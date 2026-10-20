@@ -164,9 +164,12 @@ DiagnosticStream joins native streams before final observer notification at last
 ## Production SQLite transport
 
 Create `SqliteConnection` with its owner's `make_resource`, and create the executor
-with the same domain's `make<SqliteMutationExecutor>(connection)`. Connection,
-caches, and executor clones retain that explicit lifetime. A Global connection can
-be borrowed by its own UserContexts. Asynchronous operations and streams on a
+with its domain's `make<SqliteMutationExecutor>(connection)`. A provider may
+also borrow its parent Global connection. Statement caches belong to the
+connection; column layouts belong to provider state. Provider clones retain
+the provider's explicit lifetime. A Global connection can be borrowed by its
+own UserContexts, but a User-local provider cannot back asynchronous work
+retained by another User or Global. Asynchronous operations and streams on a
 User connection must use that User domain; Global and sibling destinations are
 rejected before operation creation. Synchronous calls may explicitly copy results
 to another domain because those results do not retain the connection.
@@ -519,6 +522,14 @@ Fresh shared graphs create a new ledger; `with_shared_graph` preserves the recei
 ledger and loaded snapshot. Composition validates every version before merging
 and leaves the source unchanged. Independent copies have independent graphs;
 aliases inside one copy remain aliases.
+
+Generated `parent.includePendingMutationsFrom(child)` is an explicit destination
+copy of pending intent into the parent's scope, including cross-Context inputs.
+The shared runtime copies nested values and original state into the receiver;
+closing the source invalidates its ordinary handles but not the copied intent.
+This operation does not rebind the source or save either object. Recursive
+runtime attachment retains its same-Context binding requirement. See the
+[generated composition and actual graph-save contract](generated_ledger_composition_5_0_6.md).
 
 ## Behavior, policies, decoding, and entity-service borrows
 

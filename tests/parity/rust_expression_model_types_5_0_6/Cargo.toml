@@ -1,0 +1,24 @@
+[package]
+name = "teaql_expression_model_types_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+serde_json = "=1.0.150"
+serde = { version = "=1.0.228", features = ["derive"] }
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }

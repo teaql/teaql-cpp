@@ -38,7 +38,7 @@ def observe(executable, inputs, emulator=(), arguments=()):
     return outputs
 
 
-def main(corpus_name="value_cases.json", label="Value"):
+def main(corpus_name="value_5_0_6_cases.json.gz", label="Value"):
     parser = argparse.ArgumentParser()
     parser.add_argument("--cpp", required=True)
     parser.add_argument("--rust")

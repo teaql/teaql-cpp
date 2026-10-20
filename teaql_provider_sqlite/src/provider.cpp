@@ -49,12 +49,14 @@ struct StatementEntry {
     using allocator_type = Allocator;
     String key;
     sqlite3_stmt* statement = nullptr;
+    bool loaned = false;
 
     StatementEntry(std::allocator_arg_t, Allocator a) : key(a.resource()) {}
 
     StatementEntry(std::allocator_arg_t, Allocator a, StatementEntry&& other)
         : key(std::move(other.key), a.resource()),
-          statement(std::exchange(other.statement, nullptr)) {}
+          statement(std::exchange(other.statement, nullptr)),
+          loaned(std::exchange(other.loaned, false)) {}
 
     StatementEntry(const StatementEntry&) = delete;
 };
@@ -173,6 +175,7 @@ struct SqliteConnectionState {
                     entry = &statements[*p];
                     statement = std::exchange(entry->statement, nullptr);
                     recency.erase(p);
+                    entry->loaned = true;
                     return;
                 }
             }
@@ -210,8 +213,11 @@ struct SqliteConnectionState {
             }
             if (cached && statement) {
                 auto slot = std::find_if(statements.begin(), statements.end(), [](const auto& e) {
-                    return !e.statement;
+                    return !e.statement && !e.loaned;
                 });
+                if (slot == statements.end() && recency.empty()) {
+                    return; // Every fixed cache slot is borrowed; retain a transient statement.
+                }
                 if (slot == statements.end()) {
                     auto index = recency.back();
                     recency.pop_back();
@@ -221,6 +227,7 @@ struct SqliteConnectionState {
                 }
                 slot->key = sql;
                 entry = &*slot;
+                entry->loaned = true;
             }
         } catch (...) {
             sqlite3_finalize(statement);
@@ -236,7 +243,19 @@ struct SqliteConnectionState {
         sqlite3_reset(statement);
         sqlite3_clear_bindings(statement);
         if (entry) {
+            // Concurrent checkouts of one key return a single idle cache entry,
+            // matching the source map's replacement behavior.
+            for (auto position = recency.begin(); position != recency.end(); ++position) {
+                auto& other = statements[*position];
+                if (other.key == entry->key) {
+                    sqlite3_finalize(other.statement);
+                    other.statement = nullptr;
+                    recency.erase(position);
+                    break;
+                }
+            }
             entry->statement = statement;
+            entry->loaned = false;
             recency.insert(recency.begin(), std::size_t(entry - statements.data()));
             entry = nullptr;
         } else {
@@ -244,6 +263,34 @@ struct SqliteConnectionState {
         }
         statement = nullptr;
     }
+};
+
+class SqliteCachedDynamicStatements final : public SqliteDynamicStatementCache {
+public:
+    explicit SqliteCachedDynamicStatements(SqliteConnectionState& connection)
+        : connection_(connection) {}
+
+    SqliteDynamicStatement prepare(Memory r, std::string_view sql) override {
+        sqlite3_stmt* statement = nullptr;
+        StatementEntry* entry = nullptr;
+        try {
+            connection_.prepare(r, sql, true, statement, entry);
+        } catch (const MutationExecutorError&) {
+            throw DynamicFieldError(r, "DYNAMIC_FIELD_STORAGE_FAILED", "storage");
+        }
+        if (!statement) {
+            throw DynamicFieldError(r, "DYNAMIC_FIELD_STORAGE_FAILED", "storage");
+        }
+        return SqliteDynamicStatement(
+            statement,
+            {&connection_, entry, [](void* owner, sqlite3_stmt* value, void* slot) noexcept {
+                 auto* entry = static_cast<StatementEntry*>(slot);
+                 static_cast<SqliteConnectionState*>(owner)->release_statement(value, entry);
+             }});
+    }
+
+private:
+    SqliteConnectionState& connection_;
 };
 
 // Intrusive, allocation-free wait queue. SQLite calls run on the owner thread;
@@ -282,16 +329,22 @@ struct SqliteLease {
         queued = false;
     }
 
-    bool acquire(WakeSignal& signal) {
+    void require_unpoisoned() {
+        if (connection.poisoned) {
+            release();
+            throw MutationExecutorError::lock(resource,
+                                              "poisoned lock: another task failed inside");
+        }
+    }
+
+    bool acquire(WakeSignal& signal, bool defer_connection_lock = false) {
         connection.require_owner();
         if (owned) {
             return true;
         }
         wake = &signal;
-        if (connection.poisoned) {
-            release();
-            throw MutationExecutorError::lock(resource,
-                                              "poisoned lock: another task failed inside");
+        if (!defer_connection_lock) {
+            require_unpoisoned();
         }
         const bool allowed =
             !connection.transaction_owner || connection.transaction_owner == transaction;
@@ -342,13 +395,21 @@ struct SqliteProviderState {
 
     SqliteProviderState(std::allocator_arg_t, Allocator a, SqliteConnectionState& connection)
         : resource(a.resource()), connection(connection), layouts(resource) {
-        if (resource != connection.resource) {
-            throw std::invalid_argument(
-                "SQLite provider and connection must share their owning Context");
-        }
+        connection.require_borrow(resource);
         layouts.reserve(DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY);
         for (std::size_t i = 0; i < DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY; ++i) {
             layouts.emplace_back();
+        }
+    }
+
+    void require_borrow(Memory destination) const {
+        connection.require_borrow(destination);
+        // Connection and provider have independent owners. Global connections
+        // can serve User-local providers; their layouts and operation state
+        // cannot escape into another User or into Global.
+        if (!async_arena(resource).can_lend_to(async_arena(destination))) {
+            throw std::invalid_argument(
+                "SQLite work cannot retain a provider from a shorter or unrelated Context");
         }
     }
 
@@ -407,7 +468,7 @@ struct SqliteSchemaCall {
                 }
                 entities = context.all_entities();
                 state = &executor->state_;
-                state->connection.require_borrow(resource);
+                state->require_borrow(resource);
                 lease.emplace(resource, state->connection);
             }
             if (!lease->acquire(wake)) {
@@ -602,17 +663,25 @@ struct SqliteCall {
     CompiledQuery query;
     SqliteCursor cursor;
     std::optional<SqliteBindings> bindings;
+    bool wait_before_binding;
 
     SqliteCall(std::allocator_arg_t,
                Allocator a,
                SqliteProviderState& state,
                const CompiledQuery& query,
-               const void* transaction = nullptr)
+               const void* transaction = nullptr,
+               bool wait_before_binding = false)
         : resource(a.resource()), query(std::allocator_arg, a, query),
-          cursor(resource, state, transaction) {}
+          cursor(resource, state, transaction), wait_before_binding(wait_before_binding) {}
 
     std::optional<Output> poll(WakeSignal& wake) {
+        bool native_guard = false;
         try {
+            // Root async calls await the source transaction lease before binding.
+            // Synchronous and transaction-bound calls retain bind-before-lock.
+            if (wait_before_binding && !cursor.lease.acquire(wake, true)) {
+                return {};
+            }
             if (!bindings) {
                 auto result = bind_values(resource, query.params);
                 if (!result) {
@@ -623,6 +692,8 @@ struct SqliteCall {
             if (!cursor.lease.acquire(wake)) {
                 return {};
             }
+            cursor.lease.require_unpoisoned();
+            native_guard = true;
             cursor.prepare(query, !std::is_same_v<T, std::uint64_t>);
             cursor.bind(*bindings);
             if constexpr (std::is_same_v<T, std::uint64_t>) {
@@ -645,7 +716,7 @@ struct SqliteCall {
         } catch (MutationExecutorError& error) {
             return Output::err(resource, std::move(error));
         } catch (...) {
-            if (cursor.lease.owned) {
+            if (native_guard && cursor.lease.owned) {
                 cursor.provider.connection.poisoned = true;
             }
             throw;
@@ -683,10 +754,13 @@ struct SqliteRepeatedCall {
           values(values.begin(), values.end(), resource) {}
 
     std::optional<Output> poll(WakeSignal& wake) {
+        bool native_guard = false;
         try {
-            if (!cursor.lease.acquire(wake)) {
+            if (!cursor.lease.acquire(wake, true)) {
                 return {};
             }
+            cursor.lease.require_unpoisoned();
+            native_guard = true;
             cursor.prepare(query, true);
             Rows rows(resource);
             for (const auto& value : values) {
@@ -705,7 +779,7 @@ struct SqliteRepeatedCall {
         } catch (MutationExecutorError& error) {
             return Output::err(resource, std::move(error));
         } catch (...) {
-            if (cursor.lease.owned) {
+            if (native_guard && cursor.lease.owned) {
                 cursor.provider.connection.poisoned = true;
             }
             throw;
@@ -817,15 +891,12 @@ struct SqliteDynamicCall {
             if (!lease.acquire(wake)) {
                 return {};
             }
+            SqliteCachedDynamicStatements cache(provider.connection);
             if constexpr (std::same_as<T, DynamicStorageRows>) {
-                return sqlite_dynamic_load(resource,
-                                           provider.connection.db,
-                                           namespace_name,
-                                           definitions->get(),
-                                           ids,
-                                           *selection);
+                return sqlite_dynamic_load(
+                    resource, cache, namespace_name, definitions->get(), ids, *selection);
             } else {
-                return apply ? sqlite_dynamic_apply(resource, provider.connection.db, writes)
+                return apply ? sqlite_dynamic_apply(resource, cache, writes)
                              : sqlite_dynamic_ensure_schema(resource, provider.connection.db);
             }
         } catch (MutationExecutorError&) {
@@ -851,6 +922,7 @@ struct SqliteDynamicCall {
 // Rust's associated Tx is a provider clone. This scoped carrier keeps that
 // connection/cache borrow while making the consuming terminal API explicit.
 struct SqliteNativeTransaction final : SqlTransportTransaction<MutationExecutorError>,
+                                       StreamingSqlTransport<MutationExecutorError>,
                                        DynamicFieldStore {
     using allocator_type = Allocator;
     SqliteProviderState& provider;
@@ -895,6 +967,8 @@ struct SqliteNativeTransaction final : SqlTransportTransaction<MutationExecutorE
         validate_writes(Memory, std::span<const DynamicFieldWrite>) const override;
     DynamicStorageFuture<std::monostate>&
     apply_writes(Memory, std::span<const DynamicFieldWrite>, const MutationIntent&) const override;
+
+    QueryStream<MutationExecutorError>& stream_sql(Memory, CompiledQuery, std::size_t) override;
 
     void activate() noexcept {
         provider.connection.transaction_owner = this;
@@ -1092,17 +1166,22 @@ struct SqliteStream {
                  Allocator a,
                  SqliteProviderState& state,
                  CompiledQuery query,
-                 std::size_t size)
+                 std::size_t size,
+                 const void* transaction = nullptr)
         : resource(a.resource()), query(std::allocator_arg, a, std::move(query)),
-          cursor(resource, state), chunk_size(size) {}
+          cursor(resource, state, transaction), chunk_size(size) {}
 
     Poll poll_next(WakeSignal& wake) {
         if (terminal) {
             cursor.close();
             return std::optional<Item>{};
         }
+        bool native_guard = started;
         try {
             if (!started) {
+                if (!cursor.lease.transaction && !cursor.lease.acquire(wake, true)) {
+                    return {};
+                }
                 if (!bindings) {
                     auto result = bind_values(resource, query.params);
                     if (!result) {
@@ -1114,12 +1193,23 @@ struct SqliteStream {
                 if (!cursor.lease.acquire(wake)) {
                     return {};
                 }
+                cursor.lease.require_unpoisoned();
+                native_guard = true;
                 cursor.prepare(query, true);
                 cursor.bind(*bindings);
                 started = true;
             }
             StreamChunk chunk(std::allocator_arg, Allocator(resource), index, false);
             while (cursor.next()) {
+                if (chunk.rows.capacity() == 0) {
+                    // Match the source's short prefix without allocating for EOF.
+                    // Its zero-size compatibility path also starts with four rows.
+                    chunk.rows.reserve(chunk_size == 0 ? std::size_t{4}
+                                                       : std::min(chunk_size, std::size_t{4}));
+                } else if (chunk.rows.size() == chunk.rows.capacity() &&
+                           chunk.rows.size() < chunk_size) {
+                    chunk.rows.reserve(chunk_size);
+                }
                 chunk.rows.push_back(cursor.row());
                 if (chunk.rows.size() == chunk_size) {
                     ++index;
@@ -1137,7 +1227,7 @@ struct SqliteStream {
             terminal = true;
             return std::optional<Item>(Item::err(resource, std::move(error)));
         } catch (...) {
-            if (cursor.lease.owned) {
+            if (native_guard && cursor.lease.owned) {
                 cursor.provider.connection.poisoned = true;
             }
             throw;
@@ -1152,6 +1242,14 @@ struct SqliteStream {
         cursor.close();
     }
 };
+
+QueryStream<MutationExecutorError>&
+SqliteNativeTransaction::stream_sql(Memory r, CompiledQuery query, std::size_t size) {
+    require_domain(r);
+    require_active();
+    return track(make_resource_stream<Result<StreamChunk, MutationExecutorError>, SqliteStream>(
+        r, provider, std::move(query), size, this));
+}
 
 struct SqliteDynamicStream : SqliteStream {
     using allocator_type = Allocator;
@@ -1182,8 +1280,9 @@ struct SqliteDynamicStream : SqliteStream {
             if (!ids) {
                 return failure(ids.error());
             }
+            SqliteCachedDynamicStatements cache(cursor.provider.connection);
             auto values = sqlite_dynamic_load(resource,
-                                              cursor.provider.connection.db,
+                                              cache,
                                               plan.storage_namespace(),
                                               plan.definitions(),
                                               ids.value(),
@@ -1197,7 +1296,7 @@ struct SqliteDynamicStream : SqliteStream {
             }
             return polled;
         } catch (...) {
-            if (cursor.lease.owned) {
+            if (started && cursor.lease.owned) {
                 cursor.provider.connection.poisoned = true;
             }
             throw;
@@ -1303,7 +1402,7 @@ std::optional<std::uint64_t> SqliteMutationExecutor::source_identity() const {
 }
 
 DynamicStorageFuture<std::monostate>& SqliteMutationExecutor::ensure_schema(Memory r) const {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     return make_resource_operation<Result<std::monostate, DynamicFieldError>,
                                    detail::SqliteDynamicCall<std::monostate>>(r, state_);
 }
@@ -1315,7 +1414,7 @@ SqliteMutationExecutor::load_values(Memory r,
                                     std::span<const std::uint64_t> ids,
                                     const DynamicFieldSelection& selection,
                                     const QueryIntent& intent) const {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     return make_resource_operation<Result<DynamicStorageRows, DynamicFieldError>,
                                    detail::SqliteDynamicCall<DynamicStorageRows>>(
         r, state_, name, definitions, ids, selection, intent);
@@ -1329,7 +1428,7 @@ SqliteMutationExecutor::validate_writes(Memory r, std::span<const DynamicFieldWr
 
 DynamicStorageFuture<std::monostate>& SqliteMutationExecutor::apply_writes(
     Memory r, std::span<const DynamicFieldWrite>, const MutationIntent&) const {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     return make_resource_operation<Result<std::monostate, DynamicFieldError>,
                                    detail::SqliteDynamicErrorCall>(r);
 }
@@ -1402,7 +1501,7 @@ SqliteMutationExecutor::rollback_transaction(Memory r) {
 
 DataServiceOperationResult<SqlTransactionHandle<MutationExecutorError>, MutationExecutorError>&
 SqliteMutationExecutor::begin_sql(Memory r) {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     auto& transaction =
         detail::async_arena(r).make_resource<detail::SqliteNativeTransaction>(state_);
     return make_resource_operation<
@@ -1412,16 +1511,17 @@ SqliteMutationExecutor::begin_sql(Memory r) {
 
 DataServiceOperationResult<std::uint64_t, MutationExecutorError>&
 SqliteMutationExecutor::execute_sql(Memory r, const CompiledQuery& query) {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     return make_resource_operation<Result<std::uint64_t, MutationExecutorError>,
-                                   detail::SqliteCall<std::uint64_t>>(r, state_, query);
+                                   detail::SqliteCall<std::uint64_t>>(
+        r, state_, query, nullptr, true);
 }
 
 DataServiceOperationResult<SqliteMutationExecutor::Rows, MutationExecutorError>&
 SqliteMutationExecutor::fetch_all_compact_sql(Memory r, const CompiledQuery& query) {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     return make_resource_operation<Result<Rows, MutationExecutorError>, detail::SqliteCall<Rows>>(
-        r, state_, query);
+        r, state_, query, nullptr, true);
 }
 
 DataServiceOperationResult<SqliteMutationExecutor::Rows, MutationExecutorError>&
@@ -1429,7 +1529,7 @@ SqliteMutationExecutor::fetch_repeated_compact_sql(Memory r,
                                                    const CompiledQuery& query,
                                                    std::size_t index,
                                                    std::span<const Value> values) {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     return make_resource_operation<Result<Rows, MutationExecutorError>, detail::SqliteRepeatedCall>(
         r, state_, query, index, values);
 }
@@ -1439,7 +1539,7 @@ SqliteMutationExecutor::stream_sql_with_dynamic_fields(Memory r,
                                                        CompiledQuery query,
                                                        std::size_t size,
                                                        DynamicFieldStreamPlan plan) {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     auto checked = plan.validate_store(*this);
     if (!checked) {
         return Result<QueryStream<MutationExecutorError>*, DynamicFieldError>::err(
@@ -1457,14 +1557,14 @@ SqliteMutationExecutor::stream_sql_with_dynamic_fields(Memory r,
 
 QueryStream<MutationExecutorError>&
 SqliteMutationExecutor::stream_sql(Memory r, CompiledQuery query, std::size_t size) {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     return make_resource_stream<Result<StreamChunk, MutationExecutorError>, detail::SqliteStream>(
         r, state_, std::move(query), size);
 }
 
 QueryStream<MutationExecutorError>&
 SqliteMutationExecutor::query_stream(Memory r, QueryRequest request, std::size_t size) {
-    state_.connection.require_borrow(r);
+    state_.require_borrow(r);
     try {
         SqliteDialect dialect;
         EntityDescriptor entity(std::allocator_arg, Allocator(r), request.query.entity);
@@ -1488,7 +1588,7 @@ SqliteIdSpaceGenerator::SqliteIdSpaceGenerator(std::allocator_arg_t,
                                                Allocator a,
                                                SqliteMutationExecutor& executor)
     : executor_(executor), table_name_(DEFAULT_ID_SPACE_TABLE, a.resource()) {
-    executor_.state_.connection.require_borrow(a.resource());
+    executor_.state_.require_borrow(a.resource());
 }
 
 SqliteIdSpaceGenerator::SqliteIdSpaceGenerator(std::allocator_arg_t,
@@ -1691,7 +1791,7 @@ SqliteBusinessIdAllocator::SqliteBusinessIdAllocator(std::allocator_arg_t,
                                                      Allocator a,
                                                      SqliteMutationExecutor& executor)
     : executor_(executor), table_name_(DEFAULT_BUSINESS_ID_SPACE_TABLE, a.resource()) {
-    executor_.state_.connection.require_borrow(a.resource());
+    executor_.state_.require_borrow(a.resource());
 }
 
 SqliteBusinessIdAllocator::SqliteBusinessIdAllocator(std::allocator_arg_t,

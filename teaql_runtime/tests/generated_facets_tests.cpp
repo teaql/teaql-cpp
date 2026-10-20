@@ -62,7 +62,16 @@ static void ownership_and_execution() {
               std::optional<std::uint64_t>(2),
           "explicit Global result copies survive actual UserContext destruction");
     auto rebound = retained_query.rebindGlobal(*next_user_context);
-    rebound.facetByCustomerAs("new global facet", next_Q.people().comment("next facet"));
+    auto next_child = next_Q.people().comment("next facet");
+    rejected = false;
+    try {
+        rebound.facetByCustomerAs("new global facet", next_child);
+    } catch (const std::invalid_argument&) {
+        rejected = true;
+    }
+    check(rejected, "Global facet capture requires an explicit destination copy");
+    auto global_child = next_child.copyToGlobal(*next_user_context);
+    rebound.facetByCustomerAs("new global facet", global_child);
     check(rebound.query().facets.back().query.memory_resource() == global.memory_resource(),
           "rebound facet snapshots retain their explicit Global domain");
 }

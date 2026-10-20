@@ -1,0 +1,6 @@
+{
+  "scope": "Supplementary observer dependency binding. Original immutable sample corpus remains unchanged. The imported file supplies block_on; its original test module is cfg(test) and is not compiled by the observer binary.",
+  "files": {
+    "tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs": "b293ead8f720c253047747af509a2923c7d325224677639aff40b306ecde139d"
+  }
+}

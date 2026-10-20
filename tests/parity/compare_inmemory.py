@@ -2,6 +2,7 @@
 import argparse
 import copy
 import json
+import gzip
 from pathlib import Path
 import subprocess
 from compare_values import observe, same
@@ -26,7 +27,7 @@ def main():
     args = parser.parse_args()
     emulator = [part for part in args.cpp_emulator.split(";") if part]
     root = Path(__file__).resolve().parents[2]
-    corpus = json.loads(Path(__file__).with_name("inmemory_cases.json").read_text())
+    corpus = json.loads(gzip.decompress(Path(__file__).with_name("inmemory_baseline_5_0_6_cases.json.gz").read_bytes()))
     lock = json.loads((root / "upstream.lock.json").read_text())
     if corpus["baseline"] != lock["commit"]:
         raise RuntimeError("In-memory observations belong to another baseline")
@@ -34,6 +35,8 @@ def main():
                               capture_output=True).stdout)
     if bits not in [32, 64]:
         raise RuntimeError("Unsupported probe pointer width")
+    if corpus.get("pointer_bits", bits) != bits:
+        raise RuntimeError("Current in-memory corpus is native64-only; requalify actual 32-bit source before use")
     cases = corpus["cases"]
     inputs = [c["input"] for c in cases]
     expected = [c.get("expected_32", c["expected"]) if bits == 32 else c["expected"] for c in cases]

@@ -1,0 +1,20 @@
+{
+  "scope": "Actual unmodified generated Business-ID runtime, independent reference-compatible observer lock",
+  "exit_code": 0,
+  "registry_identities": 129,
+  "registry_identities_match_original": true,
+  "old_oracle_inputs_changed": false,
+  "observer_inputs": {
+    "tests/parity/rust_runtime_configuration_models_5_0_6/Cargo.toml": "ad48c28ee4674b47fa48dca599326caa40eabbeefd45b9254acb4aae029ee560",
+    "tests/parity/rust_runtime_configuration_models_5_0_6/Cargo.lock": "93fbda756491621fa2a54df6b98e00f56dc3797a95e72057e7f70c2b17fdc8e1",
+    "tests/parity/rust_runtime_configuration_models_5_0_6/src/main.rs": "2a7bf86d6e1f27dea9008a6ae1924fa2109706b3341decfaaa0701f1026bcaf3"
+  },
+  "build_output": "warning: methods `scalar_from_receipts_as` and `scalar_from_tickets_as` are never used\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/business_ids_rust/lib/src/tenant/request.rs:1380:8\n     |\n  45 | impl<R> TenantRequest<R> {\n     | ------------------------ methods in this implementation\n...\n1380 |     fn scalar_from_receipts_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n     |        ^^^^^^^^^^^^^^^^^^^^^^^\n...\n1432 |     fn scalar_from_tickets_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n     |        ^^^^^^^^^^^^^^^^^^^^^^\n     |\n     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: `cpp-business-ids-core` (lib) generated 1 warning\n   Compiling teaql_runtime_configuration_models_506 v0.1.0 (/home/philip/githome/teaql-cpp/tests/parity/rust_runtime_configuration_models_5_0_6)\nwarning: function `main` is never used\n  --> src/../../rust_field_layout/src/bin/original_like_privacy_5_0_6.rs:31:4\n   |\n31 | fn main() {}\n   |    ^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: `teaql_runtime_configuration_models_506` (bin \"teaql_runtime_configuration_models_506\") generated 1 warning\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.83s\n",
+  "observations": {
+    "runtime_scenarios": 27,
+    "context_rounds": 54,
+    "actual_successful_saves": 54,
+    "source_key_environment_errors": 18
+  },
+  "cpp_execution": "pending; syntax only passes"
+}

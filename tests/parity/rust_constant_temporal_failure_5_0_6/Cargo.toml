@@ -1,0 +1,21 @@
+[package]
+name = "teaql_cpp_constant_temporal_failure"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "lib.rs"
+
+[dependencies]
+domain = { package = "cpp-constants-temporal-core", path = "../../generator/parity/constants_temporal_rust/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }

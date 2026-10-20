@@ -119,6 +119,7 @@ using ::teaql::SubQueryExpr;
 using ::teaql::TeaqlBoxedRelations;
 using ::teaql::TeaqlEmpty;
 using ::teaql::TeaqlEntity;
+using ::teaql::TeaqlEntityDefaults;
 using ::teaql::Timestamp;
 using ::teaql::TraceChain;
 using ::teaql::TraceKind;

@@ -20,6 +20,7 @@
 #include <teaql/runtime/document_round_trip.hpp>
 #include <teaql/runtime/logging.hpp>
 #include <teaql/runtime/detail/context/identity.hpp>
+#include <teaql/runtime/detail/json_hydration.hpp>
 #include <teaql/data_service/dynamic_fields.hpp>
 #include <exception>
 
@@ -1093,6 +1094,71 @@ public:
     Result<ResourceBorrow<EntityDataService<E>>, ContextError>
     entity_data_service(std::string_view entity) const;
     void set_entity_graph_decoder_registry(const InMemoryEntityGraphDecoderRegistry&);
+
+    // Presentation hydration against installed metadata; decoded data grants no save authority.
+    template <Entity T>
+    Result<T, EntityError> decode_json_entity(const Json& value) const {
+        check_public();
+        auto r = memory_resource();
+        detail::JsonReadSession session(*this);
+        auto descriptor = session.descriptor(T::entity_descriptor(r));
+        if (!descriptor) {
+            return Result<T, EntityError>::err(r, std::move(descriptor).error());
+        }
+        auto layout = detail::require_json_layout<T>(r);
+        if (!layout) {
+            return Result<T, EntityError>::err(r, std::move(layout).error());
+        }
+        std::optional<EntityRuntimeState> state;
+        auto row =
+            session.decode(*descriptor.value(), value, T::supports_dynamic_property_load(), state);
+        if (!row) {
+            return Result<T, EntityError>::err(r, std::move(row).error());
+        }
+        if (state) {
+            return T::from_compact_row_with_context(r, std::move(row).value(), AnyRef(*state));
+        }
+        return T::from_compact_row(r, std::move(row).value());
+    }
+
+    template <Entity T>
+    Result<Vector<T>, EntityError> decode_json_entities(const Json& value) const {
+        check_public();
+        auto r = memory_resource();
+        using Output = Result<Vector<T>, EntityError>;
+        detail::JsonReadSession session(*this);
+        auto descriptor = session.descriptor(T::entity_descriptor(r));
+        if (!descriptor) {
+            return Output::err(r, std::move(descriptor).error());
+        }
+        auto layout = detail::require_json_layout<T>(r);
+        if (!layout) {
+            return Output::err(r, std::move(layout).error());
+        }
+        const auto* array = std::get_if<Json::Array>(&value.data);
+        if (!array) {
+            return Output::err(
+                r, detail::json_input_error(r, T::ENTITY_NAME, "expected entity array"));
+        }
+        Vector<T> output(r);
+        output.reserve(array->size());
+        for (const auto& input : *array) {
+            std::optional<EntityRuntimeState> state;
+            auto row = session.decode(
+                *descriptor.value(), input, T::supports_dynamic_property_load(), state);
+            if (!row) {
+                return Output::err(r, std::move(row).error());
+            }
+            auto entity =
+                state ? T::from_compact_row_with_context(r, std::move(row).value(), AnyRef(*state))
+                      : T::from_compact_row(r, std::move(row).value());
+            if (!entity) {
+                return Output::err(r, std::move(entity).error());
+            }
+            output.emplace_back(std::move(entity).value());
+        }
+        return Output::ok(r, std::move(output));
+    }
 
     template <class Owner, class T>
         requires std::derived_from<T, EntityDataServiceBehaviorRegistry>

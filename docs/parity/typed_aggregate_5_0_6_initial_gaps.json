@@ -1,0 +1,385 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "gaps": [
+    {
+      "index": 116,
+      "input": {
+        "projection": [],
+        "rows": 1,
+        "failure": false,
+        "fail_model": null,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": []
+      },
+      "cpp": {
+        "outcome": {
+          "ids": [
+            1
+          ],
+          "loaded": true,
+          "rows": 1,
+          "total": null
+        },
+        "projection": []
+      }
+    },
+    {
+      "index": 117,
+      "input": {
+        "projection": [],
+        "rows": 1,
+        "failure": false,
+        "fail_model": 0,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": []
+      },
+      "cpp": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "index": 118,
+      "input": {
+        "projection": [],
+        "rows": 1,
+        "failure": false,
+        "fail_model": 1,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": []
+      },
+      "cpp": {
+        "outcome": {
+          "ids": [
+            1
+          ],
+          "loaded": true,
+          "rows": 1,
+          "total": null
+        },
+        "projection": []
+      }
+    },
+    {
+      "index": 122,
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": false,
+        "fail_model": null,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": []
+      },
+      "cpp": {
+        "outcome": {
+          "ids": [
+            1,
+            2
+          ],
+          "loaded": true,
+          "rows": 2,
+          "total": null
+        },
+        "projection": []
+      }
+    },
+    {
+      "index": 123,
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 0,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": []
+      },
+      "cpp": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "index": 124,
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 1,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": []
+      },
+      "cpp": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "index": 134,
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 1,
+        "failure": false,
+        "fail_model": null,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      },
+      "cpp": {
+        "outcome": {
+          "ids": [
+            1
+          ],
+          "loaded": true,
+          "rows": 1,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "index": 135,
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 1,
+        "failure": false,
+        "fail_model": 0,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      },
+      "cpp": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "index": 136,
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 1,
+        "failure": false,
+        "fail_model": 1,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      },
+      "cpp": {
+        "outcome": {
+          "ids": [
+            1
+          ],
+          "loaded": true,
+          "rows": 1,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "index": 140,
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": null,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      },
+      "cpp": {
+        "outcome": {
+          "ids": [
+            1,
+            2
+          ],
+          "loaded": true,
+          "rows": 2,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "index": 141,
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 0,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      },
+      "cpp": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "index": 142,
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 1,
+        "comment": "Read dynamic typed aggregate rows",
+        "purpose": "Verify typed aggregate carrier boundary",
+        "dynamic": true
+      },
+      "rust": {
+        "outcome": {
+          "error": "Parent: dynamic fields require a runtime-owned indexed entity carrier"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      },
+      "cpp": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    }
+  ]
+}

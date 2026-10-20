@@ -1,0 +1,9 @@
+<root name="cpp_sample_types_unsigned_recipe" org="teaql" data_service="sqlite">
+    <priority id="id()" platform="platform(contextRoot=true)" name="string()" code="string()" value="unsigned()"
+              _constant="true" _identifier="code">
+        <_value id="1" name="Basic" code="BASIC" value="7" />
+        <_value id="22" name="Extended" code="EXTENDED" value="9" />
+    </priority>
+    <platform name="string()" />
+    <sample_item platform="platform(contextRoot=true)" name="string()" value="unsigned()" optional_value="unsigned(optional=true)" />
+</root>

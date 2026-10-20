@@ -1,0 +1,18 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "gates": {
+    "native_exit_code": 0,
+    "sanitize_exit_code": 0,
+    "complete_original_source_cases": 13,
+    "default_pmr_disabled": true,
+    "actual_user_deletion": true,
+    "leak_scanning": false
+  },
+  "files": {
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/runtime_assembly.hpp": "135836444333db33a1029dfbd6484a5b99e1878bb50b52f50f6ed33aa06c826f",
+    "tests/parity/runtime_assembly_config_probe.cpp": "42a8acb32bc50a08cc755c75357c6869da1cce69c92725f27ad5b76e87eec51c",
+    "scripts/verify_runtime_connection_5_0_6.py": "c51b9f8793bf9e75bdd059a91b2fe7ef76d7bd7400aae636d81714f17329d5f7"
+  },
+  "scope": "Actual retained generated module/executor assembled through shared provider infrastructure. Full original success query_error and files preserved; schema remains explicit. Production/module registration, actual new generated config APIs/Assist/Java/reproduction and full capability/phase exit remain required. Fullupdatedcompiler4508 still running."
+}

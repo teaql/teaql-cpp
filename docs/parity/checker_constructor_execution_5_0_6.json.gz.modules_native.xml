@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="5"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="canada-mini-host"
+	time="0"
+	timestamp="2026-10-18T18:14:28"
+	>
+	<testcase name="module_checker_context_contracts" classname="module_checker_context_contracts" time="0.00419624" status="run">
+		<properties/>
+		<system-out>Checker/fix Context ownership contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_checker_reentrant_close" classname="module_checker_reentrant_close" time="0.00252685" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_checker_registration_reentrant_close" classname="module_checker_registration_reentrant_close" time="0.00252023" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_checker_typed_direct_reentrant_close" classname="module_checker_typed_direct_reentrant_close" time="0.00347921" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_checker_constructor_contracts" classname="module_checker_constructor_contracts" time="0.00281825" status="run">
+		<properties/>
+		<system-out>opaque_alias:true
+constructors:5
+checker_name:Entity
+</system-out>
+	</testcase>
+</testsuite>

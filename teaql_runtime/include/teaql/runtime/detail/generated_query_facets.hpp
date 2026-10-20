@@ -3,40 +3,59 @@
 #include <teaql/core/request.hpp>
 
 namespace teaql::detail {
+// Keep the bare source query separate from runtime option application.
+inline void clear_generated_query_options(SelectQuery& query) {
+    query.comment_text.reset();
+    std::erase_if(query.trace_chain, [](const auto& node) {
+        return node.kind == TraceKind::Comment;
+    });
+    query.raw_sql_text.reset();
+    query.raw_sql_search_criteria.clear();
+    query.dynamic_properties.clear();
+    query.raw_projections.clear();
+    query.relation_aggregates.clear();
+    query.object_group_bys.clear();
+    query.facets.clear();
+    query.child_enhancements.clear();
+}
+
+inline SelectQuery capture_generated_core_query(const SelectQuery& source) {
+    auto query = source.clone(source.memory_resource());
+    clear_generated_query_options(query);
+    return query;
+}
+
 // Rebuild builder state at a snapshot boundary, preserving the retained core API.
 inline request::QuerySelection
 capture_generated_selection(const SelectQuery& core,
                             const request::QueryOptions& origins,
                             std::span<const request::RelationFilter> filters,
-                            std::span<const request::QuerySelection> children) {
+                            std::span<const request::QuerySelection> children,
+                            std::span<const request::RelationSelection> relations = {}) {
     auto r = core.memory_resource();
     request::QuerySelection selection(std::allocator_arg, Allocator(r), core);
     auto& query = selection.query;
     auto& options = selection.query_options;
+    for (const auto& relation : relations) {
+        selection.relation_selections.emplace_back(relation);
+    }
     if (query.comment_text) {
         options.comment.emplace(*query.comment_text, r);
-        query.comment_text.reset();
-        std::erase_if(query.trace_chain, [](const auto& node) {
-            return node.kind == TraceKind::Comment;
-        });
     }
     if (query.raw_sql_text) {
         options.raw_sql.emplace(*query.raw_sql_text, r);
     }
-    query.raw_sql_text.reset();
     options.raw_sql_search_criteria = std::move(query.raw_sql_search_criteria);
     for (const auto& property : query.dynamic_properties) {
         options.dynamic_properties.emplace_back(
             property.property_name,
             request::UnsafeRawSqlSegment::trusted(r, property.raw_sql_segment));
     }
-    query.dynamic_properties.clear();
     for (const auto& projection : query.raw_projections) {
         options.raw_projections.emplace_back(
             projection.property_name,
             request::UnsafeRawSqlSegment::trusted(r, projection.raw_sql_segment));
     }
-    query.raw_projections.clear();
     for (const auto& aggregate : origins.relation_aggregates) {
         options.relation_aggregates.emplace_back(aggregate);
     }
@@ -46,16 +65,13 @@ capture_generated_selection(const SelectQuery& core,
     for (const auto& facet : query.facets) {
         options.facets.emplace_back(facet);
     }
-    query.relation_aggregates.clear();
-    query.object_group_bys.clear();
-    query.facets.clear();
     for (const auto& filter : filters) {
         selection.relation_filters.emplace_back(filter);
     }
     for (const auto& child : children) {
         selection.child_enhancements.emplace_back(child);
     }
-    query.child_enhancements.clear();
+    clear_generated_query_options(query);
     return selection;
 }
 

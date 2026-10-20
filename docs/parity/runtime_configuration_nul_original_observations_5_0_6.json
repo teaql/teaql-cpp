@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "status": "original_observations_cpp_comparison_required",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_inputs": {
+    "tests/parity/rust_execution_shapes_5_0_6/src/bin/runtime_configuration_nul_original_5_0_6.rs": "3355225e2cce3d1be2b2b8cc4259fd74176fa385900c3d735ca318cf6e471305",
+    "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs": "2ec8634bffd0ba33046fec865feebb8796c9df087c93c40b3e3b1abc0ad361d5",
+    "tests/parity/rust_execution_shapes_5_0_6/Cargo.lock": "2deb61ccf27c82a58eba825565a7c6d36c5b39d85bbb2998bcc6f782f607c866"
+  },
+  "build_exit_code": 0,
+  "cases": [
+    {
+      "name": "parent",
+      "source_expected": {
+        "debug": "ConnectionError(\"file name contained an unexpected NUL byte\")",
+        "display": "connection error: file name contained an unexpected NUL byte",
+        "ok": false,
+        "source": null
+      },
+      "created_paths": []
+    },
+    {
+      "name": "file",
+      "source_expected": {
+        "debug": "ConnectionError(\"nul byte found in provided data at position: 11\")",
+        "display": "connection error: nul byte found in provided data at position: 11",
+        "ok": false,
+        "source": null
+      },
+      "created_paths": [
+        "folder"
+      ]
+    }
+  ],
+  "notice": "Direct original ServiceRuntimeConfig calls with embedded NUL. Earlier environment observer and its20 immutable observations are unchanged. No C++ comparison or full acceptance."
+}

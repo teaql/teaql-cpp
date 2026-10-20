@@ -378,6 +378,20 @@ String SqlDialect::compile_select_sql(Memory r,
         sql += " WHERE ";
         sql += join(r, where, " AND ");
     }
+    if (!query.group_by_fields.empty()) {
+        Vector<String> parts(r);
+        for (const auto& field : query.group_by_fields) {
+            parts.emplace_back(column_sql(r, entity, field));
+        }
+        sql += " GROUP BY ";
+        sql += join(r, parts, ", ");
+    }
+    if (query.having_predicate) {
+        auto having = compile_expr(r, entity, *query.having_predicate, params);
+        sql += " HAVING ";
+        sql += having;
+    }
+    // Rank the grouped/filtered result before applying the per-parent slice.
     if (partitioned) {
         auto rank = quote_ident(r, PARTITION_RANK_PROPERTY);
         String out("SELECT * FROM (", r);
@@ -398,19 +412,6 @@ String SqlDialect::compile_select_sql(Memory r,
         out += " ORDER BY ";
         out += rank;
         return out;
-    }
-    if (!query.group_by_fields.empty()) {
-        Vector<String> parts(r);
-        for (const auto& field : query.group_by_fields) {
-            parts.emplace_back(column_sql(r, entity, field));
-        }
-        sql += " GROUP BY ";
-        sql += join(r, parts, ", ");
-    }
-    if (query.having_predicate) {
-        auto having = compile_expr(r, entity, *query.having_predicate, params);
-        sql += " HAVING ";
-        sql += having;
     }
     if (!query.order_by.empty()) {
         Vector<String> parts(r);

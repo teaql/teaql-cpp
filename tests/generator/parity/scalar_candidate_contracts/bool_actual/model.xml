@@ -1,0 +1,1 @@
+<root name="scalar_candidate_fixture" org="teaql" data_service="sqlite"><platform name="string()"/><record platform="platform(contextRoot=true)" name="string()" choice="bool(candidates=true,false)"/></root>

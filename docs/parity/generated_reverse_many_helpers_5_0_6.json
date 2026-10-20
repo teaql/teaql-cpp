@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 864,
+  "statistics": {
+    "type_errors": 96,
+    "NotLoaded": 672,
+    "Value": 96
+  },
+  "profiles": {
+    "native": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 58: generated_reverse_many_helpers_rust_parity\n1/1 Test #58: generated_reverse_many_helpers_rust_parity ...   Passed    0.24 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.25 sec\n",
+      "sha256": "d3afd4ae31303c40d3a626b61bed607f327810af72edca1837d3edeae2ead27d"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 860: module_generated_reverse_many_helpers_rust_parity\n1/1 Test #860: module_generated_reverse_many_helpers_rust_parity ...   Passed    0.26 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.27 sec\n",
+      "sha256": "4c3ae89c7fd1427d755aa8fb272b3d901c7ddc04015044c64f8ed381924ca74e"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 58: generated_reverse_many_helpers_rust_parity\n1/1 Test #58: generated_reverse_many_helpers_rust_parity ...   Passed    0.92 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.92 sec\n",
+      "sha256": "a8835e79ea729f1ca1b8cda2d147824780109913043d604fa7a7ade0503d4312"
+    }
+  },
+  "source_registry_versions_preserved": true,
+  "source_registry_checksums_preserved": true,
+  "original_generated_provenance_sha256": "08d08f6a10be0799e5244ef10beaa622a1ce606dc311eb1f77ca1cb46579883c",
+  "hashes": {
+    "tests/parity/rust_reverse_many_helpers_5_0_6/Cargo.lock": "5859a2c3807f8b5cb5d1407a3df976d3557971017711983ad9a7a59a106826ee",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/generated_reverse_many_helpers_5_0_6_cases.json.gz": "7eea186173caa0535e66bb4425f14719feb3bb212df8004c46ef7071c3aad713",
+    "tests/parity/generated_reverse_many_helpers_5_0_6.rs": "d55cf6ecd9695d3eff0b7bb4f5bad3aeca63a3b116715cc9e33284ea5a260345",
+    "tests/parity/generated_reverse_many_helpers_probe.cpp": "8f296a3eaef87b7120856e9c4e22b9f972d45c81ee2842b4a2d2daad830162ab",
+    "tests/parity/compare_generated_reverse_many_helpers_5_0_6.py": "5606fb283693bdbf524107be93fd61b78dc3cd689db93b40d2f93c26887fb7d2"
+  },
+  "normalization": "none",
+  "default_pmr_disabled": true,
+  "explicit_global_copy": true,
+  "actual_user_context_deletion": true,
+  "canonical_bodies": 542,
+  "format_cpp_count": 1369,
+  "production_runtime_changed": false,
+  "generator_changed": false,
+  "complete_capability_acceptance": false,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false
+}

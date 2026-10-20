@@ -25,7 +25,7 @@ def target_inputs(inputs, bits):
     return results
 
 
-def main(corpus_name='runtime_error_debug_cases.json.gz', label='Runtime error and status diagnostics'):
+def main(corpus_name='runtime_error_debug_baseline_5_0_6_cases.json.gz', label='Runtime error and status diagnostics'):
     parser = argparse.ArgumentParser()
     parser.add_argument('--cpp', required=True)
     parser.add_argument('--rust')
@@ -40,6 +40,8 @@ def main(corpus_name='runtime_error_debug_cases.json.gz', label='Runtime error a
     data = json.load(gzip.open(path, 'rt')) if path.suffix == '.gz' else json.loads(path.read_text())
     if data['baseline'] != json.loads((root / 'upstream.lock.json').read_text())['commit']:
         raise RuntimeError('Runtime diagnostic observations use a different source baseline')
+    if data.get('pointer_bits', bits) != bits:
+        raise RuntimeError('Current diagnostic corpus is native64-only; requalify actual 32-bit source before use')
     inputs = [case['input'] for case in data['cases']]
     key = 'expected_32' if bits == 32 else 'expected'
     expected = [case.get(key, case['expected']) for case in data['cases']]

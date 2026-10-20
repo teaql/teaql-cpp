@@ -1,0 +1,29 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "methods": [
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 336,
+      "end_line": 339,
+      "body": "pub fn enhance_child(mut self, request: impl Into<QuerySelection>) -> Self {\n        self.child_enhancements.push(request.into());\n        self\n    }",
+      "sha256": "5156535fc8aa8b58f055695c56b8f06e705e357df12ddde672c6bd84f7fb9e50",
+      "responsibility": "Capture the complete QuerySelection, not only its bare core query; Into conversions admit other generated domains and explicit core/selection values."
+    },
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "start_line": 336,
+      "end_line": 339,
+      "body": "pub fn enhance_child(mut self, request: impl Into<QuerySelection>) -> Self {\n        self.child_enhancements.push(request.into());\n        self\n    }",
+      "sha256": "5156535fc8aa8b58f055695c56b8f06e705e357df12ddde672c6bd84f7fb9e50",
+      "responsibility": "Capture the complete QuerySelection, not only its bare core query; Into conversions admit other generated domains and explicit core/selection values."
+    }
+  ],
+  "cpp_runtime": "teaql_runtime/include/teaql/runtime/entity_query.hpp",
+  "cpp_contract": "Direct values require the destination resource; wrappers also require checked Context identity and unpurposed state. Capture deep-copies values without invoking a child executor.",
+  "fixture_sha256": {
+    "dynamic_json_schema.sql": "b11a024137503d0b23f205b478185e09dec7aee74b09c99f1c2cbfdf1c25e226",
+    "dynamic_json_dataset.sql": "f3c3983ddfb853fd7a86eba9352e7cb36d434107773836639d46f6673308bd59"
+  },
+  "complete_capability_acceptance": false
+}

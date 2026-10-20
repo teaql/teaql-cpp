@@ -1,0 +1,9 @@
+{
+  "scope": "Imported body/export/ABI and frozen source/path registration consistency; semantic execution remains separate",
+  "exit_code": 0,
+  "canonical_bodies": 690,
+  "exports": 1495,
+  "modules": 7,
+  "unqualified_capabilities": 11,
+  "output": "Imported Context, templates, ownership, core exports and ABI contracts pass\nVerified 690 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\nVerified 1495 catalog exports and isolated lookup across 7 modules\nVerified 36 locked generator sources and 17 capability records; 11 remain unqualified\nVerified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 124 Rust source files, 378 declarations, 693 source tests; source inventory only (not parity acceptance)\nVerified 7 active packages, 124 source units, 124 source ownership/disposition links and 769 retained move destinations; structure/provenance only, not unchanged-body or semantic acceptance\n"
+}

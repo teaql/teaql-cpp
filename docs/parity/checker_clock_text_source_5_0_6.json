@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "observations": 48,
+  "comparison_exit_code": 0,
+  "output": "Generated string clock Checkers: 48 exact original/native outcomes\n",
+  "original_generated_files_changed": false,
+  "reference_registry_versions_preserved": true,
+  "reference_registry_checksums_preserved": true,
+  "normalization": "none",
+  "complete_capability_acceptance": false,
+  "hashes": {
+    "scripts/verify_checker_clock_text_5_0_6.py": "d6396d8dcf7acf8602d40ed85413e8b13071c37c67684fa3ef1dc3bb8dec9abf",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/rust_checker_clock_text_5_0_6/Cargo.toml": "a2ffea5dca64e7157d80b517c48dc0e7caf039810fe0bb7b339489ea4ca9c4f7",
+    "tests/parity/rust_checker_clock_text_5_0_6/Cargo.lock": "02bca15d52854f9aa27c998e1514f88051e982d47787f893b90a0fe6ff112a82",
+    "tests/parity/checker_clock_text_5_0_6.rs": "8f1af9460a01c953fbdfaf62d7d5b0fe1f6b59ada33ba5c3d8ad1a4d96409b75",
+    "tests/parity/checker_clock_text_probe.cpp": "41abb26d511c2f4c8fbc6f90cee7b7bd1aa4e7e89fb7e45daa87e0d33eae4b8b",
+    "tests/parity/compare_checker_clock_text_5_0_6.py": "5d342f8a8bbb4e5c927119d6ae5d6e8aa4fab49b8deef1dcdab8fa229032ee3f",
+    "tests/parity/checker_clock_text_5_0_6_cases.json.gz": "7e649abc82b79cbdcb6514805ec84f0d619fdd798bda3d73677484295a41194b",
+    "tests/generator/parity/checker_unique_string_rust/PROVENANCE.json": "bcf556ae8d4024f23e7f78d8679383f7f57f1e9e1b94c1fa015ac90fa23e23a0"
+  }
+}

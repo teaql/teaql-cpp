@@ -1,0 +1,59 @@
+{
+  "recorded_utc": "2026-10-14T17:06:50.110751+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Actual original/native constant/candidate/Business-ID JSON query execution on existing SQLite data. Query-only, not ID allocation/bootstrap or full G10 acceptance.",
+  "exact_original_native_outcomes": 5910,
+  "successes": 5520,
+  "condition_panics_before_database": 390,
+  "safe_sql_log_records": 5520,
+  "model_types": [
+    "OrderStatus",
+    "Record",
+    "Person",
+    "Receipt",
+    "Ticket"
+  ],
+  "original_registry_difference_count": 0,
+  "source_startup_test_key": "Public deterministic all-zero 32-byte key/version1; no ID allocation.",
+  "native_startup_adaptation": "Existing trusted Context-owned module/executor/provider query assembly, no environment key configuration.",
+  "checks": {
+    "native_corpus": {
+      "passed": 1,
+      "selected": 1
+    },
+    "native_context": {
+      "passed": 1,
+      "selected": 1
+    },
+    "module_corpus": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize_corpus": {
+      "passed": 1,
+      "selected": 1,
+      "leak_scanning": false
+    },
+    "format_files": 1441,
+    "canonical_module_bodies": 657,
+    "module_exports": 1485
+  },
+  "initial_cpp_compile_failure": "Unqualified generated require_value helper across two domains; harness namespace qualification repaired.",
+  "raw_validation": "docs/parity/dynamic_json_domains_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "tests/support/dynamic_json_domain_models.sql": "9c3d70417515360e6e2f637a18813dc70ca047eb113a39a326b9b0cf4fbebaa4",
+    "tests/parity/generated_dynamic_json_domains_probe.cpp": "e8215809ab9bc123792d2f06f2bbfd1288b650c867f8e52e096cf92d081b1ee1",
+    "tests/parity/compare_dynamic_json_domains_5_0_6.py": "d875260f1a29dd098d6f4f6ec1db8368ae8e89ec361b4e08b71c3dc332116aa1",
+    "tests/parity/rust_dynamic_json_domains_5_0_6/src/main.rs": "7d2dd8376b38af88a776672397724e41300266a9afd3414a2fb7b660820f8841",
+    "tests/parity/rust_dynamic_json_domains_5_0_6/Cargo.toml": "427980d8e1a6a4ee2b6e15370bdf75d270778ee36b9117c98cba9bcf97564294",
+    "tests/parity/rust_dynamic_json_domains_5_0_6/Cargo.lock": "e904e8694080f411171cc7aaddb370d5919afdb0e474edabc6518e2420c9d8f5",
+    "tests/parity/dynamic_json_domains_5_0_6_cases.json.gz": "ad6b779c9d18ae229b66538d9aed92c543c396fd7c1797f6a4a17d97f73b9f30",
+    "docs/dynamic_json_qualification_matrix_5_0_6.md": "a55fccaf280004b6776e2a96f7db012403f756638ed67fb75b344696ec5724c9"
+  },
+  "production_or_generator_functions_changed": false,
+  "original_or_historical_files_changed": false,
+  "java_or_generation_reproduction_rerun": false,
+  "complete_capability_acceptance": false,
+  "full_suite_mips_or_device_test": false
+}

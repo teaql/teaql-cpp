@@ -78,13 +78,32 @@ public:
         bool object_alias = false;
     };
 
-    static Result<FieldLookup, EntityError> lookupField(Memory r,
-                                                        const CompactRow& row,
-                                                        std::string_view entity,
-                                                        std::string_view field,
-                                                        std::string_view column,
-                                                        bool forward_relation) {
+    static Result<FieldLookup, EntityError>
+    lookupField(Memory r,
+                const CompactRow& row,
+                std::string_view entity,
+                std::string_view field,
+                std::string_view column,
+                bool forward_relation,
+                std::optional<ArenaBorrow<FieldLayout>> field_layout = std::nullopt) {
         using Output = Result<FieldLookup, EntityError>;
+        const FieldLayout* aliases = nullptr;
+        std::optional<std::size_t> field_index;
+        if (field_layout) {
+            aliases = &field_layout->get();
+            if (field_layout->memory_resource() != r) {
+                throw std::invalid_argument("Field lookup requires metadata bound to its Context");
+            }
+            field_index = aliases->index(field);
+            if (aliases->entity() != entity || !field_index ||
+                aliases->index(column) != field_index) {
+                return Output::err(r,
+                                   EntityError(std::allocator_arg,
+                                               Allocator(r),
+                                               entity,
+                                               "incompatible generated field layout"));
+            }
+        }
         FieldLookup result;
         for (const auto& [name, value] : row.iter()) {
             if (name == field) {
@@ -109,6 +128,10 @@ public:
                 } else {
                     result.value = &value;
                 }
+            } else if (aliases && aliases->index(name) == field_index) {
+                // Native member aliases are scalar slots. Only the physical
+                // forward-relation spelling above unwraps a reference object.
+                result.value = &value;
             }
         }
         return Output::ok(r, result);
@@ -177,6 +200,7 @@ struct ExpressionDiagnostic {
     Vector<String> access_path, missing_preload;
     String suggested_fix, human_message;
     std::optional<String> nested_fix;
+    StaticString entry_name;
     static constexpr std::string_view severity = "error";
 
     static String method(Memory r, std::string_view prefix, std::string_view name) {
@@ -197,11 +221,12 @@ struct ExpressionDiagnostic {
                          Allocator a,
                          std::string_view root_desc,
                          std::string_view node,
-                         std::string_view path)
+                         std::string_view path,
+                         StaticString native_entry = "")
         : root(root_desc, a.resource()), failed_node(node, a.resource()),
           attempted_path(path, a.resource()), original_expr_with_broken_point(a.resource()),
           access_path(a.resource()), missing_preload(a.resource()), suggested_fix(a.resource()),
-          human_message(a.resource()) {
+          human_message(a.resource()), entry_name(native_entry) {
         auto r = a.resource();
         std::size_t begin = 0;
         while (true) {
@@ -239,17 +264,23 @@ struct ExpressionDiagnostic {
         }
         auto separator = root_desc.find('(');
         auto root_name = root_desc.substr(0, separator);
-        String entry(r);
+        auto explicit_entry = entry_name.view();
+        auto entry = explicit_entry.empty() ? method(r, "", root_name) : String(explicit_entry, r);
         // Source entry spelling is adapted to the generated C++ lowerCamelCase API.
-        for (std::size_t i = 0; i < root_name.size(); ++i) {
-            char c = root_name[i];
-            entry += i == 0 && c >= 'A' && c <= 'Z' ? char(c - 'A' + 'a') : c;
+        if (explicit_entry.empty() && !entry.empty() && entry.front() >= 'A' &&
+            entry.front() <= 'Z') {
+            entry.front() = char(entry.front() - 'A' + 'a');
         }
         original_expr_with_broken_point = "E::";
         original_expr_with_broken_point += entry;
         original_expr_with_broken_point += '(';
-        original_expr_with_broken_point +=
-            separator == root_desc.npos ? ")" : root_desc.substr(separator + 1);
+        if (separator == root_desc.npos) {
+            original_expr_with_broken_point += ')';
+        } else {
+            auto arguments = root_desc.substr(separator + 1);
+            // The original renderer takes split('(').nth(1), not the entire tail.
+            original_expr_with_broken_point += arguments.substr(0, arguments.find('('));
+        }
         for (const auto& part : access_path) {
             original_expr_with_broken_point += '.';
             original_expr_with_broken_point += method(r, "get", part);
@@ -272,8 +303,12 @@ struct ExpressionDiagnostic {
     }
 
     ExpressionDiagnostic(std::allocator_arg_t, Allocator a, const ExpressionDiagnostic& other)
-        : ExpressionDiagnostic(
-              std::allocator_arg, a, other.root, other.failed_node, other.attempted_path) {}
+        : ExpressionDiagnostic(std::allocator_arg,
+                               a,
+                               other.root,
+                               other.failed_node,
+                               other.attempted_path,
+                               other.entry_name) {}
 
     Memory memory_resource() const {
         return root.get_allocator().resource();
@@ -310,11 +345,14 @@ class ExpressionNotLoadedError final : public std::exception {
 public:
     using allocator_type = Allocator;
 
-    ExpressionNotLoadedError(Memory r, std::string_view root, const eval::MissingPath& missing)
+    ExpressionNotLoadedError(Memory r,
+                             std::string_view root,
+                             const eval::MissingPath& missing,
+                             StaticString entry_name = "")
         : diagnostic_(std::allocator_arg,
                       Allocator(r),
                       detail::resource_arena(r).make<ExpressionDiagnostic>(
-                          root, missing.failed_node, missing.attempted_path)) {}
+                          root, missing.failed_node, missing.attempted_path, entry_name)) {}
 
     ExpressionNotLoadedError(std::allocator_arg_t,
                              Allocator a,
@@ -341,9 +379,13 @@ namespace detail {
 struct ExpressionRootProvenance {
     using allocator_type = Allocator;
     String description;
+    StaticString entry_name;
 
-    ExpressionRootProvenance(std::allocator_arg_t, Allocator a, std::string_view root)
-        : description(root, a.resource()) {}
+    ExpressionRootProvenance(std::allocator_arg_t,
+                             Allocator a,
+                             std::string_view root,
+                             StaticString native_entry = "")
+        : description(root, a.resource()), entry_name(native_entry) {}
 
     Memory memory_resource() const {
         return description.get_allocator().resource();
@@ -389,6 +431,11 @@ public:
 
     static RuntimeExpression from_result(eval::EvalResult<T> value,
                                          std::string_view root_desc = "Unknown()") {
+        return from_result(std::move(value), root_desc, StaticString{""});
+    }
+
+    static RuntimeExpression
+    from_result(eval::EvalResult<T> value, std::string_view root_desc, StaticString entry_name) {
         ExpressionScope scope(value.memory_resource());
         if constexpr (requires { value.get().memory_resource(); }) {
             if (value.is_value() && value.get().memory_resource() != value.memory_resource()) {
@@ -397,7 +444,8 @@ public:
         }
         auto state =
             scope.get().template make_identified<detail::ExpressionState<T>>(std::move(value));
-        auto& root = scope.get().template make<detail::ExpressionRootProvenance>(root_desc);
+        auto& root =
+            scope.get().template make<detail::ExpressionRootProvenance>(root_desc, entry_name);
         return RuntimeExpression(scope,
                                  state.slot,
                                  ArenaBorrow<detail::ExpressionRootProvenance>(
@@ -413,7 +461,8 @@ public:
         requires(!requires(const T& value) { value.get(); })
     {
         return from_result(detail::clone_in(destination.memory_resource(), result()),
-                           rootDescription());
+                           rootDescription(),
+                           root_.get().entry_name);
     }
 
     std::optional<T> eval() const {
@@ -483,20 +532,22 @@ public:
         const auto& current = result();
         auto r = memory_resource();
         if (current.is_null()) {
-            return RuntimeExpression<U>::from_result(eval::EvalResult<U>::null(r),
-                                                     rootDescription());
+            return RuntimeExpression<U>::from_result(
+                eval::EvalResult<U>::null(r), rootDescription(), root_.get().entry_name);
         }
         if (current.is_not_loaded()) {
             return RuntimeExpression<U>::from_result(
                 eval::EvalResult<U>::not_loaded(
                     r, current.missing().failed_node, current.missing().attempted_path),
-                rootDescription());
+                rootDescription(),
+                root_.get().entry_name);
         }
         check_payload(current.get());
         return RuntimeExpression<U>::from_result(
             eval::EvalResult<U>::value(
                 r, std::invoke(std::forward<F>(function), detail::clone_in(r, current.get()))),
-            rootDescription());
+            rootDescription(),
+            root_.get().entry_name);
     }
 
     template <class F>
@@ -507,13 +558,15 @@ public:
         auto r = memory_resource();
         if (current.is_null()) {
             return Output::from_result(eval::EvalResult<typename Output::payload_type>::null(r),
-                                       rootDescription());
+                                       rootDescription(),
+                                       root_.get().entry_name);
         }
         if (current.is_not_loaded()) {
             return Output::from_result(
                 eval::EvalResult<typename Output::payload_type>::not_loaded(
                     r, current.missing().failed_node, current.missing().attempted_path),
-                rootDescription());
+                rootDescription(),
+                root_.get().entry_name);
         }
         check_payload(current.get());
         auto output = std::invoke(std::forward<F>(function), detail::clone_in(r, current.get()));
@@ -529,7 +582,8 @@ public:
         }
         return Output::from_result(eval::EvalResult<typename Output::payload_type>::not_loaded(
                                        r, next.missing().failed_node, path),
-                                   rootDescription());
+                                   rootDescription(),
+                                   root_.get().entry_name);
     }
 
     const ExpressionScope& scope() const noexcept {
@@ -576,8 +630,10 @@ private:
 
     void require_loaded(const eval::EvalResult<T>& value) const {
         if (value.is_not_loaded()) {
-            throw ExpressionNotLoadedError(
-                value.memory_resource(), rootDescription(), value.missing());
+            throw ExpressionNotLoadedError(value.memory_resource(),
+                                           rootDescription(),
+                                           value.missing(),
+                                           root_.get().entry_name);
         }
     }
 
@@ -587,7 +643,7 @@ private:
 };
 
 template <class T>
-RuntimeExpression<EntityBorrow<T>> entity_expression(const T& value) {
+RuntimeExpression<EntityBorrow<T>> entity_expression(const T& value, StaticString entry_name) {
     auto r = value.memory_resource();
     String root("Unknown()", r);
     if constexpr (requires {
@@ -602,10 +658,19 @@ RuntimeExpression<EntityBorrow<T>> entity_expression(const T& value) {
         root += ')';
     }
     return RuntimeExpression<EntityBorrow<T>>::from_result(
-        eval::EvalResult<EntityBorrow<T>>::value(r, EntityBorrow<T>(value)), root);
+        eval::EvalResult<EntityBorrow<T>>::value(r, EntityBorrow<T>(value)), root, entry_name);
+}
+
+template <class T>
+RuntimeExpression<EntityBorrow<T>> entity_expression(const T& value) {
+    return entity_expression(value, StaticString{""});
 }
 
 template <class T>
     requires(!std::is_lvalue_reference_v<T>)
 auto entity_expression(T&&) = delete;
+
+template <class T>
+    requires(!std::is_lvalue_reference_v<T>)
+auto entity_expression(T&&, StaticString) = delete;
 }

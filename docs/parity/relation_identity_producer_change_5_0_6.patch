@@ -1,0 +1,444 @@
+--- preserved producer before relationship fix
++++ current producer
+@@ -150,6 +150,15 @@
+     return identifier(RustReverseRelationNaming.rustMemberName(rel));
+   }
+ 
++  // Model identities are data. C++ keyword escaping applies only to emitted identifiers.
++  private static String relationIdentity(FieldDescriptor fd) {
++    return RustFieldDescriptorNaming.rustMemberName(fd);
++  }
++
++  private static String relationIdentity(ReverseRelation rel) {
++    return RustReverseRelationNaming.rustMemberName(rel);
++  }
++
+   private static String quote(String text) {
+     return "\""
+         + text.replace("\\", "\\\\")
+@@ -740,7 +749,7 @@
+         continue;
+       }
+       String target = typeName(((ObjectType) field.getFieldType()).getRefer());
+-      String member = relationName(field);
++      String member = relationName(field), identity = relationIdentity(field);
+       String knownNull =
+           field.getBooleanAttribute("optional")
+               ? "is_loaded(" + quote(canonical(field)) + ") && !" + fieldName(field) + "()"
+@@ -755,7 +764,7 @@
+               + camel("eval_" + member)
+               + "() const { return GeneratedRelationAccess::object("
+               + "memory_resource(), "
+-              + quote(member)
++              + quote(identity)
+               + ", "
+               + member
+               + "(), "
+@@ -763,7 +772,7 @@
+               + "); }");
+     }
+     for (ReverseRelation relation : od.getReverseRelations()) {
+-      String target = typeName(relation.getChild()), member = relationName(relation);
++      String target = typeName(relation.getChild()), member = relationName(relation), identity = relationIdentity(relation);
+       boolean many = !ReverseRelationNaming.oneToOne(relation);
+       String handle = camel(member + "_handle");
+       line(
+@@ -779,7 +788,7 @@
+               + "<"
+               + target
+               + ">(ENTITY_NAME, id(), "
+-              + quote(member)
++              + quote(identity)
+               + "); }");
+       line(
+           out,
+@@ -792,9 +801,9 @@
+               + camel("eval_" + member)
+               + "() const { return "
+               + (many
+-                  ? "GeneratedRelationAccess::list(*this, " + member + "(), " + quote(member)
++                  ? "GeneratedRelationAccess::list(*this, " + member + "(), " + quote(identity)
+                   : "GeneratedRelationAccess::object(memory_resource(), "
+-                      + quote(member)
++                      + quote(identity)
+                       + ", "
+                       + member
+                       + "(), "
+@@ -837,11 +846,11 @@
+     List<String> relations = new ArrayList<>();
+     for (FieldDescriptor field : fields(od)) {
+       if (field.isObjectProperty()) {
+-        relations.add(relationName(field));
++        relations.add(relationIdentity(field));
+       }
+     }
+     for (ReverseRelation relation : od.getReverseRelations()) {
+-      relations.add(relationName(relation));
++      relations.add(relationIdentity(relation));
+     }
+     line(
+         out,
+@@ -869,7 +878,7 @@
+         continue;
+       }
+       String target = typeName(((ObjectType) field.getFieldType()).getRefer());
+-      String member = relationName(field), path = quote(member);
++      String member = relationName(field), path = quote(relationIdentity(field));
+       String foreign = fieldName(field) + "()";
+       String resolved =
+           field.getBooleanAttribute("optional")
+@@ -904,7 +913,7 @@
+     for (ReverseRelation relation : od.getReverseRelations()) {
+       String target = typeName(relation.getChild()),
+           member = relationName(relation),
+-          path = quote(member);
++          path = quote(relationIdentity(relation));
+       if (ReverseRelationNaming.oneToOne(relation)) {
+         line(
+             out,
+@@ -979,18 +988,18 @@
+     line(out, "projection.dynamic(dynamic);");
+     for (FieldDescriptor field : fields(od)) {
+       if (field.isObjectProperty()) {
+-        String member = relationName(field);
++        String member = relationName(field), identity = relationIdentity(field);
+         line(out, "projection.forward<" + typeName(((ObjectType) field.getFieldType()).getRefer())
+-            + ">(" + quote(member) + ", " + member + "_ ? &*" + member
+-            + "_ : nullptr, load_state.is_loaded(" + quote(member)
++            + ">(" + quote(identity) + ", " + member + "_ ? &*" + member
++            + "_ : nullptr, load_state.is_loaded(" + quote(identity)
+             + "), generated_detail::encode(r, " + fieldName(field) + "_));");
+       }
+     }
+     for (ReverseRelation relation : od.getReverseRelations()) {
+-      String member = relationName(relation);
++      String identity = relationIdentity(relation);
+       line(out, "projection." + (ReverseRelationNaming.oneToOne(relation) ? "reverse_one" : "reverse_many")
+-          + "<" + typeName(relation.getChild()) + ">(" + quote(member)
+-          + ", load_state.is_loaded(" + quote(member) + "));");
++          + "<" + typeName(relation.getChild()) + ">(" + quote(identity)
++          + ", load_state.is_loaded(" + quote(identity) + "));");
+     }
+     line(out, "return projection.finish(dynamic_field_values()); }");
+   }
+@@ -1137,16 +1146,19 @@
+         fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {
+       descriptorRelation(
+           out,
+-          relationName(fd),
++          relationIdentity(fd),
+           typeName(((ObjectType) fd.getFieldType()).getRefer()),
+           canonical(fd),
+           "id",
+           false);
+     }
+-    for (ReverseRelation rel : od.getReverseRelations()) {
++    // Rust emits reverse descriptor attributes in one-to-one, then one-to-many order.
++    for (ReverseRelation rel : java.util.stream.Stream.concat(
++        RustObjectDescriptorNaming.rustOneToOneRelations(od).stream(),
++        RustObjectDescriptorNaming.rustOneToManyRelations(od).stream()).toList()) {
+       descriptorRelation(
+           out,
+-          relationName(rel),
++          relationIdentity(rel),
+           typeName(rel.getChild()),
+           "id",
+           canonical(rel.getProperty()),
+@@ -1212,6 +1224,7 @@
+           out,
+           name,
+           relationName(fd),
++          relationIdentity(fd),
+           typeName(((ObjectType) fd.getFieldType()).getRefer()));
+     }
+     // Source reverse relations are installed runtime views, not struct fields
+@@ -1225,7 +1238,7 @@
+       if (fd.isObjectProperty()) {
+         String variable = fieldName(fd) + "_lookup.value()";
+         line(out, "if (" + variable + ".alias_present) { auto& pool = detail::ContextArena::from_memory(r).loaded_snapshots();");
+-        line(out, "if (!" + variable + ".object_alias && !row.is_loaded_relation(" + quote(columnName(fd)) + ")) { result.load_state.mark_unloaded(" + quote(relationName(fd)) + ", &pool).value(); }");
++        line(out, "if (!" + variable + ".object_alias && !row.is_loaded_relation(" + quote(columnName(fd)) + ")) { result.load_state.mark_unloaded(" + quote(relationIdentity(fd)) + ", &pool).value(); }");
+         line(out, "result.load_state.mark_loaded(" + quote(canonical(fd)) + ", &pool).value(); }");
+       }
+     }
+@@ -1247,10 +1260,10 @@
+     line(out, "detail::EntityRuntimeAccess::retain_loaded_native_values(values, load_state);");
+     for (FieldDescriptor fd :
+         fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {
+-      injectRelation(out, relationName(fd), false);
++      injectRelation(out, relationName(fd), relationIdentity(fd), false);
+     }
+     for (ReverseRelation rel : od.getReverseRelations()) {
+-      injectRelation(out, relationName(rel), !ReverseRelationNaming.oneToOne(rel));
++      injectRelation(out, relationName(rel), relationIdentity(rel), !ReverseRelationNaming.oneToOne(rel));
+     }
+     line(out, "inject_runtime(values); return values; }");
+     for (FieldDescriptor fd :
+@@ -1294,23 +1307,23 @@
+             + "; }");
+   }
+ 
+-  private void decodeRelation(StringBuilder out, String entity, String member, String target) {
++  private void decodeRelation(StringBuilder out, String entity, String member, String identity, String target) {
+     String variable = member + "_decoded";
+     line(out, "auto " + variable + " = GeneratedRelationAccess::decodeObject<" + target
+-        + ">(r, row.get(" + quote(member) + "));");
++        + ">(r, row.get(" + quote(identity) + "));");
+     line(out, "if (!" + variable + ") { return Outcome::err(r, std::move(" + variable + ").error()); }");
+     line(out, "if (" + variable + ".value()) { result." + member + "_ = detail::make_box<" + target
+         + ">(r, std::move(*" + variable + ".value())); }");
+   }
+ 
+-  private void injectRelation(StringBuilder out, String member, boolean many) {
++  private void injectRelation(StringBuilder out, String member, String identity, boolean many) {
+     if (many) {
+       line(
+           out,
+           "if (auto relation = std::move("
+               + member
+               + "_).into_value()) { values.fields.emplace(String("
+-              + quote(member)
++              + quote(identity)
+               + ", r), std::move(*relation)); }");
+     } else {
+       line(
+@@ -1318,7 +1331,7 @@
+           "if ("
+               + member
+               + "_) { values.fields.emplace(String("
+-              + quote(member)
++              + quote(identity)
+               + ", r), Value(r, std::move(*"
+               + member
+               + "_).into_values().fields)); }");
+@@ -1596,14 +1609,14 @@
+                   + ", request::entity_id_value(memory_resource(), std::forward<Reference>(value))));");
+         }
+         String target = typeName(((ObjectType) fd.getFieldType()).getRefer());
+-        relationSelectionInputs(out, request, relationName(fd));
++        relationSelectionInputs(out, request, relationName(fd), relationIdentity(fd));
+         line(
+             methods,
+             request
+                 + "& select_"
+                 + relationName(fd)
+                 + "() { selection.relation("
+-                + quote(relationName(fd))
++                + quote(relationIdentity(fd))
+                 + "); return *this; }");
+         line(
+             methods,
+@@ -1614,7 +1627,7 @@
+                 + "_with(const "
+                 + target
+                 + "Request<P, ChildResult>& child) { selection.relation_query("
+-                + quote(relationName(fd))
++                + quote(relationIdentity(fd))
+                 + ", child.query()); return *this; }");
+         line(
+             methods,
+@@ -1643,14 +1656,14 @@
+         reverseAnalysisMethods(methods, request, relation, od.getOneToManyRelations().contains(relation));
+       }
+       for (ReverseRelation rel : od.getReverseRelations()) {
+-        relationSelectionInputs(out, request, relationName(rel));
++        relationSelectionInputs(out, request, relationName(rel), relationIdentity(rel));
+         line(
+             methods,
+             request
+                 + "& select_"
+                 + relationName(rel)
+                 + "() { selection.relation("
+-                + quote(relationName(rel))
++                + quote(relationIdentity(rel))
+                 + "); return *this; }");
+         line(
+             methods,
+@@ -1661,7 +1674,7 @@
+                 + "_with(const "
+                 + typeName(rel.getChild())
+                 + "Request<P, ChildResult>& child) { selection.relation_query("
+-                + quote(relationName(rel))
++                + quote(relationIdentity(rel))
+                 + ", child.query()); return *this; }");
+         line(
+             methods,
+@@ -1679,6 +1692,14 @@
+                 + ")); return *this; }");
+       }
+       adaptQueryMethods(out, request, methods.toString());
++      for (FieldDescriptor field : fields(od)) {
++        if (field.isObjectProperty()) {
++          relationSelectionAliases(out, request, relationName(field), relationIdentity(field), true);
++        }
++      }
++      for (ReverseRelation relation : od.getReverseRelations()) {
++        relationSelectionAliases(out, request, relationName(relation), relationIdentity(relation), false);
++      }
+       for (FieldDescriptor fd : fields(od)) {
+         queryFieldCriteria(out, request, fd);
+       }
+@@ -1834,15 +1855,33 @@
+     line(out, request + "& " + method + "(" + parameters + ") { " + body + " return *this; }");
+   }
+ 
+-  private void relationSelectionInputs(StringBuilder out, String request, String relation) {
++  private void relationSelectionInputs(StringBuilder out, String request, String relation, String identity) {
+     String method = camel("select_" + relation + "_with");
+     fluent(out, request,
+         "template <class ChildRequest> requires requires (const ChildRequest& child) { child.runtimeQuery().selection(); } ",
+         method, "const ChildRequest& child", "child",
+-        "query_.selectRelation(" + quote(relation) + ", child.runtimeQuery());");
++        "query_.selectRelation(" + quote(identity) + ", child.runtimeQuery());");
+     for (String type : List.of("SelectQuery", "request::QuerySelection")) {
+       fluent(out, request, "", method, "const " + type + "& child", "child",
+-          "query_.selectRelation(" + quote(relation) + ", child);");
++          "query_.selectRelation(" + quote(identity) + ", child);");
++    }
++  }
++
++  // Diagnostic suggestions use canonical paths. Prefixes make keyword names legal C++ APIs.
++  private void relationSelectionAliases(StringBuilder out, String request, String member,
++      String identity, boolean forward) {
++    String original = camel("select_" + member), alias = camel("select_" + identity);
++    if (original.equals(alias)) {
++      return;
++    }
++    fluent(out, request, "", alias, "", "", original + "();");
++    fluent(out, request,
++        "template <class ChildRequest> requires requires (" + request
++            + "& self, const ChildRequest& child) { self." + original + "With(child); } ",
++        alias + "With", "const ChildRequest& child", "child", original + "With(child);");
++    if (forward) {
++      fluent(out, request, "", camel("unselect_" + identity), "", "",
++          camel("unselect_" + member) + "();");
+     }
+   }
+ 
+@@ -2070,7 +2109,7 @@
+         fieldAdapter(out, request, camel("unselect_" + member), "", "", "query_.unselect(" + canonical + ");");
+       }
+       if (fd.isObjectProperty()) {
+-        fieldAdapter(out, request, camel("unselect_" + relationName(fd)), "", "", "query_.unselectRelation(" + canonical + ", " + quote(relationName(fd)) + ");");
++        fieldAdapter(out, request, camel("unselect_" + relationName(fd)), "", "", "query_.unselectRelation(" + canonical + ", " + quote(relationIdentity(fd)) + ");");
+       }
+       if (sourceNumericField(fd)) {
+         fieldAdapter(out, request, camel("select_" + member + "_with_function"), "AggregateFunction function", "function", "query_.selectWithFunction(" + canonical + ", " + canonical + ", function);");
+@@ -2309,21 +2348,15 @@
+       }
+       for (FieldDescriptor fd :
+           fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {
+-        line(
+-            out,
+-            typeName(((ObjectType) fd.getFieldType()).getRefer())
+-                + "Expression "
+-                + camel("get_" + relationName(fd))
+-                + "() const;");
++        expressionRelationDeclaration(out,
++            typeName(((ObjectType) fd.getFieldType()).getRefer()) + "Expression",
++            relationName(fd), relationIdentity(fd));
+       }
+       for (ReverseRelation rel : od.getReverseRelations()) {
+-        line(
+-            out,
++        expressionRelationDeclaration(out,
+             typeName(rel.getChild())
+-                + (ReverseRelationNaming.oneToOne(rel) ? "Expression" : "ListExpression")
+-                + " "
+-                + camel("get_" + relationName(rel))
+-                + "() const;");
++                + (ReverseRelationNaming.oneToOne(rel) ? "Expression" : "ListExpression"),
++            relationName(rel), relationIdentity(rel));
+       }
+       line(out, "};");
+       line(
+@@ -2364,6 +2397,7 @@
+             out,
+             typeName(od),
+             relationName(fd),
++            relationIdentity(fd),
+             typeName(((ObjectType) fd.getFieldType()).getRefer()),
+             false);
+       }
+@@ -2372,6 +2406,7 @@
+             out,
+             typeName(od),
+             relationName(rel),
++            relationIdentity(rel),
+             typeName(rel.getChild()),
+             !ReverseRelationNaming.oneToOne(rel));
+       }
+@@ -2410,8 +2445,16 @@
+     return out.toString();
+   }
+ 
++  private void expressionRelationDeclaration(StringBuilder out, String expression,
++      String member, String identity) {
++    line(out, expression + " " + camel("get_" + member) + "() const;");
++    if (!camel("get_" + member).equals(camel("get_" + identity))) {
++      line(out, expression + " " + camel("get_" + identity) + "() const;");
++    }
++  }
++
+   private void expressionRelation(
+-      StringBuilder out, String name, String member, String target, boolean many) {
++      StringBuilder out, String name, String member, String identity, String target, boolean many) {
+     String expression = target + (many ? "ListExpression" : "Expression");
+     String payload = (many ? "EntityListBorrow<" : "EntityBorrow<") + target + ">";
+     line(
+@@ -2423,7 +2466,7 @@
+             + "Expression::"
+             + camel("get_" + member)
+             + "() const { auto next = this->andThen("
+-            + quote(member)
++            + quote(identity)
+             + ", [](EntityBorrow<"
+             + name
+             + "> source) { return RuntimeExpression<"
+@@ -2433,6 +2476,10 @@
+             + "()); }); return "
+             + expression
+             + "(next); }");
++    if (!camel("get_" + member).equals(camel("get_" + identity))) {
++      line(out, "inline " + expression + " " + name + "Expression::"
++          + camel("get_" + identity) + "() const { return " + camel("get_" + member) + "(); }");
++    }
+   }
+ 
+   private String checkers(String ns, List<ObjectDescriptor> entities) {
+@@ -3019,6 +3066,18 @@
+     }
+     code.appendTail(result);
+     return result.toString();
++  }
++
++  private void relationIdentityAssist(StringBuilder out, String entity, String member, String identity) {
++    if (member.equals(identity)) {
++      return;
++    }
++    line(out, "Relationship identity for " + entity + ": `" + quote(identity)
++        + "` is the metadata, JSON and diagnostic path. The escaped model accessor `"
++        + camel(member) + "()` is a C++ identifier only. Q `" + camel("select_" + identity)
++        + "()` / `" + camel("select_" + identity + "_with") + "(child)` and E `"
++        + camel("get_" + identity) + "()` delegate to the corresponding escaped Q/E methods."
++        + " They preserve Context binding and do not issue implicit queries.");
+   }
+ 
+   private String assist(String ns, List<ObjectDescriptor> entities) {
+@@ -3469,6 +3528,16 @@
+               + "Behavior` preserves the EntityDataServiceBehavior SPI; runtime hook names retain"
+               + " snake_case.");
+     }
++    for (ObjectDescriptor od : entities) {
++      for (FieldDescriptor field : fields(od)) {
++        if (field.isObjectProperty()) {
++          relationIdentityAssist(out, typeName(od), relationName(field), relationIdentity(field));
++        }
++      }
++      for (ReverseRelation relation : od.getReverseRelations()) {
++        relationIdentityAssist(out, typeName(od), relationName(relation), relationIdentity(relation));
++      }
++    }
+     return camelAssist(out.toString(), ns);
+   }
+ 

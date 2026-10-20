@@ -1,6 +1,7 @@
 // Original executor/cache/probe tests with controlled transport and explicit scopes.
 #include <teaql/sql/executor.hpp>
 #include <teaql/runtime/context.hpp>
+#include <teaql/core/query_debug.hpp>
 #include <charconv>
 #include <iostream>
 
@@ -185,7 +186,7 @@ struct Fixture {
 
     QueryRequest request(const SelectQuery& query, bool debug = false, bool metadata = true) {
         auto intent = QueryIntent::create(
-            owner, "exercise SQL executor fixture", "verify cache and partition contracts");
+            owner, "verify bounded provider query", "verify provider query behavior");
         return QueryRequest(
             std::allocator_arg, Allocator(owner), query, intent.value(), debug, metadata);
     }
@@ -238,12 +239,12 @@ static void batch_metadata_keeps_each_statement_and_its_numbered_bindings() {
     for (auto value : {"first", "second"}) {
         InsertCommand command(std::allocator_arg, Allocator(f.owner), "Order");
         command.value("name", value);
-        batch.emplace_back(std::move(command), "ported batch child");
+        batch.emplace_back(std::move(command), "audited provider conformance test");
     }
     auto request = MutationRequest(std::allocator_arg,
                                    Allocator(f.owner),
                                    std::move(batch),
-                                   "ported mutation execution fixture");
+                                   "audited provider conformance test");
     const auto& result = f.executor.mutate(f.owner, std::move(request)).wait();
     check(result && result.value().metadata.statements.size() == 2,
           "original two batch statements");
@@ -286,7 +287,7 @@ static void sql_executor_never_eagerly_expands_private_values_even_when_diagnost
                                        MutationRequest(std::allocator_arg,
                                                        Allocator(f.owner),
                                                        std::move(command),
-                                                       "ported mutation execution fixture"))
+                                                       "audited provider conformance test"))
                                .wait();
     check(inserted && !inserted.value().metadata.debug_query &&
               inserted.value().metadata.params.size() == 1 &&
@@ -443,6 +444,158 @@ static void cached_select_plan_preserves_parameter_order_for_supported_query_sha
     rebound(subquery(20), subquery(30));
 }
 
+static void ordinary_sql_query_future_keeps_partition_probe_state_out_of_frame() {
+    Fixture f(true);
+    auto query = f.query();
+    query.limit(1).comment("what: ordinary SQL future size");
+    auto& operation = f.executor.query(f.owner, f.request(query, false, false));
+    constexpr auto bytes = sizeof(detail::SqlQueryOperation<String>);
+    std::cout << "ORDINARY_SQL_QUERY_ARENA_FRAME_BYTES=" << bytes << '\n';
+    check(bytes <= 4608, "ordinary native query state fits the original frame bound");
+    check(f.schema.lookups == 0 && f.transport.single_calls == 0,
+          "unpolled ordinary query does not execute");
+    check(bool(operation.wait()) && f.schema.lookups == 1 && f.transport.single_calls == 1 &&
+              f.transport.repeated_calls == 0,
+          "ordinary query never enters the repeated probe path");
+}
+
+static void partition_probe_fallback_keeps_identical_single_and_explicit_policy_queries() {
+    for (unsigned mode : {0, 1, 2}) {
+        Fixture f(true);
+        Vector<Value> values(f.owner);
+        values.emplace_back(std::uint64_t(7));
+        if (mode != 1) {
+            values.emplace_back(std::uint64_t(mode == 0 ? 7 : 9));
+        }
+        auto query = f.query();
+        query.filter(Expr::in_list(f.owner, "id", values))
+            .order_desc("id")
+            .limit(1)
+            .partition_by("id");
+        if (mode == 2) {
+            query.top_n_probe_parent_threshold(32);
+        }
+        check(f.run(query, false, false).rows.empty() && f.transport.repeated_calls == 0 &&
+                  f.transport.single_calls == 1,
+              "identical, singleton and explicit-policy partition inputs use one ordinary query");
+    }
+}
+
+static void cache_payload_has_no_original_secrets(Fixture& f,
+                                                  const EntityDescriptor& entity,
+                                                  const SelectQuery& query,
+                                                  const CompiledQuery& compiled) {
+    // Exercise the same canonical entry constructor used by the private cache.
+    // Do not add a production cache-inspection API for a test.
+    detail::CachedSelectPlan entry(std::allocator_arg,
+                                   Allocator(f.owner),
+                                   entity,
+                                   detail::select_plan_key(f.owner, query),
+                                   compiled);
+    check(f.cache.cached_plans() == 1 && entry.log.intent_redactions.is_empty() &&
+              debug_string(f.owner, entry.key).find("SECRET") == String::npos,
+          "one normalized plan contains no original secret values or provenance");
+}
+
+static void cached_like_plan_rebinds_originals_across_all_expression_positions() {
+    Fixture f;
+    auto entity = test_entity(f.owner);
+    entity.mask_fields({"name"});
+    TestDialect fresh;
+    for (auto prefix : {"FIRST-SECRET", "SECOND-SECRET"}) {
+        auto tagged = [&](std::string_view suffix) {
+            String value(prefix, f.owner);
+            value += suffix;
+            return value;
+        };
+        String public_value("PLAIN-", f.owner);
+        public_value += prefix;
+        auto nested = f.query();
+        nested.filter(Expr::begin_with(f.owner, "name", tagged("-SUBQUERY")));
+        Vector<Value> ids(f.owner);
+        ids.emplace_back(std::uint64_t(1));
+        ids.emplace_back(std::uint64_t(2));
+        Expr filter(f.owner, Expr::Kind::And);
+        filter.args.emplace_back(Expr::contain(f.owner, "name", tagged("-FILTER")));
+        filter.args.emplace_back(Expr::in_list(f.owner, "id", ids));
+        filter.args.emplace_back(Expr::in_subquery(f.owner, "id", entity, nested, "id"));
+        auto query = f.query();
+        query.project_expr("public", Expr::value(f.owner, public_value))
+            .filter(std::move(filter))
+            .having(Expr::not_end_with(f.owner, "name", tagged("-HAVING")))
+            .add_order(OrderBy::asc_expr(Expr::end_with(f.owner, "name", tagged("-ORDER"))));
+        auto actual = f.cache.compile_select_cached(f.owner, f.dialect, entity, query);
+        check(actual == fresh.compile_select(f.owner, entity, query),
+              "all LIKE positions rebind exactly like fresh production compilation");
+        Vector<String> secrets(f.owner);
+        actual.log_context.intent_redactions.extend_secrets(false, secrets);
+        for (auto suffix : {"-FILTER", "-SUBQUERY", "-HAVING", "-ORDER"}) {
+            check(std::ranges::find(secrets, tagged(suffix)) != secrets.end(),
+                  "cached LIKE operands retain current originals");
+        }
+        check(std::ranges::all_of(secrets,
+                                  [&](const String& secret) {
+                                      return secret.starts_with(prefix);
+                                  }),
+              "no prior LIKE operand survives a cache hit");
+        cache_payload_has_no_original_secrets(f, entity, query, actual);
+    }
+}
+
+static void cached_partition_having_rebinds_numeric_and_private_like_operands() {
+    Fixture f;
+    auto entity = test_entity(f.owner);
+    entity.mask_fields({"name"});
+    TestDialect fresh;
+    for (auto number : {std::int64_t(1), std::int64_t(11)}) {
+        std::string_view original = number == 1 ? "FIRST-SECRET" : "SECOND-SECRET";
+        String search("SEARCH-", f.owner);
+        search += number == 1 ? "1" : "11";
+        Expr having(f.owner, Expr::Kind::And);
+        having.args.emplace_back(
+            Expr::binary(Expr::count_all(f.owner), BinaryOp::Gt, Expr::value(f.owner, number + 2)));
+        having.args.emplace_back(Expr::contain(f.owner, "name", original));
+        auto query = f.query();
+        query.project_expr("marker", Expr::value(f.owner, number))
+            .filter(Expr::gt(f.owner, "id", number + 1))
+            .search_with_text(search)
+            .group_by("id")
+            .group_by("name")
+            .count("n")
+            .having(std::move(having))
+            .add_order(OrderBy::asc_expr(Expr::value(f.owner, number + 3)))
+            .page(0, 10)
+            .partition_by("id");
+        auto expected = fresh.compile_select(f.owner, entity, query);
+        check(expected.sql.find("ROW_NUMBER() OVER (PARTITION BY \"id\"") != String::npos &&
+                  expected.sql.find(" GROUP BY ") != String::npos &&
+                  expected.sql.find(" HAVING ") != String::npos,
+              "grouping and HAVING remain inside the ranked partition query");
+        String search_pattern("%", f.owner);
+        search_pattern += search;
+        search_pattern += '%';
+        String private_pattern("%", f.owner);
+        private_pattern += original;
+        private_pattern += '%';
+        Vector<Value> values(f.owner);
+        for (auto value : {number, number + 3, number + 1}) {
+            values.emplace_back(value);
+        }
+        values.emplace_back(Value(f.owner, search_pattern));
+        values.emplace_back(number + 2);
+        values.emplace_back(Value(f.owner, private_pattern));
+        check(expected.params == values, "projection/window/WHERE/search/HAVING binding order");
+        auto actual = f.cache.compile_select_cached(f.owner, f.dialect, entity, query);
+        check(actual == expected && f.dialect.compilations == 1,
+              "cold and warm partition plans equal fresh compilation with one cache miss");
+        Vector<String> secrets(f.owner);
+        actual.log_context.intent_redactions.extend_secrets(false, secrets);
+        check(secrets.size() == 1 && secrets.front() == original,
+              "only the current private HAVING original survives");
+        cache_payload_has_no_original_secrets(f, entity, query, actual);
+    }
+}
+
 int main() {
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
@@ -451,6 +604,8 @@ int main() {
         batch_metadata_keeps_each_statement_and_its_numbered_bindings();
         skips_execution_metadata_when_caller_will_discard_it();
         sql_executor_never_eagerly_expands_private_values_even_when_diagnostics_requested();
+        ordinary_sql_query_future_keeps_partition_probe_state_out_of_frame();
+        partition_probe_fallback_keeps_identical_single_and_explicit_policy_queries();
         topn_004_011_sqlite_reuses_one_repeated_probe_boundary();
         keeps_partition_query_observable_when_metadata_is_enabled();
         topn_001_explicit_zero_threshold_forces_window_for_probe_provider();
@@ -460,10 +615,12 @@ int main() {
             topn_007_probe_rewrites_only_partition_membership_filter(user->memory_resource());
         }
         cached_select_plan_rebinds_values_and_separates_in_list_lengths();
+        cached_like_plan_rebinds_originals_across_all_expression_positions();
+        cached_partition_having_rebinds_numeric_and_private_like_operands();
         cached_select_plan_rebinds_large_in_as_one_array_parameter();
         cached_select_plan_preserves_parameter_order_for_supported_query_shapes();
         std::pmr::set_default_resource(previous);
-        std::cout << "Original twelve SQL executor contracts passed\n";
+        std::cout << "Original sixteen SQL executor contracts passed\n";
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n';
         return 1;

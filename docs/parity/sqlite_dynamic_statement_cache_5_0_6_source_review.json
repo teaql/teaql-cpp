@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_path": "teaql-provider-sqlite/src/dynamic_fields.rs",
+  "source_sha256": "016be6656f22fb68eb9c8a37a6aa174bbc6758c6417183272b0cc256036b75df",
+  "original_responsibilities": [
+    "apply validates the entire batch before statements",
+    "apply prepares cached UPSERT and DELETE before mutations",
+    "load prepares a cached SELECT for each bounded owner-ID chunk"
+  ],
+  "live_source_observations": 123,
+  "source_and_cpp_exit_code": 0,
+  "notice": "Live original provider corpus preserves every result/error/rollback/storage outcome; native cache/lifecycle controls separately verify the C++ ownership protocol. Cache capacity and owner-thread scheduling remain the documented C++ adaptations.",
+  "cpp_only_failure_control": "Native sqlite3 authorizer rejects DELETE at preparation; test requires safe storage error, no preceding UPSERT writes, return of borrowed UPSERT, and successful retry after denial is removed. This control is source-order regression evidence, not an additional live Rust comparison."
+}

@@ -7,7 +7,8 @@ struct sqlite3_stmt;
 namespace teaql::detail {
 enum class SqliteDecodeKind { Infer, Bool, Decimal, Json, Date, Timestamp, Text };
 SqliteDecodeKind sqlite_decode_kind(std::optional<std::string_view> declaration);
-// Internal fast-path contract; failure leaves the general timestamp parser responsible.
+// Invalid fast-path input normally falls through to the general parser. Debug
+// builds preserve the source's checked byte-subtraction failure as an exception.
 std::optional<Timestamp> parse_fixed_sqlite_timestamp(std::string_view);
 
 // Context-owned immutable layout; rows may borrow it only in the same domain.

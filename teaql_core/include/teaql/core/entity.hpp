@@ -2,6 +2,7 @@
 #include <teaql/core/meta.hpp>
 #include <teaql/core/mutation.hpp>
 #include <teaql/core/result.hpp>
+#include <teaql/core/detail/request_intent.hpp>
 #include <teaql/core/row.hpp>
 #include <teaql/core/detail/text.hpp>
 #include <set>
@@ -126,10 +127,23 @@ void register_entities(EntityDescriptorStore& store) {
 template <class T>
 class Audited;
 
+// Metadata defaults remain independent of entity state and persistence protocols.
+template <class Derived>
+class TeaqlEntityDefaults {
+public:
+    static Result<std::optional<ArenaBorrow<FieldLayout>>, EntityError> field_layout(Memory r) {
+        return Result<std::optional<ArenaBorrow<FieldLayout>>, EntityError>::ok(r, std::nullopt);
+    }
+
+    static void register_into(EntityDescriptorStore& store) {
+        store.register_descriptor(Derived::entity_descriptor(store.memory_resource()));
+    }
+};
+
 // CRTP supplies Rust trait defaults, while allowing handwritten models to override
 // projection/dirty tracking. These hooks do not silently invent mutation intent.
 template <class Derived>
-class EntityDefaults {
+class EntityDefaults : public TeaqlEntityDefaults<Derived> {
 public:
     std::optional<DataType> dynamic_property_type(std::string_view key) const {
         const auto& model = static_cast<const Derived&>(*this);
@@ -156,6 +170,10 @@ public:
 
     bool has_pending_dynamic_mutations() const {
         return false;
+    }
+
+    std::optional<AnyRef> runtime_state_any() const {
+        return std::nullopt;
     }
 
     static constexpr bool supports_dynamic_field_load() {
@@ -192,10 +210,6 @@ public:
                         Allocator(r),
                         Derived::ENTITY_NAME,
                         "entity lacks the runtime-owned indexed dynamic-field carrier"));
-    }
-
-    static void register_into(EntityDescriptorStore& store) {
-        store.register_descriptor(Derived::entity_descriptor(store.memory_resource()));
     }
 
     static Result<Derived, EntityError>
@@ -328,7 +342,7 @@ public:
 
     Audited(std::allocator_arg_t, Allocator a, const Audited& other)
         requires detail::domain_copyable<T>
-        : Audited(std::allocator_arg, a, other.inner_, other.comment_) {}
+        : Audited(std::allocator_arg, a, other.inner_, other.comment_.comment()) {}
 
     Audited(std::allocator_arg_t, Allocator a, Audited&& other)
         : Audited(detail::move_to(a.resource(), std::move(other))) {}
@@ -337,37 +351,40 @@ public:
     Audited(Audited&&) noexcept = default;
 
     const T& entity() const {
+        comment_.require_valid();
         return inner_;
     }
 
     T& entity_mut() {
+        comment_.require_valid();
         return inner_;
     }
 
     std::string_view get_comment() const {
-        return comment_;
+        comment_.require_valid();
+        return comment_.comment();
     }
 
     Memory memory_resource() const {
-        return comment_.get_allocator().resource();
+        return comment_.memory_resource();
     }
 
     T into_entity() && {
-        inner_.set_comment(comment_);
+        comment_.require_valid();
+        inner_.set_comment(comment_.comment());
         return std::move(inner_);
     }
 
 private:
-    static String validate(Memory r, std::string_view text) {
-        auto trimmed = text;
-        detail::trim_start(trimmed);
-        if (trimmed.empty()) {
-            throw std::invalid_argument("audit comment must not be empty");
+    static MutationIntent validate(Memory r, std::string_view text) {
+        auto intent = MutationIntent::create(r, text);
+        if (!intent) {
+            throw std::invalid_argument(std::string(intent.error().to_string(r)));
         }
-        return String(text, r);
+        return std::move(intent).value();
     }
 
-    String comment_;
+    MutationIntent comment_;
     T inner_;
 };
 
@@ -615,6 +632,16 @@ public:
 
     void inject_into_values(Record& values) && {
         std::move(*inner_).inject_into_values(values);
+    }
+
+    void inject_into_json_values(Record& values, const eval::LoadState* loaded = nullptr) && {
+        if constexpr (requires(T&& relation) {
+                          std::move(relation).inject_into_json_values(values, loaded);
+                      }) {
+            std::move(*inner_).inject_into_json_values(values, loaded);
+        } else {
+            std::move(*inner_).inject_into_values(values);
+        }
     }
 
 private:

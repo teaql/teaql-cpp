@@ -8,6 +8,9 @@ inline void write_debug(DebugWriter& writer, const PurposedSelectQuery& value) {
         fields.field("query", [&](auto& out) {
             write_debug(out, value.as_query());
         });
+        fields.field("has_diagnostic_source", [&](auto& out) {
+            write_debug(out, bool(value.diagnostic_source_));
+        });
     });
 }
 }

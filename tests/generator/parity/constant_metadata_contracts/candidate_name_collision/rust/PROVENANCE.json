@@ -1,0 +1,30 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/parity/constant_metadata_contracts/candidate_name_collision/model.xml",
+  "model_sha256": "4a90166c80e8ba08cebff784a1a8600e0474eec2ac7c10545c9f66efa915a2ab",
+  "hand_edited": false,
+  "observer_sha256": "218cd94f595c1747eb9d7c7c7820032051cb3b7076d52bf4c9bf70c0a55c6409",
+  "files": {
+    "OBSERVATION.json": "ed550125716301e4c687dc465a276bac124a19fac61055fc0b5247ad79c9002b",
+    "lib/Cargo.toml": "14c6d0491b6e7c788302983f9eed4ffe16b88e63231c9dc85ca34925fae215ee",
+    "lib/src/sample_data.rs": "4b14da8f62998512d4ad8b5472f5d280727669d136520d941bd2cfb78fba2be0",
+    "lib/src/request_support.rs": "e9677b95990c7cab888e2a9e17cff55cdab35559fd072f2228923cdd1da177e6",
+    "lib/src/q.rs": "b78b4cb86b466605d6d94a1ba2b14c2c50378c4cefb1c5ec70a6e7456932041e",
+    "lib/src/e.rs": "1ebd33bea0af73a86d7e62ca764a3dd83437c87804f9d07d1db97c23a7d8be01",
+    "lib/src/lib.rs": "1cd83f0ea9c721a69ff3c0f9f636bd2937313500dfcdad6626778565d787a3db",
+    "lib/src/runtime.rs": "dd0cb4fa46c932ddb6afa2d00de8196ea6e7e92cd57be347db9fdd11d97272be",
+    "lib/src/status/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/status/entity.rs": "8b77861a3f21f43f7969a26c060741dc970e15bb3ef04c1369bc04d18b60382d",
+    "lib/src/status/behavior.rs": "bae1119d9b55008cab29ef89cf2f849ff338fa806fbe4a944002fa9df914e11a",
+    "lib/src/status/checker.rs": "59429d10a6e5d5d8154e7e8b6759d044536fa9bf3ff9880a600a52e9bb7fcccb",
+    "lib/src/status/expression.rs": "dd7fbce921f766b63b7a205dde95ef0e9ff8bfa8b57de796e5306d8ea6a3fefa",
+    "lib/src/status/request.rs": "0abd87a8972b961d1913b2786b99815bc09a2e5a7b40e727e83f273ffe4f7150",
+    "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/platform/entity.rs": "1ab2c8ba2bf7db433548d8a23e88b9f8c46c29f7bb59ae03e94fd4bb25c3b5dc",
+    "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+    "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+    "lib/src/platform/expression.rs": "4658e3b818692ce039814affff2ac041c099eed4d2c9e27d13faff5ff58ff473",
+    "lib/src/platform/request.rs": "2f8351b6d2391026af0fa2bc944d47044e0e044b73125c4fb1cb193cccf9f57f"
+  }
+}

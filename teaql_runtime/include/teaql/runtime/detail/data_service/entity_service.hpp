@@ -316,6 +316,7 @@ private:
         if (query_log_intent_) {
             scoped.query_log_intent_ =
                 &context().template make<SqlIntentRedactions>(*query_log_intent_);
+            scoped.data_service_.metadata.with_query_privacy(*scoped.query_log_intent_);
         }
         return scoped;
     }
@@ -327,6 +328,7 @@ private:
         if (!scoped.query_log_intent_) {
             scoped.query_log_intent_ = &context().template make<SqlIntentRedactions>();
         }
+        scoped.data_service_.metadata.with_query_privacy(*scoped.query_log_intent_);
         return scoped;
     }
 
@@ -498,6 +500,11 @@ struct EntityDataServiceAccess {
     }
 
     template <class E>
+    static bool has_request_intent(const EntityDataService<E>& service) {
+        return service.query_intent_.has_value();
+    }
+
+    template <class E>
     static const UserContext& context(const EntityDataService<E>& service) {
         return service.context();
     }
@@ -600,6 +607,49 @@ struct EntityDataServiceAccess {
     template <class E>
     static auto query_scoped(const EntityDataService<E>& service) {
         return service.query_scoped_service();
+    }
+
+    static const SelectQuery* diagnostic_source(const PurposedSelectQuery& query) {
+        return query.diagnostic_source_ ? &*query.diagnostic_source_ : nullptr;
+    }
+
+    template <class E>
+    static auto query_scoped(const EntityDataService<E>& service, const SelectQuery& source) {
+        auto r = service.memory_resource();
+        using R = Result<EntityDataService<E>, RuntimeError>;
+        auto intent = service.request_intent_for(source);
+        if (!intent) {
+            return R::err(r, std::move(intent).error());
+        }
+        auto scoped = service.query_scoped_service();
+        scoped.with_query_intent(intent.value());
+        if (scoped.data_service_.metadata.capture_execution_metadata()) {
+            auto tree = clone_in(r, source);
+            expand_query_facet_diagnostics(tree);
+            Vector<const SelectQuery*> pending(r);
+            pending.push_back(&tree);
+            while (!pending.empty()) {
+                auto* query = pending.back();
+                pending.pop_back();
+                scoped.query_log_intent_->extend(
+                    scoped.data_service_.executor.get().query_log_intent(r, *query));
+                for (const auto& relation : query->relations) {
+                    if (relation.query) {
+                        pending.push_back(&*relation.query);
+                    }
+                }
+                for (const auto& child : query->child_enhancements) {
+                    pending.push_back(&child);
+                }
+                for (const auto& aggregate : query->relation_aggregates) {
+                    pending.push_back(&aggregate.query);
+                }
+                for (const auto& group : query->object_group_bys) {
+                    pending.push_back(&group.query);
+                }
+            }
+        }
+        return R::ok(r, std::move(scoped));
     }
 
     template <class E>

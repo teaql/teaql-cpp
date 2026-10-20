@@ -1,0 +1,115 @@
+{
+  "input": {
+    "module": "combined",
+    "root": "normal",
+    "fault": false,
+    "rounds": 1,
+    "scale": "Tiny",
+    "seed": 7
+  },
+  "output": {
+    "rounds": [
+      {
+        "after": {
+          "platform": [
+            {
+              "id": 1,
+              "name": "string()",
+              "version": 1
+            }
+          ],
+          "priority": [
+            {
+              "code": "BASIC",
+              "id": 1,
+              "name": "Basic",
+              "platform": 1,
+              "value": "7",
+              "version": 1
+            },
+            {
+              "code": "EXTENDED",
+              "id": 22,
+              "name": "Extended",
+              "platform": 1,
+              "value": "9",
+              "version": 1
+            }
+          ],
+          "sample_item": []
+        },
+        "before": {
+          "platform": [
+            {
+              "id": 1,
+              "name": "string()",
+              "version": 1
+            }
+          ],
+          "priority": [
+            {
+              "code": "BASIC",
+              "id": 1,
+              "name": "Basic",
+              "platform": 1,
+              "value": "7",
+              "version": 1
+            },
+            {
+              "code": "EXTENDED",
+              "id": 22,
+              "name": "Extended",
+              "platform": 1,
+              "value": "9",
+              "version": 1
+            }
+          ],
+          "sample_item": []
+        },
+        "logs": [
+          {
+            "affected_rows": null,
+            "audit_reason": null,
+            "comment": "what: inspect existing entities before sample-data initialization",
+            "context": "SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: Some(Success), database_kind: Some(\"sqlite\"), parameter_policies: [Plain], generated_sql: true, masked_parameters: [false], mode: Some(\"safe\"), omission_reason: None }",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version, name FROM platform_data WHERE (version > 0) LIMIT 10000",
+            "operation": "Select",
+            "params": [
+              "I64(0)"
+            ],
+            "pretty_sql": "-- TeaQL SAFE\nSELECT id, version, name FROM platform_data WHERE (version > 0) LIMIT 10000",
+            "purpose": "why: avoid duplicate sample records",
+            "result_count": 1,
+            "result_type": null,
+            "sql": "SELECT id, version, name FROM platform_data WHERE (version > ?) LIMIT 10000",
+            "summary": "1 rows returned",
+            "trace": "[TraceNode { kind: Operation, entity_type: \"Platform\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"Platform\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }]"
+          },
+          {
+            "affected_rows": null,
+            "audit_reason": null,
+            "comment": "what: inspect existing entities before sample-data initialization",
+            "context": "SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: Some(Success), database_kind: Some(\"sqlite\"), parameter_policies: [Plain], generated_sql: true, masked_parameters: [false], mode: Some(\"safe\"), omission_reason: None }",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version, name, code, value, platform AS platform_id FROM priority_data WHERE (version > 0) LIMIT 10000",
+            "operation": "Select",
+            "params": [
+              "I64(0)"
+            ],
+            "pretty_sql": "-- TeaQL SAFE\nSELECT id, version, name, code, value, platform AS platform_id FROM priority_data WHERE (version > 0) LIMIT 10000",
+            "purpose": "why: avoid duplicate sample records",
+            "result_count": 2,
+            "result_type": null,
+            "sql": "SELECT id, version, name, code, value, platform AS platform_id FROM priority_data WHERE (version > ?) LIMIT 10000",
+            "summary": "2 rows returned",
+            "trace": "[TraceNode { kind: Operation, entity_type: \"Priority\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"Priority\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }]"
+          }
+        ],
+        "report": {
+          "error": "check failed: failed to materialize SampleItem for checker: SampleItem: invalid field value: I64(8)"
+        }
+      }
+    ],
+    "schema_error": null
+  },
+  "stderr": "[TeaQL][MUTATION-POLICY-001] request=Platform.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Priority.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+}

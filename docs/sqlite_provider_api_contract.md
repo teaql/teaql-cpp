@@ -69,8 +69,12 @@ reviewed direct ports, and the two external test files retain their own final
 Stage 6 gates. Source inventory and matching export names are not the review.
 
 The original Arc-owned connection constructors map to explicit
-make_resource<SqliteConnection> followed by make<SqliteMutationExecutor> in the
-same owning Context. Provider Clone borrows the same connection/layout state;
+make_resource<SqliteConnection> followed by make<SqliteMutationExecutor>. A
+provider may share its connection's domain, or belong to a UserContext beneath
+the connection's Global domain. Connection and provider state have separate
+borrow checks; User provider state cannot back asynchronous work retained by
+another User or Global. Provider Clone remains in its own domain and borrows
+the same connection/layout state;
 connection() returns that scoped resource, never a new owner. ID/business-ID
 constructors select an explicit provider dependency and copy configured table
 names into their destination. A destination may borrow the connection only

@@ -1,0 +1,8 @@
+<root name="cpp_relation_identities" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <owner platform="platform(contextRoot=true)" name="string()" />
+    <entry platform="platform(contextRoot=true)" name="string()"
+           namespace="owner(reverseName=class)" operator="owner(reverseName=template)?" />
+    <profile platform="platform(contextRoot=true)" name="string()"
+             owner="owner(relationType=oneToOne reverseName=operator)" />
+</root>

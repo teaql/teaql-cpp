@@ -1,0 +1,51 @@
+{
+  "recorded_utc": "2026-10-14T15:49:54.297158+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Restored float/statistical projection and reference filtering actual generated SQLite execution. Complete capability/phase acceptance remains open.",
+  "exact_source_native_requests": 432,
+  "outcomes": {
+    "success": 108,
+    "graph write error: Transport error: no such function: STDDEV": 60,
+    "graph write error: Transport error: no such function: STDDEV_POP": 60,
+    "graph write error: Transport error: no such function: VAR_SAMP": 60,
+    "graph write error: Transport error: no such function: VAR_POP": 60,
+    "graph write error: Transport error: rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range": 24,
+    "graph write error: Transport error: unrecognized token: \"\"alias \u96ea\"": 60
+  },
+  "all_requests_invoked_execute_for_rows": true,
+  "binding_failures_are_not_sqlite_statement_execution_evidence": true,
+  "native_tests": {
+    "passed": 1,
+    "selected": 1
+  },
+  "module_tests": {
+    "passed": 1,
+    "selected": 1
+  },
+  "sanitize_tests": {
+    "passed": 1,
+    "selected": 1,
+    "leak_scanning": false
+  },
+  "format_cpp_files": 1437,
+  "canonical_module_bodies": 645,
+  "original_generated_files_changed": false,
+  "production_functions_changed": false,
+  "file_sha256": {
+    "tests/support/query_field_branches_sql.sql": "95fab21ef5fd3194754086b8180e76b2a4152f18934cadca908005ceb0ca91bb",
+    "tests/parity/generated_query_field_sql_probe.cpp": "2e246e21a345f3d1f8a0c5a6307d08405909b315699783cb6829e47ccbae2462",
+    "tests/parity/compare_generated_query_field_sql_5_0_6.py": "15d0b1b875c0a8c77136b25d02cd907081ab37799ce0d96920e03d5c84676e5c",
+    "tests/parity/rust_query_field_sql_5_0_6/src/main.rs": "96d4059d8682e5c1edae8c3fa37a4812b7aad2dd0cf6537f5e1e92c58f720ba9",
+    "tests/parity/rust_query_field_sql_5_0_6/Cargo.toml": "30ef64c9c7d8905c97cb18b805bac7a5a73b233b609f38585c14be41370d93f5",
+    "tests/parity/rust_query_field_sql_5_0_6/Cargo.lock": "843890ef6212c403a1155bd0fc7c6c5d7f1257803c4acbef110db7f53759f795",
+    "tests/parity/generated_query_field_sql_5_0_6_cases.json.gz": "0bbee0187dec60877edf360d1e4c237164a6f5d728cb5f6cbd20c04a74169c7c"
+  },
+  "raw_validation": "docs/parity/query_field_sql_validation_5_0_6.json.gz",
+  "initial_failures": [
+    "Observer compilation failed due to ambiguous unqualified executor; domain-qualified name repaired after terminal compiler failures.",
+    "Canonical consumer verifier ran before regeneration finished and observed an old consumer; rerun after terminal module build matches 645 complete bodies."
+  ],
+  "complete_capability_acceptance": false,
+  "full_suite_or_mips_or_physical_device_test": false
+}

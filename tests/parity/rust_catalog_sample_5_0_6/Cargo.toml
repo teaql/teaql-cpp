@@ -1,0 +1,32 @@
+[package]
+name = "teaql_catalog_sample_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+async-trait = "=0.1.89"
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rusqlite = { version = "=0.40.1", features = ["bundled", "chrono", "column_decltype"] }
+cpp_candidates_core = { package = "cpp-candidates-core", path = "../../generator/parity/candidates_rust/lib" }
+cpp_constants_catalog_core = { package = "cpp-constants-catalog-core", path = "../../generator/parity/constants_catalog_rust/lib" }
+
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+[[bin]]
+name = "catalog_samples"
+path = "src/main.rs"
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }

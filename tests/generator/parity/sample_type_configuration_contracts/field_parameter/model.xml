@@ -1,0 +1,9 @@
+<root name="cpp_sample_types_field_parameter" org="teaql" data_service="sqlite">
+    <priority id="id()" platform="platform(contextRoot=true)" name="string()" code="string()" value="integer(rustType=u64)"
+              _constant="true" _identifier="code">
+        <_value id="1" name="Basic" code="BASIC" value="7" />
+        <_value id="22" name="Extended" code="EXTENDED" value="9" />
+    </priority>
+    <platform name="string()" />
+    <sample_item platform="platform(contextRoot=true)" name="string()" value="integer(rustType=u64)" optional_value="integer(rustType=u64 optional=true)" />
+</root>

@@ -1,0 +1,27 @@
+{
+  "reason": "Initial actual SQLite comparison used the retained legacy TEXT temporal schema. Preserve source before changing only the fixture path to native DATE/TIMESTAMP storage.",
+  "exit_codes": {
+    "original_build": 0,
+    "native_build": 0,
+    "initial_record_comparison": 0,
+    "module_build": 0
+  },
+  "sources": {
+    "tests/parity/query_predicate_execution_probe.cpp": {
+      "sha256": "e39a0234d5cf19f877b2343bb4b612c05725d3414d87ed408ce04092b52a3829",
+      "snapshot": "docs/parity/query_predicate_text_query_predicate_execution_probe.cpp.gz"
+    },
+    "tests/parity/rust_query_predicate_execution_5_0_6/src/main.rs": {
+      "sha256": "755ddd7f7acfc0db073f619d8288afbce9373ddf9acb924c90f33f5d015592bf",
+      "snapshot": "docs/parity/query_predicate_text_main.rs.gz"
+    },
+    "tests/parity/compare_query_predicate_execution_5_0_6.py": {
+      "sha256": "703362bdfe49fbf29c28c5f0c4cd93812ab1b8f586fa32b4f7d2829a6d1a82aa",
+      "snapshot": "docs/parity/query_predicate_text_compare_query_predicate_execution_5_0_6.py.gz"
+    }
+  },
+  "artifacts": {
+    "build_native_current/teaql_query_predicate_execution_probe": "82d0134bfce869c052eb5d024356f8d9938a15069d7a0eb8bb9f88ce3d9a264e",
+    "build_modules_native/modules/teaql_module_query_predicate_execution_probe": "b0f0b1f64fa25f7563729cae0149aca45a65de22e125d4833e88a7ddc6ae716b"
+  }
+}

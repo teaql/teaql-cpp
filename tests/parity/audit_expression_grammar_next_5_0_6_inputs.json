@@ -1,0 +1,146 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Broader original expression/type/pattern/body and lexical continuation witness; observations, not an accepted syntax subset.",
+  "cases": [
+    [
+      "range_prefix",
+      "17, audit_value_max_len=..17, audit_value_max_len=21"
+    ],
+    [
+      "range_full",
+      "17, audit_value_max_len=.., audit_value_max_len=21"
+    ],
+    [
+      "range_inclusive_prefix",
+      "17, audit_value_max_len=..=17, audit_value_max_len=21"
+    ],
+    [
+      "if_let",
+      "17, audit_value_max_len=if let Some(x) = value {x}, audit_value_max_len=21"
+    ],
+    [
+      "while_loop",
+      "17, audit_value_max_len=while flag {}, audit_value_max_len=21"
+    ],
+    [
+      "while_let",
+      "17, audit_value_max_len=while let Some(x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "for_loop",
+      "17, audit_value_max_len=for x in values {}, audit_value_max_len=21"
+    ],
+    [
+      "match",
+      "17, audit_value_max_len=match value { _ => 1 }, audit_value_max_len=21"
+    ],
+    [
+      "break",
+      "17, audit_value_max_len=break, audit_value_max_len=21"
+    ],
+    [
+      "break_label",
+      "17, audit_value_max_len=break 'label 1, audit_value_max_len=21"
+    ],
+    [
+      "continue_label",
+      "17, audit_value_max_len=continue 'label, audit_value_max_len=21"
+    ],
+    [
+      "labeled_loop",
+      "17, audit_value_max_len='label: loop {}, audit_value_max_len=21"
+    ],
+    [
+      "yield",
+      "17, audit_value_max_len=yield 1, audit_value_max_len=21"
+    ],
+    [
+      "async_closure",
+      "17, audit_value_max_len=async || 1, audit_value_max_len=21"
+    ],
+    [
+      "async_move_closure",
+      "17, audit_value_max_len=async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_return_type",
+      "17, audit_value_max_len=|| -> usize {1}, audit_value_max_len=21"
+    ],
+    [
+      "struct",
+      "17, audit_value_max_len=Thing { value: 1 }, audit_value_max_len=21"
+    ],
+    [
+      "struct_rest",
+      "17, audit_value_max_len=Thing { ..value }, audit_value_max_len=21"
+    ],
+    [
+      "qualified_call",
+      "17, audit_value_max_len=Thing::<usize>::new(), audit_value_max_len=21"
+    ],
+    [
+      "generic_call",
+      "17, audit_value_max_len=function::<usize>(1), audit_value_max_len=21"
+    ],
+    [
+      "generic_method",
+      "17, audit_value_max_len=value.method::<usize>(), audit_value_max_len=21"
+    ],
+    [
+      "qualified_path",
+      "17, audit_value_max_len=<Thing as Trait>::VALUE, audit_value_max_len=21"
+    ],
+    [
+      "const_statements",
+      "17, audit_value_max_len=const {let x = 1; x}, audit_value_max_len=21"
+    ],
+    [
+      "block_statements",
+      "17, audit_value_max_len={let x = 1; x}, audit_value_max_len=21"
+    ],
+    [
+      "bad_block_rhs",
+      "17, audit_value_max_len={1 +}, audit_value_max_len=21"
+    ],
+    [
+      "bad_if_body",
+      "17, audit_value_max_len=if flag {1 +}, audit_value_max_len=21"
+    ],
+    [
+      "bad_else_body",
+      "17, audit_value_max_len=if flag {1} else {2 +}, audit_value_max_len=21"
+    ],
+    [
+      "raw_reference",
+      "17, audit_value_max_len=&raw const value, audit_value_max_len=21"
+    ],
+    [
+      "let_expr",
+      "17, audit_value_max_len=let Some(x) = value, audit_value_max_len=21"
+    ],
+    [
+      "inferred_expr",
+      "17, audit_value_max_len=_, audit_value_max_len=21"
+    ],
+    [
+      "bad_closure_comma",
+      "17, audit_value_max_len=|,| 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_closure_type",
+      "17, audit_value_max_len=|x:| 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_block_statement",
+      "17, audit_value_max_len={let = 1;}, audit_value_max_len=21"
+    ],
+    [
+      "bad_range_inclusive",
+      "17, audit_value_max_len=17..=, audit_value_max_len=21"
+    ],
+    [
+      "bad_parenthesis_delimiter",
+      "17, audit_value_max_len=(1]), audit_value_max_len=21"
+    ]
+  ]
+}

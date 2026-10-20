@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("format_cases.json", "ID/JSON text"))
+    raise SystemExit(main("format_5_0_6_cases.json.gz", "ID/JSON text"))

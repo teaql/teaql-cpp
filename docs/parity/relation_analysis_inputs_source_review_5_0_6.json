@@ -1,0 +1,77 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "methods": [
+    {
+      "name": "facet_by_customer_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn facet_by_customer_as(self, facet_name: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.facet_by_customer_as_with_options(facet_name, request, true)\n    }",
+      "sha256": "289efc118470da5cc71ec3a46e66c5c970ba8e8a523dc0a017e4213ed1dfd383"
+    },
+    {
+      "name": "facet_by_customer_as_with_options",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn facet_by_customer_as_with_options(\n        mut self,\n        facet_name: impl Into<String>,\n        request: impl Into<QuerySelection>,\n        include_all_facets: bool,\n    ) -> Self {\n        self.query_options.facets.push(FacetRequest::new(\n            facet_name,\n            \"customer\",\n            request,\n            include_all_facets,\n        ));\n        self\n    }",
+      "sha256": "d3d68e46c61af0acab911e0f13461a84bfb3e61226b62c66b19bbc9db5635955"
+    },
+    {
+      "name": "group_by_customer_with",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn group_by_customer_with(mut self, request: impl Into<QuerySelection>) -> Self {\n        self.query = self.query.group_by(\"customer_id\");\n        self.query_options.object_group_bys.push(ObjectGroupBy::new(\n            \"customer\",\n            \"customer_id\",\n            request,\n        ));\n        self\n    }",
+      "sha256": "784c1f00335d8a05bf1877a0afc443d2edb69aa7e0a40573e7f3fb1427488d61"
+    },
+    {
+      "name": "group_by_customer_with_details_from",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn group_by_customer_with_details_from(self, request: impl Into<QuerySelection>) -> Self {\n        self.group_by_customer_with(request)\n    }",
+      "sha256": "48a30f2461d7b416f8f1f0eb4a62a12f22fb5d3047209cfa24dd803aefbda8e8"
+    },
+    {
+      "name": "count_orders_with",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn count_orders_with(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query_options.relation_aggregates.push(RelationAggregate::new(\n            \"orders\",\n            alias,\n            selection,\n            true,\n        ));\n        self\n    }",
+      "sha256": "5872f9e382bd66144da47f589cbd8552850a9f66d538f33835df9cb3af276705"
+    },
+    {
+      "name": "stats_from_orders",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn stats_from_orders(self, request: impl Into<QuerySelection>) -> Self {\n        self.stats_from_orders_as(\"refinements\", request)\n    }",
+      "sha256": "f49b4f6c8517a90093861526cbe8aeac23c98686a980c502eb125bbb5df7c357"
+    },
+    {
+      "name": "stats_from_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn stats_from_orders_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query_options.relation_aggregates.push(RelationAggregate::new(\n            \"orders\",\n            alias,\n            selection,\n            false,\n        ));\n        self\n    }",
+      "sha256": "2e1b3561fd3136dc464d7676a12d1df28a7961fd09f38f09513778eff5255335"
+    },
+    {
+      "name": "group_by_orders_with_details",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn group_by_orders_with_details(self, request: impl Into<QuerySelection>) -> Self {\n        self.stats_from_orders(request)\n    }",
+      "sha256": "0a5de39d39d106f8ccc0aa2c7fcfd915d9d16a356b5b61588402c41a1b2171dd"
+    }
+  ],
+  "stage": "Shared runtime input conversion and embedded graph repair pass focused terminal gates. Generated wrappers/Assist and complete capability/phase acceptance remain open.",
+  "fixture_sha256": {
+    "dynamic_json_schema.sql": "b11a024137503d0b23f205b478185e09dec7aee74b09c99f1c2cbfdf1c25e226",
+    "dynamic_json_dataset.sql": "f3c3983ddfb853fd7a86eba9352e7cb36d434107773836639d46f6673308bd59"
+  },
+  "files_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "940671bb7dc60be39f638330ac9c80a77d894584099c713bb1189fd762102757",
+    "teaql_runtime/include/teaql/runtime/entity_runtime.hpp": "c836a9100ee47f534b4339cf9a8dcc90e923408e580a201e15634a4c33b78801",
+    "teaql_runtime/src/entity_runtime.cpp": "edd12a88cde126ce2c0dbfeaedbab04c0cce6e04c3d9d464ea8fb478a59fd3f4",
+    "teaql_runtime/include/teaql/runtime/entity_graph_decoder.hpp": "b65899251cd4600db3bf99341c7ea95957912d8f8fca1c27a7febbcbc7c14d2e",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/relation_installation.hpp": "e6c4bc95ca70dd88ad3f01886f97b8d71ee6abec15e72d7b7d4a7362c20515f2",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp": "ce5d931e4d2dcc2d29705a7966062b0108d64217d7c1355f2ec42bde9e6ac47a",
+    "teaql_runtime/src/data_service/relation_graph.cpp": "fcd66eb903864b19ea0ebe56075b95ae52a52b0b4db1fc0d25713f7025588510",
+    "teaql_runtime/src/data_service/relation_enhancement.cpp": "69bf2110d08fc2cf206d4722d3116a795ac713399485eb662542ee47e50403b9",
+    "tests/parity/generated_relation_analysis_inputs_probe.cpp": "2e6eacd1f71695658ac89426d7be66387f30c730c782c25fa12b8f4eed11868c",
+    "teaql_runtime/tests/relation_analysis_input_tests.cpp": "703223b4383d9b8ddb2fc94d0f0f461ddaedb6197cdb386560ac2551bd4b968e",
+    "teaql_runtime/tests/generated_facets_tests.cpp": "4b20cdf515901fc65df436359f9b42d6d3b0403e4a438c251ce118a7f66d0ec7",
+    "tests/parity/rust_relation_analysis_inputs_5_0_6/src/main.rs": "a5505769a181a1b5b3b14e391f1b62047b5d8951ba11aaf887057097ad02ca59",
+    "tests/parity/rust_relation_analysis_inputs_5_0_6/src/bin/relation_analysis_typing_5_0_6.rs": "6b8f2a4cf9dca3fb0d121cc8cacd37ec4a0ad1e3f38882fc885e4166b8b525a6",
+    "tests/parity/rust_relation_analysis_inputs_5_0_6/Cargo.lock": "f47e716e060a77588fce39b9d0b92d52f6d1603865003442988b0bb1b06d4ba1",
+    "scripts/verify_relation_analysis_inputs_5_0_6.py": "3561457b4dbbad0340d41fb456b8607ed3c227863281353a9be09da17a15e97c"
+  },
+  "remaining": "Runtime-first conversion and graph repair; generated request adapters, Assist and generator/compiler/reproduction integration still required. Full phases/capabilities are not accepted."
+}

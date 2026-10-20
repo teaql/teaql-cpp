@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "purpose": "Comparator sensitivity control, not a C++ runtime execution gate",
+  "exit_code": 1,
+  "stderr": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/scripts/verify_runtime_configuration_kernel_5_0_6.py\", line 83, in <module>\n    main()\n  File \"/home/philip/githome/teaql-cpp/scripts/verify_runtime_configuration_kernel_5_0_6.py\", line 67, in main\n    assert same(expected, actual) and paths == [], case['name'] + ': C++ mismatch'\nAssertionError: config_missing: C++ mismatch\n",
+  "stdout": "",
+  "scope": "An intentionally wrong probe result is rejected at the first actual original missing-environment case; retained source inputs are verified before the probe runs."
+}

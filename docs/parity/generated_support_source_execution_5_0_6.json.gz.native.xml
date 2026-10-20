@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="canada-mini-host"
+	time="13"
+	timestamp="2026-10-18T16:26:37"
+	>
+	<testcase name="generated_support_contracts" classname="generated_support_contracts" time="0.0104115" status="run">
+		<properties/>
+		<system-out>Generated-support runtime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="generated_support_source_rust_parity" classname="generated_support_source_rust_parity" time="13.6341" status="run">
+		<properties/>
+		<system-out>Generated support private source parity: 822/822 observations match
+</system-out>
+	</testcase>
+	<testcase name="generated_support_source_context_contracts" classname="generated_support_source_context_contracts" time="0.00541153" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+</testsuite>

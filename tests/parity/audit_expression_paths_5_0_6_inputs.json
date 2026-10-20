@@ -1,0 +1,790 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Actual-source expression/path/range/lifetime and complete delimiter controls; classifications come from the original parser.",
+  "cases": [
+    [
+      "path_valid_0_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..17, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_0_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..17, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_0_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..17, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_0_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..17, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_1_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=.., audit_value_max_len=21"
+    ],
+    [
+      "path_valid_1_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=.., audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_1_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=.., audit_value_max_len=21"
+    ],
+    [
+      "path_valid_1_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=.., audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_2_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..=17, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_2_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..=17, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_2_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..=17, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_2_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..=17, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_3_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..=function(1), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_3_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..=function(1), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_3_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..=function(1), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_3_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..=function(1), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_4_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..(1 + 2), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_4_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..(1 + 2), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_4_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..(1 + 2), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_4_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..(1 + 2), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_5_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..=17 + 2, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_5_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..=17 + 2, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_5_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..=17 + 2, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_5_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..=17 + 2, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_6_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing::<usize>::new(), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_6_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing::<usize>::new(), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_6_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing::<usize>::new(), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_6_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing::<usize>::new(), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_7_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=function::<usize>(1), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_7_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=function::<usize>(1), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_7_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=function::<usize>(1), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_7_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=function::<usize>(1), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_8_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=function::<usize, (u8, u8)>(1), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_8_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=function::<usize, (u8, u8)>(1), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_8_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=function::<usize, (u8, u8)>(1), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_8_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=function::<usize, (u8, u8)>(1), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_9_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=<Thing as Trait>::VALUE, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_9_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=<Thing as Trait>::VALUE, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_9_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=<Thing as Trait>::VALUE, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_9_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=<Thing as Trait>::VALUE, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_10_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=<Thing>::VALUE, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_10_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=<Thing>::VALUE, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_10_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=<Thing>::VALUE, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_10_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=<Thing>::VALUE, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_11_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=::module::function::<usize>(), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_11_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=::module::function::<usize>(), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_11_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=::module::function::<usize>(), audit_value_max_len=21"
+    ],
+    [
+      "path_valid_11_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=::module::function::<usize>(), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_12_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=break 'label 1, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_12_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=break 'label 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_12_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=break 'label 1, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_12_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=break 'label 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_13_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=break 'label, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_13_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=break 'label, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_13_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=break 'label, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_13_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=break 'label, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_14_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=continue 'label, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_14_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=continue 'label, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_14_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=continue 'label, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_14_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=continue 'label, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_15_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len='label: loop {}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_15_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len='label: loop {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_15_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int='label: loop {}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_15_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int='label: loop {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_16_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len='label: {}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_16_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len='label: {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_16_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int='label: {}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_16_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int='label: {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_17_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=yield, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_17_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=yield, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_17_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=yield, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_17_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=yield, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_18_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=yield 1, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_18_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=yield 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_18_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=yield 1, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_18_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=yield 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_19_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=&raw const value, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_19_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=&raw const value, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_19_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=&raw const value, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_19_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=&raw const value, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_20_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=&raw mut value, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_20_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=&raw mut value, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_20_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=&raw mut value, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_20_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=&raw mut value, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_21_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=|| -> usize {1}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_21_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=|| -> usize {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_21_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=|| -> usize {1}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_21_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=|| -> usize {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_22_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=|x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_22_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=|x: usize| -> usize {x}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_22_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=|x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_22_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=|x: usize| -> usize {x}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_23_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=move || -> usize {1}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_23_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=move || -> usize {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_23_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=move || -> usize {1}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_23_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=move || -> usize {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_24_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=async || -> usize {1}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_24_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=async || -> usize {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_24_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=async || -> usize {1}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_24_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=async || -> usize {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_25_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=|| -> Vec<(u8, u8)> {value}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_25_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=|| -> Vec<(u8, u8)> {value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_25_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=|| -> Vec<(u8, u8)> {value}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_25_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=|| -> Vec<(u8, u8)> {value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_26_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=&'a value, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_26_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=&'a value, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_26_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=&'a value, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_26_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=&'a value, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_27_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=break 'a', audit_value_max_len=21"
+    ],
+    [
+      "path_valid_27_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=break 'a', audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_27_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=break 'a', audit_value_max_len=21"
+    ],
+    [
+      "path_valid_27_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=break 'a', audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_28_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=ignored!{'a}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_28_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=ignored!{'a}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_28_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=ignored!{'a}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_28_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=ignored!{'a}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_29_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=ignored!{'a'}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_29_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=ignored!{'a'}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_29_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=ignored!{'a'}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_29_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=ignored!{'a'}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_30_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=ignored!{r#\"}\"#}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_30_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=ignored!{r#\"}\"#}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_valid_30_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=ignored!{r#\"}\"#}, audit_value_max_len=21"
+    ],
+    [
+      "path_valid_30_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=ignored!{r#\"}\"#}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_0_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..=, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_0_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..=, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_0_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..=, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_0_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..=, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_1_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..=+, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_1_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..=+, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_1_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..=+, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_1_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..=+, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_2_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..=1 +, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_2_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..=1 +, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_2_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..=1 +, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_2_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..=1 +, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_3_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=..function(,), audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_3_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=..function(,), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_3_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=..function(,), audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_3_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=..function(,), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_4_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing::<>:new(), audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_4_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing::<>:new(), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_4_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing::<>:new(), audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_4_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing::<>:new(), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_5_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing::<usize, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_5_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing::<usize, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_5_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing::<usize, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_5_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing::<usize, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_6_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=function::<usize>(,), audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_6_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=function::<usize>(,), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_6_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=function::<usize>(,), audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_6_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=function::<usize>(,), audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_7_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=<Thing as Trait>VALUE, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_7_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=<Thing as Trait>VALUE, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_7_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=<Thing as Trait>VALUE, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_7_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=<Thing as Trait>VALUE, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_8_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=break 'label +, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_8_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=break 'label +, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_8_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=break 'label +, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_8_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=break 'label +, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_9_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len='label: 1, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_9_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len='label: 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_9_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int='label: 1, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_9_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int='label: 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_10_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=&raw value, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_10_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=&raw value, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_10_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=&raw value, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_10_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=&raw value, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_11_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=&raw const, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_11_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=&raw const, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_11_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=&raw const, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_11_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=&raw const, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_12_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=&raw mut +, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_12_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=&raw mut +, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_12_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=&raw mut +, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_12_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=&raw mut +, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_13_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=|| -> {1}, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_13_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=|| -> {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_13_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=|| -> {1}, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_13_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=|| -> {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_14_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=|| -> usize 1, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_14_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=|| -> usize 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_14_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=|| -> usize 1, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_14_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=|| -> usize 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_15_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=|| -> usize {1 +}, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_15_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=|| -> usize {1 +}, audit_mask_fields=\"name\""
+    ],
+    [
+      "path_invalid_15_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=|| -> usize {1 +}, audit_value_max_len=21"
+    ],
+    [
+      "path_invalid_15_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=|| -> usize {1 +}, audit_mask_fields=\"name\""
+    ],
+    [
+      "delimiter_stream_0",
+      "17, audit_value_max_len=(1]), audit_value_max_len=21"
+    ],
+    [
+      "delimiter_stream_1",
+      "17, other=(1]), audit_value_max_len=21"
+    ],
+    [
+      "delimiter_stream_2",
+      "17, audit_value_max_len=21, other=[1)"
+    ],
+    [
+      "delimiter_stream_3",
+      "17, audit_value_max_len=21, other={1]"
+    ],
+    [
+      "delimiter_stream_4",
+      "17, other=\"(]\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_stream_5",
+      "17, other=r#\"(]\"#, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_stream_6",
+      "17, other=ignored!{'a}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_stream_7",
+      "17, other=ignored!{'a'}, audit_value_max_len=21"
+    ]
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "generator/src/main/resources/generator/rust-lib-core/request/index.stg",
+  "source_sha256": "d886a74d7636d774cd1744f4a4b78ca783a435cd89bb3719ec1cf9f6b344bc59",
+  "request_guard": "impl<R>",
+  "request_functions": [
+    {
+      "name": "new",
+      "guard": "unconstrained R",
+      "start_line": 661,
+      "end_line": 672,
+      "sha256": "328cf9baaf8623ef7c07bef4690a753244c952239b17822aba0827bda2f69c4c",
+      "body": "fn new() -> Self {\n        Self {\n            query: SelectQuery::new(\"<objectDescriptor.rustStructName>\")<objectDescriptor.fields:{f | <if(f.id)>\n                .project(\"<f.rustStorageFieldName>\")<elseif(f.version)>\n                .project(\"<f.rustStorageFieldName>\")<endif>}>,\n            relation_selections: Vec::new(),\n            relation_filters: Vec::new(),\n            child_enhancements: Vec::new(),\n            query_options: QueryOptions::default(),\n            marker: PhantomData,\n        }\n    }"
+    },
+    {
+      "name": "return_type",
+      "guard": "unconstrained R",
+      "start_line": 674,
+      "end_line": 683,
+      "sha256": "a08d12a27cbae11a19a1438e636f61e07e37514e310b4b25bf699e94fa45b063",
+      "body": "fn return_type\\<T\\>(self) -> <objectDescriptor.rustStructName>Request\\<T\\> {\n        <objectDescriptor.rustStructName>Request {\n            query: self.query,\n            relation_selections: self.relation_selections,\n            relation_filters: self.relation_filters,\n            child_enhancements: self.child_enhancements,\n            query_options: self.query_options,\n            marker: PhantomData,\n        }\n    }"
+    },
+    {
+      "name": "query",
+      "guard": "unconstrained R",
+      "start_line": 685,
+      "end_line": 687,
+      "sha256": "7202ee015f64fef9362533dde9f4c0542d802e16c498dfbfce5b24b86d92dd92",
+      "body": "fn query(&self) -> &SelectQuery {\n        &self.query\n    }"
+    },
+    {
+      "name": "relation_selections",
+      "guard": "unconstrained R",
+      "start_line": 689,
+      "end_line": 691,
+      "sha256": "c4cb5d53ff83aef37caa44e29dc80c69d6a416dc0082708839193c0dda4f4453",
+      "body": "fn relation_selections(&self) -> &[RelationSelection] {\n        &self.relation_selections\n    }"
+    },
+    {
+      "name": "relation_filters",
+      "guard": "unconstrained R",
+      "start_line": 693,
+      "end_line": 695,
+      "sha256": "8d5178b49b26623ff976839398bfc42f51a2e37cdfd009c2437f2654a6688d0f",
+      "body": "fn relation_filters(&self) -> &[RelationFilter] {\n        &self.relation_filters\n    }"
+    },
+    {
+      "name": "child_enhancements",
+      "guard": "unconstrained R",
+      "start_line": 697,
+      "end_line": 699,
+      "sha256": "fe5038b90354d9c2564807fa6f41ef5fc953e9d6ef720bb8139527a601c446f1",
+      "body": "fn child_enhancements(&self) -> &[QuerySelection] {\n        &self.child_enhancements\n    }"
+    },
+    {
+      "name": "query_options",
+      "guard": "unconstrained R",
+      "start_line": 701,
+      "end_line": 703,
+      "sha256": "20d86800fcbcfe88f9bdaca16cd1616e746c24b623e73253712ea4bb1ce64cc6",
+      "body": "fn query_options(&self) -> &QueryOptions {\n        &self.query_options\n    }"
+    },
+    {
+      "name": "into_query",
+      "guard": "unconstrained R",
+      "start_line": 705,
+      "end_line": 707,
+      "sha256": "e3730cecd245d122e4a8d28123fb911f4fb9df1c3dddcaf4c6b7c0da86297d7c",
+      "body": "fn into_query(self) -> SelectQuery {\n        self.query\n    }"
+    },
+    {
+      "name": "purpose",
+      "guard": "unconstrained R",
+      "start_line": 710,
+      "end_line": 712,
+      "sha256": "0e49a28243d61e392bbb458a7240ecdf23efa2263411a5277bb046dfd850210e",
+      "body": "fn purpose(self, purpose: impl Into\\<String\\>) -> crate::PurposedQuery\\<Self\\> {\n        crate::PurposedQuery::new(self, purpose)\n    }"
+    },
+    {
+      "name": "matching_any_of",
+      "guard": "unconstrained R",
+      "start_line": 941,
+      "end_line": 946,
+      "sha256": "798391c3b46217b64e8e50fc048868cbdcf91c4ef01f4cec871bf32df54f1a9c",
+      "body": "fn matching_any_of(mut self, request: impl Into\\<QuerySelection\\>) -> Self {\n        let selection = request.into();\n        let entity = EntityDescriptor::new(selection.query.entity.clone());\n        self.query = self.query.and_filter(Expr::in_subquery(\"id\", entity, selection.query.clone(), \"id\"));\n        self\n    }"
+    },
+    {
+      "name": "match_any_of",
+      "guard": "unconstrained R",
+      "start_line": 948,
+      "end_line": 950,
+      "sha256": "f892eed57d9ae345f5e28ea980b357f73e09062e1bc117152b1176f5c4b2c31d",
+      "body": "fn match_any_of(self, request: impl Into\\<QuerySelection\\>) -> Self {\n        self.matching_any_of(request)\n    }"
+    },
+    {
+      "name": "enhance_child",
+      "guard": "unconstrained R",
+      "start_line": 952,
+      "end_line": 955,
+      "sha256": "369f3dcdd55519915d86ab02dd7454ceb7398d5e3752cc466dc8585997fcd2d2",
+      "body": "fn enhance_child(mut self, request: impl Into\\<QuerySelection\\>) -> Self {\n        self.child_enhancements.push(request.into());\n        self\n    }"
+    }
+  ],
+  "public_execution_impl": {
+    "start_line": 1423,
+    "end_line": 1535,
+    "sha256": "d29c6e876c465ee979d1ec154cc5428fdb33d0280f179274f1ce65c6c165b4e8",
+    "body": "impl\\<R: teaql_core::Entity\\> crate::PurposedQuery\\<<objectDescriptor.rustStructName>Request\\<R\\>\\> {\n    pub fn comment(mut self, comment: impl Into\\<String\\>) -> Self {\n        self.inner.query_options.comment = Some(comment.into());\n        self\n    }\n\n    pub fn new_entity\\<C\\>(&self, context: &C) -> crate::<objectDescriptor.rustStructName>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n    {\n        self.require_comment();\n        let mut entity = crate::<objectDescriptor.rustStructName>::runtime_new(context.user_context().entity_runtime_state());\n        if let Ok(id) = context.user_context().next_id(crate::<objectDescriptor.rustStructName>::ENTITY_NAME) {\n            entity.update_id(id);\n        }\n        teaql_core::Entity::mark_as_new(&mut entity);\n        entity\n    }\n\n    fn into_inner_with_trace(mut self) -> <objectDescriptor.rustStructName>Request\\<R\\> {\n        self.require_comment();\n        self.inner.query.trace_chain.push(teaql_core::TraceNode::typed(\n            teaql_core::TraceKind::Purpose,\n            self.inner.query.entity.clone(),\n            None,\n            self.purpose,\n        ));\n        self.inner\n    }\n\n    fn require_comment(&self) {\n        assert!(\n            self.inner\n                .query_options\n                .comment\n                .as_deref()\n                .is_some_and(|comment| !comment.trim().is_empty()),\n            \"query comment must not be empty\"\n        );\n    }\n\n    pub async fn execute_for_page\\<'a, C\\>(\n        self,\n        context: &'a C,\n        offset: u64,\n        limit: u64,\n    ) -> Result\\<teaql_core::SmartList\\<R\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_page(context, offset, limit).await\n    }\n\n    pub async fn execute_for_exists\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<bool, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n    {\n        self.into_inner_with_trace()._execute_for_exists(context).await\n    }\n\n    pub async fn execute_for_list\\<'a, C\\>(self, context: &'a C) -> Result\\<teaql_core::SmartList\\<R\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_list(context).await\n    }\n\n    pub async fn execute_for_rows\\<'a, C\\>(self, context: &'a C) -> Result\\<teaql_core::SmartList\\<teaql_core::CompactRow\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n    {\n        self.into_inner_with_trace()._execute_for_rows(context).await\n    }\n\n    /// Execute query as a lazy entity stream without materializing the result set.\n    /// Set chunk size via .stream(chunk_size) or .stream_default() on the query.\n    pub async fn execute_for_stream\\<'a, C\\>(self, context: &'a C) -> Result\\<crate::request_support::TeaqlEntityStream\\<'a, R, teaql_runtime::RuntimeError\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_stream(context).await\n    }\n\n    pub async fn execute_for_first\\<'a, C\\>(self, context: &'a C) -> Result\\<Option\\<R\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_first(context).await\n    }\n\n    pub async fn execute_for_one\\<'a, C\\>(self, context: &'a C) -> Result\\<Option\\<R\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_one(context).await\n    }\n\n\n    pub async fn execute_for_count\\<'a, C\\>(self, context: &'a C) -> Result\\<u64, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n    {\n        self.into_inner_with_trace()._execute_for_count(context).await\n    }\n}"
+  },
+  "runtime_source": "teaql_runtime/include/teaql/runtime/entity_query.hpp",
+  "runtime_sha256": "2f33195de8a450f6d819570b4314dd9bfeb02d2beaee262591cd21d16d4e636f",
+  "disposition": "Runtime constraint repair only; generated facade migration remains required."
+}

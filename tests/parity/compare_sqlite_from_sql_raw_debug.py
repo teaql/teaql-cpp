@@ -12,7 +12,7 @@ def main():
     parser.add_argument("--cpp",required=True)
     parser.add_argument("--rust")
     args=parser.parse_args()
-    with gzip.open(Path(__file__).with_name("sqlite_from_sql_raw_debug_cases.json.gz"),"rt") as source:
+    with gzip.open(Path(__file__).with_name("sqlite_from_sql_raw_debug_5_0_6_cases.json.gz"),"rt") as source:
         corpus=json.load(source)
     root=Path(__file__).resolve().parents[2]
     assert corpus["baseline"]==json.loads((root/"upstream.lock.json").read_text())["commit"]

@@ -210,24 +210,24 @@ void PersonDynamicJsonRecipe::apply_chain(Query& query,
     }
 }
 }
-template <bool Purposed = false, Entity Result = Platform>
+template <bool Purposed = false, class Result = Platform>
 class PlatformRequest;
-template <bool Purposed = false, Entity Result = OrderStatus>
+template <bool Purposed = false, class Result = OrderStatus>
 class OrderStatusRequest;
-template <bool Purposed = false, Entity Result = Record>
+template <bool Purposed = false, class Result = Record>
 class RecordRequest;
-template <bool Purposed = false, Entity Result = Person>
+template <bool Purposed = false, class Result = Person>
 class PersonRequest;
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class PlatformRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class PlatformRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class OrderStatusRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class RecordRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class PersonRequest;
 
 public:
@@ -251,6 +251,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -263,6 +269,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     PlatformRequest<true, Result> purpose(std::string_view text) const& {
         return PlatformRequest<true, Result>(query_.purpose(text));
     }
@@ -271,12 +307,12 @@ public:
         return PlatformRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     PlatformRequest<Purposed, Return> returnType() const& {
         return PlatformRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     PlatformRequest<Purposed, Return> returnType() && {
         return PlatformRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
     }
@@ -428,6 +464,20 @@ public:
 
     PlatformRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -886,15 +936,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     PlatformRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     PlatformRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    PlatformRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    PlatformRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -1062,73 +1132,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     Platform& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -1143,6 +1213,824 @@ public:
 
     PlatformRequest rebindGlobal(UserContext& user_context) const {
         return PlatformRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& withOrderStatusListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "order_status_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& withOrderStatusListMatching(const ChildRequest& child) && {
+        this->withOrderStatusListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withOrderStatusListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "order_status_list");
+        return *this;
+    }
+
+    PlatformRequest&& withOrderStatusListMatching(const SelectQuery& child) && {
+        this->withOrderStatusListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withOrderStatusListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "order_status_list");
+        return *this;
+    }
+
+    PlatformRequest&& withOrderStatusListMatching(const request::QuerySelection& child) && {
+        this->withOrderStatusListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& withoutOrderStatusListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "order_status_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& withoutOrderStatusListMatching(const ChildRequest& child) && {
+        this->withoutOrderStatusListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withoutOrderStatusListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "order_status_list");
+        return *this;
+    }
+
+    PlatformRequest&& withoutOrderStatusListMatching(const SelectQuery& child) && {
+        this->withoutOrderStatusListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withoutOrderStatusListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "order_status_list");
+        return *this;
+    }
+
+    PlatformRequest&& withoutOrderStatusListMatching(const request::QuerySelection& child) && {
+        this->withoutOrderStatusListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& countOrderStatusesWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("order_status_list", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& countOrderStatusesWith(std::string_view alias, const ChildRequest& child) && {
+        this->countOrderStatusesWith(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& countOrderStatusesWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("order_status_list", alias, child, true);
+        return *this;
+    }
+
+    PlatformRequest&& countOrderStatusesWith(std::string_view alias, const SelectQuery& child) && {
+        this->countOrderStatusesWith(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& countOrderStatusesWith(std::string_view alias,
+                                            const request::QuerySelection& child) & {
+        query_.aggregateRelation("order_status_list", alias, child, true);
+        return *this;
+    }
+
+    PlatformRequest&& countOrderStatusesWith(std::string_view alias,
+                                             const request::QuerySelection& child) && {
+        this->countOrderStatusesWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& statsFromOrderStatuses(const ChildRequest& child) & {
+        query_.aggregateRelation("order_status_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& statsFromOrderStatuses(const ChildRequest& child) && {
+        this->statsFromOrderStatuses(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromOrderStatuses(const SelectQuery& child) & {
+        query_.aggregateRelation("order_status_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromOrderStatuses(const SelectQuery& child) && {
+        this->statsFromOrderStatuses(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromOrderStatuses(const request::QuerySelection& child) & {
+        query_.aggregateRelation("order_status_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromOrderStatuses(const request::QuerySelection& child) && {
+        this->statsFromOrderStatuses(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& statsFromOrderStatusesAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("order_status_list", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& statsFromOrderStatusesAs(std::string_view alias,
+                                               const ChildRequest& child) && {
+        this->statsFromOrderStatusesAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromOrderStatusesAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("order_status_list", alias, child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromOrderStatusesAs(std::string_view alias,
+                                               const SelectQuery& child) && {
+        this->statsFromOrderStatusesAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromOrderStatusesAs(std::string_view alias,
+                                              const request::QuerySelection& child) & {
+        query_.aggregateRelation("order_status_list", alias, child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromOrderStatusesAs(std::string_view alias,
+                                               const request::QuerySelection& child) && {
+        this->statsFromOrderStatusesAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& groupByOrderStatusesWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("order_status_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& groupByOrderStatusesWithDetails(const ChildRequest& child) && {
+        this->groupByOrderStatusesWithDetails(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& groupByOrderStatusesWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("order_status_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& groupByOrderStatusesWithDetails(const SelectQuery& child) && {
+        this->groupByOrderStatusesWithDetails(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& groupByOrderStatusesWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("order_status_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& groupByOrderStatusesWithDetails(const request::QuerySelection& child) && {
+        this->groupByOrderStatusesWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& withRecordListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "record_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& withRecordListMatching(const ChildRequest& child) && {
+        this->withRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withRecordListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "record_list");
+        return *this;
+    }
+
+    PlatformRequest&& withRecordListMatching(const SelectQuery& child) && {
+        this->withRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withRecordListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "record_list");
+        return *this;
+    }
+
+    PlatformRequest&& withRecordListMatching(const request::QuerySelection& child) && {
+        this->withRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& withoutRecordListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "record_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& withoutRecordListMatching(const ChildRequest& child) && {
+        this->withoutRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withoutRecordListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "record_list");
+        return *this;
+    }
+
+    PlatformRequest&& withoutRecordListMatching(const SelectQuery& child) && {
+        this->withoutRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withoutRecordListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "record_list");
+        return *this;
+    }
+
+    PlatformRequest&& withoutRecordListMatching(const request::QuerySelection& child) && {
+        this->withoutRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& countRecordsWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("record_list", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& countRecordsWith(std::string_view alias, const ChildRequest& child) && {
+        this->countRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& countRecordsWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("record_list", alias, child, true);
+        return *this;
+    }
+
+    PlatformRequest&& countRecordsWith(std::string_view alias, const SelectQuery& child) && {
+        this->countRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& countRecordsWith(std::string_view alias,
+                                      const request::QuerySelection& child) & {
+        query_.aggregateRelation("record_list", alias, child, true);
+        return *this;
+    }
+
+    PlatformRequest&& countRecordsWith(std::string_view alias,
+                                       const request::QuerySelection& child) && {
+        this->countRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& statsFromRecords(const ChildRequest& child) & {
+        query_.aggregateRelation("record_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& statsFromRecords(const ChildRequest& child) && {
+        this->statsFromRecords(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromRecords(const SelectQuery& child) & {
+        query_.aggregateRelation("record_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromRecords(const SelectQuery& child) && {
+        this->statsFromRecords(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromRecords(const request::QuerySelection& child) & {
+        query_.aggregateRelation("record_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromRecords(const request::QuerySelection& child) && {
+        this->statsFromRecords(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& statsFromRecordsAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("record_list", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& statsFromRecordsAs(std::string_view alias, const ChildRequest& child) && {
+        this->statsFromRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("record_list", alias, child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromRecordsAs(std::string_view alias, const SelectQuery& child) && {
+        this->statsFromRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromRecordsAs(std::string_view alias,
+                                        const request::QuerySelection& child) & {
+        query_.aggregateRelation("record_list", alias, child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromRecordsAs(std::string_view alias,
+                                         const request::QuerySelection& child) && {
+        this->statsFromRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& groupByRecordsWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("record_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& groupByRecordsWithDetails(const ChildRequest& child) && {
+        this->groupByRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& groupByRecordsWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("record_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& groupByRecordsWithDetails(const SelectQuery& child) && {
+        this->groupByRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& groupByRecordsWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("record_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& groupByRecordsWithDetails(const request::QuerySelection& child) && {
+        this->groupByRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& withPersonListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "person_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& withPersonListMatching(const ChildRequest& child) && {
+        this->withPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withPersonListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "person_list");
+        return *this;
+    }
+
+    PlatformRequest&& withPersonListMatching(const SelectQuery& child) && {
+        this->withPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withPersonListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "person_list");
+        return *this;
+    }
+
+    PlatformRequest&& withPersonListMatching(const request::QuerySelection& child) && {
+        this->withPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& withoutPersonListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "person_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& withoutPersonListMatching(const ChildRequest& child) && {
+        this->withoutPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withoutPersonListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "person_list");
+        return *this;
+    }
+
+    PlatformRequest&& withoutPersonListMatching(const SelectQuery& child) && {
+        this->withoutPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withoutPersonListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "person_list");
+        return *this;
+    }
+
+    PlatformRequest&& withoutPersonListMatching(const request::QuerySelection& child) && {
+        this->withoutPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& countPeopleWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("person_list", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& countPeopleWith(std::string_view alias, const ChildRequest& child) && {
+        this->countPeopleWith(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& countPeopleWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("person_list", alias, child, true);
+        return *this;
+    }
+
+    PlatformRequest&& countPeopleWith(std::string_view alias, const SelectQuery& child) && {
+        this->countPeopleWith(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& countPeopleWith(std::string_view alias,
+                                     const request::QuerySelection& child) & {
+        query_.aggregateRelation("person_list", alias, child, true);
+        return *this;
+    }
+
+    PlatformRequest&& countPeopleWith(std::string_view alias,
+                                      const request::QuerySelection& child) && {
+        this->countPeopleWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& statsFromPeople(const ChildRequest& child) & {
+        query_.aggregateRelation("person_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& statsFromPeople(const ChildRequest& child) && {
+        this->statsFromPeople(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromPeople(const SelectQuery& child) & {
+        query_.aggregateRelation("person_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromPeople(const SelectQuery& child) && {
+        this->statsFromPeople(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromPeople(const request::QuerySelection& child) & {
+        query_.aggregateRelation("person_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromPeople(const request::QuerySelection& child) && {
+        this->statsFromPeople(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& statsFromPeopleAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("person_list", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& statsFromPeopleAs(std::string_view alias, const ChildRequest& child) && {
+        this->statsFromPeopleAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromPeopleAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("person_list", alias, child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromPeopleAs(std::string_view alias, const SelectQuery& child) && {
+        this->statsFromPeopleAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromPeopleAs(std::string_view alias,
+                                       const request::QuerySelection& child) & {
+        query_.aggregateRelation("person_list", alias, child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromPeopleAs(std::string_view alias,
+                                        const request::QuerySelection& child) && {
+        this->statsFromPeopleAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& groupByPeopleWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("person_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& groupByPeopleWithDetails(const ChildRequest& child) && {
+        this->groupByPeopleWithDetails(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& groupByPeopleWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("person_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& groupByPeopleWithDetails(const SelectQuery& child) && {
+        this->groupByPeopleWithDetails(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& groupByPeopleWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("person_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& groupByPeopleWithDetails(const request::QuerySelection& child) && {
+        this->groupByPeopleWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& selectOrderStatusListWith(const ChildRequest& child) & {
+        query_.selectRelation("order_status_list", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& selectOrderStatusListWith(const ChildRequest& child) && {
+        this->selectOrderStatusListWith(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& selectOrderStatusListWith(const SelectQuery& child) & {
+        query_.selectRelation("order_status_list", child);
+        return *this;
+    }
+
+    PlatformRequest&& selectOrderStatusListWith(const SelectQuery& child) && {
+        this->selectOrderStatusListWith(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& selectOrderStatusListWith(const request::QuerySelection& child) & {
+        query_.selectRelation("order_status_list", child);
+        return *this;
+    }
+
+    PlatformRequest&& selectOrderStatusListWith(const request::QuerySelection& child) && {
+        this->selectOrderStatusListWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& selectRecordListWith(const ChildRequest& child) & {
+        query_.selectRelation("record_list", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& selectRecordListWith(const ChildRequest& child) && {
+        this->selectRecordListWith(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& selectRecordListWith(const SelectQuery& child) & {
+        query_.selectRelation("record_list", child);
+        return *this;
+    }
+
+    PlatformRequest&& selectRecordListWith(const SelectQuery& child) && {
+        this->selectRecordListWith(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& selectRecordListWith(const request::QuerySelection& child) & {
+        query_.selectRelation("record_list", child);
+        return *this;
+    }
+
+    PlatformRequest&& selectRecordListWith(const request::QuerySelection& child) && {
+        this->selectRecordListWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& selectPersonListWith(const ChildRequest& child) & {
+        query_.selectRelation("person_list", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& selectPersonListWith(const ChildRequest& child) && {
+        this->selectPersonListWith(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& selectPersonListWith(const SelectQuery& child) & {
+        query_.selectRelation("person_list", child);
+        return *this;
+    }
+
+    PlatformRequest&& selectPersonListWith(const SelectQuery& child) && {
+        this->selectPersonListWith(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& selectPersonListWith(const request::QuerySelection& child) & {
+        query_.selectRelation("person_list", child);
+        return *this;
+    }
+
+    PlatformRequest&& selectPersonListWith(const request::QuerySelection& child) && {
+        this->selectPersonListWith(child);
+        return std::move(*this);
     }
 
     PlatformRequest& selectId() & {
@@ -2499,7 +3387,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     withOrderStatusListMatching(const OrderStatusRequest<P, ChildResult>& child) & {
@@ -2510,7 +3398,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     withOrderStatusListMatching(const OrderStatusRequest<P, ChildResult>& child) && {
@@ -2534,7 +3422,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     withoutOrderStatusListMatching(const OrderStatusRequest<P, ChildResult>& child) & {
@@ -2545,7 +3433,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     withoutOrderStatusListMatching(const OrderStatusRequest<P, ChildResult>& child) && {
@@ -2583,7 +3471,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& countOrderStatusesWith(std::string_view alias,
                                             const OrderStatusRequest<P, ChildResult>& child) & {
@@ -2594,7 +3482,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& countOrderStatusesWith(std::string_view alias,
                                              const OrderStatusRequest<P, ChildResult>& child) && {
@@ -2602,7 +3490,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& statsFromOrderStatuses(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2612,14 +3500,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& statsFromOrderStatuses(const OrderStatusRequest<P, ChildResult>& child) && {
         this->statsFromOrderStatuses(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& statsFromOrderStatusesAs(std::string_view alias,
                                               const OrderStatusRequest<P, ChildResult>& child) & {
@@ -2630,7 +3518,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& statsFromOrderStatusesAs(std::string_view alias,
                                                const OrderStatusRequest<P, ChildResult>& child) && {
@@ -2638,7 +3526,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     groupByOrderStatusesWithDetails(const OrderStatusRequest<P, ChildResult>& child) & {
@@ -2649,7 +3537,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     groupByOrderStatusesWithDetails(const OrderStatusRequest<P, ChildResult>& child) && {
@@ -2673,7 +3561,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& withRecordListMatching(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2683,7 +3571,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& withRecordListMatching(const RecordRequest<P, ChildResult>& child) && {
         this->withRecordListMatching(child);
@@ -2706,7 +3594,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& withoutRecordListMatching(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2716,7 +3604,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& withoutRecordListMatching(const RecordRequest<P, ChildResult>& child) && {
         this->withoutRecordListMatching(child);
@@ -2751,7 +3639,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& countRecordsWith(std::string_view alias,
                                       const RecordRequest<P, ChildResult>& child) & {
@@ -2762,7 +3650,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& countRecordsWith(std::string_view alias,
                                        const RecordRequest<P, ChildResult>& child) && {
@@ -2770,7 +3658,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& statsFromRecords(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2780,14 +3668,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& statsFromRecords(const RecordRequest<P, ChildResult>& child) && {
         this->statsFromRecords(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& statsFromRecordsAs(std::string_view alias,
                                         const RecordRequest<P, ChildResult>& child) & {
@@ -2798,7 +3686,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& statsFromRecordsAs(std::string_view alias,
                                          const RecordRequest<P, ChildResult>& child) && {
@@ -2806,7 +3694,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& groupByRecordsWithDetails(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2816,7 +3704,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& groupByRecordsWithDetails(const RecordRequest<P, ChildResult>& child) && {
         this->groupByRecordsWithDetails(child);
@@ -2839,7 +3727,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& withPersonListMatching(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2849,7 +3737,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& withPersonListMatching(const PersonRequest<P, ChildResult>& child) && {
         this->withPersonListMatching(child);
@@ -2872,7 +3760,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& withoutPersonListMatching(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2882,7 +3770,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& withoutPersonListMatching(const PersonRequest<P, ChildResult>& child) && {
         this->withoutPersonListMatching(child);
@@ -2917,7 +3805,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& countPeopleWith(std::string_view alias,
                                      const PersonRequest<P, ChildResult>& child) & {
@@ -2928,7 +3816,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& countPeopleWith(std::string_view alias,
                                       const PersonRequest<P, ChildResult>& child) && {
@@ -2936,7 +3824,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& statsFromPeople(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2946,14 +3834,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& statsFromPeople(const PersonRequest<P, ChildResult>& child) && {
         this->statsFromPeople(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& statsFromPeopleAs(std::string_view alias,
                                        const PersonRequest<P, ChildResult>& child) & {
@@ -2964,7 +3852,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& statsFromPeopleAs(std::string_view alias,
                                         const PersonRequest<P, ChildResult>& child) && {
@@ -2972,7 +3860,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& groupByPeopleWithDetails(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2982,7 +3870,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& groupByPeopleWithDetails(const PersonRequest<P, ChildResult>& child) && {
         this->groupByPeopleWithDetails(child);
@@ -3001,17 +3889,14 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& selectOrderStatusListWith(const OrderStatusRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("order_status_list", child.query());
-        });
+        query_.selectRelation("order_status_list", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     selectOrderStatusListWith(const OrderStatusRequest<P, ChildResult>& child) && {
@@ -3019,7 +3904,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& withOrderStatusList(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -3031,7 +3916,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& withOrderStatusList(const OrderStatusRequest<P, ChildResult>& child) && {
         this->withOrderStatusList(child);
@@ -3050,24 +3935,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& selectRecordListWith(const RecordRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("record_list", child.query());
-        });
+        query_.selectRelation("record_list", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& selectRecordListWith(const RecordRequest<P, ChildResult>& child) && {
         this->selectRecordListWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& withRecordList(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -3079,7 +3961,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& withRecordList(const RecordRequest<P, ChildResult>& child) && {
         this->withRecordList(child);
@@ -3098,24 +3980,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& selectPersonListWith(const PersonRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("person_list", child.query());
-        });
+        query_.selectRelation("person_list", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& selectPersonListWith(const PersonRequest<P, ChildResult>& child) && {
         this->selectPersonListWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& withPersonList(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -3127,10 +4006,66 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& withPersonList(const PersonRequest<P, ChildResult>& child) && {
         this->withPersonList(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -3152,6 +4087,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameSoundingLike(const Input& value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameIs(const Input& value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameIsNot(const Input& value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameGreaterThan(const Input& value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameGreaterThanOrEqualTo(const Input& value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameLessThan(const Input& value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameLessThanOrEqualTo(const Input& value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    PlatformRequest& withNameBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    PlatformRequest&& withNameBetween(const Lower& lower, const Upper& upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& withNameIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& withNameIn(Inputs&& inputs) && {
+        this->withNameIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& withNameNotIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& withNameNotIn(Inputs&& inputs) && {
+        this->withNameNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -3217,15 +4294,15 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class OrderStatusRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class PlatformRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class OrderStatusRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class RecordRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class PersonRequest;
 
 public:
@@ -3251,6 +4328,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -3263,6 +4346,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     OrderStatusRequest<true, Result> purpose(std::string_view text) const& {
         return OrderStatusRequest<true, Result>(query_.purpose(text));
     }
@@ -3271,12 +4384,12 @@ public:
         return OrderStatusRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     OrderStatusRequest<Purposed, Return> returnType() const& {
         return OrderStatusRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     OrderStatusRequest<Purposed, Return> returnType() && {
         return OrderStatusRequest<Purposed, Return>(
             std::move(query_).template returnType<Return>());
@@ -3429,6 +4542,20 @@ public:
 
     OrderStatusRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -3887,15 +5014,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     OrderStatusRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     OrderStatusRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    OrderStatusRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    OrderStatusRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -4065,73 +5212,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     OrderStatus& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -4146,6 +5293,902 @@ public:
 
     OrderStatusRequest rebindGlobal(UserContext& user_context) const {
         return OrderStatusRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <request::EntityReference Reference>
+    OrderStatusRequest& filterByPlatform(Reference&& value) & {
+        query_.andFilter(
+            Expr::eq(memory_resource(),
+                     "platform_id",
+                     request::entity_id_value(memory_resource(), std::forward<Reference>(value))));
+        return *this;
+    }
+
+    template <request::EntityReference Reference>
+    OrderStatusRequest&& filterByPlatform(Reference&& value) && {
+        this->filterByPlatform(std::forward<Reference>(value));
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& selectPlatformWith(const ChildRequest& child) & {
+        query_.selectRelation("platform", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& selectPlatformWith(const ChildRequest& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectPlatformWith(const SelectQuery& child) & {
+        query_.selectRelation("platform", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& selectPlatformWith(const SelectQuery& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectPlatformWith(const request::QuerySelection& child) & {
+        query_.selectRelation("platform", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& selectPlatformWith(const request::QuerySelection& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& withPlatformMatching(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& withPlatformMatching(const ChildRequest& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withPlatformMatching(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    OrderStatusRequest&& withPlatformMatching(const SelectQuery& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withPlatformMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    OrderStatusRequest&& withPlatformMatching(const request::QuerySelection& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& withoutPlatformMatching(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& withoutPlatformMatching(const ChildRequest& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withoutPlatformMatching(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    OrderStatusRequest&& withoutPlatformMatching(const SelectQuery& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withoutPlatformMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    OrderStatusRequest&& withoutPlatformMatching(const request::QuerySelection& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& rollUpToPlatformWith(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& rollUpToPlatformWith(const ChildRequest& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& rollUpToPlatformWith(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& rollUpToPlatformWith(const SelectQuery& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& rollUpToPlatformWith(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& rollUpToPlatformWith(const request::QuerySelection& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& facetByPlatformAs(std::string_view facet_name,
+                                          const ChildRequest& child) & {
+        query_.facetBy("platform", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& facetByPlatformAs(std::string_view facet_name,
+                                           const ChildRequest& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& facetByPlatformAs(std::string_view facet_name, const SelectQuery& child) & {
+        query_.facetBy("platform", facet_name, child);
+        return *this;
+    }
+
+    OrderStatusRequest&& facetByPlatformAs(std::string_view facet_name,
+                                           const SelectQuery& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& facetByPlatformAs(std::string_view facet_name,
+                                          const request::QuerySelection& child) & {
+        query_.facetBy("platform", facet_name, child);
+        return *this;
+    }
+
+    OrderStatusRequest&& facetByPlatformAs(std::string_view facet_name,
+                                           const request::QuerySelection& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                     const ChildRequest& child,
+                                                     bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                      const ChildRequest& child,
+                                                      bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                     const SelectQuery& child,
+                                                     bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    OrderStatusRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                      const SelectQuery& child,
+                                                      bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                     const request::QuerySelection& child,
+                                                     bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    OrderStatusRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                      const request::QuerySelection& child,
+                                                      bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& groupByPlatformWith(const ChildRequest& child) & {
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& groupByPlatformWith(const ChildRequest& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByPlatformWith(const SelectQuery& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByPlatformWith(const SelectQuery& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByPlatformWith(const request::QuerySelection& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByPlatformWith(const request::QuerySelection& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& groupByPlatformWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& groupByPlatformWithDetailsFrom(const ChildRequest& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByPlatformWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByPlatformWithDetailsFrom(const SelectQuery& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByPlatformWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByPlatformWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& withRecordListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "record_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& withRecordListMatching(const ChildRequest& child) && {
+        this->withRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withRecordListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "record_list");
+        return *this;
+    }
+
+    OrderStatusRequest&& withRecordListMatching(const SelectQuery& child) && {
+        this->withRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withRecordListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "record_list");
+        return *this;
+    }
+
+    OrderStatusRequest&& withRecordListMatching(const request::QuerySelection& child) && {
+        this->withRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& withoutRecordListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "record_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& withoutRecordListMatching(const ChildRequest& child) && {
+        this->withoutRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withoutRecordListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "record_list");
+        return *this;
+    }
+
+    OrderStatusRequest&& withoutRecordListMatching(const SelectQuery& child) && {
+        this->withoutRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withoutRecordListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Record::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "record_list");
+        return *this;
+    }
+
+    OrderStatusRequest&& withoutRecordListMatching(const request::QuerySelection& child) && {
+        this->withoutRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& countRecordsWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("record_list", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& countRecordsWith(std::string_view alias, const ChildRequest& child) && {
+        this->countRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countRecordsWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("record_list", alias, child, true);
+        return *this;
+    }
+
+    OrderStatusRequest&& countRecordsWith(std::string_view alias, const SelectQuery& child) && {
+        this->countRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countRecordsWith(std::string_view alias,
+                                         const request::QuerySelection& child) & {
+        query_.aggregateRelation("record_list", alias, child, true);
+        return *this;
+    }
+
+    OrderStatusRequest&& countRecordsWith(std::string_view alias,
+                                          const request::QuerySelection& child) && {
+        this->countRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& statsFromRecords(const ChildRequest& child) & {
+        query_.aggregateRelation("record_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& statsFromRecords(const ChildRequest& child) && {
+        this->statsFromRecords(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& statsFromRecords(const SelectQuery& child) & {
+        query_.aggregateRelation("record_list", "refinements", child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& statsFromRecords(const SelectQuery& child) && {
+        this->statsFromRecords(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& statsFromRecords(const request::QuerySelection& child) & {
+        query_.aggregateRelation("record_list", "refinements", child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& statsFromRecords(const request::QuerySelection& child) && {
+        this->statsFromRecords(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& statsFromRecordsAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("record_list", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& statsFromRecordsAs(std::string_view alias, const ChildRequest& child) && {
+        this->statsFromRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& statsFromRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("record_list", alias, child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& statsFromRecordsAs(std::string_view alias, const SelectQuery& child) && {
+        this->statsFromRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& statsFromRecordsAs(std::string_view alias,
+                                           const request::QuerySelection& child) & {
+        query_.aggregateRelation("record_list", alias, child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& statsFromRecordsAs(std::string_view alias,
+                                            const request::QuerySelection& child) && {
+        this->statsFromRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& groupByRecordsWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("record_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& groupByRecordsWithDetails(const ChildRequest& child) && {
+        this->groupByRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByRecordsWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("record_list", "refinements", child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByRecordsWithDetails(const SelectQuery& child) && {
+        this->groupByRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByRecordsWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("record_list", "refinements", child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByRecordsWithDetails(const request::QuerySelection& child) && {
+        this->groupByRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& withPersonListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "person_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& withPersonListMatching(const ChildRequest& child) && {
+        this->withPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withPersonListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "person_list");
+        return *this;
+    }
+
+    OrderStatusRequest&& withPersonListMatching(const SelectQuery& child) && {
+        this->withPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withPersonListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "person_list");
+        return *this;
+    }
+
+    OrderStatusRequest&& withPersonListMatching(const request::QuerySelection& child) && {
+        this->withPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& withoutPersonListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "person_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& withoutPersonListMatching(const ChildRequest& child) && {
+        this->withoutPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withoutPersonListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "person_list");
+        return *this;
+    }
+
+    OrderStatusRequest&& withoutPersonListMatching(const SelectQuery& child) && {
+        this->withoutPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withoutPersonListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "status_id",
+                              Person::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "person_list");
+        return *this;
+    }
+
+    OrderStatusRequest&& withoutPersonListMatching(const request::QuerySelection& child) && {
+        this->withoutPersonListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& countPeopleWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("person_list", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& countPeopleWith(std::string_view alias, const ChildRequest& child) && {
+        this->countPeopleWith(alias, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countPeopleWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("person_list", alias, child, true);
+        return *this;
+    }
+
+    OrderStatusRequest&& countPeopleWith(std::string_view alias, const SelectQuery& child) && {
+        this->countPeopleWith(alias, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countPeopleWith(std::string_view alias,
+                                        const request::QuerySelection& child) & {
+        query_.aggregateRelation("person_list", alias, child, true);
+        return *this;
+    }
+
+    OrderStatusRequest&& countPeopleWith(std::string_view alias,
+                                         const request::QuerySelection& child) && {
+        this->countPeopleWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& statsFromPeople(const ChildRequest& child) & {
+        query_.aggregateRelation("person_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& statsFromPeople(const ChildRequest& child) && {
+        this->statsFromPeople(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& statsFromPeople(const SelectQuery& child) & {
+        query_.aggregateRelation("person_list", "refinements", child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& statsFromPeople(const SelectQuery& child) && {
+        this->statsFromPeople(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& statsFromPeople(const request::QuerySelection& child) & {
+        query_.aggregateRelation("person_list", "refinements", child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& statsFromPeople(const request::QuerySelection& child) && {
+        this->statsFromPeople(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& statsFromPeopleAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("person_list", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& statsFromPeopleAs(std::string_view alias, const ChildRequest& child) && {
+        this->statsFromPeopleAs(alias, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& statsFromPeopleAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("person_list", alias, child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& statsFromPeopleAs(std::string_view alias, const SelectQuery& child) && {
+        this->statsFromPeopleAs(alias, child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& statsFromPeopleAs(std::string_view alias,
+                                          const request::QuerySelection& child) & {
+        query_.aggregateRelation("person_list", alias, child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& statsFromPeopleAs(std::string_view alias,
+                                           const request::QuerySelection& child) && {
+        this->statsFromPeopleAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& groupByPeopleWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("person_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& groupByPeopleWithDetails(const ChildRequest& child) && {
+        this->groupByPeopleWithDetails(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByPeopleWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("person_list", "refinements", child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByPeopleWithDetails(const SelectQuery& child) && {
+        this->groupByPeopleWithDetails(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByPeopleWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("person_list", "refinements", child, false);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByPeopleWithDetails(const request::QuerySelection& child) && {
+        this->groupByPeopleWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& selectRecordListWith(const ChildRequest& child) & {
+        query_.selectRelation("record_list", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& selectRecordListWith(const ChildRequest& child) && {
+        this->selectRecordListWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectRecordListWith(const SelectQuery& child) & {
+        query_.selectRelation("record_list", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& selectRecordListWith(const SelectQuery& child) && {
+        this->selectRecordListWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectRecordListWith(const request::QuerySelection& child) & {
+        query_.selectRelation("record_list", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& selectRecordListWith(const request::QuerySelection& child) && {
+        this->selectRecordListWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& selectPersonListWith(const ChildRequest& child) & {
+        query_.selectRelation("person_list", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& selectPersonListWith(const ChildRequest& child) && {
+        this->selectPersonListWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectPersonListWith(const SelectQuery& child) & {
+        query_.selectRelation("person_list", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& selectPersonListWith(const SelectQuery& child) && {
+        this->selectPersonListWith(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectPersonListWith(const request::QuerySelection& child) & {
+        query_.selectRelation("person_list", child);
+        return *this;
+    }
+
+    OrderStatusRequest&& selectPersonListWith(const request::QuerySelection& child) && {
+        this->selectPersonListWith(child);
+        return std::move(*this);
     }
 
     OrderStatusRequest& withIdIsValue11() & {
@@ -6576,24 +8619,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& selectPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("platform", child.query());
-        });
+        query_.selectRelation("platform", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& selectPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->selectPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withPlatform(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6605,14 +8645,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withPlatform(const PlatformRequest<P, ChildResult>& child) && {
         this->withPlatform(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withPlatformMatching(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6622,7 +8662,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withPlatformMatching(const PlatformRequest<P, ChildResult>& child) && {
         this->withPlatformMatching(child);
@@ -6641,7 +8681,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withoutPlatformMatching(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6651,7 +8691,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withoutPlatformMatching(const PlatformRequest<P, ChildResult>& child) && {
         this->withoutPlatformMatching(child);
@@ -6670,7 +8710,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& facetByPlatformAs(std::string_view facet_name,
                                           const PlatformRequest<P, ChildResult>& child) & {
@@ -6681,7 +8721,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& facetByPlatformAs(std::string_view facet_name,
                                            const PlatformRequest<P, ChildResult>& child) && {
@@ -6689,7 +8729,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
                                                      const PlatformRequest<P, ChildResult>& child,
@@ -6701,7 +8741,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
                                                       const PlatformRequest<P, ChildResult>& child,
@@ -6710,7 +8750,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& groupByPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6720,14 +8760,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& groupByPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->groupByPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&
     groupByPlatformWithDetailsFrom(const PlatformRequest<P, ChildResult>& child) & {
@@ -6738,7 +8778,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&&
     groupByPlatformWithDetailsFrom(const PlatformRequest<P, ChildResult>& child) && {
@@ -6773,7 +8813,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& rollUpToPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6784,7 +8824,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& rollUpToPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->rollUpToPlatformWith(child);
@@ -6807,7 +8847,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withRecordListMatching(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6817,7 +8857,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withRecordListMatching(const RecordRequest<P, ChildResult>& child) && {
         this->withRecordListMatching(child);
@@ -6837,7 +8877,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withoutRecordListMatching(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6847,7 +8887,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withoutRecordListMatching(const RecordRequest<P, ChildResult>& child) && {
         this->withoutRecordListMatching(child);
@@ -6882,7 +8922,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& countRecordsWith(std::string_view alias,
                                          const RecordRequest<P, ChildResult>& child) & {
@@ -6893,7 +8933,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& countRecordsWith(std::string_view alias,
                                           const RecordRequest<P, ChildResult>& child) && {
@@ -6901,7 +8941,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& statsFromRecords(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6911,14 +8951,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& statsFromRecords(const RecordRequest<P, ChildResult>& child) && {
         this->statsFromRecords(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& statsFromRecordsAs(std::string_view alias,
                                            const RecordRequest<P, ChildResult>& child) & {
@@ -6929,7 +8969,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& statsFromRecordsAs(std::string_view alias,
                                             const RecordRequest<P, ChildResult>& child) && {
@@ -6937,7 +8977,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& groupByRecordsWithDetails(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6947,7 +8987,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& groupByRecordsWithDetails(const RecordRequest<P, ChildResult>& child) && {
         this->groupByRecordsWithDetails(child);
@@ -6970,7 +9010,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withPersonListMatching(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6980,7 +9020,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withPersonListMatching(const PersonRequest<P, ChildResult>& child) && {
         this->withPersonListMatching(child);
@@ -7000,7 +9040,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withoutPersonListMatching(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -7010,7 +9050,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withoutPersonListMatching(const PersonRequest<P, ChildResult>& child) && {
         this->withoutPersonListMatching(child);
@@ -7045,7 +9085,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& countPeopleWith(std::string_view alias,
                                         const PersonRequest<P, ChildResult>& child) & {
@@ -7056,7 +9096,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& countPeopleWith(std::string_view alias,
                                          const PersonRequest<P, ChildResult>& child) && {
@@ -7064,7 +9104,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& statsFromPeople(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -7074,14 +9114,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& statsFromPeople(const PersonRequest<P, ChildResult>& child) && {
         this->statsFromPeople(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& statsFromPeopleAs(std::string_view alias,
                                           const PersonRequest<P, ChildResult>& child) & {
@@ -7092,7 +9132,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& statsFromPeopleAs(std::string_view alias,
                                            const PersonRequest<P, ChildResult>& child) && {
@@ -7100,7 +9140,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& groupByPeopleWithDetails(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -7110,7 +9150,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& groupByPeopleWithDetails(const PersonRequest<P, ChildResult>& child) && {
         this->groupByPeopleWithDetails(child);
@@ -7129,24 +9169,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& selectRecordListWith(const RecordRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("record_list", child.query());
-        });
+        query_.selectRelation("record_list", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& selectRecordListWith(const RecordRequest<P, ChildResult>& child) && {
         this->selectRecordListWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withRecordList(const RecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -7158,7 +9195,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withRecordList(const RecordRequest<P, ChildResult>& child) && {
         this->withRecordList(child);
@@ -7177,24 +9214,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& selectPersonListWith(const PersonRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("person_list", child.query());
-        });
+        query_.selectRelation("person_list", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& selectPersonListWith(const PersonRequest<P, ChildResult>& child) && {
         this->selectPersonListWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest& withPersonList(const PersonRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -7206,10 +9240,66 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     OrderStatusRequest&& withPersonList(const PersonRequest<P, ChildResult>& child) && {
         this->withPersonList(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -7231,6 +9321,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withNameSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withNameSoundingLike(const Input& value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withNameIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withNameIs(const Input& value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withNameIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withNameIsNot(const Input& value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withNameGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withNameGreaterThan(const Input& value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withNameGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withNameGreaterThanOrEqualTo(const Input& value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withNameLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withNameLessThan(const Input& value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withNameLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withNameLessThanOrEqualTo(const Input& value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    OrderStatusRequest& withNameBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    OrderStatusRequest&& withNameBetween(const Lower& lower, const Upper& upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& withNameIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& withNameIn(Inputs&& inputs) && {
+        this->withNameIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& withNameNotIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& withNameNotIn(Inputs&& inputs) && {
+        this->withNameNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -7292,6 +9524,148 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     OrderStatusRequest&& withNameAfter(const T& value) && {
         this->withNameAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withCodeSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "code", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withCodeSoundingLike(const Input& value) && {
+        this->withCodeSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withCodeIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "code", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withCodeIs(const Input& value) && {
+        this->withCodeIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withCodeIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "code", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withCodeIsNot(const Input& value) && {
+        this->withCodeIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withCodeGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "code", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withCodeGreaterThan(const Input& value) && {
+        this->withCodeGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withCodeGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "code", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withCodeGreaterThanOrEqualTo(const Input& value) && {
+        this->withCodeGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withCodeLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "code", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withCodeLessThan(const Input& value) && {
+        this->withCodeLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest& withCodeLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "code", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    OrderStatusRequest&& withCodeLessThanOrEqualTo(const Input& value) && {
+        this->withCodeLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    OrderStatusRequest& withCodeBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "code", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    OrderStatusRequest&& withCodeBetween(const Lower& lower, const Upper& upper) && {
+        this->withCodeBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& withCodeIn(Inputs&& inputs) & {
+        query_.filterField("code", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& withCodeIn(Inputs&& inputs) && {
+        this->withCodeIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& withCodeNotIn(Inputs&& inputs) & {
+        query_.filterField("code", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& withCodeNotIn(Inputs&& inputs) && {
+        this->withCodeNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -7358,15 +9732,15 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class RecordRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class PlatformRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class OrderStatusRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class RecordRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class PersonRequest;
 
 public:
@@ -7390,6 +9764,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -7402,6 +9782,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     RecordRequest<true, Result> purpose(std::string_view text) const& {
         return RecordRequest<true, Result>(query_.purpose(text));
     }
@@ -7410,12 +9820,12 @@ public:
         return RecordRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     RecordRequest<Purposed, Return> returnType() const& {
         return RecordRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     RecordRequest<Purposed, Return> returnType() && {
         return RecordRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
     }
@@ -7567,6 +9977,20 @@ public:
 
     RecordRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -8024,15 +10448,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     RecordRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     RecordRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    RecordRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    RecordRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -8203,73 +10647,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     Record& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -8284,6 +10728,689 @@ public:
 
     RecordRequest rebindGlobal(UserContext& user_context) const {
         return RecordRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <request::EntityReference Reference>
+    RecordRequest& filterByPlatform(Reference&& value) & {
+        query_.andFilter(
+            Expr::eq(memory_resource(),
+                     "platform_id",
+                     request::entity_id_value(memory_resource(), std::forward<Reference>(value))));
+        return *this;
+    }
+
+    template <request::EntityReference Reference>
+    RecordRequest&& filterByPlatform(Reference&& value) && {
+        this->filterByPlatform(std::forward<Reference>(value));
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& selectPlatformWith(const ChildRequest& child) & {
+        query_.selectRelation("platform", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& selectPlatformWith(const ChildRequest& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& selectPlatformWith(const SelectQuery& child) & {
+        query_.selectRelation("platform", child);
+        return *this;
+    }
+
+    RecordRequest&& selectPlatformWith(const SelectQuery& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& selectPlatformWith(const request::QuerySelection& child) & {
+        query_.selectRelation("platform", child);
+        return *this;
+    }
+
+    RecordRequest&& selectPlatformWith(const request::QuerySelection& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& selectStatusWith(const ChildRequest& child) & {
+        query_.selectRelation("status", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& selectStatusWith(const ChildRequest& child) && {
+        this->selectStatusWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& selectStatusWith(const SelectQuery& child) & {
+        query_.selectRelation("status", child);
+        return *this;
+    }
+
+    RecordRequest&& selectStatusWith(const SelectQuery& child) && {
+        this->selectStatusWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& selectStatusWith(const request::QuerySelection& child) & {
+        query_.selectRelation("status", child);
+        return *this;
+    }
+
+    RecordRequest&& selectStatusWith(const request::QuerySelection& child) && {
+        this->selectStatusWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& withPlatformMatching(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& withPlatformMatching(const ChildRequest& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& withPlatformMatching(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    RecordRequest&& withPlatformMatching(const SelectQuery& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& withPlatformMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    RecordRequest&& withPlatformMatching(const request::QuerySelection& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& withoutPlatformMatching(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& withoutPlatformMatching(const ChildRequest& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& withoutPlatformMatching(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    RecordRequest&& withoutPlatformMatching(const SelectQuery& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& withoutPlatformMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    RecordRequest&& withoutPlatformMatching(const request::QuerySelection& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& rollUpToPlatformWith(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& rollUpToPlatformWith(const ChildRequest& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& rollUpToPlatformWith(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    RecordRequest&& rollUpToPlatformWith(const SelectQuery& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& rollUpToPlatformWith(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    RecordRequest&& rollUpToPlatformWith(const request::QuerySelection& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& facetByPlatformAs(std::string_view facet_name, const ChildRequest& child) & {
+        query_.facetBy("platform", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& facetByPlatformAs(std::string_view facet_name, const ChildRequest& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    RecordRequest& facetByPlatformAs(std::string_view facet_name, const SelectQuery& child) & {
+        query_.facetBy("platform", facet_name, child);
+        return *this;
+    }
+
+    RecordRequest&& facetByPlatformAs(std::string_view facet_name, const SelectQuery& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    RecordRequest& facetByPlatformAs(std::string_view facet_name,
+                                     const request::QuerySelection& child) & {
+        query_.facetBy("platform", facet_name, child);
+        return *this;
+    }
+
+    RecordRequest&& facetByPlatformAs(std::string_view facet_name,
+                                      const request::QuerySelection& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                const ChildRequest& child,
+                                                bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                 const ChildRequest& child,
+                                                 bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    RecordRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                const SelectQuery& child,
+                                                bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    RecordRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                 const SelectQuery& child,
+                                                 bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    RecordRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                const request::QuerySelection& child,
+                                                bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    RecordRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                 const request::QuerySelection& child,
+                                                 bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& groupByPlatformWith(const ChildRequest& child) & {
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& groupByPlatformWith(const ChildRequest& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& groupByPlatformWith(const SelectQuery& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    RecordRequest&& groupByPlatformWith(const SelectQuery& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& groupByPlatformWith(const request::QuerySelection& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    RecordRequest&& groupByPlatformWith(const request::QuerySelection& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& groupByPlatformWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& groupByPlatformWithDetailsFrom(const ChildRequest& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& groupByPlatformWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    RecordRequest&& groupByPlatformWithDetailsFrom(const SelectQuery& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& groupByPlatformWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    RecordRequest&& groupByPlatformWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& withStatusMatching(const ChildRequest& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "status");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& withStatusMatching(const ChildRequest& child) && {
+        this->withStatusMatching(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& withStatusMatching(const SelectQuery& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "status");
+        return *this;
+    }
+
+    RecordRequest&& withStatusMatching(const SelectQuery& child) && {
+        this->withStatusMatching(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& withStatusMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "status");
+        return *this;
+    }
+
+    RecordRequest&& withStatusMatching(const request::QuerySelection& child) && {
+        this->withStatusMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& withoutStatusMatching(const ChildRequest& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "status");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& withoutStatusMatching(const ChildRequest& child) && {
+        this->withoutStatusMatching(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& withoutStatusMatching(const SelectQuery& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "status");
+        return *this;
+    }
+
+    RecordRequest&& withoutStatusMatching(const SelectQuery& child) && {
+        this->withoutStatusMatching(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& withoutStatusMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "status");
+        return *this;
+    }
+
+    RecordRequest&& withoutStatusMatching(const request::QuerySelection& child) && {
+        this->withoutStatusMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& rollUpToStatusWith(const ChildRequest& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "status");
+        query_.groupByObject("status", "status_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& rollUpToStatusWith(const ChildRequest& child) && {
+        this->rollUpToStatusWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& rollUpToStatusWith(const SelectQuery& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "status");
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    RecordRequest&& rollUpToStatusWith(const SelectQuery& child) && {
+        this->rollUpToStatusWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& rollUpToStatusWith(const request::QuerySelection& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "status");
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    RecordRequest&& rollUpToStatusWith(const request::QuerySelection& child) && {
+        this->rollUpToStatusWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& facetByStatusAs(std::string_view facet_name, const ChildRequest& child) & {
+        query_.facetBy("status", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& facetByStatusAs(std::string_view facet_name, const ChildRequest& child) && {
+        this->facetByStatusAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    RecordRequest& facetByStatusAs(std::string_view facet_name, const SelectQuery& child) & {
+        query_.facetBy("status", facet_name, child);
+        return *this;
+    }
+
+    RecordRequest&& facetByStatusAs(std::string_view facet_name, const SelectQuery& child) && {
+        this->facetByStatusAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    RecordRequest& facetByStatusAs(std::string_view facet_name,
+                                   const request::QuerySelection& child) & {
+        query_.facetBy("status", facet_name, child);
+        return *this;
+    }
+
+    RecordRequest&& facetByStatusAs(std::string_view facet_name,
+                                    const request::QuerySelection& child) && {
+        this->facetByStatusAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& facetByStatusAsWithOptions(std::string_view facet_name,
+                                              const ChildRequest& child,
+                                              bool include_all_facets) & {
+        query_.facetBy("status", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& facetByStatusAsWithOptions(std::string_view facet_name,
+                                               const ChildRequest& child,
+                                               bool include_all_facets) && {
+        this->facetByStatusAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    RecordRequest& facetByStatusAsWithOptions(std::string_view facet_name,
+                                              const SelectQuery& child,
+                                              bool include_all_facets) & {
+        query_.facetBy("status", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    RecordRequest&& facetByStatusAsWithOptions(std::string_view facet_name,
+                                               const SelectQuery& child,
+                                               bool include_all_facets) && {
+        this->facetByStatusAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    RecordRequest& facetByStatusAsWithOptions(std::string_view facet_name,
+                                              const request::QuerySelection& child,
+                                              bool include_all_facets) & {
+        query_.facetBy("status", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    RecordRequest&& facetByStatusAsWithOptions(std::string_view facet_name,
+                                               const request::QuerySelection& child,
+                                               bool include_all_facets) && {
+        this->facetByStatusAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& groupByStatusWith(const ChildRequest& child) & {
+        query_.groupByObject("status", "status_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& groupByStatusWith(const ChildRequest& child) && {
+        this->groupByStatusWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& groupByStatusWith(const SelectQuery& child) & {
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    RecordRequest&& groupByStatusWith(const SelectQuery& child) && {
+        this->groupByStatusWith(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& groupByStatusWith(const request::QuerySelection& child) & {
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    RecordRequest&& groupByStatusWith(const request::QuerySelection& child) && {
+        this->groupByStatusWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest& groupByStatusWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("status", "status_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    RecordRequest&& groupByStatusWithDetailsFrom(const ChildRequest& child) && {
+        this->groupByStatusWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& groupByStatusWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    RecordRequest&& groupByStatusWithDetailsFrom(const SelectQuery& child) && {
+        this->groupByStatusWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    RecordRequest& groupByStatusWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    RecordRequest&& groupByStatusWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupByStatusWithDetailsFrom(child);
+        return std::move(*this);
     }
 
     RecordRequest& selectId() & {
@@ -11559,24 +14686,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& selectPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("platform", child.query());
-        });
+        query_.selectRelation("platform", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& selectPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->selectPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& withPlatform(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11588,7 +14712,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& withPlatform(const PlatformRequest<P, ChildResult>& child) && {
         this->withPlatform(child);
@@ -11607,24 +14731,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& selectStatusWith(const OrderStatusRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("status", child.query());
-        });
+        query_.selectRelation("status", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& selectStatusWith(const OrderStatusRequest<P, ChildResult>& child) && {
         this->selectStatusWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& withStatus(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11636,14 +14757,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& withStatus(const OrderStatusRequest<P, ChildResult>& child) && {
         this->withStatus(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& withPlatformMatching(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11653,7 +14774,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& withPlatformMatching(const PlatformRequest<P, ChildResult>& child) && {
         this->withPlatformMatching(child);
@@ -11672,7 +14793,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& withoutPlatformMatching(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11682,7 +14803,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& withoutPlatformMatching(const PlatformRequest<P, ChildResult>& child) && {
         this->withoutPlatformMatching(child);
@@ -11701,7 +14822,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& facetByPlatformAs(std::string_view facet_name,
                                      const PlatformRequest<P, ChildResult>& child) & {
@@ -11712,7 +14833,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& facetByPlatformAs(std::string_view facet_name,
                                       const PlatformRequest<P, ChildResult>& child) && {
@@ -11720,7 +14841,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
                                                 const PlatformRequest<P, ChildResult>& child,
@@ -11732,7 +14853,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
                                                  const PlatformRequest<P, ChildResult>& child,
@@ -11741,7 +14862,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& groupByPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11751,14 +14872,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& groupByPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->groupByPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& groupByPlatformWithDetailsFrom(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11768,7 +14889,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&&
     groupByPlatformWithDetailsFrom(const PlatformRequest<P, ChildResult>& child) && {
@@ -11803,7 +14924,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& rollUpToPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11814,14 +14935,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& rollUpToPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->rollUpToPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& withStatusMatching(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11831,7 +14952,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& withStatusMatching(const OrderStatusRequest<P, ChildResult>& child) && {
         this->withStatusMatching(child);
@@ -11850,7 +14971,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& withoutStatusMatching(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11860,7 +14981,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& withoutStatusMatching(const OrderStatusRequest<P, ChildResult>& child) && {
         this->withoutStatusMatching(child);
@@ -11879,7 +15000,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& facetByStatusAs(std::string_view facet_name,
                                    const OrderStatusRequest<P, ChildResult>& child) & {
@@ -11890,7 +15011,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& facetByStatusAs(std::string_view facet_name,
                                     const OrderStatusRequest<P, ChildResult>& child) && {
@@ -11898,7 +15019,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& facetByStatusAsWithOptions(std::string_view facet_name,
                                               const OrderStatusRequest<P, ChildResult>& child,
@@ -11910,7 +15031,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& facetByStatusAsWithOptions(std::string_view facet_name,
                                                const OrderStatusRequest<P, ChildResult>& child,
@@ -11919,7 +15040,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& groupByStatusWith(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11929,14 +15050,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& groupByStatusWith(const OrderStatusRequest<P, ChildResult>& child) && {
         this->groupByStatusWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& groupByStatusWithDetailsFrom(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11946,7 +15067,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&&
     groupByStatusWithDetailsFrom(const OrderStatusRequest<P, ChildResult>& child) && {
@@ -11981,7 +15102,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest& rollUpToStatusWith(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -11992,10 +15113,66 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     RecordRequest&& rollUpToStatusWith(const OrderStatusRequest<P, ChildResult>& child) && {
         this->rollUpToStatusWith(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -12017,6 +15194,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withNameSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withNameSoundingLike(const Input& value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withNameIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withNameIs(const Input& value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withNameIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withNameIsNot(const Input& value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withNameGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withNameGreaterThan(const Input& value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withNameGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withNameGreaterThanOrEqualTo(const Input& value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withNameLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withNameLessThan(const Input& value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withNameLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withNameLessThanOrEqualTo(const Input& value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    RecordRequest& withNameBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    RecordRequest&& withNameBetween(const Lower& lower, const Upper& upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& withNameIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& withNameIn(Inputs&& inputs) && {
+        this->withNameIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& withNameNotIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& withNameNotIn(Inputs&& inputs) && {
+        this->withNameNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -12081,6 +15400,148 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withPhaseSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withPhaseSoundingLike(const Input& value) && {
+        this->withPhaseSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withPhaseIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withPhaseIs(const Input& value) && {
+        this->withPhaseIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withPhaseIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withPhaseIsNot(const Input& value) && {
+        this->withPhaseIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withPhaseGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withPhaseGreaterThan(const Input& value) && {
+        this->withPhaseGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withPhaseGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withPhaseGreaterThanOrEqualTo(const Input& value) && {
+        this->withPhaseGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withPhaseLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withPhaseLessThan(const Input& value) && {
+        this->withPhaseLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withPhaseLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withPhaseLessThanOrEqualTo(const Input& value) && {
+        this->withPhaseLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    RecordRequest& withPhaseBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "phase", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    RecordRequest&& withPhaseBetween(const Lower& lower, const Upper& upper) && {
+        this->withPhaseBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& withPhaseIn(Inputs&& inputs) & {
+        query_.filterField("phase", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& withPhaseIn(Inputs&& inputs) && {
+        this->withPhaseIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& withPhaseNotIn(Inputs&& inputs) & {
+        query_.filterField("phase", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& withPhaseNotIn(Inputs&& inputs) && {
+        this->withPhaseNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     RecordRequest& withPhase(request::FieldOperator op, Inputs&& inputs) & {
@@ -12140,6 +15601,148 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     RecordRequest&& withPhaseAfter(const T& value) && {
         this->withPhaseAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withTagSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "tag", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withTagSoundingLike(const Input& value) && {
+        this->withTagSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withTagIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "tag", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withTagIs(const Input& value) && {
+        this->withTagIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withTagIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "tag", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withTagIsNot(const Input& value) && {
+        this->withTagIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withTagGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "tag", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withTagGreaterThan(const Input& value) && {
+        this->withTagGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withTagGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "tag", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withTagGreaterThanOrEqualTo(const Input& value) && {
+        this->withTagGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withTagLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "tag", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withTagLessThan(const Input& value) && {
+        this->withTagLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest& withTagLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "tag", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    RecordRequest&& withTagLessThanOrEqualTo(const Input& value) && {
+        this->withTagLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    RecordRequest& withTagBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "tag", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    RecordRequest&& withTagBetween(const Lower& lower, const Upper& upper) && {
+        this->withTagBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& withTagIn(Inputs&& inputs) & {
+        query_.filterField("tag", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& withTagIn(Inputs&& inputs) && {
+        this->withTagIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest& withTagNotIn(Inputs&& inputs) & {
+        query_.filterField("tag", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    RecordRequest&& withTagNotIn(Inputs&& inputs) && {
+        this->withTagNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -12206,15 +15809,15 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class PersonRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class PlatformRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class OrderStatusRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class RecordRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class PersonRequest;
 
 public:
@@ -12238,6 +15841,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -12250,6 +15859,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     PersonRequest<true, Result> purpose(std::string_view text) const& {
         return PersonRequest<true, Result>(query_.purpose(text));
     }
@@ -12258,12 +15897,12 @@ public:
         return PersonRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     PersonRequest<Purposed, Return> returnType() const& {
         return PersonRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     PersonRequest<Purposed, Return> returnType() && {
         return PersonRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
     }
@@ -12415,6 +16054,20 @@ public:
 
     PersonRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -12872,15 +16525,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     PersonRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     PersonRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    PersonRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    PersonRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -13050,73 +16723,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     Person& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -13131,6 +16804,689 @@ public:
 
     PersonRequest rebindGlobal(UserContext& user_context) const {
         return PersonRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <request::EntityReference Reference>
+    PersonRequest& filterByPlatform(Reference&& value) & {
+        query_.andFilter(
+            Expr::eq(memory_resource(),
+                     "platform_id",
+                     request::entity_id_value(memory_resource(), std::forward<Reference>(value))));
+        return *this;
+    }
+
+    template <request::EntityReference Reference>
+    PersonRequest&& filterByPlatform(Reference&& value) && {
+        this->filterByPlatform(std::forward<Reference>(value));
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& selectPlatformWith(const ChildRequest& child) & {
+        query_.selectRelation("platform", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& selectPlatformWith(const ChildRequest& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectPlatformWith(const SelectQuery& child) & {
+        query_.selectRelation("platform", child);
+        return *this;
+    }
+
+    PersonRequest&& selectPlatformWith(const SelectQuery& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectPlatformWith(const request::QuerySelection& child) & {
+        query_.selectRelation("platform", child);
+        return *this;
+    }
+
+    PersonRequest&& selectPlatformWith(const request::QuerySelection& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& selectStatusWith(const ChildRequest& child) & {
+        query_.selectRelation("status", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& selectStatusWith(const ChildRequest& child) && {
+        this->selectStatusWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectStatusWith(const SelectQuery& child) & {
+        query_.selectRelation("status", child);
+        return *this;
+    }
+
+    PersonRequest&& selectStatusWith(const SelectQuery& child) && {
+        this->selectStatusWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectStatusWith(const request::QuerySelection& child) & {
+        query_.selectRelation("status", child);
+        return *this;
+    }
+
+    PersonRequest&& selectStatusWith(const request::QuerySelection& child) && {
+        this->selectStatusWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& withPlatformMatching(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& withPlatformMatching(const ChildRequest& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& withPlatformMatching(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    PersonRequest&& withPlatformMatching(const SelectQuery& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& withPlatformMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    PersonRequest&& withPlatformMatching(const request::QuerySelection& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& withoutPlatformMatching(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& withoutPlatformMatching(const ChildRequest& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& withoutPlatformMatching(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    PersonRequest&& withoutPlatformMatching(const SelectQuery& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& withoutPlatformMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    PersonRequest&& withoutPlatformMatching(const request::QuerySelection& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& rollUpToPlatformWith(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& rollUpToPlatformWith(const ChildRequest& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& rollUpToPlatformWith(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    PersonRequest&& rollUpToPlatformWith(const SelectQuery& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& rollUpToPlatformWith(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    PersonRequest&& rollUpToPlatformWith(const request::QuerySelection& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& facetByPlatformAs(std::string_view facet_name, const ChildRequest& child) & {
+        query_.facetBy("platform", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& facetByPlatformAs(std::string_view facet_name, const ChildRequest& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    PersonRequest& facetByPlatformAs(std::string_view facet_name, const SelectQuery& child) & {
+        query_.facetBy("platform", facet_name, child);
+        return *this;
+    }
+
+    PersonRequest&& facetByPlatformAs(std::string_view facet_name, const SelectQuery& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    PersonRequest& facetByPlatformAs(std::string_view facet_name,
+                                     const request::QuerySelection& child) & {
+        query_.facetBy("platform", facet_name, child);
+        return *this;
+    }
+
+    PersonRequest&& facetByPlatformAs(std::string_view facet_name,
+                                      const request::QuerySelection& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                const ChildRequest& child,
+                                                bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                 const ChildRequest& child,
+                                                 bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    PersonRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                const SelectQuery& child,
+                                                bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    PersonRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                 const SelectQuery& child,
+                                                 bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    PersonRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                const request::QuerySelection& child,
+                                                bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    PersonRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                 const request::QuerySelection& child,
+                                                 bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& groupByPlatformWith(const ChildRequest& child) & {
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& groupByPlatformWith(const ChildRequest& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByPlatformWith(const SelectQuery& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    PersonRequest&& groupByPlatformWith(const SelectQuery& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByPlatformWith(const request::QuerySelection& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    PersonRequest&& groupByPlatformWith(const request::QuerySelection& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& groupByPlatformWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& groupByPlatformWithDetailsFrom(const ChildRequest& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByPlatformWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    PersonRequest&& groupByPlatformWithDetailsFrom(const SelectQuery& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByPlatformWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    PersonRequest&& groupByPlatformWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& withStatusMatching(const ChildRequest& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "status");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& withStatusMatching(const ChildRequest& child) && {
+        this->withStatusMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& withStatusMatching(const SelectQuery& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "status");
+        return *this;
+    }
+
+    PersonRequest&& withStatusMatching(const SelectQuery& child) && {
+        this->withStatusMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& withStatusMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "status");
+        return *this;
+    }
+
+    PersonRequest&& withStatusMatching(const request::QuerySelection& child) && {
+        this->withStatusMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& withoutStatusMatching(const ChildRequest& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "status");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& withoutStatusMatching(const ChildRequest& child) && {
+        this->withoutStatusMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& withoutStatusMatching(const SelectQuery& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "status");
+        return *this;
+    }
+
+    PersonRequest&& withoutStatusMatching(const SelectQuery& child) && {
+        this->withoutStatusMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& withoutStatusMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "status");
+        return *this;
+    }
+
+    PersonRequest&& withoutStatusMatching(const request::QuerySelection& child) && {
+        this->withoutStatusMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& rollUpToStatusWith(const ChildRequest& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "status");
+        query_.groupByObject("status", "status_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& rollUpToStatusWith(const ChildRequest& child) && {
+        this->rollUpToStatusWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& rollUpToStatusWith(const SelectQuery& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "status");
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    PersonRequest&& rollUpToStatusWith(const SelectQuery& child) && {
+        this->rollUpToStatusWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& rollUpToStatusWith(const request::QuerySelection& child) & {
+        query_.filterRelation("status_id",
+                              "id",
+                              OrderStatus::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "status");
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    PersonRequest&& rollUpToStatusWith(const request::QuerySelection& child) && {
+        this->rollUpToStatusWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& facetByStatusAs(std::string_view facet_name, const ChildRequest& child) & {
+        query_.facetBy("status", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& facetByStatusAs(std::string_view facet_name, const ChildRequest& child) && {
+        this->facetByStatusAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    PersonRequest& facetByStatusAs(std::string_view facet_name, const SelectQuery& child) & {
+        query_.facetBy("status", facet_name, child);
+        return *this;
+    }
+
+    PersonRequest&& facetByStatusAs(std::string_view facet_name, const SelectQuery& child) && {
+        this->facetByStatusAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    PersonRequest& facetByStatusAs(std::string_view facet_name,
+                                   const request::QuerySelection& child) & {
+        query_.facetBy("status", facet_name, child);
+        return *this;
+    }
+
+    PersonRequest&& facetByStatusAs(std::string_view facet_name,
+                                    const request::QuerySelection& child) && {
+        this->facetByStatusAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& facetByStatusAsWithOptions(std::string_view facet_name,
+                                              const ChildRequest& child,
+                                              bool include_all_facets) & {
+        query_.facetBy("status", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& facetByStatusAsWithOptions(std::string_view facet_name,
+                                               const ChildRequest& child,
+                                               bool include_all_facets) && {
+        this->facetByStatusAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    PersonRequest& facetByStatusAsWithOptions(std::string_view facet_name,
+                                              const SelectQuery& child,
+                                              bool include_all_facets) & {
+        query_.facetBy("status", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    PersonRequest&& facetByStatusAsWithOptions(std::string_view facet_name,
+                                               const SelectQuery& child,
+                                               bool include_all_facets) && {
+        this->facetByStatusAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    PersonRequest& facetByStatusAsWithOptions(std::string_view facet_name,
+                                              const request::QuerySelection& child,
+                                              bool include_all_facets) & {
+        query_.facetBy("status", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    PersonRequest&& facetByStatusAsWithOptions(std::string_view facet_name,
+                                               const request::QuerySelection& child,
+                                               bool include_all_facets) && {
+        this->facetByStatusAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& groupByStatusWith(const ChildRequest& child) & {
+        query_.groupByObject("status", "status_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& groupByStatusWith(const ChildRequest& child) && {
+        this->groupByStatusWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByStatusWith(const SelectQuery& child) & {
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    PersonRequest&& groupByStatusWith(const SelectQuery& child) && {
+        this->groupByStatusWith(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByStatusWith(const request::QuerySelection& child) & {
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    PersonRequest&& groupByStatusWith(const request::QuerySelection& child) && {
+        this->groupByStatusWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& groupByStatusWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("status", "status_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& groupByStatusWithDetailsFrom(const ChildRequest& child) && {
+        this->groupByStatusWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByStatusWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    PersonRequest&& groupByStatusWithDetailsFrom(const SelectQuery& child) && {
+        this->groupByStatusWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByStatusWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("status", "status_id", child);
+        return *this;
+    }
+
+    PersonRequest&& groupByStatusWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupByStatusWithDetailsFrom(child);
+        return std::move(*this);
     }
 
     PersonRequest& selectId() & {
@@ -15834,24 +20190,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& selectPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("platform", child.query());
-        });
+        query_.selectRelation("platform", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& selectPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->selectPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& whosePlatform(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -15863,7 +20216,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& whosePlatform(const PlatformRequest<P, ChildResult>& child) && {
         this->whosePlatform(child);
@@ -15882,24 +20235,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& selectStatusWith(const OrderStatusRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("status", child.query());
-        });
+        query_.selectRelation("status", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& selectStatusWith(const OrderStatusRequest<P, ChildResult>& child) && {
         this->selectStatusWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& whoseStatus(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -15911,14 +20261,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& whoseStatus(const OrderStatusRequest<P, ChildResult>& child) && {
         this->whoseStatus(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& withPlatformMatching(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -15928,7 +20278,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& withPlatformMatching(const PlatformRequest<P, ChildResult>& child) && {
         this->withPlatformMatching(child);
@@ -15947,7 +20297,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& withoutPlatformMatching(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -15957,7 +20307,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& withoutPlatformMatching(const PlatformRequest<P, ChildResult>& child) && {
         this->withoutPlatformMatching(child);
@@ -15976,7 +20326,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& facetByPlatformAs(std::string_view facet_name,
                                      const PlatformRequest<P, ChildResult>& child) & {
@@ -15987,7 +20337,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& facetByPlatformAs(std::string_view facet_name,
                                       const PlatformRequest<P, ChildResult>& child) && {
@@ -15995,7 +20345,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
                                                 const PlatformRequest<P, ChildResult>& child,
@@ -16007,7 +20357,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
                                                  const PlatformRequest<P, ChildResult>& child,
@@ -16016,7 +20366,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& groupByPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -16026,14 +20376,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& groupByPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->groupByPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& groupByPlatformWithDetailsFrom(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -16043,7 +20393,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&&
     groupByPlatformWithDetailsFrom(const PlatformRequest<P, ChildResult>& child) && {
@@ -16078,7 +20428,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& rollUpToPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -16089,14 +20439,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& rollUpToPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->rollUpToPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& withStatusMatching(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -16106,7 +20456,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& withStatusMatching(const OrderStatusRequest<P, ChildResult>& child) && {
         this->withStatusMatching(child);
@@ -16125,7 +20475,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& withoutStatusMatching(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -16135,7 +20485,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& withoutStatusMatching(const OrderStatusRequest<P, ChildResult>& child) && {
         this->withoutStatusMatching(child);
@@ -16154,7 +20504,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& facetByStatusAs(std::string_view facet_name,
                                    const OrderStatusRequest<P, ChildResult>& child) & {
@@ -16165,7 +20515,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& facetByStatusAs(std::string_view facet_name,
                                     const OrderStatusRequest<P, ChildResult>& child) && {
@@ -16173,7 +20523,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& facetByStatusAsWithOptions(std::string_view facet_name,
                                               const OrderStatusRequest<P, ChildResult>& child,
@@ -16185,7 +20535,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& facetByStatusAsWithOptions(std::string_view facet_name,
                                                const OrderStatusRequest<P, ChildResult>& child,
@@ -16194,7 +20544,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& groupByStatusWith(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -16204,14 +20554,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& groupByStatusWith(const OrderStatusRequest<P, ChildResult>& child) && {
         this->groupByStatusWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& groupByStatusWithDetailsFrom(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -16221,7 +20571,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&&
     groupByStatusWithDetailsFrom(const OrderStatusRequest<P, ChildResult>& child) && {
@@ -16256,7 +20606,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest& rollUpToStatusWith(const OrderStatusRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -16267,10 +20617,66 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PersonRequest&& rollUpToStatusWith(const OrderStatusRequest<P, ChildResult>& child) && {
         this->rollUpToStatusWith(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseIdIs(const Input& value) && {
+        this->whoseIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseIdIsNot(const Input& value) && {
+        this->whoseIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseIdIn(Inputs&& inputs) && {
+        this->whoseIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseIdNotIn(Inputs&& inputs) && {
+        this->whoseIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -16292,6 +20698,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseNameSoundsLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseNameSoundsLike(const Input& value) && {
+        this->whoseNameSoundsLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseNameIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseNameIs(const Input& value) && {
+        this->whoseNameIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseNameIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseNameIsNot(const Input& value) && {
+        this->whoseNameIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseNameGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseNameGreaterThan(const Input& value) && {
+        this->whoseNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseNameGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseNameGreaterThanOrEqualTo(const Input& value) && {
+        this->whoseNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseNameLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseNameLessThan(const Input& value) && {
+        this->whoseNameLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whoseNameLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whoseNameLessThanOrEqualTo(const Input& value) && {
+        this->whoseNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    PersonRequest& whoseNameBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    PersonRequest&& whoseNameBetween(const Lower& lower, const Upper& upper) && {
+        this->whoseNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseNameIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseNameIn(Inputs&& inputs) && {
+        this->whoseNameIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseNameNotIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseNameNotIn(Inputs&& inputs) && {
+        this->whoseNameNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -16353,6 +20901,148 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     PersonRequest&& whoseNameAfter(const T& value) && {
         this->whoseNameAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whosePhaseSoundsLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whosePhaseSoundsLike(const Input& value) && {
+        this->whosePhaseSoundsLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whosePhaseIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whosePhaseIs(const Input& value) && {
+        this->whosePhaseIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whosePhaseIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whosePhaseIsNot(const Input& value) && {
+        this->whosePhaseIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whosePhaseGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whosePhaseGreaterThan(const Input& value) && {
+        this->whosePhaseGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whosePhaseGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whosePhaseGreaterThanOrEqualTo(const Input& value) && {
+        this->whosePhaseGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whosePhaseLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whosePhaseLessThan(const Input& value) && {
+        this->whosePhaseLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest& whosePhaseLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "phase", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PersonRequest&& whosePhaseLessThanOrEqualTo(const Input& value) && {
+        this->whosePhaseLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    PersonRequest& whosePhaseBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "phase", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    PersonRequest&& whosePhaseBetween(const Lower& lower, const Upper& upper) && {
+        this->whosePhaseBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whosePhaseIn(Inputs&& inputs) & {
+        query_.filterField("phase", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whosePhaseIn(Inputs&& inputs) && {
+        this->whosePhaseIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whosePhaseNotIn(Inputs&& inputs) & {
+        query_.filterField("phase", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whosePhaseNotIn(Inputs&& inputs) && {
+        this->whosePhaseNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -16419,23 +21109,23 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 PlatformRequest<Purposed, Result>& PlatformRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 OrderStatusRequest<Purposed, Result>&
 OrderStatusRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 RecordRequest<Purposed, Result>& RecordRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 PersonRequest<Purposed, Result>& PersonRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }

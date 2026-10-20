@@ -191,6 +191,16 @@ std::uint32_t Arena::slot_for_address(const void* object) const {
         throw std::logic_error("Allocation scope is closed");
     }
     auto address = reinterpret_cast<std::uintptr_t>(object);
+    // Borrowing a freshly registered result must not scan all earlier objects.
+    // Older objects keep the existing lookup and identical dead-storage checks.
+    if (issued_objects_ != 0) {
+        auto& latest = object_record(issued_objects_);
+        auto start = reinterpret_cast<std::uintptr_t>(latest.object);
+        if (latest.object && address >= start && address - start < latest.bytes) {
+            check_live(issued_objects_, 0, std::source_location::current(), true);
+            return issued_objects_;
+        }
+    }
     for (std::uint32_t slot = 1; slot <= issued_objects_; ++slot) {
         auto& record = object_record(slot);
         auto start = reinterpret_cast<std::uintptr_t>(record.object);

@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("sql_dialect_hook_cases.json", "SQL dialect hook order"))
+    raise SystemExit(main("sql_dialect_hook_5_0_6_cases.json.gz", "SQL dialect hook order"))

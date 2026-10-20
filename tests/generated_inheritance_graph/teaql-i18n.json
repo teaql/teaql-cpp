@@ -1,0 +1,124 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.platform.name": "Name",
+                "entity.academy": "Academy",
+                "entity.enrollment": "Enrollment",
+                "property.school.rank": "Rank",
+                "property.enrollment.id": "Id",
+                "property.enrollment.note": "Note",
+                "property.academy.id": "Id",
+                "property.school.platform": "Platform",
+                "entity.specialist": "Specialist",
+                "property.specialist.active": "Active",
+                "property.school.id": "Id",
+                "property.academy.campusCode": "Campus Code",
+                "property.enrollment.version": "Version",
+                "entity.platform": "Platform",
+                "property.platform.id": "Id",
+                "entity.school": "School",
+                "property.school.name": "Name",
+                "entity.researchAcademy": "Research Academy",
+                "property.specialist.platform": "Platform",
+                "property.researchAcademy.id": "Id",
+                "property.researchAcademy.budget": "Budget",
+                "property.school.advisor": "Advisor",
+                "property.platform.version": "Version",
+                "property.specialist.version": "Version",
+                "property.enrollment.school": "School",
+                "property.school.version": "Version",
+                "property.specialist.name": "Name",
+                "property.specialist.id": "Id"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

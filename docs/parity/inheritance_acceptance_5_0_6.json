@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "status": "qualified",
+  "phase": "P2",
+  "capability": "G04",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "profiles": {
+    "native": {
+      "passed": 18,
+      "total": 18,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n      Start 404: generated_inheritance_graph_rust_parity\n      Start 403: generated_inheritance_save_rust_parity\n      Start 402: generated_return_type_rust_parity\n      Start 406: generated_inheritance_variants_rust_parity\n 1/18 Test #406: generated_inheritance_variants_rust_parity ........   Passed    8.15 sec\n      Start 411: generated_inherited_stream_rust_parity\n 2/18 Test #402: generated_return_type_rust_parity .................   Passed   13.49 sec\n      Start 401: generated_inheritance_sqlite_rust_parity\n 3/18 Test #401: generated_inheritance_sqlite_rust_parity ..........   Passed    3.09 sec\n      Start 398: generated_inheritance_query_rust_parity\n 4/18 Test #411: generated_inherited_stream_rust_parity ............   Passed    8.50 sec\n      Start 235: generated_inherited_json_rust_parity\n 5/18 Test #235: generated_inherited_json_rust_parity ..............   Passed    0.76 sec\n      Start 408: inherited_business_governed_rust_parity\n 6/18 Test #398: generated_inheritance_query_rust_parity ...........   Passed    2.12 sec\n      Start 409: inherited_business_update_rust_parity\n 7/18 Test #408: inherited_business_governed_rust_parity ...........   Passed    1.70 sec\n      Start 396: generated_inheritance_rust_parity\n 8/18 Test #396: generated_inheritance_rust_parity .................   Passed    0.28 sec\n      Start 405: generated_inheritance_graph_contracts\n 9/18 Test #409: inherited_business_update_rust_parity .............   Passed    0.70 sec\n      Start 407: generated_inheritance_variants_contracts\n10/18 Test #407: generated_inheritance_variants_contracts ..........   Passed    0.08 sec\n      Start 400: generated_return_type_contracts\n11/18 Test #400: generated_return_type_contracts ...................   Passed    0.05 sec\n      Start 397: generated_inheritance_contracts\n12/18 Test #405: generated_inheritance_graph_contracts .............   Passed    0.15 sec\n      Start 236: generated_inherited_json_context_contracts\n13/18 Test #236: generated_inherited_json_context_contracts ........   Passed    0.01 sec\n      Start 399: generated_inheritance_query_contracts\n14/18 Test #399: generated_inheritance_query_contracts .............   Passed    0.01 sec\n      Start 410: generated_inherited_business_lifetime_contracts\n15/18 Test #410: generated_inherited_business_lifetime_contracts ...   Passed    0.01 sec\n16/18 Test #397: generated_inheritance_contracts ...................   Passed    0.09 sec\n17/18 Test #403: generated_inheritance_save_rust_parity ............   Passed   35.87 sec\n18/18 Test #404: generated_inheritance_graph_rust_parity ...........   Passed   73.67 sec\n\n100% tests passed out of 18\n\nTotal Test time (real) =  73.68 sec\n",
+      "sha256": "2337ff03da03a5eb19be025711e744a1aea486d887990a907c70a1ecd52824f3"
+    },
+    "modules": {
+      "passed": 10,
+      "total": 10,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n      Start 734: module_inherited_business_governed_rust_parity\n      Start 735: module_inherited_business_update_rust_parity\n      Start 725: module_generated_inherited_json_rust_parity\n      Start 600: module_generated_inheritance_variants_contracts\n 1/10 Test #600: module_generated_inheritance_variants_contracts ..........   Passed    0.03 sec\n      Start 599: module_generated_inheritance_graph_contracts\n 2/10 Test #599: module_generated_inheritance_graph_contracts .............   Passed    0.06 sec\n      Start 688: module_generated_inherited_json_context_contracts\n 3/10 Test #688: module_generated_inherited_json_context_contracts ........   Passed    0.01 sec\n      Start 707: module_generated_inherited_business_lifetime_contracts\n 4/10 Test #707: module_generated_inherited_business_lifetime_contracts ...   Passed    0.00 sec\n      Start 595: module_generated_inheritance_contracts\n 5/10 Test #595: module_generated_inheritance_contracts ...................   Passed    0.04 sec\n      Start 602: module_generated_return_type_contracts\n 6/10 Test #602: module_generated_return_type_contracts ...................   Passed    0.02 sec\n      Start 601: module_generated_inheritance_query_contracts\n 7/10 Test #601: module_generated_inheritance_query_contracts .............   Passed    0.01 sec\n 8/10 Test #725: module_generated_inherited_json_rust_parity ..............   Passed    0.49 sec\n 9/10 Test #735: module_inherited_business_update_rust_parity .............   Passed    0.50 sec\n10/10 Test #734: module_inherited_business_governed_rust_parity ...........   Passed    0.92 sec\n\n100% tests passed out of 10\n\nTotal Test time (real) =   0.94 sec\n",
+      "sha256": "895eba21c682fbd87fc606a591f054de26e0c81b67490adbd72fa6dc198b7b62"
+    }
+  },
+  "java": [
+    {
+      "suite": "com.skynet.codegenerator.CppGenerationTest",
+      "passed": 36,
+      "report_sha256": "d355a169ec6acad9e76e91edefc5ddd8ecd065df436015c46c481ac13b29cb57"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+      "passed": 2,
+      "report_sha256": "19d152ac0ddc22ce2166029c8c7d4551ef5cd4b4473c5fb83bb1d0eb2cea31e3"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+      "passed": 2,
+      "report_sha256": "1c51713b4c74789239f927ea4af3a44d8cedc541b49bc82e9e608fdebdd687f6"
+    }
+  ],
+  "reference_locked_observations": 7736,
+  "parent_metadata_observations": 36,
+  "adapted_business_id_observations": 80,
+  "source_driver_changes": false,
+  "original_generated_rust_changes": false,
+  "untouched_inherited_business_id_artifact_accepted": false,
+  "source_binding_adaptation": "docs/inherited_business_binding_bridge_5_0_6.md",
+  "normal_inheritance_generation": true,
+  "constant_guard_removed": false,
+  "workspaces": 20,
+  "generated_files": 240,
+  "contract_sdk_reproduction": 41,
+  "canonical_bodies": 521,
+  "catalog_exports": 1479,
+  "modules": 7,
+  "ownership_sanitizer": "docs/parity/inherited_business_binding_bridge_5_0_6_terminal.json",
+  "full_p0_p7_acceptance": false,
+  "format_cpp_count": 1357,
+  "format_cpp_check_passed": true
+}

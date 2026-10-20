@@ -1,0 +1,253 @@
+{
+  "schema": 1,
+  "cases": [
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "bool_actual",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "boolean",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "date",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "double",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "integer",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "nullable_integer",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "number",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "text",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "scalar_candidate_contracts",
+      "case": "timestamp",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "custom_unsigned",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "equivalent_integer",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "equivalent_string_alias",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "field_parameter",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "integer_as_string",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "integer_as_unsigned",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "numeric_alias",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "string_alias",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "type_configuration_contracts",
+      "case": "unsigned_recipe",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "candidate_name_collision",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "comma_identifier_value",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "empty_identifier_value",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "malformed_xml",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "missing_identifier",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "missing_identifier_value",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "missing_seed_field",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "multiple_roots",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "multiple_roots_reversed",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "no_candidates",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "no_root",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "unicode_identifier_value",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_metadata_contracts",
+      "case": "unknown_identifier",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "cycle_pair",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "cycle_three",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "depth_exceeded",
+      "files": 1,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "foreign_value_one",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "missing_target_one",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "optional_forward",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "ordered",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "reversed",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "self_reference",
+      "files": 12,
+      "regenerated_files_identical": true
+    },
+    {
+      "family": "constant_topology_contracts",
+      "case": "self_reference_required",
+      "files": 12,
+      "regenerated_files_identical": true
+    }
+  ],
+  "rust_artifacts_changed": false,
+  "historical_cpp_artifacts_changed": false
+}

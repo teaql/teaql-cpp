@@ -1,0 +1,12 @@
+[
+  "ordered",
+  "reversed",
+  "missing_target_one",
+  "foreign_value_one",
+  "self_reference",
+  "cycle_pair",
+  "cycle_three",
+  "depth_exceeded",
+  "self_reference_required",
+  "optional_forward"
+]

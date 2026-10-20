@@ -313,28 +313,28 @@ inline PlatformExpression ResearchAcademyExpression::getPlatform() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value));
+        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static SchoolExpression school(const School& value) {
-        return SchoolExpression(entity_expression(value));
+        return SchoolExpression(entity_expression(value, StaticString{"school"}));
     }
 
     static SchoolExpression school(School&&) = delete;
     static SchoolExpression school(const School&&) = delete;
 
     static AcademyExpression academy(const Academy& value) {
-        return AcademyExpression(entity_expression(value));
+        return AcademyExpression(entity_expression(value, StaticString{"academy"}));
     }
 
     static AcademyExpression academy(Academy&&) = delete;
     static AcademyExpression academy(const Academy&&) = delete;
 
     static ResearchAcademyExpression researchAcademy(const ResearchAcademy& value) {
-        return ResearchAcademyExpression(entity_expression(value));
+        return ResearchAcademyExpression(entity_expression(value, StaticString{"researchAcademy"}));
     }
 
     static ResearchAcademyExpression researchAcademy(ResearchAcademy&&) = delete;

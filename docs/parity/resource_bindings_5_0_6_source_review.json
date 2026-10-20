@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "contracts": [
+    "Original typed resources are TypeId-keyed owned Box values. Named resources are an independent string-keyed Box index; named type mismatch reports MissingResource.",
+    "Native registration indexes borrow explicit User/associated Global owners. Typed/named indexes remain independent and replacement does not destroy arena-owned objects.",
+    "Current lookup and generated Checker reads must observe the latest registry entry. Nested payload observations are copied explicitly into Global before User deletion.",
+    "Native ResourceBorrow checks stable Global ContextState before touching a deleted User arena; get/copy of an expired borrow must fail. Old managed objects remain accessible until their owning arena closes.",
+    "Raw typed missing-resource names use Rust type paths versus native compiler type names; this is an existing documented language adaptation, not equal diagnostic text."
+  ],
+  "source_sha256": {
+    ".reference/teaql-rs/teaql-runtime/src/context.rs": "2285152dc8050ba9b23057491e5b0c94ffa3590bae1516f78758717458d990ae",
+    "teaql_runtime/include/teaql/runtime/context.hpp": "22324f064870edbbdeb4109d7bd39df7620199b6eb9d22c9eabaac44909eb529",
+    "teaql_runtime/include/teaql/runtime/resources.hpp": "898956156c393ed036ba7884b831ec9ca2a3abf7cb39bbb11c2e18d8afff767a",
+    "docs/context_lifetime.md": "e6cb4af21d918fb7b176c48120425539a0fc31d2bbb4f05148f9436e43eda0f2"
+  }
+}

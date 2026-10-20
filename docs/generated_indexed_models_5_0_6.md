@@ -1,5 +1,10 @@
 # Generated indexed model integration for Rust 5.0.6
 
+This is the original scoped checkpoint. Later
+[G01 acceptance](entity_helper_acceptance_5_0_6.md) and the
+[current G15 responsibility review](shared_load_state_requirements_5_0_6.md)
+supersede its historical pending lists without changing the evidence below.
+
 Status: fixed metadata and initial/setter/row state implemented; complete G01/G15
 qualification remains open. This checkpoint follows the frozen producer
 45e1572c4956ca963410d8ea436ead3c8857087a and runtime

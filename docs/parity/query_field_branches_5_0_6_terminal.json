@@ -1,0 +1,73 @@
+{
+  "recorded_utc": "2026-10-14T15:41:44.860643+00:00",
+  "scope": "Actual field branch construction and restored source-selected numeric/reference adapters; complete capability/phase acceptance remains open.",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": {
+    "field_constructions": 8316,
+    "extension_constructions": 432,
+    "new_sql_execution_cases": 0,
+    "source_public_declarations": 755,
+    "source_inventory_semantic_acceptance": false
+  },
+  "checks": {
+    "native": {
+      "passed": 5,
+      "selected": 5
+    },
+    "modules": {
+      "passed": 2,
+      "selected": 2
+    },
+    "sanitize": {
+      "passed": 2,
+      "selected": 2,
+      "leak_scanning": false
+    },
+    "cpp_compiler": {
+      "positive": 2,
+      "negative": 5
+    },
+    "original_compiler": {
+      "negative": 8,
+      "required_exit": 101,
+      "method_specific_E0599": true
+    },
+    "java": {
+      "passed": 54,
+      "selected": 54
+    },
+    "cpp_workspaces": 24,
+    "cpp_generated_files": 288,
+    "sdk_fixtures": 44,
+    "source_generated_files_with_provenance": 20,
+    "sdk_new_delegates": 78,
+    "sdk_existing_bodies_unchanged": true,
+    "format_cpp_files": 1436,
+    "canonical_module_bodies": 644,
+    "module_exports": 1485
+  },
+  "file_sha256": {
+    "tests/generator/query_field_branches.xml": "f4da2f61c081a0ba6ef4407ab5584b11e5f8227a5a14b759040bceaf237b4e72",
+    "tests/generated_query_field_branches/manifest.json": "b1349866cf8f28819e0df234a2e32cefb2bf3112ffb7ce820221538947f9feb4",
+    "tests/generator/parity/query_field_branches_rust/PROVENANCE.json": "3f4e6a6ecd49813bc26ed1ece849ed399682b3b9fb45565f08052a10c7e8e9cf",
+    "tests/parity/generated_query_field_branches_probe.cpp": "5d6ffaf4ac0bac00da3cd993610090b3e7ba70082ad409d9bd0a3706d1a4f2f1",
+    "tests/parity/generated_query_field_extensions_probe.cpp": "aea27c75c5dfa1430bda88b0faba3b3ca55b5f4b1d2062e3373c1ca7ef7125f7",
+    "scripts/verify_query_field_declarations_5_0_6.py": "8683c1c91c13e0f021b8f8cf1e858e44b836713009ef6ee2a7aaf0feb1d0de77",
+    "scripts/verify_query_field_guards_5_0_6.py": "aa2dd8e5034325b01ec475bd5e840a9977f9b0884f90d1d1983564bfed26ab03",
+    "scripts/reproduce_cpp_contract_fixtures.py": "f9c3d4ee7bb8231aedf0571138f271fe99e8bd1cc7c0b554357808178cef24e2",
+    "scripts/verify_generated_type_errors.py": "6aa0fb93333cb91241be1b13d18987328ae6e10906dc9aea522632582a31d7dd",
+    "docs/parity/query_branches_sdk_change_5_0_6.json": "4864c7cacfefe4c30dabd409f8e527bf42b89673be0ced7ce7dd8aa2fba6b819"
+  },
+  "producer_sha256": "622821cbe0e44cda68408e97bddba80d5345f4cda077bfe479b15fd191a15d6d",
+  "raw_validation": "docs/parity/query_field_branches_validation_5_0_6.json.gz",
+  "dispositions": [
+    "Initial wrong-class name inventory excluded from acceptance.",
+    "Initial generator placement compile error preserved and corrected before regeneration.",
+    "Initial SDK verifier rejected unrecognized constant-selection wrappers; exact old-body equality still enforced.",
+    "Source-only compiler refusals do not establish rejection of all retained legacy native convenience APIs."
+  ],
+  "complete_capability_acceptance": false,
+  "mips_or_physical_device_test": false,
+  "full_integration_test": false
+}

@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 8448,
+  "original_successes": 7200,
+  "original_errors": 1248,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "legacy_observations": 1440,
+  "legacy_live_source_exit_code": 0,
+  "live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 8448 actual source/native pagination convenience outcomes\n",
+  "reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 8448 actual source/native pagination convenience outcomes\n",
+  "legacy_live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nGenerated execution parity: 1440/1440 observations match\n",
+  "profiles": {
+    "native": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "pagination_convenience_rust_parity",
+        "generated_execution_rust_parity",
+        "generated_execution_context_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 35: pagination_convenience_rust_parity\n1/3 Test #35: pagination_convenience_rust_parity ......   Passed   17.15 sec\n    Start 36: generated_execution_rust_parity\n2/3 Test #36: generated_execution_rust_parity .........   Passed    3.60 sec\n    Start 48: generated_execution_context_contracts\n3/3 Test #48: generated_execution_context_contracts ...   Passed    0.01 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =  20.76 sec\n"
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_pagination_convenience_rust_parity",
+        "module_generated_execution_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 658: module_pagination_convenience_rust_parity\n1/2 Test #658: module_pagination_convenience_rust_parity ...   Passed   20.57 sec\n    Start 659: module_generated_execution_rust_parity\n2/2 Test #659: module_generated_execution_rust_parity ......   Passed    4.05 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =  24.62 sec\n"
+    }
+  },
+  "canonical_consumer_bodies": 138,
+  "production_function_bodies_changed": false,
+  "formatting": {
+    "handwritten_files": 1016,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "tests/parity/generated_execution_probe.cpp": "cba91cb82799ce914f0fd32abd7cb70926ede98cfd32e49ee9a4e394be9ff17e",
+    "tests/parity/rust_field_layout/src/bin/generated_execution_5_0_6.rs": "6043c3a14be463fed47fa46b073e031ca3bd95ce1bf86aa96b4e123765f0167e",
+    "tests/parity/generate_pagination_convenience_5_0_6.py": "3bd55ad1563e552cea51a05e58c91346ebebd7581ce0852f84721912d15d7097",
+    "tests/parity/compare_pagination_convenience_5_0_6.py": "c3516f4b0e45ae267f77fcb0137b5b16efc48d23c00c0199887338e0dc6f0802",
+    "tests/parity/pagination_convenience_5_0_6_cases.json.gz": "0ade170b8a0e49719ed142dcc9f28023adc124b604b05ecce43219970d5ef0c2",
+    "tests/parity/generated_execution_5_0_6_cases.json.gz": "7538eff212453fd51e7ac27139cee80d7059f26a09712df301d252d363e4cb1a"
+  },
+  "scope": "Twelve scalar pagination modifiers, four original generated models, normal/minimal projections, purpose stage adaptation, six execution forms and u64 saturation/binding boundaries; exact results/errors/ordered SQL/params/intent.",
+  "notice": "Existing runtime and generated methods unchanged. No new generator production change or artifact emission. Deferred/cache/replacement/interleaving/other model configurations remain open. SAN and MIPS were not rerun for this observer-only change; existing lifetime test included in native selection. G01-G17/P0-P7 remain unqualified.",
+  "binding_inventory": {
+    "active_baseline": 155,
+    "custom_dispatcher_requires_review": 21,
+    "historical_baseline_requires_replay": 63
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_hashes": {
+    "teaql-runtime/src/generated_support.rs": "f21089ff92ae378fa74174f1eb42c028728034e3cb92841fd0795afd14119a2c",
+    "teaql-runtime/src/data_service/resolved.rs": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+    "teaql-provider-sqlite/tests/request_trace_log.rs": "7c7bd3cd32fe5b2d9de9cc20b4192fbe728ca761ab5910da25dd8c03148e6b71",
+    "examples/src/lib.rs": "f299e3f045a6bf38c7be2fcb22ac89f9c33af4c9204cc38c780cefafb9f9c9cd"
+  },
+  "reviewed_responsibilities": [
+    "PurposedSelectQuery separate executable and diagnostic values, Debug presence flag, preserving first source for exact count, composing future facet diagnostics, and deliberate into_query source removal.",
+    "Facet diagnostic expansion moves facets into invocation-only child enhancements and recursively traverses relations, children and object groups; it never changes the executable query.",
+    "Entity service source scoping validates root intent, collects each query through the original executor classification SPI before execution, and stays private to one invocation.",
+    "All public raw/owned/list/entity/enhanced/aggregate fetch routes select that scope; streaming holds the scoped observer through cursor consumption.",
+    "Native constructor/copy/move allocation follows explicit domains. Private metadata views retain checked borrows; cancellation forwards to the existing child operation before memory reclamation."
+  ],
+  "source_tests": {
+    "path": "teaql-provider-sqlite/tests/request_trace_log.rs",
+    "count": 3,
+    "unchanged": true,
+    "filter": "count"
+  },
+  "adaptation": "Allocator-aware value copies, Context-confined private redaction state and explicit cancel/close forwarding replace source Box/Arc/Mutex ownership. No shared owner extends User lifetime.",
+  "fixtures": [
+    "Native uses existing examples/models.hpp Order; source includes byte-preserved examples/src/lib.rs Order. SQLite descriptor and explicit table/data match on both sides.",
+    "Native pending executor controls are C++ ownership adaptations; source immutable borrows do not permit Context deletion with a live future.",
+    "The real-cursor teardown fixture first attempted a User-owned SQLite transport with a Global connection, which the runtime rejected. Connection and transport now share Global ownership and are explicitly borrowed by User; query/executor/cursor/diagnostics remain User-owned."
+  ],
+  "build_fixture_diagnosis": {
+    "path": "teaql_runtime/tests/runtime_callback_scope_tests.cpp",
+    "previous_error": "unsigned had no DataServiceError display formatter",
+    "old_wrapper_control": {
+      "exit_code": 1,
+      "log": "/tmp/teaql_derived_query_old_wrapper_compile.log"
+    },
+    "repair": "Use existing allocator-scoped String error type without changing callback behavior."
+  },
+  "remaining": [
+    "Complete model/generated/facet/storage/protected-sink matrices",
+    "Frozen generated COUNT helpers that do not request diagnostic-source preservation remain unchanged",
+    "Final phase and capability exit criteria"
+  ],
+  "additional_original_tests": [
+    "repeated_facet_diagnostics_merge_with_removed_count_sources",
+    "future_facet_bindings_are_safe_before_root_rows_entities_and_stream"
+  ],
+  "additional_harness": {
+    "manifest": "/tmp/teaql_original_facet_diagnostics_506/Cargo.toml",
+    "notes": "Isolated test-only package includes byte-preserved original facet_trace.rs; uses existing locked futures-util 0.3.34 without adding any project dependency."
+  },
+  "hydration_fixture_link_repair": {
+    "path": "tests/support/relation_hydration_fixture.hpp",
+    "failure_log": "/tmp/teaql_derived_query_native_full_build_final.log",
+    "reason": "Low-level relation_hydration.hpp exposed EntityFacetRuntime but not the template body of fetch_smart_list_with_relation_aggregates for UnusedExecutor.",
+    "repair": "Include existing teaql/runtime/data_service.hpp to provide complete template definitions; no production algorithm or fixture function body changed."
+  }
+}

@@ -11,8 +11,13 @@ from generate_business_id_reference import LAUNCHER
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = {'types': 'tests/generator/types.xml', 'relations': 'tests/generator/relations.xml',
+            'typed_member_aliases': 'tests/generator/typed_member_aliases.xml',
             'optional_types': 'tests/generator/optional_types.xml',
+            'query_field_branches': 'tests/generator/query_field_branches.xml',
             'checkers': 'tests/generator/checkers.xml',
+            'checker_unique_string': 'tests/generator/checker_unique_string.xml',
+            'checker_clock_scalars': 'tests/generator/checker_clock_scalars.xml',
+            'checker_clock_composition': 'tests/generator/checker_clock_composition.xml',
             'inheritance': 'tests/generator/inheritance.xml',
             'inheritance_graph': 'tests/generator/inheritance_graph.xml',
             'inheritance_variants': 'tests/generator/inheritance_variants.xml',
@@ -22,6 +27,8 @@ FIXTURES = {'types': 'tests/generator/types.xml', 'relations': 'tests/generator/
             'constants_root': 'tests/generator/constants_root.xml',
             'constants_numeric': 'tests/generator/constants_numeric.xml',
             'constants_catalog': 'tests/generator/constants_catalog.xml',
+            'constants_temporal': 'tests/generator/constants_temporal.xml',
+            'constants_temporal_required': 'tests/generator/constants_temporal_required.xml',
             'dynamic_json': 'tests/generator/dynamic_json.xml',
             'sample_fields': 'tests/generator/sample_fields.xml',
             'sample_fields_runtime': 'tests/generator/sample_fields_runtime.xml',

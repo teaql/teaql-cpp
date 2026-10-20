@@ -1,0 +1,29 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "exit_code": 101,
+  "original_generated_files_changed": false,
+  "adaptation": "Shared-type imports and rebinding the original parent slot body exposed four private-tuple-field accesses in unchanged descendant setters.",
+  "errors": [
+    {
+      "code": "E0616",
+      "message": "field `0` of struct `document::entity::DocumentNumber` is private",
+      "rendered": "error[E0616]: field `0` of struct `document::entity::DocumentNumber` is private\n   --> /home/philip/githome/teaql-cpp/build_inherited_business_binding_bridge_5_0_6/lib/src/intermediate_record/entity.rs:234:31\n    |\n234 |         let canonical = value.0.clone();\n    |                               ^ private field\n\n"
+    },
+    {
+      "code": "E0616",
+      "message": "field `0` of struct `document::entity::DocumentNumber` is private",
+      "rendered": "error[E0616]: field `0` of struct `document::entity::DocumentNumber` is private\n   --> /home/philip/githome/teaql-cpp/build_inherited_business_binding_bridge_5_0_6/lib/src/invoice/entity.rs:242:31\n    |\n242 |         let canonical = value.0.clone();\n    |                               ^ private field\n\n"
+    },
+    {
+      "code": "E0616",
+      "message": "field `0` of struct `document::entity::DocumentNumber` is private",
+      "rendered": "error[E0616]: field `0` of struct `document::entity::DocumentNumber` is private\n   --> /home/philip/githome/teaql-cpp/build_inherited_business_binding_bridge_5_0_6/lib/src/receipt/entity.rs:241:31\n    |\n241 |         let canonical = value.0.clone();\n    |                               ^ private field\n\n"
+    },
+    {
+      "code": "E0616",
+      "message": "field `0` of struct `document::entity::DocumentNumber` is private",
+      "rendered": "error[E0616]: field `0` of struct `document::entity::DocumentNumber` is private\n   --> /home/philip/githome/teaql-cpp/build_inherited_business_binding_bridge_5_0_6/lib/src/special_invoice/entity.rs:249:31\n    |\n249 |         let canonical = value.0.clone();\n    |                               ^ private field\n\n"
+    }
+  ],
+  "source_compilation_qualified": false
+}

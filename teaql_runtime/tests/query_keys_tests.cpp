@@ -2,6 +2,7 @@
 #include <teaql/runtime/detail/query_keys.hpp>
 #include <teaql/core/detail/query_debug.hpp>
 #include <bit>
+#include <array>
 #include <cmath>
 #include <iostream>
 #include <limits>
@@ -104,8 +105,19 @@ static void explicit_lifetime() {
     auto& q = ctx->make<SelectQuery>("Device with a long allocated name");
     q.filter(Expr::eq(r, "long allocated field", "nested allocation payload"));
     q.comment("private comment");
+    q.purpose(String(256, 'p', r));
+    const std::array schema{
+        DynamicPropertyDefinitions::Field{"_readonly with a long allocated name", DataType::Text}};
+    auto definitions = DynamicPropertyDefinitions::from_fields(r, schema);
+    check(definitions.is_ok(), "retention fixture creates the readonly schema");
+    auto schema_hash = definitions.value().schema_hash();
+    q.dynamic_property_definitions =
+        detail::make_box<DynamicPropertyDefinitions>(r, std::move(definitions).value());
     auto& child = ctx->make<SelectQuery>("Child with a long allocated name");
     child.filter(Expr::eq(r, "child field", 123)).comment("child comment").stream(10);
+    child.purpose(String(256, 'c', r));
+    child.dynamic_property_definitions =
+        detail::make_box<DynamicPropertyDefinitions>(r, *q.dynamic_property_definitions);
     q.relation_query("children with a long name", child)
         .object_group_by("object", "object_id", child)
         .child_enhancement(child);
@@ -120,15 +132,24 @@ static void explicit_lifetime() {
                                                      detail::PaginationKeyRoot{"Root", 42}));
     auto expected = aggregation(g, retained);
     check(key == expected, "Global canonical copy and key agree");
-    ctx->close();
-    check(ctx->allocation_stats().live_blocks == 0, "all User blocks reclaimed");
+    ctx.reset();
+    check(global.live_user_bytes() == 0, "actual User destruction reclaims all blocks");
     check(aggregation(g, retained) == key && debug.find("private comment") != String::npos &&
               ids.starts_with("teaql:id-set:v1:"),
-          "Global keys and nested query survive source close");
+          "Global keys and nested query survive actual source destruction");
     check(retained.memory_resource() == g && retained.relations[0].query->memory_resource() == g &&
               retained.object_group_bys[0].query.memory_resource() == g &&
               retained.child_enhancements[0].memory_resource() == g,
           "all canonical nested queries use destination");
+    check(retained.dynamic_property_definitions->memory_resource() == g &&
+              retained.dynamic_property_definitions->schema_hash() == schema_hash &&
+              retained.relations[0].query->dynamic_property_definitions->memory_resource() == g &&
+              retained.object_group_bys[0].query.dynamic_property_definitions->memory_resource() ==
+                  g &&
+              retained.child_enhancements[0].dynamic_property_definitions->memory_resource() == g &&
+              retained.purpose_text->size() == 256 &&
+              retained.relations[0].query->purpose_text->size() == 256,
+          "retained readonly schemas and intent use Global storage at every nested boundary");
 }
 
 int main() {

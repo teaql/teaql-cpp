@@ -1,0 +1,1 @@
+<root name="constant_id_fixture" org="teaql" data_service="sqlite"><platform name="string()"/><status id="id()" platform="platform(contextRoot=true)" code="string()" _constant="true" _identifier="code"><_value code="BASIC" /><_value id="2" code="EXTENDED" /></status></root>

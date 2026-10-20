@@ -1,0 +1,1812 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "previous_baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Exact committed root tests and actual called C++ fixture bodies. Registration and hashes are structural evidence; executed test/review evidence is recorded separately. Historical contracts remain unchanged. No complete runtime parity claim.",
+  "source_sha256": "8afefa70e4dfc9b2564038f00b4f2f66aad91f59c32ef27a6fcb9f25fc6242e8",
+  "historical_source_sha256": "fd19972f5410e2b417d39a36f71a7859d372f532203c2b34d248a7a1d889f961",
+  "historical_ledger_sha256": "daa2bd1ecd9605b6dc99ab28253fc80dba0e3cfd82d87ab3390fb790975710d0",
+  "tests": [
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "scalar_fk_column_named_like_relation_does_not_create_related_entity",
+      "line": 1242,
+      "source_body_sha256": "05548a1f91b688ba94c67910fd4c4ce8fcaeb79b1485bdb9df86c8a90e4ba26b",
+      "historical_line": 1223,
+      "historical_body_sha256": "c9d60b6061ceb394e71bcd49caf95a6461e18027c6fd64738da61e89f8247bb1",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_line": 193,
+      "cpp_file_sha256": "1334e06444bcf5fc654f4c5c095cac07790d9a2a9a91e4f23047c089a1408971",
+      "cpp_body_sha256": "af8016b985f4ce223132895de4b77fb32ee2463d472dc533a5e5efe9287db94a",
+      "fixture_calls": [
+        "scalar_fk_column_named_like_relation_does_not_create_related_entity"
+      ],
+      "native_checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_registration"
+      ],
+      "historical_review": "Reviewed original root body: PaymentOrder/payment_order scalar channel_id uses physical channel, independent channel->PaymentChannel relation, projection id/channel_id retains channel AS channel_id, CompactRow I64 id9/channel_id1002 hydrates scalars and absent typed channel, and exactly one matching column/relation. Handwritten private mappings replace derive; synthetic conditional-quoting dialect uses SQLite ?n instead of $n, without a PostgreSQL provider.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "detached_reverse_relation_remains_in_entity_metadata",
+      "line": 1288,
+      "source_body_sha256": "50cde74542b936149f224b2f1433f7847aa5fbef8e534eee2daaad8b0b68a504",
+      "historical_line": 1266,
+      "historical_body_sha256": "50cde74542b936149f224b2f1433f7847aa5fbef8e534eee2daaad8b0b68a504",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_line": 217,
+      "cpp_file_sha256": "1334e06444bcf5fc654f4c5c095cac07790d9a2a9a91e4f23047c089a1408971",
+      "cpp_body_sha256": "ba6a59e151e63e05c495a88e489addfa8aecbbe6143a82dd5a5921e3122e00c3",
+      "fixture_calls": [
+        "detached_reverse_relation_remains_in_entity_metadata"
+      ],
+      "native_checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_registration"
+      ],
+      "historical_review": "Reviewed original private reverse_relation fixture and every body assertion: DetachedProduct/detached_product has exactly two scalar properties and one many relation line_list->DetachedLine with local id and foreign product_id. Handwritten descriptor retains relation metadata independently of model members; this does not claim generator implementation.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_store_registers_entities",
+      "line": 1301,
+      "source_body_sha256": "3239f5344eb6098d5584680f53555b70946cf320cf439146e944206c8b669a65",
+      "historical_line": 1279,
+      "historical_body_sha256": "3239f5344eb6098d5584680f53555b70946cf320cf439146e944206c8b669a65",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_line": 230,
+      "cpp_file_sha256": "1334e06444bcf5fc654f4c5c095cac07790d9a2a9a91e4f23047c089a1408971",
+      "cpp_body_sha256": "4631cba99d38cb33366c3f6d2d2b42720c1c5eddc17e0d57b2487e75f28dfc31",
+      "fixture_calls": [
+        "metadata_store_registers_entities"
+      ],
+      "native_checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_registration"
+      ],
+      "historical_review": "Reviewed exact original entity(): Order/orders, U64 id required/id, I64 version required/version, Text name and many lines->OrderLine id/order_id. Actual InMemoryMetadataStore.with_entity then entity(Order) must find the descriptor.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "runtime_module_registers_descriptor_into_context",
+      "line": 1307,
+      "source_body_sha256": "ad364c90653d983843a58184117ec8c3b48ac69a4a315e3e2fc9a50a02862f57",
+      "historical_line": 1285,
+      "historical_body_sha256": "ad364c90653d983843a58184117ec8c3b48ac69a4a315e3e2fc9a50a02862f57",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_line": 237,
+      "cpp_file_sha256": "1334e06444bcf5fc654f4c5c095cac07790d9a2a9a91e4f23047c089a1408971",
+      "cpp_body_sha256": "2581ae66cab710a71f5bdafd2f7879c758e2948d88c38257236cd0051071a4c8",
+      "fixture_calls": [
+        "runtime_module_registers_descriptor_into_context"
+      ],
+      "native_checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_registration"
+      ],
+      "historical_review": "Reviewed original descriptor-module input with complete Order descriptor. Actual RuntimeModule.descriptor.apply_to(UserContext) must install both entity metadata and entity-data-service availability; explicit Global/User bootstrap is the C++ lifetime adaptation.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "runtime_module_registers_derived_entity_and_behavior",
+      "line": 1314,
+      "source_body_sha256": "43f6d3948ab276262c2f3339a7d2ea7a2e8ea8a12535e8d7791c68f844f1818f",
+      "historical_line": 1292,
+      "historical_body_sha256": "43f6d3948ab276262c2f3339a7d2ea7a2e8ea8a12535e8d7791c68f844f1818f",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_line": 245,
+      "cpp_file_sha256": "1334e06444bcf5fc654f4c5c095cac07790d9a2a9a91e4f23047c089a1408971",
+      "cpp_body_sha256": "896fae38338a017898df1ccf467fab63d1ce490444cd5b899b73fe0afbe3f89e",
+      "fixture_calls": [
+        "runtime_module_registers_derived_entity_and_behavior"
+      ],
+      "native_checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_registration"
+      ],
+      "historical_review": "Reviewed original CatalogProductRow/catalog_product (required id and name) and OrderBehavior fixture (select version I64 1, default insert version I64 1, relation lines). Actual typed RuntimeModule.entity_with_behavior applies metadata/service/behavior registries; all three original presence assertions are retained. Handwritten model mapping does not migrate the generator.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "module_macro_registers_multiple_entities",
+      "line": 1328,
+      "source_body_sha256": "8a470ada7297e2e6bf8300389e5349af6f30a942cccb52b584beaf8540fbf3a0",
+      "historical_line": 1306,
+      "historical_body_sha256": "8a470ada7297e2e6bf8300389e5349af6f30a942cccb52b584beaf8540fbf3a0",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_line": 255,
+      "cpp_file_sha256": "1334e06444bcf5fc654f4c5c095cac07790d9a2a9a91e4f23047c089a1408971",
+      "cpp_body_sha256": "33964cfc89c52c5d6c01f440ad406a6916116feb12728d945033e99edcf17f46",
+      "fixture_calls": [
+        "module_macro_registers_multiple_entities"
+      ],
+      "native_checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_registration"
+      ],
+      "historical_review": "Reviewed actual original body and registry.rs module! expansion: despite its name the invocation has exactly one CatalogProductRow, expanding to RuntimeModule.entity<T>(). Both original entity presence and service availability assertions are retained through that actual C++ typed builder; no macro/generator implementation claim.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "module_macro_registers_entity_behavior_pairs",
+      "line": 1335,
+      "source_body_sha256": "c30b16d0e9ebcf1563fd47570d8a2116613f7ddee1983d46c4fd92cc776f039d",
+      "historical_line": 1313,
+      "historical_body_sha256": "c30b16d0e9ebcf1563fd47570d8a2116613f7ddee1983d46c4fd92cc776f039d",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_line": 265,
+      "cpp_file_sha256": "1334e06444bcf5fc654f4c5c095cac07790d9a2a9a91e4f23047c089a1408971",
+      "cpp_body_sha256": "f33edb1ee72e54794a4873d78f74a10fa47c68883010e06305d2ac47390c7866",
+      "fixture_calls": [
+        "module_macro_registers_entity_behavior_pairs"
+      ],
+      "native_checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_registration"
+      ],
+      "historical_review": "Reviewed actual original CatalogProductRow=>OrderBehavior macro expansion into entity_with_behavior. User-owned explicit behavior registration applies the real module and retains both original entity and behavior presence assertions. The macro syntax itself is outside the handwritten migration.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "data_service_returns_optimistic_lock_conflict",
+      "line": 1347,
+      "source_body_sha256": "45bc596aee145a96e3088b65be42733d34202bf7e571f41c1818a0fe5ede859a",
+      "historical_line": 1325,
+      "historical_body_sha256": "f14ac5a2412967b154f7ecddaefc5d2e9fe0c937d9b4229dc6fd45f4fe20f591",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_line": 17,
+      "cpp_file_sha256": "c89246a521a2ed47f99c31db53b3eb46bf24695e096fa0e2d9451576fb2884f2",
+      "cpp_body_sha256": "c4a5bc3c6088eb7a275471af8a7639d3c5bd04f42e8071700aa11b7b198e611e",
+      "fixture_calls": [
+        "data_service_returns_optimistic_lock_conflict"
+      ],
+      "native_checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ],
+      "historical_review": "Reviewed original root body and StubExecutor: Order/orders metadata, U64 id1, expected version3, Text name next, affected0 with empty generated values/no persisted snapshot. Actual RuntimeDataService.update returns DataServiceError::Runtime(OptimisticLockConflict), preserving the original typed match rather than flattening to a string.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_indexes_resources_and_locals",
+      "line": 1374,
+      "source_body_sha256": "46b123df9bf32a62afa13186204adfd21764ca227914968456ba0b4dac904a81",
+      "historical_line": 1349,
+      "historical_body_sha256": "46b123df9bf32a62afa13186204adfd21764ca227914968456ba0b4dac904a81",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_line": 275,
+      "cpp_file_sha256": "1334e06444bcf5fc654f4c5c095cac07790d9a2a9a91e4f23047c089a1408971",
+      "cpp_body_sha256": "4dc953e1b46c694df398ee39d19658325d107daa2d87bd9be0eeb2f48c946a08",
+      "fixture_calls": [
+        "user_context_indexes_resources_and_locals"
+      ],
+      "native_checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_registration"
+      ],
+      "historical_review": "Reviewed all original inputs/assertions: actual Order metadata, typed U64 42, named String tenant=acme, local trace_id=Value::Text(req-1). Real UserContext resource/local indexes independently resolve the exact values and Text variant; managed User allocation replaces source by-value ownership.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_builds_context_data_service",
+      "line": 1394,
+      "source_body_sha256": "9d70cf4c19711f4fe873f6e3f13ac1f102541a56efbd91e3c46832586e974d90",
+      "historical_line": 1369,
+      "historical_body_sha256": "8d2d1120f2287988bf34640ab4972fedd8ed1a72d32066d0df4d3696f6273ae9",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_line": 32,
+      "cpp_file_sha256": "c89246a521a2ed47f99c31db53b3eb46bf24695e096fa0e2d9451576fb2884f2",
+      "cpp_body_sha256": "00654dac2cf1d0e8bbf631106240a72b78e4653b8b02f2274330a0c7be0a11e6",
+      "fixture_calls": [
+        "user_context_builds_context_data_service"
+      ],
+      "native_checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ],
+      "historical_review": "Reviewed original Context/telemetry fixture: registered affected1 StubExecutor, empty rows, Order metadata, id1/version3/name next update. Checked Context executor lookup and managed ContextDataService construction are the C++ explicit-lifetime adaptation of the crate-private convenience factory. Actual Context and provider observation returns affected1 and the full ordered start:mutation/start:provider/success/success sequence; no local service implementation.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_resolves_entity_data_service_by_entity_type",
+      "line": 1431,
+      "source_body_sha256": "fd219b6295baabd757002caaf324fdb8e54e72cb7de54196ef944bc04fae1383",
+      "historical_line": 1400,
+      "historical_body_sha256": "c3dd19aeb7dd422c8efc0e1cfd643c4765eff4ebd53d5768b0e9d1c9a1f02635",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_line": 53,
+      "cpp_file_sha256": "c89246a521a2ed47f99c31db53b3eb46bf24695e096fa0e2d9451576fb2884f2",
+      "cpp_body_sha256": "bb29c8d9445b99aa3c6fc0dcf94730398d9040429ba4e652ec2dc6b661628653",
+      "fixture_calls": [
+        "user_context_resolves_entity_data_service_by_entity_type"
+      ],
+      "native_checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ],
+      "historical_review": "Reviewed original metadata+entity-registry and executor setup. Actual UserContext.entity_data_service(Order) returns entity Order and select.entity Order; real internal insert of U64 id1/I64 version1/Text name n returns affected1. The separate entity and Context service adapters are preserved.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_applies_behavior_hooks",
+      "line": 1470,
+      "source_body_sha256": "296e2e417cfb3c1685645bf0b00af6de4f8403dfeaeaec081f53773dc6fc4166",
+      "historical_line": 1430,
+      "historical_body_sha256": "c50041b2af9ca5679dd6cc7658d8b0eebf85bc2f26f5ec6145824a83ebf99003",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_line": 66,
+      "cpp_file_sha256": "c89246a521a2ed47f99c31db53b3eb46bf24695e096fa0e2d9451576fb2884f2",
+      "cpp_body_sha256": "ba24b3411112fc632620cf98f9732e608bd7d3e21999a955c8c955fb5195a421",
+      "fixture_calls": [
+        "entity_data_service_applies_behavior_hooks"
+      ],
+      "native_checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ],
+      "historical_review": "Reviewed complete Order/OrderLine/Product descriptors and OrderBehavior defaults. Actual internal insert U64 id1/Text n receives I64 version1 from the behavior and returns affected1; relation_loads equals the complete one-element lines vector. Commented-out original SQL assertions are not invented as executed source requirements.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_applies_request_policy_after_behavior_hooks",
+      "line": 1509,
+      "source_body_sha256": "74ff8c2149dfc72ba77c81f19185af86d23a8d6f057a4c8b7e699be17523f4bf",
+      "historical_line": 1463,
+      "historical_body_sha256": "d7f8daefcdd7d0fcec46b44460af7d0d92d2323db7ae30d389c7141e411c443c",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_line": 81,
+      "cpp_file_sha256": "c89246a521a2ed47f99c31db53b3eb46bf24695e096fa0e2d9451576fb2884f2",
+      "cpp_body_sha256": "bb7243b6e3640c2c47b40f97d0560443c5e452f39814c9096480c1f2de4fd500",
+      "fixture_calls": [
+        "entity_data_service_applies_request_policy_after_behavior_hooks"
+      ],
+      "native_checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ],
+      "historical_review": "Reviewed actual OrderBehavior and TenantRequestPolicy with named U64 tenant_id9. Actual prepare_insert_command(id1/name n) runs behavior before policy; the prepared version must be exact Value::I64(9), replacing behavior default I64(1). Source commented SQL assertions remain commentary, not evidence.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "public_query_families_cannot_bypass_request_policy",
+      "line": 1544,
+      "source_body_sha256": "ea5b5637c556dcdf9b12c825f98de683a5db59f2dbea779f9e210ad756fe2b73",
+      "historical_line": 1498,
+      "historical_body_sha256": "8a1126793a659d165fcdc99351afa1784ee416e8ac7c3b7180667d45e8539268",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_line": 108,
+      "cpp_file_sha256": "c89246a521a2ed47f99c31db53b3eb46bf24695e096fa0e2d9451576fb2884f2",
+      "cpp_body_sha256": "50903ccea8b0e2381f031c9874e6e63f13edbcd4dd71d7e450b9ab5256c48498",
+      "fixture_calls": [
+        "public_query_families_cannot_bypass_request_policy"
+      ],
+      "native_checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ],
+      "historical_review": "Reviewed all ten actual source calls and assert_query_policy_probe: purposed Order query verify query policy coverage; lines/lineCount/OrderLine/single=true relation aggregate; borrowed and owned fetch_all, fetch_stream, both smart-list entries, typed Order fetch, enhanced fetch and borrowed/owned aggregate enhancement; aggregate count(orderCount) with verify aggregate query policy coverage. Every real public entry returns Runtime Policy with exact QUERY_POLICY_PROBE; added provider counters remain zero. Stream fixture is genuinely empty; no private query bypass substitutes for a public entry.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_prepares_insert_command_with_generated_id",
+      "line": 1614,
+      "source_body_sha256": "2282869274ca7d7a31e3bb13b3fc5b5a5d13316e87a41dbddce512d2ccae4c7c",
+      "historical_line": 1554,
+      "historical_body_sha256": "2282869274ca7d7a31e3bb13b3fc5b5a5d13316e87a41dbddce512d2ccae4c7c",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_line": 145,
+      "cpp_file_sha256": "c89246a521a2ed47f99c31db53b3eb46bf24695e096fa0e2d9451576fb2884f2",
+      "cpp_body_sha256": "c3477fc4f1728f12e2ceac2b9a6c285fdd67aa4418cb0841b0c77c202fbbc2ef",
+      "fixture_calls": [
+        "entity_data_service_prepares_insert_command_with_generated_id"
+      ],
+      "native_checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ],
+      "historical_review": "Reviewed source fixed generator42, OrderBehavior and three entity descriptors. Actual preparation of U64 id0/Text n returns exact U64 id42, I64 version1 and Text n. Separate U64 id0/I64 version0/Text zero-version input is normalized by runtime preparation to I64 version1; zero versions are not retained or treated as absent assertions.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "custom_user_context_can_drive_insert_preparation",
+      "line": 1665,
+      "source_body_sha256": "18b8839797547df175191448ffbefe8af608faf113f69a3b41ec480607fe1ffa",
+      "historical_line": 1605,
+      "historical_body_sha256": "18b8839797547df175191448ffbefe8af608faf113f69a3b41ec480607fe1ffa",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_line": 168,
+      "cpp_file_sha256": "c89246a521a2ed47f99c31db53b3eb46bf24695e096fa0e2d9451576fb2884f2",
+      "cpp_body_sha256": "53c4d2a2741b7d876068d1947382273a8a7c7a84410e1faec81157fd93a17ebe",
+      "fixture_calls": [
+        "custom_user_context_can_drive_insert_preparation"
+      ],
+      "native_checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ],
+      "historical_review": "Reviewed ContextAwareOrderBehavior source and named resources String tenant acme/I64 initial_version7, Value::Text trace_id req-9, fixed generator99. Real prepare_insert_command(empty Order insert) returns exact Value U64 id99/I64 version7/Text acme:req-9. Behavior reads actual invoking UserContext resources/locals; no independent Memory parameter substitutes for its capabilities.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "checker_registry_validates_and_fixes_insert_commands",
+      "line": 1697,
+      "source_body_sha256": "e3dbad67ceb7edb54f93ce6baebc5f2453e02b4302028b4690b4fcf789eed17b",
+      "historical_line": 1637,
+      "historical_body_sha256": "e3dbad67ceb7edb54f93ce6baebc5f2453e02b4302028b4690b4fcf789eed17b",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 128,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "1c6ede9cd4ba7d5310ed6bb77a90ec0d1c7163d94832bf89aedb7de6764a4a16",
+      "fixture_calls": [
+        "checker_registry_validates_and_fixes_insert_commands"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed original OrderChecker and fixed generator77: name valid prepares exact U64 id77/I64 version1 without status marker; name no returns exactly one checker result at name. Actual checker registry and entity command preparation run source required/min-string helpers.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_not_null_constraints_are_checked_without_a_custom_checker",
+      "line": 1733,
+      "source_body_sha256": "8dee015a69f073ad696bbf68cd3812743ae32f3babd2dea36080dba28b5dda95",
+      "historical_line": 1673,
+      "historical_body_sha256": "8dee015a69f073ad696bbf68cd3812743ae32f3babd2dea36080dba28b5dda95",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 153,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "ae578ae0242817dc31d35df4897bbce68011ab169c6a90139bda0807a576eb6b",
+      "fixture_calls": [
+        "metadata_not_null_constraints_are_checked_without_a_custom_checker"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed exact School descriptor (required U64 ID/contact_phone Text) and Create payload id1 with no custom checker. Actual Context check_and_fix returns exactly one Required result at contact_phone.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "sparse_ledger_create_payload_reports_required_field_before_sql",
+      "line": 1764,
+      "source_body_sha256": "e06eed4ad32de9b6fca8637eb52b6395aefbfd5a87d3992bba43e6c1dcf8d19a",
+      "historical_line": 1704,
+      "historical_body_sha256": "e06eed4ad32de9b6fca8637eb52b6395aefbfd5a87d3992bba43e6c1dcf8d19a",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 163,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "518567d91703fd5ec8d35c9568b6202126aff8596246c828ec6e9866bdb5cc3f",
+      "fixture_calls": [
+        "sparse_ledger_create_payload_reports_required_field_before_sql"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed School id/address/version required metadata and exact U64 id1/I64 version1 payload. Actual private Context required-create helper returns one Required address error; supplied school_list[2] location yields model school_list[2].address and JSON /schoolList/2/address. Adding Text address 12 River Road makes the same helper succeed.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "nested_sparse_ledger_insert_plan_rejects_required_field_at_child_path",
+      "line": 1815,
+      "source_body_sha256": "1d011ccf998819dda8b94ee22884c1667b886bda3e722deda61c3484cdcaa052",
+      "historical_line": 1755,
+      "historical_body_sha256": "3b7e89c24401fdff30bd2fd7981eeace719157b8a39f1517b0150ad19f4738a5",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 209,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "ac051e8917a3d75911958647cf4cee6b2481990584db71f763fb593a71495584",
+      "fixture_calls": [
+        "nested_sparse_ledger_insert_plan_rejects_required_field_at_child_path"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed exact required OrderLine id/order_id/name descriptor, default empty/affected0 StubExecutor, new U64 child9 with order_id7, and line_items[0] location map. Actual internal ledger execution returns exactly one Required line_items[0].name with JSON /lineItems/0/name before mutation. No test-local planner substitutes for runtime.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_update_of_existing_versioned_row_requires_loaded_original_version",
+      "line": 1852,
+      "source_body_sha256": "0ca216b33c0e4baf1f191d0e0d8c4bb4b317f2909ca31a8fa928fb0fa9734ce5",
+      "historical_line": 1789,
+      "historical_body_sha256": "a634bdc390d41afdd1fde1095808588111518744e32ef1abe4f3b460e4d5af29",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 235,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "36d6b83f4d542937e64afcceb3e1bee7da7a5652452c555e0c6dc09d494247e9",
+      "fixture_calls": [
+        "ledger_update_of_existing_versioned_row_requires_loaded_original_version"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed required School id/name/version and original StubExecutor row I64 id1, Text Old School, I64 version3. Root intent U64 School1 name New School has no original version; actual ledger execution returns Graph error containing cannot update School and without its loaded original version, with no mutation. Available provider row does not supply missing loaded original version implicitly.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_attachment_version_conflict_rejects_ledger_plan_before_sql",
+      "line": 1897,
+      "source_body_sha256": "1da340ef2395b354bf092d7e27376e52077610b1b94d1216754d1931bda329ad",
+      "historical_line": 1831,
+      "historical_body_sha256": "e65d9cd1fd9a3319da73537aec7e56dbed107b41428258e1170e83d140d2d77e",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 256,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "79a916d25855dcf9ba2e24f962c61e3f18321c342d625c53c827a8e3e3bd35f5",
+      "fixture_calls": [
+        "generated_attachment_version_conflict_rejects_ledger_plan_before_sql"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed root School1 original version2/name Newer and stale original version1/name Stale. Actual adopt_mutations_from retains attachment failure; actual ledger execution returns Graph message containing all four original fragments: generated entity graph attachment failed before save, School#1, version 2, version 1. Added counters verify no query/mutation provider call.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_delete_of_existing_versioned_row_requires_loaded_original_version",
+      "line": 1940,
+      "source_body_sha256": "810df0b47cb1aa3d6a13033c61a73263991286a448cf2158392657372b88c4bd",
+      "historical_line": 1871,
+      "historical_body_sha256": "45e2aaea4e5c1bb08990d49319d72b5d70ba6b534b1166429ac9378c5abc55df",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 283,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "33a80bab3d809d73f95e7313ce82259eb9bfb25ec79b65aa5fccdd8b7efd89a1",
+      "fixture_calls": [
+        "ledger_delete_of_existing_versioned_row_requires_loaded_original_version"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed required School id/version descriptor, default StubExecutor and delete intent for U64 School1 without loaded version. Actual ledger executor returns Graph error containing cannot delete School and without its loaded original version, before mutation.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_validation_does_not_require_runtime_managed_version_on_create",
+      "line": 1973,
+      "source_body_sha256": "319e3564e94c14b202fe05246291aebc6e87ee41d78f3a963bc9b7708a585c70",
+      "historical_line": 1901,
+      "historical_body_sha256": "319e3564e94c14b202fe05246291aebc6e87ee41d78f3a963bc9b7708a585c70",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 299,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "5291edbd3e9d0a494cb5a673602012d03facd3ce4b05eab0b351b47e4bc6175a",
+      "fixture_calls": [
+        "metadata_validation_does_not_require_runtime_managed_version_on_create"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed original descriptor order id/version/name and Create payload U64 id1/Text TeaQL School without version. Actual metadata validation succeeds and version remains absent; runtime-managed version is neither required nor synthesized by this checker entry.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_preserves_values_and_reports_timestamp_type_error",
+      "line": 2000,
+      "source_body_sha256": "831ed0ba53dd19f3f1e868500059968be27abbe17ea81a92e783bacf1b2da33a",
+      "historical_line": 1928,
+      "historical_body_sha256": "831ed0ba53dd19f3f1e868500059968be27abbe17ea81a92e783bacf1b2da33a",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 384,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "fcc8969bd220f915d6524b148c3c20de49d586968e741967f805f945566dbb46",
+      "fixture_calls": [
+        "typed_checker_preserves_values_and_reports_timestamp_type_error"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed original TimestampedEntity id/version/happened_at mapping and no-op typed checker. Actual TypedEntityChecker receives U64 id7/I64 version1/Text happened_at 2026-08-25 and Update marker, returns one InvalidType diagnostic containing happened_at and 2026-08-25, and restores the original Text value. Handwritten private mapping preserves Timestamp/I64/U64 conversions and rejects Text; generator unchanged.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_not_null_constraints_allow_omitted_fields_on_partial_update",
+      "line": 2042,
+      "source_body_sha256": "d5bfc1263159cd7a5ec9e16d9b9f99a3ced8c54538328288b2306d3e8b77d07c",
+      "historical_line": 1970,
+      "historical_body_sha256": "d5bfc1263159cd7a5ec9e16d9b9f99a3ced8c54538328288b2306d3e8b77d07c",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 402,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "1feee140458257297061dd9261a446f5fb1e8cb80b96ffa6c56cc177ada2348d",
+      "fixture_calls": [
+        "metadata_not_null_constraints_allow_omitted_fields_on_partial_update"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed School id/contact_phone required metadata and Update payload U64 id1. Omitted contact_phone succeeds; explicitly inserting untyped Null returns structured Check error. The same Context path preserves omission versus explicit Null.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_validates_and_fixes_derived_entities_without_record_access",
+      "line": 2068,
+      "source_body_sha256": "254c05f110d249a3c1a0e2b0f3da0e0f7a7a6a99ca794901f68121ee794c8bb9",
+      "historical_line": 1996,
+      "historical_body_sha256": "254c05f110d249a3c1a0e2b0f3da0e0f7a7a6a99ca794901f68121ee794c8bb9",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 415,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "00f610d71f6296d9762539b05b1e7a7bbda2ac8d49b970c3c2e981ece745bc6d",
+      "fixture_calls": [
+        "typed_checker_validates_and_fixes_derived_entities_without_record_access"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed actual TypedOrderChecker (Create required-name, scalar-count minimum3, fix->fixed) and fixed generator79. Actual prepare of name fix yields exact Text fixed/U64 id79/I64 version1 and no status marker. Separate version1-only command returns a Required result at name. TypedEntityChecker, registry and Context metadata remain real kernel paths.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_preserves_sparse_update_boundary",
+      "line": 2114,
+      "source_body_sha256": "d67bf60ca14783ebb53dba301d9435a2a9b6e00667ce72ff5cc983bcac3ea0e5",
+      "historical_line": 2042,
+      "historical_body_sha256": "d67bf60ca14783ebb53dba301d9435a2a9b6e00667ce72ff5cc983bcac3ea0e5",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 445,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "031a27b8d465628f0699bfa85d0c3a6e51a861ecd9b89f050d724c1a7926bce5",
+      "fixture_calls": [
+        "typed_checker_preserves_sparse_update_boundary"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed U64 id7/Text valid and Update marker against typed Order metadata/checker. Actual typed check preserves exact id/name and does not add version. Replacing name with Text fix yields Text fixed while version remains absent; defaulted typed version is not new update intent.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "checker_registry_reports_nested_create_locations_and_fixes_records",
+      "line": 2149,
+      "source_body_sha256": "2e6b9a14ae0d5ba9bfedef9d13cfe70bf2af8317bf714149eccb15c09b4f96b3",
+      "historical_line": 2077,
+      "historical_body_sha256": "2e6b9a14ae0d5ba9bfedef9d13cfe70bf2af8317bf714149eccb15c09b4f96b3",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 464,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "109c368823da3deb09a309d148e93b92a0740fc335e25108285f667bdd8a7877",
+      "fixture_calls": [
+        "checker_registry_reports_nested_create_locations_and_fixes_records"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed checker-only Context (no metadata), U64 child id10/Create marker and hash root lines[0]. Actual checking inserts I64 version1 while returning exactly one Required lines[0].name; adding Text valid child makes the same nested entry succeed.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "built_in_language_translators_cover_fifteen_languages",
+      "line": 2189,
+      "source_body_sha256": "ee597044e28f224c6a327791a600be8da2af0c6b730a258fa90a9f8315f584a4",
+      "historical_line": 2117,
+      "historical_body_sha256": "ee597044e28f224c6a327791a600be8da2af0c6b730a258fa90a9f8315f584a4",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 479,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "3eef2e7be946d05e45bdb2750e0167186f1f23a656a60731c1dbae97350546c1",
+      "fixture_calls": [
+        "built_in_language_translators_cover_fifteen_languages"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed all original five CheckResults: required name, age min I64 18/12, age max I64 65/70, name min-str2/x and max-str8/too long name. Actual translators cover 15 languages/75 nonempty messages with no unexpanded brace; preserve required/Chinese required/French obligatoire witnesses and zh-CN/zh-TW aliases. Unicode literals remain semantic fixture data.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_language_switch_translates_checker_errors",
+      "line": 2225,
+      "source_body_sha256": "d4ce240ca313563a9b8f91c80be1325de0f6a7c3c755e5cdd02a59398ac0e524",
+      "historical_line": 2153,
+      "historical_body_sha256": "d4ce240ca313563a9b8f91c80be1325de0f6a7c3c755e5cdd02a59398ac0e524",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_line": 517,
+      "cpp_file_sha256": "4553b510ec58c4bc30acd0fd1447650d260eccf3b6533097ce001fc4dc26ad7f",
+      "cpp_body_sha256": "90d1ba403a897ed0a3a1f4b2730199dd844f738ce1d7b39f2da537305b41e987",
+      "fixture_calls": [
+        "user_context_language_switch_translates_checker_errors"
+      ],
+      "native_checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_validation"
+      ],
+      "historical_review": "Reviewed Chinese OrderChecker/fixed77 empty insert returning one translated required message; independent English Context switches es to Spanish and rejects invalid-code without changing language. Original teaql.i18n/v1 en/es EN/ES {location} catalog is parsed and explicitly User-owned; actual translation of hash-root name returns exact ES Name. No shared ownership extends catalog lifetime.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_event_sink_receives_data_service_mutation_events",
+      "line": 2283,
+      "source_body_sha256": "874959e78982bf7ee6346e61661072fe74e187539e2fd8fe7041795e204097ab",
+      "historical_line": 2211,
+      "historical_body_sha256": "e9922ad419fb957caa7e75789a687f733be180f78e998e2946e7a9f6ce95965f",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_line": 46,
+      "cpp_file_sha256": "44010fceb6e3c2c67137079124f891a3b33374c216d340f917923d19c1930c0f",
+      "cpp_body_sha256": "3a6374d57efff1b27ad7215cfd7ad24c2caff8c98aea8bcb8374acf4d6d640b7",
+      "fixture_calls": [
+        "user_context_event_sink_receives_data_service_mutation_events"
+      ],
+      "native_checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ],
+      "historical_review": "Reviewed every original raw/safe event assertion: Order mask name, fixed88, controlled U64 id88/I64 version1/Text old row; actual insert created, update name updated expected1, delete expected2, recover -3. Four raw kinds Created/Updated/Deleted/Recovered retain exact IDs/version2, one updated field name, absent blind-update old values, exact Text updated new value/change, no deletion snapshots, recovered I64 version4 and version change. Four application-safe events retain Created and a present masked name field whose projection is not created. Actual Context mutation/event delivery and safe projection are used, not test-local event construction.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_places_foreign_key_parent_before_child",
+      "line": 2403,
+      "source_body_sha256": "dcd78e3e59c632bb2197d7b4ada4b0b5d098eed1ddad75a8c7be13a584cf43f8",
+      "historical_line": 2325,
+      "historical_body_sha256": "dcd78e3e59c632bb2197d7b4ada4b0b5d098eed1ddad75a8c7be13a584cf43f8",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_line": 128,
+      "cpp_file_sha256": "44010fceb6e3c2c67137079124f891a3b33374c216d340f917923d19c1930c0f",
+      "cpp_body_sha256": "e9162496a098dba5949c0e54e8b319a5e7b50c9c1f2f4e9fdf8456af66f0dfaf",
+      "fixture_calls": [
+        "ledger_insert_order_places_foreign_key_parent_before_child"
+      ],
+      "native_checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ],
+      "historical_review": "Reviewed complete original OrderLine/Product descriptors, U64 line10/product88 and changes line id10/product_id88, product id88. Actual EntityDataServiceAccess.order_new_ledger_keys receives original input [line,product] and returns the full exact [product,line] vector; no local topological-sort substitute.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_honors_reverse_many_and_forward_parents",
+      "line": 2438,
+      "source_body_sha256": "6f2a8d9bc8883b44af384acc41fe87c61f7a8677117462170d63026899940b06",
+      "historical_line": 2360,
+      "historical_body_sha256": "6f2a8d9bc8883b44af384acc41fe87c61f7a8677117462170d63026899940b06",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_line": 147,
+      "cpp_file_sha256": "44010fceb6e3c2c67137079124f891a3b33374c216d340f917923d19c1930c0f",
+      "cpp_body_sha256": "c7dfa867121e7f022bae70de196c25392c76a99481e414f8859aaadd38bcf397",
+      "fixture_calls": [
+        "ledger_insert_order_honors_reverse_many_and_forward_parents"
+      ],
+      "native_checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ],
+      "historical_review": "Reviewed complete Order/OrderLine/Product descriptors and U64 order77/line10/product88 changes with order_id77/product_id88. Actual kernel helper receives [line,product,order] and returns exact [order,product,line], preserving independent reverse-many and forward dependencies.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_reports_required_foreign_key_cycle_before_sql",
+      "line": 2480,
+      "source_body_sha256": "03eef1717472f1ca653645f6323084da462679374fc4883566594d3b3ad13c6a",
+      "historical_line": 2402,
+      "historical_body_sha256": "03eef1717472f1ca653645f6323084da462679374fc4883566594d3b3ad13c6a",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_line": 169,
+      "cpp_file_sha256": "44010fceb6e3c2c67137079124f891a3b33374c216d340f917923d19c1930c0f",
+      "cpp_body_sha256": "25ff8c4645289d4ead1aca7f97903689e32d443f3eadc8a6a6633244be09f5f9",
+      "fixture_calls": [
+        "ledger_insert_order_reports_required_foreign_key_cycle_before_sql"
+      ],
+      "native_checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ],
+      "historical_review": "Reviewed original Alpha(id,beta_id required)/beta->Beta and Beta(id,alpha_id required)/alpha->Alpha descriptors with U64 Alpha1/Beta2 and reciprocal FK changes. Actual kernel ordering returns Graph message containing both Alpha and Beta; added counters prove no query or mutation. No backend dialect is needed for this generic preflight.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_builds_relation_plans",
+      "line": 2534,
+      "source_body_sha256": "28b7a8464577de4854d29cc596c095febb7c2580c3f83d0ae7fb0566a10c13bb",
+      "historical_line": 2456,
+      "historical_body_sha256": "28b7a8464577de4854d29cc596c095febb7c2580c3f83d0ae7fb0566a10c13bb",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_line": 199,
+      "cpp_file_sha256": "44010fceb6e3c2c67137079124f891a3b33374c216d340f917923d19c1930c0f",
+      "cpp_body_sha256": "6beb8cde1931234cd2244da29ee527e56aeedb4fa3a88a057f1ae71ce03b7d23",
+      "fixture_calls": [
+        "entity_data_service_builds_relation_plans"
+      ],
+      "native_checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ],
+      "historical_review": "Reviewed OrderBehavior relation_loads=[lines] and complete Order/OrderLine/Product metadata. Actual service.relation_plans returns exactly one many lines->OrderLine plan with local id and foreign order_id; every original field assertion is retained.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_builds_relation_query_from_parent_rows",
+      "line": 2567,
+      "source_body_sha256": "27b8c87e546d27841c5cf8c6e65a976ed8499952c5cb3813c4f111141b214098",
+      "historical_line": 2489,
+      "historical_body_sha256": "27b8c87e546d27841c5cf8c6e65a976ed8499952c5cb3813c4f111141b214098",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_line": 220,
+      "cpp_file_sha256": "44010fceb6e3c2c67137079124f891a3b33374c216d340f917923d19c1930c0f",
+      "cpp_body_sha256": "594ca1cf1e0e6a853c7ba8c2469539c62f53a91c19c9ca7a12f684aaacf67744",
+      "fixture_calls": [
+        "entity_data_service_builds_relation_query_from_parent_rows"
+      ],
+      "native_checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ],
+      "historical_review": "Reviewed exact U64 parent IDs [11,12,11]. Actual relation_query(lines,rows) returns a Binary predicate with Value::List right operand exactly [U64(11),U64(12)], preserving deduplication order and type. Original commented compiler assertions remain commentary, not execution evidence.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_enhances_parent_rows_with_relations",
+      "line": 2610,
+      "source_body_sha256": "291d965f45e81598da3b054663924ee5f02372852e9794f5ff9f3e3b06bd0684",
+      "historical_line": 2532,
+      "historical_body_sha256": "4b3c67a522322b3cb0f5199135edb3c84e6787c736e6f92f2344ad296a342184",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_line": 256,
+      "cpp_file_sha256": "44010fceb6e3c2c67137079124f891a3b33374c216d340f917923d19c1930c0f",
+      "cpp_body_sha256": "b0b7e7c6a033b03674e7451b259786d95f01d561240a19fb68a8e29e7bec1ab9",
+      "fixture_calls": [
+        "entity_data_service_enhances_parent_rows_with_relations"
+      ],
+      "native_checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ],
+      "historical_review": "Reviewed exact controlled child rows U64 101/order11/Text l1, 102/order11/l2, 201/order12/l3 and parent IDs11/12/13. Actual kernel relation-plan forest plus actual entity fetch adapter attaches List cardinalities2/1 and emits start:relation_load through original recording telemetry. The C++ helper only connects private production components; it does not implement grouping or hydration locally.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "topn_006_008_009_relation_is_stable_empty_safe_and_count_free",
+      "line": 2684,
+      "source_body_sha256": "4fd82a71e960bd5cef182fd486a15f937c3005f45b25546307cc6ffe443ad0e2",
+      "historical_line": 2600,
+      "historical_body_sha256": "c5b7e069510fcdfb7f7788d1645fcdab2e81d9be881847f145b240f80f58287e",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_line": 322,
+      "cpp_file_sha256": "44010fceb6e3c2c67137079124f891a3b33374c216d340f917923d19c1930c0f",
+      "cpp_body_sha256": "b07ffa00efa02bf61adb4f1532b654a930216ba8e32c30ea102a5c7f513414f4",
+      "fixture_calls": [
+        "topn_006_008_009_relation_is_stable_empty_safe_and_count_free"
+      ],
+      "native_checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ],
+      "historical_review": "Reviewed actual body: exactly two U64 parents11/12, six child rows first IDs101/201 and U64 partition ranks1..3, lines query OrderLine order name DESC limit3, controlled capturing executor. Actual relation plan building/hydration makes exactly one nonaggregate query, partition order_id, limit3, full order [name DESC,id ASC], two List payloads of three Object children and no internal rank property. Despite its name, original inputs do not include an empty third parent; this source port does not claim they prove that branch. Shared source fixtures/generator unchanged.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "relation_enhancement_wraps_inverse_many_relation_as_list",
+      "line": 2774,
+      "source_body_sha256": "7d1b79717dd3d1e89e20eff04499af589cae99a5af2ab44dcc6153f0c2a6694a",
+      "historical_line": 2677,
+      "historical_body_sha256": "43c2b2b3e93bc609306c1f92e9cfdfde07b31ef7fb29fb75c2f7a4719394f36d",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_line": 27,
+      "cpp_file_sha256": "2a68170af94f2b329c005d4b29c5629f3a9f252b671f7f41e8e8fcb76018039f",
+      "cpp_body_sha256": "ce3cad32fe28ecc51831c30954bb0d50e629be94a976cbb36982157f91354c57",
+      "fixture_calls": [
+        "relation_enhancement_wraps_inverse_many_relation_as_list"
+      ],
+      "native_checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ],
+      "historical_review": "Reviewed original OrderLineWithProduct/ProductWithLines/ProductLine private derive fixtures and exact queue batches: U64 line11/order7/product101/Text line, then U64 product101/Text sku. Actual EnhancedEntitiesOperation decodes the related product and its inverse-many SmartList containing exactly one ProductLine ID11. Handwritten field mapping parses the kernel-produced List/Object; it does not implement hydration/grouping. The private scalar models do not invent source runtime-state fields.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_to_one_getter_resolves_from_runtime_module_identity_graph",
+      "line": 2820,
+      "source_body_sha256": "dfcebdfc7f0cb46105c62d339faff60fb8f49f49854a56fdf96e42f5ddd08cfc",
+      "historical_line": 2719,
+      "historical_body_sha256": "84f3a0820ffeddb457c0860b4a8cea39632ac607c3e30d2d82d6e722a5a53f88",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_line": 69,
+      "cpp_file_sha256": "2a68170af94f2b329c005d4b29c5629f3a9f252b671f7f41e8e8fcb76018039f",
+      "cpp_body_sha256": "60c1bf3c7f117d8973ffbd129b23ac200e6900fa609d7924d381346f3dc5818b",
+      "fixture_calls": [
+        "generated_to_one_getter_resolves_from_runtime_module_identity_graph"
+      ],
+      "native_checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ],
+      "historical_review": "Reviewed source FlatTrip/FlatVendor descriptors, skipped runtime-state fields and handwritten vendor() getter. Actual RuntimeModule typed registration/into_context installs the real graph decoders; original queue batches Trip U64 id11/vendor101 then Vendor U64 id101/Text Acme flow through actual enhanced query. Vendor member stays absent, while root.resolve_entity-backed getter returns name Acme. C++ vendor_value avoids a field/method naming collision; payload/metadata name remains vendor. Generator unchanged.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_to_many_getter_uses_adjacency_and_mutation_copies_on_write",
+      "line": 2860,
+      "source_body_sha256": "427b12ce9fafbcfbc4f389e2527deb8dc72480234b354147718acd8446416657",
+      "historical_line": 2755,
+      "historical_body_sha256": "effd3e1d266dc1a188bdcab6909f2099592540da65668dff4a620b89412deb11",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_line": 95,
+      "cpp_file_sha256": "2a68170af94f2b329c005d4b29c5629f3a9f252b671f7f41e8e8fcb76018039f",
+      "cpp_body_sha256": "6e5e825c3e101bf8a8b47d07e5305fa37a1985a3d8b710a1964e134981ce0775",
+      "fixture_calls": [
+        "generated_to_many_getter_uses_adjacency_and_mutation_copies_on_write"
+      ],
+      "native_checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ],
+      "historical_review": "Reviewed source FlatFleet/FlatFleetTrip descriptors, skipped root fields and both handwritten list getters. Actual module/decoders enhanced query uses Fleet U64 id7 and trips11/12 with fleet7/names first/second. Local trip_list remains unloaded; getter resolves two adjacency items with second name second. Explicit User-domain copy of the borrowed C++ result preserves the immutable graph; mutable getter clones its list before appending trip13/fleet7/name third with fresh root. Local list becomes loaded/size3 while actual root adjacency remains size2. Logical trip_list name is preserved despite C++ trip_list_value member adaptation.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_fetches_smart_list_of_entities",
+      "line": 2924,
+      "source_body_sha256": "ecb8d0e9bab38d210dee81a0c67ffd0b68a1a0a13870ea103a85e493861038b1",
+      "historical_line": 2815,
+      "historical_body_sha256": "cb56eebda8e1defd13aea987c696d28020dbc983102c9402730b8ab18f4d8d1d",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_line": 134,
+      "cpp_file_sha256": "2a68170af94f2b329c005d4b29c5629f3a9f252b671f7f41e8e8fcb76018039f",
+      "cpp_body_sha256": "88a3f97d66691c760886130db13eeba9482c6dc3e338c03ceb4a0fd5140d047a",
+      "fixture_calls": [
+        "entity_data_service_fetches_smart_list_of_entities"
+      ],
+      "native_checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ],
+      "historical_review": "Reviewed the distinct handwritten original OrderEntity codec: U64 or nonnegative I64 ID, strictly I64 version and Text name, with original option-debug error shape; this is not replaced by the looser derive fixture. Actual internal basic-list operation receives original StubExecutor row U64 id7/I64 version2/Text typed and returns exactly one model with all three original fields.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_entity_fetch_restores_id_and_version_to_reduced_projection",
+      "line": 2961,
+      "source_body_sha256": "18f59ef2309c1eb5e772b5f28a4069aa81a442626ce0b61635c2f00eca10a8e3",
+      "historical_line": 2849,
+      "historical_body_sha256": "4debb67d1e1d8e735945ff456c959b8abbaec76c9ba55e627333405ea3deffc8",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_line": 147,
+      "cpp_file_sha256": "2a68170af94f2b329c005d4b29c5629f3a9f252b671f7f41e8e8fcb76018039f",
+      "cpp_body_sha256": "65207cb15a5d377157cd34320294b35c3acc12bf67c5c6c61babad32fb01974e",
+      "fixture_calls": [
+        "typed_entity_fetch_restores_id_and_version_to_reduced_projection"
+      ],
+      "native_checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ],
+      "historical_review": "Reviewed original reusable CapturingQueryExecutor row U64 id7/I64 version2/Text typed and projection [name]. Actual private basic and enhanced operations each return one OrderEntity, make exactly two provider queries total and restore exact projection order [name,id,version] on both. Queue fixture repeat mode preserves reusable capturing semantics and metadata backend; no test-local projection completion.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_fetches_smart_list_of_derived_entities",
+      "line": 3011,
+      "source_body_sha256": "b82bebdd90a8656287cd72f8fe19b145d6b52b66a4e6e9c1019a505df2abaddd",
+      "historical_line": 2889,
+      "historical_body_sha256": "091a3a061e722f2cc2fa2ac042bda2a49a9ad1e5c27aab9257ae617486401eeb",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_line": 172,
+      "cpp_file_sha256": "2a68170af94f2b329c005d4b29c5629f3a9f252b671f7f41e8e8fcb76018039f",
+      "cpp_body_sha256": "71fc04e882f367f276aca940d6005047ea1b26ca4a85c82bcb9cdcdd700ac77d",
+      "fixture_calls": [
+        "entity_data_service_fetches_smart_list_of_derived_entities"
+      ],
+      "native_checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ],
+      "historical_review": "Reviewed original CatalogProduct/catalog_product required id/name descriptor and derive mapping, distinct from handwritten OrderEntity and rooted flat models. Actual Context service/basic-list operation decodes original U64 id9/Text derived row, returns exactly one model with both original field assertions. Scalar fixture has no runtime-state field; handwritten mapping does not claim generator implementation.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_collects_dynamic_properties_for_aggregate_output",
+      "line": 3048,
+      "source_body_sha256": "c3a678de08f887564d59a77e92a6eb3176e5079e3baeb323b36d62f74e0c55f9",
+      "historical_line": 2923,
+      "historical_body_sha256": "d5a41702c6a61111d8d151bb1781aaccb4542a94cf67e9be654cf22333be21c2",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_line": 65,
+      "cpp_file_sha256": "f3a55c74892edef5f4990ff0214f73d9d25f067e3a6bdff7ed348cdab62499ec",
+      "cpp_body_sha256": "fea5cfc72b0c94f5a0d4c0f953fd008b660a4e54cad6cd5dc3d26e71831f9f5a",
+      "fixture_calls": [
+        "entity_data_service_collects_dynamic_properties_for_aggregate_output"
+      ],
+      "native_checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ],
+      "historical_review": "Reviewed original OrderAggregate/orders derive fixture: only U64 id is a scalar property and all other fields are dynamic. Actual Context/basic-list decoding of U64 id1/I64 lineCount3/F64 amount18.5 returns one model, exact field variants and full flattened JSON {id:1,lineCount:3,amount:18.5}. Handwritten private mapping preserves dynamic ownership/flattening; generator unchanged.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_executes_relation_aggregates_into_dynamic_properties",
+      "line": 3091,
+      "source_body_sha256": "d16b2a3c0639d92cb549be6eaa9f2624dfafa0e21595d8b40959affffc86c111",
+      "historical_line": 2963,
+      "historical_body_sha256": "7600015e9450608d6aeebd0cfec935588e22f72469b6b04a93a3f0f3cd17e25b",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_line": 159,
+      "cpp_file_sha256": "f3a55c74892edef5f4990ff0214f73d9d25f067e3a6bdff7ed348cdab62499ec",
+      "cpp_body_sha256": "4e5e0202c7773e16cfaefbf80d843b8e98c65f78a8e69623a8b69926eb5cc1e4",
+      "fixture_calls": [
+        "entity_data_service_executes_relation_aggregates_into_dynamic_properties"
+      ],
+      "native_checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ],
+      "historical_review": "Reviewed exact queued parents U64 IDs1/2, I64 version1/names first/second, then U64 order_id1/I64 lineCount3. Actual private EntityRowsOperation with lines/lineCount/OrderLine/single=true and projection id/version/name yields first I64(3) and unmatched second U64(0), exactly two queries and second entity OrderLine (the source mock SELECT string depends only on entity). No local aggregate/grouping implementation.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_maps_relation_aggregate_storage_key_to_property_key",
+      "line": 3156,
+      "source_body_sha256": "bd243120c95226059f17b7e546004c01e88c2f2baf19f5523884b80fc099c605",
+      "historical_line": 3026,
+      "historical_body_sha256": "b5cdbbd693209a4aaa80e91cb265c67b4d08f2bfdc017955712b7e7bcbebde76",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_line": 174,
+      "cpp_file_sha256": "f3a55c74892edef5f4990ff0214f73d9d25f067e3a6bdff7ed348cdab62499ec",
+      "cpp_body_sha256": "4b14a3cc527acaf128e555574122c520f6469e57d2fa15df7e0ad9fdee52f4fa",
+      "fixture_calls": [
+        "entity_data_service_maps_relation_aggregate_storage_key_to_property_key"
+      ],
+      "native_checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ],
+      "historical_review": "Reviewed logical order_id property mapped to physical order_ref, original U64 parent1/version1/name first and aggregate I64 order_ref1/I64 lineCount3. Actual runtime relation-aggregate rows map physical storage key to logical relation property, preserve exact I64(3) result and the second OrderLine query target. Mixed signed aggregate FK and unsigned parent ID are retained.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_uses_aggregation_cache_when_resource_is_registered",
+      "line": 3219,
+      "source_body_sha256": "f6ee645e4a0d5b77c84228a8cce91e9654b88e1a5575204721633def910f71c2",
+      "historical_line": 3087,
+      "historical_body_sha256": "07fb4a713a0833ba093347d2a033833b392ea09c522ca7ade312715b2b799b34",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_line": 201,
+      "cpp_file_sha256": "f3a55c74892edef5f4990ff0214f73d9d25f067e3a6bdff7ed348cdab62499ec",
+      "cpp_body_sha256": "230f70d631366d43079f18dda52fdd738debf487f070bd62c48f9b2bf7cd4af1",
+      "fixture_calls": [
+        "entity_data_service_uses_aggregation_cache_when_resource_is_registered"
+      ],
+      "native_checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ],
+      "historical_review": "Reviewed registered concrete InMemoryAggregationCache, original queue one I64 count2 row and count(count) with 60000ms TTL. Two actual private fetches return fully equal rows, issue exactly one provider query and emit exactly two start:cache events/one start:provider. Recording telemetry and cache are explicit User-managed resources.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "continuous_page_fetch_uses_id_seek_for_the_next_page",
+      "line": 3270,
+      "source_body_sha256": "e30523f9b1f925403998ad6a965f1d5624209445f6e809dee66489aaa2e5865a",
+      "historical_line": 3139,
+      "historical_body_sha256": "be6c1c7fc0fd1ee65612631d2d113644f269ec3c995a6d779c85a7473f30d1f0",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 124,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "eaddf5b7a2e1d5a3ae26578eb9804381c91cd45a4977eb969aff3446b45185db",
+      "fixture_calls": [
+        "continuous_page_fetch_uses_id_seek_for_the_next_page"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed exact tenant-1:user-1, reusable capturing rows U64 IDs100..91/version1/order-ID names, descending id pages(0,10)/(10,10), recent-orders namespace/TTL60. Actual private fetch reports OFFSET_FALLBACK:FIRST_PAGE then CURSOR_SEEK with cursor ID; second captured query has offset0 and debug predicate Lt/U64(91). No test-local cursor construction.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_reuses_ordered_ids_and_returns_exact_count",
+      "line": 3336,
+      "source_body_sha256": "078e7bcd38e44230d1209c0815d01b585a52be455f0099c1be87067e4c19b4d0",
+      "historical_line": 3199,
+      "historical_body_sha256": "ce2c4b2d14b1e10bff7dc904d54c0c315b1eeeda29c4222d82dd677852d6f99c",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 160,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "e508dd5aaa439f6a040b28c37c1f32b24d9fc71c87dba48a51eabbaacf78be62",
+      "fixture_calls": [
+        "id_set_pagination_reuses_ordered_ids_and_returns_exact_count"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed original ID queue1..100, typed batches21..30/51..60, principal id-set-test:tenant-1:user-1 and name-ascending pages(20,10)/(50,10), orders TTL60/max1000. Actual enhanced query gives total100/first IDs21 then51, BUILD thenHIT; exactly three queries, build projection[id]/limit1001/last order id and zero-offset retained slices containing exact U64(21)/U64(51).",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_limit_overflow_falls_back_without_false_count",
+      "line": 3430,
+      "source_body_sha256": "e5e3589c5b66f5e6950bfc7e60864c28765846277adb12ceb43d55a0b4890918",
+      "historical_line": 3287,
+      "historical_body_sha256": "2ce4feab2210839af2f9bc065fa44589dd755d323fa0e47559dd49b3744d8886",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 194,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "6c153ed61aa207b5133d0ebef68a6c94589656f25f7ff3caad2ffd87eaa60a47",
+      "fixture_calls": [
+        "id_set_pagination_limit_overflow_falls_back_without_false_count"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed principal id-set-overflow-test, queued IDs1..4 then complete Order1 row and overflow TTL60/max3/page(0,1). Actual enhanced query has absent total_count, exact ID_SET_FALLBACK_LIMIT_EXCEEDED and candidate count4. No overflow IDs are converted into a false exact count.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_coalesces_concurrent_cache_misses",
+      "line": 3476,
+      "source_body_sha256": "4a8b5ffb7e0ff9830ed37eda32d0b759ac16435487809922eca914a99757372f",
+      "historical_line": 3330,
+      "historical_body_sha256": "4e7d737868215d416f9a780d4d96454e5de83c9b6e94346ea52d707243f2cba2",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 318,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "a013db30c945523b62f24a459342c7400e4e841742b0544505ee9a3d2d14ef8f",
+      "fixture_calls": [
+        "id_set_pagination_coalesces_concurrent_cache_misses"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed two same-principal id-set-single-flight-user contexts sharing an ID store, single-flight TTL60/max100/page(0,1), ID-only rows1/2 and complete entity1. Both actual enhanced operations are polled pending before the builder finishes, then both return exact total2 with one SeqCst ID query. Original25ms async delay uses a native wake-only timer joined on finish/cancel; all Context work remains owner-thread. Explicit Global-owned store/counter replaces Arc lifetime sharing, not actual registry/lock/recheck behavior.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_rebuilds_after_ttl_expiry",
+      "line": 3529,
+      "source_body_sha256": "a279d51a0ba49ad91cd239a96ec502c7e42a276b7b1181b72c250732e559cdae",
+      "historical_line": 3380,
+      "historical_body_sha256": "cd0d9ad682cfd40d3ba9c4d00fd551eaf4d55aa78dc3eae28cbf889b1f6f5b0c",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 335,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "a9bfd55ab7d7e49f8eab38a8d6e08520c719557fe85e3966d68aa68393320d7e",
+      "fixture_calls": [
+        "id_set_pagination_rebuilds_after_ttl_expiry"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed id-set-ttl-user/ttl namespace, TTL1/max100/page(0,1), original25ms ID-only fixture and actual1050ms wait. Actual enhanced query builds twice (SeqCst counter2) and final plan is exactly ID_SET_BUILD. Real expiry is exercised, not forced test-store state.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_isolates_principals_in_a_shared_store",
+      "line": 3561,
+      "source_body_sha256": "029fcab7f07f3dee7b71e5e7e14e64843a1a7347c17672081e137eda248657f7",
+      "historical_line": 3412,
+      "historical_body_sha256": "b4b10bd9677ed236ec12034ecac4840b425881ba71a7b081c1eba3ac2fb9af22",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 347,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "6135e8295a5bc3a8d904646442a3ed8518feeac05d11edeb8cfc753c3f955131",
+      "fixture_calls": [
+        "id_set_pagination_isolates_principals_in_a_shared_store"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed shared source store/executor counter, tenant-1:user-1 versus tenant-1:user-2, principal-isolation TTL60/max100/page(0,1). Actual enhanced queries against explicit Global store produce two ID-only builds, preserving principal separation; no per-user replacement store bypasses the shared-store requirement.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_retains_empty_exact_result",
+      "line": 3607,
+      "source_body_sha256": "c8d5a2680b08aa7a2ede13109837ff5dce1ae285d4c43da58f23ba5cb42628ff",
+      "historical_line": 3455,
+      "historical_body_sha256": "7502f9c8f3ec1a16066eec51dbc9cbbfa99569240588cba1226d043c07a2ac8b",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 403,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "bd7c14b78a61c12909fa684acda6eff1a81d1f8ecc118ddef5dc9ac5bdaf43fc",
+      "fixture_calls": [
+        "id_set_pagination_retains_empty_exact_result"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed id-set-empty-user, original two empty ID-set queue batches, empty TTL60/max100/page(0,10). Actual enhanced result is empty with present exact total0 and ID_SET_BUILD, preserving optional presence rather than treating zero as no count.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_store_failure_falls_back_without_changing_rows",
+      "line": 3636,
+      "source_body_sha256": "3f617a8f201dc041535c92c8937a612fbf701ad52bed2af8eac57b4d1ed540ec",
+      "historical_line": 3484,
+      "historical_body_sha256": "70da657db987047d03a41fc5fdc71018c4a6c06bd9ef76588fa3909f53892880",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 415,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "506f150588783f549a5fa2e161438054f8132676ae0aa5688d708b5add047cd3",
+      "fixture_calls": [
+        "id_set_pagination_store_failure_falls_back_without_changing_rows"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed unavailable store get/put/invalidate each returning unavailable, id-set-store-failure-user and complete U64 Order7/version1/name order-7 row, unavailable TTL60/max100/page(0,10). Actual enhanced result keeps first ID7, total absent and exact ID_SET_FALLBACK_STORE_UNAVAILABLE. Store SPI and runtime fallback remain separate.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_does_not_shift_page_when_an_entity_disappears",
+      "line": 3676,
+      "source_body_sha256": "fc32b0c597eedc19cd0922708bef9aedbe06d0d1e1bfedc7209d05e7562216e7",
+      "historical_line": 3521,
+      "historical_body_sha256": "1517ad1ff641d269f1c2bb4d69aa6a23f750ac091f38db6f6f4324ee26f77878",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 429,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "760f360d3f7cce32aea970e3843cb9e06ab10e286bcfddca79a501115eb65fd3",
+      "fixture_calls": [
+        "id_set_pagination_does_not_shift_page_when_an_entity_disappears"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed id-set-delete-user, retained U64 IDs[1,2], only complete entity2 returned, delete TTL60/max100/page(0,2). Actual enhanced result retains total2 but contains one row/first ID2; the ID window is not rebuilt or reduced because one entity disappeared.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_unsupported_shape_falls_back_visibly",
+      "line": 3718,
+      "source_body_sha256": "c512753e866e204e995ea9f5edac4737ccf4423ea2929656867a5fff8606e818",
+      "historical_line": 3560,
+      "historical_body_sha256": "6002c66b9efc3769326665649155eebc746fa35f3b1506736419b13a02c41a83",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_line": 441,
+      "cpp_file_sha256": "f1b53fad833ac88c93b5c5e4fa3d65220d14865b4a00b1e2f7b257a3805a86d1",
+      "cpp_body_sha256": "16479d5a0fc16e94303f8be8bcea9b732c8d4fb6e80f914ce4e47e084436595b",
+      "fixture_calls": [
+        "id_set_pagination_unsupported_shape_falls_back_visibly"
+      ],
+      "native_checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ],
+      "historical_review": "Reviewed id-set-unsupported-user, complete entity9 row, expression ordering Column(name), unsupported TTL60/max100/page(0,10). Actual enhanced query retains ID9 and exact ID_SET_FALLBACK_UNSUPPORTED_SHAPE; ordinary id ordering is removed before supplying the source expression shape.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "aggregation_cache_is_namespaced_and_invalidated_after_write",
+      "line": 3756,
+      "source_body_sha256": "4c0d1bbbb77c7236f24094d95a5c10fb9b44859b9f65667f6db032d4a5bfcb99",
+      "historical_line": 3595,
+      "historical_body_sha256": "4a01e23c84305290b45e53de3a9332c015aaca8b68aa7c87538ec525b258349e",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_line": 223,
+      "cpp_file_sha256": "f3a55c74892edef5f4990ff0214f73d9d25f067e3a6bdff7ed348cdab62499ec",
+      "cpp_body_sha256": "ff8b5747d428ca0708dd277856d8388dde68e0dc6ef0c23c3f541f8882bd19dc",
+      "fixture_calls": [
+        "aggregation_cache_is_namespaced_and_invalidated_after_write"
+      ],
+      "native_checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ],
+      "historical_review": "Reviewed registered tenant-a AggregationCacheBackend interface, queued I64 count2/count3 and 60000ms count query. Actual first/cached full results compare equal; actual internal insert of U64 id9/I64 version1/Text new invalidates the namespace; refreshed rows differ and only two provider queries are issued. User-owned interface borrow replaces source Arc without extending storage lifetime.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "aggregation_cache_propagates_to_relation_aggregates",
+      "line": 3807,
+      "source_body_sha256": "2552145386151a00b0c0a0e413b093a362b43f9c144db55ef3707790a72a0376",
+      "historical_line": 3641,
+      "historical_body_sha256": "fc60fe04e4341d5789defaae6b270f78dba79ed6de6ae76ef4798032fd5cbe3a",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_line": 249,
+      "cpp_file_sha256": "f3a55c74892edef5f4990ff0214f73d9d25f067e3a6bdff7ed348cdab62499ec",
+      "cpp_body_sha256": "5cb6d56c7898a52a30ca6bbac60aa53ff4cd4736a32241ca91ab5b265a333340",
+      "fixture_calls": [
+        "aggregation_cache_propagates_to_relation_aggregates"
+      ],
+      "native_checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ],
+      "historical_review": "Reviewed original two parent rows IDs1/2/version1/names first/second and aggregate order_id1/lineCount3, concrete cache and parent projection id/version/name with both enable/propagate TTL60000. Two actual relation-aggregate entries return fully equal row vectors and make only two provider queries total, preserving root and child cache propagation rather than replaying test-local results.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_fetches_smart_list_entities_with_query_features",
+      "line": 3874,
+      "source_body_sha256": "d3d992e6ebc964b5ed58d1aa309e4012d8d1cda638699b96328ea767d5f8e53d",
+      "historical_line": 3702,
+      "historical_body_sha256": "fa6dabef794bedd5db362ff9051f3aeb6cff0095dd4096b2b18370953b633ffc",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 43,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "7204b63f54edbc155cf6350d822f7c6113d9e938cc6b6b251d60a8b243ebcc08",
+      "fixture_calls": [
+        "memory_data_service_fetches_smart_list_entities_with_query_features"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed exact three U64 IDs 1/2/3, I64 version 1 and alpha/beta/gamma rows, Gte U64 2, descending ID and limit 1. Typed SmartList contains exactly ID 3/version 1/gamma. This is the pinned cfg(test) oracle, not a production database.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_relation_aggregates",
+      "line": 3917,
+      "source_body_sha256": "b33c0a27fef82a08500fbce0a2c69279571291e2abd3bf37d3e9c822a2bc709f",
+      "historical_line": 3742,
+      "historical_body_sha256": "ec4570aef3f54eceee75d68832ec8d051b3e6979faa59655377be06ce44823ef",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 58,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "510b1a015013fdf61df33ed0adc2c3a283b119e5f5df107926bb05366077f17f",
+      "fixture_calls": [
+        "memory_data_service_runs_relation_aggregates"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed parents 1/2 first/second and lines 10/11/12 with exact U64 order_id 1/1/2, version 1 and line1/2/3. id/name projection and single lines/lineCount aggregate return two parents with exact U64 2/1 counts. Selected cfg(test) helper replay; production engine types remain unchanged.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_aggregates",
+      "line": 3992,
+      "source_body_sha256": "b9299c6ecf7c43596916bf34159269a90e32a963087f61c0de93183c1c118bd7",
+      "historical_line": 3811,
+      "historical_body_sha256": "ec9a1c14d5f793c188f3cd9668043c7dfada23c89db25d48b0bd1304830e20bf",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 89,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "19fa2cfc7163a9773877148901371dd15bf2ff616a11751d3f6d14978e990caa",
+      "fixture_calls": [
+        "memory_data_service_runs_aggregates"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed original alpha/beta IDs 1/2 and I64 versions 1/2; Count(id,count) and Sum(version,versionSum) return one row with exact U64 2/3. The cfg(test) oracle differs deliberately from published Count I64/Sum F64 semantics.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_grouped_aggregates_and_extended_filters",
+      "line": 4063,
+      "source_body_sha256": "7420a7b3f0d092cb02858157f3ff623d0a8c78b3fbef69ab2905b35d632dfcb6",
+      "historical_line": 3877,
+      "historical_body_sha256": "2b9dd30066b35d9190d5f82b5e55c38c95ba77a91da132ab6cbded5b824c1ae4",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 100,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "90b8a65415f9c8529fd9b03e66cd8f728d35082263219d8840c6571a416a64ef",
+      "fixture_calls": [
+        "memory_data_service_runs_grouped_aggregates_and_extended_filters"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed alpha/alpha/tmp-beta IDs 1/2/3 and versions 1/2/3; inclusive Between 1..3, NotLike tmp%, NotIn deleted, name grouping, count and sum return exactly alpha/U64 2/U64 3. Selected private oracle fixture, not full memory.rs API acceptance.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_extended_aggregates_and_having",
+      "line": 4113,
+      "source_body_sha256": "ab0c3d8a4aeca2ae70709d263930fdbbcbd7fef3ba762c65a3669b6260adb371",
+      "historical_line": 3924,
+      "historical_body_sha256": "f727e7cbe2802e2cda9ec9a347832795cc864cd7f0386b70523b60d8b2ec45a4",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 119,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "959c4bfcc3e14127b89f4560396992249af545b3488d350333bdccb426a96628",
+      "fixture_calls": [
+        "memory_data_service_runs_extended_aggregates_and_having"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed alpha versions 1/3 and beta version 7, grouped count/stddev/var_pop/bit_or and HAVING total > I64 1. Exact outputs are alpha, U64 2, retained-f64 Decimal JSON 1.4142135623730951454746218583, Decimal ONE and I64 3. Extended aggregates remain test-only as in pinned cfg(test) helper.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_sound_like_filter",
+      "line": 4171,
+      "source_body_sha256": "dd9369f28cbd5f14b0b95b9f06f7f6bc082b6b45d1754b4b75910746fb744473",
+      "historical_line": 3979,
+      "historical_body_sha256": "f4c576b6361748419b8cd467f97bf38daa71a666de3e7b9b77151a6bf2e8eaec",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 141,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "f7770ff7844d0266b76c4963db53310116aebdcbc59c225fabd2d022a7b2f1d1",
+      "fixture_calls": [
+        "memory_data_service_runs_sound_like_filter"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed Robert/Rupert/Ashcraft IDs 1/2/3, version 1, SoundLike Robert and ascending ID. Exact two ordered names Robert/Rupert use the pinned private ASCII Soundex algorithm. Published InMemoryQueryEngine unsupported function behavior is unchanged.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_java_style_string_match_filters",
+      "line": 4208,
+      "source_body_sha256": "2f2faae4b4df473bf5fcedbe901ecc9d8438929bd091ac5a4fc0e47c8959964a",
+      "historical_line": 4016,
+      "historical_body_sha256": "d87f222765f6bec02573a236fec66fabba28f182267e235fd8d23c6d81a48d24",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 152,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "a381ac782b98573380cba0d54771b5075ab1186c57fe50e6a18b251fffd58b1e",
+      "fixture_calls": [
+        "memory_data_service_runs_java_style_string_match_filters"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed tea-order/coffee-order/tea-archived rows and all six original contain/begin/end positive and negative predicates with ascending ID. Exactly one tea-order row remains; allocator-owned selected private oracle delegates ordinary predicates to production ExprEvaluator.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_property_to_property_filters",
+      "line": 4263,
+      "source_body_sha256": "6f06b3b02aaea32e56224756d84423b9d77f29a90240a5c674688a9f3124acef",
+      "historical_line": 4068,
+      "historical_body_sha256": "2784f524ee33c0cff260c795d4a20da9102af13f7853d28e2f3faff3f6249546",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 168,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "df7d6d05f120180975ff50c964182e59a1b7bd6d7512b8029340b632f624bc24",
+      "fixture_calls": [
+        "memory_data_service_runs_property_to_property_filters"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed ID1/version2/keep and ID2/version1/skip and version >= id column comparison. Exactly one keep row remains with original typed numeric inputs.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_supports_mutations_and_optimistic_locking",
+      "line": 4297,
+      "source_body_sha256": "e4a281e537b2494c536a59acdbea00782044d646be1f18081883f3cc09b66593",
+      "historical_line": 4099,
+      "historical_body_sha256": "cc34b0a327f552a07f87e201abb864e044b4cfbb3e79166de71226d90a656445",
+      "body_changed": true,
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_line": 178,
+      "cpp_file_sha256": "ab8ae26d3628768d925c02d71a3dca684c7afc0f67bb777d70a1b447156f8d1c",
+      "cpp_body_sha256": "c501dc71c469014582d2ce86fa6c302ac4dba5bcb8b74b1003f14183be715642",
+      "fixture_calls": [
+        "memory_data_service_supports_mutations_and_optimistic_locking"
+      ],
+      "native_checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ],
+      "historical_review": "Reviewed insert Order U64 10/I64 1/draft, expected-version-1 update to submitted/I64 2, stale expected-version-1 typed Runtime OptimisticLockConflict, soft delete expected 2 to I64 -3 and recover -3 to I64 4. Deleted row remains queryable; these private-oracle operations do not claim graph save.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "optimistic_conflict_does_not_print_outside_diagnostic_sink",
+      "line": 4380,
+      "source_body_sha256": "3e9aca932d2e8edbf27d2f0730fab147acd1edc5b39edee1fe059861d04e9040",
+      "historical_line": 4164,
+      "historical_body_sha256": "3e9aca932d2e8edbf27d2f0730fab147acd1edc5b39edee1fe059861d04e9040",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/optimistic_conflict_output.py",
+      "cpp_line": 1,
+      "cpp_file_sha256": "fa59e95c2abc8622a89aa92544e15fe07eca634156b9d930f9bf96f7ab1bc284",
+      "cpp_body_sha256": "fa59e95c2abc8622a89aa92544e15fe07eca634156b9d930f9bf96f7ab1bc284",
+      "fixture_calls": [
+        "memory_data_service_supports_mutations_and_optimistic_locking"
+      ],
+      "native_checks": [
+        "original_runtime_optimistic_conflict_output_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_optimistic_conflict_output_contracts"
+      ],
+      "historical_review": "Reviewed isolated-process invocation of only the mutation/optimistic-lock body, successful exit, running 1 test stdout marker and absence of OptimisticLockConflict in memory.rs from both stdout/stderr. Python subprocess capture preserves process/output scope and configured MIPS emulator; no in-process assertion substitutes for output capture.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_reports_missing_schema_provider",
+      "line": 4399,
+      "source_body_sha256": "5d0e8509d00bb05eacb128ed2c43d381c9393efa2d87793abcbcdaeacb7b2e56",
+      "historical_line": 4183,
+      "historical_body_sha256": "5d0e8509d00bb05eacb128ed2c43d381c9393efa2d87793abcbcdaeacb7b2e56",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/context_tail.cpp",
+      "cpp_line": 18,
+      "cpp_file_sha256": "cdf602037e3bed7a7659c2daf32e532e56d1302416a4c4d71b89f7ad47dac35c",
+      "cpp_body_sha256": "251f727cbbb67470a84437cb7b50bb8d39761a57bc75ffab672171bf1d1e40a6",
+      "fixture_calls": [
+        "user_context_reports_missing_schema_provider"
+      ],
+      "native_checks": [
+        "original_runtime_context_tail_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_context_tail"
+      ],
+      "historical_review": "Reviewed actual lazy UserContext ensure_schema without a provider: exact RuntimeError Schema variant and missing schema provider message. Explicit Global bootstrap replaces source default implicit runtime ownership.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_stores_and_exposes_user_identifier",
+      "line": 4407,
+      "source_body_sha256": "1e11012640b97ac8580c94a8d7bb836ce676c8bfc2fbd444324a11a089d7955f",
+      "historical_line": 4191,
+      "historical_body_sha256": "1e11012640b97ac8580c94a8d7bb836ce676c8bfc2fbd444324a11a089d7955f",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/context_tail.cpp",
+      "cpp_line": 27,
+      "cpp_file_sha256": "cdf602037e3bed7a7659c2daf32e532e56d1302416a4c4d71b89f7ad47dac35c",
+      "cpp_body_sha256": "3c701426093f03d78140accccf1dd1a2c2c34499862742e3be0767a2e3a09509",
+      "fixture_calls": [
+        "user_context_stores_and_exposes_user_identifier"
+      ],
+      "native_checks": [
+        "original_runtime_context_tail_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_context_tail"
+      ],
+      "historical_review": "Reviewed default environment USER then USERNAME then main, process and thread identity shape, explicit user-123 setter, user-456 builder, optional user-789 then None and optional user-abc builder. Expected identity is independently constructed. C++ native thread ID explicitly adapts Rust process-local ThreadId; no literal cross-language thread-number equivalence is claimed.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "local_lock_enforces_ownership_timeout_and_lease_expiry",
+      "line": 4438,
+      "source_body_sha256": "023396437d1ccdab9e7d9b7559d5b3909176900b7e4625dce71b46b59ff53d6b",
+      "historical_line": 4222,
+      "historical_body_sha256": "023396437d1ccdab9e7d9b7559d5b3909176900b7e4625dce71b46b59ff53d6b",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/context_tail.cpp",
+      "cpp_line": 71,
+      "cpp_file_sha256": "cdf602037e3bed7a7659c2daf32e532e56d1302416a4c4d71b89f7ad47dac35c",
+      "cpp_body_sha256": "11fad1e013db92fdbdada391ba2230643926509c0d5d7c0421705452a112cd85",
+      "fixture_calls": [
+        "local_lock_enforces_ownership_timeout_and_lease_expiry"
+      ],
+      "native_checks": [
+        "original_runtime_context_tail_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_context_tail"
+      ],
+      "historical_review": "Reviewed exact seven acquire/reject/unlock decisions with two Users, zero timeout, 50ms lease and actual 60ms expiry wait. Both Users share one application-owned Global lock directory; isolated generated key replaces source wall-clock debug key without changing ownership/lease behavior.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "remote_lock_delegates_and_preserves_context_ownership",
+      "line": 4487,
+      "source_body_sha256": "6fa06cb986dcf056d4412039a0e932a9637025285295711d4aa2007e43904e16",
+      "historical_line": 4271,
+      "historical_body_sha256": "6fa06cb986dcf056d4412039a0e932a9637025285295711d4aa2007e43904e16",
+      "body_changed": false,
+      "cpp_fixture": "tests/parity/teaql_runtime/context_tail.cpp",
+      "cpp_line": 88,
+      "cpp_file_sha256": "cdf602037e3bed7a7659c2daf32e532e56d1302416a4c4d71b89f7ad47dac35c",
+      "cpp_body_sha256": "d52338540ca75bc39b5a2b85f7150d12554c2fa77d960f57b7ccf0e3d55ac4f7",
+      "fixture_calls": [
+        "remote_lock_delegates_and_preserves_context_ownership"
+      ],
+      "native_checks": [
+        "original_runtime_context_tail_contracts"
+      ],
+      "module_checks": [
+        "module_original_runtime_context_tail"
+      ],
+      "historical_review": "Reviewed all seven provider acquisition/rejection/unlock outcomes and absent-provider optional success. Actual UserContext async delegation uses explicit Global test provider rebinding instead of Arc; owner-only test map mirrors source Mutex map on owner thread, timeout 0 and expiry 1000 preserved. No cloud provider is introduced.",
+      "status": "current_source_and_fixture_locators_reviewed_not_full_leaf_acceptance"
+    }
+  ],
+  "changed_bodies": 45
+}

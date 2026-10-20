@@ -1,0 +1,22 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/checker_clock_scalars.xml",
+  "model_sha256": "2aac0ea0438dac8d9a5f242385967b0c7a8ff7b19d9d258390d346c50e5b4350",
+  "hand_edited": false,
+  "files": {
+    "lib/Cargo.toml": "6798d8b0a0fdf2f117fb8a1e4f52bcc454bc988de869e2d7a504f39a1248e431",
+    "lib/src/e.rs": "6512b2d22caf8c0cce6a8db4a248ad6ab2b574dac58e42feda6b2333995ee676",
+    "lib/src/lib.rs": "b7e7264065005ada34273c7c9af6fb4a7d831ff29dd07569674f99069332325f",
+    "lib/src/note/behavior.rs": "85ab51d169b81456d5c70f6db4c58a3f071b3c2ec8a7d865f855c71b61d8a478",
+    "lib/src/note/checker.rs": "9927e50bb4a428674d59cf25c9e58f2fec41c50c9aa19e183ec4c44aed53d0be",
+    "lib/src/note/entity.rs": "6e19d25407f0057e62cfd8ed20c8f2c9a844cbdd09998487b6d7d50bca0654ef",
+    "lib/src/note/expression.rs": "106eeff666cbfac8a0db5f1ccb6428e94854729f4324a80d2623b0ea4d7ceddb",
+    "lib/src/note/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/note/request.rs": "27d930190ae93c16d18247a2c07c2fb3e57aca262ef883c9d1c6945ac1c4710f",
+    "lib/src/q.rs": "dc1ff834b9a7ab660cff56006d7d6c4beb9997af2ff931c991438b82b23dbb1f",
+    "lib/src/request_support.rs": "d5a43f55deb3bc6ea1f92814457c4feb6e14078b19848d5de5204b80cea79879",
+    "lib/src/runtime.rs": "c056ffd2c5d6a110c212a8043f7c0d8d8983f7a28498fd0336e043f4bc9b90e2",
+    "lib/src/sample_data.rs": "3ad93bcef6a1c6b135cb7292d7d253c5da4d43c0beae927f00665b0502388465"
+  }
+}

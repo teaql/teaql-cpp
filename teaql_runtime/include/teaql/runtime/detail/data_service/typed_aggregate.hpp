@@ -1,5 +1,7 @@
 #pragma once
 #include <teaql/runtime/detail/data_service/entity_query.hpp>
+#include <teaql/runtime/detail/data_service/dynamic_loading.hpp>
+#include <teaql/runtime/detail/read_hydration.hpp>
 
 namespace teaql::detail {
 // Retained crate-internal typed aggregation, with a fresh decoding root and
@@ -19,37 +21,98 @@ public:
                             std::span<const RelationAggregate> aggregates)
         : service_(std::allocator_arg, allocator, service),
           query_(std::allocator_arg, allocator, query),
-          aggregates_(aggregates.begin(), aggregates.end(), allocator.resource()) {}
+          aggregates_(aggregates.begin(), aggregates.end(), allocator.resource()),
+          rows_(allocator.resource()) {}
 
     std::optional<R> poll(WakeSignal& wake) {
         auto resource = service_.memory_resource();
-        if (!child_) {
+        if (!fetched_) {
             const auto& context = EntityDataServiceAccess::context(service_);
-            ensure_identity_projection(context, query_);
-            root_ = &context.template make<EntityRuntimeState>();
-            child_ = &make_operation<RelationRowsResult<E>, EntityRowsOperation<E>>(
-                resource, service_, query_, std::span<const RelationAggregate>(aggregates_), true);
+            if (!child_) {
+                if (query_.dynamic_field_selection &&
+                    !EntityDataServiceAccess::has_request_intent(service_)) {
+                    auto source = clone_in(resource, query_);
+                    if (EntityDataServiceAccess::context_service(service_)
+                            .metadata.capture_execution_metadata()) {
+                        for (const auto& aggregate : aggregates_) {
+                            source.child_enhancements.emplace_back(aggregate.query);
+                        }
+                    }
+                    auto scoped = EntityDataServiceAccess::query_scoped(service_, source);
+                    if (!scoped) {
+                        return R::err(
+                            resource,
+                            DataServiceError<Error>::runtime(resource, std::move(scoped).error()));
+                    }
+                    service_ = std::move(scoped).value();
+                }
+                ensure_identity_projection(context, query_);
+                root_ = &context.template make<EntityRuntimeState>();
+                child_ = &make_operation<RelationRowsResult<E>, EntityRowsOperation<E>>(
+                    resource,
+                    service_,
+                    query_,
+                    std::span<const RelationAggregate>(aggregates_),
+                    true);
+            }
+            forwarding_.attach(child_->wake_signal(), wake);
+            const auto* result = child_->poll();
+            if (!result) {
+                return {};
+            }
+            forwarding_.reset();
+            if (!*result) {
+                return R::err(resource, copy_or_take_error(*child_, *result));
+            }
+            rows_ = Vector<CompactRow>(result->value(), resource);
+            child_ = nullptr;
+            fetched_ = true;
         }
-        forwarding_.attach(child_->wake_signal(), wake);
-        const auto* result = child_->poll();
-        if (!result) {
-            return {};
-        }
-        if (!*result) {
-            return R::err(resource, copy_or_take_error(*child_, *result));
-        }
-        SmartList<T> list(std::allocator_arg, Allocator(resource));
-        list.data.reserve(result->value().size());
-        for (const auto& row : result->value()) {
-            auto decoded =
-                T::from_compact_row_with_context(resource, clone_in(resource, row), AnyRef(*root_));
-            if (!decoded) {
+        if (query_.dynamic_field_selection && !rows_.empty()) {
+            if (!T::supports_dynamic_field_load()) {
                 return R::err(
                     resource,
-                    DataServiceError<Error>::entity(resource, std::move(decoded).error()));
+                    DataServiceError<Error>::entity(
+                        resource,
+                        EntityError(
+                            std::allocator_arg,
+                            Allocator(resource),
+                            T::ENTITY_NAME,
+                            "dynamic fields require a runtime-owned indexed entity carrier")));
             }
-            list.data.emplace_back(std::move(decoded).value());
+            if (!dynamic_) {
+                auto intent = EntityDataServiceAccess::request_intent(service_, query_);
+                if (!intent) {
+                    return R::err(
+                        resource,
+                        DataServiceError<Error>::runtime(resource, std::move(intent).error()));
+                }
+                dynamic_ = &make_operation<typename DynamicRowsOperation<Error>::Output,
+                                           DynamicRowsOperation<Error>>(
+                    resource,
+                    EntityDataServiceAccess::context(service_),
+                    std::span<CompactRow>(rows_),
+                    T::ENTITY_NAME,
+                    *query_.dynamic_field_selection,
+                    intent.value());
+            }
+            forwarding_.attach(dynamic_->wake_signal(), wake);
+            const auto* result = dynamic_->poll();
+            if (!result) {
+                return {};
+            }
+            forwarding_.reset();
+            if (!*result) {
+                return R::err(resource, copy_or_take_error(*dynamic_, *result));
+            }
         }
+        auto decoded =
+            decode_compact_rows_with_read_metadata<T>(resource, std::move(rows_), *root_);
+        if (!decoded) {
+            return R::err(resource,
+                          DataServiceError<Error>::entity(resource, std::move(decoded).error()));
+        }
+        SmartList<T> list(std::allocator_arg, Allocator(resource), std::move(decoded).value());
         list.loaded();
         return R::ok(resource, std::move(list));
     }
@@ -57,6 +120,7 @@ public:
     void finish_and_wait() noexcept {
         forwarding_.reset();
         child_ = nullptr;
+        dynamic_ = nullptr;
     }
 
     void cancel_and_wait() noexcept {
@@ -65,15 +129,22 @@ public:
             child_->cancel();
             child_ = nullptr;
         }
+        if (dynamic_) {
+            dynamic_->cancel();
+            dynamic_ = nullptr;
+        }
     }
 
 private:
     EntityDataService<E> service_;
     SelectQuery query_;
     Vector<RelationAggregate> aggregates_;
+    Vector<CompactRow> rows_;
     EntityRuntimeState* root_ = nullptr;
     AsyncOperation<RelationRowsResult<E>>* child_ = nullptr;
+    AsyncOperation<typename DynamicRowsOperation<Error>::Output>* dynamic_ = nullptr;
     WakeSignal::Forward forwarding_;
+    bool fetched_ = false;
 };
 
 template <class E, Entity T>

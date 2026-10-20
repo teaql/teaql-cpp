@@ -36,8 +36,10 @@ struct BatchIntentScope {
 };
 
 TraceChain mutation_statement_trace(Memory, const MutationRequest&, const BatchIntentScope*);
-SqlIntentRedactions
-batch_mutation_redactions(Memory, const MutationRequest&, const SchemaProvider&);
+SqlIntentRedactions batch_mutation_redactions(Memory,
+                                              const MutationRequest&,
+                                              const SchemaProvider&,
+                                              const SqlExecutorState&);
 
 struct MutationExecutionScope {
     using allocator_type = Allocator;
@@ -536,7 +538,12 @@ public:
             if (!pending_) {
                 request_.require_valid_intent();
                 journal_ = &async_arena(resource_).template make<FailureJournal>(observer_);
-                auto redactions = batch_mutation_redactions(resource_, request_, schema_);
+                // The guarded source entry does not inherit request sidecars.
+                // Ordinary batches classify through the same descriptor cache
+                // used to compile each leaf, including a previously cached schema.
+                auto redactions =
+                    guard_ ? SqlIntentRedactions(resource_)
+                           : batch_mutation_redactions(resource_, request_, schema_, cache_);
                 auto& retained = async_arena(resource_).template make<SqlIntentRedactions>(
                     std::move(redactions));
                 MutationExecutionScope scope(

@@ -3,6 +3,7 @@
 #include <teaql/runtime/dynamic_fields.hpp>
 #include <teaql/runtime/transaction.hpp>
 #include "../../tests/support/graph_saver_fixture.hpp"
+#include <array>
 #include <iostream>
 
 using namespace teaql;
@@ -177,9 +178,99 @@ static void recursive_error_retention() {
           "raw Debug preserves the nested error structure");
 }
 
+struct InterleavedAudit {
+    using allocator_type = Allocator;
+    const UserContext& user_context;
+    detail::PendingAuditBatch& batch;
+    std::uint64_t id;
+    bool suspended = false;
+
+    InterleavedAudit(std::allocator_arg_t,
+                     Allocator,
+                     const UserContext& user_context,
+                     detail::PendingAuditBatch& batch,
+                     std::uint64_t id)
+        : user_context(user_context), batch(batch), id(id) {}
+
+    std::optional<Result<std::uint64_t, RuntimeError>> poll(WakeSignal& wake) {
+        detail::AuditActivation active(user_context, batch);
+        auto r = user_context.memory_resource();
+        check(bool(user_context.send_event(event(r, id))), "Enqueue this operation's fact");
+        if (!suspended) {
+            suspended = true;
+            wake.notify();
+            return {};
+        }
+        return Result<std::uint64_t, RuntimeError>::ok(r, batch.events.size());
+    }
+
+    void finish_and_wait() noexcept {}
+
+    void cancel_and_wait() noexcept {}
+};
+
+static void interleaved_operations_reusing_one_context() {
+    std::pmr::set_default_resource(std::pmr::null_memory_resource());
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& left = user_context->make<detail::PendingAuditBatch>(*user_context);
+    auto& right = user_context->make<detail::PendingAuditBatch>(*user_context);
+    auto& first = make_operation<Result<std::uint64_t, RuntimeError>, InterleavedAudit>(
+        r, *user_context, left, std::uint64_t(7));
+    auto& second = make_operation<Result<std::uint64_t, RuntimeError>, InterleavedAudit>(
+        r, *user_context, right, std::uint64_t(9));
+    check(first.poll() == nullptr && !detail::has_audit_scope(*user_context),
+          "First suspension restores ambient activation");
+    check(second.poll() == nullptr && !detail::has_audit_scope(*user_context),
+          "Interleaved suspension restores ambient activation");
+    check(second.wait().value() == 2 && !detail::has_audit_scope(*user_context),
+          "Second operation finishes independently before the first");
+    check(first.wait().value() == 2 && !detail::has_audit_scope(*user_context),
+          "First operation resumes its own queue");
+    for (const auto& fact : left.events) {
+        check(fact.values.at(String("id", r)).try_u64() == 7, "Left facts stay in the left queue");
+    }
+    for (const auto& fact : right.events) {
+        check(fact.values.at(String("id", r)).try_u64() == 9,
+              "Right facts stay in the right queue");
+    }
+    user_context.reset();
+    check(global.live_user_bytes() == 0, "Interleaved operation and queue storage is reclaimed");
+}
+
+static void large_work_payload_stays_outside_scope_carrier() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    {
+        auto small_work = [] {
+            return std::uint64_t(3);
+        };
+        std::array<std::uint8_t, 64 * 1024> padding{};
+        padding.back() = 7;
+        auto large_work = [padding] {
+            return std::uint64_t(padding.back());
+        };
+        ContextOnceFunction<std::uint64_t()> small(
+            std::allocator_arg, Allocator(r), std::move(small_work));
+        ContextOnceFunction<std::uint64_t()> large(
+            std::allocator_arg, Allocator(r), std::move(large_work));
+        static_assert(sizeof(detail::ScopeExecution<saver_fixture::Ambient, std::uint64_t>) <
+                      sizeof(padding));
+        check(sizeof(small) == sizeof(large) && sizeof(large) < sizeof(large_work),
+              "Scope callback carrier excludes the captured work payload");
+        check(small() == 3 && large() == 7, "Both Context-owned callback payloads execute");
+    }
+    user_context.reset();
+    check(global.live_user_bytes() == 0, "Large captured work storage is reclaimed at close");
+}
+
 int main() {
     isolated_scopes_and_enrichment();
     pending_commit_isolation();
     recursive_error_retention();
+    interleaved_operations_reusing_one_context();
+    large_work_payload_stays_outside_scope_carrier();
     std::cout << "Commit audit scope contracts passed\n";
 }

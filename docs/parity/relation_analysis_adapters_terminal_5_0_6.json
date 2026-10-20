@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "date": "2026-10-14T21:35:08.841195+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_execution": {
+    "total": 1944,
+    "success": 1584,
+    "original_intent_failures": 360,
+    "result_rows": 3420,
+    "facet_rows": 192,
+    "safe_sql_records": 3432
+  },
+  "gates": {
+    "native": 9,
+    "sanitize": 6,
+    "sanitize_leak_scanning": false,
+    "module": 5,
+    "compiler_positive": 3,
+    "compiler_negative": 3,
+    "java": [
+      {
+        "suite": "com.skynet.codegenerator.CppGenerationTest",
+        "tests": 56
+      },
+      {
+        "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+        "tests": 2
+      },
+      {
+        "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+        "tests": 2
+      }
+    ],
+    "workspaces": 24,
+    "generated_files": 288,
+    "contract_sdks": 44,
+    "exact_new_delegates": 1824,
+    "canonical_bodies": 673,
+    "exports": 1485,
+    "formatted_cpp_files": 1457
+  },
+  "all_builds_and_tests_terminal_exit_zero": true,
+  "references_clean": true,
+  "producer_branch": "cpp_support",
+  "remaining": "Complete P0-P7 and G06/G08/G12/G13 obligations remain active. Matching, roll-up and field-statistic conversion bounds are next.",
+  "artifacts": {
+    "docs/parity/relation_analysis_adapters_source_review_5_0_6.json": "3534095a6ab421bbab909873b965d2a379db6d43523e27f19583e37957ef92ea",
+    "docs/parity/relation_analysis_adapters_validation_5_0_6.json.gz": "e8ef49d1e2d63ded9e591f1e1e04ca80c7b34c75c502e5c6db6d478c9a9f3570",
+    "docs/parity/relation_analysis_adapters_sdk_change_5_0_6.json": "c9c1038261dfc90d733a7fa08a0bfe4f0d7f2681303ec4d7fe98a825031d6ce8",
+    "tests/parity/relation_analysis_inputs_5_0_6_cases.json.gz": "956eebb8f7e3061b401328c60486728311912d3cfdae3fe89dc98d7b557a58a5"
+  }
+}

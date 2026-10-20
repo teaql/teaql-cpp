@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scenarios": 504,
+  "rounds": 1008,
+  "original_successes": 864,
+  "original_errors": 144,
+  "outcomes": {
+    "success": 864,
+    "graph write error: Transport error: UNIQUE constraint failed: status_data.id": 144
+  },
+  "complete_original_domains": 7,
+  "native_compiled_domains": 7,
+  "source_and_cpp_exit_code": 0,
+  "source_and_cpp_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nsigned_overflow observed 72 scenarios; differences 0\nunsigned_max observed 72 scenarios; differences 0\nzero observed 72 scenarios; differences 0\nsigned_max observed 72 scenarios; differences 0\nfallback_text observed 72 scenarios; differences 0\ndefault_missing observed 72 scenarios; differences 0\npositive observed 72 scenarios; differences 0\nCompared 504 actual original/native constant-ID SQLite scenarios\n",
+  "live_corpus_replay_exit_code": 0,
+  "live_corpus_replay_output": "signed_overflow 72 stored original/native observations reproduce\nunsigned_max 72 stored original/native observations reproduce\nzero 72 stored original/native observations reproduce\nsigned_max 72 stored original/native observations reproduce\nfallback_text 72 stored original/native observations reproduce\ndefault_missing 72 stored original/native observations reproduce\npositive 72 stored original/native observations reproduce\nReproduced all 504 original/native SQLite bootstrap scenarios\n",
+  "models": [
+    {
+      "model": "signed_overflow",
+      "rust_exit_code": 0,
+      "cpp_exit_code": 0,
+      "rust_binary_sha256": "9405e5f1c2c255335ea49d6c01ad8b73843939e2cdaebb9a42905b83082b09cb",
+      "cpp_binary_sha256": "6e11454cfdaeecb5207ac1461c20bca46f6d044d9502849553f1475e54c70417"
+    },
+    {
+      "model": "unsigned_max",
+      "rust_exit_code": 0,
+      "cpp_exit_code": 0,
+      "rust_binary_sha256": "a297bde3488e0e17ab8f36b51f8881c26b59c5723c7b6512d57367c2b7d35cd5",
+      "cpp_binary_sha256": "6a97e59735c82bfd416beeaf0c161f3fa7ae3e721df75b3a8010c2217a208340"
+    },
+    {
+      "model": "zero",
+      "rust_exit_code": 0,
+      "cpp_exit_code": 0,
+      "rust_binary_sha256": "4be9136dd28a905a353ca31f7f64bd28fd45cdea969f8f8efa7735f1809ca8b4",
+      "cpp_binary_sha256": "6a499f36bb659f4cfe9c65934def5f3451a1353644bc9b9edb5d76a702d403b1"
+    },
+    {
+      "model": "signed_max",
+      "rust_exit_code": 0,
+      "cpp_exit_code": 0,
+      "rust_binary_sha256": "ed5e3db9da88db757a1de0af2915fe523d28adb1af8772a9e99bcb5cdf1f8b4e",
+      "cpp_binary_sha256": "fcc66a1388b7076215798b1777191fafc871a2bbecde41bc3aff05051b4a5276"
+    },
+    {
+      "model": "fallback_text",
+      "rust_exit_code": 0,
+      "cpp_exit_code": 0,
+      "rust_binary_sha256": "bd7d981dea59d56718869f1c54b2a889a9756e29281ac82565f45929d1bc9e5a",
+      "cpp_binary_sha256": "ee1eb6db8bbeb256343c037e0035515097d6e968c722dc73f7ff7339319615f6"
+    },
+    {
+      "model": "default_missing",
+      "rust_exit_code": 0,
+      "cpp_exit_code": 0,
+      "rust_binary_sha256": "c0ca29661060e7d8374e6cb6ec4a861e42a28773ebaaa3c3887014a8dd4f0ba2",
+      "cpp_binary_sha256": "4fe896054cab7ed5c4d68601faf2361910499abc5d6e5cf72e49c666df52d338"
+    },
+    {
+      "model": "positive",
+      "rust_exit_code": 0,
+      "cpp_exit_code": 0,
+      "rust_binary_sha256": "02f0147c4dfb238be71002e9a58cdcca259d97d84eb025722436b6bb54f88d11",
+      "cpp_binary_sha256": "716778253d7cecb604ad143eb47cd9f01e6a0ca9bc770f95a048f4daec638e86"
+    }
+  ],
+  "runtime_prebuild_exit_code": 0,
+  "runtime_prebuild_output": "ninja: no work to do.\n",
+  "default_pmr_disabled": true,
+  "actual_user_context_destruction": true,
+  "production_or_generator_body_changes": false,
+  "format_output": "Formatted 1019 handwritten C++ files with clang-format 18.1.8\n",
+  "format_check_output": "Checked 1019 handwritten C++ files with clang-format 18.1.8\n",
+  "sanitizer_module_mips_runs": false,
+  "original_zero_identity_behavior": "Allocate a new positive BASIC ID on each initialization; not idempotent. Preserve original behavior explicitly.",
+  "remaining_scope": "Scalar/time, root/dependency/seed metadata, custom capabilities and controlled concurrent conflicts remain required. Default constant guard remains; capabilities/phases are not complete.",
+  "sha256": {
+    "tests/parity/constant_id_execution_5_0_6_cases.json.gz": "dc2cb1dff719231c4eb75617a2e278fe1cdaee57003772203426acf7b68e7e93",
+    "tests/parity/constant_id_execution_5_0_6.rs": "a04a14d30502a43079df6c774ec14352817622aa3406ac10f133a9e2af8ffe6e",
+    "tests/parity/constant_id_execution_probe.cpp": "8e3fa414e2a8d0da852b8eaac014d34f44d1597724989dde02e1949f8af5fdf8",
+    "scripts/verify_constant_id_execution.py": "944ea9c5bb4a354991532d6f8b2f37e26fdc358ef622e6c1728a59f004ee2674",
+    "docs/parity/constant_id_execution_5_0_6_source_review.json": "a9594255c719f9379ae72d940bfddc10a2ea6a580fa70168d2ee6afa62440ee5"
+  }
+}

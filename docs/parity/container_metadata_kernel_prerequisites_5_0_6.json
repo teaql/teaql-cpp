@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "scope": "Existing arbitrary runtime entity identity, logical relation names and typed reverse JSON mechanics; runtime-first prerequisite only.",
+  "tests": [
+    {
+      "name": "json_graph_views_context_contracts",
+      "classname": "json_graph_views_context_contracts",
+      "time": "0.00163418",
+      "status": "run"
+    },
+    {
+      "name": "field_layout_contracts",
+      "classname": "field_layout_contracts",
+      "time": "0.00158739",
+      "status": "run"
+    }
+  ],
+  "junit": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<testsuite name=\"(empty)\"\n\ttests=\"2\"\n\tfailures=\"0\"\n\tdisabled=\"0\"\n\tskipped=\"0\"\n\thostname=\"\"\n\ttime=\"0\"\n\ttimestamp=\"2026-10-18T10:22:37\"\n\t>\n\t<testcase name=\"json_graph_views_context_contracts\" classname=\"json_graph_views_context_contracts\" time=\"0.00163418\" status=\"run\">\n\t\t<properties/>\n\t\t<system-out>JSON graph view lifetime contracts passed\n</system-out>\n\t</testcase>\n\t<testcase name=\"field_layout_contracts\" classname=\"field_layout_contracts\" time=\"0.00158739\" status=\"run\">\n\t\t<properties/>\n\t\t<system-out>FieldLayout Context and metadata contracts passed\n</system-out>\n\t</testcase>\n</testsuite>\n",
+  "build_log": "[0/2] Re-checking globbed directories...\n[1/3] Linking CXX executable teaql_field_layout_tests\n[2/3] Linking CXX executable teaql_json_graph_views_probe\n",
+  "source_sha256": {
+    "teaql_core/src/load_state.cpp": "532d74eadd0c40408bda10fa5e3c7624253e9ba7c05bfe237ae9c24ad993d9df",
+    "teaql_core/include/teaql/core/meta.hpp": "5e0cc949d9b21644298a870a9dc51ecf59dec3b7817601b5ab31c564f392cb48",
+    "teaql_runtime/include/teaql/runtime/generated_entity_json.hpp": "16d877689730159ae573687920fe6a32acc8144bef0dd7a766343f63432498d0"
+  },
+  "complete": true
+}

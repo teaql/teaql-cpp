@@ -2,21 +2,40 @@
 #include <charconv>
 
 namespace teaql::detail {
+void record_query_metadata(const UserContext&, SqlIntentRedactions*, const ExecutionMetadata&);
+
 namespace {
 struct ContextObserver {
     using allocator_type = Allocator;
     ResourceBorrow<const UserContext> context;
+    std::optional<ResourceBorrow<SqlIntentRedactions>> query_privacy;
 
-    ContextObserver(std::allocator_arg_t, Allocator a, const UserContext& context)
-        : context(std::allocator_arg, a, context, resource_arena(context.memory_resource())) {}
+    ContextObserver(std::allocator_arg_t,
+                    Allocator a,
+                    const UserContext& context,
+                    const std::optional<ResourceBorrow<SqlIntentRedactions>>& privacy = {})
+        : context(std::allocator_arg, a, context, resource_arena(context.memory_resource())),
+          query_privacy(clone_in(a.resource(), privacy)) {}
 
     ContextObserver(std::allocator_arg_t, Allocator a, const ContextObserver& other)
-        : context(std::allocator_arg, a, other.context) {}
+        : context(std::allocator_arg, a, other.context),
+          query_privacy(clone_in(a.resource(), other.query_privacy)) {}
 
     void operator()(ExecutionMetadata value) const {
-        context.get().record_metadata_log(value);
+        record_query_metadata(
+            context.get(), query_privacy ? &query_privacy->get() : nullptr, value);
     }
 };
+}
+
+void UserContextMetadata::with_query_privacy(SqlIntentRedactions& privacy) {
+    auto r = memory_resource();
+    auto entry = ContextResources::entry(resource_arena(r), privacy.memory_resource(), privacy);
+    query_privacy_.emplace(std::allocator_arg, Allocator(r), privacy, *entry.owner, entry.slot);
+}
+
+void UserContextMetadata::record_metadata_log(const ExecutionMetadata& value) const {
+    record_query_metadata(context(), query_privacy_ ? &query_privacy_->get() : nullptr, value);
 }
 
 Vector<const EntityDescriptor*> UserContextMetadata::all_entities(Memory r) const {
@@ -31,9 +50,10 @@ std::optional<ExecutionObserver> UserContextMetadata::query_diagnostic_observer(
     if (!capture_execution_metadata()) {
         return {};
     }
-    return ExecutionObserver(std::allocator_arg,
-                             Allocator(r),
-                             ContextObserver(std::allocator_arg, Allocator(r), context()));
+    return ExecutionObserver(
+        std::allocator_arg,
+        Allocator(r),
+        ContextObserver(std::allocator_arg, Allocator(r), context(), query_privacy_));
 }
 
 std::optional<ExecutionObserver> UserContextMetadata::mutation_diagnostic_observer(Memory r) const {

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="10"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="canada-mini-host"
+	time="1"
+	timestamp="2026-10-18T17:53:34"
+	>
+	<testcase name="check_model_contracts" classname="check_model_contracts" time="0.00190983" status="run">
+		<properties/>
+		<system-out>Checker model and wire ownership contracts pass
+</system-out>
+	</testcase>
+	<testcase name="check_model_rust_parity" classname="check_model_rust_parity" time="0.67778" status="run">
+		<properties/>
+		<system-out>check model 5.0.6 parity: 220/220 observations match
+</system-out>
+	</testcase>
+	<testcase name="checker_context_contracts" classname="checker_context_contracts" time="0.00671444" status="run">
+		<properties/>
+		<system-out>Checker/fix Context ownership contracts passed
+</system-out>
+	</testcase>
+	<testcase name="checker_reentrant_close" classname="checker_reentrant_close" time="0.00142584" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="checker_registration_reentrant_close" classname="checker_registration_reentrant_close" time="0.00124731" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="checker_typed_direct_reentrant_close" classname="checker_typed_direct_reentrant_close" time="0.00125709" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="checker_rust_parity" classname="checker_rust_parity" time="0.3823" status="run">
+		<properties/>
+		<system-out>checker 5.0.6 parity: 1362/1362 observations match
+</system-out>
+	</testcase>
+	<testcase name="original_runtime_checker_locale_contracts" classname="original_runtime_checker_locale_contracts" time="0.00269611" status="run">
+		<properties/>
+		<system-out>Original nine checker/language/catalog contracts passed
+</system-out>
+	</testcase>
+	<testcase name="runtime_check_error_contracts" classname="runtime_check_error_contracts" time="0.0029912" status="run">
+		<properties/>
+		<system-out>Runtime check/error contracts passed
+</system-out>
+	</testcase>
+	<testcase name="runtime_check_rust_parity" classname="runtime_check_rust_parity" time="0.250529" status="run">
+		<properties/>
+		<system-out>Runtime checks/errors (64-bit usize): 1134/1134 observations match
+</system-out>
+	</testcase>
+</testsuite>

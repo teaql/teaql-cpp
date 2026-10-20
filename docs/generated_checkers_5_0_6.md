@@ -1,9 +1,12 @@
 # Generated Checker and behavior assembly for Rust 5.0.6
 
-Status: supported-model implementation and focused native/lifetime/module/
-reproduction gates passed. Complete G02/G03/G12/G15 and P1
-remain open. Sources are the frozen producer's checker/index.stg,
-behavior/index.stg and runtime/index.stg, plus runtime 5.0.6.
+Status: G02/G03 are qualified with documented C++ language/ownership adaptations.
+G12/G15 and the other P1/P7 responsibilities remain open. See the
+[final ten-requirement acceptance](checker_behavior_acceptance_5_0_6.md) and its
+current terminal evidence. The following implementation notes and checkpoint
+counts are historical; their narrower scope and source failures are preserved.
+Sources are the locked producer's checker/index.stg, behavior/index.stg and
+runtime/index.stg, plus Rust 5.0.6.
 
 ## Generated responsibilities
 

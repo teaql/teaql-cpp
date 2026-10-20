@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "cases": [
+    {
+      "case": "ordered",
+      "observations": 960,
+      "rounds": 1440,
+      "errors": 504,
+      "query_errors": 480,
+      "callbacks": 2052,
+      "corpus_sha256": "0c82951d7185dadcd95be03d54263587ca4a7e8a52c9f56287e5eb0cd981067e"
+    },
+    {
+      "case": "reversed",
+      "observations": 960,
+      "rounds": 1440,
+      "errors": 1440,
+      "query_errors": 480,
+      "callbacks": 1500,
+      "corpus_sha256": "594c345d67fe927afab944fe2806e76974ba2309eaf9bf19e77db8cb87fc87dc"
+    },
+    {
+      "case": "self_reference_required",
+      "observations": 960,
+      "rounds": 1440,
+      "errors": 504,
+      "query_errors": 480,
+      "callbacks": 2052,
+      "corpus_sha256": "08e3d38d8580c85fa74a7f9df2273ef02739d4b651c4b7107f492ae39fa6af91"
+    }
+  ],
+  "total_observations": 2880,
+  "total_rounds": 4320,
+  "source_reference_checksums_verified": true,
+  "normalization": "none",
+  "complete_capability_acceptance": false,
+  "profiles": {
+    "native": {
+      "passed": 3,
+      "total": 3,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 410: constant_topology_extensions_ordered_rust_parity\n    Start 411: constant_topology_extensions_reversed_rust_parity\n    Start 412: constant_topology_extensions_self_reference_required_rust_parity\n1/3 Test #411: constant_topology_extensions_reversed_rust_parity ..................   Passed   20.53 sec\n2/3 Test #410: constant_topology_extensions_ordered_rust_parity ...................   Passed   46.13 sec\n3/3 Test #412: constant_topology_extensions_self_reference_required_rust_parity ...   Passed   47.89 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =  47.90 sec\n",
+      "sha256": "3e41cba8795e50baeb80021745da8c0a41d208be80d2f4e108a704443cba0e9e"
+    },
+    "modules": {
+      "passed": 3,
+      "total": 3,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 738: module_constant_topology_extensions_ordered_rust_parity\n    Start 739: module_constant_topology_extensions_reversed_rust_parity\n    Start 740: module_constant_topology_extensions_self_reference_required_rust_parity\n1/3 Test #739: module_constant_topology_extensions_reversed_rust_parity ..................   Passed   23.35 sec\n2/3 Test #738: module_constant_topology_extensions_ordered_rust_parity ...................   Passed   46.27 sec\n3/3 Test #740: module_constant_topology_extensions_self_reference_required_rust_parity ...   Passed   48.03 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =  48.04 sec\n",
+      "sha256": "14dce27267f8f878fcfa5610275a9312fe3dd12fc02457cfeda92a2cee7113d5"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "case": "ordered",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 410: constant_topology_extensions_ordered_rust_parity\n1/1 Test #410: constant_topology_extensions_ordered_rust_parity ...   Passed  138.84 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) = 138.85 sec\n",
+      "sha256": "5822ea48ea60365328f659f3311b419f02e172c15a4f941dba559fda89291ce3"
+    }
+  },
+  "canonical_bodies": 526,
+  "catalog_exports": 1479,
+  "sanitizer_status": "passed",
+  "leak_scanning": false,
+  "format_cpp_count": 1362
+}

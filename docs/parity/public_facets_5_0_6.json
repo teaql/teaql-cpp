@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "Exact original/native observations and targeted native/sanitizer/module gates pass; complete capabilities remain partial",
+  "runtime_source": {
+    "path": ".reference/teaql-rs/teaql-runtime/src/generated_support.rs",
+    "sha256": "f21089ff92ae378fa74174f1eb42c028728034e3cb92841fd0795afd14119a2c",
+    "execution_range": "374-440",
+    "entry_range": "296-314"
+  },
+  "observer": {
+    "path": "tests/parity/rust_generated_support_5_0_6/src/main.rs",
+    "sha256": "04fb3cd2bdc3876b091e2937cc4b3975377975c1edc4ada0463fd00464da1284",
+    "manifest_sha256": "20028abffb3be501524f4f3bd04dc2f67153a69096b449e5c4cfffd108a0c79a",
+    "lock_sha256": "169b24cc8c499d9dc9a627cd01df69d4417a238d4a514a4ac0cc78ff8338db4d",
+    "adaptations": [
+      "Read optional root purpose from input without inventing a Purpose trace.",
+      "Observe MissingEntity and RequestIntent variants, replacing the old fixture panic on unknown errors.",
+      "Record full public query Debug and stable retained SQL diagnostic fields.",
+      "Run a separate same-Context query after public facets to observe privacy isolation."
+    ],
+    "unchanged_helpers": {
+      "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+      "tests/parity/rust_values/src/fixture_sql.rs": "3f9b4a0b35cee94de9ccb283f0cf35d64e6196b112791a9017ea42f836215abf",
+      "tests/parity/rust_values/src/fixture_query_keys.rs": "d55434c6c84ff848c07c22f28c5f562597e9bb3f4c952abc8dbffa4f8977f4c3"
+    }
+  },
+  "source_disposition": {
+    "generated_support_path": "tests/generator/parity/dynamic_json_rust/lib/src/request_support.rs",
+    "sha256": "d7a0d7966bbabb3ff234c5aee596f1dc1098d6060e7611acbb651aa2b1255d1e",
+    "range": "551-588",
+    "behavior": "Frozen generated helper retains Calculate facet, separate ancestry prefix and nonrecursive compact facet results. The public core helper inherits validated root intent, owns ancestry and recursively executes nested options. Both contracts are preserved; no generator modification."
+  },
+  "matrices": {
+    "public_facets": {
+      "inputs": 1178,
+      "sha256": "9728a3a11e6a0cb0271da09a9acd0e3f5d576f52d35f5655e25f610eb2702541",
+      "comparison": "exact original/native; no normalization",
+      "callback_calls": 1062,
+      "original_sqlite_inputs": 48
+    },
+    "public_facet_logs": {
+      "inputs": 36,
+      "sha256": "5af45b9238a799565de111422d52d96d29c83dc55ed9713b66d9ca05ab222632",
+      "comparison": "exact original/native; no normalization",
+      "original_sqlite_inputs": 36,
+      "logged_controls": 18,
+      "retained_facet_statements": 48,
+      "retained_followup_statements": 18,
+      "assertions": "Future protected literals absent from retained facet diagnostics; unrelated follow-up intent retains them. Logging-disabled histories remain empty."
+    }
+  },
+  "initial_differences": 1096,
+  "native_controls": {
+    "passed": true,
+    "source": "teaql_runtime/tests/generated_support_tests.cpp",
+    "scope": [
+      "required intent before metadata or service lookup, including empty options",
+      "include-all metadata validation",
+      "parent and nested pending-child teardown on actual User deletion",
+      "no cancellation authority over foreign Context work",
+      "deep Global retention of actual nested facet results",
+      "no default PMR allocation"
+    ]
+  },
+  "native_gate": {
+    "passed": 11,
+    "total": 11,
+    "log": "/tmp/teaql_public_facets_506_native_final_tests.log"
+  },
+  "remaining": "Complete models, policies, protected sinks, plaintext controls, full integration and G01-G17/P0-P7 remain unqualified.",
+  "build_history": [
+    {
+      "log": "/tmp/teaql_runtime_baselines_506_build.log",
+      "exit_code": 101,
+      "reason": "Observer manifest omitted its existing async-trait dependency; original driver unchanged."
+    },
+    {
+      "log": "/tmp/teaql_runtime_baselines_506_retry_build.log",
+      "exit_code": 0
+    },
+    {
+      "log": "/tmp/teaql_public_facet_logs_506_native_build.log",
+      "exit_code": 1,
+      "reason": "New observation formatter omitted existing SqlExecutionOutcome Debug declarations."
+    },
+    {
+      "log": "/tmp/teaql_public_facet_logs_506_native_retry_build.log",
+      "exit_code": 1,
+      "reason": "Incorrect observer include path; actual declaration belongs to teaql/data_service/sql_log_debug.hpp."
+    },
+    {
+      "log": "/tmp/teaql_public_facet_logs_506_native_final_build.log",
+      "exit_code": 0
+    }
+  ],
+  "sanitizer_gate": {
+    "passed": 4,
+    "total": 4,
+    "leak_scanning": false,
+    "log": "/tmp/teaql_public_facets_506_sanitize_tests.log",
+    "scope": "Public fake/SQLite observations, User deletion/foreign ownership controls and unchanged generated async regression; SQLite internals uninstrumented"
+  },
+  "module_gate": {
+    "passed": 3,
+    "total": 3,
+    "canonical_consumer_bodies": 172,
+    "log": "/tmp/teaql_public_facets_506_module_tests.log"
+  },
+  "reproduction": [
+    {
+      "log": "/tmp/teaql_runtime_support_baselines_506_reproduce.log",
+      "exit_code": 0,
+      "sha256": "184908bba58b26acc62bcb42c4029b699bef84d8815f26c708f082826bb349a4"
+    },
+    {
+      "log": "/tmp/teaql_public_facets_506_reproduce.log",
+      "exit_code": 0,
+      "sha256": "c57711da7dbb24f1b1cf5135f3f905792eb639d91a8d9fafb8cb0ee431616d3c"
+    },
+    {
+      "log": "/tmp/teaql_public_facet_logs_506_reproduce.log",
+      "exit_code": 0,
+      "sha256": "4c6b77c21f317aa6b13819dc2c421995f60b0f2f5f49b2016328f7438d55f69d"
+    }
+  ],
+  "formatting": {
+    "files": 1026,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "relation_regression": {
+    "passed": 7,
+    "total": 7,
+    "log": "/tmp/teaql_public_facets_506_relation_tests.log",
+    "build_log": "/tmp/teaql_public_facets_506_relation_build.log",
+    "scope": "Existing original/native owner, asynchronous owner, graph and flat facet matrices plus Context controls; passing after public helper correction"
+  }
+}

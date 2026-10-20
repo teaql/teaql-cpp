@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "initial_record": "docs/parity/full_native_integration_5_0_6_initial.json",
+  "follow_ups": [
+    {
+      "name": "constant_temporal_rust_parity",
+      "exit_code": 0,
+      "observations": 1728,
+      "seconds": 90.27,
+      "log_sha256": "642a98f819857d171da723a435e3f6aa063499c8fa58ed1ccf8803fdaba8a3d2",
+      "output": "Temporal constants: 1728/1728 exact original/native outcomes\nreal 90.27\nuser 89.87\nsys 0.82\n"
+    },
+    {
+      "name": "bootstrap_extensions_rust_parity",
+      "exit_code": 0,
+      "observations": 2304,
+      "seconds": 131.01,
+      "log_sha256": "daf21e89e68ce58e08bc00e41e096988a07a52a9caa9995de2fe33234f1a7a9a",
+      "output": "Bootstrap extensions: 2304/2304 exact override/resource outcomes\nreal 131.01\nuser 131.12\nsys 0.34\n"
+    }
+  ],
+  "scheduling_fix": "generated_api_type_errors explicitly uses four compiler workers and reserves four CTest PROCESSORS slots. Existing temporal/extension timeout budgets remain 120/180 seconds.",
+  "full_native_rerun": false,
+  "ctest_replay_pending": false,
+  "complete_capability_acceptance": false,
+  "ctest_replay": {
+    "passed": 2,
+    "total": 2,
+    "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start  41: bootstrap_extensions_rust_parity\n    Start 573: constant_temporal_rust_parity\n1/2 Test #573: constant_temporal_rust_parity ......   Passed   73.59 sec\n2/2 Test  #41: bootstrap_extensions_rust_parity ...   Passed  113.72 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) = 113.73 sec\n"
+  }
+}

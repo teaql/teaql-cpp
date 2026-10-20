@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_inputs": {
+    "tests/parity/rust_execution_shapes_5_0_6/src/bin/runtime_service_errors_original_5_0_6.rs": "2eeab459c92729dfac74470b7a19c63785415a5828b4a04269964f50e7d85f0b",
+    "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs": "2ec8634bffd0ba33046fec865feebb8796c9df087c93c40b3e3b1abc0ad361d5",
+    "tests/parity/rust_execution_shapes_5_0_6/Cargo.lock": "2deb61ccf27c82a58eba825565a7c6d36c5b39d85bbb2998bcc6f782f607c866"
+  },
+  "build_exit_code": 0,
+  "cases": [
+    {
+      "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotPresent }",
+      "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable not found",
+      "name": "missing",
+      "source": "environment variable not found",
+      "source_debug": "NotPresent"
+    },
+    {
+      "debug": "ConnectionError(\"a retained connection diagnostic\")",
+      "display": "connection error: a retained connection diagnostic",
+      "name": "connection",
+      "source": null,
+      "source_debug": null
+    },
+    {
+      "debug": "Configuration(\"an invalid configured profile\")",
+      "display": "configuration error: an invalid configured profile",
+      "name": "configuration",
+      "source": null,
+      "source_debug": null
+    },
+    {
+      "debug": "Rusqlite(InvalidQuery)",
+      "display": "rusqlite error: Query is not read-only",
+      "name": "sqlite",
+      "source": "Query is not read-only",
+      "source_debug": "InvalidQuery"
+    },
+    {
+      "debug": "Runtime(Graph(\"a retained runtime diagnostic\"))",
+      "display": "runtime error: graph write error: a retained runtime diagnostic",
+      "name": "runtime",
+      "source": "graph write error: a retained runtime diagnostic",
+      "source_debug": "Graph(\"a retained runtime diagnostic\")"
+    }
+  ],
+  "notice": "Calls all five original public service error branches and real From conversions; actual C++ comparison remains required."
+}

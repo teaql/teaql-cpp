@@ -87,6 +87,11 @@ protected:
         return pending_.track(operation);
     }
 
+    template <class T>
+    AsyncStream<T>& track(AsyncStream<T>& stream) {
+        return pending_.track(stream);
+    }
+
     void require_active() const {
         if (consumed_) {
             throw std::logic_error("SQL transaction has been consumed");

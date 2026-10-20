@@ -1,6 +1,8 @@
 #pragma once
 #include "fixture_query_keys.hpp"
+#include "debug_modes.hpp"
 #include <teaql/runtime/generated_support.hpp>
+#include <teaql/runtime/purposed_query_debug.hpp>
 #include <teaql/core/detail/query_debug.hpp>
 
 namespace support_fixture {
@@ -96,9 +98,11 @@ static Json aggregates(Memory r, std::span<const RelationAggregate> values) {
 
 static Json error(Memory r, const RuntimeError& value) {
     auto result = detail::model_json(r);
-    auto kind = value.kind() == RuntimeError::Kind::Graph    ? "Graph"
-                : value.kind() == RuntimeError::Kind::Policy ? "Policy"
-                                                             : "MissingRelation";
+    auto kind = value.kind() == RuntimeError::Kind::Graph           ? "Graph"
+                : value.kind() == RuntimeError::Kind::Policy        ? "Policy"
+                : value.kind() == RuntimeError::Kind::RequestIntent ? "RequestIntent"
+                : value.kind() == RuntimeError::Kind::MissingEntity ? "MissingEntity"
+                                                                    : "MissingRelation";
     detail::model_put(result, "kind", kind);
     detail::model_put(result, "text", value.to_string(r));
     return result;
@@ -194,6 +198,7 @@ public:
         auto call = detail::model_json(r);
         detail::model_put(call, "entity", entity);
         detail::model_put(call, "query", detail::debug_query(r, query.as_query()));
+        detail::model_put(call, "diagnostic", formatted_debug(r, query));
         detail::model_put(call, "aggregates", aggregates(r, relation_aggregates));
         detail::model_put(call, "trace", trace(r, chain));
         calls.emplace_back(std::move(call));

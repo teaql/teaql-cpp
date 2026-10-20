@@ -355,6 +355,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "cpp-member-aliases-core"
+version = "0.1.0"
+dependencies = [
+ "async-stream",
+ "async-trait",
+ "chrono",
+ "futures-util",
+ "log",
+ "rusqlite",
+ "rust_decimal",
+ "serde",
+ "serde_json",
+ "teaql-core",
+ "teaql-data-service",
+ "teaql-macros",
+ "teaql-provider-sqlite",
+ "teaql-runtime",
+ "teaql-sql",
+ "tokio",
+]
+
+[[package]]
 name = "cpp-relations-core"
 version = "0.1.0"
 dependencies = [
@@ -1141,6 +1163,7 @@ dependencies = [
  "cpp-inheritance-core",
  "cpp-inheritance-graph-core",
  "cpp-inheritance-variants-core",
+ "cpp-member-aliases-core",
  "cpp-relations-core",
  "cpp-sample-runtime-core",
  "cpp-sample-temporal-core",

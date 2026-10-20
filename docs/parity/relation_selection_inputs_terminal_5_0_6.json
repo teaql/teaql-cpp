@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "date": "2026-10-14T20:10:50.455392+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_execution": {
+    "total": 1152,
+    "success": 1152,
+    "result_rows": 2784,
+    "safe_sql_records": 1800,
+    "scope": "Forward relation materialization and typed/compact execution; unrelated/reverse typing has separate construction proof"
+  },
+  "gates": {
+    "native": 4,
+    "module": 2,
+    "sanitize": 2,
+    "sanitize_leak_scanning": false,
+    "compiler_positive": 3,
+    "compiler_negative": 3,
+    "java": [
+      {
+        "suite": "com.skynet.codegenerator.CppGenerationTest",
+        "tests": 55
+      },
+      {
+        "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+        "tests": 2
+      },
+      {
+        "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+        "tests": 2
+      }
+    ],
+    "workspaces": 24,
+    "generated_files": 288,
+    "contract_sdks": 44,
+    "selector_input_additions": 456,
+    "typed_delegate_replacements": 76,
+    "canonical_consumers": 669,
+    "module_exports": 1485,
+    "formatted_cpp_files": 1453
+  },
+  "all_build_processes_terminal_exit_zero": true,
+  "reference_worktrees_clean": true,
+  "remaining": "Complete G06/G08/G12/G13 and all P0-P7 requirements remain active. Relation matching/grouping/facet/aggregate conversions need their original bounds reviewed.",
+  "artifacts": {
+    "docs/parity/relation_selection_inputs_source_review_5_0_6.json": "2402f71a262acf3fdb39ddda636f81fa69d5cf551bd1d0ac3f26269104f34c81",
+    "tests/parity/relation_selection_inputs_5_0_6_cases.json.gz": "d1e17c2208d6008e983fa80bf9ccd145b1c0489e3dc78ac024bf9d08942438b2",
+    "docs/parity/relation_selection_inputs_validation_5_0_6.json.gz": "73da79e6a07857e169ec33595b378620d3a79a77d6af18bc4684fbd85aa69f54",
+    "docs/parity/relation_selection_inputs_sdk_change_5_0_6.json": "7d78c989a04f2ef7bbdcdf8a396bf38e714d12c4dd5ad825e38c966e68d94e4d",
+    "docs/parity/relation_selection_typed_delegates_sdk_change_5_0_6.json": "d6433ee8dad18f832216c54b96bd81e291f55942ef2d4a273dd2580264cda6ee"
+  }
+}

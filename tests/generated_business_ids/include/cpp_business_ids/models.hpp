@@ -112,6 +112,7 @@ public:
     }
 
     static Result<Tenant, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -269,6 +270,7 @@ public:
     }
 
     static Result<Receipt, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -484,6 +486,7 @@ public:
     }
 
     static Result<Ticket, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -689,6 +692,35 @@ inline eval::EvalResult<EntityListBorrow<Ticket>> Tenant::evalTicketList() const
     return GeneratedRelationAccess::list(*this, ticketList(), "ticket_list");
 }
 
+inline std::optional<Json> Tenant::borrowed_json(Memory r, EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.reverse_many<Receipt>("receipt_list", load_state.is_loaded("receipt_list"));
+    projection.reverse_many<Ticket>("ticket_list", load_state.is_loaded("ticket_list"));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void Tenant::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
 }
@@ -751,17 +783,20 @@ inline Result<Tenant, EntityError> Tenant::from_compact_row(Memory r, CompactRow
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
@@ -822,6 +857,51 @@ inline const Tenant* Receipt::tenant() const {
 
 inline eval::EvalResult<EntityBorrow<Tenant>> Receipt::evalTenant() const {
     return GeneratedRelationAccess::object(memory_resource(), "tenant", tenant(), false);
+}
+
+inline std::optional<Json> Receipt::borrowed_json(Memory r, EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "tenant_id",
+        [&] {
+            return generated_detail::encode(r, tenant_id_);
+        },
+        load_state.is_loaded("tenant_id"),
+        false);
+    projection.field(
+        "receipt_number",
+        [&] {
+            return generated_detail::encode(r, receipt_number_);
+        },
+        load_state.is_loaded("receipt_number"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.forward<Tenant>("tenant",
+                               tenant_ ? &*tenant_ : nullptr,
+                               load_state.is_loaded("tenant"),
+                               generated_detail::encode(r, tenant_id_));
+    return projection.finish(dynamic_field_values());
 }
 
 inline void Receipt::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
@@ -895,27 +975,30 @@ inline Result<Receipt, EntityError> Receipt::from_compact_row(Memory r, CompactR
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto tenant_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "tenant_id", "tenant", true);
+    auto tenant_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "tenant_id", "tenant", true, field_layout_binding);
     if (!tenant_id_lookup) {
         return Outcome::err(r, std::move(tenant_id_lookup).error());
     }
     auto receipt_number_lookup = GeneratedRelationAccess::lookupField(
-        r, row, ENTITY_NAME, "receipt_number", "receipt_number", false);
+        r, row, ENTITY_NAME, "receipt_number", "receipt_number", false, field_layout_binding);
     if (!receipt_number_lookup) {
         return Outcome::err(r, std::move(receipt_number_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
@@ -1011,6 +1094,51 @@ inline eval::EvalResult<EntityBorrow<Tenant>> Ticket::evalTenant() const {
     return GeneratedRelationAccess::object(memory_resource(), "tenant", tenant(), false);
 }
 
+inline std::optional<Json> Ticket::borrowed_json(Memory r, EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "tenant_id",
+        [&] {
+            return generated_detail::encode(r, tenant_id_);
+        },
+        load_state.is_loaded("tenant_id"),
+        false);
+    projection.field(
+        "ticket_number",
+        [&] {
+            return generated_detail::encode(r, ticket_number_);
+        },
+        load_state.is_loaded("ticket_number"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.forward<Tenant>("tenant",
+                               tenant_ ? &*tenant_ : nullptr,
+                               load_state.is_loaded("tenant"),
+                               generated_detail::encode(r, tenant_id_));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void Ticket::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
     if (tenant_) {
@@ -1082,27 +1210,30 @@ inline Result<Ticket, EntityError> Ticket::from_compact_row(Memory r, CompactRow
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto tenant_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "tenant_id", "tenant", true);
+    auto tenant_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "tenant_id", "tenant", true, field_layout_binding);
     if (!tenant_id_lookup) {
         return Outcome::err(r, std::move(tenant_id_lookup).error());
     }
     auto ticket_number_lookup = GeneratedRelationAccess::lookupField(
-        r, row, ENTITY_NAME, "ticket_number", "ticket_number", false);
+        r, row, ENTITY_NAME, "ticket_number", "ticket_number", false, field_layout_binding);
     if (!ticket_number_lookup) {
         return Outcome::err(r, std::move(ticket_number_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }

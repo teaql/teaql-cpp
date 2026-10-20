@@ -1,0 +1,202 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "declared ten-model topology/compiler dispositions and five-domain actual SQLite/Q/E outcomes qualified; complete G05/P3 and all phases/capabilities remain partial",
+  "metadata_configurations": 10,
+  "successful_original_compilers": 5,
+  "successful_native_compilers": 7,
+  "source_optional_reference_failure_crates": 2,
+  "source_compiler_errors": {
+    "E0308": 4
+  },
+  "identical_parser_failures": {
+    "CYCLE": 2,
+    "DEPTH_EXCEEDED": 1
+  },
+  "counts": {
+    "scenarios": 480,
+    "rounds": 720,
+    "sql_entries": 3444,
+    "typed_values": 864,
+    "bootstrap_success": 360,
+    "query_success": 720
+  },
+  "errors": {
+    "graph write error: Transport error: UNIQUE constraint failed: category_data.id": 72,
+    "graph write error: Transport error: FOREIGN KEY constraint failed": 288
+  },
+  "expression_states": {
+    "category:Value": 792,
+    "parent:NotApplicable": 576,
+    "category:NotLoaded": 72,
+    "parent:Value": 264,
+    "parent:NotLoaded": 24
+  },
+  "models": {
+    "foreign_value_one": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 856,
+      "typed_values": 288,
+      "bootstrap_success": 120,
+      "query_success": 144
+    },
+    "missing_target_one": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 504,
+      "typed_values": 0,
+      "query_success": 144
+    },
+    "ordered": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 856,
+      "typed_values": 288,
+      "bootstrap_success": 120,
+      "query_success": 144
+    },
+    "reversed": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 312,
+      "typed_values": 0,
+      "query_success": 144
+    },
+    "self_reference_required": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 916,
+      "typed_values": 288,
+      "bootstrap_success": 120,
+      "query_success": 144
+    }
+  },
+  "native": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 5,
+    "total": 5
+  },
+  "modules": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 5,
+    "total": 5,
+    "canonical_bodies": 442
+  },
+  "format": {
+    "version": "18.1.8",
+    "files": 1349,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "artifact_compiler_reproduction_exit_code": 0,
+  "live_original_reproduction_exit_code": 0,
+  "all_database_snapshots_unchanged_by_user_close": true,
+  "runtime_changed": false,
+  "producer_changed": false,
+  "guards_removed": false,
+  "comparison": "Exact full physical rows/versions/ID floors/roots/errors, typed scalar/E values and Value/NotLoaded status, SQL/binding/intent records. Timing and raw per-language diagnostic text are outside equality. Raw diagnostics preserved separately; no legitimate Null branch is claimed. Optional source compile failures never become paired runtime oracles.",
+  "ownership": "Global owns SQLite/observations; each round actually deletes its fresh UserContext. Nested observations/diagnostic copies belong to Global. Default PMR disabled; no implicit lifetime extension.",
+  "fixture_corrections": [
+    "Original optional self-reference failed with two E0308 errors; it was preserved and a separate required-self case and optional-forward control were added.",
+    "Initial observer called nonexistent Rust is_null; source public ValueExpression uses eval.",
+    "Deleting a referenced Category violated actual SQLite FK constraints in fixture setup. Missing-row setup now deletes an unreferenced Category after the selected Status; no FK disabling.",
+    "Original selected soft-deleted target produces missing-preload panic. The observer catches only that signature and preserves NotLoaded, while unrelated panics resume; native catches only ExpressionNotLoadedError. Raw diagnostics are retained independently."
+  ],
+  "hashes": {
+    "scripts/audit_constant_topology_contracts.py": "fd09bf029e4e56068c5277065516641f3e1100266e7f403e2d215f30d7cedad3",
+    "scripts/verify_constant_topology_execution.py": "32119fec0fcf8eb147c81c37fb4f4bad83d567e7e0658b73fbb941137d7812ca",
+    "tests/generator/ConstantMetadataProbe.java": "218cd94f595c1747eb9d7c7c7820032051cb3b7076d52bf4c9bf70c0a55c6409",
+    "tests/generator/parity/constant_topology_contracts/cases.json": "0f4fe66cda4f0014ef42e18cde6b9d8d4aedf4c0d4d135249da9a41241deb266",
+    "tests/parity/constant_topology_execution_probe.cpp": "d00a66b22022a6a81f753fe2257fcea72ad7ceddaccc54fe87f5b4c688509136",
+    "tests/parity/constant_topology_execution_5_0_6.rs": "e1760f04d03ff25bc4b9318cbeb1c96d2a07f4705f8b18269c87795520b185c5",
+    "tests/parity/compare_constant_topology_execution_5_0_6.py": "ab3ab1f25289b9dcd1083b8e1c64c1a82165a0a4802e16923c51b077ea13a616",
+    "docs/parity/constant_topology_contracts_5_0_6_initial_audit.json": "0f538a8c2bf1aa1f8305ad28b0cd346316b7c8264fb008fdb9be587a12a1e26e",
+    "docs/parity/constant_topology_contracts_5_0_6_source_review.json": "266f4af635bda1563b484a2320467d7e2d1d2cd53bb847a6bcdb8b7a40701cda",
+    "docs/parity/constant_topology_contracts_5_0_6_runtime_diagnostics.json.gz": "e872ce7f604de14a446a9487dfd11de9e869ce407d6be27dab0d4b19c44bb2b2",
+    "tests/parity/constant_topology_execution_ordered_5_0_6_cases.json.gz": "b0ec58b9cdbd42bc2d81a2977bc20ad61e1c18f3401fd9c4dacc99517898231d",
+    "tests/parity/constant_topology_execution_missing_target_one_5_0_6_cases.json.gz": "63284e0af162529d38908656ace062352fae07fd8dca0508f9dddeb6e9c29318",
+    "tests/parity/constant_topology_execution_reversed_5_0_6_cases.json.gz": "7407ff3e40b95241cd8f823d97b871a19415f6122fbd62050c859e6c469602fd",
+    "tests/parity/constant_topology_execution_self_reference_required_5_0_6_cases.json.gz": "11451f21d7a3260c81fdbfa10e410d26435849aa74ffe834bcbb28b201b20781",
+    "tests/parity/constant_topology_execution_foreign_value_one_5_0_6_cases.json.gz": "47d699ebdd566b2275038169165910844a71bd9b4857585f6021d1aafd3ccc2b"
+  },
+  "logs": {
+    "initial_attempt": {
+      "path": "/tmp/teaql_constant_topology_contracts_initial_audit_506.log",
+      "sha256": "103fb6802cbdac1f2d511e53b7c17d127d78f741f0f904bb8385653a2c44d5f7",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nordered {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nreversed {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_target_one {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nforeign_value_one {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/scripts/audit_constant_topology_contracts.py\", line 175, in <module>\n    main()\n  File \"/home/philip/githome/teaql-cpp/scripts/audit_constant_topology_contracts.py\", line 154, in main\n    raise RuntimeError(f'Source-compilable topology configuration regressed: {case_name}')\nRuntimeError: Source-compilable topology configuration regressed: self_reference\n"
+    },
+    "initial_audit": {
+      "path": "/tmp/teaql_constant_topology_contracts_initial_audit_retry_506.log",
+      "sha256": "d79129cc73363e40a609b529fe7e336b91062abb34ed1ac15524edcd95337292",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nordered {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nreversed {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_target_one {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nforeign_value_one {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nself_reference {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0308\",\"message\":\"mismatched types\",\"primary\":[{\"file\":\"entity.rs\",\"line\":236}]},{\"code\":\"E0308\",\"message\":\"mismatched types\",\"primary\":[{\"file\":\"entity.rs\",\"line\":243}]}]},\"cpp_compile\":{\"exit_code\":0}}\ncycle_pair {}\ncycle_three {}\ndepth_exceeded {}\nself_reference_required {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\noptional_forward {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0308\",\"message\":\"mismatched types\",\"primary\":[{\"file\":\"entity.rs\",\"line\":234}]},{\"code\":\"E0308\",\"message\":\"mismatched types\",\"primary\":[{\"file\":\"entity.rs\",\"line\":241}]}]},\"cpp_compile\":{\"exit_code\":0}}\nRecorded 10 complete original/native metadata contracts\n"
+    },
+    "artifact_compiler_reproduce": {
+      "path": "/tmp/teaql_constant_topology_contracts_reproduce_506.log",
+      "sha256": "8972ad5ef731a01fdd9d776e79c83ba8855074b639294b56b5adda0af09d63e1",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nordered {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nreversed {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_target_one {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nforeign_value_one {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nself_reference {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0308\",\"message\":\"mismatched types\",\"primary\":[{\"file\":\"entity.rs\",\"line\":236}]},{\"code\":\"E0308\",\"message\":\"mismatched types\",\"primary\":[{\"file\":\"entity.rs\",\"line\":243}]}]},\"cpp_compile\":{\"exit_code\":0}}\ncycle_pair {}\ncycle_three {}\ndepth_exceeded {}\nself_reference_required {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\noptional_forward {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0308\",\"message\":\"mismatched types\",\"primary\":[{\"file\":\"entity.rs\",\"line\":234}]},{\"code\":\"E0308\",\"message\":\"mismatched types\",\"primary\":[{\"file\":\"entity.rs\",\"line\":241}]}]},\"cpp_compile\":{\"exit_code\":0}}\nVerified 10 complete original/native metadata contracts\n"
+    },
+    "native_build": {
+      "path": "/tmp/teaql_constant_topology_native_build_retry_506.log",
+      "sha256": "65aede91cbe8ac21dfdd220e36593b64e318b95a016f908a284e680a2040f7a9",
+      "output": "[1/10] Building CXX object CMakeFiles/teaql_constant_topology_reversed_probe.dir/tests/parity/constant_topology_reversed_probe.cpp.o\n[2/10] Building CXX object CMakeFiles/teaql_constant_topology_ordered_probe.dir/tests/parity/constant_topology_ordered_probe.cpp.o\n[3/10] Building CXX object CMakeFiles/teaql_constant_topology_foreign_value_one_probe.dir/tests/parity/constant_topology_foreign_value_one_probe.cpp.o\n[4/10] Building CXX object CMakeFiles/teaql_constant_topology_missing_target_one_probe.dir/tests/parity/constant_topology_missing_target_one_probe.cpp.o\n[5/10] Linking CXX executable teaql_constant_topology_ordered_probe\n[6/10] Linking CXX executable teaql_constant_topology_reversed_probe\n[7/10] Linking CXX executable teaql_constant_topology_missing_target_one_probe\n[8/10] Linking CXX executable teaql_constant_topology_foreign_value_one_probe\n[9/10] Building CXX object CMakeFiles/teaql_constant_topology_self_reference_required_probe.dir/tests/parity/constant_topology_self_reference_required_probe.cpp.o\n[10/10] Linking CXX executable teaql_constant_topology_self_reference_required_probe\n"
+    },
+    "module_build": {
+      "path": "/tmp/teaql_constant_topology_module_build_retry_506.log",
+      "sha256": "91270cd268e4665e4ba72152108f70d789ef5a41afd0b16c772e1daed4233d9c",
+      "output": "[0/1] Re-running CMake...\n-- Configuring done (2.3s)\n-- Generating done (0.7s)\n-- Build files have been written to: /home/philip/githome/teaql-cpp/build_modules_native\n[1/42] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd\n[2/40] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd\n[3/38] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd\n[4/36] Generating CXX dyndep file modules/CMakeFiles/teaql_data_service_module.dir/CXX.dd\n[5/34] Generating CXX dyndep file modules/CMakeFiles/teaql_sql_module.dir/CXX.dd\n[6/32] Generating CXX dyndep file modules/CMakeFiles/teaql_runtime_module.dir/CXX.dd\n[7/30] Generating CXX dyndep file modules/CMakeFiles/teaql_provider_sqlite_module.dir/CXX.dd\n[8/28] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_topology_ordered_probe.cpp for CXX dependencies\n[9/28] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_topology_reversed_probe.cpp for CXX dependencies\n[10/28] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_topology_missing_target_one_probe.cpp for CXX dependencies\n[11/28] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_topology_foreign_value_one_probe.cpp for CXX dependencies\n[12/28] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_topology_ordered_probe.dir/CXX.dd\n[13/28] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_topology_reversed_probe.dir/CXX.dd\n[14/28] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_topology_missing_target_one_probe.dir/CXX.dd\n[15/28] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_topology_foreign_value_one_probe.dir/CXX.dd\n[16/28] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_topology_self_reference_required_probe.cpp for CXX dependencies\n[17/28] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_topology_self_reference_required_probe.dir/CXX.dd\n[18/28] Building CXX object modules/CMakeFiles/teaql_module_constant_topology_reversed_probe.dir/consumers/constant_topology_reversed_probe.cpp.o\n[19/28] Building CXX object modules/CMakeFiles/teaql_module_constant_topology_ordered_probe.dir/consumers/constant_topology_ordered_probe.cpp.o\n[20/28] Building CXX object modules/CMakeFiles/teaql_module_constant_topology_missing_target_one_probe.dir/consumers/constant_topology_missing_target_one_probe.cpp.o\n[21/28] Building CXX object modules/CMakeFiles/teaql_module_constant_topology_foreign_value_one_probe.dir/consumers/constant_topology_foreign_value_one_probe.cpp.o\n[22/28] Linking CXX executable modules/teaql_module_constant_topology_ordered_probe\n[23/28] Linking CXX executable modules/teaql_module_constant_topology_reversed_probe\n[24/28] Linking CXX executable modules/teaql_module_constant_topology_missing_target_one_probe\n[25/28] Linking CXX executable modules/teaql_module_constant_topology_foreign_value_one_probe\n[26/28] Building CXX object modules/CMakeFiles/teaql_module_constant_topology_self_reference_required_probe.dir/consumers/constant_topology_self_reference_required_probe.cpp.o\n[27/28] Linking CXX executable modules/teaql_module_constant_topology_self_reference_required_probe\n"
+    },
+    "original_observer_build": {
+      "path": "/tmp/teaql_constant_topology_rust_build_final_506.log",
+      "sha256": "3e4c4a989fd719259d229a88d4cbf7f749356fafb95532de1dfa523668536664",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nordered: complete original observer built\nreversed: complete original observer built\nmissing_target_one: complete original observer built\nforeign_value_one: complete original observer built\nself_reference_required: complete original observer built\n"
+    },
+    "comparison": {
+      "path": "/tmp/teaql_constant_topology_execution_compare_retry_506.log",
+      "sha256": "244ae5866394f2aa37fdae1fa69c3d71b175f4648c36a6e8ab4f115212736fa3",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nordered: 96/96 topology SQLite/Q/E outcomes match\nreversed: 96/96 topology SQLite/Q/E outcomes match\nmissing_target_one: 96/96 topology SQLite/Q/E outcomes match\nforeign_value_one: 96/96 topology SQLite/Q/E outcomes match\nself_reference_required: 96/96 topology SQLite/Q/E outcomes match\n"
+    },
+    "native_tests": {
+      "path": "/tmp/teaql_constant_topology_native_tests_506.log",
+      "sha256": "b131d90b6122c9fc00b309c21cd2b0eb35fc77ac79d306f5c1031d2cc5267a8f",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 57: constant_topology_ordered_rust_parity\n    Start 58: constant_topology_reversed_rust_parity\n    Start 59: constant_topology_missing_target_one_rust_parity\n    Start 60: constant_topology_foreign_value_one_rust_parity\n1/5 Test #58: constant_topology_reversed_rust_parity ..................   Passed    2.00 sec\n    Start 61: constant_topology_self_reference_required_rust_parity\n2/5 Test #59: constant_topology_missing_target_one_rust_parity ........   Passed    3.50 sec\n3/5 Test #60: constant_topology_foreign_value_one_rust_parity .........   Passed    4.90 sec\n4/5 Test #57: constant_topology_ordered_rust_parity ...................   Passed    4.93 sec\n5/5 Test #61: constant_topology_self_reference_required_rust_parity ...   Passed    4.77 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =   6.78 sec\n"
+    },
+    "module_tests": {
+      "path": "/tmp/teaql_constant_topology_module_tests_506.log",
+      "sha256": "a68d98e3eaa936d9435130a4215074605bff07e954d8c901d366073c9898f034",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 758: module_constant_topology_ordered_rust_parity\n    Start 759: module_constant_topology_reversed_rust_parity\n    Start 760: module_constant_topology_missing_target_one_rust_parity\n    Start 761: module_constant_topology_foreign_value_one_rust_parity\n1/5 Test #759: module_constant_topology_reversed_rust_parity ..................   Passed    2.17 sec\n    Start 762: module_constant_topology_self_reference_required_rust_parity\n2/5 Test #760: module_constant_topology_missing_target_one_rust_parity ........   Passed    3.58 sec\n3/5 Test #758: module_constant_topology_ordered_rust_parity ...................   Passed    5.16 sec\n4/5 Test #761: module_constant_topology_foreign_value_one_rust_parity .........   Passed    5.23 sec\n5/5 Test #762: module_constant_topology_self_reference_required_rust_parity ...   Passed    4.76 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =   6.94 sec\n"
+    },
+    "live_original_reproduction": {
+      "path": "/tmp/teaql_constant_topology_execution_reproduce_506.log",
+      "sha256": "244ae5866394f2aa37fdae1fa69c3d71b175f4648c36a6e8ab4f115212736fa3",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nordered: 96/96 topology SQLite/Q/E outcomes match\nreversed: 96/96 topology SQLite/Q/E outcomes match\nmissing_target_one: 96/96 topology SQLite/Q/E outcomes match\nforeign_value_one: 96/96 topology SQLite/Q/E outcomes match\nself_reference_required: 96/96 topology SQLite/Q/E outcomes match\n"
+    },
+    "module_bodies": {
+      "path": "/tmp/teaql_constant_topology_module_bodies_506.log",
+      "sha256": "6fcf5a0d5f347430eb43dfa699bf456fba8b3383ebf53f75b53b25ea682c51af",
+      "output": "Verified 442 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n"
+    },
+    "module_paths": {
+      "path": "/tmp/teaql_constant_topology_module_paths_506.log",
+      "sha256": "95dd3feb3ed003aa5edeb5aac251b95102d25da5ebc7f536f34434d3d61f8282",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 124 Rust source files, 378 declarations, 693 source tests; source inventory only (not parity acceptance)\nVerified 7 active packages, 121 source units, 124 source ownership/disposition links and 769 retained move destinations; structure/provenance only, not unchanged-body or semantic acceptance\n"
+    },
+    "format": {
+      "path": "/tmp/teaql_constant_topology_format_final_506.log",
+      "sha256": "8a75ce1832c1809d5dd8f2f8977ab74e0d5312dcaff204d3ca6a65304e380148",
+      "output": "Formatted 1349 handwritten C++ files with clang-format 18.1.8\n"
+    },
+    "format_check": {
+      "path": "/tmp/teaql_constant_topology_format_check_final_506.log",
+      "sha256": "3374b37e98962ad01dbde29380300c6a7c3f951869ca0ec09bb9a23add19d02a",
+      "output": "Checked 1349 handwritten C++ files with clang-format 18.1.8\n"
+    }
+  },
+  "remaining": [
+    "Additional graph/model/seed/type and extension configurations.",
+    "Full scalar/time/resource replacement, Assist and all P0-P7 integration/guard removal."
+  ]
+}

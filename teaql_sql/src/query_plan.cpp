@@ -223,11 +223,11 @@ SqlBindings collect_select_bindings(Memory r,
             }
         }
     }
-    if (partitioned) {
-        return params;
-    }
     if (query.having_predicate) {
         collect_expr(r, *query.having_predicate, params, array);
+    }
+    if (partitioned) {
+        return params;
     }
     for (const auto& order : query.order_by) {
         if (order.expr) {

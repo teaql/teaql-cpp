@@ -1,0 +1,3 @@
+<root name="cpp_checker_unique_string" org="teaql" data_service="sqlite">
+    <note code="uniStr()" />
+</root>

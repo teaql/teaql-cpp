@@ -1,0 +1,137 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.platform.name": "Name",
+                "property.order.id": "Id",
+                "property.person.id": "Id",
+                "property.order.platform": "Platform",
+                "property.product.id": "Id",
+                "property.product.platform": "Platform",
+                "property.company.version": "Version",
+                "property.order.version": "Version",
+                "property.company.id": "Id",
+                "property.product.version": "Version",
+                "property.order.amount": "Amount",
+                "property.person.email": "Email",
+                "entity.product": "Product",
+                "property.person.version": "Version",
+                "property.order.customer": "Customer",
+                "entity.order": "Order",
+                "property.order.code": "Code",
+                "entity.profile": "Profile",
+                "property.profile.note": "Note",
+                "entity.platform": "Platform",
+                "property.platform.id": "Id",
+                "entity.company": "Company",
+                "property.product.sku": "Sku",
+                "property.line.product": "Product",
+                "property.company.name": "Name",
+                "property.line.quantity": "Quantity",
+                "property.person.name": "Name",
+                "property.company.platform": "Platform",
+                "property.line.id": "Id",
+                "property.order.priority": "Priority",
+                "entity.line": "Line",
+                "property.product.price": "Price",
+                "property.person.platform": "Platform",
+                "property.profile.person": "Person",
+                "property.profile.version": "Version",
+                "entity.person": "Person",
+                "property.profile.id": "Id",
+                "property.line.version": "Version",
+                "property.platform.version": "Version",
+                "property.line.order": "Order",
+                "property.order.seller": "Seller"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

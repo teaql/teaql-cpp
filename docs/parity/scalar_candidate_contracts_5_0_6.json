@@ -1,0 +1,817 @@
+{
+  "schema": 1,
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "Eight complete original and C++ generated workspaces compile; exact metadata and fresh original file reproduction pass; actual runtime semantics pending",
+  "cases": [
+    {
+      "case": "text",
+      "original": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 112785,
+                "key": "red",
+                "value": "red",
+                "method": "red",
+                "filter": "red"
+              },
+              {
+                "id": 3027034,
+                "key": "blue",
+                "value": "blue",
+                "method": "blue",
+                "filter": "blue"
+              },
+              {
+                "id": 3392903,
+                "key": "null",
+                "value": "null",
+                "method": "null",
+                "filter": "null"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 112785,
+                "key": "red",
+                "value": "red",
+                "method": "red",
+                "filter": "red"
+              },
+              {
+                "id": 3027034,
+                "key": "blue",
+                "value": "blue",
+                "method": "blue",
+                "filter": "blue"
+              },
+              {
+                "id": 3392903,
+                "key": "null",
+                "value": "null",
+                "method": "null",
+                "filter": "null"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile": {
+        "case": "text",
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "case": "text",
+        "exit_code": 0
+      },
+      "cpp_compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "integer",
+      "original": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "i64",
+            "candidates": [
+              {
+                "id": 49,
+                "key": "1",
+                "value": "1",
+                "method": "value_1",
+                "filter": "1"
+              },
+              {
+                "id": 50,
+                "key": "2",
+                "value": "2",
+                "method": "value_2",
+                "filter": "2"
+              },
+              {
+                "id": 51,
+                "key": "3",
+                "value": "3",
+                "method": "value_3",
+                "filter": "3"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "i64",
+            "candidates": [
+              {
+                "id": 49,
+                "key": "1",
+                "value": "1",
+                "method": "value_1",
+                "filter": "1"
+              },
+              {
+                "id": 50,
+                "key": "2",
+                "value": "2",
+                "method": "value_2",
+                "filter": "2"
+              },
+              {
+                "id": 51,
+                "key": "3",
+                "value": "3",
+                "method": "value_3",
+                "filter": "3"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile": {
+        "case": "integer",
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "case": "integer",
+        "exit_code": 0
+      },
+      "cpp_compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "number",
+      "original": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "rust_decimal::Decimal",
+            "candidates": [
+              {
+                "id": 48568,
+                "key": "1.5",
+                "value": "1.5",
+                "method": "value_1_5",
+                "filter": "1.5"
+              },
+              {
+                "id": 49529,
+                "key": "2.5",
+                "value": "2.5",
+                "method": "value_2_5",
+                "filter": "2.5"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "rust_decimal::Decimal",
+            "candidates": [
+              {
+                "id": 48568,
+                "key": "1.5",
+                "value": "1.5",
+                "method": "value_1_5",
+                "filter": "1.5"
+              },
+              {
+                "id": 49529,
+                "key": "2.5",
+                "value": "2.5",
+                "method": "value_2_5",
+                "filter": "2.5"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile": {
+        "case": "number",
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "case": "number",
+        "exit_code": 0
+      },
+      "cpp_compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "double",
+      "original": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "f64",
+            "candidates": [
+              {
+                "id": 48568,
+                "key": "1.5",
+                "value": "1.5",
+                "method": "value_1_5",
+                "filter": "1.5"
+              },
+              {
+                "id": 49529,
+                "key": "2.5",
+                "value": "2.5",
+                "method": "value_2_5",
+                "filter": "2.5"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "f64",
+            "candidates": [
+              {
+                "id": 48568,
+                "key": "1.5",
+                "value": "1.5",
+                "method": "value_1_5",
+                "filter": "1.5"
+              },
+              {
+                "id": 49529,
+                "key": "2.5",
+                "value": "2.5",
+                "method": "value_2_5",
+                "filter": "2.5"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile": {
+        "case": "double",
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "case": "double",
+        "exit_code": 0
+      },
+      "cpp_compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "date",
+      "original": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "chrono::NaiveDate",
+            "candidates": [
+              {
+                "id": 1162559460,
+                "key": "2026-10-01",
+                "value": "2026-10-01",
+                "method": "value_2026_10_01",
+                "filter": "2026-10-01"
+              },
+              {
+                "id": 1162559461,
+                "key": "2026-10-02",
+                "value": "2026-10-02",
+                "method": "value_2026_10_02",
+                "filter": "2026-10-02"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "chrono::NaiveDate",
+            "candidates": [
+              {
+                "id": 1162559460,
+                "key": "2026-10-01",
+                "value": "2026-10-01",
+                "method": "value_2026_10_01",
+                "filter": "2026-10-01"
+              },
+              {
+                "id": 1162559461,
+                "key": "2026-10-02",
+                "value": "2026-10-02",
+                "method": "value_2026_10_02",
+                "filter": "2026-10-02"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile": {
+        "case": "date",
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "case": "date",
+        "exit_code": 0
+      },
+      "cpp_compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "timestamp",
+      "original": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "teaql_core::time::Timestamp",
+            "candidates": [
+              {
+                "id": 1162559460,
+                "key": "2026-10-01",
+                "value": "2026-10-01",
+                "method": "value_2026_10_01",
+                "filter": "2026-10-01"
+              },
+              {
+                "id": 1162559461,
+                "key": "2026-10-02",
+                "value": "2026-10-02",
+                "method": "value_2026_10_02",
+                "filter": "2026-10-02"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "teaql_core::time::Timestamp",
+            "candidates": [
+              {
+                "id": 1162559460,
+                "key": "2026-10-01",
+                "value": "2026-10-01",
+                "method": "value_2026_10_01",
+                "filter": "2026-10-01"
+              },
+              {
+                "id": 1162559461,
+                "key": "2026-10-02",
+                "value": "2026-10-02",
+                "method": "value_2026_10_02",
+                "filter": "2026-10-02"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile": {
+        "case": "timestamp",
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "case": "timestamp",
+        "exit_code": 0
+      },
+      "cpp_compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "boolean",
+      "original": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 3569038,
+                "key": "true",
+                "value": "true",
+                "method": "true",
+                "filter": "true"
+              },
+              {
+                "id": 97196323,
+                "key": "false",
+                "value": "false",
+                "method": "false",
+                "filter": "false"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 3569038,
+                "key": "true",
+                "value": "true",
+                "method": "true",
+                "filter": "true"
+              },
+              {
+                "id": 97196323,
+                "key": "false",
+                "value": "false",
+                "method": "false",
+                "filter": "false"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile": {
+        "case": "boolean",
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "case": "boolean",
+        "exit_code": 0
+      },
+      "cpp_compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "nullable_integer",
+      "original": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "Option<i64>",
+            "candidates": [
+              {
+                "id": 49,
+                "key": "1",
+                "value": "1",
+                "method": "value_1",
+                "filter": "1"
+              },
+              {
+                "id": 50,
+                "key": "2",
+                "value": "2",
+                "method": "value_2",
+                "filter": "2"
+              },
+              {
+                "id": 3392903,
+                "key": "null",
+                "value": "null",
+                "method": "null",
+                "filter": "null"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "Option<i64>",
+            "candidates": [
+              {
+                "id": 49,
+                "key": "1",
+                "value": "1",
+                "method": "value_1",
+                "filter": "1"
+              },
+              {
+                "id": 50,
+                "key": "2",
+                "value": "2",
+                "method": "value_2",
+                "filter": "2"
+              },
+              {
+                "id": 3392903,
+                "key": "null",
+                "value": "null",
+                "method": "null",
+                "filter": "null"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile": {
+        "case": "nullable_integer",
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "case": "nullable_integer",
+        "exit_code": 0
+      },
+      "cpp_compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "note": "The boolean() recipe authentically parses as String; it is a parser/naming control, not Boolean type coverage. Scalar candidate literals stay source Text values even on numeric/date fields. Actual SQLite behavior still requires source/native qualification.",
+  "reproduction": {
+    "command": "python3 scripts/audit_scalar_candidate_contracts.py --generation-only",
+    "exit_code": 0,
+    "report": "/tmp/teaql_scalar_candidate_contracts_reproduction_final.json",
+    "log": "/tmp/teaql_scalar_candidate_contracts_reproduction_final.log"
+  }
+}

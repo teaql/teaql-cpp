@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "declared temporal bootstrap/native/module matrix passed; G05/P3 remains partial",
+  "scenarios": 1728,
+  "rounds": 2592,
+  "successful_rounds": 1728,
+  "failures": {
+    "check failed: The Created_at is required; The Updated_at is required": 648,
+    "graph write error: Transport error: UNIQUE constraint failed: priority_data.id": 216
+  },
+  "sql_entries": 11628,
+  "published_fix_evidence_entries": 0,
+  "comparison": "exact JSON kinds/values/rows/versions/ID floors/root/errors/public evidence/SQL bindings and intent; no timestamp or error normalization",
+  "clock_scope": "Existing Linux test shim controls CLOCK_REALTIME; per-round progression is actual process time, BusinessClock is independent, CLOCK_MONOTONIC unchanged.",
+  "native": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 5,
+    "total": 5
+  },
+  "modules": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 2,
+    "total": 2,
+    "canonical_consumer_bodies": 266
+  },
+  "format": {
+    "version": "18.1.8",
+    "files": 1133,
+    "format_exit": 0,
+    "check_exit": 0
+  },
+  "complete_original_cpp_fixtures_reproduced": [
+    "constants_temporal",
+    "constants_temporal_required"
+  ],
+  "source_failure": "docs/parity/constant_temporal_source_failure_5_0_6.json",
+  "clock_boundary": "docs/parity/clock_epoch_boundary_5_0_6.json",
+  "initial_failures": [
+    {
+      "log": "/tmp/teaql_constant_temporal_rust_build_506.log",
+      "disposition": "Full optional Timestamp original fails four E0308 errors; retained separately without editing it."
+    },
+    {
+      "log": "/tmp/teaql_constant_temporal_native_build_506.log",
+      "disposition": "Observer require_value needed its actual generated namespace; fixture corrected, production generator unchanged."
+    },
+    {
+      "log": "/tmp/teaql_constant_temporal_comparison_506.log",
+      "disposition": "Pre-epoch original chrono::Utc::now panic exposed shared native now() acceptance gap. Source unchanged; both native now implementations reject this state and separate epoch controls retain panic/exception raw diagnostics."
+    }
+  ],
+  "producer_implementation_changed": false,
+  "normal_generation_guards_removed": false,
+  "hashes": {
+    "teaql_core/src/time.cpp": "701178c304eff10ec2a9bea632b3dc293b59f0a734ba4c970ac9ea522a8d567e",
+    "teaql_runtime/src/business_clock.cpp": "9d1b07f268d1bd0610767408a30a6938332188365e3a06886b4a86181ad1b09f",
+    "tests/generator/constants_temporal.xml": "6149b0d1739140cfc57f5f2620cbe1e3e9519fa9f13dd86cc770277cfa71a265",
+    "tests/generator/constants_temporal_required.xml": "48df4d5b4cb80f21c082c9462731cdd87f4927152837575de45b8a7600b4f29e",
+    "tests/parity/constant_temporal_probe.cpp": "de69c72bf887243095de49e46e42991643d3b138fc52b918a3696b184716e587",
+    "tests/parity/clock_epoch_boundary_probe.cpp": "6ab65ef8f42d4150332186ac25715efaaa75fa31c53f755d1e6dd2daad9bf040",
+    "tests/parity/compare_constant_temporal_5_0_6.py": "03ce2e9eba38a35e50ab964894807fcba081a93a0c8e23e1e757ba6d72f3343f",
+    "tests/parity/compare_clock_epoch_boundary_5_0_6.py": "582ce79141ca961f957a03776a40afeaebed926b696dcba75f34b7afe42edde0",
+    "scripts/verify_constant_temporal_source_failure.py": "d74419df122da71f8e32fd2c8d949fe2440a867e318f38db9e105303f384ee44",
+    "tests/parity/rust_constant_temporal_5_0_6/Cargo.toml": "57029561d6e0d6d9094a371186bfd5933c716473c16cf6ec62fc28e2792f358c",
+    "tests/parity/rust_constant_temporal_5_0_6/Cargo.lock": "45234ad0a0ae8a53af96bf2a95453941a1221c6a4dddfa00ea52c125cd67119c",
+    "tests/parity/rust_constant_temporal_5_0_6/src/main.rs": "b6118be70c88979ce70d585e160339d3f25e45164e6b12d8f336abdfe3130bb1",
+    "tests/parity/rust_constant_temporal_5_0_6/src/bin/clock_epoch_boundary.rs": "6e5521422cab6426f4959e18ea54aef8c5dfcb6495f40147f847e964ace12d77",
+    "tests/parity/rust_constant_temporal_failure_5_0_6/Cargo.toml": "a0e80e5b2f5349ba5accac1430ee5508cd2b213eee275bedba2ccc42298a50a5",
+    "tests/parity/rust_constant_temporal_failure_5_0_6/Cargo.lock": "24841617196d3c4fa9546935a6db5d760436f55da89e42fc7c905312cfd3bbfb",
+    "tests/parity/rust_constant_temporal_failure_5_0_6/lib.rs": "60eaa93535567671af7473d45deabcaff2894aa41e594bcaea9177c04c8323b7",
+    "tests/parity/constant_temporal_5_0_6_cases.json.gz": "d366c2dbe52102e5a60f67af974355d561176e1b5664be351e13a90d7099e8a3"
+  },
+  "logs": {
+    "native_tests": {
+      "path": "/tmp/teaql_constant_temporal_native_tests_506.log",
+      "sha256": "78d238ad7d6274f9c1a59f2e03de7e6a320e33122cfe608cdfa261ff7c615c9b",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 489: timestamp_api_contracts\n    Start   7: business_clock_scope_contracts\n    Start 175: original_runtime_business_clock_contracts\n    Start 546: constant_temporal_rust_parity\n1/5 Test #489: timestamp_api_contracts .....................   Passed    0.00 sec\n    Start 547: clock_epoch_boundary_contracts\n2/5 Test   #7: business_clock_scope_contracts ..............   Passed    0.00 sec\n3/5 Test #175: original_runtime_business_clock_contracts ...   Passed    0.00 sec\n4/5 Test #547: clock_epoch_boundary_contracts ..............   Passed    0.05 sec\n5/5 Test #546: constant_temporal_rust_parity ...............   Passed   89.50 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =  89.51 sec\n"
+    },
+    "module_tests": {
+      "path": "/tmp/teaql_constant_temporal_module_tests_506.log",
+      "sha256": "1c2c6b56969a87f12276fb80ff1fc1664672a1c276c2f3c0d4a6418a8e3507ca",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 719: module_constant_temporal_rust_parity\n1/2 Test #719: module_constant_temporal_rust_parity ....   Passed   89.84 sec\n    Start 720: module_clock_epoch_boundary_contracts\n2/2 Test #720: module_clock_epoch_boundary_contracts ...   Passed    0.05 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =  89.91 sec\n"
+    },
+    "module_bodies": {
+      "path": "/tmp/teaql_constant_temporal_module_bodies_506.log",
+      "sha256": "502f26cf8909588055a1a00fa3d0d82db0c6c97b5907d3d9803aca17e87f7215",
+      "output": "Verified 266 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n"
+    },
+    "original_reproduce": {
+      "path": "/tmp/teaql_constant_temporal_original_reproduce_506.log",
+      "sha256": "6454c5b5282fb001c99429da6b1e92d0c52999047f1451c1ecdbf5d9d038ae8b",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\n23:22:53.725 [main] INFO com.skynet.codegenerator.DomainGenerationService - generate domain files started: domainName=cpp_constants_temporal, scope=rust-lib-core\n23:22:53.808 [main] INFO com.skynet.codegenerator.DomainGenerationService - Total generators found: 128\n23:22:53.814 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRuntimeGenerator\n23:22:54.009 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRuntimeGenerator, fileCount=1\n23:22:54.010 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustLibGenerator\n23:22:54.013 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustLibGenerator, fileCount=1\n23:22:54.016 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustQGenerator\n23:22:54.105 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustQGenerator, fileCount=1\n23:22:54.106 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.CargoTomlGenerator\n23:22:54.110 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.CargoTomlGenerator, fileCount=1\n23:22:54.110 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityModGenerator\n23:22:54.110 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityModGenerator, fileCount=3\n23:22:54.111 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRequestGenerator\n23:22:54.163 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRequestGenerator, fileCount=1\n23:22:54.166 [main] INFO com.skynet.codegenerator.DomainGenerationService - PojoGenerator skipped. scope=rust-lib-core, generator.getScopes()=[java-lib-core]\n23:22:54.166 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityStructGenerator\n23:22:54.254 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityStructGenerator, fileCount=3\n23:22:54.254 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRequestEntityGenerator\n23:22:54.349 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRequestEntityGenerator, fileCount=3\n23:22:54.350 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustBehaviorGenerator\n23:22:54.353 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustBehaviorGenerator, fileCount=3\n23:22:54.354 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityExpressionGenerator\n23:22:54.367 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityExpressionGenerator, fileCount=3\n23:22:54.367 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustExpressionGenerator\n23:22:54.373 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustExpressionGenerator, fileCount=1\n23:22:54.374 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustSampleDataGenerator\n23:22:54.392 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustSampleDataGenerator, fileCount=1\n23:22:54.393 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustCheckerGenerator\n23:22:54.414 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustCheckerGenerator, fileCount=3\n23:22:54.414 [main] INFO com.skynet.codegenerator.DomainGenerationService - generate domain files completed: domainName=cpp_constants_temporal, scope=rust-lib-core, fileCount=25\n23:22:55.412 [main] INFO com.skynet.codegenerator.DomainGenerationService - generate domain files started: domainName=cpp_constants_temporal_required, scope=rust-lib-core\n23:22:55.514 [main] INFO com.skynet.codegenerator.DomainGenerationService - Total generators found: 128\n23:22:55.517 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRequestGenerator\n23:22:55.782 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRequestGenerator, fileCount=1\n23:22:55.783 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustSampleDataGenerator\n23:22:55.810 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustSampleDataGenerator, fileCount=1\n23:22:55.812 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustLibGenerator\n23:22:55.815 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustLibGenerator, fileCount=1\n23:22:55.815 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRuntimeGenerator\n23:22:55.850 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRuntimeGenerator, fileCount=1\n23:22:55.851 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustExpressionGenerator\n23:22:55.860 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustExpressionGenerator, fileCount=1\n23:22:55.860 [main] INFO com.skynet.codegenerator.DomainGenerationService - PojoGenerator skipped. scope=rust-lib-core, generator.getScopes()=[java-lib-core]\n23:22:55.862 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityModGenerator\n23:22:55.862 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityModGenerator, fileCount=3\n23:22:55.863 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRequestEntityGenerator\n23:22:55.976 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustRequestEntityGenerator, fileCount=3\n23:22:55.977 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustQGenerator\n23:22:56.008 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustQGenerator, fileCount=1\n23:22:56.009 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityStructGenerator\n23:22:56.068 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityStructGenerator, fileCount=3\n23:22:56.070 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustCheckerGenerator\n23:22:56.089 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustCheckerGenerator, fileCount=3\n23:22:56.090 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustBehaviorGenerator\n23:22:56.093 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustBehaviorGenerator, fileCount=3\n23:22:56.093 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityExpressionGenerator\n23:22:56.105 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.RustEntityExpressionGenerator, fileCount=3\n23:22:56.106 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.CargoTomlGenerator\n23:22:56.108 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=rust-lib-core, generator=com.skynet.codegenerator.rust.CargoTomlGenerator, fileCount=1\n23:22:56.111 [main] INFO com.skynet.codegenerator.DomainGenerationService - generate domain files completed: domainName=cpp_constants_temporal_required, scope=rust-lib-core, fileCount=25\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nVerified 26 frozen constants_temporal files\nVerified 26 frozen constants_temporal_required files\n"
+    },
+    "cpp_reproduce": {
+      "path": "/tmp/teaql_constant_temporal_cpp_reproduce_506.log",
+      "sha256": "ed520fbde352894ecc6c797831f27a7702a9721b200e7d2582596b36fa9c167e",
+      "output": "Verified 12 files: tests/generated_constants_temporal\nVerified 12 files: tests/generated_constants_temporal_required\n"
+    },
+    "failure_reproduce": {
+      "path": "/tmp/teaql_constant_temporal_failure_reproduce_506.log",
+      "sha256": "513c2584ea3ddfbfe36d59cf70ad0b5eadeb4775b3f20ddd23976c6f07f8aec0",
+      "output": "Verified 36 locked generator sources and 17 capability records; 17 remain unqualified\nVerified four original E0308 errors and independent complete C++ optional-Timestamp compilation\n"
+    },
+    "clock_native_build": {
+      "path": "/tmp/teaql_constant_temporal_clock_native_build_506.log",
+      "sha256": "5c3f3fb692d81531353adffe9663b0b5eecf6d55f4fb9f089ccddf77ea23b943",
+      "output": "[1/10] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/business_clock.cpp.o\n[2/10] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/time.cpp.o\n[3/10] Linking CXX static library teaql_core/libteaql_core.a\n[4/10] Linking CXX static library teaql_runtime/libteaql_runtime.a\n[5/10] Building CXX object CMakeFiles/teaql_clock_epoch_boundary_probe.dir/tests/parity/clock_epoch_boundary_probe.cpp.o\n[6/10] Linking CXX executable teaql_business_clock_scope_tests\n[7/10] Linking CXX executable teaql_original_business_clock_tests\n[8/10] Linking CXX executable teaql_timestamp_api_tests\n[9/10] Linking CXX executable teaql_clock_epoch_boundary_probe\n[10/10] Linking CXX executable teaql_constant_temporal_probe\n"
+    },
+    "module_build": {
+      "path": "/tmp/teaql_constant_temporal_module_build_506.log",
+      "sha256": "e3f15a030cc5664d31ef24fb73f2730cf0dc496ff8a6c2fb4490c94120f814c7",
+      "output": "[1/35] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd\n[2/33] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd\n[3/31] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd\n[4/29] Generating CXX dyndep file modules/CMakeFiles/teaql_data_service_module.dir/CXX.dd\n[5/27] Generating CXX dyndep file modules/CMakeFiles/teaql_sql_module.dir/CXX.dd\n[6/25] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/business_clock.cpp.o\n[7/25] Generating CXX dyndep file modules/CMakeFiles/teaql_runtime_module.dir/CXX.dd\n[8/23] Generating CXX dyndep file modules/CMakeFiles/teaql_provider_sqlite_module.dir/CXX.dd\n[9/21] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_temporal_probe.cpp for CXX dependencies\n[10/21] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/time.cpp.o\n[11/21] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/clock_epoch_boundary_probe.cpp for CXX dependencies\n[12/21] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_temporal_probe.dir/CXX.dd\n[13/21] Generating CXX dyndep file modules/CMakeFiles/teaql_module_clock_epoch_boundary_probe.dir/CXX.dd\n[14/21] Linking CXX static library teaql_core/libteaql_core.a\n[15/21] Building CXX object CMakeFiles/teaql_sample_fixed_clock.dir/tests/support/fixed_sample_clock.cpp.o\n[16/21] Linking CXX static library teaql_runtime/libteaql_runtime.a\n[17/21] Building CXX object modules/CMakeFiles/teaql_module_clock_epoch_boundary_probe.dir/consumers/clock_epoch_boundary_probe.cpp.o\n[18/21] Linking CXX shared library libteaql_sample_fixed_clock.so\n[19/21] Linking CXX executable modules/teaql_module_clock_epoch_boundary_probe\n[20/21] Building CXX object modules/CMakeFiles/teaql_module_constant_temporal_probe.dir/consumers/constant_temporal_probe.cpp.o\n[21/21] Linking CXX executable modules/teaql_module_constant_temporal_probe\n"
+    },
+    "comparison_retry": {
+      "path": "/tmp/teaql_constant_temporal_comparison_retry_506.log",
+      "sha256": "6b2956cd1b34bc8cb0a8ed7775833bbfd8ecf828323bf5bdad15b50a3285ed66",
+      "output": "Temporal constants: 1728/1728 exact original/native outcomes\n"
+    },
+    "source_failure": {
+      "path": "/tmp/teaql_constant_temporal_source_failure_506.log",
+      "sha256": "513c2584ea3ddfbfe36d59cf70ad0b5eadeb4775b3f20ddd23976c6f07f8aec0",
+      "output": "Verified 36 locked generator sources and 17 capability records; 17 remain unqualified\nVerified four original E0308 errors and independent complete C++ optional-Timestamp compilation\n"
+    }
+  },
+  "remaining": [
+    "Broader unsigned/custom type configurations and source failure dispositions.",
+    "Custom checker/behavior/resources and concurrent optimistic bootstrap conflicts.",
+    "Populated ordinary graph Fix evidence remains separate from empty bootstrap caller evidence.",
+    "All full G01-G17/P0-P7 and full baseline integration requirements remain open."
+  ]
+}

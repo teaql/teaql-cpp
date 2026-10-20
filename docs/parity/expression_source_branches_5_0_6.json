@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "status": "complete_named_source_template_review",
+  "source": "generator/src/main/resources/generator/rust-lib-core/expression/index.stg",
+  "source_sha256": "13db6f49860ce1f76309f453acb57af7b15d81a556339430649f615bc60fc425",
+  "branches": [
+    {
+      "template": "index",
+      "first_line": 1,
+      "sha256": "b3717b8183366f87c66a78e9cb05fe30b0953f66240819d4c1094a68efef4737",
+      "cpp_responsibilities": [
+        "RuntimeExpression",
+        "ExpressionDiagnostic",
+        "ExpressionNotLoadedError"
+      ],
+      "complete_source": "index(domain) ::= <<\n\n// The `E` expression wrapper provides zero-cost AST traversal\n// and will automatically panic if it encounters a NotLoaded error.\npub struct E;\n\nimpl E {\n<domain.objectDescriptors:eMethod();separator=\"\\n\\n\">\n}\n\n\npub fn trigger_logic_bug_panic(root_desc: &str, failed_node: &str, attempted_path: &str) -> ! {\n    let parts: Vec\\<&str\\> = attempted_path.split('.').collect();\n    let break_idx = parts.iter().position(|&p| p == failed_node).unwrap_or(0);\n\n    let mut nested_fix = String::new();\n    if break_idx \\< parts.len() - 1 {\n        nested_fix.push_str(&format!(\"\\\"select_{}(\", failed_node));\n        let mut close_parens = 1;\n        for i in (break_idx + 1)..parts.len() {\n            let sub_field = parts[i];\n            let prev_field = parts[i-1];\n            let is_last = i == parts.len() - 1;\n            if is_last {\n                nested_fix.push_str(&format!(\"\\<generated Q entry for {}\\>.select_{}()\", prev_field, sub_field));\n            } else {\n                nested_fix.push_str(&format!(\"\\<generated Q entry for {}\\>.select_{}(\", prev_field, sub_field));\n                close_parens += 1;\n            }\n        }\n        for _ in 0..close_parens {\n            nested_fix.push(')');\n        }\n        nested_fix.push('\"');\n    } else {\n        nested_fix = \"null\".to_string();\n    }\n\n    let suggested_fix = format!(\"\\\"select_{}()\\\"\", failed_node);\n    \n    let access_path_json = format!(\"[{}]\", parts.iter().map(|s| format!(\"\\\"{}\\\"\", s)).collect::\\<Vec\\<_\\>\\>().join(\", \"));\n    let missing_preload_json = format!(\"[\\\"{}\\\"]\", failed_node);\n    \n    let human_nested = if nested_fix != \"null\" { format!(\" 或完整嵌套加载 {}\", nested_fix) } else { String::new() };\n    let root_name = root_desc.split('(').next().unwrap_or(\"Unknown\");\n    \n    let mut root_snake = String::new();\n    for (i, c) in root_name.chars().enumerate() {\n        if c.is_uppercase() {\n            if i > 0 {\n                root_snake.push('_');\n            }\n            root_snake.push(c.to_ascii_lowercase());\n        } else {\n            root_snake.push(c);\n        }\n    }\n    let id_part = root_desc.split('(').nth(1).unwrap_or(\")\");\n    let mut original_expr = format!(\"E::{}({}\", root_snake, id_part);\n    for p in &parts {\n        original_expr.push_str(&format!(\".get_{}()\", p));\n        if *p == failed_node {\n            original_expr.push_str(\"\\<broken\\>\");\n        }\n    }\n\n    let human_message = format!(\"\\\"访问 {}.{} 时缺少预加载。请在查询中加入 {}{}\\\"\", root_name, attempted_path, suggested_fix, human_nested);\n\n    panic!(\"\\n\\n💥 [Coding Logic Bug]\\n\\noriginal_expr_with_broken_point: \\\"{}\\\"\\nroot: {}\\naccess_path: {}\\nbreak_point: \\\"{}\\\"\\nmissing_preload: {}\\nsuggested_fix: {}\\nnested_fix: {}\\nseverity: \\\"error\\\"\\nhuman_message: {}\\n\", \n        original_expr, root_desc, access_path_json, failed_node, missing_preload_json, suggested_fix, nested_fix, human_message);\n}\n\n#[derive(Clone)]\npub struct ValueExpression\\<'a, T\\> {\n    result: teaql_core::eval::EvalResult\\<T\\>,\n    root_desc: std::sync::Arc\\<String\\>,\n    _phantom: std::marker::PhantomData\\<&'a ()\\>,\n}\n\nimpl\\<'a, T: Clone\\> ValueExpression\\<'a, T\\> {\n    pub fn new(result: teaql_core::eval::EvalResult\\<T\\>, root_desc: std::sync::Arc\\<String\\>) -> Self {\n        Self { result, root_desc, _phantom: std::marker::PhantomData }\n    }\n\n    fn resolve(self) -> Option\\<T\\> {\n        match self.result {\n            teaql_core::eval::EvalResult::Value(v) => Some(v),\n            teaql_core::eval::EvalResult::Null => None,\n            teaql_core::eval::EvalResult::NotLoaded { failed_node, attempted_path } => {\n                crate::trigger_logic_bug_panic(&self.root_desc, &failed_node, &attempted_path)\n            }\n        }\n    }\n\n    pub fn eval(self) -> Option\\<T\\> {\n        self.resolve()\n    }\n\n    pub fn unwrap(self) -> T {\n        self.resolve().expect(\"Value was legitimately null in database!\")\n    }\n\n    /// Returns `default_value` only when the expression is loaded and null.\n    ///\n    /// # Panics\n    ///\n    /// Panics when a required field or relation is `NotLoaded`.\n    pub fn or_if_null(self, default_value: T) -> T {\n        self.eval().unwrap_or(default_value)\n    }\n\n    /// Lazily computes a fallback only when the expression is loaded and null.\n    ///\n    /// # Panics\n    ///\n    /// Panics when a required field or relation is `NotLoaded`.\n    pub fn or_else_if_null(self, default_fn: impl FnOnce() -> T) -> T {\n        self.eval().unwrap_or_else(default_fn)\n    }\n\n    /// Returns `T::default()` only when the expression is loaded and null.\n    ///\n    /// # Panics\n    ///\n    /// Panics when a required field or relation is `NotLoaded`.\n    pub fn or_default_if_null(self) -> T where T: Default {\n        self.eval().unwrap_or_default()\n    }\n}\n\n\n>>\n\n"
+    },
+    {
+      "template": "eMethod",
+      "first_line": 134,
+      "sha256": "b3b37d9cc1352b0a4803f441e4eb2605a8597436ef930b38b68b4f1b921671ed",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressions E entries",
+        "entity_expression"
+      ],
+      "complete_source": "eMethod(objectDescriptor) ::= <<\n    pub fn <objectDescriptor.rustModuleName>\\<'a\\>(value: &'a crate::<objectDescriptor.rustStructName>) -> crate::<objectDescriptor.rustStructName>Expression\\<'a\\> {\n        let root_desc = std::sync::Arc::new(format!(\"<objectDescriptor.rustStructName>(id={})\", value.id()));\n        crate::<objectDescriptor.rustStructName>Expression::new(teaql_core::eval::EvalResult::Value(value), root_desc)\n    }\n>>\n\n"
+    },
+    {
+      "template": "entityExpression",
+      "first_line": 141,
+      "sha256": "b7f56b7545ee9598a545d03b46e27a09092081516fd508768433d9b69bb9095b",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressions entity wrapper",
+        "RuntimeExpression<EntityBorrow<Model>>"
+      ],
+      "complete_source": "entityExpression(objectDescriptor) ::= <<\n#[derive(Clone)]\npub struct <objectDescriptor.rustStructName>Expression\\<'a\\> {\n    result: teaql_core::eval::EvalResult\\<&'a crate::<objectDescriptor.rustStructName>\\>,\n    root_desc: std::sync::Arc\\<String\\>,\n}\n\nimpl\\<'a\\> <objectDescriptor.rustStructName>Expression\\<'a\\> {\n    pub fn new(result: teaql_core::eval::EvalResult\\<&'a crate::<objectDescriptor.rustStructName>\\>, root_desc: std::sync::Arc\\<String\\>) -> Self {\n        Self { result, root_desc }\n    }\n\n    fn resolve(&self) -> Option\\<&'a crate::<objectDescriptor.rustStructName>\\> {\n        match &self.result {\n            teaql_core::eval::EvalResult::Value(v) => Some(*v),\n            teaql_core::eval::EvalResult::Null => None,\n            teaql_core::eval::EvalResult::NotLoaded { failed_node, attempted_path } => {\n                crate::trigger_logic_bug_panic(&self.root_desc, &failed_node, &attempted_path)\n            }\n        }\n    }\n\n    pub fn eval(&self) -> Option\\<&'a crate::<objectDescriptor.rustStructName>\\> {\n        self.resolve()\n    }\n\n    pub fn unwrap(&self) -> &'a crate::<objectDescriptor.rustStructName> {\n        self.resolve().expect(\"Relation was legitimately null in database!\")\n    }\n\n<objectDescriptor.rustScalarFields:scalarAccessor();separator=\"\\n\\n\">\n<objectDescriptor.rustObjectFields:objectStorageAccessor();separator=\"\\n\\n\">\n<objectDescriptor.rustObjectFields:objectRelationAccessor();separator=\"\\n\\n\">\n<objectDescriptor.constantObjectFields:constantObjectExpressionAccessor();separator=\"\\n\\n\">\n<objectDescriptor.rustOneToOneRelations:oneToOneReverseRelationAccessor();separator=\"\\n\\n\">\n<objectDescriptor.rustOneToManyRelations:oneToManyReverseRelationAccessor();separator=\"\\n\\n\">\n}\n>>\n\n"
+    },
+    {
+      "template": "listExpression",
+      "first_line": 180,
+      "sha256": "55d0ccc17d0587ee76eab1cf89b8c3d17ba8bcdf49f3df50d7539674edcfc9a8",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressions list wrapper",
+        "RuntimeExpression<EntityListBorrow<Model>>"
+      ],
+      "complete_source": "listExpression(objectDescriptor) ::= <<\n#[derive(Clone)]\npub struct <objectDescriptor.rustStructName>ListExpression\\<'a\\> {\n    result: teaql_core::eval::EvalResult\\<&'a teaql_core::SmartList\\<crate::<objectDescriptor.rustStructName>\\>\\>,\n    root_desc: std::sync::Arc\\<String\\>,\n}\n\nimpl\\<'a\\> <objectDescriptor.rustStructName>ListExpression\\<'a\\> {\n    pub fn new(result: teaql_core::eval::EvalResult\\<&'a teaql_core::SmartList\\<crate::<objectDescriptor.rustStructName>\\>\\>, root_desc: std::sync::Arc\\<String\\>) -> Self {\n        Self { result, root_desc }\n    }\n\n    fn resolve(&self) -> Option\\<&'a teaql_core::SmartList\\<crate::<objectDescriptor.rustStructName>\\>\\> {\n        match &self.result {\n            teaql_core::eval::EvalResult::Value(v) => Some(*v),\n            teaql_core::eval::EvalResult::Null => None,\n            teaql_core::eval::EvalResult::NotLoaded { failed_node, attempted_path } => {\n                crate::trigger_logic_bug_panic(&self.root_desc, &failed_node, &attempted_path)\n            }\n        }\n    }\n\n    pub fn eval(&self) -> Option\\<&'a teaql_core::SmartList\\<crate::<objectDescriptor.rustStructName>\\>\\> {\n        self.resolve()\n    }\n\n    pub fn unwrap(&self) -> &'a teaql_core::SmartList\\<crate::<objectDescriptor.rustStructName>\\> {\n        self.resolve().expect(\"List relation was legitimately null in database!\")\n    }\n\n    pub fn size(&self) -> crate::ValueExpression\\<'a, usize\\> {\n        let next = self.result.clone().and_then(\"size\", |list| teaql_core::eval::EvalResult::Value(list.len()));\n        crate::ValueExpression::new(next, self.root_desc.clone())\n    }\n\n    pub fn first(&self) -> crate::<objectDescriptor.rustStructName>Expression\\<'a\\> {\n        let next = self.result.clone().and_then(\"first\", |list| {\n            if let Some(item) = list.first() {\n                teaql_core::eval::EvalResult::Value(item)\n            } else {\n                teaql_core::eval::EvalResult::Null\n            }\n        });\n        crate::<objectDescriptor.rustStructName>Expression::new(next, self.root_desc.clone())\n    }\n\n    pub fn get(&self, index: usize) -> crate::<objectDescriptor.rustStructName>Expression\\<'a\\> {\n        let next = self.result.clone().and_then(\"get\", |list| {\n            if let Some(item) = list.get(index) {\n                teaql_core::eval::EvalResult::Value(item)\n            } else {\n                teaql_core::eval::EvalResult::Null\n            }\n        });\n        crate::<objectDescriptor.rustStructName>Expression::new(next, self.root_desc.clone())\n    }\n}\n>>\n\n"
+    },
+    {
+      "template": "scalarAccessor",
+      "first_line": 239,
+      "sha256": "c066a7f5bf53c2bf5c3c6f514d0479e3108289900c3f3cb04e0d8911a744b6ca",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressions field loop",
+        "RuntimeExpression::from_result"
+      ],
+      "complete_source": "scalarAccessor(fieldDescriptor) ::= <<\n    pub fn get_<fieldDescriptor.rustStorageMemberName>(self) -> crate::ValueExpression\\<'a, <fieldDescriptor.rustType>\\> {\n        let next = self.result.and_then(\"<fieldDescriptor.rustStorageFieldName>\", |entity| entity.eval_<fieldDescriptor.rustStorageMemberName>());\n        crate::ValueExpression::new(next, self.root_desc.clone())\n    }\n>>\n\n"
+    },
+    {
+      "template": "objectStorageAccessor",
+      "first_line": 246,
+      "sha256": "731907be0ae59ff7a39a4867058e1a2cd655d07e70d7f978526b80b1c870a772",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressions field loop",
+        "generated model eval FK methods"
+      ],
+      "complete_source": "objectStorageAccessor(fieldDescriptor) ::= <<\n    pub fn get_<fieldDescriptor.rustStorageMemberName>(self) -> crate::ValueExpression\\<'a, <fieldDescriptor.rustStorageType>\\> {\n        let next = self.result.and_then(\"<fieldDescriptor.rustStorageFieldName>\", |entity| entity.eval_<fieldDescriptor.rustStorageMemberName>());\n        crate::ValueExpression::new(next, self.root_desc.clone())\n    }\n>>\n\n"
+    },
+    {
+      "template": "objectRelationAccessor",
+      "first_line": 253,
+      "sha256": "dcdad0614b2f0a665f0e131b9d35800df8d12a3689ac00192bb2a7aad9b1f532",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressionRelation",
+        "GeneratedRelationAccess"
+      ],
+      "complete_source": "objectRelationAccessor(fieldDescriptor) ::= <<\n    pub fn get_<fieldDescriptor.rustMemberName>(self) -> crate::<fieldDescriptor.fieldType.refer.rustStructName>Expression\\<'a\\> {\n        let next = self.result.and_then(\"<fieldDescriptor.rustMemberName>\", |entity| entity.eval_<fieldDescriptor.rustMemberName>());\n        crate::<fieldDescriptor.fieldType.refer.rustStructName>Expression::new(next, self.root_desc.clone())\n    }\n>>\n\n"
+    },
+    {
+      "template": "oneToOneReverseRelationAccessor",
+      "first_line": 260,
+      "sha256": "5a21164d31bb66c6569f038de309a41ebc46ae40a3259b9c4826552311279806",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressionRelation",
+        "GeneratedRelationAccess"
+      ],
+      "complete_source": "oneToOneReverseRelationAccessor(relation) ::= <<\n    pub fn get_<relation.rustMemberName>(self) -> crate::<relation.child.rustStructName>Expression\\<'a\\> {\n        let next = self.result.and_then(\"<relation.rustMemberName>\", |entity| entity.eval_<relation.rustMemberName>());\n        crate::<relation.child.rustStructName>Expression::new(next, self.root_desc.clone())\n    }\n>>\n\n"
+    },
+    {
+      "template": "oneToManyReverseRelationAccessor",
+      "first_line": 267,
+      "sha256": "cccf7ec167e873b11f8ca9983e01435b193460aa10cef30d914232a97c756b91",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressionRelation",
+        "GeneratedRelationAccess"
+      ],
+      "complete_source": "oneToManyReverseRelationAccessor(relation) ::= <<\n    pub fn get_<relation.rustMemberName>(self) -> crate::<relation.child.rustStructName>ListExpression\\<'a\\> {\n        let next = self.result.and_then(\"<relation.rustMemberName>\", |entity| entity.eval_<relation.rustMemberName>());\n        crate::<relation.child.rustStructName>ListExpression::new(next, self.root_desc.clone())\n    }\n>>\n\n"
+    },
+    {
+      "template": "constantObjectExpressionAccessor",
+      "first_line": 274,
+      "sha256": "ba79d8c4fe2f580dd5105260f10b10982790a274512eca9f1d38633e84923f67",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressions candidate loop"
+      ],
+      "complete_source": "constantObjectExpressionAccessor(fieldDescriptor) ::= <<\n<fieldDescriptor.candidateForConst:{candidate | <constantObjectExpressionMethod(fieldDescriptor, candidate)>};separator=\"\\n\\n\">\n>>\n\n"
+    },
+    {
+      "template": "constantObjectExpressionMethod",
+      "first_line": 278,
+      "sha256": "d11c50b61c01bfef4499a80bee8920f3a022f094a1a4db373f67829628b3220b",
+      "cpp_responsibilities": [
+        "CppCoreGenerator.expressions candidate loaded check",
+        "model candidate predicate"
+      ],
+      "complete_source": "constantObjectExpressionMethod(fieldDescriptor, candidate) ::= <<\n    pub fn <fieldDescriptor.rustMemberName>_is_<candidate.rustCandidateMethodValue>(self) -> crate::ValueExpression\\<'a, bool\\> {\n        let next = self.result.and_then(\"<fieldDescriptor.rustStorageFieldName>\", |entity| {\n            if !entity.is_loaded(\"<fieldDescriptor.rustStorageFieldName>\") {\n                teaql_core::eval::EvalResult::NotLoaded { failed_node: \"<fieldDescriptor.rustStorageFieldName>\".to_string(), attempted_path: \"<fieldDescriptor.rustStorageFieldName>\".to_string() }\n            } else {\n                teaql_core::eval::EvalResult::Value(entity.<fieldDescriptor.rustMemberName>_is_<candidate.rustCandidateMethodValue>())\n            }\n        });\n        crate::ValueExpression::new(next, self.root_desc.clone())\n    }\n>>\n"
+    }
+  ],
+  "notice": "Complete source inventory and responsibility mapping; runtime/source outcomes and final gates remain separate proof requirements."
+}

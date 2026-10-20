@@ -1,0 +1,18 @@
+<root name="cpp_constants_temporal" org="teaql" data_service="sqlite">
+    <priority id="id()" platform="platform(contextRoot=true)" name="string()" code="string()"
+              instant="dateTime()" optional_instant="dateTime()?"
+              clock="time()" optional_clock="time()?"
+              created_at="createTime()" updated_at="updateTime()"
+              _constant="true" _identifier="code">
+        <_value id="1" name="Basic" code="BASIC" instant="2001-01-01T01:02:03"
+                optional_instant="2002-02-02T02:03:04" clock="07:30:00" optional_clock="08:45:00" />
+        <_value id="22" name="Extended" code="EXTENDED" instant="2003-03-03T03:04:05"
+                optional_instant="2004-04-04T04:05:06" clock="23:59:59" optional_clock="00:00:00" />
+    </priority>
+    <platform name="string()" created_at="createTime()" updated_at="updateTime()" />
+    <label id="id()" platform="platform(contextRoot=true)" priority="priority()" code="string()"
+           _constant="true" _identifier="code">
+        <_value id="31" code="PUBLIC" />
+        <_value id="32" code="PRIVATE" />
+    </label>
+</root>

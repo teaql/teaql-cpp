@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 450,
+  "models": 5,
+  "callbacks": 450,
+  "policy_reviews": 100,
+  "findings": 600,
+  "fix_evidence": 1170,
+  "successful_saves": 20,
+  "profiles": {
+    "native": {
+      "passed": 4,
+      "total": 4,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start  63: protected_behavior_rust_parity\n    Start 421: inherited_business_governed_rust_parity\n    Start 422: inherited_business_update_rust_parity\n    Start  62: inherited_business_extensions_rust_parity\n1/4 Test #422: inherited_business_update_rust_parity .......   Passed    0.52 sec\n2/4 Test #421: inherited_business_governed_rust_parity .....   Passed    0.91 sec\n3/4 Test  #63: protected_behavior_rust_parity ..............   Passed    2.23 sec\n4/4 Test  #62: inherited_business_extensions_rust_parity ...   Passed    6.28 sec\n\n100% tests passed out of 4\n\nTotal Test time (real) =   6.30 sec\n",
+      "sha256": "f66f8a143a8f2fcd584783b37489781bda1f2c89e1f673b5650109936bbbdd5b"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 876: module_inherited_business_extensions_rust_parity\n1/1 Test #876: module_inherited_business_extensions_rust_parity ...   Passed    5.36 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   5.37 sec\n",
+      "sha256": "7c72c94baf9fc3b882e287fb50ca3f4169dcc693b44f24ed9b97f257927dd1ad"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 62: inherited_business_extensions_rust_parity\n1/1 Test #62: inherited_business_extensions_rust_parity ...   Passed   18.60 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  18.61 sec\n",
+      "sha256": "1cd98c825e6e51af409b25f4b61a2e1ddb9fcb31e4a63843f7e3593a6e508b4a"
+    }
+  },
+  "adapted_source_only": true,
+  "source_artifact_acceptance": false,
+  "original_generated_files_changed": false,
+  "production_runtime_changed": false,
+  "producer_changed": false,
+  "normalization": "none",
+  "clock_projection": "Presence and creation-time retention; fixed BusinessClock controls IDs only.",
+  "default_pmr_disabled": true,
+  "explicit_global_output_copy": true,
+  "actual_user_deletion": true,
+  "leak_scanning": false,
+  "canonical_bodies": 557,
+  "format_cpp_count": 1377,
+  "mips_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "hashes": {
+    "tests/parity/inherited_business_extensions_5_0_6.rs": "293951149b0c9354d7cedcba773a0a5155132af37454c4f67f7f43a841f2efd9",
+    "tests/parity/inherited_business_extensions_probe.cpp": "834e729d4163ab9e6f4823f679e3cdda09e4ac326bb0fecb4987a0c3fe2e3ef5",
+    "tests/parity/compare_inherited_business_extensions_5_0_6.py": "99feb6a1acae19f12c2f93f756f2e3e781a593cc1c13816698a4dc4c517f6f75",
+    "tests/parity/inherited_business_extensions_5_0_6_cases.json.gz": "c7cecebcadd4f430cdfee275108b327b6acb2525b6dfa816996044f5734b98ab",
+    "tests/parity/rust_inherited_business_extensions_5_0_6/Cargo.toml": "e9c51a7a33049d2981f0978fb0e366cf765426c6d13d8da464a7e4b26ad6cbdf",
+    "tests/parity/rust_inherited_business_extensions_5_0_6/Cargo.lock": "63c3a7f96836d483e3f2670d879aff34c913e920093378c1499bd458f471585f",
+    "scripts/verify_inherited_business_extensions_5_0_6.py": "53e315805da5e85e1a55e09e569081020d10388ae86f94aee47b80c20ddd68bd",
+    "docs/parity/inherited_business_extensions_source_5_0_6.json": "b4f243aaeb56687edc3563ea386f59dd4cf65b278ec1d165e6b9952a88521e27",
+    "docs/inherited_business_extensions_5_0_6.md": "ee1c6a6bfcbe0ac30ea5186047a856cbefd27d0dad17db84fb2d17c639bf9ae7"
+  }
+}

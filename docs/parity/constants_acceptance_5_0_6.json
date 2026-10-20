@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "status": "qualified_with_documented_language_and_ownership_adaptations",
+  "capability": "G05",
+  "phase": "P3",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "default_constant_guard_removed": true,
+  "normal_generation_workspaces": 20,
+  "reproduced_workspace_files": 240,
+  "contract_sdks": 44,
+  "all_contract_code_bytes_unchanged": true,
+  "generated_assist_updates": 30,
+  "java": [
+    {
+      "name": "CppGenerationTest",
+      "tests": 38,
+      "failures": 0,
+      "errors": 0,
+      "report_sha256": "0868bab300ae88fc79e91404807028134942f78e17914e227eb307d7b184aeea"
+    },
+    {
+      "name": "CppFieldLayoutMetadataTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "report_sha256": "e80d3be1ce8788265d4df9caab015e5cf5757fc996b9c5f4577d927a3ec38eae"
+    },
+    {
+      "name": "CppJsonInputMetadataTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "report_sha256": "925190b647255784e324aaefa24010d90be0a78aa22389ad776d545a65dfe827"
+    }
+  ],
+  "profiles": {
+    "native": {
+      "passed": 13,
+      "total": 13,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n      Start 388: constant_governance_rust_parity\n      Start 412: constant_topology_extensions_self_reference_required_rust_parity\n      Start 410: constant_topology_extensions_ordered_rust_parity\n      Start 577: bootstrap_temporal_extensions_rust_parity\n 1/13 Test #577: bootstrap_temporal_extensions_rust_parity ..........................   Passed   59.36 sec\n      Start 411: constant_topology_extensions_reversed_rust_parity\n 2/13 Test #388: constant_governance_rust_parity ....................................   Passed   92.85 sec\n      Start 391: generated_bootstrap_rust_parity\n 3/13 Test #391: generated_bootstrap_rust_parity ....................................   Passed    4.64 sec\n      Start 392: generated_candidates_rust_parity\n 4/13 Test #392: generated_candidates_rust_parity ...................................   Passed    6.61 sec\n      Start 390: generated_constant_variants_rust_parity\n 5/13 Test #410: constant_topology_extensions_ordered_rust_parity ...................   Passed  108.73 sec\n      Start 394: generated_bootstrap_save_async_contracts\n 6/13 Test #390: generated_constant_variants_rust_parity ............................   Passed    5.06 sec\n      Start 389: generated_constant_scalar_contracts\n 7/13 Test #389: generated_constant_scalar_contracts ................................   Passed    0.20 sec\n      Start 395: generated_bootstrap_model_contracts\n 8/13 Test #395: generated_bootstrap_model_contracts ................................   Passed    0.01 sec\n      Start 281: generated_bootstrap_contracts\n 9/13 Test #281: generated_bootstrap_contracts ......................................   Passed    0.01 sec\n      Start 393: generated_candidates_contracts\n10/13 Test #393: generated_candidates_contracts .....................................   Passed    0.01 sec\n11/13 Test #394: generated_bootstrap_save_async_contracts ...........................   Passed    1.07 sec\n12/13 Test #411: constant_topology_extensions_reversed_rust_parity ..................   Passed   54.83 sec\n13/13 Test #412: constant_topology_extensions_self_reference_required_rust_parity ...   Passed  114.24 sec\n\n100% tests passed out of 13\n\nTotal Test time (real) = 114.27 sec\n",
+      "sha256": "bfc62f9caf1bfce42abb0777b6de2aa52ae76da2a9b634605af9c79242727050"
+    },
+    "modules": {
+      "passed": 9,
+      "total": 9,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 740: module_constant_topology_extensions_self_reference_required_rust_parity\n    Start 738: module_constant_topology_extensions_ordered_rust_parity\n    Start 743: module_constant_governance_rust_parity\n    Start 763: module_bootstrap_temporal_extensions_rust_parity\n1/9 Test #763: module_bootstrap_temporal_extensions_rust_parity ..........................   Passed   38.32 sec\n    Start 739: module_constant_topology_extensions_reversed_rust_parity\n2/9 Test #743: module_constant_governance_rust_parity ....................................   Passed   53.67 sec\n    Start 696: module_generated_bootstrap_save_async_contracts\n3/9 Test #696: module_generated_bootstrap_save_async_contracts ...........................   Passed    0.54 sec\n    Start 601: module_generated_bootstrap_model_contracts\n4/9 Test #601: module_generated_bootstrap_model_contracts ................................   Passed    0.00 sec\n    Start 600: module_generated_candidates_contracts\n5/9 Test #600: module_generated_candidates_contracts .....................................   Passed    0.00 sec\n    Start 602: module_generated_bootstrap_contracts\n6/9 Test #602: module_generated_bootstrap_contracts ......................................   Passed    0.01 sec\n7/9 Test #738: module_constant_topology_extensions_ordered_rust_parity ...................   Passed   60.60 sec\n8/9 Test #739: module_constant_topology_extensions_reversed_rust_parity ..................   Passed   23.16 sec\n9/9 Test #740: module_constant_topology_extensions_self_reference_required_rust_parity ...   Passed   62.67 sec\n\n100% tests passed out of 9\n\nTotal Test time (real) =  62.68 sec\n",
+      "sha256": "bfa81b3f8724ad3fdde710b3cd0bf969a85faceb3fd4a0920c62cf1ae304ddad"
+    }
+  },
+  "canonical_bodies": 526,
+  "catalog_exports": 1479,
+  "format_cpp_count": 1362,
+  "source_replay": "docs/parity/constant_closure_source_5_0_6.json",
+  "source_replay_observations": 4939,
+  "reference_locked_failure_replay": "docs/parity/constant_failure_closure_source_5_0_6.json",
+  "reference_locked_errors": 21,
+  "original_generated_rust_changed": false,
+  "original_reference_checkouts_changed": false,
+  "original_corpora_changed": false,
+  "cpp_runtime_function_changed": false,
+  "full_goal_complete": false,
+  "new_sanitizer_run": false,
+  "new_mips_run": false,
+  "physical_device_run": false,
+  "hashes": {
+    "scripts/generate_examples.py": "d8e5ad7fca7b37388bf6f0e5a0e3c4c2ec275a1df5de30c320c1efe750a4bcb2",
+    "scripts/reproduce_cpp_contract_fixtures.py": "6bcc55f29e576100183c1333abf06c660d6b3b3885a5b41c3f11be5023a90e40",
+    "docs/parity/p3_contract_sdk_reproduction_5_0_6.json": "c356f4cd5deae7576f57f4bb445bbb2da52660a6476ef6dc95e578799e00eae3",
+    "docs/parity/p3_contract_sdk_instruction_changes_5_0_6.json": "ec3d3da05e5333aa9d0c6c1b69ff597a3a4b2c660af537f3ec4bd439cb167279",
+    "docs/parity/constant_closure_source_5_0_6.json": "ac108ffa23ae252be7bd5c34f37d57c874c986eb02b3400a47d11fd5ec96b810",
+    "docs/parity/constant_failure_closure_source_5_0_6.json": "f8c08a9100a5d6beff3e32acc9d7617b2e3d0a4766d8bdc8e4556382a85a6f48",
+    "examples/generated/manifest.json": "2c971fb52d2e5b1997d31eff4a7e6af81b97bff2ff13e0c7e84ef57f61a0f42f",
+    "tests/generated_sample_fields_runtime/manifest.json": "ef960a9dd1eb5544fbb510d12ee2a1d361f8bd7d7e601599709401d10aec023f",
+    "tests/generated_candidates/manifest.json": "05f8372e75568c28d1ea84d27e7e84b1b6bf4d4335cfe158af6010d429ea0208",
+    "tests/generated_inheritance/manifest.json": "05f3697ccba9e829e485a5247c13a3829b511defcc4f54cc8bc781ea88575004",
+    "tests/generated_dynamic_json/manifest.json": "19c3ddc4f8592ffbb556e92e89acb4d6413061bc9f691d8c83b7e0d93047ade5",
+    "tests/generated_checkers/manifest.json": "093938ff2d9d3dedd4ad0cd336a585646cba205a75e37f68cf830af0c8fb8dd9",
+    "tests/generated_inheritance_variants/manifest.json": "e3a210fcf8d99f5579b0442b9e849ae5cc65e28353ea6fbd36b5f2f0cdc0511f",
+    "tests/generated_business_ids/manifest.json": "54c530a0332ee11062f6a931dac3cc576e6c0e37144c1861ea2403fdd69624a1",
+    "tests/generated_inheritance_graph/manifest.json": "42911e1b79e8a9ea23a7679f18fb480dc48c997ee7a78748a53a03485c9cd324",
+    "tests/generated_sample_fields/manifest.json": "d0c97edc20faa27cd9887d433f2054163d30bde201b965197ead058d8933f38c",
+    "tests/generated_inheritance_business_ids/manifest.json": "e424b5035a800d6406a46271720ac26ba569c3e5a262026c6ae3f01b3b87cdda",
+    "tests/generated_constants_numeric/manifest.json": "70f0ac45c65e7855a29a8129afa0a355751489e6db48f9a185036901a8806b12",
+    "tests/generated_optional_types/manifest.json": "cffabe33c7a160545d27e1ed40908bbb1ce619f501037092a3fda89d1eb98875",
+    "tests/generated_constants_scalar/manifest.json": "28b159cc7ae5d4c465aebea34590adee055952ba4bbfd088eb6e5cc2503e39a8",
+    "tests/generated_types/manifest.json": "5fd4db2e90925ff37bde45117d0265817d0045a973a4748b2336c6838dea4e0d",
+    "tests/generated_constants_temporal/manifest.json": "4f807e65a0615ff7522ed41d9bea10728fec01833facf09728a72cca321575c7",
+    "tests/generated_constants_temporal_required/manifest.json": "3ac484820386c11b918925d4a68a0f26cf2f7c4ad75be239edba0c9d7e996dd4",
+    "tests/generated_sample_fields_temporal/manifest.json": "7f7e56f9e0e40340a370a3ff8c310ec893e133ea4fb8742d5e0c17945035fde5",
+    "tests/generated_constants_catalog/manifest.json": "dd895a97ac2febf224d149f52f15b690022b30cb7babe2388cf7ea8bfaf73057",
+    "tests/generated_relations/manifest.json": "d8a0db580d952b4344b37d5335bcb4217fcf31b99fde6cc23c0f90fc942246b5"
+  },
+  "producer_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "0e2a0e0493d352ad05c6365d628f5711c2cf31c4a7602facfff37236e87e866d",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "e11df6f6c2057a557535186ecdadd1d23b02a3fdf1c1abc10c2bdd4a71c8195c"
+  },
+  "final_strict_checks": {
+    "contract": {
+      "exit_code": 0,
+      "output": "Reproduced 44 complete C++ contract SDKs; all code bytes unchanged; 0 generated Assist updates\nVerified 36 locked generator sources and 17 capability records; 15 remain unqualified\n",
+      "sha256": "d4ee26361d1f12ebb39dfce6faa83db25ec9898a9c50803b4afa82e66806a287"
+    },
+    "optional": {
+      "exit_code": 0,
+      "output": "Verified 36 locked generator sources and 17 capability records; 15 remain unqualified\nVerified four original E0308 errors and independent complete C++ optional-Timestamp compilation\n",
+      "sha256": "91fba7f16e92c2e1c8ed76e77943cc96fac20ef69a74a9e921929fcc7ae222d6"
+    }
+  }
+}

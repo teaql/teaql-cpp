@@ -1,5 +1,9 @@
 # Inherited stream and parent metadata qualification: Rust 5.0.6
 
+Current status: G04/P2 is qualified with documented language/ownership adaptations;
+normal inheritance generation is enabled. See [the final acceptance](inheritance_acceptance_5_0_6.md).
+The checkpoint status and guard statements below are retained historical evidence.
+
 This checkpoint uses the exact runtime and generator commits in the active
 locks. It supplements the inheritance qualification matrix; G04/P2 remains
 partial because the frozen producer's inherited Business-ID combination still

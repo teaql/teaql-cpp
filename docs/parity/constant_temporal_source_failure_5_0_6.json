@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "original_provenance": {
+    "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+    "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "model": "tests/generator/constants_temporal.xml",
+    "model_sha256": "6149b0d1739140cfc57f5f2620cbe1e3e9519fa9f13dd86cc770277cfa71a265",
+    "hand_edited": false,
+    "files": {
+      "lib/Cargo.toml": "3968bd7f54bcff8408a78c9b8d1e35e7a74f3216c2f510751ed1bf425617abd4",
+      "lib/src/e.rs": "7a1940112beb6d4487f5a9660aa702044f49789e1488ddf987a92fe1e818ff54",
+      "lib/src/label/behavior.rs": "2832e04c4e9434149bfaa5fea702139cdcd24bbc4cdc478aa71615a8aa3752f9",
+      "lib/src/label/checker.rs": "9a3bbfa6a173065ef07e82974354d38550116f3046ecd45d379af4e4f5696467",
+      "lib/src/label/entity.rs": "fe3379421a8197d828770566a2ee6b3430d1b5dab6d534264c80522e38f07b6e",
+      "lib/src/label/expression.rs": "6d35c05df161098bc7e92c951087382b76d997d63408fa1ba383dc26cd95e08a",
+      "lib/src/label/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/label/request.rs": "c85e85812dc2de72f71c7d173b2345bc3ee469118d54beb116cdcf633381a415",
+      "lib/src/lib.rs": "e9ebfe3c1f971535a77041b8435bb2e3e46d842a59dcfc93cd8e15055aa2ca20",
+      "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+      "lib/src/platform/checker.rs": "02edd5a2e1759cb5d1ed3929c1b66543b1330d833eddad401380e9f6b613b251",
+      "lib/src/platform/entity.rs": "44b71fee738809c0a6510651a7d5713c2e3668a2b1534f1750a8fad9d5ebb0cf",
+      "lib/src/platform/expression.rs": "fe02a18c87a8672380f6554706e8dd67b61255ce22da19c745c27e6ee6000d0f",
+      "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/platform/request.rs": "d103ca234aa4cb3c6ec7a552aadbd973fd236e9a7585d108932521c230f81373",
+      "lib/src/priority/behavior.rs": "334c09111fad87bd014f5becc3bf2e2bb840a2fc5343498a2a9299788de3a7f3",
+      "lib/src/priority/checker.rs": "ce2fd5b39c7928a5f30c0da26f54492e77d19a99a423bb1a27346b48b9aff928",
+      "lib/src/priority/entity.rs": "502f6e7b8047ab013b2dec5d5d5a6cd5c57886d2092713ac6c9726b8383090f4",
+      "lib/src/priority/expression.rs": "d1576c6845133d2e55001764a4121dc541a95f5a014c84d95d6203cb28dd64e3",
+      "lib/src/priority/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/priority/request.rs": "4a3c11eb793701834a21fccbc70a87ad379b8bf3afadc14f50d2844a6cb096bb",
+      "lib/src/q.rs": "d64e88d81c5ae305afd95f59befcbfcb5a4a13ecdd6fff54ddd13c134032d71b",
+      "lib/src/request_support.rs": "a930f1ab9937199ebea007a9751248670a359bce045a22a70b37fe96ab1663db",
+      "lib/src/runtime.rs": "bb3b6a978924ff5da2dae0a7df17d483e113153b611d1c8d190fa7289fea504e",
+      "lib/src/sample_data.rs": "9f8dfc9bbcb480895277881c5329340fa26388ac9bdc6914c0f5d668dd47646e"
+    }
+  },
+  "cpp_provenance": {
+    "scope": "cpp-lib-core",
+    "qualification_only": false,
+    "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+    "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+    "generator_implementation_sha256": {
+      "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "0e2a0e0493d352ad05c6365d628f5711c2cf31c4a7602facfff37236e87e866d",
+      "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "49dd29d76b7fea04fd1eee1e01ac109dce6cae1b7f2a6c154ef5b21f97768844",
+      "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
+      "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "0a84df2e8f3c8f4aad0ca44634ae7d7fa6162ab16212f03abc250261f10071ef",
+      "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
+      "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "088fcf661bad6c58230f65f21737f62495b92174aff2e34118c5a98b432bbae0"
+    },
+    "model": "tests/generator/constants_temporal.xml",
+    "model_sha256": "6149b0d1739140cfc57f5f2620cbe1e3e9519fa9f13dd86cc770277cfa71a265",
+    "runtime_rust_baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "formatter": "18.1.8",
+    "files": {
+      "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+      "ASSIST.md": "540d4ed0c060a677058e17f3bb867c349fe0747a836cdd169c6d579c8cfcd2ed",
+      "CMakeLists.txt": "dc51f83ee9b3488025a9ee9f11ffa502766d6558b10cadcacbbd2b323db0dc67",
+      "include/cpp_constants_temporal/checkers.hpp": "a7794a02fc4ea9bd7e257a7f32f56419cffea507363408f0fbd369e4e895385a",
+      "include/cpp_constants_temporal/expressions.hpp": "334767aba8e5f197a55f741bc7521eef6887455737cb2ab95005d544a9a9e8ba",
+      "include/cpp_constants_temporal/models.hpp": "543319ef2827161673f782c8a4af67569acbcd650ea905540f40b9da01aec869",
+      "include/cpp_constants_temporal/queries.hpp": "1b3cd650fe64523012fb7b061d0332354b86ab3b49b4c99010a5ab6716d7d179",
+      "include/cpp_constants_temporal/runtime.hpp": "a213bf9e65cf027ffec42d841736d030345930019651947ba1f7dfcc19e6d922",
+      "include/cpp_constants_temporal/sample_data.hpp": "cc5ef434ba3e02393b73fe11058453f209e2d58607119655947de7a8708ad669",
+      "include/cpp_constants_temporal/support.hpp": "8fedc7227fc1235789b4f7a4d8c16077c0c44a1dae7308c65be90ef539a3e676",
+      "include/cpp_constants_temporal.hpp": "109c68170c6aaec2f46f1f60e113507a5b33747cb6b897d30c65137fbeadf8bd"
+    }
+  },
+  "source_exit_code": 101,
+  "errors": [
+    {
+      "code": "E0308",
+      "message": "mismatched types",
+      "primary": [
+        {
+          "file": "tests/generator/parity/constants_temporal_rust/lib/src/runtime.rs",
+          "line": 272,
+          "label": "expected `Option<Timestamp>`, found `Timestamp`"
+        }
+      ]
+    },
+    {
+      "code": "E0308",
+      "message": "mismatched types",
+      "primary": [
+        {
+          "file": "tests/generator/parity/constants_temporal_rust/lib/src/runtime.rs",
+          "line": 284,
+          "label": "expected `Option<Timestamp>`, found `Timestamp`"
+        }
+      ]
+    },
+    {
+      "code": "E0308",
+      "message": "mismatched types",
+      "primary": [
+        {
+          "file": "tests/generator/parity/constants_temporal_rust/lib/src/runtime.rs",
+          "line": 296,
+          "label": "expected `Option<Timestamp>`, found `Timestamp`"
+        }
+      ]
+    },
+    {
+      "code": "E0308",
+      "message": "mismatched types",
+      "primary": [
+        {
+          "file": "tests/generator/parity/constants_temporal_rust/lib/src/runtime.rs",
+          "line": 308,
+          "label": "expected `Option<Timestamp>`, found `Timestamp`"
+        }
+      ]
+    }
+  ],
+  "cpp_compile_exit_code": 0,
+  "disposition": "Complete unchanged original bootstrap passes Timestamp::now() to Option<Timestamp> setters in create/reconcile for two constants. Preserve all four E0308 errors and original output. C++ wraps the optional value and compiles independently; this is not a runnable original oracle or runtime parity for optional Timestamp constants."
+}

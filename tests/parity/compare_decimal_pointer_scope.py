@@ -17,7 +17,7 @@ def main():
     parser.add_argument('--rust-emulator', default='')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    with gzip.open(Path(__file__).with_name('decimal_pointer_scope_cases.json.gz'), 'rt') as source:
+    with gzip.open(Path(__file__).with_name('decimal_pointer_scope_baseline_5_0_6_cases.json.gz'), 'rt') as source:
         corpus = json.load(source)
     if corpus['baseline'] != json.loads((root / 'upstream.lock.json').read_text())['commit']:
         raise RuntimeError('Decimal pointer observations belong to a different source baseline')
@@ -25,6 +25,8 @@ def main():
     bits = subprocess.check_output(emulator + [args.cpp, '--pointer-bits'], text=True).strip()
     if bits not in ('32', '64'):
         raise RuntimeError('Unsupported native pointer width')
+    if int(bits) != corpus.get('pointer_bits', int(bits)):
+        raise RuntimeError('Current pointer corpus is native64-only; historical 32-bit evidence remains separate')
     cases = corpus['cases']
     inputs = [case['input'] for case in cases]
     expected = [case['expected'][bits] for case in cases]

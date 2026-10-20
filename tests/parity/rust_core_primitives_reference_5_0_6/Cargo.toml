@@ -1,0 +1,49 @@
+[package]
+name = "teaql_core_primitives_reference_506"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "business_id_oracle"
+path = "../rust_values/src/bin/business_id_oracle.rs"
+
+[[bin]]
+name = "core_api_oracle"
+path = "../rust_values/src/bin/core_api_oracle.rs"
+
+[[bin]]
+name = "core_aux_debug_oracle"
+path = "../rust_values/src/bin/core_aux_debug_oracle.rs"
+
+[[bin]]
+name = "core_graph_api_oracle"
+path = "../rust_values/src/bin/core_graph_api_oracle.rs"
+
+[[bin]]
+name = "timestamp_api_oracle"
+path = "../rust_values/src/bin/timestamp_api_oracle.rs"
+
+[[bin]]
+name = "chrono_value_oracle"
+path = "../rust_values/src/bin/chrono_value_oracle.rs"
+
+[[bin]]
+name = "clock_epoch_boundary_oracle"
+path = "../rust_constant_temporal_5_0_6/src/bin/clock_epoch_boundary.rs"
+
+[[bin]]
+name = "compact_row_api_oracle"
+path = "../rust_values/src/bin/compact_row_api_oracle.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+serde_json = "=1.0.150"
+
+[workspace]
+
+[[bin]]
+name = "meta_api_reference_5_0_6"
+path = "../rust_field_layout/src/bin/meta_api_5_0_6.rs"

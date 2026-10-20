@@ -5,6 +5,8 @@
 #include <teaql/core/list.hpp>
 #include <teaql/memory/arena.hpp>
 #include <algorithm>
+#include <charconv>
+#include <limits>
 
 namespace teaql {
 namespace {
@@ -230,6 +232,24 @@ void write_debug(DebugWriter& writer, const CompactRow& row) {
 }
 
 namespace {
+void validate_row_size(Memory owner, std::size_t columns, std::size_t values) {
+    if (columns == values) {
+        return;
+    }
+    String message("assertion `left == right` failed: row values must match the actual "
+                   "projection layout\n  left: ",
+                   owner);
+    auto append = [&](std::size_t value) {
+        char buffer[std::numeric_limits<std::size_t>::digits10 + 1];
+        auto result = std::to_chars(buffer, buffer + sizeof(buffer), value);
+        message.append(buffer, result.ptr);
+    };
+    append(columns);
+    message += "\n right: ";
+    append(values);
+    throw std::invalid_argument(std::string(message));
+}
+
 const ColumnLayout* make_layout(Memory owner,
                                 Vector<String> names,
                                 std::span<const String> relations = {},
@@ -467,9 +487,7 @@ CompactRow::CompactRow(std::allocator_arg_t,
                        const ColumnLayout& columns,
                        std::span<const Value> values)
     : values_(a.resource()) {
-    if (columns.names().size() != values.size()) {
-        throw std::invalid_argument("CompactRow column/value count mismatch");
-    }
+    validate_row_size(a.resource(), columns.names().size(), values.size());
     shared_ =
         columns.memory_resource() == a.resource() ? &columns : copy_layout(a.resource(), columns);
     values_.reserve(values.size());
@@ -483,9 +501,7 @@ CompactRow::CompactRow(std::allocator_arg_t,
                        const ColumnLayout& columns,
                        Vector<Value>&& values)
     : values_(a.resource()) {
-    if (columns.names().size() != values.size()) {
-        throw std::invalid_argument("CompactRow column/value count mismatch");
-    }
+    validate_row_size(a.resource(), columns.names().size(), values.size());
     shared_ =
         columns.memory_resource() == a.resource() ? &columns : copy_layout(a.resource(), columns);
     if (values.get_allocator().resource() == a.resource()) {
@@ -773,7 +789,9 @@ void CompactRow::extend(const CompactRow& other) {
     DynamicFieldMergeShapes shapes(std::allocator_arg, Allocator(memory_resource()));
     auto result = try_extend(other, shapes);
     if (!result) {
-        throw std::invalid_argument(std::string(result.error().to_string(memory_resource())));
+        String message("incompatible CompactRow read metadata: ", memory_resource());
+        message += debug_string(memory_resource(), result.error());
+        throw std::invalid_argument(std::string(message));
     }
 }
 
@@ -825,6 +843,24 @@ Result<std::monostate, DynamicFieldError> CompactRow::try_extend(const CompactRo
             }
         }
     }
+    const auto* layout = shared_columns();
+    const bool same_schema = left == definitions || (left && definitions && *left == *definitions);
+    const auto relation_names = layout->relation_names();
+    const bool same_relations =
+        std::ranges::all_of(other.shared_columns()->relation_names(), [&](const auto& name) {
+            return std::ranges::find(relation_names, name) != relation_names.end();
+        });
+    if (!other.loaded_relations_ && same_schema && same_relations &&
+        std::ranges::equal(keys(), other.keys())) {
+        // Reuse existing geometry and value capacity after metadata validation.
+        // Borrowed inputs still copy payloads into this scope; duplicate columns
+        // retain the source's first-slot lookup and last-incoming-value behavior.
+        for (const auto& [name, value] : other.iter()) {
+            const auto position = std::ranges::find(keys(), name) - keys().begin();
+            values_[std::size_t(position)] = Value(r, value);
+        }
+        return Output::ok(r, {});
+    }
     Vector<String> names = copy_names(r, keys());
     Vector<Value> values(r);
     for (const auto& value : values_) {
@@ -845,8 +881,6 @@ Result<std::monostate, DynamicFieldError> CompactRow::try_extend(const CompactRo
             relations.emplace_back(name);
         }
     }
-    const auto* layout = shared_columns();
-    const bool same_schema = left == definitions || (left && definitions && *left == *definitions);
     if (!std::ranges::equal(names, keys()) ||
         !std::ranges::equal(relations, layout->relation_names()) || !same_schema) {
         layout = make_layout(r, std::move(names), relations, definitions);
@@ -858,6 +892,7 @@ Result<std::monostate, DynamicFieldError> CompactRow::try_extend(const CompactRo
         }
     }
     if (other.loaded_relations_) {
+        (void)read_metadata();
         for (const auto& [name, list] : other.loaded_relations_->lists) {
             set_loaded_relation(name, list);
         }

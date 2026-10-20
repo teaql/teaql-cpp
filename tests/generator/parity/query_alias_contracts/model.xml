@@ -1,0 +1,6 @@
+<root name="cpp_query_aliases" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <record platform="platform(contextRoot=true)" class="number()" operator="number()"
+            template="number()" type="integer()" match="number()" ordinary="number()"
+            namespace="platform()?" />
+</root>

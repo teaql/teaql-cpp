@@ -1,5 +1,10 @@
 # Complete reference source API review
 
+This historical source contract is reconciled with the active baseline by the
+[5.0.6 protocol acceptance](document_reference_acceptance_5_0_6.md), including
+every reference-source change, exact-dependency actual-source replay and current
+module/lifetime gates. Earlier acceptance labels are preserved below.
+
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 Reviewed production bodies: entity_reference.rs lines 1–294 and
 round_trip_reference.rs lines 1–914, before their test modules.

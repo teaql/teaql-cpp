@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scenarios": 20,
+  "gate_positions": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "actions": [
+    "resume",
+    "nonretryable_terminal_failure",
+    "explicit_cancel",
+    "actual_user_context_deletion"
+  ],
+  "profiles": {
+    "native": {
+      "exit_code": 0,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        "generated_bootstrap_model_contracts",
+        "generated_bootstrap_contracts",
+        "generated_bootstrap_save_async_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 350: generated_bootstrap_save_async_contracts\n    Start 351: generated_bootstrap_model_contracts\n    Start 239: generated_bootstrap_contracts\n1/3 Test #351: generated_bootstrap_model_contracts ........   Passed    0.00 sec\n2/3 Test #239: generated_bootstrap_contracts ..............   Passed    0.00 sec\n3/3 Test #350: generated_bootstrap_save_async_contracts ...   Passed    0.35 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.36 sec\n",
+      "build_exit_code": 0
+    },
+    "sanitize": {
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "tests": [
+        "generated_bootstrap_save_async_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 350: generated_bootstrap_save_async_contracts\n1/1 Test #350: generated_bootstrap_save_async_contracts ...   Passed    1.04 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   1.05 sec\n",
+      "build_exit_code": 0
+    },
+    "modules": {
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "tests": [
+        "module_generated_bootstrap_save_async_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 642: module_generated_bootstrap_save_async_contracts\n1/1 Test #642: module_generated_bootstrap_save_async_contracts ...   Passed    0.35 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.37 sec\n",
+      "build_exit_code": 0
+    }
+  },
+  "default_pmr_disabled": true,
+  "actual_worker_join_before_resource_destruction": true,
+  "real_sqlite_writes_readback_and_transactions": true,
+  "rust_deferred_provider_parity_claim": false,
+  "production_or_generator_body_changes": false,
+  "generated_artifacts_modified": false,
+  "initial_fixture_failure": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 350: generated_bootstrap_save_async_contracts\n1/1 Test #350: generated_bootstrap_save_async_contracts ...***Failed    0.00 sec\nmissing typed resource: cpp_constants_numeric::ServiceRuntimeExecutor\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   0.01 sec\n\nThe following tests FAILED:\n\t350 - generated_bootstrap_save_async_contracts (Failed)\nErrors while running CTest\n",
+  "format_output": "Formatted 1018 handwritten C++ files with clang-format 18.1.8\n",
+  "format_check_output": "Checked 1018 handwritten C++ files with clang-format 18.1.8\n",
+  "module_consumer_output": "Verified 157 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n",
+  "module_dependency_output": "Verified 245 production headers, 687 include edges and 7 modules: acyclic and confined to supported layers\n",
+  "module_export_output": "Verified 1479 catalog exports and isolated lookup across 7 modules\n",
+  "baseline_verification": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\n",
+  "sanitizer_leak_scanning": false,
+  "mips_or_physical_run": false,
+  "sha256": {
+    "tests/generator/generated_bootstrap_save_async_tests.cpp": "d06b88a43981ee9b9ea2a765420e38c616eee186f5bb083b011b6fe9a0a7929d",
+    "modules/contracts.json": "c179ec29681859832b9f2efac1d80bfa7b393dff5a4e45e69b50392d5dd54f48",
+    "docs/parity/bootstrap_save_async_5_0_6_source_review.json": "511c600620e219e62e732a5f8eff6f0045851527307f672d77794ca1cbe87e3c"
+  },
+  "remaining_scope": "Constant guard, broader model/scalar/metadata/topology/customization/conflict requirements and P0-P7 remain open."
+}

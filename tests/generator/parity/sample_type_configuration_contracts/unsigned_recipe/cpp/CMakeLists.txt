@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 4.4)
+project(cpp_sample_types_unsigned_recipe LANGUAGES CXX)
+find_package(teaql_cpp CONFIG REQUIRED)
+add_library(cpp_sample_types_unsigned_recipe INTERFACE)
+target_include_directories(cpp_sample_types_unsigned_recipe INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(cpp_sample_types_unsigned_recipe INTERFACE cxx_std_20)
+target_link_libraries(cpp_sample_types_unsigned_recipe INTERFACE teaql::provider_sqlite)

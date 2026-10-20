@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("sql_projection_scope_cases.json", "SQL projection scope"))
+    raise SystemExit(main("sql_projection_scope_5_0_6_cases.json.gz", "SQL projection scope"))

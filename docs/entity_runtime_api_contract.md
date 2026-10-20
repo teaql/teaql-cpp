@@ -1,5 +1,12 @@
 # Entity runtime production API review
 
+This is the historical 5.0.5 acceptance record. The active reference is the
+5.0.6 commit in `upstream.lock.json`; the
+[complete 5.0.6 review](entity_runtime_source_review_5_0_6.md) now accepts that
+source with its explicit Context adaptations. The
+[consuming loaded-view continuation](loaded_view_move_5_0_6.md) records the
+earlier receiver-copy difference and its focused repair.
+
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`,
 entity_runtime.rs production lines 1–1035. Embedded source tests are separate
 acceptance evidence. The source group is accepted within its explicit Context ownership/owner-thread

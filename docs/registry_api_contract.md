@@ -1,5 +1,10 @@
 # Registry and runtime module source contract
 
+The [complete 5.0.6 registry review](registry_source_review_5_0_6.md) qualifies
+RG01-RG24 with current exact-source/native/imported evidence, including the new
+metadata-preserving SmartList boundary. The review below remains a historical
+5.0.5 checkpoint; its results are not relabeled as current-baseline execution.
+
 Baseline: Rust v5.0.5 commit `62940ae2b88e7acc32763853b8b4685a01c7e90a`,
 registry.rs (590 production/macro lines). The complete source body and native
 registry/module/behavior/decoder boundaries are reviewed. This source group is

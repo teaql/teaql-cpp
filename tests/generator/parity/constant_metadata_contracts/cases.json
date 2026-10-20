@@ -1,0 +1,15 @@
+[
+  "no_root",
+  "multiple_roots",
+  "multiple_roots_reversed",
+  "missing_identifier",
+  "unknown_identifier",
+  "no_candidates",
+  "empty_identifier_value",
+  "missing_identifier_value",
+  "missing_seed_field",
+  "comma_identifier_value",
+  "candidate_name_collision",
+  "unicode_identifier_value",
+  "malformed_xml"
+]

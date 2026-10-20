@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python3",
+    "tests/parity/compare_sqlite_decoding.py",
+    "--cpp",
+    "build_native_current/teaql_sqlite_decoding_checked_probe",
+    "--rust",
+    "/tmp/teaql_cpp_sqlite_baselines_506/release/sqlite_decoding_oracle"
+  ],
+  "exit_code": 1,
+  "stdout": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_decoding.py\", line 47, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_decoding.py\", line 37, in main\n    raise RuntimeError('Decoding corpus differs from actual original source')\nRuntimeError: Decoding corpus differs from actual original source\n",
+  "scope": "Known wrong unchecked source against checked native probe is rejected; no corpus mutation."
+}

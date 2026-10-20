@@ -1,0 +1,383 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "previous_baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "root_test_names_added": [],
+  "root_test_names_removed": [],
+  "root_tests": 75,
+  "byte_unchanged_bodies": 30,
+  "changed_bodies": 45,
+  "review_scope": "Source test setup, assertions and called C++ fixture contracts; not full implementing-leaf acceptance",
+  "review_notes": [
+    "New fixture_select declares meaningful comment/purpose in trusted test code. Public query, nested relation and aggregate inputs now use it; C++ fixtures already bind explicit intent.",
+    "Mutation and ledger fixtures explicitly bind MutationIntent or root comments. Existing direct C++ fixtures use actual runtime intent constructors and governed private entry points.",
+    "The memory aggregate struct literal initializes new facets, relation_aggregates, purpose, readonly definitions and dynamic selection fields to empty/None. This cfg(test)-only helper remains reference-only, separate from the public in-memory engine.",
+    "One entity-binding assertion now constructs fixture_select(repo.entity()) instead of repo.select(); expected entity remains Order. The C++ counterpart retains its entity/select binding assertions.",
+    "Other business assertions, expected rows, counts, errors, checker paths, relation keys, ordering, cache/TTL/principal and lock behavior remain the historical reviewed contracts. Direct source and C++ execution supply current evidence rather than a baseline-label update.",
+    "Production root adds commit_audit, document_round_trip, dynamic_fields, shared metadata decoder and DynamicFieldChanges declarations/reexports. Root-test execution does not qualify every implementing leaf or generated configuration."
+  ],
+  "historical_module_ledger_preserved": true,
+  "historical_source_dispositions_preserved": true,
+  "changes": [
+    {
+      "name": "scalar_fk_column_named_like_relation_does_not_create_related_entity",
+      "source_body_sha256": "05548a1f91b688ba94c67910fd4c4ce8fcaeb79b1485bdb9df86c8a90e4ba26b",
+      "historical_body_sha256": "c9d60b6061ceb394e71bcd49caf95a6461e18027c6fd64738da61e89f8247bb1",
+      "cpp_fixture": "tests/parity/teaql_runtime/registration.cpp",
+      "cpp_body_sha256": "af8016b985f4ce223132895de4b77fb32ee2463d472dc533a5e5efe9287db94a",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -3,9 +3,12 @@\n\n         let sql = PostgresDialect\n             .compile_select(\n                 &descriptor,\n-                &SelectQuery::new(\"PaymentOrder\")\n-                    .project(\"id\")\n-                    .project(\"channel_id\"),\n+                &fixture_select(\n+                    \"PaymentOrder\",\n+                    \"scalar_fk_column_named_like_relation_does_not_create_related_entity\",\n+                )\n+                .project(\"id\")\n+                .project(\"channel_id\"),\n             )\n             .unwrap()\n             .sql;\n"
+    },
+    {
+      "name": "data_service_returns_optimistic_lock_conflict",
+      "source_body_sha256": "45bc596aee145a96e3088b65be42733d34202bf7e571f41c1818a0fe5ede859a",
+      "historical_body_sha256": "f14ac5a2412967b154f7ecddaefc5d2e9fe0c937d9b4229dc6fd45f4fe20f591",
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_body_sha256": "c4a5bc3c6088eb7a275471af8a7639d3c5bd04f42e8071700aa11b7b198e611e",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -4,7 +4,10 @@\n\n             affected: 0,\n             rows: Vec::new(),\n         };\n-        let repo = RuntimeDataService::new(&store, &executor);\n+        let repo = RuntimeDataService::new(&store, &executor).with_mutation_intent(\n+            teaql_core::MutationIntent::new(\"verify data_service_returns_optimistic_lock_conflict\")\n+                .unwrap(),\n+        );\n \n         let err = repo\n             .update(\n"
+    },
+    {
+      "name": "user_context_builds_context_data_service",
+      "source_body_sha256": "9d70cf4c19711f4fe873f6e3f13ac1f102541a56efbd91e3c46832586e974d90",
+      "historical_body_sha256": "8d2d1120f2287988bf34640ab4972fedd8ed1a72d32066d0df4d3696f6273ae9",
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_body_sha256": "00654dac2cf1d0e8bbf631106240a72b78e4653b8b02f2274330a0c7be0a11e6",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -11,7 +11,13 @@\n\n             rows: Vec::new(),\n         });\n \n-        let repo = context.data_service_internal::<StubExecutor>().unwrap();\n+        let repo = context\n+            .data_service_internal::<StubExecutor>()\n+            .unwrap()\n+            .with_mutation_intent(\n+                teaql_core::MutationIntent::new(\"verify user_context_builds_context_data_service\")\n+                    .unwrap(),\n+            );\n         let affected = repo\n             .update(\n                 &UpdateCommand::new(\"Order\", 1_u64)\n"
+    },
+    {
+      "name": "user_context_resolves_entity_data_service_by_entity_type",
+      "source_body_sha256": "fd219b6295baabd757002caaf324fdb8e54e72cb7de54196ef944bc04fae1383",
+      "historical_body_sha256": "c3dd19aeb7dd422c8efc0e1cfd643c4765eff4ebd53d5768b0e9d1c9a1f02635",
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_body_sha256": "bb29c8d9445b99aa3c6fc0dcf94730398d9040429ba4e652ec2dc6b661628653",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -10,9 +10,18 @@\n\n \n         let repo = context\n             .entity_data_service::<StubExecutor>(\"Order\")\n-            .unwrap();\n+            .unwrap()\n+            .with_mutation_intent(\n+                teaql_core::MutationIntent::new(\n+                    \"verify user_context_resolves_entity_data_service_by_entity_type\",\n+                )\n+                .unwrap(),\n+            );\n         assert_eq!(repo.entity(), \"Order\");\n-        assert_eq!(repo.select().entity, \"Order\");\n+        assert_eq!(\n+            fixture_select(repo.entity(), \"verify typed repository selection\").entity,\n+            \"Order\"\n+        );\n \n         let affected = repo\n             .insert_internal(\n"
+    },
+    {
+      "name": "entity_data_service_applies_behavior_hooks",
+      "source_body_sha256": "296e2e417cfb3c1685645bf0b00af6de4f8403dfeaeaec081f53773dc6fc4166",
+      "historical_body_sha256": "c50041b2af9ca5679dd6cc7658d8b0eebf85bc2f26f5ec6145824a83ebf99003",
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_body_sha256": "ba24b3411112fc632620cf98f9732e608bd7d3e21999a955c8c955fb5195a421",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -19,9 +19,15 @@\n\n \n         let repo = context\n             .entity_data_service::<StubExecutor>(\"Order\")\n-            .unwrap();\n+            .unwrap()\n+            .with_mutation_intent(\n+                teaql_core::MutationIntent::new(\n+                    \"verify entity_data_service_applies_behavior_hooks\",\n+                )\n+                .unwrap(),\n+            );\n \n-        // let compiled = repo.compile(&repo.select()).unwrap();\n+        // let compiled = repo.compile(&fixture_select(repo.entity(), \"verify typed repository selection\")).unwrap();\n         // assert!(compiled.sql.contains(\"WHERE (version = $1)\"));\n \n         let insert = repo.insert_command().value(\"id\", 1_u64).value(\"name\", \"n\");\n"
+    },
+    {
+      "name": "entity_data_service_applies_request_policy_after_behavior_hooks",
+      "source_body_sha256": "74ff8c2149dfc72ba77c81f19185af86d23a8d6f057a4c8b7e699be17523f4bf",
+      "historical_body_sha256": "d7f8daefcdd7d0fcec46b44460af7d0d92d2323db7ae30d389c7141e411c443c",
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_body_sha256": "bb7243b6e3640c2c47b40f97d0560443c5e452f39814c9096480c1f2de4fd500",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -23,7 +23,7 @@\n\n             .entity_data_service::<StubExecutor>(\"Order\")\n             .unwrap();\n \n-        // let compiled = repo.compile(&repo.select()).unwrap();\n+        // let compiled = repo.compile(&fixture_select(repo.entity(), \"verify typed repository selection\")).unwrap();\n         // assert!(compiled.sql.contains(\"version = $1\"));\n         // assert!(compiled.sql.contains(\"id = $2\"));\n \n"
+    },
+    {
+      "name": "public_query_families_cannot_bypass_request_policy",
+      "source_body_sha256": "ea5b5637c556dcdf9b12c825f98de683a5db59f2dbea779f9e210ad756fe2b73",
+      "historical_body_sha256": "8a1126793a659d165fcdc99351afa1784ee416e8ac7c3b7180667d45e8539268",
+      "cpp_fixture": "tests/parity/teaql_runtime/service_boundaries.cpp",
+      "cpp_body_sha256": "50903ccea8b0e2381f031c9874e6e63f13edbcd4dd71d7e450b9ab5256c48498",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -14,9 +14,22 @@\n\n         let repo = context\n             .entity_data_service::<StubExecutor>(\"Order\")\n             .unwrap();\n-        let query = PurposedSelectQuery::new(repo.select(), \"verify query policy coverage\");\n-        let relation_aggregate =\n-            RelationAggregate::new(\"lines\", \"lineCount\", SelectQuery::new(\"OrderLine\"), true);\n+        let query = PurposedSelectQuery::new(\n+            fixture_select(\n+                \"Order\",\n+                \"public_query_families_cannot_bypass_request_policy\",\n+            ),\n+            \"verify query policy coverage\",\n+        );\n+        let relation_aggregate = RelationAggregate::new(\n+            \"lines\",\n+            \"lineCount\",\n+            fixture_select(\n+                \"OrderLine\",\n+                \"public_query_families_cannot_bypass_request_policy\",\n+            ),\n+            true,\n+        );\n \n         assert_query_policy_probe(repo.fetch_all(&query).await);\n         assert_query_policy_probe(repo.fetch_all_owned(query.clone()).await);\n@@ -47,7 +60,8 @@\n\n         );\n \n         let aggregate_query = PurposedSelectQuery::new(\n-            repo.select().aggregate(Aggregate::count(\"orderCount\")),\n+            fixture_select(repo.entity(), \"verify typed repository selection\")\n+                .aggregate(Aggregate::count(\"orderCount\")),\n             \"verify aggregate query policy coverage\",\n         );\n         assert_query_policy_probe(repo.fetch_all(&aggregate_query).await);\n"
+    },
+    {
+      "name": "nested_sparse_ledger_insert_plan_rejects_required_field_at_child_path",
+      "source_body_sha256": "1d011ccf998819dda8b94ee22884c1667b886bda3e722deda61c3484cdcaa052",
+      "historical_body_sha256": "3b7e89c24401fdff30bd2fd7981eeace719157b8a39f1517b0150ad19f4738a5",
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_body_sha256": "ac051e8917a3d75911958647cf4cee6b2481990584db71f763fb593a71495584",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -10,6 +10,9 @@\n\n         let executor = StubExecutor::default();\n         let repo = EntityDataService::for_executor(&context, \"OrderLine\", &executor);\n         let root = EntityRuntimeState::default();\n+        root.set_comment(\n+            \"verify nested_sparse_ledger_insert_plan_rejects_required_field_at_child_path\",\n+        );\n         let child_key = EntityKey::new(\"OrderLine\", 9_u64);\n         root.mark_as_new(child_key.clone());\n         root.set(child_key.clone(), \"order_id\", Value::U64(7));\n"
+    },
+    {
+      "name": "ledger_update_of_existing_versioned_row_requires_loaded_original_version",
+      "source_body_sha256": "0ca216b33c0e4baf1f191d0e0d8c4bb4b317f2909ca31a8fa928fb0fa9734ce5",
+      "historical_body_sha256": "a634bdc390d41afdd1fde1095808588111518744e32ef1abe4f3b460e4d5af29",
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_body_sha256": "36d6b83f4d542937e64afcceb3e1bee7da7a5652452c555e0c6dc09d494247e9",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -21,6 +21,9 @@\n\n         };\n         let repo = EntityDataService::for_executor(&context, \"School\", &executor);\n         let root = EntityRuntimeState::default();\n+        root.set_comment(\n+            \"verify ledger_update_of_existing_versioned_row_requires_loaded_original_version\",\n+        );\n         root.set(\n             EntityKey::new(\"School\", 1_u64),\n             \"name\",\n"
+    },
+    {
+      "name": "generated_attachment_version_conflict_rejects_ledger_plan_before_sql",
+      "source_body_sha256": "1da340ef2395b354bf092d7e27376e52077610b1b94d1216754d1931bda329ad",
+      "historical_body_sha256": "e65d9cd1fd9a3319da73537aec7e56dbed107b41428258e1170e83d140d2d77e",
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_body_sha256": "79a916d25855dcf9ba2e24f962c61e3f18321c342d625c53c827a8e3e3bd35f5",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -14,6 +14,9 @@\n\n         let executor = StubExecutor::default();\n         let repo = EntityDataService::for_executor(&context, \"School\", &executor);\n         let root = EntityRuntimeState::default();\n+        root.set_comment(\n+            \"verify generated_attachment_version_conflict_rejects_ledger_plan_before_sql\",\n+        );\n         let stale = EntityRuntimeState::default();\n         let key = EntityKey::new(\"School\", 1_u64);\n         root.set_original_version(key.clone(), 2);\n"
+    },
+    {
+      "name": "ledger_delete_of_existing_versioned_row_requires_loaded_original_version",
+      "source_body_sha256": "810df0b47cb1aa3d6a13033c61a73263991286a448cf2158392657372b88c4bd",
+      "historical_body_sha256": "45e2aaea4e5c1bb08990d49319d72b5d70ba6b534b1166429ac9378c5abc55df",
+      "cpp_fixture": "tests/parity/teaql_runtime/validation.cpp",
+      "cpp_body_sha256": "33a80bab3d809d73f95e7313ce82259eb9bfb25ec79b65aa5fccdd8b7efd89a1",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -13,6 +13,9 @@\n\n         let executor = StubExecutor::default();\n         let repo = EntityDataService::for_executor(&context, \"School\", &executor);\n         let root = EntityRuntimeState::default();\n+        root.set_comment(\n+            \"verify ledger_delete_of_existing_versioned_row_requires_loaded_original_version\",\n+        );\n         root.mark_as_delete(EntityKey::new(\"School\", 1_u64));\n         let error = repo\n             .execute_ledger_plan_internal(root, &BTreeMap::new())\n"
+    },
+    {
+      "name": "user_context_event_sink_receives_data_service_mutation_events",
+      "source_body_sha256": "874959e78982bf7ee6346e61661072fe74e187539e2fd8fe7041795e204097ab",
+      "historical_body_sha256": "e9922ad419fb957caa7e75789a687f733be180f78e998e2946e7a9f6ce95965f",
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_body_sha256": "3a6374d57efff1b27ad7215cfd7ad24c2caff8c98aea8bcb8374acf4d6d640b7",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -26,7 +26,13 @@\n\n \n         let repo = context\n             .entity_data_service::<StubExecutor>(\"Order\")\n-            .unwrap();\n+            .unwrap()\n+            .with_mutation_intent(\n+                teaql_core::MutationIntent::new(\n+                    \"verify user_context_event_sink_receives_data_service_mutation_events\",\n+                )\n+                .unwrap(),\n+            );\n         repo.insert_internal(&repo.insert_command().value(\"name\", \"created\"))\n             .await\n             .unwrap();\n"
+    },
+    {
+      "name": "entity_data_service_enhances_parent_rows_with_relations",
+      "source_body_sha256": "291d965f45e81598da3b054663924ee5f02372852e9794f5ff9f3e3b06bd0684",
+      "historical_body_sha256": "4b3c67a522322b3cb0f5199135edb3c84e6787c736e6f92f2344ad296a342184",
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_body_sha256": "b0b7e7c6a033b03674e7451b259786d95f01d561240a19fb68a8e29e7bec1ab9",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -39,7 +39,13 @@\n\n \n         let repo = context\n             .entity_data_service::<StubExecutor>(\"Order\")\n-            .unwrap();\n+            .unwrap()\n+            .with_mutation_intent(\n+                teaql_core::MutationIntent::new(\n+                    \"verify entity_data_service_enhances_parent_rows_with_relations\",\n+                )\n+                .unwrap(),\n+            );\n         let mut parents = vec![\n             teaql_core::CompactRow::from_map(Record::from([(String::from(\"id\"), Value::U64(11))])),\n             teaql_core::CompactRow::from_map(Record::from([(String::from(\"id\"), Value::U64(12))])),\n"
+    },
+    {
+      "name": "topn_006_008_009_relation_is_stable_empty_safe_and_count_free",
+      "source_body_sha256": "4fd82a71e960bd5cef182fd486a15f937c3005f45b25546307cc6ffe443ad0e2",
+      "historical_body_sha256": "c5b7e069510fcdfb7f7788d1645fcdab2e81d9be881847f145b240f80f58287e",
+      "cpp_fixture": "tests/parity/teaql_runtime/events_relations.cpp",
+      "cpp_body_sha256": "b07ffa00efa02bf61adb4f1532b654a930216ba8e32c30ea102a5c7f513414f4",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -28,16 +28,29 @@\n\n \n         let repo = context\n             .entity_data_service::<CapturingQueryExecutor>(\"Order\")\n-            .unwrap();\n+            .unwrap()\n+            .with_mutation_intent(\n+                teaql_core::MutationIntent::new(\n+                    \"verify topn_006_008_009_relation_is_stable_empty_safe_and_count_free\",\n+                )\n+                .unwrap(),\n+            );\n         let mut parents = vec![\n             teaql_core::CompactRow::from_map(Record::from([(String::from(\"id\"), Value::U64(11))])),\n             teaql_core::CompactRow::from_map(Record::from([(String::from(\"id\"), Value::U64(12))])),\n         ];\n-        let query = SelectQuery::new(\"Order\").relation_query(\n+        let query = fixture_select(\n+            \"Order\",\n+            \"topn_006_008_009_relation_is_stable_empty_safe_and_count_free\",\n+        )\n+        .relation_query(\n             \"lines\",\n-            SelectQuery::new(\"OrderLine\")\n-                .order_by(OrderBy::desc(\"name\"))\n-                .limit(3),\n+            fixture_select(\n+                \"OrderLine\",\n+                \"topn_006_008_009_relation_is_stable_empty_safe_and_count_free\",\n+            )\n+            .order_by(OrderBy::desc(\"name\"))\n+            .limit(3),\n         );\n \n         repo.enhance_query_relations_internal(&mut parents, &query)\n"
+    },
+    {
+      "name": "relation_enhancement_wraps_inverse_many_relation_as_list",
+      "source_body_sha256": "7d1b79717dd3d1e89e20eff04499af589cae99a5af2ab44dcc6153f0c2a6694a",
+      "historical_body_sha256": "43c2b2b3e93bc609306c1f92e9cfdfde07b31ef7fb29fb75c2f7a4719394f36d",
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_body_sha256": "ce3cad32fe28ecc51831c30954bb0d50e629be94a976cbb36982157f91354c57",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -29,7 +29,11 @@\n\n             .unwrap();\n         let rows = repo\n             .fetch_enhanced_entities_internal::<OrderLineWithProductEntityRow>(\n-                &SelectQuery::new(\"OrderLine\").relation(\"product\"),\n+                &fixture_select(\n+                    \"OrderLine\",\n+                    \"relation_enhancement_wraps_inverse_many_relation_as_list\",\n+                )\n+                .relation(\"product\"),\n             )\n             .await\n             .unwrap();\n"
+    },
+    {
+      "name": "generated_to_one_getter_resolves_from_runtime_module_identity_graph",
+      "source_body_sha256": "dfcebdfc7f0cb46105c62d339faff60fb8f49f49854a56fdf96e42f5ddd08cfc",
+      "historical_body_sha256": "84f3a0820ffeddb457c0860b4a8cea39632ac607c3e30d2d82d6e722a5a53f88",
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_body_sha256": "60c1bf3c7f117d8973ffbd129b23ac200e6900fa609d7924d381346f3dc5818b",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -24,7 +24,11 @@\n\n             .unwrap();\n         let rows = repo\n             .fetch_enhanced_entities_internal::<FlatTripRow>(\n-                &SelectQuery::new(\"FlatTrip\").relation(\"vendor\"),\n+                &fixture_select(\n+                    \"FlatTrip\",\n+                    \"generated_to_one_getter_resolves_from_runtime_module_identity_graph\",\n+                )\n+                .relation(\"vendor\"),\n             )\n             .await\n             .unwrap();\n"
+    },
+    {
+      "name": "generated_to_many_getter_uses_adjacency_and_mutation_copies_on_write",
+      "source_body_sha256": "427b12ce9fafbcfbc4f389e2527deb8dc72480234b354147718acd8446416657",
+      "historical_body_sha256": "effd3e1d266dc1a188bdcab6909f2099592540da65668dff4a620b89412deb11",
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_body_sha256": "6e5e825c3e101bf8a8b47d07e5305fa37a1985a3d8b710a1964e134981ce0775",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -29,7 +29,11 @@\n\n             .unwrap();\n         let mut rows = repo\n             .fetch_enhanced_entities_internal::<FlatFleetRow>(\n-                &SelectQuery::new(\"FlatFleet\").relation(\"trip_list\"),\n+                &fixture_select(\n+                    \"FlatFleet\",\n+                    \"generated_to_many_getter_uses_adjacency_and_mutation_copies_on_write\",\n+                )\n+                .relation(\"trip_list\"),\n             )\n             .await\n             .unwrap();\n"
+    },
+    {
+      "name": "entity_data_service_fetches_smart_list_of_entities",
+      "source_body_sha256": "ecb8d0e9bab38d210dee81a0c67ffd0b68a1a0a13870ea103a85e493861038b1",
+      "historical_body_sha256": "cb56eebda8e1defd13aea987c696d28020dbc983102c9402730b8ab18f4d8d1d",
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_body_sha256": "88a3f97d66691c760886130db13eeba9482c6dc3e338c03ceb4a0fd5140d047a",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -16,7 +16,10 @@\n\n             .entity_data_service::<StubExecutor>(\"Order\")\n             .unwrap();\n         let rows = repo\n-            .fetch_entities_internal::<OrderEntity>(&repo.select())\n+            .fetch_entities_internal::<OrderEntity>(&fixture_select(\n+                repo.entity(),\n+                \"verify typed repository selection\",\n+            ))\n             .await\n             .unwrap();\n \n"
+    },
+    {
+      "name": "typed_entity_fetch_restores_id_and_version_to_reduced_projection",
+      "source_body_sha256": "18f59ef2309c1eb5e772b5f28a4069aa81a442626ce0b61635c2f00eca10a8e3",
+      "historical_body_sha256": "4debb67d1e1d8e735945ff456c959b8abbaec76c9ba55e627333405ea3deffc8",
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_body_sha256": "65207cb15a5d377157cd34320294b35c3acc12bf67c5c6c61babad32fb01974e",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -16,12 +16,22 @@\n\n             .entity_data_service::<CapturingQueryExecutor>(\"Order\")\n             .unwrap();\n         let rows = repo\n-            .fetch_entities_internal::<OrderEntity>(&SelectQuery::new(\"Order\").project(\"name\"))\n+            .fetch_entities_internal::<OrderEntity>(\n+                &fixture_select(\n+                    \"Order\",\n+                    \"typed_entity_fetch_restores_id_and_version_to_reduced_projection\",\n+                )\n+                .project(\"name\"),\n+            )\n             .await\n             .unwrap();\n         let enhanced_rows = repo\n             .fetch_enhanced_entities_internal::<OrderEntity>(\n-                &SelectQuery::new(\"Order\").project(\"name\"),\n+                &fixture_select(\n+                    \"Order\",\n+                    \"typed_entity_fetch_restores_id_and_version_to_reduced_projection\",\n+                )\n+                .project(\"name\"),\n             )\n             .await\n             .unwrap();\n"
+    },
+    {
+      "name": "entity_data_service_fetches_smart_list_of_derived_entities",
+      "source_body_sha256": "b82bebdd90a8656287cd72f8fe19b145d6b52b66a4e6e9c1019a505df2abaddd",
+      "historical_body_sha256": "091a3a061e722f2cc2fa2ac042bda2a49a9ad1e5c27aab9257ae617486401eeb",
+      "cpp_fixture": "tests/parity/teaql_runtime/typed_queries.cpp",
+      "cpp_body_sha256": "71fc04e882f367f276aca940d6005047ea1b26ca4a85c82bcb9cdcdd700ac77d",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -17,7 +17,10 @@\n\n             .entity_data_service::<StubExecutor>(\"CatalogProduct\")\n             .unwrap();\n         let rows = repo\n-            .fetch_entities_internal::<CatalogProductRow>(&repo.select())\n+            .fetch_entities_internal::<CatalogProductRow>(&fixture_select(\n+                repo.entity(),\n+                \"verify typed repository selection\",\n+            ))\n             .await\n             .unwrap();\n \n"
+    },
+    {
+      "name": "entity_data_service_collects_dynamic_properties_for_aggregate_output",
+      "source_body_sha256": "c3a678de08f887564d59a77e92a6eb3176e5079e3baeb323b36d62f74e0c55f9",
+      "historical_body_sha256": "d5a41702c6a61111d8d151bb1781aaccb4542a94cf67e9be654cf22333be21c2",
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_body_sha256": "fea5cfc72b0c94f5a0d4c0f953fd008b660a4e54cad6cd5dc3d26e71831f9f5a",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -19,7 +19,10 @@\n\n             .entity_data_service::<StubExecutor>(\"OrderAggregate\")\n             .unwrap();\n         let rows = repo\n-            .fetch_entities_internal::<OrderAggregateDynamic>(&repo.select())\n+            .fetch_entities_internal::<OrderAggregateDynamic>(&fixture_select(\n+                repo.entity(),\n+                \"verify typed repository selection\",\n+            ))\n             .await\n             .unwrap();\n \n"
+    },
+    {
+      "name": "entity_data_service_executes_relation_aggregates_into_dynamic_properties",
+      "source_body_sha256": "d16b2a3c0639d92cb549be6eaa9f2624dfafa0e21595d8b40959affffc86c111",
+      "historical_body_sha256": "7600015e9450608d6aeebd0cfec935588e22f72469b6b04a93a3f0f3cd17e25b",
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_body_sha256": "4e5e0202c7773e16cfaefbf80d843b8e98c65f78a8e69623a8b69926eb5cc1e4",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -36,15 +36,17 @@\n\n             .unwrap();\n         let rows = repo\n             .fetch_all_with_relation_aggregates_internal(\n-                &repo\n-                    .select()\n+                &fixture_select(repo.entity(), \"verify typed repository selection\")\n                     .project(\"id\")\n                     .project(\"version\")\n                     .project(\"name\"),\n                 &[RelationAggregate::new(\n                     \"lines\",\n                     \"lineCount\",\n-                    SelectQuery::new(\"OrderLine\"),\n+                    fixture_select(\n+                        \"OrderLine\",\n+                        \"entity_data_service_executes_relation_aggregates_into_dynamic_properties\",\n+                    ),\n                     true,\n                 )],\n             )\n"
+    },
+    {
+      "name": "entity_data_service_maps_relation_aggregate_storage_key_to_property_key",
+      "source_body_sha256": "bd243120c95226059f17b7e546004c01e88c2f2baf19f5523884b80fc099c605",
+      "historical_body_sha256": "b5cdbbd693209a4aaa80e91cb265c67b4d08f2bfdc017955712b7e7bcbebde76",
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_body_sha256": "4b14a3cc527acaf128e555574122c520f6469e57d2fa15df7e0ad9fdee52f4fa",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -35,15 +35,17 @@\n\n             .unwrap();\n         let rows = repo\n             .fetch_all_with_relation_aggregates_internal(\n-                &repo\n-                    .select()\n+                &fixture_select(repo.entity(), \"verify typed repository selection\")\n                     .project(\"id\")\n                     .project(\"version\")\n                     .project(\"name\"),\n                 &[RelationAggregate::new(\n                     \"lines\",\n                     \"lineCount\",\n-                    SelectQuery::new(\"OrderLine\"),\n+                    fixture_select(\n+                        \"OrderLine\",\n+                        \"entity_data_service_maps_relation_aggregate_storage_key_to_property_key\",\n+                    ),\n                     true,\n                 )],\n             )\n"
+    },
+    {
+      "name": "entity_data_service_uses_aggregation_cache_when_resource_is_registered",
+      "source_body_sha256": "f6ee645e4a0d5b77c84228a8cce91e9654b88e1a5575204721633def910f71c2",
+      "historical_body_sha256": "07fb4a713a0833ba093347d2a033833b392ea09c522ca7ade312715b2b799b34",
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_body_sha256": "230f70d631366d43079f18dda52fdd738debf487f070bd62c48f9b2bf7cd4af1",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -21,8 +21,7 @@\n\n         let repo = context\n             .entity_data_service::<QueueExecutor>(\"Order\")\n             .unwrap();\n-        let query = repo\n-            .select()\n+        let query = fixture_select(repo.entity(), \"verify typed repository selection\")\n             .count(\"count\")\n             .enable_aggregation_cache_for(60_000);\n \n"
+    },
+    {
+      "name": "continuous_page_fetch_uses_id_seek_for_the_next_page",
+      "source_body_sha256": "e30523f9b1f925403998ad6a965f1d5624209445f6e809dee66489aaa2e5865a",
+      "historical_body_sha256": "be6c1c7fc0fd1ee65612631d2d113644f269ec3c995a6d779c85a7473f30d1f0",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "eaddf5b7a2e1d5a3ae26578eb9804381c91cd45a4977eb969aff3446b45185db",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -22,20 +22,26 @@\n\n             .entity_data_service::<CapturingQueryExecutor>(\"Order\")\n             .unwrap();\n \n-        let first = SelectQuery::new(\"Order\")\n-            .order_desc(\"id\")\n-            .page(0, 10)\n-            .optimize_for_continuous_page_fetch_with(\"recent-orders\", 60);\n+        let first = fixture_select(\n+            \"Order\",\n+            \"continuous_page_fetch_uses_id_seek_for_the_next_page\",\n+        )\n+        .order_desc(\"id\")\n+        .page(0, 10)\n+        .optimize_for_continuous_page_fetch_with(\"recent-orders\", 60);\n         repo.fetch_all_internal(&first).await.unwrap();\n         assert_eq!(\n             context.continuous_page_plan().as_deref(),\n             Some(\"OFFSET_FALLBACK:FIRST_PAGE\")\n         );\n \n-        let second = SelectQuery::new(\"Order\")\n-            .order_desc(\"id\")\n-            .page(10, 10)\n-            .optimize_for_continuous_page_fetch_with(\"recent-orders\", 60);\n+        let second = fixture_select(\n+            \"Order\",\n+            \"continuous_page_fetch_uses_id_seek_for_the_next_page\",\n+        )\n+        .order_desc(\"id\")\n+        .page(10, 10)\n+        .optimize_for_continuous_page_fetch_with(\"recent-orders\", 60);\n         repo.fetch_all_internal(&second).await.unwrap();\n         assert_eq!(\n             context.continuous_page_plan().as_deref(),\n"
+    },
+    {
+      "name": "id_set_pagination_reuses_ordered_ids_and_returns_exact_count",
+      "source_body_sha256": "078e7bcd38e44230d1209c0815d01b585a52be455f0099c1be87067e4c19b4d0",
+      "historical_body_sha256": "ce2c4b2d14b1e10bff7dc904d54c0c315b1eeeda29c4222d82dd677852d6f99c",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "e508dd5aaa439f6a040b28c37c1f32b24d9fc71c87dba48a51eabbaacf78be62",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -32,11 +32,14 @@\n\n \n         let first = repo\n             .fetch_enhanced_entities_with_relation_aggregates_internal::<Order>(\n-                &SelectQuery::new(\"Order\")\n-                    .projects([\"id\", \"version\", \"name\"])\n-                    .order_asc(\"name\")\n-                    .page(20, 10)\n-                    .optimize_pagination_with_id_set_config(\"orders\", 60, 1_000),\n+                &fixture_select(\n+                    \"Order\",\n+                    \"id_set_pagination_reuses_ordered_ids_and_returns_exact_count\",\n+                )\n+                .projects([\"id\", \"version\", \"name\"])\n+                .order_asc(\"name\")\n+                .page(20, 10)\n+                .optimize_pagination_with_id_set_config(\"orders\", 60, 1_000),\n                 &[],\n             )\n             .await\n@@ -47,11 +50,14 @@\n\n \n         let second = repo\n             .fetch_enhanced_entities_with_relation_aggregates_internal::<Order>(\n-                &SelectQuery::new(\"Order\")\n-                    .projects([\"id\", \"version\", \"name\"])\n-                    .order_asc(\"name\")\n-                    .page(50, 10)\n-                    .optimize_pagination_with_id_set_config(\"orders\", 60, 1_000),\n+                &fixture_select(\n+                    \"Order\",\n+                    \"id_set_pagination_reuses_ordered_ids_and_returns_exact_count\",\n+                )\n+                .projects([\"id\", \"version\", \"name\"])\n+                .order_asc(\"name\")\n+                .page(50, 10)\n+                .optimize_pagination_with_id_set_config(\"orders\", 60, 1_000),\n                 &[],\n             )\n             .await\n"
+    },
+    {
+      "name": "id_set_pagination_limit_overflow_falls_back_without_false_count",
+      "source_body_sha256": "e5e3589c5b66f5e6950bfc7e60864c28765846277adb12ceb43d55a0b4890918",
+      "historical_body_sha256": "2ce4feab2210839af2f9bc065fa44589dd755d323fa0e47559dd49b3744d8886",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "6c153ed61aa207b5133d0ebef68a6c94589656f25f7ff3caad2ffd87eaa60a47",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -22,11 +22,14 @@\n\n             .unwrap();\n         let rows = repo\n             .fetch_enhanced_entities_with_relation_aggregates_internal::<Order>(\n-                &SelectQuery::new(\"Order\")\n-                    .projects([\"id\", \"version\", \"name\"])\n-                    .order_asc(\"id\")\n-                    .page(0, 1)\n-                    .optimize_pagination_with_id_set_config(\"overflow\", 60, 3),\n+                &fixture_select(\n+                    \"Order\",\n+                    \"id_set_pagination_limit_overflow_falls_back_without_false_count\",\n+                )\n+                .projects([\"id\", \"version\", \"name\"])\n+                .order_asc(\"id\")\n+                .page(0, 1)\n+                .optimize_pagination_with_id_set_config(\"overflow\", 60, 3),\n                 &[],\n             )\n             .await\n"
+    },
+    {
+      "name": "id_set_pagination_coalesces_concurrent_cache_misses",
+      "source_body_sha256": "4a8b5ffb7e0ff9830ed37eda32d0b759ac16435487809922eca914a99757372f",
+      "historical_body_sha256": "4e7d737868215d416f9a780d4d96454e5de83c9b6e94346ea52d707243f2cba2",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "a013db30c945523b62f24a459342c7400e4e841742b0544505ee9a3d2d14ef8f",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -14,11 +14,14 @@\n\n         };\n         let first_context = make_context(executor.clone());\n         let second_context = make_context(executor);\n-        let query = SelectQuery::new(\"Order\")\n-            .projects([\"id\", \"version\", \"name\"])\n-            .order_asc(\"id\")\n-            .page(0, 1)\n-            .optimize_pagination_with_id_set_config(\"single-flight\", 60, 100);\n+        let query = fixture_select(\n+            \"Order\",\n+            \"id_set_pagination_coalesces_concurrent_cache_misses\",\n+        )\n+        .projects([\"id\", \"version\", \"name\"])\n+        .order_asc(\"id\")\n+        .page(0, 1)\n+        .optimize_pagination_with_id_set_config(\"single-flight\", 60, 100);\n \n         let first = async {\n             first_context\n"
+    },
+    {
+      "name": "id_set_pagination_rebuilds_after_ttl_expiry",
+      "source_body_sha256": "a279d51a0ba49ad91cd239a96ec502c7e42a276b7b1181b72c250732e559cdae",
+      "historical_body_sha256": "cd0d9ad682cfd40d3ba9c4d00fd551eaf4d55aa78dc3eae28cbf889b1f6f5b0c",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "a9bfd55ab7d7e49f8eab38a8d6e08520c719557fe85e3966d68aa68393320d7e",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -8,7 +8,7 @@\n\n         context.set_id_set_store(Arc::new(crate::InMemoryIdSetStore::default()));\n         context.insert_resource(PostgresDialect);\n         context.insert_resource(executor);\n-        let query = SelectQuery::new(\"Order\")\n+        let query = fixture_select(\"Order\", \"id_set_pagination_rebuilds_after_ttl_expiry\")\n             .projects([\"id\", \"version\", \"name\"])\n             .order_asc(\"id\")\n             .page(0, 1)\n"
+    },
+    {
+      "name": "id_set_pagination_isolates_principals_in_a_shared_store",
+      "source_body_sha256": "029fcab7f07f3dee7b71e5e7e14e64843a1a7347c17672081e137eda248657f7",
+      "historical_body_sha256": "b4b10bd9677ed236ec12034ecac4840b425881ba71a7b081c1eba3ac2fb9af22",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "6135e8295a5bc3a8d904646442a3ed8518feeac05d11edeb8cfc753c3f955131",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -14,11 +14,14 @@\n\n         };\n         let first_context = make_context(\"tenant-1:user-1\");\n         let second_context = make_context(\"tenant-1:user-2\");\n-        let query = SelectQuery::new(\"Order\")\n-            .projects([\"id\", \"version\", \"name\"])\n-            .order_asc(\"id\")\n-            .page(0, 1)\n-            .optimize_pagination_with_id_set_config(\"principal-isolation\", 60, 100);\n+        let query = fixture_select(\n+            \"Order\",\n+            \"id_set_pagination_isolates_principals_in_a_shared_store\",\n+        )\n+        .projects([\"id\", \"version\", \"name\"])\n+        .order_asc(\"id\")\n+        .page(0, 1)\n+        .optimize_pagination_with_id_set_config(\"principal-isolation\", 60, 100);\n \n         first_context\n             .entity_data_service::<ConcurrentIdSetExecutor>(\"Order\")\n"
+    },
+    {
+      "name": "id_set_pagination_retains_empty_exact_result",
+      "source_body_sha256": "c8d5a2680b08aa7a2ede13109837ff5dce1ae285d4c43da58f23ba5cb42628ff",
+      "historical_body_sha256": "7502f9c8f3ec1a16066eec51dbc9cbbfa99569240588cba1226d043c07a2ac8b",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "bd7c14b78a61c12909fa684acda6eff1a81d1f8ecc118ddef5dc9ac5bdaf43fc",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -8,7 +8,7 @@\n\n             rows: Mutex::new(VecDeque::from([Vec::new(), Vec::new()])),\n             queries: Mutex::new(Vec::new()),\n         });\n-        let query = SelectQuery::new(\"Order\")\n+        let query = fixture_select(\"Order\", \"id_set_pagination_retains_empty_exact_result\")\n             .projects([\"id\", \"version\", \"name\"])\n             .order_asc(\"id\")\n             .page(0, 10)\n"
+    },
+    {
+      "name": "id_set_pagination_store_failure_falls_back_without_changing_rows",
+      "source_body_sha256": "3f617a8f201dc041535c92c8937a612fbf701ad52bed2af8eac57b4d1ed540ec",
+      "historical_body_sha256": "70da657db987047d03a41fc5fdc71018c4a6c06bd9ef76588fa3909f53892880",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "506f150588783f549a5fa2e161438054f8132676ae0aa5688d708b5add047cd3",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -13,11 +13,14 @@\n\n             ])]])),\n             queries: Mutex::new(Vec::new()),\n         });\n-        let query = SelectQuery::new(\"Order\")\n-            .projects([\"id\", \"version\", \"name\"])\n-            .order_asc(\"id\")\n-            .page(0, 10)\n-            .optimize_pagination_with_id_set_config(\"unavailable\", 60, 100);\n+        let query = fixture_select(\n+            \"Order\",\n+            \"id_set_pagination_store_failure_falls_back_without_changing_rows\",\n+        )\n+        .projects([\"id\", \"version\", \"name\"])\n+        .order_asc(\"id\")\n+        .page(0, 10)\n+        .optimize_pagination_with_id_set_config(\"unavailable\", 60, 100);\n \n         let rows = context\n             .entity_data_service::<IdSetQueueExecutor>(\"Order\")\n"
+    },
+    {
+      "name": "id_set_pagination_does_not_shift_page_when_an_entity_disappears",
+      "source_body_sha256": "fc32b0c597eedc19cd0922708bef9aedbe06d0d1e1bfedc7209d05e7562216e7",
+      "historical_body_sha256": "1517ad1ff641d269f1c2bb4d69aa6a23f750ac091f38db6f6f4324ee26f77878",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "760f360d3f7cce32aea970e3843cb9e06ab10e286bcfddca79a501115eb65fd3",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -18,11 +18,14 @@\n\n             ])),\n             queries: Mutex::new(Vec::new()),\n         });\n-        let query = SelectQuery::new(\"Order\")\n-            .projects([\"id\", \"version\", \"name\"])\n-            .order_asc(\"id\")\n-            .page(0, 2)\n-            .optimize_pagination_with_id_set_config(\"delete\", 60, 100);\n+        let query = fixture_select(\n+            \"Order\",\n+            \"id_set_pagination_does_not_shift_page_when_an_entity_disappears\",\n+        )\n+        .projects([\"id\", \"version\", \"name\"])\n+        .order_asc(\"id\")\n+        .page(0, 2)\n+        .optimize_pagination_with_id_set_config(\"delete\", 60, 100);\n \n         let rows = context\n             .entity_data_service::<IdSetQueueExecutor>(\"Order\")\n"
+    },
+    {
+      "name": "id_set_pagination_unsupported_shape_falls_back_visibly",
+      "source_body_sha256": "c512753e866e204e995ea9f5edac4737ccf4423ea2929656867a5fff8606e818",
+      "historical_body_sha256": "6002c66b9efc3769326665649155eebc746fa35f3b1506736419b13a02c41a83",
+      "cpp_fixture": "tests/parity/teaql_runtime/pagination.cpp",
+      "cpp_body_sha256": "16479d5a0fc16e94303f8be8bcea9b732c8d4fb6e80f914ce4e47e084436595b",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -12,11 +12,14 @@\n\n             ])]])),\n             queries: Mutex::new(Vec::new()),\n         });\n-        let query = SelectQuery::new(\"Order\")\n-            .projects([\"id\", \"version\", \"name\"])\n-            .order_expr_asc(Expr::column(\"name\"))\n-            .page(0, 10)\n-            .optimize_pagination_with_id_set_config(\"unsupported\", 60, 100);\n+        let query = fixture_select(\n+            \"Order\",\n+            \"id_set_pagination_unsupported_shape_falls_back_visibly\",\n+        )\n+        .projects([\"id\", \"version\", \"name\"])\n+        .order_expr_asc(Expr::column(\"name\"))\n+        .page(0, 10)\n+        .optimize_pagination_with_id_set_config(\"unsupported\", 60, 100);\n \n         let rows = context\n             .entity_data_service::<IdSetQueueExecutor>(\"Order\")\n"
+    },
+    {
+      "name": "aggregation_cache_is_namespaced_and_invalidated_after_write",
+      "source_body_sha256": "4c0d1bbbb77c7236f24094d95a5c10fb9b44859b9f65667f6db032d4a5bfcb99",
+      "historical_body_sha256": "4a01e23c84305290b45e53de3a9332c015aaca8b68aa7c87538ec525b258349e",
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_body_sha256": "ff8b5747d428ca0708dd277856d8388dde68e0dc6ef0c23c3f541f8882bd19dc",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -19,9 +19,14 @@\n\n \n         let repo = context\n             .entity_data_service::<QueueExecutor>(\"Order\")\n-            .unwrap();\n-        let query = repo\n-            .select()\n+            .unwrap()\n+            .with_mutation_intent(\n+                teaql_core::MutationIntent::new(\n+                    \"verify aggregation_cache_is_namespaced_and_invalidated_after_write\",\n+                )\n+                .unwrap(),\n+            );\n+        let query = fixture_select(repo.entity(), \"verify typed repository selection\")\n             .count(\"count\")\n             .enable_aggregation_cache_for(60_000);\n \n"
+    },
+    {
+      "name": "aggregation_cache_propagates_to_relation_aggregates",
+      "source_body_sha256": "2552145386151a00b0c0a0e413b093a362b43f9c144db55ef3707790a72a0376",
+      "historical_body_sha256": "fc60fe04e4341d5789defaae6b270f78dba79ed6de6ae76ef4798032fd5cbe3a",
+      "cpp_fixture": "tests/parity/teaql_runtime/aggregates_cache.cpp",
+      "cpp_body_sha256": "5cb6d56c7898a52a30ca6bbac60aa53ff4cd4736a32241ca91ab5b265a333340",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -34,15 +34,21 @@\n\n         let repo = context\n             .entity_data_service::<QueueExecutor>(\"Order\")\n             .unwrap();\n-        let query = repo\n-            .select()\n+        let query = fixture_select(repo.entity(), \"verify typed repository selection\")\n             .project(\"id\")\n             .project(\"version\")\n             .project(\"name\")\n             .enable_aggregation_cache_for(60_000)\n             .propagate_aggregation_cache(60_000);\n-        let aggregate =\n-            RelationAggregate::new(\"lines\", \"lineCount\", SelectQuery::new(\"OrderLine\"), true);\n+        let aggregate = RelationAggregate::new(\n+            \"lines\",\n+            \"lineCount\",\n+            fixture_select(\n+                \"OrderLine\",\n+                \"aggregation_cache_propagates_to_relation_aggregates\",\n+            ),\n+            true,\n+        );\n \n         let first = repo\n             .fetch_all_with_relation_aggregates_internal(&query, &[aggregate.clone()])\n"
+    },
+    {
+      "name": "memory_data_service_fetches_smart_list_entities_with_query_features",
+      "source_body_sha256": "d3d992e6ebc964b5ed58d1aa309e4012d8d1cda638699b96328ea767d5f8e53d",
+      "historical_body_sha256": "fa6dabef794bedd5db362ff9051f3aeb6cff0095dd4096b2b18370953b633ffc",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "7204b63f54edbc155cf6350d822f7c6113d9e938cc6b6b251d60a8b243ebcc08",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -21,14 +21,17 @@\n\n             ],\n         );\n \n-        let query = teaql_core::SelectQuery::new(\"Order\")\n-            .filter(Expr::Binary {\n-                left: Box::new(Expr::column(\"id\")),\n-                op: teaql_core::BinaryOp::Gte,\n-                right: Box::new(Expr::value(2_u64)),\n-            })\n-            .order_by(OrderBy::desc(\"id\"))\n-            .limit(1);\n+        let query = fixture_select(\n+            \"Order\",\n+            \"memory_data_service_fetches_smart_list_entities_with_query_features\",\n+        )\n+        .filter(Expr::Binary {\n+            left: Box::new(Expr::column(\"id\")),\n+            op: teaql_core::BinaryOp::Gte,\n+            right: Box::new(Expr::value(2_u64)),\n+        })\n+        .order_by(OrderBy::desc(\"id\"))\n+        .limit(1);\n \n         let orders = data_service.fetch_entities::<Order>(&query).unwrap();\n \n"
+    },
+    {
+      "name": "memory_data_service_runs_relation_aggregates",
+      "source_body_sha256": "b33c0a27fef82a08500fbce0a2c69279571291e2abd3bf37d3e9c822a2bc709f",
+      "historical_body_sha256": "ec4570aef3f54eceee75d68832ec8d051b3e6979faa59655377be06ce44823ef",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "510b1a015013fdf61df33ed0adc2c3a283b119e5f5df107926bb05366077f17f",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -43,9 +43,15 @@\n\n                 ],\n             );\n \n-        let query = SelectQuery::new(\"Order\").project(\"id\").project(\"name\");\n-        let aggregate =\n-            RelationAggregate::new(\"lines\", \"lineCount\", SelectQuery::new(\"OrderLine\"), true);\n+        let query = fixture_select(\"Order\", \"memory_data_service_runs_relation_aggregates\")\n+            .project(\"id\")\n+            .project(\"name\");\n+        let aggregate = RelationAggregate::new(\n+            \"lines\",\n+            \"lineCount\",\n+            fixture_select(\"OrderLine\", \"memory_data_service_runs_relation_aggregates\"),\n+            true,\n+        );\n \n         let rows = data_service\n             .fetch_all_with_relation_aggregates(&query, &[aggregate])\n"
+    },
+    {
+      "name": "memory_data_service_runs_aggregates",
+      "source_body_sha256": "b9299c6ecf7c43596916bf34159269a90e32a963087f61c0de93183c1c118bd7",
+      "historical_body_sha256": "ec9a1c14d5f793c188f3cd9668043c7dfada23c89db25d48b0bd1304830e20bf",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "19fa2cfc7163a9773877148901371dd15bf2ff616a11751d3f6d14978e990caa",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -42,11 +42,16 @@\n\n             ],\n             group_by: Vec::new(),\n             relations: Vec::new(),\n+            facets: Vec::new(),\n+            relation_aggregates: Vec::new(),\n             aggregation_cache: None,\n             comment: None,\n+            purpose: None,\n             raw_sql: None,\n             raw_sql_search_criteria: Vec::new(),\n             dynamic_properties: Vec::new(),\n+            dynamic_property_definitions: None,\n+            dynamic_field_selection: None,\n             raw_projections: Vec::new(),\n             object_group_bys: Vec::new(),\n             search_with_text: None,\n"
+    },
+    {
+      "name": "memory_data_service_runs_grouped_aggregates_and_extended_filters",
+      "source_body_sha256": "7420a7b3f0d092cb02858157f3ff623d0a8c78b3fbef69ab2905b35d632dfcb6",
+      "historical_body_sha256": "2b9dd30066b35d9190d5f82b5e55c38c95ba77a91da132ab6cbded5b824c1ae4",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "90b8a65415f9c8529fd9b03e66cd8f728d35082263219d8840c6571a416a64ef",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -23,15 +23,18 @@\n\n \n         let rows = data_service\n             .fetch_all(\n-                &teaql_core::SelectQuery::new(\"Order\")\n-                    .filter(\n-                        Expr::between(\"version\", 1_i64, 3_i64)\n-                            .and_expr(Expr::not_like(\"name\", \"tmp%\"))\n-                            .and_expr(Expr::not_in_list(\"name\", vec![Value::from(\"deleted\")])),\n-                    )\n-                    .group_by(\"name\")\n-                    .count(\"total\")\n-                    .sum(\"version\", \"versionSum\"),\n+                &fixture_select(\n+                    \"Order\",\n+                    \"memory_data_service_runs_grouped_aggregates_and_extended_filters\",\n+                )\n+                .filter(\n+                    Expr::between(\"version\", 1_i64, 3_i64)\n+                        .and_expr(Expr::not_like(\"name\", \"tmp%\"))\n+                        .and_expr(Expr::not_in_list(\"name\", vec![Value::from(\"deleted\")])),\n+                )\n+                .group_by(\"name\")\n+                .count(\"total\")\n+                .sum(\"version\", \"versionSum\"),\n             )\n             .unwrap();\n \n"
+    },
+    {
+      "name": "memory_data_service_runs_extended_aggregates_and_having",
+      "source_body_sha256": "ab0c3d8a4aeca2ae70709d263930fdbbcbd7fef3ba762c65a3669b6260adb371",
+      "historical_body_sha256": "f727e7cbe2802e2cda9ec9a347832795cc864cd7f0386b70523b60d8b2ec45a4",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "959c4bfcc3e14127b89f4560396992249af545b3488d350333bdccb426a96628",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -23,13 +23,16 @@\n\n \n         let rows = data_service\n             .fetch_all(\n-                &teaql_core::SelectQuery::new(\"Order\")\n-                    .group_by(\"name\")\n-                    .count(\"total\")\n-                    .stddev(\"version\", \"stddevVersion\")\n-                    .var_pop(\"version\", \"varPopVersion\")\n-                    .bit_or(\"version\", \"bitOrVersion\")\n-                    .having(Expr::gt(\"total\", 1_i64)),\n+                &fixture_select(\n+                    \"Order\",\n+                    \"memory_data_service_runs_extended_aggregates_and_having\",\n+                )\n+                .group_by(\"name\")\n+                .count(\"total\")\n+                .stddev(\"version\", \"stddevVersion\")\n+                .var_pop(\"version\", \"varPopVersion\")\n+                .bit_or(\"version\", \"bitOrVersion\")\n+                .having(Expr::gt(\"total\", 1_i64)),\n             )\n             .unwrap();\n \n"
+    },
+    {
+      "name": "memory_data_service_runs_sound_like_filter",
+      "source_body_sha256": "dd9369f28cbd5f14b0b95b9f06f7f6bc082b6b45d1754b4b75910746fb744473",
+      "historical_body_sha256": "f4c576b6361748419b8cd467f97bf38daa71a666de3e7b9b77151a6bf2e8eaec",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "f7770ff7844d0266b76c4963db53310116aebdcbc59c225fabd2d022a7b2f1d1",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -23,7 +23,7 @@\n\n \n         let rows = data_service\n             .fetch_all(\n-                &teaql_core::SelectQuery::new(\"Order\")\n+                &fixture_select(\"Order\", \"memory_data_service_runs_sound_like_filter\")\n                     .filter(Expr::sound_like(\"name\", \"Robert\"))\n                     .order_asc(\"id\"),\n             )\n"
+    },
+    {
+      "name": "memory_data_service_runs_java_style_string_match_filters",
+      "source_body_sha256": "2f2faae4b4df473bf5fcedbe901ecc9d8438929bd091ac5a4fc0e47c8959964a",
+      "historical_body_sha256": "d87f222765f6bec02573a236fec66fabba28f182267e235fd8d23c6d81a48d24",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "a381ac782b98573380cba0d54771b5075ab1186c57fe50e6a18b251fffd58b1e",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -29,16 +29,19 @@\n\n \n         let rows = data_service\n             .fetch_all(\n-                &teaql_core::SelectQuery::new(\"Order\")\n-                    .filter(\n-                        Expr::contain(\"name\", \"tea\")\n-                            .and_expr(Expr::begin_with(\"name\", \"tea\"))\n-                            .and_expr(Expr::end_with(\"name\", \"order\"))\n-                            .and_expr(Expr::not_contain(\"name\", \"coffee\"))\n-                            .and_expr(Expr::not_begin_with(\"name\", \"archived\"))\n-                            .and_expr(Expr::not_end_with(\"name\", \"draft\")),\n-                    )\n-                    .order_asc(\"id\"),\n+                &fixture_select(\n+                    \"Order\",\n+                    \"memory_data_service_runs_java_style_string_match_filters\",\n+                )\n+                .filter(\n+                    Expr::contain(\"name\", \"tea\")\n+                        .and_expr(Expr::begin_with(\"name\", \"tea\"))\n+                        .and_expr(Expr::end_with(\"name\", \"order\"))\n+                        .and_expr(Expr::not_contain(\"name\", \"coffee\"))\n+                        .and_expr(Expr::not_begin_with(\"name\", \"archived\"))\n+                        .and_expr(Expr::not_end_with(\"name\", \"draft\")),\n+                )\n+                .order_asc(\"id\"),\n             )\n             .unwrap();\n \n"
+    },
+    {
+      "name": "memory_data_service_runs_property_to_property_filters",
+      "source_body_sha256": "6f06b3b02aaea32e56224756d84423b9d77f29a90240a5c674688a9f3124acef",
+      "historical_body_sha256": "2784f524ee33c0cff260c795d4a20da9102af13f7853d28e2f3faff3f6249546",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "df7d6d05f120180975ff50c964182e59a1b7bd6d7512b8029340b632f624bc24",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -18,9 +18,12 @@\n\n \n         let rows = data_service\n             .fetch_all(\n-                &teaql_core::SelectQuery::new(\"Order\")\n-                    .filter(Expr::compare_columns(\"version\", BinaryOp::Gte, \"id\"))\n-                    .order_asc(\"id\"),\n+                &fixture_select(\n+                    \"Order\",\n+                    \"memory_data_service_runs_property_to_property_filters\",\n+                )\n+                .filter(Expr::compare_columns(\"version\", BinaryOp::Gte, \"id\"))\n+                .order_asc(\"id\"),\n             )\n             .unwrap();\n \n"
+    },
+    {
+      "name": "memory_data_service_supports_mutations_and_optimistic_locking",
+      "source_body_sha256": "e4a281e537b2494c536a59acdbea00782044d646be1f18081883f3cc09b66593",
+      "historical_body_sha256": "cc34b0a327f552a07f87e201abb864e044b4cfbb3e79166de71226d90a656445",
+      "cpp_fixture": "tests/parity/teaql_runtime/memory_service.cpp",
+      "cpp_body_sha256": "c501dc71c469014582d2ce86fa6c302ac4dba5bcb8b74b1003f14183be715642",
+      "diff": "--- 5.0.5\n\n+++ 5.0.6\n\n@@ -19,7 +19,13 @@\n\n             .unwrap();\n \n         let row = data_service\n-            .fetch_all(&teaql_core::SelectQuery::new(\"Order\").filter(Expr::eq(\"id\", 10_u64)))\n+            .fetch_all(\n+                &fixture_select(\n+                    \"Order\",\n+                    \"memory_data_service_supports_mutations_and_optimistic_locking\",\n+                )\n+                .filter(Expr::eq(\"id\", 10_u64)),\n+            )\n             .unwrap()\n             .pop()\n             .unwrap();\n@@ -45,7 +51,13 @@\n\n             .delete(&DeleteCommand::new(\"Order\", 10_u64).expected_version(2))\n             .unwrap();\n         let row = data_service\n-            .fetch_all(&teaql_core::SelectQuery::new(\"Order\").filter(Expr::eq(\"id\", 10_u64)))\n+            .fetch_all(\n+                &fixture_select(\n+                    \"Order\",\n+                    \"memory_data_service_supports_mutations_and_optimistic_locking\",\n+                )\n+                .filter(Expr::eq(\"id\", 10_u64)),\n+            )\n             .unwrap()\n             .pop()\n             .unwrap();\n@@ -55,7 +67,13 @@\n\n             .recover(&RecoverCommand::new(\"Order\", 10_u64, -3))\n             .unwrap();\n         let row = data_service\n-            .fetch_all(&teaql_core::SelectQuery::new(\"Order\").filter(Expr::eq(\"id\", 10_u64)))\n+            .fetch_all(\n+                &fixture_select(\n+                    \"Order\",\n+                    \"memory_data_service_supports_mutations_and_optimistic_locking\",\n+                )\n+                .filter(Expr::eq(\"id\", 10_u64)),\n+            )\n             .unwrap()\n             .pop()\n             .unwrap();\n"
+    }
+  ]
+}

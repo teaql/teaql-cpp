@@ -1,0 +1,23 @@
+{
+  "scope": "Historical pre-guard C++ output, reproduced from the exact retained producer source hash in an isolated compiler directory. Not a supported domain.",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "hand_edited": false,
+  "model": "tests/generator/parity/type_configuration_contracts/custom_unsigned/model.xml",
+  "model_sha256": "268ca2c0666921ab7527014bf5a67601962a9e6d60973128e0cba9a19fec01df",
+  "producer_cpp_core_sha256": "853fcc94de33a1d65e89ab317cc19ad2df193c5bc620e80de79ac5ce5615338a",
+  "files": {
+    "CMakeLists.txt": "970e8047c772d1169b1ab7bfa045f0e989f663e215efd0f2be11fd089b036363",
+    "OBSERVATION.json": "08a3194c7500937d5d4781e72cf6e2100daef5829548aea93736438f9e951ab1",
+    "ASSIST.md": "9dd4eea45f97ca35cb14aa7fd527bb0c737ae018f6b7101bc10cebf5cfe66ce6",
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "include/cpp_type_configuration_fixture.hpp": "c00f9a7f947b75946d59cefe3112e445d95bf5d10de23646edc6286a25611336",
+    "include/cpp_type_configuration_fixture/runtime.hpp": "144a967236ac527350081fe86d3a2a045408abda9155ead0c0f6bef78e5fae66",
+    "include/cpp_type_configuration_fixture/expressions.hpp": "12e2f6459af700f556d21d08a136b2caf62f4bb18637e7c019aec7d37a07318b",
+    "include/cpp_type_configuration_fixture/support.hpp": "8ebb60555a625aaa950531b2412fc0381521807bad9d254cfdab7ec5bf271090",
+    "include/cpp_type_configuration_fixture/queries.hpp": "b9f464783a2891937228833acd9ba8f84e8e899f087b63b9283055c78e6fb9ff",
+    "include/cpp_type_configuration_fixture/sample_data.hpp": "39a010568a8e780739373d96a3efd6e6ae24249281bf9782965879194518b951",
+    "include/cpp_type_configuration_fixture/checkers.hpp": "1fc4d4f47566f8d25b3e405ec6abfcf9a45dae992e32ea352137c9ac8c520988",
+    "include/cpp_type_configuration_fixture/models.hpp": "e3e441682b0a874e121c189e8abc5cb031afafbb3bba05c985b6357e645b45a7"
+  }
+}

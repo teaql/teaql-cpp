@@ -50,6 +50,12 @@ stimuli remain; this corpus alone does not qualify successful explicitly
 purposed raw TransactionScope queries or mutations. Those positive contracts
 require separate evidence.
 
+The later [explicit TransactionScope checkpoint](transaction_scope_intent_5_0_6.md)
+supplies that positive evidence through actual SQLite: 64 complete original
+observations match the header and imported consumers. Historical missing-intent
+stimuli remain unchanged. This supplements the raw-request boundary without
+qualifying complete governed execution or P7.
+
 ## Internal preparation responsibility
 
 The initial comparison found **350/1,502** layered mutation differences. The

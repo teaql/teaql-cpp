@@ -1,0 +1,814 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "generator/src/main/resources/generator/rust-lib-core/request/index.stg",
+  "template_sha256": "791e5e0d9a2c5250f500e607074d468bb0a5a79ad4081f745f9ca1ddfb1c5960",
+  "functions": [
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1551,
+      "end_line": 1554,
+      "sha256": "1ace4ddeaab0cf15a8d8ee0138e1a91a007044c2c1b4a7b34cb186d8541f6f4b",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>(mut self) -> Self {\n        self.query = self.query.project(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "project_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1556,
+      "end_line": 1558,
+      "sha256": "355be802b976dc72dbea1fee147b6010113cf997d0539c6dd1df40d43f42d227",
+      "body": "pub fn project_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.select_<fieldDescriptor.rustStorageMemberName>()\n    }"
+    },
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>_raw",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1560,
+      "end_line": 1562,
+      "sha256": "bcbc00a41529c16dedc2febd7f450b3656233dae58e599d7ce69f7316cab303e",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>_raw(self, raw_sql_segment: impl Into\\<String\\>) -> Self {\n        self.select_<fieldDescriptor.rustStorageMemberName>_unsafe_raw(UnsafeRawSqlSegment::trusted(raw_sql_segment))\n    }"
+    },
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>_unsafe_raw",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1564,
+      "end_line": 1569,
+      "sha256": "32ef1594706bce43786e7ae7b81651c814466441fb773879f77d2d446d1e9d6b",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>_unsafe_raw(mut self, raw_sql_segment: UnsafeRawSqlSegment) -> Self {\n        self.query_options\n            .raw_projections\n            .push(RawProjection::new(\"<fieldDescriptor.rustStorageFieldName>\", raw_sql_segment));\n        self\n    }"
+    },
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>_with_function",
+      "requirement": "PP02",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version",
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1572,
+      "end_line": 1574,
+      "sha256": "a9a47d92b2cb2f7f543764bc5b5e80c0c0351a069c763fea693803e5372e0490",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>_with_function(self, function: AggregateFunction) -> Self {\n        self.select_<fieldDescriptor.rustStorageMemberName>_as_with_function(\"<fieldDescriptor.rustStorageFieldName>\", function)\n    }"
+    },
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>_as_with_function",
+      "requirement": "PP02",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version",
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1576,
+      "end_line": 1582,
+      "sha256": "71a78ebb57fc97092f0929efa30099aefa5a98df1cd40be2c9154176ee09190d",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>_as_with_function(\n        self,\n        alias: impl Into\\<String\\>,\n        function: AggregateFunction,\n    ) -> Self {\n        self.aggregate_with_function(\"<fieldDescriptor.rustStorageFieldName>\", alias, function)\n    }"
+    },
+    {
+      "name": "group_by_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP03",
+      "guards": [],
+      "start_line": 1586,
+      "end_line": 1588,
+      "sha256": "110d8596732bac73f3c59998ddc45b1272d434e77f4fb74a6123f306d33fa996",
+      "body": "pub fn group_by_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.group_by(\"<fieldDescriptor.rustStorageFieldName>\")\n    }"
+    },
+    {
+      "name": "group_by_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP03",
+      "guards": [],
+      "start_line": 1590,
+      "end_line": 1597,
+      "sha256": "ac0a9340e8e9aee0bd6db24d14cd5caa3b662c8364f9a25d71dfb228b6f7a654",
+      "body": "pub fn group_by_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        let alias = alias.into();\n        let mut request = self.group_by(\"<fieldDescriptor.rustStorageFieldName>\");\n        request.query = request\n            .query\n            .project_expr(alias, Expr::column(\"<fieldDescriptor.rustStorageFieldName>\"));\n        request\n    }"
+    },
+    {
+      "name": "group_by_<fieldDescriptor.rustStorageMemberName>_with_function",
+      "requirement": "PP03",
+      "guards": [],
+      "start_line": 1599,
+      "end_line": 1606,
+      "sha256": "c3e171355d204e492b4e862e9064313fc966674ee71853c8eb748266b57557e9",
+      "body": "pub fn group_by_<fieldDescriptor.rustStorageMemberName>_with_function(\n        self,\n        alias: impl Into\\<String\\>,\n        function: AggregateFunction,\n    ) -> Self {\n        self.group_by(\"<fieldDescriptor.rustStorageFieldName>\")\n            .aggregate_with_function(\"<fieldDescriptor.rustStorageFieldName>\", alias, function)\n    }"
+    },
+    {
+      "name": "count_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1608,
+      "end_line": 1610,
+      "sha256": "6c9be032ef6ab770a64ae695a36d75e085cdc0c1a63ec1767de8be21e5af6d2f",
+      "body": "pub fn count_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.count_<fieldDescriptor.rustStorageMemberName>_as(\"<fieldDescriptor.rustStorageMemberName>_count\")\n    }"
+    },
+    {
+      "name": "count_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1612,
+      "end_line": 1614,
+      "sha256": "2a0778f910e1070ab194eedea4653dc1a4d4c47222ad90bafc454e48bea33edd",
+      "body": "pub fn count_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_count_field(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "sum_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1616,
+      "end_line": 1618,
+      "sha256": "38ed59ec16d6c7512df7285e3ada146dea98e1d588789d66b77aa1dc7c9046d9",
+      "body": "pub fn sum_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.sum_<fieldDescriptor.rustStorageMemberName>_as(\"sum_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "sum_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1620,
+      "end_line": 1622,
+      "sha256": "3ed816c24faf50289aa9beb2e098ecb5d724dff59b8b8efe6061adda41f41e74",
+      "body": "pub fn sum_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_sum(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "avg_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1624,
+      "end_line": 1626,
+      "sha256": "84a2250133b4d60a85d6e86d56f7f54fadc9527fc51f00687fc4c685417d23e7",
+      "body": "pub fn avg_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.avg_<fieldDescriptor.rustStorageMemberName>_as(\"avg_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "avg_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1628,
+      "end_line": 1630,
+      "sha256": "593d3a5f01a18aedf9b41d41b3e3af16daf5b1801ca85edb879aee3e10685a88",
+      "body": "pub fn avg_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_avg(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "min_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1632,
+      "end_line": 1634,
+      "sha256": "b602011a46ba978234fd8b3cdcc96b629d9e8a581ae97a7caf247b42b5cf0172",
+      "body": "pub fn min_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.min_<fieldDescriptor.rustStorageMemberName>_as(\"min_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "min_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1636,
+      "end_line": 1638,
+      "sha256": "080c287545e48ddd74f273e447f14f7d1ec077600a6d24c4c8dcb489ec9abee8",
+      "body": "pub fn min_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_min(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "max_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1640,
+      "end_line": 1642,
+      "sha256": "94842b5165b5c5ec0937ba207e66f6dfd08c5a5edb0ef270508c27f1f5822d62",
+      "body": "pub fn max_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.max_<fieldDescriptor.rustStorageMemberName>_as(\"max_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "max_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1644,
+      "end_line": 1646,
+      "sha256": "da0d4fab82de2035c4358519965078c0f73c0f2249fd8ab4e6b34a6f1d0ebdd9",
+      "body": "pub fn max_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_max(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "standard_deviation_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1649,
+      "end_line": 1651,
+      "sha256": "8a087db2b2ccc2ce4be3b809175610c91e2d361b88080b06ecc31ec80306c1c9",
+      "body": "pub fn standard_deviation_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.standard_deviation_<fieldDescriptor.rustStorageMemberName>_as(\"stdDev_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "standard_deviation_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1653,
+      "end_line": 1655,
+      "sha256": "eed499903e1624bc14c1cf5c39624f26fcc2965e5a39092afed826dc716117cb",
+      "body": "pub fn standard_deviation_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_stddev(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1657,
+      "end_line": 1659,
+      "sha256": "101ba0c122bdef25173508e34b906b77d027305d5a15b826e090b1a22b2d5328",
+      "body": "pub fn square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>_as(\"stdDevPop_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1661,
+      "end_line": 1663,
+      "sha256": "3f013b0bb8f977cc49d3e73ad73440b1beb04b7337416a2dfa6b42b5a6a2e7e7",
+      "body": "pub fn square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_stddev_pop(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "sample_variance_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1665,
+      "end_line": 1667,
+      "sha256": "4ee8d1f5f0860ce29457231062f96892c32c16995541fea438463567209d4f5b",
+      "body": "pub fn sample_variance_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.sample_variance_<fieldDescriptor.rustStorageMemberName>_as(\"varSamp_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "sample_variance_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1669,
+      "end_line": 1671,
+      "sha256": "a4858bf7ae5ef306dff0cdd5bcaa7e0b80dc162711ad51ad01dfc480df474154",
+      "body": "pub fn sample_variance_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_var_samp(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "sample_population_variance_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1673,
+      "end_line": 1675,
+      "sha256": "f84808cc5651f29d9ecaa9009a599bc4481428cc381b4cd524dd64eb851e4613",
+      "body": "pub fn sample_population_variance_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.sample_population_variance_<fieldDescriptor.rustStorageMemberName>_as(\"varPop_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "sample_population_variance_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1677,
+      "end_line": 1679,
+      "sha256": "625b5e5ec48057d54da6c2363c49392537e90fb53f49abbf9b6a0123da50c0ba",
+      "body": "pub fn sample_population_variance_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_var_pop(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "unselect_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1683,
+      "end_line": 1687,
+      "sha256": "ceeca270ebba0262e53e6a3fc6dab05abb378cac71ca5e184d9bc7af36b9db70",
+      "body": "pub fn unselect_<fieldDescriptor.rustStorageMemberName>(mut self) -> Self {\n        self.query.projection.retain(|field| field != \"<fieldDescriptor.rustStorageFieldName>\");\n        self.query_options.raw_projections.retain(|projection| projection.property_name != \"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "fieldDescriptor.isBusinessId"
+      ],
+      "start_line": 1692,
+      "end_line": 1698,
+      "sha256": "b41601e5306f69fb44cfdc25df24cc13c618093a3d69b281421b62d4d467b5f8",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is(\n        mut self,\n        value: crate::<fieldDescriptor.rustBusinessIdTypeName>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::eq(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_not",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "fieldDescriptor.isBusinessId"
+      ],
+      "start_line": 1700,
+      "end_line": 1706,
+      "sha256": "b996f6f8c10bfd2ed2b20aebda21c7eee57077bce5537d38c23856d7883624c1",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_not(\n        mut self,\n        value: crate::<fieldDescriptor.rustBusinessIdTypeName>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::ne(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "fieldDescriptor.isBusinessId"
+      ],
+      "start_line": 1708,
+      "end_line": 1711,
+      "sha256": "742dab7efc216f82723c56a4e11092268c2c4df669c812d215f7698a9f35b6b5",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "fieldDescriptor.isBusinessId"
+      ],
+      "start_line": 1713,
+      "end_line": 1716,
+      "sha256": "7f8def7e4f9a3841ebba90dcc32eefebeb6c3ec5d2dde228efb76ef228b405e3",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_not_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.snakeBooleanPredicateExpr>",
+      "requirement": "PP06",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "fieldDescriptor.isBool"
+      ],
+      "start_line": 1719,
+      "end_line": 1722,
+      "sha256": "184bc6746e3f482852d911b0d07cd73d143c5994462e8f18431d6960776783c7",
+      "body": "pub fn <fieldDescriptor.snakeBooleanPredicateExpr>(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::eq(\"<fieldDescriptor.rustStorageFieldName>\", true));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.snakeBooleanNegativePredicateExpr>",
+      "requirement": "PP06",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "fieldDescriptor.isBool"
+      ],
+      "start_line": 1724,
+      "end_line": 1727,
+      "sha256": "e5a32ebe8065d0671d1c35197e38fb18044527f17cd8b0f7c76e791823687495",
+      "body": "pub fn <fieldDescriptor.snakeBooleanNegativePredicateExpr>(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::eq(\"<fieldDescriptor.rustStorageFieldName>\", false));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "fieldDescriptor.isBool"
+      ],
+      "start_line": 1729,
+      "end_line": 1732,
+      "sha256": "742dab7efc216f82723c56a4e11092268c2c4df669c812d215f7698a9f35b6b5",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "fieldDescriptor.isBool"
+      ],
+      "start_line": 1734,
+      "end_line": 1737,
+      "sha256": "7f8def7e4f9a3841ebba90dcc32eefebeb6c3ec5d2dde228efb76ef228b405e3",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_not_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>",
+      "requirement": "PP07",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1740,
+      "end_line": 1751,
+      "sha256": "1c8bfd7acd1cca35585ccc1438024e79bdd49422de4d15047e8706fafca07eb2",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>(\n        mut self,\n        operator: FieldOperator,\n        values: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(field_operator_expr(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            operator,\n            values.into_iter().map(Into::into).collect(),\n        ));\n        self\n    }"
+    },
+    {
+      "name": "create_<fieldDescriptor.rustStorageMemberName>_criteria",
+      "requirement": "PP07",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1753,
+      "end_line": 1762,
+      "sha256": "988ca48bd07cee35c0b6ffcfbf4a074822b50793b0f8dc0c516659e387bef411",
+      "body": "pub fn create_<fieldDescriptor.rustStorageMemberName>_criteria(\n        operator: FieldOperator,\n        values: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Expr {\n        field_operator_expr(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            operator,\n            values.into_iter().map(Into::into).collect(),\n        )\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1764,
+      "end_line": 1767,
+      "sha256": "3e6e4b50975d7784bb93ebb285c4d429a0f069d31f08fa0a23dac8f4f4862873",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::eq(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_not",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1771,
+      "end_line": 1774,
+      "sha256": "ac00ae1a06f70ce808a0fa4c472e32f87552e4dced428ece1936326eb6f57180",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_not(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::ne(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_greater_than",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1777,
+      "end_line": 1780,
+      "sha256": "5a2294d3ee3f7ffc1be8d5eb0ea9a4b20d0fe644249fcb0770e4358e39ebe940",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_greater_than(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::gt(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_greater_than_or_equal_to",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1782,
+      "end_line": 1785,
+      "sha256": "9e2287273250630985dac6fe31bd7c00013b0acaad27eab4a4788c83357832f7",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_greater_than_or_equal_to(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::gte(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_less_than",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1787,
+      "end_line": 1790,
+      "sha256": "82eacef7cf6dc0d3a4792d5ea1589b23819ccf134e75032a9bc2e37568285894",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_less_than(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::lt(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_less_than_or_equal_to",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1792,
+      "end_line": 1795,
+      "sha256": "65d411131abcbdd3a432a13ca095d4b4bf1e8e1f569e48b296cc75565944f7b2",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_less_than_or_equal_to(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::lte(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_between",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1797,
+      "end_line": 1804,
+      "sha256": "4e451e64faef41f8f1204cba4022c5f7ced63f341bd7a541b6a39017eed9161b",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_between(\n        mut self,\n        lower: impl Into\\<teaql_core::Value\\>,\n        upper: impl Into\\<teaql_core::Value\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::between(\"<fieldDescriptor.rustStorageFieldName>\", lower, upper));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_between_range",
+      "requirement": "PP10",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1806,
+      "end_line": 1816,
+      "sha256": "48a4923acce692738d44417678818a2068aa342e308ee0d15de745322dbe547e",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_between_range\\<T\\>(mut self, range: DateRange\\<T\\>) -> Self\n    where\n        T: Into\\<teaql_core::Value\\>,\n    {\n        self.query = self.query.and_filter(Expr::between(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            range.start,\n            range.end,\n        ));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_in",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1819,
+      "end_line": 1828,
+      "sha256": "63da45e7e4be2dd27db9b73fcbfe04f5e59dac9bb844b3d941209567e0eac1f4",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_in(\n        mut self,\n        values: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::in_list(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            values.into_iter().map(Into::into),\n        ));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_not_in",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1830,
+      "end_line": 1839,
+      "sha256": "d67f7679ffde5410bd46d056ba5d97cfcaad3df502c46bd0a08117825bd51610",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_not_in(\n        mut self,\n        values: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::not_in_list(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            values.into_iter().map(Into::into),\n        ));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_contain<fieldDescriptor.rustAttributePredicateSuffixExpr>",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1842,
+      "end_line": 1845,
+      "sha256": "8d9cb0a305129a0d4bfa4a78090531956b99a9d471075118755ef8f874605615",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_contain<fieldDescriptor.rustAttributePredicateSuffixExpr>(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::contain(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_not_contain<fieldDescriptor.rustAttributePredicateSuffixExpr>",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1847,
+      "end_line": 1850,
+      "sha256": "ce741bdeddd2364fc392d65bb9cea2d25c7dd7ccfa8dddd019b919389682906d",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_not_contain<fieldDescriptor.rustAttributePredicateSuffixExpr>(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::not_contain(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_start<fieldDescriptor.rustAttributePredicateSuffixExpr>_with",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1852,
+      "end_line": 1855,
+      "sha256": "99822cfc37a75f8bea14696dd1651660c382b819940799dcd27c89e6da08fbb9",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_start<fieldDescriptor.rustAttributePredicateSuffixExpr>_with(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::begin_with(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_not_start<fieldDescriptor.rustAttributePredicateSuffixExpr>_with",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1857,
+      "end_line": 1860,
+      "sha256": "3a6d9b641c84446e4b8d9be644f3a9df67a996f808baeab438231f940add000e",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_not_start<fieldDescriptor.rustAttributePredicateSuffixExpr>_with(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::not_begin_with(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_end<fieldDescriptor.rustAttributePredicateSuffixExpr>_with",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1862,
+      "end_line": 1865,
+      "sha256": "ede5c64d860002d723cfddf6cc7274439665936e55da14cf62e4ca2385e2e7e3",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_end<fieldDescriptor.rustAttributePredicateSuffixExpr>_with(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::end_with(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_not_end<fieldDescriptor.rustAttributePredicateSuffixExpr>_with",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1867,
+      "end_line": 1870,
+      "sha256": "468c7b6b9415c95e8b3f7eb12f727241fb37d145ae7c9e8fd067a380b887b47c",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_not_end<fieldDescriptor.rustAttributePredicateSuffixExpr>_with(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::not_end_with(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_sound<fieldDescriptor.rustAttributePredicateSuffixExpr>_like",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1872,
+      "end_line": 1875,
+      "sha256": "3f9310a52e79fa868491b4f21a5ce42e80f052def8db2bb7e26a5cc2cc419019",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_sound<fieldDescriptor.rustAttributePredicateSuffixExpr>_like(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::sound_like(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_before",
+      "requirement": "PP10",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1878,
+      "end_line": 1881,
+      "sha256": "6ab468e6a9a397578bf7dbcccb6bdec974505703c79f465416c6779be1bcc847",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_before(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::lt(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_after",
+      "requirement": "PP10",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1883,
+      "end_line": 1886,
+      "sha256": "db941d0fce595a5b6068499c8216f8712483f6463c53f8032b6d8e79d974d424",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_after(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::gt(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1888,
+      "end_line": 1891,
+      "sha256": "742dab7efc216f82723c56a4e11092268c2c4df669c812d215f7698a9f35b6b5",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1895,
+      "end_line": 1898,
+      "sha256": "7f8def7e4f9a3841ebba90dcc32eefebeb6c3ec5d2dde228efb76ef228b405e3",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_not_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "order_by_<fieldDescriptor.rustStorageMemberName>_asc",
+      "requirement": "PP11",
+      "guards": [],
+      "start_line": 1905,
+      "end_line": 1908,
+      "sha256": "754c39353de268e596eb34b00e8a02f835e532b0c4a7125c5466f48a15914ae4",
+      "body": "pub fn order_by_<fieldDescriptor.rustStorageMemberName>_asc(mut self) -> Self {\n        self.query = self.query.order_asc(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "order_by_<fieldDescriptor.rustStorageMemberName>_desc",
+      "requirement": "PP11",
+      "guards": [],
+      "start_line": 1910,
+      "end_line": 1913,
+      "sha256": "828a9f5a64485bcb80deb3f7c8d5696fb5f519a56a409bc5b90e23b6be784d1d",
+      "body": "pub fn order_by_<fieldDescriptor.rustStorageMemberName>_desc(mut self) -> Self {\n        self.query = self.query.order_desc(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "order_by_<fieldDescriptor.rustStorageMemberName>_asc_using_gbk",
+      "requirement": "PP11",
+      "guards": [],
+      "start_line": 1915,
+      "end_line": 1918,
+      "sha256": "ac046c22536caa69405b8376e883f45d1450e3ac234fca3923cff0b0fb60254a",
+      "body": "pub fn order_by_<fieldDescriptor.rustStorageMemberName>_asc_using_gbk(mut self) -> Self {\n        self.query = self.query.order_gbk_asc(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "order_by_<fieldDescriptor.rustStorageMemberName>_desc_using_gbk",
+      "requirement": "PP11",
+      "guards": [],
+      "start_line": 1920,
+      "end_line": 1923,
+      "sha256": "0d0eda84f895e827bfc9f7770a53bb538f36e74da97793ff9698c401cc24c729",
+      "body": "pub fn order_by_<fieldDescriptor.rustStorageMemberName>_desc_using_gbk(mut self) -> Self {\n        self.query = self.query.order_gbk_desc(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    }
+  ],
+  "cpp_source": "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java",
+  "cpp_helpers": [
+    {
+      "name": "sourceTemplateFlag",
+      "start_line": 2635,
+      "end_line": 2642,
+      "sha256": "76a3fc8dbe646ec77b602f18f0602b35ec7452b216e8461caf9d1c47b4398f07",
+      "body": "  private static boolean sourceTemplateFlag(FieldDescriptor field, String attribute) {\n    String value = field.getAttributeValue(attribute);\n    if (value == null || value.isEmpty()) { return false; }\n    return !Set.of(\"false\", \"off\", \"no\").contains(value.toLowerCase(Locale.ROOT));\n  }\n\n  // The source adaptor resolves nonempty attributes before JavaBean methods.\n  // In particular float inherits isNumber=true despite FieldDescriptor.isNumber().\n"
+    },
+    {
+      "name": "sourceNumericField",
+      "start_line": 2643,
+      "end_line": 2647,
+      "sha256": "6ed12fff0fb6532189f8915cf3f67fc7f26c67f3277ad173ed43745435546d31",
+      "body": "  private static boolean sourceNumericField(FieldDescriptor field) {\n    String value = field.getAttributeValue(\"isNumber\");\n    return value == null || value.isEmpty() ? field.isNumber() : sourceTemplateFlag(field, \"isNumber\");\n  }\n\n"
+    },
+    {
+      "name": "queryFieldCriteria",
+      "start_line": 2031,
+      "end_line": 2081,
+      "sha256": "47a4ce5885bf6dd1ab30f78e3213d54d86c0a72cba842b19b980ea74753f3ce7",
+      "body": "  private void queryFieldCriteria(StringBuilder out, String request, FieldDescriptor fd) {\n    if (fd.isVersion() || fd.isBoolean() || fd.isObjectProperty() || CppBusinessIdMetadata.isBusinessId(fd)) {\n      return;\n    }\n    String prefix = camel(identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd)));\n    String field = quote(canonical(fd));\n    String rangeTemplate = \"template <std::ranges::input_range Inputs> requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>> \";\n    String scalarTemplate = \"template <class Input> requires std::constructible_from<Value, Memory, const Input&> \";\n    if (baseType(fd).equals(\"String\") && !fd.getBooleanAttribute(\"isText\") && !fd.getBooleanAttribute(\"isPassword\")) {\n      String soundName = camel(identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd)\n          + \"Sound\" + FieldDescriptorNaming.attributePredicateSuffixExpr(fd) + \"Like\"));\n      fluent(out, request, scalarTemplate, soundName, \"const Input& value\", \"value\",\n          \"query_.andFilter(Expr::sound_like(memory_resource(), \" + field + \", value));\");\n    }\n    for (String[] comparison : List.of(new String[]{\"Is\", \"eq\"}, new String[]{\"IsNot\", \"ne\"},\n        new String[]{\"GreaterThan\", \"gt\"}, new String[]{\"GreaterThanOrEqualTo\", \"gte\"},\n        new String[]{\"LessThan\", \"lt\"}, new String[]{\"LessThanOrEqualTo\", \"lte\"})) {\n      if (fd.isId() && !comparison[0].equals(\"Is\") && !comparison[0].equals(\"IsNot\")) { continue; }\n      fluent(out, request, scalarTemplate, prefix + comparison[0], \"const Input& value\", \"value\",\n          \"query_.andFilter(Expr::\" + comparison[1] + \"(memory_resource(), \" + field + \", value));\");\n    }\n    if (!fd.isId()) {\n      String betweenTemplate = \"template <class Lower, class Upper> requires std::constructible_from<Value, Memory, const Lower&> && std::constructible_from<Value, Memory, const Upper&> \";\n      fluent(out, request, betweenTemplate, prefix + \"Between\", \"const Lower& lower, const Upper& upper\", \"lower, upper\",\n          \"query_.andFilter(Expr::between(memory_resource(), \" + field + \", lower, upper));\");\n    }\n    for (String suffix : List.of(\"In\", \"NotIn\")) {\n      fluent(out, request, rangeTemplate, prefix + suffix,\n          \"Inputs&& inputs\", \"std::forward<Inputs>(inputs)\",\n          \"query_.filterField(\" + field + \", request::FieldOperator::\" + suffix\n              + \", std::forward<Inputs>(inputs));\");\n    }\n    fluent(out, request, rangeTemplate, prefix,\n        \"request::FieldOperator op, Inputs&& inputs\", \"op, std::forward<Inputs>(inputs)\",\n        \"query_.filterField(\" + field + \", op, std::forward<Inputs>(inputs));\");\n    line(out, rangeTemplate + \"Ref<Expr> \" + camel(\"create_\" + fieldName(fd) + \"_criteria\")\n        + \"(request::FieldOperator op, Inputs&& inputs) const { return query_.createFieldCriteria(\"\n        + field + \", op, std::forward<Inputs>(inputs)); }\");\n    if (!fd.isId()) {\n      String valueTemplate = \"template <class T> requires std::constructible_from<Value, Memory, const T&> \";\n      fluent(out, request, valueTemplate, prefix + \"BetweenRange\",\n          \"const request::DateRange<T>& range\", \"range\",\n          \"query_.andFilter(Expr::between(memory_resource(), \" + field + \", range.start, range.end));\");\n      for (String suffix : List.of(\"Before\", \"After\")) {\n        fluent(out, request, valueTemplate, prefix + suffix, \"const T& value\", \"value\",\n            \"query_.andFilter(Expr::\" + (suffix.equals(\"Before\") ? \"lt\" : \"gt\")\n            + \"(memory_resource(), \" + field + \", value));\");\n      }\n    }\n  }\n\n"
+    },
+    {
+      "name": "queryField",
+      "start_line": 2082,
+      "end_line": 2299,
+      "sha256": "e3eb4fd216635c6262ef3206a99467983e482055cf48634e06d4dc2fc500e584",
+      "body": "  private void queryField(StringBuilder out, String request, FieldDescriptor fd) {\n    String member = fieldName(fd), canonical = quote(canonical(fd));\n    String sourceMember = RustFieldDescriptorNaming.rustStorageMemberName(fd);\n    String prefix = identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd));\n    for (Candidate candidate : candidates(fd)) {\n      for (boolean negative : List.of(false, true)) {\n        String method = prefix + (negative ? \"_is_not_\" : \"_is_\")\n            + candidate.getRustCandidateMethodValue();\n        line(out, request + \"& \" + method\n            + \"() { selection.and_filter(Expr::\" + (negative ? \"ne\" : \"eq\")\n            + \"(memory_resource(), \" + canonical + \", \"\n            + candidateLiteral(fd, candidate) + \")); return *this; }\");\n      }\n    }\n    line(\n        out,\n        request\n            + \"& select_\"\n            + member\n            + \"() { selection.project(\"\n            + canonical\n            + \"); return *this; }\");\n    if (!fd.isId() && !fd.isVersion()) {\n      fieldAdapter(out, request, camel(\"project_\" + member), \"\", \"\", \"query_.select(\" + canonical + \");\");\n      fieldAdapter(out, request, camel(\"select_\" + member + \"_raw\"), \"std::string_view sql\", \"sql\", \"query_.selectRaw(\" + canonical + \", sql);\");\n      fieldAdapter(out, request, camel(\"select_\" + member + \"_unsafe_raw\"), \"request::UnsafeRawSqlSegment sql\", \"std::move(sql)\", \"query_.selectUnsafeRaw(\" + canonical + \", std::move(sql));\");\n      if (!fd.isObjectProperty()) {\n        fieldAdapter(out, request, camel(\"unselect_\" + member), \"\", \"\", \"query_.unselect(\" + canonical + \");\");\n      }\n      if (fd.isObjectProperty()) {\n        fieldAdapter(out, request, camel(\"unselect_\" + relationName(fd)), \"\", \"\", \"query_.unselectRelation(\" + canonical + \", \" + quote(relationIdentity(fd)) + \");\");\n      }\n      if (sourceNumericField(fd)) {\n        fieldAdapter(out, request, camel(\"select_\" + member + \"_with_function\"), \"AggregateFunction function\", \"function\", \"query_.selectWithFunction(\" + canonical + \", \" + canonical + \", function);\");\n        fieldAdapter(out, request, camel(\"select_\" + member + \"_as_with_function\"), \"std::string_view alias, AggregateFunction function\", \"alias, function\", \"query_.selectWithFunction(\" + canonical + \", alias, function);\");\n      }\n    }\n    for (String direction : List.of(\"asc\", \"desc\")) {\n      line(\n          out,\n          request\n              + \"& order_by_\"\n              + member\n              + \"_\"\n              + direction\n              + \"() { selection.order_\"\n              + direction\n              + \"(\"\n              + canonical\n              + \"); return *this; }\");\n    }\n    for (String direction : List.of(\"asc\", \"desc\")) {\n      line(out, request + \"& order_by_\" + member + \"_\" + direction + \"_using_gbk() { selection.order_gbk_\" + direction + \"(\" + canonical + \"); return *this; }\");\n    }\n    if (fd.isBoolean()) {\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.snakeBooleanPredicateExpr(fd))\n              + \"() { selection.and_filter(Expr::eq(memory_resource(), \"\n              + canonical\n              + \", true)); return *this; }\");\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.snakeBooleanNegativePredicateExpr(fd))\n              + \"() { selection.and_filter(Expr::eq(memory_resource(), \"\n              + canonical\n              + \", false)); return *this; }\");\n    }\n    for (String[] pair :\n        List.of(\n            new String[] {\"is\", \"eq\"},\n            new String[] {\"is_not\", \"ne\"},\n            new String[] {\"greater_than\", \"gt\"},\n            new String[] {\"greater_than_or_equal_to\", \"gte\"},\n            new String[] {\"less_than\", \"lt\"},\n            new String[] {\"less_than_or_equal_to\", \"lte\"})) {\n      line(\n          out,\n          request\n              + \"& \"\n              + prefix\n              + \"_\"\n              + pair[0]\n              + \"(\"\n              + predicateType(fd)\n              + \" value) { selection.and_filter(Expr::\"\n              + pair[1]\n              + \"(memory_resource(), \"\n              + canonical\n              + \", generated_detail::encode(memory_resource(), value))); return *this; }\");\n    }\n    line(\n        out,\n        request\n            + \"& \"\n            + prefix\n            + \"_between(\"\n            + predicateType(fd)\n            + \" lower, \"\n            + predicateType(fd)\n            + \" upper) { selection.and_filter(Expr::between(memory_resource(), \"\n            + canonical\n            + \", generated_detail::encode(memory_resource(), lower),\"\n            + \" generated_detail::encode(memory_resource(), upper))); return *this; }\");\n    for (String suffix : List.of(\"in\", \"not_in\")) {\n      line(\n          out,\n          request\n              + \"& \"\n              + prefix\n              + \"_\"\n              + suffix\n              + \"(std::span<const \"\n              + (CppBusinessIdMetadata.isBusinessId(fd) ? applicationType(fd) : baseType(fd))\n              + \"> inputs) { auto r = memory_resource(); Vector<Value> values(r); for (const auto&\"\n              + \" value : inputs) { values.emplace_back(generated_detail::encode(r, value)); }\"\n              + \" selection.and_filter(Expr::in_list(r, \"\n              + canonical\n              + \", values, \"\n              + suffix.equals(\"not_in\")\n              + \")); return *this; }\");\n    }\n    String aggregateMember = fd.isObjectProperty() ? relationName(fd) : member;\n    String sourceCountMember = fd.isObjectProperty()\n        ? RustFieldDescriptorNaming.rustMemberName(fd) : sourceMember;\n    fieldAdapter(out, request, camel(\"group_by_\" + aggregateMember), \"\", \"\",\n        \"query_.groupBy(\" + canonical + \");\");\n    fieldAdapter(out, request, camel(\"group_by_\" + aggregateMember + \"_as\"), \"std::string_view alias\", \"alias\",\n        \"query_.groupBy(\" + canonical + \"); query_.selectAs(\" + canonical + \", alias);\");\n    fieldAdapter(out, request, camel(\"group_by_\" + aggregateMember + \"_with_function\"),\n        \"std::string_view alias, AggregateFunction function\", \"alias, function\",\n        \"query_.groupBy(\" + canonical + \"); query_.aggregateWithFunction(\" + canonical + \", alias, function);\");\n    fieldAdapter(out, request, camel(\"count_\" + aggregateMember), \"\", \"\",\n        \"query_.aggregateCountField(\" + canonical + \", \" + quote(sourceCountMember + \"_count\") + \");\");\n    fieldAdapter(out, request, camel(\"count_\" + aggregateMember + \"_as\"), \"std::string_view alias\", \"alias\",\n        \"query_.aggregateCountField(\" + canonical + \", alias);\");\n    if (!fd.isObjectProperty()) {\n      for (String method : List.of(\"sum\", \"avg\", \"min\", \"max\")) {\n        fieldAdapter(out, request, camel(method + \"_\" + member), \"\", \"\",\n            \"query_.\" + camel(\"aggregate_\" + method) + \"(\" + canonical + \", \" + quote(method + \"_\" + sourceMember) + \");\");\n        fieldAdapter(out, request, camel(method + \"_\" + member + \"_as\"), \"std::string_view alias\", \"alias\",\n            \"query_.\" + camel(\"aggregate_\" + method) + \"(\" + canonical + \", alias);\");\n      }\n      if (sourceNumericField(fd)) {\n        for (String[] method : List.of(\n            new String[]{\"standard_deviation\", \"aggregateStddev\", \"stdDev\"},\n            new String[]{\"square_root_of_population_standard_deviation\", \"aggregateStddevPop\", \"stdDevPop\"},\n            new String[]{\"sample_variance\", \"aggregateVarSamp\", \"varSamp\"},\n            new String[]{\"sample_population_variance\", \"aggregateVarPop\", \"varPop\"})) {\n          fieldAdapter(out, request, camel(method[0] + \"_\" + member), \"\", \"\",\n              \"query_.\" + method[1] + \"(\" + canonical + \", \" + quote(method[2] + \"_\" + sourceMember) + \");\");\n          fieldAdapter(out, request, camel(method[0] + \"_\" + member + \"_as\"), \"std::string_view alias\", \"alias\",\n              \"query_.\" + method[1] + \"(\" + canonical + \", alias);\");\n        }\n      }\n    }\n    if (baseType(fd).equals(\"String\")) {\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.stringContainsPredicateExpr(fd))\n              + \"(std::string_view value) { selection.and_filter(Expr::contain(memory_resource(), \"\n              + canonical\n              + \", value)); return *this; }\");\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.StringStartsWithPredicateExpr(fd))\n              + \"(std::string_view value) {\"\n              + \" selection.and_filter(Expr::begin_with(memory_resource(), \"\n              + canonical\n              + \", value)); return *this; }\");\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.StringEndsWithPredicateExpr(fd))\n              + \"(std::string_view value) { selection.and_filter(Expr::end_with(memory_resource(), \"\n              + canonical\n              + \", value)); return *this; }\");\n    }\n    if (baseType(fd).equals(\"String\") && !CppBusinessIdMetadata.isBusinessId(fd)\n        && !fd.getBooleanAttribute(\"isText\") && !fd.getBooleanAttribute(\"isPassword\")) {\n      for (String[] method : List.of(\n          new String[]{\"NotContain\", \"not_contain\", \"\"},\n          new String[]{\"NotStart\", \"not_begin_with\", \"With\"},\n          new String[]{\"NotEnd\", \"not_end_with\", \"With\"},\n          new String[]{\"Sound\", \"sound_like\", \"Like\"})) {\n        String methodName = identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd)\n            + method[0] + FieldDescriptorNaming.attributePredicateSuffixExpr(fd) + method[2]);\n        line(out, request + \"& \" + methodName + \"(std::string_view value) { selection.and_filter(Expr::\"\n            + method[1] + \"(memory_resource(), \" + canonical + \", value)); return *this; }\");\n      }\n    }\n    Set<String> candidateNames = new HashSet<>();\n    for (Candidate candidate : candidates(fd)) {\n      candidateNames.add(camel(prefix + \"_is_\" + candidate.getRustCandidateMethodValue()));\n      candidateNames.add(camel(prefix + \"_is_not_\" + candidate.getRustCandidateMethodValue()));\n    }\n    // Source Unknown/Known denote SQL NULL availability. Keep established C++\n    // Null/NotNull aliases only when a real candidate does not occupy that name.\n    for (String[] method : List.of(new String[]{\"is_unknown\", \"is_null\"},\n        new String[]{\"is_known\", \"is_not_null\"}, new String[]{\"is_null\", \"is_null\"},\n        new String[]{\"is_not_null\", \"is_not_null\"})) {\n      if (!candidateNames.contains(camel(prefix + \"_\" + method[0]))) {\n        line(out, request + \"& \" + prefix + \"_\" + method[0]\n            + \"() { selection.and_filter(Expr::\" + method[1] + \"(memory_resource(), \"\n            + canonical + \")); return *this; }\");\n      }\n    }\n  }\n\n"
+    },
+    {
+      "name": "descriptorFields",
+      "start_line": 178,
+      "end_line": 183,
+      "sha256": "7fd6aca385422c7bf6e9347762391fb1f22272ee21f6e7e2ef329487fee31312",
+      "body": "  private static List<FieldDescriptor> descriptorFields(ObjectDescriptor od) {\n    return java.util.stream.Stream.concat(\n        fields(od).stream().filter(field -> !field.isObjectProperty()),\n        fields(od).stream().filter(FieldDescriptor::isObjectProperty)).toList();\n  }\n\n"
+    },
+    {
+      "name": "models",
+      "start_line": 488,
+      "end_line": 704,
+      "sha256": "f3111c282b749dc579c2ed90cb5c1b651144312c527a3128f70d7d926e3ae143",
+      "body": "  private String models(String ns, List<ObjectDescriptor> entities) {\n    StringBuilder out = new StringBuilder(header(ns, \"support.hpp\"));\n    if (hasGeneratedBootstrap(entities)) {\n      line(out, \"namespace generated_detail {\");\n      for (ObjectDescriptor entity : entities) {\n        line(out, \"struct \" + typeName(entity) + \"BootstrapRecipe;\");\n      }\n      line(out, \"}\");\n    }\n    line(out, \"namespace generated_detail {\");\n    for (ObjectDescriptor entity : entities) { line(out, \"struct \" + typeName(entity) + \"SampleRecipe;\"); }\n    line(out, \"}\");\n    Set<FieldDescriptor> businessFields = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());\n    for (ObjectDescriptor od : entities) {\n      line(out, \"struct \" + typeName(od) + \"; class \" + typeName(od) + \"Checker;\");\n    }\n    for (ObjectDescriptor od : entities) {\n      for (FieldDescriptor field : fields(od)) {\n        if (CppBusinessIdMetadata.isBusinessId(field) && businessFields.add(field)) {\n          businessIdType(out, field);\n        }\n      }\n    }\n    for (ObjectDescriptor od : entities) {\n      String name = typeName(od);\n      line(out, \"struct \" + name + \" : generated_detail::Model<\" + name + \"> {\");\n      line(\n          out,\n          \"using Base = generated_detail::Model<\" + name + \">; friend class \" + name + \"Checker;\");\n      line(out, \"static constexpr std::string_view ENTITY_NAME = \" + quote(name) + \";\");\n      line(out, \"friend struct generated_detail::\" + name + \"SampleRecipe;\");\n      if (hasGeneratedBootstrap(entities)) {\n        line(out, \"friend struct generated_detail::\" + name + \"BootstrapRecipe;\");\n      }\n      List<FieldDescriptor> identityFields = od.getFields().stream()\n          .filter(field -> field.isId() || field.isVersion()).toList();\n      line(out, \"static constexpr std::array<std::string_view, \" + identityFields.size()\n          + \"> QUERY_IDENTITY_FIELDS{\" + identityFields.stream().map(field -> quote(canonical(field)))\n              .collect(java.util.stream.Collectors.joining(\", \")) + \"};\");\n      List<FieldDescriptor> projectionFields = descriptorFields(od);\n      if (projectionFields.stream().anyMatch(field -> !canonical(field).equals(\n          RustFieldDescriptorNaming.rustStorageMemberName(field)))) {\n        line(out, \"static constexpr std::array<std::string_view, \" + projectionFields.size()\n            + \"> QUERY_PROJECTION_FIELDS{\" + projectionFields.stream().map(field -> quote(canonical(field)))\n                .collect(java.util.stream.Collectors.joining(\", \")) + \"};\");\n      }\n      line(out, \"private:\");\n      for (FieldDescriptor fd : fields(od)) {\n        line(out, storageType(fd) + \" \" + fieldName(fd) + \"_;\");\n      }\n      for (FieldDescriptor fd :\n          fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n        line(\n            out,\n            \"detail::ScopedBox<\"\n                + typeName(((ObjectType) fd.getFieldType()).getRefer())\n                + \"> \"\n                + relationName(fd)\n                + \"_;\");\n      }\n      for (ReverseRelation rel : od.getReverseRelations()) {\n        line(\n            out,\n            (ReverseRelationNaming.oneToOne(rel) ? \"detail::ScopedBox<\" : \"SmartList<\")\n                + typeName(rel.getChild())\n                + \"> \"\n                + relationName(rel)\n                + \"_;\");\n      }\n      line(out, \"public:\");\n      line(out, name + \"(std::allocator_arg_t, Allocator);\");\n      line(out, name + \"(std::allocator_arg_t, Allocator, const \" + name + \"&);\");\n      line(\n          out,\n          name\n              + \"(std::allocator_arg_t, Allocator a, \"\n              + name\n              + \"&& other) : \"\n              + name\n              + \"(std::allocator_arg, a, std::as_const(other)) {} \");\n      // The allocator-aware move delegates to copy into the destination below.\n      line(out, name + \"(const \" + name + \"&) = delete;\");\n      line(out, name + \"(\" + name + \"&&) noexcept;\");\n      line(out, \"~\" + name + \"();\");\n      line(out, \"static EntityDescriptor entity_descriptor(Memory);\");\n      emitFieldLayout(out, od);\n\n      line(out, \"static Result<\" + name + \", EntityError> from_compact_row(Memory, CompactRow);\");\n      line(out, \"std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;\");\n      line(out, \"MutationValues into_values() &&;\");\n      line(out, \"void attachRuntimeStateRecursive(const EntityRuntimeState&);\");\n      for (FieldDescriptor fd : fields(od)) {\n        String field = fieldName(fd);\n        boolean storedOnly = fd.getBooleanAttribute(\"optional\") || baseType(fd).equals(\"Json\");\n        line(\n            out,\n            (storedOnly ? \"const \" + storageType(fd) + \"&\" : applicationType(fd))\n                + \" \"\n                + field\n                + \"() const { return \"\n                + (storedOnly\n                    ? field + \"_\"\n                    : (CppBusinessIdMetadata.isBusinessId(fd)\n                            ? \"GeneratedBusinessIdAccess::from_canonical<\"\n                                + applicationType(fd)\n                                + \">(\"\n                                + \"memory_resource(), \"\n                            : \"\")\n                        + \"detail::EntityRuntimeAccess::current_field(root, entity_key(), \"\n                        + quote(canonical(fd))\n                        + \", \"\n                        + field\n                        + \"_)\"\n                        + (CppBusinessIdMetadata.isBusinessId(fd) ? \")\" : \"\"))\n                + \"; }\");\n        if (fd.isId()) {\n          line(out, storageType(fd) + \" id_for_runtime() const { return \" + field + \"_; }\");\n        }\n        line(\n            out,\n            \"std::optional<Value> \"\n                + camel(\"changed_\" + field)\n                + \"() const { return root.get(entity_key(), \"\n                + quote(canonical(fd))\n                + \"); }\");\n        line(\n            out,\n            \"eval::EvalResult<\"\n                + applicationType(fd)\n                + \"> \"\n                + camel(\"eval_\" + field)\n                + \"() const { return detail::EntityRuntimeAccess::eval_field<\"\n                + applicationType(fd)\n                + \">(memory_resource(), load_state, \"\n                + quote(canonical(fd))\n                + \", [this] { return detail::clone_in(memory_resource(), \"\n                + field\n                + \"()); }); }\");\n        if (fd.isContextRoot() || fd.isConstantObjectField()) {\n          line(out, \"private: // Scoped and constant assignments belong to generated runtime code.\");\n        }\n        line(out, name + \"& update_\" + field + \"(\" + argumentType(fd) + \" value) {\");\n        boolean textField = !CppBusinessIdMetadata.isBusinessId(fd) && baseType(fd).equals(\"String\");\n        if (textField) {\n          line(out, \"detail::EntityRuntimeAccess::update_text(root, entity_key(), \"\n              + quote(canonical(fd)) + \", \" + field + \"_, value);\");\n        } else {\n          if (CppBusinessIdMetadata.isBusinessId(fd)) {\n            line(out, field + \"_.assign(value.asStr());\");\n          } else {\n            line(out, field + \"_ = detail::clone_in(memory_resource(), value);\");\n          }\n          line(out, \"root.set(entity_key(), \" + quote(canonical(fd))\n              + \", generated_detail::encode(memory_resource(), \" + field + \"_));\");\n        }\n        line(out, \"load_state.mark_loaded(\" + quote(canonical(fd))\n            + \", &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots()).value();\"\n            + \" return *this; }\");\n        if (fd.isContextRoot() || fd.isConstantObjectField()) {\n          line(out, \"public:\");\n        }\n        if (fd.isVersion()) {\n          line(out, \"std::int64_t version_value() const { return \" + field + \"_; }\");\n        }\n      }\n      for (FieldDescriptor field : fields(od)) {\n        if (!field.isConstantObjectField()) { continue; }\n        for (Candidate candidate : candidates(field)) {\n          String suffix = candidate.getRustCandidateMethodValue();\n          line(out, name + \"& \" + camel(\"update_\" + relationName(field) + \"_to_\" + suffix)\n              + \"() { return \" + camel(\"update_\" + fieldName(field)) + \"(\"\n              + candidateLiteral(field, candidate) + \"); }\");\n          line(out, \"bool \" + camel(relationName(field) + \"_is_\" + suffix)\n              + \"() const { return \" + camel(fieldName(field)) + \"() == \"\n              + candidateLiteral(field, candidate) + \"; }\");\n        }\n      }\n      for (FieldDescriptor fd :\n          fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n        String target = typeName(((ObjectType) fd.getFieldType()).getRefer());\n        line(out, \"const \" + target + \"* \" + relationName(fd) + \"() const;\");\n        if (fd.isContextRoot() || fd.isConstantObjectField()) {\n          line(out, \"private:\");\n        }\n        line(out, name + \"& update_\" + relationName(fd) + \"(const \" + target + \"& value);\");\n        if (fd.isContextRoot() || fd.isConstantObjectField()) {\n          line(out, \"public:\");\n        }\n        relationEvalDeclaration(out, relationName(fd), target, false);\n      }\n      for (ReverseRelation rel : od.getReverseRelations()) {\n        String target = typeName(rel.getChild()), member = relationName(rel);\n        if (ReverseRelationNaming.oneToOne(rel)) {\n          line(out, \"const \" + target + \"* \" + member + \"() const;\");\n        } else {\n          line(out, \"const SmartList<\" + target + \">& \" + member + \"() const;\");\n          line(out, \"SmartList<\" + target + \">& \" + member + \"();\");\n        }\n        boolean many = !ReverseRelationNaming.oneToOne(rel);\n        relationEvalDeclaration(out, member, target, many);\n        line(\n            out,\n            \"RelationHandle<\"\n                + (many ? \"SmartList<\" + target + \">\" : target)\n                + \"> \"\n                + camel(member + \"_handle\")\n                + \"() const;\");\n      }\n      line(out, \"};\");\n    }\n    for (ObjectDescriptor od : entities) {\n      modelDefinitions(out, od);\n    }\n    line(out, \"}\");\n    return camelModelMethods(out.toString(), entities);\n  }\n\n"
+    },
+    {
+      "name": "modelDefinitions",
+      "start_line": 1007,
+      "end_line": 1292,
+      "sha256": "ba4a26a13474369da31ea84e585a26edad7e2995b6dd409bcc1fe97943361305",
+      "body": "  private void modelDefinitions(StringBuilder out, ObjectDescriptor od) {\n    relationAccessors(out, od);\n    relationEvaluations(out, od);\n    jsonProjection(out, od);\n    String name = typeName(od);\n    line(out, \"inline void \" + name\n        + \"::attachRuntimeStateRecursive(const EntityRuntimeState& target) {\");\n    line(out, \"root.attach_runtime_state(target);\");\n    for (FieldDescriptor field : fields(od)) {\n      if (field.isObjectProperty()) {\n        String member = relationName(field) + \"_\";\n        line(out, \"if (\" + member + \") { \" + member\n            + \"->attachRuntimeStateRecursive(target); }\");\n      }\n    }\n    line(out, \"}\");\n    StringBuilder init = new StringBuilder(\": Base(std::allocator_arg, a)\");\n    StringBuilder copy = new StringBuilder(\": Base(std::allocator_arg, a, other)\");\n    for (FieldDescriptor fd : fields(od)) {\n      String member = fieldName(fd) + \"_\";\n      boolean clockDefault = \"Timestamp\".equals(baseType(fd))\n          && \"teaql_core::time::Timestamp::now()\".equals(RustFieldDescriptorNaming.rustDefaultValue(fd));\n      init.append(\", \")\n          .append(member)\n          .append(clockDefault ? \"(Timestamp::now())\" : \"(generated_detail::default_value<\"\n              + storageType(fd) + \">(a.resource()))\");\n      copy.append(\", \")\n          .append(member)\n          .append(\"(detail::clone_in(a.resource(), other.\")\n          .append(member)\n          .append(\"))\");\n    }\n    for (FieldDescriptor fd :\n        fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n      String member = relationName(fd) + \"_\";\n      init.append(\", \")\n          .append(member)\n          .append(\"(nullptr, detail::ScopedDelete<\")\n          .append(typeName(((ObjectType) fd.getFieldType()).getRefer()))\n          .append(\">{a.resource()})\");\n      copy.append(\", \")\n          .append(member)\n          .append(\"(generated_detail::copy_box(a.resource(), other.\")\n          .append(member)\n          .append(\"))\");\n    }\n    for (ReverseRelation rel : od.getReverseRelations()) {\n      String member = relationName(rel) + \"_\";\n      if (ReverseRelationNaming.oneToOne(rel)) {\n        init.append(\", \")\n            .append(member)\n            .append(\"(nullptr, detail::ScopedDelete<\")\n            .append(typeName(rel.getChild()))\n            .append(\">{a.resource()})\");\n        copy.append(\", \")\n            .append(member)\n            .append(\"(generated_detail::copy_box(a.resource(), other.\")\n            .append(member)\n            .append(\"))\");\n      } else {\n        init.append(\", \").append(member).append(\"(std::allocator_arg, a)\");\n        copy.append(\", \")\n            .append(member)\n            .append(\"(std::allocator_arg, a, other.\")\n            .append(member)\n            .append(\")\");\n      }\n    }\n    line(\n        out,\n        \"inline \" + name + \"::\" + name + \"(std::allocator_arg_t, Allocator a) \" + init + \" {}\");\n    line(\n        out,\n        \"inline \"\n            + name\n            + \"::\"\n            + name\n            + \"(std::allocator_arg_t, Allocator a, const \"\n            + name\n            + \"& other) \"\n            + copy\n            + \" {}\");\n    line(out, \"inline \" + name + \"::\" + name + \"(\" + name + \"&&) noexcept = default;\");\n    line(out, \"inline \" + name + \"::~\" + name + \"() = default;\");\n    line(out, \"inline EntityDescriptor \" + name + \"::entity_descriptor(Memory r) {\");\n    line(\n        out,\n        \"EntityDescriptor d(std::allocator_arg, Allocator(r), ENTITY_NAME); d.table(\"\n            + quote(od.getTableName())\n            + \");\");\n    if (od.getDataService() != null) {\n      line(out, \"d.service(\" + quote(od.getDataService().getName()) + \");\");\n    }\n    for (FieldDescriptor fd : descriptorFields(od)) {\n      String flags =\n          (fd.isId() ? \".id()\" : fd.isVersion() ? \".version()\" : \"\")\n              + (!fd.getBooleanAttribute(\"optional\") ? \".not_null()\" : \"\");\n      line(\n          out,\n          \"{ auto& property = d.property(\"\n              + quote(RustFieldDescriptorNaming.rustStorageMemberName(fd))\n              + \", DataType::\"\n              + dataType(fd)\n              + \", \"\n              + quote(columnName(fd))\n              + \")\"\n              + flags\n              + \";\");\n      String inputColumn = CppJsonInputMetadata.column(fd);\n      String physicalColumn = columnName(fd).isEmpty() ? canonical(fd) : columnName(fd);\n      if (!inputColumn.equals(physicalColumn)) {\n        line(out, \"property.json_column_name.emplace(\" + CppJsonInputMetadata.cppView(inputColumn) + \", r);\");\n      }\n      String maxLength = fd.getAttributeValue(\"max\");\n      if (baseType(fd).equals(\"String\")\n          && !fd.getBooleanAttribute(\"isText\")\n          && maxLength != null\n          && maxLength.matches(\"[1-9][0-9]*\")) {\n        line(out, \"property.with_max_length(\" + maxLength + \");\");\n      }\n      String sqlType = fd.getAttributeValue(Attributes.SQL_TYPE);\n      if (sqlType != null) {\n        var numeric =\n            Pattern.compile(\n                    \"(?i)^\\\\s*(?:NUMERIC|DECIMAL)\\\\s*\\\\(\\\\s*(\\\\d+)\\\\s*,\\\\s*(\\\\d+)\\\\s*\\\\)\\\\s*$\")\n                .matcher(sqlType);\n        if (numeric.matches()) {\n          line(\n              out,\n              \"property.with_numeric_precision(\"\n                  + numeric.group(1)\n                  + \").with_numeric_scale(\"\n                  + numeric.group(2)\n                  + \");\");\n        }\n      }\n      line(out, \"(void)property; }\");\n    }\n    for (FieldDescriptor fd :\n        fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n      descriptorRelation(\n          out,\n          relationIdentity(fd),\n          typeName(((ObjectType) fd.getFieldType()).getRefer()),\n          canonical(fd),\n          \"id\",\n          false);\n    }\n    // Rust emits reverse descriptor attributes in one-to-one, then one-to-many order.\n    for (ReverseRelation rel : java.util.stream.Stream.concat(\n        RustObjectDescriptorNaming.rustOneToOneRelations(od).stream(),\n        RustObjectDescriptorNaming.rustOneToManyRelations(od).stream()).toList()) {\n      descriptorRelation(\n          out,\n          relationIdentity(rel),\n          typeName(rel.getChild()),\n          \"id\",\n          canonical(rel.getProperty()),\n          !ReverseRelationNaming.oneToOne(rel));\n    }\n    line(out, \"d.mask_fields({\" + String.join(\",\",\n        CppFieldLayoutMetadata.auditMaskFields(od).stream().map(FieldDescriptorNaming::canonicalPropertyName)\n            .map(CppCoreGenerator::quote).toList()) + \"});\");\n    String auditLimit = CppFieldLayoutMetadata.auditValueMaxLen(od);\n    if (auditLimit != null) {\n      boolean wide = new java.math.BigInteger(auditLimit).bitLength() > 32;\n      if (wide) {\n        line(out, \"static_assert(\" + auditLimit + \"ULL <= static_cast<unsigned long long>(static_cast<std::size_t>(-1)), \\\"audit_value_max_len exceeds target usize\\\");\");\n      }\n      line(out, \"d.audit_max_length(\" + auditLimit + (wide ? \"ULL\" : \"\") + \");\");\n    }\n    line(out, \"return d; }\");\n    line(\n        out,\n        \"inline Result<\"\n            + name\n            + \", EntityError> \"\n            + name\n            + \"::from_compact_row(Memory r, CompactRow row) {\");\n    line(\n        out,\n        \"using Outcome = Result<\"\n            + name\n            + \", EntityError>; \"\n            + name\n            + \" result(std::allocator_arg, Allocator(r)); auto captured = detail::EntityRuntimeAccess::capture_dynamic_values(result.dynamic, row, field_layout(r)); if (!captured) { return Outcome::err(r, std::move(captured).error()); }\");\n    for (FieldDescriptor fd : fields(od)) {\n      String variable = fieldName(fd) + \"_lookup\";\n      line(out, \"auto \" + variable + \" = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, \"\n          + quote(canonical(fd)) + \", \" + quote(columnName(fd)) + \", \" + fd.isObjectProperty() + \");\");\n      line(out, \"if (!\" + variable + \") { return Outcome::err(r, std::move(\" + variable + \").error()); }\");\n    }\n    for (FieldDescriptor fd : fields(od)) {\n      String field = fieldName(fd);\n      line(\n          out,\n          \"auto \"\n              + field\n              + \"_value = generated_detail::decode<\"\n              + storageType(fd)\n              + \">(r, \"\n              + field\n              + \"_lookup.value().value, ENTITY_NAME, \"\n              + quote(canonical(fd))\n              + \");\");\n      line(\n          out,\n          \"if (!\"\n              + field\n              + \"_value) { return Outcome::err(r, std::move(\"\n              + field\n              + \"_value).error()); }\");\n      line(out, \"result.\" + field + \"_ = std::move(\" + field + \"_value).value();\");\n    }\n    for (FieldDescriptor fd :\n        fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n      decodeRelation(\n          out,\n          name,\n          relationName(fd),\n          relationIdentity(fd),\n          typeName(((ObjectType) fd.getFieldType()).getRefer()));\n    }\n    // Source reverse relations are installed runtime views, not struct fields\n    // reconstructed from arbitrary raw columns. Keep the local fallback empty.\n    line(\n        out,\n        \"result.load_state =\"\n            + \" row.indexed_load_state(detail::ContextArena::from_memory(r).loaded_snapshots(),\"\n            + \" field_layout(r));\");\n    for (FieldDescriptor fd : fields(od)) {\n      if (fd.isObjectProperty()) {\n        String variable = fieldName(fd) + \"_lookup.value()\";\n        line(out, \"if (\" + variable + \".alias_present) { auto& pool = detail::ContextArena::from_memory(r).loaded_snapshots();\");\n        line(out, \"if (!\" + variable + \".object_alias && !row.is_loaded_relation(\" + quote(columnName(fd)) + \")) { result.load_state.mark_unloaded(\" + quote(relationIdentity(fd)) + \", &pool).value(); }\");\n        line(out, \"result.load_state.mark_loaded(\" + quote(canonical(fd)) + \", &pool).value(); }\");\n      }\n    }\n    line(out, \"result.root.set_original_compact_row(ENTITY_NAME, row); return Outcome::ok(r, std::move(result)); }\");\n    line(\n        out,\n        \"inline MutationValues \"\n            + name\n            + \"::into_values() && { auto r = memory_resource(); MutationValues values(r);\");\n    for (FieldDescriptor fd : fields(od)) {\n      line(\n          out,\n          \"values.fields.emplace(String(\"\n              + quote(canonical(fd))\n              + \", r), generated_detail::encode(r, \"\n              + fieldName(fd)\n              + \"_));\");\n    }\n    line(out, \"detail::EntityRuntimeAccess::retain_loaded_native_values(values, load_state);\");\n    for (FieldDescriptor fd :\n        fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n      injectRelation(out, relationName(fd), relationIdentity(fd), false);\n    }\n    for (ReverseRelation rel : od.getReverseRelations()) {\n      injectRelation(out, relationName(rel), relationIdentity(rel), !ReverseRelationNaming.oneToOne(rel));\n    }\n    line(out, \"inject_runtime(values); return values; }\");\n    for (FieldDescriptor fd :\n        fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n      String target = typeName(((ObjectType) fd.getFieldType()).getRefer()),\n          relation = relationName(fd);\n      line(\n          out,\n          \"inline \"\n              + name\n              + \"& \"\n              + name\n              + \"::update_\"\n              + relation\n              + \"(const \"\n              + target\n              + \"& value) { \"\n              + relation\n              + \"_ = detail::make_box<\"\n              + target\n              + \">(memory_resource(), value); update_\"\n              + fieldName(fd)\n              + \"(value.id()); return *this; }\");\n    }\n  }\n\n"
+    },
+    {
+      "name": "camelAssist",
+      "start_line": 3024,
+      "end_line": 3070,
+      "sha256": "396b4fa6b1f3e0251bc994fd424548eea1c841a47fdf021a499d0607488077f3",
+      "body": "  private String camelAssist(String text, String namespace) {\n    java.util.regex.Matcher code = java.util.regex.Pattern.compile(\"`([^`]*)`\").matcher(text);\n    StringBuffer result = new StringBuffer();\n    Set<String> protocols =\n        Set.of(\n            namespace,\n            \"user_context\",\n            \"query_factory\",\n            \"audit_as\",\n            \"memory_resource\",\n            \"get_entity\",\n            \"canonical_name\",\n            \"into_query\",\n            \"DATABASE_URL_ENV\",\n            \"target_state\",\n            \"insert_resource\",\n            \"static_cast\",\n            \"const_cast\",\n            \"reinterpret_cast\",\n            \"dynamic_cast\",\n            \"ensure_schema\",\n            \"apply_to\",\n            \"decode_json_entity\",\n            \"decode_json_entities\",\n            \"into_json\",\n            \"chunk_size\");\n    while (code.find()) {\n      // A quoted result key is model data, not an application identifier.\n      if (code.group(1).startsWith(\"\\\"\") && code.group(1).endsWith(\"\\\"\")) {\n        code.appendReplacement(result, java.util.regex.Matcher.quoteReplacement(code.group()));\n        continue;\n      }\n      java.util.regex.Matcher words =\n          java.util.regex.Pattern.compile(\"[A-Za-z_][A-Za-z_0-9]*\").matcher(code.group(1));\n      StringBuffer snippet = new StringBuffer();\n      while (words.find()) {\n        String word = words.group();\n        boolean standard = code.group(1).substring(0, words.start()).endsWith(\"std::\");\n        words.appendReplacement(snippet, protocols.contains(word) || standard ? word : camel(word));\n      }\n      words.appendTail(snippet);\n      code.appendReplacement(result, java.util.regex.Matcher.quoteReplacement(\"`\" + snippet + \"`\"));\n    }\n    code.appendTail(result);\n    return result.toString();\n  }\n\n"
+    },
+    {
+      "name": "assist",
+      "start_line": 3083,
+      "end_line": 3570,
+      "sha256": "078afb41da1d1b7d04194bc793a7e6c665df6d7befbf393960d930c2f0cc649e",
+      "body": "  private String assist(String ns, List<ObjectDescriptor> entities) {\n    StringBuilder out =\n        new StringBuilder(\n            \"# Generated C++ model-aware API\\n\\nNamespace: `\"\n                + ns\n                + \"`. Create `auto Q = user_context.queries<query_factory>();`. Allocate with\"\n                + \" UserContext. Execute only after purpose and comment.\\n\\n\");\n    line(out, \"Standalone registries: `repositoryRegistry(user_context)`, `behaviorRegistry(user_context)` and `checkerRegistry(user_context)` each allocate an independent Context-owned registry using every generated model's canonical name. They do not install themselves into the Context or execute SQL. Runtime registry lookup/replacement APIs retain snake_case; generated defaults are managed objects and checked callback borrows expire with their owner. Same-domain clones share those checked callbacks; cross-domain retention requires separately allocated destination callbacks, not an implicit shared owner.\");\n    line(out, \"`user_context.make<LocalSchemaProvider>()` provides the separate data-service schema lookup SPI. `get_entity(canonical_name)` returns a fresh Context-owned descriptor or null for an unknown/case-mismatched name. It always uses the generated static model descriptor, independently of mutable Context metadata and the runtime schema-initialization provider. Ordinary configuration binds the SQL executor to this provider. DataServiceDialect, DataServiceMutationExecutor, DataServiceMutationError and DataServiceIdGenerator expose the corresponding SQLite provider types; DataServiceConnection remains a checked Context-bound connection reference.\");\n    line(out, \"Runtime configuration: `ServiceRuntimeConfig::fromEnv(user_context)` reads the model-derived `DATABASE_URL_ENV` without caching it. `databaseUrl()` exposes the retained URL. Configuration and typed error payloads use the supplied Context; destroy value wrappers before Context close or explicitly copy into the destination scope.\");\n    line(out, \"`serviceRuntimeFromEnv(user_context)` and `serviceRuntime(user_context, config)` prepare a SQLite URL and return a Result containing a checked executor reference. `serviceRuntimeFromConnection(user_context, connection)` assembles from a checked `DataServiceConnection` (`Ref<SqliteConnection>`), including an explicitly rebound Global connection. Expired and foreign Context references are rejected; configuration from another domain requires an explicit copy. These entries register metadata, Checker/Behavior, IDs, provider and executor but leave schema initialization explicit. `configureRuntime(user_context, filename)` retains its direct filename contract; `setup` additionally ensures schema. Business-ID key providers remain application-installed through UserContext. Typed ServiceRuntimeError preserves MissingEnv, ConnectionError, Configuration, provider and runtime payloads; ordinary C++ binding/allocation exceptions retain their established behavior. URL preparation preserves source slash-pair stripping and query removal; it does not enforce SQLite URI open modes.\");\n    if (entities.stream().flatMap(entity -> fields(entity).stream()).anyMatch(CppBusinessIdMetadata::isBusinessId)) {\n      line(out, \"DataServiceBusinessIdAllocator names the SQLite-backed allocation/schema implementation for this modeled Business-ID domain; ordinary domains omit the alias. Register runtime infrastructure before installing the application-owned key provider. Sample generation leaves Business-ID values to configured Checker/Fix; a missing key can fail a governed sample save while earlier commits remain.\");\n    }\n    if (entities.stream().anyMatch(od -> od.getParentOd() != null)) {\n      line(out, \"Inheritance is supported in normal generation: ancestor fields retain their declaring metadata, each model retains its own table/identity, and typed Q/E, child enhancement and audited graph save use the shared runtime. Type filters/grouping preserve source SQL and may fail when SQLite has no discriminator column. Streams support scalar models; relation/aggregate enhancement is not supported. Inherited Business IDs share the ancestor's value type.\\n\");\n    }\n    if (entities.stream().anyMatch(ObjectDescriptor::isConstant)) {\n      line(out, \"Constant bootstrap uses normal generation. `user_context.ensure_schema()` creates/reconciles the ordinary Domain Root and constants through the shared runtime, governed saves and configured Checker/Policy. Constants retain declaration order and object seeds use identity 1; late targets can fail foreign-key checks. Fixed zero identities retain source allocation behavior and are not idempotent. Bootstrap retries source-defined conflicts up to five attempts; configured audit delivery errors may follow a committed write. Negative identities, candidate naming collisions, invalid roots and unsupported configured scalar carriers reject before output. C++ boolean/JSON and optional Timestamp/reference bindings have independent compiler controls where the original generated Rust crate cannot compile; they are not paired runtime evidence for those broken artifacts.\\n\");\n    }\n    for (ObjectDescriptor od : entities) {\n      line(out, \"## \" + typeName(od));\n      line(\n          out,\n          \"Entries: `Q.\"\n              + identifier(PluralizationUtils.pluralize(od.getName()))\n              + \"()` and `Q.\"\n              + identifier(PluralizationUtils.pluralize(od.getName()))\n              + \"_minimal()`. Evaluation: `E::\"\n              + identifier(od.getName())\n              + \"(entity)`.\\n\");\n      line(out, \"Matching and scalar relation statistics: with...Matching/without...Matching, rollUpTo...With and field-statistic ...As methods accept unpurposed generated requests, QuerySelection or SelectQuery values. Matching embeds the bare query but retains complete filter metadata; its descriptor always comes from the declared relationship target. Roll-up combines matching and object grouping. Field statistics materialize the selection before adding the aggregate, preserving the original fresh-selection options boundary. SQLite errors for unsupported statistical functions remain errors. All inputs retain checked Context and explicit destination-copy requirements.\");\n      line(out, \"Relation analysis inputs: facetBy...As/AsWithOptions, groupBy...With/WithDetailsFrom, count...With, statsFrom.../As and reverse groupBy...WithDetails accept unpurposed generated requests, QuerySelection and SelectQuery values. Capture preserves complete selection metadata and snapshots without executing a child executor. Requests must share the checked Context binding; all inputs require the destination allocation domain or an explicit destination copy, including User-to-Global capture. Facet children need a nonblank comment at execution. Matching, roll-up and field-statistic methods retain separate conversion contracts.\");\n      line(out, \"Relation selection: `select...With(child)` accepts unpurposed requests from the same or another generated domain, or explicit QuerySelection/SelectQuery values. The runtime captures the materialized selection, including its options, without invoking a child executor. Requests must share the checked Context binding; foreign values require an explicit destination copy. Value inputs are kernel borrows and must remain alive through capture. Target-specific request overloads delegate to the same runtime capture and lifetime checks.\");\n      line(out, \"Child enhancement: `enhanceChild(child)` accepts an unpurposed request from the same or another generated domain, or explicit QuerySelection/SelectQuery values. It snapshots the complete selection and options without executing a child executor. Requests must share the checked Context binding; foreign values require an explicit destination copy. Ordinary wrapper captures preserve binding checks; explicit core values follow the kernel borrow contract.\");\n      line(out, \"Inheritance/query metadata: `matchTypes(types)` accepts Value spans and constrained input ranges, snapshots values into the bound Context and consumes single-pass ranges once. `withTypeGroup()`, `enhanceChild(request)`, `enhanceChildrenIfNeeded()` and `Q.\"\n          + camel(identifier(PluralizationUtils.pluralize(od.getName())))\n          + \"WithChildren()`. The with-children entry clears slicing, includes self fields and descendants, and does not apply the default live-version filter.\\n\");\n      line(out, \"Entity helpers: `\" + typeName(od) + \"::withId(user_context, id)` constructs a U64 Value in the explicit UserContext domain. `isLoaded(field)` reads scalar/relation availability; `setLoadState(state)` copies into the model's allocation domain and validates its indexed layout before replacement. An incompatible layout throws and preserves the old state; changing availability does not change field values or stage mutations.\\n\");\n      line(out, \"General query: `withDeletedRows()`, `deletedRowsOnly()`, `appendSearchCriteria(expr)` and `filterProperty(left, FieldOperator, right)` preserve the source filter rules. `pageOffset(offset, size)`, `pageNumber(number, size)`, `pageDefault(number)`, `offsetOnly(offset)` and `top(size)` are available before/after purpose. Field `unselect...` methods preserve independent aliases; raw SQL methods follow the source explicit trusted-segment API and require application-controlled SQL.\\n\");\n      line(out, \"Generic scalar criteria: the field's predicate prefix accepts `(FieldOperator, inputs)` where inputs is a range of values convertible to core Value. `create...Criteria(op, inputs)` is a const method on a bound request and returns `Ref<Expr>` in its allocation scope; append it with `appendSearchCriteria(criteria)` without another Context argument. Foreign UserContext IDs are rejected; use an explicit destination copy. Before/After and BetweenRange helpers retain source comparison and inclusive range semantics. These helpers are not generated for version, Boolean, object-reference or Business-ID fields where the original template omits them.\\n\");\n      line(out, \"Scalar membership: source-supported `...In(inputs)` and `...NotIn(inputs)` accept input ranges whose elements convert to core Value, including arrays, vectors, spans and single-pass ranges. Values are copied into the bound request's allocator. Existing typed span overloads remain. The generic range overloads are omitted for Boolean, version, object-reference and Business-ID fields; Business-ID methods keep their distinct typed values. Neither route adds another Context argument.\");\n      line(out, \"Scalar comparisons: ordinary scalar Is/IsNot and non-ID ordered/Between methods also accept values constructible as core Value. Between can use independently typed lower/upper operands. Existing field-typed overloads remain, and the new overloads copy payloads into the bound allocator. Boolean/version/object-reference/Business-ID fields retain their separate contracts; unsupported values fail in constraints.\");\n      line(out, \"Text predicates: source-selected sound-like methods accept Value-constructible operands as well as text. Contains/start/end variants keep their text-only inputs. Generic sound-like overloads are omitted for large-text/password/Business-ID fields. Optional values are not implicitly converted to Value; use an explicit supported Value NULL or TypedNull when the intended criterion needs NULL. Numeric select...WithFunction helpers construct aggregate projections, and unselect removes the plain/raw field projection while preserving independent aliases and aggregates. SQLite rejects unsupported aggregate functions. The current default GBK compiler emits its argument unchanged, so the GBK marker does not establish GBK collation.\");\n      line(out, \"Request state before purpose: `coreQuery()` returns an independent bare core snapshot corresponding to the original query(&self). The existing `query()` keeps the integrated C++ runtime representation. Destroy the snapshot before its allocator closes or explicitly copy it into a destination scope. `relationSelections()`, `relationFilters()` and `childEnhancements()` return read-only Context borrows. `queryOptions()` returns an independent allocator-aware snapshot; destroy it before its owning Context closes or copy it explicitly into a destination scope. `std::move(request).intoQuery()` consumes the request and returns only its core SelectQuery, omitting option metadata and child enhancements as in the original direct into_query method. `std::move(request.selection()).into_query()` is a separate core conversion that applies options and enhancements. Neither conversion grants execution authority or extends Context lifetime. A consumed request rejects later access.\");\n      line(out, \"Relationship analysis: forward `groupBy...With(child)`, `groupBy...WithDetails()`, `groupBy...WithDetailsFrom(child)` and `rollUpTo...With(child)` use matching object queries. Forward/reverse `have...`, `haveNo...`, `with...Matching(child)` and `without...Matching(child)` preserve source membership semantics. Reverse collection `count...`, `count...As(alias)`, `count...With(alias, child)`, `statsFrom...As(alias, child)` and centrally named field aggregates attach results during executeForList/One/Page; executeForRows retains the source raw compact-row behavior.\\n\");\n      for (FieldDescriptor field : fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n        String relation = RustFieldDescriptorNaming.rustMemberName(field);\n        line(out, \"Facet: `\" + camel(\"facet_by_\" + relation + \"_as\") + \"(name, child)` defaults to all facets; `\"\n            + camel(\"facet_by_\" + relation + \"_as_with_options\") + \"(name, child, includeAll)` controls outer-query restriction. Matching child relation aggregates receive the outer predicate. Facets attach to list/page results; one executes them before returning the first entity. Rows/count/exists/stream do not execute them. Child facet metadata does not imply recursive generated facet execution.\");\n      }\n      line(out, \"Aggregation: `groupBy(field)`, `count()`, `countAs(alias)`, `aggregateCountField(field, alias)`, `aggregateWithFunction(field, alias, function)` and `aggregateSum/Avg/Min/Max/Stddev/StddevPop/VarSamp/VarPop/BitAnd/BitOr/BitXor(field, alias)` build source-shaped aggregate queries. `enableAggregationCache()`, `enableAggregationCacheFor(duration)` and `propagateAggregationCache(duration)` retain cache metadata. Read compact aggregate rows with `executeForRows(user_context)`; SQLite may reject statistical and bitwise functions, matching the source backend.\\n\");\n      line(out, \"Execution: `executeForCount(user_context)` returns an unsliced count; `executeForExists(user_context)` retains the query offset and limits to one compact row; `executeForFirst(user_context)` has the same first-or-empty contract as `executeForOne`. `executeForPage(user_context, offset, limit)` returns a typed list with total count. These methods require purpose and nonblank comment; only UserContext supplies runtime dependencies.\\n\");\n      line(out, \"Typed JSON presentation: after `module(user_context).apply_to(user_context)`, decode with `user_context.decode_json_entity<\"\n          + typeName(od) + \">(value)` or `user_context.decode_json_entities<\" + typeName(od)\n          + \">(array)`. Both return Result and delegate to the shared installed-metadata runtime. Read back with `std::move(entity).into_json(user_context.memory_resource())`; nested loaded views preserve omitted fields, NULL and empty lists. Input cannot authorize a save or replace authoritative database loading. Persistent # fields and incoming runtime state are rejected.\\n\");\n      line(out, \"Dynamic JSON: `filterWithJson(text)` applies model-aware self/foreign-key filters, dotted forward/reverse relation membership, `_orderBy`, `_start`, `_size`, `_pageSize` and `_page`. Unknown fields are ignored as in the frozen Rust generator; malformed JSON throws a Context-borrowed diagnostic. Strings become contains predicates; numeric arrays of length two become ranges. Child queries keep their live-row filter even when the leaf is unknown.\\n\");\n      line(out, \"Result adaptation: `returnType<Model>()` changes decoding and keeps the source query identity, projections and Context. `newEntity(user_context)` still creates \"\n          + typeName(od) + \". Result fields require appropriate projections/enhancements; adaptation does not load fields or issue SQL.\\n\");\n      for (ObjectDescriptor child : od.getChildrenOds()) {\n        line(out, \"- Type filter: `is\" + typeName(child) + \"()` matches that type and its descendants.\");\n      }\n      for (FieldDescriptor fd : fields(od)) {\n        String member = fieldName(fd),\n            prefix = identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd));\n        line(\n            out,\n            \"- Model: `\"\n                + member\n                + (fd.isContextRoot() || fd.isConstantObjectField()\n                    ? (fd.isContextRoot()\n                        ? \"()`; Context-root assignment is managed through UserContext; changed `\"\n                        : \"()`; constant ID assignment is internal; changed `\")\n                    : \"()` / `update_\" + member + \"(\" + argumentType(fd) + \")`; changed `\")\n                + camel(\"changed_\" + member)\n                + \"()`; evaluation `\"\n                + camel(\"eval_\" + member)\n                + \"()`; expression `get_\"\n                + member\n                + \"()`.\");\n        for (Candidate candidate : candidates(fd)) {\n          String suffix = candidate.getRustCandidateMethodValue();\n          line(out, \"- Candidate filters: `\" + camel(prefix + \"_is_\" + suffix) + \"()` and `\"\n              + camel(prefix + \"_is_not_\" + suffix) + \"()`; exact value `\"\n              + (fd.isObjectProperty() ? candidate.getId() : candidate.getRustCandidateFilterValue())\n              + \"`.\");\n          if (fd.isConstantObjectField()) {\n            line(out, \"- Candidate model update: `\" + camel(\"update_\" + relationName(fd) + \"_to_\" + suffix)\n                + \"()`; model and E check: `\" + camel(relationName(fd) + \"_is_\" + suffix)\n                + \"()`. E preserves NotLoaded and never performs SQL.\");\n          }\n        }\n        line(\n            out,\n            \"- Scalar predicates: `\"\n                + prefix\n                + \"_is`, `\"\n                + prefix\n                + \"_is_not`, `\"\n                + prefix\n                + \"_greater_than`, `\"\n                + prefix\n                + \"_greater_than_or_equal_to`, `\"\n                + prefix\n                + \"_less_than`, `\"\n                + prefix\n                + \"_less_than_or_equal_to`. Arguments: `\"\n                + predicateType(fd)\n                + \"`.\");\n        line(\n            out,\n            \"- Range/set/null predicates: `\"\n                + prefix\n                + \"_between(lower, upper)`, `\"\n                + prefix\n                + \"_in(std::span<const \"\n                + baseType(fd)\n                + \">)`, `\"\n                + prefix\n                + \"_not_in(std::span<const \"\n                + baseType(fd)\n                + \">)`, `\"\n                + prefix\n                + \"_is_null()`, `\"\n                + prefix\n                + \"_is_not_null()`.\");\n        line(\n            out,\n            \"- Projection/order/group: `select_\"\n                + member\n                + \"()`, `order_by_\"\n                + member\n                + \"_asc()`, `order_by_\"\n                + member\n                + \"_desc()`, `group_by_\"\n                + (fd.isObjectProperty() ? relationName(fd) : member)\n                + \"()`.\");\n        String aggregateMember = fd.isObjectProperty() ? relationName(fd) : member;\n        line(out, \"- Group/count: `\" + camel(\"group_by_\" + aggregateMember) + \"()`, `\"\n            + camel(\"group_by_\" + aggregateMember + \"_as\") + \"(alias)`, `\"\n            + camel(\"group_by_\" + aggregateMember + \"_with_function\") + \"(alias, function)`, `\"\n            + camel(\"count_\" + aggregateMember) + \"()` and `\"\n            + camel(\"count_\" + aggregateMember + \"_as\") + \"(alias)`.\");\n        if (!fd.isObjectProperty()) {\n          for (String method : List.of(\"sum\", \"avg\", \"min\", \"max\")) {\n            line(out, \"- Scalar aggregate: `\" + camel(method + \"_\" + member) + \"()` uses alias `\"\n                + quote(method + \"_\" + RustFieldDescriptorNaming.rustStorageMemberName(fd)) + \"`; `\" + camel(method + \"_\" + member + \"_as\")\n                + \"(alias)` sets an explicit result alias. Use executeForRows for aggregate outputs.\");\n          }\n          if (sourceNumericField(fd)) {\n            for (String method : List.of(\"standard_deviation\", \"square_root_of_population_standard_deviation\", \"sample_variance\", \"sample_population_variance\")) {\n              line(out, \"- Statistical aggregate: `\" + camel(method + \"_\" + member) + \"()` and `\"\n                  + camel(method + \"_\" + member + \"_as\") + \"(alias)`; SQLite requires the corresponding SQL function.\");\n            }\n          }\n        }\n        if (fd.isBoolean()) {\n          line(\n              out,\n              \"- Boolean predicates: `\"\n                  + identifier(FieldDescriptorNaming.snakeBooleanPredicateExpr(fd))\n                  + \"()`, `\"\n                  + identifier(FieldDescriptorNaming.snakeBooleanNegativePredicateExpr(fd))\n                  + \"()`.\");\n        }\n        if (baseType(fd).equals(\"String\")) {\n          line(\n              out,\n              \"- Text predicates: `\"\n                  + identifier(FieldDescriptorNaming.stringContainsPredicateExpr(fd))\n                  + \"(text)`, `\"\n                  + identifier(FieldDescriptorNaming.StringStartsWithPredicateExpr(fd))\n                  + \"(text)`, `\"\n                  + identifier(FieldDescriptorNaming.StringEndsWithPredicateExpr(fd))\n                  + \"(text)`.\");\n        }\n        if (fd.isObjectProperty()) {\n          String target = typeName(((ObjectType) fd.getFieldType()).getRefer()),\n              relation = relationName(fd);\n          line(\n              out,\n              \"- Forward relation: `\"\n                  + relation\n                  + \"()` returns const \"\n                  + target\n                  + (fd.isContextRoot() || fd.isConstantObjectField()\n                      ? (fd.isContextRoot()\n                          ? \"*; Context-root assignment is managed through UserContext; query `select_\"\n                          : \"*; constant assignment uses candidate update methods; query `select_\")\n                      : \"*, `update_\" + relation + \"(const \" + target + \"&)`; query `select_\")\n                  + relation\n                  + \"()`, `select_\"\n                  + relation\n                  + \"_with(\"\n                  + target\n                  + \"Request<P>)`, `\"\n                  + prefix\n                  + \"(\"\n                  + target\n                  + \"Request<P>)`; expression `get_\"\n                  + relation\n                  + \"()`.\");\n        }\n      }\n      for (FieldDescriptor field : fields(od)) {\n        if (field.isObjectProperty()) {\n          line(\n              out,\n              \"- Model relation evaluation: `\"\n                  + camel(\"eval_\" + relationName(field))\n                  + \"()` returns a checked entity borrow or Null/NotLoaded.\");\n        }\n      }\n      for (ReverseRelation rel : od.getReverseRelations()) {\n        String member = relationName(rel), target = typeName(rel.getChild());\n        line(\n            out,\n            \"- Model relation evaluation: `\"\n                + camel(\"eval_\" + member)\n                + \"()`; query view handle: `\"\n                + camel(member + \"_handle\")\n                + \"()`.\");\n        line(\n            out,\n            \"- Reverse relation: `\"\n                + member\n                + \"()` returns \"\n                + (ReverseRelationNaming.oneToOne(rel)\n                    ? \"const \" + target + \"*\"\n                    : \"SmartList<\" + target + \">&\")\n                + \"; query `select_\"\n                + member\n                + \"()`, `select_\"\n                + member\n                + \"_with(\"\n                + target\n                + \"Request<P>)`, `with_\"\n                + member\n                + \"(\"\n                + target\n                + \"Request<P>)`; expression `get_\"\n                + member\n                + \"()`.\");\n      }\n    }\n    line(\n        out,\n        \"\\n\"\n            + \"Common request methods: `comment(text)`, `purpose(text)`, `filter(expr)`,\"\n            + \" `andFilter(expr)`, `orFilter(expr)`, `selectSelf()`, `selectSelfFields()`,\"\n            + \" `limit(n)`, `offset(n)`, `skip(n)`, `hardLimit(n)`, `searchWithText(text)`.\"\n            + \" Purpose stages an executable type; modifiers remain available.\");\n    line(out, \"Embedded child requests must remain unpurposed: select relations, enhance children,\"\n        + \" facets, relation matching, grouping and aggregates with a child before its purpose()\"\n        + \" transition. The parent retains its own purpose; ordinary C++ modifiers may appear\"\n        + \" before or after that parent transition. Keep child comments and filters on the child.\"\n        + \" Root execution still requires both a nonblank comment and purpose.\");\n    line(out, \"Membership: matchingAnyOf(child) and matchAnyOf(child) compare root IDs with\"\n        + \" the child's ID subquery. They copy its core query, including selected relations,\"\n        + \" but do not import its independent selection options, comment, raw SQL or enhancements.\"\n        + \" Ordinary child requests may come from another generated executor domain.\"\n        + \" Keep the child unpurposed and in the same UserContext, or copy it explicitly first.\"\n        + \" Direct QuerySelection and SelectQuery inputs are also accepted in the receiving allocation scope.\"\n        + \" selection() captures independent options; moving that value into into_query() applies them\"\n        + \" before core-query membership. Use Context make() for retained conversion payloads;\"\n        + \" stack-owned payloads must be destroyed before their Context closes.\");\n    line(\n        out,\n        \"Dynamic fields: Q requests provide `selectDynamicFields(selection)`; models provide\"\n            + \" `dynamicFieldValues()`, `updateDynamicField(code, value)`,\"\n            + \" `deleteDynamicField(code)` and `hasPendingDynamicMutations()`.\"\n            + \" Durable fields use the runtime Context provider and audited ledger save;\"\n            + \" native getters and mutation values remain separate.\");\n    line(out,\n        \"Readonly computed properties: `hasDynamicProperty(key)` reports an underscore-key\"\n            + \" projection even when its value is NULL; `dynamicProperty(key)` returns a borrowed\"\n            + \" non-NULL value, treating typed NULL and JSON null as absent.\"\n            + \" False, zero and empty text remain readable. These accessors do not allocate,\"\n            + \" execute SQL or grant durable dynamic-field write authority; returned values\"\n            + \" borrow the model's Context.\");\n    line(out,\n        \"Context operations: `stream(chunk_size)`, `copyTo(user_context)`,\"\n            + \" `copyToGlobal(user_context)`, `rebindGlobal(user_context)`. Mutable request copies\"\n            + \" are independent; retained copies are explicit.\");\n    line(\n        out,\n        \"Executable methods (exactly one UserContext argument): `execute_for_list(user_context)`,\"\n            + \" `execute_for_entity_list(user_context)`, `execute(user_context)`,\"\n            + \" `execute_for_one(user_context)`, `execute_for_stream(user_context)`,\"\n            + \" `execute_for_entity(user_context)`, `execute_for_rows(user_context)`,\"\n            + \" `new_entity(user_context)`. Pollable results use `.wait()`; only newEntity returns\"\n            + \" a managed model directly.\");\n    line(\n        out,\n        \"Expression methods: `eval()`, `unwrap()`, `is_null()`, `is_not_null()`,\"\n            + \" `or_if_null(fallback)`, `or_else_if_null(callback)`, `or_default_if_null()`. List\"\n            + \" expressions add `size()` (scalar expression), `first()` and `get(index)` (entity\"\n            + \" expressions). NotLoaded is never a NULL fallback.\");\n    line(out, \"Default NULL fallback is available only for scalar payloads with a default\"\n        + \" value. Strong Business ID payloads have no public default: use a typed\"\n        + \" `orIfNull(fallback)` or `orElseIfNull(callback)` instead.\"\n        + \" Missing-load errors never invoke a fallback.\");\n    line(out, \"Missing-load diagnostics: catch `ExpressionNotLoadedError` and inspect\"\n        + \" `error.diagnostic()` for the captured root, access_path, failed_node, missing_preload,\"\n        + \" suggested_fix, optional nested_fix, severity and English human_message.\"\n        + \" Suggestions use generated C++ camelCase selection names. The error borrows its\"\n        + \" Context; diagnostic access fails after close. `what()` is static and remains safe.\"\n        + \" Retention requires an explicit destination copy before closing the source Context.\");\n    line(out, \"Diagnostic repair scope: a loaded relationship can leave a leaf-only diagnostic\"\n        + \" path. Apply the selection to that relationship's child request and retain the\"\n        + \" enclosing selection. Nested C++ selections use `select...With(child)`; leaf\"\n        + \" selections use `select...()`. Renderer entry placeholders and captured id=...\"\n        + \" expressions are explanatory pseudocode. Use current object/field Assist to resolve\"\n        + \" the actual Q entry, child type and selection names before executing a repair.\");\n    line(\n        out,\n        \"Expression composition: `map(callback)`, `andThen(node, callback)` and owning scalar\"\n            + \" `copyTo(user_context)`. Entity/list bindings are checked borrows; temporary entity\"\n            + \" entries are rejected. Scalar access is an eager snapshot. All Q/E wrappers expire\"\n            + \" with their scope; Global diagnostics must outlive surviving wrappers.\");\n    line(\n        out,\n        \"Save: `AuditedSaveExt<Model>::save(std::move(entity).audit_as(\\\"reason\\\"),\"\n            + \" user_context).wait()`. Allocate requests/models with UserContext and call\"\n            + \" setup(user_context) once at bootstrap. Use explicit destination copies before\"\n            + \" closing the owning context. Unknown fields are compile errors.\");\n    line(out, \"Sample data: `generateSampleData(user_context, SampleDataPlan{SampleDataScale::Tiny, seed}).wait()` uses Context-bound queries and audited saves. It loads roots/constants, skips missing required dependencies, and generates business rows in depth/name order. Run setup first. Reference selection and numeric values follow the seed/index rules; temporal fields use the wall clock. Repeated calls create additional business rows. Reports and errors belong to UserContext; copy explicitly before close.\");\n    line(out, \"Sample failure: generation stops at the first save error; earlier successful saves remain committed. A failed invocation returns an error, and a later invocation may create another business batch.\");\n    if (entities.stream().anyMatch(entity -> entity.getDepth() > 0 && !entity.isConstant()\n        && fields(entity).stream().anyMatch(field -> baseType(field).equals(\"String\")\n            && !field.isString() && !field.isJsonLiteral()\n            && (field.isNumber() || field.getBooleanAttribute(\"isNumber\"))))) {\n      line(out, \"Numeric sample recipes for String-mapped aliases retain the original integer operand. Generated typed Checkers can reject entity materialization before custom CheckerLogic runs. The runtime does not silently convert the operand to text; modules without those checkers retain the provider's actual behavior. Use explicitly typed application values when this model's sample save fails.\");\n    }\n    line(out, \"Sample progress: register an application-owned `SampleDataLogSink` through `user_context.insert_resource(owner, static_cast<SampleDataLogSink&>(sink))`. Its synchronous `info(user_context, message)` receives the original sample Info messages in execution order. Allocate the sink in the declared Global/User owner; `memory_resource()` must identify that owner. Missing or disabled sinks do not format messages. Messages are callback borrows; retaining them requires an explicit copy into the sink owner's allocator. Pending re-polls do not repeat start; cancellation and save failure emit no successful completion. A callback must not close its active Context, and exceptions propagate as operation failure. This sample-specific sink does not replace SQL diagnostics or audit sinks.\");\n    if (entities.stream().anyMatch(entity -> entity.getDepth() > 0 && !entity.isConstant()\n        && CppFieldLayoutMetadata.fields(entity).stream().anyMatch(field -> baseType(field).equals(\"Json\") && (field.isString() || field.isJsonLiteral())))) {\n      line(out, \"JSON sample text follows the locked source setter operand and can fail typed checking. The sample generator does not silently turn that text into valid JSON. Initialize JSON models with explicit typed values when sample generation reports an error. Complete quoted JSON-literal source generation also has a retained compiler failure; no complete sample parity is advertised for that configuration.\");\n    }\n    line(out, \"Deletion: `entity.markForDeletion()` records deletion in the ledger and returns\"\n        + \" the model for chaining. Save through the audited save API; marking alone does\"\n        + \" not execute SQL. Versioned SQLite models use the runtime soft-delete protocol.\");\n    line(out, \"Projection shortcuts: `selectSelfFields()` and `selectSelfWithoutParent()`\"\n        + \" both select native fields, including inherited fields as the original generator\"\n        + \" does. `selectAll()` also selects forward and reverse to-one relations;\"\n        + \" `selectChildren()` adds reverse collections, and `selectAny()` aliases it.\"\n        + \" These do not replace `enhanceChildrenIfNeeded()` for polymorphic descendants.\"\n        + \" Named relation selections can include soft-deleted child rows; they do not\"\n        + \" automatically apply a child Q entry's default live-row filter. Use an explicit\"\n        + \" select...With(child_request) to carry the child's filters and projection.\");\n    line(out, \"Runtime attachment: `entity.attachRuntimeStateRecursive(target_state)` adopts\"\n        + \" pending mutations and preserves the entity's loaded snapshot. It recursively\"\n        + \" attaches stored forward objects; it does not load relations or traverse graph\"\n        + \" lookups/reverse collections. Both states must belong to the same Context;\"\n        + \" cross-domain retention requires an explicit destination copy.\");\n    List<String> sourceIdentityDifferences = entities.stream().flatMap(entity -> descriptorFields(entity).stream())\n        .filter(field -> !canonical(field).equals(RustFieldDescriptorNaming.rustStorageMemberName(field)))\n        .map(field -> quote(canonical(field)) + \" -> \" + quote(RustFieldDescriptorNaming.rustStorageMemberName(field)))\n        .distinct().toList();\n    if (!sourceIdentityDifferences.isEmpty()) {\n      line(out, \"Source metadata boundary: query projections retain storage names while descriptors retain the original Rust member identities: `\"\n          + String.join(\", \", sourceIdentityDifferences) + \"`. Queries of these fields can preserve the original unknown-field SQL failure. The adapter does not silently rename query fields to make that source configuration succeed.\");\n    }\n    line(out, \"## Business IDs\");\n    for (ObjectDescriptor entity : entities) {\n      for (FieldDescriptor field : fields(entity)) {\n        if (CppBusinessIdMetadata.isBusinessId(field)) {\n          String type = applicationType(field);\n          line(\n              out,\n              \"- `\"\n                  + type\n                  + \"::create(user_context.memory_resource(), text)` trims and rejects blank text;\"\n                  + \" `asStr()` exposes canonical text. Model setter `\"\n                  + camel(\"update_\" + fieldName(field))\n                  + \"(const \"\n                  + type\n                  + \"&)` and scalar predicates accept this distinct type.\"\n                  + \" `definition(user_context.memory_resource())` exposes its configured profile.\"\n                  + \" Creation uses the trusted active root, allocation service and fix evidence;\"\n                  + \" dirty Business IDs are immutable on update.\");\n        }\n      }\n    }\n    if (entities.stream()\n        .flatMap(entity -> fields(entity).stream())\n        .anyMatch(CppBusinessIdMetadata::isBusinessId)) {\n      line(\n          out,\n          \"setup installs SQLite Business-ID infrastructure. Register an explicit\"\n              + \" BusinessIdKeyProvider through UserContext before daily-permuted-v1 creation; no\"\n              + \" default key or hidden owner is introduced. Use with_active_root before allocating\"\n              + \" aggregate IDs.\");\n    }\n    line(out, \"## Model relation evaluation\");\n    line(\n        out,\n        \"Model evalX() and E.getX() share the runtime relation rules. Loaded empty lists are\"\n            + \" values, selected empty to-one relations are Null, and missing views are NotLoaded.\"\n            + \" Returned entity/list values are checked Context borrows. Reverse XHandle() methods\"\n            + \" expose the immutable query-installed view; existing mutable list getters remain\"\n            + \" explicit model-local graph construction adapters. No getter performs implicit\"\n            + \" SQL.\");\n    line(out, \"## Checker and behavior assembly\");\n    line(out, \"Wire metadata: `generatedWireFieldMappings(user_context)` returns Context-owned typed maps from canonical model field names to the selected JSON wire spelling. Like the original template, each entity entry lists its own fields; it does not flatten inherited fields or rename relation keys to FK storage keys. `generatedWireFieldAliases(user_context)` returns the separately defined empty legacy-alias map. These functions do not install metadata, authorize client input or provide a transport endpoint. Explicit destination copying is required to retain the maps after Context close.\");\n    line(\n        out,\n        \"`configureRuntime(user_context, filename)` installs generated metadata, checkers and\"\n            + \" behaviors, the SQLite provider, scoped persistent IDs and the application executor.\"\n            + \" It does not create schema. `setup(user_context, filename)` performs that configuration\"\n            + \" and waits for `user_context.ensure_schema().wait()`; its default filename is `:memory:`.\");\n    line(\n        out,\n        \"Use `module(user_context)` for metadata-only registration, or\"\n            + \" `moduleWithCheckers(user_context)`, `moduleWithBehaviors(user_context)` or\"\n            + \" `moduleWithBehaviorsAndCheckers(user_context)` for explicit assembly. Keep\"\n            + \" handwritten logic outside generated files.\");\n    line(out, \"For custom assembly, call `configureRuntime(user_context, filename)` first, then\"\n        + \" register application-owned Checker/Behavior overrides with a module and apply it\"\n        + \" before `user_context.ensure_schema().wait()` or business execution. Calling\"\n        + \" `configureRuntime` or `setup` again installs defaults and replaces those registrations.\");\n    if (hasGeneratedBootstrap(entities)) {\n      line(out, \"All four module factories register schema bootstrap. Schema initialization prepares\"\n          + \" the generated Domain Root and active-root binding; reuse that root instead of inserting\"\n          + \" a second ID 1. Repeated initialization preserves existing root values. Bootstrap\"\n          + \" errors propagate; do not treat a failed `setup` as a usable initialized Context.\");\n    }\n    for (ObjectDescriptor od : entities) {\n      String name = typeName(od);\n      line(\n          out,\n          \"- Extend `\"\n              + name\n              + \"CheckerLogic` and override `checkAndFix\"\n              + name\n              + \"(user_context, entity, status, location, results)`. Allocate logic in an explicit\"\n              + \" Context, create `\"\n              + name\n              + \"Checker` with that logic and register its `TypedEntityChecker` adapter. The\"\n              + \" built-in Context/time fixes and predefined update-load checks run before custom\"\n              + \" logic.\");\n      line(\n          out,\n          \"- `\"\n              + name\n              + \"Behavior` preserves the EntityDataServiceBehavior SPI; runtime hook names retain\"\n              + \" snake_case.\");\n    }\n    for (ObjectDescriptor od : entities) {\n      for (FieldDescriptor field : fields(od)) {\n        if (field.isObjectProperty()) {\n          relationIdentityAssist(out, typeName(od), relationName(field), relationIdentity(field));\n        }\n      }\n      for (ReverseRelation relation : od.getReverseRelations()) {\n        relationIdentityAssist(out, typeName(od), relationName(relation), relationIdentity(relation));\n      }\n    }\n    line(out, \"Aggregate composition: `parent.includePendingMutationsFrom(child)` copies the child's pending additions, updates and deletions into the parent's Context for its next audited Save. Set modeled relationships before composition. It returns a checked Result; it does not load a relation, run SQL or save either object. The source retains its pending ledger for retry; original-version conflicts reject composition without partially merging. Cross-domain composition is an explicit destination copy: nested values and snapshots belong to the receiving Context, and closing the source does not invalidate them. It does not rebind the source object or extend either Context lifetime. The runtime owns ledger merging and Context validation.\");\n    return camelAssist(out.toString(), ns);\n  }\n\n  /** Local, offline entry point; uses exactly the service's model parser/discovery. */\n  public static void main(String[] args) throws Exception {\n    Set<String> flags = args.length < 2 ? Set.of() : new HashSet<>(Arrays.asList(args).subList(2, args.length));\n    if (args.length < 2 || !Set.of(\"--qualify-inheritance\", \"--qualify-constants\").containsAll(flags)) {\n      throw new IllegalArgumentException(\"Usage: CppCoreGenerator MODEL OUTPUT_DIRECTORY [--qualify-inheritance] [--qualify-constants]\");\n    }\n    Path model = Path.of(args[0]).toAbsolutePath();\n    Path output = Path.of(args[1]).toAbsolutePath().normalize();\n    GenerateContext context = new GenerateContext(SCOPE, model.getFileName().toString());\n    context.setEntranceFile(model.getFileName().toString());\n    context.appendFile(model.getFileName().toString(), Files.readAllBytes(model));\n    BaseDomainManager manager = new BaseDomainManager();\n    Domain domain = manager.getDomain(manager.parse(context));\n    List<GeneratedFile> generated = args.length > 2\n        ? new CppCoreGenerator(flags.contains(\"--qualify-inheritance\"), flags.contains(\"--qualify-constants\")).generate(domain)\n        : new DomainGenerationService().generateDomainFiles(domain, SCOPE);\n    for (GeneratedFile file : generated) {\n      Path target = output.resolve(file.getPath()).normalize();\n      if (!target.startsWith(output)) {\n        throw new IllegalArgumentException(\"Invalid generated path: \" + file.getPath());\n      }\n      Files.createDirectories(target.getParent());\n      Files.write(target, file.getData());\n    }\n  }\n}\n"
+    }
+  ],
+  "runtime_source": "teaql_runtime/include/teaql/runtime/entity_query.hpp",
+  "runtime_constructor_sha256": "bbb1fc7706a1e93b21e9a700a6a4319c84d3d44656c39f66cb2d8e6c346bff0d",
+  "runtime_constructor": "    explicit EntityQuery(UserContext& user_context, bool minimal = false, bool live_rows = true)\n        requires(!Purposed)\n        : binding_(user_context),\n          description_(user_context.make_ref<detail::QueryDescription>(T::ENTITY_NAME)) {\n        auto descriptor = T::entity_descriptor(memory_resource());\n        if constexpr (requires { T::QUERY_IDENTITY_FIELDS; }) {\n            for (auto field : T::QUERY_IDENTITY_FIELDS) {\n                description().query.project(field);\n            }\n        }\n        for (const auto& property : descriptor.properties) {\n            if constexpr (!requires { T::QUERY_IDENTITY_FIELDS; }) {\n                if (property.is_id || property.is_version) {\n                    description().query.project(property.name);\n                }\n            }\n            if (live_rows && property.is_version) {\n                description().query.and_filter(\n                    Expr::gt(memory_resource(), property.name, std::int64_t(0)));\n            }\n        }\n        if (!minimal) {\n            if constexpr (requires { T::QUERY_PROJECTION_FIELDS; }) {\n                for (auto field : T::QUERY_PROJECTION_FIELDS) {\n                    description().query.project(field);\n                }\n            } else {\n                for (const auto& property : descriptor.properties) {\n                    description().query.project(property.name);\n                }\n            }\n        }\n    }\n\n",
+  "notice": "Complete source/guard review index, not semantic acceptance or proof from counts."
+}

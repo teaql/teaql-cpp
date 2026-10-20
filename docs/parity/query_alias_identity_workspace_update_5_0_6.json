@@ -1,0 +1,198 @@
+{
+  "workspaces": [
+    {
+      "model": "examples/generator/model.xml",
+      "workspace": "examples/generated",
+      "changes": 36,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/types.xml",
+      "workspace": "tests/generated_types",
+      "changes": 112,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/checkers.xml",
+      "workspace": "tests/generated_checkers",
+      "changes": 32,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/checker_unique_string.xml",
+      "workspace": "tests/generated_checker_unique_string",
+      "changes": 12,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/checker_clock_scalars.xml",
+      "workspace": "tests/generated_checker_clock_scalars",
+      "changes": 127,
+      "changed": [
+        "ASSIST.md",
+        "include/cpp_checker_clock_scalars/queries.hpp"
+      ]
+    },
+    {
+      "model": "tests/generator/checker_clock_composition.xml",
+      "workspace": "tests/generated_checker_clock_composition",
+      "changes": 52,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/relations.xml",
+      "workspace": "tests/generated_relations",
+      "changes": 48,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/business_ids.xml",
+      "workspace": "tests/generated_business_ids",
+      "changes": 44,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/optional_types.xml",
+      "workspace": "tests/generated_optional_types",
+      "changes": 44,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/query_field_branches.xml",
+      "workspace": "tests/generated_query_field_branches",
+      "changes": 80,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/inheritance.xml",
+      "workspace": "tests/generated_inheritance",
+      "changes": 72,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/inheritance_graph.xml",
+      "workspace": "tests/generated_inheritance_graph",
+      "changes": 100,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/inheritance_variants.xml",
+      "workspace": "tests/generated_inheritance_variants",
+      "changes": 168,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/inheritance_business_ids.xml",
+      "workspace": "tests/generated_inheritance_business_ids",
+      "changes": 188,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/candidates.xml",
+      "workspace": "tests/generated_candidates",
+      "changes": 64,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/constants_scalar.xml",
+      "workspace": "tests/generated_constants_scalar",
+      "changes": 76,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/constants_numeric.xml",
+      "workspace": "tests/generated_constants_numeric",
+      "changes": 68,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/constants_catalog.xml",
+      "workspace": "tests/generated_constants_catalog",
+      "changes": 28,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/constants_temporal.xml",
+      "workspace": "tests/generated_constants_temporal",
+      "changes": 72,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/constants_temporal_required.xml",
+      "workspace": "tests/generated_constants_temporal_required",
+      "changes": 68,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/dynamic_json.xml",
+      "workspace": "tests/generated_dynamic_json",
+      "changes": 100,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/sample_fields.xml",
+      "workspace": "tests/generated_sample_fields",
+      "changes": 116,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/sample_fields_runtime.xml",
+      "workspace": "tests/generated_sample_fields_runtime",
+      "changes": 116,
+      "changed": [
+        "ASSIST.md"
+      ]
+    },
+    {
+      "model": "tests/generator/sample_fields_temporal.xml",
+      "workspace": "tests/generated_sample_fields_temporal",
+      "changes": 112,
+      "changed": [
+        "ASSIST.md"
+      ]
+    }
+  ],
+  "total_changes": 1935
+}

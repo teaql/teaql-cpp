@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/runtime/detail/data_service/entity_service.hpp>
+#include <teaql/runtime/detail/data_service/diagnostic_query.hpp>
 
 namespace teaql::detail {
 template <class Error>
@@ -131,7 +132,7 @@ public:
                 std::move(request),
                 size,
                 std::move(plan).value(),
-                capture ? cs.metadata.query_diagnostic_observer(r)
+                capture ? EntityDataServiceAccess::observer(service_)
                         : std::optional<ExecutionObserver>{});
             if (!source) {
                 return R::err(r,
@@ -147,7 +148,7 @@ public:
                                             r,
                                             std::move(request),
                                             size,
-                                            std::move(*cs.metadata.query_diagnostic_observer(r)))
+                                            std::move(*EntityDataServiceAccess::observer(service_)))
                                       : &executor.query_stream(r, std::move(request), size);
         }
         auto& source = *selected_source;
@@ -196,7 +197,15 @@ auto EntityDataService<E>::fetch_stream(const PurposedSelectQuery& query) const
     requires std::derived_from<E, StreamQueryExecutor<Error>>
 {
     using R = Result<EntityQueryStream<Error>, DataServiceError<Error>>;
-    return make_operation<R, detail::EntityStreamOperation<E>>(
-        memory_resource(), *this, query.as_query());
+    return detail::execute_scoped_purposed_query<EntityQueryStream<Error>>(
+        *this,
+        query,
+        {},
+        +[](const EntityDataService<E>& service,
+            const SelectQuery& actual,
+            std::span<const RelationAggregate>) -> auto& {
+            return make_operation<R, detail::EntityStreamOperation<E>>(
+                service.memory_resource(), service, actual);
+        });
 }
 }

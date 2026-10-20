@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="6"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="canada-mini-host"
+	time="0"
+	timestamp="2026-10-18T16:48:54"
+	>
+	<testcase name="module_dynamic_provider_contracts" classname="module_dynamic_provider_contracts" time="0.0075705" status="run">
+		<properties/>
+		<system-out>Dynamic Context provider contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_dynamic_graph_save_contracts" classname="module_dynamic_graph_save_contracts" time="0.0813194" status="run">
+		<properties/>
+		<system-out>[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=School.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATI...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="module_schema_dynamic_context_contracts" classname="module_schema_dynamic_context_contracts" time="0.00472342" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_schema_runtime_contracts" classname="module_schema_runtime_contracts" time="0.00434062" status="run">
+		<properties/>
+		<system-out>Schema runtime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_schema_dynamic_source_rust_parity" classname="module_schema_dynamic_source_rust_parity" time="0.294599" status="run">
+		<properties/>
+		<system-out>Context dynamic schema lifecycle parity: 864/864 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_schema_runtime_rust_parity" classname="module_schema_runtime_rust_parity" time="0.135271" status="run">
+		<properties/>
+		<system-out>Schema runtime parity: 384/384 observations match
+</system-out>
+	</testcase>
+</testsuite>

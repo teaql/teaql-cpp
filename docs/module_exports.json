@@ -871,6 +871,10 @@
         "EntityJsonTraversal": {
           "kind": "CXXRecordDecl",
           "header": "teaql_core/include/teaql/core/entity.hpp"
+        },
+        "TeaqlEntityDefaults": {
+          "kind": "ClassTemplateDecl",
+          "header": "teaql_core/include/teaql/core/entity.hpp"
         }
       },
       "teaql::detail": {
@@ -3849,6 +3853,62 @@
         "GeneratedReadonlyProperties": {
           "kind": "class",
           "header": "teaql_runtime/include/teaql/runtime/generated_readonly_properties.hpp"
+        },
+        "GeneratedEntityJson": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_entity_json.hpp"
+        },
+        "GeneratedWireFieldMap": {
+          "kind": "TypeAliasDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_wire_fields.hpp"
+        },
+        "GeneratedWireFieldMappings": {
+          "kind": "TypeAliasDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_wire_fields.hpp"
+        },
+        "GeneratedScalarCodec": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_scalar_codec.hpp"
+        },
+        "SampleDataLogSink": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/sample_data_logging.hpp"
+        },
+        "GeneratedEnvironmentError": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_runtime_config.hpp"
+        },
+        "GeneratedRuntimeConfigurationError": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_runtime_config.hpp"
+        },
+        "GeneratedServiceRuntimeConfig": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_runtime_config.hpp"
+        },
+        "GeneratedServiceRuntimeError": {
+          "kind": "ClassTemplateDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_service_runtime_error.hpp"
+        },
+        "read_generated_runtime_config": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_runtime_config.hpp"
+        },
+        "GeneratedLocalSchemaProvider": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_schema_provider.hpp"
+        },
+        "read_generated_environment_value": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_runtime_config.hpp"
+        },
+        "read_generated_business_id_key": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_business_id_environment.hpp"
+        },
+        "install_generated_business_id_environment_key": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/generated_business_id_environment.hpp"
         }
       },
       "teaql::detail": {
@@ -4735,6 +4795,74 @@
         "capture_ledger_trace_scopes": {
           "kind": "FunctionDecl",
           "header": "teaql_runtime/include/teaql/runtime/entity_save.hpp"
+        },
+        "mutation_audit_value": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/dynamic_fields.hpp"
+        },
+        "entity_ledger_privacy": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp"
+        },
+        "graph_plan_privacy": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp"
+        },
+        "install_saved_dynamic_fields": {
+          "kind": "FunctionTemplateDecl",
+          "header": "teaql_runtime/include/teaql/runtime/entity_save.hpp"
+        },
+        "extract_graph_node_from_entity": {
+          "kind": "FunctionTemplateDecl",
+          "header": "teaql_runtime/include/teaql/runtime/entity_save.hpp"
+        },
+        "preflight_pending_dynamic_entities": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/entity_save.hpp"
+        },
+        "borrow_entity_runtime_state": {
+          "kind": "FunctionTemplateDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/runtime_state_bridge.hpp"
+        },
+        "AuditActivation": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/commit_audit.hpp"
+        },
+        "ContextAuditAccess": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/commit_audit.hpp"
+        },
+        "PendingAuditBatch": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/commit_audit.hpp"
+        },
+        "deliver_committed_audits": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/commit_audit.hpp"
+        },
+        "enqueue_audit": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/commit_audit.hpp"
+        },
+        "enrich_dynamic_audit": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/commit_audit.hpp"
+        },
+        "has_audit_scope": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/commit_audit.hpp"
+        },
+        "query_has_facet_diagnostics": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/purposed_query.hpp"
+        },
+        "facet_diagnostic_source": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/purposed_query.hpp"
+        },
+        "expand_query_facet_diagnostics": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/purposed_query.hpp"
         }
       },
       "teaql::runtime": {
@@ -5649,6 +5777,18 @@
         "GeneratedReadonlyProperties": {
           "kind": "class",
           "header": "teaql_runtime/include/teaql/runtime/generated_readonly_properties.hpp"
+        },
+        "GeneratedEntityJson": {
+          "kind": "UsingDecl",
+          "header": "teaql_runtime/include/teaql/runtime.hpp"
+        },
+        "GeneratedScalarCodec": {
+          "kind": "UsingDecl",
+          "header": "teaql_runtime/include/teaql/runtime.hpp"
+        },
+        "SampleDataLogSink": {
+          "kind": "UsingDecl",
+          "header": "teaql_runtime/include/teaql/runtime.hpp"
         }
       },
       "teaql::core": {
@@ -5873,6 +6013,22 @@
         "use_sqlite_provider": {
           "kind": "FunctionTemplateDecl",
           "header": "teaql_provider_sqlite/include/teaql/provider_sqlite/schema.hpp"
+        },
+        "prepare_generated_sqlite_runtime_path": {
+          "kind": "FunctionDecl",
+          "header": "teaql_provider_sqlite/include/teaql/provider_sqlite/runtime_config.hpp"
+        },
+        "open_generated_sqlite_runtime_connection": {
+          "kind": "FunctionDecl",
+          "header": "teaql_provider_sqlite/include/teaql/provider_sqlite/runtime_connection.hpp"
+        },
+        "assemble_generated_sqlite_runtime": {
+          "kind": "FunctionTemplateDecl",
+          "header": "teaql_provider_sqlite/include/teaql/provider_sqlite/runtime_assembly.hpp"
+        },
+        "bind_generated_sqlite_runtime": {
+          "kind": "FunctionTemplateDecl",
+          "header": "teaql_provider_sqlite/include/teaql/provider_sqlite/runtime_assembly.hpp"
         }
       },
       "teaql::detail": {

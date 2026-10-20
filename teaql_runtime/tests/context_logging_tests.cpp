@@ -229,12 +229,57 @@ static void output_and_failure_order() {
           "retention happens before ordinary output failure");
 }
 
+static void request_owned_audit_provenance() {
+    quiet();
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto make_entry = [&](DataServiceOperation operation,
+                          std::optional<std::string_view> owned_reason,
+                          std::optional<std::string_view> local_reason) {
+        auto input = metadata(r);
+        input.operation = operation;
+        if (owned_reason) {
+            input.comment.emplace(*owned_reason, r);
+        }
+        if (local_reason) {
+            input.trace_chain.emplace_back(TraceKind::AuditReason, "OrderLine", *local_reason);
+        }
+        user_context->clear_sql_logs();
+        user_context->record_metadata_log(input);
+        return user_context->sql_logs();
+    };
+    auto query = make_entry(DataServiceOperation::Query, "root audit", std::nullopt);
+    check(query.size() == 1 && !query[0].audit_reason,
+          "ordinary query comments do not become mutation audit reasons");
+    auto readback = make_entry(DataServiceOperation::Query,
+                               "root private-customer audit",
+                               "descendant private-password lineage");
+    check(readback[0].audit_reason == "root [REDACTED] audit",
+          "audited readback keeps the masked request-owned reason over descendant lineage");
+    auto mutation = make_entry(DataServiceOperation::Update, "root audit", "local lineage");
+    check(mutation[0].audit_reason == "root audit",
+          "mutation audit reason comes from executed request metadata");
+    auto legacy = make_entry(DataServiceOperation::Update, std::nullopt, "legacy lineage");
+    check(legacy[0].audit_reason == "legacy lineage",
+          "standalone metadata without owned intent retains its local audit fold");
+    auto recover = make_entry(DataServiceOperation::Recover, "recover audit", std::nullopt);
+    check(recover[0].operation == SqlLogOperation::Recover &&
+              recover[0].audit_reason == "recover audit" &&
+              recover[0].trace_path.back().kind == TraceKind::Sql &&
+              recover[0].trace_path.back().comment == "",
+          "recovery retains its distinct operation and request audit reason");
+    check(recover[0].trace_path.back().entity_type == "recover",
+          "recovery canonical SQL lineage names the actual operation");
+}
+
 int main() {
     try {
         auto* prior = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         lifetime_and_options();
         identity_and_quiescence();
         output_and_failure_order();
+        request_owned_audit_provenance();
         std::pmr::set_default_resource(prior);
         std::cout << "Context logging contracts passed\n";
     } catch (const std::exception& e) {

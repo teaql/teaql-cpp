@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="19"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="2"
+	timestamp="2026-10-18T09:06:39"
+	>
+	<testcase name="audit_event_projection_5_0_6_rust_parity" classname="audit_event_projection_5_0_6_rust_parity" time="0.15867" status="run">
+		<properties/>
+		<system-out>Audit event projection 5.0.6 parity: 104/104 observations match
+</system-out>
+	</testcase>
+	<testcase name="original_runtime_log_privacy_contracts" classname="original_runtime_log_privacy_contracts" time="0.00273649" status="run">
+		<properties/>
+		<system-out>TeaQL WARNING: sensitive plaintext logging enabled; application data may be written to disk. Authentication secrets remain redacted.
+Original log-privacy fixture passed
+</system-out>
+	</testcase>
+	<testcase name="original_runtime_file_log_privacy_contracts" classname="original_runtime_file_log_privacy_contracts" time="0.0643715" status="run">
+		<properties/>
+		<system-out>Original three isolated file-log privacy cases passed; evidence: /tmp/teaql-cpp-log-privacy-vz5_bwtd
+</system-out>
+	</testcase>
+	<testcase name="original_runtime_masking_contracts" classname="original_runtime_masking_contracts" time="0.0216958" status="run">
+		<properties/>
+		<system-out>Original SQLite masking contracts passed; PostgreSQL array case excluded
+</system-out>
+	</testcase>
+	<testcase name="runtime_log_contracts" classname="runtime_log_contracts" time="0.00753681" status="run">
+		<properties/>
+		<system-out>Runtime log contracts passed
+</system-out>
+	</testcase>
+	<testcase name="audit_event_contracts" classname="audit_event_contracts" time="0.00347855" status="run">
+		<properties/>
+		<system-out>Audit event contracts passed
+</system-out>
+	</testcase>
+	<testcase name="audit_event_context_reentrant_close" classname="audit_event_context_reentrant_close" time="0.00204904" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="audit_event_owner_reentrant_close" classname="audit_event_owner_reentrant_close" time="0.00241106" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="audit_event_payload_reentrant_close" classname="audit_event_payload_reentrant_close" time="0.00205195" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="audit_event_result_reentrant_close" classname="audit_event_result_reentrant_close" time="0.00208408" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="sql_log_query_source_rust_parity" classname="sql_log_query_source_rust_parity" time="0.0716218" status="run">
+		<properties/>
+		<system-out>SQL-log query/source policy parity: 79/79 observations match
+</system-out>
+	</testcase>
+	<testcase name="executor_spi_contracts" classname="executor_spi_contracts" time="0.00266132" status="run">
+		<properties/>
+		<system-out>Executor SPI contracts passed
+</system-out>
+	</testcase>
+	<testcase name="data_service_contracts" classname="data_service_contracts" time="0.00285995" status="run">
+		<properties/>
+		<system-out>Data-service contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_projection_scope_contracts" classname="sql_projection_scope_contracts" time="0.00216271" status="run">
+		<properties/>
+		<system-out>SQL projection ownership and identity contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_projection_scope_rust_parity" classname="sql_projection_scope_rust_parity" time="0.0602355" status="run">
+		<properties/>
+		<system-out>SQL projection scope parity: 8/8 observations match
+</system-out>
+	</testcase>
+	<testcase name="runtime_log_rust_parity" classname="runtime_log_rust_parity" time="0.948875" status="run">
+		<properties/>
+		<system-out>Runtime SQL log projection parity: 425/425 observations match
+</system-out>
+	</testcase>
+	<testcase name="audit_event_rust_parity" classname="audit_event_rust_parity" time="0.510878" status="run">
+		<properties/>
+		<system-out>Audit events and privacy parity: 1427/1427 outputs match; 0 target-width inputs reject before execution
+</system-out>
+	</testcase>
+	<testcase name="sql_log_rust_parity" classname="sql_log_rust_parity" time="0.358863" status="run">
+		<properties/>
+		<system-out>sql log 5.0.6 parity: 1008/1008 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_model_api_rust_parity" classname="sql_model_api_rust_parity" time="2.16509" status="run">
+		<properties/>
+		<system-out>SQL model API 5.0.6 parity: 40/40 observations match
+</system-out>
+	</testcase>
+</testsuite>

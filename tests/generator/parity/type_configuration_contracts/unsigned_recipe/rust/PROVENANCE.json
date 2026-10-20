@@ -1,0 +1,29 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "hand_edited": false,
+  "model": "tests/generator/parity/type_configuration_contracts/unsigned_recipe/model.xml",
+  "model_sha256": "132949a49e02843cdf906bed427ba33992e05ba05655fa47421187a32762edf1",
+  "files": {
+    "OBSERVATION.json": "363e466af9154cb24a36024961101173313332b34161c9c8af016f656ec30ff2",
+    "lib/Cargo.toml": "3c7a5fd314a52a5cddeb468a4c1aef9f59762c9a8cdd7e8d7c2a68f9d99c739b",
+    "lib/src/sample_data.rs": "64eeb93888fab27fc0695e3e29a30e0d11ba90d8b20d737e3cf5351c37574b82",
+    "lib/src/request_support.rs": "00d5f24425a1a48eded44e2b07d3dfa904a5b08261f30fbb777c0bf52e344f8c",
+    "lib/src/q.rs": "c001fa6a93032ce4a9f5884e64176755e80e24326220e7aa035631210adc9a93",
+    "lib/src/e.rs": "cacdb78b3b38581893db7f0d65e91b6fce4205df08330b6ec5ee451060079401",
+    "lib/src/lib.rs": "a69fc9f7c1f74874d9ed1a6f051313969c2def5f0c3a2250c74b50e55753412a",
+    "lib/src/runtime.rs": "82087d3d96310d6159b43a65811ad6ccc5cd70b9caa31ae28b95e54d32cc0880",
+    "lib/src/priority/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/priority/entity.rs": "36b212611874ad11acc572fbc4f5d74846cf5105355a0a3c36b2de508c4b5b82",
+    "lib/src/priority/behavior.rs": "334c09111fad87bd014f5becc3bf2e2bb840a2fc5343498a2a9299788de3a7f3",
+    "lib/src/priority/checker.rs": "a1b7190deb1cd4d8ee47e4dddd8b298e5e69121c6d6215fe1fcb3c5f21cb3699",
+    "lib/src/priority/expression.rs": "d2d127595ef9feba41cdd0869d1b387ee7751f2becfbb4cd582c25b38edb5c2b",
+    "lib/src/priority/request.rs": "82f598917eff37ddc0aacb600cbb11085c25feaf22bf84590be4dc8717d375cd",
+    "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/platform/entity.rs": "1dd71574e4c738889366074306227b044c4a5a2ff327bf42270d4b75eb32d6cb",
+    "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+    "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+    "lib/src/platform/expression.rs": "670dacccd1fe60f676bf31af8ec3c01fc223a89ec1bd8a619925b816121c9b03",
+    "lib/src/platform/request.rs": "694976ef01ce381abb5ea9d26f7368901ea8db57d5929136cd5b4d579ddb8929"
+  }
+}

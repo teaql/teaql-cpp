@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "models": 10,
+  "complete_original_compile_successes": 7,
+  "complete_original_compile_failures": 3,
+  "cpp_complete_umbrella_compile_successes": 7,
+  "cpp_pre_emission_rejections": 3,
+  "original_compiler_diagnostics_unchanged": true,
+  "source_and_cpp_metadata_equal": true,
+  "java_tests": [
+    {
+      "name": "CppGenerationTest",
+      "tests": 34,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "name": "CppJsonInputMetadataTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "name": "CppFieldLayoutMetadataTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "java_test_exit_code": 0,
+  "java_build_exit_code": 0,
+  "generation_workspaces": 18,
+  "reproduced_files": 216,
+  "regeneration_exit_code": 0,
+  "generation_reproduction_exit_code": 0,
+  "original_fixture_byte_and_file_set_reproduction_exit_code": 0,
+  "original_reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nnegative_one {}\nnegative_min {}\nsigned_overflow {}\nunsigned_max {}\nzero {}\nsigned_max {}\nduplicate {}\nfallback_text {}\ndefault_missing {}\npositive {}\nVerified 10 original/C++ constant-ID contracts: /tmp/teaql_constant_id_contracts/generation.json\n",
+  "generation_reproduction_output": "Verified 12 files: examples/generated\nVerified 12 files: tests/generated_types\nVerified 12 files: tests/generated_checkers\nVerified 12 files: tests/generated_relations\nVerified 12 files: tests/generated_business_ids\nVerified 12 files: tests/generated_optional_types\nVerified 12 files: tests/generated_inheritance\nVerified 12 files: tests/generated_inheritance_graph\nVerified 12 files: tests/generated_inheritance_variants\nVerified 12 files: tests/generated_inheritance_business_ids\nVerified 12 files: tests/generated_candidates\nVerified 12 files: tests/generated_constants_scalar\nVerified 12 files: tests/generated_constants_numeric\nVerified 12 files: tests/generated_constants_catalog\nVerified 12 files: tests/generated_dynamic_json\nVerified 12 files: tests/generated_sample_fields\nVerified 12 files: tests/generated_sample_fields_runtime\nVerified 12 files: tests/generated_sample_fields_temporal\n",
+  "source_verification_output": "Verified 36 locked generator sources and 17 capability records; 17 remain unqualified\n",
+  "format_output": "Formatted 1018 handwritten C++ files with clang-format 18.1.8\n",
+  "format_check_output": "Checked 1018 handwritten C++ files with clang-format 18.1.8\n",
+  "runtime_function_changes": false,
+  "new_dependency": false,
+  "sanitizer_module_mips_runs": false,
+  "sha256": {
+    "tests/generator/ConstantMetadataProbe.java": "218cd94f595c1747eb9d7c7c7820032051cb3b7076d52bf4c9bf70c0a55c6409",
+    "scripts/audit_constant_id_contracts.py": "abed6e5bddc58ea2c32e2309f4b3a2e204a4bedcf26f2db4f9fda3a16a0382e1",
+    "tests/generator/parity/constant_id_contracts/cases.json": "6ef8abe37753b67520770dce16655b27c5ae411ad190f8e22c9c2dfb56c8ce97",
+    "docs/parity/constant_id_contracts_5_0_6.json": "1702ab30c91795e5ba001d936a41a61c271919e9ecb401bdb8f11fd719a29d9a",
+    "docs/parity/constant_id_contracts_5_0_6_initial_audit.json": "b04aefdf85fb7386183609de9f2b5f28acbf3f178969b6b7eb5712fa552d7fe7"
+  },
+  "generator_source_sha256": "853fcc94de33a1d65e89ab317cc19ad2df193c5bc620e80de79ac5ce5615338a",
+  "remaining_scope": "No SQLite execution qualification for extreme/zero/fallback IDs; broader root/identifier/seed/scalar/customization requirements and all phases/capabilities remain open.",
+  "initial_cpp_compile_diagnostics": {
+    "negative_one": "In file included from /tmp/teaql_constant_id_contracts/negative_one/compile.cpp:1:\nIn file included from /tmp/teaql_constant_id_contracts/negative_one/cpp/include/constant_id_fixture.hpp:4:\n/tmp/teaql_constant_id_contracts/negative_one/cpp/include/constant_id_fixture/runtime.hpp:35:23: error: expected unqualified-id\n   35 | struct StatusBootstrap-1 : StatusBootstrapRecipe { static constexpr std::uint64_t fixed_id = -1ULL;\n      |                       ^\n/tmp/teaql_constant_id_contracts/negative_one/cpp/include/constant_id_fixture/runtime.hpp:59:242: error: expected '>'\n   59 | inline GeneratedSchemaBootstrapFuture& ensure_bootstrap(const UserContext& user_context) { const std::array<GeneratedSchemaBootstrap, 3> recipes{run_generated_bootstrap_model<PlatformBootstrap1>, run_generated_bootstrap_model<StatusBootstrap-1>, run_generated_bootstrap_model<StatusBootstrap2>}; return run_generated_schema_bootstrap(user_context, recipes); }\n      |                                                                                                                                                                                                                                                  ^\n/tmp/teaql_constant_id_contracts/negative_one/cpp/include/constant_id_fixture/runtime.hpp:59:226: note: to match this '<'\n   59 | inline GeneratedSchemaBootstrapFuture& ensure_bootstrap(const UserContext& user_context) { const std::array<GeneratedSchemaBootstrap, 3> recipes{run_generated_bootstrap_model<PlatformBootstrap1>, run_generated_bootstrap_model<StatusBootstrap-1>, run_generated_bootstrap_model<StatusBootstrap2>}; return run_generated_schema_bootstrap(user_context, recipes); }\n      |                                                                                                                                                                                                                                  ^\n/tmp/teaql_constant_id_contracts/negative_one/cpp/include/constant_id_fixture/runtime.hpp:59:245: error: expected expression\n   59 | inline GeneratedSchemaBootstrapFuture& ensure_bootstrap(const UserContext& user_context) { const std::array<GeneratedSchemaBootstrap, 3> recipes{run_generated_bootstrap_model<PlatformBootstrap1>, run_generated_bootstrap_model<StatusBootstrap-1>, run_generated_bootstrap_model<StatusBootstrap2>}; return run_generated_schema_bootstrap(user_context, recipes); }\n      |                                                                                                                                                                                                                                                     ^\n3 errors generated.\n",
+    "negative_min": "In file included from /tmp/teaql_constant_id_contracts/negative_min/compile.cpp:1:\nIn file included from /tmp/teaql_constant_id_contracts/negative_min/cpp/include/constant_id_fixture.hpp:4:\n/tmp/teaql_constant_id_contracts/negative_min/cpp/include/constant_id_fixture/runtime.hpp:35:23: error: expected unqualified-id\n   35 | struct StatusBootstrap-9223372036854775808 : StatusBootstrapRecipe { static constexpr std::uint64_t fixed_id = -9223372036854775808ULL;\n      |                       ^\n/tmp/teaql_constant_id_contracts/negative_min/cpp/include/constant_id_fixture/runtime.hpp:59:242: error: expected '>'\n   59 | inline GeneratedSchemaBootstrapFuture& ensure_bootstrap(const UserContext& user_context) { const std::array<GeneratedSchemaBootstrap, 3> recipes{run_generated_bootstrap_model<PlatformBootstrap1>, run_generated_bootstrap_model<StatusBootstrap-9223372036854775808>, run_generated_bootstrap_model<StatusBootstrap2>}; return run_generated_schema_bootstrap(user_context, recipes); }\n      |                                                                                                                                                                                                                                                  ^\n/tmp/teaql_constant_id_contracts/negative_min/cpp/include/constant_id_fixture/runtime.hpp:59:226: note: to match this '<'\n   59 | inline GeneratedSchemaBootstrapFuture& ensure_bootstrap(const UserContext& user_context) { const std::array<GeneratedSchemaBootstrap, 3> recipes{run_generated_bootstrap_model<PlatformBootstrap1>, run_generated_bootstrap_model<StatusBootstrap-9223372036854775808>, run_generated_bootstrap_model<StatusBootstrap2>}; return run_generated_schema_bootstrap(user_context, recipes); }\n      |                                                                                                                                                                                                                                  ^\n/tmp/teaql_constant_id_contracts/negative_min/cpp/include/constant_id_fixture/runtime.hpp:59:243: warning: integer literal is too large to be represented in a signed integer type, interpreting as unsigned [-Wimplicitly-unsigned-literal]\n   59 | inline GeneratedSchemaBootstrapFuture& ensure_bootstrap(const UserContext& user_context) { const std::array<GeneratedSchemaBootstrap, 3> recipes{run_generated_bootstrap_model<PlatformBootstrap1>, run_generated_bootstrap_model<StatusBootstrap-9223372036854775808>, run_generated_bootstrap_model<StatusBootstrap2>}; return run_generated_schema_bootstrap(user_context, recipes); }\n      |                                                                                                                                                                                                                                                   ^\n/tmp/teaql_constant_id_contracts/negative_min/cpp/include/constant_id_fixture/runtime.hpp:59:263: error: expected expression\n   59 | inline GeneratedSchemaBootstrapFuture& ensure_bootstrap(const UserContext& user_context) { const std::array<GeneratedSchemaBootstrap, 3> recipes{run_generated_bootstrap_model<PlatformBootstrap1>, run_generated_bootstrap_model<StatusBootstrap-9223372036854775808>, run_generated_bootstrap_model<StatusBootstrap2>}; return run_generated_schema_bootstrap(user_context, recipes); }\n      |                                                                                                                                                                                                                                                                       ^\n1 warning and 3 errors generated.\n"
+  }
+}

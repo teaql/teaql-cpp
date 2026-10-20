@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 20,
+  "follow_up_successes": 10,
+  "follow_up_errors": 10,
+  "corpus": "tests/parity/inherited_business_update_adapted_source_5_0_6_cases.json.gz",
+  "observer_sha256": "f8d0bf95c09e5a71f51ddca48672b2b9e477347fdf475c46df553747df96e1da",
+  "cpp_observer_sha256": "29e1368aee2e9fd62839742d0f706f0bf8fe3f92709d1911cf549ee34684bd3b",
+  "original_files_unchanged": true,
+  "source_artifact_acceptance": false,
+  "source_registry_versions_preserved": true,
+  "source_dependency_checksums_preserved": true,
+  "normalization": "none",
+  "inheritance_guard_removed": false
+}

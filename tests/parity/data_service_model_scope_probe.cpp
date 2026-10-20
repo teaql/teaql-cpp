@@ -36,6 +36,15 @@ static Json evaluate(UserContext& user, const Json& input) {
     auto* comment = std::get_if<String>(&field(input, "comment").data);
     auto intent = QueryIntent::create(
         owner, comment ? std::string_view(*comment) : name, "inspect data-service model fixture");
+    if (!intent) {
+        auto error = detail::model_json(owner);
+        detail::model_put(error, "code", intent.error().code());
+        detail::model_put(error, "field", intent.error().field);
+        detail::model_put(error, "message", intent.error().to_string(owner));
+        auto output = detail::model_json(owner);
+        detail::model_put(output, "intent_error", error);
+        return output;
+    }
     QueryRequest request(
         std::allocator_arg, Allocator(owner), query, intent.value(), flags & 2, flags & 4);
     request.trace_chain = TraceChain(traces, owner);

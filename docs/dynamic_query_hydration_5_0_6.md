@@ -1,5 +1,7 @@
 # Dynamic query hydration in Rust 5.0.6
 
+Current G16 qualification is recorded in the [complete acceptance audit](dynamic_storage_acceptance_5_0_6.md). The text below preserves this earlier checkpoint and its original remaining-work boundaries.
+
 Status: typed root loading, shared decoding and SQLite cursor enhancement have
 scoped original-source evidence. G16 and the complete migration remain partial.
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.

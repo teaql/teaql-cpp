@@ -1,6 +1,7 @@
 """Compare actual cursor registration in the corresponding original build profile."""
 import argparse
 import json
+import gzip
 from pathlib import Path
 import subprocess
 from compare_values import observe, same
@@ -14,7 +15,7 @@ def main():
     parser.add_argument("--rust")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    corpus = json.loads(Path(__file__).with_name("entity_query_boundary_cases.json").read_text())
+    corpus = json.loads(gzip.decompress(Path(__file__).with_name("entity_query_boundary_baseline_5_0_6_cases.json.gz").read_bytes()))
     if corpus["baseline"] != json.loads((root / "upstream.lock.json").read_text())["commit"]:
         raise RuntimeError("Entity query boundary observations belong to a different baseline")
     cases = corpus["cases"]

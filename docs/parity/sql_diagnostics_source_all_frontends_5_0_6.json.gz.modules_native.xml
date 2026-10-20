@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="11"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="1"
+	timestamp="2026-10-18T19:46:47"
+	>
+	<testcase name="module_sql_query_executor_contracts" classname="module_sql_query_executor_contracts" time="0.100366" status="run">
+		<properties/>
+		<system-out>SQL query executor contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_sql_transaction_execution_contracts" classname="module_sql_transaction_execution_contracts" time="0.00729212" status="run">
+		<properties/>
+		<system-out>SQL transaction execution contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_sql_stream_execution_contracts" classname="module_sql_stream_execution_contracts" time="0.00498687" status="run">
+		<properties/>
+		<system-out>SQL stream execution contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_original_sql_diagnostic_stream_contracts" classname="module_original_sql_diagnostic_stream_contracts" time="0.00238143" status="run">
+		<properties/>
+		<system-out>Original seven diagnostic stream contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_sql_move_only_context_contracts" classname="module_sql_move_only_context_contracts" time="0.00275128" status="run">
+		<properties/>
+		<system-out>Move-only SQL completion contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_sql_query_rust_parity" classname="module_sql_query_rust_parity" time="1.40883" status="run">
+		<properties/>
+		<system-out>SQL query executor parity: 767/767 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_sql_stream_rust_parity" classname="module_sql_stream_rust_parity" time="0.920032" status="run">
+		<properties/>
+		<system-out>SQL stream execution parity: 1765/1765 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_sql_execution_rust_parity" classname="module_sql_execution_rust_parity" time="1.40254" status="run">
+		<properties/>
+		<system-out>SQL mutation execution parity: 2029/2029 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_sql_transaction_rust_parity" classname="module_sql_transaction_rust_parity" time="1.54555" status="run">
+		<properties/>
+		<system-out>SQL transaction execution parity: 2029/2029 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_sql_executor_kind_rust_parity" classname="module_sql_executor_kind_rust_parity" time="0.124778" status="run">
+		<properties/>
+		<system-out>SQL executor backend capture parity: 93/93 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_sql_diagnostics_guard_rust_parity" classname="module_sql_diagnostics_guard_rust_parity" time="0.0944235" status="run">
+		<properties/>
+		<system-out>SQL diagnostic guards parity: 352/352 observations match
+</system-out>
+	</testcase>
+</testsuite>

@@ -157,3 +157,16 @@ sanitizer CTest. For the MIPS live comparison, also pass
 Complete SafeExpression/public model and all-stage acceptance is not established
 by this checkpoint. No generator or production dependency changed. MIPS
 validation uses QEMU rather than the physical router.
+
+## Current 5.0.6 whole-source qualification
+
+The historical checkpoints above remain unchanged. The complete
+[SE01-SE16 review](safe_expression_source_review_5_0_6.md) now accepts the
+308-line SafeExpression source under the current pinned 5.0.6 baseline. Actual
+source tests 4, source/native/imported observations 580 per frontend, one original
+compiler positive/eight exact negative bounds and native 5/imported 5 pass.
+Complete API and observer bodies are permanently imported without edits.
+All 938 canonical bodies and SDK/archive identities verify. This advances exactly
+one source disposition; whole generated E, runtime/protected callers and
+G13/G14/G17/P0-P7 remain independent. No historical full or sanitizer/MIPS result
+is relabeled as a new run.

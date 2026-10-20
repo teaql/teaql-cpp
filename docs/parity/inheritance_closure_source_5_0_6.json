@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "matrices": [
+    {
+      "matrix": "generated_inheritance",
+      "observations": 48,
+      "corpus_sha256": "5e70eb175548fd5164b1cdaae0dc8256fd04196a84dafac261872f85ea84b118",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inheritance_5_0_6.rs",
+      "unchanged_driver_sha256": "7a1bfe2fd0e2252a57ac034efaf787606afc76583073281e7210077ae7be5b21"
+    },
+    {
+      "matrix": "generated_inheritance_query",
+      "observations": 1944,
+      "corpus_sha256": "4a95dd7dacfdb079397f6f42a9861bc3199442510b52489c5219d5dc1d6a39f3",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inheritance_query_5_0_6.rs",
+      "unchanged_driver_sha256": "3f98ddf06f4f89526fc7b288b43267ee3765ba90d478f1c408f0c996637fc464"
+    },
+    {
+      "matrix": "generated_inheritance_sqlite",
+      "observations": 144,
+      "corpus_sha256": "1aa4f9c49bdc2aa8a27b8d357a02596ebf025e4a84272dca4cc06bc04481cccc",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inheritance_sqlite_5_0_6.rs",
+      "unchanged_driver_sha256": "2cfaa30b2c732b966fedf2fbf895a93af71ec75bd0344f607ec257111c284de6"
+    },
+    {
+      "matrix": "generated_return_type",
+      "observations": 702,
+      "corpus_sha256": "f7c2d260abcd8f50e9441756e42dc4c7d9a677269a0e619376843c01fec514b3",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inheritance_sqlite_5_0_6.rs",
+      "unchanged_driver_sha256": "2cfaa30b2c732b966fedf2fbf895a93af71ec75bd0344f607ec257111c284de6"
+    },
+    {
+      "matrix": "generated_inheritance_save",
+      "observations": 1350,
+      "corpus_sha256": "b3c97a91fe245733075995230a83c5e5aadf819ead2f1b871faff913f7677cbb",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inheritance_save_5_0_6.rs",
+      "unchanged_driver_sha256": "bbc3988f0c5468b55399c8bdd1a7736e6f0ab25612d0d794010cef8994ff2241"
+    },
+    {
+      "matrix": "generated_inheritance_graph",
+      "observations": 2313,
+      "corpus_sha256": "706669dc1d80d13054a62534e032f5ad345a7688b5bc5db1386c55c9b74b432f",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inheritance_graph_5_0_6.rs",
+      "unchanged_driver_sha256": "93257921f5d7462a16cf9ca6e6b1e44adccbcd3065e3ae49b578104c11e2ab2e"
+    },
+    {
+      "matrix": "generated_inheritance_variants",
+      "observations": 375,
+      "corpus_sha256": "eb2647ca2e3d1feddd0ef85b496a804726a60a2ba9a64697d57dbac4d8cecad0",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inheritance_variants_5_0_6.rs",
+      "unchanged_driver_sha256": "b54c6e1d2a622f2fe0573d0098a26cc5b51d9f36d92f51f3f325d207f87a5a7c"
+    },
+    {
+      "matrix": "generated_inherited_stream",
+      "observations": 432,
+      "corpus_sha256": "abf457ea8b00c0f1109dd1938ad736e2b0e78001b96bddc53358fe791bfa55f2",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inherited_stream_5_0_6.rs",
+      "unchanged_driver_sha256": "0aeb7c95363e10c66483ebccda3bccdae79ce8ab10d5f517fd75e5d9e0b45672"
+    },
+    {
+      "matrix": "generated_inherited_json",
+      "observations": 428,
+      "corpus_sha256": "2b33dcc7eb108d9cb9108526684db4839e18b897639b3ea5c0c4ae1fd9f61a6f",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_inherited_json_5_0_6.rs",
+      "unchanged_driver_sha256": "0735696afbb28b8cdbfab0e13a0fac39d042adfb9897eec153daff874f64b9b7"
+    }
+  ],
+  "observations": 7736,
+  "manifest_sha256": "d725cdfd23c59b848891f174dcd0458f3b41f5eb9c14aee80159e69b34670315",
+  "lock_sha256": "5c9137885e6c9926d268a048092028841ff6c1e2f8f42777f95fb5dd0a059cb4",
+  "reference_lock_sha256": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+  "source_dependency_versions_preserved": true,
+  "source_dependency_checksums_preserved": true,
+  "original_drivers_changed": false,
+  "original_generated_source_changed": false,
+  "normalization": "none",
+  "complete_capability_acceptance": false
+}

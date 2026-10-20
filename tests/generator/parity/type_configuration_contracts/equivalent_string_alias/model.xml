@@ -1,0 +1,9 @@
+<root name="cpp_type_configuration_fixture" org="teaql" data_service="sqlite">
+    <_type_definition name="word" parent="string" rustType="String" />
+    <priority id="id()" platform="platform(contextRoot=true)" name="string()" code="string()" value="word()"
+              _constant="true" _identifier="code">
+        <_value id="1" name="Basic" code="BASIC" value="7" />
+        <_value id="22" name="Extended" code="EXTENDED" value="9" />
+    </priority>
+    <platform name="string()" />
+</root>

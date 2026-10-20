@@ -1,0 +1,29 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "hand_edited": false,
+  "model": "tests/generator/parity/query_alias_contracts/model.xml",
+  "model_sha256": "c69c71eda45df00e397d15b46d9f8c6c0394bbd81d612232914aff9b91ffa053",
+  "files": {
+    "OBSERVATION.json": "9f962d30b5de848098a9ad0e29329d2bfa27d0ffc3820f84b60f78f6fbb66037",
+    "lib/Cargo.toml": "df1512ce606c4bd35d91badfb746fa0bab6b9532b847c495aaaf7c01e3c7a9bf",
+    "lib/src/sample_data.rs": "8eb2eea502e9c660f73ff0875db6db9b257d2162edd286989daa24e47ff4b77b",
+    "lib/src/request_support.rs": "2381f8a75a6e638cab7da29ac0a3ccc3c095340a589d076f2df92aa4c22b18d4",
+    "lib/src/q.rs": "a294765ecb643876db6380b4efcba1b7322c63d79d8319df527779758841b9fb",
+    "lib/src/e.rs": "125b26eb2d9af951025dd6ee70b26704e01a25262818a67ee2d5b563d18f079d",
+    "lib/src/lib.rs": "b4a04e34b5165f9e5581e453374942b7a4fb343ba1cc655bf0cdae121e41b50f",
+    "lib/src/runtime.rs": "7083765afeefb88c6f27d69b51f3a8fb342d2afff50b2eb06676c0e273800c13",
+    "lib/src/record/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/record/entity.rs": "1277a969108132be5a8d94af38f779e504eee85151f659789681a8059eb4b752",
+    "lib/src/record/behavior.rs": "c9166039397b9230ea683620f32d6bf3f8fa54197ec722b5242fff315fcfbf21",
+    "lib/src/record/checker.rs": "453b3c14d6bf7c8f13367a1cd72ce4e384b69e0431517465acf14e603713b86c",
+    "lib/src/record/expression.rs": "8a48768ba75219ffbeb1b8b8d0621832e194ca9477627cc3dae1d7f192f2f8e3",
+    "lib/src/record/request.rs": "60d86578bf86089c6659ab01d5d2d41cd23910d6ea3473b887d65deda2e24e07",
+    "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/platform/entity.rs": "7eb5509d58fa97174f25face883b7de66206a61c4d08866714407f0624802390",
+    "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+    "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+    "lib/src/platform/expression.rs": "550e5acfb8ba09caa14195edfb1ad0a5e60cc33e5c519bcdc2312cf1dc0066e4",
+    "lib/src/platform/request.rs": "dfb8ac48a2d6ff56a0c05504f54832361c0a4421ae0884c11e61e554df925511"
+  }
+}

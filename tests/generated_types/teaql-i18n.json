@@ -1,0 +1,131 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.person.age": "Age",
+                "entity.device": "Device",
+                "property.device.id": "Id",
+                "property.device.code": "Code",
+                "property.device.version": "Version",
+                "property.person.id": "Id",
+                "property.orderStatus.version": "Version",
+                "property.person.balance": "Balance",
+                "property.inventory.id": "Id",
+                "property.person.active": "Active",
+                "property.category.name": "Name",
+                "property.person.nickname": "Nickname",
+                "property.person.updatedAt": "Updated At",
+                "entity.category": "Category",
+                "property.person.email": "Email",
+                "property.child.version": "Version",
+                "property.person.version": "Version",
+                "property.child.name": "Name",
+                "property.device.active": "Active",
+                "entity.child": "Child",
+                "property.person.payload": "Payload",
+                "property.category.version": "Version",
+                "property.device.owner": "Owner",
+                "property.orderStatus.id": "Id",
+                "property.child.id": "Id",
+                "property.inventory.name": "Name",
+                "property.category.id": "Id",
+                "entity.orderStatus": "Order Status",
+                "property.person.height": "Height",
+                "property.person.ratio": "Ratio",
+                "entity.person": "Person",
+                "property.inventory.version": "Version",
+                "property.orderStatus.name": "Name",
+                "entity.inventory": "Inventory",
+                "property.person.birthday": "Birthday"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

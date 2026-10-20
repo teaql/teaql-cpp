@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 936,
+  "initial_differences": 216,
+  "source_and_cpp_exit_code": 0,
+  "presentation_adaptations": [
+    "ASCII C++ API casing",
+    "English human message",
+    "nested selectWith syntax"
+  ],
+  "raw_original_panics_retained": true,
+  "legacy_observations": 196,
+  "legacy_live_source_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "generated_expression_diagnostics_rust_parity",
+        "expression_diagnostic_text_rust_parity",
+        "expression_diagnostic_text_context_contracts",
+        "runtime_entity_expression_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 526: generated_expression_diagnostics_rust_parity\n1/4 Test #526: generated_expression_diagnostics_rust_parity ...   Passed    0.09 sec\n    Start 527: expression_diagnostic_text_rust_parity\n2/4 Test #527: expression_diagnostic_text_rust_parity .........   Passed    0.28 sec\n    Start 528: expression_diagnostic_text_context_contracts\n3/4 Test #528: expression_diagnostic_text_context_contracts ...   Passed    0.00 sec\n    Start 529: runtime_entity_expression_contracts\n4/4 Test #529: runtime_entity_expression_contracts ............   Passed    0.00 sec\n\n100% tests passed out of 4\n\nTotal Test time (real) =   0.38 sec\n"
+    },
+    "sanitize": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "expression_diagnostic_text_rust_parity",
+        "expression_diagnostic_text_context_contracts",
+        "runtime_entity_expression_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 527: expression_diagnostic_text_rust_parity\n1/3 Test #527: expression_diagnostic_text_rust_parity .........   Passed    0.72 sec\n    Start 528: expression_diagnostic_text_context_contracts\n2/3 Test #528: expression_diagnostic_text_context_contracts ...   Passed    0.01 sec\n    Start 529: runtime_entity_expression_contracts\n3/3 Test #529: runtime_entity_expression_contracts ............   Passed    0.01 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.76 sec\n"
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_expression_diagnostic_text_context_contracts",
+        "module_expression_diagnostic_text_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 638: module_expression_diagnostic_text_context_contracts\n1/2 Test #638: module_expression_diagnostic_text_context_contracts ...   Passed    0.00 sec\n    Start 663: module_expression_diagnostic_text_rust_parity\n2/2 Test #663: module_expression_diagnostic_text_rust_parity .........   Passed    0.24 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.25 sec\n"
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 139,
+  "formatting": {
+    "handwritten_files": 1017,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_expression.hpp": "c89ebb1e2535956b76d983e49ff0b2409915cfcfe8e326ed427ebfdbb0aac6b0",
+    "tests/parity/expression_diagnostic_text_probe.cpp": "cfd324153dbe4f54ff840f697e3f05aaadac0712905cfd0d16e91b0b66f60b95",
+    "tests/parity/rust_field_layout/src/bin/expression_diagnostic_text_5_0_6.rs": "a0a84a84e6826a7015fa490b76bd6ec7c8b8d7b21d51694b0b0a073b627024e6",
+    "tests/parity/compare_expression_diagnostic_text_5_0_6.py": "52822f3a118ae8466bb6194f0630886a5727078ae06602d35ebd3266d115c3e1",
+    "tests/parity/generate_expression_diagnostic_text_5_0_6.py": "604db120e29e90564f9230e67a1211b8441992e169321a55aab4f4a30d2c44f2",
+    "tests/parity/expression_diagnostic_text_5_0_6_cases.json.gz": "d5d71d20ba2c36a11f791c82aa3db4dde965b5aacaf8cdd12a899e3efb3fb2d9",
+    "tests/parity/generated_expression_diagnostics_5_0_6_cases.json": "2c82e838644cf1da7059a34111a788ff588924bdb5613dae8dc2db44d0fee71b"
+  },
+  "live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 936 original/native diagnostic text cases\n",
+  "legacy_live_source_output": "196 source diagnostic observations match (explicit C++ spelling and English text adaptations)\n",
+  "initial_fixture_error": "std::pmr::string cannot compare directly to std::string; corrected explicit string_view comparison after failed build processes terminated.",
+  "scope": "Root identifier casing and original first parenthesis segment; control/quote/Unicode/empty/repeated missing paths; safe native JSON roundtrip; actual User destruction with explicit Global copy and expired reference rejection.",
+  "notice": "Unchanged original producer function supplies raw panics. Field-label extraction is fixture-scoped and excludes embedded field-label delimiter sequences; not a universal panic parser or executable automatic query repair. Full model/Assist/extension and G01-G17/P0-P7 remain open. No MIPS or physical-device execution.",
+  "binding_inventory": {
+    "active_baseline": 155,
+    "custom_dispatcher_requires_review": 22,
+    "historical_baseline_requires_replay": 63
+  }
+}

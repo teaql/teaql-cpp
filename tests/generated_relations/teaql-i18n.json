@@ -1,0 +1,115 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.platform.name": "Name",
+                "entity.device": "Device",
+                "property.device.id": "Id",
+                "entity.profile": "Profile",
+                "entity.platform": "Platform",
+                "property.platform.id": "Id",
+                "property.device.name": "Name",
+                "property.device.version": "Version",
+                "entity.school": "School",
+                "property.school.name": "Name",
+                "property.school.platform": "Platform",
+                "property.school.id": "Id",
+                "property.profile.version": "Version",
+                "property.device.platform": "Platform",
+                "property.profile.id": "Id",
+                "property.platform.version": "Version",
+                "property.profile.name": "Name",
+                "property.school.version": "Version",
+                "property.profile.platform": "Platform"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

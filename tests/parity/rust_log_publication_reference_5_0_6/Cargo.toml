@@ -1,0 +1,46 @@
+[package]
+name = "teaql_log_publication_source_506"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[[bin]]
+name = "runtime_log_oracle"
+path = "../rust_values/src/bin/runtime_log_oracle.rs"
+
+[[bin]]
+name = "audit_event_oracle"
+path = "../rust_values/src/bin/audit_event_oracle.rs"
+
+[[bin]]
+name = "context_logging_oracle"
+path = "../rust_values/src/bin/context_logging_oracle.rs"
+
+[[bin]]
+name = "log_formatter_oracle"
+path = "../rust_values/src/bin/log_formatter_oracle.rs"
+
+[[bin]]
+name = "log_manager_oracle"
+path = "../rust_values/src/bin/log_manager_oracle.rs"
+
+[[bin]]
+name = "log_model_public"
+path = "../rust_field_layout/src/bin/log_model_5_0_6.rs"
+
+[[bin]]
+name = "buffer_clone"
+path = "../rust_values/src/bin/log_model_oracle.rs"
+
+[dependencies]
+teaql-core = {path = "../../../.reference/teaql-rs/teaql-core"}
+teaql-runtime = {path = "../../../.reference/teaql-rs/teaql-runtime"}
+teaql-data-service = {path = "../../../.reference/teaql-rs/teaql-data-service"}
+teaql-sql = {path = "../../../.reference/teaql-rs/teaql-sql"}
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+serde_json = "=1.0.150"
+sha2 = "=0.10.9"
+tokio = "=1.52.3"

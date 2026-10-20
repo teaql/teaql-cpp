@@ -1,0 +1,856 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "checked_arithmetic": false,
+  "status": "declared SQLite corpus families requalified; full integration remains pending",
+  "observations": 14355,
+  "matrices": [
+    {
+      "matrix": "sqlite_schema",
+      "observations": 735,
+      "source_changed": 0,
+      "checked_failures": 0,
+      "native_differences": 0,
+      "driver": "tests/parity/rust_values/src/bin/sqlite_schema_oracle.rs",
+      "driver_sha256": "e1968887167fb60ba51cd5192d9f4d59b50fc1cb76885c51ded3a42f14469074",
+      "historical_sha256": "9b335843440c23ced7a018a99b5ba2317f0204b89f18a3dbbb43fcebced519ab",
+      "active": "tests/parity/sqlite_schema_unchecked_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sqlite_decoding",
+      "observations": 6029,
+      "source_changed": 0,
+      "checked_failures": 0,
+      "native_differences": 0,
+      "driver": "tests/parity/rust_values/src/bin/sqlite_decoding_oracle.rs",
+      "driver_sha256": "c51e8037ed884cb93ee0d4b36772385f11114b6a4ed18e3ce6d65ab1e1e0be43",
+      "historical_sha256": "deddcd599f9c6d1921e09420095d5e762fb900f522520b41278e06dd5e308b2b",
+      "active": "tests/parity/sqlite_decoding_unchecked_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sqlite_bindings",
+      "observations": 1084,
+      "source_changed": 0,
+      "checked_failures": 0,
+      "native_differences": 0,
+      "driver": "tests/parity/rust_values/src/bin/sqlite_bindings_oracle.rs",
+      "driver_sha256": "fee41ae1df733988a17a56451c5e3ecd52b9178e0d5af4341da9b3ac185f64f8",
+      "historical_sha256": "8ca490cdf263b82dcd7416cc5b95d70a2f12a29ea0e220416b8a271a124e27c5",
+      "active": "tests/parity/sqlite_bindings_unchecked_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sqlite_error_model",
+      "observations": 563,
+      "source_changed": 0,
+      "checked_failures": 0,
+      "native_differences": 0,
+      "driver": "tests/parity/rust_values/src/bin/sqlite_error_model_oracle.rs",
+      "driver_sha256": "254a2123d36323c0663efc62c7b87990afa8f596aefcc10185766de4311a75eb",
+      "historical_sha256": "048f6a4ba649e05fcb89a9030bd914e810e3c7db48a79e81d3725d1dd71631c3",
+      "active": "tests/parity/sqlite_error_model_unchecked_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sqlite_native_diagnostics",
+      "observations": 5810,
+      "source_changed": 0,
+      "checked_failures": 0,
+      "native_differences": 0,
+      "driver": "tests/parity/rust_values/src/bin/sqlite_native_diagnostics_oracle.rs",
+      "driver_sha256": "b15a03357dc37e496fdd6a12f059a42b5bf6ac4cded4e3e2b8efbaec04dc313c",
+      "historical_sha256": "6bb688dc993a6572cabe065b8361db08fd5c1cb61fb4e6682f9c627290cba18a",
+      "active": "tests/parity/sqlite_native_diagnostics_unchecked_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sqlite_simple_error",
+      "observations": 62,
+      "source_changed": 0,
+      "checked_failures": 0,
+      "native_differences": 0,
+      "driver": "tests/parity/rust_values/src/bin/sqlite_simple_error_oracle.rs",
+      "driver_sha256": "2871f6a534891d40edd999137d8078ccb870519ab8f10a940f83223f6c591b6e",
+      "historical_sha256": "95b96e841b7a56b5319a201f73c540cfcd745bb3b318e7adb0fa8318042ab194",
+      "active": "tests/parity/sqlite_simple_error_unchecked_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sqlite_from_sql_error",
+      "observations": 36,
+      "source_changed": 0,
+      "checked_failures": 0,
+      "native_differences": 0,
+      "driver": "tests/parity/rust_values/src/bin/sqlite_from_sql_error_oracle.rs",
+      "driver_sha256": "3efafbf783e7d696f2570d156a084b2469095cafb3ad9450a1c141e36229a4a5",
+      "historical_sha256": "a575c1a8bf8e9d0ecad5a2ce36fb60b8e5279269ebdda3d4ab7c5fba5516b1d4",
+      "active": "tests/parity/sqlite_from_sql_error_unchecked_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sqlite_from_sql_raw_debug",
+      "observations": 36,
+      "source_changed": 0,
+      "checked_failures": 0,
+      "native_differences": 0,
+      "driver": "tests/parity/rust_values/src/bin/sqlite_from_sql_error_oracle.rs",
+      "driver_sha256": "3efafbf783e7d696f2570d156a084b2469095cafb3ad9450a1c141e36229a4a5",
+      "historical_sha256": "52d3d732cfffec3d59deedf1130b39723efff7c49c739d1262341d0603ca55bd",
+      "active": "tests/parity/sqlite_from_sql_raw_debug_unchecked_5_0_6_cases.json.gz"
+    }
+  ],
+  "manifest_sha256": "790f946d3da62e1fca049eef52bc8ced1284d3fd1c431057bf5d3fd69bc58b55",
+  "lock_sha256": "5fca5ed8c5d035926a420202cface4c5d42214a4eba16e6bab365e5820afa9ee",
+  "observer_helpers_sha256": {
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_values/src/fixture_sql.rs": "3f9b4a0b35cee94de9ccb283f0cf35d64e6196b112791a9017ea42f836215abf",
+    "tests/parity/rust_sqlite_baselines_5_0_6/sqlite_decoding_checked.rs": "1b9051be083bbafe2bdf9ae7c22b7f16745aa96f9abbd445819febc4d53a8a3b",
+    "tests/parity/sqlite_decoding_checked_probe.cpp": "43a7a1c528595fa43f524e0112a501b6245bb379215a9d4f7db98b51cde08c58",
+    "tests/parity/sqlite_decoding_probe.cpp": "c0a84e8472dc2145b327d3cae4433f0478b2840e136f2ea6919122599717348d",
+    "scripts/verify_sqlite_baselines_5_0_6.py": "afa6edc4fbb67778f82797e37060bf1cdd8cbe710bc00a85e00e6e93ac796064"
+  },
+  "timestamp_short_circuit_controls": [
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "rows": [
+          {
+            "keys": [
+              "v"
+            ],
+            "values": [
+              {
+                "kind": "timestamp",
+                "value": "1709168523000"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d33302030313a2d323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392078783a2d323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'2f3032342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'3a3032342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'783032342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'322f32342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323a32342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'327832342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'32302f342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'32303a342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323078342d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'3230322f2d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'3230323a2d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032782d30322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d2f322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d3a322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d78322d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d302f2d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input is out of range",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d303a2d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input is out of range",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30782d32392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input is out of range",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d2f392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d3a392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d78392030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d322f2030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d323a2030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32782030313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d3239202f313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d3239203a313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392078313a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d323920302f3a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d323920303a3a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030783a30323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a2f323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a3a323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a78323a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a302f3a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a303a3a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30783a3033' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a2f33' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a3a33' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a7833' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a302f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a303a' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a3078' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b302f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b782f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b2f78' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b7830' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b3078' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b32343a302f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b30783a302f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b32343a3030' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b32333a3630' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332d30313a3030' AS TEXT)"
+      },
+      "expected": {
+        "rows": [
+          {
+            "keys": [
+              "v"
+            ],
+            "values": [
+              {
+                "kind": "timestamp",
+                "value": "1709172123000"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b30383a' AS TEXT)"
+      },
+      "expected": {
+        "rows": [
+          {
+            "keys": [
+              "v"
+            ],
+            "values": [
+              {
+                "kind": "timestamp",
+                "value": "1709139723000"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332b30383a303078' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332e' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: premature end of input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332e78' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input contains invalid characters",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332e313233343536373839302b30303a3030' AS TEXT)"
+      },
+      "expected": {
+        "rows": [
+          {
+            "keys": [
+              "v"
+            ],
+            "values": [
+              {
+                "kind": "timestamp",
+                "value": "1709168523123"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d33302030313a30323a30332b782f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392032343a30323a30332b782f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: input is out of range",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a36302b782f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "decl": "TIMESTAMP",
+        "sql_value": "CAST(x'323032342d30322d32392030313a30323a30332e302b782f' AS TEXT)"
+      },
+      "expected": {
+        "error": "rusqlite bind error: invalid sqlite timestamp: trailing input",
+        "kind": "Bind",
+        "source_none": true
+      }
+    }
+  ],
+  "dependency_scope": "Exact direct dependencies from the original 5.0.6 lock, including rusqlite 0.40.1 and libsqlite3-sys 0.38.1. Development observer only.",
+  "normalization": "none",
+  "complete_capability_acceptance": false
+}

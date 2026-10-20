@@ -74,6 +74,25 @@ RegisteredResource checker_resource(Arena& destination, Owner& owner, T& object)
     return ContextResources::entry(destination, owner.memory_resource(), object, slot);
 }
 
+template <class C, class Owner>
+ResourceBorrow<const C> typed_checker_borrow(Allocator a, Owner& owner, C& checker) {
+    auto registered = checker_resource(resource_arena(a.resource()), owner, checker);
+    return ResourceBorrow<const C>(
+        std::allocator_arg, a, checker, *registered.owner, registered.slot);
+}
+
+template <class C>
+ResourceBorrow<const C>
+typed_checker_borrow(Allocator a, const UserContext& user_context, Ref<C> reference) {
+    auto& origin = checker_reference_origin(user_context, reference.id());
+    auto& checker =
+        *static_cast<C*>(origin.resolve(reference_slot(reference.id()), typeid(C), reference.id()));
+    (void)ContextResources::entry(
+        resource_arena(a.resource()), &origin, checker, reference_slot(reference.id()));
+    return ResourceBorrow<const C>(
+        std::allocator_arg, a, checker, origin, reference_slot(reference.id()));
+}
+
 std::optional<FieldSet> take_checker_fields(EntityValues&, std::string_view name);
 bool missing_or_untyped_null(const Record&, std::string_view name);
 }
@@ -161,9 +180,45 @@ public:
         const UserContext&, T&, CheckObjectStatus, const ObjectLocation&, CheckResults&) const = 0;
 };
 
+// Generic construction does not confer an erased Checker capability. As in
+// Rust, metadata is sufficient to construct a carrier; dispatch additionally
+// requires an Entity, an explicit copy capability and matching typed logic.
+template <class T, class C>
+class TypedEntityChecker {
+public:
+    using allocator_type = Allocator;
+
+    template <class Owner>
+    TypedEntityChecker(std::allocator_arg_t, Allocator a, Owner& owner, C& checker)
+        requires TeaqlEntity<T>
+        : checker_(detail::typed_checker_borrow<C>(a, owner, checker)),
+          name_(T::entity_descriptor(a.resource()).name, a.resource()) {}
+
+    TypedEntityChecker(std::allocator_arg_t,
+                       Allocator a,
+                       const UserContext& user_context,
+                       Ref<C> checker)
+        requires TeaqlEntity<T>
+        : checker_(detail::typed_checker_borrow<C>(a, user_context, checker)),
+          name_(T::entity_descriptor(a.resource()).name, a.resource()) {}
+
+    TypedEntityChecker(std::allocator_arg_t, Allocator a, const TypedEntityChecker& other)
+        : checker_(std::allocator_arg, a, other.checker_), name_(other.name_, a.resource()) {}
+
+    TypedEntityChecker(const TypedEntityChecker&) = delete;
+
+    Memory memory_resource() const noexcept {
+        return name_.get_allocator().resource();
+    }
+
+private:
+    ResourceBorrow<const C> checker_;
+    String name_;
+};
+
 template <Entity T, class C>
-    requires std::derived_from<C, TypedChecker<T>>
-class TypedEntityChecker final : public Checker {
+    requires(detail::domain_copyable<T> && std::derived_from<C, TypedChecker<T>>)
+class TypedEntityChecker<T, C> final : public Checker {
 public:
     using allocator_type = Allocator;
 
@@ -258,23 +313,12 @@ public:
 private:
     static ResourceBorrow<const C>
     borrow(Allocator a, const UserContext& context, Ref<C> reference) {
-        auto& origin = detail::checker_reference_origin(context, reference.id());
-        auto& checker = *static_cast<C*>(
-            origin.resolve(detail::reference_slot(reference.id()), typeid(C), reference.id()));
-        (void)detail::ContextResources::entry(detail::resource_arena(a.resource()),
-                                              &origin,
-                                              checker,
-                                              detail::reference_slot(reference.id()));
-        return ResourceBorrow<const C>(
-            std::allocator_arg, a, checker, origin, detail::reference_slot(reference.id()));
+        return detail::typed_checker_borrow<C>(a, context, reference);
     }
 
     template <class Owner>
     static ResourceBorrow<const C> borrow(Allocator a, Owner& owner, C& checker) {
-        auto registered =
-            detail::checker_resource(detail::resource_arena(a.resource()), owner, checker);
-        return ResourceBorrow<const C>(
-            std::allocator_arg, a, checker, *registered.owner, registered.slot);
+        return detail::typed_checker_borrow<C>(a, owner, checker);
     }
 
     ResourceBorrow<const C> checker_;

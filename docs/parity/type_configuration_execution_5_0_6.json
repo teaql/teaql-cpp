@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "declared six-domain SQLite/bootstrap/Q/E execution qualified; G05/P3 remains partial",
+  "models": [
+    {
+      "case": "equivalent_integer",
+      "observations": 96,
+      "comparison": "exact",
+      "rust_build_exit": 0,
+      "rust_binary_sha256": "043d151e45278c3e167c92b40d31ea5c42c8ce4a5f57194e66d21791edd7a8c0",
+      "cpp_binary_sha256": "0901ee65b24b0857c790de21ba9c2428077a1fa1a5290f087c1ced1082be2051"
+    },
+    {
+      "case": "equivalent_string_alias",
+      "observations": 96,
+      "comparison": "exact",
+      "rust_build_exit": 0,
+      "rust_binary_sha256": "fb54f72ab9c9abb43c58bc1b919d1d8468f56e926ce8e54e30179436d21a2bbb",
+      "cpp_binary_sha256": "e602291ced4fbe8f4398854103889b7ea76e45b667d2871c93c9e77b69218fe4"
+    },
+    {
+      "case": "field_parameter",
+      "observations": 96,
+      "comparison": "exact",
+      "rust_build_exit": 0,
+      "rust_binary_sha256": "2a62e9e46ba4316a3d53afa1fcf1a6fb6e7e89136e08d78c807488625971c298",
+      "cpp_binary_sha256": "5e6a6bbc5526266ae69c7e80d264ae0fed3e4aa286c0827289bba1b510966644"
+    },
+    {
+      "case": "numeric_alias",
+      "observations": 96,
+      "comparison": "exact",
+      "rust_build_exit": 0,
+      "rust_binary_sha256": "0444abbbaafeb481c2661f41d85f16b290c21792089ac144683b3687906d8673",
+      "cpp_binary_sha256": "10d375499d3fba0df4f650181bd9182998ed8fc248dfdb22a385a33bbbecb864"
+    },
+    {
+      "case": "string_alias",
+      "observations": 96,
+      "comparison": "exact",
+      "rust_build_exit": 0,
+      "rust_binary_sha256": "daa8ae482a82315402c497192398197d98984986750d0d9d497fb9132d97f575",
+      "cpp_binary_sha256": "cbe2a2b078603f5c94d00f4d951296140017e69462e7ad2fc95abc92b8067b48"
+    },
+    {
+      "case": "unsigned_recipe",
+      "observations": 96,
+      "comparison": "exact",
+      "rust_build_exit": 0,
+      "rust_binary_sha256": "220e422354af12304483ce39016a34d51619e18f4c61cdfa549052dbd99993a5",
+      "cpp_binary_sha256": "a5c324a883daddba2e3f486b960253e19f3bc6fcd84b9128fceffe544a87806f"
+    }
+  ],
+  "scenarios": 576,
+  "rounds": 864,
+  "successful_bootstrap_rounds": 720,
+  "bootstrap_errors": {
+    "graph write error: Transport error: UNIQUE constraint failed: priority_data.id": 144
+  },
+  "queries": 3456,
+  "query_errors": 0,
+  "sql_entries": 4656,
+  "comparison": "exact complete outcomes without timestamp/value/error normalization",
+  "native": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 6,
+    "total": 6
+  },
+  "modules": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 6,
+    "total": 6,
+    "canonical_bodies": 321
+  },
+  "format": {
+    "version": "18.1.8",
+    "files": 1212,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "runtime_changed": false,
+  "producer_changed": false,
+  "guards_removed": false,
+  "ownership": "Global owns the retained SQLite resource and observation values; each round really deletes UserContext and its ID allocator. Default PMR is disabled; typed query/E wrappers do not extend the source lifetime.",
+  "scope": "Four module factories, six stored states, two round counts and two log modes per each of six authentic source-compilable type configurations. Four generated typed Q requests and loaded E scalar reads per round; source-invalid configurations are excluded explicitly by the preceding compiler disposition.",
+  "hashes": {
+    "tests/parity/type_configuration_execution_equivalent_integer_5_0_6_cases.json.gz": "f86057b0941526e4a459e90fcf32611a02b70f2cf3462da09779215594f0e0a1",
+    "tests/parity/type_configuration_equivalent_integer_probe.cpp": "867b366ad32df353681ad44efe7fc87b4d03de2d282e342c5aa7543e0eadfdd8",
+    "tests/parity/type_configuration_execution_equivalent_string_alias_5_0_6_cases.json.gz": "7436508cbe5d86e5031d0206e738ec2015e16e7e0df8fa04a987801a83140aa9",
+    "tests/parity/type_configuration_equivalent_string_alias_probe.cpp": "9e3f0ee52cff21393ee3cf7dd5d7af986a56b0060f887f961dbfb3c3cf4a3fba",
+    "tests/parity/type_configuration_execution_field_parameter_5_0_6_cases.json.gz": "843cec02733bccbe15fe217de875d6bff7b08244e8878bff6b4dadb1cea9fb5d",
+    "tests/parity/type_configuration_field_parameter_probe.cpp": "7fee65f80b2a08ad1ca06ff147dc16d7e83eed23f79ad9ea8c11727ececd8145",
+    "tests/parity/type_configuration_execution_numeric_alias_5_0_6_cases.json.gz": "aa23d3d0afabd520505cec94e5b970dcc714bbd08b10b10e07f7d6feb7e7d4fd",
+    "tests/parity/type_configuration_numeric_alias_probe.cpp": "c9b522c326c82bf8b3dbf46aa1e2d7b59a8f70f7cab08442f1db712cf4982762",
+    "tests/parity/type_configuration_execution_string_alias_5_0_6_cases.json.gz": "78ac072150253f071db89b7e44f7a6b6abb2c13b4064d0e8633425f84bd9b4cd",
+    "tests/parity/type_configuration_string_alias_probe.cpp": "8b38f4c2a0c4de9e2788e2fe1d39966c343780fe1010c4618c2f23ebf8e3b36a",
+    "tests/parity/type_configuration_execution_unsigned_recipe_5_0_6_cases.json.gz": "7dcd83d5d287e0a8f9cdefc94d7c751682f76719af663aec4767d3b038d9818f",
+    "tests/parity/type_configuration_unsigned_recipe_probe.cpp": "8a5612d64e4126c89dcd9a8a7509ac1e63dbb9a1ff23fbaac45be67f076a17a9",
+    "tests/parity/type_configuration_execution_probe.cpp": "2ca6f7cdb52cc27e51ea6d3557a8579a0162f93016e0b782d6b4f44c09397bf8",
+    "tests/parity/type_configuration_execution_5_0_6.rs": "94dfbd790bb3bf7ba05e53475afa9088919240b1b3f8a815d6395306c8019ede",
+    "scripts/verify_type_configuration_execution.py": "52d283122d2f57530e7d52ac4bb1d8e79e78224850bdd540326578245b7fce70",
+    "tests/parity/compare_type_configuration_execution_5_0_6.py": "fd3996aabd496ec492275fe7dbb6945639a31fdf6dc96cdadb684324db517135"
+  },
+  "logs": {
+    "rust_builds": {
+      "path": "/tmp/teaql_type_execution_rust_builds_506.log",
+      "sha256": "ca1cc71d6a84610487cafb991af18c5364a31be759a696a52f59cb10633dd342",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nequivalent_integer: complete original execution observer built\nequivalent_string_alias: complete original execution observer built\nfield_parameter: complete original execution observer built\nnumeric_alias: complete original execution observer built\nstring_alias: complete original execution observer built\nunsigned_recipe: complete original execution observer built\n"
+    },
+    "native_configure": {
+      "path": "/tmp/teaql_type_execution_native_configure_506.log",
+      "sha256": "6d15dc473f03e0242f8f518a46532928ccc874fe4e6f9d98635d55c130ca627c",
+      "output": "-- Configuring done (0.3s)\n-- Generating done (0.5s)\n-- Build files have been written to: /home/philip/githome/teaql-cpp/build_native_current\n"
+    },
+    "native_build": {
+      "path": "/tmp/teaql_type_execution_native_build_506.log",
+      "sha256": "1067b8131257b8fce4a6cae93406e785c3a0091f36d8c284f21487e1b169a695",
+      "output": "[1/12] Building CXX object CMakeFiles/teaql_type_configuration_equivalent_string_alias_probe.dir/tests/parity/type_configuration_equivalent_string_alias_probe.cpp.o\n[2/12] Building CXX object CMakeFiles/teaql_type_configuration_equivalent_integer_probe.dir/tests/parity/type_configuration_equivalent_integer_probe.cpp.o\n[3/12] Building CXX object CMakeFiles/teaql_type_configuration_field_parameter_probe.dir/tests/parity/type_configuration_field_parameter_probe.cpp.o\n[4/12] Building CXX object CMakeFiles/teaql_type_configuration_numeric_alias_probe.dir/tests/parity/type_configuration_numeric_alias_probe.cpp.o\n[5/12] Building CXX object CMakeFiles/teaql_type_configuration_unsigned_recipe_probe.dir/tests/parity/type_configuration_unsigned_recipe_probe.cpp.o\n[6/12] Building CXX object CMakeFiles/teaql_type_configuration_string_alias_probe.dir/tests/parity/type_configuration_string_alias_probe.cpp.o\n[7/12] Linking CXX executable teaql_type_configuration_equivalent_integer_probe\n[8/12] Linking CXX executable teaql_type_configuration_equivalent_string_alias_probe\n[9/12] Linking CXX executable teaql_type_configuration_field_parameter_probe\n[10/12] Linking CXX executable teaql_type_configuration_numeric_alias_probe\n[11/12] Linking CXX executable teaql_type_configuration_string_alias_probe\n[12/12] Linking CXX executable teaql_type_configuration_unsigned_recipe_probe\n"
+    },
+    "comparison": {
+      "path": "/tmp/teaql_type_execution_comparison_506.log",
+      "sha256": "ca1086628b09380e4947ae38a154c4dfaf2b8e919c8752d25f3482bac4563e2b",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nequivalent_integer: 96/96 configured-type SQLite/Q/E outcomes match\nequivalent_string_alias: 96/96 configured-type SQLite/Q/E outcomes match\nfield_parameter: 96/96 configured-type SQLite/Q/E outcomes match\nnumeric_alias: 96/96 configured-type SQLite/Q/E outcomes match\nstring_alias: 96/96 configured-type SQLite/Q/E outcomes match\nunsigned_recipe: 96/96 configured-type SQLite/Q/E outcomes match\n"
+    },
+    "native_tests": {
+      "path": "/tmp/teaql_type_execution_native_tests_506.log",
+      "sha256": "6057fb22916f3163a046e1a7c1bf42c91e86db469938b25e8e87efcacf8c45c7",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 41: type_configuration_equivalent_integer_rust_parity\n    Start 42: type_configuration_equivalent_string_alias_rust_parity\n    Start 43: type_configuration_field_parameter_rust_parity\n    Start 44: type_configuration_numeric_alias_rust_parity\n1/6 Test #43: type_configuration_field_parameter_rust_parity ...........   Passed    4.93 sec\n    Start 45: type_configuration_string_alias_rust_parity\n2/6 Test #42: type_configuration_equivalent_string_alias_rust_parity ...   Passed    5.02 sec\n    Start 46: type_configuration_unsigned_recipe_rust_parity\n3/6 Test #41: type_configuration_equivalent_integer_rust_parity ........   Passed    5.05 sec\n4/6 Test #44: type_configuration_numeric_alias_rust_parity .............   Passed    5.11 sec\n5/6 Test #45: type_configuration_string_alias_rust_parity ..............   Passed    4.05 sec\n6/6 Test #46: type_configuration_unsigned_recipe_rust_parity ...........   Passed    4.06 sec\n\n100% tests passed out of 6\n\nTotal Test time (real) =   9.09 sec\n"
+    },
+    "module_configure": {
+      "path": "/tmp/teaql_type_execution_module_configure_506.log",
+      "sha256": "0c7a27f311a960bfd5da027a7865d5ddb11af946932dce017b037ad00fb6ca17",
+      "output": "-- Configuring done (1.5s)\n-- Generating done (0.7s)\n-- Build files have been written to: /home/philip/githome/teaql-cpp/build_modules_native\n"
+    },
+    "module_build": {
+      "path": "/tmp/teaql_type_execution_module_build_506.log",
+      "sha256": "b2a760ba303426cbb07738b6d707de7f7f0e07eea4f6f0d1737f683464ca898d",
+      "output": "[1/45] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd\n[2/43] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd\n[3/41] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd\n[4/39] Generating CXX dyndep file modules/CMakeFiles/teaql_data_service_module.dir/CXX.dd\n[5/37] Generating CXX dyndep file modules/CMakeFiles/teaql_sql_module.dir/CXX.dd\n[6/35] Generating CXX dyndep file modules/CMakeFiles/teaql_runtime_module.dir/CXX.dd\n[7/33] Generating CXX dyndep file modules/CMakeFiles/teaql_provider_sqlite_module.dir/CXX.dd\n[8/31] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/type_configuration_equivalent_integer_probe.cpp for CXX dependencies\n[9/31] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/type_configuration_equivalent_string_alias_probe.cpp for CXX dependencies\n[10/31] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/type_configuration_field_parameter_probe.cpp for CXX dependencies\n[11/31] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/type_configuration_numeric_alias_probe.cpp for CXX dependencies\n[12/31] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/type_configuration_string_alias_probe.cpp for CXX dependencies\n[13/31] Generating CXX dyndep file modules/CMakeFiles/teaql_module_type_configuration_equivalent_integer_probe.dir/CXX.dd\n[14/31] Generating CXX dyndep file modules/CMakeFiles/teaql_module_type_configuration_equivalent_string_alias_probe.dir/CXX.dd\n[15/31] Generating CXX dyndep file modules/CMakeFiles/teaql_module_type_configuration_field_parameter_probe.dir/CXX.dd\n[16/31] Generating CXX dyndep file modules/CMakeFiles/teaql_module_type_configuration_numeric_alias_probe.dir/CXX.dd\n[17/31] Generating CXX dyndep file modules/CMakeFiles/teaql_module_type_configuration_string_alias_probe.dir/CXX.dd\n[18/31] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/type_configuration_unsigned_recipe_probe.cpp for CXX dependencies\n[19/31] Generating CXX dyndep file modules/CMakeFiles/teaql_module_type_configuration_unsigned_recipe_probe.dir/CXX.dd\n[20/31] Building CXX object modules/CMakeFiles/teaql_module_type_configuration_equivalent_integer_probe.dir/consumers/type_configuration_equivalent_integer_probe.cpp.o\n[21/31] Building CXX object modules/CMakeFiles/teaql_module_type_configuration_equivalent_string_alias_probe.dir/consumers/type_configuration_equivalent_string_alias_probe.cpp.o\n[22/31] Building CXX object modules/CMakeFiles/teaql_module_type_configuration_field_parameter_probe.dir/consumers/type_configuration_field_parameter_probe.cpp.o\n[23/31] Building CXX object modules/CMakeFiles/teaql_module_type_configuration_numeric_alias_probe.dir/consumers/type_configuration_numeric_alias_probe.cpp.o\n[24/31] Building CXX object modules/CMakeFiles/teaql_module_type_configuration_unsigned_recipe_probe.dir/consumers/type_configuration_unsigned_recipe_probe.cpp.o\n[25/31] Building CXX object modules/CMakeFiles/teaql_module_type_configuration_string_alias_probe.dir/consumers/type_configuration_string_alias_probe.cpp.o\n[26/31] Linking CXX executable modules/teaql_module_type_configuration_equivalent_integer_probe\n[27/31] Linking CXX executable modules/teaql_module_type_configuration_equivalent_string_alias_probe\n[28/31] Linking CXX executable modules/teaql_module_type_configuration_field_parameter_probe\n[29/31] Linking CXX executable modules/teaql_module_type_configuration_numeric_alias_probe\n[30/31] Linking CXX executable modules/teaql_module_type_configuration_string_alias_probe\n[31/31] Linking CXX executable modules/teaql_module_type_configuration_unsigned_recipe_probe\n"
+    },
+    "module_tests": {
+      "path": "/tmp/teaql_type_execution_module_tests_506.log",
+      "sha256": "79158410389d923f562a106847872b6ea6b0ebca52b66549e1a92e5abdb328ac",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 727: module_type_configuration_equivalent_integer_rust_parity\n1/6 Test #727: module_type_configuration_equivalent_integer_rust_parity ........   Passed    2.55 sec\n    Start 728: module_type_configuration_equivalent_string_alias_rust_parity\n2/6 Test #728: module_type_configuration_equivalent_string_alias_rust_parity ...   Passed    2.91 sec\n    Start 729: module_type_configuration_field_parameter_rust_parity\n3/6 Test #729: module_type_configuration_field_parameter_rust_parity ...........   Passed    3.13 sec\n    Start 730: module_type_configuration_numeric_alias_rust_parity\n4/6 Test #730: module_type_configuration_numeric_alias_rust_parity .............   Passed    2.86 sec\n    Start 731: module_type_configuration_string_alias_rust_parity\n5/6 Test #731: module_type_configuration_string_alias_rust_parity ..............   Passed    3.19 sec\n    Start 732: module_type_configuration_unsigned_recipe_rust_parity\n6/6 Test #732: module_type_configuration_unsigned_recipe_rust_parity ...........   Passed    2.99 sec\n\n100% tests passed out of 6\n\nTotal Test time (real) =  17.65 sec\n"
+    },
+    "module_bodies": {
+      "path": "/tmp/teaql_type_execution_module_bodies_506.log",
+      "sha256": "81b2341ce23f4d1397ba5c060be2404c84218790527d4a76db4c9d94611d14bf",
+      "output": "Verified 321 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n"
+    },
+    "reproduce": {
+      "path": "/tmp/teaql_type_execution_reproduce_506.log",
+      "sha256": "ca1086628b09380e4947ae38a154c4dfaf2b8e919c8752d25f3482bac4563e2b",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nequivalent_integer: 96/96 configured-type SQLite/Q/E outcomes match\nequivalent_string_alias: 96/96 configured-type SQLite/Q/E outcomes match\nfield_parameter: 96/96 configured-type SQLite/Q/E outcomes match\nnumeric_alias: 96/96 configured-type SQLite/Q/E outcomes match\nstring_alias: 96/96 configured-type SQLite/Q/E outcomes match\nunsigned_recipe: 96/96 configured-type SQLite/Q/E outcomes match\n"
+    }
+  },
+  "remaining": [
+    "Other constant matrix obligations: arbitrary custom/opaque types, checker/behavior/resource overrides and concurrent optimistic bootstrap conflicts.",
+    "All complete G01-G17/P0-P7 exit criteria and full baseline integration remain their independent requirements."
+  ]
+}

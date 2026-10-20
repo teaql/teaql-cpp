@@ -1,0 +1,1145 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "terminal full suite: 472/549 passed; 76 historical baseline rejections and one Context factory fixture failure require qualification",
+  "completed": 549,
+  "total": 549,
+  "failures": [
+    {
+      "number": 451,
+      "name": "core_aux_debug_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_core_aux_debug.py\", line 6, in <module>\n    raise SystemExit(main('core_aux_debug_cases.json.gz', 'Auxiliary core diagnostics'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Auxiliary core diagnostics observations belong to a different upstream baseline"
+    },
+    {
+      "number": 71,
+      "name": "entity_reference_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_reference.py\", line 5, in <module>\n    raise SystemExit(main(\"entity_reference_cases.json\", \"Entity reference\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity reference observations belong to a different upstream baseline"
+    },
+    {
+      "number": 449,
+      "name": "decimal_extended_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_extended.py\", line 6, in <module>\n    raise SystemExit(main('decimal_extended_cases.json.gz', 'Extended Decimal'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Extended Decimal observations belong to a different upstream baseline"
+    },
+    {
+      "number": 404,
+      "name": "entity_runtime_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_runtime.py\", line 4, in <module>\n    raise SystemExit(main('entity_runtime_cases.json','Identity graph and mutation ledger'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Identity graph and mutation ledger observations belong to a different upstream baseline"
+    },
+    {
+      "number": 144,
+      "name": "i18n_debug_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_i18n_debug_scope.py\", line 6, in <module>\n    raise SystemExit(main('i18n_debug_scope_cases.json.gz', 'Catalog diagnostics'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Catalog diagnostics observations belong to a different upstream baseline"
+    },
+    {
+      "number": 428,
+      "name": "sqlite_native_diagnostics_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_native_diagnostics.py\", line 6, in <module>\n    raise SystemExit(main(\"sqlite_native_diagnostics_cases.json.gz\", \"SQLite native diagnostic payloads\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite native diagnostic payloads observations belong to a different upstream baseline"
+    },
+    {
+      "number": 390,
+      "name": "id_set_build_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_id_set_build.py\", line 4, in <module>\n    raise SystemExit(main('id_set_build_cases.json','ID set build coordination'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: ID set build coordination observations belong to a different upstream baseline"
+    },
+    {
+      "number": 509,
+      "name": "generated_support_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_generated_support.py\", line 5, in <module>\n    raise SystemExit(main(\"generated_support_cases.json\", \"Generated runtime support\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Generated runtime support observations belong to a different upstream baseline"
+    },
+    {
+      "number": 425,
+      "name": "sqlite_decoding_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_decoding.py\", line 5, in <module>\n    raise SystemExit(main(\"sqlite_decoding_cases.json\", \"SQLite row decoding\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite row decoding observations belong to a different upstream baseline"
+    },
+    {
+      "number": 457,
+      "name": "decimal_wire_format_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_wire_format.py\", line 6, in <module>\n    raise SystemExit(main(\"decimal_wire_format_cases.json\", \"Decimal JSON/format\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal JSON/format observations belong to a different upstream baseline"
+    },
+    {
+      "number": 389,
+      "name": "query_keys_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_query_keys.py\", line 11, in <module>\n    raise SystemExit(main(corpus, f'canonical and pagination query keys ({args.pointer_bytes * 8}-bit usize)'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: canonical and pagination query keys (64-bit usize) observations belong to a different upstream baseline"
+    },
+    {
+      "number": 74,
+      "name": "inmemory_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_inmemory.py\", line 55, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_inmemory.py\", line 32, in main\n    raise RuntimeError(\"In-memory observations belong to another baseline\")\nRuntimeError: In-memory observations belong to another baseline"
+    },
+    {
+      "number": 454,
+      "name": "decimal_numeric_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_numeric.py\", line 6, in <module>\n    raise SystemExit(main(\"decimal_numeric_cases.json\", \"Decimal numeric conversion\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal numeric conversion observations belong to a different upstream baseline"
+    },
+    {
+      "number": 300,
+      "name": "data_service_model_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_data_service_model_scope.py\", line 6, in <module>\n    raise SystemExit(main('data_service_model_scope_cases.json.gz', 'Data-service models'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Data-service models observations belong to a different upstream baseline"
+    },
+    {
+      "number": 469,
+      "name": "core_graph_api_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_core_graph_api.py\", line 6, in <module>\n    raise SystemExit(main('core_graph_api_cases.json.gz', 'Core input graph API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Core input graph API observations belong to a different upstream baseline"
+    },
+    {
+      "number": 67,
+      "name": "round_trip_reference_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_round_trip_reference.py\", line 4, in <module>\n    raise SystemExit(main(\"round_trip_reference_cases.json\", \"Round-trip reference\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Round-trip reference observations belong to a different upstream baseline"
+    },
+    {
+      "number": 456,
+      "name": "decimal_foundation_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_foundations.py\", line 6, in <module>\n    raise SystemExit(main(\"decimal_foundation_cases.json\", \"Decimal foundations\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal foundations observations belong to a different upstream baseline"
+    },
+    {
+      "number": 440,
+      "name": "sql_mutation_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_mutation.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_mutation_cases.json\", \"SQL mutation compilation\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL mutation compilation observations belong to a different upstream baseline"
+    },
+    {
+      "number": 467,
+      "name": "presentation_api_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_presentation_api.py\", line 6, in <module>\n    raise SystemExit(main('presentation_api_cases.json.gz', 'Presentation API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Presentation API observations belong to a different upstream baseline"
+    },
+    {
+      "number": 416,
+      "name": "runtime_business_id_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_business_id.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_business_id_cases.json\", \"Runtime Business ID profiles\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime Business ID profiles observations belong to a different upstream baseline"
+    },
+    {
+      "number": 433,
+      "name": "sql_transaction_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_transaction.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_transaction_cases.json\", \"SQL transaction execution\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL transaction execution observations belong to a different upstream baseline"
+    },
+    {
+      "number": 411,
+      "name": "runtime_log_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_log.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_log_cases.json\", \"Runtime SQL log projection\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime SQL log projection observations belong to a different upstream baseline"
+    },
+    {
+      "number": 434,
+      "name": "sql_execution_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_execution.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_execution_cases.json\", \"SQL mutation execution\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL mutation execution observations belong to a different upstream baseline"
+    },
+    {
+      "number": 442,
+      "name": "sql_dialect_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_dialect_cases.json\", \"SQL dialect query/schema\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL dialect query/schema observations belong to a different upstream baseline"
+    },
+    {
+      "number": 383,
+      "name": "provider_sqlite_schema_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_schema.py\", line 5, in <module>\n    raise SystemExit(main('sqlite_schema_cases.json', 'Production SQLite schema'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Production SQLite schema observations belong to a different upstream baseline"
+    },
+    {
+      "number": 453,
+      "name": "decimal_parsing_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_parsing.py\", line 6, in <module>\n    raise SystemExit(main(\"decimal_parsing_cases.json\", \"Decimal parsing\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal parsing observations belong to a different upstream baseline"
+    },
+    {
+      "number": 409,
+      "name": "log_manager_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_manager.py\", line 70, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_manager.py\", line 53, in main\n    raise RuntimeError('Log manager observations belong to a different baseline')\nRuntimeError: Log manager observations belong to a different baseline"
+    },
+    {
+      "number": 427,
+      "name": "sqlite_error_model_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_error_model.py\", line 6, in <module>\n    raise SystemExit(main(\"sqlite_error_model_cases.json.gz\", \"SQLite driver/provider error models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite driver/provider error models observations belong to a different upstream baseline"
+    },
+    {
+      "number": 260,
+      "name": "runtime_error_debug_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_error_debug.py\", line 59, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_error_debug.py\", line 42, in main\n    raise RuntimeError('Runtime diagnostic observations use a different source baseline')\nRuntimeError: Runtime diagnostic observations use a different source baseline"
+    },
+    {
+      "number": 406,
+      "name": "context_event_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_context_event.py\", line 4, in <module>\n    raise SystemExit(main('context_event_cases.json', 'Context event dispatch'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context event dispatch observations belong to a different upstream baseline"
+    },
+    {
+      "number": 408,
+      "name": "context_logging_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_context_logging.py\", line 4, in <module>\n    raise SystemExit(main('context_logging_cases.json', 'Context logging'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context logging observations belong to a different upstream baseline"
+    },
+    {
+      "number": 412,
+      "name": "audit_event_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_audit_event.py\", line 56, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_audit_event.py\", line 22, in main\n    raise RuntimeError('Audit observations belong to a different source baseline')\nRuntimeError: Audit observations belong to a different source baseline"
+    },
+    {
+      "number": 439,
+      "name": "sql_schema_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_schema.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_schema_cases.json\", \"SQL schema indexes/naming\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL schema indexes/naming observations belong to a different upstream baseline"
+    },
+    {
+      "number": 432,
+      "name": "sql_stream_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_stream.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_stream_cases.json\", \"SQL stream execution\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL stream execution observations belong to a different upstream baseline"
+    },
+    {
+      "number": 448,
+      "name": "decimal_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal.py\", line 5, in <module>\n    raise SystemExit(main(\"decimal_cases.json\", \"Decimal arithmetic\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal arithmetic observations belong to a different upstream baseline"
+    },
+    {
+      "number": 145,
+      "name": "i18n_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_i18n.py\", line 5, in <module>\n    raise SystemExit(main('i18n_cases.json', 'Language and i18n'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Language and i18n observations belong to a different upstream baseline"
+    },
+    {
+      "number": 415,
+      "name": "business_service_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_business_service.py\", line 5, in <module>\n    raise SystemExit(main(\"business_service_cases.json\", \"Business clock/service\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Business clock/service observations belong to a different upstream baseline"
+    },
+    {
+      "number": 452,
+      "name": "decimal_scale_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_scale.py\", line 5, in <module>\n    raise SystemExit(main(\"decimal_scale_cases.json\", \"Decimal scale/codec\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal scale/codec observations belong to a different upstream baseline"
+    },
+    {
+      "number": 510,
+      "name": "purposed_query_debug_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_purposed_query_debug.py\", line 5, in <module>\n    raise SystemExit(main(\"purposed_query_debug_cases.json.gz\", \"Purposed query diagnostics\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Purposed query diagnostics observations belong to a different upstream baseline"
+    },
+    {
+      "number": 445,
+      "name": "system_time_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_system_time.py\", line 6, in <module>\n    raise SystemExit(main('system_time_cases.json.gz', 'SystemTime'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SystemTime observations belong to a different upstream baseline"
+    },
+    {
+      "number": 417,
+      "name": "runtime_registry_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_registry.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_registry_cases.json\", \"Runtime metadata/registry\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime metadata/registry observations belong to a different upstream baseline"
+    },
+    {
+      "number": 410,
+      "name": "log_formatter_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_formatter.py\", line 71, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_formatter.py\", line 26, in main\n    raise RuntimeError('Formatter observations belong to a different baseline')\nRuntimeError: Formatter observations belong to a different baseline"
+    },
+    {
+      "number": 419,
+      "name": "runtime_context_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_context.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_context_cases.json\", \"Runtime Context resources\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime Context resources observations belong to a different upstream baseline"
+    },
+    {
+      "number": 297,
+      "name": "system_time_arithmetic_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_system_time_arithmetic_scope.py\", line 6, in <module>\n    raise SystemExit(main('system_time_arithmetic_scope_cases.json', 'System-time arithmetic'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: System-time arithmetic observations belong to a different upstream baseline"
+    },
+    {
+      "number": 418,
+      "name": "runtime_check_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_check.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_check_cases.json\", \"Runtime checks/errors\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_error_debug.py\", line 42, in main\n    raise RuntimeError('Runtime diagnostic observations use a different source baseline')\nRuntimeError: Runtime diagnostic observations use a different source baseline"
+    },
+    {
+      "number": 426,
+      "name": "sqlite_bindings_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_bindings.py\", line 5, in <module>\n    raise SystemExit(main(\"sqlite_bindings_cases.json\", \"SQLite bindings/storage\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite bindings/storage observations belong to a different upstream baseline"
+    },
+    {
+      "number": 76,
+      "name": "context_locking_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_locking.py\", line 4, in <module>\n    raise SystemExit(main(\"locking_cases.json\", \"Context locking\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context locking observations belong to a different upstream baseline"
+    },
+    {
+      "number": 239,
+      "name": "telemetry_model_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_telemetry_model_scope.py\", line 6, in <module>\n    raise SystemExit(main('telemetry_model_scope_cases.json.gz', 'Telemetry models'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Telemetry models observations belong to a different upstream baseline"
+    },
+    {
+      "number": 407,
+      "name": "telemetry_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_telemetry.py\", line 4, in <module>\n    raise SystemExit(main('telemetry_cases.json', 'Runtime telemetry'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime telemetry observations belong to a different upstream baseline"
+    },
+    {
+      "number": 256,
+      "name": "registry_debug_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_registry_debug_scope.py\", line 6, in <module>\n    raise SystemExit(main('registry_debug_scope_cases.json.gz', 'Registry diagnostics'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Registry diagnostics observations belong to a different upstream baseline"
+    },
+    {
+      "number": 512,
+      "name": "data_store_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_data_store.py\", line 5, in <module>\n    raise SystemExit(main(\"data_store_cases.json\", \"DataStore\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: DataStore observations belong to a different upstream baseline"
+    },
+    {
+      "number": 292,
+      "name": "executor_defaults_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_executor_defaults_scope.py\", line 6, in <module>\n    raise SystemExit(main('executor_defaults_scope_cases.json', 'Executor defaults'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Executor defaults observations belong to a different upstream baseline"
+    },
+    {
+      "number": 391,
+      "name": "query_store_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_query_store.py\", line 4, in <module>\n    raise SystemExit(main('query_store_cases.json','Query stores'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Query stores observations belong to a different upstream baseline"
+    },
+    {
+      "number": 438,
+      "name": "sql_transport_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_transport.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_transport_cases.json\", \"SQL transport defaults/errors\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL transport defaults/errors observations belong to a different upstream baseline"
+    },
+    {
+      "number": 460,
+      "name": "search_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_search.py\", line 37, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_search.py\", line 19, in main\n    raise RuntimeError('Search corpus baseline differs')\nRuntimeError: Search corpus baseline differs"
+    },
+    {
+      "number": 459,
+      "name": "presentation_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_presentation.py\", line 5, in <module>\n    raise SystemExit(main(\"presentation_cases.json\", \"Presentation\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Presentation observations belong to a different upstream baseline"
+    },
+    {
+      "number": 455,
+      "name": "decimal_pointer_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_pointer_scope.py\", line 48, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_pointer_scope.py\", line 23, in main\n    raise RuntimeError('Decimal pointer observations belong to a different source baseline')\nRuntimeError: Decimal pointer observations belong to a different source baseline"
+    },
+    {
+      "number": 461,
+      "name": "value_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 76, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Value observations belong to a different upstream baseline"
+    },
+    {
+      "number": 413,
+      "name": "schema_runtime_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_schema_runtime.py\", line 5, in <module>\n    raise SystemExit(main(\"schema_runtime_cases.json\", \"Schema runtime\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Schema runtime observations belong to a different upstream baseline"
+    },
+    {
+      "number": 462,
+      "name": "format_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_formats.py\", line 6, in <module>\n    raise SystemExit(main(\"format_cases.json\", \"ID/JSON text\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: ID/JSON text observations belong to a different upstream baseline"
+    },
+    {
+      "number": 450,
+      "name": "decimal_inline_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_inline.py\", line 6, in <module>\n    raise SystemExit(main('decimal_inline_cases.json.gz', 'Decimal inline string'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal inline string observations belong to a different upstream baseline"
+    },
+    {
+      "number": 431,
+      "name": "sqlite_from_sql_raw_debug_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_from_sql_raw_debug.py\", line 31, in <module>\n    if __name__==\"__main__\":raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_from_sql_raw_debug.py\", line 18, in main\n    assert corpus[\"baseline\"]==json.loads((root/\"upstream.lock.json\").read_text())[\"commit\"]\nAssertionError",
+      "checked_corpus_baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a"
+    },
+    {
+      "number": 287,
+      "name": "sql_dialect_in_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_in.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_dialect_in_cases.json\", \"Direct SQL IN defaults\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Direct SQL IN defaults observations belong to a different upstream baseline"
+    },
+    {
+      "number": 430,
+      "name": "sqlite_from_sql_error_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_from_sql_error.py\", line 6, in <module>\n    raise SystemExit(main(\"sqlite_from_sql_error_cases.json.gz\", \"SQLite column-conversion errors\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite column-conversion errors observations belong to a different upstream baseline"
+    },
+    {
+      "number": 30,
+      "name": "runtime_id_model_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_id_models.py\", line 41, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_id_models.py\", line 21, in main\n    raise RuntimeError(\"Runtime ID observations belong to a different baseline\")\nRuntimeError: Runtime ID observations belong to a different baseline"
+    },
+    {
+      "number": 429,
+      "name": "sqlite_simple_error_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_simple_error.py\", line 6, in <module>\n    raise SystemExit(main(\"sqlite_simple_error_cases.json.gz\", \"SQLite scalar/text/unit errors\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite scalar/text/unit errors observations belong to a different upstream baseline"
+    },
+    {
+      "number": 435,
+      "name": "sql_executor_kind_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_executor_kind.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_executor_kind_cases.json\", \"SQL executor backend capture\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL executor backend capture observations belong to a different upstream baseline"
+    },
+    {
+      "number": 481,
+      "name": "timestamp_api_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_timestamp_api.py\", line 6, in <module>\n    raise SystemExit(main('timestamp_api_cases.json', 'Timestamp API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Timestamp API observations belong to a different upstream baseline"
+    },
+    {
+      "number": 441,
+      "name": "sql_dialect_hooks_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_hooks.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_dialect_hook_cases.json\", \"SQL dialect hook order\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL dialect hook order observations belong to a different upstream baseline"
+    },
+    {
+      "number": 286,
+      "name": "sql_dialect_helpers_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_helpers.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_dialect_helper_cases.json\", \"SQL dialect helpers\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL dialect helpers observations belong to a different upstream baseline"
+    },
+    {
+      "number": 228,
+      "name": "typed_aggregate_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_typed_aggregate_scope.py\", line 5, in <module>\n    raise SystemExit(main(\"typed_aggregate_scope_cases.json\", \"Typed aggregate helper\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Typed aggregate helper observations belong to a different upstream baseline"
+    },
+    {
+      "number": 399,
+      "name": "entity_query_boundary_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_query_boundaries.py\", line 39, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_query_boundaries.py\", line 19, in main\n    raise RuntimeError(\"Entity query boundary observations belong to a different baseline\")\nRuntimeError: Entity query boundary observations belong to a different baseline"
+    },
+    {
+      "number": 98,
+      "name": "unified_buffer_clone_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_unified_buffer_clone.py\", line 5, in <module>\n    raise SystemExit(main(\"unified_buffer_clone_cases.json\", \"Unified buffer Clone\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Unified buffer Clone observations belong to a different upstream baseline"
+    },
+    {
+      "number": 324,
+      "name": "chrono_value_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_chrono_value.py\", line 6, in <module>\n    raise SystemExit(main('chrono_value_cases.json', 'UTC Value conversion'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: UTC Value conversion observations belong to a different upstream baseline"
+    },
+    {
+      "number": 302,
+      "name": "sql_projection_scope_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_projection_scope.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_projection_scope_cases.json\", \"SQL projection scope\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL projection scope observations belong to a different upstream baseline"
+    },
+    {
+      "number": 162,
+      "name": "original_runtime_context_contracts",
+      "reason": "requires separate diagnosis",
+      "diagnostic": "factory exhaustion preserves previously published object references"
+    },
+    {
+      "number": 437,
+      "name": "sql_query_rust_parity",
+      "reason": "historic corpus baseline rejection",
+      "diagnostic": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_query.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_query_cases.json\", \"SQL query executor\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL query executor observations belong to a different upstream baseline\n\n547/549 Test  #41: derived_query_composition_rust_parity ...................   Passed    1.57 sec\n548/549 Test #533: generated_sample_execution_rust_parity ..................   Passed  685.79 sec\n549/549 Test #544: generated_api_type_errors ...............................   Passed  972.07 sec\n\n86% tests passed, 77 tests failed out of 549\n\nTotal Test time (real) = 972.09 sec\n\nThe following tests FAILED:\n\t 30 - runtime_id_model_rust_parity (Failed)\n\t 67 - round_trip_reference_rust_parity (Failed)\n\t 71 - entity_reference_rust_parity (Failed)\n\t 74 - inmemory_rust_parity (Failed)\n\t 76 - context_locking_rust_parity (Failed)\n\t 98 - unified_buffer_clone_rust_parity (Failed)\n\t144 - i18n_debug_scope_rust_parity (Failed)\n\t145 - i18n_rust_parity (Failed)\n\t162 - original_runtime_context_contracts (Failed)\n\t228 - typed_aggregate_scope_rust_parity (Failed)\n\t239 - telemetry_model_scope_rust_parity (Failed)\n\t256 - registry_debug_scope_rust_parity (Failed)\n\t260 - runtime_error_debug_rust_parity (Failed)\n\t286 - sql_dialect_helpers_rust_parity (Failed)\n\t287 - sql_dialect_in_rust_parity (Failed)\n\t292 - executor_defaults_scope_rust_parity (Failed)\n\t297 - system_time_arithmetic_scope_rust_parity (Failed)\n\t300 - data_service_model_scope_rust_parity (Failed)\n\t302 - sql_projection_scope_rust_parity (Failed)\n\t324 - chrono_value_rust_parity (Failed)\n\t383 - provider_sqlite_schema_rust_parity (Failed)\n\t389 - query_keys_rust_parity (Failed)\n\t390 - id_set_build_rust_parity (Failed)\n\t391 - query_store_rust_parity (Failed)\n\t399 - entity_query_boundary_rust_parity (Failed)\n\t404 - entity_runtime_rust_parity (Failed)\n\t406 - context_event_rust_parity (Failed)\n\t407 - telemetry_rust_parity (Failed)\n\t408 - context_logging_rust_parity (Failed)\n\t409 - log_manager_rust_parity (Failed)\n\t410 - log_formatter_rust_parity (Failed)\n\t411 - runtime_log_rust_parity (Failed)\n\t412 - audit_event_rust_parity (Failed)\n\t413 - schema_runtime_rust_parity (Failed)\n\t415 - business_service_rust_parity (Failed)\n\t416 - runtime_business_id_rust_parity (Failed)\n\t417 - runtime_registry_rust_parity (Failed)\n\t418 - runtime_check_rust_parity (Failed)\n\t419 - runtime_context_rust_parity (Failed)\n\t425 - sqlite_decoding_rust_parity (Failed)\n\t426 - sqlite_bindings_rust_parity (Failed)\n\t427 - sqlite_error_model_rust_parity (Failed)\n\t428 - sqlite_native_diagnostics_rust_parity (Failed)\n\t429 - sqlite_simple_error_rust_parity (Failed)\n\t430 - sqlite_from_sql_error_rust_parity (Failed)\n\t431 - sqlite_from_sql_raw_debug_rust_parity (Failed)\n\t432 - sql_stream_rust_parity (Failed)\n\t433 - sql_transaction_rust_parity (Failed)\n\t434 - sql_execution_rust_parity (Failed)\n\t435 - sql_executor_kind_rust_parity (Failed)\n\t437 - sql_query_rust_parity (Failed)\n\t438 - sql_transport_rust_parity (Failed)\n\t439 - sql_schema_rust_parity (Failed)\n\t440 - sql_mutation_rust_parity (Failed)\n\t441 - sql_dialect_hooks_rust_parity (Failed)\n\t442 - sql_dialect_rust_parity (Failed)\n\t445 - system_time_rust_parity (Failed)\n\t448 - decimal_rust_parity (Failed)\n\t449 - decimal_extended_rust_parity (Failed)\n\t450 - decimal_inline_rust_parity (Failed)\n\t451 - core_aux_debug_rust_parity (Failed)\n\t452 - decimal_scale_rust_parity (Failed)\n\t453 - decimal_parsing_rust_parity (Failed)\n\t454 - decimal_numeric_rust_parity (Failed)\n\t455 - decimal_pointer_scope_rust_parity (Failed)\n\t456 - decimal_foundation_rust_parity (Failed)\n\t457 - decimal_wire_format_rust_parity (Failed)\n\t459 - presentation_rust_parity (Failed)\n\t460 - search_rust_parity (Failed)\n\t461 - value_rust_parity (Failed)\n\t462 - format_rust_parity (Failed)\n\t467 - presentation_api_rust_parity (Failed)\n\t469 - core_graph_api_rust_parity (Failed)\n\t481 - timestamp_api_rust_parity (Failed)\n\t509 - generated_support_rust_parity (Failed)\n\t510 - purposed_query_debug_rust_parity (Failed)\n\t512 - data_store_rust_parity (Failed)\nErrors while running CTest"
+    }
+  ],
+  "log": "/tmp/teaql_native_integration_full_tests.log",
+  "note": "Do not relabel old expected corpora or suppress baseline rejection. Actual locked-source reruns and new semantic comparisons are required.",
+  "passed": 472,
+  "failed": 77,
+  "exit_code": 8,
+  "wall_seconds": 972.09,
+  "log_sha256": "1658844520abcd95c9352e49a43806102a606737c6c6aaa53629aabe0d22ff57",
+  "generated_api_type_errors": {
+    "passed": true,
+    "wall_seconds": 972.07
+  },
+  "follow_up": {
+    "full_suite_rerun": false,
+    "native_selection_passed": 13,
+    "native_selection_total": 13,
+    "scalar_baseline_families_requalified": 10,
+    "auxiliary_diagnostic_inputs_requalified": 94,
+    "context_fixture_corrected_and_passed": true,
+    "log": "/tmp/teaql_scalar_context_native_tests.log",
+    "scope": "Eleven historical-corpus rejections and the Context fixture failure have successful selected follow-ups. The original full-suite result remains failing; 65 other recorded baseline failures are still unrequalified."
+  },
+  "public_facet_follow_up": {
+    "full_suite_rerun": false,
+    "native_selected": {
+      "passed": 11,
+      "total": 11
+    },
+    "native_relation_selected": {
+      "passed": 7,
+      "total": 7
+    },
+    "sanitizer_selected": {
+      "passed": 4,
+      "total": 4
+    },
+    "modules_selected": {
+      "passed": 3,
+      "total": 3
+    },
+    "historical_bindings_requalified": [
+      "generated_support_rust_parity",
+      "purposed_query_debug_rust_parity",
+      "data_store_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 62,
+    "evidence": "docs/parity/public_facets_5_0_6.json"
+  },
+  "query_optimization_follow_up": {
+    "full_suite_rerun": false,
+    "native": {
+      "passed": 13,
+      "total": 13
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1
+    },
+    "modules": {
+      "passed": 3,
+      "total": 3
+    },
+    "requalified_bindings": [
+      "query_keys_rust_parity",
+      "query_store_rust_parity",
+      "id_set_build_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 59,
+    "evidence": "docs/parity/query_optimization_5_0_6.json"
+  },
+  "sqlite_baseline_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native_checked": {
+        "passed": 9,
+        "total": 9,
+        "tests": [
+          "provider_sqlite_schema_rust_parity",
+          "sqlite_error_model_rust_parity",
+          "sqlite_from_sql_raw_debug_rust_parity",
+          "sqlite_from_sql_error_rust_parity",
+          "sqlite_bindings_rust_parity",
+          "provider_sqlite_decoding_contracts",
+          "sqlite_simple_error_rust_parity",
+          "sqlite_decoding_rust_parity",
+          "sqlite_native_diagnostics_rust_parity"
+        ],
+        "log": "/tmp/teaql_sqlite_baselines_native_tests_506.log",
+        "log_sha256": "6577bf9d601903185a44d9d463911895c56e40a4be088dcfb379f2b83c813167"
+      },
+      "native_unchecked": {
+        "passed": 9,
+        "total": 9,
+        "tests": [
+          "provider_sqlite_decoding_contracts",
+          "provider_sqlite_schema_rust_parity",
+          "sqlite_decoding_rust_parity",
+          "sqlite_bindings_rust_parity",
+          "sqlite_error_model_rust_parity",
+          "sqlite_native_diagnostics_rust_parity",
+          "sqlite_simple_error_rust_parity",
+          "sqlite_from_sql_error_rust_parity",
+          "sqlite_from_sql_raw_debug_rust_parity"
+        ],
+        "log": "/tmp/teaql_sqlite_baselines_release_tests_506.log",
+        "log_sha256": "089f6b9d6f273ab391ee852bbaaba935cfa94a2c82d1dce41b94401d9eb6f282"
+      },
+      "modules_checked": {
+        "passed": 9,
+        "total": 9,
+        "tests": [
+          "module_provider_sqlite_decoding_contracts",
+          "module_sqlite_bindings_rust_parity",
+          "module_sqlite_schema_rust_parity",
+          "module_sqlite_error_model_rust_parity",
+          "module_sqlite_simple_error_rust_parity",
+          "module_sqlite_from_sql_error_rust_parity",
+          "module_sqlite_from_sql_raw_debug_rust_parity",
+          "module_sqlite_decoding_rust_parity",
+          "module_sqlite_native_diagnostics_rust_parity"
+        ],
+        "log": "/tmp/teaql_sqlite_baselines_modules_tests_506.log",
+        "log_sha256": "b0da4b93bcc8f238d4948a8cc0a49167fe4c972f156c51669fe9d0cf2d5db043"
+      },
+      "sanitize_checked": {
+        "passed": 2,
+        "total": 2,
+        "tests": [
+          "provider_sqlite_decoding_contracts",
+          "sqlite_decoding_rust_parity"
+        ],
+        "log": "/tmp/teaql_sqlite_baselines_sanitize_tests_506.log",
+        "log_sha256": "bae71ac75de9c3d8d781ab2341c6cc5a79d047fa9b9550aa456ec9b4b2dc8e3f"
+      }
+    },
+    "requalified_bindings": [
+      "provider_sqlite_schema_rust_parity",
+      "sqlite_decoding_rust_parity",
+      "sqlite_bindings_rust_parity",
+      "sqlite_error_model_rust_parity",
+      "sqlite_native_diagnostics_rust_parity",
+      "sqlite_simple_error_rust_parity",
+      "sqlite_from_sql_error_rust_parity",
+      "sqlite_from_sql_raw_debug_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 51,
+    "evidence": "docs/parity/sqlite_baselines_5_0_6_terminal.json",
+    "scope": "14,355 unchanged historical inputs per checked/unchecked source profile plus 64 timestamp controls per profile. Fresh 583-test registry is not full-suite acceptance."
+  },
+  "sql_baseline_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native": {
+        "passed": 10,
+        "total": 10,
+        "tests": [
+          "sql_transport_rust_parity",
+          "sql_dialect_in_rust_parity",
+          "sql_dialect_hooks_rust_parity",
+          "sql_dialect_helpers_rust_parity",
+          "sql_schema_rust_parity",
+          "sql_dialect_contracts",
+          "sql_projection_scope_rust_parity",
+          "sql_grouped_partition_rust_parity",
+          "sql_dialect_rust_parity",
+          "sql_mutation_rust_parity"
+        ],
+        "log": "/tmp/teaql_sql_baselines_native_tests_506.log",
+        "log_sha256": "1a938e747d1c990c48b2af64528b91137bb3f68a4e14d92365f3d8852e2e2845"
+      },
+      "modules": {
+        "passed": 10,
+        "total": 10,
+        "tests": [
+          "module_sql_dialect_contracts",
+          "module_sql_projection_scope_rust_parity",
+          "module_sql_dialect_helpers_rust_parity",
+          "module_sql_dialect_in_rust_parity",
+          "module_sql_dialect_hooks_rust_parity",
+          "module_sql_transport_rust_parity",
+          "module_sql_grouped_partition_rust_parity",
+          "module_sql_schema_rust_parity",
+          "module_sql_dialect_rust_parity",
+          "module_sql_mutation_rust_parity"
+        ],
+        "log": "/tmp/teaql_sql_baselines_modules_tests_506.log",
+        "log_sha256": "f6b565bf2560048afc61f14449825e0d34fdb10f07abd368bf91f7ca77ed2071"
+      },
+      "sanitize": {
+        "passed": 2,
+        "total": 2,
+        "tests": [
+          "sql_dialect_contracts",
+          "sql_grouped_partition_rust_parity"
+        ],
+        "log": "/tmp/teaql_sql_baselines_sanitize_tests_506.log",
+        "log_sha256": "eb822a6dc1cb4e83269bfc20e8fff9875149d676bd19fc0e4ae26c6db3b69974"
+      }
+    },
+    "requalified_bindings": [
+      "sql_dialect_helpers_rust_parity",
+      "sql_dialect_in_rust_parity",
+      "sql_projection_scope_rust_parity",
+      "sql_transport_rust_parity",
+      "sql_schema_rust_parity",
+      "sql_mutation_rust_parity",
+      "sql_dialect_hooks_rust_parity",
+      "sql_dialect_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 43,
+    "evidence": "docs/parity/sql_baselines_5_0_6_terminal.json",
+    "scope": "6,894 historical inputs and 146 actual SQLite/compile controls pass. Four historical adapters retain nine current-protocol compiler errors; their six execution/default bindings remain open. Fresh 584-test registry is not full-suite acceptance."
+  },
+  "sql_protocol_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native": {
+        "passed": 8,
+        "total": 8,
+        "tests": [
+          "executor_defaults_scope_rust_parity",
+          "sql_executor_kind_rust_parity",
+          "sql_query_executor_contracts",
+          "sql_cached_partition_rust_parity",
+          "sql_stream_rust_parity",
+          "sql_transaction_rust_parity",
+          "sql_execution_rust_parity",
+          "sql_query_rust_parity"
+        ],
+        "log": "/tmp/teaql_sql_protocol_native_tests_506.log",
+        "log_sha256": "b38c5293b617a3162ac1f823ca1b60dca81b5fc7c3d5f7ced330dbbea74f669f"
+      },
+      "modules": {
+        "passed": 8,
+        "total": 8,
+        "tests": [
+          "module_sql_query_executor_contracts",
+          "module_executor_defaults_scope_rust_parity",
+          "module_sql_stream_rust_parity",
+          "module_sql_executor_kind_rust_parity",
+          "module_sql_cached_partition_rust_parity",
+          "module_sql_query_rust_parity",
+          "module_sql_execution_rust_parity",
+          "module_sql_transaction_rust_parity"
+        ],
+        "log": "/tmp/teaql_sql_protocol_modules_tests_506.log",
+        "log_sha256": "5d1e7e364e430b2dda5e1fa801b9f32151a5027dd1df717c0306836e3e9b7154"
+      },
+      "sanitize": {
+        "passed": 8,
+        "total": 8,
+        "tests": [
+          "sql_cached_partition_rust_parity",
+          "sql_query_executor_contracts",
+          "executor_defaults_scope_rust_parity",
+          "sql_executor_kind_rust_parity",
+          "sql_stream_rust_parity",
+          "sql_execution_rust_parity",
+          "sql_transaction_rust_parity",
+          "sql_query_rust_parity"
+        ],
+        "log": "/tmp/teaql_sql_protocol_sanitize_tests_506.log",
+        "log_sha256": "b1f6ccf74cfc4754371a4b7ec053406e7ef6868251dde243041a675d58a132a1"
+      }
+    },
+    "requalified_bindings": [
+      "executor_defaults_scope_rust_parity",
+      "sql_query_rust_parity",
+      "sql_stream_rust_parity",
+      "sql_execution_rust_parity",
+      "sql_transaction_rust_parity",
+      "sql_executor_kind_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 37,
+    "evidence": "docs/parity/sql_protocol_5_0_6_terminal.json",
+    "scope": "3473 unchanged historical inputs reject current constructors; 3473 separate explicit-intent controls plus 33 negative controls and eight real SQLite cached-group scenarios are exact source/native observations. Fresh 585-test registry is not full-suite acceptance."
+  },
+  "core_baseline_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native": {
+        "passed": 8,
+        "total": 8,
+        "tests": [
+          "system_time_arithmetic_scope_rust_parity",
+          "system_time_rust_parity",
+          "search_rust_parity",
+          "presentation_rust_parity",
+          "timestamp_api_rust_parity",
+          "chrono_value_rust_parity",
+          "presentation_api_rust_parity",
+          "core_graph_api_rust_parity"
+        ],
+        "log": "/tmp/teaql_core_baselines_native_tests_506.log",
+        "log_sha256": "cae00937a76c6521ac24b561a34c05e48e1f797a127048b48f34c0bac8d53592"
+      },
+      "modules": {
+        "passed": 8,
+        "total": 8,
+        "tests": [
+          "module_chrono_value_rust_parity",
+          "module_timestamp_api_rust_parity",
+          "module_presentation_rust_parity",
+          "module_system_time_arithmetic_scope_rust_parity",
+          "module_system_time_rust_parity",
+          "module_search_rust_parity",
+          "module_presentation_api_rust_parity",
+          "module_core_graph_api_rust_parity"
+        ],
+        "log": "/tmp/teaql_core_baselines_modules_tests_506.log",
+        "log_sha256": "1a6d44af5a28d3d74d6c6c50dc9359a6c750c82ddf8d537f963dfe62ef71b244"
+      }
+    },
+    "requalified_bindings": [
+      "chrono_value_rust_parity",
+      "timestamp_api_rust_parity",
+      "system_time_rust_parity",
+      "system_time_arithmetic_scope_rust_parity",
+      "presentation_rust_parity",
+      "presentation_api_rust_parity",
+      "core_graph_api_rust_parity",
+      "search_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 29,
+    "evidence": "docs/parity/core_baselines_5_0_6_terminal.json",
+    "scope": "3867 byte-preserved historical inputs replayed with unchanged original drivers and reference Cargo.lock dependency versions; no production change. Original full integration remains failing, not rerun."
+  },
+  "runtime_public_baseline_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native": {
+        "passed": 9,
+        "total": 9,
+        "tests": [
+          "runtime_context_rust_parity",
+          "runtime_registry_rust_parity",
+          "business_service_rust_parity",
+          "runtime_check_rust_parity",
+          "telemetry_model_scope_rust_parity",
+          "telemetry_rust_parity",
+          "schema_runtime_rust_parity",
+          "runtime_business_id_rust_parity",
+          "registry_debug_scope_rust_parity"
+        ],
+        "log": "/tmp/teaql_runtime_public_baselines_native_tests_506.log",
+        "log_sha256": "7fb135ca156522e3838982a3725545f19a881bf9891cb1417b653ac1a3a4eb6b"
+      },
+      "modules": {
+        "passed": 9,
+        "total": 9,
+        "tests": [
+          "module_telemetry_rust_parity",
+          "module_runtime_check_rust_parity",
+          "module_runtime_context_rust_parity",
+          "module_runtime_registry_rust_parity",
+          "module_schema_runtime_rust_parity",
+          "module_telemetry_model_scope_rust_parity",
+          "module_registry_debug_scope_rust_parity",
+          "module_business_service_rust_parity",
+          "module_runtime_business_id_rust_parity"
+        ],
+        "log": "/tmp/teaql_runtime_public_baselines_modules_tests_506.log",
+        "log_sha256": "a41184eea7d67c17319ab852d6fc0ba1cf0aa3d033be68588ac850a46fc6e758"
+      }
+    },
+    "requalified_bindings": [
+      "runtime_registry_rust_parity",
+      "runtime_context_rust_parity",
+      "runtime_check_rust_parity",
+      "telemetry_rust_parity",
+      "telemetry_model_scope_rust_parity",
+      "registry_debug_scope_rust_parity",
+      "schema_runtime_rust_parity",
+      "business_service_rust_parity",
+      "runtime_business_id_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 20,
+    "evidence": "docs/parity/runtime_public_baselines_5_0_6_terminal.json",
+    "scope": "6418 unchanged historical observations match locked original public runtime methods with reference-lock dependency versions. Native64 check/location evidence only. Original full integration remains failing and has not been rerun."
+  },
+  "state_baseline_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native": {
+        "passed": 4,
+        "total": 4,
+        "tests": [
+          "i18n_rust_parity",
+          "data_service_model_scope_rust_parity",
+          "entity_runtime_rust_parity",
+          "i18n_debug_scope_rust_parity"
+        ],
+        "log": "/tmp/teaql_state_baselines_native_tests_506.log",
+        "log_sha256": "4c11ce73268ee6a049673c582682e8d0ded1d019d564fe460a2ce9b4eecd9dfc"
+      },
+      "modules": {
+        "passed": 4,
+        "total": 4,
+        "tests": [
+          "module_i18n_rust_parity",
+          "module_data_service_model_scope_rust_parity",
+          "module_entity_runtime_rust_parity",
+          "module_i18n_debug_scope_rust_parity"
+        ],
+        "log": "/tmp/teaql_state_baselines_modules_tests_506.log",
+        "log_sha256": "405984ad21d2682769051c3d83949692f3acb5217eff184b5390d80b82a10ede"
+      },
+      "sanitize": {
+        "passed": 1,
+        "total": 1,
+        "tests": [
+          "data_service_model_scope_rust_parity"
+        ],
+        "log": "/tmp/teaql_state_baselines_sanitize_tests_506.log",
+        "log_sha256": "b0b77879b888a37dce2c1c5070e987651634bf76623c426dd99236edc81e3377"
+      }
+    },
+    "requalified_bindings": [
+      "i18n_rust_parity",
+      "i18n_debug_scope_rust_parity",
+      "entity_runtime_rust_parity",
+      "data_service_model_scope_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 16,
+    "evidence": "docs/parity/state_baselines_5_0_6_terminal.json",
+    "scope": "4916 source/native state/I18n/model observations; 25 original state changes and 40 current request-model outcomes. Original private aggregate shell remains uncompiled and its 48 cases are not accepted. Historical full suite remains failing."
+  },
+  "typed_aggregate_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native": {
+        "passed": 3,
+        "total": 3,
+        "tests": [
+          "typed_aggregate_context_contracts",
+          "dynamic_query_contracts",
+          "typed_aggregate_scope_rust_parity"
+        ],
+        "log": "/tmp/teaql_typed_aggregate_native_tests_506.log",
+        "log_sha256": "6f876e28b5092e22c153fe1ee777add4fa481914a94ea1b47e248a6dcc83a276",
+        "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 259: typed_aggregate_scope_rust_parity\n    Start 369: dynamic_query_contracts\n    Start 258: typed_aggregate_context_contracts\n1/3 Test #258: typed_aggregate_context_contracts ...   Passed    0.00 sec\n2/3 Test #369: dynamic_query_contracts .............   Passed    0.02 sec\n3/3 Test #259: typed_aggregate_scope_rust_parity ...   Passed    0.10 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.12 sec\n"
+      },
+      "modules": {
+        "passed": 3,
+        "total": 3,
+        "tests": [
+          "module_typed_aggregate_context_contracts",
+          "module_dynamic_query_contracts",
+          "module_typed_aggregate_scope_rust_parity"
+        ],
+        "log": "/tmp/teaql_typed_aggregate_modules_tests_506.log",
+        "log_sha256": "a94793c0b98f1522b9822588b0a5df834edad4186dd145c00d220f133fbca129",
+        "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 772: module_typed_aggregate_scope_rust_parity\n    Start 698: module_dynamic_query_contracts\n    Start 697: module_typed_aggregate_context_contracts\n1/3 Test #697: module_typed_aggregate_context_contracts ...   Passed    0.00 sec\n2/3 Test #698: module_dynamic_query_contracts .............   Passed    0.01 sec\n3/3 Test #772: module_typed_aggregate_scope_rust_parity ...   Passed    0.07 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.08 sec\n"
+      },
+      "sanitize": {
+        "passed": 3,
+        "total": 3,
+        "tests": [
+          "typed_aggregate_context_contracts",
+          "dynamic_query_contracts",
+          "typed_aggregate_scope_rust_parity"
+        ],
+        "log": "/tmp/teaql_typed_aggregate_sanitize_tests_506.log",
+        "log_sha256": "062de6d4732a50cda46ad6798886070317c418a743c55ff31803839bf27ae88f",
+        "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 369: dynamic_query_contracts\n    Start 259: typed_aggregate_scope_rust_parity\n    Start 258: typed_aggregate_context_contracts\n1/3 Test #258: typed_aggregate_context_contracts ...   Passed    0.02 sec\n2/3 Test #369: dynamic_query_contracts .............   Passed    0.09 sec\n3/3 Test #259: typed_aggregate_scope_rust_parity ...   Passed    0.26 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.27 sec\n"
+      }
+    },
+    "requalified_bindings": [
+      "typed_aggregate_scope_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 15,
+    "evidence": "docs/parity/typed_aggregate_5_0_6_terminal.json",
+    "scope": "146 exact outcomes through the complete original runtime, 12 production dynamic-carrier gaps repaired; native/module/SAN selected 3/3 each. Indexed carrier and pending cancellation/deletion are native integration checks, not paired source claims. Historical module root ledgers require source-based migration; full capability/P0-P7 acceptance remains open."
+  },
+  "runtime_root_registration_follow_up": {
+    "full_suite_rerun": false,
+    "original_root_tests": 75,
+    "profiles": {
+      "native": {
+        "passed": 10,
+        "total": 10,
+        "tests": [
+          "original_runtime_aggregate_cache_contracts",
+          "original_runtime_typed_query_contracts",
+          "original_runtime_events_relations_contracts",
+          "original_runtime_validation_contracts",
+          "original_runtime_memory_service_contracts",
+          "original_runtime_optimistic_conflict_output_contracts",
+          "original_runtime_service_boundary_contracts",
+          "original_runtime_registration_contracts",
+          "original_runtime_context_tail_contracts",
+          "original_runtime_pagination_contracts"
+        ],
+        "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n      Start 211: original_runtime_pagination_contracts\n      Start 213: original_runtime_context_tail_contracts\n      Start 215: original_runtime_optimistic_conflict_output_contracts\n      Start 210: original_runtime_aggregate_cache_contracts\n 1/10 Test #210: original_runtime_aggregate_cache_contracts ..............   Passed    0.01 sec\n      Start 209: original_runtime_typed_query_contracts\n 2/10 Test #209: original_runtime_typed_query_contracts ..................   Passed    0.01 sec\n      Start 208: original_runtime_events_relations_contracts\n 3/10 Test #208: original_runtime_events_relations_contracts .............   Passed    0.01 sec\n      Start 207: original_runtime_validation_contracts\n 4/10 Test #207: original_runtime_validation_contracts ...................   Passed    0.00 sec\n      Start 212: original_runtime_memory_service_contracts\n 5/10 Test #212: original_runtime_memory_service_contracts ...............   Passed    0.00 sec\n      Start 206: original_runtime_service_boundary_contracts\n 6/10 Test #215: original_runtime_optimistic_conflict_output_contracts ...   Passed    0.03 sec\n      Start 205: original_runtime_registration_contracts\n 7/10 Test #206: original_runtime_service_boundary_contracts .............   Passed    0.00 sec\n 8/10 Test #205: original_runtime_registration_contracts .................   Passed    0.00 sec\n 9/10 Test #213: original_runtime_context_tail_contracts .................   Passed    0.06 sec\n10/10 Test #211: original_runtime_pagination_contracts ...................   Passed    1.19 sec\n\n100% tests passed out of 10\n\nTotal Test time (real) =   1.20 sec\n",
+        "log_sha256": "cf347bceb75855709120e246097feba6e4b5007bc8387026538e7d45e9e7490a",
+        "namespace_passed": 1,
+        "namespace_total": 1,
+        "namespace_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 3: runtime_public_namespace_contracts\n1/1 Test #3: runtime_public_namespace_contracts ...   Passed    0.00 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.01 sec\n"
+      },
+      "modules": {
+        "passed": 10,
+        "total": 10,
+        "tests": [
+          "module_original_runtime_aggregates_cache",
+          "module_original_runtime_typed_queries",
+          "module_original_runtime_events_relations",
+          "module_original_runtime_validation",
+          "module_original_runtime_memory_service",
+          "module_original_runtime_optimistic_conflict_output_contracts",
+          "module_original_runtime_service_boundaries",
+          "module_original_runtime_registration",
+          "module_original_runtime_context_tail",
+          "module_original_runtime_pagination"
+        ],
+        "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n      Start 628: module_original_runtime_pagination\n      Start 630: module_original_runtime_context_tail\n      Start 699: module_original_runtime_optimistic_conflict_output_contracts\n      Start 627: module_original_runtime_aggregates_cache\n 1/10 Test #627: module_original_runtime_aggregates_cache .......................   Passed    0.01 sec\n      Start 626: module_original_runtime_typed_queries\n 2/10 Test #626: module_original_runtime_typed_queries ..........................   Passed    0.01 sec\n      Start 625: module_original_runtime_events_relations\n 3/10 Test #625: module_original_runtime_events_relations .......................   Passed    0.00 sec\n      Start 624: module_original_runtime_validation\n 4/10 Test #624: module_original_runtime_validation .............................   Passed    0.00 sec\n      Start 629: module_original_runtime_memory_service\n 5/10 Test #629: module_original_runtime_memory_service .........................   Passed    0.00 sec\n      Start 623: module_original_runtime_service_boundaries\n 6/10 Test #699: module_original_runtime_optimistic_conflict_output_contracts ...   Passed    0.03 sec\n      Start 622: module_original_runtime_registration\n 7/10 Test #623: module_original_runtime_service_boundaries .....................   Passed    0.00 sec\n 8/10 Test #622: module_original_runtime_registration ...........................   Passed    0.00 sec\n 9/10 Test #630: module_original_runtime_context_tail ...........................   Passed    0.06 sec\n10/10 Test #628: module_original_runtime_pagination .............................   Passed    1.19 sec\n\n100% tests passed out of 10\n\nTotal Test time (real) =   1.21 sec\n",
+        "log_sha256": "d9d4403c3bc7745878e6683934bfaff3b37961e0730a07ef2ad017bd70524d96",
+        "namespace_passed": 1,
+        "namespace_total": 1,
+        "namespace_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 631: module_runtime_public_namespace_contracts\n1/1 Test #631: module_runtime_public_namespace_contracts ...   Passed    0.00 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.01 sec\n"
+      }
+    },
+    "current_module_root_gate": true,
+    "historical_ledgers_preserved": true,
+    "remaining_recorded_baseline_failures": 15,
+    "evidence": "docs/parity/runtime_roots_5_0_6_terminal.json",
+    "scope": "Restores the current source/fixture registration audit; no additional original full-suite failure is counted as closed by this separate gate. All capability statuses remain partial."
+  },
+  "logging_baseline_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native": {
+        "passed": 12,
+        "total": 12,
+        "tests": [
+          "context_logging_rust_parity",
+          "context_event_rust_parity",
+          "log_manager_rust_parity",
+          "log_manager_contracts",
+          "runtime_log_contracts",
+          "context_logging_contracts",
+          "audit_event_contracts",
+          "log_formatter_contracts",
+          "context_event_contracts",
+          "runtime_log_rust_parity",
+          "audit_event_rust_parity",
+          "log_formatter_rust_parity"
+        ],
+        "log": "/tmp/teaql_logging_baselines_native_tests_506.log",
+        "log_sha256": "02aaa8e9db7e6a09e6066004088c3b1a224f76e37aaa1b866aed8b3167a1e3bf",
+        "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n      Start 444: runtime_log_rust_parity\n      Start 442: log_manager_rust_parity\n      Start 439: context_event_rust_parity\n      Start 441: context_logging_rust_parity\n 1/12 Test #441: context_logging_rust_parity ......   Passed    1.33 sec\n      Start 445: audit_event_rust_parity\n 2/12 Test #439: context_event_rust_parity ........   Passed    1.46 sec\n      Start 443: log_formatter_rust_parity\n 3/12 Test #442: log_manager_rust_parity ..........   Passed    1.74 sec\n      Start 272: log_manager_contracts\n 4/12 Test #272: log_manager_contracts ............   Passed    0.02 sec\n      Start 274: runtime_log_contracts\n 5/12 Test #274: runtime_log_contracts ............   Passed    0.02 sec\n      Start 271: context_logging_contracts\n 6/12 Test #271: context_logging_contracts ........   Passed    0.01 sec\n      Start 275: audit_event_contracts\n 7/12 Test #275: audit_event_contracts ............   Passed    0.01 sec\n      Start 273: log_formatter_contracts\n 8/12 Test #273: log_formatter_contracts ..........   Passed    0.01 sec\n      Start 268: context_event_contracts\n 9/12 Test #268: context_event_contracts ..........   Passed    0.02 sec\n10/12 Test #444: runtime_log_rust_parity ..........   Passed    2.05 sec\n11/12 Test #445: audit_event_rust_parity ..........   Passed    1.03 sec\n12/12 Test #443: log_formatter_rust_parity ........   Passed    0.91 sec\n\n100% tests passed out of 12\n\nTotal Test time (real) =   2.39 sec\n"
+      },
+      "modules": {
+        "passed": 12,
+        "total": 12,
+        "tests": [
+          "module_audit_event_contracts",
+          "module_log_formatter_contracts",
+          "module_context_logging_contracts",
+          "module_log_manager_contracts",
+          "module_runtime_log_contracts",
+          "module_context_event_contracts",
+          "module_audit_event_rust_parity",
+          "module_context_logging_rust_parity",
+          "module_log_manager_rust_parity",
+          "module_runtime_log_rust_parity",
+          "module_log_formatter_rust_parity",
+          "module_context_event_rust_parity"
+        ],
+        "log": "/tmp/teaql_logging_baselines_modules_tests_506.log",
+        "log_sha256": "bd8eacbcd25a7f2fc8291316e8cf65506a21f4c09624c025cea0de8d25f85e6f",
+        "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n      Start 638: module_log_manager_contracts\n      Start 636: module_context_logging_contracts\n      Start 639: module_audit_event_contracts\n      Start 637: module_log_formatter_contracts\n 1/12 Test #639: module_audit_event_contracts .........   Passed    0.00 sec\n      Start 699: module_runtime_log_contracts\n 2/12 Test #637: module_log_formatter_contracts .......   Passed    0.00 sec\n      Start 700: module_context_event_contracts\n 3/12 Test #636: module_context_logging_contracts .....   Passed    0.00 sec\n      Start 775: module_runtime_log_rust_parity\n 4/12 Test #638: module_log_manager_contracts .........   Passed    0.01 sec\n      Start 776: module_audit_event_rust_parity\n 5/12 Test #699: module_runtime_log_contracts .........   Passed    0.01 sec\n      Start 777: module_context_logging_rust_parity\n 6/12 Test #700: module_context_event_contracts .......   Passed    0.01 sec\n      Start 778: module_log_manager_rust_parity\n 7/12 Test #776: module_audit_event_rust_parity .......   Passed    0.45 sec\n      Start 779: module_context_event_rust_parity\n 8/12 Test #777: module_context_logging_rust_parity ...   Passed    0.52 sec\n      Start 780: module_log_formatter_rust_parity\n 9/12 Test #778: module_log_manager_rust_parity .......   Passed    0.66 sec\n10/12 Test #775: module_runtime_log_rust_parity .......   Passed    0.88 sec\n11/12 Test #780: module_log_formatter_rust_parity .....   Passed    0.42 sec\n12/12 Test #779: module_context_event_rust_parity .....   Passed    0.66 sec\n\n100% tests passed out of 12\n\nTotal Test time (real) =   1.13 sec\n"
+      },
+      "sanitize": {
+        "passed": 2,
+        "total": 2,
+        "tests": [
+          "context_logging_contracts",
+          "context_logging_rust_parity"
+        ],
+        "log": "/tmp/teaql_logging_baselines_sanitize_tests_506.log",
+        "log_sha256": "be255134f4e2b5e6867668608e29095e1059ffd8b2b51670db7bf280ba9402bf",
+        "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 271: context_logging_contracts\n    Start 441: context_logging_rust_parity\n1/2 Test #271: context_logging_contracts ........   Passed    0.02 sec\n2/2 Test #441: context_logging_rust_parity ......   Passed    1.75 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   1.76 sec\n"
+      }
+    },
+    "requalified_bindings": [
+      "runtime_log_rust_parity",
+      "audit_event_rust_parity",
+      "context_logging_rust_parity",
+      "log_formatter_rust_parity",
+      "log_manager_rust_parity",
+      "context_event_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 9,
+    "evidence": "docs/parity/logging_baselines_5_0_6_terminal.json",
+    "scope": "4288 original/native outcomes through unchanged historical inputs, five byte-identical drivers and complete current Context dispatch with append-only access bridges. Original Context shell failure preserved. 249 audit provenance gaps and 37 Recover classification gaps fixed. Native/modules 12/12 each, SAN 2/2 and original Context/privacy 2/2 pass. Existing time/header/filename adapters remain explicit. Native64 only; all capability/phase gates remain partial."
+  },
+  "final_baseline_follow_up": {
+    "full_suite_rerun": false,
+    "profiles": {
+      "native": {
+        "passed": 17,
+        "total": 17,
+        "tests": [
+          "runtime_error_debug_rust_parity",
+          "context_locking_contracts",
+          "round_trip_reference_rust_parity",
+          "inmemory_rust_parity",
+          "context_locking_rust_parity",
+          "runtime_id_model_rust_parity",
+          "decimal_pointer_scope_rust_parity",
+          "entity_reference_context_contracts",
+          "unified_buffer_clone_rust_parity",
+          "round_trip_reference_context_contracts",
+          "inmemory_context_contracts",
+          "runtime_check_error_contracts",
+          "decimal_contracts",
+          "unified_buffer_clone_contracts",
+          "runtime_id_model_contracts",
+          "entity_query_boundary_rust_parity",
+          "entity_reference_rust_parity"
+        ],
+        "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n      Start 101: entity_reference_rust_parity\n      Start 104: inmemory_rust_parity\n      Start  97: round_trip_reference_rust_parity\n      Start 291: runtime_error_debug_rust_parity\n 1/17 Test #291: runtime_error_debug_rust_parity ..........   Passed    0.63 sec\n      Start 105: context_locking_contracts\n 2/17 Test #105: context_locking_contracts ................   Passed    0.41 sec\n      Start 106: context_locking_rust_parity\n 3/17 Test  #97: round_trip_reference_rust_parity .........   Passed    1.21 sec\n      Start 488: decimal_pointer_scope_rust_parity\n 4/17 Test #104: inmemory_rust_parity .....................   Passed    1.22 sec\n      Start  30: runtime_id_model_rust_parity\n 5/17 Test #106: context_locking_rust_parity ..............   Passed    0.27 sec\n      Start 432: entity_query_boundary_rust_parity\n 6/17 Test  #30: runtime_id_model_rust_parity .............   Passed    0.09 sec\n      Start 128: unified_buffer_clone_rust_parity\n 7/17 Test #488: decimal_pointer_scope_rust_parity ........   Passed    0.13 sec\n      Start  98: entity_reference_context_contracts\n 8/17 Test  #98: entity_reference_context_contracts .......   Passed    0.02 sec\n      Start  94: round_trip_reference_context_contracts\n 9/17 Test #128: unified_buffer_clone_rust_parity .........   Passed    0.05 sec\n      Start 103: inmemory_context_contracts\n10/17 Test  #94: round_trip_reference_context_contracts ...   Passed    0.01 sec\n      Start 288: runtime_check_error_contracts\n11/17 Test #103: inmemory_context_contracts ...............   Passed    0.01 sec\n      Start 336: decimal_contracts\n12/17 Test #288: runtime_check_error_contracts ............   Passed    0.01 sec\n13/17 Test #336: decimal_contracts ........................   Passed    0.00 sec\n      Start 127: unified_buffer_clone_contracts\n      Start  29: runtime_id_model_contracts\n14/17 Test #127: unified_buffer_clone_contracts ...........   Passed    0.00 sec\n15/17 Test  #29: runtime_id_model_contracts ...............   Passed    0.00 sec\n16/17 Test #432: entity_query_boundary_rust_parity ........   Passed    0.07 sec\n17/17 Test #101: entity_reference_rust_parity .............   Passed    3.96 sec\n\n100% tests passed out of 17\n\nTotal Test time (real) =   3.97 sec\n",
+        "log_sha256": "641b084ce7a0c3b33c8bd6eea5e59ae69cf8483c888bbee6e6d7b88c8bd5818a"
+      },
+      "modules": {
+        "passed": 16,
+        "total": 16,
+        "tests": [
+          "module_decimal_contracts",
+          "module_inmemory_context_contracts",
+          "module_runtime_id_model_contracts",
+          "module_entity_reference_context_contracts",
+          "module_unified_buffer_clone_contracts",
+          "module_round_trip_reference_context_contracts",
+          "module_unified_buffer_clone_rust_parity",
+          "module_runtime_id_model_rust_parity",
+          "module_context_locking_rust_parity",
+          "module_context_locking_contracts",
+          "module_runtime_error_debug_rust_parity",
+          "module_decimal_pointer_scope_rust_parity",
+          "module_entity_query_boundary_rust_parity",
+          "module_inmemory_rust_parity",
+          "module_round_trip_reference_rust_parity",
+          "module_entity_reference_rust_parity"
+        ],
+        "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n      Start 649: module_entity_reference_context_contracts\n      Start 646: module_round_trip_reference_context_contracts\n      Start 645: module_inmemory_context_contracts\n      Start 603: module_decimal_contracts\n 1/16 Test #603: module_decimal_contracts ........................   Passed    0.01 sec\n      Start 701: module_runtime_id_model_contracts\n 2/16 Test #645: module_inmemory_context_contracts ...............   Passed    0.01 sec\n      Start 702: module_context_locking_contracts\n 3/16 Test #701: module_runtime_id_model_contracts ...............   Passed    0.00 sec\n      Start 703: module_unified_buffer_clone_contracts\n 4/16 Test #649: module_entity_reference_context_contracts .......   Passed    0.02 sec\n      Start 783: module_runtime_id_model_rust_parity\n 5/16 Test #703: module_unified_buffer_clone_contracts ...........   Passed    0.00 sec\n      Start 784: module_runtime_error_debug_rust_parity\n 6/16 Test #646: module_round_trip_reference_context_contracts ...   Passed    0.02 sec\n      Start 785: module_unified_buffer_clone_rust_parity\n 7/16 Test #785: module_unified_buffer_clone_rust_parity .........   Passed    0.03 sec\n      Start 786: module_context_locking_rust_parity\n 8/16 Test #783: module_runtime_id_model_rust_parity .............   Passed    0.07 sec\n      Start 787: module_inmemory_rust_parity\n 9/16 Test #786: module_context_locking_rust_parity ..............   Passed    0.21 sec\n      Start 788: module_entity_reference_rust_parity\n10/16 Test #702: module_context_locking_contracts ................   Passed    0.41 sec\n      Start 789: module_round_trip_reference_rust_parity\n11/16 Test #784: module_runtime_error_debug_rust_parity ..........   Passed    0.55 sec\n      Start 790: module_decimal_pointer_scope_rust_parity\n12/16 Test #790: module_decimal_pointer_scope_rust_parity ........   Passed    0.14 sec\n      Start 791: module_entity_query_boundary_rust_parity\n13/16 Test #791: module_entity_query_boundary_rust_parity ........   Passed    0.08 sec\n14/16 Test #787: module_inmemory_rust_parity .....................   Passed    1.30 sec\n15/16 Test #789: module_round_trip_reference_rust_parity .........   Passed    1.28 sec\n16/16 Test #788: module_entity_reference_rust_parity .............   Passed    4.22 sec\n\n100% tests passed out of 16\n\nTotal Test time (real) =   4.50 sec\n",
+        "log_sha256": "3efc7078156252dde8a3e9c4c4ce088b9ebe7753e7972e1d2711ae8f2b48f31e"
+      },
+      "release": {
+        "passed": 2,
+        "total": 2,
+        "tests": [
+          "runtime_id_model_rust_parity",
+          "entity_query_boundary_rust_parity"
+        ],
+        "output": "Test project /tmp/teaql_cpp_sqlite_release_506\n    Start  30: runtime_id_model_rust_parity\n1/2 Test  #30: runtime_id_model_rust_parity ........   Passed    0.06 sec\n    Start 432: entity_query_boundary_rust_parity\n2/2 Test #432: entity_query_boundary_rust_parity ...   Passed    0.06 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.13 sec\n",
+        "log_sha256": "2ef5dea070ac8eba4275f13ffba5d90b90f510b7892f6c1090e82274b36405d7"
+      }
+    },
+    "requalified_bindings": [
+      "runtime_id_model_rust_parity",
+      "runtime_error_debug_rust_parity",
+      "unified_buffer_clone_rust_parity",
+      "context_locking_rust_parity",
+      "inmemory_rust_parity",
+      "entity_reference_rust_parity",
+      "round_trip_reference_rust_parity",
+      "decimal_pointer_scope_rust_parity",
+      "entity_query_boundary_rust_parity"
+    ],
+    "remaining_recorded_baseline_failures": 0,
+    "evidence": "docs/parity/final_baselines_5_0_6_terminal.json",
+    "scope": "9762 Debug/native64 and 114 Release/native64 observations requalify nine historical native bindings. Unchanged historical inputs/drivers preserved; query boundaries add separate explicit-intent controls. Native17/module16/Release2 pass; fresh full native run remains pending. No current 32-bit/source-leaf/model/generator/full-phase acceptance claim."
+  }
+}

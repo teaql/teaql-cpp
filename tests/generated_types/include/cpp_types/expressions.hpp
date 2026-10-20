@@ -416,42 +416,42 @@ inline PersonExpression DeviceExpression::getOwner() const {
 
 struct E {
     static PersonExpression person(const Person& value) {
-        return PersonExpression(entity_expression(value));
+        return PersonExpression(entity_expression(value, StaticString{"person"}));
     }
 
     static PersonExpression person(Person&&) = delete;
     static PersonExpression person(const Person&&) = delete;
 
     static DeviceExpression device(const Device& value) {
-        return DeviceExpression(entity_expression(value));
+        return DeviceExpression(entity_expression(value, StaticString{"device"}));
     }
 
     static DeviceExpression device(Device&&) = delete;
     static DeviceExpression device(const Device&&) = delete;
 
     static OrderStatusExpression orderStatus(const OrderStatus& value) {
-        return OrderStatusExpression(entity_expression(value));
+        return OrderStatusExpression(entity_expression(value, StaticString{"orderStatus"}));
     }
 
     static OrderStatusExpression orderStatus(OrderStatus&&) = delete;
     static OrderStatusExpression orderStatus(const OrderStatus&&) = delete;
 
     static CategoryExpression category(const Category& value) {
-        return CategoryExpression(entity_expression(value));
+        return CategoryExpression(entity_expression(value, StaticString{"category"}));
     }
 
     static CategoryExpression category(Category&&) = delete;
     static CategoryExpression category(const Category&&) = delete;
 
     static ChildExpression child(const Child& value) {
-        return ChildExpression(entity_expression(value));
+        return ChildExpression(entity_expression(value, StaticString{"child"}));
     }
 
     static ChildExpression child(Child&&) = delete;
     static ChildExpression child(const Child&&) = delete;
 
     static InventoryExpression inventory(const Inventory& value) {
-        return InventoryExpression(entity_expression(value));
+        return InventoryExpression(entity_expression(value, StaticString{"inventory"}));
     }
 
     static InventoryExpression inventory(Inventory&&) = delete;

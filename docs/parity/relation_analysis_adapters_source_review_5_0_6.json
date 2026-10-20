@@ -1,0 +1,69 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "original_method_bodies": [
+    {
+      "name": "facet_by_customer_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn facet_by_customer_as(self, facet_name: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.facet_by_customer_as_with_options(facet_name, request, true)\n    }",
+      "sha256": "289efc118470da5cc71ec3a46e66c5c970ba8e8a523dc0a017e4213ed1dfd383"
+    },
+    {
+      "name": "facet_by_customer_as_with_options",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn facet_by_customer_as_with_options(\n        mut self,\n        facet_name: impl Into<String>,\n        request: impl Into<QuerySelection>,\n        include_all_facets: bool,\n    ) -> Self {\n        self.query_options.facets.push(FacetRequest::new(\n            facet_name,\n            \"customer\",\n            request,\n            include_all_facets,\n        ));\n        self\n    }",
+      "sha256": "d3d68e46c61af0acab911e0f13461a84bfb3e61226b62c66b19bbc9db5635955"
+    },
+    {
+      "name": "group_by_customer_with",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn group_by_customer_with(mut self, request: impl Into<QuerySelection>) -> Self {\n        self.query = self.query.group_by(\"customer_id\");\n        self.query_options.object_group_bys.push(ObjectGroupBy::new(\n            \"customer\",\n            \"customer_id\",\n            request,\n        ));\n        self\n    }",
+      "sha256": "784c1f00335d8a05bf1877a0afc443d2edb69aa7e0a40573e7f3fb1427488d61"
+    },
+    {
+      "name": "group_by_customer_with_details_from",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn group_by_customer_with_details_from(self, request: impl Into<QuerySelection>) -> Self {\n        self.group_by_customer_with(request)\n    }",
+      "sha256": "48a30f2461d7b416f8f1f0eb4a62a12f22fb5d3047209cfa24dd803aefbda8e8"
+    },
+    {
+      "name": "count_orders_with",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn count_orders_with(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query_options.relation_aggregates.push(RelationAggregate::new(\n            \"orders\",\n            alias,\n            selection,\n            true,\n        ));\n        self\n    }",
+      "sha256": "5872f9e382bd66144da47f589cbd8552850a9f66d538f33835df9cb3af276705"
+    },
+    {
+      "name": "stats_from_orders",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn stats_from_orders(self, request: impl Into<QuerySelection>) -> Self {\n        self.stats_from_orders_as(\"refinements\", request)\n    }",
+      "sha256": "f49b4f6c8517a90093861526cbe8aeac23c98686a980c502eb125bbb5df7c357"
+    },
+    {
+      "name": "stats_from_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn stats_from_orders_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query_options.relation_aggregates.push(RelationAggregate::new(\n            \"orders\",\n            alias,\n            selection,\n            false,\n        ));\n        self\n    }",
+      "sha256": "2e1b3561fd3136dc464d7676a12d1df28a7961fd09f38f09513778eff5255335"
+    },
+    {
+      "name": "group_by_orders_with_details",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn group_by_orders_with_details(self, request: impl Into<QuerySelection>) -> Self {\n        self.stats_from_orders(request)\n    }",
+      "sha256": "0a5de39d39d106f8ccc0aa2c7fcfd915d9d16a356b5b61588402c41a1b2171dd"
+    }
+  ],
+  "files_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_runtime.hpp": "4fcb97675a2be1483f4ef4b709368b3c3b32226f6f1ae60cdee11bc36f3ece74",
+    "teaql_runtime/src/entity_runtime.cpp": "618929bb31f0097f0659fe99795632374c1bb6ff3406968076b5ce495fd085d6",
+    "teaql_runtime/include/teaql/runtime/entity_graph_decoder.hpp": "02d6696c85f9c1956697eae52d8bc1f6966f6fe07be89e37b6b5bb54e9147084",
+    "teaql_runtime/src/data_service/relation_graph.cpp": "ffb2fb3cb9c7fdfde82201f2acca38b8a08c9b23f0fe1413aa79fbce39d6c700",
+    "teaql_runtime/tests/embedded_graph_boundary_tests.cpp": "1940125b0926a7ea79b25636305bd3ad2dd68b9110bbbe33359efd291f988a62",
+    "tests/parity/generated_analysis_adapter_inputs_probe.cpp": "6fadbc8981fa351c12bfea4da566dc661275355e0b2c24a68bb761c0ccfc86cb",
+    "scripts/reproduce_cpp_contract_fixtures.py": "cad389d8754a7e3bf624b7d2a09ee99bd4a43a00937a7fb5717051f3cfca965b",
+    "scripts/verify_generated_type_errors.py": "d0bff85e53f7b6ca1e054d343fc7a2f35bd0041f6a5f302331d5e860a59c2e24"
+  },
+  "producer_files_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "1498806b48207f97b9a634335d5e2a008a7dab38af4e1136757c20095d96ee6e",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "0f7a2fb7a0dc5ef42bc97580a07e68ebfae4dcefecbda93c7e1396944069d744"
+  },
+  "scope": "Generated facet/group/relation count/detail conversions; NULL facets and builder-owned view allocation. Matching/roll-up/field-statistic families and full phase requirements remain open."
+}

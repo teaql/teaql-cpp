@@ -201,6 +201,9 @@ protected:
 
     virtual void on_closed() noexcept {}
 
+    // Keep the memory_resource hook overridable for scoped allocation accounting.
+    void* do_allocate(std::size_t bytes, std::size_t alignment) override;
+
 private:
     struct Cleanup {
         Cleanup* previous;
@@ -293,7 +296,6 @@ private:
     bool closing_ = false;
     bool closed_ = false;
     const Arena* parent_;
-    void* do_allocate(std::size_t bytes, std::size_t alignment) override;
 
     void do_deallocate(void*, std::size_t, std::size_t) override {} // Region reclamation only.
 

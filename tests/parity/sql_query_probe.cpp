@@ -168,12 +168,24 @@ static Json evaluate(UserContext& user, const Json& j) {
             (void)active.query_log_intent(r, q);
         }
         auto comment = optional(item, "comment");
+        auto purpose = optional(item, "purpose");
         auto intent = QueryIntent::from_optional(
             r,
-            comment          ? std::optional<std::string_view>(text(*comment))
+            comment && std::holds_alternative<String>(comment->data)
+                ? std::optional<std::string_view>(text(*comment))
             : q.comment_text ? std::optional<std::string_view>(*q.comment_text)
                              : std::nullopt,
-            "inspect SQL query fixture");
+            purpose && std::holds_alternative<String>(purpose->data)
+                ? std::optional<std::string_view>(text(*purpose))
+                : std::nullopt);
+        if (!intent) {
+            auto out = detail::model_json(r);
+            detail::model_put(out, "intent_error", intent.error().to_string(r));
+            detail::model_put(out, "compiles", dialect.compiles);
+            detail::model_put(out, "lookups", schema.lookups);
+            results.emplace_back(std::move(out));
+            continue;
+        }
         QueryRequest request(std::allocator_arg,
                              Allocator(r),
                              q,

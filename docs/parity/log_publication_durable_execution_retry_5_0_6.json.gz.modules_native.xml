@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="15"
+	failures="1"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="1"
+	timestamp="2026-10-18T09:21:27"
+	>
+	<testcase name="module_context_logging_contracts" classname="module_context_logging_contracts" time="0.00647032" status="run">
+		<properties/>
+		<system-out>TeaQL WARNING: sensitive plaintext logging enabled; application data may be written to disk. Authentication secrets remain redacted.
+Context logging contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_log_formatter_contracts" classname="module_log_formatter_contracts" time="0.0030611" status="run">
+		<properties/>
+		<system-out>Log formatter contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_log_manager_contracts" classname="module_log_manager_contracts" time="0.0115216" status="run">
+		<properties/>
+		<system-out>Log manager contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_audit_event_contracts" classname="module_audit_event_contracts" time="0.00391296" status="run">
+		<properties/>
+		<system-out>Audit event contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_runtime_log_contracts" classname="module_runtime_log_contracts" time="0.00810993" status="run">
+		<properties/>
+		<system-out>Runtime log contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_unified_buffer_clone_contracts" classname="module_unified_buffer_clone_contracts" time="0.00243975" status="run">
+		<properties/>
+		<system-out>Unified buffer Clone and explicit retention contracts pass
+</system-out>
+	</testcase>
+	<testcase name="module_context_logging_vectors_contracts" classname="module_context_logging_vectors_contracts" time="0.00255825" status="fail">
+		<failure message="Failed"/>
+		<properties/>
+		<system-out>source trace fixture is unavailable
+</system-out>
+	</testcase>
+	<testcase name="module_log_model_contracts" classname="module_log_model_contracts" time="0.00392691" status="run">
+		<properties/>
+		<system-out>Runtime log model ownership contracts pass
+</system-out>
+	</testcase>
+	<testcase name="module_runtime_log_rust_parity" classname="module_runtime_log_rust_parity" time="0.91639" status="run">
+		<properties/>
+		<system-out>Runtime SQL log projection parity: 425/425 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_audit_event_rust_parity" classname="module_audit_event_rust_parity" time="0.48224" status="run">
+		<properties/>
+		<system-out>Audit events and privacy parity: 1427/1427 outputs match; 0 target-width inputs reject before execution
+</system-out>
+	</testcase>
+	<testcase name="module_context_logging_rust_parity" classname="module_context_logging_rust_parity" time="0.551991" status="run">
+		<properties/>
+		<system-out>Context logging parity: 327/327 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_log_manager_rust_parity" classname="module_log_manager_rust_parity" time="0.748883" status="run">
+		<properties/>
+		<system-out>Log manager parity: 94/94 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_unified_buffer_clone_rust_parity" classname="module_unified_buffer_clone_rust_parity" time="0.0598392" status="run">
+		<properties/>
+		<system-out>Unified buffer Clone parity: 1/1 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_log_model_rust_parity" classname="module_log_model_rust_parity" time="1.33193" status="run">
+		<properties/>
+		<system-out>log_model 5.0.6 parity: 172/172 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_log_formatter_rust_parity" classname="module_log_formatter_rust_parity" time="0.433896" status="run">
+		<properties/>
+		<system-out>Log formatter parity: 927/927 outputs match; 0 target-width inputs reject before formatting
+</system-out>
+	</testcase>
+</testsuite>

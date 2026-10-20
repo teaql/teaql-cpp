@@ -3,6 +3,7 @@
 #include <sqlite3.h>
 #include <array>
 #include <charconv>
+#include <stdexcept>
 
 namespace teaql::detail {
 namespace {
@@ -202,10 +203,47 @@ std::optional<Timestamp> parse_fixed_sqlite_timestamp(std::string_view s) {
         s[13] != ':' || s[16] != ':') {
         return {};
     }
-    for (unsigned i : {0, 1, 2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18}) {
-        if (s[i] < '0' || s[i] > '9') {
-            return {};
+    // The source's then_some eagerly evaluates u8 subtraction, even for an
+    // invalid digit. Preserve its checked Debug failure and short-circuit order.
+    auto digits = [&](unsigned start, unsigned length) -> std::optional<unsigned> {
+        unsigned value = 0;
+        for (unsigned i = start; i < start + length; ++i) {
+            auto byte = static_cast<unsigned char>(s[i]);
+#ifndef NDEBUG
+            if (byte < '0') {
+                throw std::out_of_range("attempt to subtract with overflow");
+            }
+#endif
+            if (byte < '0' || byte > '9') {
+                return {};
+            }
+            value = value * 10 + byte - '0';
         }
+        return value;
+    };
+    auto year = digits(0, 4);
+    if (!year) {
+        return {};
+    }
+    auto month = digits(5, 2);
+    if (!month) {
+        return {};
+    }
+    auto day = digits(8, 2);
+    if (!day || !Date::from_ymd(static_cast<std::int32_t>(*year), *month, *day)) {
+        return {};
+    }
+    auto hour = digits(11, 2);
+    if (!hour) {
+        return {};
+    }
+    auto minute = digits(14, 2);
+    if (!minute) {
+        return {};
+    }
+    auto second = digits(17, 2);
+    if (!second) {
+        return {};
     }
     if (s[17] == '6') {
         return {}; // Fast path excludes leap seconds.
@@ -234,6 +272,29 @@ std::optional<Timestamp> parse_fixed_sqlite_timestamp(std::string_view s) {
         }
         int offset = 0;
         if (!p.s.empty()) {
+#ifndef NDEBUG
+            // signed_offset also eagerly computes both byte subtractions.
+            auto suffix = p.s;
+            bool fixed_offset = (suffix.size() == 3 || suffix.size() == 5 ||
+                                 (suffix.size() == 6 && suffix[3] == ':')) &&
+                                (suffix.front() == '+' || suffix.front() == '-');
+            if (fixed_offset) {
+                for (unsigned index : {1, 2}) {
+                    if (static_cast<unsigned char>(suffix[index]) < '0') {
+                        throw std::out_of_range("attempt to subtract with overflow");
+                    }
+                }
+                if (static_cast<unsigned char>(suffix[1]) <= '9' &&
+                    static_cast<unsigned char>(suffix[2]) <= '9' && suffix.size() > 3) {
+                    auto start = suffix.size() == 6 ? 4 : 3;
+                    for (auto index : {start, start + 1}) {
+                        if (static_cast<unsigned char>(suffix[index]) < '0') {
+                            throw std::out_of_range("attempt to subtract with overflow");
+                        }
+                    }
+                }
+            }
+#endif
             if (p.take('Z') || p.take('z')) {
                 if (!p.s.empty()) {
                     return {};

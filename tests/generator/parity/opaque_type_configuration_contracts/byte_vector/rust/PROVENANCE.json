@@ -1,0 +1,29 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/parity/opaque_type_configuration_contracts/byte_vector/model.xml",
+  "model_sha256": "6ada9186b4351579833438412f8ca8d4f3817c83a1d9468db41ecd8904f6967d",
+  "hand_edited": false,
+  "files": {
+    "OBSERVATION.json": "cb7e2c6ad36793893b375a2d28276d8269c0cdadfda6d2fc3cbf5ecdda7fe26b",
+    "lib/Cargo.toml": "3cc4f3aa4df42327a6fc5c9f7781c4bc4e575dc03bd0275ce938eda8fdfe48ed",
+    "lib/src/sample_data.rs": "64eeb93888fab27fc0695e3e29a30e0d11ba90d8b20d737e3cf5351c37574b82",
+    "lib/src/request_support.rs": "19349bbbe4996d3e17002e927c8dfab14e7a7513b0913b184cf752e3f4b947a7",
+    "lib/src/q.rs": "cf1bea0e1124ddfc5b043ce115932b372fcbefd1ab7b41028bbeba667215ec06",
+    "lib/src/e.rs": "8d8368d41217591d5a1595efbf4b95cd8018bfb56f1fc9ee6fbb5457daec011a",
+    "lib/src/lib.rs": "3de1c3181ee6eddcc7fc190307d092483db0531867946079da101f754894111a",
+    "lib/src/runtime.rs": "b8f32f702d6ab10a5216dc95d7cc97481aeecbfd4d013f6a7b97ea17f3b45005",
+    "lib/src/priority/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/priority/entity.rs": "9e6c8d75f3ea3db8bb4c14390872801f18d7633a9fc19773ee37fdaef384098b",
+    "lib/src/priority/behavior.rs": "334c09111fad87bd014f5becc3bf2e2bb840a2fc5343498a2a9299788de3a7f3",
+    "lib/src/priority/checker.rs": "27f7fb095662721f1761202ae7fae0da7862fb8031160599adeadac94820cff4",
+    "lib/src/priority/expression.rs": "c00904722c79e225a873d64be856d77cc4d4ce6ff96e02600e8f8bf62484856b",
+    "lib/src/priority/request.rs": "248b961a6466b84f4a44574be039904e84ebdc78af7f00aa5d44d7da13f30bfc",
+    "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/platform/entity.rs": "dc8b70e44c46ab4fe9f1ec925a0b567e0760d736acaeb08baf677df38e323bca",
+    "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+    "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+    "lib/src/platform/expression.rs": "670dacccd1fe60f676bf31af8ec3c01fc223a89ec1bd8a619925b816121c9b03",
+    "lib/src/platform/request.rs": "694976ef01ce381abb5ea9d26f7368901ea8db57d5929136cd5b4d579ddb8929"
+  }
+}

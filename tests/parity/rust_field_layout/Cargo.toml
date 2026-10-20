@@ -27,6 +27,7 @@ cpp_candidates_core = { package = "cpp-candidates-core", path = "../../generator
 cpp_dynamic_json_core = { package = "cpp-dynamic-json-core", path = "../../generator/parity/dynamic_json_rust/lib" }
 cpp_sample_temporal_core = { package = "cpp-sample-temporal-core", path = "../../generator/parity/sample_fields_temporal_rust/lib" }
 cpp_sample_runtime_core = { package = "cpp-sample-runtime-core", path = "../../generator/parity/sample_fields_runtime_rust/lib" }
+cpp_member_aliases_core = { package = "cpp-member-aliases-core", path = "../../generator/parity/typed_member_aliases_rust/lib" }
 chrono = "=0.4.44"
 async-trait = "=0.1.92"
 # Already locked runtime dependencies; test-only authenticated malformed stimuli.

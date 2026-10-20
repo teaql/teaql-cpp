@@ -1,0 +1,63 @@
+{
+  "recorded_utc": "2026-10-14T18:52:09.160613+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Restore general match_types IntoIterator conversion with constrained Context input ranges. Ordinary fixture lacks internal_type metadata; its six actual SQL failures remain explicit. No full general-query/phase acceptance.",
+  "exact_original_native_outcomes": 198,
+  "construction_outcomes": 192,
+  "actual_sqlite_unknown_field_failures": 6,
+  "checks": {
+    "native": {
+      "passed": 3,
+      "selected": 3
+    },
+    "modules": {
+      "passed": 2,
+      "selected": 2
+    },
+    "sanitize": {
+      "passed": 2,
+      "selected": 2,
+      "leak_scanning": false
+    },
+    "compiler": {
+      "positive": 1,
+      "negative": 2
+    },
+    "java_tests": 56,
+    "generated_workspaces": 24,
+    "generated_workspace_files": 288,
+    "strict_contract_sdks": 44,
+    "exact_added_delegates": 134,
+    "changed_sdk_query_headers": 30,
+    "changed_sdk_assist_files": 30,
+    "format_files": 1448,
+    "canonical_consumer_bodies": 664,
+    "module_exports": 1485,
+    "public_name_inventory_only": 755
+  },
+  "original_registry_difference_count": 0,
+  "runtime_change": "Constrained lvalue/rvalue overloads reuse criteria_values and existing Value-span matchTypes; previous body unchanged.",
+  "generator_change": "Thin constrained matchTypes overloads plus accurate Assist.",
+  "original_generated_or_historical_files_changed": false,
+  "raw_validation": "docs/parity/type_match_ranges_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "c7162bbc7085bb7a0bb7ca9ac7e9f383084b6a941e925d6a56c99ad21905d1e0",
+    "teaql_runtime/tests/generated_type_match_range_tests.cpp": "a173182229ed80e8d686e94efeac3859432a6081b52002b67fc504730b6160b0",
+    "tests/parity/generated_type_match_ranges_probe.cpp": "11ef372d19318bbcca88b83912704830c3dc10012334c0a9bb85c70359702fb6",
+    "tests/parity/compare_generated_type_match_ranges_5_0_6.py": "60d91cfc47fd16b9f6c9e8a5406f9119a2c21187820543c2136071dfc224ebb8",
+    "tests/parity/rust_type_match_ranges_5_0_6/Cargo.toml": "6abe7c24cb44c0bf930712af764378cdc2fd3072a32e03c547e410e5b8ea6112",
+    "tests/parity/rust_type_match_ranges_5_0_6/Cargo.lock": "1c00a1f861483ffce7636d9496b46b5a74f580be4a2cab57fc324b82b87875f9",
+    "tests/parity/rust_type_match_ranges_5_0_6/src/main.rs": "133cb8c50f006cc6d42d458773121e8bfa01801205430aeae3c20bd5d60e36dc",
+    "tests/parity/generated_type_match_ranges_5_0_6_cases.json.gz": "2a6a60612b3557dc10f8c31b33a84868954c97907519df5feedbefc941276af4",
+    "docs/parity/type_match_ranges_source_review_5_0_6.json": "f63f1d149c799c1de20acaa1faeecc4a9faf724e8c9baae48e6d323015128146",
+    "docs/parity/type_match_ranges_sdk_change_5_0_6.json": "00d728542d7c7498c65c733be478b95f3517836665ed83d0d2e5d446b634919c",
+    "scripts/reproduce_cpp_contract_fixtures.py": "cc7fd5ce841fd0afe7f14b6eacc1b0dda2c98d721c189791c8f2c15f43766819"
+  },
+  "producer_file_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "4adce35a06be88daead05f3335e6bf6b6fae4a9a039a7fd3ebe412329eaba3de",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "14e25651a986a9c82d902ac5bf456e45ddc1a072f9de255b5ae3b21bff0bb093"
+  },
+  "complete_capability_acceptance": false,
+  "full_suite_mips_device_run": false
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="17"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="canada-mini-host"
+	time="2"
+	timestamp="2026-10-18T17:16:04"
+	>
+	<testcase name="module_original_runtime_context_tail" classname="module_original_runtime_context_tail" time="0.0627174" status="run">
+		<properties/>
+		<system-out>Four original Context-tail contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_original_runtime_context_contracts" classname="module_original_runtime_context_contracts" time="0.00291322" status="run">
+		<properties/>
+		<system-out>Original six Context contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_context_defaults_contracts" classname="module_context_defaults_contracts" time="0.00205503" status="run">
+		<properties/>
+		<system-out>Context defaults contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_context_model_contracts" classname="module_context_model_contracts" time="0.00642056" status="run">
+		<properties/>
+		<system-out>Context model protocols and lifetime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_runtime_context_resource_contracts" classname="module_runtime_context_resource_contracts" time="0.00209285" status="run">
+		<properties/>
+		<system-out>Runtime Context resource contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_data_store_contracts" classname="module_data_store_contracts" time="0.00443222" status="run">
+		<properties/>
+		<system-out>DataStore public and lifetime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_checker_context_contracts" classname="module_checker_context_contracts" time="0.00282468" status="run">
+		<properties/>
+		<system-out>Checker/fix Context ownership contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_checker_reentrant_close" classname="module_checker_reentrant_close" time="0.00185904" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_checker_registration_reentrant_close" classname="module_checker_registration_reentrant_close" time="0.00171665" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_checker_typed_direct_reentrant_close" classname="module_checker_typed_direct_reentrant_close" time="0.00182188" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_context_defaults_rust_parity" classname="module_context_defaults_rust_parity" time="0.0739593" status="run">
+		<properties/>
+		<system-out>context_defaults 5.0.6 parity: 75/75 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_context_model_rust_parity" classname="module_context_model_rust_parity" time="0.589703" status="run">
+		<properties/>
+		<system-out>context_model 5.0.6 parity: 234/234 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_checker_rust_parity" classname="module_checker_rust_parity" time="0.519106" status="run">
+		<properties/>
+		<system-out>checker 5.0.6 parity: 1362/1362 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_data_store_rust_parity" classname="module_data_store_rust_parity" time="0.235104" status="run">
+		<properties/>
+		<system-out>DataStore parity: 251/251 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_internal_id_rust_parity" classname="module_internal_id_rust_parity" time="0.154085" status="run">
+		<properties/>
+		<system-out>Internal ID protocol 5.0.6 parity: 171/171 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_runtime_context_rust_parity" classname="module_runtime_context_rust_parity" time="0.337134" status="run">
+		<properties/>
+		<system-out>Runtime Context resources parity: 410/410 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_business_service_rust_parity" classname="module_business_service_rust_parity" time="0.506452" status="run">
+		<properties/>
+		<system-out>Business clock/service parity: 859/859 observations match
+</system-out>
+	</testcase>
+</testsuite>

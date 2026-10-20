@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 48,
+  "source_comparison_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 7,
+      "total": 7,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 401: generated_optional_fields_rust_parity\n    Start 429: generated_checker_flow_rust_parity\n    Start 430: generated_checker_commit_rust_parity\n    Start 400: generated_entity_helpers_rust_parity\n1/7 Test #400: generated_entity_helpers_rust_parity ....   Passed    2.37 sec\n    Start 580: generated_optional_types_contracts\n2/7 Test #580: generated_optional_types_contracts ......   Passed    0.06 sec\n    Start 578: generated_checker_contracts\n3/7 Test #578: generated_checker_contracts .............   Passed    0.03 sec\n    Start  62: checker_clock_text_rust_parity\n4/7 Test  #62: checker_clock_text_rust_parity ..........   Passed    0.16 sec\n5/7 Test #430: generated_checker_commit_rust_parity ....   Passed    5.84 sec\n6/7 Test #401: generated_optional_fields_rust_parity ...   Passed    9.17 sec\n7/7 Test #429: generated_checker_flow_rust_parity ......   Passed    9.98 sec\n\n100% tests passed out of 7\n\nTotal Test time (real) =  10.01 sec\n",
+      "sha256": "1ce0a19d412f86dc70211fbe7d089edf4cf79766251ffea7dfa725e39906c663"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 876: module_checker_clock_text_rust_parity\n1/1 Test #876: module_checker_clock_text_rust_parity ...   Passed    0.08 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.10 sec\n",
+      "sha256": "4481a77a8ce3c314d14be0bb050b92b63574376a275998fa29a1ea66a0b005b7"
+    },
+    "sanitize": {
+      "passed": 5,
+      "total": 5,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 400: generated_entity_helpers_rust_parity\n    Start 580: generated_optional_types_contracts\n    Start 578: generated_checker_contracts\n    Start  62: checker_clock_text_rust_parity\n1/5 Test #578: generated_checker_contracts .............   Passed    0.05 sec\n    Start 401: generated_optional_fields_rust_parity\n2/5 Test #580: generated_optional_types_contracts ......   Passed    0.07 sec\n3/5 Test  #62: checker_clock_text_rust_parity ..........   Passed    0.10 sec\n4/5 Test #400: generated_entity_helpers_rust_parity ....   Passed    3.19 sec\n5/5 Test #401: generated_optional_fields_rust_parity ...   Passed   10.55 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =  10.61 sec\n",
+      "sha256": "a6c8e3d31bb9f2293332d45a5927e68c3dfa55f3d5dfcab4b60c2fa5aa2353e5"
+    }
+  },
+  "java": [
+    {
+      "suite": "com.skynet.codegenerator.CppGenerationTest",
+      "passed": 42,
+      "sha256": "5ecfe0d76978015eced417bf5ac541e34bd18dd1517895ac6ffa032596bd0caf"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+      "passed": 2,
+      "sha256": "0dcfde4b16ea0875769294f8bee330708fecf924e5080a887da8475207d5cb79"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+      "passed": 2,
+      "sha256": "5a90427aaf3f1b7e084622981558ad66ce07ba5760e374d4aa5099d2d1eb0b3d"
+    }
+  ],
+  "workspaces": 21,
+  "reproduced_files": 252,
+  "contract_sdks": 44,
+  "canonical_bodies": 566,
+  "format_cpp_count": 1386,
+  "original_worktrees_changed": false,
+  "original_generated_files_patched": false,
+  "default_pmr_disabled": true,
+  "explicit_global_observation_copy": true,
+  "actual_user_deletion": true,
+  "leak_scanning": false,
+  "public_string_setter_accepts_timestamp": false,
+  "complete_capability_acceptance": false,
+  "source_scope": "Direct required uniStr Checker stored/ledger/load-state/diagnostic outcomes only; no SQL/save claim.",
+  "mips_run": false,
+  "physical_device_run": false,
+  "hashes": {
+    "teaql_runtime/include/teaql/runtime/entity_runtime.hpp": "1e20c9d499d3222f26e30ff91c8c0153d19af015ca22acdbd6c3fa9afe2e3d18",
+    "teaql_runtime/include/teaql/runtime/generated_checker.hpp": "d6a3bbf93e2da5b4978a9fe51087c5d6a7fa4d5b39d3739c0639d7ef41846c94",
+    "tests/parity/checker_clock_text_probe.cpp": "41abb26d511c2f4c8fbc6f90cee7b7bd1aa4e7e89fb7e45daa87e0d33eae4b8b",
+    "tests/parity/checker_clock_text_5_0_6.rs": "8f1af9460a01c953fbdfaf62d7d5b0fe1f6b59ada33ba5c3d8ad1a4d96409b75",
+    "tests/parity/compare_checker_clock_text_5_0_6.py": "5d342f8a8bbb4e5c927119d6ae5d6e8aa4fab49b8deef1dcdab8fa229032ee3f",
+    "scripts/verify_checker_clock_text_5_0_6.py": "d6396d8dcf7acf8602d40ed85413e8b13071c37c67684fa3ef1dc3bb8dec9abf",
+    "docs/parity/checker_clock_text_source_5_0_6.json": "35c339c9a1de31c5deab3bdd6070ee9ca7abb15550359a560c0bd1b3c4f6a6dc",
+    "docs/parity/clock_text_sdk_regeneration_5_0_6.json": "f92c5422262024dfd9e77ddfc3c99c545588c8c8837ae520acbf5db298350d17",
+    "tests/generator/checker_unique_string.xml": "59f70dbc21fc643a777efb08d15489b17efdfd7ab07b6b91757f5bdbf1538e92",
+    "tests/generated_checker_unique_string/manifest.json": "cbcda21295a470fcc50cf31437c88527ae380c22c1ffdce70fb3dda774d3ef01",
+    "tests/generator/parity/checker_unique_string_rust/PROVENANCE.json": "bcf556ae8d4024f23e7f78d8679383f7f57f1e9e1b94c1fa015ac90fa23e23a0",
+    "docs/parity/checker_clock_text_initial_validation_failures_5_0_6.json.gz": "2073a7df06e92fcf8f1a884daaed778027f213b60f17b8d36e1851de713f75b1"
+  },
+  "producer_hashes": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "65f24247598129610d34ba219130cf33e3a24b4453808aeb88ef7001a3f49469",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "4246155067e3bf9e7d4a48db96b4f595e5ad299cf9c6140a461f299c3ac8ac28"
+  }
+}

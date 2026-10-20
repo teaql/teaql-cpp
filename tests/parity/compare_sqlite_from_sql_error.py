@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("sqlite_from_sql_error_cases.json.gz", "SQLite column-conversion errors"))
+    raise SystemExit(main("sqlite_from_sql_error_5_0_6_cases.json.gz", "SQLite column-conversion errors"))

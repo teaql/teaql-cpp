@@ -1,6 +1,7 @@
-// Semantic port of all ten locked SQL binding-policy test contracts.
+// Semantic port of all eleven locked SQL binding-policy test contracts.
 #include <teaql/sql/dialect.hpp>
 #include <teaql/sql/bindings.hpp>
+#include <teaql/data_service/sql_log_debug.hpp>
 #include <teaql/memory/arena.hpp>
 #include <algorithm>
 #include <atomic>
@@ -71,6 +72,45 @@ static void descriptor_declaration(Memory r) {
           "privacy classification does not alter values");
     legacy.mask_fields({});
     policies(dialect.compile_select(r, legacy, query), {Policy::Plain, Policy::Credential});
+}
+
+static void typed_like_originals(Memory r) {
+    Dialect dialect;
+    auto root = entity(r);
+    SelectQuery query(std::allocator_arg, Allocator(r), "Customer");
+    Vector<Expr> clauses(r);
+    clauses.emplace_back(Expr::contain(r, "display_name", "%MASKED_\\%"));
+    clauses.emplace_back(Expr::begin_with(r, "status", "PLAIN-ORIGINAL"));
+    clauses.emplace_back(Expr::end_with(r, "password", "CREDENTIAL-ORIGINAL"));
+    query.filter(all(r, std::move(clauses)));
+    auto compiled = dialect.compile_select(r, root, query);
+    check(compiled.params.size() == 3 && compiled.params[0].try_text() == "%%MASKED_\\%%" &&
+              compiled.params[1].try_text() == "PLAIN-ORIGINAL%" &&
+              compiled.params[2].try_text() == "%CREDENTIAL-ORIGINAL",
+          "typed LIKE keeps execution patterns unchanged");
+    policies(compiled, {Policy::Masked, Policy::Plain, Policy::Credential});
+    auto contains = [](const Vector<String>& secrets, std::string_view value) {
+        return std::find(secrets.begin(), secrets.end(), value) != secrets.end();
+    };
+    for (bool debug : {false, true}) {
+        Vector<String> secrets(r);
+        compiled.log_context.intent_redactions.extend_secrets(debug, secrets);
+        check(contains(secrets, "%MASKED_\\%") == !debug &&
+                  contains(secrets, "CREDENTIAL-ORIGINAL") && !contains(secrets, "PLAIN-ORIGINAL"),
+              "original operands follow field policy and credentials stay protected");
+    }
+    EntityDescriptor legacy(std::allocator_arg, Allocator(r), "Legacy");
+    legacy.property("name", DataType::Text);
+    SelectQuery unknown_query(std::allocator_arg, Allocator(r), "Legacy");
+    unknown_query.filter(Expr::not_contain(r, "name", "UNKNOWN-ORIGINAL"));
+    auto unknown = dialect.compile_select(r, legacy, unknown_query);
+    policies(unknown, {Policy::Unknown});
+    Vector<String> secrets(r);
+    unknown.log_context.intent_redactions.extend_secrets(true, secrets);
+    check(secrets.size() == 1 && secrets[0] == "UNKNOWN-ORIGINAL",
+          "unknown original operands stay private even with debug permission");
+    check(debug_string(r, compiled.log_context).find("ORIGINAL") == String::npos,
+          "SqlLogContext Debug excludes private original operands");
 }
 
 static void predicates_and_scalar_scope(Memory r) {
@@ -256,6 +296,7 @@ int main() {
     std::pmr::set_default_resource(std::pmr::null_memory_resource());
     Arena memory(4096, std::pmr::new_delete_resource());
     descriptor_declaration(&memory);
+    typed_like_originals(&memory);
     predicates_and_scalar_scope(&memory);
     subquery_and_search_scope(&memory);
     raw_fragments_taint_the_statement(&memory);

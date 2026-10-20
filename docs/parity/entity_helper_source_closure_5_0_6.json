@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 3364,
+  "matrices": [
+    {
+      "corpus": "generated_entity_helpers_5_0_6_cases.json",
+      "observations": 1624,
+      "exit_code": 0,
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nSame-model generated entity helpers parity: 1624/1624 observations match\n"
+    },
+    {
+      "corpus": "generated_optional_fields_5_0_6_cases.json.gz",
+      "observations": 1548,
+      "exit_code": 0,
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nGenerated optional fields and Checker parity: 1548/1548 observations match\n"
+    },
+    {
+      "corpus": "recursive_attachment_helpers_5_0_6_cases.json.gz",
+      "observations": 192,
+      "exit_code": 0,
+      "output": "Recursive attachment: 192/192 exact original/native outcomes\n"
+    }
+  ],
+  "reference_registry_versions_preserved": true,
+  "reference_registry_checksums_preserved": true,
+  "original_entity_checker_files_changed": false,
+  "existing_entity_observer_changed": false,
+  "recursive_observer_added": true,
+  "historical_manifests_changed": false,
+  "normalization": "none",
+  "access_adaptation": "Unchanged entity/Checker-only path harness excludes broken original request/runtime scaffolds; relations use the complete original crate.",
+  "complete_generator_acceptance": false,
+  "hashes": {
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/rust_entity_helper_closure_5_0_6/Cargo.toml": "b1d98c3350c506f6e3283910f75933dfafd8599bce029ea820fab062b08ad663",
+    "tests/parity/rust_entity_helper_closure_5_0_6/Cargo.lock": "91819450fbe40795fbf40cf0d2352ca39ba6c94351f1444a3106e49f2c0c1ddf",
+    "tests/parity/rust_recursive_attachment_helpers_5_0_6/Cargo.toml": "48c8fe3c3faebdd8538cdd5e721488d59ea614ba2e3941fa77f26d278877fa07",
+    "tests/parity/rust_recursive_attachment_helpers_5_0_6/Cargo.lock": "c7dbd43610db2a1fbeb3c474dbdd7e902c36912b8418889fb0890523a45cd356",
+    "tests/parity/compare_generated_entity_helpers.py": "9106d961641b7c4c1779e769aa2e929cc1347c8e3a1008b56d2837712bc46c39",
+    "tests/parity/generated_entity_helpers_5_0_6_cases.json": "fe8c2f0fa11288933907c56a6bd05b8e31778ea13f708254845fd89bbb4872c6",
+    "tests/parity/compare_generated_optional_fields.py": "fb537f3f4177ffdae03f8cf81c2b0ad807af679c3bc4a47f4115e1ae12118005",
+    "tests/parity/generated_optional_fields_5_0_6_cases.json.gz": "3c387e423801cdb94aa9a1bd7bd3fd80529000ac8f4960f742b780bc97091c84",
+    "tests/parity/compare_recursive_attachment_helpers_5_0_6.py": "13d16a854b1d5c86eb940c7a8e951859bdf15ba7332c666abe3216d9c3e4985e",
+    "tests/parity/recursive_attachment_helpers_5_0_6_cases.json.gz": "fcd3bbb0bb01d0cf2e0d5cca7db276366bc1859095ecbd56a244169beed6c0fe",
+    "scripts/verify_entity_helper_source_closure_5_0_6.py": "83742a87ec6cb633fbde4a5e17eafd1dca540894227075d72a937a63d95c36f3",
+    "tests/parity/rust_types_entities/src/lib.rs": "ecfde5ed6cc3653c86570aa373c104efb6a1938adafbe91df5d945bd8101415c",
+    "tests/parity/rust_field_layout/src/bin/generated_entity_helpers_5_0_6.rs": "2a695922bc8adca1cb60dc48154f9123efb58ccb187a04b6d2c8832c1ead9062",
+    "tests/parity/recursive_attachment_helpers_5_0_6.rs": "f29a4015e35b8181e08d63e818c40dc840c337f002863d2108d5046781b16fdf",
+    "tests/parity/generated_entity_helpers_probe.cpp": "4da0dc90918cf3ea05a196441d853c9d61caf5416e753d5686837bec34c84c20",
+    "tests/parity/recursive_attachment_helpers_probe.cpp": "dacb11be5e1507f786125f3ffd8d51be2555ac91125c74bcd4675457ad27fd3b",
+    "tests/generator/parity/types_rust/PROVENANCE.json": "241564feaa5ccafffe2bc42a92d649ae0fc2d987c0f5cfcc9252fa31aac35b6f",
+    "tests/generator/parity/optional_types_rust/PROVENANCE.json": "74271992bd876ec666315106d5b5dacb85257ea6fd5db63fc0811452391765b3",
+    "tests/generator/parity/relations_rust/PROVENANCE.json": "08d08f6a10be0799e5244ef10beaa622a1ce606dc311eb1f77ca1cb46579883c"
+  }
+}

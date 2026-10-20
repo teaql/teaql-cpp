@@ -1,0 +1,23 @@
+[package]
+name = "teaql_checker_helpers_closure_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rusqlite = { version = "=0.40.1", features = ["bundled", "chrono", "column_decltype"] }
+school_management_service_core = { package = "school-management-service-core", path = "../../../.reference/teaql-rs/examples/shared-load-state/fixtures/narrow/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }

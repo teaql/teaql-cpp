@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "exact_semantic_cases": 80,
+  "ownership_adaptations": 1,
+  "layouts": 72,
+  "saturation_and_release_cases": 8,
+  "profiles": {
+    "native": {
+      "passed": 5,
+      "total": 5,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start   1: initialized_snapshot_cache_rust_parity\n    Start 376: loaded_snapshot_rust_parity\n    Start 550: readonly_schema_hash_5_0_6_rust_parity\n1/5 Test #550: readonly_schema_hash_5_0_6_rust_parity ...   Passed    0.11 sec\n    Start 377: loaded_snapshot_contracts\n2/5 Test #377: loaded_snapshot_contracts ................   Passed    0.05 sec\n    Start 549: model_debug_contracts\n3/5 Test #549: model_debug_contracts ....................   Passed    0.00 sec\n4/5 Test #376: loaded_snapshot_rust_parity ..............   Passed    0.59 sec\n5/5 Test   #1: initialized_snapshot_cache_rust_parity ...   Passed    0.86 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =   0.87 sec\n",
+      "sha256": "2198095c9fc7f5ecaf346aef31fdecabdbcdd0ab43bc3b967d9ca236b8ed5141"
+    },
+    "sanitize": {
+      "passed": 2,
+      "total": 2,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start   1: initialized_snapshot_cache_rust_parity\n    Start 377: loaded_snapshot_contracts\n1/2 Test #377: loaded_snapshot_contracts ................   Passed    0.23 sec\n2/2 Test   #1: initialized_snapshot_cache_rust_parity ...   Passed    3.63 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   3.63 sec\n",
+      "sha256": "879a2d5648724d0ada237e29c7f2d59e142854f7fa24f624bcee7a6b4a9cabd3"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 878: module_initialized_snapshot_cache_rust_parity\n1/1 Test #878: module_initialized_snapshot_cache_rust_parity ...   Passed    0.95 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.96 sec\n",
+      "sha256": "e5deb5639eceb37297583fb84a5f37361653e888bb1beb647e72671d1051cf14"
+    }
+  },
+  "canonical_bodies": 585,
+  "format_cpp_count": 1405,
+  "default_pmr_disabled": true,
+  "global_metadata_user_hints_separated": true,
+  "explicit_global_output_copy": true,
+  "actual_user_deletion": true,
+  "escaped_borrow_rejected": true,
+  "zero_live_user_bytes_after_deletion": true,
+  "raw_diagnostics_normalized": false,
+  "initialized_debug_text_parity_claimed": false,
+  "production_cpp_changed_this_checkpoint": false,
+  "producer_changed_this_checkpoint": false,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "complete_phase_acceptance": false,
+  "complete_generator_acceptance": false,
+  "initial_validation_failure_record": "docs/parity/initialized_snapshot_cache_initial_validation_5_0_6.json.gz",
+  "source_record": "docs/parity/initialized_snapshot_cache_source_5_0_6.json",
+  "hashes": {
+    "docs/initialized_snapshot_cache_5_0_6.md": "716e06eeda098a2640f05452f16aef01ced7349e121a52b5d4f9e475c248e51a",
+    "docs/parity/initialized_snapshot_cache_source_5_0_6.json": "3b13334636e06b3761cf7501ab25d3fd302eabf24135139f434d38a88bb5b35b",
+    "docs/parity/initialized_snapshot_cache_initial_validation_5_0_6.json.gz": "0234617d4bfa9b4e28ab95a1f05ee9e12932cedc37193043b8af11d5e1421cc4",
+    "docs/parity/initialized_snapshot_cache_initial_gaps_5_0_6.json.gz": "ae8348691b940c888706623477ed48d51d60fc0fb26d73c02c76cdf1ef8c3fc2",
+    "tests/parity/initialized_snapshot_cache_5_0_6_cases.json.gz": "de3c4aace11a11e44dc52eba6bb956d9da13f82f1b9c5d813ff78be142d6e808",
+    "tests/parity/initialized_snapshot_cache_5_0_6.rs": "d2952fbaf408726542d205f72701ba6d7ade6ef1d001537008d70f2b709525ef",
+    "tests/parity/initialized_snapshot_cache_probe.cpp": "043155ad72fc233653408303ac29717cbc116c37f10838a8b49da8bc86e3a8f7",
+    "tests/parity/compare_initialized_snapshot_cache_5_0_6.py": "de716355558da3818af35e8703321455301575a536446c455690c5b565174e80",
+    "scripts/verify_initialized_snapshot_cache_5_0_6.py": "6c36df1837a70a5fd2fedf3bf84fb41121ccc26bfe073524d76a2e3d09d11471",
+    "tests/parity/rust_initialized_snapshot_cache_5_0_6/Cargo.toml": "db53c85138849a604056bb22ec84f1cd23b7f7dbe95500a8c7d40128ca8a8396",
+    "tests/parity/rust_initialized_snapshot_cache_5_0_6/Cargo.lock": "6b1b318bd7338203d9166b359b93ebfc3523555013d3573eefaff569f72f82e8",
+    "teaql_core/include/teaql/core/load_state.hpp": "e2dc3d72a7dcbfdee725a51d09f1e07bdfe9dfc15a92fac219c4a3550a2dae02",
+    "teaql_core/src/load_state.cpp": "532d74eadd0c40408bda10fa5e3c7624253e9ba7c05bfe237ae9c24ad993d9df",
+    "teaql_core/include/teaql/core/row.hpp": "e15c5a5d11e500d97ae1971b976322eecacb049106a8595db42ed53a00481dbf",
+    "teaql_core/src/row.cpp": "9855ee6b2624f7e483592909b23681b5524e8b8c4c29ba6db87415581b95beda",
+    "modules/contracts.json": "367f4a8cdf3709353861d290f31c26587c3db7e2bdce5e8d0780eafbf7bbe1be",
+    "modules/CMakeLists.txt": "f18f99e262451efef3d1b7de08436273d25391c4458196fd79b6d201037bd154",
+    "tests/CMakeLists.txt": "ffb53047621f175537321bca0ccdb4d57d0806783e4629be5ec993750df2c713",
+    "upstream.lock.json": "289895ccb9ebbada5dc05ca2e3b2d286895f40eb91d7b0935f6864a08214d246"
+  },
+  "live_reproduction": {
+    "exit_code": 0,
+    "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nwarning: patch `teaql-macros v5.0.6 (/home/philip/githome/teaql-cpp/.reference/teaql-rs/teaql-macros)` was not used in the crate graph\nhelp: Check that the patched package version and available features are compatible\n      with the dependency requirements. If the patch has a different version from\n      what is locked in the Cargo.lock file, run `cargo update` to use the new\n      version. This may also occur with an optional dependency that is not enabled.\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.04s\nInitialized snapshot caches: 80 exact semantic cases and one explicit ownership adaptation\n",
+    "sha256": "355578a4f64d6c0ccdcdd2ed676568103bc90e052a13f8ae2e925effd4d974a7"
+  }
+}

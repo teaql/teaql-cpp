@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_hashes": {
+    "teaql-runtime/src/generated_support.rs": "f21089ff92ae378fa74174f1eb42c028728034e3cb92841fd0795afd14119a2c",
+    "teaql-runtime/src/data_service/resolved.rs": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+    "teaql-provider-sqlite/tests/request_trace_log.rs": "7c7bd3cd32fe5b2d9de9cc20b4192fbe728ca761ab5910da25dd8c03148e6b71"
+  },
+  "status": "original source corpus recorded; native implementation/comparison pending",
+  "cases": 360,
+  "successes": 90,
+  "errors": 270,
+  "corpus_sha256": "11275b608bcd5169328e477f5005c934eb72bd33a4d59b0a95d127223f4cd48c",
+  "native_status": "not qualified",
+  "original_build_log": "/tmp/teaql_derived_query_composition_rust_build.log",
+  "generation_log": "/tmp/teaql_derived_query_composition_source.log",
+  "preserved_previous_corpus": "576/576 original/native observations reproduce unchanged",
+  "remaining": [
+    "Add native optional diagnostic_steps adapter after current full compiler job exits",
+    "Compare all 360 exact results with no normalization",
+    "Run relevant lifetime/module checks and preserve original corpus prefix"
+  ]
+}

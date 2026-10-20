@@ -41,11 +41,18 @@ inline void write_debug(DebugWriter& writer, const SqlBindings& value) {
         });
         fields.field("originals", [&](auto& out) {
             out.sequence(value.originals_, [](auto& element, const auto& original) {
-                element.raw("(");
-                write_debug(element, original.first);
-                element.raw(", ");
-                write_debug(element, original.second);
-                element.raw(")");
+                constexpr unsigned parts[]{0, 1};
+                element.sequence(
+                    parts,
+                    [&](auto& field, unsigned part) {
+                        if (part == 0) {
+                            write_debug(field, original.first);
+                        } else {
+                            write_debug(field, original.second);
+                        }
+                    },
+                    "(",
+                    ")");
             });
         });
         fields.field("scope", [&](auto& out) {

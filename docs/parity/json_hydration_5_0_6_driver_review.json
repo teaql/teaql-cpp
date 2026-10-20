@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "entry_points": [
+    "UserContext::decode_json_entity",
+    "UserContext::decode_json_entities"
+  ],
+  "original_files": [
+    "teaql-runtime/src/context/json.rs",
+    "teaql-runtime/src/context/json/graph.rs"
+  ],
+  "original_methods_unchanged": true,
+  "observer": "tests/parity/rust_private_save_5_0_6/src/bin/json_hydration_5_0_6.rs",
+  "cpp_observer": "tests/parity/json_hydration_probe.cpp",
+  "fixture": "tests/support/json_hydration_fixture.hpp",
+  "observations": 7072,
+  "successful": 596,
+  "errors": 6476,
+  "output_normalization": false,
+  "initial_differences": 8,
+  "corrected_contract": "Convert all fields before sorted canonical duplicate-alias validation.",
+  "scope": "Explicit row-backed typed fixture with every scalar data type, readonly carrier capability, valid/absent/failed layouts, self target relations, layout sharing, recursive projections, depth limits and errors. Generated facades, complete inheritance/dynamic models and persistence authority remain unqualified."
+}

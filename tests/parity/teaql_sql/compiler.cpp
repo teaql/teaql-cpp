@@ -1,11 +1,39 @@
 // Pinned root SQL tests with a synthetic numbered SQLite compiler dialect.
 #include <teaql/runtime/context.hpp>
-#include <teaql/sql/dialect.hpp>
+#include <teaql/sql.hpp>
 #include <array>
 #include <charconv>
 #include <iostream>
 
 using namespace teaql;
+
+static_assert(
+    std::same_as<sql::SqlBindings, SqlBindings> &&
+    std::same_as<sql::SchemaIndexSpec, SchemaIndexSpec> &&
+    std::same_as<sql::SqlDialect, SqlDialect> && std::same_as<sql::CompiledQuery, CompiledQuery> &&
+    std::same_as<sql::DatabaseKind, DatabaseKind> &&
+    std::same_as<sql::SqlCompileError, SqlCompileError> &&
+    std::same_as<sql::SqlDataServiceExecutor<String>, SqlDataServiceExecutor<String>> &&
+    std::same_as<sql::SqlDataServiceTransaction<String>, SqlDataServiceTransaction<String>> &&
+    std::same_as<sql::SqlExecutorError<String>, SqlExecutorError<String>> &&
+    std::same_as<sql::SqlTransaction<String>, SqlTransaction<String>> &&
+    std::same_as<sql::SqlTransactionTransport<String>, SqlTransactionTransport<String>> &&
+    std::same_as<sql::SqlTransport<String>, SqlTransport<String>> &&
+    std::same_as<sql::StreamingSqlTransport<String>, StreamingSqlTransport<String>>);
+static_assert(&sql::bounded_sql_identifier == &bounded_sql_identifier &&
+              &sql::schema_foreign_key_name == &schema_foreign_key_name &&
+              &sql::schema_index_specs == &schema_index_specs &&
+              &sql::storage_length_covers == &storage_length_covers &&
+              &sql::storage_numeric_covers == &storage_numeric_covers &&
+              &sql::validate_schema_identifier_lengths == &validate_schema_identifier_lengths &&
+              &sql::render_sql_value == &render_sql_value &&
+              &sql::render_sql_with == &render_sql_with);
+using QuoteBytes = String (*)(Memory, std::string_view, char);
+using QuoteScalar = String (*)(Memory, std::string_view, char32_t);
+static_assert(static_cast<QuoteBytes>(&sql::quote_identifier_if_needed) ==
+                  static_cast<QuoteBytes>(&quote_identifier_if_needed) &&
+              static_cast<QuoteScalar>(&sql::quote_identifier_if_needed) ==
+                  static_cast<QuoteScalar>(&quote_identifier_if_needed));
 
 static void check(bool condition, const char* message) {
     if (!condition) {
@@ -285,6 +313,27 @@ static void compiles_partitioned_relation_limit_per_parent(Fixture& f) {
         compiled,
         R"(SELECT * FROM (SELECT "id", "order_id", "name", ROW_NUMBER() OVER (PARTITION BY "order_id" ORDER BY "id" DESC) AS "__teaql_partition_rank" FROM "orderline" WHERE ("order_id" IN ($1, $2))) AS "__teaql_partitioned" WHERE "__teaql_partition_rank" > 1 AND "__teaql_partition_rank" <= 4 ORDER BY "__teaql_partition_rank")");
     check(compiled.params == values, "original per-parent window bindings");
+}
+
+static void partitioned_grouping_preserves_having_before_window_slice(Fixture& f) {
+    SelectQuery query(std::allocator_arg, Allocator(f.owner), "OrderLine");
+    query.group_by("order_id")
+        .group_by("name")
+        .count("n")
+        .filter(Expr::eq(f.owner, "name", "retained"))
+        .having(Expr::binary(
+            Expr::count_all(f.owner), BinaryOp::Gt, Expr::value(f.owner, std::int64_t(1))))
+        .order_asc("name")
+        .page(1, 3)
+        .partition_by("order_id");
+    auto compiled = f.dialect.compile_select(f.owner, f.line, query);
+    sql_is(
+        compiled,
+        R"(SELECT * FROM (SELECT "order_id", "name", COUNT(*) AS "n", ROW_NUMBER() OVER (PARTITION BY "order_id" ORDER BY "name" ASC) AS "__teaql_partition_rank" FROM "orderline" WHERE ("name" = $1) GROUP BY "order_id", "name" HAVING (COUNT(*) > $2)) AS "__teaql_partitioned" WHERE "__teaql_partition_rank" > 1 AND "__teaql_partition_rank" <= 4 ORDER BY "__teaql_partition_rank")");
+    Vector<Value> expected(f.owner);
+    expected.emplace_back(Value(f.owner, "retained"));
+    expected.emplace_back(std::int64_t(1));
+    check(compiled.params == expected, "original grouped partition retains WHERE/HAVING bindings");
 }
 
 static void deduplicates_partition_projection_for_mysql_derived_tables(Fixture& f) {
@@ -604,6 +653,7 @@ static void original_contracts(Fixture& f) {
     foreign_key_names_share_stable_provider_bounds(f.owner);
     compiles_select_with_filters_order_and_limit(f);
     compiles_partitioned_relation_limit_per_parent(f);
+    partitioned_grouping_preserves_having_before_window_slice(f);
     deduplicates_partition_projection_for_mysql_derived_tables(f);
     compiles_aggregate_projection(f, false);
     compiles_aggregate_projection(f, true);

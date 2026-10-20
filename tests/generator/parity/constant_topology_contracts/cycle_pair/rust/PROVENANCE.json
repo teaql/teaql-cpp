@@ -1,0 +1,11 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/parity/constant_topology_contracts/cycle_pair/model.xml",
+  "model_sha256": "3b356bc99b690e9e32c61e40dc0ca256e7400825922b2af98846eda7c0fbf6b4",
+  "hand_edited": false,
+  "observer_sha256": "218cd94f595c1747eb9d7c7c7820032051cb3b7076d52bf4c9bf70c0a55c6409",
+  "files": {
+    "OBSERVATION.json": "4a11a6a524d667b77522945262dc496122c822590a13f7245ec6af2fc494ef5f"
+  }
+}

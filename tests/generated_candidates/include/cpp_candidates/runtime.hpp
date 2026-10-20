@@ -4,6 +4,162 @@
 #include "queries.hpp"
 
 namespace cpp_candidates {
+using ServiceRuntime = UserContext;
+using ServiceRuntimeError = GeneratedServiceRuntimeError<SqliteDriverError>;
+using DataServiceConnection = Ref<SqliteConnection>;
+inline constexpr std::string_view DATABASE_URL_ENV = "CPP_CANDIDATES_CORE_DATABASE_URL";
+
+struct ServiceRuntimeConfig : GeneratedServiceRuntimeConfig {
+    using GeneratedServiceRuntimeConfig::GeneratedServiceRuntimeConfig;
+
+    std::string_view databaseUrl() const {
+        return database_url;
+    }
+
+    static Result<ServiceRuntimeConfig, ServiceRuntimeError> fromEnv(UserContext& user_context) {
+        auto r = user_context.memory_resource();
+        auto value = read_generated_runtime_config(r, DATABASE_URL_ENV);
+        using Output = Result<ServiceRuntimeConfig, ServiceRuntimeError>;
+        if (!value) {
+            return Output::err(r, ServiceRuntimeError::from_preparation(r, value.error()));
+        }
+        return Output::ok(r, ServiceRuntimeConfig(std::allocator_arg, Allocator(r), value.value()));
+    }
+};
+
+using DataServiceDialect = SqliteDialect;
+using DataServiceMutationExecutor = SqliteMutationExecutor;
+using DataServiceMutationError = MutationExecutorError;
+using DataServiceIdGenerator = SqliteIdSpaceGenerator;
+
+class LocalSchemaProvider final : public GeneratedLocalSchemaProvider {
+public:
+    LocalSchemaProvider(std::allocator_arg_t, Allocator a)
+        : GeneratedLocalSchemaProvider(std::allocator_arg, a, lookup) {}
+
+    LocalSchemaProvider(std::allocator_arg_t, Allocator a, const LocalSchemaProvider& other)
+        : GeneratedLocalSchemaProvider(std::allocator_arg, a, other) {}
+
+private:
+    static std::optional<EntityDescriptor> lookup(Memory r, std::string_view name) {
+        if (name == Platform::ENTITY_NAME) {
+            return Platform::entity_descriptor(r);
+        }
+        if (name == OrderStatus::ENTITY_NAME) {
+            return OrderStatus::entity_descriptor(r);
+        }
+        if (name == Record::ENTITY_NAME) {
+            return Record::entity_descriptor(r);
+        }
+        if (name == Person::ENTITY_NAME) {
+            return Person::entity_descriptor(r);
+        }
+        return std::nullopt;
+    }
+};
+
+inline InMemoryEntityRegistry& repositoryRegistry(UserContext& user_context) {
+    auto& registry = user_context.make<InMemoryEntityRegistry>();
+    registry.register_entity(Platform::ENTITY_NAME);
+    registry.register_entity(OrderStatus::ENTITY_NAME);
+    registry.register_entity(Record::ENTITY_NAME);
+    registry.register_entity(Person::ENTITY_NAME);
+    return registry;
+}
+
+inline InMemoryEntityDataServiceBehaviorRegistry& behaviorRegistry(UserContext& user_context) {
+    auto& registry = user_context.make<InMemoryEntityDataServiceBehaviorRegistry>();
+    {
+        auto& behavior = user_context.make<PlatformBehavior>();
+        registry.register_behavior(Platform::ENTITY_NAME, user_context, behavior);
+    }
+    {
+        auto& behavior = user_context.make<OrderStatusBehavior>();
+        registry.register_behavior(OrderStatus::ENTITY_NAME, user_context, behavior);
+    }
+    {
+        auto& behavior = user_context.make<RecordBehavior>();
+        registry.register_behavior(Record::ENTITY_NAME, user_context, behavior);
+    }
+    {
+        auto& behavior = user_context.make<PersonBehavior>();
+        registry.register_behavior(Person::ENTITY_NAME, user_context, behavior);
+    }
+    return registry;
+}
+
+inline InMemoryCheckerRegistry& checkerRegistry(UserContext& user_context) {
+    auto& registry = user_context.make<InMemoryCheckerRegistry>();
+    {
+        auto& checker = user_context.make<PlatformChecker>();
+        auto& adapter =
+            user_context.make<TypedEntityChecker<Platform, PlatformChecker>>(user_context, checker);
+        registry.register_checker(user_context, adapter);
+    }
+    {
+        auto& checker = user_context.make<OrderStatusChecker>();
+        auto& adapter = user_context.make<TypedEntityChecker<OrderStatus, OrderStatusChecker>>(
+            user_context, checker);
+        registry.register_checker(user_context, adapter);
+    }
+    {
+        auto& checker = user_context.make<RecordChecker>();
+        auto& adapter =
+            user_context.make<TypedEntityChecker<Record, RecordChecker>>(user_context, checker);
+        registry.register_checker(user_context, adapter);
+    }
+    {
+        auto& checker = user_context.make<PersonChecker>();
+        auto& adapter =
+            user_context.make<TypedEntityChecker<Person, PersonChecker>>(user_context, checker);
+        registry.register_checker(user_context, adapter);
+    }
+    return registry;
+}
+
+inline GeneratedWireFieldMappings& generatedWireFieldMappings(UserContext& user_context) {
+    auto& mappings = user_context.make<GeneratedWireFieldMappings>();
+    auto r = user_context.memory_resource();
+    {
+        auto& fields = mappings.try_emplace(String("Platform", r)).first->second;
+        fields.insert_or_assign(String("id", r), String("id", r));
+        fields.insert_or_assign(String("name", r), String("name", r));
+        fields.insert_or_assign(String("version", r), String("version", r));
+    }
+    {
+        auto& fields = mappings.try_emplace(String("OrderStatus", r)).first->second;
+        fields.insert_or_assign(String("id", r), String("id", r));
+        fields.insert_or_assign(String("platform", r), String("platform", r));
+        fields.insert_or_assign(String("name", r), String("name", r));
+        fields.insert_or_assign(String("code", r), String("code", r));
+        fields.insert_or_assign(String("version", r), String("version", r));
+    }
+    {
+        auto& fields = mappings.try_emplace(String("Record", r)).first->second;
+        fields.insert_or_assign(String("id", r), String("id", r));
+        fields.insert_or_assign(String("platform", r), String("platform", r));
+        fields.insert_or_assign(String("name", r), String("name", r));
+        fields.insert_or_assign(String("status", r), String("status", r));
+        fields.insert_or_assign(String("phase", r), String("phase", r));
+        fields.insert_or_assign(String("tag", r), String("tag", r));
+        fields.insert_or_assign(String("version", r), String("version", r));
+    }
+    {
+        auto& fields = mappings.try_emplace(String("Person", r)).first->second;
+        fields.insert_or_assign(String("id", r), String("id", r));
+        fields.insert_or_assign(String("platform", r), String("platform", r));
+        fields.insert_or_assign(String("name", r), String("name", r));
+        fields.insert_or_assign(String("status", r), String("status", r));
+        fields.insert_or_assign(String("phase", r), String("phase", r));
+        fields.insert_or_assign(String("version", r), String("version", r));
+    }
+    return mappings;
+}
+
+inline GeneratedWireFieldMappings& generatedWireFieldAliases(UserContext& user_context) {
+    return user_context.make<GeneratedWireFieldMappings>();
+}
+
 namespace generated_detail {
 struct PlatformBootstrapRecipe {
     using Model = Platform;
@@ -333,23 +489,53 @@ inline RuntimeModule& moduleWithBehaviorsAndCheckers(UserContext& user_context) 
     return module;
 }
 
+inline Result<Ref<DataServiceExecutor>, ServiceRuntimeError>
+serviceRuntimeFromConnection(UserContext& user_context, DataServiceConnection connection) {
+    auto r = user_context.memory_resource();
+    using Output = Result<Ref<DataServiceExecutor>, ServiceRuntimeError>;
+    auto& module = moduleWithBehaviorsAndCheckers(user_context);
+    auto& schema_provider = user_context.make<LocalSchemaProvider>();
+    return Output::ok(r,
+                      assemble_generated_sqlite_runtime<DataServiceExecutor, false>(
+                          user_context, module, connection, schema_provider));
+}
+
+inline Result<Ref<DataServiceExecutor>, ServiceRuntimeError>
+serviceRuntime(UserContext& user_context, const ServiceRuntimeConfig& config) {
+    auto r = user_context.memory_resource();
+    using Output = Result<Ref<DataServiceExecutor>, ServiceRuntimeError>;
+    if (config.memory_resource() != r) {
+        throw std::invalid_argument(
+            "Generated runtime configuration requires an explicit destination copy");
+    }
+    auto connection = open_generated_sqlite_runtime_connection(user_context, config.databaseUrl());
+    if (!connection) {
+        return Output::err(r, ServiceRuntimeError::from_preparation(r, connection.error()));
+    }
+    return serviceRuntimeFromConnection(user_context, connection.value());
+}
+
+inline Result<Ref<DataServiceExecutor>, ServiceRuntimeError>
+serviceRuntimeFromEnv(UserContext& user_context) {
+    auto r = user_context.memory_resource();
+    auto config = ServiceRuntimeConfig::fromEnv(user_context);
+    if (!config) {
+        return Result<Ref<DataServiceExecutor>, ServiceRuntimeError>::err(
+            r, std::move(config).error());
+    }
+    return serviceRuntime(user_context, config.value());
+}
+
 inline Ref<DataServiceExecutor> configureRuntime(UserContext& user_context,
                                                  std::string_view filename = ":memory:") {
     auto& module = moduleWithBehaviorsAndCheckers(user_context);
     module.apply_to(user_context);
     auto& metadata = module.metadata;
     user_context.set_metadata(user_context, metadata);
-    auto& connection = user_context.make_resource<SqliteConnection>(filename);
-    auto& transport = user_context.make<SqliteMutationExecutor>(connection);
-    use_sqlite_provider(user_context, user_context, transport);
-    auto& ids = user_context.make<SqliteIdSpaceGenerator>(transport);
-    user_context.set_internal_id_generator(user_context, ids);
-    auto dialect = user_context.require_resource<SqliteDialect>();
-    auto& state = user_context.make<SqlExecutorState>();
-    auto executor = user_context.make_ref<DataServiceExecutor>(
-        require_value(dialect).get(), transport, metadata, state);
-    user_context.register_executor(executor);
-    return executor;
+    auto connection = user_context.make_resource_ref<SqliteConnection>(filename);
+    auto& schema_provider = user_context.make<LocalSchemaProvider>();
+    return bind_generated_sqlite_runtime<DataServiceExecutor, false>(
+        user_context, schema_provider, connection);
 }
 
 inline Ref<DataServiceExecutor> setup(UserContext& user_context,

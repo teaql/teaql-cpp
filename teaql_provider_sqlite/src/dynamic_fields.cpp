@@ -47,16 +47,6 @@ void check_namespace(Memory r, std::string_view name) {
     }
 }
 
-using Statement = std::unique_ptr<sqlite3_stmt, decltype(&sqlite3_finalize)>;
-
-Statement prepare(Memory r, sqlite3* db, std::string_view sql) {
-    sqlite3_stmt* stmt = nullptr;
-    auto status = sqlite3_prepare_v2(db, sql.data(), int(sql.size()), &stmt, nullptr);
-    Statement result(stmt, &sqlite3_finalize);
-    require_sql(r, status == SQLITE_OK && stmt);
-    return result;
-}
-
 void bind_text(Memory r, sqlite3_stmt* stmt, int index, std::string_view text) {
     require_sql(r,
                 sqlite3_bind_text(stmt, index, text.data(), int(text.size()), SQLITE_TRANSIENT) ==
@@ -222,16 +212,16 @@ sqlite_dynamic_validate(Memory r, std::span<const DynamicFieldWrite> writes) {
     }
 }
 
-Result<std::monostate, DynamicFieldError>
-sqlite_dynamic_apply(Memory r, sqlite3* db, std::span<const DynamicFieldWrite> writes) {
+Result<std::monostate, DynamicFieldError> sqlite_dynamic_apply(
+    Memory r, SqliteDynamicStatementCache& cache, std::span<const DynamicFieldWrite> writes) {
     using Output = Result<std::monostate, DynamicFieldError>;
     auto checked = sqlite_dynamic_validate(r, writes);
     if (!checked) {
         return checked;
     }
     try {
-        auto set = prepare(r, db, upsert);
-        auto remove = prepare(r, db, erase);
+        auto set = cache.prepare(r, upsert);
+        auto remove = cache.prepare(r, erase);
         for (const auto& write : writes) {
             auto id = id_text(r, write.owner_id);
             for (const auto& [code, mutation] : write.changes) {
@@ -277,7 +267,7 @@ sqlite_dynamic_apply(Memory r, sqlite3* db, std::span<const DynamicFieldWrite> w
 
 Result<DynamicStorageRows, DynamicFieldError>
 sqlite_dynamic_load(Memory r,
-                    sqlite3* db,
+                    SqliteDynamicStatementCache& cache,
                     std::string_view namespace_name,
                     const DynamicFieldDefinitions& definitions,
                     std::span<const std::uint64_t> ids,
@@ -305,7 +295,7 @@ sqlite_dynamic_load(Memory r,
                 sql += '?';
             }
             sql += ')';
-            auto stmt = prepare(r, db, sql);
+            auto stmt = cache.prepare(r, sql);
             bind_text(r, stmt.get(), 1, namespace_name);
             bind_text(r, stmt.get(), 2, definitions.owner_type());
             for (std::size_t i = 0; i < chunk.size(); ++i) {

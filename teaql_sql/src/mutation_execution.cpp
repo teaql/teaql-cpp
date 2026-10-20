@@ -36,8 +36,10 @@ mutation_statement_trace(Memory r, const MutationRequest& request, const BatchIn
     return prefix;
 }
 
-SqlIntentRedactions
-batch_mutation_redactions(Memory r, const MutationRequest& request, const SchemaProvider& schema) {
+SqlIntentRedactions batch_mutation_redactions(Memory r,
+                                              const MutationRequest& request,
+                                              const SchemaProvider& schema,
+                                              const SqlExecutorState& cache) {
     SqlIntentRedactions redactions(r);
     if (auto* own = request.diagnostic_redactions()) {
         redactions.extend(*own);
@@ -74,7 +76,7 @@ batch_mutation_redactions(Memory r, const MutationRequest& request, const Schema
                     }
                 } else if constexpr (std::same_as<T, InsertCommand> ||
                                      std::same_as<T, UpdateCommand>) {
-                    auto* entity = schema.get_entity(command.entity);
+                    auto* entity = cache.entity_descriptor(schema, command.entity);
                     capture(entity, command.values.fields);
                     if constexpr (std::same_as<T, UpdateCommand>) {
                         if (command.old_values) {

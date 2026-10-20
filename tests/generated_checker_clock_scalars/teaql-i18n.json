@@ -1,0 +1,122 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.note.optionalPayload": "Optional Payload",
+                "property.note.payload": "Payload",
+                "property.note.optionalTime": "Optional Time",
+                "property.note.id": "Id",
+                "property.note.optionalDecimal": "Optional Decimal",
+                "property.note.double": "Double",
+                "property.note.optionalInteger": "Optional Integer",
+                "property.note.decimal": "Decimal",
+                "property.note.optionalFloat": "Optional Float",
+                "property.note.long": "Long",
+                "property.note.code": "Code",
+                "property.note.date": "Date",
+                "property.note.text": "Text",
+                "property.note.integer": "Integer",
+                "property.note.optionalCode": "Optional Code",
+                "property.note.optionalDate": "Optional Date",
+                "property.note.optionalLong": "Optional Long",
+                "property.note.timestamp": "Timestamp",
+                "property.note.optionalText": "Optional Text",
+                "property.note.optionalDouble": "Optional Double",
+                "property.note.version": "Version",
+                "entity.note": "Note",
+                "property.note.active": "Active",
+                "property.note.optionalActive": "Optional Active",
+                "property.note.float": "Float",
+                "property.note.time": "Time"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

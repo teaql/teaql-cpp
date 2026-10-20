@@ -1,0 +1,425 @@
+{
+  "snapshot_sha256": "1a65a4a1e02302e55136caf621c0cacb26f27cd0d32465c25572b094aa0682f8",
+  "records": [
+    {
+      "directory": "examples/generated",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_types",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_checkers",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_checker_unique_string",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_checker_clock_scalars",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_checker_clock_composition",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_relations",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_business_ids",
+      "lookup_fields": [
+        {
+          "lookup": "receiptByReceiptNumber",
+          "type": "ReceiptNumber",
+          "rust_lookup": "receipt_by_receipt_number",
+          "entry": "receipts",
+          "predicate": "withReceiptNumberIs",
+          "field": "receipt_number",
+          "entity": "Receipt"
+        },
+        {
+          "lookup": "ticketByTicketNumber",
+          "type": "TicketNumber",
+          "rust_lookup": "ticket_by_ticket_number",
+          "entry": "tickets",
+          "predicate": "withTicketNumberIs",
+          "field": "ticket_number",
+          "entity": "Ticket"
+        }
+      ],
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_business_ids/queries.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_optional_types",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_query_field_branches",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_inheritance",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_inheritance_graph",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_inheritance_variants",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_inheritance_business_ids",
+      "lookup_fields": [
+        {
+          "lookup": "documentByDocumentNumber",
+          "type": "DocumentNumber",
+          "rust_lookup": "document_by_document_number",
+          "entry": "documents",
+          "predicate": "withDocumentNumberIs",
+          "field": "document_number",
+          "entity": "Document"
+        }
+      ],
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_inheritance_business_ids/queries.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_candidates",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_constants_scalar",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_constants_numeric",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_constants_catalog",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_constants_temporal",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_constants_temporal_required",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_dynamic_json",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_sample_fields",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_sample_fields_runtime",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generated_sample_fields_temporal",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/number/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/integer/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/nullable_integer/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/boolean/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/double/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/bool_actual/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/text/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/date/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/timestamp/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/unsigned_recipe/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/integer_as_string/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/equivalent_string_alias/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/field_parameter/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/custom_unsigned/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/numeric_alias/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/equivalent_integer/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/integer_as_unsigned/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/string_alias/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/unsigned_recipe/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/equivalent_string_alias/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/field_parameter/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/numeric_alias/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/equivalent_integer/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/string_alias/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/multiple_roots/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/multiple_roots_reversed/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/no_candidates/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_identifier_value/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/empty_identifier_value/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/comma_identifier_value/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/candidate_name_collision/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_identifier/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/unknown_identifier/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/malformed_xml/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_seed_field/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/unicode_identifier_value/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/no_root/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/depth_exceeded/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/foreign_value_one/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/cycle_three/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/cycle_pair/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/reversed/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/self_reference/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/optional_forward/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/missing_target_one/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/ordered/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/self_reference_required/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/byte_vector/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/named_opaque/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/relation_identity_contracts/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/query_alias_contracts/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/expression_root_contracts/cpp",
+      "lookup_fields": [],
+      "changed_files": []
+    }
+  ]
+}

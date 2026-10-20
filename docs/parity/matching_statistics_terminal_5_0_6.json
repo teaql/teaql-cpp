@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "date": "2026-10-14T22:08:25.185134+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_execution": {
+    "total": 2808,
+    "success": 1992,
+    "source_failures": 816,
+    "result_rows": 3424,
+    "safe_sql_records": 4080,
+    "complete_filter_sidecars": true
+  },
+  "gates": {
+    "native": 7,
+    "sanitize": 3,
+    "sanitize_leak_scanning": false,
+    "module": 3,
+    "compiler_positive": 1,
+    "compiler_negative": 3,
+    "java": [
+      {
+        "suite": "com.skynet.codegenerator.CppGenerationTest",
+        "tests": 57
+      },
+      {
+        "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+        "tests": 2
+      },
+      {
+        "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+        "tests": 2
+      }
+    ],
+    "workspaces": 24,
+    "generated_files": 288,
+    "sdks": 44,
+    "new_exact_delegates": 1500,
+    "canonical_bodies": 676,
+    "exports": 1485,
+    "formatted_cpp_files": 1460
+  },
+  "all_builds_and_tests_terminal_exit_zero": true,
+  "references_clean": true,
+  "producer_branch": "cpp_support",
+  "remaining": "Complete G06/G08/G12/G13 and P0-P7 requirements retain source/model/configuration, governance/privacy and integration obligations. Converting these input families is not complete parity.",
+  "artifacts": {
+    "docs/parity/matching_statistics_validation_5_0_6.json.gz": "784909c8283fa02b77eb83ce69fec206476fdc415edac5a75f6a009d7d25d046",
+    "docs/parity/matching_statistics_inputs_source_review_5_0_6.json": "396aea1f4e6410d21761118392ddd8b949c89c9b7180eb3d83f702dcde874ceb",
+    "docs/parity/matching_statistics_sdk_change_5_0_6.json": "ea1704a819e8697e6f122699da123be324c6c581fad22ddd582c8d9c94959cd1",
+    "tests/parity/matching_statistics_inputs_5_0_6_cases.json.gz": "c8473071d300f884c07457a6dde52d209410f7eeb2fa2615b6cce1f508be4fe7",
+    "tests/parity/matching_statistics_inputs_complete_5_0_6_cases.json.gz": "727df088da374b0a209b06f601b8c3a80bd9f10f0aade9c867eb4e8293fa0ed7"
+  }
+}

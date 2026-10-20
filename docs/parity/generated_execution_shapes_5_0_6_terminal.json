@@ -1,0 +1,63 @@
+{
+  "recorded_utc": "2026-10-14T16:07:25.944546+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Grouped/aggregate generated execution and current-reference-registry replay of six execution/page matrices. Complete capabilities and phases remain open.",
+  "new_exact_outcomes": 6048,
+  "new_successes": 4400,
+  "new_errors": 1648,
+  "new_safe_sql_log_records": 5360,
+  "logs_are_not_physical_statement_count": true,
+  "six_matrix_outcomes": {
+    "new_shapes": 6048,
+    "retained_generated_execution": 1440,
+    "retained_pagination": 8448,
+    "deferred_plain": 108,
+    "deferred_id_set": 252,
+    "deferred_continuous": 640
+  },
+  "total_exact_replayed_outcomes": 16936,
+  "registry_identity_difference_count": 0,
+  "checks": {
+    "native_new": {
+      "passed": 1,
+      "selected": 1
+    },
+    "native_context": {
+      "passed": 1,
+      "selected": 1
+    },
+    "modules": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize": {
+      "passed": 1,
+      "selected": 1,
+      "leak_scanning": false
+    },
+    "format_files": 1438,
+    "canonical_module_bodies": 646,
+    "module_exports": 1485
+  },
+  "file_sha256": {
+    "tests/parity/generated_execution_shapes_probe.cpp": "952d2b595e6681c65f036f70f9e44e7f93ac13503652a109f1beece2d0046994",
+    "tests/parity/compare_generated_execution_shapes_5_0_6.py": "1851c091ec0ff98d665cb6a92a073e067e6e4b228ca962ce06786db8bb5dae4a",
+    "tests/parity/rust_execution_shapes_5_0_6/src/main.rs": "1f60493f6275d3a54d817884dc55c4d0ce9118e62e7197f2ec669dc677c37929",
+    "tests/parity/rust_execution_shapes_5_0_6/Cargo.toml": "9a4b33d4344be147d1fcea65b62dff57617bd63620c9cf47f17540ba13e1c7c9",
+    "tests/parity/rust_execution_shapes_5_0_6/Cargo.lock": "2deb61ccf27c82a58eba825565a7c6d36c5b39d85bbb2998bcc6f782f607c866",
+    "scripts/verify_generated_execution_protocols_5_0_6.py": "24dca712f3ed202885dfab072245e87bc41c7b9979bb4b6c44ad3b34595aad8f",
+    "docs/parity/execution_shapes_deferred_observer_copies_5_0_6.json": "91eacbfa6d64fb67e78da206e091cb8b442f11622b5c604af1826e607c65a419",
+    "tests/parity/generated_execution_shapes_5_0_6_cases.json.gz": "eb3ef448c5f2ac8653d2ee39f762224bd7e1cee9d0d0c76d698a52be602b3149"
+  },
+  "raw_validation": "docs/parity/generated_execution_shapes_validation_5_0_6.json.gz",
+  "initial_dispositions": [
+    "Initial shared observer build has 46 reference-registry identity differences and is excluded from qualification.",
+    "Deferred copies initially lacked direct async-trait/data-service development dependencies; fixed manifest compiles with --offline --locked, preserving exact copied observer bytes."
+  ],
+  "production_or_generator_functions_changed": false,
+  "original_or_historical_artifacts_changed": false,
+  "java_or_generated_reproduction_rerun": false,
+  "complete_capability_acceptance": false,
+  "full_native_mips_or_device_test": false
+}

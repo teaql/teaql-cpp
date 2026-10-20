@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "declared controlled two-connection optimistic bootstrap matrix qualified; complete G05/P3 remains partial",
+  "scenarios": 768,
+  "rounds": 1152,
+  "successful_rounds": 1024,
+  "errors": {
+    "optimistic lock conflict on Priority(1)": 64,
+    "optimistic lock conflict on Priority(22)": 64
+  },
+  "immutable_reviews": 1824,
+  "rival_commits": 1440,
+  "sql_entries": 6568,
+  "all_rounds_autocommit": true,
+  "comparison": "exact full plans/original versions/rows/ID floors/errors/reviews/remaining budgets/SQL intent/autocommit/after-close state; no output normalization",
+  "source_interleaving_boundary": "GraphSaverFor::save_graph_dyn: actual plan_graph, review_mutation_plan, begin, execute_graph_plan_internal. Rival commits on a separate SQLite connection from the application Policy callback.",
+  "scheduling_scope": "Deterministic two-connection interleaving only. No simultaneous threads/process stress and no concurrent access to one UserContext.",
+  "native": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 1,
+    "total": 1
+  },
+  "modules": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 1,
+    "total": 1,
+    "canonical_bodies": 322
+  },
+  "format": {
+    "version": "18.1.8",
+    "files": 1213,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "runtime_changed": false,
+  "producer_changed": false,
+  "generated_outputs_changed": false,
+  "guards_removed": false,
+  "initial_fixture_disposition": {
+    "path": "docs/parity/bootstrap_conflict_5_0_6_initial_gaps.json.gz",
+    "raw_sha256": "02f2f9b95576a09e0b2f7b1add10ed0a74fda890ae00982f4190ced0363985a2",
+    "correction": "Default process/time-derived plan execution IDs caused 768 initial differences. Same trusted trace/user setup restores exact complete plan agreement without removing or rewriting IDs.",
+    "compressed_losslessly": true
+  },
+  "ownership": "Global owns both SQLite connection resources and observations. Policy belongs to User and borrows Global resources. User actually closes before final rival observation; default PMR disabled. No implicit owner extends User lifetime.",
+  "hashes": {
+    "tests/parity/bootstrap_conflict_probe.cpp": "924018254ef7c63a569cbf40b51b6dd86d1aba24867eb6ed7d2f6b45d92f0068",
+    "tests/parity/rust_constant_variants/src/bin/bootstrap_conflict.rs": "7a04c9fd85f8c88fc55ecb8cf555ce6af46fe72908dc65651eec76356eec0931",
+    "tests/parity/compare_bootstrap_conflict_5_0_6.py": "4777b5de8232c1b61f986f49a2720540cc96abd650faa64b7b62e6c3f159fc3c",
+    "tests/parity/bootstrap_conflict_5_0_6_cases.json.gz": "31c0298047a3fd1f05651970b65d179db41212040fd6bff5a031bd45407dd164",
+    "docs/parity/bootstrap_conflict_5_0_6_initial_gaps.json.gz": "1b99493b3e87b5602d698510d672be99d199ba5e5f87a11f5ceb306897ac57f2"
+  },
+  "logs": {
+    "rust_build_trace": {
+      "path": "/tmp/teaql_bootstrap_conflict_rust_build_trace_506.log",
+      "sha256": "71a82f486ab913fd68ec1f1fc282954f3601ddf07217475347328363edc09618",
+      "output": "warning: unused import: `teaql_core::Entity as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:5:5\n  |\n5 | use teaql_core::Entity as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `crate::request_support::AuditedSave as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:6:5\n  |\n6 | use crate::request_support::AuditedSave as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nwarning: associated function `from_display` is never used\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:61:8\n   |\n60 | impl SampleDataError {\n   | -------------------- associated function in this implementation\n61 |     fn from_display(error: impl std::fmt::Display) -> Self {\n   |        ^^^^^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: method `scalar_from_labels_as` is never used\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/priority/request.rs:3853:8\n     |\n  45 | impl<R> PriorityRequest<R> {\n     | -------------------------- method in this implementation\n...\n3853 |     fn scalar_from_labels_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n     |        ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: method `scalar_from_labels_as` is never used\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/platform/request.rs:1725:8\n     |\n  45 | impl<R> PlatformRequest<R> {\n     | -------------------------- method in this implementation\n...\n1725 |     fn scalar_from_labels_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n     |        ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: unused import: `teaql_core::Entity as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:5:5\n  |\n5 | use teaql_core::Entity as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `crate::request_support::AuditedSave as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:6:5\n  |\n6 | use crate::request_support::AuditedSave as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nwarning: associated function `from_display` is never used\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:61:8\n   |\n60 | impl SampleDataError {\n   | -------------------- associated function in this implementation\n61 |     fn from_display(error: impl std::fmt::Display) -> Self {\n   |        ^^^^^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: `cpp-constants-numeric-core` (lib) generated 5 warnings (run `cargo fix --lib -p cpp-constants-numeric-core` to apply 2 suggestions)\nwarning: `cpp-constants-catalog-core` (lib) generated 3 warnings (run `cargo fix --lib -p cpp-constants-catalog-core` to apply 2 suggestions)\n   Compiling teaql_cpp_constant_variants_oracle v0.1.0 (/home/philip/githome/teaql-cpp/tests/parity/rust_constant_variants)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.49s\n"
+    },
+    "native_build_retry": {
+      "path": "/tmp/teaql_bootstrap_conflict_native_build_retry_506.log",
+      "sha256": "5e979ce64526d705b88f3d33d3dd1ba2a5904b62f9ab5ffccdbcd1cec58fb295",
+      "output": "[1/2] Building CXX object CMakeFiles/teaql_bootstrap_conflict_probe.dir/tests/parity/bootstrap_conflict_probe.cpp.o\nIn file included from /home/philip/githome/teaql-cpp/tests/parity/bootstrap_conflict_probe.cpp:2:\n/home/philip/githome/teaql-cpp/tests/parity/generated_constant_variants_probe.cpp:356:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n  356 | }\n      | ^\n1 warning generated.\n[2/2] Linking CXX executable teaql_bootstrap_conflict_probe\n"
+    },
+    "module_build_retry": {
+      "path": "/tmp/teaql_bootstrap_conflict_module_build_retry_506.log",
+      "sha256": "5a5748a842788b9b4e43bacfa04c97da4a539fa93ff18b2deb48c7bb9661fef8",
+      "output": "[0/1] Re-running CMake...\n-- Configuring done (1.7s)\n-- Generating done (0.8s)\n-- Build files have been written to: /home/philip/githome/teaql-cpp/build_modules_native\n[1/26] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd\n[2/24] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd\n[3/22] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd\n[4/20] Generating CXX dyndep file modules/CMakeFiles/teaql_data_service_module.dir/CXX.dd\n[5/18] Generating CXX dyndep file modules/CMakeFiles/teaql_sql_module.dir/CXX.dd\n[6/16] Generating CXX dyndep file modules/CMakeFiles/teaql_runtime_module.dir/CXX.dd\n[7/14] Generating CXX dyndep file modules/CMakeFiles/teaql_provider_sqlite_module.dir/CXX.dd\n[8/12] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/bootstrap_conflict_probe.cpp for CXX dependencies\n[9/12] Generating CXX dyndep file modules/CMakeFiles/teaql_module_bootstrap_conflict_probe.dir/CXX.dd\n[10/12] Building CXX object modules/CMakeFiles/teaql_module_bootstrap_conflict_probe.dir/consumers/bootstrap_conflict_probe.cpp.o\nIn file included from /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/bootstrap_conflict_probe.cpp:50:\n/home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/generated_constant_variants_probe.cpp:403:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n  403 | }\n      | ^\n1 warning generated.\n[11/12] Linking CXX executable modules/teaql_module_bootstrap_conflict_probe\n"
+    },
+    "comparison_retry": {
+      "path": "/tmp/teaql_bootstrap_conflict_comparison_retry_506.log",
+      "sha256": "b4c9ed357e6c7afb3ee5cb84b0858126700418cebd6db8295175b8370ca86d78",
+      "output": "Bootstrap conflict: 768/768 exact second-connection outcomes\n"
+    },
+    "native_tests": {
+      "path": "/tmp/teaql_bootstrap_conflict_native_tests_506.log",
+      "sha256": "af57f8aa44df0a40eabb2b23c474dc12c945cd312af66142adb32f9b3a4504a7",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 41: bootstrap_conflict_rust_parity\n1/1 Test #41: bootstrap_conflict_rust_parity ...   Passed   35.07 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  35.08 sec\n"
+    },
+    "module_tests": {
+      "path": "/tmp/teaql_bootstrap_conflict_module_tests_506.log",
+      "sha256": "220e865f4221b4b5fe15c6a66e27611054554e4c4f62b54cd6157984279801b1",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 734: module_bootstrap_conflict_rust_parity\n1/1 Test #734: module_bootstrap_conflict_rust_parity ...   Passed   35.47 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  35.48 sec\n"
+    },
+    "module_bodies": {
+      "path": "/tmp/teaql_bootstrap_conflict_module_bodies_506.log",
+      "sha256": "8f92bc616a60715fc8b108c7f5906017ff895758972a773db7c5df55cb788da5",
+      "output": "Verified 322 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n"
+    },
+    "reproduce": {
+      "path": "/tmp/teaql_bootstrap_conflict_reproduce_506.log",
+      "sha256": "b4c9ed357e6c7afb3ee5cb84b0858126700418cebd6db8295175b8370ca86d78",
+      "output": "Bootstrap conflict: 768/768 exact second-connection outcomes\n"
+    }
+  },
+  "remaining": [
+    "Broader bootstrap root/dependency/model topologies and custom Checker/behavior/resource overrides.",
+    "Other constant/type-source-disposition and complete G01-G17/P0-P7 requirements remain independent.",
+    "Simultaneous-thread/process stress is not established by this scoped deterministic interleaving."
+  ]
+}

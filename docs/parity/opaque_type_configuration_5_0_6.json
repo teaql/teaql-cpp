@@ -1,0 +1,369 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "cases": [
+    {
+      "case": "named_opaque",
+      "original_generated": true,
+      "original_compile_exit": 101,
+      "original_errors": [
+        {
+          "code": "E0425",
+          "message": "cannot find type `OpaqueToken` in this scope",
+          "rendered": "error[E0425]: cannot find type `OpaqueToken` in this scope\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/named_opaque/rust/lib/src/priority/entity.rs:29:12\n   |\n29 |     value: OpaqueToken,\n   |            ^^^^^^^^^^^ not found in this scope\n\n"
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find type `OpaqueToken` in this scope",
+          "rendered": "error[E0425]: cannot find type `OpaqueToken` in this scope\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/named_opaque/rust/lib/src/priority/entity.rs:150:28\n    |\n150 |     pub fn value(&self) -> OpaqueToken {\n    |                            ^^^^^^^^^^^ not found in this scope\n\n"
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find type `OpaqueToken` in this scope",
+          "rendered": "error[E0425]: cannot find type `OpaqueToken` in this scope\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/named_opaque/rust/lib/src/priority/entity.rs:166:62\n    |\n166 |     pub fn eval_value(&self) -> teaql_core::eval::EvalResult<OpaqueToken> {\n    |                                                              ^^^^^^^^^^^ not found in this scope\n    |\nhelp: you might be missing a type parameter\n    |\n 44 | impl<OpaqueToken> Priority {\n    |     +++++++++++++\n\n"
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find type `OpaqueToken` in this scope",
+          "rendered": "error[E0425]: cannot find type `OpaqueToken` in this scope\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/named_opaque/rust/lib/src/priority/expression.rs:40:58\n   |\n40 |     pub fn get_value(self) -> crate::ValueExpression<'a, OpaqueToken> {\n   |                                                          ^^^^^^^^^^^ not found in this scope\n   |\nhelp: you might be missing a type parameter\n   |\n 7 | impl<'a, OpaqueToken> PriorityExpression<'a> {\n   |        +++++++++++++\n\n"
+        }
+      ],
+      "cpp_frontend_rejected": true,
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform()\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "token",
+            "field_rust_type": "OpaqueToken",
+            "type_rust_type": "OpaqueToken",
+            "storage_type": "OpaqueToken",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          }
+        ],
+        "generated": false,
+        "error_type": "java.lang.IllegalArgumentException",
+        "error": "C++ unsupported configured scalar type: priority.value (Rust OpaqueToken)"
+      }
+    },
+    {
+      "case": "wide_unsigned",
+      "original_generated": true,
+      "original_compile_exit": 101,
+      "original_errors": [
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/runtime.rs:266:47\n    |\n266 |             if constant_priority_1.value() != \"7\" { constant_priority_1.update_value(\"7\"); changed = true; }\n    |                ---------------------------    ^^^ expected `u128`, found `&str`\n    |                |\n    |                expected because this is `u128`\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "`?` operator has incompatible types",
+          "rendered": "error[E0308]: `?` operator has incompatible types\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ expected `u128`, found `Value`\n   |\n   = note: `?` operator cannot convert from `serde_json::Value` to `u128`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "`?` operator has incompatible types",
+          "rendered": "error[E0308]: `?` operator has incompatible types\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ expected `u128`, found `Value`\n   |\n   = note: `?` operator cannot convert from `serde_json::Value` to `u128`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0277",
+          "message": "the trait bound `teaql_core::Value: From<u128>` is not satisfied",
+          "rendered": "error[E0277]: the trait bound `teaql_core::Value: From<u128>` is not satisfied\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ the trait `From<u128>` is not implemented for `teaql_core::Value`\n   |\n   = help: `teaql_core::Value` implements trait `From<T>`:\n             From<&str>\n             From<CheckObjectStatus>\n             From<bool>\n             From<chrono::datetime::DateTime<chrono::offset::utc::Utc>>\n             From<chrono::naive::date::NaiveDate>\n             From<f32>\n             From<f64>\n             From<i16>\n           and 9 others\n   = note: required for `u128` to implement `Into<teaql_core::Value>`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0277",
+          "message": "the trait bound `teaql_core::Value: From<u128>` is not satisfied",
+          "rendered": "error[E0277]: the trait bound `teaql_core::Value: From<u128>` is not satisfied\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ the trait `From<u128>` is not implemented for `teaql_core::Value`\n   |\n   = help: `teaql_core::Value` implements trait `From<T>`:\n             From<&str>\n             From<CheckObjectStatus>\n             From<bool>\n             From<chrono::datetime::DateTime<chrono::offset::utc::Utc>>\n             From<chrono::naive::date::NaiveDate>\n             From<f32>\n             From<f64>\n             From<i16>\n           and 9 others\n   = note: required for `u128` to implement `Into<teaql_core::Value>`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0277",
+          "message": "the trait bound `teaql_core::Value: From<u128>` is not satisfied",
+          "rendered": "error[E0277]: the trait bound `teaql_core::Value: From<u128>` is not satisfied\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ the trait `From<u128>` is not implemented for `teaql_core::Value`\n   |\n   = help: `teaql_core::Value` implements trait `From<T>`:\n             From<&str>\n             From<CheckObjectStatus>\n             From<bool>\n             From<chrono::datetime::DateTime<chrono::offset::utc::Utc>>\n             From<chrono::naive::date::NaiveDate>\n             From<f32>\n             From<f64>\n             From<i16>\n           and 9 others\n   = note: required for `u128` to implement `Into<teaql_core::Value>`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:72:20\n   |\n72 |             value: String::new(),\n   |                    ^^^^^^^^^^^^^ expected `u128`, found `String`\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:151:113\n    |\n151 |         self.changed_value().and_then(|value| value.try_text().map(|value| value.to_owned())).unwrap_or_else(|| self.value.clone())\n    |                                                                                                                 ^^^^^^^^^^^^^^^^^^ expected `String`, found `u128`\n    |\nhelp: try using a conversion method\n    |\n151 -         self.changed_value().and_then(|value| value.try_text().map(|value| value.to_owned())).unwrap_or_else(|| self.value.clone())\n151 +         self.changed_value().and_then(|value| value.try_text().map(|value| value.to_owned())).unwrap_or_else(|| self.value.to_string())\n    |\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:151:9\n    |\n150 |     pub fn value(&self) -> std::primitive::u128 {\n    |                            -------------------- expected `u128` because of return type\n151 |         self.changed_value().and_then(|value| value.try_text().map(|value| value.to_owned())).unwrap_or_else(|| self.value.clone())\n    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `u128`, found `String`\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:156:87\n    |\n156 |         self.value = value.try_text().map(|value| value.to_owned()).unwrap_or_else(|| self.value.clone());\n    |                                                                                       ^^^^^^^^^^^^^^^^^^ expected `String`, found `u128`\n    |\nhelp: try using a conversion method\n    |\n156 -         self.value = value.try_text().map(|value| value.to_owned()).unwrap_or_else(|| self.value.clone());\n156 +         self.value = value.try_text().map(|value| value.to_owned()).unwrap_or_else(|| self.value.to_string());\n    |\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/rust/lib/src/priority/entity.rs:156:22\n    |\n156 |         self.value = value.try_text().map(|value| value.to_owned()).unwrap_or_else(|| self.value.clone());\n    |         ----------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `u128`, found `String`\n    |         |\n    |         expected due to the type of this binding\n\n"
+        }
+      ],
+      "cpp_frontend_rejected": true,
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform()\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "token",
+            "field_rust_type": "std::primitive::u128",
+            "type_rust_type": "std::primitive::u128",
+            "storage_type": "std::primitive::u128",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          }
+        ],
+        "generated": false,
+        "error_type": "java.lang.IllegalArgumentException",
+        "error": "C++ unsupported configured scalar type: priority.value (Rust std::primitive::u128)"
+      }
+    },
+    {
+      "case": "byte_vector",
+      "original_generated": true,
+      "original_compile_exit": 101,
+      "original_errors": [
+        {
+          "code": "E0277",
+          "message": "can't compare `Vec<u8>` with `&str`",
+          "rendered": "error[E0277]: can't compare `Vec<u8>` with `&str`\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/runtime.rs:266:44\n    |\n266 |             if constant_priority_1.value() != \"7\" { constant_priority_1.update_value(\"7\"); changed = true; }\n    |                                            ^^ no implementation for `Vec<u8> == &str`\n    |\n    = help: the trait `PartialEq<&str>` is not implemented for `Vec<u8>`\nhelp: `Vec<u8>` implements trait `PartialEq<Rhs>`\n   --> /home/philip/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/bstr/traits.rs:56:9\n    |\n 56 |         impl PartialEq<$lhs> for $rhs {\n    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    |         |\n    |         `PartialEq<ByteStr>`\n    |         `PartialEq<ByteString>`\n    |\n   ::: /home/philip/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/bstr.rs:519:1\n    |\n519 | impl_partial_eq!(ByteString, Vec<u8>);\n    | ------------------------------------- in this macro invocation\n...\n663 | impl_partial_eq!(ByteStr, Vec<u8>);\n    | ---------------------------------- in this macro invocation\n    = note: this error originates in the macro `impl_partial_eq` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "`?` operator has incompatible types",
+          "rendered": "error[E0308]: `?` operator has incompatible types\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ expected `Vec<u8>`, found `Value`\n   |\n   = note: `?` operator cannot convert from `serde_json::Value` to `Vec<u8>`\n   = note: expected struct `Vec<u8>`\n                found enum `serde_json::Value`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "`?` operator has incompatible types",
+          "rendered": "error[E0308]: `?` operator has incompatible types\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ expected `Vec<u8>`, found `Value`\n   |\n   = note: `?` operator cannot convert from `serde_json::Value` to `Vec<u8>`\n   = note: expected struct `Vec<u8>`\n                found enum `serde_json::Value`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0277",
+          "message": "the trait bound `teaql_core::Value: From<Vec<u8>>` is not satisfied",
+          "rendered": "error[E0277]: the trait bound `teaql_core::Value: From<Vec<u8>>` is not satisfied\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ the trait `From<Vec<u8>>` is not implemented for `teaql_core::Value`\n   |\n   = help: `teaql_core::Value` implements trait `From<T>`:\n             From<&str>\n             From<CheckObjectStatus>\n             From<bool>\n             From<chrono::datetime::DateTime<chrono::offset::utc::Utc>>\n             From<chrono::naive::date::NaiveDate>\n             From<f32>\n             From<f64>\n             From<i16>\n           and 9 others\n   = note: required for `Vec<u8>` to implement `Into<teaql_core::Value>`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0277",
+          "message": "the trait bound `teaql_core::Value: From<Vec<u8>>` is not satisfied",
+          "rendered": "error[E0277]: the trait bound `teaql_core::Value: From<Vec<u8>>` is not satisfied\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ the trait `From<Vec<u8>>` is not implemented for `teaql_core::Value`\n   |\n   = help: `teaql_core::Value` implements trait `From<T>`:\n             From<&str>\n             From<CheckObjectStatus>\n             From<bool>\n             From<chrono::datetime::DateTime<chrono::offset::utc::Utc>>\n             From<chrono::naive::date::NaiveDate>\n             From<f32>\n             From<f64>\n             From<i16>\n           and 9 others\n   = note: required for `Vec<u8>` to implement `Into<teaql_core::Value>`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0277",
+          "message": "the trait bound `teaql_core::Value: From<Vec<u8>>` is not satisfied",
+          "rendered": "error[E0277]: the trait bound `teaql_core::Value: From<Vec<u8>>` is not satisfied\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:15:35\n   |\n15 | #[derive(Clone, Debug, PartialEq, TeaqlEntity)]\n   |                                   ^^^^^^^^^^^ the trait `From<Vec<u8>>` is not implemented for `teaql_core::Value`\n   |\n   = help: `teaql_core::Value` implements trait `From<T>`:\n             From<&str>\n             From<CheckObjectStatus>\n             From<bool>\n             From<chrono::datetime::DateTime<chrono::offset::utc::Utc>>\n             From<chrono::naive::date::NaiveDate>\n             From<f32>\n             From<f64>\n             From<i16>\n           and 9 others\n   = note: required for `Vec<u8>` to implement `Into<teaql_core::Value>`\n   = note: this error originates in the derive macro `TeaqlEntity` (in Nightly builds, run with -Z macro-backtrace for more info)\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:72:20\n   |\n72 |             value: String::new(),\n   |                    ^^^^^^^^^^^^^ expected `Vec<u8>`, found `String`\n   |\n   = note: expected struct `Vec<u8>`\n              found struct `std::string::String`\nhelp: call `Into::into` on this expression to convert `std::string::String` into `Vec<u8>`\n   |\n72 |             value: String::new().into(),\n   |                                 +++++++\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:151:113\n    |\n151 |         self.changed_value().and_then(|value| value.try_text().map(|value| value.to_owned())).unwrap_or_else(|| self.value.clone())\n    |                                                                                                                 ^^^^^^^^^^^^^^^^^^ expected `String`, found `Vec<u8>`\n    |\n    = note: expected struct `std::string::String`\n               found struct `Vec<u8>`\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:151:9\n    |\n150 |     pub fn value(&self) -> Vec<u8> {\n    |                            ------- expected `Vec<u8>` because of return type\n151 |         self.changed_value().and_then(|value| value.try_text().map(|value| value.to_owned())).unwrap_or_else(|| self.value.clone())\n    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Vec<u8>`, found `String`\n    |\n    = note: expected struct `Vec<u8>`\n               found struct `std::string::String`\nhelp: call `Into::into` on this expression to convert `std::string::String` into `Vec<u8>`\n    |\n151 |         self.changed_value().and_then(|value| value.try_text().map(|value| value.to_owned())).unwrap_or_else(|| self.value.clone()).into()\n    |                                                                                                                                    +++++++\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:156:87\n    |\n156 |         self.value = value.try_text().map(|value| value.to_owned()).unwrap_or_else(|| self.value.clone());\n    |                                                                                       ^^^^^^^^^^^^^^^^^^ expected `String`, found `Vec<u8>`\n    |\n    = note: expected struct `std::string::String`\n               found struct `Vec<u8>`\n\n"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "rendered": "error[E0308]: mismatched types\n   --> /home/philip/githome/teaql-cpp/tests/generator/parity/opaque_type_configuration_contracts/byte_vector/rust/lib/src/priority/entity.rs:156:22\n    |\n156 |         self.value = value.try_text().map(|value| value.to_owned()).unwrap_or_else(|| self.value.clone());\n    |         ----------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Vec<u8>`, found `String`\n    |         |\n    |         expected due to the type of this binding\n    |\n    = note: expected struct `Vec<u8>`\n               found struct `std::string::String`\nhelp: call `Into::into` on this expression to convert `std::string::String` into `Vec<u8>`\n    |\n156 |         self.value = value.try_text().map(|value| value.to_owned()).unwrap_or_else(|| self.value.clone()).into();\n    |                                                                                                          +++++++\n\n"
+        }
+      ],
+      "cpp_frontend_rejected": true,
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform()\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "token",
+            "field_rust_type": "Vec<u8>",
+            "type_rust_type": "Vec<u8>",
+            "storage_type": "Vec<u8>",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          }
+        ],
+        "generated": false,
+        "error_type": "java.lang.IllegalArgumentException",
+        "error": "C++ unsupported configured scalar type: priority.value (Rust Vec<u8>)"
+      }
+    }
+  ],
+  "runtime_parity_claimed": false
+}

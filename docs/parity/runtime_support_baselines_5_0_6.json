@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "cases": 297,
+  "matrices": [
+    {
+      "stem": "purposed_query_debug",
+      "inputs": 46,
+      "source_changed": 46,
+      "original_driver": "tests/parity/rust_values/src/bin/generated_support_oracle.rs",
+      "original_driver_sha256": "ddc9e28869a24eed52ade0b611714c2aefcfa145a939f752a1082fad46ee598a",
+      "historical_sha256": "d9cc946c47ef4bb0e0b29ada83a35700418802ba27e1da6d419ae59dc49c2750"
+    },
+    {
+      "stem": "data_store",
+      "inputs": 251,
+      "source_changed": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/data_store_oracle.rs",
+      "original_driver_sha256": "f492383ced395b54da2d8035066ca1001f936dcaeb57ff0dd1e2dc37308f5b72",
+      "historical_sha256": "0f2f05c0e10d6563b08c0bf955edf2d4f7a297137119405c74705de73cd305eb"
+    }
+  ],
+  "normalization": "none",
+  "scope": "Purpose diagnostics and DataStore only; complete capabilities remain partial"
+}

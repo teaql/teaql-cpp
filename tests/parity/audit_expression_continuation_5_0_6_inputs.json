@@ -1,0 +1,118 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Durable full 28-input initial expression/container witness. Known differences must remain visible until their source responsibilities are implemented; not an acceptance corpus.",
+  "cases": [
+    [
+      "macro_parentheses",
+      "17, audit_value_max_len=ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_brackets",
+      "17, audit_value_max_len=ignored![not Rust +], audit_value_max_len=21"
+    ],
+    [
+      "macro_braces",
+      "17, audit_value_max_len=ignored!{anything, +}, audit_value_max_len=21"
+    ],
+    [
+      "qualified_macro",
+      "17, audit_value_max_len=module::ignored!{tokens}, audit_value_max_len=21"
+    ],
+    [
+      "absolute_macro",
+      "17, audit_value_max_len=::module::ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_lifetime",
+      "17, audit_value_max_len=ignored!{'a}, audit_value_max_len=21"
+    ],
+    [
+      "macro_character",
+      "17, audit_value_max_len=ignored!{'a'}, audit_value_max_len=21"
+    ],
+    [
+      "macro_nested",
+      "17, audit_value_max_len=ignored!{a(b[c{d}])}, audit_value_max_len=21"
+    ],
+    [
+      "macro_raw_string",
+      "17, audit_value_max_len=ignored!{r#\"}\"#}, audit_value_max_len=21"
+    ],
+    [
+      "path_call",
+      "17, audit_value_max_len=some::call(1,2), audit_value_max_len=21"
+    ],
+    [
+      "if_block",
+      "17, audit_value_max_len=if flag {1} else {2}, audit_value_max_len=21"
+    ],
+    [
+      "async_block",
+      "17, audit_value_max_len=async {1}, audit_value_max_len=21"
+    ],
+    [
+      "const_block",
+      "17, audit_value_max_len=const {1}, audit_value_max_len=21"
+    ],
+    [
+      "closure",
+      "17, audit_value_max_len=|| 1, audit_value_max_len=21"
+    ],
+    [
+      "return_expr",
+      "17, audit_value_max_len=return 1, audit_value_max_len=21"
+    ],
+    [
+      "loop_expr",
+      "17, audit_value_max_len=loop {}, audit_value_max_len=21"
+    ],
+    [
+      "array_expr",
+      "17, audit_value_max_len=[1,2], audit_value_max_len=21"
+    ],
+    [
+      "tuple_expr",
+      "17, audit_value_max_len=(1,2), audit_value_max_len=21"
+    ],
+    [
+      "bad_paren",
+      "17, audit_value_max_len=(17 +), audit_value_max_len=21"
+    ],
+    [
+      "bad_binary",
+      "17, audit_value_max_len=17 +, audit_value_max_len=21"
+    ],
+    [
+      "character",
+      "17, audit_value_max_len='a', audit_value_max_len=21"
+    ],
+    [
+      "byte_string",
+      "17, audit_value_max_len=b\"17\", audit_value_max_len=21"
+    ],
+    [
+      "float",
+      "17, audit_value_max_len=17.5, audit_value_max_len=21"
+    ],
+    [
+      "entity_override",
+      "17, entity=\"Other\", audit_value_max_len=21"
+    ],
+    [
+      "table_override",
+      "17, table=\"other_data\", audit_value_max_len=21"
+    ],
+    [
+      "service_override",
+      "17, data_service=\"other\", audit_value_max_len=21"
+    ],
+    [
+      "indexed_flag",
+      "17, indexed_layout, audit_value_max_len=21"
+    ],
+    [
+      "reverse_relation",
+      "17, reverse_relation(name=\"others\",target=\"Other\",many), audit_value_max_len=21"
+    ]
+  ]
+}

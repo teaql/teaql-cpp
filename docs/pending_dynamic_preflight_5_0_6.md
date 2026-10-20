@@ -1,5 +1,7 @@
 # Pending dynamic entity preflight and governance
 
+Current G16 qualification is recorded in the [complete acceptance audit](dynamic_storage_acceptance_5_0_6.md). The text below preserves this earlier checkpoint and its original remaining-work boundaries.
+
 Recorded: 2026-10-12. Baseline:
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`. This extends
 [dynamic ledger persistence](dynamic_graph_save_5_0_6.md); it does not qualify

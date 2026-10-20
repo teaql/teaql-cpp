@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "matrices": [
+    {
+      "matrix": "executor_defaults_scope",
+      "observations": 296,
+      "historical_inputs": 144,
+      "explicit_intent_controls": 144,
+      "negative_controls": 8,
+      "native_differences": 0,
+      "active": "tests/parity/executor_defaults_scope_protocol_5_0_6_cases.json.gz",
+      "historical_constructor_rejections": 144
+    },
+    {
+      "matrix": "sql_query",
+      "observations": 767,
+      "historical_inputs": 381,
+      "explicit_intent_controls": 381,
+      "negative_controls": 5,
+      "native_differences": 0,
+      "active": "tests/parity/sql_query_protocol_5_0_6_cases.json.gz",
+      "historical_constructor_rejections": 381
+    },
+    {
+      "matrix": "sql_stream",
+      "observations": 1765,
+      "historical_inputs": 880,
+      "explicit_intent_controls": 880,
+      "negative_controls": 5,
+      "native_differences": 0,
+      "active": "tests/parity/sql_stream_protocol_5_0_6_cases.json.gz",
+      "historical_constructor_rejections": 880
+    },
+    {
+      "matrix": "sql_execution",
+      "observations": 2029,
+      "historical_inputs": 1012,
+      "explicit_intent_controls": 1012,
+      "negative_controls": 5,
+      "native_differences": 0,
+      "active": "tests/parity/sql_execution_protocol_5_0_6_cases.json.gz",
+      "historical_constructor_rejections": 1012
+    },
+    {
+      "matrix": "sql_transaction",
+      "observations": 2029,
+      "historical_inputs": 1012,
+      "explicit_intent_controls": 1012,
+      "negative_controls": 5,
+      "native_differences": 0,
+      "active": "tests/parity/sql_transaction_protocol_5_0_6_cases.json.gz",
+      "historical_constructor_rejections": 1012
+    },
+    {
+      "matrix": "sql_executor_kind",
+      "observations": 93,
+      "historical_inputs": 44,
+      "explicit_intent_controls": 44,
+      "negative_controls": 5,
+      "native_differences": 0,
+      "active": "tests/parity/sql_executor_kind_protocol_5_0_6_cases.json.gz",
+      "historical_constructor_rejections": 44
+    },
+    {
+      "matrix": "sql_cached_partition",
+      "observations": 8,
+      "historical_inputs": 0,
+      "explicit_intent_controls": 8,
+      "negative_controls": 0,
+      "native_differences": 0,
+      "active": "tests/parity/sql_cached_partition_protocol_5_0_6_cases.json.gz",
+      "historical_constructor_rejections": 0
+    }
+  ],
+  "observations": 6987,
+  "normalization": "none",
+  "helper_sha256": {
+    "scripts/verify_sql_protocol_5_0_6.py": "a38dc33171e5567704fab5bdfaf691a26ca8ad6348795462424499b25d93ace8",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_values/src/fixture_sql.rs": "3f9b4a0b35cee94de9ccb283f0cf35d64e6196b112791a9017ea42f836215abf",
+    "tests/parity/rust_field_layout/src/bin/sql_execution_5_0_6.rs": "49a01ff8758abb5103fa31723a218d3ac0d10b37540bd4862706152489cafcc6",
+    "tests/parity/sql_execution_probe.cpp": "30e8e1a3591976756b247395d7a40ef6ff4a435c4a630d6d2dd23439db854518"
+  },
+  "complete_capability_acceptance": false
+}

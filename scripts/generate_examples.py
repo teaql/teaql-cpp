@@ -16,6 +16,8 @@ def main():
     parser.add_argument('--generator-dir', type=Path,
                         default=ROOT.parent / 'teaql_code_gen_cpp')
     parser.add_argument('--check', action='store_true')
+    parser.add_argument('--fixtures', nargs='+',
+                        help='Generate only the named model file stems; unknown names fail')
     args = parser.parse_args()
     generator = args.generator_dir.resolve()
     if not (generator / 'generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java').is_file():
@@ -33,12 +35,17 @@ def main():
                         f'-Dmdep.outputFile={classpath}'], cwd=generator, check=True)
         entries = [generator / 'generator/target/classes', generator / 'model/target/classes']
         cp = ':'.join(map(str, entries)) + ':' + classpath.read_text().strip()
-        for model, destination in [('examples/generator/model.xml', 'examples/generated'),
+        fixtures = [('examples/generator/model.xml', 'examples/generated'),
+                                   ('tests/generator/typed_member_aliases.xml', 'tests/generated_typed_member_aliases'),
                                    ('tests/generator/types.xml', 'tests/generated_types'),
                                    ('tests/generator/checkers.xml', 'tests/generated_checkers'),
+                                   ('tests/generator/checker_unique_string.xml', 'tests/generated_checker_unique_string'),
+                                   ('tests/generator/checker_clock_scalars.xml', 'tests/generated_checker_clock_scalars'),
+                                   ('tests/generator/checker_clock_composition.xml', 'tests/generated_checker_clock_composition'),
                                    ('tests/generator/relations.xml', 'tests/generated_relations'),
                                    ('tests/generator/business_ids.xml', 'tests/generated_business_ids'),
                                    ('tests/generator/optional_types.xml', 'tests/generated_optional_types'),
+                                   ('tests/generator/query_field_branches.xml', 'tests/generated_query_field_branches'),
                                    ('tests/generator/inheritance.xml', 'tests/generated_inheritance'),
                                    ('tests/generator/inheritance_graph.xml', 'tests/generated_inheritance_graph'),
                                    ('tests/generator/inheritance_variants.xml', 'tests/generated_inheritance_variants'),
@@ -47,20 +54,22 @@ def main():
                                    ('tests/generator/constants_scalar.xml', 'tests/generated_constants_scalar'),
                                    ('tests/generator/constants_numeric.xml', 'tests/generated_constants_numeric'),
                                    ('tests/generator/constants_catalog.xml', 'tests/generated_constants_catalog'),
+                                   ('tests/generator/constants_temporal.xml', 'tests/generated_constants_temporal'),
+                                   ('tests/generator/constants_temporal_required.xml', 'tests/generated_constants_temporal_required'),
                                    ('tests/generator/dynamic_json.xml', 'tests/generated_dynamic_json'),
                                    ('tests/generator/sample_fields.xml', 'tests/generated_sample_fields'),
                                    ('tests/generator/sample_fields_runtime.xml', 'tests/generated_sample_fields_runtime'),
-                                   ('tests/generator/sample_fields_temporal.xml', 'tests/generated_sample_fields_temporal')]:
+                                   ('tests/generator/sample_fields_temporal.xml', 'tests/generated_sample_fields_temporal')]
+        if args.fixtures and not set(args.fixtures) <= {Path(model).stem for model, _ in fixtures}:
+            parser.error('Unknown fixture names: ' + ', '.join(sorted(
+                set(args.fixtures) - {Path(model).stem for model, _ in fixtures})))
+        for model, destination in fixtures:
+            if args.fixtures and Path(model).stem not in args.fixtures:
+                continue
             output = work / destination
             command = ['java', '-cp', cp,
                             'com.skynet.codegenerator.cpp.CppCoreGenerator',
                             str(ROOT / model), str(output)]
-            qualification = model.endswith(('/inheritance.xml', '/inheritance_graph.xml', '/inheritance_variants.xml', '/inheritance_business_ids.xml'))
-            if qualification:
-                command.append('--qualify-inheritance')
-            if model.endswith(('/candidates.xml', '/constants_scalar.xml', '/constants_numeric.xml', '/constants_catalog.xml')):
-                qualification = True
-                command.append('--qualify-constants')
             subprocess.run(command, cwd=generator, check=True)
             files = sorted(path for path in output.rglob('*') if path.is_file())
             headers = [str(path) for path in files if path.suffix == '.hpp']
@@ -69,13 +78,19 @@ def main():
             lock = json.loads((generator / 'cpp_generator.lock.json').read_text())
             checkpoint = lock['generator_baseline_commit']
             implementation = ['generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java',
+                              'generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java',
+                              'generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java',
+                              'generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java',
                               'generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java',
+                              'generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java',
+                              'generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java',
                               'generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java',
+                              'generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java',
                               'model/src/main/resources/models/infra/system-types.xml',
                               'generator/src/main/resources/generator/cpp_lib_core/support.hpp.template']
             manifest = {
                 'scope': 'cpp-lib-core',
-                'qualification_only': qualification,
+                'qualification_only': False,
                 'generator_base_commit': lock.get('generator_workspace_base_commit', checkpoint),
                 'generator_reference_commit': checkpoint,
                 'generator_implementation_sha256': {

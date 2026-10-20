@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "input": {
+    "root": "Person(id=7)",
+    "node": "name",
+    "path": "parent.name"
+  },
+  "positive_control": true,
+  "negative_controls": [
+    {
+      "name": "missing_broken_point",
+      "rejected": true
+    },
+    {
+      "name": "wrong_root_arguments",
+      "rejected": true
+    },
+    {
+      "name": "wrong_missing_preload",
+      "rejected": true
+    },
+    {
+      "name": "wrong_severity",
+      "rejected": true
+    },
+    {
+      "name": "wrong_leaf_suggestion",
+      "rejected": true
+    },
+    {
+      "name": "wrong_english_message",
+      "rejected": true
+    },
+    {
+      "name": "extra_native_field",
+      "rejected": true
+    }
+  ],
+  "notice": "Synthetic adapter controls show presentation translation cannot silently repair these semantic/field/rendering changes. Not additional Rust/runtime observations."
+}

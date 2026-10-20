@@ -108,11 +108,35 @@ static void physical_types_and_failures() {
           "JSON parse retains line/column and reason");
 }
 
+static void checked_timestamp_digits() {
+    check(!detail::parse_fixed_sqlite_timestamp("2024-02-30 01:-2:03"),
+          "invalid calendar short-circuits before malformed clock bytes");
+    check(!detail::parse_fixed_sqlite_timestamp("2024-02-29 xx:-2:03"),
+          "earlier nondigit returns before later checked subtraction");
+    check(detail::parse_fixed_sqlite_timestamp("2024-02-29 01:02:03.123+08:00").has_value(),
+          "ordinary fixed timestamps still decode");
+    for (auto value :
+         {"2024-02-29 01:-2:03.123+08:00", "2024-02-29 01:02:03+x/", "2024-02-29 01:02:03+24:0/"}) {
+        bool failed = false;
+        try {
+            (void)detail::parse_fixed_sqlite_timestamp(value);
+        } catch (const std::out_of_range& error) {
+            failed = std::string_view(error.what()) == "attempt to subtract with overflow";
+        }
+#ifndef NDEBUG
+        check(failed, "Debug preserves eager source byte-subtraction failure");
+#else
+        check(!failed, "Release rejects malformed timestamp without checked overflow");
+#endif
+    }
+}
+
 int main() {
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         row_lifetimes();
         physical_types_and_failures();
+        checked_timestamp_digits();
         std::pmr::set_default_resource(previous);
         std::cout << "SQLite decoding contracts passed\n";
     } catch (const std::exception& e) {

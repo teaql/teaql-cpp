@@ -1,0 +1,62 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Inspected generated outer/facet compact-row execution responsibility; not complete G08/G16 body acceptance.",
+  "records": [
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/request_support.rs",
+      "start_line": 551,
+      "end_line": 591,
+      "text": "pub(crate) async fn execute_facets<C>(\n    context: &C,\n    outer_query: &SelectQuery,\n    options: &QueryOptions,\n) -> Result<BTreeMap<String, SmartList<CompactRow>>, RuntimeError>\nwhere\n    C: TeaqlRuntime + ?Sized,\n{\n    let mut facets = BTreeMap::new();\n    for facet in &options.facets {\n        let mut selection = facet.query.clone();\n        merge_outer_filter_into_facet_aggregates(&mut selection, outer_query);\n        if !facet.include_all_facets {\n            selection = restrict_facet_to_outer_query(context, selection, outer_query, &facet.relation_name)?;\n        }\n        let relation_aggregates = runtime_relation_aggregates(&selection.query_options);\n        let query = apply_runtime_metadata(\n            selection.query,\n            &selection.query_options,\n            &selection.child_enhancements,\n        );\n        let entity = query.entity.clone();\n        let mut chain = outer_query.trace_chain.clone();\n        chain.push(teaql_core::TraceNode::new(\n            query.entity.clone(),\n            None,\n            facet.facet_name.clone(),\n        ));\n\n        let query = PurposedSelectQuery::new(\n            query,\n            format!(\"Calculate facet {}\", facet.facet_name),\n        );\n        let facet_rows = context.fetch_facet_smart_list(&entity, &query, &relation_aggregates, chain).await?;\n        facets.insert(facet.facet_name.clone(), facet_rows);\n    }\n    Ok(facets)\n}\n\npub(crate) fn restrict_facet_to_outer_query<C>(\n    context: &C,\n",
+      "excerpt_sha256": "85ace7ae975e6cb7f2b8579cd037d429bea2509d518d047ae9c929eeaadb9bcf",
+      "source_sha256": "d7a0d7966bbabb3ff234c5aee596f1dc1098d6060e7611acbb651aa2b1255d1e",
+      "review": "Generated facets apply captured options, outer scope, separate intent/trace and compact-row fetch; there is no typed dynamic carrier installation at this boundary.",
+      "cpp_mapping": "teaql_runtime/include/teaql/runtime/detail/generated_query_facets.hpp",
+      "cpp_sha256": "94f3ef200306b02b82876012dc14df6b77cf046409a919ee0a132b247029e4de"
+    },
+    {
+      "source": ".reference/teaql-rs/teaql-runtime/src/data_service/resolved.rs",
+      "start_line": 1455,
+      "end_line": 1464,
+      "text": "    pub(crate) async fn fetch_smart_list_with_relation_aggregates_internal(\n        &self,\n        query: &SelectQuery,\n        relation_aggregates: &[RelationAggregate],\n    ) -> Result<SmartList<teaql_core::CompactRow>, DataServiceError<E::Error>> {\n        self.fetch_all_with_relation_aggregates_internal(query, relation_aggregates)\n            .await\n            .map(SmartList::from)\n    }\n\n",
+      "excerpt_sha256": "4a0835652e45582eb4dc3440fcf8ec2b4ae4cbdb7424d881c38702d21861bbbf",
+      "source_sha256": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+      "review": "Compact-row facet list wraps row fetch, unlike the following typed-entity dynamic loader.",
+      "cpp_mapping": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+      "cpp_sha256": "ba8467a4e6aca28fd504b8b674bf17cf5d13718b39acff7086d96c35ee9eba97"
+    },
+    {
+      "source": ".reference/teaql-rs/teaql-runtime/src/data_service/resolved.rs",
+      "start_line": 1840,
+      "end_line": 1858,
+      "text": "    pub async fn fetch_smart_list_with_relation_aggregates(\n        &self,\n        query: &PurposedSelectQuery,\n        relation_aggregates: &[RelationAggregate],\n    ) -> Result<SmartList<teaql_core::CompactRow>, DataServiceError<E::Error>> {\n        let scoped = self\n            .query_scoped_service_with_aggregates(\n                query.diagnostic_source().unwrap_or(query.as_query()),\n                relation_aggregates,\n            )\n            .map_err(DataServiceError::Runtime)?;\n        scoped\n            .fetch_smart_list_with_relation_aggregates_internal(\n                query.as_query(),\n                relation_aggregates,\n            )\n            .await\n    }\n\n",
+      "excerpt_sha256": "13805d508ca08854578681fb80c0506a923b39774ec18d520d4959727d9e2eb7",
+      "source_sha256": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+      "review": "Compact facet fetch captures query-scoped intent and delegates to compact row list; does not synthesize persistent extension read metadata.",
+      "cpp_mapping": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+      "cpp_sha256": "ba8467a4e6aca28fd504b8b674bf17cf5d13718b39acff7086d96c35ee9eba97"
+    },
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "start_line": 105,
+      "end_line": 131,
+      "text": "        R: teaql_core::Entity + Send + 'a,\n    {\n        let query_options = self.query_options.clone();\n        let relation_aggregates = runtime_relation_aggregates(&query_options);\n        let query = authorize_query(apply_runtime_metadata(\n            self.query,\n            &query_options,\n            &self.child_enhancements,\n        ))?;\n        let (mut rows, facets) = if query_options.facets.is_empty() {\n            let rows = context.fetch_entity_smart_list::<R>(\n                \"Order\",\n                query,\n                relation_aggregates,\n            ).await?;\n            (rows, std::collections::BTreeMap::new())\n        } else {\n            let rows = context.fetch_entity_smart_list::<R>(\n                \"Order\",\n                query.clone(),\n                relation_aggregates,\n            ).await?;\n            let facets = execute_facets(context, query.as_query(), &query_options)\n                .await?;\n            (rows, facets)\n        };\n        attach_facets(&mut rows, facets);\n",
+      "excerpt_sha256": "00379d38239a4b8098331a333bf6c2f72d939951e8b78083143ff5181f462076",
+      "source_sha256": "5f1ff86ad020908b486dfa0a425661379eda9c569f06d097106aa957d5273507",
+      "review": "Typed outer rows are fetched first; selected facets execute before list attachment and one/page conversion.",
+      "cpp_mapping": "teaql_runtime/include/teaql/runtime/detail/generated_query_facets.hpp",
+      "cpp_sha256": "94f3ef200306b02b82876012dc14df6b77cf046409a919ee0a132b247029e4de"
+    },
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/request_support.rs",
+      "start_line": 600,
+      "end_line": 626,
+      "text": "        .user_context()\n        .entity(&outer_query.entity)\n        .cloned()\n        .ok_or_else(|| RuntimeError::Graph(format!(\"missing entity: {}\", outer_query.entity)))?;\n    let relation = descriptor\n        .relation_by_name(relation_name)\n        .cloned()\n        .ok_or_else(|| RuntimeError::MissingRelation {\n            entity: outer_query.entity.clone(),\n            relation: relation_name.to_owned(),\n        })?;\n    let mut subquery = outer_query.clone();\n    subquery.projection.clear();\n    subquery.expr_projection.clear();\n    subquery.order_by.clear();\n    subquery.slice = None;\n    subquery.aggregates.clear();\n    subquery.group_by.clear();\n    subquery.relations.clear();\n    selection.query = selection.query.and_filter(Expr::in_subquery(\n        relation.foreign_key,\n        descriptor,\n        subquery,\n        relation.local_key,\n    ));\n    Ok(selection)\n}\n",
+      "excerpt_sha256": "2358d369561199270ad39c357234e4b70459d30b541e16717ac73de260383591",
+      "source_sha256": "d7a0d7966bbabb3ff234c5aee596f1dc1098d6060e7611acbb651aa2b1255d1e",
+      "review": "Restricted membership clears ordinary query projections but retains computed dynamic properties. Actual SQLite pair preserves the resulting two-column subquery error; this is not successful restricted computed-facet execution.",
+      "cpp_mapping": "teaql_runtime/include/teaql/runtime/detail/generated_query_facets.hpp",
+      "cpp_sha256": "94f3ef200306b02b82876012dc14df6b77cf046409a919ee0a132b247029e4de"
+    }
+  ]
+}

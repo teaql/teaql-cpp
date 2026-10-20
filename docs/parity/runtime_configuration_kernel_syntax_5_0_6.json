@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "stage": "shared_kernel_unregistered",
+  "gates": {
+    "runtime_source_syntax_exit_code": 0,
+    "provider_source_final_syntax_exit_code": 0,
+    "ownership_fixture_syntax_exit_code": 0,
+    "format_apply_check_exit_code": 0,
+    "formatted_files": 1465,
+    "old_files_bytes_and_timestamps_preserved": 1460
+  },
+  "files": {
+    "teaql_runtime/include/teaql/runtime/generated_runtime_config.hpp": "22e31c503e30fbabc75bb7ff064e9f65b489f4869fe30d48a05d5c72172cae72",
+    "teaql_runtime/src/generated_runtime_config.cpp": "984ce6f338d965d0b09cf1746c1affd39b8b6e2a9dea19206b85f637daf98725",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/runtime_config.hpp": "14c0570b0d013f581dd1ddcc8df1235e9fe028be59e31dd471d983ae82876a95",
+    "teaql_provider_sqlite/src/runtime_config.cpp": "13be6251549332e3dc09f3d7e7c9ab488850d93d86e24aa0bbf7e1ee92a86a3c",
+    "teaql_runtime/tests/runtime_config_tests.cpp": "27b3c7cf21c3d9ac2a1e0d0e4f25452e596652937b5cdd50487f900675ae2002"
+  },
+  "source_observations": {
+    "environment_and_connection": 20,
+    "direct_config_nul": 2
+  },
+  "notice": "No production CMake/module inputs or generated APIs changed. No linked execution, original/C++ parity, lifetime, sanitizer or full native integration result is claimed. Complete service error composition, production/module registration and thin generated adapters remain required."
+}

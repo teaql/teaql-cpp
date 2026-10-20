@@ -1,0 +1,5 @@
+#define TEAQL_CHECK_MODEL IntermediateRecord
+#define TEAQL_CHECK_CHECKER IntermediateRecordChecker
+#define TEAQL_CHECK_LOGIC IntermediateRecordCheckerLogic
+#define TEAQL_CHECK_CALLBACK checkAndFixIntermediateRecord
+#include "inherited_checker_helpers_probe.cpp"

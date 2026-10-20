@@ -1,0 +1,769 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "generator/src/main/resources/generator/rust-lib-core/request/index.stg",
+  "template_sha256": "791e5e0d9a2c5250f500e607074d468bb0a5a79ad4081f745f9ca1ddfb1c5960",
+  "functions": [
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1551,
+      "end_line": 1554,
+      "sha256": "1ace4ddeaab0cf15a8d8ee0138e1a91a007044c2c1b4a7b34cb186d8541f6f4b",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>(mut self) -> Self {\n        self.query = self.query.project(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "project_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1556,
+      "end_line": 1558,
+      "sha256": "355be802b976dc72dbea1fee147b6010113cf997d0539c6dd1df40d43f42d227",
+      "body": "pub fn project_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.select_<fieldDescriptor.rustStorageMemberName>()\n    }"
+    },
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>_raw",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1560,
+      "end_line": 1562,
+      "sha256": "bcbc00a41529c16dedc2febd7f450b3656233dae58e599d7ce69f7316cab303e",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>_raw(self, raw_sql_segment: impl Into\\<String\\>) -> Self {\n        self.select_<fieldDescriptor.rustStorageMemberName>_unsafe_raw(UnsafeRawSqlSegment::trusted(raw_sql_segment))\n    }"
+    },
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>_unsafe_raw",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1564,
+      "end_line": 1569,
+      "sha256": "32ef1594706bce43786e7ae7b81651c814466441fb773879f77d2d446d1e9d6b",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>_unsafe_raw(mut self, raw_sql_segment: UnsafeRawSqlSegment) -> Self {\n        self.query_options\n            .raw_projections\n            .push(RawProjection::new(\"<fieldDescriptor.rustStorageFieldName>\", raw_sql_segment));\n        self\n    }"
+    },
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>_with_function",
+      "requirement": "PP02",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version",
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1572,
+      "end_line": 1574,
+      "sha256": "a9a47d92b2cb2f7f543764bc5b5e80c0c0351a069c763fea693803e5372e0490",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>_with_function(self, function: AggregateFunction) -> Self {\n        self.select_<fieldDescriptor.rustStorageMemberName>_as_with_function(\"<fieldDescriptor.rustStorageFieldName>\", function)\n    }"
+    },
+    {
+      "name": "select_<fieldDescriptor.rustStorageMemberName>_as_with_function",
+      "requirement": "PP02",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version",
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1576,
+      "end_line": 1582,
+      "sha256": "71a78ebb57fc97092f0929efa30099aefa5a98df1cd40be2c9154176ee09190d",
+      "body": "pub fn select_<fieldDescriptor.rustStorageMemberName>_as_with_function(\n        self,\n        alias: impl Into\\<String\\>,\n        function: AggregateFunction,\n    ) -> Self {\n        self.aggregate_with_function(\"<fieldDescriptor.rustStorageFieldName>\", alias, function)\n    }"
+    },
+    {
+      "name": "group_by_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP03",
+      "guards": [],
+      "start_line": 1586,
+      "end_line": 1588,
+      "sha256": "110d8596732bac73f3c59998ddc45b1272d434e77f4fb74a6123f306d33fa996",
+      "body": "pub fn group_by_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.group_by(\"<fieldDescriptor.rustStorageFieldName>\")\n    }"
+    },
+    {
+      "name": "group_by_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP03",
+      "guards": [],
+      "start_line": 1590,
+      "end_line": 1597,
+      "sha256": "ac0a9340e8e9aee0bd6db24d14cd5caa3b662c8364f9a25d71dfb228b6f7a654",
+      "body": "pub fn group_by_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        let alias = alias.into();\n        let mut request = self.group_by(\"<fieldDescriptor.rustStorageFieldName>\");\n        request.query = request\n            .query\n            .project_expr(alias, Expr::column(\"<fieldDescriptor.rustStorageFieldName>\"));\n        request\n    }"
+    },
+    {
+      "name": "group_by_<fieldDescriptor.rustStorageMemberName>_with_function",
+      "requirement": "PP03",
+      "guards": [],
+      "start_line": 1599,
+      "end_line": 1606,
+      "sha256": "c3e171355d204e492b4e862e9064313fc966674ee71853c8eb748266b57557e9",
+      "body": "pub fn group_by_<fieldDescriptor.rustStorageMemberName>_with_function(\n        self,\n        alias: impl Into\\<String\\>,\n        function: AggregateFunction,\n    ) -> Self {\n        self.group_by(\"<fieldDescriptor.rustStorageFieldName>\")\n            .aggregate_with_function(\"<fieldDescriptor.rustStorageFieldName>\", alias, function)\n    }"
+    },
+    {
+      "name": "count_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1608,
+      "end_line": 1610,
+      "sha256": "6c9be032ef6ab770a64ae695a36d75e085cdc0c1a63ec1767de8be21e5af6d2f",
+      "body": "pub fn count_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.count_<fieldDescriptor.rustStorageMemberName>_as(\"<fieldDescriptor.rustStorageMemberName>_count\")\n    }"
+    },
+    {
+      "name": "count_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1612,
+      "end_line": 1614,
+      "sha256": "2a0778f910e1070ab194eedea4653dc1a4d4c47222ad90bafc454e48bea33edd",
+      "body": "pub fn count_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_count_field(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "sum_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1616,
+      "end_line": 1618,
+      "sha256": "38ed59ec16d6c7512df7285e3ada146dea98e1d588789d66b77aa1dc7c9046d9",
+      "body": "pub fn sum_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.sum_<fieldDescriptor.rustStorageMemberName>_as(\"sum_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "sum_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1620,
+      "end_line": 1622,
+      "sha256": "3ed816c24faf50289aa9beb2e098ecb5d724dff59b8b8efe6061adda41f41e74",
+      "body": "pub fn sum_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_sum(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "avg_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1624,
+      "end_line": 1626,
+      "sha256": "84a2250133b4d60a85d6e86d56f7f54fadc9527fc51f00687fc4c685417d23e7",
+      "body": "pub fn avg_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.avg_<fieldDescriptor.rustStorageMemberName>_as(\"avg_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "avg_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1628,
+      "end_line": 1630,
+      "sha256": "593d3a5f01a18aedf9b41d41b3e3af16daf5b1801ca85edb879aee3e10685a88",
+      "body": "pub fn avg_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_avg(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "min_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1632,
+      "end_line": 1634,
+      "sha256": "b602011a46ba978234fd8b3cdcc96b629d9e8a581ae97a7caf247b42b5cf0172",
+      "body": "pub fn min_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.min_<fieldDescriptor.rustStorageMemberName>_as(\"min_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "min_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1636,
+      "end_line": 1638,
+      "sha256": "080c287545e48ddd74f273e447f14f7d1ec077600a6d24c4c8dcb489ec9abee8",
+      "body": "pub fn min_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_min(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "max_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1640,
+      "end_line": 1642,
+      "sha256": "94842b5165b5c5ec0937ba207e66f6dfd08c5a5edb0ef270508c27f1f5822d62",
+      "body": "pub fn max_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.max_<fieldDescriptor.rustStorageMemberName>_as(\"max_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "max_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [],
+      "start_line": 1644,
+      "end_line": 1646,
+      "sha256": "da0d4fab82de2035c4358519965078c0f73c0f2249fd8ab4e6b34a6f1d0ebdd9",
+      "body": "pub fn max_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_max(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "standard_deviation_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1649,
+      "end_line": 1651,
+      "sha256": "8a087db2b2ccc2ce4be3b809175610c91e2d361b88080b06ecc31ec80306c1c9",
+      "body": "pub fn standard_deviation_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.standard_deviation_<fieldDescriptor.rustStorageMemberName>_as(\"stdDev_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "standard_deviation_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1653,
+      "end_line": 1655,
+      "sha256": "eed499903e1624bc14c1cf5c39624f26fcc2965e5a39092afed826dc716117cb",
+      "body": "pub fn standard_deviation_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_stddev(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1657,
+      "end_line": 1659,
+      "sha256": "101ba0c122bdef25173508e34b906b77d027305d5a15b826e090b1a22b2d5328",
+      "body": "pub fn square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>_as(\"stdDevPop_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1661,
+      "end_line": 1663,
+      "sha256": "3f013b0bb8f977cc49d3e73ad73440b1beb04b7337416a2dfa6b42b5a6a2e7e7",
+      "body": "pub fn square_root_of_population_standard_deviation_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_stddev_pop(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "sample_variance_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1665,
+      "end_line": 1667,
+      "sha256": "4ee8d1f5f0860ce29457231062f96892c32c16995541fea438463567209d4f5b",
+      "body": "pub fn sample_variance_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.sample_variance_<fieldDescriptor.rustStorageMemberName>_as(\"varSamp_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "sample_variance_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1669,
+      "end_line": 1671,
+      "sha256": "a4858bf7ae5ef306dff0cdd5bcaa7e0b80dc162711ad51ad01dfc480df474154",
+      "body": "pub fn sample_variance_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_var_samp(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "sample_population_variance_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1673,
+      "end_line": 1675,
+      "sha256": "f84808cc5651f29d9ecaa9009a599bc4481428cc381b4cd524dd64eb851e4613",
+      "body": "pub fn sample_population_variance_<fieldDescriptor.rustStorageMemberName>(self) -> Self {\n        self.sample_population_variance_<fieldDescriptor.rustStorageMemberName>_as(\"varPop_<fieldDescriptor.rustStorageMemberName>\")\n    }"
+    },
+    {
+      "name": "sample_population_variance_<fieldDescriptor.rustStorageMemberName>_as",
+      "requirement": "PP04",
+      "guards": [
+        "fieldDescriptor.isNumber"
+      ],
+      "start_line": 1677,
+      "end_line": 1679,
+      "sha256": "625b5e5ec48057d54da6c2363c49392537e90fb53f49abbf9b6a0123da50c0ba",
+      "body": "pub fn sample_population_variance_<fieldDescriptor.rustStorageMemberName>_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_var_pop(\"<fieldDescriptor.rustStorageFieldName>\", alias)\n    }"
+    },
+    {
+      "name": "unselect_<fieldDescriptor.rustStorageMemberName>",
+      "requirement": "PP01",
+      "guards": [
+        "!fieldDescriptor.id && !fieldDescriptor.version"
+      ],
+      "start_line": 1683,
+      "end_line": 1687,
+      "sha256": "ceeca270ebba0262e53e6a3fc6dab05abb378cac71ca5e184d9bc7af36b9db70",
+      "body": "pub fn unselect_<fieldDescriptor.rustStorageMemberName>(mut self) -> Self {\n        self.query.projection.retain(|field| field != \"<fieldDescriptor.rustStorageFieldName>\");\n        self.query_options.raw_projections.retain(|projection| projection.property_name != \"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "fieldDescriptor.isBusinessId"
+      ],
+      "start_line": 1692,
+      "end_line": 1698,
+      "sha256": "b41601e5306f69fb44cfdc25df24cc13c618093a3d69b281421b62d4d467b5f8",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is(\n        mut self,\n        value: crate::<fieldDescriptor.rustBusinessIdTypeName>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::eq(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_not",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "fieldDescriptor.isBusinessId"
+      ],
+      "start_line": 1700,
+      "end_line": 1706,
+      "sha256": "b996f6f8c10bfd2ed2b20aebda21c7eee57077bce5537d38c23856d7883624c1",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_not(\n        mut self,\n        value: crate::<fieldDescriptor.rustBusinessIdTypeName>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::ne(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "fieldDescriptor.isBusinessId"
+      ],
+      "start_line": 1708,
+      "end_line": 1711,
+      "sha256": "742dab7efc216f82723c56a4e11092268c2c4df669c812d215f7698a9f35b6b5",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "fieldDescriptor.isBusinessId"
+      ],
+      "start_line": 1713,
+      "end_line": 1716,
+      "sha256": "7f8def7e4f9a3841ebba90dcc32eefebeb6c3ec5d2dde228efb76ef228b405e3",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_not_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.snakeBooleanPredicateExpr>",
+      "requirement": "PP06",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "fieldDescriptor.isBool"
+      ],
+      "start_line": 1719,
+      "end_line": 1722,
+      "sha256": "184bc6746e3f482852d911b0d07cd73d143c5994462e8f18431d6960776783c7",
+      "body": "pub fn <fieldDescriptor.snakeBooleanPredicateExpr>(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::eq(\"<fieldDescriptor.rustStorageFieldName>\", true));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.snakeBooleanNegativePredicateExpr>",
+      "requirement": "PP06",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "fieldDescriptor.isBool"
+      ],
+      "start_line": 1724,
+      "end_line": 1727,
+      "sha256": "e5a32ebe8065d0671d1c35197e38fb18044527f17cd8b0f7c76e791823687495",
+      "body": "pub fn <fieldDescriptor.snakeBooleanNegativePredicateExpr>(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::eq(\"<fieldDescriptor.rustStorageFieldName>\", false));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "fieldDescriptor.isBool"
+      ],
+      "start_line": 1729,
+      "end_line": 1732,
+      "sha256": "742dab7efc216f82723c56a4e11092268c2c4df669c812d215f7698a9f35b6b5",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "fieldDescriptor.isBool"
+      ],
+      "start_line": 1734,
+      "end_line": 1737,
+      "sha256": "7f8def7e4f9a3841ebba90dcc32eefebeb6c3ec5d2dde228efb76ef228b405e3",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_not_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>",
+      "requirement": "PP07",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1740,
+      "end_line": 1751,
+      "sha256": "1c8bfd7acd1cca35585ccc1438024e79bdd49422de4d15047e8706fafca07eb2",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>(\n        mut self,\n        operator: FieldOperator,\n        values: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(field_operator_expr(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            operator,\n            values.into_iter().map(Into::into).collect(),\n        ));\n        self\n    }"
+    },
+    {
+      "name": "create_<fieldDescriptor.rustStorageMemberName>_criteria",
+      "requirement": "PP07",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1753,
+      "end_line": 1762,
+      "sha256": "988ca48bd07cee35c0b6ffcfbf4a074822b50793b0f8dc0c516659e387bef411",
+      "body": "pub fn create_<fieldDescriptor.rustStorageMemberName>_criteria(\n        operator: FieldOperator,\n        values: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Expr {\n        field_operator_expr(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            operator,\n            values.into_iter().map(Into::into).collect(),\n        )\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1764,
+      "end_line": 1767,
+      "sha256": "3e6e4b50975d7784bb93ebb285c4d429a0f069d31f08fa0a23dac8f4f4862873",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::eq(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_not",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1771,
+      "end_line": 1774,
+      "sha256": "ac00ae1a06f70ce808a0fa4c472e32f87552e4dced428ece1936326eb6f57180",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_not(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::ne(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_greater_than",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1777,
+      "end_line": 1780,
+      "sha256": "5a2294d3ee3f7ffc1be8d5eb0ea9a4b20d0fe644249fcb0770e4358e39ebe940",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_greater_than(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::gt(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_greater_than_or_equal_to",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1782,
+      "end_line": 1785,
+      "sha256": "9e2287273250630985dac6fe31bd7c00013b0acaad27eab4a4788c83357832f7",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_greater_than_or_equal_to(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::gte(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_less_than",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1787,
+      "end_line": 1790,
+      "sha256": "82eacef7cf6dc0d3a4792d5ea1589b23819ccf134e75032a9bc2e37568285894",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_less_than(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::lt(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_less_than_or_equal_to",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1792,
+      "end_line": 1795,
+      "sha256": "65d411131abcbdd3a432a13ca095d4b4bf1e8e1f569e48b296cc75565944f7b2",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_less_than_or_equal_to(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::lte(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_between",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1797,
+      "end_line": 1804,
+      "sha256": "4e451e64faef41f8f1204cba4022c5f7ced63f341bd7a541b6a39017eed9161b",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_between(\n        mut self,\n        lower: impl Into\\<teaql_core::Value\\>,\n        upper: impl Into\\<teaql_core::Value\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::between(\"<fieldDescriptor.rustStorageFieldName>\", lower, upper));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_between_range",
+      "requirement": "PP10",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1806,
+      "end_line": 1816,
+      "sha256": "48a4923acce692738d44417678818a2068aa342e308ee0d15de745322dbe547e",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_between_range\\<T\\>(mut self, range: DateRange\\<T\\>) -> Self\n    where\n        T: Into\\<teaql_core::Value\\>,\n    {\n        self.query = self.query.and_filter(Expr::between(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            range.start,\n            range.end,\n        ));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_in",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1819,
+      "end_line": 1828,
+      "sha256": "63da45e7e4be2dd27db9b73fcbfe04f5e59dac9bb844b3d941209567e0eac1f4",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_in(\n        mut self,\n        values: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::in_list(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            values.into_iter().map(Into::into),\n        ));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_not_in",
+      "requirement": "PP08",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)"
+      ],
+      "start_line": 1830,
+      "end_line": 1839,
+      "sha256": "d67f7679ffde5410bd46d056ba5d97cfcaad3df502c46bd0a08117825bd51610",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_not_in(\n        mut self,\n        values: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::not_in_list(\n            \"<fieldDescriptor.rustStorageFieldName>\",\n            values.into_iter().map(Into::into),\n        ));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_contain<fieldDescriptor.rustAttributePredicateSuffixExpr>",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1842,
+      "end_line": 1845,
+      "sha256": "8d9cb0a305129a0d4bfa4a78090531956b99a9d471075118755ef8f874605615",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_contain<fieldDescriptor.rustAttributePredicateSuffixExpr>(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::contain(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_not_contain<fieldDescriptor.rustAttributePredicateSuffixExpr>",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1847,
+      "end_line": 1850,
+      "sha256": "ce741bdeddd2364fc392d65bb9cea2d25c7dd7ccfa8dddd019b919389682906d",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_not_contain<fieldDescriptor.rustAttributePredicateSuffixExpr>(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::not_contain(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_start<fieldDescriptor.rustAttributePredicateSuffixExpr>_with",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1852,
+      "end_line": 1855,
+      "sha256": "99822cfc37a75f8bea14696dd1651660c382b819940799dcd27c89e6da08fbb9",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_start<fieldDescriptor.rustAttributePredicateSuffixExpr>_with(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::begin_with(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_not_start<fieldDescriptor.rustAttributePredicateSuffixExpr>_with",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1857,
+      "end_line": 1860,
+      "sha256": "3a6d9b641c84446e4b8d9be644f3a9df67a996f808baeab438231f940add000e",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_not_start<fieldDescriptor.rustAttributePredicateSuffixExpr>_with(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::not_begin_with(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_end<fieldDescriptor.rustAttributePredicateSuffixExpr>_with",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1862,
+      "end_line": 1865,
+      "sha256": "ede5c64d860002d723cfddf6cc7274439665936e55da14cf62e4ca2385e2e7e3",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_end<fieldDescriptor.rustAttributePredicateSuffixExpr>_with(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::end_with(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_not_end<fieldDescriptor.rustAttributePredicateSuffixExpr>_with",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1867,
+      "end_line": 1870,
+      "sha256": "468c7b6b9415c95e8b3f7eb12f727241fb37d145ae7c9e8fd067a380b887b47c",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_not_end<fieldDescriptor.rustAttributePredicateSuffixExpr>_with(mut self, value: impl Into\\<String\\>) -> Self {\n        self.query = self.query.and_filter(Expr::not_end_with(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_sound<fieldDescriptor.rustAttributePredicateSuffixExpr>_like",
+      "requirement": "PP09",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "fieldDescriptor.isString && !fieldDescriptor.isText && !fieldDescriptor.isPassword"
+      ],
+      "start_line": 1872,
+      "end_line": 1875,
+      "sha256": "3f9310a52e79fa868491b4f21a5ce42e80f052def8db2bb7e26a5cc2cc419019",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_sound<fieldDescriptor.rustAttributePredicateSuffixExpr>_like(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::sound_like(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_before",
+      "requirement": "PP10",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1878,
+      "end_line": 1881,
+      "sha256": "6ab468e6a9a397578bf7dbcccb6bdec974505703c79f465416c6779be1bcc847",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_before(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::lt(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_after",
+      "requirement": "PP10",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1883,
+      "end_line": 1886,
+      "sha256": "db941d0fce595a5b6068499c8216f8712483f6463c53f8032b6d8e79d974d424",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_after(mut self, value: impl Into\\<teaql_core::Value\\>) -> Self {\n        self.query = self.query.and_filter(Expr::gt(\"<fieldDescriptor.rustStorageFieldName>\", value));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1888,
+      "end_line": 1891,
+      "sha256": "742dab7efc216f82723c56a4e11092268c2c4df669c812d215f7698a9f35b6b5",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_unknown(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "<fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known",
+      "requirement": "PP05",
+      "guards": [
+        "!fieldDescriptor.isVersion",
+        "NOT (fieldDescriptor.isBusinessId)",
+        "NOT (fieldDescriptor.isBool)",
+        "!fieldDescriptor.isId"
+      ],
+      "start_line": 1895,
+      "end_line": 1898,
+      "sha256": "7f8def7e4f9a3841ebba90dcc32eefebeb6c3ec5d2dde228efb76ef228b405e3",
+      "body": "pub fn <fieldDescriptor.rustAttributePredicatePrefixExpr>_is_known(mut self) -> Self {\n        self.query = self.query.and_filter(Expr::is_not_null(\"<fieldDescriptor.rustStorageFieldName>\"));\n        self\n    }"
+    },
+    {
+      "name": "order_by_<fieldDescriptor.rustStorageMemberName>_asc",
+      "requirement": "PP11",
+      "guards": [],
+      "start_line": 1905,
+      "end_line": 1908,
+      "sha256": "754c39353de268e596eb34b00e8a02f835e532b0c4a7125c5466f48a15914ae4",
+      "body": "pub fn order_by_<fieldDescriptor.rustStorageMemberName>_asc(mut self) -> Self {\n        self.query = self.query.order_asc(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "order_by_<fieldDescriptor.rustStorageMemberName>_desc",
+      "requirement": "PP11",
+      "guards": [],
+      "start_line": 1910,
+      "end_line": 1913,
+      "sha256": "828a9f5a64485bcb80deb3f7c8d5696fb5f519a56a409bc5b90e23b6be784d1d",
+      "body": "pub fn order_by_<fieldDescriptor.rustStorageMemberName>_desc(mut self) -> Self {\n        self.query = self.query.order_desc(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "order_by_<fieldDescriptor.rustStorageMemberName>_asc_using_gbk",
+      "requirement": "PP11",
+      "guards": [],
+      "start_line": 1915,
+      "end_line": 1918,
+      "sha256": "ac046c22536caa69405b8376e883f45d1450e3ac234fca3923cff0b0fb60254a",
+      "body": "pub fn order_by_<fieldDescriptor.rustStorageMemberName>_asc_using_gbk(mut self) -> Self {\n        self.query = self.query.order_gbk_asc(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    },
+    {
+      "name": "order_by_<fieldDescriptor.rustStorageMemberName>_desc_using_gbk",
+      "requirement": "PP11",
+      "guards": [],
+      "start_line": 1920,
+      "end_line": 1923,
+      "sha256": "0d0eda84f895e827bfc9f7770a53bb538f36e74da97793ff9698c401cc24c729",
+      "body": "pub fn order_by_<fieldDescriptor.rustStorageMemberName>_desc_using_gbk(mut self) -> Self {\n        self.query = self.query.order_gbk_desc(\"<fieldDescriptor.rustStorageFieldName>\");\n        self\n    }"
+    }
+  ],
+  "cpp_source": "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java",
+  "cpp_helpers": [
+    {
+      "name": "sourceNumericField",
+      "start_line": 2585,
+      "end_line": 2589,
+      "sha256": "6ed12fff0fb6532189f8915cf3f67fc7f26c67f3277ad173ed43745435546d31",
+      "body": "  private static boolean sourceNumericField(FieldDescriptor field) {\n    String value = field.getAttributeValue(\"isNumber\");\n    return value == null || value.isEmpty() ? field.isNumber() : sourceTemplateFlag(field, \"isNumber\");\n  }\n\n"
+    },
+    {
+      "name": "queryFieldCriteria",
+      "start_line": 1984,
+      "end_line": 2034,
+      "sha256": "47a4ce5885bf6dd1ab30f78e3213d54d86c0a72cba842b19b980ea74753f3ce7",
+      "body": "  private void queryFieldCriteria(StringBuilder out, String request, FieldDescriptor fd) {\n    if (fd.isVersion() || fd.isBoolean() || fd.isObjectProperty() || CppBusinessIdMetadata.isBusinessId(fd)) {\n      return;\n    }\n    String prefix = camel(identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd)));\n    String field = quote(canonical(fd));\n    String rangeTemplate = \"template <std::ranges::input_range Inputs> requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>> \";\n    String scalarTemplate = \"template <class Input> requires std::constructible_from<Value, Memory, const Input&> \";\n    if (baseType(fd).equals(\"String\") && !fd.getBooleanAttribute(\"isText\") && !fd.getBooleanAttribute(\"isPassword\")) {\n      String soundName = camel(identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd)\n          + \"Sound\" + FieldDescriptorNaming.attributePredicateSuffixExpr(fd) + \"Like\"));\n      fluent(out, request, scalarTemplate, soundName, \"const Input& value\", \"value\",\n          \"query_.andFilter(Expr::sound_like(memory_resource(), \" + field + \", value));\");\n    }\n    for (String[] comparison : List.of(new String[]{\"Is\", \"eq\"}, new String[]{\"IsNot\", \"ne\"},\n        new String[]{\"GreaterThan\", \"gt\"}, new String[]{\"GreaterThanOrEqualTo\", \"gte\"},\n        new String[]{\"LessThan\", \"lt\"}, new String[]{\"LessThanOrEqualTo\", \"lte\"})) {\n      if (fd.isId() && !comparison[0].equals(\"Is\") && !comparison[0].equals(\"IsNot\")) { continue; }\n      fluent(out, request, scalarTemplate, prefix + comparison[0], \"const Input& value\", \"value\",\n          \"query_.andFilter(Expr::\" + comparison[1] + \"(memory_resource(), \" + field + \", value));\");\n    }\n    if (!fd.isId()) {\n      String betweenTemplate = \"template <class Lower, class Upper> requires std::constructible_from<Value, Memory, const Lower&> && std::constructible_from<Value, Memory, const Upper&> \";\n      fluent(out, request, betweenTemplate, prefix + \"Between\", \"const Lower& lower, const Upper& upper\", \"lower, upper\",\n          \"query_.andFilter(Expr::between(memory_resource(), \" + field + \", lower, upper));\");\n    }\n    for (String suffix : List.of(\"In\", \"NotIn\")) {\n      fluent(out, request, rangeTemplate, prefix + suffix,\n          \"Inputs&& inputs\", \"std::forward<Inputs>(inputs)\",\n          \"query_.filterField(\" + field + \", request::FieldOperator::\" + suffix\n              + \", std::forward<Inputs>(inputs));\");\n    }\n    fluent(out, request, rangeTemplate, prefix,\n        \"request::FieldOperator op, Inputs&& inputs\", \"op, std::forward<Inputs>(inputs)\",\n        \"query_.filterField(\" + field + \", op, std::forward<Inputs>(inputs));\");\n    line(out, rangeTemplate + \"Ref<Expr> \" + camel(\"create_\" + fieldName(fd) + \"_criteria\")\n        + \"(request::FieldOperator op, Inputs&& inputs) const { return query_.createFieldCriteria(\"\n        + field + \", op, std::forward<Inputs>(inputs)); }\");\n    if (!fd.isId()) {\n      String valueTemplate = \"template <class T> requires std::constructible_from<Value, Memory, const T&> \";\n      fluent(out, request, valueTemplate, prefix + \"BetweenRange\",\n          \"const request::DateRange<T>& range\", \"range\",\n          \"query_.andFilter(Expr::between(memory_resource(), \" + field + \", range.start, range.end));\");\n      for (String suffix : List.of(\"Before\", \"After\")) {\n        fluent(out, request, valueTemplate, prefix + suffix, \"const T& value\", \"value\",\n            \"query_.andFilter(Expr::\" + (suffix.equals(\"Before\") ? \"lt\" : \"gt\")\n            + \"(memory_resource(), \" + field + \", value));\");\n      }\n    }\n  }\n\n"
+    },
+    {
+      "name": "queryField",
+      "start_line": 2035,
+      "end_line": 2249,
+      "sha256": "e766801be0608025433de37d2a4a81bc4759ce7eef909c2d056acc3d1ff19d6e",
+      "body": "  private void queryField(StringBuilder out, String request, FieldDescriptor fd) {\n    String member = fieldName(fd), canonical = quote(canonical(fd));\n    String prefix = identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd));\n    for (Candidate candidate : candidates(fd)) {\n      for (boolean negative : List.of(false, true)) {\n        String method = prefix + (negative ? \"_is_not_\" : \"_is_\")\n            + candidate.getRustCandidateMethodValue();\n        line(out, request + \"& \" + method\n            + \"() { selection.and_filter(Expr::\" + (negative ? \"ne\" : \"eq\")\n            + \"(memory_resource(), \" + canonical + \", \"\n            + candidateLiteral(fd, candidate) + \")); return *this; }\");\n      }\n    }\n    line(\n        out,\n        request\n            + \"& select_\"\n            + member\n            + \"() { selection.project(\"\n            + canonical\n            + \"); return *this; }\");\n    if (!fd.isId() && !fd.isVersion()) {\n      fieldAdapter(out, request, camel(\"project_\" + member), \"\", \"\", \"query_.select(\" + canonical + \");\");\n      fieldAdapter(out, request, camel(\"select_\" + member + \"_raw\"), \"std::string_view sql\", \"sql\", \"query_.selectRaw(\" + canonical + \", sql);\");\n      fieldAdapter(out, request, camel(\"select_\" + member + \"_unsafe_raw\"), \"request::UnsafeRawSqlSegment sql\", \"std::move(sql)\", \"query_.selectUnsafeRaw(\" + canonical + \", std::move(sql));\");\n      if (!fd.isObjectProperty()) {\n        fieldAdapter(out, request, camel(\"unselect_\" + member), \"\", \"\", \"query_.unselect(\" + canonical + \");\");\n      }\n      if (fd.isObjectProperty()) {\n        fieldAdapter(out, request, camel(\"unselect_\" + relationName(fd)), \"\", \"\", \"query_.unselectRelation(\" + canonical + \", \" + quote(relationName(fd)) + \");\");\n      }\n      if (sourceNumericField(fd)) {\n        fieldAdapter(out, request, camel(\"select_\" + member + \"_with_function\"), \"AggregateFunction function\", \"function\", \"query_.selectWithFunction(\" + canonical + \", \" + canonical + \", function);\");\n        fieldAdapter(out, request, camel(\"select_\" + member + \"_as_with_function\"), \"std::string_view alias, AggregateFunction function\", \"alias, function\", \"query_.selectWithFunction(\" + canonical + \", alias, function);\");\n      }\n    }\n    for (String direction : List.of(\"asc\", \"desc\")) {\n      line(\n          out,\n          request\n              + \"& order_by_\"\n              + member\n              + \"_\"\n              + direction\n              + \"() { selection.order_\"\n              + direction\n              + \"(\"\n              + canonical\n              + \"); return *this; }\");\n    }\n    for (String direction : List.of(\"asc\", \"desc\")) {\n      line(out, request + \"& order_by_\" + member + \"_\" + direction + \"_using_gbk() { selection.order_gbk_\" + direction + \"(\" + canonical + \"); return *this; }\");\n    }\n    if (fd.isBoolean()) {\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.snakeBooleanPredicateExpr(fd))\n              + \"() { selection.and_filter(Expr::eq(memory_resource(), \"\n              + canonical\n              + \", true)); return *this; }\");\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.snakeBooleanNegativePredicateExpr(fd))\n              + \"() { selection.and_filter(Expr::eq(memory_resource(), \"\n              + canonical\n              + \", false)); return *this; }\");\n    }\n    for (String[] pair :\n        List.of(\n            new String[] {\"is\", \"eq\"},\n            new String[] {\"is_not\", \"ne\"},\n            new String[] {\"greater_than\", \"gt\"},\n            new String[] {\"greater_than_or_equal_to\", \"gte\"},\n            new String[] {\"less_than\", \"lt\"},\n            new String[] {\"less_than_or_equal_to\", \"lte\"})) {\n      line(\n          out,\n          request\n              + \"& \"\n              + prefix\n              + \"_\"\n              + pair[0]\n              + \"(\"\n              + predicateType(fd)\n              + \" value) { selection.and_filter(Expr::\"\n              + pair[1]\n              + \"(memory_resource(), \"\n              + canonical\n              + \", generated_detail::encode(memory_resource(), value))); return *this; }\");\n    }\n    line(\n        out,\n        request\n            + \"& \"\n            + prefix\n            + \"_between(\"\n            + predicateType(fd)\n            + \" lower, \"\n            + predicateType(fd)\n            + \" upper) { selection.and_filter(Expr::between(memory_resource(), \"\n            + canonical\n            + \", generated_detail::encode(memory_resource(), lower),\"\n            + \" generated_detail::encode(memory_resource(), upper))); return *this; }\");\n    for (String suffix : List.of(\"in\", \"not_in\")) {\n      line(\n          out,\n          request\n              + \"& \"\n              + prefix\n              + \"_\"\n              + suffix\n              + \"(std::span<const \"\n              + (CppBusinessIdMetadata.isBusinessId(fd) ? applicationType(fd) : baseType(fd))\n              + \"> inputs) { auto r = memory_resource(); Vector<Value> values(r); for (const auto&\"\n              + \" value : inputs) { values.emplace_back(generated_detail::encode(r, value)); }\"\n              + \" selection.and_filter(Expr::in_list(r, \"\n              + canonical\n              + \", values, \"\n              + suffix.equals(\"not_in\")\n              + \")); return *this; }\");\n    }\n    String aggregateMember = fd.isObjectProperty() ? relationName(fd) : member;\n    fieldAdapter(out, request, camel(\"group_by_\" + aggregateMember), \"\", \"\",\n        \"query_.groupBy(\" + canonical + \");\");\n    fieldAdapter(out, request, camel(\"group_by_\" + aggregateMember + \"_as\"), \"std::string_view alias\", \"alias\",\n        \"query_.groupBy(\" + canonical + \"); query_.selectAs(\" + canonical + \", alias);\");\n    fieldAdapter(out, request, camel(\"group_by_\" + aggregateMember + \"_with_function\"),\n        \"std::string_view alias, AggregateFunction function\", \"alias, function\",\n        \"query_.groupBy(\" + canonical + \"); query_.aggregateWithFunction(\" + canonical + \", alias, function);\");\n    fieldAdapter(out, request, camel(\"count_\" + aggregateMember), \"\", \"\",\n        \"query_.aggregateCountField(\" + canonical + \", \" + quote(aggregateMember + \"_count\") + \");\");\n    fieldAdapter(out, request, camel(\"count_\" + aggregateMember + \"_as\"), \"std::string_view alias\", \"alias\",\n        \"query_.aggregateCountField(\" + canonical + \", alias);\");\n    if (!fd.isObjectProperty()) {\n      for (String method : List.of(\"sum\", \"avg\", \"min\", \"max\")) {\n        fieldAdapter(out, request, camel(method + \"_\" + member), \"\", \"\",\n            \"query_.\" + camel(\"aggregate_\" + method) + \"(\" + canonical + \", \" + quote(method + \"_\" + member) + \");\");\n        fieldAdapter(out, request, camel(method + \"_\" + member + \"_as\"), \"std::string_view alias\", \"alias\",\n            \"query_.\" + camel(\"aggregate_\" + method) + \"(\" + canonical + \", alias);\");\n      }\n      if (sourceNumericField(fd)) {\n        for (String[] method : List.of(\n            new String[]{\"standard_deviation\", \"aggregateStddev\", \"stdDev\"},\n            new String[]{\"square_root_of_population_standard_deviation\", \"aggregateStddevPop\", \"stdDevPop\"},\n            new String[]{\"sample_variance\", \"aggregateVarSamp\", \"varSamp\"},\n            new String[]{\"sample_population_variance\", \"aggregateVarPop\", \"varPop\"})) {\n          fieldAdapter(out, request, camel(method[0] + \"_\" + member), \"\", \"\",\n              \"query_.\" + method[1] + \"(\" + canonical + \", \" + quote(method[2] + \"_\" + member) + \");\");\n          fieldAdapter(out, request, camel(method[0] + \"_\" + member + \"_as\"), \"std::string_view alias\", \"alias\",\n              \"query_.\" + method[1] + \"(\" + canonical + \", alias);\");\n        }\n      }\n    }\n    if (baseType(fd).equals(\"String\")) {\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.stringContainsPredicateExpr(fd))\n              + \"(std::string_view value) { selection.and_filter(Expr::contain(memory_resource(), \"\n              + canonical\n              + \", value)); return *this; }\");\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.StringStartsWithPredicateExpr(fd))\n              + \"(std::string_view value) {\"\n              + \" selection.and_filter(Expr::begin_with(memory_resource(), \"\n              + canonical\n              + \", value)); return *this; }\");\n      line(\n          out,\n          request\n              + \"& \"\n              + identifier(FieldDescriptorNaming.StringEndsWithPredicateExpr(fd))\n              + \"(std::string_view value) { selection.and_filter(Expr::end_with(memory_resource(), \"\n              + canonical\n              + \", value)); return *this; }\");\n    }\n    if (baseType(fd).equals(\"String\") && !CppBusinessIdMetadata.isBusinessId(fd)\n        && !fd.getBooleanAttribute(\"isText\") && !fd.getBooleanAttribute(\"isPassword\")) {\n      for (String[] method : List.of(\n          new String[]{\"NotContain\", \"not_contain\", \"\"},\n          new String[]{\"NotStart\", \"not_begin_with\", \"With\"},\n          new String[]{\"NotEnd\", \"not_end_with\", \"With\"},\n          new String[]{\"Sound\", \"sound_like\", \"Like\"})) {\n        String methodName = identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd)\n            + method[0] + FieldDescriptorNaming.attributePredicateSuffixExpr(fd) + method[2]);\n        line(out, request + \"& \" + methodName + \"(std::string_view value) { selection.and_filter(Expr::\"\n            + method[1] + \"(memory_resource(), \" + canonical + \", value)); return *this; }\");\n      }\n    }\n    Set<String> candidateNames = new HashSet<>();\n    for (Candidate candidate : candidates(fd)) {\n      candidateNames.add(camel(prefix + \"_is_\" + candidate.getRustCandidateMethodValue()));\n      candidateNames.add(camel(prefix + \"_is_not_\" + candidate.getRustCandidateMethodValue()));\n    }\n    // Source Unknown/Known denote SQL NULL availability. Keep established C++\n    // Null/NotNull aliases only when a real candidate does not occupy that name.\n    for (String[] method : List.of(new String[]{\"is_unknown\", \"is_null\"},\n        new String[]{\"is_known\", \"is_not_null\"}, new String[]{\"is_null\", \"is_null\"},\n        new String[]{\"is_not_null\", \"is_not_null\"})) {\n      if (!candidateNames.contains(camel(prefix + \"_\" + method[0]))) {\n        line(out, request + \"& \" + prefix + \"_\" + method[0]\n            + \"() { selection.and_filter(Expr::\" + method[1] + \"(memory_resource(), \"\n            + canonical + \")); return *this; }\");\n      }\n    }\n  }\n\n"
+    }
+  ],
+  "notice": "Complete source/guard review index, not semantic acceptance or proof from counts."
+}

@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 192,
+  "models": 2,
+  "profiles": {
+    "native": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 58: recursive_attachment_helpers_rust_parity\n1/1 Test #58: recursive_attachment_helpers_rust_parity ...   Passed    0.50 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.52 sec\n",
+      "sha256": "1dd87bc346e2248d614a4b7a00ecb965dc0485157ac73966e1d17f7db75207a7"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 868: module_recursive_attachment_helpers_rust_parity\n1/1 Test #868: module_recursive_attachment_helpers_rust_parity ...   Passed    0.54 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.56 sec\n",
+      "sha256": "87f5565ab7ea8e1a8995f93baa0807f3c977c8ff20ad8ce6c3733864d97b2598"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 58: recursive_attachment_helpers_rust_parity\n1/1 Test #58: recursive_attachment_helpers_rust_parity ...   Passed    1.33 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   1.35 sec\n",
+      "sha256": "226bd03a5d8f365f7a8d33b10e2982ed68c2bbd896e676c0ec336e9769d5b510"
+    }
+  },
+  "source_registry_versions_preserved": true,
+  "source_registry_checksums_preserved": true,
+  "original_generated_files_changed": false,
+  "production_runtime_changed": false,
+  "producer_changed": false,
+  "normalization": "none",
+  "projection": "Public state only; private composition-error diagnostics and later Save/SQL are outside this observer.",
+  "default_pmr_disabled": true,
+  "explicit_global_output_copy": true,
+  "actual_user_deletion": true,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "canonical_bodies": 546,
+  "format_cpp_count": 1373,
+  "hashes": {
+    "tests/parity/recursive_attachment_helpers_5_0_6.rs": "f29a4015e35b8181e08d63e818c40dc840c337f002863d2108d5046781b16fdf",
+    "tests/parity/recursive_attachment_helpers_probe.cpp": "dacb11be5e1507f786125f3ffd8d51be2555ac91125c74bcd4675457ad27fd3b",
+    "tests/parity/compare_recursive_attachment_helpers_5_0_6.py": "13d16a854b1d5c86eb940c7a8e951859bdf15ba7332c666abe3216d9c3e4985e",
+    "tests/parity/rust_recursive_attachment_helpers_5_0_6/Cargo.toml": "48c8fe3c3faebdd8538cdd5e721488d59ea614ba2e3941fa77f26d278877fa07",
+    "tests/parity/rust_recursive_attachment_helpers_5_0_6/Cargo.lock": "c7dbd43610db2a1fbeb3c474dbdd7e902c36912b8418889fb0890523a45cd356",
+    "tests/parity/recursive_attachment_helpers_5_0_6_cases.json.gz": "fcd3bbb0bb01d0cf2e0d5cca7db276366bc1859095ecbd56a244169beed6c0fe",
+    "tests/generator/parity/relations_rust/PROVENANCE.json": "08d08f6a10be0799e5244ef10beaa622a1ce606dc311eb1f77ca1cb46579883c",
+    "docs/parity/entity_helper_source_closure_5_0_6.json": "06078c6d12597364b3b53abb1481d21dfdcf056ea0a274be80ea6a8179cdae2e",
+    "modules/contracts.json": "de3c51e9c87efcff8d34453042f181e304e16e1eda52378282e255e14a63731b"
+  }
+}

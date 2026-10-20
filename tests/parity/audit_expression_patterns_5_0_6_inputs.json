@@ -1,0 +1,1402 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Source-classified pattern, condition, loop, match, struct and operand candidates; candidate names are not expected outcomes.",
+  "expressions": [
+    "if let Some(x) = value {x}",
+    "if let A | B = value {} else {}",
+    "if let (x, y) = pair {x}",
+    "if (Thing { value: 1 }).value == 1 {}",
+    "if function(Thing { value: 1 }) {}",
+    "while flag {}",
+    "while let Some(x) = value {}",
+    "while let _ = next() {break}",
+    "for x in values {}",
+    "for (x, y) in pairs {}",
+    "for x in .. {}",
+    "for x in 1.. {}",
+    "for x in iterator(Thing {value: 1}) {}",
+    "'label: for x in values {break 'label}",
+    "'label: while flag {continue 'label}",
+    "match value {_ => 1}",
+    "match value {Some(x) => x, None => 0,}",
+    "match value {Some(x) if x > 0 => x, _ => 0}",
+    "match value {Some(x) => {x} None => {0}}",
+    "match value {Some(x) => if flag {1} else {2} None => 0}",
+    "match function(Thing {value: 1}) {_ => 1}",
+    "Thing {value: 1}",
+    "Thing {value}",
+    "Thing {0: value}",
+    "Thing {value: if flag {1} else {2}, ..base}",
+    "Thing {..value}",
+    "Thing {..value,}",
+    "Thing {..}",
+    "<Thing as Trait>::Item {value: 1}",
+    "let Some(x) = value",
+    "let _ = Thing {value: 1}",
+    "if let Thing {value: x, ..} = value {x}",
+    "if let &Some(ref mut x) = value {}",
+    "if let head @ Some(x) = value {}",
+    "if let [head, tail @ ..] = values {}",
+    "if let | A | B = value {}",
+    "match value {0..=10 => 1, _ => 0}",
+    "if let Some((x, y)) = value {Thing {value: x}}",
+    "{while flag {} 1}",
+    "{for x in values {} 1}",
+    "{match value {_ => {}} 1}",
+    "match value {_ => async {} _ => 1}",
+    "match value {_ => (1) _ => 2}",
+    "match value {_ => {}.method() _ => 2}",
+    "if let = value {}",
+    "if let Some(,) = value {}",
+    "if let x + y = value {}",
+    "while {}",
+    "while let Some(x) = {}",
+    "while let = value {}",
+    "for in values {}",
+    "for x values {}",
+    "for (x y) in values {}",
+    "for x in {}",
+    "match {}",
+    "match value {=> 1}",
+    "match value {_ =>}",
+    "match value {_ => 1 +, _ => 0}",
+    "match value {_ if => 1}",
+    "match value {_ => 1 _ => 2}",
+    "match value {Some(,) => 1}",
+    "Thing {value:}",
+    "Thing {value: 1 other: 2}",
+    "Thing {1}",
+    "Thing {..value, other: 1}",
+    "Thing {..value, ..other}",
+    "Thing {value: 1 +}",
+    "let = value",
+    "let Some(,) = value",
+    "let x + y = value",
+    "let Some(x) =",
+    "if let if = value {}",
+    "if let _ @ Some(x) = value {}",
+    "match value {0 @ x => 1}",
+    "if let x @ = value {}",
+    "if let Some(x,) = value {}",
+    "if let () = value {}",
+    "if let (x,) = value {}",
+    "match value {Thing {value, ..} => value}",
+    "match value {_ => const {1} _ => 2}",
+    "match value {_ => unsafe {1} _ => 2}",
+    "match value {_ => ignored!{} _ => 2}"
+  ],
+  "cases": [
+    [
+      "pattern_candidate_0_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let Some(x) = value {x}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_0_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let Some(x) = value {x}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_0_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let Some(x) = value {x}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_0_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let Some(x) = value {x}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_1_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let A | B = value {} else {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_1_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let A | B = value {} else {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_1_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let A | B = value {} else {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_1_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let A | B = value {} else {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_2_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let (x, y) = pair {x}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_2_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let (x, y) = pair {x}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_2_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let (x, y) = pair {x}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_2_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let (x, y) = pair {x}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_3_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if (Thing { value: 1 }).value == 1 {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_3_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if (Thing { value: 1 }).value == 1 {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_3_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if (Thing { value: 1 }).value == 1 {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_3_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if (Thing { value: 1 }).value == 1 {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_4_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if function(Thing { value: 1 }) {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_4_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if function(Thing { value: 1 }) {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_4_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if function(Thing { value: 1 }) {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_4_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if function(Thing { value: 1 }) {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_5_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=while flag {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_5_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=while flag {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_5_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=while flag {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_5_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=while flag {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_6_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=while let Some(x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_6_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=while let Some(x) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_6_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=while let Some(x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_6_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=while let Some(x) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_7_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=while let _ = next() {break}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_7_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=while let _ = next() {break}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_7_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=while let _ = next() {break}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_7_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=while let _ = next() {break}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_8_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for x in values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_8_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for x in values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_8_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for x in values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_8_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for x in values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_9_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for (x, y) in pairs {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_9_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for (x, y) in pairs {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_9_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for (x, y) in pairs {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_9_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for (x, y) in pairs {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_10_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for x in .. {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_10_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for x in .. {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_10_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for x in .. {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_10_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for x in .. {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_11_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for x in 1.. {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_11_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for x in 1.. {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_11_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for x in 1.. {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_11_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for x in 1.. {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_12_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for x in iterator(Thing {value: 1}) {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_12_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for x in iterator(Thing {value: 1}) {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_12_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for x in iterator(Thing {value: 1}) {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_12_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for x in iterator(Thing {value: 1}) {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_13_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len='label: for x in values {break 'label}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_13_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len='label: for x in values {break 'label}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_13_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int='label: for x in values {break 'label}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_13_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int='label: for x in values {break 'label}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_14_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len='label: while flag {continue 'label}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_14_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len='label: while flag {continue 'label}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_14_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int='label: while flag {continue 'label}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_14_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int='label: while flag {continue 'label}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_15_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_15_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_15_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_15_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_16_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Some(x) => x, None => 0,}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_16_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Some(x) => x, None => 0,}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_16_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Some(x) => x, None => 0,}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_16_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Some(x) => x, None => 0,}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_17_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Some(x) if x > 0 => x, _ => 0}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_17_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Some(x) if x > 0 => x, _ => 0}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_17_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Some(x) if x > 0 => x, _ => 0}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_17_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Some(x) if x > 0 => x, _ => 0}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_18_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Some(x) => {x} None => {0}}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_18_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Some(x) => {x} None => {0}}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_18_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Some(x) => {x} None => {0}}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_18_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Some(x) => {x} None => {0}}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_19_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Some(x) => if flag {1} else {2} None => 0}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_19_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Some(x) => if flag {1} else {2} None => 0}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_19_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Some(x) => if flag {1} else {2} None => 0}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_19_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Some(x) => if flag {1} else {2} None => 0}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_20_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match function(Thing {value: 1}) {_ => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_20_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match function(Thing {value: 1}) {_ => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_20_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match function(Thing {value: 1}) {_ => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_20_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match function(Thing {value: 1}) {_ => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_21_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {value: 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_21_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {value: 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_21_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {value: 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_21_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {value: 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_22_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_22_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_22_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_22_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_23_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {0: value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_23_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {0: value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_23_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {0: value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_23_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {0: value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_24_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {value: if flag {1} else {2}, ..base}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_24_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {value: if flag {1} else {2}, ..base}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_24_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {value: if flag {1} else {2}, ..base}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_24_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {value: if flag {1} else {2}, ..base}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_25_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {..value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_25_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {..value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_25_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {..value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_25_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {..value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_26_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {..value,}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_26_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {..value,}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_26_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {..value,}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_26_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {..value,}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_27_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {..}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_27_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {..}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_27_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {..}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_27_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {..}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_28_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=<Thing as Trait>::Item {value: 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_28_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=<Thing as Trait>::Item {value: 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_28_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=<Thing as Trait>::Item {value: 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_28_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=<Thing as Trait>::Item {value: 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_29_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=let Some(x) = value, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_29_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=let Some(x) = value, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_29_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=let Some(x) = value, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_29_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=let Some(x) = value, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_30_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=let _ = Thing {value: 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_30_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=let _ = Thing {value: 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_30_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=let _ = Thing {value: 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_30_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=let _ = Thing {value: 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_31_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let Thing {value: x, ..} = value {x}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_31_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let Thing {value: x, ..} = value {x}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_31_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let Thing {value: x, ..} = value {x}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_31_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let Thing {value: x, ..} = value {x}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_32_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let &Some(ref mut x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_32_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let &Some(ref mut x) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_32_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let &Some(ref mut x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_32_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let &Some(ref mut x) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_33_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let head @ Some(x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_33_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let head @ Some(x) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_33_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let head @ Some(x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_33_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let head @ Some(x) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_34_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let [head, tail @ ..] = values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_34_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let [head, tail @ ..] = values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_34_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let [head, tail @ ..] = values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_34_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let [head, tail @ ..] = values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_35_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let | A | B = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_35_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let | A | B = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_35_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let | A | B = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_35_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let | A | B = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_36_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {0..=10 => 1, _ => 0}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_36_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {0..=10 => 1, _ => 0}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_36_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {0..=10 => 1, _ => 0}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_36_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {0..=10 => 1, _ => 0}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_37_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let Some((x, y)) = value {Thing {value: x}}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_37_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let Some((x, y)) = value {Thing {value: x}}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_37_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let Some((x, y)) = value {Thing {value: x}}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_37_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let Some((x, y)) = value {Thing {value: x}}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_38_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len={while flag {} 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_38_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len={while flag {} 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_38_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int={while flag {} 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_38_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int={while flag {} 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_39_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len={for x in values {} 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_39_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len={for x in values {} 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_39_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int={for x in values {} 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_39_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int={for x in values {} 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_40_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len={match value {_ => {}} 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_40_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len={match value {_ => {}} 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_40_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int={match value {_ => {}} 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_40_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int={match value {_ => {}} 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_41_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => async {} _ => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_41_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => async {} _ => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_41_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => async {} _ => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_41_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => async {} _ => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_42_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => (1) _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_42_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => (1) _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_42_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => (1) _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_42_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => (1) _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_43_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => {}.method() _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_43_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => {}.method() _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_43_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => {}.method() _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_43_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => {}.method() _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_44_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_44_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_44_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_44_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_45_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let Some(,) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_45_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let Some(,) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_45_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let Some(,) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_45_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let Some(,) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_46_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let x + y = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_46_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let x + y = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_46_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let x + y = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_46_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let x + y = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_47_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=while {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_47_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=while {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_47_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=while {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_47_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=while {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_48_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=while let Some(x) = {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_48_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=while let Some(x) = {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_48_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=while let Some(x) = {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_48_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=while let Some(x) = {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_49_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=while let = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_49_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=while let = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_49_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=while let = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_49_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=while let = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_50_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for in values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_50_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for in values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_50_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for in values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_50_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for in values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_51_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for x values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_51_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for x values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_51_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for x values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_51_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for x values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_52_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for (x y) in values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_52_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for (x y) in values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_52_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for (x y) in values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_52_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for (x y) in values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_53_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for x in {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_53_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for x in {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_53_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for x in {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_53_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for x in {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_54_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_54_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_54_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_54_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_55_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {=> 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_55_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {=> 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_55_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {=> 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_55_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {=> 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_56_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ =>}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_56_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ =>}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_56_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ =>}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_56_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ =>}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_57_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => 1 +, _ => 0}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_57_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => 1 +, _ => 0}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_57_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => 1 +, _ => 0}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_57_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => 1 +, _ => 0}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_58_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ if => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_58_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ if => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_58_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ if => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_58_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ if => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_59_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => 1 _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_59_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => 1 _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_59_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => 1 _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_59_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => 1 _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_60_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Some(,) => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_60_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Some(,) => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_60_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Some(,) => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_60_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Some(,) => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_61_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {value:}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_61_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {value:}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_61_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {value:}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_61_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {value:}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_62_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {value: 1 other: 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_62_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {value: 1 other: 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_62_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {value: 1 other: 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_62_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {value: 1 other: 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_63_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_63_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_63_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_63_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_64_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {..value, other: 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_64_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {..value, other: 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_64_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {..value, other: 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_64_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {..value, other: 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_65_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {..value, ..other}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_65_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {..value, ..other}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_65_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {..value, ..other}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_65_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {..value, ..other}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_66_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {value: 1 +}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_66_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {value: 1 +}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_66_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {value: 1 +}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_66_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {value: 1 +}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_67_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=let = value, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_67_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=let = value, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_67_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=let = value, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_67_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=let = value, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_68_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=let Some(,) = value, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_68_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=let Some(,) = value, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_68_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=let Some(,) = value, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_68_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=let Some(,) = value, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_69_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=let x + y = value, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_69_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=let x + y = value, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_69_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=let x + y = value, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_69_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=let x + y = value, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_70_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=let Some(x) =, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_70_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=let Some(x) =, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_70_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=let Some(x) =, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_70_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=let Some(x) =, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_71_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let if = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_71_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let if = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_71_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let if = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_71_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let if = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_72_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let _ @ Some(x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_72_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let _ @ Some(x) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_72_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let _ @ Some(x) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_72_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let _ @ Some(x) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_73_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {0 @ x => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_73_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {0 @ x => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_73_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {0 @ x => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_73_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {0 @ x => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_74_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let x @ = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_74_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let x @ = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_74_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let x @ = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_74_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let x @ = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_75_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let Some(x,) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_75_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let Some(x,) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_75_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let Some(x,) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_75_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let Some(x,) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_76_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let () = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_76_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let () = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_76_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let () = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_76_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let () = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_77_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let (x,) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_77_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let (x,) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_77_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let (x,) = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_77_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let (x,) = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_78_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Thing {value, ..} => value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_78_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Thing {value, ..} => value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_78_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Thing {value, ..} => value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_78_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Thing {value, ..} => value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_79_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => const {1} _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_79_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => const {1} _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_79_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => const {1} _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_79_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => const {1} _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_80_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => unsafe {1} _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_80_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => unsafe {1} _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_80_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => unsafe {1} _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_80_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => unsafe {1} _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_81_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => ignored!{} _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_81_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => ignored!{} _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_candidate_81_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => ignored!{} _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_candidate_81_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => ignored!{} _ => 2}, audit_mask_fields=\"name\""
+    ]
+  ]
+}

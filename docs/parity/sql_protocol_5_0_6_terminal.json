@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "current protocol constructors, valid execution and cached SQLite HAVING qualified; complete goal remains open",
+  "observations": 6987,
+  "historical_constructor_rejections": 3473,
+  "explicit_intent_controls": 3481,
+  "negative_controls": 33,
+  "actual_cached_sqlite_scenarios": 8,
+  "actual_cached_sqlite_statements": 24,
+  "profiles": {
+    "native": {
+      "passed": 8,
+      "total": 8,
+      "tests": [
+        "executor_defaults_scope_rust_parity",
+        "sql_executor_kind_rust_parity",
+        "sql_query_executor_contracts",
+        "sql_cached_partition_rust_parity",
+        "sql_stream_rust_parity",
+        "sql_transaction_rust_parity",
+        "sql_execution_rust_parity",
+        "sql_query_rust_parity"
+      ],
+      "log": "/tmp/teaql_sql_protocol_native_tests_506.log",
+      "log_sha256": "b38c5293b617a3162ac1f823ca1b60dca81b5fc7c3d5f7ced330dbbea74f669f"
+    },
+    "modules": {
+      "passed": 8,
+      "total": 8,
+      "tests": [
+        "module_sql_query_executor_contracts",
+        "module_executor_defaults_scope_rust_parity",
+        "module_sql_stream_rust_parity",
+        "module_sql_executor_kind_rust_parity",
+        "module_sql_cached_partition_rust_parity",
+        "module_sql_query_rust_parity",
+        "module_sql_execution_rust_parity",
+        "module_sql_transaction_rust_parity"
+      ],
+      "log": "/tmp/teaql_sql_protocol_modules_tests_506.log",
+      "log_sha256": "5d1e7e364e430b2dda5e1fa801b9f32151a5027dd1df717c0306836e3e9b7154"
+    },
+    "sanitize": {
+      "passed": 8,
+      "total": 8,
+      "tests": [
+        "sql_cached_partition_rust_parity",
+        "sql_query_executor_contracts",
+        "executor_defaults_scope_rust_parity",
+        "sql_executor_kind_rust_parity",
+        "sql_stream_rust_parity",
+        "sql_execution_rust_parity",
+        "sql_transaction_rust_parity",
+        "sql_query_rust_parity"
+      ],
+      "log": "/tmp/teaql_sql_protocol_sanitize_tests_506.log",
+      "log_sha256": "b1f6ccf74cfc4754371a4b7ec053406e7ef6868251dde243041a675d58a132a1"
+    }
+  },
+  "canonical_bodies": 465,
+  "catalog_exports": 1479,
+  "formatted_handwritten_cpp": 1354,
+  "source_reproduction": true,
+  "module_source_reproduction": true,
+  "previous_sql_family_observations_reproduced": 7040,
+  "previous_explicit_execution_regression": {
+    "passed": 1,
+    "total": 1
+  },
+  "production_sha256": {
+    "teaql_sql/src/query_plan.cpp": "1c087f3db9f266e6302f18e65393551179edd9d8121af503da0e5b4ef3911722"
+  },
+  "record_sha256": {
+    "docs/parity/sql_protocol_5_0_6.json": "9a71bb2e443ae54da571405d9c7910d12c1118e47071ae522e062c4e4ca6da24"
+  },
+  "previous_baseline_manifest_unchanged": true,
+  "sanitizer_leak_scanning": false,
+  "full_native_rerun": false,
+  "mips_qemu_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "remaining_recorded_baseline_failures": 37
+}

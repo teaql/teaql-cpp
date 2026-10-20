@@ -1,0 +1,996 @@
+[
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "id"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label",
+      "id",
+      "version"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read typed aggregate rows",
+    "purpose": "Verify private typed aggregate decoding"
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": null,
+    "purpose": null,
+    "dynamic": false
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": null,
+    "purpose": null,
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": null,
+    "dynamic": false
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": null,
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": null,
+    "purpose": "Verify private typed aggregate decoding",
+    "dynamic": false
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": null,
+    "purpose": "Verify private typed aggregate decoding",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "",
+    "purpose": "Verify private typed aggregate decoding",
+    "dynamic": false
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "",
+    "purpose": "Verify private typed aggregate decoding",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "",
+    "dynamic": false
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "   ",
+    "purpose": "Verify private typed aggregate decoding",
+    "dynamic": false
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "   ",
+    "purpose": "Verify private typed aggregate decoding",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "   ",
+    "dynamic": false
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read typed aggregate rows",
+    "purpose": "   ",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 1,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 1,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 1,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 1,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 1,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 1,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 0,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 1,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 1,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 1,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 1,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 1,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 1,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": false,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": null,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 0,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  },
+  {
+    "projection": [
+      "label"
+    ],
+    "rows": 2,
+    "failure": true,
+    "fail_model": 1,
+    "comment": "Read dynamic typed aggregate rows",
+    "purpose": "Verify typed aggregate carrier boundary",
+    "dynamic": true
+  }
+]

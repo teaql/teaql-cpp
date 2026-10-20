@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "observations": 384,
+  "rounds": 576,
+  "original_source_unchanged": true,
+  "source_manifest_sha256": "8cf3708a8d2763a636f2060973dba9f7a2c3de86c1f54cabca5209ca03c2bcda",
+  "source_lock_sha256": "b7a4e9e71cdfdcf6e843d52b18e9cf2722e34a6edab7ec622a0784d819b6cc7e",
+  "reference_lock_sha256": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+  "source_registry_versions_preserved": true,
+  "bootstrap_checker_hooks": 600,
+  "ordinary_checker_hooks": 840,
+  "ordinary_save_rejections": 0,
+  "corpus_sha256": "e08b94274ccb6d6d3a31e290bd0e333f4887452f6cddaad42f4ca15dadb85c9b",
+  "normalization": "none",
+  "full_capability_acceptance": false
+}

@@ -1,4 +1,5 @@
 #pragma once
+#include <teaql/runtime/detail/data_service/diagnostic_query.hpp>
 #include <teaql/runtime/detail/data_service/id_set_page.hpp>
 #include <teaql/runtime/detail/data_service/dynamic_loading.hpp>
 #include <teaql/runtime/detail/read_hydration.hpp>
@@ -132,6 +133,13 @@ public:
                 if (plans_) {
                     root_ = &context().template make<EntityRuntimeState>();
                     graph_ = &context().template make<EntityGraphBuilder>();
+                    if (!compact_) {
+                        auto embedded = attach_flat_relation_graph(
+                            context(), query_.entity, rows_, *root_, *graph_);
+                        if (!embedded) {
+                            return entity(std::move(embedded).error());
+                        }
+                    }
                     phase_ = Phase::QueryPlans;
                 } else {
                     auto plans = traced_->relation_plans();
@@ -329,8 +337,16 @@ auto EntityDataService<E>::fetch_enhanced_entities_with_relation_aggregates(
     const PurposedSelectQuery& query, std::span<const RelationAggregate> aggregates) const
     -> DataServiceOperationResult<SmartList<T>, DataServiceError<Error>>& {
     using R = Result<SmartList<T>, DataServiceError<Error>>;
-    return make_operation<R, detail::EnhancedEntitiesOperation<E, T>>(
-        memory_resource(), *this, query.as_query(), aggregates);
+    return detail::execute_scoped_purposed_query<SmartList<T>>(
+        *this,
+        query,
+        aggregates,
+        +[](const EntityDataService<E>& service,
+            const SelectQuery& actual,
+            std::span<const RelationAggregate> items) -> auto& {
+            return make_operation<R, detail::EnhancedEntitiesOperation<E, T>>(
+                service.memory_resource(), service, actual, items);
+        });
 }
 
 template <class E>

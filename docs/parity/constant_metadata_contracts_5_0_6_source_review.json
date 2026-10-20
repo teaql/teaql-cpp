@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "contracts": [
+    "Domain.getRootDescriptors filters structural roots and excludes constants; RustDomainNaming.rustGeneratedBootstrap requires exactly one ordinary root.",
+    "Template rendering suppresses invalid-root bootstrap attribute evaluation and emits an incomplete runtime; the full original crate detects the missing module factory.",
+    "ObjectDescriptor.getIdentityConstants requires an identifier field and nonempty candidates, splits candidate and ID columns independently and supplies missing IDs through Candidate.",
+    "FieldDescriptor.getCandidateValue splits its own candidate/sample column and returns string 1 when the requested line is missing; missing XML cells are not reconstructed by observers.",
+    "Comma values, absent identifiers and declaration-derived candidates retain the original parser metadata before C++ recipe emission."
+  ],
+  "source_sha256": {
+    ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/meta/Domain.java": "e7bb04214eeb80551591393421140355374b05f919ce37a2b6ddf552940aefe5",
+    ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java": "5490f3465f4bdebf36b080cc4560e9852fa8e0befe770a5fe27b4a1f3d1f59a6",
+    ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java": "4328467bc0950f545fac46a11cd1329647b05a8f30fb61055125009ec593cc2e",
+    ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/naming/RustDomainNaming.java": "14112576e1eec2ea38c46c733f8efa6e384b99cf7ad1686c8156f1c3a7fadbbd",
+    ".reference/teaql_code_gen/generator/src/main/resources/generator/rust-lib-core/runtime/index.stg": "590214978302c3af88142572b7a54a129d0fcd5b303cc57d51a0e954f508fe1e"
+  }
+}

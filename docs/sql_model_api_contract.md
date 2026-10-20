@@ -156,3 +156,15 @@ Next work: complete the fresh comparisons/ownership checks, review the complete
 SQLite rendering and compiler/executor/log composition evidence, and refresh
 all affected consumers at the final worktree state. Source-group and Stage 3
 acceptance remain open.
+
+## Separate current 5.0.6 complete source receipts
+
+The preceding 5.0.5 evidence remains historical. The complete current
+[SB01-SB14/BT01-BT11 binding review](sql_bindings_source_review_5_0_6.md) and
+[ST01-ST15/SR01-SR06 type/renderer review](sql_types_source_review_5_0_6.md)
+now have independent source acceptance receipts. Each retains its complete
+body/model/test responsibilities, explicit C++ ownership/interface adaptations,
+exact source comparisons and canonical imported contracts. The renderer profile
+remains SQLite-only; source/reference execution of another discriminator is not
+native provider support. These receipts do not accept complete dialect/executor/
+provider, protected runtime callers or whole G13/G14/G17/P0-P7.

@@ -1,0 +1,25 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "hand_edited": false,
+  "model": "tests/generator/parity/relation_identity_contracts/model.xml",
+  "model_sha256": "27150aedc257211a98ef60717fc50b47204a072ea9eee5cebb06f88d0ffe406c",
+  "files": {
+    "CMakeLists.txt": "902d14fc1a699c904011304526b8769728f95ee6efa5a3ae20d08493f76c0844",
+    "OBSERVATION.json": "5132dd5d67f1342ff33c921aad533a852e8179d358922eee947fd3f04d08c851",
+    "ASSIST.md": "99dba36d5f33eb57dd48764541aad585cbd28fc1ff822ce6cd1cd236cfd036bc",
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "include/cpp_relation_identities.hpp": "14290ef27c72936000a238dd04cd44f4afe01f12e0881bf0840489db7bb08567",
+    "include/cpp_relation_identities/runtime.hpp": "d2f61844f06520d765f9cf0e54cb34abf1748def67887f50f9760c2abfe61382",
+    "include/cpp_relation_identities/expressions.hpp": "3781a708f079045ec3aee7ae16fdcbd80b535a08fff6c864036a96c907dbe109",
+    "include/cpp_relation_identities/support.hpp": "abd4b8113a29b7c6ba86a1e2592887aecb1edc08e446b2df6d1f215a997bbf13",
+    "include/cpp_relation_identities/queries.hpp": "ce5a854ff69ddeee4d01ddd7f175482a6594968d6e78009213fa5a23074af2c7",
+    "include/cpp_relation_identities/sample_data.hpp": "c002924cae5af9c8e9b4964dda1a852878288343de578378184a54967ff79254",
+    "include/cpp_relation_identities/checkers.hpp": "e7cd0e2cdd7399a23c99d183b5c9c7d48f47d57cd1b350c46ee89859c7183b32",
+    "include/cpp_relation_identities/models.hpp": "e4f0c54b16de2374cc43c2b17f676af84e5624e39295448c43667e8cb09d821b"
+  },
+  "formatter": "18.1.8",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "73403df300dc5aa8d7da083d2388fd845d76bde34a99c16fe8476ea05f2d66d9"
+  }
+}

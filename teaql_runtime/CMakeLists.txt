@@ -10,6 +10,7 @@ add_library(teaql_runtime
     src/data_service/mutation_privacy.cpp
     src/entity_graph_decoder.cpp
     src/context/entity.cpp
+    src/context/json.cpp
     src/dynamic_fields.cpp
     src/entity_runtime.cpp
     src/graph.cpp
@@ -36,6 +37,8 @@ add_library(teaql_runtime
     src/data_store.cpp
     src/context/data_store.cpp
     src/generated_support.cpp
+    src/generated_runtime_config.cpp
+    src/generated_business_id_environment.cpp
     src/generated_dynamic_fields.cpp
     src/round_trip_reference_types.cpp
     src/round_trip_reference.cpp

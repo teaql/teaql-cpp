@@ -1,0 +1,6 @@
+{
+  "source": "tests/parity/rust_field_layout/src/bin/generated_dynamic_json_5_0_6.rs",
+  "copy": "tests/parity/rust_dynamic_json_base_5_0_6/src/bin/generated_dynamic_json_5_0_6.rs",
+  "sha256": "0b45c45946b24ce163d4f6c091d35d337e17beeec959ce77d9fa5ce03895ff00",
+  "byte_identical": true
+}

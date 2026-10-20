@@ -1,0 +1,65 @@
+{
+  "recorded_utc": "2026-10-14T16:29:47.143614+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Repair inherited dynamic JSON scalar/object lookup and inherited object-analysis/Assist omissions through existing canonical metadata adapter. Construction qualification, not SQL execution or complete capability acceptance.",
+  "initial_mismatches": 852,
+  "exact_original_native_constructions": 2656,
+  "successful_constructions": 2476,
+  "original_panics": 180,
+  "new_sql_execution_cases": 0,
+  "checks": {
+    "native": {
+      "passed": 3,
+      "selected": 3
+    },
+    "modules": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize": {
+      "passed": 1,
+      "selected": 1,
+      "leak_scanning": false
+    },
+    "compiler": {
+      "positive": 1,
+      "negative": 2
+    },
+    "java": {
+      "passed": 55,
+      "selected": 55
+    },
+    "cpp_workspaces": 24,
+    "cpp_generated_files": 288,
+    "sdk_fixtures": 44,
+    "sdk_generated_code_updates": 0,
+    "sdk_generated_assist_updates": 0,
+    "original_generated_files_with_provenance": 44,
+    "format_cpp_files": 1439,
+    "canonical_consumer_bodies": 647,
+    "module_exports": 1485
+  },
+  "generator_field_collection_sites_corrected": 5,
+  "runtime_functions_changed": false,
+  "original_or_historical_files_changed": false,
+  "file_sha256": {
+    "tests/parity/generated_dynamic_json_inheritance_probe.cpp": "90e059f5ed24a60e19900d298ef164f14e8f19f51686baca36ce3a22106d657e",
+    "tests/parity/compare_dynamic_json_inheritance_5_0_6.py": "80153628d405b4ca4bd45ebea93f56f1f41c5915b5628b7864f3d946be8f2ad1",
+    "tests/parity/rust_dynamic_json_inheritance_5_0_6/src/main.rs": "25d9a45f59728e2ae15cc19859ec24d80f89ecd98a1bf1edb5ee52e4d232c6f4",
+    "tests/parity/rust_dynamic_json_inheritance_5_0_6/Cargo.toml": "b68a9b3c479973f0d17374342090dcf98778b407be8277ecd2f1cedb27dab7d0",
+    "tests/parity/rust_dynamic_json_inheritance_5_0_6/Cargo.lock": "eaff1a5d97682696a47e44f4f90c0905f46d3553d58b717907a7d956c23c3a49",
+    "tests/parity/dynamic_json_inheritance_5_0_6_cases.json.gz": "2bb7b1d2d6078b71a7f66e4d6910650b24d1b50e21ba3b7a98336d96773ba523",
+    "tests/generated_inheritance_graph/manifest.json": "43f63f43e79be0c04500d68ab256c1ec707af734704ade808a632d7e57b94655",
+    "docs/parity/dynamic_json_inheritance_sdk_change_5_0_6.json": "6f62f7b849679038dff7111194a8a5286a94639efb88b11cb483d152ec3d1dd0"
+  },
+  "producer_sha256": "c8367df0a5b68ef6bd431552cd6bb1c5aa5be905a8b5282a3d03fa060b7e9784",
+  "raw_validation": "docs/parity/dynamic_json_inheritance_validation_5_0_6.json.gz",
+  "initial_failures": [
+    "852 original/native ignored inherited-field/path differences retained.",
+    "SDK producer provenance stale after generator correction; explicit refresh requires existing code equality.",
+    "Positive compiler stimulus JSON quote escaping corrected; initial syntax failure excluded."
+  ],
+  "complete_capability_acceptance": false,
+  "mips_or_physical_device_or_full_integration_run": false
+}

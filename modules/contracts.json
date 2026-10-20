@@ -79,6 +79,33 @@
     },
     {
       "package": "teaql_data_service",
+      "stem": "request_vector_tests",
+      "cases": [
+        {
+          "name": "request_vector_contracts",
+          "arguments": [
+            "tests/parity/teaql_data_service/data/request_intent_v1.json"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_data_service",
+      "stem": "data_service_request_source_probe",
+      "source": "tests/parity/data_service_request_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_data_service",
+      "stem": "data_service_model_probe",
+      "source": "tests/parity/data_service_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_data_service",
       "stem": "data_service_scope_tests",
       "cases": [
         {
@@ -200,6 +227,20 @@
           "name": "sql_transaction_execution_contracts",
           "arguments": [],
           "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "native_transaction_stream_tests",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_transaction_stream_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
         }
       ]
     },
@@ -885,11 +926,3665 @@
           ]
         }
       ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "json_hydration_probe",
+      "source": "tests/parity/json_hydration_probe.cpp",
+      "cases": [
+        {
+          "name": "json_hydration_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_json_hydration_probe",
+      "source": "tests/parity/generated_json_hydration_probe.cpp",
+      "cases": [
+        {
+          "name": "generated_json_hydration_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_inherited_json_probe",
+      "source": "tests/parity/generated_inherited_json_probe.cpp",
+      "cases": [
+        {
+          "name": "generated_inherited_json_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_json_graph_views_probe",
+      "source": "tests/parity/generated_json_graph_views_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_dynamic_storage_tests",
+      "source": "teaql_provider_sqlite/tests/dynamic_storage_tests.cpp",
+      "cases": [
+        {
+          "name": "sqlite_dynamic_storage_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_transport_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_transport_tests.cpp",
+      "cases": [
+        {
+          "name": "provider_sqlite_transport_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_audit_projection_probe",
+      "source": "tests/parity/dynamic_audit_projection_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "dynamic_save_audit_probe",
+      "source": "tests/parity/dynamic_save_audit_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_execution_probe",
+      "source": "tests/parity/generated_execution_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_execution_shapes_probe",
+      "source": "tests/parity/generated_execution_shapes_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_dynamic_json_inheritance_probe",
+      "source": "tests/parity/generated_dynamic_json_inheritance_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_dynamic_json_scalar_probe",
+      "source": "tests/parity/generated_dynamic_json_scalar_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_dynamic_json_domains_probe",
+      "source": "tests/parity/generated_dynamic_json_domains_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_dynamic_json_inherited_sql_probe",
+      "source": "tests/parity/generated_dynamic_json_inherited_sql_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_dynamic_json_privacy_probe",
+      "source": "tests/parity/generated_dynamic_json_privacy_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_dynamic_json_composition_probe",
+      "source": "tests/parity/generated_dynamic_json_composition_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_dynamic_json_persistent_probe",
+      "source": "tests/parity/generated_dynamic_json_persistent_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_dynamic_json_facets_probe",
+      "source": "tests/parity/generated_dynamic_json_facets_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "expression_diagnostic_text_probe",
+      "source": "tests/parity/expression_diagnostic_text_probe.cpp",
+      "cases": [
+        {
+          "name": "expression_diagnostic_text_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_constant_variants_probe",
+      "source": "tests/parity/generated_constant_variants_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_bootstrap_save_async_tests",
+      "source": "tests/generator/generated_bootstrap_save_async_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_bootstrap_save_async_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_dynamic_json_probe",
+      "source": "tests/parity/generated_dynamic_json_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "deferred_id_set_page_probe",
+      "source": "tests/parity/deferred_id_set_page_probe.cpp",
+      "cases": [
+        {
+          "name": "deferred_id_set_page_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "deferred_plain_page_probe",
+      "source": "tests/parity/deferred_plain_page_probe.cpp",
+      "cases": [
+        {
+          "name": "deferred_plain_page_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "deferred_continuous_page_probe",
+      "source": "tests/parity/deferred_continuous_page_probe.cpp",
+      "cases": [
+        {
+          "name": "deferred_continuous_page_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "derived_query_diagnostics_probe",
+      "source": "tests/parity/derived_query_diagnostics_probe.cpp",
+      "cases": [
+        {
+          "name": "derived_query_diagnostics_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "derived_query_composition_probe",
+      "source": "tests/parity/derived_query_composition_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "original_context_tests",
+      "source": "tests/parity/teaql_runtime/context.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "generated_support_tests",
+      "package": "teaql_runtime",
+      "source": "teaql_runtime/tests/generated_support_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_support_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "generated_support_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/generated_support_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_keys_tests",
+      "source": "teaql_runtime/tests/query_keys_tests.cpp",
+      "cases": [
+        {
+          "name": "query_keys_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_keys_probe",
+      "source": "tests/parity/query_keys_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_candidate_text_probe",
+      "source": "tests/parity/scalar_candidate_text_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_candidate_integer_probe",
+      "source": "tests/parity/scalar_candidate_integer_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_candidate_nullable_integer_probe",
+      "source": "tests/parity/scalar_candidate_nullable_integer_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_candidate_number_probe",
+      "source": "tests/parity/scalar_candidate_number_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_candidate_double_probe",
+      "source": "tests/parity/scalar_candidate_double_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_candidate_date_probe",
+      "source": "tests/parity/scalar_candidate_date_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_candidate_timestamp_probe",
+      "source": "tests/parity/scalar_candidate_timestamp_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_candidate_boolean_probe",
+      "source": "tests/parity/scalar_candidate_boolean_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_temporal_probe",
+      "source": "tests/parity/constant_temporal_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "clock_epoch_boundary_probe",
+      "source": "tests/parity/clock_epoch_boundary_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "type_configuration_equivalent_integer_probe",
+      "source": "tests/parity/type_configuration_equivalent_integer_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "type_configuration_equivalent_string_alias_probe",
+      "source": "tests/parity/type_configuration_equivalent_string_alias_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "type_configuration_field_parameter_probe",
+      "source": "tests/parity/type_configuration_field_parameter_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "type_configuration_numeric_alias_probe",
+      "source": "tests/parity/type_configuration_numeric_alias_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "type_configuration_string_alias_probe",
+      "source": "tests/parity/type_configuration_string_alias_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "type_configuration_unsigned_recipe_probe",
+      "source": "tests/parity/type_configuration_unsigned_recipe_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "bootstrap_conflict_probe",
+      "source": "tests/parity/bootstrap_conflict_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "bootstrap_extensions_probe",
+      "source": "tests/parity/bootstrap_extensions_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_metadata_missing_identifier_probe",
+      "source": "tests/parity/constant_metadata_missing_identifier_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_metadata_unknown_identifier_probe",
+      "source": "tests/parity/constant_metadata_unknown_identifier_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_metadata_no_candidates_probe",
+      "source": "tests/parity/constant_metadata_no_candidates_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_metadata_empty_identifier_value_probe",
+      "source": "tests/parity/constant_metadata_empty_identifier_value_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_metadata_missing_identifier_value_probe",
+      "source": "tests/parity/constant_metadata_missing_identifier_value_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_metadata_missing_seed_field_probe",
+      "source": "tests/parity/constant_metadata_missing_seed_field_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_metadata_comma_identifier_value_probe",
+      "source": "tests/parity/constant_metadata_comma_identifier_value_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_metadata_unicode_identifier_value_probe",
+      "source": "tests/parity/constant_metadata_unicode_identifier_value_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_topology_ordered_probe",
+      "source": "tests/parity/constant_topology_ordered_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_topology_reversed_probe",
+      "source": "tests/parity/constant_topology_reversed_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_topology_missing_target_one_probe",
+      "source": "tests/parity/constant_topology_missing_target_one_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_topology_foreign_value_one_probe",
+      "source": "tests/parity/constant_topology_foreign_value_one_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_topology_self_reference_required_probe",
+      "source": "tests/parity/constant_topology_self_reference_required_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "resource_bindings_probe",
+      "source": "tests/parity/resource_bindings_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_schema_probe",
+      "source": "tests/parity/sqlite_schema_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_decoding_checked_probe",
+      "source": "tests/parity/sqlite_decoding_checked_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_bindings_probe",
+      "source": "tests/parity/sqlite_bindings_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_error_model_probe",
+      "source": "tests/parity/sqlite_error_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_native_diagnostics_probe",
+      "source": "tests/parity/sqlite_native_diagnostics_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_simple_error_probe",
+      "source": "tests/parity/sqlite_simple_error_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_from_sql_error_probe",
+      "source": "tests/parity/sqlite_from_sql_error_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_dialect_helper_probe",
+      "source": "tests/parity/sql_dialect_helper_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_dialect_probe",
+      "source": "tests/parity/sql_dialect_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_data_service",
+      "stem": "sql_projection_scope_probe",
+      "source": "tests/parity/sql_projection_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_transport_probe",
+      "source": "tests/parity/sql_transport_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_schema_probe",
+      "source": "tests/parity/sql_schema_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_mutation_probe",
+      "source": "tests/parity/sql_mutation_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sql_grouped_partition_probe",
+      "source": "tests/parity/sql_grouped_partition_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_query_probe",
+      "source": "tests/parity/sql_query_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_stream_probe",
+      "source": "tests/parity/sql_stream_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_data_service",
+      "stem": "executor_defaults_scope_probe",
+      "source": "tests/parity/executor_defaults_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_execution_protocol_probe",
+      "source": "tests/parity/sql_execution_protocol_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sql_cached_partition_probe",
+      "source": "tests/parity/sql_cached_partition_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "chrono_value_probe",
+      "source": "tests/parity/chrono_value_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "timestamp_api_probe",
+      "source": "tests/parity/timestamp_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_data_service",
+      "stem": "system_time_probe",
+      "source": "tests/parity/system_time_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_data_service",
+      "stem": "system_time_arithmetic_scope_probe",
+      "source": "tests/parity/system_time_arithmetic_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "presentation_probe",
+      "source": "tests/parity/presentation_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "presentation_api_probe",
+      "source": "tests/parity/presentation_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_graph_api_probe",
+      "source": "tests/parity/core_graph_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "search_probe",
+      "source": "tests/parity/search_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_registry_probe",
+      "source": "tests/parity/runtime_registry_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_context_probe",
+      "source": "tests/parity/runtime_context_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_check_probe",
+      "source": "tests/parity/runtime_check_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "telemetry_probe",
+      "source": "tests/parity/telemetry_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "telemetry_model_scope_probe",
+      "source": "tests/parity/telemetry_model_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "registry_debug_scope_probe",
+      "source": "tests/parity/registry_debug_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "schema_runtime_probe",
+      "source": "tests/parity/schema_runtime_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "business_service_probe",
+      "source": "tests/parity/business_service_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_business_id_probe",
+      "source": "tests/parity/runtime_business_id_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "i18n_probe",
+      "source": "tests/parity/i18n_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "i18n_debug_scope_probe",
+      "source": "tests/parity/i18n_debug_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_runtime_probe",
+      "source": "tests/parity/entity_runtime_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "data_service_model_scope_probe",
+      "source": "tests/parity/data_service_model_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "typed_aggregate_scope_probe",
+      "source": "tests/parity/typed_aggregate_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "typed_aggregate_tests",
+      "cases": [
+        {
+          "name": "typed_aggregate_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_query_tests",
+      "cases": [
+        {
+          "name": "dynamic_query_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_log_probe",
+      "source": "tests/parity/runtime_log_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "audit_event_probe",
+      "source": "tests/parity/audit_event_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_logging_probe",
+      "source": "tests/parity/context_logging_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "log_formatter_probe",
+      "source": "tests/parity/log_formatter_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "log_manager_probe",
+      "source": "tests/parity/log_manager_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_event_probe",
+      "source": "tests/parity/context_event_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_log_tests",
+      "cases": [
+        {
+          "name": "runtime_log_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_event_tests",
+      "cases": [
+        {
+          "name": "context_event_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_id_model_probe",
+      "source": "tests/parity/runtime_id_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "unified_buffer_clone_probe",
+      "source": "tests/parity/unified_buffer_clone_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "locking_probe",
+      "source": "tests/parity/locking_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "inmemory_probe",
+      "source": "tests/parity/inmemory_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_reference_probe",
+      "source": "tests/parity/entity_reference_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "round_trip_reference_probe",
+      "source": "tests/parity/round_trip_reference_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "decimal_probe",
+      "source": "tests/parity/decimal_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_query_probe",
+      "source": "tests/parity/entity_query_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_id_model_tests",
+      "cases": [
+        {
+          "name": "runtime_id_model_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "locking_tests",
+      "cases": [
+        {
+          "name": "context_locking_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "unified_buffer_clone_tests",
+      "cases": [
+        {
+          "name": "unified_buffer_clone_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "inherited_business_governed_probe",
+      "source": "tests/parity/inherited_business_governed_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "inherited_business_update_probe",
+      "source": "tests/parity/inherited_business_update_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_inherited_business_lifetime_tests",
+      "source": "tests/generator/generated_inherited_business_lifetime_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_inherited_business_lifetime_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "bootstrap_temporal_extensions_probe",
+      "source": "tests/parity/bootstrap_temporal_extensions_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_topology_extensions_ordered_probe",
+      "source": "tests/parity/constant_topology_extensions_ordered_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_topology_extensions_reversed_probe",
+      "source": "tests/parity/constant_topology_extensions_reversed_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "constant_topology_extensions_self_reference_required_probe",
+      "source": "tests/parity/constant_topology_extensions_self_reference_required_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "inherited_checker_helpers_document_probe",
+      "source": "tests/parity/inherited_checker_helpers_document_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "inherited_checker_helpers_intermediate_record_probe",
+      "source": "tests/parity/inherited_checker_helpers_intermediate_record_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "inherited_checker_helpers_invoice_probe",
+      "source": "tests/parity/inherited_checker_helpers_invoice_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "inherited_checker_helpers_receipt_probe",
+      "source": "tests/parity/inherited_checker_helpers_receipt_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "inherited_checker_helpers_special_invoice_probe",
+      "source": "tests/parity/inherited_checker_helpers_special_invoice_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_reverse_many_helpers_probe",
+      "source": "tests/parity/generated_reverse_many_helpers_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "entity_helper_entries_probe",
+      "source": "tests/parity/entity_helper_entries_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "entity_helper_entries_lifetime_tests",
+      "source": "tests/generator/entity_helper_entries_lifetime_tests.cpp",
+      "cases": [
+        {
+          "name": "entity_helper_entries_context_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "entity_constructor_helpers_probe",
+      "source": "tests/parity/entity_constructor_helpers_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "recursive_attachment_helpers_probe",
+      "source": "tests/parity/recursive_attachment_helpers_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_behavior_hooks_probe",
+      "source": "tests/parity/generated_behavior_hooks_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "protected_behavior_probe",
+      "source": "tests/parity/protected_behavior_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "inherited_business_extensions_probe",
+      "source": "tests/parity/inherited_business_extensions_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "checker_clock_text_probe",
+      "source": "tests/parity/checker_clock_text_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "checker_clock_scalars_probe",
+      "source": "tests/parity/checker_clock_scalars_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "checker_clock_composition_probe",
+      "source": "tests/parity/checker_clock_composition_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "initialized_snapshot_cache_probe",
+      "source": "tests/parity/initialized_snapshot_cache_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_wire_mapping_lifetime_tests",
+      "source": "tests/generator/generated_wire_mapping_lifetime_tests.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "expression_model_types_probe",
+      "source": "tests/parity/expression_model_types_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "expression_business_ids_probe",
+      "source": "tests/parity/expression_business_ids_probe.cpp",
+      "cases": [
+        {
+          "name": "expression_business_ids_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "inherited_sample_execution_probe",
+      "source": "tests/parity/inherited_sample_execution_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "sample_progress_probe",
+      "source": "tests/parity/sample_progress_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "sample_data_logging_tests",
+      "package": "teaql_runtime",
+      "source": "teaql_runtime/tests/sample_data_logging_tests.cpp",
+      "cases": [
+        {
+          "name": "sample_data_logging_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_request_state_probe",
+      "source": "tests/parity/generated_request_state_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_request_state_tests",
+      "source": "teaql_runtime/tests/generated_request_state_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_request_state_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_core_query_view_probe",
+      "source": "tests/parity/generated_core_query_view_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_core_query_view_tests",
+      "source": "teaql_runtime/tests/generated_core_query_view_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_core_query_view_context_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_scalar_membership_probe",
+      "source": "tests/parity/generated_scalar_membership_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_membership_range_tests",
+      "source": "teaql_runtime/tests/generated_membership_range_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_membership_range_context_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_scalar_comparison_probe",
+      "source": "tests/parity/generated_scalar_comparison_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_scalar_comparison_tests",
+      "source": "teaql_runtime/tests/generated_scalar_comparison_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_scalar_comparison_context_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_projection_text_probe",
+      "source": "tests/parity/generated_projection_text_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_projection_text_tests",
+      "source": "teaql_runtime/tests/generated_projection_text_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_projection_text_context_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_query_field_branches_probe",
+      "source": "tests/parity/generated_query_field_branches_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_query_field_extensions_probe",
+      "source": "tests/parity/generated_query_field_extensions_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_query_field_sql_probe",
+      "source": "tests/parity/generated_query_field_sql_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_type_match_ranges_probe",
+      "source": "tests/parity/generated_type_match_ranges_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_type_match_range_tests",
+      "source": "teaql_runtime/tests/generated_type_match_range_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_type_match_range_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_selection_scope_probe",
+      "source": "tests/parity/generated_selection_scope_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_enhancement_inputs_probe",
+      "source": "tests/parity/generated_enhancement_inputs_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "enhancement_input_tests",
+      "source": "teaql_runtime/tests/enhancement_input_tests.cpp",
+      "cases": [
+        {
+          "name": "enhancement_input_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_relation_selection_inputs_probe",
+      "source": "tests/parity/generated_relation_selection_inputs_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "relation_selection_input_tests",
+      "source": "teaql_runtime/tests/relation_selection_input_tests.cpp",
+      "cases": [
+        {
+          "name": "relation_selection_input_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_relation_analysis_inputs_probe",
+      "source": "tests/parity/generated_relation_analysis_inputs_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "relation_analysis_input_tests",
+      "source": "teaql_runtime/tests/relation_analysis_input_tests.cpp",
+      "cases": [
+        {
+          "name": "relation_analysis_input_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "embedded_graph_boundary_tests",
+      "source": "teaql_runtime/tests/embedded_graph_boundary_tests.cpp",
+      "cases": [
+        {
+          "name": "embedded_graph_null_facets_contracts",
+          "arguments": [
+            "null"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name": "embedded_graph_repeated_install_contracts",
+          "arguments": [
+            "repeat"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name": "embedded_graph_reserved_view_contracts",
+          "arguments": [
+            "reserve"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_analysis_adapter_inputs_probe",
+      "source": "tests/parity/generated_analysis_adapter_inputs_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_matching_statistics_inputs_probe",
+      "source": "tests/parity/generated_matching_statistics_inputs_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "matching_statistics_input_tests",
+      "source": "teaql_runtime/tests/matching_statistics_input_tests.cpp",
+      "cases": [
+        {
+          "name": "matching_statistics_input_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_matching_statistics_adapters_probe",
+      "source": "tests/parity/generated_matching_statistics_adapters_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "runtime_config_tests",
+      "package": "teaql_provider_sqlite",
+      "source": "teaql_runtime/tests/runtime_config_tests.cpp",
+      "cases": [
+        {
+          "name": "runtime_configuration_scope_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "service_runtime_error_tests",
+      "package": "teaql_provider_sqlite",
+      "source": "teaql_runtime/tests/service_runtime_error_tests.cpp",
+      "cases": [
+        {
+          "name": "service_runtime_error_scope_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "runtime_connection_tests",
+      "package": "teaql_provider_sqlite",
+      "source": "teaql_provider_sqlite/tests/runtime_connection_tests.cpp",
+      "cases": [
+        {
+          "name": "runtime_connection_scope_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "runtime_configuration_kernel_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/runtime_configuration_kernel_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "runtime_connection_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/runtime_connection_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "runtime_assembly_config_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/runtime_assembly_config_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "generated_runtime_configuration_tests",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/generator/generated_runtime_configuration_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_runtime_configuration_scope_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "generated_runtime_configuration_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/generated_runtime_configuration_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "generated_business_runtime_configuration_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/generated_business_runtime_configuration_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "generated_filename_configuration_tests",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/generator/generated_filename_configuration_tests.cpp",
+      "cases": []
+    },
+    {
+      "stem": "generated_schema_provider_tests",
+      "package": "teaql_runtime",
+      "source": "teaql_runtime/tests/generated_schema_provider_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_schema_provider_scope_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "stem": "generated_registry_schema_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/generated_registry_schema_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "generated_registry_scope_tests",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/generator/generated_registry_scope_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_registry_scope_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "runtime_schema_binding_tests",
+      "package": "teaql_provider_sqlite",
+      "source": "teaql_provider_sqlite/tests/runtime_schema_binding_tests.cpp",
+      "cases": [
+        {
+          "name": "runtime_schema_binding_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "stem": "business_sample_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/business_sample_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "catalog_sample_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/catalog_sample_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "custom_sample_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/custom_sample_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "sample_original_operand_tests",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/generator/sample_original_operand_tests.cpp",
+      "cases": [
+        {
+          "name": "sample_original_operand_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "stem": "sample_type_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/sample_type_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_predicate_execution_probe",
+      "source": "tests/parity/query_predicate_execution_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_alias_probe",
+      "source": "tests/parity/query_alias_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_projection_identity_tests",
+      "source": "tests/generator/query_projection_identity_tests.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "relation_identity_probe",
+      "source": "tests/parity/relation_identity_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "relation_identity_tests",
+      "source": "tests/generator/relation_identity_tests.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "relation_identity_kernel_tests",
+      "source": "tests/generator/relation_identity_kernel_tests.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "relation_graph_save_probe",
+      "source": "tests/parity/relation_graph_save_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "ledger_composition_tests",
+      "source": "tests/generator/ledger_composition_tests.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_diagnostic_tests",
+      "source": "tests/generator/scalar_diagnostic_tests.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "scalar_diagnostic_repair_probe",
+      "source": "tests/parity/scalar_diagnostic_repair_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "expression_entry_tests",
+      "source": "tests/generator/expression_entry_tests.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "expression_root_probe",
+      "source": "tests/parity/expression_root_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "composed_general_probe",
+      "source": "tests/parity/composed_general_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "query_result_marker_probe",
+      "source": "tests/parity/query_result_marker_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "general_query_guards_probe",
+      "source": "tests/parity/general_query_guards_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "business_id_lookups_probe",
+      "source": "tests/parity/business_id_lookups_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "business_id_lookup_tests",
+      "source": "tests/generator/business_id_lookup_tests.cpp",
+      "cases": [
+        {
+          "name": "business_id_lookup_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "deferred_facet_page_probe",
+      "source": "tests/parity/deferred_facet_page_probe.cpp",
+      "cases": [
+        {
+          "name": "deferred_facet_page_context_contracts",
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ],
+          "arguments": [
+            "--self-test"
+          ]
+        }
+      ],
+      "package": "teaql_provider_sqlite"
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "execution_context_binding_tests",
+      "source": "tests/generator/execution_context_binding_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_execution_binding_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "deferred_resource_replacement_probe",
+      "source": "tests/parity/deferred_resource_replacement_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "stream_shapes_probe",
+      "source": "tests/parity/stream_shapes_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "hot_execution_probe",
+      "source": "tests/parity/hot_execution_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "entry_lookup_probe",
+      "source": "tests/parity/entry_lookup_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "execution_result_models_probe",
+      "source": "tests/parity/execution_result_models_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "execution_options_probe",
+      "source": "tests/parity/execution_options_probe.cpp",
+      "cases": []
+    },
+    {
+      "stem": "generated_business_environment_probe",
+      "package": "teaql_provider_sqlite",
+      "source": "tests/parity/generated_business_environment_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_i18n_tests",
+      "source": "tests/generator/generated_i18n_tests.cpp",
+      "cases": [
+        {
+          "name": "generated_i18n_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "field_layout_tests",
+      "cases": [
+        {
+          "name": "field_layout_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "loaded_snapshot_tests",
+      "cases": [
+        {
+          "name": "loaded_snapshot_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "dynamic_carrier_tests",
+      "cases": [
+        {
+          "name": "dynamic_carrier_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "compact_row_api_tests",
+      "cases": [
+        {
+          "name": "compact_row_api_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "field_layout_probe",
+      "source": "tests/parity/field_layout_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "loaded_snapshot_probe",
+      "source": "tests/parity/loaded_snapshot_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_carrier_probe",
+      "source": "tests/parity/dynamic_carrier_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "readonly_schema_hash_probe",
+      "source": "tests/parity/readonly_schema_hash_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "compact_row_api_probe",
+      "source": "tests/parity/compact_row_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_dynamic_storage_probe",
+      "source": "tests/parity/sqlite_dynamic_storage_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_provider_probe",
+      "source": "tests/parity/dynamic_provider_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_provider_tests",
+      "source": "teaql_runtime/tests/dynamic_provider_tests.cpp",
+      "cases": [
+        {
+          "name": "dynamic_provider_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "dynamic_fields_tests",
+      "cases": [
+        {
+          "name": "dynamic_fields_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_data_service",
+      "stem": "dynamic_storage_tests",
+      "cases": [
+        {
+          "name": "dynamic_storage_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_ledger_tests",
+      "cases": [
+        {
+          "name": "dynamic_ledger_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_graph_save_tests",
+      "cases": [
+        {
+          "name": "dynamic_graph_save_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ],
+      "qualified_calls": [
+        "sql"
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_preflight_tests",
+      "cases": [
+        {
+          "name": "dynamic_preflight_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "dynamic_relation_tests",
+      "cases": [
+        {
+          "name": "dynamic_relation_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "commit_audit_transaction_tests",
+      "cases": [
+        {
+          "name": "commit_audit_transaction_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "transaction_scope_tests",
+      "cases": [
+        {
+          "name": "transaction_scope_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "dynamic_fields_probe",
+      "source": "tests/parity/dynamic_fields_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "dynamic_storage_probe",
+      "source": "tests/parity/dynamic_storage_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "dynamic_ledger_probe",
+      "source": "tests/parity/dynamic_ledger_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "dynamic_governance_probe",
+      "source": "tests/parity/dynamic_governance_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "dynamic_graph_debug_probe",
+      "source": "tests/parity/dynamic_graph_debug_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "dynamic_query_probe",
+      "source": "tests/parity/dynamic_query_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "document_model_debug_probe",
+      "source": "tests/parity/document_model_debug_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "document_round_trip_probe",
+      "source": "tests/parity/document_round_trip_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "document_service_async_probe",
+      "source": "tests/parity/document_service_async_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "document_providers_probe",
+      "source": "tests/parity/document_providers_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "reference_model_probe",
+      "source": "tests/parity/reference_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "reference_model_tests",
+      "source": "teaql_runtime/tests/reference_model_tests.cpp",
+      "cases": [
+        {
+          "name": "reference_model_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "original_round_trip_reference_tests",
+      "source": "tests/parity/teaql_runtime/round_trip_reference.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_round_trip_reference_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "transaction_scope_intent_probe",
+      "source": "tests/parity/transaction_scope_intent_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "request_trace_scope_tests",
+      "source": "teaql_runtime/tests/request_trace_scope_tests.cpp",
+      "cases": [
+        {
+          "name": "request_trace_scope_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_primitives_probe",
+      "source": "tests/parity/core_primitives_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "business_id_probe",
+      "source": "tests/parity/business_id_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_api_probe",
+      "source": "tests/parity/core_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_aux_debug_probe",
+      "source": "tests/parity/core_aux_debug_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "business_id_tests",
+      "cases": [
+        {
+          "name": "business_id_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_api_tests",
+      "cases": [
+        {
+          "name": "core_api_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "meta_api_tests",
+      "cases": [
+        {
+          "name": "meta_api_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "meta_api_probe",
+      "source": "tests/parity/meta_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_graph_api_tests",
+      "cases": [
+        {
+          "name": "core_graph_api_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "timestamp_api_tests",
+      "cases": [
+        {
+          "name": "timestamp_api_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_model_tests",
+      "cases": [
+        {
+          "name": "core_model_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "load_state_allocation_tests",
+      "cases": [
+        {
+          "name": "load_state_allocation_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "shared_state_source_tests",
+      "cases": [
+        {
+          "name": "shared_state_source_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "runtime_expression_tests",
+      "package": "teaql_runtime",
+      "source": "teaql_runtime/tests/entity_expression_tests.cpp",
+      "cases": [
+        {
+          "name": "runtime_entity_expression_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "stem": "generated_member_alias_probe",
+      "package": "teaql_runtime",
+      "source": "tests/parity/generated_member_alias_probe.cpp",
+      "cases": [
+        {
+          "name": "generated_member_alias_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_load_state_bulk_probe",
+      "source": "tests/parity/generated_load_state_bulk_probe.cpp",
+      "cases": [
+        {
+          "name": "generated_load_state_bulk_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "eval_indexed_probe",
+      "source": "tests/parity/eval_indexed_probe.cpp",
+      "cases": [
+        {
+          "name": "eval_indexed_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "eval_tests",
+      "source": "teaql_core/tests/eval_tests.cpp",
+      "cases": [
+        {
+          "name": "eval_context_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "eval_probe",
+      "source": "tests/parity/eval_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "entity_registration_api_tests",
+      "source": "teaql_core/tests/entity_registration_api_tests.cpp",
+      "cases": [
+        {
+          "name": "entity_registration_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "entity_registration_api_probe",
+      "source": "tests/parity/entity_registration_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "base_entity_api_tests",
+      "source": "teaql_core/tests/base_entity_api_tests.cpp",
+      "cases": [
+        {
+          "name": "base_entity_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "base_entity_api_probe",
+      "source": "tests/parity/base_entity_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "entity_debug_tests",
+      "source": "teaql_core/tests/entity_debug_tests.cpp",
+      "cases": [
+        {
+          "name": "entity_debug_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "entity_debug_probe",
+      "source": "tests/parity/entity_debug_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "entity_owned_api_tests",
+      "source": "teaql_core/tests/entity_owned_api_tests.cpp",
+      "cases": [
+        {
+          "name": "entity_owned_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "entity_defaults_api_probe",
+      "source": "tests/parity/entity_defaults_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "entity_source_probe",
+      "source": "tests/parity/entity_source_probe.cpp",
+      "cases": [
+        {
+          "name": "entity_source_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_shape_presentation_probe",
+      "source": "tests/parity/core_shape_presentation_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "entity_expression_tests",
+      "source": "teaql_core/tests/entity_expression_tests.cpp",
+      "cases": [
+        {
+          "name": "entity_expression_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_state_bridge_probe",
+      "source": "tests/parity/runtime_state_bridge_probe.cpp",
+      "cases": [
+        {
+          "name": "runtime_state_bridge_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "audited_auto_save_probe",
+      "source": "tests/parity/audited_auto_save_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_runtime_state_bridge_probe",
+      "source": "tests/parity/generated_runtime_state_bridge_probe.cpp",
+      "cases": [
+        {
+          "name": "generated_runtime_state_bridge_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "telemetry_tests",
+      "cases": [
+        {
+          "name": "telemetry_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_async_lease_probe",
+      "source": "tests/parity/sqlite_async_lease_probe.cpp",
+      "sqlite_fixture": true,
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_lease_binding_probe",
+      "source": "tests/parity/sqlite_lease_binding_probe.cpp",
+      "sqlite_fixture": true,
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_chunk_capacity_probe",
+      "source": "tests/parity/sqlite_chunk_capacity_probe.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "sqlite_chunk_capacity_contracts",
+          "arguments": [
+            "--contracts"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "original_provider_storage_tests",
+      "source": "tests/parity/teaql_provider_sqlite/storage.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "original_provider_storage_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "original_provider_schema_tests",
+      "source": "tests/parity/teaql_provider_sqlite/schema.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "original_provider_schema_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "original_provider_query_tests",
+      "source": "tests/parity/teaql_provider_sqlite/query_rows.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "original_provider_query_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "original_provider_transaction_tests",
+      "source": "tests/parity/teaql_provider_sqlite/transactions.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "original_provider_transaction_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_async_schedule_probe",
+      "source": "tests/parity/sqlite_async_schedule_probe.cpp",
+      "sqlite_fixture": true,
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_transport_probe",
+      "source": "tests/parity/sqlite_transport_probe.cpp",
+      "sqlite_fixture": true,
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "commit_audit_tests",
+      "cases": [
+        {
+          "name": "commit_audit_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "commit_audit_source_probe",
+      "source": "tests/parity/commit_audit_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_store_tests",
+      "cases": [
+        {
+          "name": "query_store_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_store_model_tests",
+      "cases": [
+        {
+          "name": "query_store_model_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "id_set_build_tests",
+      "cases": [
+        {
+          "name": "id_set_build_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_store_probe",
+      "source": "tests/parity/query_store_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_store_model_probe",
+      "source": "tests/parity/query_store_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "id_set_build_probe",
+      "source": "tests/parity/id_set_build_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "i18n_tests",
+      "cases": [
+        {
+          "name": "i18n_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_runtime_assembly_probe",
+      "source": "tests/parity/generated_runtime_assembly_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_sample_state_probe",
+      "source": "tests/parity/generated_sample_state_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_sample_execution_probe",
+      "source": "tests/parity/generated_sample_execution_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_sample_fields_probe",
+      "source": "tests/parity/generated_sample_fields_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_check_tests",
+      "cases": [
+        {
+          "name": "runtime_check_error_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "error_generic_tests",
+      "cases": [
+        {
+          "name": "error_generic_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_error_source_probe",
+      "source": "tests/parity/runtime_error_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_data_service",
+      "stem": "sql_log_probe",
+      "source": "tests/parity/sql_log_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_model_api_probe",
+      "source": "tests/parity/sql_model_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "sql_log_query_source_probe",
+      "source": "tests/parity/sql_log_query_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "audit_event_projection_probe",
+      "source": "tests/parity/audit_event_projection_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "log_privacy",
+      "source": "tests/parity/teaql_runtime/log_privacy.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_log_privacy_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "masking_contract_tests",
+      "source": "tests/parity/teaql_runtime/masking_contract_tests.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_masking_contracts",
+          "arguments": [
+            "tests/parity/teaql_runtime/data/masking_v1.tsv"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_logging_vectors",
+      "source": "tests/parity/teaql_runtime/logging_vectors.cpp",
+      "cases": [
+        {
+          "name": "context_logging_vectors_contracts",
+          "arguments": [
+            "tests/parity/teaql_runtime/data/sql_trace_path_v1.json"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "log_model_tests",
+      "cases": [
+        {
+          "name": "log_model_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "log_model_probe",
+      "source": "tests/parity/log_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "query_api_tests",
+      "cases": [
+        {
+          "name": "query_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "query_api_probe",
+      "source": "tests/parity/query_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "query_debug_probe",
+      "source": "tests/parity/query_debug_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "core_like_expression_source_probe",
+      "source": "tests/parity/core_like_expression_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "safe_expression_api_tests",
+      "cases": [
+        {
+          "name": "safe_expression_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "safe_expression_api_probe",
+      "source": "tests/parity/safe_expression_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "safe_expression_empty_source_probe",
+      "source": "tests/parity/safe_expression_empty_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "mutation_model_api_tests",
+      "cases": [
+        {
+          "name": "mutation_model_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "mutation_debug_tests",
+      "cases": [
+        {
+          "name": "mutation_debug_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "mutation_model_api_probe",
+      "source": "tests/parity/mutation_model_api_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "mutation_debug_probe",
+      "source": "tests/parity/mutation_debug_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "original_sql_binding_tests",
+      "source": "tests/parity/teaql_sql/binding_tests.cpp",
+      "cases": [
+        {
+          "name": "original_sql_binding_policy_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_bindings_source_probe",
+      "source": "tests/parity/sql_bindings_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "original_sql_rendering_tests",
+      "source": "tests/parity/teaql_sql/log_rendering_tests.cpp",
+      "cases": [
+        {
+          "name": "original_sql_log_rendering_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_types_probe",
+      "source": "tests/parity/sql_types_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "model_debug_probe",
+      "source": "tests/parity/model_debug_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "core_shape_presentation_tests",
+      "source": "teaql_core/tests/shape_presentation_tests.cpp",
+      "cases": [
+        {
+          "name": "core_shape_presentation_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "core_query_intent_source_probe",
+      "source": "tests/parity/core_query_intent_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_schema_builder_tests",
+      "source": "teaql_core/tests/query_schema_builder_tests.cpp",
+      "cases": [
+        {
+          "name": "query_schema_builder_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_schema_builder_probe",
+      "source": "tests/parity/query_schema_builder_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_full_state_tests",
+      "source": "teaql_core/tests/query_full_state_tests.cpp",
+      "cases": [
+        {
+          "name": "query_full_state_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "query_full_state_probe",
+      "source": "tests/parity/query_full_state_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "row_extend_error_probe",
+      "source": "tests/parity/row_extend_error_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "row_read_sidecar_probe",
+      "source": "tests/parity/row_read_sidecar_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "row_enhancement_probe",
+      "source": "tests/parity/row_enhancement_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "inmemory_source_probe",
+      "source": "tests/parity/inmemory_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "original_inmemory_tests",
+      "source": "tests/parity/teaql_runtime/inmemory_engine.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_inmemory_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "generated_support_source_probe",
+      "source": "tests/parity/generated_support_source_probe.cpp",
+      "cases": [
+        {
+          "name": "generated_support_source_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "schema_dynamic_source_probe",
+      "source": "tests/parity/schema_dynamic_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "schema_dynamic_tests",
+      "source": "teaql_runtime/tests/schema_dynamic_tests.cpp",
+      "cases": [
+        {
+          "name": "schema_dynamic_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "schema_runtime_tests",
+      "source": "teaql_runtime/tests/schema_runtime_tests.cpp",
+      "cases": [
+        {
+          "name": "schema_runtime_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_defaults_tests",
+      "source": "teaql_runtime/tests/context_defaults_tests.cpp",
+      "cases": [
+        {
+          "name": "context_defaults_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_defaults_probe",
+      "source": "tests/parity/context_defaults_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_model_tests",
+      "source": "teaql_runtime/tests/context_model_tests.cpp",
+      "cases": [
+        {
+          "name": "context_model_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_model_probe",
+      "source": "tests/parity/context_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_context_tests",
+      "source": "teaql_runtime/tests/runtime_context_tests.cpp",
+      "cases": [
+        {
+          "name": "runtime_context_resource_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "data_store_tests",
+      "source": "teaql_runtime/tests/data_store_tests.cpp",
+      "cases": [
+        {
+          "name": "data_store_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "data_store_probe",
+      "source": "tests/parity/data_store_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "checker_tests",
+      "source": "teaql_runtime/tests/checker_tests.cpp",
+      "cases": [
+        {
+          "name": "checker_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name": "checker_reentrant_close",
+          "arguments": [
+            "reentrant-close"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name": "checker_registration_reentrant_close",
+          "arguments": [
+            "registration-close"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name": "checker_typed_direct_reentrant_close",
+          "arguments": [
+            "typed-direct-close"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "checker_probe",
+      "source": "tests/parity/checker_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "internal_id_probe",
+      "source": "tests/parity/internal_id_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "entity_decoder_tests",
+      "source": "teaql_provider_sqlite/tests/entity_decoder_tests.cpp",
+      "cases": [
+        {
+          "name": "entity_decoder_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_decoder_probe",
+      "source": "tests/parity/entity_decoder_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "json_graph_decoder_probe",
+      "source": "tests/parity/json_graph_decoder_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_graph_probe",
+      "source": "tests/parity/runtime_graph_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "registry_smart_list_source_probe",
+      "source": "tests/parity/registry_smart_list_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "check_model_probe",
+      "source": "tests/parity/check_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "check_model_tests",
+      "source": "teaql_runtime/tests/check_model_tests.cpp",
+      "cases": [
+        {
+          "name": "check_model_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "original_checker_locale_tests",
+      "source": "tests/parity/teaql_runtime/checker_locale.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_checker_locale_contracts",
+          "arguments": [
+            "tests/parity/teaql_runtime/locale_cases_v1.json",
+            "tests/parity/teaql_runtime/builtin_i18n_v1.json"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "checker_constructor_tests",
+      "source": "tests/parity/checker_constructor_contracts.cpp",
+      "cases": [
+        {
+          "name": "checker_constructor_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "loaded_view_move_probe",
+      "source": "tests/parity/loaded_view_move_probe.cpp",
+      "cases": [
+        {
+          "name": "loaded_view_move_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_runtime_tests",
+      "cases": [
+        {
+          "name": "entity_runtime_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_runtime_model_probe",
+      "source": "tests/parity/entity_runtime_model_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_runtime_equality_probe",
+      "source": "tests/parity/entity_runtime_equality_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "original_runtime_graph_reference_tests",
+      "source": "tests/parity/teaql_runtime/graph_reference_lifetime.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_graph_reference_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "original_flat_graph_tests",
+      "source": "tests/parity/teaql_runtime/flat_identity_graph.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_flat_identity_graph_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "original_ledger_tests",
+      "source": "tests/parity/teaql_runtime/test_incremental_ledger.cpp",
+      "cases": [
+        {
+          "name": "original_runtime_incremental_ledger_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_runtime_dynamic_debug_probe",
+      "source": "tests/parity/entity_runtime_dynamic_debug_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "ledger_entity_guard_tests",
+      "source": "tests/parity/ledger_entity_guard_contracts.cpp",
+      "cases": [
+        {
+          "name": "ledger_entity_guard_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_diagnostics_guard_probe",
+      "source": "tests/parity/sql_diagnostics_guard_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "original_diagnostic_stream_tests",
+      "source": "tests/parity/teaql_sql/diagnostic_stream.cpp",
+      "cases": [
+        {
+          "name": "original_sql_diagnostic_stream_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "sql_move_only_tests",
+      "source": "teaql_runtime/tests/sql_move_only_tests.cpp",
+      "cases": [
+        {
+          "name": "sql_move_only_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "original_query_execution_tests",
+      "source": "tests/parity/teaql_sql/execution_tests.cpp",
+      "cases": [
+        {
+          "name": "original_sql_query_execution_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "original_mutation_execution_tests",
+      "source": "tests/parity/teaql_sql/mutation_execution_tests.cpp",
+      "cases": [
+        {
+          "name": "original_sql_mutation_execution_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "mutation_descriptor_cache_probe",
+      "source": "tests/parity/mutation_descriptor_cache_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_dynamic_stream_source_probe",
+      "source": "tests/parity/sql_dynamic_stream_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "original_sql_executor_tests",
+      "source": "tests/parity/teaql_sql/executor_contracts.cpp",
+      "cases": [
+        {
+          "name": "original_sql_executor_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "original_sql_default_tests",
+      "source": "tests/parity/teaql_sql/default_contracts.cpp",
+      "cases": [
+        {
+          "name": "original_sql_default_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "sql_executor_error_probe",
+      "source": "tests/parity/sql_executor_error_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_sql",
+      "stem": "original_sql_compiler_tests",
+      "source": "tests/parity/teaql_sql/compiler.cpp",
+      "cases": [
+        {
+          "name": "original_sql_compiler_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sql_mutation_tests",
+      "source": "teaql_provider_sqlite/tests/sql_mutation_tests.cpp",
+      "cases": [
+        {
+          "name": "sql_mutation_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_model_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_model_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_model_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_unicode_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_unicode_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_unicode_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_business_id_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_business_id_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_business_id_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ],
+      "qualified_calls": [
+        "sql"
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_driver_error_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_driver_error_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_driver_error_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_error_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_error_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_error_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_simple_error_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_simple_error_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_simple_error_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_from_sql_error_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_from_sql_error_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_from_sql_error_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_boxed_error_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_boxed_error_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "provider_sqlite_boxed_error_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "sqlite_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_regression_tests.cpp",
+      "sqlite_fixture": true,
+      "cases": [
+        {
+          "name": "sqlite_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
     }
   ],
   "fixtures": [
     "tests/support/sqlite_execution_fixture.hpp",
-    "tests/support/sql_transaction_fixture.hpp"
+    "tests/support/sql_transaction_fixture.hpp",
+    "tests/parity/inherited_checker_helpers_probe.cpp"
   ],
   "examples": [
     "examples/sqlite_schema_crud.cpp",

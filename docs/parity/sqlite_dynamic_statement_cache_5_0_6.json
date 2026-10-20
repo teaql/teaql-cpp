@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_and_cpp_observations": 123,
+  "source_and_cpp_exit_code": 0,
+  "live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nRust 5.0.6 SQLite dynamic storage parity: 123/123 observations match\n",
+  "profiles": {
+    "native": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "provider_sqlite_transport_contracts",
+        "sqlite_dynamic_storage_contracts",
+        "sqlite_dynamic_storage_rust_parity",
+        "generated_dynamic_field_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 253: provider_sqlite_transport_contracts\n1/4 Test #253: provider_sqlite_transport_contracts ...   Passed    0.01 sec\n    Start 330: sqlite_dynamic_storage_contracts\n2/4 Test #330: sqlite_dynamic_storage_contracts ......   Passed    0.01 sec\n    Start 331: sqlite_dynamic_storage_rust_parity\n3/4 Test #331: sqlite_dynamic_storage_rust_parity ....   Passed    0.23 sec\n    Start 505: generated_dynamic_field_contracts\n4/4 Test #505: generated_dynamic_field_contracts .....   Passed    0.02 sec\n\n100% tests passed out of 4\n\nTotal Test time (real) =   0.27 sec\n"
+    },
+    "sanitize": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "provider_sqlite_transport_contracts",
+        "sqlite_dynamic_storage_contracts",
+        "sqlite_dynamic_storage_rust_parity",
+        "generated_dynamic_field_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 253: provider_sqlite_transport_contracts\n1/4 Test #253: provider_sqlite_transport_contracts ...   Passed    0.04 sec\n    Start 330: sqlite_dynamic_storage_contracts\n2/4 Test #330: sqlite_dynamic_storage_contracts ......   Passed    0.04 sec\n    Start 331: sqlite_dynamic_storage_rust_parity\n3/4 Test #331: sqlite_dynamic_storage_rust_parity ....   Passed    0.62 sec\n    Start 505: generated_dynamic_field_contracts\n4/4 Test #505: generated_dynamic_field_contracts .....   Passed    0.06 sec\n\n100% tests passed out of 4\n\nTotal Test time (real) =   0.76 sec\n"
+    },
+    "modules_native": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_generated_dynamic_field_contracts",
+        "module_sqlite_dynamic_storage_contracts",
+        "module_provider_sqlite_transport_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 544: module_generated_dynamic_field_contracts\n1/3 Test #544: module_generated_dynamic_field_contracts .....   Passed    0.02 sec\n    Start 630: module_sqlite_dynamic_storage_contracts\n2/3 Test #630: module_sqlite_dynamic_storage_contracts ......   Passed    0.01 sec\n    Start 631: module_provider_sqlite_transport_contracts\n3/3 Test #631: module_provider_sqlite_transport_contracts ...   Passed    0.01 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.06 sec\n"
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 134,
+  "formatting": {
+    "handwritten_files": 1014,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/detail/dynamic_fields.hpp": "f78093cc6d26a7aa0d5d76b0c85de72ef3a288242b184cd8b229722f27b45a3d",
+    "teaql_provider_sqlite/src/dynamic_fields.cpp": "7723143f413702e223950ea64946c63b249885aced1a686318bfad6082866013",
+    "teaql_provider_sqlite/src/provider.cpp": "8e2ceea1de14411bd4165a12089edd2d29271e0e779cc860fb36714da7ab6f46",
+    "teaql_provider_sqlite/tests/dynamic_storage_tests.cpp": "f8e565ac310b19ab84b71e3a51693b9f728152f24f6b80fc0c7a16b8f3ee046f",
+    "modules/contracts.json": "22badb7a8ddaa641de8cb9eb0377fb78e1b82ddf58de4a544cce8b609724e71c",
+    "tests/parity/sqlite_dynamic_storage_5_0_6_cases.json": "210860b33333e878658d9f50d905d17922b01ad2a86e444d68d364f6d3b4c1e5"
+  },
+  "initial_module_failures": [
+    "Unregistered canonical storage test target",
+    "Test-local sql helper ambiguous with exported teaql::sql; renamed fixture_sql without changing test behavior"
+  ],
+  "notice": "Connection-owned caching and scoped native cleanup only. Complete protected dynamic I/O, model/provider configuration, G01-G17 and P0-P7 remain unqualified. No MIPS or physical-device test.",
+  "native_controls": [
+    "paired prepared statement keys and repeat-read reuse",
+    "Global cache after actual User destruction",
+    "DELETE authorizer preparation failure before any write",
+    "return and retry after preparation failure",
+    "default PMR disabled during all storage contracts"
+  ]
+}

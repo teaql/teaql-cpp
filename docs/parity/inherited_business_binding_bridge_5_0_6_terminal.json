@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_creation_observations": 60,
+  "source_update_retry_observations": 20,
+  "source_native_reproduction": true,
+  "source_module_reproduction": true,
+  "canonical_bodies": 521,
+  "format_cpp_count": 1357,
+  "original_producer_files_unchanged": true,
+  "production_cpp_changed": false,
+  "generator_changed": false,
+  "inheritance_guard_removed": false,
+  "complete_capability_acceptance": false,
+  "profiles": {
+    "native": {
+      "passed": 3,
+      "total": 3,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 408: inherited_business_governed_rust_parity\n    Start 409: inherited_business_update_rust_parity\n    Start 410: generated_inherited_business_lifetime_contracts\n1/3 Test #410: generated_inherited_business_lifetime_contracts ...   Passed    0.00 sec\n2/3 Test #409: inherited_business_update_rust_parity .............   Passed    0.35 sec\n3/3 Test #408: inherited_business_governed_rust_parity ...........   Passed    0.60 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.61 sec\n"
+    },
+    "modules": {
+      "passed": 3,
+      "total": 3,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 707: module_generated_inherited_business_lifetime_contracts\n    Start 734: module_inherited_business_governed_rust_parity\n    Start 735: module_inherited_business_update_rust_parity\n1/3 Test #707: module_generated_inherited_business_lifetime_contracts ...   Passed    0.00 sec\n2/3 Test #735: module_inherited_business_update_rust_parity .............   Passed    0.50 sec\n3/3 Test #734: module_inherited_business_governed_rust_parity ...........   Passed    0.91 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.93 sec\n"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 410: generated_inherited_business_lifetime_contracts\n1/1 Test #410: generated_inherited_business_lifetime_contracts ...   Passed    0.03 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.05 sec\n"
+    }
+  },
+  "sanitize_leak_scanning": false
+}

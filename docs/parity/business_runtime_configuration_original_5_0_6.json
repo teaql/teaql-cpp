@@ -1,0 +1,2037 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_inputs": {
+    "tests/generator/parity/business_ids_rust/PROVENANCE.json": "e5f8aec219847029c280f4b4a2eac1fb1bb2db6b3d992b78d2c024f4b01dad9c",
+    "tests/generator/parity/business_ids_rust/lib/src/runtime.rs": "fb5673825e4d57f2e3e11c7421aaad8e8ccfad6c310cd3ea6c2ebd7541e1a12c",
+    "tests/generator/business_ids.xml": "32e9016e771838835abdac84d1a526ad6549f3f772082cbfa3663d898e95e9e3",
+    "tests/parity/rust_runtime_configuration_models_5_0_6/Cargo.toml": "ad48c28ee4674b47fa48dca599326caa40eabbeefd45b9254acb4aae029ee560",
+    "tests/parity/rust_runtime_configuration_models_5_0_6/Cargo.lock": "93fbda756491621fa2a54df6b98e00f56dc3797a95e72057e7f70c2b17fdc8e1",
+    "tests/parity/rust_runtime_configuration_models_5_0_6/src/main.rs": "2a7bf86d6e1f27dea9008a6ae1924fa2109706b3341decfaaa0701f1026bcaf3"
+  },
+  "cases": [
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 2,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 1
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-PD8XDT",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 2,
+              "name": "receipt-1",
+              "number": "RCP-20231114-PD8XDT",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 2,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 1
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-90WSGT",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 2,
+              "name": "receipt-1",
+              "number": "RCP-20231114-90WSGT",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 2,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 1
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-9N9DO3",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 2,
+              "name": "receipt-1",
+              "number": "RCP-20231114-9N9DO3",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 3,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 1
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-PD8XDT",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 2,
+              "name": "receipt-1",
+              "number": "RCP-20231114-PD8XDT",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 2
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-PD8XDT",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 3,
+                "name": "receipt-2",
+                "number": "RCP-20231114-OVX5RD",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 3,
+              "name": "receipt-2",
+              "number": "RCP-20231114-OVX5RD",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 3,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 1
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-90WSGT",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 2,
+              "name": "receipt-1",
+              "number": "RCP-20231114-90WSGT",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 2
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-90WSGT",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 3,
+                "name": "receipt-2",
+                "number": "RCP-20231114-33Y6EU",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 3,
+              "name": "receipt-2",
+              "number": "RCP-20231114-33Y6EU",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "pool",
+        "rounds": 3,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 1
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-9N9DO3",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 2,
+              "name": "receipt-1",
+              "number": "RCP-20231114-9N9DO3",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "count": 2
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 2,
+                "name": "receipt-1",
+                "number": "RCP-20231114-9N9DO3",
+                "tenant": 1,
+                "version": 1
+              },
+              {
+                "id": 3,
+                "name": "receipt-2",
+                "number": "RCP-20231114-9IXSRW",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 3,
+              "name": "receipt-2",
+              "number": "RCP-20231114-9IXSRW",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 2,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 2,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 2,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 3,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-2",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-2",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 3,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-2",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-2",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "config",
+        "rounds": 3,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-2",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-2",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 2,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 2,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 2,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 3,
+        "key_version": 1
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-2",
+                "number": "RCP-20231114-1FUDWC",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-2",
+              "number": "RCP-20231114-1FUDWC",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 3,
+        "key_version": 2
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-2",
+                "number": "RCP-20231114-SMU9QK",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-2",
+              "number": "RCP-20231114-SMU9QK",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    },
+    {
+      "input": {
+        "entry": "env",
+        "rounds": 3,
+        "key_version": 4294967295
+      },
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-0",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-0",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-1",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-1",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          },
+          {
+            "assembled": true,
+            "before_schema": {
+              "debug": "Graph(\"Transport error: no such table: receipt_data\")",
+              "display": "graph write error: Transport error: no such table: receipt_data"
+            },
+            "rows": [
+              {
+                "id": 1,
+                "name": "receipt-2",
+                "number": "RCP-20231114-7YTRGV",
+                "tenant": 1,
+                "version": 1
+              }
+            ],
+            "saved": {
+              "id": 1,
+              "name": "receipt-2",
+              "number": "RCP-20231114-7YTRGV",
+              "tenant": 1,
+              "version": 1
+            }
+          }
+        ]
+      },
+      "stderr": "[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Tenant.saveGraph source=GeneratedDefault approval=NotApplicable\n[TeaQL][MUTATION-POLICY-001] request=Receipt.saveGraph source=GeneratedDefault approval=NotApplicable\n"
+    }
+  ],
+  "source_environment_errors": [
+    {
+      "name": "missing_key",
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": null,
+      "key_version": null,
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "MissingEnv { name: \"TEAQL_BUSINESS_ID_KEY_V1_HEX\", source: NotPresent }",
+            "display": "missing environment variable TEAQL_BUSINESS_ID_KEY_V1_HEX: environment variable not found",
+            "source": "environment variable not found"
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "missing_key",
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": null,
+      "key_version": null,
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "MissingEnv { name: \"TEAQL_BUSINESS_ID_KEY_V1_HEX\", source: NotPresent }",
+            "display": "missing environment variable TEAQL_BUSINESS_ID_KEY_V1_HEX: environment variable not found",
+            "source": "environment variable not found"
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "missing_key",
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": null,
+      "key_version": null,
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "MissingEnv { name: \"TEAQL_BUSINESS_ID_KEY_V1_HEX\", source: NotPresent }",
+            "display": "missing environment variable TEAQL_BUSINESS_ID_KEY_V1_HEX: environment variable not found",
+            "source": "environment variable not found"
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "short_key",
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "00",
+      "key_version": "1",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_V1_HEX must contain exactly 64 hexadecimal characters\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_V1_HEX must contain exactly 64 hexadecimal characters",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "short_key",
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "00",
+      "key_version": "1",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_V1_HEX must contain exactly 64 hexadecimal characters\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_V1_HEX must contain exactly 64 hexadecimal characters",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "short_key",
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "00",
+      "key_version": "1",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_V1_HEX must contain exactly 64 hexadecimal characters\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_V1_HEX must contain exactly 64 hexadecimal characters",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "invalid_hex",
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+      "key_version": "1",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_V1_HEX must contain only hexadecimal characters\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_V1_HEX must contain only hexadecimal characters",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "invalid_hex",
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+      "key_version": "1",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_V1_HEX must contain only hexadecimal characters\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_V1_HEX must contain only hexadecimal characters",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "invalid_hex",
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+      "key_version": "1",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_V1_HEX must contain only hexadecimal characters\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_V1_HEX must contain only hexadecimal characters",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "zero_version",
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "0",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"InvalidDefinition: business ID key version must be positive\")",
+            "display": "configuration error: InvalidDefinition: business ID key version must be positive",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "zero_version",
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "0",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"InvalidDefinition: business ID key version must be positive\")",
+            "display": "configuration error: InvalidDefinition: business ID key version must be positive",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "zero_version",
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "0",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"InvalidDefinition: business ID key version must be positive\")",
+            "display": "configuration error: InvalidDefinition: business ID key version must be positive",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "invalid_version",
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "bad",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "invalid_version",
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "bad",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "invalid_version",
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "bad",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "overflow_version",
+      "input": {
+        "entry": "pool",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "4294967296",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "overflow_version",
+      "input": {
+        "entry": "config",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "4294967296",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "name": "overflow_version",
+      "input": {
+        "entry": "env",
+        "rounds": 1,
+        "key_version": 1
+      },
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_version": "4294967296",
+      "source_expected": {
+        "rounds": [
+          {
+            "assembled": false,
+            "debug": "Configuration(\"TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32\")",
+            "display": "configuration error: TEAQL_BUSINESS_ID_KEY_VERSION must be a positive u32",
+            "source": null
+          }
+        ]
+      },
+      "stderr": ""
+    }
+  ],
+  "adaptation": "C++ installs its application-owned typed key through UserContext. The original environment parsing failures are retained as source-only observations; they are never normalized into successful C++ startup."
+}

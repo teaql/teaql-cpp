@@ -33,15 +33,18 @@ def main():
     imports = "import teaql_provider_sqlite;\n"
     args.output.mkdir(parents=True, exist_ok=True)
     manifest = []
-    prepared = set()
+    prepared = {}
 
     def adapt(source, destination, entry=False, qualified_calls=()):
         source = source.resolve()
-        if source in prepared:
-            return
-        prepared.add(source)
+        # The same source can be included under a macro and also provide its
+        # own executable entry. Only the entry view receives an import prologue.
+        key = (source, entry)
+        if key in prepared:
+            return prepared[key]
+        prepared[key] = destination
         text = source.read_text()
-        original = re.sub(r"^#include [^\n]+\n", "", text, flags=re.M)
+        original = re.sub(r"^(?:#include|import) [^\n]+\n", "", text, flags=re.M)
         text = re.sub(r"^#include <teaql/[^>]+>\n", "", text, flags=re.M)
 
         def quoted_include(match):
@@ -51,26 +54,39 @@ def main():
             if dependency.relative_to(root).parts[0] not in {"tests", "examples"}:
                 raise RuntimeError(f"Cannot copy a production implementation into test fixtures: {dependency}")
             target = args.output / dependency.relative_to(root)
-            adapt(dependency, target)
+            target = adapt(dependency, target)
             return '#include "' + os.path.relpath(target, destination.parent) + '"\n'
 
         text = re.sub(r'^#include "([^\"]+)"\n', quoted_include, text, flags=re.M)
         if entry:
-            quoted = re.findall(r'^#include "[^\"]+"\n', text, re.M)
-            text = re.sub(r'^#include "[^\"]+"\n', "", text, flags=re.M)
-            includes = re.findall(r"^#include [^\n]+\n", text, re.M)
-            text = re.sub(r"^#include [^\n]+\n", "", text, flags=re.M)
+            # Keep fixture includes in place: macro state at the include site
+            # can change the declarations (e.g. an included driver's main).
+            includes = re.findall(r"^#include <[^>]+>\n", text, re.M)
+            text = re.sub(r"^#include <[^>]+>\n", "", text, flags=re.M)
             # Complete imports expose teaql::request; preserve global fixture calls.
             for name in qualified_calls:
-                text = re.sub(rf"(?<![\w:]){name}(?=\s*\()", "::" + name, text)
+                # A helper defined in this entry keeps its original declaration.
+                # Only its calls need qualification when an import adds a namespace
+                # with the same name (for example, a fixture's static void sql).
+                declarations = [match.span() for match in re.finditer(
+                    rf"^[ \t]*static[ \t]+[\w:<>,*& \t]+\b{name}(?=\s*\()",
+                    text, re.M)]
+
+                def qualify(match):
+                    if any(start <= match.start() < end for start, end in declarations):
+                        return match[0]
+                    return "::" + name
+
+                text = re.sub(rf"(?<![\w:]){name}(?=\s*\()", qualify, text)
             text = (preamble + "".join(includes) + imports +
-                    "// TEAQL canonical consumer begin\n" + "".join(quoted) + text)
+                    "// TEAQL canonical consumer begin\n" + text)
         write_if_changed(destination, text)
         manifest.append({"source": str(source.relative_to(root)),
                          "consumer": str(destination.relative_to(args.output)),
                          "body_sha256": hashlib.sha256(original.encode()).hexdigest(),
                          "entry": entry,
                          "qualified_calls": list(qualified_calls)})
+        return destination
 
     for fixture in contracts["fixtures"]:
         adapt(root / fixture, args.output / fixture)

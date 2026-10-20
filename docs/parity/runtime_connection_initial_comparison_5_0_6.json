@@ -1,0 +1,224 @@
+{
+  "scope": "Connection outcome/error and files only; source successful generated query_error is deliberately outside this kernel probe. Original20 observations retained unchanged.",
+  "results": [
+    {
+      "name": "connect_missing",
+      "actual": {
+        "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotPresent }",
+        "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable not found",
+        "ok": false,
+        "source": "environment variable not found"
+      },
+      "expected_connection_only": {
+        "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotPresent }",
+        "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable not found",
+        "ok": false,
+        "source": "environment variable not found"
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_invalid_unicode",
+      "actual": {
+        "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotUnicode(\"\\xFF\") }",
+        "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable was not valid unicode: \"\\xFF\"",
+        "ok": false,
+        "source": "environment variable was not valid unicode: \"\\xFF\""
+      },
+      "expected_connection_only": {
+        "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotUnicode(\"\\xFF\") }",
+        "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable was not valid unicode: \"\\xFF\"",
+        "ok": false,
+        "source": "environment variable was not valid unicode: \"\\xFF\""
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_memory",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_sqlite_memory",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_two_slash_memory",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_three_slash_memory",
+      "actual": {
+        "debug": "ConnectionError(\"unable to open database file\")",
+        "display": "connection error: unable to open database file",
+        "ok": false,
+        "source": null
+      },
+      "expected_connection_only": {
+        "debug": "ConnectionError(\"unable to open database file: /:memory:\")",
+        "display": "connection error: unable to open database file: /:memory:",
+        "ok": false,
+        "source": null
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_empty",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_query_only",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_plain_file",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [
+        "folder/data.db"
+      ],
+      "expected_files": [
+        "folder/data.db"
+      ]
+    },
+    {
+      "name": "connect_url_query_ignored",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [
+        "folder/data.db"
+      ],
+      "expected_files": [
+        "folder/data.db"
+      ]
+    },
+    {
+      "name": "connect_literal_percent",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [
+        "db%20name.db"
+      ],
+      "expected_files": [
+        "db%20name.db"
+      ]
+    },
+    {
+      "name": "connect_file_uri",
+      "actual": {
+        "ok": true
+      },
+      "expected_connection_only": {
+        "ok": true
+      },
+      "created_files": [
+        "memorydb"
+      ],
+      "expected_files": [
+        "memorydb"
+      ]
+    },
+    {
+      "name": "connect_parent_failure",
+      "actual": {
+        "debug": "ConnectionError(\"Not a directory (os error 20)\")",
+        "display": "connection error: Not a directory (os error 20)",
+        "ok": false,
+        "source": null
+      },
+      "expected_connection_only": {
+        "debug": "ConnectionError(\"File exists (os error 17)\")",
+        "display": "connection error: File exists (os error 17)",
+        "ok": false,
+        "source": null
+      },
+      "created_files": [],
+      "expected_files": []
+    }
+  ],
+  "mismatches": [
+    {
+      "name": "connect_three_slash_memory",
+      "actual": {
+        "debug": "ConnectionError(\"unable to open database file\")",
+        "display": "connection error: unable to open database file",
+        "ok": false,
+        "source": null
+      },
+      "expected_connection_only": {
+        "debug": "ConnectionError(\"unable to open database file: /:memory:\")",
+        "display": "connection error: unable to open database file: /:memory:",
+        "ok": false,
+        "source": null
+      },
+      "created_files": [],
+      "expected_files": []
+    },
+    {
+      "name": "connect_parent_failure",
+      "actual": {
+        "debug": "ConnectionError(\"Not a directory (os error 20)\")",
+        "display": "connection error: Not a directory (os error 20)",
+        "ok": false,
+        "source": null
+      },
+      "expected_connection_only": {
+        "debug": "ConnectionError(\"File exists (os error 17)\")",
+        "display": "connection error: File exists (os error 17)",
+        "ok": false,
+        "source": null
+      },
+      "created_files": [],
+      "expected_files": []
+    }
+  ]
+}

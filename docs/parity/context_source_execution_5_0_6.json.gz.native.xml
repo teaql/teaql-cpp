@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="17"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="canada-mini-host"
+	time="2"
+	timestamp="2026-10-18T17:15:29"
+	>
+	<testcase name="context_defaults_contracts" classname="context_defaults_contracts" time="0.00267329" status="run">
+		<properties/>
+		<system-out>Context defaults contracts passed
+</system-out>
+	</testcase>
+	<testcase name="context_defaults_rust_parity" classname="context_defaults_rust_parity" time="0.0840527" status="run">
+		<properties/>
+		<system-out>context_defaults 5.0.6 parity: 75/75 observations match
+</system-out>
+	</testcase>
+	<testcase name="checker_context_contracts" classname="checker_context_contracts" time="0.00334549" status="run">
+		<properties/>
+		<system-out>Checker/fix Context ownership contracts passed
+</system-out>
+	</testcase>
+	<testcase name="checker_reentrant_close" classname="checker_reentrant_close" time="0.00209039" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="checker_registration_reentrant_close" classname="checker_registration_reentrant_close" time="0.00202644" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="checker_typed_direct_reentrant_close" classname="checker_typed_direct_reentrant_close" time="0.00209169" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="checker_rust_parity" classname="checker_rust_parity" time="0.478002" status="run">
+		<properties/>
+		<system-out>checker 5.0.6 parity: 1362/1362 observations match
+</system-out>
+	</testcase>
+	<testcase name="original_runtime_context_contracts" classname="original_runtime_context_contracts" time="0.0031048" status="run">
+		<properties/>
+		<system-out>Original six Context contracts passed
+</system-out>
+	</testcase>
+	<testcase name="original_runtime_context_tail_contracts" classname="original_runtime_context_tail_contracts" time="0.0624531" status="run">
+		<properties/>
+		<system-out>Four original Context-tail contracts passed
+</system-out>
+	</testcase>
+	<testcase name="runtime_context_resource_contracts" classname="runtime_context_resource_contracts" time="0.00265529" status="run">
+		<properties/>
+		<system-out>Runtime Context resource contracts passed
+</system-out>
+	</testcase>
+	<testcase name="context_model_contracts" classname="context_model_contracts" time="0.00825698" status="run">
+		<properties/>
+		<system-out>Context model protocols and lifetime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="context_model_rust_parity" classname="context_model_rust_parity" time="0.572358" status="run">
+		<properties/>
+		<system-out>context_model 5.0.6 parity: 234/234 observations match
+</system-out>
+	</testcase>
+	<testcase name="internal_id_rust_parity" classname="internal_id_rust_parity" time="0.175847" status="run">
+		<properties/>
+		<system-out>Internal ID protocol 5.0.6 parity: 171/171 observations match
+</system-out>
+	</testcase>
+	<testcase name="business_service_rust_parity" classname="business_service_rust_parity" time="0.530972" status="run">
+		<properties/>
+		<system-out>Business clock/service parity: 859/859 observations match
+</system-out>
+	</testcase>
+	<testcase name="runtime_context_rust_parity" classname="runtime_context_rust_parity" time="0.402558" status="run">
+		<properties/>
+		<system-out>Runtime Context resources parity: 410/410 observations match
+</system-out>
+	</testcase>
+	<testcase name="data_store_contracts" classname="data_store_contracts" time="0.00441249" status="run">
+		<properties/>
+		<system-out>DataStore public and lifetime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="data_store_rust_parity" classname="data_store_rust_parity" time="0.226033" status="run">
+		<properties/>
+		<system-out>DataStore parity: 251/251 observations match
+</system-out>
+	</testcase>
+</testsuite>

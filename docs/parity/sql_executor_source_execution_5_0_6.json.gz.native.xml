@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="19"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="2"
+	timestamp="2026-10-18T20:57:03"
+	>
+	<testcase name="original_sql_mutation_execution_contracts" classname="original_sql_mutation_execution_contracts" time="0.0273023" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="original_sql_query_execution_contracts" classname="original_sql_query_execution_contracts" time="0.00617913" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="original_sql_executor_contracts" classname="original_sql_executor_contracts" time="0.0225054" status="run">
+		<properties/>
+		<system-out>ORDINARY_SQL_QUERY_ARENA_FRAME_BYTES=2872
+Original sixteen SQL executor contracts passed
+</system-out>
+	</testcase>
+	<testcase name="original_sql_default_contracts" classname="original_sql_default_contracts" time="0.00549758" status="run">
+		<properties/>
+		<system-out>Original five data-service/schema contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_dynamic_stream_source_rust_parity" classname="sql_dynamic_stream_source_rust_parity" time="0.338282" status="run">
+		<properties/>
+		<system-out>SQL dynamic stream entry parity: 720/720 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_diagnostics_guard_rust_parity" classname="sql_diagnostics_guard_rust_parity" time="0.167962" status="run">
+		<properties/>
+		<system-out>SQL diagnostic guards parity: 352/352 observations match
+</system-out>
+	</testcase>
+	<testcase name="original_sql_diagnostic_stream_contracts" classname="original_sql_diagnostic_stream_contracts" time="0.00497906" status="run">
+		<properties/>
+		<system-out>Original seven diagnostic stream contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_move_only_context_contracts" classname="sql_move_only_context_contracts" time="0.00622226" status="run">
+		<properties/>
+		<system-out>Move-only SQL completion contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_stream_execution_contracts" classname="sql_stream_execution_contracts" time="0.00886043" status="run">
+		<properties/>
+		<system-out>SQL stream execution contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_transaction_execution_contracts" classname="sql_transaction_execution_contracts" time="0.0114402" status="run">
+		<properties/>
+		<system-out>SQL transaction execution contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_query_executor_contracts" classname="sql_query_executor_contracts" time="0.172903" status="run">
+		<properties/>
+		<system-out>SQL query executor contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_transport_contracts" classname="sql_transport_contracts" time="0.00534937" status="run">
+		<properties/>
+		<system-out>SQL transport contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_stream_rust_parity" classname="sql_stream_rust_parity" time="1.33743" status="run">
+		<properties/>
+		<system-out>SQL stream execution parity: 1765/1765 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_transaction_rust_parity" classname="sql_transaction_rust_parity" time="2.47748" status="run">
+		<properties/>
+		<system-out>SQL transaction execution parity: 2029/2029 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_execution_rust_parity" classname="sql_execution_rust_parity" time="1.98247" status="run">
+		<properties/>
+		<system-out>SQL mutation execution parity: 2029/2029 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_executor_kind_rust_parity" classname="sql_executor_kind_rust_parity" time="0.240534" status="run">
+		<properties/>
+		<system-out>SQL executor backend capture parity: 93/93 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_executor_error_rust_parity" classname="sql_executor_error_rust_parity" time="0.319762" status="run">
+		<properties/>
+		<system-out>sql executor error 5.0.6 parity: 144/144 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_query_rust_parity" classname="sql_query_rust_parity" time="2.21267" status="run">
+		<properties/>
+		<system-out>SQL query executor parity: 767/767 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_transport_rust_parity" classname="sql_transport_rust_parity" time="0.29194" status="run">
+		<properties/>
+		<system-out>SQL transport defaults/errors parity: 344/344 observations match
+</system-out>
+	</testcase>
+</testsuite>

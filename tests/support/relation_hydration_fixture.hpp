@@ -1,5 +1,5 @@
 #pragma once
-#include <teaql/runtime/detail/data_service/relation_hydration.hpp>
+#include <teaql/runtime/data_service.hpp>
 
 namespace hydration_fixture {
 using namespace teaql;

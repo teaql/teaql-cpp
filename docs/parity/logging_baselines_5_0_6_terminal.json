@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "six logging/audit/event historical families requalified; complete capability acceptance remains partial",
+  "observations": 4288,
+  "initial_context_logging_gaps": 249,
+  "initial_recover_classification_gaps": 37,
+  "profiles": {
+    "native": {
+      "passed": 12,
+      "total": 12,
+      "tests": [
+        "context_logging_rust_parity",
+        "context_event_rust_parity",
+        "log_manager_rust_parity",
+        "log_manager_contracts",
+        "runtime_log_contracts",
+        "context_logging_contracts",
+        "audit_event_contracts",
+        "log_formatter_contracts",
+        "context_event_contracts",
+        "runtime_log_rust_parity",
+        "audit_event_rust_parity",
+        "log_formatter_rust_parity"
+      ],
+      "log": "/tmp/teaql_logging_baselines_native_tests_506.log",
+      "log_sha256": "02aaa8e9db7e6a09e6066004088c3b1a224f76e37aaa1b866aed8b3167a1e3bf",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n      Start 444: runtime_log_rust_parity\n      Start 442: log_manager_rust_parity\n      Start 439: context_event_rust_parity\n      Start 441: context_logging_rust_parity\n 1/12 Test #441: context_logging_rust_parity ......   Passed    1.33 sec\n      Start 445: audit_event_rust_parity\n 2/12 Test #439: context_event_rust_parity ........   Passed    1.46 sec\n      Start 443: log_formatter_rust_parity\n 3/12 Test #442: log_manager_rust_parity ..........   Passed    1.74 sec\n      Start 272: log_manager_contracts\n 4/12 Test #272: log_manager_contracts ............   Passed    0.02 sec\n      Start 274: runtime_log_contracts\n 5/12 Test #274: runtime_log_contracts ............   Passed    0.02 sec\n      Start 271: context_logging_contracts\n 6/12 Test #271: context_logging_contracts ........   Passed    0.01 sec\n      Start 275: audit_event_contracts\n 7/12 Test #275: audit_event_contracts ............   Passed    0.01 sec\n      Start 273: log_formatter_contracts\n 8/12 Test #273: log_formatter_contracts ..........   Passed    0.01 sec\n      Start 268: context_event_contracts\n 9/12 Test #268: context_event_contracts ..........   Passed    0.02 sec\n10/12 Test #444: runtime_log_rust_parity ..........   Passed    2.05 sec\n11/12 Test #445: audit_event_rust_parity ..........   Passed    1.03 sec\n12/12 Test #443: log_formatter_rust_parity ........   Passed    0.91 sec\n\n100% tests passed out of 12\n\nTotal Test time (real) =   2.39 sec\n"
+    },
+    "modules": {
+      "passed": 12,
+      "total": 12,
+      "tests": [
+        "module_audit_event_contracts",
+        "module_log_formatter_contracts",
+        "module_context_logging_contracts",
+        "module_log_manager_contracts",
+        "module_runtime_log_contracts",
+        "module_context_event_contracts",
+        "module_audit_event_rust_parity",
+        "module_context_logging_rust_parity",
+        "module_log_manager_rust_parity",
+        "module_runtime_log_rust_parity",
+        "module_log_formatter_rust_parity",
+        "module_context_event_rust_parity"
+      ],
+      "log": "/tmp/teaql_logging_baselines_modules_tests_506.log",
+      "log_sha256": "bd8eacbcd25a7f2fc8291316e8cf65506a21f4c09624c025cea0de8d25f85e6f",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n      Start 638: module_log_manager_contracts\n      Start 636: module_context_logging_contracts\n      Start 639: module_audit_event_contracts\n      Start 637: module_log_formatter_contracts\n 1/12 Test #639: module_audit_event_contracts .........   Passed    0.00 sec\n      Start 699: module_runtime_log_contracts\n 2/12 Test #637: module_log_formatter_contracts .......   Passed    0.00 sec\n      Start 700: module_context_event_contracts\n 3/12 Test #636: module_context_logging_contracts .....   Passed    0.00 sec\n      Start 775: module_runtime_log_rust_parity\n 4/12 Test #638: module_log_manager_contracts .........   Passed    0.01 sec\n      Start 776: module_audit_event_rust_parity\n 5/12 Test #699: module_runtime_log_contracts .........   Passed    0.01 sec\n      Start 777: module_context_logging_rust_parity\n 6/12 Test #700: module_context_event_contracts .......   Passed    0.01 sec\n      Start 778: module_log_manager_rust_parity\n 7/12 Test #776: module_audit_event_rust_parity .......   Passed    0.45 sec\n      Start 779: module_context_event_rust_parity\n 8/12 Test #777: module_context_logging_rust_parity ...   Passed    0.52 sec\n      Start 780: module_log_formatter_rust_parity\n 9/12 Test #778: module_log_manager_rust_parity .......   Passed    0.66 sec\n10/12 Test #775: module_runtime_log_rust_parity .......   Passed    0.88 sec\n11/12 Test #780: module_log_formatter_rust_parity .....   Passed    0.42 sec\n12/12 Test #779: module_context_event_rust_parity .....   Passed    0.66 sec\n\n100% tests passed out of 12\n\nTotal Test time (real) =   1.13 sec\n"
+    },
+    "sanitize": {
+      "passed": 2,
+      "total": 2,
+      "tests": [
+        "context_logging_contracts",
+        "context_logging_rust_parity"
+      ],
+      "log": "/tmp/teaql_logging_baselines_sanitize_tests_506.log",
+      "log_sha256": "be255134f4e2b5e6867668608e29095e1059ffd8b2b51670db7bf280ba9402bf",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 271: context_logging_contracts\n    Start 441: context_logging_rust_parity\n1/2 Test #271: context_logging_contracts ........   Passed    0.02 sec\n2/2 Test #441: context_logging_rust_parity ......   Passed    1.75 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   1.76 sec\n"
+    }
+  },
+  "original_context_privacy_regressions": {
+    "passed": 2,
+    "total": 2,
+    "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 192: original_runtime_context_contracts\n    Start 191: original_runtime_log_privacy_contracts\n1/2 Test #192: original_runtime_context_contracts .......   Passed    0.00 sec\n2/2 Test #191: original_runtime_log_privacy_contracts ...   Passed    0.00 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.01 sec\n",
+    "log_sha256": "66cf67c485764cad8e6d6f3e5c04ce06546cf10aa0318035dbd23aa68d52c620"
+  },
+  "source_reproduction": true,
+  "module_source_reproduction": true,
+  "canonical_bodies": 499,
+  "catalog_exports": 1479,
+  "formatted_handwritten_cpp": 1354,
+  "current_module_root_gate_verified": true,
+  "reference_dependency_versions": true,
+  "complete_context_event_runtime": true,
+  "context_event_original_archive_files": 610,
+  "context_event_append_only_files": 2,
+  "record_sha256": {
+    "docs/parity/logging_baselines_5_0_6.json": "e73afa28827fa7f27f4a416de589a631930999c26bb663df057011c224160a7a",
+    "docs/parity/logging_baselines_5_0_6_initial_gaps.json.gz": "8329e5babccd863be46dbba99b62e48ea0820de4f2acdbccba7a40a8a2cea08d",
+    "docs/parity/logging_baselines_5_0_6_initial_compiler_failure.json": "96fdc3fc5c2fbd9849293cd31f9e1fc8c8e490be54eba10b0921ac911e0939fb"
+  },
+  "production_sha256": {
+    "teaql_runtime/src/context/logging.cpp": "226d3f27603738bc5741648f0477453770cc6fd5eb7f76ee7266f1fc47847cc0"
+  },
+  "fixture_sha256": {
+    "teaql_runtime/tests/context_logging_tests.cpp": "59cbf1a1f4243115ed6b480f6b27340f21566532266dbacd0cd16c5519ae0395"
+  },
+  "normalization": "JSON output exact; existing formatter adapters remove volatile human time prefix; manager also corrects the documented JSON header claim and canonicalizes executable log filename",
+  "native_pointer_bits": 64,
+  "historical_artifacts_preserved": true,
+  "remaining_recorded_baseline_failures": 9,
+  "full_native_rerun": false,
+  "mips_qemu_run": false,
+  "physical_device_run": false,
+  "sanitizer_leak_scanning": false,
+  "complete_capability_acceptance": false,
+  "generator_changed_this_checkpoint": false
+}

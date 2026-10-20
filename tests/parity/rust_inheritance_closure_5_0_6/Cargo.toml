@@ -1,0 +1,56 @@
+[package]
+name = "teaql_inheritance_closure_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype"] }
+cpp_inheritance_core = { package = "cpp-inheritance-core", path = "../../generator/parity/inheritance_rust/lib" }
+cpp_inheritance_graph_core = { package = "cpp-inheritance-graph-core", path = "../../generator/parity/inheritance_graph_rust/lib" }
+cpp_inheritance_variants_core = { package = "cpp-inheritance-variants-core", path = "../../generator/parity/inheritance_variants_rust/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+[[bin]]
+name = "generated_inheritance_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inheritance_5_0_6.rs"
+
+[[bin]]
+name = "generated_inheritance_query_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inheritance_query_5_0_6.rs"
+
+[[bin]]
+name = "generated_inheritance_sqlite_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inheritance_sqlite_5_0_6.rs"
+
+[[bin]]
+name = "generated_inheritance_save_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inheritance_save_5_0_6.rs"
+
+[[bin]]
+name = "generated_inheritance_graph_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inheritance_graph_5_0_6.rs"
+
+[[bin]]
+name = "generated_inheritance_variants_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inheritance_variants_5_0_6.rs"
+
+[[bin]]
+name = "generated_inherited_stream_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inherited_stream_5_0_6.rs"
+
+[[bin]]
+name = "generated_inherited_json_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inherited_json_5_0_6.rs"

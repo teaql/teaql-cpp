@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "controls": [
+    {
+      "name": "historical_baseline",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Module root ledger must use the pinned Rust baseline\n"
+    },
+    {
+      "name": "changed_cpp_body",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Module root ledger differs from current committed source or called C++ fixtures\n"
+    },
+    {
+      "name": "missing_module_registration",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Missing imported root checks: scalar_fk_column_named_like_relation_does_not_create_related_entity\n"
+    }
+  ]
+}

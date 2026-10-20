@@ -14,7 +14,7 @@ static void check(bool value, const char* message) {
     }
 }
 
-static void sql(sqlite3* db, const char* text) {
+static void fixture_sql(sqlite3* db, const char* text) {
     check(sqlite3_exec(db, text, nullptr, nullptr, nullptr) == SQLITE_OK, "fixture SQL succeeds");
 }
 
@@ -79,6 +79,7 @@ static void roundtrip_and_isolation() {
     check(store && store->is_transaction_bound() &&
               store->source_identity() == provider.source_identity(),
           "native transaction exposes its bound store");
+    const auto cached_before_dynamic = connection.cached_statement_count();
     auto& pending = store->apply_writes(r, writes, reason);
     bool rejected = false;
     try {
@@ -89,6 +90,8 @@ static void roundtrip_and_isolation() {
     check(rejected && !tx.consumed(),
           "pending dynamic work prevents premature transaction consumption");
     check(bool(pending.wait()), "all declared variants write within transaction");
+    check(connection.cached_statement_count() == cached_before_dynamic + 2,
+          "upsert and delete retain distinct shared cache entries while both are borrowed");
     const std::array<std::uint64_t, 2> ids{UINT64_MAX, 7};
     auto& own = store->load_values(r, "profile", schema, ids, selection, read).wait();
     check(own && own.value().at(UINT64_MAX).size() == 10 && own.value().at(7).empty(),
@@ -100,6 +103,15 @@ static void roundtrip_and_isolation() {
     check(own.value().at(UINT64_MAX).find("u64")->second.try_u64() == UINT64_MAX &&
               own.value().at(UINT64_MAX).find("i64")->second.try_i64() == INT64_MIN,
           "full-width integer domains survive text owner ids and JSON operands");
+    const auto cached_after_read = connection.cached_statement_count();
+    auto& repeated = store->load_values(r, "profile", schema, ids, selection, read).wait();
+    check(repeated && repeated.value() == own.value() &&
+              connection.cached_statement_count() == cached_after_read,
+          "dynamic loads reuse the connection-owned query statement without stale bindings");
+    CompiledQuery native(std::allocator_arg, Allocator(r));
+    native.sql = "SELECT 42 AS native_value";
+    check(provider.fetch_all_compact(r, native).is_err(),
+          "ambient native SQL cannot bypass the active transaction lease");
     auto& outside = provider.load_values(r, "profile", schema, ids, selection, read);
     check(!outside.poll(), "ambient read waits for exclusive transaction");
     check(bool(tx.commit_sql(r).wait()), "native and dynamic transaction commits");
@@ -126,6 +138,41 @@ static void roundtrip_and_isolation() {
     check(bool(rollback.rollback_sql(r).wait()) && bool(blocked.wait()) &&
               blocked.wait().value().at(UINT64_MAX).find("text")->second.try_text() == "雪",
           "rollback removes extension changes before waking ambient reader");
+}
+
+static void global_cache_outlives_user_work() {
+    GlobalContext global;
+    auto& connection = global.make_resource<SqliteConnection>();
+    auto& provider = global.make<SqliteMutationExecutor>(connection);
+    {
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
+        auto& schema = user_context->make<DynamicFieldDefinitions>(definitions(r));
+        check(bool(provider.ensure_schema(r).wait()), "global connection schema");
+        Vector<DynamicFieldWrite> writes(r);
+        writes.emplace_back("global_profile", schema, 7, changes(r));
+        auto reason = MutationIntent::create(r, "persist from temporary User");
+        auto& tx = provider.begin_sql(r).wait().value().get();
+        check(bool(tx.dynamic_field_store()->apply_writes(r, writes, reason.value()).wait()) &&
+                  bool(tx.commit_sql(r).wait()),
+              "temporary User returns cached write statements");
+    }
+    check(connection.cached_statement_count() >= 2,
+          "Global cache retains native statements after actual User destruction");
+    for (auto* statement = sqlite3_next_stmt(connection.native_handle(), nullptr); statement;
+         statement = sqlite3_next_stmt(connection.native_handle(), statement)) {
+        check(!sqlite3_stmt_busy(statement), "no User cursor remains busy in Global cache");
+    }
+    auto next_user_context = global.make_user_context();
+    auto r = next_user_context->memory_resource();
+    auto& schema = next_user_context->make<DynamicFieldDefinitions>(definitions(r));
+    auto selection = DynamicFieldSelection::all(r);
+    auto intent = QueryIntent::create(r, "read Global cached storage", "verify User cleanup");
+    const std::array<std::uint64_t, 1> ids{7};
+    auto& rows =
+        provider.load_values(r, "global_profile", schema, ids, selection, intent.value()).wait();
+    check(rows && rows.value().at(7).find("text")->second.try_text() == "雪",
+          "later User reads through retained Global cache without stale binding storage");
 }
 
 static void validation_and_errors() {
@@ -156,22 +203,64 @@ static void validation_and_errors() {
         store->load_values(r, "profile", schema, ids, selection, read).wait().value().at(7).empty(),
         "earlier valid write not partially issued");
     tx.rollback_sql(r).wait();
-    sql(connection.native_handle(),
+    fixture_sql(
+        connection.native_handle(),
         "INSERT INTO teaql_dynamic_field_storage_v1 VALUES ('profile','Item','7','text','stale','Text',0,'\"SECRET\"')");
     auto& mismatch = provider.load_values(r, "profile", schema, ids, selection, read).wait();
     check(!mismatch && mismatch.error().code == "DYNAMIC_FIELD_DEFINITION_MISMATCH",
           "stored revision mismatch rejects");
-    sql(connection.native_handle(),
+    fixture_sql(
+        connection.native_handle(),
         "UPDATE teaql_dynamic_field_storage_v1 SET definition_revision='v1',payload='invalid SECRET data'");
     auto& corrupt = provider.load_values(r, "profile", schema, ids, selection, read).wait();
     check(!corrupt && corrupt.error().code == "DYNAMIC_FIELD_INVALID_STORAGE" &&
               corrupt.error().to_string(r).find("SECRET") == String::npos,
           "corrupt payload diagnostics omit stored data");
-    sql(connection.native_handle(), "DROP TABLE teaql_dynamic_field_storage_v1");
+    fixture_sql(connection.native_handle(), "DROP TABLE teaql_dynamic_field_storage_v1");
     auto& missing = provider.load_values(r, "profile", schema, ids, selection, read).wait();
     check(!missing && missing.error().code == "DYNAMIC_FIELD_STORAGE_FAILED" &&
               missing.error().field == "storage",
           "driver errors project to safe storage error");
+}
+
+static void preparation_failure_precedes_writes() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& connection = user_context->make_resource<SqliteConnection>();
+    auto& provider = user_context->make<SqliteMutationExecutor>(connection);
+    check(bool(provider.ensure_schema(r).wait()), "prepare-failure schema initializes");
+    auto& schema = user_context->make<DynamicFieldDefinitions>(definitions(r));
+    Vector<DynamicFieldWrite> writes(r);
+    writes.emplace_back("profile", schema, 7, changes(r));
+    auto reason = MutationIntent::create(r, "verify paired preparation before mutation");
+    auto& tx = provider.begin_sql(r).wait().value().get();
+    auto* store = tx.dynamic_field_store();
+    auto deny_delete = [](void*, int action, const char*, const char*, const char*, const char*) {
+        return action == SQLITE_DELETE ? SQLITE_DENY : SQLITE_OK;
+    };
+    check(sqlite3_set_authorizer(connection.native_handle(), deny_delete, nullptr) == SQLITE_OK,
+          "install native prepare-time DELETE denial");
+    auto& failed = store->apply_writes(r, writes, reason.value()).wait();
+    check(!failed && failed.error().code == "DYNAMIC_FIELD_STORAGE_FAILED" &&
+              failed.error().field == "storage",
+          "DELETE preparation failure returns the safe storage error");
+    check(connection.cached_statement_count() == 1,
+          "failed DELETE preparation returns the already-borrowed UPSERT statement");
+    check(sqlite3_set_authorizer(connection.native_handle(), nullptr, nullptr) == SQLITE_OK,
+          "remove native prepare-time denial");
+    const std::array<std::uint64_t, 1> ids{7};
+    auto selection = DynamicFieldSelection::all(r);
+    auto read =
+        QueryIntent::create(r, "inspect failed dynamic preparation", "reject partial writes");
+    auto& empty = store->load_values(r, "profile", schema, ids, selection, read.value()).wait();
+    check(empty && empty.value().at(7).empty(),
+          "both write statements prepare before any dynamic mutation executes");
+    check(bool(store->apply_writes(r, writes, reason.value()).wait()),
+          "released cached statement can be reused after preparation failure");
+    auto& rows = store->load_values(r, "profile", schema, ids, selection, read.value()).wait();
+    check(rows && rows.value().at(7).size() == 10 && bool(tx.commit_sql(r).wait()),
+          "retry persists every typed value and releases the transaction lease");
 }
 
 static void cancellation_and_terminal_failure() {
@@ -190,7 +279,8 @@ static void cancellation_and_terminal_failure() {
     check(!wait.poll(), "read waits on owned transaction");
     tx.cancel_sql();
     check(bool(wait.wait()), "transaction abandonment wakes queued ambient work");
-    sql(connection.native_handle(),
+    fixture_sql(
+        connection.native_handle(),
         "PRAGMA foreign_keys=ON; CREATE TABLE parent(id INTEGER PRIMARY KEY); CREATE TABLE child(id INTEGER REFERENCES parent(id) DEFERRABLE INITIALLY DEFERRED)");
     auto& failed = provider.begin_sql(r).wait().value().get();
     CompiledQuery insert(std::allocator_arg, Allocator(r));
@@ -205,13 +295,18 @@ static void cancellation_and_terminal_failure() {
 }
 
 int main() {
+    auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
         roundtrip_and_isolation();
+        global_cache_outlives_user_work();
         validation_and_errors();
+        preparation_failure_precedes_writes();
         cancellation_and_terminal_failure();
         std::cout << "SQLite dynamic storage contracts passed\n";
     } catch (const std::exception& e) {
+        std::pmr::set_default_resource(previous);
         std::cerr << e.what() << '\n';
         return 1;
     }
+    std::pmr::set_default_resource(previous);
 }

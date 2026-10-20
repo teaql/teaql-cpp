@@ -4,6 +4,12 @@ Status: scoped asynchronous lease and synchronous transaction source comparisons
 pass. Complete provider/transaction and P7 acceptance remain open. Runtime:
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` (5.0.6).
 
+The later [complete transaction interface review](sqlite_transaction_streaming_5_0_6.md)
+reproduces missing native transaction StreamingSqlTransport support in C++.
+This matrix's root read/write/begin scheduling results remain valid within their
+scope; they do not exercise the missing transaction cursor path. A separate
+repair and source/lifetime gates are required before complete transaction parity.
+
 ## Original protocol
 
 The original `teaql-provider-sqlite/src/transaction.rs` returns a distinct,

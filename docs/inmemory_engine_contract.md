@@ -1,5 +1,10 @@
 # In-memory engine source contract
 
+The later [complete 5.0.6 review](inmemory_source_acceptance_5_0_6.md) requalifies
+the entire source, including typed-LIKE resolution, read-metadata pipeline
+boundaries and the original nineteen tests through both C++ frontends. The
+5.0.5 baseline, counts and architecture evidence below remain historical.
+
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`,
 `teaql-runtime/src/inmemory_engine.rs`, production lines 1–511.
 The separate ExprEvaluator and InMemoryQueryEngine public abstractions are both

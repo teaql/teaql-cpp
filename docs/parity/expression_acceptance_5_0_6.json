@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "status": "qualified_with_documented_ownership_and_presentation_adaptations",
+  "capability": "G11",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "requirements": 11,
+  "requirement_matrix": "docs/expression_requirements_5_0_6.md",
+  "source_branch_review": "docs/parity/expression_source_branches_5_0_6.json",
+  "source_observations": 2416,
+  "source_matrices": {
+    "diagnostics": 196,
+    "values": 108,
+    "complete_frames": 1200,
+    "scalar_conversions": 816,
+    "typed_business_ids": 96
+  },
+  "typed_id_resolutions": 936,
+  "typed_id_decode_rejections": 18,
+  "profiles": {
+    "native": {
+      "passed": 14,
+      "total": 14,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n      Start 604: expression_diagnostic_framing_rust_parity\n      Start 605: expression_diagnostic_text_rust_parity\n      Start 601: expression_model_types_rust_parity\n      Start 602: generated_expression_values_rust_parity\n 1/14 Test #602: generated_expression_values_rust_parity ........   Passed    0.10 sec\n      Start 599: expression_business_ids_rust_parity\n 2/14 Test #599: expression_business_ids_rust_parity ............   Passed    0.17 sec\n      Start 603: generated_expression_diagnostics_rust_parity\n 3/14 Test #601: expression_model_types_rust_parity .............   Passed    0.32 sec\n      Start 584: generated_optional_types_contracts\n 4/14 Test #605: expression_diagnostic_text_rust_parity .........   Passed    0.33 sec\n      Start 606: expression_diagnostic_text_context_contracts\n 5/14 Test #606: expression_diagnostic_text_context_contracts ...   Passed    0.01 sec\n      Start 577: generated_api_contracts\n 6/14 Test #584: generated_optional_types_contracts .............   Passed    0.02 sec\n      Start 612: example_generated_query_expression\n 7/14 Test #612: example_generated_query_expression .............   Passed    0.02 sec\n      Start 585: generated_business_id_contracts\n 8/14 Test #604: expression_diagnostic_framing_rust_parity ......   Passed    0.37 sec\n      Start 600: expression_business_ids_context_contracts\n 9/14 Test #600: expression_business_ids_context_contracts ......   Passed    0.00 sec\n      Start 607: runtime_entity_expression_contracts\n10/14 Test #607: runtime_entity_expression_contracts ............   Passed    0.00 sec\n      Start 583: generated_relation_contracts\n11/14 Test #583: generated_relation_contracts ...................   Passed    0.00 sec\n12/14 Test #585: generated_business_id_contracts ................   Passed    0.02 sec\n13/14 Test #577: generated_api_contracts ........................   Passed    0.05 sec\n14/14 Test #603: generated_expression_diagnostics_rust_parity ...   Passed    0.12 sec\n\n100% tests passed out of 14\n\nTotal Test time (real) =   0.40 sec\n",
+      "sha256": "e7da99cb73d82bd866ba0e3de9522c080754c70b757631f27dc20af76fd2f60b"
+    },
+    "module": {
+      "passed": 6,
+      "total": 6,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 891: module_expression_model_types_rust_parity\n    Start 761: module_expression_diagnostic_framing_rust_parity\n    Start 718: module_expression_diagnostic_text_context_contracts\n    Start 632: module_import_contracts\n1/6 Test #632: module_import_contracts ...............................   Passed    0.00 sec\n    Start 736: module_expression_business_ids_context_contracts\n2/6 Test #718: module_expression_diagnostic_text_context_contracts ...   Passed    0.01 sec\n    Start 892: module_expression_business_ids_rust_parity\n3/6 Test #736: module_expression_business_ids_context_contracts ......   Passed    0.00 sec\n4/6 Test #892: module_expression_business_ids_rust_parity ............   Passed    0.23 sec\n5/6 Test #891: module_expression_model_types_rust_parity .............   Passed    0.42 sec\n6/6 Test #761: module_expression_diagnostic_framing_rust_parity ......   Passed    0.48 sec\n\n100% tests passed out of 6\n\nTotal Test time (real) =   0.50 sec\n",
+      "sha256": "35f1798bd4f5cc8d9077486355749cb977a31a05ac7e3b9c6cda25607cabbdbf"
+    },
+    "sanitize": {
+      "passed": 5,
+      "total": 5,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 601: expression_model_types_rust_parity\n    Start 606: expression_diagnostic_text_context_contracts\n    Start 607: runtime_entity_expression_contracts\n    Start 599: expression_business_ids_rust_parity\n1/5 Test #606: expression_diagnostic_text_context_contracts ...   Passed    0.02 sec\n    Start 600: expression_business_ids_context_contracts\n2/5 Test #607: runtime_entity_expression_contracts ............   Passed    0.02 sec\n3/5 Test #600: expression_business_ids_context_contracts ......   Passed    0.01 sec\n4/5 Test #599: expression_business_ids_rust_parity ............   Passed    0.49 sec\n5/5 Test #601: expression_model_types_rust_parity .............   Passed    0.97 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =   0.98 sec\n",
+      "sha256": "8896aace1fe785b5d2aa7ac784d22144fb5367ce1e1b24d36eef597ffd872764"
+    }
+  },
+  "compiler": {
+    "positive": 20,
+    "negative": 47,
+    "exit_code": 0,
+    "output": "Verified missing_purpose\nVerified positive\nVerified unknown_field\nVerified wrong_scalar\nVerified wrong_relation\nVerified extra_runtime_argument\nVerified global_factory\nVerified context_on_entry\nVerified temporary_entity\nVerified missing_audit\nVerified sample_positive\nVerified sample_wrong_plan\nVerified sample_extra_runtime\nVerified dynamic_json_positive\nVerified general_query_positive\nVerified aggregation_positive\nVerified facets_positive\nVerified facets_wrong_child\nVerified relationship_analysis_positive\nVerified relationship_analysis_wrong_child\nVerified aggregation_wrong_function\nVerified raw_segment_wrong_type\nVerified dynamic_json_wrong_input\nVerified execution_extensions_positive\nVerified count_missing_purpose\nVerified page_extra_context\nVerified candidate_positive\nVerified candidate_raw_id_setter\nVerified candidate_raw_object_setter\nVerified candidate_unknown_update\nVerified candidate_unknown_predicate\nVerified candidate_unknown_expression\nVerified candidate_human_vocabulary\nVerified candidate_missing_purpose\nVerified business_id_positive\nVerified business_id_text_setter\nVerified business_id_wrong_type\nVerified business_id_text_predicate\nVerified optional_scalar_positive\nVerified optional_timestamp_text\nVerified optional_timestamp_predicate\nVerified context_root_getters\nVerified context_root_id_setter\nVerified context_root_object_setter\nVerified business_context_root_setter\nVerified inheritance_positive\nVerified inheritance_unknown_subtype\nVerified inheritance_missing_purpose\nVerified inheritance_untyped_child\nVerified return_type_positive\nVerified return_type_not_entity\nVerified return_type_missing_purpose\nVerified candidate_diagnostic_repairs\nVerified return_type_extra_context\nVerified expression_diagnostic_dynamic_repairs\nVerified inherited_diagnostic_repairs\nVerified checker_customization_positive\nVerified expression_diagnostic_wrong_child\nVerified checker_wrong_logic\nVerified checker_wrong_adapter\nVerified checker_wrong_entity\nVerified checker_wrong_callback\nVerified wire_metadata_positive\nVerified wire_metadata_global_argument\nVerified wire_metadata_extra_argument\nVerified business_id_expression_fallback\nVerified business_id_expression_default_forbidden\nVerified 20 positive and 47 negative generated API compiler contracts\n"
+  },
+  "source_default_constraint": {
+    "expected_error": "E0277; ReceiptNumber: Default",
+    "exit_code": 101,
+    "verified": true
+  },
+  "java": [
+    {
+      "suite": "com.skynet.codegenerator.CppGenerationTest",
+      "passed": 49,
+      "sha256": "542eefa77aa5aaffbb9503cece14e446d577de273ec94ec4a07182141b8828f8",
+      "executed": [
+        "jsonInputKeepsRustQuotedAliasesSeparateFromSqlIdentifiers",
+        "relationshipAnalysisUsesSourceVocabularyAndRuntimeLayers",
+        "typedJsonPresentationUsesInstalledRuntimeAndBorrowedProjection",
+        "entitiesQueriesAndExpressionsUseProductionContracts",
+        "customAssemblyGuidancePreservesRegistrationOrder",
+        "outputIsDeterministic",
+        "candidateMethodCollisionsFailBeforeEmittingInvalidCpp",
+        "bootstrapRootPrecedesConstantsEvenWhenDeclaredLast",
+        "auditLengthsRetainIgnoredValuesAndTargetWidthGuard",
+        "dynamicJsonDelegatesToRuntimeWithAuthenticAliasesAndRelationKeys",
+        "inheritedAuditMasksResolveAtEachDeclaringModel",
+        "inheritedBusinessIdDeclaresItsSharedTypeOnce",
+        "checkerLogicFixesAndRegistrationUseRuntimeMechanics",
+        "checkerConditionsUseSourceTemplateBooleanAndStringTruth",
+        "standaloneConstantRetainsIdentityOneAlongsideOrdinaryRoot",
+        "unsupportedDatabaseFailsInsteadOfProducingWrongRuntime",
+        "negativeConstantIdsRejectBeforeEmission",
+        "defaultInheritancePreservesFlattenedFieldsAndLegacyEntryOutput",
+        "constantIdsKeepOriginalSaturationAndZero",
+        "facetAdaptersKeepSourceArgumentOrderAndRuntimeResponsibility",
+        "configuredScalarStorageCannotSilentlyChangeItsDomain",
+        "numericAndJsonClockFixesRetainSourceValueConversions",
+        "opaqueConfiguredTypesCannotFallBackToTextStorage",
+        "entityIdentityAndLoadStateHelpersUseExistingScopedRuntime",
+        "childSelectionsRequireUnpurposedRequests",
+        "generalQueriesUseRuntimeAdaptersAndAuthenticPredicateVocabulary",
+        "fieldCriteriaUseContextOwnedRuntimeRoots",
+        "wireMappingsUseOwnFieldsAndSelectedProfile",
+        "runtimeConstructorsPreserveRequiredTimestampDefaults",
+        "auditLengthsUseOriginalRustIntegerSemantics",
+        "sampleScalarAdaptersPreserveSourceNumericAttributesAndJsonText",
+        "defaultConstantsPreserveLegacyOutputAndModelAwareBootstrapGuidance",
+        "normalConstantsStillRejectInvalidDomainRoots",
+        "auditLengthStringsDecodeEscapesButKeepRawPayloads",
+        "invalidBusinessIdDefinitionsFailBeforeEmission",
+        "candidateNamesKeepNumericAndPunctuationFallbacks",
+        "contextRootSettersStayInternalAndAssistOmitsThem",
+        "auditMasksKeepOriginalModelKeys",
+        "constantOnlyDomainHasNoDomainRoot",
+        "nullCandidateKeepsLiteralEqualityAndSourceUnknownKnownNullChecks",
+        "centralPluralizationAndHumanPredicatesMatchRustAndJava",
+        "stringUpdatesDelegateStoredAndLedgerSemanticsToRuntime",
+        "candidateShortcutsUseCentralNamesAndConstantStorageIds",
+        "stringClockFixesRetainValueOperandsThroughRuntime",
+        "relationEvaluationDelegatesToRuntimeAndModelHelpers",
+        "fieldTypeParametersAndEquivalentDeclarationsRetainSourceTyping",
+        "businessIdsUseDistinctValuesAndExistingServices",
+        "aggregateMethodsPreserveSourceNamesAliasesAndFieldEligibility",
+        "executionAdaptersPreserveTheDistinctServiceWrapper"
+      ]
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+      "passed": 2,
+      "sha256": "345da1bf617740c1e40416f80f4023f964d740294bca63598c2a95a83da3ea7f",
+      "executed": [
+        "metadataMatchesFrozenRust506SchoolFixture",
+        "metadataPositionsIncludeOverflowAndRevisionChanges"
+      ]
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+      "passed": 2,
+      "sha256": "f6de8cebd3c3240a0beba285cbd8897c6e099aab8e11a5b4db272fbf5acd9953",
+      "executed": [
+        "rustLiteralEscapesRetainTheirSemanticCharacters",
+        "cppViewsRetainEmbeddedZeroAndUtf8ByteLength"
+      ]
+    }
+  ],
+  "workspaces": 23,
+  "reproduced_files": 276,
+  "contract_sdks": 44,
+  "sdk_code_bytes_unchanged": true,
+  "canonical_bodies": 612,
+  "format_cpp_count": 1410,
+  "exports": 1483,
+  "source_dispositions_preserved": true,
+  "broader_integration_obligations_preserved": true,
+  "original_generated_bodies_changed": false,
+  "production_runtime_changed_this_checkpoint": false,
+  "complete_phase_acceptance": false,
+  "complete_generator_acceptance": false,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "hashes": {
+    "docs/expression_acceptance_5_0_6.md": "e0ac6c985624338ede07d45cf634e06b4700475e9c968b2ddda9ce408fc06110",
+    "docs/expression_requirements_5_0_6.md": "643fb7d61d191ff867bece0ef2b1f03bc4fa322be043e0d98051a7de1393d726",
+    "docs/expression_business_ids_5_0_6.md": "388cecc973a1c5464c0e8dae6eb14776391ed7281180cb347477d30b272abcd3",
+    "docs/parity/expression_acceptance_validation_5_0_6.json.gz": "cde8a7ad4793a872ea5f1a9c908c1e187a68df5d68001c0a83dbad6a9b37a228",
+    "docs/parity/expression_pre_acceptance_5_0_6.json": "449e188206111b22230885408d730b11261c4da4f6851df1f98b8f49aa5d7217",
+    "docs/parity/expression_source_branches_5_0_6.json": "41494a2b1919579de52cfe2234dc4c483974261ea9b40bde1380b0c3727951dc",
+    "docs/parity/expression_business_ids_source_5_0_6.json.gz": "47c48d3abe78edb88c8c4ad79293faad6ebac3f8b09f683ba3463535898f149f",
+    "docs/parity/expression_assist_sdk_regeneration_5_0_6.json": "f179e1340dfcf7f2525d15f5811ddd8d5ba404220197ccdd32e3b5b337a5f310",
+    "tests/parity/expression_business_ids_5_0_6_cases.json.gz": "a725aafc423392bd653419dbf71c42a09d8750b72f3cf4c524c0fe96b6e89444",
+    "tests/parity/expression_business_ids_probe.cpp": "af29dc83a95b3099d1af6d0c3487eba6f99f1b77814692fcac39548a83ac90a3",
+    "tests/parity/compare_expression_business_ids_5_0_6.py": "d62989d9ca91b9fc650007c38e7ec8fa405cca442c059a34751a310e974a8405",
+    "scripts/verify_expression_source_closure_5_0_6.py": "988f579dd62a60465ade2f399cb67ed0530ef5482d76b9d50fd1e12523a739d9",
+    "tests/parity/rust_expression_business_ids_5_0_6/Cargo.toml": "c3c3ae782e4d7ffdd726bf3cfed63d6b17d2cdb673134d191ae7016be01d3deb",
+    "tests/parity/rust_expression_business_ids_5_0_6/Cargo.lock": "f38e15b0a70d250a44dd21dc74af469d9aef2ab57270e38c686dabf2780821f5",
+    "tests/parity/rust_expression_business_ids_5_0_6/src/main.rs": "cb08d96e4d4f765fd834738f5ca1094cabe8005edef8e027a29bed114b7c1b85",
+    "tests/parity/rust_expression_business_ids_5_0_6/examples/default_forbidden.rs": "6bbfe513743a8f4bab8792614fdf735ebe92b6bc35688534cc82e91c064d416e",
+    "tests/parity/rust_expression_closure_5_0_6/Cargo.toml": "b43a79f3f217fec15d6253ff4f8bf856af78a22ff771f1cd0c2b7fe097704899",
+    "tests/parity/rust_expression_closure_5_0_6/Cargo.lock": "b7e39b1f03580b06e510ec56272d5c31c6f932dfd5ce289083269ea25e13f773",
+    "upstream.lock.json": "289895ccb9ebbada5dc05ca2e3b2d286895f40eb91d7b0935f6864a08214d246",
+    "scripts/verify_generated_type_errors.py": "585db9df17c4043e54d1c182a67a3ec7950acea0a59202f07cb4758f24dc5e0d",
+    "teaql_runtime/include/teaql/runtime/entity_expression.hpp": "c89ebb1e2535956b76d983e49ff0b2409915cfcfe8e326ed427ebfdbb0aac6b0",
+    "teaql_runtime/include/teaql/runtime/generated_scalar_codec.hpp": "2fe236dbdca70319914c5021217d3716f5707dff8304f8b42932721798d0e23a"
+  },
+  "producer_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "e59a5eca30326a2545b01f74a5963055af10406011a3ea07d13590758c53ad54"
+  }
+}

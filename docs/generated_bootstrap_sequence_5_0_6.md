@@ -1,5 +1,10 @@
 # Generated bootstrap sequence support: Rust 5.0.6
 
+Current status: G05/P3 is now qualified with documented language/ownership
+adaptations and constants use normal generation. See
+[the acceptance record](constants_acceptance_5_0_6.md). The text and counts below
+retain this earlier checkpoint, including its then-active generation guard.
+
 Historical prerequisite checkpoint: this runtime change implemented the shared scheduling and retry mechanics
 needed by P3 constant initialization. At that checkpoint it did not emit model initialization
 recipes or remove the constant-generation guard. The subsequent model integration

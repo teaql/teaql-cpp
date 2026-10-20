@@ -1,5 +1,11 @@
 # General generated Q interfaces: Rust 5.0.6 checkpoint
 
+Current status: G06 and G07 are qualified by the
+[complete general-query review](general_query_acceptance_review_5_0_6.md) and
+[field-interface acceptance](predicate_projection_acceptance_5_0_6.md).
+Earlier checkpoint counts and open-scope statements below remain historical;
+other capabilities and P4/P7 retain their independent requirements.
+
 Status: scoped G06/G07/G09 implementation and qualification. The full generator
 matrix and P0–P7 goal remain active.
 
@@ -41,8 +47,11 @@ are not a parser, sanitizer or permission grant.
 
 Generated scalar helpers now include source negative contains/start/end and
 sound predicates, with authentic centralized human/non-human naming, GBK ordering,
-project/raw/unsafeRaw/unselect, and numeric function selections. GBK remains an
-explicit SQLite unsupported-operation error. Source guards and further model
+project/raw/unsafeRaw/unselect, and numeric function selections. The later
+[projection/text review](generated_projection_text_5_0_6.md) verifies that the
+locked SQLite compiler preserves GBK flags through its default argument path;
+this is not a locale-collation claim. The earlier unsupported-operation wording
+was incorrect. Source guards and further model
 variants still require full qualification; this checkpoint is not an exhaustive
 G07 surface claim. No ordinary query/expression wrapper extends Context lifetime.
 
@@ -119,5 +128,31 @@ internals. MIPS and physical device execution are not part of this checkpoint.
 - Native SQLite dependency change is a profile checkpoint, not a relabeling of
   historical 5.0.5 corpora or a complete 5.0.6 migration claim.
 
-All full generator capabilities remain unqualified until their complete gates
-and source dispositions are closed.
+At this historical checkpoint no complete generator capability was qualified.
+Current capability acceptance is tracked by the active ledger; G06/G07 remain
+partial until their complete gates and source dispositions are closed.
+
+## Request-state follow-up
+
+[The request-state checkpoint](generated_request_state_5_0_6.md) restores four
+state views and the direct consuming core conversion. Actual complete original
+execution agrees for 432 configurations/3024 views and conversions. The later [core query view checkpoint](generated_core_query_view_5_0_6.md)
+qualifies the source bare query(&self) responsibility through explicit-domain
+coreQuery snapshots. Existing integrated C++ query() callers keep their separate
+boundary. These two checkpoints close the named state/conversion responsibilities;
+they do not establish complete G06/P4 acceptance.
+
+## Scalar execution follow-up
+
+The [scalar predicate execution matrix](query_predicate_execution_5_0_6.md)
+extends the construction evidence to 5,936 exact original/native SQLite outcomes
+across all seventeen scalar branches, including optional dates/timestamps,
+Boolean availability, DateRange and all four order variants. Typed DATE/TIMESTAMP
+storage produces 4,656 successes, 1,280 authentic unsigned-binding errors,
+2,840 typed snapshots and 4,656 ordered safe SQL records. The earlier TEXT-schema
+fixture's 534 typed materialization errors are preserved separately. Generic
+membership/selection/matching input repairs are recorded in the
+[active source review](query_surface_review_5_0_6.md); the initial remaining-work
+list above is historical, not a statement that those repairs are still absent.
+Complete source/guard dispositions, configured model variants and composed
+policy/raw/projection/page/stream integration remain required for G06/G07/P4/P7.

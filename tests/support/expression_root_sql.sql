@@ -1,0 +1,12 @@
+CREATE TABLE platform_data(id INTEGER PRIMARY KEY, name TEXT NOT NULL, version INTEGER NOT NULL);
+INSERT INTO platform_data VALUES(1,'root',1);
+CREATE TABLE class_data(id INTEGER PRIMARY KEY, platform INTEGER NOT NULL, name TEXT NOT NULL, operator NUMERIC NOT NULL, version INTEGER NOT NULL);
+INSERT INTO class_data VALUES(10,1,'class row',2,1),(12,1,'deleted class',3,-1);
+CREATE TABLE operator_data(id INTEGER PRIMARY KEY, platform INTEGER NOT NULL, name TEXT NOT NULL, version INTEGER NOT NULL);
+INSERT INTO operator_data VALUES(10,1,'operator row',1),(12,1,'deleted operator',-1);
+CREATE TABLE template_data(id INTEGER PRIMARY KEY, platform INTEGER NOT NULL, name TEXT NOT NULL, version INTEGER NOT NULL);
+INSERT INTO template_data VALUES(10,1,'template row',1),(12,1,'deleted template',-1);
+CREATE TABLE namespace_data(id INTEGER PRIMARY KEY, platform INTEGER NOT NULL, name TEXT NOT NULL, version INTEGER NOT NULL);
+INSERT INTO namespace_data VALUES(10,1,'namespace row',1),(12,1,'deleted namespace',-1);
+CREATE TABLE plain_record_data(id INTEGER PRIMARY KEY, platform INTEGER NOT NULL, name TEXT NOT NULL, version INTEGER NOT NULL);
+INSERT INTO plain_record_data VALUES(10,1,'plain row',1),(12,1,'deleted plain',-1);

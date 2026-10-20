@@ -1,0 +1,498 @@
+{
+  "schema": 1,
+  "before_snapshot_sha256": "26342eeafb10426bb51e1458a7ab4ce8f864c24f3e9da64c37c53b42f9f028ee",
+  "records": [
+    {
+      "directory": "examples/generated",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_examples/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_types",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_types/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_checkers",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_checker_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_checker_unique_string",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_checker_unique_string/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_checker_clock_scalars",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_checker_clock_scalars/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_checker_clock_composition",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_checker_clock_composition/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_relations",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_relations/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_business_ids",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_business_ids/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_optional_types",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_optional_types/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_query_field_branches",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_query_branches/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_inheritance",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_inheritance/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_inheritance_graph",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_inheritance_graph/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_inheritance_variants",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_inheritance_variants/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_inheritance_business_ids",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_inheritance_business_ids/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_candidates",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_candidates/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_constants_scalar",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_constants_scalar/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_constants_numeric",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_constants_numeric/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_constants_catalog",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_constants_catalog/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_constants_temporal",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_constants_temporal/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_constants_temporal_required",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_constants_temporal_required/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_dynamic_json",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_dynamic_json/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_sample_fields",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_fields/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_sample_fields_runtime",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_runtime/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generated_sample_fields_temporal",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_temporal/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/number/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/integer/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/nullable_integer/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/boolean/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/double/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/bool_actual/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/text/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/date/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/timestamp/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/scalar_candidate_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/unsigned_recipe/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_type_configuration_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/integer_as_string/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/equivalent_string_alias/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_type_configuration_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/field_parameter/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_type_configuration_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/custom_unsigned/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/numeric_alias/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_type_configuration_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/equivalent_integer/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_type_configuration_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/integer_as_unsigned/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/string_alias/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_type_configuration_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/unsigned_recipe/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_types_unsigned_recipe/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/equivalent_string_alias/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_types_equivalent_string_alias/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/field_parameter/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_types_field_parameter/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/numeric_alias/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_types_numeric_alias/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/equivalent_integer/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_types_equivalent_integer/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/string_alias/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_sample_types_string_alias/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/multiple_roots/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/multiple_roots_reversed/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/no_candidates/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_metadata_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_identifier_value/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_metadata_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/empty_identifier_value/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_metadata_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/comma_identifier_value/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_metadata_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/candidate_name_collision/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_identifier/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_metadata_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/unknown_identifier/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_metadata_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/malformed_xml/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_seed_field/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_metadata_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/unicode_identifier_value/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_metadata_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/no_root/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/depth_exceeded/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/foreign_value_one/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_topology_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/cycle_three/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/cycle_pair/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/reversed/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_topology_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/self_reference/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_topology_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/optional_forward/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_topology_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/missing_target_one/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_topology_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/ordered/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_topology_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/self_reference_required/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/constant_topology_fixture/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/byte_vector/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/named_opaque/cpp",
+      "changed_files": []
+    },
+    {
+      "directory": "tests/generator/parity/relation_identity_contracts/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_relation_identities/support.hpp"
+      ]
+    },
+    {
+      "directory": "tests/generator/parity/query_alias_contracts/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_query_aliases/support.hpp"
+      ]
+    }
+  ],
+  "original_rust_unchanged": true,
+  "all_other_generated_bodies_unchanged": true
+}

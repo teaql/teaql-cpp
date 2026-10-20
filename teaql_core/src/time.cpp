@@ -1,9 +1,10 @@
 #include <teaql/core/time.hpp>
 #include <teaql/core/json.hpp>
 #include <teaql/core/detail/text.hpp>
+#include <teaql/core/detail/system_clock.hpp>
 #include <bit>
 #include <charconv>
-#include <chrono>
+#include <stdexcept>
 
 namespace teaql {
 Json Timestamp::to_json_value(Memory destination) const {
@@ -239,9 +240,9 @@ Timestamp Timestamp::from_u64(std::uint64_t n) {
 }
 
 Timestamp Timestamp::now() {
-    return Timestamp(std::chrono::floor<std::chrono::milliseconds>(
-                         std::chrono::system_clock::now().time_since_epoch())
-                         .count());
+    auto time = detail::system_utc_time();
+    // The validated chrono date range fits in signed milliseconds.
+    return Timestamp(time.seconds * 1000 + time.nanoseconds / 1000000);
 }
 
 std::optional<Timestamp> Timestamp::parse(std::string_view s) {

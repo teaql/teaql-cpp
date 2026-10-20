@@ -1,0 +1,23 @@
+[package]
+name="mutation_execution_source_506"
+version="0.0.0"
+edition="2024"
+publish=false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+futures-core = "=0.3.32"
+[workspace]
+
+[[bin]]
+name="mutation_execution_source_506"
+path="../rust_sql_protocol_5_0_6/sql_execution_protocol.rs"
+
+[[bin]]
+name="mutation_descriptor_cache_source_506"
+path="../mutation_descriptor_cache_source_5_0_6.rs"

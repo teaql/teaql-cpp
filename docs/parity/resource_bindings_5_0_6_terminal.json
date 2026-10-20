@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "declared typed/named resource replacement and generated Checker matrix qualified; complete capabilities/phases remain partial",
+  "counts": {
+    "rounds": 576,
+    "steps": 3264,
+    "missing_typed": 1056,
+    "missing_named": 1728,
+    "checker_success": 1872,
+    "checker_required": 1392,
+    "hooks": 3264,
+    "resource_found": 1872,
+    "destructors": 1728,
+    "scenarios": 384
+  },
+  "expired_borrows": {
+    "captured": 288,
+    "get_rejected": 288,
+    "copy_rejected": 288
+  },
+  "original_borrow_compiler_errors": {
+    "E0502": 1,
+    "E0505": 1,
+    "E0515": 1
+  },
+  "comparison": "Exact current bindings, full nested resource data, key bytes, named errors, typed absence kind, hooks/status/rank/Checker errors and final destructor counts. Per-step destruction timing is checked against each language contract and preserved independently; raw typed name diagnostics are not claimed equal.",
+  "ownership_adaptation": "Rust resource indexes own Box values and drop replacement immediately; native indexes borrow Context-owned arena objects and reclaim them at Context end. Old native inline borrows remain readable before close and reject get/copy after actual User deletion. Nested observations belong to Global; null default PMR.",
+  "native": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 1,
+    "total": 1
+  },
+  "modules": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 1,
+    "total": 1,
+    "canonical_bodies": 443
+  },
+  "sanitize": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 1,
+    "total": 1,
+    "leak_scanning": false
+  },
+  "format": {
+    "version": "18.1.8",
+    "files": 1350,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "live_original_reproduction_exit_code": 0,
+  "source_borrow_reproduction_exit_code": 0,
+  "runtime_changed": false,
+  "producer_changed": false,
+  "generated_outputs_changed": false,
+  "guards_removed": false,
+  "fixture_corrections": [
+    "Original float Value has F64 only; fixture ratio now uses F64.",
+    "Arena-managed nontrivial OtherBindingSettings now declares allocator-aware construction; EntityValues uses allocator_arg.",
+    "PMR string operator+ selected default resource in a temporary; explicit owner-allocator string construction and append removes the null-default allocation failure."
+  ],
+  "hashes": {
+    "tests/parity/resource_bindings_probe.cpp": "bd61b212f66b2082257af4f539b1326c1bb37453ee97b47bd03495b88a6afca2",
+    "tests/parity/rust_constant_variants/src/bin/resource_bindings.rs": "de4c670cc18631c43fbf1a434f4ae7e85da41546899a3e873e6a8d3a0d7bf171",
+    "tests/parity/compare_resource_bindings_5_0_6.py": "a922e0590d7f4db49bb8b5307590e71f39262f71fd2503f58db91d9f1de92530",
+    "scripts/verify_resource_borrow_failures.py": "87adae22290cea910a5ab13acadf7ffa1be3a6aa5ae8ef4aeca5057bb1533fd8",
+    "tests/parity/resource_bindings_5_0_6_cases.json.gz": "a061fc1cda99743499917d61c9d87aa4af1ba8242211245aba77ba663ff86e69",
+    "docs/parity/resource_bindings_5_0_6_source_review.json": "fd16f03a4b3f1efa64cba9a00d6b701a3620a63aecbdc8c970115d6be9449a9a",
+    "docs/parity/resource_bindings_5_0_6_native_ownership.json.gz": "3bee82364e6fef3d0d4f4f87b464328ee4495d0dc6a7d0b76d7278e07d791930",
+    "docs/parity/resource_bindings_5_0_6_raw_lookup_diagnostics.json.gz": "c5b203ad58011e90de1c81bbf4237325570fe361a0808c8a3e42ea0214474bcc",
+    "docs/parity/resource_borrow_failures_5_0_6.json": "4be320aa1777f00f9bedd02f9567cb68bf8d30956cff954ffd676fa88afc06d9"
+  },
+  "logs": {
+    "rust_build": {
+      "path": "/tmp/teaql_resource_bindings_rust_build_retry_506.log",
+      "sha256": "24c3f3758d4d66162a2bf4296c3f8ecf67b00f472ef7b2203be365d0c62885d6",
+      "output": "warning: unused import: `teaql_core::Entity as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:5:5\n  |\n5 | use teaql_core::Entity as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `crate::request_support::AuditedSave as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:6:5\n  |\n6 | use crate::request_support::AuditedSave as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nwarning: associated function `from_display` is never used\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:61:8\n   |\n60 | impl SampleDataError {\n   | -------------------- associated function in this implementation\n61 |     fn from_display(error: impl std::fmt::Display) -> Self {\n   |        ^^^^^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `teaql_core::Entity as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:5:5\n  |\n5 | use teaql_core::Entity as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `crate::request_support::AuditedSave as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:6:5\n  |\n6 | use crate::request_support::AuditedSave as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nwarning: associated function `from_display` is never used\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:61:8\n   |\n60 | impl SampleDataError {\n   | -------------------- associated function in this implementation\n61 |     fn from_display(error: impl std::fmt::Display) -> Self {\n   |        ^^^^^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: method `scalar_from_labels_as` is never used\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/priority/request.rs:3853:8\n     |\n  45 | impl<R> PriorityRequest<R> {\n     | -------------------------- method in this implementation\n...\n3853 |     fn scalar_from_labels_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n     |        ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: method `scalar_from_labels_as` is never used\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/platform/request.rs:1725:8\n     |\n  45 | impl<R> PlatformRequest<R> {\n     | -------------------------- method in this implementation\n...\n1725 |     fn scalar_from_labels_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n     |        ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: `cpp-constants-catalog-core` (lib) generated 3 warnings (run `cargo fix --lib -p cpp-constants-catalog-core` to apply 2 suggestions)\nwarning: `cpp-constants-numeric-core` (lib) generated 5 warnings (run `cargo fix --lib -p cpp-constants-numeric-core` to apply 2 suggestions)\n   Compiling teaql_cpp_constant_variants_oracle v0.1.0 (/home/philip/githome/teaql-cpp/tests/parity/rust_constant_variants)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.68s\n"
+    },
+    "native_build": {
+      "path": "/tmp/teaql_resource_bindings_native_build_final_506.log",
+      "sha256": "9843427205bda186450b64b7df3ee53b36d53ca282a8561c54e84ad7aaa68b5e",
+      "output": "[1/2] Building CXX object CMakeFiles/teaql_resource_bindings_probe.dir/tests/parity/resource_bindings_probe.cpp.o\nIn file included from /home/philip/githome/teaql-cpp/tests/parity/resource_bindings_probe.cpp:2:\n/home/philip/githome/teaql-cpp/tests/parity/generated_constant_variants_probe.cpp:356:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n  356 | }\n      | ^\n1 warning generated.\n[2/2] Linking CXX executable teaql_resource_bindings_probe\n"
+    },
+    "module_build": {
+      "path": "/tmp/teaql_resource_bindings_module_build_retry_506.log",
+      "sha256": "9ba155912f80de3d57ae24fe711ef422c3f32d306db6fb9ddd375449cd953b6e",
+      "output": "[0/1] Re-running CMake...\n-- Configuring done (2.4s)\n-- Generating done (1.0s)\n-- Build files have been written to: /home/philip/githome/teaql-cpp/build_modules_native\n[1/26] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd\n[2/24] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd\n[3/22] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd\n[4/20] Generating CXX dyndep file modules/CMakeFiles/teaql_data_service_module.dir/CXX.dd\n[5/18] Generating CXX dyndep file modules/CMakeFiles/teaql_sql_module.dir/CXX.dd\n[6/16] Generating CXX dyndep file modules/CMakeFiles/teaql_runtime_module.dir/CXX.dd\n[7/14] Generating CXX dyndep file modules/CMakeFiles/teaql_provider_sqlite_module.dir/CXX.dd\n[8/12] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/resource_bindings_probe.cpp for CXX dependencies\n[9/12] Generating CXX dyndep file modules/CMakeFiles/teaql_module_resource_bindings_probe.dir/CXX.dd\n[10/12] Building CXX object modules/CMakeFiles/teaql_module_resource_bindings_probe.dir/consumers/resource_bindings_probe.cpp.o\nIn file included from /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/resource_bindings_probe.cpp:50:\n/home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/generated_constant_variants_probe.cpp:403:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n  403 | }\n      | ^\n1 warning generated.\n[11/12] Linking CXX executable modules/teaql_module_resource_bindings_probe\n"
+    },
+    "sanitize_build": {
+      "path": "/tmp/teaql_resource_bindings_sanitize_build_506.log",
+      "sha256": "d10f6553f549d001c0d04a16c52f8bb7d260a838c14dfedadfa716fadfc4d6d8",
+      "output": "[1/6] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/business_clock.cpp.o\n[2/6] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/time.cpp.o\n[3/6] Linking CXX static library teaql_core/libteaql_core.a\n[4/6] Linking CXX static library teaql_runtime/libteaql_runtime.a\n[5/6] Building CXX object CMakeFiles/teaql_resource_bindings_probe.dir/tests/parity/resource_bindings_probe.cpp.o\nIn file included from /home/philip/githome/teaql-cpp/tests/parity/resource_bindings_probe.cpp:2:\n/home/philip/githome/teaql-cpp/tests/parity/generated_constant_variants_probe.cpp:356:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n  356 | }\n      | ^\n1 warning generated.\n[6/6] Linking CXX executable teaql_resource_bindings_probe\n"
+    },
+    "comparison": {
+      "path": "/tmp/teaql_resource_bindings_compare_retry_506.log",
+      "sha256": "a74bd89a37dbf841e66acff3abbb6e172aaea4591270a0b4730c34f49a1abd17",
+      "output": "Resource bindings: 384/384 exact override/resource outcomes\n"
+    },
+    "native_tests": {
+      "path": "/tmp/teaql_resource_bindings_native_tests_506.log",
+      "sha256": "3bc046b160a7a18bc7d1a43ae9f12be54216f9225a2f786239961f383f61cfb0",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 43: resource_bindings_rust_parity\n1/1 Test #43: resource_bindings_rust_parity ....   Passed    3.69 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   3.70 sec\n"
+    },
+    "module_tests": {
+      "path": "/tmp/teaql_resource_bindings_module_tests_506.log",
+      "sha256": "521c1200881aa50b4608df81ba120f2d7f1d5e7df2d7481f12bbd758ea2694ec",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 764: module_resource_bindings_rust_parity\n1/1 Test #764: module_resource_bindings_rust_parity ...   Passed    3.72 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   3.73 sec\n"
+    },
+    "sanitize_tests": {
+      "path": "/tmp/teaql_resource_bindings_sanitize_tests_506.log",
+      "sha256": "bc8a8f289cebd61dd1b8675b13edc7af97da2c6509213e4a2850bb0e0cc022a8",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 43: resource_bindings_rust_parity\n1/1 Test #43: resource_bindings_rust_parity ....   Passed   11.39 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  11.41 sec\n"
+    },
+    "reproduce": {
+      "path": "/tmp/teaql_resource_bindings_reproduce_506.log",
+      "sha256": "a74bd89a37dbf841e66acff3abbb6e172aaea4591270a0b4730c34f49a1abd17",
+      "output": "Resource bindings: 384/384 exact override/resource outcomes\n"
+    },
+    "source_borrow_rejections": {
+      "path": "/tmp/teaql_resource_borrow_failures_record_506.log",
+      "sha256": "400a498eaf9d9eddc4753342920444ae804bee0d18bb5680c592d5b77e5654ec",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nwarning: patch `teaql-macros v5.0.6 (/home/philip/githome/teaql-cpp/.reference/teaql-rs/teaql-macros)` was not used in the crate graph\nhelp: Check that the patched package version and available features are compatible\n      with the dependency requirements. If the patch has a different version from\n      what is locked in the Cargo.lock file, run `cargo update` to use the new\n      version. This may also occur with an optional dependency that is not enabled.\n     Locking 104 packages to latest Rust 1.97.1 compatible versions\nVerified three original resource borrow compiler rejections\n"
+    },
+    "source_borrow_rejections_reproduce": {
+      "path": "/tmp/teaql_resource_borrow_failures_reproduce_506.log",
+      "sha256": "ae8f0f8f0a4d56009dc2de274a4d5efcf18a99e7d3ac0083fd25a0a55be9d6e8",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified three original resource borrow compiler rejections\n"
+    },
+    "module_bodies": {
+      "path": "/tmp/teaql_resource_bindings_module_bodies_506.log",
+      "sha256": "d0b6338ff095d613918fba29f26ff7d853c4169ce4c3d36dad33ddbcc0f139be",
+      "output": "Verified 443 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n"
+    },
+    "format": {
+      "path": "/tmp/teaql_resource_bindings_format_retry_506.log",
+      "sha256": "c7be851e75797478c8a61ca54361248f91d0352c48b94c314bf0f2d5f3db719a",
+      "output": "Formatted 1350 handwritten C++ files with clang-format 18.1.8\n"
+    },
+    "format_check": {
+      "path": "/tmp/teaql_resource_bindings_format_check_retry_506.log",
+      "sha256": "4c8a324d742935b9b54fa4b0410240d7d9eefea3144a823e78f7998c73f15be9",
+      "output": "Checked 1350 handwritten C++ files with clang-format 18.1.8\n"
+    }
+  },
+  "remaining": [
+    "Broader provider/clock/service replacement and model/Assist configurations.",
+    "All complete G01-G17/P0-P7 integration and guard removal requirements."
+  ]
+}

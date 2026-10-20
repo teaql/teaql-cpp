@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "matrices": [
+    {
+      "stem": "query_keys",
+      "inputs": 451,
+      "historical_sha256": "9f5f098b94b9b9e3c8c70122c09dbe08df0af9952afb6297d1db428ab4c2d8a0",
+      "source_changed": 451
+    },
+    {
+      "stem": "query_store",
+      "inputs": 259,
+      "historical_sha256": "30415e8cc06b13a44763758bc925642ff1112a2c765b459b99566fb76cedb287",
+      "source_changed": 0
+    },
+    {
+      "stem": "id_set_build",
+      "inputs": 144,
+      "historical_sha256": "850a6fa73541b706776b266402407b8af284f1b421023c62fcd4572a23ae74ff",
+      "source_changed": 0
+    },
+    {
+      "stem": "query_metadata_keys",
+      "inputs": 672,
+      "historical_sha256": null,
+      "source_changed": null
+    }
+  ],
+  "cases": 1526,
+  "normalization": "none",
+  "manifest_sha256": "f9b132579ff43aef8982a2a8ece40a6cf596260f622f441a6fcad2666862542f",
+  "lock_sha256": "12271f1d5f61d9510c0116ce46071eca8f6afc60ac87898a736124f10c2b0ea2",
+  "original_sources": {
+    "data_service/helpers.rs": "0244a34e8467f716d09ebcbbb5f3c2b2ade41ef3b41070e3c919fa5dc5613421",
+    "data_service/resolved.rs": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+    "context/pagination.rs": "b4aa60224bb200336c69304d1bd7ec3091e64d96338341523089ddfcc3643512",
+    "data_service/cache.rs": "0eb366d219098ecf26b3bdb3cd95d50e40c365533bffa6342278ce87cd93e026"
+  },
+  "body_extraction": "19c5909dec35b512b8f3ddeeeaab5b7e5cdba0773fd6815aa8a08066648305b1",
+  "scope": "Native64 key/store/lock responsibilities; complete G08/G09/G13/G15/G16/P0-P7 remain partial",
+  "status": "scoped original/native and relevant native/sanitizer/module gates pass; complete capabilities remain partial",
+  "verification": {
+    "native": {
+      "passed": 13,
+      "total": 13,
+      "log": "/tmp/teaql_query_optimization_506_native_tests.log"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "leak_scanning": false,
+      "log": "/tmp/teaql_query_optimization_506_sanitize_tests.log"
+    },
+    "modules": {
+      "passed": 3,
+      "total": 3,
+      "log": "/tmp/teaql_query_optimization_506_module_tests.log",
+      "canonical_bodies": 175
+    },
+    "reproduction": {
+      "exit_code": 0,
+      "log": "/tmp/teaql_query_optimization_506_reproduce.log",
+      "sha256": "8d9269fdaf168f47788dd53baf73c4903a2ed2b7baa451a4a88db722b3ddb758"
+    },
+    "formatting": {
+      "files": 1027,
+      "format_exit_code": 0,
+      "check_exit_code": 0
+    }
+  },
+  "observer_source_hashes": {
+    "tests/parity/rust_query_optimization_5_0_6/src/bin/query_keys.rs": "5221188cb49aab4ceffe713c8b4531e979b9a5e6c7bd95112f28dc31cb833ec7",
+    "tests/parity/rust_values/src/bin/query_keys_oracle.rs": "07a254156cbb3d4f7049c143de2df8b75002cb20156f2f74c23fec4a39afff6b",
+    "tests/parity/rust_values/src/bin/query_store_oracle.rs": "4e90ceadb769fb8382bea9a87e3d533c125c77d404985b92835ca07b73463138",
+    "tests/parity/rust_values/src/bin/id_set_build_oracle.rs": "3dca8bb4e87f7d6b755c74a6523951949769a48b381404601ab87cf34fadd175",
+    "tests/support/query_metadata_fixture.hpp": "29cb43584aaeb17ad0a764f7725710ca71471c977096e14894601016afa38c0e"
+  },
+  "build_history": [
+    {
+      "log": "/tmp/teaql_query_optimization_506_source_build.log",
+      "exit_code": 101,
+      "reason": "Historical fixture exhaustively matched Expr, now nonexhaustive. Companion adds an explicit unsupported-expression panic; original methods and driver are preserved."
+    },
+    {
+      "log": "/tmp/teaql_query_optimization_506_source_retry_build.log",
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 # Generated candidates checkpoint: Rust 5.0.6
 
+Current status: G05/P3 is now qualified with documented language/ownership
+adaptations and constants use normal generation. See
+[the acceptance record](constants_acceptance_5_0_6.md). The text and counts below
+retain this earlier checkpoint, including its then-active generation guard.
+
 Status: P3/G05 is partial. Candidate Q/model/E semantics are qualified for the
 retained fixture; generated constant bootstrap is still pending. Normal constant
 entity generation remains guarded. Qualification output uses `--qualify-constants`.

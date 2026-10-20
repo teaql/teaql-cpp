@@ -1,4 +1,8 @@
 #pragma once
+#include <teaql/runtime/generated_runtime_config.hpp>
+#include <teaql/runtime/generated_business_id_environment.hpp>
+#include <teaql/runtime/generated_schema_provider.hpp>
+#include <teaql/runtime/generated_service_runtime_error.hpp>
 #include <teaql/runtime/business_id.hpp>
 #include <teaql/runtime/context.hpp>
 #include <teaql/runtime/checker_model_debug.hpp>
@@ -46,6 +50,7 @@
 #include <teaql/runtime/round_trip_reference.hpp>
 #include <teaql/runtime/document_round_trip.hpp>
 #include <teaql/runtime/reference_model_debug.hpp>
+#include <teaql/runtime/document_model_debug.hpp>
 #include <teaql/runtime/relation_model_debug.hpp>
 #include <teaql/runtime/registry_debug.hpp>
 #include <teaql/runtime/telemetry.hpp>
@@ -53,6 +58,15 @@
 #include <teaql/runtime/transaction.hpp>
 
 namespace teaql::runtime {
+using ::teaql::GeneratedLocalSchemaProvider;
+using ::teaql::GeneratedEnvironmentError;
+using ::teaql::GeneratedRuntimeConfigurationError;
+using ::teaql::GeneratedServiceRuntimeConfig;
+using ::teaql::GeneratedServiceRuntimeError;
+using ::teaql::read_generated_runtime_config;
+using ::teaql::read_generated_environment_value;
+using ::teaql::read_generated_business_id_key;
+using ::teaql::install_generated_business_id_environment_key;
 using ::teaql::GeneratedDynamicJsonFormatError;
 using ::teaql::GeneratedServiceRuntimeExecutor;
 using ::teaql::apply_generated_dynamic_json;
@@ -85,6 +99,9 @@ using ::teaql::GeneratedFieldChecks;
 using ::teaql::GeneratedDynamicFields;
 using ::teaql::GeneratedReadonlyProperties;
 using ::teaql::GeneratedRelationAccess;
+using ::teaql::GeneratedEntityJson;
+using ::teaql::GeneratedScalarCodec;
+using ::teaql::SampleDataLogSink;
 using ::teaql::GeneratedBusinessId;
 using ::teaql::GeneratedBusinessIdAccess;
 using ::teaql::BUSINESS_ID_V1_ALPHABET;

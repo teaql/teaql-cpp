@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "original_source_files": 610,
+  "appended_source_files": 1,
+  "original_method_bodies_changed": false,
+  "reference_registry_versions_preserved": true,
+  "reference_registry_checksums_preserved": true,
+  "observer_exit_code": 0,
+  "output": "Protected Behavior: 1296/1296 exact original/native outcomes\n",
+  "bridge": "\nimpl<'a, E> EntityDataService<'a, E>\nwhere E: teaql_data_service::QueryExecutor + teaql_data_service::MutationExecutor + Send + Sync {\n    #[doc(hidden)]\n    pub async fn __cpp_protected_delete(&self, command: &teaql_core::DeleteCommand,\n        reason: Option<&str>) -> Result<u64, DataServiceError<E::Error>> {\n        match reason {\n            Some(reason) => self.with_mutation_intent(teaql_core::MutationIntent::new(reason)\n                .map_err(crate::RuntimeError::from).map_err(DataServiceError::Runtime)?)\n                .delete_internal(command).await,\n            None => self.delete_internal(command).await,\n        }\n    }\n    #[doc(hidden)]\n    pub async fn __cpp_protected_recover(&self, command: &teaql_core::RecoverCommand,\n        reason: Option<&str>) -> Result<u64, DataServiceError<E::Error>> {\n        match reason {\n            Some(reason) => self.with_mutation_intent(teaql_core::MutationIntent::new(reason)\n                .map_err(crate::RuntimeError::from).map_err(DataServiceError::Runtime)?)\n                .recover_internal(command).await,\n            None => self.recover_internal(command).await,\n        }\n    }\n}\n",
+  "original_resolved_sha256": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+  "compiled_resolved_sha256": "86ca464b33362713edf36dba9851692d8596b859437b879148ed1db25555b9e3",
+  "hashes": {
+    "scripts/verify_protected_behavior_5_0_6.py": "112009250843731be28fba3f94415e573352c4f1cd58301f62d79fb74d8b8099",
+    "tests/parity/build_protected_behavior_oracle_5_0_6.py": "7369349566e6a913c7e6be5f15af2e98c3c1d62e4808bd96e4c02a1b3bdf8abd",
+    "tests/parity/protected_behavior_5_0_6.rs": "b4fd8b4a028e44cb46cf2e317d4d5e193568b497c64a7919b54b5532b537e103",
+    "tests/parity/protected_behavior_probe.cpp": "b2f029935165258befa28d5826076a87bdf88b5836bf9fba2a2026d1f6a63372",
+    "tests/parity/compare_protected_behavior_5_0_6.py": "8c891ed0ee63e2b98c1df9a807579cc77ef793c914be6cca7dedb4f614645c7e",
+    "tests/parity/protected_behavior_5_0_6_cases.json.gz": "83f158e5283e3948e6d686aab6a2ad7cfcba027fff5070bb1f3f6a3107103d3f",
+    "tests/parity/rust_protected_behavior_5_0_6/Cargo.toml": "7a5de0ce708835c13a2e95fda32a98897383b53a39db4dfab77310854d2cb509",
+    "tests/parity/rust_protected_behavior_5_0_6/Cargo.lock": "bf79a641d1a50f2da0bae08ba372bec4b2ace0f50cdebe201414043e04d6b62c",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/generator/parity/checkers_rust/PROVENANCE.json": "ac52cb0b115dd5a93ffeaa10573ae61bec23f52da5e011be0b07d5bf4c46a2e7"
+  }
+}

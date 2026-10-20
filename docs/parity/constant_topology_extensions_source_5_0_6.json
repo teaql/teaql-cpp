@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "cases": [
+    {
+      "case": "ordered",
+      "build_exit_code": 0,
+      "source_versions_preserved": true,
+      "lock_sha256": "b5403d442e7f7198060e35d7428bd9eef9171db99dd8f7bc72dc02d627c8044a",
+      "observer_sha256": "668d399328e6bcdd72bc9b25784bf057b3c93c2406087a01c37279c579c69553",
+      "source_checksums_preserved": true,
+      "original_artifact_provenance_sha256": "25881f525f6eb590dd255d5cd4a552a21b2fe409336ef1b2f0f06e9cc17bb523"
+    },
+    {
+      "case": "reversed",
+      "build_exit_code": 0,
+      "source_versions_preserved": true,
+      "lock_sha256": "b5403d442e7f7198060e35d7428bd9eef9171db99dd8f7bc72dc02d627c8044a",
+      "observer_sha256": "668d399328e6bcdd72bc9b25784bf057b3c93c2406087a01c37279c579c69553",
+      "source_checksums_preserved": true,
+      "original_artifact_provenance_sha256": "c0c8b02983b258d46344f4631617e42bc7b640505e82bc7ed965a472cf9ff4f0"
+    },
+    {
+      "case": "self_reference_required",
+      "build_exit_code": 0,
+      "source_versions_preserved": true,
+      "lock_sha256": "b5403d442e7f7198060e35d7428bd9eef9171db99dd8f7bc72dc02d627c8044a",
+      "observer_sha256": "668d399328e6bcdd72bc9b25784bf057b3c93c2406087a01c37279c579c69553",
+      "source_checksums_preserved": true,
+      "original_artifact_provenance_sha256": "28d6b8f58308ea72f198c653eb49977ee0947afba7c69965086e05b61c3e3a6f"
+    }
+  ],
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "reference_lock_sha256": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1"
+}

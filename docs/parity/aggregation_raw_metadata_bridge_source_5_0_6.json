@@ -1,0 +1,12 @@
+{
+  "scope": "Unaccepted source metadata representation experiment, not a changed runtime or a source-result normalization. Only Line.order_id column_name changes from quoted SQL token to raw identifier through the public MetadataStore API. Runtime/provider/query algorithms and generated original libraries are unchanged.",
+  "source": "tests/parity/rust_field_layout/src/bin/generated_relation_analysis_5_0_6.rs",
+  "source_sha256": "55a91534e077da6ffc2dc8cdf703a89f654cb8b2d05425b79f44d16685d38bda",
+  "observer": "tests/parity/rust_dynamic_json_base_5_0_6/src/bin/relation_aggregate_metadata_bridge_5_0_6.rs",
+  "observer_sha256": "138904b42450d779ebab96fa5858e8fbb3714acdf663bc1d082fe6c6493700be",
+  "helper": "// Controlled metadata representation experiment; production/reference algorithms stay unchanged.\nfn raw_column_metadata() -> teaql_runtime::InMemoryMetadataStore {\n    let mut metadata = cpp_dynamic_json_core::module().metadata;\n    let mut descriptor = teaql_runtime::MetadataStore::entity(&metadata, \"Line\").unwrap().clone();\n    let property = descriptor.properties.iter_mut().find(|property| property.name == \"order_id\").unwrap();\n    assert_eq!(property.column_name, \"\\\"order\\\"\");\n    property.column_name = \"order\".into();\n    metadata.register(descriptor);\n    metadata\n}\n",
+  "old_assembly": "let user_context=driver::block_on(cpp_dynamic_json_core::service_runtime_from_pool(pool)).unwrap().with_active_root(\"Platform\",1);",
+  "new_assembly": "let user_context=driver::block_on(cpp_dynamic_json_core::service_runtime_from_pool(pool)).unwrap().with_active_root(\"Platform\",1).with_metadata(raw_column_metadata());",
+  "other_observer_bodies_byte_identical": true,
+  "status": "candidate evidence only; user behavior choice remains pending"
+}

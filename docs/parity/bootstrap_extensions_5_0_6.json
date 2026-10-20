@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "declared Numeric Checker/Behavior/resource matrix qualified; complete capabilities and P0-P7 remain partial",
+  "scenarios": 2304,
+  "counts": {
+    "rounds": 3456,
+    "sql_entries": 35568,
+    "resource_destructions": 3456,
+    "bootstrap_success": 2448,
+    "continuations": 1728,
+    "query_success": 1728,
+    "save_success": 1296,
+    "prepared_insert_success": 864,
+    "prepared_update_success": 1152
+  },
+  "bootstrap_errors": {
+    "check failed: The Rank is required": 576,
+    "graph write error: Transport error: UNIQUE constraint failed: priority_data.id": 432
+  },
+  "continuation_errors": {
+    "prepare_insert_error: entity event error: fixture behavior denial": 576,
+    "prepare_update_error: entity event error: fixture behavior denial": 576,
+    "prepare_insert_error: check failed: The Rank is required": 288,
+    "save_error: check failed: The Rank is required": 360
+  },
+  "hooks": {
+    "select": 2880,
+    "insert": 1152,
+    "update": 1152,
+    "checker": 5256
+  },
+  "checker_statuses": {
+    "Create": 3312,
+    "Update": 1944
+  },
+  "all_rounds_destroy_resource_once": true,
+  "comparison": "Exact full callback order/status/scalars/resource tags/prepared commands/rows/versions/ID floors/roots/errors/SQL intent and destructor counts; no output normalization. Timing is outside the observer.",
+  "ownership": "Global owns SQLite and observation storage; extension logic/behavior/typed resource belong to User; actual User deletion each round and default PMR disabled.",
+  "runtime_changed": false,
+  "producer_changed": false,
+  "generated_outputs_changed": false,
+  "guards_removed": false,
+  "hashes": {
+    "tests/parity/bootstrap_extensions_probe.cpp": "e5959c140e89b3a794f46c08a7516153144c67dbae48cbefa75a48c8e426108d",
+    "tests/parity/rust_constant_variants/src/bin/bootstrap_extensions.rs": "7b911554a271ffa1ca147b8ccd5b1eaa9bd55bbadf14c01a2e869da388ab96e0",
+    "tests/parity/rust_constant_variants/Cargo.toml": "5816667c81c95b211c51ff91474ef02fd9da95530c12241cbd43b9e09b45eefc",
+    "tests/parity/rust_constant_variants/Cargo.lock": "1cc4aeaa9ce642375d198e91ac23af6b855780f84e44068c88cc5edf8dd968bc",
+    "tests/parity/compare_bootstrap_extensions_5_0_6.py": "31ad30e058c488c5f3e81961a85592f21464b09aa617bda57f491044be2bab43",
+    "tests/parity/bootstrap_extensions_5_0_6_cases.json.gz": "6f523320c8d3aa1bef47ce8061ad465371c0c3e81f2fcb20e9af3d327f00d224",
+    "docs/parity/bootstrap_extensions_5_0_6_source_review.json": "4c554c97cc6bab1b64aaf6994cb3fbd4ec6ed64ea6d844c9980a30be7e85da19"
+  },
+  "remaining": [
+    "Broader constant scalar/time/topology and model configuration matrix.",
+    "Resource replacement and missing-resource failure contracts, other extension hooks and full assembly/sample/Assist.",
+    "All complete capabilities and P0-P7 final integration gates remain open."
+  ],
+  "native": {
+    "build_exit_code": 0,
+    "parity_ctest_exit_code": 0,
+    "lifetime_build_exit_code": 0,
+    "lifetime_ctest_exit_code": 0,
+    "passed": 3,
+    "total": 3
+  },
+  "modules": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 1,
+    "total": 1,
+    "canonical_bodies": 323
+  },
+  "format": {
+    "version": "18.1.8",
+    "files": 1214,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "live_original_reproduction_exit_code": 0,
+  "initial_fixture_disposition": {
+    "path": "docs/parity/bootstrap_extensions_5_0_6_initial_gaps.json.gz",
+    "raw_sha256": "d6665b7ab6be2786e2afa66ee78256b9749d7e23dc15975aa2032fa41cf91b64",
+    "scenarios": 1440,
+    "status_spelling_differences": 4392,
+    "correction": "Initial observer before command-preparation expansion used lowercase status helper; existing native enum Debug now matches original Debug. No production or generated changes. Full initial outputs retained losslessly."
+  },
+  "logs": {
+    "rust_build": {
+      "path": "/tmp/teaql_bootstrap_extensions_rust_build_final_506.log",
+      "sha256": "3e4c51571cd941d1c03d364d965ee9400b402684c78c04ab1c2e1c56ddaabd85",
+      "output": "warning: unused import: `teaql_core::Entity as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:5:5\n  |\n5 | use teaql_core::Entity as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `crate::request_support::AuditedSave as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:6:5\n  |\n6 | use crate::request_support::AuditedSave as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nwarning: associated function `from_display` is never used\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_catalog_rust/lib/src/sample_data.rs:61:8\n   |\n60 | impl SampleDataError {\n   | -------------------- associated function in this implementation\n61 |     fn from_display(error: impl std::fmt::Display) -> Self {\n   |        ^^^^^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `teaql_core::Entity as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:5:5\n  |\n5 | use teaql_core::Entity as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `crate::request_support::AuditedSave as _`\n --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:6:5\n  |\n6 | use crate::request_support::AuditedSave as _;\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nwarning: associated function `from_display` is never used\n  --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/sample_data.rs:61:8\n   |\n60 | impl SampleDataError {\n   | -------------------- associated function in this implementation\n61 |     fn from_display(error: impl std::fmt::Display) -> Self {\n   |        ^^^^^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: method `scalar_from_labels_as` is never used\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/priority/request.rs:3853:8\n     |\n  45 | impl<R> PriorityRequest<R> {\n     | -------------------------- method in this implementation\n...\n3853 |     fn scalar_from_labels_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n     |        ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: method `scalar_from_labels_as` is never used\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/constants_numeric_rust/lib/src/platform/request.rs:1725:8\n     |\n  45 | impl<R> PlatformRequest<R> {\n     | -------------------------- method in this implementation\n...\n1725 |     fn scalar_from_labels_as(mut self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n     |        ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: `cpp-constants-catalog-core` (lib) generated 3 warnings (run `cargo fix --lib -p cpp-constants-catalog-core` to apply 2 suggestions)\nwarning: `cpp-constants-numeric-core` (lib) generated 5 warnings (run `cargo fix --lib -p cpp-constants-numeric-core` to apply 2 suggestions)\n   Compiling teaql_cpp_constant_variants_oracle v0.1.0 (/home/philip/githome/teaql-cpp/tests/parity/rust_constant_variants)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.51s\n"
+    },
+    "native_build": {
+      "path": "/tmp/teaql_bootstrap_extensions_native_build_commands_506.log",
+      "sha256": "a8c023f13f02335556418cd3412a16d024daeecd0716391926d27b11d108c567",
+      "output": "[1/2] Building CXX object CMakeFiles/teaql_bootstrap_extensions_probe.dir/tests/parity/bootstrap_extensions_probe.cpp.o\nIn file included from /home/philip/githome/teaql-cpp/tests/parity/bootstrap_extensions_probe.cpp:2:\n/home/philip/githome/teaql-cpp/tests/parity/generated_constant_variants_probe.cpp:356:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n  356 | }\n      | ^\n1 warning generated.\n[2/2] Linking CXX executable teaql_bootstrap_extensions_probe\n"
+    },
+    "module_build": {
+      "path": "/tmp/teaql_bootstrap_extensions_module_build_commands_506.log",
+      "sha256": "d2d535f80a3df74bdacbe39cd24b40a513c302ff0c3242f0e33922d2ab1f0b50",
+      "output": "[0/1] Re-running CMake...\n-- Configuring done (2.0s)\n-- Generating done (0.9s)\n-- Build files have been written to: /home/philip/githome/teaql-cpp/build_modules_native\n[1/26] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd\n[2/24] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd\n[3/22] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd\n[4/20] Generating CXX dyndep file modules/CMakeFiles/teaql_data_service_module.dir/CXX.dd\n[5/18] Generating CXX dyndep file modules/CMakeFiles/teaql_sql_module.dir/CXX.dd\n[6/16] Generating CXX dyndep file modules/CMakeFiles/teaql_runtime_module.dir/CXX.dd\n[7/14] Generating CXX dyndep file modules/CMakeFiles/teaql_provider_sqlite_module.dir/CXX.dd\n[8/12] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/bootstrap_extensions_probe.cpp for CXX dependencies\n[9/12] Generating CXX dyndep file modules/CMakeFiles/teaql_module_bootstrap_extensions_probe.dir/CXX.dd\n[10/12] Building CXX object modules/CMakeFiles/teaql_module_bootstrap_extensions_probe.dir/consumers/bootstrap_extensions_probe.cpp.o\nIn file included from /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/bootstrap_extensions_probe.cpp:50:\n/home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/generated_constant_variants_probe.cpp:403:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n  403 | }\n      | ^\n1 warning generated.\n[11/12] Linking CXX executable modules/teaql_module_bootstrap_extensions_probe\n"
+    },
+    "comparison": {
+      "path": "/tmp/teaql_bootstrap_extensions_comparison_final_506.log",
+      "sha256": "c64819c2f8ef23d905ca480954134b36dddbd0a24e62d69c9bd4798d3fd00c05",
+      "output": "Bootstrap extensions: 2304/2304 exact override/resource outcomes\n"
+    },
+    "native_tests": {
+      "path": "/tmp/teaql_bootstrap_extensions_native_tests_506.log",
+      "sha256": "1efbbb2c9c8d5dcc22037f077d69cf1fcc35f1bb77d56d9680fa3c840cbb429b",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 41: bootstrap_extensions_rust_parity\n1/1 Test #41: bootstrap_extensions_rust_parity ...   Passed  141.87 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) = 141.88 sec\n"
+    },
+    "module_tests": {
+      "path": "/tmp/teaql_bootstrap_extensions_module_tests_506.log",
+      "sha256": "69338782ed6f074f1a5536337cb6a03905e11f275906dc7812d8288a10949a36",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 736: module_bootstrap_extensions_rust_parity\n1/1 Test #736: module_bootstrap_extensions_rust_parity ...   Passed  142.31 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) = 142.32 sec\n"
+    },
+    "lifetime_build": {
+      "path": "/tmp/teaql_bootstrap_extensions_lifetime_build_506.log",
+      "sha256": "cb55213523c53f091a1f0b174508678e2b53f539fc7bd7e39acbe3b165c48150",
+      "output": "[1/3] Linking CXX executable teaql_checker_tests\n[2/3] Building CXX object CMakeFiles/teaql_runtime_callback_scope_tests.dir/teaql_runtime/tests/runtime_callback_scope_tests.cpp.o\n[3/3] Linking CXX executable teaql_runtime_callback_scope_tests\n"
+    },
+    "lifetime_tests": {
+      "path": "/tmp/teaql_bootstrap_extensions_lifetime_tests_506.log",
+      "sha256": "35467ee5d9b538c0da96333f169fda52ffe4f8be3396a0a238005eb2bc75b33f",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start  10: runtime_callback_scope_contracts\n    Start 154: checker_context_contracts\n1/2 Test  #10: runtime_callback_scope_contracts ...   Passed    0.00 sec\n2/2 Test #154: checker_context_contracts ..........   Passed    0.00 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.02 sec\n"
+    },
+    "module_bodies": {
+      "path": "/tmp/teaql_bootstrap_extensions_module_bodies_506.log",
+      "sha256": "bf866972c1b5f9d9e0f6ca173b13225111fefcc87f5009266381544341f50cc6",
+      "output": "Verified 323 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n"
+    },
+    "reproduce": {
+      "path": "/tmp/teaql_bootstrap_extensions_reproduce_506.log",
+      "sha256": "c64819c2f8ef23d905ca480954134b36dddbd0a24e62d69c9bd4798d3fd00c05",
+      "output": "Bootstrap extensions: 2304/2304 exact override/resource outcomes\n"
+    },
+    "generator_integrity": {
+      "path": "/tmp/teaql_bootstrap_extensions_generator_integrity_506.log",
+      "sha256": "4b06fa8a4af43f77eed8b3e04b1f8645f7f21d4261c95f878168dee69cdeca0e",
+      "output": "Verified 36 locked generator sources and 17 capability records; 17 remain unqualified\n"
+    },
+    "format": {
+      "path": "/tmp/teaql_bootstrap_extensions_format_506.log",
+      "sha256": "78b0f15b130e2817de76d19ed626d96971fa952f6e6216d0e26b07d5f812a66f",
+      "output": "Formatted 1214 handwritten C++ files with clang-format 18.1.8\n"
+    },
+    "format_check": {
+      "path": "/tmp/teaql_bootstrap_extensions_format_check_506.log",
+      "sha256": "7f871f072085610d9b37332eb7ac1a695025e97673b362674c7bf69ea8d4e914",
+      "output": "Checked 1214 handwritten C++ files with clang-format 18.1.8\n"
+    }
+  }
+}

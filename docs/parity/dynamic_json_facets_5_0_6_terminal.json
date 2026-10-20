@@ -1,0 +1,60 @@
+{
+  "recorded_utc": "2026-10-14T18:09:35.247190+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Simultaneous readonly/persistent Order root loading and generated Person facets; original compact-sidecar absence and computed restricted-subquery failures retained. Protected private-field/sensitive-sink and complete model/cache/async/phase integration remain open.",
+  "exact_original_native_outcomes": 6336,
+  "successes": 3672,
+  "policy_denials": 1584,
+  "source_sqlite_subquery_errors": 1080,
+  "policy_callbacks": 10344,
+  "safe_sql_log_records": 7416,
+  "denied_cases_with_select_authorizer_callbacks": 0,
+  "loaded_root_title_snapshots": 1104,
+  "text_root_title_snapshots": 504,
+  "null_root_title_snapshots": 600,
+  "readonly_root_snapshots": 1656,
+  "returned_facet_maps": 720,
+  "compact_facet_rows": 960,
+  "readonly_facet_rows": 384,
+  "persistent_facet_sidecars": 0,
+  "complete_retained_facet_reference_registry_replay": 1184,
+  "reference_registry_difference_count": 0,
+  "checks": {
+    "native_json_facet_integration": {
+      "passed": 13,
+      "selected": 13
+    },
+    "modules": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize": {
+      "passed": 1,
+      "selected": 1,
+      "leak_scanning": false
+    },
+    "format_files": 1445,
+    "canonical_consumer_bodies": 661,
+    "module_exports": 1485
+  },
+  "existing_debug_adaptation": "Exact quoted-Line descriptor spelling only; no SQL/value/error rewriting.",
+  "production_or_generator_functions_changed": false,
+  "original_generated_or_historical_files_changed": false,
+  "raw_validation": "docs/parity/dynamic_json_facets_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "tests/parity/generated_dynamic_json_facets_probe.cpp": "9545a02339b66c17b3813d9c62b8687dd9c3c2f35b9aeb400b9bae60ff6e7f2b",
+    "tests/parity/compare_dynamic_json_facets_5_0_6.py": "d45bc65d309f7e3deabf86628a1ade8be5e215962f611fbbeb83fc43af0908e6",
+    "tests/parity/rust_dynamic_json_facets_5_0_6/Cargo.toml": "59846eaddbbfe22c5156dc8354689f9532a335700c22863c46ad046e3c926cd6",
+    "tests/parity/rust_dynamic_json_facets_5_0_6/Cargo.lock": "9f5fc22bfbba1905aec30fbf6e1e86bae943008d54be73fb3e364ed0487a3dfe",
+    "tests/parity/rust_dynamic_json_facets_5_0_6/src/bin/dynamic_json_facets_5_0_6.rs": "6df229e443d2ab37fa230185d050187ececadf1ad6df675d06484578f608ae92",
+    "tests/parity/rust_dynamic_json_facets_5_0_6/src/bin/generated_facets_5_0_6.rs": "3e39d33e16dff5c3337cf96ba6b0325a6c5e6e820cd054f46dd213ded8bc9a50",
+    "tests/parity/rust_dynamic_json_facets_5_0_6/src/bin/original_like_privacy_5_0_6.rs": "b293ead8f720c253047747af509a2923c7d325224677639aff40b306ecde139d",
+    "tests/parity/dynamic_json_facets_5_0_6_cases.json.gz": "b1225af7d772bf71b9c18f7298d4dd18eeeffaf22ce35d292bf2aec778bdc753",
+    "docs/parity/dynamic_json_facets_source_review_5_0_6.json": "6199f8a5003b0d72a3129bdfd62eee398f659d96f394d00b048ef109f1f9b5ef",
+    "docs/parity/dynamic_json_facets_original_observer_copy_5_0_6.json": "903f4b36b452825a1300383e57269f72091297280dada7b5f7b2d32e913f1fe2",
+    "scripts/verify_dynamic_json_facets_5_0_6.py": "c888ae04095916b315089d66202fdd440e4e261c10b02040ecb7d1b72446ff87"
+  },
+  "complete_capability_acceptance": false,
+  "full_suite_java_generation_mips_device_run": false
+}

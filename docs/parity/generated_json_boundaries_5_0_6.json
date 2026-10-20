@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "inherited_observations": 428,
+  "graph_boundary_observations": 768,
+  "source_and_cpp_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 6,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "generated_inherited_json_rust_parity",
+        "generated_inherited_json_context_contracts",
+        "generated_json_graph_views_rust_parity",
+        "generated_json_hydration_rust_parity",
+        "generated_json_column_alias_rust_parity",
+        "generated_json_hydration_context_contracts"
+      ]
+    },
+    "sanitize": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "modules_native": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "production_function_bodies_changed": false,
+  "canonical_consumer_bodies": 132,
+  "catalog_exports": 1479,
+  "formatting": {
+    "handwritten_files": 1014,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "binding_inventory": {
+    "active_baseline": 151,
+    "historical": 63,
+    "custom": 21
+  },
+  "source_files_sha256": {
+    "tests/parity/generated_inherited_json_probe.cpp": "9fe48a20e3653dda17ce3b2e10cf1178daed7f03bca71cb4af4ec5d2c8d7cec5",
+    "tests/parity/generated_json_graph_views_probe.cpp": "400e2e479605c4864fa7f7a7f9f2193825037afd13a0c43ddf64960905da016c",
+    "tests/parity/generated_inherited_json_5_0_6_cases.json.gz": "2b33dcc7eb108d9cb9108526684db4839e18b897639b3ea5c0c4ae1fd9f61a6f",
+    "tests/parity/generated_json_graph_views_5_0_6_cases.json.gz": "08c718fb955f6946375873ba29989f8e9aa66735ac2eda423ec51eeda7000e6d"
+  },
+  "notice": "Scoped inheritance/presentation and explicit graph boundary matrices only. Provider/save/dynamic/complete configuration and capabilities/P0-P7 remain open. No MIPS or physical-device test."
+}

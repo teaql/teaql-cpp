@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="5"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="0"
+	timestamp="2026-10-18T12:05:03"
+	>
+	<testcase name="module_core_collection_contracts" classname="module_core_collection_contracts" time="0.00223314" status="run">
+		<properties/>
+		<system-out>Core collection contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_entity_expression_contracts" classname="module_entity_expression_contracts" time="0.00263565" status="run">
+		<properties/>
+		<system-out>Entity and SafeExpression contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_safe_expression_api_contracts" classname="module_safe_expression_api_contracts" time="0.00167124" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_safe_expression_api_rust_parity" classname="module_safe_expression_api_rust_parity" time="0.274617" status="run">
+		<properties/>
+		<system-out>SafeExpression API 5.0.6 parity: 448/448 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_safe_expression_empty_source_rust_parity" classname="module_safe_expression_empty_source_rust_parity" time="0.0473827" status="run">
+		<properties/>
+		<system-out>SafeExpression emptiness parity: 132/132 observations match
+</system-out>
+	</testcase>
+</testsuite>

@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 960,
+  "initialization_rounds": 1440,
+  "policy_reviews": 1380,
+  "safe_events": 4200,
+  "initial_mismatches": 576,
+  "round_outcomes": {
+    "success": 792,
+    "policy_denial": 224,
+    "committed_audit_delivery_failure": 232,
+    "unique_conflict": 192
+  },
+  "source_and_cpp_exit_code": 0,
+  "live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 960 actual original/native constant bootstrap governance outcomes\n",
+  "reproduction_exit_code": 0,
+  "reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 960 actual original/native constant bootstrap governance outcomes\n",
+  "legacy_observations": 36,
+  "legacy_live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nConstant variants parity: 36/36 observations match\n",
+  "profiles": {
+    "native": {
+      "passed": 7,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "generated_constant_scalar_contracts",
+        "generated_bootstrap_model_contracts",
+        "generated_bootstrap_contracts",
+        "generated_constant_variants_rust_parity",
+        "audited_auto_save_rust_parity",
+        "generated_bootstrap_rust_parity",
+        "constant_governance_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 347: generated_bootstrap_rust_parity\n    Start 346: generated_constant_variants_rust_parity\n    Start  93: audited_auto_save_rust_parity\n    Start 345: generated_constant_scalar_contracts\n1/6 Test #345: generated_constant_scalar_contracts .......   Passed    0.14 sec\n    Start 350: generated_bootstrap_model_contracts\n2/6 Test #350: generated_bootstrap_model_contracts .......   Passed    0.01 sec\n    Start 239: generated_bootstrap_contracts\n3/6 Test #239: generated_bootstrap_contracts .............   Passed    0.01 sec\n4/6 Test #346: generated_constant_variants_rust_parity ...   Passed    3.86 sec\n5/6 Test  #93: audited_auto_save_rust_parity .............   Passed    4.04 sec\n6/6 Test #347: generated_bootstrap_rust_parity ...........   Passed    4.05 sec\n\n100% tests passed out of 6\n\nTotal Test time (real) =   4.06 sec\nTest project /home/philip/githome/teaql-cpp/build_native_current\n    Start 344: constant_governance_rust_parity\n1/1 Test #344: constant_governance_rust_parity ...   Passed   49.13 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  49.14 sec\n"
+    },
+    "sanitize": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "generated_bootstrap_model_contracts",
+        "generated_constant_variants_rust_parity",
+        "constant_governance_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 346: generated_constant_variants_rust_parity\n    Start 350: generated_bootstrap_model_contracts\n    Start 344: constant_governance_rust_parity\n1/3 Test #350: generated_bootstrap_model_contracts .......   Passed    0.02 sec\n2/3 Test #346: generated_constant_variants_rust_parity ...   Passed    8.56 sec\n3/3 Test #344: constant_governance_rust_parity ...........   Passed  145.10 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) = 145.11 sec\n"
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_generated_bootstrap_model_contracts",
+        "module_constant_governance_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 546: module_generated_bootstrap_model_contracts\n    Start 667: module_constant_governance_rust_parity\n1/2 Test #546: module_generated_bootstrap_model_contracts ...   Passed    0.00 sec\n2/2 Test #667: module_constant_governance_rust_parity .......   Passed   42.30 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =  42.32 sec\n"
+    }
+  },
+  "module_legacy_observations": 36,
+  "module_legacy_output": "Constant variants parity: 36/36 observations match\n",
+  "module_structure_checks": [
+    "Verified 245 production headers, 687 include edges and 7 modules: acyclic and confined to supported layers\n",
+    "Verified 156 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n",
+    "Verified 1479 catalog exports and isolated lookup across 7 modules\n"
+  ],
+  "native_build_exit_code": 0,
+  "sanitize_build_exit_code": 0,
+  "module_build_exit_code": 0,
+  "formatter_inputs": 1017,
+  "formatter_version": "18.1.8",
+  "format_exit_code": 0,
+  "format_check_exit_code": 0,
+  "sanitizer_leak_scanning": false,
+  "default_pmr_disabled_in_observer": false,
+  "original_sources_modified": false,
+  "generated_artifacts_modified": false,
+  "java_generator_changed": false,
+  "mips_or_physical_run": false,
+  "remaining_scope": "Constant guard remains. Full scalar/time, metadata failures, topology/custom resources and active audited-save cleanup remain required. All G01-G17/P0-P7 incomplete.",
+  "sha256": {
+    "tests/parity/constant_governance_5_0_6_cases.json.gz": "389e722319e9a7e71e9c05833e1f2cfb7909d5efabd2cb5f6c8a930dfc850b34",
+    "tests/parity/generated_constant_variants_probe.cpp": "82d085b7203fd34fef996aec625a977481decd1ac0414be19cc0f67bc1080df1",
+    "tests/parity/rust_constant_variants/src/main.rs": "75584ce0e602642de414e602c57e618af4b836aedee0bdd864869c5b44452cfd",
+    "teaql_runtime/include/teaql/runtime/generated_bootstrap.hpp": "3808be0d68f89ef68d38d68ceeb399a19e2cf3914f01d2d896ec2a490effb354",
+    "docs/parity/constant_governance_5_0_6_initial_gaps.json": "c318405d653b23c1c8a8f58237e589b08d22f8349c9b0ce933032742d651d9af",
+    "tests/parity/generated_constant_variants_5_0_6_cases.json.gz": "03d5ec50507814f95fed12f2292b8813d286c0c855a8a3f472697c33f213fbff"
+  }
+}

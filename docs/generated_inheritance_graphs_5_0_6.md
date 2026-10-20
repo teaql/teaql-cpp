@@ -1,5 +1,9 @@
 # Inherited optional relation graphs: Rust 5.0.6
 
+Current status: G04/P2 is qualified with documented language/ownership adaptations;
+normal inheritance generation is enabled. See [the final acceptance](inheritance_acceptance_5_0_6.md).
+The checkpoint status and guard statements below are retained historical evidence.
+
 Status: partial P2/G01/G04/G13 evidence. Normal inheritance generation remains
 guarded; this fixture does not qualify every inherited model configuration.
 

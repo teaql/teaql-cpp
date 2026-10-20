@@ -1,5 +1,23 @@
 # SQL execution source-test acceptance
 
+This document preserves the historical 5.0.5 acceptance checkpoints below.
+The active baseline is 5.0.6. The subsequent
+[complete diagnostic-source review](sql_diagnostics_source_review_5_0_6.md)
+accepts diagnostic_execution.rs and diagnostic_stream.rs using exact reference
+dependencies and fresh original calls. The subsequent
+[complete execution-test review](sql_execution_tests_source_review_5_0_6.md)
+qualifies all six query and twenty-one mutation tests on 5.0.6, including the
+six mutation tests missing from the historical port. The subsequent
+[ME01-ME20 review](sql_mutation_execution_source_review_5_0_6.md) accepts complete
+mutation_execution.rs after repairing two reproduced provenance/cache gaps.
+The subsequent [SX01-SX27/XT01-XT16 review](sql_executor_source_review_5_0_6.md)
+qualifies complete executor.rs, its sixteen embedded tests and conditional
+transport/stream/transaction interfaces on the active baseline. Provider and
+runtime/governance/publication caller requirements remain independent.
+The subsequent [DC01-DC31/root review](sql_compiler_source_review_5_0_6.md)
+accepts complete dialect.rs and lib.rs on the active baseline, including all
+thirty root tests' explicit SQLite dispositions and three dialect tests.
+
 ## Complete diagnostic and renderer source-test acceptance, 2026-10-09
 
 The six query diagnostic and fifteen mutation diagnostic source-test files are

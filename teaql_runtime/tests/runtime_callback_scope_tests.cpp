@@ -3,16 +3,16 @@
 #include <exception>
 using namespace teaql;
 
-struct Executor final : QueryExecutor<unsigned>, MutationExecutor<unsigned> {
+struct Executor final : QueryExecutor<String>, MutationExecutor<String> {
     DataServiceCapabilities capabilities() const override {
         return {};
     }
 
-    AsyncOperation<Result<QueryResult, unsigned>>& query(Memory, QueryRequest) override {
+    AsyncOperation<Result<QueryResult, String>>& query(Memory, QueryRequest) override {
         throw std::logic_error("unused query");
     }
 
-    AsyncOperation<Result<MutationResult, unsigned>>& mutate(Memory, MutationRequest) override {
+    AsyncOperation<Result<MutationResult, String>>& mutate(Memory, MutationRequest) override {
         throw std::logic_error("unused mutation");
     }
 };

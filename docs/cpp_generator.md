@@ -12,14 +12,32 @@ The generator baseline is locked in its `cpp_generator.lock.json`; the runtime
 now targets the exact Rust v5.0.6 baseline. Earlier qualification remains
 historical; see [the upgrade audit](baseline_5_0_6_upgrade.md).
 
+Generated `AGENTS.md` starts with `ASSIST.md`, then links to the next entity
+action in `assist/<entity>/<action>.md` or exact field guidance in
+`assist/<entity>/fields/<field>.md`. Runtime support lives in `assist/runtime/`.
+The [action examples](generated_application_workflows_5_0_6.md) and
+[field/runtime guidance](generated_field_runtime_assist_5_0_6.md) use existing
+SDK/runtime contracts; application helper functions in their code blocks are
+examples rather than additional SDK methods. Missing external utility facades
+remain explicitly unavailable. Full G12 acceptance still requires the separate
+assembly, sample and integration matrix.
+
+The three source-shaped startup entries now return
+`Result<Ref<DataServiceExecutor>, ServiceRuntimeError>`, including
+`serviceRuntimeFromConnection(user_context, connection)`. Check the Result before
+schema or business execution. Business-ID domains install a managed environment
+key before executor registration; ordinary domains do not read key variables.
+The explicit filename `configureRuntime`/`setup` path retains manual typed-key
+installation. See the [startup contract and qualification boundary](generated_business_environment_startup_5_0_6.md).
+
 ## Generate and reproduce
 
 ```sh
+source scripts/toolchains/activate.sh
 python3 scripts/generate_examples.py
 python3 scripts/generate_examples.py --check
 python3 scripts/format_cpp.py
 python3 scripts/format_cpp.py --check
-source scripts/toolchains/activate.sh
 cmake --preset native
 cmake --build --preset native --target teaql_generated_query_expression teaql_generated_api_tests
 ctest --preset native -R '^(example_generated_query_expression|generated_api_contracts|generated_api_type_errors)$'
@@ -60,6 +78,17 @@ auto product_name = cpp_examples::E::order(rows[0])
     .getLines().first().getProduct().getName().unwrap();
 ```
 
+Canonical missing-load suggestions for scalar C++ keywords have callable Q/E
+aliases: for example, `selectClass()`, `unselectClass()` and `getClass()` delegate
+to the existing escaped `selectModelClass()`, `unselectModelClass()` and
+`getModelClass()` methods. The model-specific Assist lists affected fields;
+see [the repair contract](scalar_diagnostic_repairs_5_0_6.md).
+
+Generated E factories also supply their own static entry name to runtime
+provenance, so keyword entities display `E::modelClass(...)` while retaining
+canonical identity `Class`. Business calls keep the same one-argument signature;
+see [expression entry identity](expression_entry_identity_5_0_6.md).
+
 Application Q/E/model methods use lowerCamelCase. Runtime protocols such as
 `memory_resource`, `audit_as` and `wait_next`, canonical metadata and SQL identifiers
 retain their spelling. Entries take no Context argument. Execution takes exactly
@@ -73,6 +102,20 @@ pollable typed stream. `execute`/`executeForEntity` and `executeForEntityList` r
 their existing one/list roles. `executeForRows` provides compact aggregate rows.
 Generated methods delegate execution, cancellation and decoding to runtime.
 Stream enhancement restrictions remain enforced.
+
+`returnType<T>()` also accepts a non-Entity marker during ordinary request
+construction, inspection and composition. No marker object is allocated.
+All public execution entries, including compact rows/count/exists, and
+`newEntity` require an Entity result; restore that result before execution.
+The [generated marker contract](generated_query_result_marker_5_0_6.md) records
+the original enclosing guards, compiler checks and Context ownership evidence.
+
+Models provide `Model::withId(user_context, id)`, `isLoaded(field)` and
+`setLoadState(state)` over existing Value/indexed-state mechanics. The Context
+argument selects the ID Value's allocation domain. State replacement copies
+into the model's domain and rejects incompatible layouts before replacement;
+it changes availability without changing values or staging mutations. See
+[entity helper entries](entity_helper_entries_5_0_6.md).
 
 The runnable [example](../examples/generated_query_expression.cpp) saves an audited
 order/child graph, loads nested relations and exercises all three execution forms.
@@ -114,9 +157,10 @@ See [Q execution](runtime_query_execution.md) and
 | Typed equality/order/range/IN predicates, boolean predicates, text predicates, projections/sort/group and scalar aggregates | Generated over the existing Expr/SelectQuery operations. Runtime range/text/boolean and relation composition are exercised; not every emitted aggregate has a separate semantic comparison. |
 | Staged query intent; typed list/one/stream/compact execution; context-only runtime lookup | Implemented. Real compiler negative tests verify unavailable/incorrect operations, and runtime tests cover intent failures and context mismatch. |
 | E scalar, forward/reverse and list traversal; legitimate Null versus NotLoaded; null fallbacks | Implemented with RuntimeExpression over EvalResult and checked entity/list borrows; a generated nested graph example and scalar/load-state/lifetime tests pass. |
-| Inheritance and constant initialization/seeding | Default generation remains guarded. Qualification fixtures exercise inheritance mapping/query/save, candidate Q/model/E and actual root/constant bootstrap (99 original/C++ cases). The inherited Business-ID source compilation issue and remaining constant field/topology/governance/cleanup matrix stay open. |
-| Typed checker/behavior scaffolds and candidate shortcuts | Emitted over runtime protocols. Candidate evidence has 388 original/C++ observations; see generated_candidates_5_0_6.md. This is not full configuration or bootstrap acceptance. |
-| Dynamic JSON request decoding, full relation aggregates/facets and pagination-cache execution helpers | Remaining generator APIs stay pending; corresponding kernel concepts remain intact and callable through their existing APIs. |
+| Inheritance | Supported in normal generation. Parent/child identity, projections/enhancement, typed decoding, graph save and lifecycle checks have source comparisons. Inherited Business IDs use the documented source binding adaptation; the untouched broken Rust artifact is preserved. See [inheritance qualification](inheritance_qualification_matrix_5_0_6.md). |
+| Constant initialization/seeding | Supported in normal generation. Root/constant recipes, candidates, typed fields, topology, governance, overrides and cleanup are qualified with explicit source binding/Context adaptations. Invalid models still reject before output. See [constant acceptance](constants_acceptance_5_0_6.md). |
+| Typed checker/behavior scaffolds and candidate shortcuts | Emitted over runtime protocols. Candidate and bootstrap evidence compose in [P3 acceptance](constants_acceptance_5_0_6.md); full general Checker/behavior configuration retains its own G02/G03 obligations. |
+| Dynamic JSON request decoding, relation aggregates/facets and pagination optimization helpers | Generated adapters use the shared runtime. The capability ledger records scoped source/execution evidence and remaining complete model/configuration qualification. |
 | Rust Cargo/web/workspace integrations and external backends | Outside the agreed C++ edge scope. Only SQLite is generated. |
 | Native named-module ownership for generated domain declarations | Deferred. Generated headers can consume the existing qualified runtime module frontend. |
 

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "case": "nullable_integer",
+  "status": "exact actual original/native SQLite outcomes passed; broader models and formal gates pending",
+  "observations": 52,
+  "successes": 52,
+  "errors": 0,
+  "corpus_sha256": "22d8d82bc207f9e13ee8df71c52d71d51480fadd9176ba89f03660678fece731",
+  "normalization": "none",
+  "builds": {
+    "rust": 0,
+    "cpp": 0
+  },
+  "runtime_changed": false,
+  "generator_changed": false,
+  "log": "/tmp/teaql_scalar_candidate_nullable_decimal_execution.log",
+  "remaining": [
+    "Other scalar and true Boolean execution",
+    "Formal CMake/module/lifetime gates",
+    "Complete G05/P3 exit criteria"
+  ]
+}

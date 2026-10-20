@@ -1,0 +1,51 @@
+{
+  "recorded_utc": "2026-10-14T17:16:39.574798+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Physical inherited JSON execution on original generated models and SQLite; closes G10 inherited physical row only, full capability/integration remains open.",
+  "exact_original_native_outcomes": 4236,
+  "successes": 3840,
+  "construction_panics_before_sql": 396,
+  "safe_sql_log_records": 3840,
+  "initial_native_differences": 0,
+  "models": [
+    "School",
+    "Academy",
+    "ResearchAcademy",
+    "Enrollment"
+  ],
+  "registry_version_checksum_differences": 0,
+  "checks": {
+    "native": {
+      "passed": 1,
+      "selected": 1
+    },
+    "modules": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize": {
+      "passed": 1,
+      "selected": 1,
+      "leak_scanning": false
+    },
+    "format_files": 1442,
+    "canonical_consumer_bodies": 658,
+    "module_exports": 1485
+  },
+  "initial_source_observer_failure": "Macro delimiter assembly error; observer only corrected before source execution, generated source untouched.",
+  "file_sha256": {
+    "tests/support/dynamic_json_inherited_rows.sql": "eeef6e638f26416398d8bec5b7ca3c3c4470fbdd2bbbff05df8cf91e1774f14f",
+    "tests/parity/generated_dynamic_json_inherited_sql_probe.cpp": "d386ab77ca74daf7d55e6e285aeb03dc02212e3bfcb990fe5d1ecfde83c506c9",
+    "tests/parity/compare_dynamic_json_inherited_sql_5_0_6.py": "18ee5dae867791a58f7ca9eb82588a142320ae8ba54bf0913095045bac271636",
+    "tests/parity/rust_dynamic_json_inherited_sql_5_0_6/Cargo.toml": "604128efa2e8c53c682165451ac0a4fe1b3bec82e17b015926bee1db42abea32",
+    "tests/parity/rust_dynamic_json_inherited_sql_5_0_6/Cargo.lock": "41685442bfa68c37e7de617b8c85763e17d1a597c72368397232122356789763",
+    "tests/parity/rust_dynamic_json_inherited_sql_5_0_6/src/main.rs": "2825a8e421ad936447e505332914f81cb9fac8795e3d18a35b7cea7adf137274",
+    "tests/parity/dynamic_json_inherited_sql_5_0_6_cases.json.gz": "3e4e173f60c4e713a978573b002b8141da030c2f607ab21b1d75e05e72ccac32"
+  },
+  "raw_validation": "docs/parity/dynamic_json_inherited_sql_validation_5_0_6.json.gz",
+  "production_or_generator_functions_changed": false,
+  "original_or_historical_files_changed": false,
+  "complete_capability_acceptance": false,
+  "java_generator_refresh_or_full_suite_mips_device_run": false
+}

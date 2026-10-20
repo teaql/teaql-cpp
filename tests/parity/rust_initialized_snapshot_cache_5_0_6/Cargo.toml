@@ -1,0 +1,22 @@
+[package]
+name = "teaql_initialized_snapshot_cache_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "teaql_initialized_snapshot_cache_506"
+path = "../initialized_snapshot_cache_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+serde = "=1.0.228"
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }

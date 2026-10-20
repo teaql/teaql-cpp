@@ -1,0 +1,36 @@
+[package]
+name="checker_source_506"
+version="0.0.0"
+edition="2024"
+publish=false
+
+[[bin]]
+name="checker_checker_source_506"
+path="../rust_field_layout/src/bin/checker_5_0_6.rs"
+
+[[bin]]
+name="check_model_checker_source_506"
+path="../rust_field_layout/src/bin/check_model_5_0_6.rs"
+
+[[bin]]
+name="runtime_check_checker_source_506"
+path="../rust_values/src/bin/runtime_check_oracle.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+[workspace]
+
+[[bin]]
+name="checker_constructor_source_506"
+path="../checker_constructor_source_5_0_6.rs"
+[features]
+reject_metadata=[]
+reject_logic=[]
+reject_clone=[]
+reject_constructor=[]

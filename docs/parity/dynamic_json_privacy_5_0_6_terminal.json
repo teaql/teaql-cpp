@@ -1,0 +1,56 @@
+{
+  "recorded_utc": "2026-10-14T18:30:40.459706+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Repair enhanced query intent ancestry and compare inherited generated private/declared-plain field execution, readonly/nested/facet safe diagnostics and actual private-business-data file sinks. Credentials/audit sinks/broader model/cache/async/final integration remain required.",
+  "initial_original_native_differences": 80,
+  "exact_repaired_original_native_outcomes": 1728,
+  "successes": 1728,
+  "safe_sql_log_records": 936,
+  "masked_non_replayable_records": 480,
+  "scrubbed_comment_records": 336,
+  "unsafe_rendering_omissions": 288,
+  "actual_original_cpp_file_sink_cases": 12,
+  "reference_registry_difference_count": 0,
+  "checks": {
+    "native_relevant_integration": {
+      "passed": 14,
+      "selected": 14
+    },
+    "modules": {
+      "passed": 2,
+      "selected": 2
+    },
+    "sanitize": {
+      "passed": 2,
+      "selected": 2,
+      "leak_scanning": false
+    },
+    "format_files": 1446,
+    "canonical_consumer_bodies": 662,
+    "module_exports": 1485
+  },
+  "production_functions_changed": [
+    "Shared enhanced relation-aggregate entry now always constructs the original query scope; source and separate aggregate ancestry are captured before SQL."
+  ],
+  "generator_functions_changed": false,
+  "original_generated_or_historical_files_changed": false,
+  "raw_validation": "docs/parity/dynamic_json_privacy_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "teaql_runtime/include/teaql/runtime/detail/data_service/diagnostic_query.hpp": "04a2dfc809e35abe774bab69fed7ca948f77707830707c94c39cd1913d962e22",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp": "77baa91e1bfe672e9e8098c9455003e13bc464bdb74bf2ba71421faef49203cc",
+    "tests/parity/generated_dynamic_json_privacy_probe.cpp": "428913e157c9fe2b27c69063552238afed2b07213babac1b567f64ef951a6f74",
+    "tests/parity/compare_dynamic_json_privacy_5_0_6.py": "689a9d9b2bb64f10be3b9333885177a1a8a0b3ca41dcbc7c5777a47331f3dee7",
+    "tests/parity/verify_dynamic_json_privacy_sinks_5_0_6.py": "bbbb96f7ef0ff2a5802d835fc568bb02288b53f18a35b76fa93acbde6985b26a",
+    "tests/parity/rust_dynamic_json_privacy_5_0_6/Cargo.toml": "056ae236e345966654e39df16045003d57852dc814e78e92e17a2f5eb5b42aee",
+    "tests/parity/rust_dynamic_json_privacy_5_0_6/Cargo.lock": "06989fa9f0782f9178d43155f7cae177c50b56b67ae707f596d284d2f5813df9",
+    "tests/parity/rust_dynamic_json_privacy_5_0_6/src/main.rs": "237d896ed850f6152ae5bd3e3b469c9ed3fba1da5213041129703be59ce11b77",
+    "tests/parity/dynamic_json_privacy_5_0_6_cases.json.gz": "54f236b0a6031cfa25c5542a39b2b4e57c49d3cccde960bbaa6348c0598e7b8b",
+    "tests/support/dynamic_json_privacy_values.sql": "a6d4b5d82902d015c331f8cb37799bdce85d165df9765b92b0c74791d41e2912",
+    "docs/parity/dynamic_json_privacy_source_review_5_0_6.json": "41caa3817440aa3414fb369cd07ed39bba654154b4fd3929967aa70e8d5f87be",
+    "docs/parity/dynamic_json_privacy_sinks_repaired_5_0_6.json.gz": "3978e4bf6b331aa3af4ea863247d501139bd611a24a53a8bfb77c554eededf4b",
+    "scripts/verify_dynamic_json_privacy_5_0_6.py": "8ee2beabe55fa3b2dd61f2ff9c7989a0ff521cd1273f635cfc7d574481302f89"
+  },
+  "complete_capability_acceptance": false,
+  "full_suite_java_generation_mips_device_run": false
+}

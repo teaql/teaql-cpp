@@ -1,0 +1,17 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "note": "Four unchanged source observers cover five original assembly/sample families. Historical input/expected bytes and source clock provenance are retained; exact generated Rust SDK provenance is checked separately.",
+  "files": {
+    "tests/parity/rust_field_layout/src/bin/generated_runtime_assembly_5_0_6.rs": "84bde7a59d9b16054f5906230c24247f386655ce48b7aaf50a61cd2c5c95091b",
+    "tests/parity/rust_field_layout/src/bin/generated_sample_state_5_0_6.rs": "8d85a90a99b401e792c6ce03a79abb17947deac69184807c9197dceb8defff34",
+    "tests/parity/rust_field_layout/src/bin/generated_sample_execution_5_0_6.rs": "669aba0f291bd7405863f7f533e2c237bf76eefa707f642f0ded13559235c40c",
+    "tests/parity/rust_field_layout/src/bin/generated_sample_fields_5_0_6.rs": "9d20753c261b7a38d4ae3a0e23c8c2be8dd12fb49e344c1f69e9a4efff4456e9",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/support/fixed_sample_clock.cpp": "a107a5664077004c4bc403c56c4df3f43b090d3ebe7c216106f720ff23089a91",
+    "tests/parity/generated_runtime_assembly_5_0_6_cases.json.gz": "753d91af6054dee9f6c1a6ce1e579625f823a6928919ca88497f9bc8a7a9f217",
+    "tests/parity/generated_sample_state_5_0_6_cases.json": "a14557d239b5e71f863180ead2025eef6f24036598300069d7618f6c065f5781",
+    "tests/parity/generated_sample_execution_5_0_6_cases.json.gz": "35ba3465ea6f92a2f8a4887db7a1d64c1d2a5c31a8b014060a93e79655fe15b4",
+    "tests/parity/generated_sample_failures_5_0_6_cases.json.gz": "d98dd03fa904f32a2c569ae03e4010e5e19b73fa0b9cbefc54a129b2524c253e",
+    "tests/parity/generated_sample_fields_5_0_6_cases.json.gz": "fdbb4062f63db1180ee6a2204dde21bc03a7e449a38862e7e5ae7e3bb09c76a2"
+  }
+}

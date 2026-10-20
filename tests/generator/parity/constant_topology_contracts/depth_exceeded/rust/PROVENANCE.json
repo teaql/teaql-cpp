@@ -1,0 +1,11 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/parity/constant_topology_contracts/depth_exceeded/model.xml",
+  "model_sha256": "ffa478515003d399853392ce2f528ed1d90b67e00c3a464962b568bf8b945f18",
+  "hand_edited": false,
+  "observer_sha256": "218cd94f595c1747eb9d7c7c7820032051cb3b7076d52bf4c9bf70c0a55c6409",
+  "files": {
+    "OBSERVATION.json": "060611dfa5203ee081ce985defaa92be6ad8e5c9df04d0f791fa050b296c2ae6"
+  }
+}

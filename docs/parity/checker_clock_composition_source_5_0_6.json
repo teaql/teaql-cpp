@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "cases": 216,
+  "field_outcomes": 1296,
+  "comparison_exit_code": 0,
+  "output": "Clock composition: 216 cases / 1296 field outcomes match\n",
+  "original_generated_files_changed": false,
+  "reference_registry_versions_preserved": true,
+  "reference_registry_checksums_preserved": true,
+  "normalization": "none",
+  "source_scope": "Original complete Tenant/Record/Note entity/Checker files imported by path; complete original crate retains its missing module factory assembly error. No request/SQL/save acceptance claim.",
+  "complete_capability_acceptance": false,
+  "hashes": {
+    "scripts/verify_checker_clock_composition_5_0_6.py": "871c99f03ebff4cc31f5b3d6e0e4922a95cc29260c09128cf3dd194cd2ec08fa",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/rust_checker_clock_composition_5_0_6/Cargo.toml": "376e340be0960eb644dc7bebf60687bb2794e116d8cfe2b09ee24ed8021976d3",
+    "tests/parity/rust_checker_clock_composition_5_0_6/Cargo.lock": "6e8bbf829429b4cf2b2498aacfa8b850236cfdb0bc5975527f6cad46bcaf9a4c",
+    "tests/parity/rust_checker_clock_composition_5_0_6/lib.rs": "db85168fdbbc0608657098a18235b98469edca49a7667b163b823e7bd0ea2ed1",
+    "tests/parity/checker_clock_composition_5_0_6.rs": "8b2438342d0c29a08b8bd43bbe479f9e7404b0162b73e03826b1c9f6970790f5",
+    "tests/parity/checker_clock_composition_probe.cpp": "27af377b6d3462ec2443e2dabde1bdc2ea0552bab3c6d4dda91e3e1e3cd046bd",
+    "tests/parity/compare_checker_clock_composition_5_0_6.py": "82a885ad110b41b374216c2ced40c2c36a546c0e1d2493091c1bf5777745a7f7",
+    "tests/parity/checker_clock_composition_5_0_6_cases.json.gz": "b59c50f8777a2a3557046c14853a5cb94d9f00762aa0737b3b5159b21b42385c",
+    "tests/generator/parity/checker_clock_composition_rust/PROVENANCE.json": "b44e5614f7d53b7a990e6c1e74220e2674774ff2587c86912190c7c0c3c2ec00",
+    "tests/generator/parity/checker_clock_composition_rust/lib/src/note/entity.rs": "491e4f565acb32948770b96c31ddff9befb7c9afcbe20b179dd5d1284b7cd1db",
+    "tests/generator/parity/checker_clock_composition_rust/lib/src/note/checker.rs": "d969cb5029746a319af8d18f4c5dd0bd83d60c2256827d3a4bf206e3bdb6e424",
+    "tests/generator/parity/checker_clock_composition_rust/lib/src/record/entity.rs": "bc4d3ccfe8aedb95427331e21647f892e27c1b3a7928fb7bb8ded04b23370f76",
+    "tests/generator/parity/checker_clock_composition_rust/lib/src/record/checker.rs": "0478c2b4875f6ba04be0d55e401b01aa95e6c65a336955911e46e951ae7824df",
+    "tests/generator/parity/checker_clock_composition_rust/lib/src/tenant/entity.rs": "814498a1306b7f5b2bc35fd8603ca2f7e1ea29d7488610c3c42e3a912e3865a9",
+    "tests/generator/parity/checker_clock_composition_rust/lib/src/tenant/checker.rs": "0236ac44b822bf853270333bb85b521e48483a4184c1d65ef72af038760966a1"
+  }
+}

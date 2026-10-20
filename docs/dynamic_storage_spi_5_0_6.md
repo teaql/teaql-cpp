@@ -1,5 +1,7 @@
 # Dynamic extension storage SPI and cursor plans
 
+Current G16 qualification is recorded in the [complete acceptance audit](dynamic_storage_acceptance_5_0_6.md). The text below preserves this earlier checkpoint and its original remaining-work boundaries.
+
 Status: data-service interfaces and pure plans implemented; actual SQLite storage,
 runtime providers, cursor enhancement and transaction write execution remain open.
 Reference: Rust v5.0.6 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`,

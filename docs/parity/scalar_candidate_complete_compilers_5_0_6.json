@@ -1,0 +1,1001 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Generation/metadata/compiler qualification only; runtime semantics pending",
+  "cases": [
+    {
+      "case": "bool_actual",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "bool",
+            "candidates": [
+              {
+                "id": 3569038,
+                "key": "true",
+                "value": "true",
+                "method": "true",
+                "filter": "true"
+              },
+              {
+                "id": 97196323,
+                "key": "false",
+                "value": "false",
+                "method": "false",
+                "filter": "false"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "bool",
+            "candidates": [
+              {
+                "id": 3569038,
+                "key": "true",
+                "value": "true",
+                "method": "true",
+                "filter": "true"
+              },
+              {
+                "id": 97196323,
+                "key": "false",
+                "value": "false",
+                "method": "false",
+                "filter": "false"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "source_disposition": "Complete unchanged original crate fails four E0599 checks; C++ compilation is an independent gate, not runtime parity.",
+      "rust_compile_exit_code": 101,
+      "rust_errors": [
+        {
+          "code": "E0599",
+          "message": "no method named `with_choice_is` found for struct `record::request::RecordRequest<R>` in the current scope",
+          "spans": [
+            {
+              "file": "request.rs",
+              "line": 23,
+              "primary": false
+            },
+            {
+              "file": "request.rs",
+              "line": 1374,
+              "primary": true
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `with_choice_is_not` found for struct `record::request::RecordRequest<R>` in the current scope",
+          "spans": [
+            {
+              "file": "request.rs",
+              "line": 23,
+              "primary": false
+            },
+            {
+              "file": "request.rs",
+              "line": 1380,
+              "primary": true
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `with_choice_is` found for struct `record::request::RecordRequest<R>` in the current scope",
+          "spans": [
+            {
+              "file": "request.rs",
+              "line": 23,
+              "primary": false
+            },
+            {
+              "file": "request.rs",
+              "line": 1385,
+              "primary": true
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `with_choice_is_not` found for struct `record::request::RecordRequest<R>` in the current scope",
+          "spans": [
+            {
+              "file": "request.rs",
+              "line": 23,
+              "primary": false
+            },
+            {
+              "file": "request.rs",
+              "line": 1391,
+              "primary": true
+            }
+          ]
+        }
+      ],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "whichAreChoice",
+        "whichAreNotChoice",
+        "withChoiceIsFalse",
+        "withChoiceIsKnown",
+        "withChoiceIsNotFalse",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotTrue",
+        "withChoiceIsNull",
+        "withChoiceIsTrue",
+        "withChoiceIsUnknown"
+      ]
+    },
+    {
+      "case": "boolean",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 3569038,
+                "key": "true",
+                "value": "true",
+                "method": "true",
+                "filter": "true"
+              },
+              {
+                "id": 97196323,
+                "key": "false",
+                "value": "false",
+                "method": "false",
+                "filter": "false"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 3569038,
+                "key": "true",
+                "value": "true",
+                "method": "true",
+                "filter": "true"
+              },
+              {
+                "id": 97196323,
+                "key": "false",
+                "value": "false",
+                "method": "false",
+                "filter": "false"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile_exit_code": 0,
+      "rust_errors": [],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "withChoiceIsFalse",
+        "withChoiceIsKnown",
+        "withChoiceIsNotFalse",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotTrue",
+        "withChoiceIsNull",
+        "withChoiceIsTrue",
+        "withChoiceIsUnknown"
+      ]
+    },
+    {
+      "case": "date",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "chrono::NaiveDate",
+            "candidates": [
+              {
+                "id": 1162559460,
+                "key": "2026-10-01",
+                "value": "2026-10-01",
+                "method": "value_2026_10_01",
+                "filter": "2026-10-01"
+              },
+              {
+                "id": 1162559461,
+                "key": "2026-10-02",
+                "value": "2026-10-02",
+                "method": "value_2026_10_02",
+                "filter": "2026-10-02"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "chrono::NaiveDate",
+            "candidates": [
+              {
+                "id": 1162559460,
+                "key": "2026-10-01",
+                "value": "2026-10-01",
+                "method": "value_2026_10_01",
+                "filter": "2026-10-01"
+              },
+              {
+                "id": 1162559461,
+                "key": "2026-10-02",
+                "value": "2026-10-02",
+                "method": "value_2026_10_02",
+                "filter": "2026-10-02"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile_exit_code": 0,
+      "rust_errors": [],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "withChoiceIsKnown",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotValue20261001",
+        "withChoiceIsNotValue20261002",
+        "withChoiceIsNull",
+        "withChoiceIsUnknown",
+        "withChoiceIsValue20261001",
+        "withChoiceIsValue20261002"
+      ]
+    },
+    {
+      "case": "double",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "f64",
+            "candidates": [
+              {
+                "id": 48568,
+                "key": "1.5",
+                "value": "1.5",
+                "method": "value_1_5",
+                "filter": "1.5"
+              },
+              {
+                "id": 49529,
+                "key": "2.5",
+                "value": "2.5",
+                "method": "value_2_5",
+                "filter": "2.5"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "f64",
+            "candidates": [
+              {
+                "id": 48568,
+                "key": "1.5",
+                "value": "1.5",
+                "method": "value_1_5",
+                "filter": "1.5"
+              },
+              {
+                "id": 49529,
+                "key": "2.5",
+                "value": "2.5",
+                "method": "value_2_5",
+                "filter": "2.5"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile_exit_code": 0,
+      "rust_errors": [],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "withChoiceIsKnown",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotValue15",
+        "withChoiceIsNotValue25",
+        "withChoiceIsNull",
+        "withChoiceIsUnknown",
+        "withChoiceIsValue15",
+        "withChoiceIsValue25"
+      ]
+    },
+    {
+      "case": "integer",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "i64",
+            "candidates": [
+              {
+                "id": 49,
+                "key": "1",
+                "value": "1",
+                "method": "value_1",
+                "filter": "1"
+              },
+              {
+                "id": 50,
+                "key": "2",
+                "value": "2",
+                "method": "value_2",
+                "filter": "2"
+              },
+              {
+                "id": 51,
+                "key": "3",
+                "value": "3",
+                "method": "value_3",
+                "filter": "3"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "i64",
+            "candidates": [
+              {
+                "id": 49,
+                "key": "1",
+                "value": "1",
+                "method": "value_1",
+                "filter": "1"
+              },
+              {
+                "id": 50,
+                "key": "2",
+                "value": "2",
+                "method": "value_2",
+                "filter": "2"
+              },
+              {
+                "id": 51,
+                "key": "3",
+                "value": "3",
+                "method": "value_3",
+                "filter": "3"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile_exit_code": 0,
+      "rust_errors": [],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "withChoiceIsKnown",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotValue1",
+        "withChoiceIsNotValue2",
+        "withChoiceIsNotValue3",
+        "withChoiceIsNull",
+        "withChoiceIsUnknown",
+        "withChoiceIsValue1",
+        "withChoiceIsValue2",
+        "withChoiceIsValue3"
+      ]
+    },
+    {
+      "case": "nullable_integer",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "Option<i64>",
+            "candidates": [
+              {
+                "id": 49,
+                "key": "1",
+                "value": "1",
+                "method": "value_1",
+                "filter": "1"
+              },
+              {
+                "id": 50,
+                "key": "2",
+                "value": "2",
+                "method": "value_2",
+                "filter": "2"
+              },
+              {
+                "id": 3392903,
+                "key": "null",
+                "value": "null",
+                "method": "null",
+                "filter": "null"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "Option<i64>",
+            "candidates": [
+              {
+                "id": 49,
+                "key": "1",
+                "value": "1",
+                "method": "value_1",
+                "filter": "1"
+              },
+              {
+                "id": 50,
+                "key": "2",
+                "value": "2",
+                "method": "value_2",
+                "filter": "2"
+              },
+              {
+                "id": 3392903,
+                "key": "null",
+                "value": "null",
+                "method": "null",
+                "filter": "null"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile_exit_code": 0,
+      "rust_errors": [],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "withChoiceIsKnown",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotValue1",
+        "withChoiceIsNotValue2",
+        "withChoiceIsNull",
+        "withChoiceIsUnknown",
+        "withChoiceIsValue1",
+        "withChoiceIsValue2"
+      ]
+    },
+    {
+      "case": "number",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "rust_decimal::Decimal",
+            "candidates": [
+              {
+                "id": 48568,
+                "key": "1.5",
+                "value": "1.5",
+                "method": "value_1_5",
+                "filter": "1.5"
+              },
+              {
+                "id": 49529,
+                "key": "2.5",
+                "value": "2.5",
+                "method": "value_2_5",
+                "filter": "2.5"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "rust_decimal::Decimal",
+            "candidates": [
+              {
+                "id": 48568,
+                "key": "1.5",
+                "value": "1.5",
+                "method": "value_1_5",
+                "filter": "1.5"
+              },
+              {
+                "id": 49529,
+                "key": "2.5",
+                "value": "2.5",
+                "method": "value_2_5",
+                "filter": "2.5"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile_exit_code": 0,
+      "rust_errors": [],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "withChoiceIsKnown",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotValue15",
+        "withChoiceIsNotValue25",
+        "withChoiceIsNull",
+        "withChoiceIsUnknown",
+        "withChoiceIsValue15",
+        "withChoiceIsValue25"
+      ]
+    },
+    {
+      "case": "text",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 112785,
+                "key": "red",
+                "value": "red",
+                "method": "red",
+                "filter": "red"
+              },
+              {
+                "id": 3027034,
+                "key": "blue",
+                "value": "blue",
+                "method": "blue",
+                "filter": "blue"
+              },
+              {
+                "id": 3392903,
+                "key": "null",
+                "value": "null",
+                "method": "null",
+                "filter": "null"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 112785,
+                "key": "red",
+                "value": "red",
+                "method": "red",
+                "filter": "red"
+              },
+              {
+                "id": 3027034,
+                "key": "blue",
+                "value": "blue",
+                "method": "blue",
+                "filter": "blue"
+              },
+              {
+                "id": 3392903,
+                "key": "null",
+                "value": "null",
+                "method": "null",
+                "filter": "null"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile_exit_code": 0,
+      "rust_errors": [],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "withChoiceIsBlue",
+        "withChoiceIsKnown",
+        "withChoiceIsNotBlue",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotRed",
+        "withChoiceIsNull",
+        "withChoiceIsRed",
+        "withChoiceIsUnknown"
+      ]
+    },
+    {
+      "case": "timestamp",
+      "rust": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "teaql_core::time::Timestamp",
+            "candidates": [
+              {
+                "id": 1162559460,
+                "key": "2026-10-01",
+                "value": "2026-10-01",
+                "method": "value_2026_10_01",
+                "filter": "2026-10-01"
+              },
+              {
+                "id": 1162559461,
+                "key": "2026-10-02",
+                "value": "2026-10-02",
+                "method": "value_2026_10_02",
+                "filter": "2026-10-02"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "platform",
+            "field": "name",
+            "type": "String",
+            "candidates": [
+              {
+                "id": 1795007698,
+                "key": "string()",
+                "value": "string()",
+                "method": "string",
+                "filter": "string()"
+              }
+            ]
+          },
+          {
+            "entity": "record",
+            "field": "choice",
+            "type": "teaql_core::time::Timestamp",
+            "candidates": [
+              {
+                "id": 1162559460,
+                "key": "2026-10-01",
+                "value": "2026-10-01",
+                "method": "value_2026_10_01",
+                "filter": "2026-10-01"
+              },
+              {
+                "id": 1162559461,
+                "key": "2026-10-02",
+                "value": "2026-10-02",
+                "method": "value_2026_10_02",
+                "filter": "2026-10-02"
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "rust_compile_exit_code": 0,
+      "rust_errors": [],
+      "cpp_compile_exit_code": 0,
+      "cpp_instantiated_query_methods": [
+        "withChoiceIsKnown",
+        "withChoiceIsNotNull",
+        "withChoiceIsNotValue20261001",
+        "withChoiceIsNotValue20261002",
+        "withChoiceIsNull",
+        "withChoiceIsUnknown",
+        "withChoiceIsValue20261001",
+        "withChoiceIsValue20261002"
+      ]
+    }
+  ]
+}

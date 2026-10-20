@@ -1,0 +1,72 @@
+{
+  "recorded_utc": "2026-10-14T16:51:43.264981+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Scalar/optional/temporal dynamic JSON actual generated SQLite execution, exact reference-registry and old one/stream/policy corpus replay. Full capabilities/phases remain open.",
+  "new_original_native_outcomes": 5088,
+  "successful_requests": 4722,
+  "condition_panics_before_sql": 366,
+  "new_initial_differences": 0,
+  "policy_initial_stimulus_type_differences": 448,
+  "replayed_outcomes": {
+    "new_scalar": 5088,
+    "retained_translation": 1181,
+    "retained_one_stream": 2240,
+    "retained_policy": 3072
+  },
+  "total_exact_replayed": 11581,
+  "checks": {
+    "native_new": {
+      "passed": 1,
+      "selected": 1
+    },
+    "native_policy": {
+      "passed": 1,
+      "selected": 1
+    },
+    "module_new": {
+      "passed": 1,
+      "selected": 1
+    },
+    "module_policy": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize_new": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize_policy": {
+      "passed": 1,
+      "selected": 1
+    },
+    "leak_scanning": false,
+    "format_files": 1440,
+    "canonical_consumer_bodies": 648,
+    "module_exports": 1485
+  },
+  "original_registry_differences": 0,
+  "production_or_generator_functions_changed": false,
+  "historical_original_observer_or_corpora_changed": false,
+  "cpp_observer_migration": "Stream reuse whoseIdIs(std::uint64_t{2}) matches original whose_id_is(2_u64); prior int literal now correctly resolves to generic Value/I64. Archived old body and every mismatch; production conversions unchanged.",
+  "historical_debug_adaptation": "Existing exact quoted-Line descriptor spelling only; no SQL/value/error rewriting.",
+  "new_scalar_comparison_adaptation": null,
+  "raw_validation": "docs/parity/dynamic_json_scalar_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "tests/parity/generated_dynamic_json_scalar_probe.cpp": "bc787cf12b592b20ed32b0e97a58444a5086176c72bb49fe29007663bcb0a418",
+    "tests/parity/generated_dynamic_json_probe.cpp": "64c937146a4e191fc60c357008e25ac4a791245a231111ff7ad5d8c06fceecc0",
+    "tests/parity/compare_dynamic_json_scalar_5_0_6.py": "fb1d3baa0f8286c42b43effe3ffa05bea58e78c36cda8f20808adeb331fef8d1",
+    "scripts/verify_dynamic_json_protocols_5_0_6.py": "ac308be17f40ef8893524cc4c4ccdaaafcf69c144bbb43079eb43e3e1a05ba39",
+    "tests/parity/rust_dynamic_json_scalar_5_0_6/Cargo.toml": "2d7bc18115a53f3f648550ffa78084fb026f4ce9ba2077e077760b83f179c721",
+    "tests/parity/rust_dynamic_json_scalar_5_0_6/Cargo.lock": "eeae39b56c44e33e1dc75934894d212e06031ec004c181a8f01e0c3b82e3d234",
+    "tests/parity/rust_dynamic_json_scalar_5_0_6/src/main.rs": "687a5830f8a043cab62486376a2416d7ca86582a1f875b2ea342748d61204e01",
+    "tests/parity/rust_dynamic_json_base_5_0_6/Cargo.toml": "e9eb117bc946baab800a271712c70b2b8d375b8cd0ca44a460477d3de9ca7aff",
+    "tests/parity/rust_dynamic_json_base_5_0_6/Cargo.lock": "115b61c82b3f0a8334a062744dae98ef6dc9719757be4d75ee6fb59ec0fbad79",
+    "tests/parity/rust_dynamic_json_base_5_0_6/src/bin/generated_dynamic_json_5_0_6.rs": "0b45c45946b24ce163d4f6c091d35d337e17beeec959ce77d9fa5ce03895ff00",
+    "docs/parity/dynamic_json_base_observer_copy_5_0_6.json": "e9a54a085d3cfd70dd162cfb305b18ac799d3b054d95882c4d3dbe0d6f22cb85",
+    "tests/parity/dynamic_json_scalar_5_0_6_cases.json.gz": "d3adb2f35bf0d5fb1e30d1db522535ec68f25c814ee6cf23a948709aa84d0187"
+  },
+  "complete_capability_acceptance": false,
+  "java_or_generator_reproduction_rerun": false,
+  "full_suite_mips_or_physical_device_test": false
+}

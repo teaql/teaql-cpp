@@ -30,7 +30,7 @@ FAMILIES = ["graph_fix", "save_preparation", "ledger_plan", "policy_plan",
             "audited_auto_save", "transaction_scope", "entity_query", "entity_stream",
             "enhanced_entities", "entity_decoder", "id_set_page", "entity_query_capture", "runtime_base", "context_query",
             "runtime_base_intent", "context_query_intent", "entity_service", "relation_planning_extensions", "relation_execution", "relation_enhancement",
-            "relation_enhancement_variants", "hydration_sibling_keys", "hydration_owner_facets", "hydration_owner_facets_async", "hydration_flat_facets", "loaded_row_graph", "relation_hydration", "json_graph_views", "json_graph_decoder"]
+            "relation_enhancement_variants", "hydration_sibling_keys", "hydration_owner_facets", "hydration_owner_facets_async", "hydration_flat_facets", "loaded_row_graph", "relation_hydration", "json_graph_views", "json_graph_decoder", "json_hydration"]
 LEDGER_EXECUTION_BRIDGE = LEDGER_EXECUTION_BRIDGE.replace(
     ".execute_ledger_plan_internal(root,locations).await",
     ".execute_ledger_plan_internal(root,locations).await.map(|outcome| {\n"

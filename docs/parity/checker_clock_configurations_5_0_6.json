@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "fixed_compilation_gaps": [
+    "integer_required",
+    "integer_optional",
+    "long_required",
+    "long_optional",
+    "number_required",
+    "number_optional",
+    "float_required",
+    "float_optional",
+    "double_required",
+    "double_optional",
+    "date_required",
+    "date_optional",
+    "jsonme_required",
+    "jsonme_optional"
+  ],
+  "compiler_configurations": 24,
+  "cpp_compiles": 24,
+  "unchanged_original_compiler_errors": [
+    {
+      "case": "bool_required",
+      "errors": [
+        [
+          "E0599",
+          "no method named `with_sample_value_is` found for struct `note::request::NoteRequest<R>` in the current scope"
+        ],
+        [
+          "E0599",
+          "no method named `with_sample_value_is_not` found for struct `note::request::NoteRequest<R>` in the current scope"
+        ],
+        [
+          "E0599",
+          "no method named `with_sample_value_is` found for struct `note::request::NoteRequest<R>` in the current scope"
+        ],
+        [
+          "E0599",
+          "no method named `with_sample_value_is_not` found for struct `note::request::NoteRequest<R>` in the current scope"
+        ]
+      ]
+    },
+    {
+      "case": "bool_optional",
+      "errors": [
+        [
+          "E0599",
+          "no method named `with_sample_value_is` found for struct `note::request::NoteRequest<R>` in the current scope"
+        ],
+        [
+          "E0599",
+          "no method named `with_sample_value_is_not` found for struct `note::request::NoteRequest<R>` in the current scope"
+        ],
+        [
+          "E0599",
+          "no method named `with_sample_value_is` found for struct `note::request::NoteRequest<R>` in the current scope"
+        ],
+        [
+          "E0599",
+          "no method named `with_sample_value_is_not` found for struct `note::request::NoteRequest<R>` in the current scope"
+        ]
+      ]
+    },
+    {
+      "case": "datetime_optional",
+      "errors": [
+        [
+          "E0308",
+          "mismatched types"
+        ],
+        [
+          "E0308",
+          "mismatched types"
+        ]
+      ]
+    }
+  ],
+  "original_generated_bytes_preserved": true,
+  "cases": 36,
+  "field_outcomes": 828,
+  "live_comparison_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 2,
+      "total": 2,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 63: checker_clock_text_rust_parity\n    Start 62: checker_clock_scalars_rust_parity\n1/2 Test #63: checker_clock_text_rust_parity ......   Passed    0.09 sec\n2/2 Test #62: checker_clock_scalars_rust_parity ...   Passed    0.34 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.36 sec\n",
+      "sha256": "203bf59f38140a244c433bf4f9b7718640ed0d24c0a421572e4ff602181be262"
+    },
+    "modules": {
+      "passed": 2,
+      "total": 2,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 878: module_checker_clock_text_rust_parity\n    Start 877: module_checker_clock_scalars_rust_parity\n1/2 Test #878: module_checker_clock_text_rust_parity ......   Passed    0.17 sec\n2/2 Test #877: module_checker_clock_scalars_rust_parity ...   Passed    0.60 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.65 sec\n",
+      "sha256": "abd593f4c617874c36e95d3c64f2828da5ccbb4f2504c3ac109df3b8910acb30"
+    },
+    "sanitize": {
+      "passed": 2,
+      "total": 2,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 63: checker_clock_text_rust_parity\n    Start 62: checker_clock_scalars_rust_parity\n1/2 Test #63: checker_clock_text_rust_parity ......   Passed    0.27 sec\n2/2 Test #62: checker_clock_scalars_rust_parity ...   Passed    1.29 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   1.31 sec\n",
+      "sha256": "78ec78fed23c9aeaef82c9264c87e9fe1a7ce333ba59653f3909943e6857a798"
+    }
+  },
+  "java": [
+    {
+      "suite": "com.skynet.codegenerator.CppGenerationTest",
+      "passed": 43,
+      "sha256": "f3e89eb332c02c87681be60babc30b80923017a498c770952af0fd1c9c0a6151"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+      "passed": 2,
+      "sha256": "825fddbc741fc1aa42f1fdd6ba001fdedbf0e4d183138263dd42cb1eb76ba5ad"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+      "passed": 2,
+      "sha256": "ae77e455d9ac44fadbda006985d8a0a441a9561b35050a54e1b8d8db4163c744"
+    }
+  ],
+  "workspaces": 22,
+  "reproduced_files": 264,
+  "contract_sdks": 44,
+  "canonical_bodies": 575,
+  "format_cpp_count": 1395,
+  "default_pmr_disabled": true,
+  "explicit_global_result_copy": true,
+  "actual_user_deletion": true,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "source_scope": "Complete original entity/Checker files imported unchanged. Complete original crate retains Boolean request errors. No SQL/save qualification.",
+  "hashes": {
+    "teaql_runtime/include/teaql/runtime/entity_runtime.hpp": "85689ddc2e20be116c744d05c0199aa7448878ffa511252667f7a11f85b9be17",
+    "teaql_runtime/include/teaql/runtime/generated_checker.hpp": "f5aee595bb072cb48e6b6f53f8a071ea22c811d38258421d0908a1e6f5955601",
+    "tests/generator/checker_clock_scalars.xml": "2aac0ea0438dac8d9a5f242385967b0c7a8ff7b19d9d258390d346c50e5b4350",
+    "tests/generated_checker_clock_scalars/manifest.json": "cae182ad1da4008846dd9b1e479a4d4a6ab89cbc12f12676e0e5782c5b8a8e87",
+    "tests/parity/checker_clock_scalars_5_0_6.rs": "91a4d98e3336489c0ab3483d634798123bfbee5121791673a761e8d9684fb9e7",
+    "tests/parity/checker_clock_scalars_probe.cpp": "3b7b7a76a57d66dda16c8047540789ed08ed0b9da22ae4ddb340397ff6d18191",
+    "tests/parity/compare_checker_clock_scalars_5_0_6.py": "98afb38bc499bb520dfc896e65f21e041f17bb4e94ea02e38a6c09effcaf4133",
+    "tests/parity/checker_clock_scalars_5_0_6_cases.json.gz": "4ced4fbf512c171fbee99e13b443b7733cf88167047ed58442a2768bfe793e22",
+    "scripts/verify_checker_clock_scalars_5_0_6.py": "2a473393bb62bfae504b9b0a9be22529910deffea6c2408bbad8fb0c86157ce5",
+    "scripts/audit_checker_clock_configurations_5_0_6.py": "bba73eabc3d1b932f6e1d08d49ce37ebd96e21570d2a1fb8998804b51dbbd535",
+    "docs/parity/checker_clock_scalars_source_5_0_6.json": "853cffaa67c09b9358143a4770c5613f335117813e15153008d6142e266b4608",
+    "docs/parity/checker_clock_configuration_initial_audit_5_0_6.json.gz": "48c35200013cacedae01573e01813c423632fe848b34d2f1024703d58a83f44e",
+    "docs/parity/checker_clock_configuration_repaired_audit_5_0_6.json.gz": "d24da87aabcc49ab29e0dc867f4dd33034791337bb8c7e977b09880e552f9a52",
+    "docs/parity/checker_clock_scalars_complete_source_errors_5_0_6.json.gz": "e44758f5295e7e4825174e0d139d7fa395e4d88015bee3a30aadd0c9997dd31d",
+    "docs/parity/clock_scalar_sdk_regeneration_5_0_6.json": "f92c5422262024dfd9e77ddfc3c99c545588c8c8837ae520acbf5db298350d17"
+  },
+  "producer_hashes": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "eb306062cb706b381f802b96c9c9fffab835785a737704abe812fa36793d1c52",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "c1bf3ae3d978b3d753026781faedc76f811c59899d8cbf67a32e080545014805"
+  }
+}

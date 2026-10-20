@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "scoped exact source/native qualification",
+  "cases": 34143,
+  "corpora": [
+    {
+      "stem": "decimal",
+      "cases": 963,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "9be4256c53491e463d179763c1ec38c4f1e62c054a5949eaa1d7c16ac7b02013",
+      "original_driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "active": "decimal_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "decimal_extended",
+      "cases": 8056,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "dcbfe5ec06f85bef5e7a6118b30d506439d063d5215d0af0ea5c8e9faf04c26a",
+      "original_driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "active": "decimal_extended_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "decimal_inline",
+      "cases": 484,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "b65a72f7e0cf50afa9ccae4b66534d36f2805cd4de1c1ce8ca273337ffa3dd94",
+      "original_driver_sha256": "86e5e310a5ef316f87b18d58f35844ef8cece72fdd47c1d5264a669e1ab0f6ca",
+      "active": "decimal_inline_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "decimal_scale",
+      "cases": 1148,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "d96abef7c70692a5e7bdea3f3bd43277ce57684ee1724c42a00ae5ba65e2aee3",
+      "original_driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "active": "decimal_scale_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "decimal_parsing",
+      "cases": 8576,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "1b6a79710ba5420ed35ee34dd16d1ddfbb54d4c4e041a21c966251946b7ae88a",
+      "original_driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "active": "decimal_parsing_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "decimal_numeric",
+      "cases": 6058,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "309966a8519294c9ec394db3830bea583e786e62e57340716d2e1b34bb84c226",
+      "original_driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "active": "decimal_numeric_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "decimal_foundation",
+      "cases": 4280,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "42fa3d49a9e1ddacc1a7b2e03291441c4804c01517b52193c0ba86eab10c6ba7",
+      "original_driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "active": "decimal_foundation_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "decimal_wire_format",
+      "cases": 3008,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "c206afd781bbf98937b416a2df04bf3247dad4454a753a1115b2912d20607f24",
+      "original_driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "active": "decimal_wire_format_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "value",
+      "cases": 722,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "104f3b1b7f7fd90be3b816fa3373753ada871e42de69a276908bef159e6990c8",
+      "original_driver_sha256": "cbb2ea4581cd09db2074aec34552553e63efc6728fcf6f80b018201d2943e860",
+      "active": "value_5_0_6_cases.json.gz"
+    },
+    {
+      "stem": "format",
+      "cases": 848,
+      "source_changed": 0,
+      "native_differences": 0,
+      "historical_sha256": "f65b3880fad3256d47563ba55d1d00a26f5d6b60cecd84479c896e1e0a4a2230",
+      "original_driver_sha256": "cbb2ea4581cd09db2074aec34552553e63efc6728fcf6f80b018201d2943e860",
+      "active": "format_5_0_6_cases.json.gz"
+    }
+  ],
+  "manifest_sha256": "0d919415d97e3a34754d986defac3e3b79bf06bbb3de90e55e1dba045d6d2c3b",
+  "lock_sha256": "04d0839e773c69280e73562346546f795997a0c4a3535798766e06e2490192d2",
+  "source": "Unchanged historical drivers, frozen original teaql-core and retained exact dependencies",
+  "normalization": "none",
+  "scope": "Scalar mechanics only; full capabilities and P0-P7 remain open",
+  "verification": {
+    "fresh_reproduction": {
+      "exit_code": 0,
+      "log": "/tmp/teaql_scalar_baselines_506_reproduce.log",
+      "sha256": "d0c99c1bc73e3e52bae882f41341e11c39ab083e1a399eeff5e59b2e93dbb7bc"
+    },
+    "native_selected": {
+      "passed": 13,
+      "total": 13,
+      "log": "/tmp/teaql_scalar_context_native_tests.log"
+    },
+    "context_sanitize": {
+      "passed": 1,
+      "total": 1,
+      "leak_scanning": false,
+      "log": "/tmp/teaql_context_factory_sanitize_tests.log"
+    },
+    "formatting": {
+      "files": 1026,
+      "format_exit_code": 0,
+      "check_exit_code": 0
+    },
+    "full_integration": "docs/parity/native_integration_5_0_6_pending.json",
+    "context_and_composition_modules": {
+      "passed": 2,
+      "total": 2,
+      "log": "/tmp/teaql_diagnostic_composition_module_final_tests.log",
+      "canonical_consumers": 166,
+      "fixture_controls": "docs/parity/derived_query_composition_5_0_6.json"
+    }
+  },
+  "factory_fixture_diagnosis": {
+    "probe_source": "/tmp/teaql_context_factory_allocation_probe.cpp",
+    "probe_build_log": "/tmp/teaql_context_factory_allocation_probe_build.log",
+    "probe_output": "before_ids=1 after_ids=3 before_bytes=8256 after_bytes=8256 existing=7",
+    "old_quota": 3,
+    "corrected_failure_quota": 2,
+    "production_changes": false
+  }
+}

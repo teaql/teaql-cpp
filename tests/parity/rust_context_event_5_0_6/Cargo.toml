@@ -1,0 +1,13 @@
+[package]
+name = "teaql_context_event_506"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../build_rust_context_event_5_0_6/original/teaql-core" }
+teaql-data-service = { path = "../../../build_rust_context_event_5_0_6/original/teaql-data-service" }
+teaql-runtime = { path = "../../../build_rust_context_event_5_0_6/original/teaql-runtime" }
+serde_json = "=1.0.150"
+
+[workspace]

@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "date": "2026-10-14T22:33:36.049622+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "compiler_exit_code": 0,
+  "positive": 1,
+  "negative": 24,
+  "entries": [
+    "List",
+    "Rows",
+    "Stream",
+    "First",
+    "One",
+    "Page",
+    "Count",
+    "Exists"
+  ],
+  "refusal_categories": [
+    "missing purpose",
+    "extra Context argument",
+    "GlobalContext in place of UserContext"
+  ],
+  "contracts": [
+    "execution_matrix_all_positive",
+    "execution_matrix_list_missing_purpose",
+    "execution_matrix_list_extra_context",
+    "execution_matrix_list_global_context",
+    "execution_matrix_rows_missing_purpose",
+    "execution_matrix_rows_extra_context",
+    "execution_matrix_rows_global_context",
+    "execution_matrix_stream_missing_purpose",
+    "execution_matrix_stream_extra_context",
+    "execution_matrix_stream_global_context",
+    "execution_matrix_first_missing_purpose",
+    "execution_matrix_first_extra_context",
+    "execution_matrix_first_global_context",
+    "execution_matrix_one_missing_purpose",
+    "execution_matrix_one_extra_context",
+    "execution_matrix_one_global_context",
+    "execution_matrix_page_missing_purpose",
+    "execution_matrix_page_extra_context",
+    "execution_matrix_page_global_context",
+    "execution_matrix_count_missing_purpose",
+    "execution_matrix_count_extra_context",
+    "execution_matrix_count_global_context",
+    "execution_matrix_exists_missing_purpose",
+    "execution_matrix_exists_extra_context",
+    "execution_matrix_exists_global_context"
+  ],
+  "inputs": {
+    "scripts/verify_generated_type_errors.py": "bfddee683c13f83b23be7e569c91f42c43d9b62ec1ea7279ee23a30e9e41a848",
+    "examples/generated/include/cpp_examples.hpp": "b53c683c2908cde2a1ff698fe4495791225deeeb613ed8768b8da2d92fc262a6",
+    "examples/generated/include/cpp_examples/models.hpp": "b482255d764a3621c199805a5a907cb0d23deb6c1e0e658baab5f1a57c60e086",
+    "examples/generated/include/cpp_examples/queries.hpp": "ebbb344097a155b34c3998a16af1b96693b7df99a750ad5b30cf3c8dd9b86ae2",
+    "examples/generated/include/cpp_examples/runtime.hpp": "f5e7d976af521a2b61b219c6e63a13c4ce15cf733c4fdcc259da216009a4ae3f",
+    "examples/generated/include/cpp_examples/support.hpp": "9c8a6036c9a918043ee98e1f0f038b269f74eb8c9d09f4ad28ea124a00daa60b",
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "f187eb3c960bcc32a69fb39a2b007e2e4d3a1e190d693630832f83ad704d4833",
+    "teaql_runtime/include/teaql/runtime/detail/generated_query_execution.hpp": "54d35a3128f4f4f564b2cf4e85f6f48004a468c3a8d2e8ac46fe48dac466bfc6"
+  },
+  "scope": "Application header compiler contracts only. Native integration is running; this does not qualify every execution runtime/model/policy/privacy obligation or full G09/P4/P7."
+}

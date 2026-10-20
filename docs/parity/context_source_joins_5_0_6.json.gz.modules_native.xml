@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="23"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="canada-mini-host"
+	time="11"
+	timestamp="2026-10-18T17:25:04"
+	>
+	<testcase name="module_document_service_async_rust_parity" classname="module_document_service_async_rust_parity" time="0.193171" status="run">
+		<properties/>
+		<system-out>Document service async 5.0.6 parity: 432/432 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_document_providers_rust_parity" classname="module_document_providers_rust_parity" time="1.28766" status="run">
+		<properties/>
+		<system-out>Document providers 5.0.6 parity: 154/154 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_round_trip_reference_context_contracts" classname="module_round_trip_reference_context_contracts" time="0.0137062" status="run">
+		<properties/>
+		<system-out>Round-trip reference ownership and policy contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_entity_reference_context_contracts" classname="module_entity_reference_context_contracts" time="0.0119356" status="run">
+		<properties/>
+		<system-out>Entity reference ownership contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_context_event_contracts" classname="module_context_event_contracts" time="0.00480449" status="run">
+		<properties/>
+		<system-out>Context event and governance scope contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_runtime_state_bridge_context_contracts" classname="module_runtime_state_bridge_context_contracts" time="0.0018366" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_generated_runtime_state_bridge_context_contracts" classname="module_generated_runtime_state_bridge_context_contracts" time="0.00150059" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_telemetry_contracts" classname="module_telemetry_contracts" time="0.00248823" status="run">
+		<properties/>
+		<system-out>Runtime telemetry contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_commit_audit_contracts" classname="module_commit_audit_contracts" time="0.00324351" status="run">
+		<properties/>
+		<system-out>Commit audit scope contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_i18n_context_contracts" classname="module_i18n_context_contracts" time="0.00350899" status="run">
+		<properties/>
+		<system-out>Language/catalog Context ownership contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_schema_dynamic_context_contracts" classname="module_schema_dynamic_context_contracts" time="0.0181801" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_schema_runtime_contracts" classname="module_schema_runtime_contracts" time="0.00204054" status="run">
+		<properties/>
+		<system-out>Schema runtime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_schema_dynamic_source_rust_parity" classname="module_schema_dynamic_source_rust_parity" time="0.179625" status="run">
+		<properties/>
+		<system-out>Context dynamic schema lifecycle parity: 864/864 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_i18n_rust_parity" classname="module_i18n_rust_parity" time="0.424751" status="run">
+		<properties/>
+		<system-out>Language and i18n parity: 4575/4575 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_i18n_debug_scope_rust_parity" classname="module_i18n_debug_scope_rust_parity" time="3.13298" status="run">
+		<properties/>
+		<system-out>Catalog diagnostics parity: 60/60 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_context_event_rust_parity" classname="module_context_event_rust_parity" time="0.52142" status="run">
+		<properties/>
+		<system-out>Context event dispatch parity: 1088/1088 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_entity_reference_rust_parity" classname="module_entity_reference_rust_parity" time="4.25687" status="run">
+		<properties/>
+		<system-out>Entity reference parity: 548/548 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_round_trip_reference_rust_parity" classname="module_round_trip_reference_rust_parity" time="1.14061" status="run">
+		<properties/>
+		<system-out>Round-trip reference parity: 933/933 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_telemetry_rust_parity" classname="module_telemetry_rust_parity" time="0.160299" status="run">
+		<properties/>
+		<system-out>Runtime telemetry parity: 1032/1032 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_telemetry_model_scope_rust_parity" classname="module_telemetry_model_scope_rust_parity" time="0.239295" status="run">
+		<properties/>
+		<system-out>Telemetry models parity: 110/110 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_schema_runtime_rust_parity" classname="module_schema_runtime_rust_parity" time="0.0850766" status="run">
+		<properties/>
+		<system-out>Schema runtime parity: 384/384 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_runtime_state_bridge_rust_parity" classname="module_runtime_state_bridge_rust_parity" time="0.0989187" status="run">
+		<properties/>
+		<system-out>Matched24 full automatic-save dispatch, hook-count and raw error observations
+</system-out>
+	</testcase>
+	<testcase name="module_generated_runtime_state_bridge_rust_parity" classname="module_generated_runtime_state_bridge_rust_parity" time="0.0655345" status="run">
+		<properties/>
+		<system-out>Matched6 actual generated model borrowed-root and shared ledger observations
+</system-out>
+	</testcase>
+</testsuite>

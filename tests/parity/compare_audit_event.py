@@ -2,6 +2,7 @@
 """Compare audit output and explicitly verify target-width count rejection."""
 import argparse
 import json
+import gzip
 import subprocess
 from pathlib import Path
 
@@ -16,7 +17,7 @@ def main():
     parser.add_argument('--cpp-emulator', default='')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    corpus = json.loads(Path(__file__).with_name('audit_event_cases.json').read_text())
+    corpus = json.loads(gzip.decompress(Path(__file__).with_name('audit_event_baseline_5_0_6_cases.json.gz').read_bytes()))
     baseline = json.loads((root / 'upstream.lock.json').read_text())['commit']
     if corpus['baseline'] != baseline:
         raise RuntimeError('Audit observations belong to a different source baseline')

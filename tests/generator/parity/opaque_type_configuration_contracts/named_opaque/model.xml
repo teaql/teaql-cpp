@@ -1,0 +1,5 @@
+<root name="cpp_opaque_type_fixture" org="teaql" data_service="sqlite">
+ <_type_definition name="token" parent="string" rustType="OpaqueToken"/>
+ <platform name="string()"/>
+ <priority id="id()" platform="platform()" code="string()" value="token()" _constant="true" _identifier="code"><_value id="1" code="BASIC" value="7"/></priority>
+</root>

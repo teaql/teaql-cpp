@@ -2,4 +2,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("purposed_query_debug_cases.json.gz", "Purposed query diagnostics"))
+    raise SystemExit(main("purposed_query_debug_5_0_6_cases.json.gz", "Purposed query diagnostics"))

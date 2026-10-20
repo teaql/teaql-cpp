@@ -68,6 +68,7 @@ public:
     }
 
     static Result<Product, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -212,6 +213,7 @@ public:
     }
 
     static Result<Order, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -365,6 +367,7 @@ public:
     }
 
     static Result<OrderLine, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -537,6 +540,34 @@ inline eval::EvalResult<EntityListBorrow<OrderLine>> Product::evalOrderLineList(
     return GeneratedRelationAccess::list(*this, orderLineList(), "order_line_list");
 }
 
+inline std::optional<Json> Product::borrowed_json(Memory r, EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.reverse_many<OrderLine>("order_line_list", load_state.is_loaded("order_line_list"));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void Product::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
 }
@@ -592,17 +623,20 @@ inline Result<Product, EntityError> Product::from_compact_row(Memory r, CompactR
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
@@ -670,6 +704,34 @@ inline eval::EvalResult<EntityListBorrow<OrderLine>> Order::evalLines() const {
     return GeneratedRelationAccess::list(*this, lines(), "lines");
 }
 
+inline std::optional<Json> Order::borrowed_json(Memory r, EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.reverse_many<OrderLine>("lines", load_state.is_loaded("lines"));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void Order::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
 }
@@ -725,17 +787,20 @@ inline Result<Order, EntityError> Order::from_compact_row(Memory r, CompactRow r
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
@@ -813,6 +878,56 @@ inline eval::EvalResult<EntityBorrow<Product>> OrderLine::evalProduct() const {
     return GeneratedRelationAccess::object(memory_resource(), "product", product(), false);
 }
 
+inline std::optional<Json> OrderLine::borrowed_json(Memory r,
+                                                    EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "order_id",
+        [&] {
+            return generated_detail::encode(r, order_id_);
+        },
+        load_state.is_loaded("order_id"),
+        false);
+    projection.field(
+        "product_id",
+        [&] {
+            return generated_detail::encode(r, product_id_);
+        },
+        load_state.is_loaded("product_id"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.forward<Order>("order",
+                              order_ ? &*order_ : nullptr,
+                              load_state.is_loaded("order"),
+                              generated_detail::encode(r, order_id_));
+    projection.forward<Product>("product",
+                                product_ ? &*product_ : nullptr,
+                                load_state.is_loaded("product"),
+                                generated_detail::encode(r, product_id_));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void OrderLine::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
     if (order_) {
@@ -864,6 +979,7 @@ inline EntityDescriptor OrderLine::entity_descriptor(Memory r) {
     }
     {
         auto& property = d.property("order_id", DataType::U64, "order").not_null();
+        property.json_column_name.emplace(std::string_view("\"order\"", 7), r);
         (void)property;
     }
     {
@@ -894,27 +1010,30 @@ inline Result<OrderLine, EntityError> OrderLine::from_compact_row(Memory r, Comp
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto order_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "order_id", "order", true);
+    auto order_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "order_id", "order", true, field_layout_binding);
     if (!order_id_lookup) {
         return Outcome::err(r, std::move(order_id_lookup).error());
     }
-    auto product_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "product_id", "product", true);
+    auto product_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "product_id", "product", true, field_layout_binding);
     if (!product_id_lookup) {
         return Outcome::err(r, std::move(product_id_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }

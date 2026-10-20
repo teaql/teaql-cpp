@@ -1,0 +1,42 @@
+[package]
+name = "generated_support_reference_506"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "support_reference_506"
+path = "../rust_generated_support_5_0_6/src/main.rs"
+
+[[bin]]
+name = "purpose_reference_506"
+path = "../rust_values/src/bin/generated_support_oracle.rs"
+
+[[bin]]
+name = "derived_reference_506"
+path = "../rust_field_layout/src/bin/derived_query_diagnostics_5_0_6.rs"
+
+[[bin]]
+name = "original_request_reference_506"
+path = "../rust_field_layout/src/bin/original_request_trace_5_0_6.rs"
+
+[[bin]]
+name = "original_facet_reference_506"
+path = "original_facet.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+serde_json = "=1.0.150"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype", "functions"] }
+futures-util = "=0.3.32"
+tokio = { version = "=1.52.3", features = ["rt", "macros", "time"] }
+async-trait = "=0.1.89"
+
+[workspace]

@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "376 observations for the original eight supported models passed; authentic bool original crate compilation fails with four E0599 errors",
+  "case": "bool_actual",
+  "log": "/tmp/teaql_scalar_candidate_bool_actual_execution.log",
+  "source": "tests/parity/scalar_candidate_execution_probe.cpp",
+  "original_observer": "tests/parity/scalar_candidate_execution_5_0_6.rs",
+  "runtime_changed": false,
+  "generator_changed": false,
+  "initial_fixture_errors": [
+    "Used private Rust request module instead of public re-export",
+    "Omitted explicit EntityJsonTraversal in borrowed_json",
+    "Used Memory rather than allocator_arg for native traversal",
+    "Unqualified generated executor alias collided with runtime SPI name"
+  ],
+  "remaining": [
+    "Finish current compiler/linker and compare actual SQLite outcomes",
+    "Broaden all eight source model configurations and preserve exact failures",
+    "Register formal CMake/module targets once full native build exits",
+    "Qualify and document authentic bool source compile-failure disposition without editing frozen output"
+  ],
+  "follow_up": {
+    "status": "scoped retained-fixture and native/module integration passed; G05/P3 remains partial",
+    "evidence": "docs/parity/scalar_candidate_integration_5_0_6.json",
+    "source_failure": "docs/parity/scalar_candidate_bool_actual_5_0_6.json",
+    "note": "Earlier pending wording is historical; all processes from this integration checkpoint are terminal."
+  }
+}

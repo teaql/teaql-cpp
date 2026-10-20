@@ -1,5 +1,14 @@
 # Document round-trip runtime checkpoint: Rust 5.0.6
 
+This initial protocol checkpoint retains its original scope and pending list.
+The later [model diagnostics and boundary qualification](document_model_diagnostics_5_0_6.md)
+closes its Debug/equality/copy and full collection/token-size questions with
+actual source comparisons and current native/module/sanitizer evidence.
+The later [service checkpoint](document_service_async_5_0_6.md) and
+[whole protocol acceptance](document_reference_acceptance_5_0_6.md) complete the
+remaining custom-provider/registration/async and source-group obligations.
+Historical pending statements below retain their original checkpoint scope.
+
 Status: implemented core protocol checkpoint; complete source and generator
 qualification remains open. The active runtime/producer locks are unchanged.
 This resolves the 13 previously missing runtime root declarations with actual

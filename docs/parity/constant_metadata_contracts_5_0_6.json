@@ -1,0 +1,797 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "cases": [
+    {
+      "case": "no_root",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_FIRST",
+                "value": "First",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_SECOND",
+                "value": "Second",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 13
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0425",
+            "message": "cannot find function `module_with_behaviors_and_checkers` in this scope",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 181
+              }
+            ]
+          }
+        ]
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_FIRST",
+                "value": "First",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_SECOND",
+                "value": "Second",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": false,
+        "error_type": "java.lang.IllegalArgumentException",
+        "error": "Generated bootstrap requires exactly one Domain Root"
+      }
+    },
+    {
+      "case": "multiple_roots",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_FIRST",
+                "value": "First",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_SECOND",
+                "value": "Second",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "tenant",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0425",
+            "message": "cannot find function `module_with_behaviors_and_checkers` in this scope",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 183
+              }
+            ]
+          }
+        ]
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_FIRST",
+                "value": "First",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_SECOND",
+                "value": "Second",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "tenant",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": false,
+        "error_type": "java.lang.IllegalArgumentException",
+        "error": "Generated bootstrap requires exactly one Domain Root"
+      }
+    },
+    {
+      "case": "multiple_roots_reversed",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "tenant",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_FIRST",
+                "value": "First",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_SECOND",
+                "value": "Second",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0425",
+            "message": "cannot find function `module_with_behaviors_and_checkers` in this scope",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 183
+              }
+            ]
+          }
+        ]
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "tenant",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_FIRST",
+                "value": "First",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_SECOND",
+                "value": "Second",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": false,
+        "error_type": "java.lang.IllegalArgumentException",
+        "error": "Generated bootstrap requires exactly one Domain Root"
+      }
+    },
+    {
+      "case": "missing_identifier",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "unknown_identifier",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "no_candidates",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1717331758,
+                "key": "STATUS_STRING()",
+                "value": "String()",
+                "line": 1
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1717331758,
+                "key": "STATUS_STRING()",
+                "value": "String()",
+                "line": 1
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "empty_identifier_value",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "missing_identifier_value",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_STRING()",
+                "value": "String()",
+                "line": 1
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_STRING()",
+                "value": "String()",
+                "line": 1
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "missing_seed_field",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_FIRST",
+                "value": "First",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_SECOND",
+                "value": "Second",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_FIRST",
+                "value": "First",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_SECOND",
+                "value": "Second",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "comma_identifier_value",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_A",
+                "value": "A",
+                "line": 1
+              },
+              {
+                "id": 66,
+                "key": "STATUS_B",
+                "value": "B",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_A",
+                "value": "A",
+                "line": 1
+              },
+              {
+                "id": 66,
+                "key": "STATUS_B",
+                "value": "B",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "candidate_name_collision",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_A-B",
+                "value": "A-b",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_A_B",
+                "value": "AB",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0592",
+            "message": "duplicate definitions with name `with_code_is_a_b`",
+            "primary": [
+              {
+                "file": "request.rs",
+                "line": 1558
+              }
+            ]
+          },
+          {
+            "code": "E0592",
+            "message": "duplicate definitions with name `with_code_is_not_a_b`",
+            "primary": [
+              {
+                "file": "request.rs",
+                "line": 1564
+              }
+            ]
+          }
+        ]
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_A-B",
+                "value": "A-b",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "STATUS_A_B",
+                "value": "AB",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": false,
+        "error_type": "java.lang.IllegalArgumentException",
+        "error": "C++ candidate naming collision: status.code"
+      }
+    },
+    {
+      "case": "unicode_identifier_value",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_\u00c9LEV\u00c9",
+                "value": "\u00c9lev\u00e9",
+                "line": 1
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 19
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": true,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "STATUS_\u00c9LEV\u00c9",
+                "value": "\u00c9lev\u00e9",
+                "line": 1
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "malformed_xml",
+      "rust": {
+        "generated": false,
+        "error_type": "cn.hutool.core.exceptions.UtilException",
+        "error": "SAXParseException: Element type \"status\" must be followed by either attribute specifications, \">\" or \"/>\"."
+      },
+      "cpp": {
+        "generated": false,
+        "error_type": "cn.hutool.core.exceptions.UtilException",
+        "error": "SAXParseException: Element type \"status\" must be followed by either attribute specifications, \">\" or \"/>\"."
+      }
+    }
+  ],
+  "scope": "Complete unchanged original/native metadata generation and full crate/umbrella compiler outcomes. Source failures are retained, not runtime parity evidence."
+}

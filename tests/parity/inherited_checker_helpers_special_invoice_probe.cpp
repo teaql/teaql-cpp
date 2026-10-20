@@ -1,0 +1,5 @@
+#define TEAQL_CHECK_MODEL SpecialInvoice
+#define TEAQL_CHECK_CHECKER SpecialInvoiceChecker
+#define TEAQL_CHECK_LOGIC SpecialInvoiceCheckerLogic
+#define TEAQL_CHECK_CALLBACK checkAndFixSpecialInvoice
+#include "inherited_checker_helpers_probe.cpp"

@@ -5,6 +5,15 @@ reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`; producer:
 `45e1572c4956ca963410d8ea436ead3c8857087a`. Complete runtime privacy and G14
 acceptance are not established by metadata emission checks.
 
+The later [compiled-descriptor review](generated_privacy_contracts_5_0_6.md)
+executes the original derive and field-policy code. It corrects the earlier
+comparison's explicit model-to-storage mask adaptation: original descriptors
+carry model keys unchanged, including relation keys that differ from FK names.
+The current verifier compares those original keys; its retained source corpus
+and model inputs are unchanged. The old checkpoint statements below describe
+what that narrower emission comparison established at the time, not complete
+runtime descriptor/privacy acceptance.
+
 ## Resolve inherited masks at their declaring model
 
 The original `ObjectDescriptor.getAuditMaskFields()` resolves each model's own

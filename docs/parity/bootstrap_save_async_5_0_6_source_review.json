@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_files": [
+    {
+      "path": ".reference/teaql-rs/teaql-runtime/src/entity_save.rs",
+      "sha256": "ff04761be7223d57174a3ce3ed315f87a86ec728e48117e2a3ffb229a6427e5b"
+    },
+    {
+      "path": ".reference/teaql-rs/teaql-provider-sqlite/src/lib.rs",
+      "sha256": "39a7d3951d19e7521851d73c76fc03374c9e913998c3193298d4a485f41b35f0"
+    },
+    {
+      "path": "tests/generator/parity/constants_numeric_rust/lib/src/runtime.rs",
+      "sha256": "1860c1188a3db8be6d39fa046074cbe6724a6299a8d3862b8a650f7bda123dfc"
+    },
+    {
+      "path": "teaql_runtime/include/teaql/runtime/detail/data_service/graph_saver.hpp",
+      "sha256": "ffa14950be453f714056e24b5213ec443a702703260fdb0d956ec2f81b609870"
+    },
+    {
+      "path": "teaql_provider_sqlite/src/provider.cpp",
+      "sha256": "8e2ceea1de14411bd4165a12089edd2d29271e0e779cc860fb36714da7ab6f46"
+    },
+    {
+      "path": "teaql_runtime/include/teaql/runtime/generated_bootstrap.hpp",
+      "sha256": "3808be0d68f89ef68d38d68ceeb399a19e2cf3914f01d2d896ec2a490effb354"
+    }
+  ],
+  "ownership_adaptation": "C++ pollable SQL commit test barrier holds an actual native transaction after writes; worker accesses only explicit User-owned host bytes. Source generic audited graph save, graph planning/governance/write/readback and transaction boundaries remain production algorithms. Cancellation/join is a C++ ownership contract, not an invented Rust deferred-provider observation.",
+  "scenarios": 20,
+  "gate_positions": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "actions": [
+    "resume",
+    "terminal_failure",
+    "explicit_cancel",
+    "actual_context_deletion"
+  ],
+  "qualification": "20 actual generated bootstrap commit cleanup scenarios pass native, sanitizer and module consumers. This verifies C++ scheduling/ownership; no original Rust deferred-provider parity claim."
+}

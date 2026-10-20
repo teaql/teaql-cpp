@@ -38,8 +38,17 @@ import teaql_provider_sqlite;
 #include <teaql/runtime/generated_sample_data.hpp>
 #include <teaql/runtime/generated_dynamic_json.hpp>
 #include <teaql/runtime/generated_service_executor.hpp>
+#include <teaql/runtime/generated_runtime_config.hpp>
+#include <teaql/runtime/generated_business_id_environment.hpp>
+#include <teaql/runtime/generated_schema_provider.hpp>
+#include <teaql/runtime/generated_service_runtime_error.hpp>
+#include <teaql/provider_sqlite/runtime_assembly.hpp>
+#include <teaql/provider_sqlite/driver_error.hpp>
 #include <teaql/runtime/generated_dynamic_fields.hpp>
 #include <teaql/runtime/generated_readonly_properties.hpp>
+#include <teaql/runtime/generated_entity_json.hpp>
+#include <teaql/runtime/generated_scalar_codec.hpp>
+#include <teaql/runtime/generated_wire_fields.hpp>
 #include <teaql/runtime/generated_business_id.hpp>
 #include <teaql/runtime/module.hpp>
 #include <teaql/provider_sqlite/schema.hpp>
@@ -91,7 +100,7 @@ struct OptionalType<std::optional<T>> {
 
 template <class T>
 T default_value(Memory r) {
-    return std::make_obj_using_allocator<T>(Allocator(r));
+    return GeneratedScalarCodec::default_value<T>(r);
 }
 
 template <class T>
@@ -108,67 +117,7 @@ Value encode(Memory r, const T& input) {
 template <class T>
 Result<T, EntityError>
 decode(Memory r, const Value* input, std::string_view entity, std::string_view field) {
-    using Outcome = Result<T, EntityError>;
-    if (!input || input->is_null()) {
-        return Outcome::ok(r, default_value<T>(r));
-    }
-    if constexpr (OptionalType<T>::value) {
-        auto result = decode<typename OptionalType<T>::type>(r, input, entity, field);
-        if (!result) {
-            return Outcome::err(r, std::move(result).error());
-        }
-        return Outcome::ok(r, T(std::move(result).value()));
-    } else if constexpr (std::same_as<T, String>) {
-        if (auto text = input->try_text()) {
-            return Outcome::ok(r, String(*text, r));
-        }
-    } else if constexpr (std::same_as<T, std::uint64_t>) {
-        if (auto value = std::get_if<std::int64_t>(&input->data); value && *value < 0) {
-            String message("invalid field ", r);
-            message += field;
-            message += ": negative i64 cannot map to u64";
-            return Outcome::err(r, EntityError(std::allocator_arg, Allocator(r), entity, message));
-        }
-        if (auto value = input->try_u64()) {
-            return Outcome::ok(r, *value);
-        }
-    } else if constexpr (std::same_as<T, std::int64_t>) {
-        if (auto value = input->try_i64()) {
-            return Outcome::ok(r, *value);
-        }
-    } else if constexpr (std::same_as<T, bool>) {
-        if (auto value = input->try_bool()) {
-            return Outcome::ok(r, *value);
-        }
-    } else if constexpr (std::same_as<T, Decimal>) {
-        if (auto value = input->try_decimal()) {
-            return Outcome::ok(r, *value);
-        }
-    } else if constexpr (std::same_as<T, float> || std::same_as<T, double>) {
-        if (auto value = input->try_f64()) {
-            return Outcome::ok(r, static_cast<T>(*value));
-        }
-    } else if constexpr (std::same_as<T, Timestamp>) {
-        if (auto value = std::get_if<Timestamp>(&input->data)) {
-            return Outcome::ok(r, *value);
-        }
-        if (auto value = input->try_i64()) {
-            return Outcome::ok(r, Timestamp(*value));
-        }
-    } else if constexpr (std::same_as<T, Date>) {
-        if (auto value = std::get_if<Date>(&input->data)) {
-            return Outcome::ok(r, *value);
-        }
-    } else if constexpr (std::same_as<T, Json>) {
-        if (auto value = std::get_if<Json>(&input->data)) {
-            return Outcome::ok(r, detail::clone_in(r, *value));
-        }
-    }
-    String message("invalid field ", r);
-    message += field;
-    message += ": ";
-    message += detail::debug_value(r, *input);
-    return Outcome::err(r, EntityError(std::allocator_arg, Allocator(r), entity, message));
+    return GeneratedScalarCodec::decode<T>(r, input, entity, field);
 }
 
 template <class T>
@@ -219,9 +168,20 @@ struct Model : EntityDefaults<Derived> {
             std::allocator_arg, Allocator(memory_resource()), Derived::ENTITY_NAME, id_value());
     }
 
+    std::optional<AnyRef> runtime_state_any() const& {
+        return std::optional<AnyRef>(std::in_place, root);
+    }
+
+    std::optional<AnyRef> runtime_state_any() const&& = delete;
+
     std::optional<EntityRuntimeState> entity_runtime_state() const {
         return std::optional<EntityRuntimeState>(
             std::in_place, std::allocator_arg, Allocator(memory_resource()), root);
+    }
+
+    template <LedgerEntity Source>
+    LedgerCompositionResult includePendingMutationsFrom(const Source& source) const {
+        return LedgerEntityDefaults<Derived>::compose(self(), source);
     }
 
     bool is_new() const {
@@ -265,6 +225,22 @@ struct Model : EntityDefaults<Derived> {
 
     bool is_loaded(std::string_view field) const {
         return load_state.is_loaded(field);
+    }
+
+    bool isLoaded(std::string_view field) const {
+        return is_loaded(field);
+    }
+
+    static Value withId(const UserContext& user_context, std::uint64_t id) {
+        return Value(user_context.memory_resource(), id);
+    }
+
+    void setLoadState(const eval::LoadState& state) {
+        auto r = memory_resource();
+        auto copied = detail::clone_in(r, state);
+        auto indexed = copied.into_indexed(detail::ContextArena::from_memory(r).loaded_snapshots(),
+                                           Derived::field_layout(r));
+        load_state = std::move(indexed).value();
     }
 
     std::optional<LoadedSnapshot::Borrow> loaded_state_snapshot() const {

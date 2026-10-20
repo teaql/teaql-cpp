@@ -1,0 +1,8 @@
+<root name="cpp_expression_roots" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <class platform="platform(contextRoot=true)" name="string()" operator="number()" />
+    <operator platform="platform(contextRoot=true)" name="string()" />
+    <template platform="platform(contextRoot=true)" name="string()" />
+    <namespace platform="platform(contextRoot=true)" name="string()" />
+    <plain_record platform="platform(contextRoot=true)" name="string()" />
+</root>

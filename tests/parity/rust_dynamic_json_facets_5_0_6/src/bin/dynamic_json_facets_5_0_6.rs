@@ -1,0 +1,247 @@
+use cpp_dynamic_json_core::Q;
+use serde_json::{Value as Json, json};
+use std::{
+    future::Future,
+    io::{self, BufRead},
+    sync::{Arc, Mutex},
+    task::{Context, Poll, Wake, Waker},
+};
+use teaql_core::{Expr, SelectQuery, Entity,DataType,Value,MutationIntent};
+use teaql_core::dynamic_fields::{DynamicFieldDefinitions,DynamicFieldMutation};
+use teaql_runtime::dynamic_fields::{DatabaseDynamicFieldsProvider,DynamicFieldsProvider};
+use teaql_core::VersionedEntity;
+use teaql_data_service::dynamic_fields::{DynamicFieldWrite,DynamicFieldStore};
+use teaql_sql::{SqlTransaction,SqlTransactionTransport};
+use teaql_runtime::{RequestPolicy, RuntimeError, UserContext};
+
+#[derive(Default)]
+struct PolicyObservation {
+    calls: Mutex<Vec<Json>>,
+    selects: std::sync::atomic::AtomicU64,
+}
+struct JsonRequestPolicy {
+    mode: String,
+    observation: Arc<PolicyObservation>,
+}
+impl RequestPolicy for JsonRequestPolicy {
+    fn enforce_select(&self, _: &UserContext, query: &mut SelectQuery) -> Result<(), RuntimeError> {
+        let before = describe(query);
+        if self.mode == "restrict" || self.mode == "slice" {
+            let id = match query.entity.as_str() { "Person" => 2_u64, "Order" => 11, "Product" => 6, _ => 21 };
+            *query = query.clone().and_filter(Expr::eq("id", id));
+        }
+        if self.mode == "slice" {
+            *query = query.clone().offset(0).limit(1);
+        }
+        self.observation.calls.lock().unwrap().push(json!({
+            "before":before, "after":describe(query), "comment":query.comment, "purpose":query.purpose,
+            "aggregates":query.aggregates.iter().map(|value|format!("{value:?}")).collect::<Vec<_>>(),
+            "trace":query.trace_chain.iter().map(|value|format!("{value:?}")).collect::<Vec<_>>()
+        }));
+        if self.mode == "deny" {
+            return Err(RuntimeError::Policy("DYNAMIC_JSON_POLICY_DENIED".into()));
+        }
+        Ok(())
+    }
+}
+unsafe extern "C" fn observe_database(data: *mut std::ffi::c_void, action: i32,
+    _: *const std::ffi::c_char, _: *const std::ffi::c_char,
+    _: *const std::ffi::c_char, _: *const std::ffi::c_char) -> i32 {
+    if action == rusqlite::ffi::SQLITE_SELECT {
+        let observation = unsafe { &*(data as *const PolicyObservation) };
+        observation.selects.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    }
+    rusqlite::ffi::SQLITE_OK
+}
+fn wait<T>(future: impl Future<Output = T>) -> T {
+    struct NoWake;
+    impl Wake for NoWake {
+        fn wake(self: Arc<Self>) {}
+    }
+    let mut future = Box::pin(future);
+    let waker = Waker::from(Arc::new(NoWake));
+    let mut context = Context::from_waker(&waker);
+    loop {
+        if let Poll::Ready(value) = future.as_mut().poll(&mut context) {
+            return value;
+        }
+    }
+}
+fn describe(query: &SelectQuery) -> Json {
+    json!({"entity":query.entity,"projection":query.projection,"filter":query.filter.as_ref().map(|v|format!("{v:?}")),
+        "orders":query.order_by.iter().map(|v|format!("{v:?}")).collect::<Vec<_>>(),"slice":query.slice.as_ref().map(|v|format!("{v:?}")),"hard_limit":query.hard_limit})
+}
+fn entity_snapshot<T:Entity+VersionedEntity>(id:u64,entity:&T)->Json {json!([id,entity.version(),entity.is_field_loaded("#title"),entity.dynamic_field_values().and_then(|v|v.values().get("title")).map(|v|format!("{v:?}")),entity.dynamic_property("_computed").map(|v|format!("{v:?}"))])}
+fn facet_snapshot<T>(list:&teaql_core::SmartList<T>)->Json {
+    let mut result=serde_json::Map::new();
+    for (name,facet) in &list.facets {
+        let rows=facet.iter().map(|row| {
+            let scalars=["id","version","name","_facetComputed"].map(|key|row.get(key).map(|value|format!("{value:?}")));
+            let mut row=row.clone();
+            let dynamic=row.take_loaded_dynamic_fields().map(|values| {
+                let mut codes=values.selected_codes().iter().cloned().collect::<Vec<_>>();codes.sort();
+                json!({"selected":codes,"title":values.values().get("title").map(|value|format!("{value:?}"))})
+            });
+            json!({"scalars":scalars,"dynamic":dynamic})
+        }).collect::<Vec<_>>();
+        result.insert(name.clone(),json!(rows));
+    }
+    Json::Object(result)
+}
+fn observe(input: &Json) -> Json {
+    let pool = Arc::new(Mutex::new(rusqlite::Connection::open_in_memory().unwrap()));
+    if input["kind"] == "schema" {
+        let mut context = wait(cpp_dynamic_json_core::service_runtime_from_pool(
+            pool.clone(),
+        ))
+        .unwrap();
+        return json!({"error": wait(context.ensure_schema()).err().map(|error|error.to_string())});
+    }
+    let execute = input["execute"].as_bool().unwrap();
+    let observation = Arc::new(PolicyObservation::default());
+    let policy = input.get("policy").and_then(Json::as_str);
+    let user_context = if execute {
+        pool.lock()
+            .unwrap()
+            .execute_batch(include_str!("../../../../support/dynamic_json_schema.sql"))
+            .unwrap();
+        let mut context = wait(cpp_dynamic_json_core::service_runtime_from_pool(
+            pool.clone(),
+        ))
+        .unwrap();
+        pool.lock()
+            .unwrap()
+            .execute_batch(include_str!("../../../../support/dynamic_json_dataset.sql"))
+            .unwrap();
+        let definitions=["Person","Order","Product","Line"].map(|owner|DynamicFieldDefinitions::new(owner,"v1",[("title".to_string(),DataType::Text)]).unwrap());
+        let provider=Arc::new(DatabaseDynamicFieldsProvider::<cpp_dynamic_json_core::ServiceRuntimeExecutor>::new("json_positive",definitions.clone()).unwrap());
+        context.set_dynamic_fields_provider(provider.clone());wait(provider.ensure_schema(&context)).unwrap();
+        let transport=teaql_provider_sqlite::SqliteMutationExecutor::new(pool.clone());let tx=wait(transport.begin_sql()).unwrap();
+        let owners:[(&str,&[u64]);4]=[("Person",&[2,3,8]),("Order",&[10,11,12,13]),("Product",&[6,7]),("Line",&[20,21,22,23])];let mut writes=Vec::new();
+        for (index,(owner,ids)) in owners.iter().enumerate(){for id in *ids{let changes=std::collections::BTreeMap::from([("title".to_string(),if id%2==0 {DynamicFieldMutation::Set(Value::from(format!("{owner} extension {id}")))}else{DynamicFieldMutation::Set(Value::Null)})]);writes.push(DynamicFieldWrite{namespace:"json_positive".to_string(),definitions:definitions[index].clone(),owner_id:*id,changes});}}
+        wait(tx.apply_writes(&writes,&MutationIntent::new("seed existing JSON extensions").unwrap())).unwrap();wait(tx.commit_sql()).unwrap();
+        if let Some(mode) = policy {
+            context.disable_sql_log();
+            if input["logging"] == true { context.enable_select_sql_log(); }
+            context.set_request_policy(JsonRequestPolicy { mode: mode.into(), observation: observation.clone() });
+            let connection = pool.lock().unwrap();
+            let status = unsafe { rusqlite::ffi::sqlite3_set_authorizer(connection.handle(), Some(observe_database),
+                Arc::as_ptr(&observation) as *mut std::ffi::c_void) };
+            assert_eq!(status, rusqlite::ffi::SQLITE_OK);
+        }
+        Some(context.with_active_root("Platform", 1))
+    } else {
+        None
+    };
+    macro_rules! apply {
+        ($request:expr)=>{{
+            let mut request=$request;
+            request=request.create_property_as("_computed","id + 7");
+            let fields=match input["configuration"].as_str().unwrap() {
+                "empty"=>teaql_core::dynamic_fields::DynamicFieldSelection::fields(Vec::<(String,DataType)>::new()).unwrap(),
+                "selected"=>teaql_core::dynamic_fields::DynamicFieldSelection::fields(vec![("title".into(),DataType::Text)]).unwrap(),
+                _=>teaql_core::dynamic_fields::DynamicFieldSelection::All,
+            };
+            request=request.select_dynamic_fields_with(fields);
+            let facet_mode=input["facet"].as_str().unwrap();
+            if facet_mode!="none" {
+                let mut facet=Q::people().comment("what: inspect trusted customer facets");
+                if facet_mode=="readonly" || facet_mode=="combined" {facet=facet.create_property_as("_facetComputed","id + 13");}
+                if facet_mode=="persistent" || facet_mode=="combined" || facet_mode=="wrong_type" {
+                    let kind=if facet_mode=="wrong_type" {DataType::I64}else{DataType::Text};
+                    facet=facet.select_dynamic_fields_with(teaql_core::dynamic_fields::DynamicFieldSelection::fields(vec![("title".into(),kind)]).unwrap());
+                }
+                request=request.facet_by_customer_as_with_options("_customers",facet,input["include_all"].as_bool().unwrap());
+            }
+            if input["pre_slice"]==true {request=request.offset(3,7);}
+            if input["unlimited"]==true {request=request.unlimited();}
+            let mut failure=None;
+            for value in input["filters"].as_array().unwrap() {
+                let next=std::panic::catch_unwind(std::panic::AssertUnwindSafe(||request.clone().filter_with_json(value.as_str().unwrap())));
+                match next {Ok(value)=>request=value,Err(error)=>{failure=Some(if let Some(v)=error.downcast_ref::<String>() {v.clone()} else {error.downcast_ref::<&str>().unwrap().to_string()});break;}}
+            }
+            if let Some(failure)=failure {json!({"panic":failure})} else {
+                let query:SelectQuery=request.clone().into();let mut out=json!({"query":describe(&query),"facets":{}});
+                if execute {
+                    let request=if input["execution"]=="stream" {request.stream(input["chunk"].as_u64().unwrap() as usize)} else {request};
+                    let request=request.comment("what: inspect dynamic JSON query").purpose("why: qualify generated translation");
+                    match input.get("execution").and_then(Json::as_str).unwrap_or("list") {
+                        "count"=>{
+                            let result=wait(request.execute_for_count(user_context.as_ref().unwrap()));
+                            out["count"]=json!(result.as_ref().ok());
+                            out["error"]=json!(result.err().map(|error|error.to_string()));out["rows"]=json!([]);
+                        },
+                        "exists"=>{
+                            let result=wait(request.execute_for_exists(user_context.as_ref().unwrap()));
+                            out["exists"]=json!(result.as_ref().ok());
+                            out["error"]=json!(result.err().map(|error|error.to_string()));out["rows"]=json!([]);
+                        },
+                        "page"=>{
+                            match wait(request.execute_for_page(user_context.as_ref().unwrap(),1,1)) {
+                                Ok(list)=>{out["total"]=json!(list.total_count);out["facets"]=facet_snapshot(&list);out["rows"]=json!(list.into_iter().map(|v|entity_snapshot(v.id(),&v)).collect::<Vec<_>>());out["error"]=Json::Null;},
+                                Err(error)=>{out["total"]=Json::Null;out["rows"]=json!([]);out["error"]=json!(error.to_string());}
+                            }
+                        },
+                        "one"=>{
+                            let result=wait(request.execute_for_one(user_context.as_ref().unwrap()));
+                            match result {
+                                Ok(entity)=>{out["rows"]=json!(entity.map(|v|vec![entity_snapshot(v.id(),&v)]).unwrap_or_default());out["error"]=Json::Null;},
+                                Err(error)=>{out["rows"]=json!([]);out["error"]=json!(error.to_string());}
+                            }
+                        },
+                        "stream"=>{
+                            let mut rows=Vec::new();let mut error=None;
+                            match wait(request.execute_for_stream(user_context.as_ref().unwrap())) {
+                                Ok(mut stream)=>{
+                                    for _ in 0..input["stop"].as_u64().unwrap() {
+                                        match wait(std::future::poll_fn(|context|stream.as_mut().poll_next(context))) {
+                                            Some(Ok(entity))=>rows.push(entity_snapshot(entity.id(),&entity)),
+                                            Some(Err(value))=>{error=Some(value.to_string());break;},
+                                            None=>break,
+                                        }
+                                    }
+                                    drop(stream);
+                                },
+                                Err(value)=>error=Some(value.to_string()),
+                            }
+                            out["rows"]=json!(rows);out["error"]=json!(error);
+                            let available=pool.try_lock().is_ok();
+                            let reused=available && wait(Q::people().whose_id_is(2_u64)
+                                .comment("what: reuse executor after JSON stream").purpose("why: verify cursor lease release")
+                                .execute_for_one(user_context.as_ref().unwrap())).is_ok_and(|value|value.is_some());
+                            out["reused"]=json!(reused);
+                        },
+                        _=>{
+                            let result=wait(request.execute_for_list(user_context.as_ref().unwrap()));
+                            match result {Ok(list)=>{out["facets"]=facet_snapshot(&list);out["rows"]=json!(list.into_iter().map(|v|entity_snapshot(v.id(),&v)).collect::<Vec<_>>());out["error"]=Json::Null;},Err(error)=>{out["rows"]=json!([]);out["error"]=json!(error.to_string());}}
+                        },
+                    }
+                }
+                out
+            }
+        }};
+    }
+    let minimal = input["minimal"].as_bool().unwrap();
+    let mut output = apply!(if minimal {Q::orders_minimal()}else{Q::orders()});
+    if policy.is_some() {
+        let connection = pool.lock().unwrap();
+        unsafe { rusqlite::ffi::sqlite3_set_authorizer(connection.handle(), None, std::ptr::null_mut()); }
+        output["policy_calls"] = json!(*observation.calls.lock().unwrap());
+        output["database_selects"] = json!(observation.selects.load(std::sync::atomic::Ordering::Relaxed));
+        output["logs"] = json!(user_context.as_ref().unwrap().sql_logs().iter().map(|entry|json!({
+            "sql":entry.sql,"comment":entry.comment,"purpose":entry.purpose,
+            "params":entry.params.iter().map(|value|format!("{value:?}")).collect::<Vec<_>>(),
+            "trace":entry.trace_path.iter().map(|value|format!("{value:?}")).collect::<Vec<_>>()
+        })).collect::<Vec<_>>());
+    }
+    output
+}
+fn main() {
+    if std::env::var_os("TEAQL_DYNAMIC_JSON_DEBUG").is_none() {
+        std::panic::set_hook(Box::new(|_| {}));
+    }
+    for line in io::stdin().lock().lines() {
+        let input: Json = serde_json::from_str(&line.unwrap()).unwrap();
+        println!("{}", observe(&input));
+    }
+}

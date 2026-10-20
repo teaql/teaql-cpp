@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "date": "2026-10-14T21:02:45.146371+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "stage": "Runtime-first; producer and generated application conversion work remains required",
+  "source_execution": {
+    "total": 1944,
+    "success": 1584,
+    "missing_child_comment_failures": 360,
+    "initial_semantic_differences": 24,
+    "result_rows": 3420,
+    "facet_rows": 192,
+    "safe_sql_records": 3432
+  },
+  "gates": {
+    "native": 9,
+    "sanitize": 4,
+    "sanitize_leak_scanning": false,
+    "module": 3,
+    "formatted_cpp_files": 1455,
+    "canonical_consumers": 671,
+    "module_exports": 1485,
+    "original_typing_probe": "Successful compilation and execution"
+  },
+  "all_build_processes_terminal_exit_zero": true,
+  "reference_worktrees_clean": true,
+  "generated_artifacts_changed": false,
+  "remaining": "Generated input delegates, Assist, controlled artifact regeneration and compiler/Java/reproduction integration; matching/roll-up/field-statistic conversion bounds; full G06/G08/G12/G13 and P0-P7 requirements remain active",
+  "artifacts": {
+    "docs/parity/relation_analysis_inputs_source_review_5_0_6.json": "94240d75dbfbe4bdcd2d8670823733558d4af0590f6a28358a858891ffce4e31",
+    "tests/parity/relation_analysis_inputs_5_0_6_cases.json.gz": "956eebb8f7e3061b401328c60486728311912d3cfdae3fe89dc98d7b557a58a5",
+    "docs/parity/relation_analysis_inputs_validation_5_0_6.json.gz": "33fc38afba7c7188a57e43538e6416a37474f421065ffe99fe88d7611fdb8df0"
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "cases": [
+    {
+      "input": {
+        "entity": "Person",
+        "array": false,
+        "value": {
+          "platform": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "platform_id": 3
+          },
+          "loaded": {
+            "email": false,
+            "id": false,
+            "name": false,
+            "orders": false,
+            "platform": false,
+            "platform_id": true,
+            "profile": false,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "platform_id": 3
+          },
+          "loaded": {
+            "email": false,
+            "id": false,
+            "name": false,
+            "orders": false,
+            "platform": false,
+            "platform_id": true,
+            "profile": false,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Person",
+        "array": false,
+        "value": {
+          "platform_id": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "platform_id": 3
+          },
+          "loaded": {
+            "email": false,
+            "id": false,
+            "name": false,
+            "orders": false,
+            "platform": false,
+            "platform_id": true,
+            "profile": false,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "platform_id": 3
+          },
+          "loaded": {
+            "email": false,
+            "id": false,
+            "name": false,
+            "orders": false,
+            "platform": false,
+            "platform_id": true,
+            "profile": false,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Profile",
+        "array": false,
+        "value": {
+          "person": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "person_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "note": false,
+            "person": false,
+            "person_id": true,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "person_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "note": false,
+            "person": false,
+            "person_id": true,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Profile",
+        "array": false,
+        "value": {
+          "person_id": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "person_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "note": false,
+            "person": false,
+            "person_id": true,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "person_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "note": false,
+            "person": false,
+            "person_id": true,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Order",
+        "array": false,
+        "value": {
+          "customer": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "customer_id": 3
+          },
+          "loaded": {
+            "amount": false,
+            "code": false,
+            "customer": false,
+            "customer_id": true,
+            "id": false,
+            "lines": false,
+            "platform": false,
+            "platform_id": false,
+            "priority": false,
+            "seller": false,
+            "seller_id": false,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "customer_id": 3
+          },
+          "loaded": {
+            "amount": false,
+            "code": false,
+            "customer": false,
+            "customer_id": true,
+            "id": false,
+            "lines": false,
+            "platform": false,
+            "platform_id": false,
+            "priority": false,
+            "seller": false,
+            "seller_id": false,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Order",
+        "array": false,
+        "value": {
+          "customer_id": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "customer_id": 3
+          },
+          "loaded": {
+            "amount": false,
+            "code": false,
+            "customer": false,
+            "customer_id": true,
+            "id": false,
+            "lines": false,
+            "platform": false,
+            "platform_id": false,
+            "priority": false,
+            "seller": false,
+            "seller_id": false,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "customer_id": 3
+          },
+          "loaded": {
+            "amount": false,
+            "code": false,
+            "customer": false,
+            "customer_id": true,
+            "id": false,
+            "lines": false,
+            "platform": false,
+            "platform_id": false,
+            "priority": false,
+            "seller": false,
+            "seller_id": false,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Order",
+        "array": false,
+        "value": {
+          "seller": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "seller_id": 3
+          },
+          "loaded": {
+            "amount": false,
+            "code": false,
+            "customer": false,
+            "customer_id": false,
+            "id": false,
+            "lines": false,
+            "platform": false,
+            "platform_id": false,
+            "priority": false,
+            "seller": false,
+            "seller_id": true,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "seller_id": 3
+          },
+          "loaded": {
+            "amount": false,
+            "code": false,
+            "customer": false,
+            "customer_id": false,
+            "id": false,
+            "lines": false,
+            "platform": false,
+            "platform_id": false,
+            "priority": false,
+            "seller": false,
+            "seller_id": true,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Order",
+        "array": false,
+        "value": {
+          "seller_id": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "seller_id": 3
+          },
+          "loaded": {
+            "amount": false,
+            "code": false,
+            "customer": false,
+            "customer_id": false,
+            "id": false,
+            "lines": false,
+            "platform": false,
+            "platform_id": false,
+            "priority": false,
+            "seller": false,
+            "seller_id": true,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "seller_id": 3
+          },
+          "loaded": {
+            "amount": false,
+            "code": false,
+            "customer": false,
+            "customer_id": false,
+            "id": false,
+            "lines": false,
+            "platform": false,
+            "platform_id": false,
+            "priority": false,
+            "seller": false,
+            "seller_id": true,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "product": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "product_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "order": false,
+            "order_id": false,
+            "product": false,
+            "product_id": true,
+            "quantity": false,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "product_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "order": false,
+            "order_id": false,
+            "product": false,
+            "product_id": true,
+            "quantity": false,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "product_id": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "product_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "order": false,
+            "order_id": false,
+            "product": false,
+            "product_id": true,
+            "quantity": false,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "product_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "order": false,
+            "order_id": false,
+            "product": false,
+            "product_id": true,
+            "quantity": false,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    }
+  ],
+  "notice": "Additional foreign-key column alias audit; unaccepted observations, no normalization."
+}

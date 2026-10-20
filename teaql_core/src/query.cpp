@@ -36,6 +36,45 @@ bool blank_namespace(std::string_view value) {
     return value.empty();
 }
 
+detail::ScopedBox<DynamicPropertyDefinitions>
+schema_box(Memory r, const DynamicPropertyDefinitions& definitions) {
+    if (auto* arena = dynamic_cast<Arena*>(r)) {
+        // Closing diagnostics copy into reserved payload storage without public identities.
+        if (!arena->closing() && definitions.memory_resource() == r) {
+            if (auto slot = arena->slot_for_address(&definitions)) {
+                try {
+                    auto* registered = static_cast<DynamicPropertyDefinitions*>(
+                        arena->resolve(slot,
+                                       typeid(DynamicPropertyDefinitions),
+                                       arena->allocation_identity(slot)));
+                    if (registered == &definitions) {
+                        return detail::ScopedBox<DynamicPropertyDefinitions>(
+                            registered, detail::ScopedDelete<DynamicPropertyDefinitions>{});
+                    }
+                } catch (const ReferenceError& error) {
+                    if (error.kind() != ReferenceError::Kind::Type) {
+                        throw;
+                    }
+                }
+            }
+        }
+        auto& value = arena->make<DynamicPropertyDefinitions>(definitions);
+        return detail::ScopedBox<DynamicPropertyDefinitions>(
+            &value, detail::ScopedDelete<DynamicPropertyDefinitions>{});
+    }
+    return detail::make_box<DynamicPropertyDefinitions>(r, definitions);
+}
+
+detail::ScopedBox<DynamicFieldSelection> selection_box(Memory r,
+                                                       const DynamicFieldSelection& selection) {
+    if (auto* arena = dynamic_cast<Arena*>(r)) {
+        auto& value = arena->make<DynamicFieldSelection>(selection);
+        return detail::ScopedBox<DynamicFieldSelection>(
+            &value, detail::ScopedDelete<DynamicFieldSelection>{});
+    }
+    return detail::make_box<DynamicFieldSelection>(r, selection);
+}
+
 }
 
 NamedExpr::NamedExpr(std::allocator_arg_t, Allocator a, std::string_view name, const Expr& value)
@@ -206,12 +245,18 @@ SelectQuery::SelectQuery(std::allocator_arg_t, Allocator a, const SelectQuery& o
     copy_items(object_group_bys, other.object_group_bys);
     copy_items(child_enhancements, other.child_enhancements);
     if (other.dynamic_property_definitions) {
-        dynamic_property_definitions = detail::make_box<DynamicPropertyDefinitions>(
-            a.resource(), *other.dynamic_property_definitions);
+        dynamic_property_definitions =
+            schema_box(a.resource(), *other.dynamic_property_definitions);
     }
     if (other.dynamic_field_selection) {
-        dynamic_field_selection =
-            detail::make_box<DynamicFieldSelection>(a.resource(), *other.dynamic_field_selection);
+        if (a.resource() == other.memory_resource() &&
+            a.resource() == other.dynamic_field_selection->memory_resource() &&
+            !other.dynamic_field_selection.get_deleter().resource) {
+            dynamic_field_selection = detail::ScopedBox<DynamicFieldSelection>(
+                other.dynamic_field_selection.get(), detail::ScopedDelete<DynamicFieldSelection>{});
+        } else {
+            dynamic_field_selection = selection_box(a.resource(), *other.dynamic_field_selection);
+        }
     }
     clone_optional(search_text, a.resource(), other.search_text);
     clone_optional(predicate, a.resource(), other.predicate);
@@ -266,8 +311,15 @@ bool SelectQuery::operator==(const SelectQuery& other) const {
 }
 
 SelectQuery& SelectQuery::select_dynamic_fields(const DynamicFieldSelection& selection) {
-    auto replacement = detail::make_box<DynamicFieldSelection>(memory_resource(), selection);
+    auto replacement = selection_box(memory_resource(), selection);
     dynamic_field_selection = std::move(replacement);
+    return *this;
+}
+
+SelectQuery&
+SelectQuery::with_dynamic_property_definitions(const DynamicPropertyDefinitions& definitions) {
+    auto replacement = schema_box(memory_resource(), definitions);
+    dynamic_property_definitions = std::move(replacement);
     return *this;
 }
 
@@ -377,7 +429,6 @@ SelectQuery& SelectQuery::comment(std::string_view text) {
 }
 
 SelectQuery& SelectQuery::purpose(std::string_view text) {
-    trace_chain.emplace_back(TraceKind::Purpose, entity, text);
     set_text(purpose_text, memory_resource(), text);
     return *this;
 }

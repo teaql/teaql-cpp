@@ -360,6 +360,14 @@ public:
                                  std::uint64_t id,
                                  std::string_view relation,
                                  const RelationFacets& facets);
+    void install_relation_facets(std::uint64_t view,
+                                 std::string_view owner,
+                                 std::uint64_t id,
+                                 std::string_view relation,
+                                 const RelationFacets& facets);
+
+    std::uint64_t allocate_read_view();
+    void reserve_read_view(std::uint64_t view) noexcept;
 
     std::size_t entity_count() const noexcept;
 
@@ -380,6 +388,7 @@ private:
     using RelationFacetTable = std::pmr::
         unordered_map<detail::EntityRelationKey, RelationFacets, detail::EntityRelationHash>;
     std::optional<RelationFacetTable> relation_facets_;
+    std::uint64_t last_read_view_ = 0;
 
     struct RelationOptionEntities {
         using allocator_type = Allocator;
@@ -412,6 +421,7 @@ private:
                           std::uint64_t id,
                           std::string_view relation,
                           T value) {
+        reserve_read_view(view);
         auto r = memory_resource();
         detail::EntityRelationKey key(std::allocator_arg, Allocator(r), view, owner, id, relation);
         detail::EntityGraphValue stored(
@@ -746,7 +756,8 @@ public:
     void set_original_compact_row(std::string_view, const CompactRow&);
     void set_original_compact_row(std::string_view, CompactRow&&);
     std::optional<EntitySnapshot> original_snapshot() const;
-    EntityRuntimeState with_loaded_view_from(const EntityRuntimeState&) const;
+    EntityRuntimeState with_loaded_view_from(const EntityRuntimeState&) const&;
+    EntityRuntimeState with_loaded_view_from(const EntityRuntimeState&) &&;
     void mark_as_delete(const EntityKey&) const;
     bool is_marked_as_delete(const EntityKey&) const;
     FieldSet changed_field_names(const EntityKey&) const;
@@ -863,8 +874,33 @@ struct EntityRuntimeAccess {
                             String& stored,
                             std::string_view input) {
         Value operand(state.memory_resource(), input);
-        detail::trim(input);
-        stored.assign(input);
+        update_text_value(state, key, field, stored, operand);
+    }
+
+    static void update_text_value(const EntityRuntimeState& state,
+                                  const EntityKey& key,
+                                  std::string_view field,
+                                  String& stored,
+                                  const Value& operand) {
+        if (auto text = operand.try_text()) {
+            detail::trim(*text);
+            stored.assign(*text);
+        }
+        state.set(key, field, operand);
+    }
+
+    static void update_text_value(const EntityRuntimeState& state,
+                                  const EntityKey& key,
+                                  std::string_view field,
+                                  std::optional<String>& stored,
+                                  const Value& operand) {
+        if (std::holds_alternative<std::monostate>(operand.data)) {
+            stored.reset();
+        } else if (auto text = operand.try_text()) {
+            detail::trim(*text);
+            String normalized(*text, state.memory_resource());
+            stored.emplace(std::move(normalized));
+        }
         state.set(key, field, operand);
     }
 
@@ -875,13 +911,26 @@ struct EntityRuntimeAccess {
                             const std::optional<String>& input) {
         auto r = state.memory_resource();
         Value operand = input ? Value(r, *input) : Value(r);
-        if (input) {
-            std::string_view text = *input;
-            detail::trim(text);
-            String normalized(text, r);
+        update_text_value(state, key, field, stored, operand);
+    }
+
+    // Rust's clock fix passes a Timestamp Value through generated scalar setters.
+    // Ordinary scalar conversions retain storage; JSON stores the numeric view.
+    template <class T>
+    static void update_clock_value(const EntityRuntimeState& state,
+                                   const EntityKey& key,
+                                   std::string_view field,
+                                   T& stored,
+                                   Timestamp time) {
+        static_assert(!std::same_as<T, Timestamp> && !std::same_as<T, std::optional<Timestamp>>,
+                      "Timestamp fields use their typed clock setter");
+        auto r = state.memory_resource();
+        Value operand(r, time);
+        if constexpr (std::same_as<T, Json>) {
+            stored = operand.to_json_value(r);
+        } else if constexpr (std::same_as<T, std::optional<Json>>) {
+            auto normalized = operand.to_json_value(r);
             stored.emplace(std::move(normalized));
-        } else {
-            stored.reset();
         }
         state.set(key, field, operand);
     }
@@ -1007,8 +1056,17 @@ template <class Derived>
 class LedgerEntityDefaults {
 public:
     template <LedgerEntity T>
-    LedgerCompositionResult include_pending_mutations_from(const T& source) const {
-        const auto& self = static_cast<const Derived&>(*this);
+    LedgerCompositionResult include_pending_mutations_from(const T& source) const
+        requires LedgerEntity<Derived>
+    {
+        return compose(static_cast<const Derived&>(*this), source);
+    }
+
+    // Generated facades can delegate without inheriting an application-visible snake_case API.
+    template <LedgerEntity T>
+    static LedgerCompositionResult compose(const Derived& self, const T& source)
+        requires LedgerEntity<Derived>
+    {
         auto r = self.memory_resource();
         auto target = self.entity_runtime_state();
         if (!target) {

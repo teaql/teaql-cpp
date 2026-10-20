@@ -428,7 +428,9 @@ public:
             return Output::ok(r, &sql_error_stream<E>(r, clone_in(r, error)));
         }
         std::optional<ExecutionMetadata> metadata;
-        if (observer && request.capture_execution_metadata) {
+        // Capture precedes the provider call even without an observer, as in
+        // the source dynamic entry. Only wrapping requires both values.
+        if (request.capture_execution_metadata) {
             metadata.emplace(query_diagnostic_metadata(r, dialect_, *compiled, request));
         }
         auto source = transport_.stream_sql_with_dynamic_fields(
@@ -450,7 +452,7 @@ public:
             source.value()->cancel();
             throw;
         }
-        if (metadata) {
+        if (metadata && observer) {
             mapped = &diagnostic_stream(r, *mapped, std::move(*metadata), std::move(*observer));
         }
         return Output::ok(r, mapped);

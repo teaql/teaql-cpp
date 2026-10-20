@@ -1,0 +1,3 @@
+<root name="constant_metadata_fixture" org="teaql" data_service="sqlite">
+<status id="id()" name="string()" code="string()" _constant="true" _identifier="code"><_value id="1" code="FIRST"/><_value id="22" name="Second" code="SECOND"/></status><platform name="string()"/>
+</root>

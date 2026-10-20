@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="4"
+	timestamp="2026-10-18T09:46:15"
+	>
+	<testcase name="module_audit_event_contracts" classname="module_audit_event_contracts" time="0.00278342" status="run">
+		<properties/>
+		<system-out>Audit event contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_generated_dynamic_json_privacy_rust_parity" classname="module_generated_dynamic_json_privacy_rust_parity" time="4.89677" status="run">
+		<properties/>
+		<system-out>Generated private JSON execution: 1728/1728 exact original observations
+</system-out>
+	</testcase>
+	<testcase name="module_generated_dynamic_json_privacy_sink_contracts" classname="module_generated_dynamic_json_privacy_sink_contracts" time="0.0692296" status="run">
+		<properties/>
+		<system-out>Generated private query: 6 actual file-sink cases passed; logs: /tmp/teaql_generated_json_privacy_al9v6uov
+</system-out>
+	</testcase>
+</testsuite>

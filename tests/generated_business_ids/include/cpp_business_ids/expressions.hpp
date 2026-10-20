@@ -229,21 +229,21 @@ inline TenantExpression TicketExpression::getTenant() const {
 
 struct E {
     static TenantExpression tenant(const Tenant& value) {
-        return TenantExpression(entity_expression(value));
+        return TenantExpression(entity_expression(value, StaticString{"tenant"}));
     }
 
     static TenantExpression tenant(Tenant&&) = delete;
     static TenantExpression tenant(const Tenant&&) = delete;
 
     static ReceiptExpression receipt(const Receipt& value) {
-        return ReceiptExpression(entity_expression(value));
+        return ReceiptExpression(entity_expression(value, StaticString{"receipt"}));
     }
 
     static ReceiptExpression receipt(Receipt&&) = delete;
     static ReceiptExpression receipt(const Receipt&&) = delete;
 
     static TicketExpression ticket(const Ticket& value) {
-        return TicketExpression(entity_expression(value));
+        return TicketExpression(entity_expression(value, StaticString{"ticket"}));
     }
 
     static TicketExpression ticket(Ticket&&) = delete;

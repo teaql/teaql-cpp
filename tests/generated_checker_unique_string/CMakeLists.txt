@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 4.4)
+project(cpp_checker_unique_string LANGUAGES CXX)
+find_package(teaql_cpp CONFIG REQUIRED)
+add_library(cpp_checker_unique_string INTERFACE)
+target_include_directories(cpp_checker_unique_string INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(cpp_checker_unique_string INTERFACE cxx_std_20)
+target_link_libraries(cpp_checker_unique_string INTERFACE teaql::provider_sqlite)

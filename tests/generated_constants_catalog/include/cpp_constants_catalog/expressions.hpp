@@ -120,14 +120,14 @@ public:
 
 struct E {
     static CategoryExpression category(const Category& value) {
-        return CategoryExpression(entity_expression(value));
+        return CategoryExpression(entity_expression(value, StaticString{"category"}));
     }
 
     static CategoryExpression category(Category&&) = delete;
     static CategoryExpression category(const Category&&) = delete;
 
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value));
+        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;

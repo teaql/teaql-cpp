@@ -15,17 +15,19 @@ struct QueryDescription {
     SelectQuery query;
     String intent;
     request::QueryOptions analysis_origins;
+    Vector<request::RelationSelection> relation_selections;
     Vector<request::RelationFilter> relation_filters;
     Vector<request::QuerySelection> child_selections;
 
     QueryDescription(std::allocator_arg_t, Allocator a, std::string_view entity)
         : query(std::allocator_arg, a, entity), intent(a.resource()),
-          analysis_origins(std::allocator_arg, a), relation_filters(a.resource()),
-          child_selections(a.resource()) {}
+          analysis_origins(std::allocator_arg, a), relation_selections(a.resource()),
+          relation_filters(a.resource()), child_selections(a.resource()) {}
 
     QueryDescription(std::allocator_arg_t, Allocator a, const QueryDescription& other)
         : query(std::allocator_arg, a, other.query), intent(other.intent, a.resource()),
           analysis_origins(std::allocator_arg, a, other.analysis_origins),
+          relation_selections(other.relation_selections, a.resource()),
           relation_filters(
               other.relation_filters.begin(), other.relation_filters.end(), a.resource()),
           child_selections(
@@ -40,9 +42,9 @@ struct QueryDescription {
 namespace teaql {
 // The executor type is a compile-time protocol, not a caller-supplied resource.
 // The executing UserContext resolves its own registered executor and metadata.
-template <Entity T, class E, bool Purposed = false, Entity R = T>
+template <Entity T, class E, bool Purposed = false, class R = T>
 class EntityQuery {
-    template <Entity, class, bool, Entity>
+    template <Entity, class, bool, class>
     friend class EntityQuery;
 
 public:
@@ -68,8 +70,14 @@ public:
             }
         }
         if (!minimal) {
-            for (const auto& property : descriptor.properties) {
-                description().query.project(property.name);
+            if constexpr (requires { T::QUERY_PROJECTION_FIELDS; }) {
+                for (auto field : T::QUERY_PROJECTION_FIELDS) {
+                    description().query.project(field);
+                }
+            } else {
+                for (const auto& property : descriptor.properties) {
+                    description().query.project(property.name);
+                }
             }
         }
     }
@@ -105,23 +113,71 @@ public:
         return description().query;
     }
 
+    // Source query(&self) maps to a non-consuming, explicit-domain snapshot.
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return detail::capture_generated_core_query(description().query);
+    }
+
     request::QuerySelection selection() const
         requires(!Purposed)
     {
         const auto& value = description();
-        return detail::capture_generated_selection(
-            value.query, value.analysis_origins, value.relation_filters, value.child_selections);
+        return detail::capture_generated_selection(value.query,
+                                                   value.analysis_origins,
+                                                   value.relation_filters,
+                                                   value.child_selections,
+                                                   value.relation_selections);
     }
 
-    // Adapt decoding without changing the source entity, projections, Context
-    // binding or creation model. Lvalues retain an independent description.
-    template <Entity Result>
+    std::span<const request::RelationSelection> relationSelections() const
+        requires(!Purposed)
+    {
+        return description().relation_selections;
+    }
+
+    std::span<const request::RelationFilter> relationFilters() const
+        requires(!Purposed)
+    {
+        return description().relation_filters;
+    }
+
+    std::span<const request::QuerySelection> childEnhancements() const
+        requires(!Purposed)
+    {
+        return description().child_selections;
+    }
+
+    // C++ snapshots preserve the source option boundary without a hidden cache.
+    // The allocator belongs to the bound Context; destroy this value before close.
+    request::QueryOptions queryOptions() const
+        requires(!Purposed)
+    {
+        auto state = selection();
+        return std::move(state.query_options);
+    }
+
+    // The source's consuming method returns only its core query. This differs
+    // from QuerySelection::into_query(), which applies options and enhancements.
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        auto result = coreQuery();
+        description_ = {};
+        return result;
+    }
+
+    // The result is an unconstrained marker until public execution/creation,
+    // where the source facade requires Entity. No marker object is constructed.
+    // Lvalues retain an independent Context-owned description.
+    template <class Result>
     EntityQuery<T, E, Purposed, Result> returnType() const& {
         auto copy = binding_.get().make_ref<detail::QueryDescription>(description());
         return EntityQuery<T, E, Purposed, Result>(binding_, copy);
     }
 
-    template <Entity Result>
+    template <class Result>
     EntityQuery<T, E, Purposed, Result> returnType() && {
         (void)description();
         return EntityQuery<T, E, Purposed, Result>(binding_, std::exchange(description_, {}));
@@ -133,7 +189,7 @@ public:
         std::invoke(std::forward<F>(mutation), description().query);
     }
 
-    template <Entity Child, class ChildExecutor, bool ChildPurposed, Entity ChildResult>
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
     void requireCompatible(
         const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) const {
         binding_.require_same(child.binding_);
@@ -176,6 +232,20 @@ public:
 
     EntityQuery&& matchTypes(std::span<const Value> types) && {
         matchTypes(types);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    EntityQuery& matchTypes(Inputs&& inputs) & {
+        auto values = criteria_values(std::forward<Inputs>(inputs));
+        return matchTypes(std::span<const Value>(values));
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    EntityQuery&& matchTypes(Inputs&& inputs) && {
+        matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -227,7 +297,7 @@ public:
         return std::move(*this);
     }
 
-    template <Entity Child, class ChildExecutor, bool ChildPurposed, Entity ChildResult>
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
         requires(!ChildPurposed)
     EntityQuery&
     matchingAnyOf(const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) & {
@@ -236,7 +306,7 @@ public:
         return appendMatchingQuery(selection.query);
     }
 
-    template <Entity Child, class ChildExecutor, bool ChildPurposed, Entity ChildResult>
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
         requires(!ChildPurposed)
     EntityQuery&&
     matchingAnyOf(const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) && {
@@ -244,14 +314,14 @@ public:
         return std::move(*this);
     }
 
-    template <Entity Child, class ChildExecutor, bool ChildPurposed, Entity ChildResult>
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
         requires(!ChildPurposed)
     EntityQuery&
     matchAnyOf(const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) & {
         return matchingAnyOf(child);
     }
 
-    template <Entity Child, class ChildExecutor, bool ChildPurposed, Entity ChildResult>
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
         requires(!ChildPurposed)
     EntityQuery&&
     matchAnyOf(const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) && {
@@ -259,21 +329,52 @@ public:
         return std::move(*this);
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery& enhanceChild(const EntityQuery<Child, E, ChildPurposed, ChildResult>& child) & {
-        binding_.require_same(child.binding_);
-        if (memory_resource() != child.memory_resource()) {
+    EntityQuery& enhanceChild(const request::QuerySelection& child) & {
+        auto r = memory_resource();
+        if (r != child.memory_resource()) {
             throw std::invalid_argument("Child enhancement requires an explicit destination copy");
         }
-        description().child_selections.emplace_back(child.selection());
-        description().query.child_enhancement(child.query());
+        auto& value = description();
+        request::QuerySelection captured(std::allocator_arg, Allocator(r), child);
+        auto query = std::move(captured).into_query();
+        value.child_selections.emplace_back(child);
+        value.query.child_enhancement(query);
         return *this;
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
+    EntityQuery&& enhanceChild(const request::QuerySelection& child) && {
+        enhanceChild(child);
+        return std::move(*this);
+    }
+
+    EntityQuery& enhanceChild(const SelectQuery& child) & {
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument("Child enhancement requires an explicit destination copy");
+        }
+        request::QuerySelection selection(std::allocator_arg, Allocator(memory_resource()), child);
+        return enhanceChild(selection);
+    }
+
+    EntityQuery&& enhanceChild(const SelectQuery& child) && {
+        enhanceChild(child);
+        return std::move(*this);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
         requires(!ChildPurposed)
-    EntityQuery&& enhanceChild(const EntityQuery<Child, E, ChildPurposed, ChildResult>& child) && {
+    EntityQuery&
+    enhanceChild(const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) & {
+        requireCompatible(child);
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument("Child enhancement requires an explicit destination copy");
+        }
+        return enhanceChild(child.selection());
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&&
+    enhanceChild(const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) && {
         enhanceChild(child);
         return std::move(*this);
     }
@@ -1042,6 +1143,9 @@ public:
     }
 
     EntityQuery& stream(std::size_t chunk_size) & {
+        if (chunk_size == 0) {
+            throw std::invalid_argument("stream chunk size must be positive");
+        }
         description().query.stream(chunk_size);
         return *this;
     }
@@ -1073,121 +1177,302 @@ public:
         return std::move(*this);
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery& selectRelation(std::string_view relation,
-                                const EntityQuery<Child, E, ChildPurposed, ChildResult>& child) & {
-        binding_.require_same(child.binding_);
-        description().query.relation_query(relation, child.query());
+    EntityQuery& selectRelation(std::string_view relation, const request::QuerySelection& child) & {
+        auto r = memory_resource();
+        if (r != child.memory_resource()) {
+            throw std::invalid_argument("Relation selection requires an explicit destination copy");
+        }
+        request::QuerySelection captured(std::allocator_arg, Allocator(r), child);
+        auto query = std::move(captured).into_query();
+        description().query.relation_query(relation, query);
         return *this;
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery&&
-    selectRelation(std::string_view relation,
-                   const EntityQuery<Child, E, ChildPurposed, ChildResult>& child) && {
+    EntityQuery&& selectRelation(std::string_view relation,
+                                 const request::QuerySelection& child) && {
         selectRelation(relation, child);
         return std::move(*this);
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery& aggregateRelation(std::string_view relation,
-                                   std::string_view alias,
-                                   const EntityQuery<Child, E, ChildPurposed, ChildResult>& child,
-                                   bool single_result) & {
-        requireCompatible(child);
-        description().analysis_origins.relation_aggregates.emplace_back(
-            relation, alias, child.selection(), single_result);
-        description().query.relation_aggregates.emplace_back(
-            relation, alias, child.query(), single_result);
-        return *this;
-    }
-
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery&& aggregateRelation(std::string_view relation,
-                                    std::string_view alias,
-                                    const EntityQuery<Child, E, ChildPurposed, ChildResult>& child,
-                                    bool single_result) && {
-        this->aggregateRelation(relation, alias, child, single_result);
-        return std::move(*this);
-    }
-
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery& groupByObject(std::string_view relation,
-                               std::string_view storage_field,
-                               const EntityQuery<Child, E, ChildPurposed, ChildResult>& child) & {
-        requireCompatible(child);
-        auto& query = description().query;
-        query.group_by(storage_field);
-        description().analysis_origins.object_group_bys.emplace_back(
-            relation, storage_field, child.selection());
-        query.object_group_bys.emplace_back(relation, storage_field, child.query());
-        return *this;
-    }
-
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery&& groupByObject(std::string_view relation,
-                                std::string_view storage_field,
-                                const EntityQuery<Child, E, ChildPurposed, ChildResult>& child) && {
-        this->groupByObject(relation, storage_field, child);
-        return std::move(*this);
-    }
-
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery& filterRelation(std::string_view local_key,
-                                std::string_view foreign_key,
-                                const EntityQuery<Child, E, ChildPurposed, ChildResult>& child,
-                                bool negative = false,
-                                std::string_view relation = {}) & {
-        requireCompatible(child);
-        auto r = memory_resource();
-        auto descriptor = Child::entity_descriptor(r);
-        auto selection = child.selection();
-        auto query = selection.query.clone(r);
-        query.purpose_text.reset();
-        if (!relation.empty()) {
-            description().relation_filters.emplace_back(relation, selection);
+    EntityQuery& selectRelation(std::string_view relation, const SelectQuery& child) & {
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument("Relation selection requires an explicit destination copy");
         }
-        description().query.and_filter(
-            negative ? Expr::not_in_subquery(r, local_key, descriptor, query, foreign_key)
-                     : Expr::in_subquery(r, local_key, descriptor, query, foreign_key));
-        return *this;
+        request::QuerySelection selection(std::allocator_arg, Allocator(memory_resource()), child);
+        return selectRelation(relation, selection);
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery&& filterRelation(std::string_view local_key,
-                                 std::string_view foreign_key,
-                                 const EntityQuery<Child, E, ChildPurposed, ChildResult>& child,
-                                 bool negative = false,
-                                 std::string_view relation = {}) && {
-        this->filterRelation(local_key, foreign_key, child, negative, relation);
+    EntityQuery&& selectRelation(std::string_view relation, const SelectQuery& child) && {
+        selectRelation(relation, child);
         return std::move(*this);
     }
 
-    // The source field aggregate converts its child request to a bare SelectQuery
-    // before adding the field operation. Preserve that deliberate options boundary.
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
         requires(!ChildPurposed)
     EntityQuery&
-    aggregateRelationField(std::string_view relation,
-                           std::string_view alias,
-                           const EntityQuery<Child, E, ChildPurposed, ChildResult>& child,
-                           std::string_view field,
-                           std::string_view query_alias,
-                           AggregateFunction function) & {
+    selectRelation(std::string_view relation,
+                   const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) & {
         requireCompatible(child);
+        return selectRelation(relation, child.selection());
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&&
+    selectRelation(std::string_view relation,
+                   const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) && {
+        selectRelation(relation, child);
+        return std::move(*this);
+    }
+
+    EntityQuery& aggregateRelation(std::string_view relation,
+                                   std::string_view alias,
+                                   const request::QuerySelection& child,
+                                   bool single_result) & {
         auto r = memory_resource();
-        auto origin_query = child.query().clone(r);
+        if (r != child.memory_resource()) {
+            throw std::invalid_argument("Relation analysis requires an explicit destination copy");
+        }
+        request::QuerySelection captured(std::allocator_arg, Allocator(r), child);
+        auto query = std::move(captured).into_query();
+        description().analysis_origins.relation_aggregates.emplace_back(
+            relation, alias, child, single_result);
+        description().query.relation_aggregates.emplace_back(relation, alias, query, single_result);
+        return *this;
+    }
+
+    EntityQuery&& aggregateRelation(std::string_view relation,
+                                    std::string_view alias,
+                                    const request::QuerySelection& child,
+                                    bool single_result) && {
+        aggregateRelation(relation, alias, child, single_result);
+        return std::move(*this);
+    }
+
+    EntityQuery& aggregateRelation(std::string_view relation,
+                                   std::string_view alias,
+                                   const SelectQuery& child,
+                                   bool single_result) & {
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument("Relation analysis requires an explicit destination copy");
+        }
+        request::QuerySelection selection(std::allocator_arg, Allocator(memory_resource()), child);
+        return aggregateRelation(relation, alias, selection, single_result);
+    }
+
+    EntityQuery&& aggregateRelation(std::string_view relation,
+                                    std::string_view alias,
+                                    const SelectQuery& child,
+                                    bool single_result) && {
+        aggregateRelation(relation, alias, child, single_result);
+        return std::move(*this);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&
+    aggregateRelation(std::string_view relation,
+                      std::string_view alias,
+                      const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+                      bool single_result) & {
+        requireCompatible(child);
+        return aggregateRelation(relation, alias, child.selection(), single_result);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&&
+    aggregateRelation(std::string_view relation,
+                      std::string_view alias,
+                      const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+                      bool single_result) && {
+        aggregateRelation(relation, alias, child, single_result);
+        return std::move(*this);
+    }
+
+    EntityQuery& groupByObject(std::string_view relation,
+                               std::string_view storage_field,
+                               const request::QuerySelection& child) & {
+        auto r = memory_resource();
+        if (r != child.memory_resource()) {
+            throw std::invalid_argument("Object grouping requires an explicit destination copy");
+        }
+        request::QuerySelection captured(std::allocator_arg, Allocator(r), child);
+        auto query = std::move(captured).into_query();
+        auto& value = description();
+        value.query.group_by(storage_field);
+        value.analysis_origins.object_group_bys.emplace_back(relation, storage_field, child);
+        value.query.object_group_bys.emplace_back(relation, storage_field, query);
+        return *this;
+    }
+
+    EntityQuery&& groupByObject(std::string_view relation,
+                                std::string_view storage_field,
+                                const request::QuerySelection& child) && {
+        groupByObject(relation, storage_field, child);
+        return std::move(*this);
+    }
+
+    EntityQuery& groupByObject(std::string_view relation,
+                               std::string_view storage_field,
+                               const SelectQuery& child) & {
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument("Object grouping requires an explicit destination copy");
+        }
+        request::QuerySelection selection(std::allocator_arg, Allocator(memory_resource()), child);
+        return groupByObject(relation, storage_field, selection);
+    }
+
+    EntityQuery&& groupByObject(std::string_view relation,
+                                std::string_view storage_field,
+                                const SelectQuery& child) && {
+        groupByObject(relation, storage_field, child);
+        return std::move(*this);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&
+    groupByObject(std::string_view relation,
+                  std::string_view storage_field,
+                  const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) & {
+        requireCompatible(child);
+        return groupByObject(relation, storage_field, child.selection());
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&&
+    groupByObject(std::string_view relation,
+                  std::string_view storage_field,
+                  const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child) && {
+        groupByObject(relation, storage_field, child);
+        return std::move(*this);
+    }
+
+    EntityQuery& filterRelation(std::string_view local_key,
+                                std::string_view foreign_key,
+                                const EntityDescriptor& target,
+                                const request::QuerySelection& child,
+                                bool negative = false,
+                                std::string_view relation = {}) & {
+        auto r = memory_resource();
+        if (r != child.memory_resource()) {
+            throw std::invalid_argument("Relation matching requires an explicit destination copy");
+        }
+        auto query = child.query.clone(r);
+        query.purpose_text.reset();
+        if (!relation.empty()) {
+            description().relation_filters.emplace_back(relation, child);
+        }
+        description().query.and_filter(
+            negative ? Expr::not_in_subquery(r, local_key, target, query, foreign_key)
+                     : Expr::in_subquery(r, local_key, target, query, foreign_key));
+        return *this;
+    }
+
+    EntityQuery&& filterRelation(std::string_view local_key,
+                                 std::string_view foreign_key,
+                                 const EntityDescriptor& target,
+                                 const request::QuerySelection& child,
+                                 bool negative = false,
+                                 std::string_view relation = {}) && {
+        filterRelation(local_key, foreign_key, target, child, negative, relation);
+        return std::move(*this);
+    }
+
+    EntityQuery& filterRelation(std::string_view local_key,
+                                std::string_view foreign_key,
+                                const EntityDescriptor& target,
+                                const SelectQuery& child,
+                                bool negative = false,
+                                std::string_view relation = {}) & {
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument("Relation matching requires an explicit destination copy");
+        }
+        request::QuerySelection selection(std::allocator_arg, Allocator(memory_resource()), child);
+        return filterRelation(local_key, foreign_key, target, selection, negative, relation);
+    }
+
+    EntityQuery&& filterRelation(std::string_view local_key,
+                                 std::string_view foreign_key,
+                                 const EntityDescriptor& target,
+                                 const SelectQuery& child,
+                                 bool negative = false,
+                                 std::string_view relation = {}) && {
+        filterRelation(local_key, foreign_key, target, child, negative, relation);
+        return std::move(*this);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&
+    filterRelation(std::string_view local_key,
+                   std::string_view foreign_key,
+                   const EntityDescriptor& target,
+                   const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+                   bool negative = false,
+                   std::string_view relation = {}) & {
+        requireCompatible(child);
+        return filterRelation(
+            local_key, foreign_key, target, child.selection(), negative, relation);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&&
+    filterRelation(std::string_view local_key,
+                   std::string_view foreign_key,
+                   const EntityDescriptor& target,
+                   const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+                   bool negative = false,
+                   std::string_view relation = {}) && {
+        filterRelation(local_key, foreign_key, target, child, negative, relation);
+        return std::move(*this);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&
+    filterRelation(std::string_view local_key,
+                   std::string_view foreign_key,
+                   const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+                   bool negative = false,
+                   std::string_view relation = {}) & {
+        auto target = Child::entity_descriptor(memory_resource());
+        return filterRelation(local_key, foreign_key, target, child, negative, relation);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&&
+    filterRelation(std::string_view local_key,
+                   std::string_view foreign_key,
+                   const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+                   bool negative = false,
+                   std::string_view relation = {}) && {
+        filterRelation(local_key, foreign_key, child, negative, relation);
+        return std::move(*this);
+    }
+
+    // Field statistics materialize their selection before adding the scalar
+    // operation, then store the bare query in a fresh selection as in the source.
+    EntityQuery& aggregateRelationField(std::string_view relation,
+                                        std::string_view alias,
+                                        const request::QuerySelection& child,
+                                        std::string_view field,
+                                        std::string_view query_alias,
+                                        AggregateFunction function) & {
+        auto r = memory_resource();
+        if (r != child.memory_resource()) {
+            throw std::invalid_argument(
+                "Relation field statistics require an explicit destination copy");
+        }
+        request::QuerySelection captured(std::allocator_arg, Allocator(r), child);
+        auto origin_query = std::move(captured).into_query();
         origin_query.aggregate(
             Aggregate(std::allocator_arg, Allocator(r), function, field, query_alias));
-        auto query = child.query().clone(r);
+        auto query = origin_query.clone(r);
         query.raw_sql_text.reset();
         query.raw_sql_search_criteria.clear();
         query.dynamic_properties.clear();
@@ -1196,7 +1481,6 @@ public:
         query.relation_aggregates.clear();
         query.object_group_bys.clear();
         query.child_enhancements.clear();
-        query.aggregate(Aggregate(std::allocator_arg, Allocator(r), function, field, query_alias));
         description().analysis_origins.relation_aggregates.emplace_back(
             relation,
             alias,
@@ -1206,60 +1490,146 @@ public:
         return *this;
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
-    EntityQuery&&
-    aggregateRelationField(std::string_view relation,
-                           std::string_view alias,
-                           const EntityQuery<Child, E, ChildPurposed, ChildResult>& child,
-                           std::string_view field,
-                           std::string_view query_alias,
-                           AggregateFunction function) && {
-        this->aggregateRelationField(relation, alias, child, field, query_alias, function);
+    EntityQuery&& aggregateRelationField(std::string_view relation,
+                                         std::string_view alias,
+                                         const request::QuerySelection& child,
+                                         std::string_view field,
+                                         std::string_view query_alias,
+                                         AggregateFunction function) && {
+        aggregateRelationField(relation, alias, child, field, query_alias, function);
         return std::move(*this);
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
+    EntityQuery& aggregateRelationField(std::string_view relation,
+                                        std::string_view alias,
+                                        const SelectQuery& child,
+                                        std::string_view field,
+                                        std::string_view query_alias,
+                                        AggregateFunction function) & {
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument(
+                "Relation field statistics require an explicit destination copy");
+        }
+        request::QuerySelection selection(std::allocator_arg, Allocator(memory_resource()), child);
+        return aggregateRelationField(relation, alias, selection, field, query_alias, function);
+    }
+
+    EntityQuery&& aggregateRelationField(std::string_view relation,
+                                         std::string_view alias,
+                                         const SelectQuery& child,
+                                         std::string_view field,
+                                         std::string_view query_alias,
+                                         AggregateFunction function) && {
+        aggregateRelationField(relation, alias, child, field, query_alias, function);
+        return std::move(*this);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
         requires(!ChildPurposed)
+    EntityQuery& aggregateRelationField(
+        std::string_view relation,
+        std::string_view alias,
+        const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+        std::string_view field,
+        std::string_view query_alias,
+        AggregateFunction function) & {
+        requireCompatible(child);
+        return aggregateRelationField(
+            relation, alias, child.selection(), field, query_alias, function);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&& aggregateRelationField(
+        std::string_view relation,
+        std::string_view alias,
+        const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+        std::string_view field,
+        std::string_view query_alias,
+        AggregateFunction function) && {
+        aggregateRelationField(relation, alias, child, field, query_alias, function);
+        return std::move(*this);
+    }
+
     EntityQuery& facetBy(std::string_view relation,
                          std::string_view name,
-                         const EntityQuery<Child, E, ChildPurposed, ChildResult>& child,
+                         const request::QuerySelection& child,
                          bool include_all = true) & {
-        requireCompatible(child);
-        description().query.facets.emplace_back(name, relation, child.selection(), include_all);
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument("Facet capture requires an explicit destination copy");
+        }
+        description().query.facets.emplace_back(name, relation, child, include_all);
         return *this;
     }
 
-    template <Entity Child, bool ChildPurposed, Entity ChildResult>
-        requires(!ChildPurposed)
     EntityQuery&& facetBy(std::string_view relation,
                           std::string_view name,
-                          const EntityQuery<Child, E, ChildPurposed, ChildResult>& child,
+                          const request::QuerySelection& child,
                           bool include_all = true) && {
-        this->facetBy(relation, name, child, include_all);
+        facetBy(relation, name, child, include_all);
+        return std::move(*this);
+    }
+
+    EntityQuery& facetBy(std::string_view relation,
+                         std::string_view name,
+                         const SelectQuery& child,
+                         bool include_all = true) & {
+        if (memory_resource() != child.memory_resource()) {
+            throw std::invalid_argument("Facet capture requires an explicit destination copy");
+        }
+        request::QuerySelection selection(std::allocator_arg, Allocator(memory_resource()), child);
+        return facetBy(relation, name, selection, include_all);
+    }
+
+    EntityQuery&& facetBy(std::string_view relation,
+                          std::string_view name,
+                          const SelectQuery& child,
+                          bool include_all = true) && {
+        facetBy(relation, name, child, include_all);
+        return std::move(*this);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery& facetBy(std::string_view relation,
+                         std::string_view name,
+                         const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+                         bool include_all = true) & {
+        requireCompatible(child);
+        return facetBy(relation, name, child.selection(), include_all);
+    }
+
+    template <Entity Child, class ChildExecutor, bool ChildPurposed, class ChildResult>
+        requires(!ChildPurposed)
+    EntityQuery&&
+    facetBy(std::string_view relation,
+            std::string_view name,
+            const EntityQuery<Child, ChildExecutor, ChildPurposed, ChildResult>& child,
+            bool include_all = true) && {
+        facetBy(relation, name, child, include_all);
         return std::move(*this);
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
         auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
         if (!service) {
-            throw std::runtime_error(
-                std::string(service.error().to_string(user_context.memory_resource())));
+            return detail::generated_query_lookup_failure<SmartList<R>, typename E::Error>(
+                user_context.memory_resource(), service.error());
         }
         return detail::execute_generated_list_query<R>(service.value().get(), authorized);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
         auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
         if (!service) {
-            throw std::runtime_error(
-                std::string(service.error().to_string(user_context.memory_resource())));
+            return detail::generated_query_lookup_failure<std::optional<R>, typename E::Error>(
+                user_context.memory_resource(), service.error());
         }
         authorized.limit(1);
         auto& source = detail::execute_generated_list_query<R>(service.value().get(), authorized);
@@ -1270,43 +1640,43 @@ public:
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<R>
     {
         return executeForOne(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
         auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
         if (!service) {
-            throw std::runtime_error(
-                std::string(service.error().to_string(user_context.memory_resource())));
+            return detail::generated_query_lookup_failure<std::uint64_t, typename E::Error>(
+                user_context.memory_resource(), service.error());
         }
         return detail::execute_generated_scalar_query<true>(service.value().get(), authorized);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
         auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
         if (!service) {
-            throw std::runtime_error(
-                std::string(service.error().to_string(user_context.memory_resource())));
+            return detail::generated_query_lookup_failure<bool, typename E::Error>(
+                user_context.memory_resource(), service.error());
         }
         return detail::execute_generated_scalar_query<false>(service.value().get(), authorized);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
         auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
         if (!service) {
-            throw std::runtime_error(
-                std::string(service.error().to_string(user_context.memory_resource())));
+            return detail::generated_query_lookup_failure<SmartList<R>, typename E::Error>(
+                user_context.memory_resource(), service.error());
         }
         using State = detail::GeneratedPageQueryOperation<R, E>;
         return make_operation<typename State::Output, State>(
@@ -1314,32 +1684,34 @@ public:
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
         auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
         if (!service) {
-            throw std::runtime_error(
-                std::string(service.error().to_string(user_context.memory_resource())));
+            return detail::generated_query_lookup_failure<SmartList<CompactRow>, typename E::Error>(
+                user_context.memory_resource(), service.error());
         }
         return detail::generated_query_result(service.value().get().fetch_smart_list(authorized));
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed && std::derived_from<E, StreamQueryExecutor<typename E::Error>>
+        requires Purposed
+                 && Entity<R> && std::derived_from<E, StreamQueryExecutor<typename E::Error>>
     {
         auto authorized = authorize(user_context);
         auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
         if (!service) {
-            throw std::runtime_error(
-                std::string(service.error().to_string(user_context.memory_resource())));
+            return detail::generated_query_lookup_failure<
+                TypedEntityQueryStream<R, typename E::Error>,
+                typename E::Error>(user_context.memory_resource(), service.error());
         }
         return detail::generated_query_result(
             service.value().get().template fetch_entity_stream<R>(authorized));
     }
 
     T& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<R>
     {
         (void)authorize(user_context);
         auto id = user_context.next_id(T::ENTITY_NAME);
@@ -1400,8 +1772,11 @@ private:
         auto intent = std::string_view(source.intent);
         detail::trim(comment);
         detail::trim(intent);
-        if (comment.empty() || intent.empty()) {
-            throw std::invalid_argument("Query execution requires nonblank purpose and comment");
+        if (intent.empty()) {
+            throw std::invalid_argument("query purpose must not be empty");
+        }
+        if (comment.empty()) {
+            throw std::invalid_argument("query comment must not be empty");
         }
         // Freeze a Context-owned execution snapshot before returning asynchronous work.
         // Later builder modifications do not affect the operation.

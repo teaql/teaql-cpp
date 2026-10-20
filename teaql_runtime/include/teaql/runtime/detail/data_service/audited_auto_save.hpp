@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/runtime/detail/data_service/audited_save.hpp>
+#include <teaql/runtime/detail/runtime_state_bridge.hpp>
 
 namespace teaql::detail {
 template <Entity T, bool Ledger>
@@ -28,14 +29,13 @@ public:
             use_ledger_ =
                 Ledger || entity.has_pending_dynamic_mutations() || entity.dynamic_field_values();
             if (use_ledger_) {
-                if constexpr (LedgerEntity<T>) {
+                if constexpr (Ledger) {
                     root_ = entity.entity_runtime_state();
                 } else {
-                    return fail(RuntimeError::graph(
-                        r, "dynamic save requires the runtime mutation ledger carrier"));
+                    root_ = borrow_entity_runtime_state(entity);
                 }
-                if (!root_ &&
-                    (entity.has_pending_dynamic_mutations() || entity.dynamic_field_values())) {
+                if (!root_ && (!Ledger || entity.has_pending_dynamic_mutations() ||
+                               entity.dynamic_field_values())) {
                     return fail(RuntimeError::graph(
                         r, "dynamic save requires the runtime mutation ledger carrier"));
                 }

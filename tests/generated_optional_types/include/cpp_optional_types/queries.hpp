@@ -61,12 +61,12 @@ void ReadingDynamicJsonRecipe::apply_chain(Query& query,
     (void)value;
 }
 }
-template <bool Purposed = false, Entity Result = Reading>
+template <bool Purposed = false, class Result = Reading>
 class ReadingRequest;
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class ReadingRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class ReadingRequest;
 
 public:
@@ -90,6 +90,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -102,6 +108,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     ReadingRequest<true, Result> purpose(std::string_view text) const& {
         return ReadingRequest<true, Result>(query_.purpose(text));
     }
@@ -110,12 +146,12 @@ public:
         return ReadingRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     ReadingRequest<Purposed, Return> returnType() const& {
         return ReadingRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     ReadingRequest<Purposed, Return> returnType() && {
         return ReadingRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
     }
@@ -267,6 +303,20 @@ public:
 
     ReadingRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -724,15 +774,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     ReadingRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     ReadingRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    ReadingRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    ReadingRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    ReadingRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    ReadingRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -905,73 +975,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     Reading& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -3684,6 +3754,32 @@ public:
         return std::move(*this);
     }
 
+    ReadingRequest& selectRatioWithFunction(AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("ratio", "ratio", function);
+        });
+        return *this;
+    }
+
+    ReadingRequest&& selectRatioWithFunction(AggregateFunction function) && {
+        this->selectRatioWithFunction(function);
+        return std::move(*this);
+    }
+
+    ReadingRequest& selectRatioAsWithFunction(std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("ratio", alias, function);
+        });
+        return *this;
+    }
+
+    ReadingRequest&& selectRatioAsWithFunction(std::string_view alias,
+                                               AggregateFunction function) && {
+        this->selectRatioAsWithFunction(alias, function);
+        return std::move(*this);
+    }
+
     ReadingRequest& orderByRatioAsc() & {
         query_.mutate_selection([&](SelectQuery& selection) {
             selection.order_asc("ratio");
@@ -4015,6 +4111,102 @@ public:
 
     ReadingRequest&& maxRatioAs(std::string_view alias) && {
         this->maxRatioAs(alias);
+        return std::move(*this);
+    }
+
+    ReadingRequest& standardDeviationRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("ratio", "stdDev_ratio");
+        });
+        return *this;
+    }
+
+    ReadingRequest&& standardDeviationRatio() && {
+        this->standardDeviationRatio();
+        return std::move(*this);
+    }
+
+    ReadingRequest& standardDeviationRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("ratio", alias);
+        });
+        return *this;
+    }
+
+    ReadingRequest&& standardDeviationRatioAs(std::string_view alias) && {
+        this->standardDeviationRatioAs(alias);
+        return std::move(*this);
+    }
+
+    ReadingRequest& squareRootOfPopulationStandardDeviationRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("ratio", "stdDevPop_ratio");
+        });
+        return *this;
+    }
+
+    ReadingRequest&& squareRootOfPopulationStandardDeviationRatio() && {
+        this->squareRootOfPopulationStandardDeviationRatio();
+        return std::move(*this);
+    }
+
+    ReadingRequest& squareRootOfPopulationStandardDeviationRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("ratio", alias);
+        });
+        return *this;
+    }
+
+    ReadingRequest&& squareRootOfPopulationStandardDeviationRatioAs(std::string_view alias) && {
+        this->squareRootOfPopulationStandardDeviationRatioAs(alias);
+        return std::move(*this);
+    }
+
+    ReadingRequest& sampleVarianceRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("ratio", "varSamp_ratio");
+        });
+        return *this;
+    }
+
+    ReadingRequest&& sampleVarianceRatio() && {
+        this->sampleVarianceRatio();
+        return std::move(*this);
+    }
+
+    ReadingRequest& sampleVarianceRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("ratio", alias);
+        });
+        return *this;
+    }
+
+    ReadingRequest&& sampleVarianceRatioAs(std::string_view alias) && {
+        this->sampleVarianceRatioAs(alias);
+        return std::move(*this);
+    }
+
+    ReadingRequest& samplePopulationVarianceRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("ratio", "varPop_ratio");
+        });
+        return *this;
+    }
+
+    ReadingRequest&& samplePopulationVarianceRatio() && {
+        this->samplePopulationVarianceRatio();
+        return std::move(*this);
+    }
+
+    ReadingRequest& samplePopulationVarianceRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("ratio", alias);
+        });
+        return *this;
+    }
+
+    ReadingRequest&& samplePopulationVarianceRatioAs(std::string_view alias) && {
+        this->samplePopulationVarianceRatioAs(alias);
         return std::move(*this);
     }
 
@@ -6454,6 +6646,62 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     ReadingRequest& withId(request::FieldOperator op, Inputs&& inputs) & {
@@ -6472,6 +6720,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withTextSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withTextSoundingLike(const Input& value) && {
+        this->withTextSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withTextIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withTextIs(const Input& value) && {
+        this->withTextIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withTextIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withTextIsNot(const Input& value) && {
+        this->withTextIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withTextGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withTextGreaterThan(const Input& value) && {
+        this->withTextGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withTextGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withTextGreaterThanOrEqualTo(const Input& value) && {
+        this->withTextGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withTextLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withTextLessThan(const Input& value) && {
+        this->withTextLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withTextLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withTextLessThanOrEqualTo(const Input& value) && {
+        this->withTextLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest& withTextBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "text", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest&& withTextBetween(const Lower& lower, const Upper& upper) && {
+        this->withTextBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withTextIn(Inputs&& inputs) & {
+        query_.filterField("text", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withTextIn(Inputs&& inputs) && {
+        this->withTextIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withTextNotIn(Inputs&& inputs) & {
+        query_.filterField("text", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withTextNotIn(Inputs&& inputs) && {
+        this->withTextNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -6533,6 +6923,134 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     ReadingRequest&& withTextAfter(const T& value) && {
         this->withTextAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withBalanceIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "balance", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withBalanceIs(const Input& value) && {
+        this->withBalanceIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withBalanceIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "balance", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withBalanceIsNot(const Input& value) && {
+        this->withBalanceIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withBalanceGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "balance", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withBalanceGreaterThan(const Input& value) && {
+        this->withBalanceGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withBalanceGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "balance", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withBalanceGreaterThanOrEqualTo(const Input& value) && {
+        this->withBalanceGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withBalanceLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "balance", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withBalanceLessThan(const Input& value) && {
+        this->withBalanceLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withBalanceLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "balance", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withBalanceLessThanOrEqualTo(const Input& value) && {
+        this->withBalanceLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest& withBalanceBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "balance", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest&& withBalanceBetween(const Lower& lower, const Upper& upper) && {
+        this->withBalanceBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withBalanceIn(Inputs&& inputs) & {
+        query_.filterField("balance", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withBalanceIn(Inputs&& inputs) && {
+        this->withBalanceIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withBalanceNotIn(Inputs&& inputs) & {
+        query_.filterField("balance", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withBalanceNotIn(Inputs&& inputs) && {
+        this->withBalanceNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -6598,6 +7116,134 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withHeightIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withHeightIs(const Input& value) && {
+        this->withHeightIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withHeightIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withHeightIsNot(const Input& value) && {
+        this->withHeightIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withHeightGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withHeightGreaterThan(const Input& value) && {
+        this->withHeightGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withHeightGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withHeightGreaterThanOrEqualTo(const Input& value) && {
+        this->withHeightGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withHeightLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withHeightLessThan(const Input& value) && {
+        this->withHeightLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withHeightLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withHeightLessThanOrEqualTo(const Input& value) && {
+        this->withHeightLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest& withHeightBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "height", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest&& withHeightBetween(const Lower& lower, const Upper& upper) && {
+        this->withHeightBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withHeightIn(Inputs&& inputs) & {
+        query_.filterField("height", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withHeightIn(Inputs&& inputs) && {
+        this->withHeightIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withHeightNotIn(Inputs&& inputs) & {
+        query_.filterField("height", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withHeightNotIn(Inputs&& inputs) && {
+        this->withHeightNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     ReadingRequest& withHeight(request::FieldOperator op, Inputs&& inputs) & {
@@ -6657,6 +7303,134 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     ReadingRequest&& withHeightAfter(const T& value) && {
         this->withHeightAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRatioIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRatioIs(const Input& value) && {
+        this->withRatioIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRatioIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRatioIsNot(const Input& value) && {
+        this->withRatioIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRatioGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRatioGreaterThan(const Input& value) && {
+        this->withRatioGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRatioGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRatioGreaterThanOrEqualTo(const Input& value) && {
+        this->withRatioGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRatioLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRatioLessThan(const Input& value) && {
+        this->withRatioLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRatioLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRatioLessThanOrEqualTo(const Input& value) && {
+        this->withRatioLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest& withRatioBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "ratio", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest&& withRatioBetween(const Lower& lower, const Upper& upper) && {
+        this->withRatioBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withRatioIn(Inputs&& inputs) & {
+        query_.filterField("ratio", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withRatioIn(Inputs&& inputs) && {
+        this->withRatioIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withRatioNotIn(Inputs&& inputs) & {
+        query_.filterField("ratio", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withRatioNotIn(Inputs&& inputs) && {
+        this->withRatioNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -6722,6 +7496,134 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withCountIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withCountIs(const Input& value) && {
+        this->withCountIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withCountIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withCountIsNot(const Input& value) && {
+        this->withCountIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withCountGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withCountGreaterThan(const Input& value) && {
+        this->withCountGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withCountGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withCountGreaterThanOrEqualTo(const Input& value) && {
+        this->withCountGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withCountLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withCountLessThan(const Input& value) && {
+        this->withCountLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withCountLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withCountLessThanOrEqualTo(const Input& value) && {
+        this->withCountLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest& withCountBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "count", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest&& withCountBetween(const Lower& lower, const Upper& upper) && {
+        this->withCountBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withCountIn(Inputs&& inputs) & {
+        query_.filterField("count", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withCountIn(Inputs&& inputs) && {
+        this->withCountIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withCountNotIn(Inputs&& inputs) & {
+        query_.filterField("count", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withCountNotIn(Inputs&& inputs) && {
+        this->withCountNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     ReadingRequest& withCount(request::FieldOperator op, Inputs&& inputs) & {
@@ -6781,6 +7683,134 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     ReadingRequest&& withCountAfter(const T& value) && {
         this->withCountAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withDayIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withDayIs(const Input& value) && {
+        this->withDayIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withDayIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withDayIsNot(const Input& value) && {
+        this->withDayIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withDayGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withDayGreaterThan(const Input& value) && {
+        this->withDayGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withDayGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withDayGreaterThanOrEqualTo(const Input& value) && {
+        this->withDayGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withDayLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withDayLessThan(const Input& value) && {
+        this->withDayLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withDayLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withDayLessThanOrEqualTo(const Input& value) && {
+        this->withDayLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest& withDayBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "day", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest&& withDayBetween(const Lower& lower, const Upper& upper) && {
+        this->withDayBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withDayIn(Inputs&& inputs) & {
+        query_.filterField("day", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withDayIn(Inputs&& inputs) && {
+        this->withDayIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withDayNotIn(Inputs&& inputs) & {
+        query_.filterField("day", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withDayNotIn(Inputs&& inputs) && {
+        this->withDayNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -6846,6 +7876,135 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRecordedAtIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRecordedAtIs(const Input& value) && {
+        this->withRecordedAtIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRecordedAtIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRecordedAtIsNot(const Input& value) && {
+        this->withRecordedAtIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRecordedAtGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRecordedAtGreaterThan(const Input& value) && {
+        this->withRecordedAtGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRecordedAtGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRecordedAtGreaterThanOrEqualTo(const Input& value) && {
+        this->withRecordedAtGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRecordedAtLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRecordedAtLessThan(const Input& value) && {
+        this->withRecordedAtLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withRecordedAtLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withRecordedAtLessThanOrEqualTo(const Input& value) && {
+        this->withRecordedAtLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest& withRecordedAtBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "recorded_at", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest&& withRecordedAtBetween(const Lower& lower, const Upper& upper) && {
+        this->withRecordedAtBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withRecordedAtIn(Inputs&& inputs) & {
+        query_.filterField("recorded_at", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withRecordedAtIn(Inputs&& inputs) && {
+        this->withRecordedAtIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withRecordedAtNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "recorded_at", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withRecordedAtNotIn(Inputs&& inputs) && {
+        this->withRecordedAtNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     ReadingRequest& withRecordedAt(request::FieldOperator op, Inputs&& inputs) & {
@@ -6905,6 +8064,134 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     ReadingRequest&& withRecordedAtAfter(const T& value) && {
         this->withRecordedAtAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withPayloadIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "payload", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withPayloadIs(const Input& value) && {
+        this->withPayloadIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withPayloadIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "payload", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withPayloadIsNot(const Input& value) && {
+        this->withPayloadIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withPayloadGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "payload", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withPayloadGreaterThan(const Input& value) && {
+        this->withPayloadGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withPayloadGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "payload", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withPayloadGreaterThanOrEqualTo(const Input& value) && {
+        this->withPayloadGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withPayloadLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "payload", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withPayloadLessThan(const Input& value) && {
+        this->withPayloadLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest& withPayloadLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "payload", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    ReadingRequest&& withPayloadLessThanOrEqualTo(const Input& value) && {
+        this->withPayloadLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest& withPayloadBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "payload", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    ReadingRequest&& withPayloadBetween(const Lower& lower, const Upper& upper) && {
+        this->withPayloadBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withPayloadIn(Inputs&& inputs) & {
+        query_.filterField("payload", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withPayloadIn(Inputs&& inputs) && {
+        this->withPayloadIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest& withPayloadNotIn(Inputs&& inputs) & {
+        query_.filterField("payload", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ReadingRequest&& withPayloadNotIn(Inputs&& inputs) && {
+        this->withPayloadNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -6971,7 +8258,7 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 ReadingRequest<Purposed, Result>& ReadingRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }

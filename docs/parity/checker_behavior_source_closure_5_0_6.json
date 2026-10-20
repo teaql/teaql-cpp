@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 3096,
+  "matrices": [
+    {
+      "corpus": "generated_checker_flow_5_0_6_cases.json.gz",
+      "observations": 1620,
+      "exit_code": 0,
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nGenerated Checker flow parity: 1620/1620 observations match\n"
+    },
+    {
+      "corpus": "generated_checker_commit_5_0_6_cases.json.gz",
+      "observations": 540,
+      "exit_code": 0,
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nGenerated governed SQLite save parity: 540/540 observations match\n"
+    },
+    {
+      "corpus": "generated_runtime_assembly_5_0_6_cases.json.gz",
+      "observations": 72,
+      "exit_code": 0,
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nGenerated runtime assembly parity: 72/72 observations match\n"
+    },
+    {
+      "corpus": "generated_behavior_hooks_5_0_6_cases.json.gz",
+      "observations": 864,
+      "exit_code": 0,
+      "output": "Generated Behavior hooks: 864/864 exact original/native outcomes\n"
+    }
+  ],
+  "reference_registry_versions_preserved": true,
+  "reference_registry_checksums_preserved": true,
+  "original_generated_files_changed": false,
+  "existing_observers_changed": false,
+  "historical_manifests_changed": false,
+  "normalization": "none",
+  "complete_capability_acceptance": false,
+  "hashes": {
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/rust_generated_checker_closure_5_0_6/Cargo.toml": "c11dd8a97d99c82d48fc4dcd2a0adc1d2e2631a4b9fbe8b1989b35eb9aa27352",
+    "tests/parity/rust_generated_checker_closure_5_0_6/Cargo.lock": "e3e6c6346f694ff8b5bb248de9107b31e8b5cf0566270694a554aa61d00ad646",
+    "tests/parity/rust_generated_behavior_hooks_5_0_6/Cargo.toml": "45eb0327c991074edad10a2d4df966f72aee59e31efc76b3fe2eb7694a627779",
+    "tests/parity/rust_generated_behavior_hooks_5_0_6/Cargo.lock": "1b0aa840e1175ca5ad6d8714af4e1681d760433593ed65a06a9b99649a08ce56",
+    "tests/parity/generated_checker_flow_5_0_6_cases.json.gz": "d335e89bc75c1600b6fc7a201759c59b2174816de636a0b0a85d738f33c2cefd",
+    "tests/parity/compare_generated_checker_flow.py": "a132aec62258627684a7ba3fd683502555636c48d6190d51ff5cbf69c3142981",
+    "tests/parity/generated_checker_commit_5_0_6_cases.json.gz": "ff7879e84ecdbf0f45edbd574daef8c5ed464668958861b2998c739d28f4e0b4",
+    "tests/parity/compare_generated_checker_commit.py": "f1d4389532a6986a68c536c863b9fea59842e1240eadaeba0b1df7e45f0c0cb2",
+    "tests/parity/generated_runtime_assembly_5_0_6_cases.json.gz": "753d91af6054dee9f6c1a6ce1e579625f823a6928919ca88497f9bc8a7a9f217",
+    "tests/parity/compare_generated_runtime_assembly.py": "d86c1f07f94d1a57d1c802620af94236a22cccf1116ce1342b89c42cab384814",
+    "tests/parity/generated_behavior_hooks_5_0_6_cases.json.gz": "e7799d52ad3a0b6c431756da48efeb780cb4610974a4b031beed2c44e3ddac36",
+    "tests/parity/compare_generated_behavior_hooks_5_0_6.py": "259739953b2b4fb972091ed68d2b48033dc7dc66fa5d7e134ca74d7fe8be876d",
+    "scripts/verify_checker_behavior_source_closure_5_0_6.py": "91135bc7fe9b93d7ccfcf8a83900eccb5ea76207ae86dc30ae702066da676e10",
+    "tests/parity/rust_field_layout/src/bin/generated_checker_flow_5_0_6.rs": "603eea1fd6eefb3538ef96d12d71adf03d13dae886e08c5ee21918196e1cf66a",
+    "tests/parity/rust_field_layout/src/bin/generated_runtime_assembly_5_0_6.rs": "84bde7a59d9b16054f5906230c24247f386655ce48b7aaf50a61cd2c5c95091b",
+    "tests/parity/generated_behavior_hooks_5_0_6.rs": "013ea169b8faabdfb423b98686adce18446ff818c2e0f4575dbd5ec73262cc0c",
+    "tests/parity/generated_behavior_hooks_probe.cpp": "d1e4edab75d0cf81f7cb88402efabcac07983661e148d3de08e5441dcb71d1d3"
+  }
+}

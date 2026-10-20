@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 4.4)
+project(scalar_candidate_fixture LANGUAGES CXX)
+find_package(teaql_cpp CONFIG REQUIRED)
+add_library(scalar_candidate_fixture INTERFACE)
+target_include_directories(scalar_candidate_fixture INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(scalar_candidate_fixture INTERFACE cxx_std_20)
+target_link_libraries(scalar_candidate_fixture INTERFACE teaql::provider_sqlite)

@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 512,
+  "models": 5,
+  "field_paths": 6,
+  "source_access_adaptation": "Original entity files imported unchanged; narrow crate wrappers expose runtime_new without changing its body.",
+  "initial_observations": 256,
+  "initial_differences": 128,
+  "repaired_behavior": "Required createTime/updateTime/dateTime constructor fields initialize Timestamp::now; optional fields and copies preserve source defaults/values.",
+  "profiles": {
+    "native": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 58: entity_constructor_helpers_rust_parity\n1/1 Test #58: entity_constructor_helpers_rust_parity ...   Passed    1.31 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   1.35 sec\n",
+      "sha256": "bd9bc5c02c399cb32d1cde0710bf6ae35d5b8305d97d4f0a524108abf3b439f9"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 866: module_entity_constructor_helpers_rust_parity\n1/1 Test #866: module_entity_constructor_helpers_rust_parity ...   Passed    0.41 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.42 sec\n",
+      "sha256": "ba4588b3955cbecf287010768107054cc2be382351f0045f4a441efacc573a63"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 58: entity_constructor_helpers_rust_parity\n1/1 Test #58: entity_constructor_helpers_rust_parity ...   Passed    1.62 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   1.63 sec\n",
+      "sha256": "5b56141457c5f56fbb231f229bfaf1356d1647e10e1244ad821e7f58ee809cef"
+    },
+    "regression": {
+      "passed": 4,
+      "total": 4,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 416: generated_inheritance_variants_contracts\n    Start 575: generated_optional_types_contracts\n    Start 568: generated_api_contracts\n    Start 600: example_generated_query_expression\n1/4 Test #575: generated_optional_types_contracts .........   Passed    0.02 sec\n2/4 Test #600: example_generated_query_expression .........   Passed    0.02 sec\n3/4 Test #416: generated_inheritance_variants_contracts ...   Passed    0.02 sec\n4/4 Test #568: generated_api_contracts ....................   Passed    0.04 sec\n\n100% tests passed out of 4\n\nTotal Test time (real) =   0.05 sec\n",
+      "sha256": "c2668abef50c8f8559a74a29e400c4e841b227d4f20bcf3e2ff73f9445219730"
+    }
+  },
+  "java_tests": 44,
+  "source_registry_versions_preserved": true,
+  "source_registry_checksums_preserved": true,
+  "original_generated_entity_provenance_sha256": "8b408c9b74717e2100d4b6cf8c3abc797dd400a8e4ba0923ece231279ce4e08d",
+  "original_entity_files_changed": false,
+  "production_runtime_changed": false,
+  "producer_changed": true,
+  "normalization": "none",
+  "fixed_wall_clock": true,
+  "monotonic_clock_unchanged": true,
+  "default_pmr_disabled": true,
+  "explicit_global_output_copy": true,
+  "actual_user_deletion": true,
+  "workspaces": 20,
+  "reproduced_files": 240,
+  "contract_sdks": 44,
+  "canonical_bodies": 545,
+  "format_cpp_count": 1372,
+  "leak_scanning": false,
+  "complete_capability_acceptance": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "hashes": {
+    "tests/parity/entity_constructor_helpers_5_0_6.rs": "0d75037180a26fc1aa9fe42e49b41c05ee0aab1878d10055dd6e841487342fb4",
+    "tests/parity/entity_constructor_helpers_probe.cpp": "2ffecca6ccca115525be77cbf1396acbd5aee0d9bbdc78a9b776aa0bbd74adbf",
+    "tests/parity/compare_entity_constructor_helpers_5_0_6.py": "42217477b9edad5498202dcc69786c6bc7b8c5301af2c52bfb369fcb5856297f",
+    "tests/parity/rust_entity_constructor_helpers_5_0_6/lib.rs": "35488d6aa58612238219c4c49e7faa0342adfc2d77cd574d07ec9a3925b8579c",
+    "tests/parity/rust_entity_constructor_helpers_5_0_6/Cargo.toml": "cf205e181993ff20cf774236fcd3c7d15482603231f244eddda977f091eb6427",
+    "tests/parity/rust_entity_constructor_helpers_5_0_6/Cargo.lock": "047a468e9a480327bb3c7472571f17d46489c6f5e769c8ec6615762f7b7bd2db",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/entity_constructor_helpers_5_0_6_cases.json.gz": "5c573f16aefda719d08f619060a9768caedd379cbc5f7095b430b0a816e87d47",
+    "docs/parity/constructor_timestamp_sdk_regeneration_5_0_6.json": "b4f1f70610c62199d93a2bbb85406f898d366d43dbefd92365cbf0965da51759"
+  },
+  "producer_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "6f0b9859d627a37e376e79561eccfc033f8fef72423c7e5579c4669a36370282"
+  }
+}

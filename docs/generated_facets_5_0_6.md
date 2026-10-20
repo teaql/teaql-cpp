@@ -24,8 +24,12 @@ gets the source Calculate facet purpose and a separate trace context. Duplicate
 names replace earlier results after both requests execute. List and page attach
 facet maps; one/first execute facets before returning the first entity. Raw rows,
 count, exists and stream retain their source behavior and do not run facets.
-Nested child facet metadata is retained; the frozen runtime does not recursively
-run generated execute_facets on a compact facet fetch.
+Nested child facet metadata is retained; the frozen generated request_support
+helper does not recursively run its execute_facets on a compact facet fetch.
+The public Rust runtime helper has a separate 5.0.6 root-intent, diagnostic-source
+and recursive-execution contract. Its C++ correction is qualified separately in
+[public_facets_5_0_6.md](public_facets_5_0_6.md); this generated-helper contract
+and its observations remain unchanged.
 
 ## QuerySelection state and filter rules
 

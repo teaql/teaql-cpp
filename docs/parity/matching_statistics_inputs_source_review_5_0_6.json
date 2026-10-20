@@ -1,0 +1,105 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "methods": [
+    {
+      "name": "with_customer_matching",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn with_customer_matching(mut self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query = self.query.and_filter(Expr::in_subquery(\n            \"customer_id\",\n            <crate::Person as teaql_core::TeaqlEntity>::entity_descriptor(),\n            selection.query.clone(),\n            \"id\",\n        ));\n        self.relation_filters.push(RelationFilter::new(\"customer\", selection));\n        self\n    }",
+      "sha256": "568017eb9abdb4b7bb2ee9390753b01406ae56d0979db0d97d20cae1724812fd"
+    },
+    {
+      "name": "without_customer_matching",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn without_customer_matching(mut self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query = self.query.and_filter(Expr::not_in_subquery(\n            \"customer_id\",\n            <crate::Person as teaql_core::TeaqlEntity>::entity_descriptor(),\n            selection.query.clone(),\n            \"id\",\n        ));\n        self.relation_filters.push(RelationFilter::new(\"customer\", selection));\n        self\n    }",
+      "sha256": "e8babf567a3bc8d9047d8258474ac1341d41608fa81c6e3519ca418c7f116380"
+    },
+    {
+      "name": "roll_up_to_customer_with",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "body": "pub fn roll_up_to_customer_with(self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.with_customer_matching(selection.clone())\n            .group_by_customer_with(selection)\n    }",
+      "sha256": "ab368b867d7bb842ec0e40cc75765ad106e2a117645bea455d2500bb18e14704"
+    },
+    {
+      "name": "with_orders_matching",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn with_orders_matching(mut self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query = self.query.and_filter(Expr::in_subquery(\n            \"id\",\n            <crate::Order as teaql_core::TeaqlEntity>::entity_descriptor(),\n            selection.query.clone(),\n            \"customer_id\",\n        ));\n        self.relation_filters.push(RelationFilter::new(\"orders\", selection));\n        self\n    }",
+      "sha256": "01983f0b7184e5657744a51b6a728ce45a1dd9baf44e5a8b7f28eff885c5f6cd"
+    },
+    {
+      "name": "without_orders_matching",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn without_orders_matching(mut self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query = self.query.and_filter(Expr::not_in_subquery(\n            \"id\",\n            <crate::Order as teaql_core::TeaqlEntity>::entity_descriptor(),\n            selection.query.clone(),\n            \"customer_id\",\n        ));\n        self.relation_filters.push(RelationFilter::new(\"orders\", selection));\n        self\n    }",
+      "sha256": "1261a11ce6c0b5c2a21731a25000304980388bcf6c322f1185fd266ce7c3582e"
+    },
+    {
+      "name": "sum_amount_of_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn sum_amount_of_orders_as(self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.scalar_from_orders_as(alias, request.into().into_query().sum(\"amount\", \"sum_amount\"))\n    }",
+      "sha256": "a4b1447e5e422d9b96a9d4d75ba39a594d2b28c871a215979ffd96f10f6790b8"
+    },
+    {
+      "name": "avg_amount_of_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn avg_amount_of_orders_as(self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.scalar_from_orders_as(alias, request.into().into_query().avg(\"amount\", \"avg_amount\"))\n    }",
+      "sha256": "a8a717211d14fe6cb2796a2fe4ca98259523e8086732e065a67a0854e9b29758"
+    },
+    {
+      "name": "min_amount_of_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn min_amount_of_orders_as(self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.scalar_from_orders_as(alias, request.into().into_query().min(\"amount\", \"min_amount\"))\n    }",
+      "sha256": "d1650d6c1b43072477044eb4b127c285412269b6506bbcc31c6d98d97e558251"
+    },
+    {
+      "name": "max_amount_of_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn max_amount_of_orders_as(self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.scalar_from_orders_as(alias, request.into().into_query().max(\"amount\", \"max_amount\"))\n    }",
+      "sha256": "59716e760481e2e26abe5bba4063b3dfbbe00cc32fb9043908cb1703ea4f58d4"
+    },
+    {
+      "name": "standard_deviation_amount_of_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn standard_deviation_amount_of_orders_as(self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.scalar_from_orders_as(alias, request.into().into_query().stddev(\"amount\", \"stdDev_amount\"))\n    }",
+      "sha256": "9ca77544e30df2da6dcbeecd6a76fe3aaf6066efd35cc8a4f77cccb38e36d067"
+    },
+    {
+      "name": "square_root_of_population_standard_deviation_amount_of_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn square_root_of_population_standard_deviation_amount_of_orders_as(self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.scalar_from_orders_as(alias, request.into().into_query().stddev_pop(\"amount\", \"stdDevPop_amount\"))\n    }",
+      "sha256": "9e4d95b0a0fff0d32db8615e143a8626aa2610525c758d703fe6554e5554c97c"
+    },
+    {
+      "name": "sample_variance_amount_of_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn sample_variance_amount_of_orders_as(self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.scalar_from_orders_as(alias, request.into().into_query().var_samp(\"amount\", \"varSamp_amount\"))\n    }",
+      "sha256": "f153e3623b171611af41e1413a26036f288fa9b675b5555fd93c01d8a7768745"
+    },
+    {
+      "name": "sample_population_variance_amount_of_orders_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "body": "pub fn sample_population_variance_amount_of_orders_as(self, alias: impl Into<String>, request: impl Into<QuerySelection>) -> Self {\n        self.scalar_from_orders_as(alias, request.into().into_query().var_pop(\"amount\", \"varPop_amount\"))\n    }",
+      "sha256": "73b3f89539271ddc80e89697ceaa56458da63e69c60c7f3d170de48669b066c3"
+    }
+  ],
+  "fixture_sha256": {
+    "dynamic_json_schema.sql": "b11a024137503d0b23f205b478185e09dec7aee74b09c99f1c2cbfdf1c25e226",
+    "dynamic_json_dataset.sql": "f3c3983ddfb853fd7a86eba9352e7cb36d434107773836639d46f6673308bd59"
+  },
+  "files_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "f187eb3c960bcc32a69fb39a2b007e2e4d3a1e190d693630832f83ad704d4833",
+    "teaql_runtime/tests/matching_statistics_input_tests.cpp": "749a061d6f30063a1400e0ac13d80f687227257e1f16c20046d3cbcbe5e6d041",
+    "tests/parity/generated_matching_statistics_inputs_probe.cpp": "33e218d483c3c5e6fb965167e170a2f104a52942e01061c4356507137cea0441",
+    "tests/parity/generated_matching_statistics_adapters_probe.cpp": "0b6d29775c49a9357f4f8ba4129fb92a6aba93297437f3dfefa5b51ceb2fb9b6",
+    "tests/parity/rust_matching_statistics_inputs_5_0_6/src/main.rs": "151911a60242c6467c4b859e491feecb046d7b04f1ef2d9dd2906ae28eb9c0cc",
+    "tests/parity/rust_matching_statistics_inputs_5_0_6/src/bin/matching_statistics_typing_5_0_6.rs": "937ae1ff06196903b993a73736977119c6d69e76412a90d830d09bc6c114427b",
+    "tests/parity/rust_matching_statistics_inputs_5_0_6/Cargo.lock": "4b5e899a5c319e90c387d636d81282f434eb43b8a8db773df5f85cd2eebda673",
+    "scripts/reproduce_cpp_contract_fixtures.py": "d875d9eb2bc8ab29f5e5a48fe0fdbb53dcd8bad96e628e01e20a286de1e451a1",
+    "scripts/verify_generated_type_errors.py": "f2ef7da0df532e8783dccebbb9af719ff2590962b542d9a4f8dcd354168acb9a",
+    "scripts/verify_matching_statistics_inputs_5_0_6.py": "650b915be5a1b08ce7268e6770a5c8263d74251aff3cbbd2cb901f336f27acf5"
+  },
+  "producer_files_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "a26994ba2cb9e9863f76aef7df2088f019adf38d6dce3a047cc6cd42c846232a",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "28908859f5c1e0eb35a2ab910c68fb5187998b08b684c047a80aa408ae3140c9"
+  },
+  "scope": "Runtime plus generated matching, roll-up and field-statistic input conversions; complete capability/phase scope remains open"
+}

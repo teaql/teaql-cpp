@@ -118,3 +118,9 @@ changes renderer text and Assist; it does not change Context ownership or the
 module interface, and does not repeat sanitizer/MIPS/module profiles.
 
 The [Value/Null follow-up](generated_expression_values_5_0_6.md) adds 108 unchanged-producer observations and restores installed graph-view availability independently of the stored list flag. The 196 diagnostic comparisons continue to pass.
+
+The [text-boundary follow-up](expression_diagnostic_text_5_0_6.md) adds 936 original
+raw panic/native structured comparisons and fixes 216 root-casing/parenthesis
+differences in the shared renderer. The earlier evidence remains a historical
+checkpoint. Complete model/Assist/extension and source delimiter-injection
+qualification remain separate.

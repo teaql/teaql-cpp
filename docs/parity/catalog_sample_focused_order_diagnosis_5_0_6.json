@@ -1,0 +1,9 @@
+{
+  "scope": "Full corpus and focused corpus execute different preceding cases within one process. MutationPlan execution IDs include a process-wide sequence.",
+  "retained_asan_actual_exactly_matches_independent_focused_original": true,
+  "output_normalization": false,
+  "full_native_and_imported_corpora_unchanged": true,
+  "failed_comparison_retained": "docs/parity/catalog_sample_initial_comparison_5_0_6.json.gz",
+  "initial_sanitize_exit_code": 1,
+  "initial_sanitize_log": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/scripts/verify_catalog_sample_5_0_6.py\", line 129, in <module>\n    main()\n  File \"/home/philip/githome/teaql-cpp/scripts/verify_catalog_sample_5_0_6.py\", line 119, in main\n    raise AssertionError(f'constant/candidate sample differences: {differences}; raw outcomes retained')\nAssertionError: constant/candidate sample differences: [180, 181, 182, 183, 204, 205, 206, 207]; raw outcomes retained\nTraceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\n  File \"/usr/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['python3', 'scripts/verify_catalog_sample_5_0_6.py', '--cpp', 'build_sanitize_current/teaql_catalog_sample_probe', '--cases', '3', '23', '43', '63', '67', '71', '75', '79', '167', '83', '103', '123', '143', '147', '151', '155', '159', '175', '180', '181', '182', '183', '224', '225', '204', '205', '206', '207', '236', '237']' returned non-zero exit status 1.\n"
+}

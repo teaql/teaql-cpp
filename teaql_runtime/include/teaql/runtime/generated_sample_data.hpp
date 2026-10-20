@@ -3,6 +3,7 @@
 #include <teaql/memory/object_borrow.hpp>
 #include <teaql/core/value.hpp>
 #include <teaql/runtime/data_service.hpp>
+#include <teaql/runtime/sample_data_logging.hpp>
 #include <bit>
 #include <charconv>
 #include <cstdio>
@@ -317,11 +318,27 @@ public:
                         reason += dependency;
                         reason += " is missing in reference pool";
                         state.recordSkipped(Recipe::name, reason);
+                        sample_info(user_context_, [&](Memory r) {
+                            String message("Skipped generating ", r);
+                            message += Recipe::name;
+                            message += ": ";
+                            message += reason;
+                            message += '.';
+                            return message;
+                        });
                         return SampleDataStepResult::ok(resource_, {});
                     }
                 }
                 count_ = sample_fanout(state.plan.scale, Recipe::object_fields);
                 initialized_ = true;
+                sample_info(user_context_, [&](Memory r) {
+                    String message("Generating sample data for ", r);
+                    message += Recipe::name;
+                    message += " (expected: ";
+                    sample_log_number(message, count_);
+                    message += ")...";
+                    return message;
+                });
             }
             while (index_ < count_) {
                 if (!save_) {
@@ -345,11 +362,28 @@ public:
                         SampleDataError(std::allocator_arg, Allocator(resource_), message));
                 }
                 state.recordGenerated(Recipe::name);
+                if (index_ % 20 == 0) {
+                    sample_info(user_context_, [&](Memory r) {
+                        String message("Generating ", r);
+                        message += Recipe::name;
+                        message += ": ";
+                        sample_log_number(message, index_);
+                        message += '/';
+                        sample_log_number(message, count_);
+                        return message;
+                    });
+                }
                 if constexpr (Recipe::has_reverse) {
                     state.addReference(Recipe::name, sample_reference_id(saved.value().id()));
                 }
                 ++index_;
             }
+            sample_info(user_context_, [&](Memory r) {
+                String message("Successfully generated sample records for ", r);
+                message += Recipe::name;
+                message += '.';
+                return message;
+            });
             return SampleDataStepResult::ok(resource_, {});
         }
     }
@@ -403,6 +437,18 @@ public:
           steps_(steps.begin(), steps.end(), a.resource()) {}
 
     std::optional<SampleDataResult> poll(WakeSignal& wake) {
+        if (!started_) {
+            started_ = true;
+            sample_info(user_context_, [&](Memory r) {
+                String message("Starting sample data generation. Scale: ", r);
+                message += state_.plan.scale == SampleDataScale::Tiny    ? "Tiny"
+                           : state_.plan.scale == SampleDataScale::Small ? "Small"
+                                                                         : "Medium";
+                message += ", Seed: ";
+                sample_log_number(message, state_.plan.seed);
+                return message;
+            });
+        }
         while (index_ < steps_.size()) {
             if (!child_) {
                 child_ = &steps_[index_](user_context_, state_);
@@ -424,6 +470,14 @@ public:
             }
             ++index_;
         }
+        sample_info(user_context_, [&](Memory r) {
+            String message("Sample data generation completed successfully. Generated: ", r);
+            sample_log_number(message, state_.generated.size());
+            message += " tables, Skipped: ";
+            sample_log_number(message, state_.skipped.size());
+            message += " tables.";
+            return message;
+        });
         return SampleDataResult::ok(resource_, std::move(state_).intoReport());
     }
 
@@ -444,6 +498,7 @@ private:
     UserContext& user_context_;
     SampleDataState& state_;
     Vector<GeneratedSampleStep> steps_;
+    bool started_ = false;
     std::size_t index_ = 0;
     SampleDataStepFuture* child_ = nullptr;
     WakeSignal::Forward forwarding_;
@@ -452,6 +507,17 @@ private:
 
 namespace teaql {
 struct GeneratedSampleValues {
+    template <class Model>
+    static void unconverted_value(Model& entity, std::string_view field, Value original) {
+        auto resource = entity.memory_resource();
+        if (original.memory_resource() != resource) {
+            throw std::invalid_argument("Sample operand requires an explicit destination copy");
+        }
+        entity.root.set(entity.entity_key(), field, original);
+        auto& pool = detail::ContextArena::from_memory(resource).loaded_snapshots();
+        entity.load_state.mark_loaded(field, &pool).value();
+    }
+
     static std::int64_t
     number(const SampleDataPlan& plan, std::size_t index, std::string_view maximum) {
         return detail::sample_number(plan, index, maximum);

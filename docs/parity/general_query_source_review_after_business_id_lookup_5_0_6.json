@@ -1,0 +1,950 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source": "generator/src/main/resources/generator/rust-lib-core/request/index.stg",
+  "source_sha256": "d886a74d7636d774cd1744f4a4b78ca783a435cd89bb3719ec1cf9f6b344bc59",
+  "functions": [
+    {
+      "name": "clone",
+      "responsibility": "GQ03",
+      "start_line": 648,
+      "end_line": 657,
+      "sha256": "3cac22a7e88789d77ef04ed93e28607f76427eee3c408bc69b0524eea3950de8",
+      "body": "fn clone(&self) -> Self {\n        Self {\n            query: self.query.clone(),\n            relation_selections: self.relation_selections.clone(),\n            relation_filters: self.relation_filters.clone(),\n            child_enhancements: self.child_enhancements.clone(),\n            query_options: self.query_options.clone(),\n            marker: PhantomData,\n        }\n    }"
+    },
+    {
+      "name": "new",
+      "responsibility": "GQ01",
+      "start_line": 661,
+      "end_line": 672,
+      "sha256": "ec7bf924b3b43c9a907e99c371c529657b780310628828a1c7565b9886e66580",
+      "body": "pub(crate) fn new() -> Self {\n        Self {\n            query: SelectQuery::new(\"<objectDescriptor.rustStructName>\")<objectDescriptor.fields:{f | <if(f.id)>\n                .project(\"<f.rustStorageFieldName>\")<elseif(f.version)>\n                .project(\"<f.rustStorageFieldName>\")<endif>}>,\n            relation_selections: Vec::new(),\n            relation_filters: Vec::new(),\n            child_enhancements: Vec::new(),\n            query_options: QueryOptions::default(),\n            marker: PhantomData,\n        }\n    }"
+    },
+    {
+      "name": "return_type",
+      "responsibility": "GQ02",
+      "start_line": 674,
+      "end_line": 683,
+      "sha256": "5d0b1576346aa3098c616181c081e9a0bc3f13985fdb6b67e3ee6e50d213ee62",
+      "body": "pub fn return_type\\<T\\>(self) -> <objectDescriptor.rustStructName>Request\\<T\\> {\n        <objectDescriptor.rustStructName>Request {\n            query: self.query,\n            relation_selections: self.relation_selections,\n            relation_filters: self.relation_filters,\n            child_enhancements: self.child_enhancements,\n            query_options: self.query_options,\n            marker: PhantomData,\n        }\n    }"
+    },
+    {
+      "name": "query",
+      "responsibility": "GQ03",
+      "start_line": 685,
+      "end_line": 687,
+      "sha256": "6e5897be55a2e52a4970411885bfaf0c12b558a201774f4deac9645f04c3723d",
+      "body": "pub fn query(&self) -> &SelectQuery {\n        &self.query\n    }"
+    },
+    {
+      "name": "relation_selections",
+      "responsibility": "GQ03",
+      "start_line": 689,
+      "end_line": 691,
+      "sha256": "f3ea8cc10816c0636836823023834f357b2ef4e2ff5b641ba9bf7f86b58147e4",
+      "body": "pub fn relation_selections(&self) -> &[RelationSelection] {\n        &self.relation_selections\n    }"
+    },
+    {
+      "name": "relation_filters",
+      "responsibility": "GQ03",
+      "start_line": 693,
+      "end_line": 695,
+      "sha256": "917b20a7e8a987a8d6505abfc2b4c22b2abb405c82d894f8f1a629214609bf42",
+      "body": "pub fn relation_filters(&self) -> &[RelationFilter] {\n        &self.relation_filters\n    }"
+    },
+    {
+      "name": "child_enhancements",
+      "responsibility": "GQ03",
+      "start_line": 697,
+      "end_line": 699,
+      "sha256": "33faf40e58a0c41cda96fb372a7022447ced2e292cb603d917239e8a1d8bccc9",
+      "body": "pub fn child_enhancements(&self) -> &[QuerySelection] {\n        &self.child_enhancements\n    }"
+    },
+    {
+      "name": "query_options",
+      "responsibility": "GQ03",
+      "start_line": 701,
+      "end_line": 703,
+      "sha256": "a589b607b3a052a79a26a3599784196ed92dc0ac3b650f0f2066f5fd15696b75",
+      "body": "pub fn query_options(&self) -> &QueryOptions {\n        &self.query_options\n    }"
+    },
+    {
+      "name": "into_query",
+      "responsibility": "GQ03",
+      "start_line": 705,
+      "end_line": 707,
+      "sha256": "daf6ae9f8d38ede235ec713c16203abff44161bc45a1a3d6235cc488b26783c9",
+      "body": "pub fn into_query(self) -> SelectQuery {\n        self.query\n    }"
+    },
+    {
+      "name": "purpose",
+      "responsibility": "GQ11",
+      "start_line": 710,
+      "end_line": 712,
+      "sha256": "fdb3e7f5e0acbdb62170a8c21faf8b8f95d331fda4a29bf335413d4e94589af6",
+      "body": "pub fn purpose(self, purpose: impl Into\\<String\\>) -> crate::PurposedQuery\\<Self\\> {\n        crate::PurposedQuery::new(self, purpose)\n    }"
+    },
+    {
+      "name": "_execute_for_list",
+      "responsibility": "G09",
+      "start_line": 714,
+      "end_line": 748,
+      "sha256": "823906a6ec98e1b1bb9f226647f5da2d6782d1ba17836fe753e75d026d26daa2",
+      "body": "pub(crate) async fn _execute_for_list\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<SmartList\\<R\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        let query_options = self.query_options.clone();\n        let relation_aggregates = runtime_relation_aggregates(&query_options);\n        let query = authorize_query(apply_runtime_metadata(\n            self.query,\n            &query_options,\n            &self.child_enhancements,\n        ))?;\n        let (mut rows, facets) = if query_options.facets.is_empty() {\n            let rows = context.fetch_entity_smart_list::\\<R\\>(\n                \"<objectDescriptor.rustStructName>\",\n                query,\n                relation_aggregates,\n            ).await?;\n            (rows, std::collections::BTreeMap::new())\n        } else {\n            let rows = context.fetch_entity_smart_list::\\<R\\>(\n                \"<objectDescriptor.rustStructName>\",\n                query.clone(),\n                relation_aggregates,\n            ).await?;\n            let facets = execute_facets(context, query.as_query(), &query_options)\n                .await?;\n            (rows, facets)\n        };\n        attach_facets(&mut rows, facets);\n        Ok(rows)\n    }"
+    },
+    {
+      "name": "_execute_for_rows",
+      "responsibility": "G09",
+      "start_line": 750,
+      "end_line": 763,
+      "sha256": "fc1172e9fbe192c4bd0cda8544bf5793c6904a6cb2c4ffe305d487ef296bd47e",
+      "body": "pub(crate) async fn _execute_for_rows\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<SmartList\\<teaql_core::CompactRow\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n    {\n        let query = authorize_query(apply_runtime_metadata(\n            self.query,\n            &self.query_options,\n            &self.child_enhancements,\n        ))?;\n        context.fetch_compact_smart_list(\"<objectDescriptor.rustStructName>\", &query).await\n    }"
+    },
+    {
+      "name": "_execute_for_stream",
+      "responsibility": "G09",
+      "start_line": 765,
+      "end_line": 779,
+      "sha256": "dc0966f9a1762759628740516076b4c983d5624a2e73207a2af95ef04f4496b3",
+      "body": "pub(crate) async fn _execute_for_stream\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<TeaqlEntityStream\\<'a, R, RuntimeError\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        let query = authorize_query(apply_runtime_metadata(\n            self.query,\n            &self.query_options,\n            &self.child_enhancements,\n        ))?;\n        Ok(context.fetch_entity_stream(\"<objectDescriptor.rustStructName>\", query))\n    }"
+    },
+    {
+      "name": "_execute_for_first",
+      "responsibility": "G09",
+      "start_line": 781,
+      "end_line": 791,
+      "sha256": "0c480697808f9b723ba8467ec898aade44b5676de19e2b3f13a2be2bf7233a2c",
+      "body": "pub(crate) async fn _execute_for_first\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<Option\\<R\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        let rows = self.limit(1)._execute_for_list(context).await?;\n        Ok(rows.into_iter().next())\n    }"
+    },
+    {
+      "name": "_execute_for_one",
+      "responsibility": "G09",
+      "start_line": 793,
+      "end_line": 802,
+      "sha256": "cf188302cd560884e75929da0a932b8ea4e2ca095dee38486c4f7dc709f077a1",
+      "body": "pub(crate) async fn _execute_for_one\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<Option\\<R\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self._execute_for_first(context).await\n    }"
+    },
+    {
+      "name": "_execute_for_page",
+      "responsibility": "G09",
+      "start_line": 805,
+      "end_line": 830,
+      "sha256": "bc67ca74af557ab46787aa82d44849682e83c860a5136cd3a6cb6eb348ee4d5d",
+      "body": "pub(crate) async fn _execute_for_page\\<'a, C\\>(\n        self,\n        context: &'a C,\n        offset: u64,\n        limit: u64,\n    ) -> Result\\<SmartList\\<R\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        if self.query.id_set_pagination.is_some() {\n            let mut rows = self\n                .clone()\n                .page_offset(offset, limit)\n                ._execute_for_list(context)\n                .await?;\n            if rows.total_count.is_none() {\n                rows.total_count = Some(self._execute_for_count(context).await?);\n            }\n            return Ok(rows);\n        }\n        let total_count = self.clone()._execute_for_count(context).await?;\n        let mut rows = self.page_offset(offset, limit)._execute_for_list(context).await?;\n        rows.total_count = Some(total_count);\n        Ok(rows)\n    }"
+    },
+    {
+      "name": "_execute_for_count",
+      "responsibility": "G09",
+      "start_line": 832,
+      "end_line": 857,
+      "sha256": "f5f6b5d055acdecdf0c8d33368b7126004a2a6a029eeba5d36309e7acec5ee32",
+      "body": "pub(crate) async fn _execute_for_count\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<u64, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n    {\n        let query_options = self.query_options.clone();\n        let mut query = apply_runtime_metadata(\n            self.query,\n            &query_options,\n            &self.child_enhancements,\n        );\n        query.projection.clear();\n        query.expr_projection.clear();\n        query.order_by.clear();\n        query.slice = None;\n        query.relations.clear();\n        query = query.count(COUNT_ALIAS);\n        let query = authorize_query(query)?;\n        let rows = context.fetch_compact_rows(\"<objectDescriptor.rustStructName>\", &query).await?;\n        rows.first()\n            .and_then(|row| row.get(COUNT_ALIAS))\n            .and_then(teaql_core::Value::try_u64)\n            .ok_or_else(|| RuntimeError::Graph(format!(\"count result for <objectDescriptor.rustStructName> is missing or not numeric\")))\n    }"
+    },
+    {
+      "name": "_execute_for_exists",
+      "responsibility": "G09",
+      "start_line": 859,
+      "end_line": 875,
+      "sha256": "4bfce5a5b9fb44d2afad0e410c0419db809648006c4218350f4f16e12de85238",
+      "body": "pub(crate) async fn _execute_for_exists\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<bool, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n    {\n        let mut query = apply_runtime_metadata(\n            self.query,\n            &self.query_options,\n            &self.child_enhancements,\n        ).limit(1);\n        query.relations.clear();\n        let query = authorize_query(query)?;\n        let rows = context.fetch_compact_rows(\"<objectDescriptor.rustStructName>\", &query).await?;\n        Ok(!rows.is_empty())\n    }"
+    },
+    {
+      "name": "search_with_text",
+      "responsibility": "GQ04",
+      "start_line": 877,
+      "end_line": 880,
+      "sha256": "2a8cacb129d43f98a929cc0d17217afa23a280dbbc9e8568147181742ed85a8c",
+      "body": "pub fn search_with_text(mut self, text: impl Into\\<String\\>) -> Self {\n        self.query = self.query.search_with_text(text);\n        self\n    }"
+    },
+    {
+      "name": "filter",
+      "responsibility": "GQ04",
+      "start_line": 882,
+      "end_line": 885,
+      "sha256": "2979022ae971c3036f216b428442c06976bac5b1ba6e7049dd078f5c393f8891",
+      "body": "pub fn filter(mut self, filter: Expr) -> Self {\n        self.query = self.query.filter(filter);\n        self\n    }"
+    },
+    {
+      "name": "and_filter",
+      "responsibility": "GQ04",
+      "start_line": 887,
+      "end_line": 890,
+      "sha256": "4704cef7673b262775f11877738816f7402d88bdb7a9de3b115beef6896daf8e",
+      "body": "pub fn and_filter(mut self, filter: Expr) -> Self {\n        self.query = self.query.and_filter(filter);\n        self\n    }"
+    },
+    {
+      "name": "or_filter",
+      "responsibility": "GQ04",
+      "start_line": 892,
+      "end_line": 895,
+      "sha256": "d846660b762526c3be587e4851d47b53af75982f1c45dca46552cb79baf01192",
+      "body": "pub fn or_filter(mut self, filter: Expr) -> Self {\n        self.query = self.query.or_filter(filter);\n        self\n    }"
+    },
+    {
+      "name": "append_search_criteria",
+      "responsibility": "GQ04",
+      "start_line": 897,
+      "end_line": 899,
+      "sha256": "e46d786e641ff35ca14792d104084a536cebbeebb06c5c13f33e88ff41358078",
+      "body": "pub fn append_search_criteria(self, criteria: Expr) -> Self {\n        self.and_filter(criteria)\n    }"
+    },
+    {
+      "name": "filter_property",
+      "responsibility": "GQ04",
+      "start_line": 901,
+      "end_line": 913,
+      "sha256": "c2ce683e6fb9bc3148a51ea130423cb0fc4330857c280d9db2cfb317850bcf72",
+      "body": "pub fn filter_property(\n        mut self,\n        property1: impl AsRef\\<str\\>,\n        operator: FieldOperator,\n        property2: impl AsRef\\<str\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(field_operator_column_expr(\n            property1.as_ref(),\n            operator,\n            property2.as_ref(),\n        ));\n        self\n    }"
+    },
+    {
+      "name": "with_deleted_rows",
+      "responsibility": "GQ05",
+      "start_line": 915,
+      "end_line": 918,
+      "sha256": "e4383c49f896f0e5367a29d62c7c6501b29328f06f710f020dfd3adad4cf4ccc",
+      "body": "pub fn with_deleted_rows(mut self) -> Self {\n        self.query.filter = remove_default_live_filter(self.query.filter);\n        self\n    }"
+    },
+    {
+      "name": "deleted_rows_only",
+      "responsibility": "GQ05",
+      "start_line": 920,
+      "end_line": 924,
+      "sha256": "98bd6bb88580d1fccae1bf720a50ae655f76a0f01d73365df5e0471b8ebcb4b9",
+      "body": "pub fn deleted_rows_only(mut self) -> Self {\n        self.query.filter = remove_default_live_filter(self.query.filter);\n        self.query = self.query.and_filter(Expr::lte(\"version\", 0_i64));\n        self\n    }"
+    },
+    {
+      "name": "match_types",
+      "responsibility": "GQ06",
+      "start_line": 926,
+      "end_line": 932,
+      "sha256": "1da145ddfcf439d1a15496dda2bf8a7288ada4893d6e647c3f07703b2062aada",
+      "body": "pub fn match_types(\n        mut self,\n        types: impl IntoIterator\\<Item = impl Into\\<teaql_core::Value\\>\\>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::in_list(TYPE_FIELD, types.into_iter().map(Into::into)));\n        self\n    }"
+    },
+    {
+      "name": "with_type_group",
+      "responsibility": "GQ06",
+      "start_line": 936,
+      "end_line": 939,
+      "sha256": "7816ffe946d53016653eb3f9af9304216ca06d74883bb50b9adde0a1aadfd2d4",
+      "body": "pub fn with_type_group(mut self) -> Self {\n        self.query = self.query.project(TYPE_GROUP_FIELD);\n        self\n    }"
+    },
+    {
+      "name": "matching_any_of",
+      "responsibility": "GQ07",
+      "start_line": 941,
+      "end_line": 946,
+      "sha256": "565e8d117e770a8c9d1168281df6316c92800ce3f3bc362a6e9b0011aa18b5e8",
+      "body": "pub fn matching_any_of(mut self, request: impl Into\\<QuerySelection\\>) -> Self {\n        let selection = request.into();\n        let entity = EntityDescriptor::new(selection.query.entity.clone());\n        self.query = self.query.and_filter(Expr::in_subquery(\"id\", entity, selection.query.clone(), \"id\"));\n        self\n    }"
+    },
+    {
+      "name": "match_any_of",
+      "responsibility": "GQ07",
+      "start_line": 948,
+      "end_line": 950,
+      "sha256": "11f1da791eca2758146c74f7e6d164c82187f42993f2cab338974a9eeeff44be",
+      "body": "pub fn match_any_of(self, request: impl Into\\<QuerySelection\\>) -> Self {\n        self.matching_any_of(request)\n    }"
+    },
+    {
+      "name": "enhance_child",
+      "responsibility": "GQ07",
+      "start_line": 952,
+      "end_line": 955,
+      "sha256": "1983df01ceeb79f50923d4984babbd22cfdd967d7bfdc535897d682f184e1b53",
+      "body": "pub fn enhance_child(mut self, request: impl Into\\<QuerySelection\\>) -> Self {\n        self.child_enhancements.push(request.into());\n        self\n    }"
+    },
+    {
+      "name": "enhance_children_if_needed",
+      "responsibility": "GQ07",
+      "start_line": 957,
+      "end_line": 961,
+      "sha256": "e4db2c466ea5a1a9f5ab89d2adda8943ece0b4ccf11ac8d6f191aaf1ff1e5d18",
+      "body": "pub fn enhance_children_if_needed(self) -> Self {\n        let request = self;\n<objectDescriptor.childrenOds:tryEnhanceChild();separator=\"\\n\">\n        request\n    }"
+    },
+    {
+      "name": "comment",
+      "responsibility": "GQ11",
+      "start_line": 964,
+      "end_line": 967,
+      "sha256": "d856c448f2b65da68e9efc5a73e2ada445c400ea720c7e85b8a77aab0ddc6848",
+      "body": "pub fn comment(mut self, comment: impl Into\\<String\\>) -> Self {\n        self.query_options.comment = Some(comment.into());\n        self\n    }"
+    },
+    {
+      "name": "raw_sql",
+      "responsibility": "GQ08",
+      "start_line": 969,
+      "end_line": 971,
+      "sha256": "a3c6a9fa5e0723a5d9d2c9e796363544c66ee8f73fa33037eaf8de8ed581d9fa",
+      "body": "pub fn raw_sql(self, raw_sql: impl Into\\<String\\>) -> Self {\n        self.unsafe_raw_sql(UnsafeRawSqlSegment::trusted(raw_sql))\n    }"
+    },
+    {
+      "name": "unsafe_raw_sql",
+      "responsibility": "GQ08",
+      "start_line": 973,
+      "end_line": 976,
+      "sha256": "972d93ed3c9b26b02ce6909e815a4db26db5936bf62f5a728c118653e2c45a33",
+      "body": "pub fn unsafe_raw_sql(mut self, raw_sql: UnsafeRawSqlSegment) -> Self {\n        self.query_options.raw_sql = Some(raw_sql.into_sql());\n        self\n    }"
+    },
+    {
+      "name": "raw_sql_filter",
+      "responsibility": "GQ08",
+      "start_line": 978,
+      "end_line": 980,
+      "sha256": "4493e4d7497970e6c4d88169081667b45aa8e527e87b9d4f6fc5fc5c7f7d135e",
+      "body": "pub fn raw_sql_filter(self, raw_sql: impl Into\\<String\\>) -> Self {\n        self.unsafe_raw_sql_filter(UnsafeRawSqlSegment::trusted(raw_sql))\n    }"
+    },
+    {
+      "name": "unsafe_raw_sql_filter",
+      "responsibility": "GQ08",
+      "start_line": 982,
+      "end_line": 985,
+      "sha256": "1f8232ac95bf7b8e3ed86671411326e363b69ca19fad50177749f34f67bb1f4f",
+      "body": "pub fn unsafe_raw_sql_filter(mut self, raw_sql: UnsafeRawSqlSegment) -> Self {\n        self.query_options.raw_sql_search_criteria.push(raw_sql.into_sql());\n        self\n    }"
+    },
+    {
+      "name": "filter_with_json",
+      "responsibility": "G10",
+      "start_line": 986,
+      "end_line": 988,
+      "sha256": "52a062be69ddf545f6f78776149a8ca3ca4d7148d21051f438b6b30f5f2ce103",
+      "body": "pub fn filter_with_json(self, json_expr: impl Into\\<String\\>) -> Self {\n        self.merge_dynamic_json_expr(json_expr.into())\n    }"
+    },
+    {
+      "name": "merge_dynamic_json_expr",
+      "responsibility": "G10",
+      "start_line": 990,
+      "end_line": 994,
+      "sha256": "f7cd18efed71105a6a0990790802d86d8fc2ad6e4de5841b781350945fc31d1e",
+      "body": "fn merge_dynamic_json_expr(self, json_expr: String) -> Self {\n        let json = serde_json::from_str::\\<JsonValue\\>(&json_expr)\n            .unwrap_or_else(|_| panic!(\"Input JSON format error: {json_expr}\"));\n        self.merge_dynamic_json(&json)\n    }"
+    },
+    {
+      "name": "merge_dynamic_json",
+      "responsibility": "G10",
+      "start_line": 996,
+      "end_line": 1031,
+      "sha256": "5833e46ce0405a68044e14b1126dfcd915051f83b02e09fb7727cc14636582ce",
+      "body": "fn merge_dynamic_json(mut self, json: &JsonValue) -> Self {\n        let Some(object) = json.as_object() else {\n            return self;\n        };\n\n        for (field, value) in object {\n            if field.starts_with('_') {\n                continue;\n            }\n            self = self.apply_dynamic_json_filter(field, value);\n        }\n\n        self = self.apply_dynamic_json_order_by(object.get(\"_orderBy\"));\n\n        if let Some(offset) = dynamic_json_u64_field(object, \"_start\") {\n            self = self.skip(offset);\n        }\n        if let Some(size) = dynamic_json_u64_field(object, \"_size\") {\n            self = self.limit(size);\n        }\n\n        if let Some(page_size) = dynamic_json_u64_field(object, \"_pageSize\") {\n            self = self.limit(page_size);\n        }\n        if let Some(page_number) = dynamic_json_u64_field(object, \"_page\") {\n            if page_number > 0 {\n                let size = dynamic_json_u64_field(object, \"_pageSize\")\n                    .or_else(|| self.query.slice.as_ref().and_then(|slice| slice.limit))\n                    .unwrap_or(10);\n                let offset = page_number.saturating_sub(1).saturating_mul(size);\n                self = self.page_offset(offset, size);\n            }\n        }\n\n        self\n    }"
+    },
+    {
+      "name": "apply_dynamic_json_filter",
+      "responsibility": "G10",
+      "start_line": 1033,
+      "end_line": 1041,
+      "sha256": "d150f866388ae3cafc50d678df9710c59f125b6fd9085471964199de98005d3f",
+      "body": "pub(crate) fn apply_dynamic_json_filter(self, field: &str, value: &JsonValue) -> Self {\n        if let Some((head, tail)) = field.split_once('.') {\n            self.apply_dynamic_json_chain_filter(head, tail, value)\n        } else if let Some(storage_field) = Self::dynamic_json_self_field(field) {\n            self.and_filter(dynamic_json_filter_expr(storage_field, value))\n        } else {\n            self\n        }\n    }"
+    },
+    {
+      "name": "apply_dynamic_json_order_by",
+      "responsibility": "G10",
+      "start_line": 1043,
+      "end_line": 1063,
+      "sha256": "81f9977cddfa49588d06bc137581993a116cee00e9ba68cbc96f137aa4739906",
+      "body": "fn apply_dynamic_json_order_by(mut self, order_by: Option\\<&JsonValue\\>) -> Self {\n        match order_by {\n            Some(JsonValue::String(field)) => {\n                if let Some(storage_field) = Self::dynamic_json_self_field(field) {\n                    self.query = self.query.order_desc(storage_field);\n                }\n            }\n            Some(JsonValue::Object(order_by)) => {\n                self = self.apply_dynamic_json_single_order_by(order_by);\n            }\n            Some(JsonValue::Array(order_bys)) => {\n                for order_by in order_bys {\n                    if let Some(order_by) = order_by.as_object() {\n                        self = self.apply_dynamic_json_single_order_by(order_by);\n                    }\n                }\n            }\n            _ => {}\n        }\n        self\n    }"
+    },
+    {
+      "name": "apply_dynamic_json_single_order_by",
+      "responsibility": "G10",
+      "start_line": 1065,
+      "end_line": 1085,
+      "sha256": "6e571957178817383ff625ea332d67ab39c7f49065eb6e06a84267f7f1893d55",
+      "body": "fn apply_dynamic_json_single_order_by(\n        mut self,\n        order_by: &serde_json::Map\\<String, JsonValue\\>,\n    ) -> Self {\n        let Some(field) = order_by.get(\"field\").and_then(JsonValue::as_str) else {\n            return self;\n        };\n        let Some(storage_field) = Self::dynamic_json_self_field(field) else {\n            return self;\n        };\n        if order_by\n            .get(\"useAsc\")\n            .and_then(JsonValue::as_bool)\n            .unwrap_or(false)\n        {\n            self.query = self.query.order_asc(storage_field);\n        } else {\n            self.query = self.query.order_desc(storage_field);\n        }\n        self\n    }"
+    },
+    {
+      "name": "dynamic_json_self_field",
+      "responsibility": "G10",
+      "start_line": 1087,
+      "end_line": 1093,
+      "sha256": "e84e00e67efe1d408d3c0c42d543bcd250a69dd670b2637e5453e68113843383",
+      "body": "fn dynamic_json_self_field(field: &str) -> Option\\<&'static str\\> {\n        match field {\n<objectDescriptor.rustScalarFields:dynamicJsonScalarSelfField();separator=\"\\n\">\n<objectDescriptor.rustObjectFields:dynamicJsonObjectSelfField();separator=\"\\n\">\n            _ => None,\n        }\n    }"
+    },
+    {
+      "name": "apply_dynamic_json_chain_filter",
+      "responsibility": "G10",
+      "start_line": 1095,
+      "end_line": 1103,
+      "sha256": "b241cc7a111fe05bbf7c91c7397372658cd99cf7fdb15347ab7fe6393a3e15ce",
+      "body": "fn apply_dynamic_json_chain_filter(self, head: &str, tail: &str, value: &JsonValue) -> Self {\n        let _ = (tail, value);\n        match head {\n<objectDescriptor.rustObjectFields:dynamicJsonObjectFieldFilter();separator=\"\\n\">\n<objectDescriptor.rustOneToOneRelations:dynamicJsonReverseRelationFilter();separator=\"\\n\">\n<objectDescriptor.rustOneToManyRelations:dynamicJsonReverseRelationFilter();separator=\"\\n\">\n            _ => self,\n        }\n    }"
+    },
+    {
+      "name": "create_property_as",
+      "responsibility": "GQ08",
+      "start_line": 1105,
+      "end_line": 1111,
+      "sha256": "514f128c1396db2904dc6b40f2302953c4befdce05734fc91b30d426b1691eb5",
+      "body": "pub fn create_property_as(\n        self,\n        property_name: impl Into\\<String\\>,\n        raw_sql_segment: impl Into\\<String\\>,\n    ) -> Self {\n        self.unsafe_create_property_as(property_name, UnsafeRawSqlSegment::trusted(raw_sql_segment))\n    }"
+    },
+    {
+      "name": "unsafe_create_property_as",
+      "responsibility": "GQ08",
+      "start_line": 1113,
+      "end_line": 1122,
+      "sha256": "ddead16df81bc6e1dff16436ff6bfe5653a91bd540d94fc88d0eba71193e5b7d",
+      "body": "pub fn unsafe_create_property_as(\n        mut self,\n        property_name: impl Into\\<String\\>,\n        raw_sql_segment: UnsafeRawSqlSegment,\n    ) -> Self {\n        self.query_options\n            .dynamic_properties\n            .push(RawDynamicProperty::new(property_name, raw_sql_segment));\n        self\n    }"
+    },
+    {
+      "name": "limit",
+      "responsibility": "G09",
+      "start_line": 1124,
+      "end_line": 1127,
+      "sha256": "9e7c49a6d45bfd81cd12558e1ced37059ee0777745a49d7d85281bc1e562cc87",
+      "body": "pub fn limit(mut self, limit: u64) -> Self {\n        self.query = self.query.limit(limit);\n        self\n    }"
+    },
+    {
+      "name": "stream",
+      "responsibility": "G09",
+      "start_line": 1129,
+      "end_line": 1133,
+      "sha256": "3be20bb15b43374a658cdac1332158b1603eec27302d4dcf46a25c7564a83e75",
+      "body": "pub fn stream(mut self, chunk_size: usize) -> Self {\n        assert!(chunk_size > 0, \"stream chunk size must be positive\");\n        self.query = self.query.stream(chunk_size);\n        self\n    }"
+    },
+    {
+      "name": "stream_default",
+      "responsibility": "G09",
+      "start_line": 1135,
+      "end_line": 1138,
+      "sha256": "abb3bb04d4055f260b5a2df05db3916b0da96389b8aee32f69134bc9c8440aff",
+      "body": "pub fn stream_default(mut self) -> Self {\n        self.query = self.query.stream_default();\n        self\n    }"
+    },
+    {
+      "name": "skip",
+      "responsibility": "G09",
+      "start_line": 1140,
+      "end_line": 1143,
+      "sha256": "7d99a5203bd8f7e30d5885c37015511f7726ed5a0535a5dc7dcc1486c272473e",
+      "body": "pub fn skip(mut self, offset: u64) -> Self {\n        self.query = self.query.offset(offset);\n        self\n    }"
+    },
+    {
+      "name": "offset_only",
+      "responsibility": "G09",
+      "start_line": 1145,
+      "end_line": 1147,
+      "sha256": "bad842d16753bfe40970e33c2ecb19ddf513949c4ffb8a7a85a1ce8f2f37be4e",
+      "body": "pub fn offset_only(self, offset: u64) -> Self {\n        self.skip(offset)\n    }"
+    },
+    {
+      "name": "offset",
+      "responsibility": "G09",
+      "start_line": 1149,
+      "end_line": 1151,
+      "sha256": "f76159edc72e492e3779e093e7b5bc72142a6864006b5d70d7caf480c8a627e7",
+      "body": "pub fn offset(self, offset: u64, size: u64) -> Self {\n        self.page_offset(offset, size)\n    }"
+    },
+    {
+      "name": "page_offset",
+      "responsibility": "G09",
+      "start_line": 1153,
+      "end_line": 1156,
+      "sha256": "6a39eff189691aff68aa72cdb168e35e87070ee92ef0f1374387c326753876ec",
+      "body": "pub fn page_offset(mut self, offset: u64, limit: u64) -> Self {\n        self.query = self.query.page(offset, limit);\n        self\n    }"
+    },
+    {
+      "name": "optimize_for_continuous_page_fetch",
+      "responsibility": "G09",
+      "start_line": 1158,
+      "end_line": 1161,
+      "sha256": "8678a8cc1b710dfdb5a92619fa93d185367ad02d53d85773b6dac9e4e24c9018",
+      "body": "pub fn optimize_for_continuous_page_fetch(mut self) -> Self {\n        self.query = self.query.optimize_for_continuous_page_fetch();\n        self\n    }"
+    },
+    {
+      "name": "optimize_for_continuous_page_fetch_with",
+      "responsibility": "G09",
+      "start_line": 1163,
+      "end_line": 1172,
+      "sha256": "847b9ce3d3f55672c5bf6fe05bb80e1a52424c99f453e44142859b16f1159652",
+      "body": "pub fn optimize_for_continuous_page_fetch_with(\n        mut self,\n        namespace: impl Into\\<String\\>,\n        ttl_seconds: u64,\n    ) -> Self {\n        self.query = self\n            .query\n            .optimize_for_continuous_page_fetch_with(namespace, ttl_seconds);\n        self\n    }"
+    },
+    {
+      "name": "optimize_pagination_with_id_set",
+      "responsibility": "G09",
+      "start_line": 1174,
+      "end_line": 1177,
+      "sha256": "a95a44672f22026cc5471100a1cf9747133578542c5b994050d29fd1937fa4a6",
+      "body": "pub fn optimize_pagination_with_id_set(mut self) -> Self {\n        self.query = self.query.optimize_pagination_with_id_set();\n        self\n    }"
+    },
+    {
+      "name": "optimize_pagination_with_id_set_config",
+      "responsibility": "G09",
+      "start_line": 1179,
+      "end_line": 1189,
+      "sha256": "94caab5a176bfb596be349ac7bfa3115319ac43a60f46c74c18df79e697f3463",
+      "body": "pub fn optimize_pagination_with_id_set_config(\n        mut self,\n        namespace: impl Into\\<String\\>,\n        ttl_seconds: u64,\n        max_ids: u64,\n    ) -> Self {\n        self.query = self\n            .query\n            .optimize_pagination_with_id_set_config(namespace, ttl_seconds, max_ids);\n        self\n    }"
+    },
+    {
+      "name": "top_n_probe_parent_threshold",
+      "responsibility": "G09",
+      "start_line": 1194,
+      "end_line": 1197,
+      "sha256": "4fd04442a23c737b6dd778cab8da36808c3755008f6f4b250c71de1cc6cf0837",
+      "body": "pub fn top_n_probe_parent_threshold(mut self, threshold: usize) -> Self {\n        self.query = self.query.top_n_probe_parent_threshold(threshold);\n        self\n    }"
+    },
+    {
+      "name": "top",
+      "responsibility": "G09",
+      "start_line": 1199,
+      "end_line": 1201,
+      "sha256": "00ed066b381e0868b0024ec4cfcb5271a0795dc32b4ac01aa1f40f1103509688",
+      "body": "pub fn top(self, top_n: u64) -> Self {\n        self.limit(top_n)\n    }"
+    },
+    {
+      "name": "offset_size",
+      "responsibility": "G09",
+      "start_line": 1203,
+      "end_line": 1205,
+      "sha256": "bc5492e05c17b743c93752c3fd129e1d77fc35a0c70d086d1d0b254a35930cab",
+      "body": "pub fn offset_size(self, offset: u64, size: u64) -> Self {\n        self.offset(offset, size)\n    }"
+    },
+    {
+      "name": "unlimited",
+      "responsibility": "G09",
+      "start_line": 1207,
+      "end_line": 1210,
+      "sha256": "0e795d22184e08dd337edd9998b56865d4cbc89357847ddd4cd2d8a8e2b9c5ed",
+      "body": "pub fn unlimited(mut self) -> Self {\n        self.query.slice = None;\n        self\n    }"
+    },
+    {
+      "name": "page_number",
+      "responsibility": "G09",
+      "start_line": 1212,
+      "end_line": 1215,
+      "sha256": "9423510c1751c03d3b2a58287f05ea2ecbd54e169b75bbe9829e6ac4cf336576",
+      "body": "pub fn page_number(self, page_number: u64, page_size: u64) -> Self {\n        let offset = page_number.saturating_sub(1).saturating_mul(page_size);\n        self.page_offset(offset, page_size)\n    }"
+    },
+    {
+      "name": "page_number_default",
+      "responsibility": "G09",
+      "start_line": 1217,
+      "end_line": 1219,
+      "sha256": "a6aedde6f99a710f7077578acf24704cf3268d9dcd20710b06775625bcc1a540",
+      "body": "pub fn page_number_default(self, page_number: u64) -> Self {\n        self.page_number(page_number, 10)\n    }"
+    },
+    {
+      "name": "page",
+      "responsibility": "G09",
+      "start_line": 1221,
+      "end_line": 1223,
+      "sha256": "9af5e39662adfdd972ab022c311ac86f847f3ee3fec7e43799e811df1d0b12a7",
+      "body": "pub fn page(self, page_number: u64, page_size: u64) -> Self {\n        self.page_number(page_number, page_size)\n    }"
+    },
+    {
+      "name": "page_default",
+      "responsibility": "G09",
+      "start_line": 1225,
+      "end_line": 1227,
+      "sha256": "8bdf4e729b5cb1636556348598a0ed8f76dfb20f27b120a092448bc54c6f4468",
+      "body": "pub fn page_default(self, page_number: u64) -> Self {\n        self.page_number_default(page_number)\n    }"
+    },
+    {
+      "name": "select_self",
+      "responsibility": "GQ09",
+      "start_line": 1229,
+      "end_line": 1233,
+      "sha256": "781cd0256addecc834c53e0b602834b10def4b767dc7eadb4d39b42af50381d6",
+      "body": "pub fn select_self(mut self) -> Self {\n<objectDescriptor.rustScalarFields:selectSelfField();separator=\"\\n\">\n<objectDescriptor.rustObjectFields:selectSelfField();separator=\"\\n\">\n        self\n    }"
+    },
+    {
+      "name": "select_dynamic_fields_with",
+      "responsibility": "G16",
+      "start_line": 1235,
+      "end_line": 1238,
+      "sha256": "cc7b1ca8d5a627be3058513e57fd969392a9b6929854ef92b52d9fcb313d254e",
+      "body": "pub fn select_dynamic_fields_with(mut self, selection: teaql_core::dynamic_fields::DynamicFieldSelection) -> Self {\n        self.query = self.query.select_dynamic_fields(selection);\n        self\n    }"
+    },
+    {
+      "name": "select_self_fields",
+      "responsibility": "GQ09",
+      "start_line": 1240,
+      "end_line": 1242,
+      "sha256": "e106fa5a2f5241e5ed6677f23c5d3f88e9f6c2aaf9175322150f75e91e50a08d",
+      "body": "pub fn select_self_fields(self) -> Self {\n        self.select_self()\n    }"
+    },
+    {
+      "name": "select_self_without_parent",
+      "responsibility": "GQ09",
+      "start_line": 1244,
+      "end_line": 1246,
+      "sha256": "a769489c4086057facc0988551de8efecda2518f8e7663e33867f80ed157d087",
+      "body": "pub fn select_self_without_parent(self) -> Self {\n        self.select_self_fields()\n    }"
+    },
+    {
+      "name": "select_all",
+      "responsibility": "GQ09",
+      "start_line": 1248,
+      "end_line": 1257,
+      "sha256": "e1050e4929e1cf83a93b1b0962884563606fa53242f7c8ef876d72d8313c388b",
+      "body": "pub fn select_all(self) -> Self {\n<if(objectDescriptor.rustHasSelectAllRelations)>\n        let mut request = self.select_self();\n<objectDescriptor.rustObjectFields:selectAllObjectRelation();separator=\"\\n\">\n<objectDescriptor.rustOneToOneRelations:selectAllReverseRelation();separator=\"\\n\">\n        request\n<else>\n        self.select_self()\n<endif>\n    }"
+    },
+    {
+      "name": "select_children",
+      "responsibility": "GQ09",
+      "start_line": 1259,
+      "end_line": 1267,
+      "sha256": "97ac33ed9eeb9eeb2e8de86157b3d1395209bf8e9ba85c8b0681a50734fd127e",
+      "body": "pub fn select_children(self) -> Self {\n<if(objectDescriptor.rustHasSelectAnyRelations)>\n        let mut request = self.select_all();\n<objectDescriptor.rustOneToManyRelations:selectAllReverseRelation();separator=\"\\n\">\n        request\n<else>\n        self.select_all()\n<endif>\n    }"
+    },
+    {
+      "name": "select_any",
+      "responsibility": "GQ09",
+      "start_line": 1269,
+      "end_line": 1271,
+      "sha256": "05ed3edfed96069683795c6d4d2817458e3307a1893fc1f8cf421231984fa923",
+      "body": "pub fn select_any(self) -> Self {\n        self.select_children()\n    }"
+    },
+    {
+      "name": "group_by",
+      "responsibility": "G08",
+      "start_line": 1273,
+      "end_line": 1276,
+      "sha256": "297a1f3b6c20f9065e8db00e8ffe87f69dc45f73b921459ef2a752f5c9b87899",
+      "body": "pub fn group_by(mut self, field: impl Into\\<String\\>) -> Self {\n        self.query = self.query.group_by(field);\n        self\n    }"
+    },
+    {
+      "name": "count",
+      "responsibility": "G08",
+      "start_line": 1278,
+      "end_line": 1280,
+      "sha256": "059197b5b700f4cdc1664a746fa6e4e20656fd3380cf9f94f5974d8e5e67f470",
+      "body": "pub fn count(self) -> Self {\n        self.count_as(\"count\")\n    }"
+    },
+    {
+      "name": "count_as",
+      "responsibility": "G08",
+      "start_line": 1282,
+      "end_line": 1284,
+      "sha256": "26e4f21533ae49b6b01ef96eec80dae2d855d0e0fdfc3e66089f8d62467f43f4",
+      "body": "pub fn count_as(self, alias: impl Into\\<String\\>) -> Self {\n        self.aggregate_count(alias)\n    }"
+    },
+    {
+      "name": "aggregate_count",
+      "responsibility": "G08",
+      "start_line": 1286,
+      "end_line": 1289,
+      "sha256": "7ec7f1077892accd64f036b4036b69654b3b3e9b69f70dfbbbdd08940350b898",
+      "body": "pub fn aggregate_count(mut self, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.count(alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_count_field",
+      "responsibility": "G08",
+      "start_line": 1291,
+      "end_line": 1294,
+      "sha256": "b9d7818c93602090be4e07801e5ee565e6b630e735a0641749d8f8af8e7dcd97",
+      "body": "pub fn aggregate_count_field(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.count_field(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_with_function",
+      "responsibility": "G08",
+      "start_line": 1296,
+      "end_line": 1304,
+      "sha256": "c2a430fc0534830706ed64da4d9d3e9a2f1df19e4b494fc5dbba8dcb89089e39",
+      "body": "pub fn aggregate_with_function(\n        mut self,\n        field: impl Into\\<String\\>,\n        alias: impl Into\\<String\\>,\n        function: AggregateFunction,\n    ) -> Self {\n        self.query = self.query.aggregate(Aggregate::new(function, field, alias));\n        self\n    }"
+    },
+    {
+      "name": "aggregate_sum",
+      "responsibility": "G08",
+      "start_line": 1306,
+      "end_line": 1309,
+      "sha256": "a748c0c35032a4ce4384705ca48e5aa63e94039fc3dc5a8ba3dee6ec38284623",
+      "body": "pub fn aggregate_sum(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.sum(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_avg",
+      "responsibility": "G08",
+      "start_line": 1311,
+      "end_line": 1314,
+      "sha256": "f07f6d7b00e2d2e49d8c4d4656fb9d0a8e181e216dd6097ac6bb3568d06ae29f",
+      "body": "pub fn aggregate_avg(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.avg(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_min",
+      "responsibility": "G08",
+      "start_line": 1316,
+      "end_line": 1319,
+      "sha256": "9777c506c02aba93716d1b8bf1495326589fe6f44dd76cb193d80ade42462415",
+      "body": "pub fn aggregate_min(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.min(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_max",
+      "responsibility": "G08",
+      "start_line": 1321,
+      "end_line": 1324,
+      "sha256": "cb3df67a854363281b051494a59867b8fd9c3522635e6d39825e4a700861f516",
+      "body": "pub fn aggregate_max(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.max(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_stddev",
+      "responsibility": "G08",
+      "start_line": 1326,
+      "end_line": 1329,
+      "sha256": "5b415f7f86c40f52e2a8377c77014d9a1662f18b282e579085e1a62f088f16dd",
+      "body": "pub fn aggregate_stddev(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.stddev(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_stddev_pop",
+      "responsibility": "G08",
+      "start_line": 1331,
+      "end_line": 1334,
+      "sha256": "72fa6bcd68cdd04b5b814c6f20730d8b842b0ed266767f6400fad382a8fa57cc",
+      "body": "pub fn aggregate_stddev_pop(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.stddev_pop(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_var_samp",
+      "responsibility": "G08",
+      "start_line": 1336,
+      "end_line": 1339,
+      "sha256": "134c8b7d4c1ee42883953cb09f5b7428eb25ea38ff882784e0dc970c782c8178",
+      "body": "pub fn aggregate_var_samp(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.var_samp(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_var_pop",
+      "responsibility": "G08",
+      "start_line": 1341,
+      "end_line": 1344,
+      "sha256": "6938c62317d6719888559116eda2abbccac8fd830637b89dd6d6df0b1d8a2668",
+      "body": "pub fn aggregate_var_pop(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.var_pop(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_bit_and",
+      "responsibility": "G08",
+      "start_line": 1346,
+      "end_line": 1349,
+      "sha256": "55f572eb5a0278b32c820f0e54b28ccfdc003fcf5f682ae25931fd5b7c8f4971",
+      "body": "pub fn aggregate_bit_and(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.bit_and(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_bit_or",
+      "responsibility": "G08",
+      "start_line": 1351,
+      "end_line": 1354,
+      "sha256": "465ecf1c049aeb855d994149e6723c32bf5f35fab78579b89b2aa1326d6c1452",
+      "body": "pub fn aggregate_bit_or(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.bit_or(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "aggregate_bit_xor",
+      "responsibility": "G08",
+      "start_line": 1356,
+      "end_line": 1359,
+      "sha256": "8583ce47c8c1a03a22b74786107ac9ddb42711b7f4df2a67f492dbdff8de5490",
+      "body": "pub fn aggregate_bit_xor(mut self, field: impl Into\\<String\\>, alias: impl Into\\<String\\>) -> Self {\n        self.query = self.query.bit_xor(field, alias);\n        self\n    }"
+    },
+    {
+      "name": "enable_aggregation_cache",
+      "responsibility": "G08",
+      "start_line": 1361,
+      "end_line": 1364,
+      "sha256": "68cc0f9a4ee01edf82bfcc1974f863b72ddbd3a7f453e966f7a63d82cccc61f2",
+      "body": "pub fn enable_aggregation_cache(mut self) -> Self {\n        self.query = self.query.enable_aggregation_cache();\n        self\n    }"
+    },
+    {
+      "name": "enable_aggregation_cache_for",
+      "responsibility": "G08",
+      "start_line": 1366,
+      "end_line": 1369,
+      "sha256": "6a1ea8fe415263215d4474e4d55eb34f844a130a7c6114acabf4433a4414c53c",
+      "body": "pub fn enable_aggregation_cache_for(mut self, cache_expired_millis: u64) -> Self {\n        self.query = self.query.enable_aggregation_cache_for(cache_expired_millis);\n        self\n    }"
+    },
+    {
+      "name": "propagate_aggregation_cache",
+      "responsibility": "G08",
+      "start_line": 1371,
+      "end_line": 1374,
+      "sha256": "e17756784beee43222a334e50234841c008f8b87c9ce6d163ee5826196e85c59",
+      "body": "pub fn propagate_aggregation_cache(mut self, cache_expired_millis: u64) -> Self {\n        self.query = self.query.propagate_aggregation_cache(cache_expired_millis);\n        self\n    }"
+    },
+    {
+      "name": "default",
+      "responsibility": "GQ01",
+      "start_line": 1387,
+      "end_line": 1389,
+      "sha256": "3a5a7f82ed4bd4560b360efab3878115a2b77e378f84d7ded1e1177b6ac53798",
+      "body": "fn default() -> Self {\n        Self::new()\n    }"
+    },
+    {
+      "name": "from",
+      "responsibility": "GQ03",
+      "start_line": 1393,
+      "end_line": 1395,
+      "sha256": "ab163661086b5533951110079bed6c4393d6dd2f020f0bbc9eaae9908b2be6e0",
+      "body": "fn from(request: <objectDescriptor.rustStructName>Request\\<R\\>) -> Self {\n        QuerySelection::from(request).into_query()\n    }"
+    },
+    {
+      "name": "from",
+      "responsibility": "GQ03",
+      "start_line": 1399,
+      "end_line": 1407,
+      "sha256": "c52e0739e71ccd65a791484ad03131995feb50eb19dcc4e88d4513607a124983",
+      "body": "fn from(request: <objectDescriptor.rustStructName>Request\\<R\\>) -> Self {\n        Self {\n            query: request.query,\n            relation_selections: request.relation_selections,\n            relation_filters: request.relation_filters,\n            child_enhancements: request.child_enhancements,\n            query_options: request.query_options,\n        }\n    }"
+    },
+    {
+      "name": "save",
+      "responsibility": "G13/G17",
+      "start_line": 1416,
+      "end_line": 1420,
+      "sha256": "f252a224ccd30af8fcfe4699247fa3b37cda3bcf0c4229341d4cca6d23d65b64",
+      "body": "fn save(self, context: &'a C) -> std::pin::Pin\\<Box\\<dyn std::future::Future\\<Output = Result\\<Self::Entity, Self::Error\\>\\> + Send + '_\\>\\> {\n        Box::pin(async move {\n            context.save_audited_entity(self).await\n        })\n    }"
+    }
+  ],
+  "templates": [
+    {
+      "name": "qMethod",
+      "start_line": 573,
+      "end_line": 593,
+      "sha256": "dd148a654630a9309d2201c2c10c2a3f71792c92ff36c67eab79c7bf5f47b686",
+      "body": "qMethod(objectDescriptor) ::= <<\n    pub fn <objectDescriptor.rustPluralName>() -> <objectDescriptor.rustStructName>Request {\n        <objectDescriptor.rustStructName>Request::new()\n            .select_self()\n            .and_filter(Expr::gt(\"version\", 0_i64))\n    }\n\n    pub fn <objectDescriptor.rustPluralName>_minimal() -> <objectDescriptor.rustStructName>Request {\n        <objectDescriptor.rustStructName>Request::new()\n            .and_filter(Expr::gt(\"version\", 0_i64))\n    }\n\n    pub fn <objectDescriptor.rustPluralName>_with_children() -> <objectDescriptor.rustStructName>Request {\n        <objectDescriptor.rustStructName>Request::new()\n            .unlimited()\n            .select_self_fields()\n            .enhance_children_if_needed()\n    }\n\n<objectDescriptor.businessIdFields:rustBusinessIdLookup(objectDescriptor);separator=\"\\n\">\n>>"
+    },
+    {
+      "name": "rustBusinessIdLookup",
+      "start_line": 595,
+      "end_line": 601,
+      "sha256": "60b792dfa67f3fc8395bf0776cfbc6aed1b0364bb8ce9d2e73e31d5a56f4e8db",
+      "body": "rustBusinessIdLookup(field, objectDescriptor) ::= <<\n    pub fn <objectDescriptor.rustModuleName>_by_<field.rustStorageMemberName>(value: crate::<field.rustBusinessIdTypeName>) -> <objectDescriptor.rustStructName>Request {\n        Self::<objectDescriptor.rustPluralName>()\n            .<field.rustAttributePredicatePrefixExpr>_is(value)\n            .limit(2)\n    }\n>>"
+    },
+    {
+      "name": "childTypeFilterMethod",
+      "start_line": 1539,
+      "end_line": 1543,
+      "sha256": "0737b899712873fb5762cd4b9daf88f23d2037b7b404a0b27dd2e0dd1fae0ec7",
+      "body": "childTypeFilterMethod(child) ::= <<\n    pub fn is_<child.rustModuleName>(self) -> Self {\n        self.match_types([<child.rustTypeMatchList>])\n    }\n>>"
+    },
+    {
+      "name": "tryEnhanceChild",
+      "start_line": 1545,
+      "end_line": 1547,
+      "sha256": "8ec8b1d35a80de79fd69d902d6216bd18e5758937870ecb252ff997883b68483",
+      "body": "tryEnhanceChild(child) ::= <<\n        let request = request.enhance_child(crate::Q::<child.rustPluralName>_with_children());\n>>"
+    },
+    {
+      "name": "selectSelfField",
+      "start_line": 2285,
+      "end_line": 2287,
+      "sha256": "2f1b9c69482af6a9643950066e733fe8ddca0552957fa82955fc8a6457cc9a40",
+      "body": "selectSelfField(fieldDescriptor) ::= <<\n        self.query = self.query.project(\"<fieldDescriptor.rustStorageFieldName>\");\n>>"
+    },
+    {
+      "name": "selectAllObjectRelation",
+      "start_line": 2289,
+      "end_line": 2291,
+      "sha256": "1ca5200f1b829feace0bc1f9d652209b23e2ee6d72bb2826fb9a31465bc0d4ec",
+      "body": "selectAllObjectRelation(fieldDescriptor) ::= <<\n        request = request.select_<fieldDescriptor.rustMemberName>();\n>>"
+    },
+    {
+      "name": "selectAllReverseRelation",
+      "start_line": 2293,
+      "end_line": 2295,
+      "sha256": "4427d8d02524fa9bbdd74f73cfac748db2a1a867eb76af80488c56f34d4bdb63",
+      "body": "selectAllReverseRelation(relation) ::= <<\n        request = request.select_<relation.rustMemberName>();\n>>"
+    }
+  ],
+  "runtime_source": "teaql-core/src/request.rs",
+  "runtime_functions": [
+    {
+      "name": "field_operator_column_expr",
+      "start_line": 485,
+      "end_line": 502,
+      "sha256": "3d6282666c12861d2dae2ded48e81a0d32bf1bf1301e8a461cfe7c3d36ec7f29",
+      "body": "pub fn field_operator_column_expr(field: &str, operator: FieldOperator, other_field: &str) -> Expr {\n    let binary_op = match operator {\n        FieldOperator::Equal => BinaryOp::Eq,\n        FieldOperator::NotEqual => BinaryOp::Ne,\n        FieldOperator::GreaterThan => BinaryOp::Gt,\n        FieldOperator::GreaterThanOrEqual => BinaryOp::Gte,\n        FieldOperator::LessThan => BinaryOp::Lt,\n        FieldOperator::LessThanOrEqual => BinaryOp::Lte,\n        FieldOperator::Contain => BinaryOp::Like,\n        FieldOperator::NotContain => BinaryOp::NotLike,\n        FieldOperator::BeginWith => BinaryOp::Like,\n        FieldOperator::NotBeginWith => BinaryOp::NotLike,\n        FieldOperator::EndWith => BinaryOp::Like,\n        FieldOperator::NotEndWith => BinaryOp::NotLike,\n        unsupported => panic!(\"{unsupported:?} is not supported for property-to-property filters\"),\n    };\n    Expr::compare_columns(field, binary_op, other_field)\n}"
+    },
+    {
+      "name": "remove_default_live_filter",
+      "start_line": 526,
+      "end_line": 529,
+      "sha256": "799cd6e1560cc21b254b8d81d71bf171353783a647a4a4b76832ee57d6dc88c2",
+      "body": "pub fn remove_default_live_filter(filter: Option<Expr>) -> Option<Expr> {\n    let default_filter = Expr::gt(\"version\", 0_i64);\n    remove_filter_expr(filter?, &default_filter)\n}"
+    },
+    {
+      "name": "remove_filter_expr",
+      "start_line": 531,
+      "end_line": 549,
+      "sha256": "553a633356ae3ad42e137958510a9bf764fad38af1d4b35bfc6a593a027b61f0",
+      "body": "pub fn remove_filter_expr(filter: Expr, target: &Expr) -> Option<Expr> {\n    if &filter == target {\n        return None;\n    }\n    match filter {\n        Expr::And(parts) => {\n            let mut retained = parts\n                .into_iter()\n                .filter_map(|part| remove_filter_expr(part, target))\n                .collect::<Vec<_>>();\n            match retained.len() {\n                0 => None,\n                1 => retained.pop(),\n                _ => Some(Expr::And(retained)),\n            }\n        }\n        other => Some(other),\n    }\n}"
+    }
+  ],
+  "model_helpers": [
+    {
+      "name": "rustHasSelectAllRelations",
+      "source": "model/src/main/java/com/skynet/codegenerator/naming/RustObjectDescriptorNaming.java",
+      "start_line": 105,
+      "end_line": 107,
+      "sha256": "37a6d01e83afddd5a4280fef883841ff9b412f2c8ddf853e6395934c47d238e5",
+      "body": "    public static boolean rustHasSelectAllRelations(ObjectDescriptor od) {\n        return !rustObjectFields(od).isEmpty() || !rustOneToOneRelations(od).isEmpty();\n    }"
+    },
+    {
+      "name": "rustHasSelectAnyRelations",
+      "source": "model/src/main/java/com/skynet/codegenerator/naming/RustObjectDescriptorNaming.java",
+      "start_line": 109,
+      "end_line": 111,
+      "sha256": "cc13c50bf8605612ad3a6062c5662db5ec9fe1f559337d9fb4b76afdf328067f",
+      "body": "    public static boolean rustHasSelectAnyRelations(ObjectDescriptor od) {\n        return !rustOneToManyRelations(od).isEmpty();\n    }"
+    },
+    {
+      "name": "getBusinessIdFields",
+      "source": "model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java",
+      "start_line": 240,
+      "end_line": 242,
+      "sha256": "44b8e43e4084df2455b88d13a555e8fbb02ed720fae6e2a2280450f60942d934",
+      "body": "    public List<FieldDescriptor> getBusinessIdFields() {\n        return fields.stream().filter(FieldDescriptor::isBusinessId).toList();\n    }"
+    }
+  ],
+  "native_sources": {
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "2f33195de8a450f6d819570b4314dd9bfeb02d2beaee262591cd21d16d4e636f",
+    "teaql_core/include/teaql/core/request.hpp": "c05a74323cef90d816381c1c81daef6e5be705d05bd121652efa8c6cf4cc5e12",
+    "teaql_core/src/request.cpp": "002a0532258f2339639f0beca8b5164b15f483a02bbf5bf1c248f133d29b28e7"
+  },
+  "cpp_source": "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java",
+  "cpp_helpers": [
+    {
+      "name": "queries",
+      "start_line": 1341,
+      "end_line": 1769,
+      "sha256": "423329346d634bdc29615d6e61db43cffd6e5b261638e13b57d7975d87926626",
+      "body": "  private String queries(String ns, List<ObjectDescriptor> entities) {\n    StringBuilder out = new StringBuilder(header(ns, \"models.hpp\"));\n    line(out, \"namespace generated_detail {\");\n    for (ObjectDescriptor od : entities) {\n      line(out, \"struct \" + typeName(od) + \"DynamicJsonRecipe;\");\n    }\n    for (ObjectDescriptor od : entities) {\n      line(out, \"struct \" + typeName(od) + \"DynamicJsonRecipe { using Model = \" + typeName(od) + \";\");\n      line(out, \"static std::optional<std::string_view> self_field(std::string_view field) {\");\n      for (FieldDescriptor field : fields(od).stream().filter(FieldDescriptor::isSimpleProperty).toList()) {\n        line(out, \"if (field == \" + quote(canonical(field)) + \") { return \" + quote(canonical(field)) + \"; }\");\n      }\n      for (FieldDescriptor field : fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n        String member = RustFieldDescriptorNaming.rustMemberName(field);\n        line(out, \"if (field == \" + quote(member) + \" || field == \" + quote(canonical(field)) + \") { return \" + quote(canonical(field)) + \"; }\");\n      }\n      line(out, \"return std::nullopt; }\");\n      line(out, \"template<class Query> static void apply_chain(Query& query, std::string_view head, std::string_view tail, const Json& value);\");\n      line(out, \"};\");\n    }\n    // Template relation bodies follow every recipe declaration; cycles are valid.\n    for (ObjectDescriptor od : entities) {\n      line(out, \"template<class Query> void \" + typeName(od) + \"DynamicJsonRecipe::apply_chain(Query& query, std::string_view head, std::string_view tail, const Json& value) {\");\n      line(out, \"(void)query; (void)head; (void)tail; (void)value;\");\n      for (FieldDescriptor field : fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n        ObjectDescriptor target = ((ObjectType) field.getFieldType()).getRefer();\n        line(out, \"if (head == \" + quote(RustFieldDescriptorNaming.rustMemberName(field)) + \") { apply_generated_dynamic_json_relation<\" + typeName(target) + \"DynamicJsonRecipe>(query, \" + quote(canonical(field)) + \", \\\"id\\\", tail, value, head); return; }\");\n      }\n      for (ReverseRelation relation : od.getReverseRelations()) {\n        line(out, \"if (head == \" + quote(RustReverseRelationNaming.rustMemberName(relation)) + \") { apply_generated_dynamic_json_relation<\" + typeName(relation.getChild()) + \"DynamicJsonRecipe>(query, \\\"id\\\", \" + quote(canonical(relation.getProperty())) + \", tail, value, head); return; }\");\n      }\n      line(out, \"}\");\n    }\n    line(out, \"}\");\n    for (ObjectDescriptor od : entities) {\n      line(out, \"template <bool Purposed = false, class Result = \" + typeName(od) + \"> class \" + typeName(od) + \"Request;\");\n    }\n    for (ObjectDescriptor od : entities) {\n      String name = typeName(od), request = name + \"Request\";\n      StringBuilder friends = new StringBuilder();\n      for (ObjectDescriptor other : entities) {\n        friends\n            .append(\"template <bool, class> friend class \")\n            .append(typeName(other))\n            .append(\"Request;\\n\");\n      }\n      line(\n          out,\n          \"template <bool Purposed, class Result> class \"\n              + request\n              + \" {\\n\"\n              + friends\n              + \"public:\\n\"\n              + \"using Query = EntityQuery<\"\n              + name\n              + \", DataServiceExecutor, Purposed, Result>;\\n\"\n              + \"private: Query query_;\\npublic:\\n\"\n              + \"explicit \"\n              + request\n              + \"(UserContext& user_context, bool minimal = false, bool live_rows = true) requires (!Purposed) :\"\n              + \" query_(user_context, minimal, live_rows) {}\\n\"\n              + \"explicit \"\n              + request\n              + \"(Query value) : query_(std::move(value)) {}\\n\"\n              + \"Memory memory_resource() const { return query_.memory_resource(); }\\n\"\n              + \"const SelectQuery& query() const { return query_.query(); }\\n\"\n              + \"SelectQuery coreQuery() const requires (!Purposed) { return query_.coreQuery(); }\\n\"\n              + \"const Query& runtimeQuery() const requires (!Purposed) { return query_; }\\n\"\n              + \"request::QuerySelection selection() const requires (!Purposed) { return query_.selection(); }\\n\"\n              + \"auto relationSelections() const requires (!Purposed) { return query_.relationSelections(); }\\n\"\n              + \"auto relationFilters() const requires (!Purposed) { return query_.relationFilters(); }\\n\"\n              + \"auto childEnhancements() const requires (!Purposed) { return query_.childEnhancements(); }\\n\"\n              + \"auto queryOptions() const requires (!Purposed) { return query_.queryOptions(); }\\n\"\n              + \"SelectQuery intoQuery() && requires (!Purposed) { return std::move(query_).intoQuery(); }\\n\"\n              + request\n              + \"<true, Result> purpose(std::string_view text) const& { return \"\n              + request\n              + \"<true, Result>(query_.purpose(text)); }\\n\"\n              + request\n              + \"<true, Result> purpose(std::string_view text) && { return \"\n              + request\n              + \"<true, Result>(std::move(query_).purpose(text)); }\");\n      line(out, \"template <class Return> \" + request + \"<Purposed, Return> returnType() const& { return \"\n          + request + \"<Purposed, Return>(query_.template returnType<Return>()); }\");\n      line(out, \"template <class Return> \" + request + \"<Purposed, Return> returnType() && { return \"\n          + request + \"<Purposed, Return>(std::move(query_).template returnType<Return>()); }\");\n      for (String[] method :\n          List.of(\n              new String[] {\"comment\", \"std::string_view\"},\n              new String[] {\"filter\", \"const Expr&\"},\n              new String[] {\"selectDynamicFields\", \"const DynamicFieldSelection&\"},\n              new String[] {\"matchTypes\", \"std::span<const Value>\"},\n              new String[] {\"andFilter\", \"const Expr&\"},\n              new String[] {\"orFilter\", \"const Expr&\"},\n              new String[] {\"limit\", \"std::uint64_t\"},\n              new String[] {\"offset\", \"std::uint64_t\"},\n              new String[] {\"hardLimit\", \"std::uint64_t\"},\n              new String[] {\"stream\", \"std::size_t\"})) {\n        fluent(\n            out,\n            request,\n            \"\",\n            method[0],\n            method[1] + \" value\",\n            \"value\",\n            \"query_.\" + method[0] + \"(value);\");\n      }\n      fluent(out, request, \"\", \"unlimited\", \"\", \"\", \"query_.unlimited();\");\n      fluent(out, request, \"\", \"withDeletedRows\", \"\", \"\", \"query_.withDeletedRows();\");\n      fluent(out, request, \"\", \"deletedRowsOnly\", \"\", \"\", \"query_.deletedRowsOnly();\");\n      fluent(out, request, \"\", \"appendSearchCriteria\", \"const Expr& criteria\", \"criteria\", \"query_.appendSearchCriteria(criteria);\");\n      fluent(out, request, \"\", \"appendSearchCriteria\", \"Ref<Expr> criteria\", \"criteria\", \"query_.appendSearchCriteria(criteria);\");\n      fluent(out, request,\n          \"template <std::ranges::input_range Inputs> requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>> \",\n          \"matchTypes\", \"Inputs&& inputs\", \"std::forward<Inputs>(inputs)\",\n          \"query_.matchTypes(std::forward<Inputs>(inputs));\");\n      fluent(out, request, \"\", \"filterProperty\", \"std::string_view left, request::FieldOperator op, std::string_view right\", \"left, op, right\", \"query_.filterProperty(left, op, right);\");\n      fluent(out, request, \"\", \"pageOffset\", \"std::uint64_t offset, std::uint64_t size\", \"offset, size\", \"query_.pageOffset(offset, size);\");\n      fluent(out, request, \"\", \"offset\", \"std::uint64_t offset, std::uint64_t size\", \"offset, size\", \"query_.offset(offset, size);\");\n      fluent(out, request, \"\", \"offsetOnly\", \"std::uint64_t value\", \"value\", \"query_.offsetOnly(value);\");\n      fluent(out, request, \"\", \"offsetSize\", \"std::uint64_t offset, std::uint64_t size\", \"offset, size\", \"query_.offsetSize(offset, size);\");\n      fluent(out, request, \"\", \"top\", \"std::uint64_t value\", \"value\", \"query_.top(value);\");\n      fluent(out, request, \"\", \"pageNumber\", \"std::uint64_t number, std::uint64_t size\", \"number, size\", \"query_.pageNumber(number, size);\");\n      fluent(out, request, \"\", \"pageNumberDefault\", \"std::uint64_t number\", \"number\", \"query_.pageNumberDefault(number);\");\n      fluent(out, request, \"\", \"page\", \"std::uint64_t number, std::uint64_t size\", \"number, size\", \"query_.page(number, size);\");\n      fluent(out, request, \"\", \"pageDefault\", \"std::uint64_t number\", \"number\", \"query_.pageDefault(number);\");\n      fluent(out, request, \"\", \"streamDefault\", \"\", \"\", \"query_.streamDefault();\");\n      fluent(out, request, \"\", \"topNProbeParentThreshold\", \"std::size_t threshold\", \"threshold\", \"query_.topNProbeParentThreshold(threshold);\");\n      fluent(out, request, \"\", \"rawSql\", \"std::string_view sql\", \"sql\", \"query_.rawSql(sql);\");\n      fluent(out, request, \"\", \"rawSqlFilter\", \"std::string_view sql\", \"sql\", \"query_.rawSqlFilter(sql);\");\n      fluent(out, request, \"\", \"createPropertyAs\", \"std::string_view field, std::string_view sql\", \"field, sql\", \"query_.createPropertyAs(field, sql);\");\n      fluent(out, request, \"\", \"unsafeRawSql\", \"request::UnsafeRawSqlSegment sql\", \"std::move(sql)\", \"query_.unsafeRawSql(std::move(sql));\");\n      fluent(out, request, \"\", \"unsafeRawSqlFilter\", \"request::UnsafeRawSqlSegment sql\", \"std::move(sql)\", \"query_.unsafeRawSqlFilter(std::move(sql));\");\n      fluent(out, request, \"\", \"unsafeCreatePropertyAs\", \"std::string_view field, request::UnsafeRawSqlSegment sql\", \"field, std::move(sql)\", \"query_.unsafeCreatePropertyAs(field, std::move(sql));\");\n\n      for (String method : List.of(\"groupBy\", \"countAs\", \"aggregateCount\")) {\n        fluent(out, request, \"\", method, \"std::string_view value\", \"value\", \"query_.\" + method + \"(value);\");\n      }\n      fluent(out, request, \"\", \"count\", \"\", \"\", \"query_.count();\");\n      fluent(out, request, \"\", \"aggregateWithFunction\", \"std::string_view field, std::string_view alias, AggregateFunction function\", \"field, alias, function\", \"query_.aggregateWithFunction(field, alias, function);\");\n      for (String method : List.of(\"aggregateCountField\", \"aggregateSum\", \"aggregateAvg\", \"aggregateMin\", \"aggregateMax\", \"aggregateStddev\", \"aggregateStddevPop\", \"aggregateVarSamp\", \"aggregateVarPop\", \"aggregateBitAnd\", \"aggregateBitOr\", \"aggregateBitXor\")) {\n        fluent(out, request, \"\", method, \"std::string_view field, std::string_view alias\", \"field, alias\", \"query_.\" + method + \"(field, alias);\");\n      }\n      fluent(out, request, \"\", \"enableAggregationCache\", \"\", \"\", \"query_.enableAggregationCache();\");\n      for (String method : List.of(\"enableAggregationCacheFor\", \"propagateAggregationCache\")) {\n        fluent(out, request, \"\", method, \"std::uint64_t duration\", \"duration\", \"query_.\" + method + \"(duration);\");\n      }\n\n      fluent(out, request, \"\", \"optimizePaginationWithIdSet\", \"\", \"\", \"query_.optimizePaginationWithIdSet();\");\n      fluent(out, request, \"\", \"optimizePaginationWithIdSetConfig\", \"std::string_view name, std::uint64_t ttl, std::uint64_t max_ids\", \"name, ttl, max_ids\", \"query_.optimizePaginationWithIdSetConfig(name, ttl, max_ids);\");\n      fluent(out, request, \"\", \"optimizeForContinuousPageFetch\", \"\", \"\", \"query_.optimizeForContinuousPageFetch();\");\n      fluent(out, request, \"\", \"optimizeForContinuousPageFetchWith\", \"std::string_view name, std::uint64_t ttl\", \"name, ttl\", \"query_.optimizeForContinuousPageFetchWith(name, ttl);\");\n\n      fluent(out, request, \"\", \"filterWithJson\", \"std::string_view value\", \"value\",\n          \"apply_generated_dynamic_json<generated_detail::\" + name + \"DynamicJsonRecipe>(query_, value);\");\n      fluent(out, request, \"\", \"withTypeGroup\", \"\", \"\", \"query_.withTypeGroup();\");\n      fluent(out, request, \"template <class ChildRequest> requires requires (const ChildRequest& child) { child.runtimeQuery().selection(); } \", \"enhanceChild\",\n          \"const ChildRequest& child\", \"child\", \"query_.enhanceChild(child.runtimeQuery());\");\n      for (String childType : List.of(\"SelectQuery\", \"request::QuerySelection\")) {\n        fluent(out, request, \"\", \"enhanceChild\", \"const \" + childType + \"& child\", \"child\",\n            \"query_.enhanceChild(child);\");\n      }\n      for (String method : List.of(\"matchingAnyOf\", \"matchAnyOf\")) {\n        fluent(out, request,\n            \"template <class ChildRequest> requires requires (const ChildRequest& child) { child.runtimeQuery().selection(); } \",\n            method, \"const ChildRequest& child\", \"child\", \"query_.\" + method + \"(child.runtimeQuery());\");\n        for (String childType : List.of(\"SelectQuery\", \"request::QuerySelection\")) {\n          fluent(out, request, \"\", method, \"const \" + childType + \"& child\", \"child\", \"query_.\" + method + \"(child);\");\n        }\n      }\n      line(out, request + \"& enhanceChildrenIfNeeded() &;\");\n      line(out, request + \"&& enhanceChildrenIfNeeded() && { enhanceChildrenIfNeeded(); return std::move(*this); }\");\n      for (ObjectDescriptor child : od.getChildrenOds()) {\n        List<ObjectDescriptor> matches = new ArrayList<>();\n        matches.add(child);\n        matches.addAll(child.getAllChildrenOds());\n        String values = matches.stream().map(type -> \"Value(memory_resource(), \" + quote(typeName(type)) + \")\")\n            .collect(java.util.stream.Collectors.joining(\", \"));\n        fluent(out, request, \"\", \"is\" + typeName(child), \"\", \"\",\n            \"const std::array types{\" + values + \"}; query_.matchTypes(types);\");\n      }\n      fluent(out, request, \"\", \"skip\", \"std::uint64_t value\", \"value\", \"query_.offset(value);\");\n      fluent(\n          out,\n          request,\n          \"\",\n          \"searchWithText\",\n          \"std::string_view value\",\n          \"value\",\n          \"query_.mutate_selection([&](SelectQuery& selection) { selection.search_with_text(value);\"\n              + \" });\");\n      StringBuilder projection = new StringBuilder();\n      for (FieldDescriptor fd : descriptorFields(od)) {\n        projection.append(\"query_.select(\").append(quote(canonical(fd))).append(\");\");\n      }\n      fluent(out, request, \"\", \"selectSelf\", \"\", \"\", projection.toString());\n      fluent(out, request, \"\", \"selectSelfFields\", \"\", \"\", \"selectSelf();\");\n      fluent(out, request, \"\", \"selectSelfWithoutParent\", \"\", \"\", \"selectSelfFields();\");\n      StringBuilder all = new StringBuilder(\"selectSelf();\");\n      for (FieldDescriptor field : fields(od)) {\n        if (field.isObjectProperty()) {\n          all.append(camel(\"select_\" + relationName(field))).append(\"();\");\n        }\n      }\n      for (ReverseRelation relation : od.getOneToOneRelations()) {\n        all.append(camel(\"select_\" + relationName(relation))).append(\"();\");\n      }\n      fluent(out, request, \"\", \"selectAll\", \"\", \"\", all.toString());\n      StringBuilder children = new StringBuilder(\"selectAll();\");\n      for (ReverseRelation relation : od.getOneToManyRelations()) {\n        children.append(camel(\"select_\" + relationName(relation))).append(\"();\");\n      }\n      fluent(out, request, \"\", \"selectChildren\", \"\", \"\", children.toString());\n      fluent(out, request, \"\", \"selectAny\", \"\", \"\", \"selectChildren();\");\n      for (String method : List.of(\"executeForList\", \"executeForOne\", \"executeForFirst\", \"executeForCount\", \"executeForExists\", \"executeForStream\")) {\n        line(\n            out,\n            \"auto& \"\n                + method\n                + \"(UserContext& user_context) const requires Purposed && Entity<Result> { return query_.\"\n                + method\n                + \"(user_context); }\");\n      }\n      line(out, \"auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const requires Purposed && Entity<Result> { return query_.executeForPage(user_context, offset, limit); }\");\n      for (String[] alias :\n          List.of(\n              new String[] {\"execute\", \"executeForOne\"},\n              new String[] {\"executeForEntity\", \"executeForOne\"},\n              new String[] {\"executeForEntityList\", \"executeForList\"})) {\n        line(\n            out,\n            \"auto& \"\n                + alias[0]\n                + \"(UserContext& user_context) const requires Purposed && Entity<Result> { return query_.\"\n                + alias[1]\n                + \"(user_context); }\");\n      }\n      line(\n          out,\n          \"auto& executeForRows(UserContext& user_context) const requires Purposed && Entity<Result> { return\"\n              + \" query_.executeForRows(user_context); }\");\n      line(\n          out,\n          name\n              + \"& newEntity(UserContext& user_context) const requires Purposed && Entity<Result> { return\"\n              + \" query_.newEntity(user_context); }\");\n      for (String method : List.of(\"copyTo\", \"copyToGlobal\", \"rebindGlobal\")) {\n        line(\n            out,\n            request\n                + \" \"\n                + method\n                + \"(UserContext& user_context) const { return \"\n                + request\n                + \"(query_.\"\n                + method\n                + \"(user_context)); }\");\n      }\n      StringBuilder methods = new StringBuilder();\n      for (FieldDescriptor fd : fields(od)) {\n        queryField(methods, request, fd);\n      }\n      for (FieldDescriptor fd :\n          fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n        if (candidates(fd).isEmpty()) {\n          fluent(out, request, \"template <request::EntityReference Reference> \",\n              camel(\"filter_by_\" + relationName(fd)), \"Reference&& value\", \"std::forward<Reference>(value)\",\n              \"query_.andFilter(Expr::eq(memory_resource(), \" + quote(canonical(fd))\n                  + \", request::entity_id_value(memory_resource(), std::forward<Reference>(value))));\");\n        }\n        String target = typeName(((ObjectType) fd.getFieldType()).getRefer());\n        relationSelectionInputs(out, request, relationName(fd), relationIdentity(fd));\n        line(\n            methods,\n            request\n                + \"& select_\"\n                + relationName(fd)\n                + \"() { selection.relation(\"\n                + quote(relationIdentity(fd))\n                + \"); return *this; }\");\n        line(\n            methods,\n            \"template <bool P, class ChildResult> requires (!P) \"\n                + request\n                + \"& select_\"\n                + relationName(fd)\n                + \"_with(const \"\n                + target\n                + \"Request<P, ChildResult>& child) { selection.relation_query(\"\n                + quote(relationIdentity(fd))\n                + \", child.query()); return *this; }\");\n        line(\n            methods,\n            \"template <bool P, class ChildResult> requires (!P) \"\n                + request\n                + \"& \"\n                + identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd))\n                + \"(const \"\n                + target\n                + \"Request<P, ChildResult>& child) { auto r = memory_resource();\"\n                + \" selection.and_filter(Expr::in_subquery(r, \"\n                + quote(canonical(fd))\n                + \", \"\n                + target\n                + \"::entity_descriptor(r), child.query(), \\\"id\\\")); return *this; }\");\n      }\n      for (FieldDescriptor field : fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n        objectAnalysisInputs(out, request, field);\n        objectAnalysisMethods(methods, request, field);\n      }\n      for (ReverseRelation relation : od.getReverseRelations()) {\n        reverseMatchingInputs(out, request, relation);\n        if (od.getOneToManyRelations().contains(relation)) {\n          reverseAnalysisInputs(out, request, relation);\n        }\n        reverseAnalysisMethods(methods, request, relation, od.getOneToManyRelations().contains(relation));\n      }\n      for (ReverseRelation rel : od.getReverseRelations()) {\n        relationSelectionInputs(out, request, relationName(rel), relationIdentity(rel));\n        line(\n            methods,\n            request\n                + \"& select_\"\n                + relationName(rel)\n                + \"() { selection.relation(\"\n                + quote(relationIdentity(rel))\n                + \"); return *this; }\");\n        line(\n            methods,\n            \"template <bool P, class ChildResult> requires (!P) \"\n                + request\n                + \"& select_\"\n                + relationName(rel)\n                + \"_with(const \"\n                + typeName(rel.getChild())\n                + \"Request<P, ChildResult>& child) { selection.relation_query(\"\n                + quote(relationIdentity(rel))\n                + \", child.query()); return *this; }\");\n        line(\n            methods,\n            \"template <bool P, class ChildResult> requires (!P) \"\n                + request\n                + \"& with_\"\n                + relationName(rel)\n                + \"(const \"\n                + typeName(rel.getChild())\n                + \"Request<P, ChildResult>& child) { auto r = memory_resource();\"\n                + \" selection.and_filter(Expr::in_subquery(r, \\\"id\\\", \"\n                + typeName(rel.getChild())\n                + \"::entity_descriptor(r), child.query(), \"\n                + quote(canonical(rel.getProperty()))\n                + \")); return *this; }\");\n      }\n      adaptQueryMethods(out, request, methods.toString());\n      for (FieldDescriptor field : fields(od)) {\n        if (scalarDiagnosticAlias(field)) {\n          for (String operation : List.of(\"select\", \"unselect\")) {\n            fluent(out, request, \"\", camel(operation + \"_\" + canonical(field)), \"\", \"\",\n                \"this->\" + camel(operation + \"_\" + fieldName(field)) + \"();\");\n          }\n        }\n      }\n      for (FieldDescriptor field : fields(od)) {\n        if (field.isObjectProperty()) {\n          relationSelectionAliases(out, request, relationName(field), relationIdentity(field), true);\n        }\n      }\n      for (ReverseRelation relation : od.getReverseRelations()) {\n        relationSelectionAliases(out, request, relationName(relation), relationIdentity(relation), false);\n      }\n      for (FieldDescriptor fd : fields(od)) {\n        queryFieldCriteria(out, request, fd);\n      }\n      line(out, \"};\");\n    }\n    // Define descendant construction after every Request is complete.\n    for (ObjectDescriptor od : entities) {\n      String request = typeName(od) + \"Request\";\n      line(out, \"template <bool Purposed, class Result> \" + request + \"<Purposed, Result>& \" + request\n          + \"<Purposed, Result>::enhanceChildrenIfNeeded() & {\");\n      for (ObjectDescriptor child : od.getChildrenOds()) {\n        line(out, \"enhanceChild(\" + typeName(child) + \"Request<false>(query_.template childQuery<\"\n            + typeName(child) + \">()).unlimited().selectSelfFields().enhanceChildrenIfNeeded());\");\n      }\n      line(out, \"return *this; }\");\n    }\n    line(\n        out,\n        \"class query_factory { ContextBinding binding_; public: explicit query_factory(UserContext&\"\n            + \" user_context) : binding_(user_context) {}\");\n    Set<String> entries = new HashSet<>();\n    for (ObjectDescriptor od : entities) {\n      String plural = camel(identifier(PluralizationUtils.pluralize(od.getName())));\n      if (!entries.add(plural)) {\n        throw new IllegalArgumentException(\"C++ Q entry collision: \" + plural);\n      }\n      line(\n          out,\n          typeName(od)\n              + \"Request<false> \"\n              + plural\n              + \"Minimal() const { return \"\n              + typeName(od)\n              + \"Request<false>(binding_.get(), true); }\");\n      line(\n          out,\n          typeName(od)\n              + \"Request<false> \"\n              + plural\n              + \"() const { return \"\n              + typeName(od)\n              + \"Request<false>(binding_.get()); }\");\n      line(out, typeName(od) + \"Request<false> \" + plural + \"WithChildren() const { return \"\n          + typeName(od) + \"Request<false>(binding_.get(), true, false).unlimited().selectSelfFields().enhanceChildrenIfNeeded(); }\");\n      for (FieldDescriptor field : ownBusinessIdFields(od)) {\n        String lookup = businessIdLookupName(od, field);\n        if (!entries.add(lookup)) {\n          throw new IllegalArgumentException(\"C++ Q entry collision: \" + lookup);\n        }\n        String predicate = camel(identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(field)) + \"_is\");\n        line(out, typeName(od) + \"Request<false> \" + lookup + \"(const \" + applicationType(field)\n            + \"& value) const { return \" + plural + \"().\" + predicate + \"(value).limit(2); }\");\n      }\n    }\n    line(out, \"};\\n}\");\n    return out.toString();\n  }\n\n"
+    },
+    {
+      "name": "fluent",
+      "start_line": 1781,
+      "end_line": 1817,
+      "sha256": "f8e361fb4c9a146f0faddb5003550e0efe52c511e646857375b0d469525b8469",
+      "body": "  private void fluent(\n      StringBuilder out,\n      String request,\n      String template,\n      String method,\n      String parameters,\n      String arguments,\n      String body) {\n    line(\n        out,\n        template\n            + request\n            + \"& \"\n            + method\n            + \"(\"\n            + parameters\n            + \") & { \"\n            + body\n            + \" return *this; }\");\n    line(\n        out,\n        template\n            + request\n            + \"&& \"\n            + method\n            + \"(\"\n            + parameters\n            + \") && { this->\"\n            + method\n            + \"(\"\n            + arguments\n            + \"); return std::move(*this); }\");\n  }\n\n  // Keep the complete established field predicate vocabulary; only adapt binding,\n  // value categories and application casing after resolving semantic names.\n"
+    },
+    {
+      "name": "adaptQueryMethods",
+      "start_line": 1836,
+      "end_line": 1878,
+      "sha256": "d5a02a760c82f1f7ae1caac037dcc4833114170c4a9d09a4ffb8810a7efa32a7",
+      "body": "  private void adaptQueryMethods(StringBuilder out, String request, String source) {\n    java.util.regex.Pattern pattern =\n        java.util.regex.Pattern.compile(\n            \"(template <bool P(?:, class ChildResult)?> (?:requires \\\\(!P\\\\) )?)?\"\n                + request\n                + \"& ([A-Za-z_][A-Za-z_0-9]*)\\\\(([^)]*)\\\\) \\\\{ (.*?)return \\\\*this; \\\\}\",\n            java.util.regex.Pattern.DOTALL);\n    java.util.regex.Matcher matcher = pattern.matcher(source);\n    int consumed = 0;\n    while (matcher.find()) {\n      if (!source.substring(consumed, matcher.start()).isBlank()) {\n        throw new IllegalStateException(\"Unadapted C++ query method\");\n      }\n      String parameters = matcher.group(3);\n      String arguments = cppArguments(parameters);\n      if (matcher.group(4).startsWith(\"selection.relation_query(\")) {\n        fluent(out, request, matcher.group(1), camel(matcher.group(2)), parameters, arguments,\n            matcher.group(4).replace(\"selection.relation_query(\", \"query_.selectRelation(\")\n                .replace(\"child.query()\", \"child.runtimeQuery()\"));\n        consumed = matcher.end();\n        continue;\n      }\n      String guard =\n          parameters.contains(\"& child\") ? \"query_.requireCompatible(child.query_); \" : \"\";\n      fluent(\n          out,\n          request,\n          matcher.group(1) == null ? \"\" : matcher.group(1),\n          camel(matcher.group(2)),\n          parameters,\n          arguments,\n          guard\n              + \"query_.mutate_selection([&](SelectQuery& selection) { \"\n              + matcher.group(4)\n              + \" });\");\n      consumed = matcher.end();\n    }\n    if (!source.substring(consumed).isBlank()) {\n      throw new IllegalStateException(\"Unadapted C++ query method tail\");\n    }\n  }\n\n"
+    },
+    {
+      "name": "descriptorFields",
+      "start_line": 178,
+      "end_line": 184,
+      "sha256": "7fd6aca385422c7bf6e9347762391fb1f22272ee21f6e7e2ef329487fee31312",
+      "body": "  private static List<FieldDescriptor> descriptorFields(ObjectDescriptor od) {\n    return java.util.stream.Stream.concat(\n        fields(od).stream().filter(field -> !field.isObjectProperty()),\n        fields(od).stream().filter(FieldDescriptor::isObjectProperty)).toList();\n  }\n\n"
+    },
+    {
+      "name": "fields",
+      "start_line": 172,
+      "end_line": 178,
+      "sha256": "59d4c1b139ffae2ceb5bf5397d0a6e5f5bc924fea1516118634e20d111151dc1",
+      "body": "  private static List<FieldDescriptor> fields(ObjectDescriptor od) {\n    return CppFieldLayoutMetadata.fields(od);\n  }\n\n  // Rust's derive describes scalar storage first, then generated foreign keys.\n  // Indexed field-layout ordering remains the separate canonical model order.\n"
+    },
+    {
+      "name": "assist",
+      "start_line": 3116,
+      "end_line": 3625,
+      "sha256": "3cab52f8a9c4aef2eb07e07abc424fe06ac97e87bebbfb6829249d0e90cdd440",
+      "body": "  private String assist(String ns, List<ObjectDescriptor> entities) {\n    StringBuilder out =\n        new StringBuilder(\n            \"# Generated C++ model-aware API\\n\\nNamespace: `\"\n                + ns\n                + \"`. Create `auto Q = user_context.queries<query_factory>();`. Allocate with\"\n                + \" UserContext. Execute only after purpose and comment.\\n\\n\");\n    line(out, \"Standalone registries: `repositoryRegistry(user_context)`, `behaviorRegistry(user_context)` and `checkerRegistry(user_context)` each allocate an independent Context-owned registry using every generated model's canonical name. They do not install themselves into the Context or execute SQL. Runtime registry lookup/replacement APIs retain snake_case; generated defaults are managed objects and checked callback borrows expire with their owner. Same-domain clones share those checked callbacks; cross-domain retention requires separately allocated destination callbacks, not an implicit shared owner.\");\n    line(out, \"`user_context.make<LocalSchemaProvider>()` provides the separate data-service schema lookup SPI. `get_entity(canonical_name)` returns a fresh Context-owned descriptor or null for an unknown/case-mismatched name. It always uses the generated static model descriptor, independently of mutable Context metadata and the runtime schema-initialization provider. Ordinary configuration binds the SQL executor to this provider. DataServiceDialect, DataServiceMutationExecutor, DataServiceMutationError and DataServiceIdGenerator expose the corresponding SQLite provider types; DataServiceConnection remains a checked Context-bound connection reference.\");\n    line(out, \"Runtime configuration: `ServiceRuntimeConfig::fromEnv(user_context)` reads the model-derived `DATABASE_URL_ENV` without caching it. `databaseUrl()` exposes the retained URL. Configuration and typed error payloads use the supplied Context; destroy value wrappers before Context close or explicitly copy into the destination scope.\");\n    line(out, \"`serviceRuntimeFromEnv(user_context)` and `serviceRuntime(user_context, config)` prepare a SQLite URL and return a Result containing a checked executor reference. `serviceRuntimeFromConnection(user_context, connection)` assembles from a checked `DataServiceConnection` (`Ref<SqliteConnection>`), including an explicitly rebound Global connection. Expired and foreign Context references are rejected; configuration from another domain requires an explicit copy. These entries register metadata, Checker/Behavior, IDs, provider and executor but leave schema initialization explicit. `configureRuntime(user_context, filename)` retains its direct filename contract; `setup` additionally ensures schema. Business-ID key providers remain application-installed through UserContext. Typed ServiceRuntimeError preserves MissingEnv, ConnectionError, Configuration, provider and runtime payloads; ordinary C++ binding/allocation exceptions retain their established behavior. URL preparation preserves source slash-pair stripping and query removal; it does not enforce SQLite URI open modes.\");\n    if (entities.stream().flatMap(entity -> fields(entity).stream()).anyMatch(CppBusinessIdMetadata::isBusinessId)) {\n      line(out, \"DataServiceBusinessIdAllocator names the SQLite-backed allocation/schema implementation for this modeled Business-ID domain; ordinary domains omit the alias. Register runtime infrastructure before installing the application-owned key provider. Sample generation leaves Business-ID values to configured Checker/Fix; a missing key can fail a governed sample save while earlier commits remain.\");\n    }\n    if (entities.stream().anyMatch(od -> od.getParentOd() != null)) {\n      line(out, \"Inheritance is supported in normal generation: ancestor fields retain their declaring metadata, each model retains its own table/identity, and typed Q/E, child enhancement and audited graph save use the shared runtime. Type filters/grouping preserve source SQL and may fail when SQLite has no discriminator column. Streams support scalar models; relation/aggregate enhancement is not supported. Inherited Business IDs share the ancestor's value type.\\n\");\n    }\n    if (entities.stream().anyMatch(ObjectDescriptor::isConstant)) {\n      line(out, \"Constant bootstrap uses normal generation. `user_context.ensure_schema()` creates/reconciles the ordinary Domain Root and constants through the shared runtime, governed saves and configured Checker/Policy. Constants retain declaration order and object seeds use identity 1; late targets can fail foreign-key checks. Fixed zero identities retain source allocation behavior and are not idempotent. Bootstrap retries source-defined conflicts up to five attempts; configured audit delivery errors may follow a committed write. Negative identities, candidate naming collisions, invalid roots and unsupported configured scalar carriers reject before output. C++ boolean/JSON and optional Timestamp/reference bindings have independent compiler controls where the original generated Rust crate cannot compile; they are not paired runtime evidence for those broken artifacts.\\n\");\n    }\n    for (ObjectDescriptor od : entities) {\n      line(out, \"## \" + typeName(od));\n      line(\n          out,\n          \"Entries: `Q.\"\n              + identifier(PluralizationUtils.pluralize(od.getName()))\n              + \"()` and `Q.\"\n              + identifier(PluralizationUtils.pluralize(od.getName()))\n              + \"_minimal()`. Evaluation: `E::\"\n              + identifier(od.getName())\n              + \"(entity)`.\\n\");\n      line(out, \"Matching and scalar relation statistics: with...Matching/without...Matching, rollUpTo...With and field-statistic ...As methods accept unpurposed generated requests, QuerySelection or SelectQuery values. Matching embeds the bare query but retains complete filter metadata; its descriptor always comes from the declared relationship target. Roll-up combines matching and object grouping. Field statistics materialize the selection before adding the aggregate, preserving the original fresh-selection options boundary. SQLite errors for unsupported statistical functions remain errors. All inputs retain checked Context and explicit destination-copy requirements.\");\n      line(out, \"Relation analysis inputs: facetBy...As/AsWithOptions, groupBy...With/WithDetailsFrom, count...With, statsFrom.../As and reverse groupBy...WithDetails accept unpurposed generated requests, QuerySelection and SelectQuery values. Capture preserves complete selection metadata and snapshots without executing a child executor. Requests must share the checked Context binding; all inputs require the destination allocation domain or an explicit destination copy, including User-to-Global capture. Facet children need a nonblank comment at execution. Matching, roll-up and field-statistic methods retain separate conversion contracts.\");\n      line(out, \"Relation selection: `select...With(child)` accepts unpurposed requests from the same or another generated domain, or explicit QuerySelection/SelectQuery values. The runtime captures the materialized selection, including its options, without invoking a child executor. Requests must share the checked Context binding; foreign values require an explicit destination copy. Value inputs are kernel borrows and must remain alive through capture. Target-specific request overloads delegate to the same runtime capture and lifetime checks.\");\n      line(out, \"Child enhancement: `enhanceChild(child)` accepts an unpurposed request from the same or another generated domain, or explicit QuerySelection/SelectQuery values. It snapshots the complete selection and options without executing a child executor. Requests must share the checked Context binding; foreign values require an explicit destination copy. Ordinary wrapper captures preserve binding checks; explicit core values follow the kernel borrow contract.\");\n      line(out, \"Inheritance/query metadata: `matchTypes(types)` accepts Value spans and constrained input ranges, snapshots values into the bound Context and consumes single-pass ranges once. `withTypeGroup()`, `enhanceChild(request)`, `enhanceChildrenIfNeeded()` and `Q.\"\n          + camel(identifier(PluralizationUtils.pluralize(od.getName())))\n          + \"WithChildren()`. The with-children entry clears slicing, includes self fields and descendants, and does not apply the default live-version filter.\\n\");\n      line(out, \"Entity helpers: `\" + typeName(od) + \"::withId(user_context, id)` constructs a U64 Value in the explicit UserContext domain. `isLoaded(field)` reads scalar/relation availability; `setLoadState(state)` copies into the model's allocation domain and validates its indexed layout before replacement. An incompatible layout throws and preserves the old state; changing availability does not change field values or stage mutations.\\n\");\n      line(out, \"General query: `withDeletedRows()`, `deletedRowsOnly()`, `appendSearchCriteria(expr)` and `filterProperty(left, FieldOperator, right)` preserve the source filter rules. `pageOffset(offset, size)`, `pageNumber(number, size)`, `pageDefault(number)`, `offsetOnly(offset)` and `top(size)` are available before/after purpose. Field `unselect...` methods preserve independent aliases; raw SQL methods follow the source explicit trusted-segment API and require application-controlled SQL.\\n\");\n      line(out, \"Generic scalar criteria: the field's predicate prefix accepts `(FieldOperator, inputs)` where inputs is a range of values convertible to core Value. `create...Criteria(op, inputs)` is a const method on a bound request and returns `Ref<Expr>` in its allocation scope; append it with `appendSearchCriteria(criteria)` without another Context argument. Foreign UserContext IDs are rejected; use an explicit destination copy. Before/After and BetweenRange helpers retain source comparison and inclusive range semantics. These helpers are not generated for version, Boolean, object-reference or Business-ID fields where the original template omits them.\\n\");\n      line(out, \"Scalar membership: source-supported `...In(inputs)` and `...NotIn(inputs)` accept input ranges whose elements convert to core Value, including arrays, vectors, spans and single-pass ranges. Values are copied into the bound request's allocator. Existing typed span overloads remain. The generic range overloads are omitted for Boolean, version, object-reference and Business-ID fields; Business-ID methods keep their distinct typed values. Neither route adds another Context argument.\");\n      line(out, \"Scalar comparisons: ordinary scalar Is/IsNot and non-ID ordered/Between methods also accept values constructible as core Value. Between can use independently typed lower/upper operands. Existing field-typed overloads remain, and the new overloads copy payloads into the bound allocator. Boolean/version/object-reference/Business-ID fields retain their separate contracts; unsupported values fail in constraints.\");\n      line(out, \"Text predicates: source-selected sound-like methods accept Value-constructible operands as well as text. Contains/start/end variants keep their text-only inputs. Generic sound-like overloads are omitted for large-text/password/Business-ID fields. Optional values are not implicitly converted to Value; use an explicit supported Value NULL or TypedNull when the intended criterion needs NULL. Numeric select...WithFunction helpers construct aggregate projections, and unselect removes the plain/raw field projection while preserving independent aliases and aggregates. SQLite rejects unsupported aggregate functions. The current default GBK compiler emits its argument unchanged, so the GBK marker does not establish GBK collation.\");\n      line(out, \"Request state before purpose: `coreQuery()` returns an independent bare core snapshot corresponding to the original query(&self). The existing `query()` keeps the integrated C++ runtime representation. Destroy the snapshot before its allocator closes or explicitly copy it into a destination scope. `relationSelections()`, `relationFilters()` and `childEnhancements()` return read-only Context borrows. `queryOptions()` returns an independent allocator-aware snapshot; destroy it before its owning Context closes or copy it explicitly into a destination scope. `std::move(request).intoQuery()` consumes the request and returns only its core SelectQuery, omitting option metadata and child enhancements as in the original direct into_query method. `std::move(request.selection()).into_query()` is a separate core conversion that applies options and enhancements. Neither conversion grants execution authority or extends Context lifetime. A consumed request rejects later access.\");\n      line(out, \"Relationship analysis: forward `groupBy...With(child)`, `groupBy...WithDetails()`, `groupBy...WithDetailsFrom(child)` and `rollUpTo...With(child)` use matching object queries. Forward/reverse `have...`, `haveNo...`, `with...Matching(child)` and `without...Matching(child)` preserve source membership semantics. Reverse collection `count...`, `count...As(alias)`, `count...With(alias, child)`, `statsFrom...As(alias, child)` and centrally named field aggregates attach results during executeForList/One/Page; executeForRows retains the source raw compact-row behavior.\\n\");\n      for (FieldDescriptor field : fields(od).stream().filter(FieldDescriptor::isObjectProperty).toList()) {\n        String relation = RustFieldDescriptorNaming.rustMemberName(field);\n        line(out, \"Facet: `\" + camel(\"facet_by_\" + relation + \"_as\") + \"(name, child)` defaults to all facets; `\"\n            + camel(\"facet_by_\" + relation + \"_as_with_options\") + \"(name, child, includeAll)` controls outer-query restriction. Matching child relation aggregates receive the outer predicate. Facets attach to list/page results; one executes them before returning the first entity. Rows/count/exists/stream do not execute them. Child facet metadata does not imply recursive generated facet execution.\");\n      }\n      line(out, \"Aggregation: `groupBy(field)`, `count()`, `countAs(alias)`, `aggregateCountField(field, alias)`, `aggregateWithFunction(field, alias, function)` and `aggregateSum/Avg/Min/Max/Stddev/StddevPop/VarSamp/VarPop/BitAnd/BitOr/BitXor(field, alias)` build source-shaped aggregate queries. `enableAggregationCache()`, `enableAggregationCacheFor(duration)` and `propagateAggregationCache(duration)` retain cache metadata. Read compact aggregate rows with `executeForRows(user_context)`; SQLite may reject statistical and bitwise functions, matching the source backend.\\n\");\n      line(out, \"Execution: `executeForCount(user_context)` returns an unsliced count; `executeForExists(user_context)` retains the query offset and limits to one compact row; `executeForFirst(user_context)` has the same first-or-empty contract as `executeForOne`. `executeForPage(user_context, offset, limit)` returns a typed list with total count. These methods require purpose and nonblank comment; only UserContext supplies runtime dependencies.\\n\");\n      line(out, \"Typed JSON presentation: after `module(user_context).apply_to(user_context)`, decode with `user_context.decode_json_entity<\"\n          + typeName(od) + \">(value)` or `user_context.decode_json_entities<\" + typeName(od)\n          + \">(array)`. Both return Result and delegate to the shared installed-metadata runtime. Read back with `std::move(entity).into_json(user_context.memory_resource())`; nested loaded views preserve omitted fields, NULL and empty lists. Input cannot authorize a save or replace authoritative database loading. Persistent # fields and incoming runtime state are rejected.\\n\");\n      line(out, \"Dynamic JSON: `filterWithJson(text)` applies model-aware self/foreign-key filters, dotted forward/reverse relation membership, `_orderBy`, `_start`, `_size`, `_pageSize` and `_page`. Unknown fields are ignored as in the frozen Rust generator; malformed JSON throws a Context-borrowed diagnostic. Strings become contains predicates; numeric arrays of length two become ranges. Child queries keep their live-row filter even when the leaf is unknown.\\n\");\n      line(out, \"Result adaptation: `returnType<Model>()` changes decoding and keeps the source query identity, projections and Context. `newEntity(user_context)` still creates \"\n          + typeName(od) + \". Result fields require appropriate projections/enhancements; adaptation does not load fields or issue SQL.\\n\");\n      line(out, \"Request result markers: `returnType<T>()` accepts a non-Entity marker for request construction, inspection and composition without allocating a T. All execution methods, including compact rows/count/exists, and `newEntity(user_context)` require an Entity result. Restore an Entity marker before purpose/execution; source identity, Context binding and explicit destination-copy rules remain unchanged.\\n\");\n      for (FieldDescriptor field : ownBusinessIdFields(od)) {\n        String entry = camel(identifier(PluralizationUtils.pluralize(od.getName())));\n        String predicate = camel(identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(field)) + \"_is\");\n        line(out, \"Business-ID lookup: `Q.\" + businessIdLookupName(od, field) + \"(value)` accepts `\"\n            + applicationType(field) + \"`, delegates to `Q.\" + entry + \"().\" + predicate\n            + \"(value).limit(2)` and returns a composable request. It takes no Context argument, allocates no identifier and performs no SQL until execution. The limit can be changed; executeForOne keeps its first-or-empty behavior and does not assert uniqueness.\");\n      }\n      for (ObjectDescriptor child : od.getChildrenOds()) {\n        line(out, \"- Type filter: `is\" + typeName(child) + \"()` matches that type and its descendants.\");\n      }\n      for (FieldDescriptor fd : fields(od)) {\n        String member = fieldName(fd),\n            prefix = identifier(FieldDescriptorNaming.attributePredicatePrefixExpr(fd));\n        line(\n            out,\n            \"- Model: `\"\n                + member\n                + (fd.isContextRoot() || fd.isConstantObjectField()\n                    ? (fd.isContextRoot()\n                        ? \"()`; Context-root assignment is managed through UserContext; changed `\"\n                        : \"()`; constant ID assignment is internal; changed `\")\n                    : \"()` / `update_\" + member + \"(\" + argumentType(fd) + \")`; changed `\")\n                + camel(\"changed_\" + member)\n                + \"()`; evaluation `\"\n                + camel(\"eval_\" + member)\n                + \"()`; expression `get_\"\n                + member\n                + \"()`.\");\n        for (Candidate candidate : candidates(fd)) {\n          String suffix = candidate.getRustCandidateMethodValue();\n          line(out, \"- Candidate filters: `\" + camel(prefix + \"_is_\" + suffix) + \"()` and `\"\n              + camel(prefix + \"_is_not_\" + suffix) + \"()`; exact value `\"\n              + (fd.isObjectProperty() ? candidate.getId() : candidate.getRustCandidateFilterValue())\n              + \"`.\");\n          if (fd.isConstantObjectField()) {\n            line(out, \"- Candidate model update: `\" + camel(\"update_\" + relationName(fd) + \"_to_\" + suffix)\n                + \"()`; model and E check: `\" + camel(relationName(fd) + \"_is_\" + suffix)\n                + \"()`. E preserves NotLoaded and never performs SQL.\");\n          }\n        }\n        line(\n            out,\n            \"- Scalar predicates: `\"\n                + prefix\n                + \"_is`, `\"\n                + prefix\n                + \"_is_not`, `\"\n                + prefix\n                + \"_greater_than`, `\"\n                + prefix\n                + \"_greater_than_or_equal_to`, `\"\n                + prefix\n                + \"_less_than`, `\"\n                + prefix\n                + \"_less_than_or_equal_to`. Arguments: `\"\n                + predicateType(fd)\n                + \"`.\");\n        line(\n            out,\n            \"- Range/set/null predicates: `\"\n                + prefix\n                + \"_between(lower, upper)`, `\"\n                + prefix\n                + \"_in(std::span<const \"\n                + baseType(fd)\n                + \">)`, `\"\n                + prefix\n                + \"_not_in(std::span<const \"\n                + baseType(fd)\n                + \">)`, `\"\n                + prefix\n                + \"_is_null()`, `\"\n                + prefix\n                + \"_is_not_null()`.\");\n        line(\n            out,\n            \"- Projection/order/group: `select_\"\n                + member\n                + \"()`, `order_by_\"\n                + member\n                + \"_asc()`, `order_by_\"\n                + member\n                + \"_desc()`, `group_by_\"\n                + (fd.isObjectProperty() ? relationName(fd) : member)\n                + \"()`.\");\n        String aggregateMember = fd.isObjectProperty() ? relationName(fd) : member;\n        line(out, \"- Group/count: `\" + camel(\"group_by_\" + aggregateMember) + \"()`, `\"\n            + camel(\"group_by_\" + aggregateMember + \"_as\") + \"(alias)`, `\"\n            + camel(\"group_by_\" + aggregateMember + \"_with_function\") + \"(alias, function)`, `\"\n            + camel(\"count_\" + aggregateMember) + \"()` and `\"\n            + camel(\"count_\" + aggregateMember + \"_as\") + \"(alias)`.\");\n        if (!fd.isObjectProperty()) {\n          for (String method : List.of(\"sum\", \"avg\", \"min\", \"max\")) {\n            line(out, \"- Scalar aggregate: `\" + camel(method + \"_\" + member) + \"()` uses alias `\"\n                + quote(method + \"_\" + RustFieldDescriptorNaming.rustStorageMemberName(fd)) + \"`; `\" + camel(method + \"_\" + member + \"_as\")\n                + \"(alias)` sets an explicit result alias. Use executeForRows for aggregate outputs.\");\n          }\n          if (sourceNumericField(fd)) {\n            for (String method : List.of(\"standard_deviation\", \"square_root_of_population_standard_deviation\", \"sample_variance\", \"sample_population_variance\")) {\n              line(out, \"- Statistical aggregate: `\" + camel(method + \"_\" + member) + \"()` and `\"\n                  + camel(method + \"_\" + member + \"_as\") + \"(alias)`; SQLite requires the corresponding SQL function.\");\n            }\n          }\n        }\n        if (fd.isBoolean()) {\n          line(\n              out,\n              \"- Boolean predicates: `\"\n                  + identifier(FieldDescriptorNaming.snakeBooleanPredicateExpr(fd))\n                  + \"()`, `\"\n                  + identifier(FieldDescriptorNaming.snakeBooleanNegativePredicateExpr(fd))\n                  + \"()`.\");\n        }\n        if (baseType(fd).equals(\"String\")) {\n          line(\n              out,\n              \"- Text predicates: `\"\n                  + identifier(FieldDescriptorNaming.stringContainsPredicateExpr(fd))\n                  + \"(text)`, `\"\n                  + identifier(FieldDescriptorNaming.StringStartsWithPredicateExpr(fd))\n                  + \"(text)`, `\"\n                  + identifier(FieldDescriptorNaming.StringEndsWithPredicateExpr(fd))\n                  + \"(text)`.\");\n        }\n        if (fd.isObjectProperty()) {\n          String target = typeName(((ObjectType) fd.getFieldType()).getRefer()),\n              relation = relationName(fd);\n          line(\n              out,\n              \"- Forward relation: `\"\n                  + relation\n                  + \"()` returns const \"\n                  + target\n                  + (fd.isContextRoot() || fd.isConstantObjectField()\n                      ? (fd.isContextRoot()\n                          ? \"*; Context-root assignment is managed through UserContext; query `select_\"\n                          : \"*; constant assignment uses candidate update methods; query `select_\")\n                      : \"*, `update_\" + relation + \"(const \" + target + \"&)`; query `select_\")\n                  + relation\n                  + \"()`, `select_\"\n                  + relation\n                  + \"_with(\"\n                  + target\n                  + \"Request<P>)`, `\"\n                  + prefix\n                  + \"(\"\n                  + target\n                  + \"Request<P>)`; expression `get_\"\n                  + relation\n                  + \"()`.\");\n        }\n      }\n      for (FieldDescriptor field : fields(od)) {\n        if (field.isObjectProperty()) {\n          line(\n              out,\n              \"- Model relation evaluation: `\"\n                  + camel(\"eval_\" + relationName(field))\n                  + \"()` returns a checked entity borrow or Null/NotLoaded.\");\n        }\n      }\n      for (ReverseRelation rel : od.getReverseRelations()) {\n        String member = relationName(rel), target = typeName(rel.getChild());\n        line(\n            out,\n            \"- Model relation evaluation: `\"\n                + camel(\"eval_\" + member)\n                + \"()`; query view handle: `\"\n                + camel(member + \"_handle\")\n                + \"()`.\");\n        line(\n            out,\n            \"- Reverse relation: `\"\n                + member\n                + \"()` returns \"\n                + (ReverseRelationNaming.oneToOne(rel)\n                    ? \"const \" + target + \"*\"\n                    : \"SmartList<\" + target + \">&\")\n                + \"; query `select_\"\n                + member\n                + \"()`, `select_\"\n                + member\n                + \"_with(\"\n                + target\n                + \"Request<P>)`, `with_\"\n                + member\n                + \"(\"\n                + target\n                + \"Request<P>)`; expression `get_\"\n                + member\n                + \"()`.\");\n      }\n    }\n    line(\n        out,\n        \"\\n\"\n            + \"Common request methods: `comment(text)`, `purpose(text)`, `filter(expr)`,\"\n            + \" `andFilter(expr)`, `orFilter(expr)`, `selectSelf()`, `selectSelfFields()`,\"\n            + \" `limit(n)`, `offset(n)`, `skip(n)`, `hardLimit(n)`, `searchWithText(text)`.\"\n            + \" Purpose stages an executable type; modifiers remain available.\");\n    line(out, \"Embedded child requests must remain unpurposed: select relations, enhance children,\"\n        + \" facets, relation matching, grouping and aggregates with a child before its purpose()\"\n        + \" transition. The parent retains its own purpose; ordinary C++ modifiers may appear\"\n        + \" before or after that parent transition. Keep child comments and filters on the child.\"\n        + \" Root execution still requires both a nonblank comment and purpose.\");\n    line(out, \"Membership: matchingAnyOf(child) and matchAnyOf(child) compare root IDs with\"\n        + \" the child's ID subquery. They copy its core query, including selected relations,\"\n        + \" but do not import its independent selection options, comment, raw SQL or enhancements.\"\n        + \" Ordinary child requests may come from another generated executor domain.\"\n        + \" Keep the child unpurposed and in the same UserContext, or copy it explicitly first.\"\n        + \" Direct QuerySelection and SelectQuery inputs are also accepted in the receiving allocation scope.\"\n        + \" selection() captures independent options; moving that value into into_query() applies them\"\n        + \" before core-query membership. Use Context make() for retained conversion payloads;\"\n        + \" stack-owned payloads must be destroyed before their Context closes.\");\n    line(\n        out,\n        \"Dynamic fields: Q requests provide `selectDynamicFields(selection)`; models provide\"\n            + \" `dynamicFieldValues()`, `updateDynamicField(code, value)`,\"\n            + \" `deleteDynamicField(code)` and `hasPendingDynamicMutations()`.\"\n            + \" Durable fields use the runtime Context provider and audited ledger save;\"\n            + \" native getters and mutation values remain separate.\");\n    line(out,\n        \"Readonly computed properties: `hasDynamicProperty(key)` reports an underscore-key\"\n            + \" projection even when its value is NULL; `dynamicProperty(key)` returns a borrowed\"\n            + \" non-NULL value, treating typed NULL and JSON null as absent.\"\n            + \" False, zero and empty text remain readable. These accessors do not allocate,\"\n            + \" execute SQL or grant durable dynamic-field write authority; returned values\"\n            + \" borrow the model's Context.\");\n    line(out,\n        \"Context operations: `stream(chunk_size)`, `copyTo(user_context)`,\"\n            + \" `copyToGlobal(user_context)`, `rebindGlobal(user_context)`. Mutable request copies\"\n            + \" are independent; retained copies are explicit.\");\n    line(\n        out,\n        \"Executable methods (exactly one UserContext argument): `execute_for_list(user_context)`,\"\n            + \" `execute_for_entity_list(user_context)`, `execute(user_context)`,\"\n            + \" `execute_for_one(user_context)`, `execute_for_stream(user_context)`,\"\n            + \" `execute_for_entity(user_context)`, `execute_for_rows(user_context)`,\"\n            + \" `new_entity(user_context)`. Pollable results use `.wait()`; only newEntity returns\"\n            + \" a managed model directly.\");\n    line(\n        out,\n        \"Expression methods: `eval()`, `unwrap()`, `is_null()`, `is_not_null()`,\"\n            + \" `or_if_null(fallback)`, `or_else_if_null(callback)`, `or_default_if_null()`. List\"\n            + \" expressions add `size()` (scalar expression), `first()` and `get(index)` (entity\"\n            + \" expressions). NotLoaded is never a NULL fallback.\");\n    line(out, \"Default NULL fallback is available only for scalar payloads with a default\"\n        + \" value. Strong Business ID payloads have no public default: use a typed\"\n        + \" `orIfNull(fallback)` or `orElseIfNull(callback)` instead.\"\n        + \" Missing-load errors never invoke a fallback.\");\n    line(out, \"Missing-load diagnostics: catch `ExpressionNotLoadedError` and inspect\"\n        + \" `error.diagnostic()` for the captured root, access_path, failed_node, missing_preload,\"\n        + \" suggested_fix, optional nested_fix, severity and English human_message.\"\n        + \" Suggestions use generated C++ camelCase selection names. The error borrows its\"\n        + \" Context; diagnostic access fails after close. `what()` is static and remains safe.\"\n        + \" Retention requires an explicit destination copy before closing the source Context.\");\n    line(out, \"Diagnostic repair scope: a loaded relationship can leave a leaf-only diagnostic\"\n        + \" path. Apply the selection to that relationship's child request and retain the\"\n        + \" enclosing selection. Nested C++ selections use `select...With(child)`; leaf\"\n        + \" selections use `select...()`. Renderer entry placeholders and captured id=...\"\n        + \" expressions are explanatory pseudocode. Use current object/field Assist to resolve\"\n        + \" the actual Q entry, child type and selection names before executing a repair.\");\n    line(\n        out,\n        \"Expression composition: `map(callback)`, `andThen(node, callback)` and owning scalar\"\n            + \" `copyTo(user_context)`. Entity/list bindings are checked borrows; temporary entity\"\n            + \" entries are rejected. Scalar access is an eager snapshot. All Q/E wrappers expire\"\n            + \" with their scope; Global diagnostics must outlive surviving wrappers.\");\n    line(\n        out,\n        \"Save: `AuditedSaveExt<Model>::save(std::move(entity).audit_as(\\\"reason\\\"),\"\n            + \" user_context).wait()`. Allocate requests/models with UserContext and call\"\n            + \" setup(user_context) once at bootstrap. Use explicit destination copies before\"\n            + \" closing the owning context. Unknown fields are compile errors.\");\n    line(out, \"Sample data: `generateSampleData(user_context, SampleDataPlan{SampleDataScale::Tiny, seed}).wait()` uses Context-bound queries and audited saves. It loads roots/constants, skips missing required dependencies, and generates business rows in depth/name order. Run setup first. Reference selection and numeric values follow the seed/index rules; temporal fields use the wall clock. Repeated calls create additional business rows. Reports and errors belong to UserContext; copy explicitly before close.\");\n    line(out, \"Sample failure: generation stops at the first save error; earlier successful saves remain committed. A failed invocation returns an error, and a later invocation may create another business batch.\");\n    if (entities.stream().anyMatch(entity -> entity.getDepth() > 0 && !entity.isConstant()\n        && fields(entity).stream().anyMatch(field -> baseType(field).equals(\"String\")\n            && !field.isString() && !field.isJsonLiteral()\n            && (field.isNumber() || field.getBooleanAttribute(\"isNumber\"))))) {\n      line(out, \"Numeric sample recipes for String-mapped aliases retain the original integer operand. Generated typed Checkers can reject entity materialization before custom CheckerLogic runs. The runtime does not silently convert the operand to text; modules without those checkers retain the provider's actual behavior. Use explicitly typed application values when this model's sample save fails.\");\n    }\n    line(out, \"Sample progress: register an application-owned `SampleDataLogSink` through `user_context.insert_resource(owner, static_cast<SampleDataLogSink&>(sink))`. Its synchronous `info(user_context, message)` receives the original sample Info messages in execution order. Allocate the sink in the declared Global/User owner; `memory_resource()` must identify that owner. Missing or disabled sinks do not format messages. Messages are callback borrows; retaining them requires an explicit copy into the sink owner's allocator. Pending re-polls do not repeat start; cancellation and save failure emit no successful completion. A callback must not close its active Context, and exceptions propagate as operation failure. This sample-specific sink does not replace SQL diagnostics or audit sinks.\");\n    if (entities.stream().anyMatch(entity -> entity.getDepth() > 0 && !entity.isConstant()\n        && CppFieldLayoutMetadata.fields(entity).stream().anyMatch(field -> baseType(field).equals(\"Json\") && (field.isString() || field.isJsonLiteral())))) {\n      line(out, \"JSON sample text follows the locked source setter operand and can fail typed checking. The sample generator does not silently turn that text into valid JSON. Initialize JSON models with explicit typed values when sample generation reports an error. Complete quoted JSON-literal source generation also has a retained compiler failure; no complete sample parity is advertised for that configuration.\");\n    }\n    line(out, \"Deletion: `entity.markForDeletion()` records deletion in the ledger and returns\"\n        + \" the model for chaining. Save through the audited save API; marking alone does\"\n        + \" not execute SQL. Versioned SQLite models use the runtime soft-delete protocol.\");\n    line(out, \"Projection shortcuts: `selectSelfFields()` and `selectSelfWithoutParent()`\"\n        + \" both select native fields, including inherited fields as the original generator\"\n        + \" does. `selectAll()` also selects forward and reverse to-one relations;\"\n        + \" `selectChildren()` adds reverse collections, and `selectAny()` aliases it.\"\n        + \" These do not replace `enhanceChildrenIfNeeded()` for polymorphic descendants.\"\n        + \" Named relation selections can include soft-deleted child rows; they do not\"\n        + \" automatically apply a child Q entry's default live-row filter. Use an explicit\"\n        + \" select...With(child_request) to carry the child's filters and projection.\");\n    line(out, \"Runtime attachment: `entity.attachRuntimeStateRecursive(target_state)` adopts\"\n        + \" pending mutations and preserves the entity's loaded snapshot. It recursively\"\n        + \" attaches stored forward objects; it does not load relations or traverse graph\"\n        + \" lookups/reverse collections. Both states must belong to the same Context;\"\n        + \" cross-domain retention requires an explicit destination copy.\");\n    List<String> sourceIdentityDifferences = entities.stream().flatMap(entity -> descriptorFields(entity).stream())\n        .filter(field -> !canonical(field).equals(RustFieldDescriptorNaming.rustStorageMemberName(field)))\n        .map(field -> quote(canonical(field)) + \" -> \" + quote(RustFieldDescriptorNaming.rustStorageMemberName(field)))\n        .distinct().toList();\n    if (!sourceIdentityDifferences.isEmpty()) {\n      line(out, \"Source metadata boundary: query projections retain storage names while descriptors retain the original Rust member identities: `\"\n          + String.join(\", \", sourceIdentityDifferences) + \"`. Queries of these fields can preserve the original unknown-field SQL failure. The adapter does not silently rename query fields to make that source configuration succeed.\");\n    }\n    line(out, \"## Business IDs\");\n    for (ObjectDescriptor entity : entities) {\n      for (FieldDescriptor field : fields(entity)) {\n        if (CppBusinessIdMetadata.isBusinessId(field)) {\n          String type = applicationType(field);\n          line(\n              out,\n              \"- `\"\n                  + type\n                  + \"::create(user_context.memory_resource(), text)` trims and rejects blank text;\"\n                  + \" `asStr()` exposes canonical text. Model setter `\"\n                  + camel(\"update_\" + fieldName(field))\n                  + \"(const \"\n                  + type\n                  + \"&)` and scalar predicates accept this distinct type.\"\n                  + \" `definition(user_context.memory_resource())` exposes its configured profile.\"\n                  + \" Creation uses the trusted active root, allocation service and fix evidence;\"\n                  + \" dirty Business IDs are immutable on update.\");\n        }\n      }\n    }\n    if (entities.stream()\n        .flatMap(entity -> fields(entity).stream())\n        .anyMatch(CppBusinessIdMetadata::isBusinessId)) {\n      line(\n          out,\n          \"setup installs SQLite Business-ID infrastructure. Register an explicit\"\n              + \" BusinessIdKeyProvider through UserContext before daily-permuted-v1 creation; no\"\n              + \" default key or hidden owner is introduced. Use with_active_root before allocating\"\n              + \" aggregate IDs.\");\n    }\n    line(out, \"## Model relation evaluation\");\n    line(\n        out,\n        \"Model evalX() and E.getX() share the runtime relation rules. Loaded empty lists are\"\n            + \" values, selected empty to-one relations are Null, and missing views are NotLoaded.\"\n            + \" Returned entity/list values are checked Context borrows. Reverse XHandle() methods\"\n            + \" expose the immutable query-installed view; existing mutable list getters remain\"\n            + \" explicit model-local graph construction adapters. No getter performs implicit\"\n            + \" SQL.\");\n    line(out, \"## Checker and behavior assembly\");\n    line(out, \"Wire metadata: `generatedWireFieldMappings(user_context)` returns Context-owned typed maps from canonical model field names to the selected JSON wire spelling. Like the original template, each entity entry lists its own fields; it does not flatten inherited fields or rename relation keys to FK storage keys. `generatedWireFieldAliases(user_context)` returns the separately defined empty legacy-alias map. These functions do not install metadata, authorize client input or provide a transport endpoint. Explicit destination copying is required to retain the maps after Context close.\");\n    line(\n        out,\n        \"`configureRuntime(user_context, filename)` installs generated metadata, checkers and\"\n            + \" behaviors, the SQLite provider, scoped persistent IDs and the application executor.\"\n            + \" It does not create schema. `setup(user_context, filename)` performs that configuration\"\n            + \" and waits for `user_context.ensure_schema().wait()`; its default filename is `:memory:`.\");\n    line(\n        out,\n        \"Use `module(user_context)` for metadata-only registration, or\"\n            + \" `moduleWithCheckers(user_context)`, `moduleWithBehaviors(user_context)` or\"\n            + \" `moduleWithBehaviorsAndCheckers(user_context)` for explicit assembly. Keep\"\n            + \" handwritten logic outside generated files.\");\n    line(out, \"For custom assembly, call `configureRuntime(user_context, filename)` first, then\"\n        + \" register application-owned Checker/Behavior overrides with a module and apply it\"\n        + \" before `user_context.ensure_schema().wait()` or business execution. Calling\"\n        + \" `configureRuntime` or `setup` again installs defaults and replaces those registrations.\");\n    if (hasGeneratedBootstrap(entities)) {\n      line(out, \"All four module factories register schema bootstrap. Schema initialization prepares\"\n          + \" the generated Domain Root and active-root binding; reuse that root instead of inserting\"\n          + \" a second ID 1. Repeated initialization preserves existing root values. Bootstrap\"\n          + \" errors propagate; do not treat a failed `setup` as a usable initialized Context.\");\n    }\n    for (ObjectDescriptor od : entities) {\n      String name = typeName(od);\n      line(\n          out,\n          \"- Extend `\"\n              + name\n              + \"CheckerLogic` and override `checkAndFix\"\n              + name\n              + \"(user_context, entity, status, location, results)`. Allocate logic in an explicit\"\n              + \" Context, create `\"\n              + name\n              + \"Checker` with that logic and register its `TypedEntityChecker` adapter. The\"\n              + \" built-in Context/time fixes and predefined update-load checks run before custom\"\n              + \" logic.\");\n      line(\n          out,\n          \"- `\"\n              + name\n              + \"Behavior` preserves the EntityDataServiceBehavior SPI; runtime hook names retain\"\n              + \" snake_case.\");\n    }\n    for (ObjectDescriptor od : entities) {\n      for (FieldDescriptor field : fields(od)) {\n        if (field.isObjectProperty()) {\n          relationIdentityAssist(out, typeName(od), relationName(field), relationIdentity(field));\n        }\n      }\n      for (ReverseRelation relation : od.getReverseRelations()) {\n        relationIdentityAssist(out, typeName(od), relationName(relation), relationIdentity(relation));\n      }\n    }\n    line(out, \"Aggregate composition: `parent.includePendingMutationsFrom(child)` copies the child's pending additions, updates and deletions into the parent's Context for its next audited Save. Set modeled relationships before composition. It returns a checked Result; it does not load a relation, run SQL or save either object. The source retains its pending ledger for retry; original-version conflicts reject composition without partially merging. Cross-domain composition is an explicit destination copy: nested values and snapshots belong to the receiving Context, and closing the source does not invalidate them. It does not rebind the source object or extend either Context lifetime. The runtime owns ledger merging and Context validation.\");\n    for (ObjectDescriptor od : entities) {\n      for (FieldDescriptor field : fields(od)) {\n        if (scalarDiagnosticAlias(field)) {\n          line(out, \"Scalar diagnostic repair for \" + typeName(od) + \": `\\\"\" + canonical(field)\n              + \"\\\"` is the metadata and diagnostic path. Q `\" + camel(\"select_\" + canonical(field))\n              + \"()` / `\" + camel(\"unselect_\" + canonical(field)) + \"()` and E `\"\n              + camel(\"get_\" + canonical(field)) + \"()` delegate to the existing escaped methods `\"\n              + camel(\"select_\" + fieldName(field)) + \"()`, `\" + camel(\"unselect_\" + fieldName(field))\n              + \"()` and `\" + camel(\"get_\" + fieldName(field))\n              + \"()`. These aliases preserve Context binding, take no extra Context argument and issue no implicit queries.\");\n        }\n      }\n    }\n    return camelAssist(out.toString(), ns);\n  }\n\n  /** Local, offline entry point; uses exactly the service's model parser/discovery. */\n  public static void main(String[] args) throws Exception {\n    Set<String> flags = args.length < 2 ? Set.of() : new HashSet<>(Arrays.asList(args).subList(2, args.length));\n    if (args.length < 2 || !Set.of(\"--qualify-inheritance\", \"--qualify-constants\").containsAll(flags)) {\n      throw new IllegalArgumentException(\"Usage: CppCoreGenerator MODEL OUTPUT_DIRECTORY [--qualify-inheritance] [--qualify-constants]\");\n    }\n    Path model = Path.of(args[0]).toAbsolutePath();\n    Path output = Path.of(args[1]).toAbsolutePath().normalize();\n    GenerateContext context = new GenerateContext(SCOPE, model.getFileName().toString());\n    context.setEntranceFile(model.getFileName().toString());\n    context.appendFile(model.getFileName().toString(), Files.readAllBytes(model));\n    BaseDomainManager manager = new BaseDomainManager();\n    Domain domain = manager.getDomain(manager.parse(context));\n    List<GeneratedFile> generated = args.length > 2\n        ? new CppCoreGenerator(flags.contains(\"--qualify-inheritance\"), flags.contains(\"--qualify-constants\")).generate(domain)\n        : new DomainGenerationService().generateDomainFiles(domain, SCOPE);\n    for (GeneratedFile file : generated) {\n      Path target = output.resolve(file.getPath()).normalize();\n      if (!target.startsWith(output)) {\n        throw new IllegalArgumentException(\"Invalid generated path: \" + file.getPath());\n      }\n      Files.createDirectories(target.getParent());\n      Files.write(target, file.getData());\n    }\n  }\n}\n"
+    },
+    {
+      "name": "businessIdLookupName",
+      "start_line": 1773,
+      "end_line": 1777,
+      "sha256": "839ac1f811470d87ca2588beafe23c9b512d4f1c66d0d9cb5939c3f81f02b968",
+      "body": "  private static String businessIdLookupName(ObjectDescriptor entity, FieldDescriptor field) {\n    return camel(identifier(entity.getName() + \"_by_\" + canonical(field)));\n  }\n\n"
+    },
+    {
+      "name": "ownBusinessIdFields",
+      "start_line": 1777,
+      "end_line": 1781,
+      "sha256": "da38ec462e4e0b5d653b237d2bc99ce724b260bb4e6a79f48b4bfe78ad4b615a",
+      "body": "  private static List<FieldDescriptor> ownBusinessIdFields(ObjectDescriptor entity) {\n    return entity.getFields().stream().filter(CppBusinessIdMetadata::isBusinessId).toList();\n  }\n\n"
+    }
+  ],
+  "boundaries": "Complete body/guard responsibility index; executable evidence and requirement dispositions are separate. Delegated capability ownership does not waive shared integration or phase exits."
+}

@@ -1,0 +1,9 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "teaql-sql/src/dialect.rs",
+  "file_sha256": "912ec61d08639a5cd65784405cd1513af80a5221796d600386c46587ff534a71",
+  "body": "    fn compile_gbk_function(\n        &self,\n        entity: &EntityDescriptor,\n        args: &[Expr],\n        params: &mut crate::SqlBindings,\n    ) -> Result<String, SqlCompileError> {\n        let [arg] = args else {\n            return Err(SqlCompileError::InvalidFunctionArguments(\n                \"GBK expects exactly one argument\".to_owned(),\n            ));\n        };\n        // Default: pass through the column as-is (no GBK conversion).\n        // Dialects with GBK support (e.g. PostgreSQL) should override this method.\n        let arg = self.compile_expr(entity, arg, params)?;\n        Ok(arg)\n    }\n",
+  "native": "teaql_sql/src/dialect.cpp",
+  "behavior": "Compile the single argument unchanged; no default GBK collation conversion.",
+  "prior_unsupported_statement_corrected": true
+}

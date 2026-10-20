@@ -205,7 +205,10 @@ reused_user_context_returns_independent_mutation_ledgers(UserContext& user) {
 
 static void factory_exhaustion_preserves_existing_objects() {
     ContextLimits limits;
-    limits.user.max_objects = 3;
+    // The Context's root wrapper is an arena payload. Its graph slot and the
+    // fresh operation's graph slot still require checked object identities.
+    // Leave one identity after the published integer so the second slot fails.
+    limits.user.max_objects = 2;
     GlobalContext global(std::pmr::new_delete_resource(), 4096, limits);
     auto user = global.make_user_context();
     auto existing = user->make_ref<int>(7);
@@ -217,6 +220,9 @@ static void factory_exhaustion_preserves_existing_objects() {
     }
     check(exhausted && user->get(existing) == 7,
           "factory exhaustion preserves previously published object references");
+    auto stats = user->allocation_stats();
+    check(stats.issued_objects == 2 && stats.live_objects == 2,
+          "partial factory construction stays within its object quota");
     user.reset();
     check(global.live_user_bytes() == 0,
           "partially constructed factory state cannot prevent complete User reclamation");

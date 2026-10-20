@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "contracts": [
+    "Four complete generated module factories publish separate metadata, checker and behavior registrations; custom Priority registrations replace their default counterparts.",
+    "Original query_behavior and behavior return None during generated schema bootstrap. Native behavior follows the same suppression.",
+    "Actual public prepare_insert_command calls Behavior, then RequestPolicy, ID/version defaults and registered check_and_fix_values. prepare_update_command calls Behavior, then RequestPolicy, without a second Checker preflight.",
+    "Ordinary generated audited entity save retains its graph/ledger entry point. It exercises Checker and query Behavior but does not imply invocation of command-preparation write hooks.",
+    "Custom typed resource belongs to UserContext. Native observation and destruction counter belong to GlobalContext; emitted strings/commands/results are explicit destination copies before actual User deletion."
+  ],
+  "source_sha256": {
+    ".reference/teaql-rs/teaql-runtime/src/data_service/resolved.rs": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+    "tests/generator/parity/constants_numeric_rust/lib/src/runtime.rs": "1860c1188a3db8be6d39fa046074cbe6724a6299a8d3862b8a650f7bda123dfc",
+    "tests/generator/parity/constants_numeric_rust/lib/src/priority/checker.rs": "849449ec04301bd4695ab23079a580a092ee37f7c8ae6190b45f7a51009f7c71",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp": "c6f95a7067945f755b2aaf16e040030ac04f008fe8a0d312dbd57330e43512f5",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp": "1add83821fd20aa38cc763e5efaad9765f0c175669e149cedb0d6c40e63eebed"
+  }
+}

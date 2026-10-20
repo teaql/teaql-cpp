@@ -3,6 +3,10 @@
 import teaql_provider_sqlite;
 
 namespace isolated_teaql_provider_sqlite_teaql {
+using ::teaql::prepare_generated_sqlite_runtime_path;
+using ::teaql::open_generated_sqlite_runtime_connection;
+using ::teaql::assemble_generated_sqlite_runtime;
+using ::teaql::bind_generated_sqlite_runtime;
 using ::teaql::DEFAULT_BUSINESS_ID_SPACE_TABLE;
 using ::teaql::DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY;
 using ::teaql::DEFAULT_ID_SPACE_TABLE;

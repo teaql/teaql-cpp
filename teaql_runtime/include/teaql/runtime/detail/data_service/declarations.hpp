@@ -12,7 +12,8 @@ public:
         : context_(std::allocator_arg, a, context, resource_arena(context.memory_resource())) {}
 
     UserContextMetadata(std::allocator_arg_t, Allocator a, const UserContextMetadata& other)
-        : context_(std::allocator_arg, a, other.context_) {}
+        : context_(std::allocator_arg, a, other.context_),
+          query_privacy_(clone_in(a.resource(), other.query_privacy_)) {}
 
     UserContextMetadata(const UserContextMetadata&) = delete;
     UserContextMetadata(UserContextMetadata&&) noexcept = default;
@@ -31,9 +32,8 @@ public:
 
     Vector<const EntityDescriptor*> all_entities(Memory) const override;
 
-    void record_metadata_log(const ExecutionMetadata& value) const override {
-        context().record_metadata_log(value);
-    }
+    void record_metadata_log(const ExecutionMetadata& value) const override;
+    void with_query_privacy(SqlIntentRedactions&);
 
     bool capture_query_debug() const override {
         return context().sql_log_options().select;
@@ -48,6 +48,7 @@ public:
 
 private:
     ResourceBorrow<const UserContext> context_;
+    std::optional<ResourceBorrow<SqlIntentRedactions>> query_privacy_;
 };
 
 std::optional<String> resolve_final_comment(const UserContext&,

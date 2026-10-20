@@ -1,0 +1,137 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "methods": [
+    {
+      "name": "select_self",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 630,
+      "end_line": 637,
+      "body": "pub fn select_self(mut self) -> Self {\n        self.query = self.query.project(\"id\");\n        self.query = self.query.project(\"name\");\n        self.query = self.query.project(\"email\");\n        self.query = self.query.project(\"version\");\n        self.query = self.query.project(\"platform_id\");\n        self\n    }",
+      "sha256": "9bb17b6ef4f2df748e017a8e8654de6e7bd381ce7b19f5d144c4c6ffed27a233"
+    },
+    {
+      "name": "select_self_fields",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 644,
+      "end_line": 646,
+      "body": "pub fn select_self_fields(self) -> Self {\n        self.select_self()\n    }",
+      "sha256": "e106fa5a2f5241e5ed6677f23c5d3f88e9f6c2aaf9175322150f75e91e50a08d"
+    },
+    {
+      "name": "select_self_without_parent",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 648,
+      "end_line": 650,
+      "body": "pub fn select_self_without_parent(self) -> Self {\n        self.select_self_fields()\n    }",
+      "sha256": "a769489c4086057facc0988551de8efecda2518f8e7663e33867f80ed157d087"
+    },
+    {
+      "name": "select_all",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 652,
+      "end_line": 657,
+      "body": "pub fn select_all(self) -> Self {\n        let mut request = self.select_self();\n        request = request.select_platform();\n        request = request.select_profile();\n        request\n    }",
+      "sha256": "dea180bf9dc7fd0a980cd843971de0f27717f77c7853680895d6d9bf4c312a68"
+    },
+    {
+      "name": "select_children",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 659,
+      "end_line": 663,
+      "body": "pub fn select_children(self) -> Self {\n        let mut request = self.select_all();\n        request = request.select_orders();\n        request\n    }",
+      "sha256": "71fa04bce03bcb0f9c435669e0058a54e7ac97dc1eaaa50eee2ad53604214c65"
+    },
+    {
+      "name": "select_any",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 665,
+      "end_line": 667,
+      "body": "pub fn select_any(self) -> Self {\n        self.select_children()\n    }",
+      "sha256": "05ed3edfed96069683795c6d4d2817458e3307a1893fc1f8cf421231984fa923"
+    },
+    {
+      "name": "select_platform",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 1632,
+      "end_line": 1635,
+      "body": "pub fn select_platform(mut self) -> Self {\n        self.query = self.query.relation(\"platform\");\n        self\n    }",
+      "sha256": "4f9ecd184f7f28a7ebdb577863099866d823667a4b1cd07a47f356564f6ab9ed"
+    },
+    {
+      "name": "select_platform_with",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 1637,
+      "end_line": 1641,
+      "body": "pub fn select_platform_with(mut self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query = self.query.relation_query(\"platform\", selection.into_query());\n        self\n}",
+      "sha256": "0f715a658037d1a26b32e8215253b1d1eabd731c531a6096be16e90db75c2774"
+    },
+    {
+      "name": "unselect_platform",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 1627,
+      "end_line": 1631,
+      "body": "pub fn unselect_platform(mut self) -> Self {\n        self.query.projection.retain(|field| field != \"platform_id\");\n        self.query.relations.retain(|relation| relation.name != \"platform\");\n        self\n    }",
+      "sha256": "0e425ff21699da3ebc9fa6afbe55b768f4bb0328ab09d0bc804154fea10de996"
+    },
+    {
+      "name": "select_name_raw",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 923,
+      "end_line": 925,
+      "body": "pub fn select_name_raw(self, raw_sql_segment: impl Into<String>) -> Self {\n        self.select_name_unsafe_raw(UnsafeRawSqlSegment::trusted(raw_sql_segment))\n    }",
+      "sha256": "91fd8839ba72dc4add67f5f7ce31d868d78fb76fa476e668fda749d9a51795d7"
+    },
+    {
+      "name": "select_name_unsafe_raw",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 927,
+      "end_line": 932,
+      "body": "pub fn select_name_unsafe_raw(mut self, raw_sql_segment: UnsafeRawSqlSegment) -> Self {\n        self.query_options\n            .raw_projections\n            .push(RawProjection::new(\"name\", raw_sql_segment));\n        self\n    }",
+      "sha256": "ec8c8d7afdb36ed8c10bb6c273462b41f7a644ce44af614c92a6702e07f6796e"
+    },
+    {
+      "name": "unselect_name",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 996,
+      "end_line": 1000,
+      "body": "pub fn unselect_name(mut self) -> Self {\n        self.query.projection.retain(|field| field != \"name\");\n        self.query_options.raw_projections.retain(|projection| projection.property_name != \"name\");\n        self\n    }",
+      "sha256": "1866476c493c70d6494a6a0f84cb7a36f7f0b0c5b176310922d44261e414c3cd"
+    },
+    {
+      "name": "group_by_name_as",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 938,
+      "end_line": 945,
+      "body": "pub fn group_by_name_as(self, alias: impl Into<String>) -> Self {\n        let alias = alias.into();\n        let mut request = self.group_by(\"name\");\n        request.query = request\n            .query\n            .project_expr(alias, Expr::column(\"name\"));\n        request\n    }",
+      "sha256": "d5fe42ed3491d6c517fc02068060e1e7b4f4cbcd6fc3d59b77716b43026bf093"
+    },
+    {
+      "name": "search_with_text",
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 262,
+      "end_line": 265,
+      "body": "pub fn search_with_text(mut self, text: impl Into<String>) -> Self {\n        self.query = self.query.search_with_text(text);\n        self\n    }",
+      "sha256": "2b09edf8e23f59ce9666026d64bd56ddcbc2484cd8422ca6472d2bb77eb37426"
+    }
+  ],
+  "original_observer_copies": [
+    {
+      "source": "tests/parity/rust_field_layout/src/bin/general_query_5_0_6.rs",
+      "copy": "tests/parity/rust_selection_scope_5_0_6/src/bin/general_query_5_0_6.rs",
+      "sha256": "82144bf8bf92320c62e5f3e4800cb0a576c970a97f257aaa7ddc6234d1108d0e"
+    },
+    {
+      "source": "tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs",
+      "copy": "tests/parity/rust_selection_scope_5_0_6/src/bin/original_like_privacy_5_0_6.rs",
+      "sha256": "b293ead8f720c253047747af509a2923c7d325224677639aff40b306ecde139d"
+    }
+  ],
+  "fixture_sha256": {
+    "dynamic_json_schema.sql": "b11a024137503d0b23f205b478185e09dec7aee74b09c99f1c2cbfdf1c25e226",
+    "dynamic_json_dataset.sql": "f3c3983ddfb853fd7a86eba9352e7cb36d434107773836639d46f6673308bd59"
+  },
+  "cpp_runtime": "teaql_runtime/include/teaql/runtime/entity_query.hpp",
+  "cpp_generator": "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java",
+  "scope": "Inspected complete ordinary selection/removal/alias/search bodies with actual typed/compact execution. No claim for all inherited/constant/candidate/no-forward-relation shapes or full G06/P4/P7."
+}

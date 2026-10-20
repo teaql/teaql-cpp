@@ -1,5 +1,9 @@
 # Generated inheritance query contracts: Rust 5.0.6
 
+Current status: G04/P2 is qualified with documented language/ownership adaptations;
+normal inheritance generation is enabled. See [the final acceptance](inheritance_acceptance_5_0_6.md).
+The checkpoint status and guard statements below are retained historical evidence.
+
 Status: P2 qualification in progress. Default generation retains the inheritance
 guard. This checkpoint supplements the field-model evidence in
 [generated_inheritance_5_0_6.md](generated_inheritance_5_0_6.md).

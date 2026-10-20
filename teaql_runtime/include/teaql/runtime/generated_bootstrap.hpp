@@ -64,10 +64,15 @@ public:
             if (existing && !changed) {
                 return RuntimeSchemaResult::ok(resource_, {});
             }
-            save_ = &AuditedSaveExt<Model>::save(
-                std::move(entity).audit_as(existing ? Recipe::reconcile_reason
-                                                    : Recipe::create_reason),
-                user_context_);
+            // The source bootstrap calls the generic AuditedSaveExt entry,
+            // unlike generated business saves that explicitly use the ledger.
+            // Keep its graph planning/version initialization before Policy.
+            save_ =
+                &make_operation<Result<Model, RuntimeError>, AuditedAutomaticSave<Model, false>>(
+                    resource_,
+                    user_context_,
+                    std::move(entity).audit_as(existing ? Recipe::reconcile_reason
+                                                        : Recipe::create_reason));
             require_local(*save_);
         }
         forwarding_.attach(save_->wake_signal(), wake);

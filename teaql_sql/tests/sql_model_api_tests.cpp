@@ -152,6 +152,67 @@ static void failed_owned_copy() {
     }
 }
 
+static void like_binding_ownership_and_failures() {
+    GlobalContext global;
+    Ref<SqlBindings> retained;
+    {
+        auto user_context = global.make_user_context();
+        auto owner = user_context->memory_resource();
+        String original(4096, 'o', owner);
+        String pattern("%", owner);
+        pattern += original;
+        pattern += '%';
+        auto& bindings = user_context->make<SqlBindings>();
+        {
+            detail::SqlBindingScope scope(bindings, SqlParameterLogPolicy::Masked);
+            bindings.push_like_pattern(pattern, original);
+        }
+        retained = user_context->make_global<SqlBindings>(bindings);
+        unsigned failures = 0, successes = 0;
+        for (int failure = 0; failure < 12; ++failure) {
+            FailingResource destination(global.memory_resource());
+            SqlBindings candidate(&destination);
+            destination.remaining = failure;
+            bool failed = false;
+            try {
+                candidate.push_like_pattern(pattern, original);
+            } catch (const std::bad_alloc&) {
+                failed = true;
+            }
+            destination.remaining = -1;
+            auto context = candidate.log_context(owner, DatabaseKind::Sqlite);
+            if (failed) {
+                ++failures;
+                check(candidate.size() == 0 && context.parameter_policies.empty() &&
+                          context.intent_redactions.is_empty() &&
+                          debug_string(owner, candidate).find("originals: []") != String::npos,
+                      "failed LIKE push rolls back value, policy and original positions together");
+            } else {
+                ++successes;
+                Vector<String> secrets(owner);
+                context.intent_redactions.extend_secrets(true, secrets);
+                check(candidate.size() == 1 && context.parameter_policies.size() == 1 &&
+                          secrets.size() == 1 && secrets[0] == original,
+                      "successful LIKE push retains its exact original in conservative provenance");
+            }
+        }
+        check(failures != 0 && successes != 0, "LIKE allocation failures and success both execute");
+    }
+    check(global.live_user_bytes() == 0, "actual User deletion releases all source LIKE storage");
+    auto next_user_context = global.make_user_context();
+    auto owner = next_user_context->memory_resource();
+    const auto& bindings = next_user_context->get(next_user_context->rebind_global(retained));
+    check(bindings[0].memory_resource() == global.memory_resource(),
+          "explicit Global binding copy owns the retained execution pattern");
+    auto context = bindings.log_context(owner, DatabaseKind::Sqlite);
+    Vector<String> safe(owner), debug(owner);
+    context.intent_redactions.extend_secrets(false, safe);
+    context.intent_redactions.extend_secrets(true, debug);
+    check(safe.size() == 1 && safe[0] == String(4096, 'o', owner) && debug.empty() &&
+              context.parameter_policies[0] == SqlParameterLogPolicy::Masked,
+          "retained original survives source deletion with the correct independent mask policy");
+}
+
 static void retained_diagnostics() {
     GlobalContext global;
     Ref<SqlBindings> retained_bindings;
@@ -260,6 +321,7 @@ int main() {
         variant_equality();
         owned_bindings();
         failed_owned_copy();
+        like_binding_ownership_and_failures();
         retained_diagnostics();
         retained_index_diagnostics();
         std::pmr::set_default_resource(previous);

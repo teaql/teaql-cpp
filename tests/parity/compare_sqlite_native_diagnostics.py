@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("sqlite_native_diagnostics_cases.json.gz", "SQLite native diagnostic payloads"))
+    raise SystemExit(main("sqlite_native_diagnostics_5_0_6_cases.json.gz", "SQLite native diagnostic payloads"))

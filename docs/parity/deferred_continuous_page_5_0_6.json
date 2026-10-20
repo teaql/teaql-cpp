@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_cases": 640,
+  "sequential_cases": 480,
+  "interleaved_cases": 160,
+  "native_ownership_cases": 8,
+  "source_and_cpp_exit_code": 0,
+  "source_and_cpp_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 640 actual original/native deferred continuous page outcomes\n",
+  "reproduction_exit_code": 0,
+  "reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 640 actual original/native deferred continuous page outcomes\n",
+  "profiles": {
+    "native": {
+      "exit_code": 0,
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        "deferred_continuous_page_context_contracts",
+        "deferred_continuous_page_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 35: deferred_continuous_page_rust_parity\n    Start 36: deferred_continuous_page_context_contracts\n1/2 Test #36: deferred_continuous_page_context_contracts ...   Passed    0.03 sec\n2/2 Test #35: deferred_continuous_page_rust_parity .........   Passed    3.67 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   3.68 sec\n",
+      "build_exit_code": 0
+    },
+    "sanitize": {
+      "exit_code": 0,
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        "deferred_continuous_page_context_contracts",
+        "deferred_continuous_page_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 35: deferred_continuous_page_rust_parity\n    Start 36: deferred_continuous_page_context_contracts\n1/2 Test #36: deferred_continuous_page_context_contracts ...   Passed    0.11 sec\n2/2 Test #35: deferred_continuous_page_rust_parity .........   Passed   14.65 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =  14.66 sec\n",
+      "build_exit_code": 0
+    },
+    "modules": {
+      "exit_code": 0,
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        "module_deferred_continuous_page_context_contracts",
+        "module_deferred_continuous_page_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 652: module_deferred_continuous_page_context_contracts\n    Start 683: module_deferred_continuous_page_rust_parity\n1/2 Test #652: module_deferred_continuous_page_context_contracts ...   Passed    0.03 sec\n2/2 Test #683: module_deferred_continuous_page_rust_parity .........   Passed    3.57 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   3.59 sec\n",
+      "build_exit_code": 0
+    }
+  },
+  "projection": "Only generated wall-time cursor ID/absolute expiry projected to syntax/future validity; keys, cursor content, logical results/errors and page plans exact.",
+  "default_pmr_disabled": true,
+  "actual_context_destruction": true,
+  "explicit_store_destruction": true,
+  "production_or_generator_body_changes": false,
+  "generated_artifacts_modified": false,
+  "format_output": "Formatted 1022 handwritten C++ files with clang-format 18.1.8\n",
+  "format_check_output": "Checked 1022 handwritten C++ files with clang-format 18.1.8\n",
+  "module_consumer_output": "Verified 161 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n",
+  "module_export_output": "Verified 1479 catalog exports and isolated lookup across 7 modules\n",
+  "module_dependencies_output": "Verified 245 production headers, 687 include edges and 7 modules: acyclic and confined to supported layers\n",
+  "sanitizer_leak_scanning": false,
+  "mips_or_physical_run": false,
+  "sha256": {
+    "tests/parity/deferred_continuous_page_5_0_6_cases.json.gz": "f22ab7246a25250d17635c874096f9b6a37d2380ca2883c47293e050641b585d",
+    "tests/parity/deferred_continuous_page_probe.cpp": "c7f3dc28e0553f1369462441fb42b9de1e81e4edb53a734b7c1fae00644f76b6",
+    "tests/parity/rust_field_layout/src/bin/deferred_continuous_page_5_0_6.rs": "80791d5a3268eb4925571c0618378b2d3877a9cc01213d8a6baee201d8866248",
+    "docs/parity/deferred_continuous_page_5_0_6_source_review.json": "19656b91a3f132f0743a6cda76093bce66ee12019de212936e3f3e8fabde840e"
+  },
+  "remaining_scope": "Broader model/grouped/facet/aggregate/dynamic/protected-I/O/cache coordination and final integration remain required. Full G09/G13/P0-P7 incomplete."
+}

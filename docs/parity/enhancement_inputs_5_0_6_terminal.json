@@ -1,0 +1,62 @@
+{
+  "recorded_utc": "2026-10-14T19:37:17.422101+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Restore enhance_child complete Into<QuerySelection> inputs, including different generated domain/executor and explicit core values. Checked Context binding and child purpose rejection preserved. Other generic child families/full phase requirements remain.",
+  "exact_original_native_outcomes": 786,
+  "construction_outcomes": 768,
+  "actual_sqlite_successes": 18,
+  "actual_compact_rows": 63,
+  "checks": {
+    "native": {
+      "passed": 3,
+      "selected": 3
+    },
+    "modules": {
+      "passed": 2,
+      "selected": 2
+    },
+    "sanitize": {
+      "passed": 2,
+      "selected": 2,
+      "leak_scanning": false
+    },
+    "compiler": {
+      "positive": 1,
+      "negative": 2,
+      "initial_missing_header_negatives_excluded": true
+    },
+    "java_tests": 58,
+    "generated_workspaces": 24,
+    "generated_workspace_files": 288,
+    "strict_contract_sdks": 44,
+    "exact_added_delegates": 268,
+    "exact_public_access_replacements": 134,
+    "changed_sdk_query_headers": 30,
+    "changed_sdk_assist_files": 30,
+    "format_files": 1451,
+    "canonical_consumer_bodies": 667,
+    "module_exports": 1485
+  },
+  "original_registry_difference_count": 0,
+  "runtime_change": "Explicit core/selection overloads capture complete selection; checked EntityQuery overload accepts different executor and delegates to common capture.",
+  "generator_change": "Public runtimeQuery constrained adapter plus thin explicit value overloads and accurate Assist.",
+  "original_generated_or_historical_files_changed": false,
+  "raw_validation": "docs/parity/enhancement_inputs_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "446cb8782e8853b50de61197c440af21b55b1f833f83f3d5578ce2346478ddde",
+    "teaql_runtime/tests/enhancement_input_tests.cpp": "5bac8246d730a91c7bfce2b452531b4a5e6130d3e4b46b47f3d077acf218ddb2",
+    "tests/parity/generated_enhancement_inputs_probe.cpp": "b5f4ea15f5c390bb6d087b4a6669eb2634dcd306ac7e4bdaab9a654dc0aea1fe",
+    "tests/parity/compare_enhancement_inputs_5_0_6.py": "10add2fe36e09db384fc2c1aca47a0b50acc4e48c08b586593581799d29e5e74",
+    "tests/parity/rust_enhancement_inputs_5_0_6/Cargo.toml": "809802b47ec8b9405e43c06430ef2a36550257ac0f2454ab17e745268bb2aba4",
+    "tests/parity/rust_enhancement_inputs_5_0_6/Cargo.lock": "0eb26fe99a29f2692ec32d7949fe6edfa73838e531b24129a7088d74b4cf0ac9",
+    "tests/parity/rust_enhancement_inputs_5_0_6/src/bin/enhancement_inputs_5_0_6.rs": "6cbaa96744c2b8edb3ed6ffd8a8b2e8eb43cfc02796915e5602f0da2aae07fa5",
+    "tests/parity/enhancement_inputs_5_0_6_cases.json.gz": "9e464407b984c526cd57f1c5a5c9d638af19e1c3f1f5b7c579503a6bdca4fc18",
+    "docs/parity/enhancement_inputs_source_review_5_0_6.json": "49c8fb77393b39d0348226f5aea4c8c2ea9cbccdbb3055c0d7b74ce52e20dff8",
+    "docs/parity/enhancement_inputs_sdk_change_5_0_6.json": "80e39725a37607dd78e03c0c06e72192d394f973c7eb261aef123db58ff85d17",
+    "scripts/reproduce_cpp_contract_fixtures.py": "af05c364b0276cfe374a9e48474afff70be1dacf81a0a9d8409b3cf6113321f9",
+    "scripts/verify_enhancement_inputs_5_0_6.py": "cb3fe1009bccf817b7e52c004513b46521e8ad12b4dca910f3c8a33bed9eac6a"
+  },
+  "complete_capability_acceptance": false,
+  "full_suite_mips_device_run": false
+}

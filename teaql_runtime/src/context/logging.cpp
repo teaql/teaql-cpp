@@ -139,6 +139,9 @@ void UserContext::record_metadata_log(const ExecutionMetadata& metadata) const {
     case DataServiceOperation::Delete:
         op = SqlLogOperation::Delete;
         break;
+    case DataServiceOperation::Recover:
+        op = SqlLogOperation::Recover;
+        break;
     default:
         break;
     }
@@ -156,7 +159,11 @@ void UserContext::record_metadata_log(const ExecutionMetadata& metadata) const {
         sensitive.comment = detail::clone_in(r, metadata.comment);
     }
     sensitive.purpose = trace_value(r, metadata.trace_chain, TraceKind::Purpose);
-    sensitive.audit_reason = trace_value(r, metadata.trace_chain, TraceKind::AuditReason);
+    auto local_reason = trace_value(r, metadata.trace_chain, TraceKind::AuditReason);
+    if (op != SqlLogOperation::Select || local_reason) {
+        sensitive.audit_reason =
+            metadata.comment ? detail::clone_in(r, metadata.comment) : std::move(local_reason);
+    }
     auto trace = canonical_trace(r, op, metadata.backend, metadata.trace_chain);
     sensitive.trace_path.swap(trace);
     if (metadata.parameterized_query) {

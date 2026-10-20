@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "stage": "shared_kernel_standalone_execution",
+  "gates": {
+    "native_exit_code": 0,
+    "sanitize_exit_code": 0,
+    "original_kernel_cases": 9,
+    "default_pmr_disabled": true,
+    "actual_user_deletion": true,
+    "explicit_global_copy": true,
+    "borrow_expiration": true,
+    "sanitize_leak_scanning": false,
+    "syntax_probe_exit_code": 0,
+    "comparator_negative_control_exit_code": 1,
+    "format_check_files": 1466
+  },
+  "files": {
+    "teaql_runtime/include/teaql/runtime/generated_runtime_config.hpp": "22e31c503e30fbabc75bb7ff064e9f65b489f4869fe30d48a05d5c72172cae72",
+    "teaql_runtime/src/generated_runtime_config.cpp": "984ce6f338d965d0b09cf1746c1affd39b8b6e2a9dea19206b85f637daf98725",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/runtime_config.hpp": "14c0570b0d013f581dd1ddcc8df1235e9fe028be59e31dd471d983ae82876a95",
+    "teaql_provider_sqlite/src/runtime_config.cpp": "13be6251549332e3dc09f3d7e7c9ab488850d93d86e24aa0bbf7e1ee92a86a3c",
+    "teaql_runtime/tests/runtime_config_tests.cpp": "27b3c7cf21c3d9ac2a1e0d0e4f25452e596652937b5cdd50487f900675ae2002",
+    "tests/parity/runtime_configuration_kernel_probe.cpp": "88538715d48ce9382ef765de87124e160e6696683592e3aa6cd5347ac1e2a940",
+    "scripts/verify_runtime_configuration_kernel_5_0_6.py": "69a50441da19dbb33bfc989d59e68ebb02cc2b57e956bcf4e8c3dc27e87d9fa5"
+  },
+  "native_dependency_archives": {
+    "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime/libteaql_runtime.a": "073d8190e4d199361a1bfe411662e566b205a6ac2a7570ccea8a0584ca6f1a18",
+    "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql/libteaql_sql.a": "3ea9e34a8fb8e1736407982f7d25ac9e4327b8bb870eb5dae398370641b67908",
+    "/home/philip/githome/teaql-cpp/build_native_current/teaql_data_service/libteaql_data_service.a": "170b0180ba1967f52d64e596b8b7558a2c3c1657aef36b4b2bdb8cb1812b8234",
+    "/home/philip/githome/teaql-cpp/build_native_current/teaql_core/libteaql_core.a": "caf476063db3845cce46af38482adac09f05ea1dd456207b13d39df9bf01b255",
+    "/home/philip/githome/teaql-cpp/build_native_current/teaql_memory/libteaql_memory.a": "f94d03a41a82c99fd168ee5d1b7aa4e6249165032c7fbec732d90c008cb7d2b7"
+  },
+  "sanitize_dependency_archives": {
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_runtime/libteaql_runtime.a": "51a14174420ed6dd77adb1dfe3350a44b4baeb91b6e5100a23e858630ccd4ae2",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_sql/libteaql_sql.a": "749d14800dc57fc14a3752d7a73dd1dea7b42e3b559eee27c726873c01e2c2aa",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_data_service/libteaql_data_service.a": "c0bbdaf5356b0d172f6f6a3e3e648d92811c347271d6b5b6d25b408fb3f23427",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_core/libteaql_core.a": "1ab47a87704c6c158f9d4a1c5bb6119e7968b64ab150e9e397308387215fe4d2",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_memory/libteaql_memory.a": "2a33379e7d79f5ea2d2d2a55777ae8aeee45271dbf10cbf3b9e3f2c16138ca22"
+  },
+  "scope": "Independent locked native/sanitize compilations in /tmp, using verified no-work dependency archives. All compilers/linkers completed before output execution; both sets of archives remained unchanged. All9 current live original outcomes and filesystem side effects match. Production CMake/module registration, full five-branch service error composition, ordinary connection/startup, generated adapters/Assist/reproduction and full G12/P6/P7 remain required. Existing native integration still running."
+}

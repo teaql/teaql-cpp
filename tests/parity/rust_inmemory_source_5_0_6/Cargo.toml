@@ -1,0 +1,20 @@
+[package]
+name = "inmemory_source_506"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "inmemory_retained_source_506"
+path = "../rust_values/src/bin/inmemory_oracle.rs"
+
+[[bin]]
+name = "inmemory_source_506"
+path = "../inmemory_source_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+
+[workspace]

@@ -246,7 +246,27 @@ static Json evaluate(UserContext& user, const Json& j) {
     auto q = query(r, field(j, "query"));
     q.entity =
         optional(j, "query_entity") ? text(field(j, "query_entity")) : std::string_view(e.name);
-    auto intent = QueryIntent::create(r, "request comment", "inspect SQL stream fixture");
+    auto comment = optional(j, "comment");
+    auto purpose = optional(j, "purpose");
+    auto intent =
+        QueryIntent::from_optional(r,
+                                   comment && std::holds_alternative<String>(comment->data)
+                                       ? text(*comment)
+                                       : std::string_view("request comment"),
+                                   purpose && std::holds_alternative<String>(purpose->data)
+                                       ? std::optional<std::string_view>(text(*purpose))
+                                       : std::nullopt);
+    if (!intent) {
+        auto out = detail::model_json(r);
+        detail::model_put(out, "intent_error", intent.error().to_string(r));
+        detail::model_put(out, "compiles", d.compiles);
+        detail::model_put(out, "lookups", schema.lookups);
+        detail::model_put(out, "streams", t.streams);
+        detail::model_put(out, "fetches", t.fetches);
+        detail::model_put(out, "closed", t.closed);
+        detail::model_put(out, "size", t.size);
+        return out;
+    }
     QueryRequest req(
         std::allocator_arg, Allocator(r), q, intent.value(), true, flag(j, "metadata", true));
     auto& events = user.make<Json::Array>();

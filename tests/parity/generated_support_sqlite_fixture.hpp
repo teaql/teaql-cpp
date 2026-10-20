@@ -69,6 +69,7 @@ public:
         auto call = detail::model_json(r);
         detail::model_put(call, "entity", entity);
         detail::model_put(call, "query", detail::debug_query(r, query.as_query()));
+        detail::model_put(call, "diagnostic", formatted_debug(r, query));
         detail::model_put(call, "aggregates", aggregates(r, relation_aggregates));
         detail::model_put(call, "trace", trace(r, chain));
         calls.emplace_back(std::move(call));
@@ -92,7 +93,7 @@ public:
     SqlExecutor& executor;
     SqlRuntime& runtime;
 
-    SqlFixture(UserContext& user, const Json& descriptors)
+    SqlFixture(UserContext& user, const Json& descriptors, bool logging = false)
         : user(user), resource(user.memory_resource()),
           connection(user.make_resource<SqliteConnection>()),
           transport(user.make<SqliteMutationExecutor>(connection)),
@@ -101,6 +102,9 @@ public:
           executor(user.make<SqlExecutor>(dialect, transport, metadata, state)),
           runtime(user.make_resource<SqlRuntime>(user, executor)) {
         user.disable_sql_log();
+        if (logging) {
+            user.enable_select_sql_log();
+        }
         for (const auto& d : std::get<Json::Array>(descriptors.data)) {
             metadata.register_entity(key_entity(resource, d));
         }

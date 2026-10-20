@@ -32,12 +32,22 @@ identities instead of Rust Weak pointer diagnostics.
 
 FieldLayout owns immutable C++ geometry, while state-interning hints belong to
 the result Context's separate SnapshotPool. Its formatter is therefore explicitly
-nonexhaustive and does not invent Rust's type-local states mutex. Readonly schema
-diagnostics report the current C++ fingerprint; its std-hash numeric value is not
-qualified as Rust's private SipHash value. Complete nonempty schema/hash/cache
-diagnostic source qualification remains a named G15/G16 requirement. Exact source
+nonexhaustive and does not invent Rust's type-local states mutex. At this initial
+checkpoint readonly schema fingerprints were not yet source-qualified. The later
+[readonly schema hash checkpoint](readonly_schema_hash_5_0_6.md) implements the
+actual cached u64 through the shared Rust SipHash helper and qualifies 69 complete
+nonempty schema/query/uninitialized layout observations. Initialized snapshot
+cache representations retain their separate C++ scoped-identity adaptation and
+remaining source review. Exact source
 equality below is limited to the historical uninitialized layouts, not these
 implementation-specific initialized cache diagnostics.
+
+The later [initialized cache review](initialized_snapshot_cache_5_0_6.md)
+qualifies actual public-API geometry, reuse, hint counts, release/pruning and
+readonly-schema replacement in 80 cases. Rust weak ownership and C++ Context
+ownership remain explicitly different. Raw initialized diagnostics are retained
+for both representations; no pointer/hash-map text equality is claimed. General
+model/provider/query-cache and final G15/G16 integration remain required.
 
 ## Data-service observer failure handling
 

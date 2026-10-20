@@ -88,7 +88,7 @@ static Json observe(UserContext& user_context, const Json& input) {
         }
         if (flag(step, "save")) {
             const auto& loaded = require_value(Q.orders()
-                                                   .withIdIs(10)
+                                                   .withIdIs(std::uint64_t(10))
                                                    .comment("load cache mutation")
                                                    .purpose("invalidate aggregation cache")
                                                    .executeForOne(user_context)

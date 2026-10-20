@@ -1,6 +1,7 @@
 #include <teaql/runtime/detail/query_keys.hpp>
 #include <teaql/core/detail/query_debug.hpp>
 #include "fixture_query_keys.hpp"
+#include "../support/query_metadata_fixture.hpp"
 #include <iostream>
 
 int main() {
@@ -14,6 +15,7 @@ int main() {
             throw std::runtime_error("input JSON");
         }
         auto q = key_query(r, field(*j, "query"));
+        query_metadata(r, q, field(*j, "query"));
         auto canonical = detail::canonical_aggregation_query(r, q);
         auto out = detail::model_json(r);
         auto ns = text(field(*j, "namespace"));

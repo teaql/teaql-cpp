@@ -1,15 +1,56 @@
 #include "generated_support_sqlite_fixture.hpp"
 #include "debug_modes.hpp"
 #include <teaql/runtime/purposed_query_debug.hpp>
+#include <teaql/data_service/sql_log_debug.hpp>
 #include <iostream>
 
 using namespace teaql;
 
+static Json retained_logs(UserContext& user_context) {
+    auto r = user_context.memory_resource();
+    Json::Array output(r);
+    for (const auto& entry : user_context.sql_logs()) {
+        auto value = detail::model_json(r);
+        detail::model_put(value, "sql", entry.sql);
+        detail::model_put(value, "comment", entry.comment ? Json(r, *entry.comment) : Json(r));
+        detail::model_put(value, "purpose", entry.purpose ? Json(r, *entry.purpose) : Json(r));
+        detail::model_put(value, "debug_sql", entry.debug_sql);
+        detail::model_put(value,
+                          "outcome",
+                          entry.log_context.execution_outcome
+                              ? Json(r, debug_string(r, *entry.log_context.execution_outcome))
+                              : Json(r));
+        Json::Array params(r), trace(r);
+        for (const auto& parameter : entry.params) {
+            params.emplace_back(debug_string(r, parameter));
+        }
+        for (const auto& node : entry.trace_path) {
+            trace.emplace_back(debug_string(r, node));
+        }
+        detail::model_put(value, "params", params);
+        detail::model_put(value, "trace", trace);
+        output.emplace_back(std::move(value));
+    }
+    return Json(r, output);
+}
+
+static SelectQuery outer_query(Memory r, const Json& input) {
+    auto query = key_query(r, input);
+    if (auto* purpose = optional(input, "purpose")) {
+        if (auto* text = std::get_if<String>(&purpose->data)) {
+            query.purpose_text.emplace(*text, r);
+        }
+    }
+    return query;
+}
+
 static Json evaluate(UserContext& user, const Json& input) {
     auto r = user.memory_resource();
     if (text(field(input, "op")) == "sqlite") {
-        support_fixture::SqlFixture fixture(user, field(input, "descriptors"));
-        auto outer = key_query(r, field(input, "outer"));
+        auto* logging = optional(input, "logging");
+        support_fixture::SqlFixture fixture(
+            user, field(input, "descriptors"), logging && std::get<bool>(logging->data));
+        auto outer = outer_query(r, field(input, "outer"));
         auto options = support_fixture::options(r, field(input, "options"));
         const auto& result = execute_facets(fixture.runtime, outer, options).wait();
         auto out = detail::model_json(r);
@@ -22,6 +63,25 @@ static Json evaluate(UserContext& user, const Json& input) {
         detail::model_put(out, "calls", fixture.runtime.calls);
         detail::model_put(out, "cancelled", 0u);
         detail::model_put(out, "outer", detail::debug_query(r, outer));
+        if (auto* capture = optional(input, "capture_logs");
+            capture && std::get<bool>(capture->data)) {
+            detail::model_put(out, "logs", retained_logs(user));
+            user.clear_sql_logs();
+            auto& service = EntityDataService<support_fixture::SqlExecutor>::for_executor(
+                user, "Child", user, fixture.executor);
+            SelectQuery next(std::allocator_arg, Allocator(r), "Child");
+            next.project("id").filter(Expr::eq(r, "id", std::uint64_t(10)));
+            String comment("Unrelated follow-up ", r), purpose("Verify isolation ", r);
+            auto secret = text(field(input, "secret"));
+            comment += secret;
+            purpose += secret;
+            next.comment(comment);
+            PurposedSelectQuery request(std::allocator_arg, Allocator(r), next, purpose);
+            const auto& followup = service.fetch_all(request).wait();
+            detail::model_put(
+                out, "followup_error", followup ? Json(r) : Json(r, followup.error().to_string(r)));
+            detail::model_put(out, "followup_logs", retained_logs(user));
+        }
         return out;
     }
     auto& metadata = user.make<InMemoryMetadataStore>();
@@ -36,7 +96,7 @@ static Json evaluate(UserContext& user, const Json& input) {
     if (auto* value = optional(input, "fail_at")) {
         runtime.fail_at = integer(*value);
     }
-    auto outer = key_query(r, field(input, "outer"));
+    auto outer = outer_query(r, field(input, "outer"));
     auto out = detail::model_json(r);
     auto op = text(field(input, "op"));
     if (op == "restrict") {

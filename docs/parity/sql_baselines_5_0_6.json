@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "observations": 7040,
+  "matrices": [
+    {
+      "matrix": "sql_dialect_helper",
+      "observations": 262,
+      "source_changed": 0,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/sql_schema_oracle.rs",
+      "original_driver_sha256": "08376dbf2ab6644a392f790b0fa4412fc062d88370b55afddc1f7151ab8527f3",
+      "historical_sha256": "01573822e4a4fe51c89b0fa4257ef00c9e916726f3ce7aee563c01ba0342d626",
+      "active": "tests/parity/sql_dialect_helper_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sql_dialect_in",
+      "observations": 216,
+      "source_changed": 0,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/sql_schema_oracle.rs",
+      "original_driver_sha256": "08376dbf2ab6644a392f790b0fa4412fc062d88370b55afddc1f7151ab8527f3",
+      "historical_sha256": "b55c53a33caa599273f16304272fd406583927642cccffb6aed9bb95c219ad02",
+      "active": "tests/parity/sql_dialect_in_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sql_projection_scope",
+      "observations": 8,
+      "source_changed": 0,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/sql_log_oracle.rs",
+      "original_driver_sha256": "9b4bbd896f44a6a18f591113b099288e2db12c27823183b6f95ed5ad40f6dd4d",
+      "historical_sha256": "a50b175d9c347087c60c57c7eb6aaf5edba5fee2b9842b00d519f551fc3df6e8",
+      "active": "tests/parity/sql_projection_scope_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sql_transport",
+      "observations": 344,
+      "source_changed": 0,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/sql_transport_oracle.rs",
+      "original_driver_sha256": "e2a1e74133ce27db07325869c45ba2ea0101159408bb1574e4e9b944505e5c44",
+      "historical_sha256": "8280a17cf04ec8a34079e0cb51200d45e6d268992bc5e2fcc70a67f76152823f",
+      "active": "tests/parity/sql_transport_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sql_schema",
+      "observations": 1305,
+      "source_changed": 0,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/sql_schema_oracle.rs",
+      "original_driver_sha256": "08376dbf2ab6644a392f790b0fa4412fc062d88370b55afddc1f7151ab8527f3",
+      "historical_sha256": "b14f9c5e1f3c1a36f3aed0ae3f24028e476cd6625ef69dd39fb8394b034bb55a",
+      "active": "tests/parity/sql_schema_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sql_mutation",
+      "observations": 2505,
+      "source_changed": 0,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/sql_mutation_oracle.rs",
+      "original_driver_sha256": "4cad2b28d867c62b09a49edcf78545526611ca198166cc7086dff2492bca8f3c",
+      "historical_sha256": "f6991f510915ddc6f9a858b0c614216f9bd6fccbf341d5d1e8bf753528a786b3",
+      "active": "tests/parity/sql_mutation_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sql_dialect_hook",
+      "observations": 48,
+      "source_changed": 0,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/sql_mutation_oracle.rs",
+      "original_driver_sha256": "4cad2b28d867c62b09a49edcf78545526611ca198166cc7086dff2492bca8f3c",
+      "historical_sha256": "ef237b110522fa7248600bbd8b5b539df6d2b210f4532377bca66bf3f28ba20b",
+      "active": "tests/parity/sql_dialect_hook_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sql_dialect",
+      "observations": 2206,
+      "source_changed": 12,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_values/src/bin/sql_dialect_oracle.rs",
+      "original_driver_sha256": "26870a5d74a230cac8c88414d2ce0b994ebc767e84db7c49b436860ff742671c",
+      "historical_sha256": "2d8dc4e05f8a3d6185e6700c86112172e3d57682574bbc57b279db23d2343b98",
+      "active": "tests/parity/sql_dialect_5_0_6_cases.json.gz"
+    },
+    {
+      "matrix": "sql_grouped_partition",
+      "observations": 146,
+      "source_changed": null,
+      "native_differences": 0,
+      "original_driver": "tests/parity/rust_sql_baselines_5_0_6/sql_grouped_partition.rs",
+      "original_driver_sha256": "cb9ba8f6e3aff6494b4f5a111b107cfc575b83234a0ff792e953eea60fb900de",
+      "historical_sha256": "8014513e20bf7c9173edeab3c62832ab887953c778cfe28437a3ed02844726c7",
+      "active": "tests/parity/sql_grouped_partition_5_0_6_cases.json.gz"
+    }
+  ],
+  "manifest_sha256": "7c3debca4ac8984346b93481324da8e075a84b8e9a46069c3aeadf85cd30b077",
+  "lock_sha256": "c61318ac58be6b6d31c432faa8dbd14dc477e42528f768779f0a080c3e3acecb",
+  "observer_helpers_sha256": {
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_values/src/fixture_sql.rs": "3f9b4a0b35cee94de9ccb283f0cf35d64e6196b112791a9017ea42f836215abf",
+    "scripts/verify_sql_baselines_5_0_6.py": "54226345c5cc656c0bc91a668ec7f2a32a13639e026303875d613db8f69f1f7f"
+  },
+  "normalization": "none",
+  "status": "declared unchanged SQL families requalified; protocol migration and full integration remain open",
+  "complete_capability_acceptance": false
+}

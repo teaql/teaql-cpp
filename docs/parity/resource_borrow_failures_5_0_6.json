@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "exit_code": 101,
+  "errors": [
+    {
+      "code": "E0502",
+      "message": "cannot borrow `user_context` as mutable because it is also borrowed as immutable",
+      "primary": [
+        {
+          "file": "lib.rs",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "code": "E0505",
+      "message": "cannot move out of `user_context` because it is borrowed",
+      "primary": [
+        {
+          "file": "lib.rs",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "code": "E0515",
+      "message": "cannot return value referencing local variable `user_context`",
+      "primary": [
+        {
+          "file": "lib.rs",
+          "line": 21
+        }
+      ]
+    }
+  ],
+  "scope": "Actual public Context APIs reject mutation/drop/return while a typed resource reference remains live. Native checked handles use the documented explicit Context ownership adaptation; no source algorithm is replaced.",
+  "hashes": {
+    "tests/parity/rust_resource_borrow_failure_5_0_6/Cargo.toml": "6853a1661c1c434a7da5ec1309542b0eb8db5d31dbec09af7fc1453346acdc25",
+    "tests/parity/rust_resource_borrow_failure_5_0_6/Cargo.lock": "3dd1219c39f69e7e19667f26d7d4f065a6b066fc1d5ffbf3f1621c65e0b90574",
+    "tests/parity/rust_resource_borrow_failure_5_0_6/src/lib.rs": "d357e81c33b9ba76768a7c971a49520042131d31867d3e324fbc11136451a0ac"
+  }
+}

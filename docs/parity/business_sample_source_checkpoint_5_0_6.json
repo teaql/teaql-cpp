@@ -1,0 +1,22 @@
+{
+  "baseline": {
+    "repository": "https://github.com/teaql/teaql-rs.git",
+    "tag": "v5.0.6",
+    "version": "5.0.6",
+    "commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "policy": "Use this exact commit for design and behavior parity. Upgrade only by an explicit baseline change."
+  },
+  "source_inputs": {
+    "tests/generator/parity/business_ids_rust/PROVENANCE.json": "e5f8aec219847029c280f4b4a2eac1fb1bb2db6b3d992b78d2c024f4b01dad9c",
+    "tests/generator/parity/business_ids_rust/lib/src/sample_data.rs": "17c81b61f143f2429f3341b3ba7348814cb0d788e7aad194e71bf227a2ea35bc",
+    "tests/parity/rust_business_sample_5_0_6/Cargo.toml": "52da75e358e77c403bb285dc8cc1c6f26d200a31179ee76dfe3a5c5e67961053",
+    "tests/parity/rust_business_sample_5_0_6/Cargo.lock": "1fb1e53682c83f41952e5e102718e9ce187dfe7b0bbb2f51a96f54fb20d58ef8",
+    "tests/parity/rust_business_sample_5_0_6/src/main.rs": "dae14ee7f428f4d09ff8f10b9f9041b5737f9b72c298c488e47d25ac3f169ebc"
+  },
+  "scenarios": 128,
+  "invocations": 200,
+  "ordered_sql_records": 6588,
+  "native_comparison_log": "Verified 128 Business-ID sample scenarios, 200 invocations and 6588 exact ordered SQL diagnostics\n",
+  "source_replay_log": "Verified 128 Business-ID sample scenarios, 200 invocations and 6588 exact ordered SQL diagnostics\n",
+  "status": "Original and native comparison pass. Conditional-alias regeneration and imported/instrumented gates pending."
+}

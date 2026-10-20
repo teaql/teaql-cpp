@@ -7,7 +7,7 @@
 namespace teaql::test {
 using namespace cpp_dynamic_json;
 
-inline void initialize_dynamic_json_database(UserContext& user_context) {
+inline SqliteConnection& initialize_dynamic_json_database(UserContext& user_context) {
     auto& module = moduleWithBehaviorsAndCheckers(user_context);
     module.apply_to(user_context);
     user_context.set_metadata(user_context, module.metadata);
@@ -31,6 +31,7 @@ inline void initialize_dynamic_json_database(UserContext& user_context) {
         }
     }
     user_context.with_active_root("Platform", 1);
+    return connection;
 }
 
 }

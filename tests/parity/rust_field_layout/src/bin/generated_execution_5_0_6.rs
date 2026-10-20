@@ -34,6 +34,27 @@ fn observe(input: &Json) -> Json {
             .execute_batch(&format!("ALTER TABLE {table} RENAME TO hidden_{table}"))
             .unwrap();
     }
+    macro_rules! pagination {
+        ($request:expr) => {{
+            let mut request = $request;
+            if let Some(operations) = input["pagination"].as_array() {
+                for operation in operations {
+                    let number = operation["number"].as_u64().unwrap();
+                    let size = operation["size"].as_u64().unwrap();
+                    request = match operation["op"].as_str().unwrap() {
+                        "limit" => request.limit(size), "skip" => request.skip(number),
+                        "offset_only" => request.offset_only(number), "offset" => request.offset(number,size),
+                        "page_offset" => request.page_offset(number,size), "offset_size" => request.offset_size(number,size),
+                        "top" => request.top(size), "page_number" => request.page_number(number,size),
+                        "page_number_default" => request.page_number_default(number), "page" => request.page(number,size),
+                        "page_default" => request.page_default(number), "unlimited" => request.unlimited(),
+                        _ => panic!("unknown pagination operation"),
+                    };
+                }
+            }
+            request
+        }};
+    }
     macro_rules! execute {
         ($query:expr) => {{
             let mut request = $query;
@@ -45,7 +66,15 @@ fn observe(input: &Json) -> Json {
             } else if input["optimization"] == "continuous" {
                 request = request.optimize_for_continuous_page_fetch_with("execution_fixture", 60);
             }
-            let request = request.comment("inspect generated execution").purpose("qualify generated execution");
+            let request = if input["after_purpose"]==true {
+                // Original Rust exposes plain modifiers through public inner.
+                // Restore the purpose after applying the agreed C++ staged facade adaptation.
+                let staged = request.comment("inspect generated execution").purpose("qualify generated execution");
+                let purpose = staged.purpose;
+                pagination!(staged.inner).purpose(purpose)
+            } else {
+                pagination!(request).comment("inspect generated execution").purpose("qualify generated execution")
+            };
             let mut out = json!({"value":null,"total_count":null,"error":null});
             match input["mode"].as_str().unwrap() {
                 "count" => match driver::block_on(request.execute_for_count(&user_context)) {

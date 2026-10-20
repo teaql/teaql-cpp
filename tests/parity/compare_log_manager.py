@@ -2,6 +2,7 @@
 """Isolated processes observe real stdout/stderr/files and upstream lazy state."""
 import argparse
 import json
+import gzip
 import os
 import re
 import subprocess
@@ -48,7 +49,7 @@ def main():
     parser.add_argument('--cpp-emulator', default='')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    corpus = json.loads(Path(__file__).with_name('log_manager_cases.json').read_text())
+    corpus = json.loads(gzip.decompress(Path(__file__).with_name('log_manager_baseline_5_0_6_cases.json.gz').read_bytes()))
     if corpus['baseline'] != json.loads((root / 'upstream.lock.json').read_text())['commit']:
         raise RuntimeError('Log manager observations belong to a different baseline')
     inputs = [c['input'] for c in corpus['cases']]

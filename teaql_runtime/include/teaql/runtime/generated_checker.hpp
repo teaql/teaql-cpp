@@ -247,6 +247,43 @@ public:
         }
     }
 
+    template <class Scalar>
+    static void clock_value(const UserContext& user_context,
+                            CheckObjectStatus status,
+                            bool update,
+                            std::string_view entity,
+                            std::string_view field,
+                            std::string_view storage_field,
+                            const EntityRuntimeState& state,
+                            const EntityKey& key,
+                            Scalar& stored,
+                            eval::LoadState& loaded) {
+        clock(user_context, status, update, entity, field, [&](Timestamp time) {
+            auto r = state.memory_resource();
+            detail::EntityRuntimeAccess::update_clock_value(
+                state, key, storage_field, stored, time);
+            loaded
+                .mark_loaded(storage_field,
+                             &detail::ContextArena::from_memory(r).loaded_snapshots())
+                .value();
+        });
+    }
+
+    template <class Text>
+    static void clock_text(const UserContext& user_context,
+                           CheckObjectStatus status,
+                           bool update,
+                           std::string_view entity,
+                           std::string_view field,
+                           std::string_view storage_field,
+                           const EntityRuntimeState& state,
+                           const EntityKey& key,
+                           Text& stored,
+                           eval::LoadState& loaded) {
+        clock_value(
+            user_context, status, update, entity, field, storage_field, state, key, stored, loaded);
+    }
+
     template <class Set>
     static void clock(const UserContext& user_context,
                       CheckObjectStatus status,

@@ -37,6 +37,7 @@ public:
         std::uint64_t id;
         std::string_view relation;
         bool many;
+        const EntityGraphBuilder::RelationFacets* facets = nullptr;
     };
 
     using JsonRows = Vector<std::pair<std::uint64_t, CompactRow>>;
@@ -192,6 +193,10 @@ private:
                                              JsonEdgeRequest edge) {
         auto r = graph.memory_resource();
         detail::ReadHydrationShapes shapes(r);
+        graph.reserve_read_view(root.json_view_id());
+        for (const auto& entry : rows) {
+            graph.reserve_read_view(entry.first);
+        }
         if (edge.many) {
             SmartList<T> list(std::allocator_arg, Allocator(r));
             list.data.reserve(rows.size());
@@ -207,6 +212,9 @@ private:
                 list.data.emplace_back(std::move(entity).value());
             }
             list.loaded();
+            if (edge.facets) {
+                list.facets = *edge.facets;
+            }
             graph.install_json_relation_list(
                 root.json_view_id(), edge.owner, edge.id, edge.relation, std::move(list));
         } else {

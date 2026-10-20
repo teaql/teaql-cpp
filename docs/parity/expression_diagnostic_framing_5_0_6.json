@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 1200,
+  "preserved_prefix": 936,
+  "additional_framing_observations": 264,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "raw_original_panics_retained": true,
+  "presentation_adapter": "Consumes actual native getter/nested/root renderings and preserves root arguments/broken markers; reverses only documented casing/selectWith/language presentation. No raw source parser, no repaired missing fields or semantic results.",
+  "adapter_positive_controls": 1,
+  "adapter_negative_controls": 7,
+  "final_controls_ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 527: expression_diagnostic_framing_rust_parity\n1/1 Test #527: expression_diagnostic_framing_rust_parity ...   Passed    0.25 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.26 sec\n",
+  "profiles": {
+    "native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "expression_diagnostic_framing_rust_parity",
+        "expression_diagnostic_text_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 527: expression_diagnostic_framing_rust_parity\n1/2 Test #527: expression_diagnostic_framing_rust_parity ...   Passed    0.28 sec\n    Start 528: expression_diagnostic_text_rust_parity\n2/2 Test #528: expression_diagnostic_text_rust_parity ......   Passed    0.22 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.51 sec\n"
+    },
+    "modules_native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_expression_diagnostic_framing_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 664: module_expression_diagnostic_framing_rust_parity\n1/1 Test #664: module_expression_diagnostic_framing_rust_parity ...   Passed    0.25 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.26 sec\n"
+    }
+  },
+  "live_source_output": "Compared 1200 complete source/native diagnostic frames (explicit presentation adapter; no panic parser)\n",
+  "reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 1200 complete original/native diagnostic frames; old 936 retained verbatim\n",
+  "source_files_sha256": {
+    "tests/parity/expression_diagnostic_framing.py": "2686e06602e9fc27470b087bbd702156a6929bc5fd468e87a72fa8cf28e25f35",
+    "tests/parity/compare_expression_diagnostic_framing_5_0_6.py": "e811243cf8b42769f1f155ed90e9d1d92efcd2ee87bbe9d7cbc9b06987df49bb",
+    "tests/parity/generate_expression_diagnostic_framing_5_0_6.py": "38c7e603bca038b49adce0e81af236837bd662e25dbb2df5e9fbfc2417a6d292",
+    "tests/parity/expression_diagnostic_framing_5_0_6_cases.json.gz": "c328dd9517930f154e92e8f2d9c55e9be8d769f07961efe2a7161c446e419a5e",
+    "tests/parity/expression_diagnostic_text_5_0_6_cases.json.gz": "d5d71d20ba2c36a11f791c82aa3db4dde965b5aacaf8cdd12a899e3efb3fb2d9",
+    "tests/parity/expression_diagnostic_text_probe.cpp": "cfd324153dbe4f54ff840f697e3f05aaadac0712905cfd0d16e91b0b66f60b95",
+    "tests/parity/rust_field_layout/src/bin/expression_diagnostic_text_5_0_6.rs": "a0a84a84e6826a7015fa490b76bd6ec7c8b8d7b21d51694b0b0a073b627024e6"
+  },
+  "binding_inventory": {
+    "active_baseline": 155,
+    "custom_dispatcher_requires_review": 23,
+    "historical_baseline_requires_replay": 63
+  },
+  "production_function_bodies_changed": false,
+  "notice": "Observer/adapter/corpus validation only. No C++ code, generator artifact or lifetime change; sanitizer/MIPS not rerun. Broader model/Assist/extension and complete capabilities/P0-P7 remain open."
+}

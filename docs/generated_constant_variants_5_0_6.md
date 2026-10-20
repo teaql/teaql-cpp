@@ -1,5 +1,10 @@
 # Constant field and topology checkpoint: Rust 5.0.6
 
+Current status: G05/P3 is now qualified with documented language/ownership
+adaptations and constants use normal generation. See
+[the acceptance record](constants_acceptance_5_0_6.md). The text and counts below
+retain this earlier checkpoint, including its then-active generation guard.
+
 Status: P3/G05 remains partial. The default constant-generation guard remains.
 References are the active runtime and producer locks. This checkpoint broadens
 the original public bootstrap comparisons; it does not waive the remaining

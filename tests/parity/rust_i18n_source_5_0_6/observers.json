@@ -1,0 +1,16 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "note": "Four unchanged original tests and two existing observers/corpora. Original Language/I18n modules and their source-relative JSON fixtures are compiled directly; core/model/error dependencies are actual runtime types.",
+  "files": {
+    ".reference/teaql-rs/teaql-runtime/src/language.rs": "5bc8bf7368c1dd19082ec261a3bbdf3d91c58b668ee18ba8dabf78e51c8340ec",
+    ".reference/teaql-rs/teaql-runtime/src/i18n.rs": "840be4c8a87e357e82a15f469f5c6b99dcdc4b5dbc49658574f4fb85895b1338",
+    ".reference/teaql-rs/teaql-runtime/src/builtin-i18n-v1.json": "5e21391fcb793fedfea446fe47346e0ec7faa9175e6cdf18d956771e6db54f1c",
+    ".reference/teaql-rs/teaql-runtime/src/locale-cases-v1.json": "20d26678c151fbc7fe2d38c64e9d058e524259fe27a3e998df174a1dcbaf361a",
+    "tests/parity/rust_values/src/bin/i18n_oracle.rs": "e36a1d307d2bc92a2b242b534b9e8415ee02506e811d5c21a657f666a212a97b",
+    "tests/parity/rust_values/src/bin/i18n_debug_scope_oracle.rs": "8da2dfe640eef17b84dec7093bc1734bd79d81d8515fc88502c31ec50456b1e4",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_state_baselines_5_0_6/build.rs": "8ba56dab7be86ea2c129c9b6ff23d30ca0ff6e41840a534fc16e0f2256d8a264",
+    "tests/parity/i18n_baseline_5_0_6_cases.json.gz": "0eafc7fd72fd5617f249fb28f1d1a99d94bd81aa424b044f80de8d26cc614db4",
+    "tests/parity/i18n_debug_scope_baseline_5_0_6_cases.json.gz": "b913fcc734f2e8be2f73fb24f3f851f297d4765bf0514b5cd087dac773302f32"
+  }
+}

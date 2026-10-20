@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "scope": "Focused target-size literal guard on locked MIPS compiler; no complete runtime/QEMU/physical-device claim.",
+  "initial_invocation": {
+    "cause": "Resolving the compiler symlink invoked its basename-sensitive wrapper directly; preserve the g++ driver spelling.",
+    "exit_code": 127,
+    "diagnostics": "/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/bin/mips-openwrt-linux-musl-wrapper.sh: 84: exec: mips-openwrt-linux-musl-wrapper.sh.bin: not found\n"
+  },
+  "cases": [
+    {
+      "case": "small",
+      "input": "#include <cstddef>\nstatic_assert(sizeof(std::size_t)==4);\nstatic_assert(17ULL <= static_cast<unsigned long long>(static_cast<std::size_t>(-1)), \"audit_value_max_len exceeds target usize\");\n",
+      "expected_compile_success": true,
+      "exit_code": 0,
+      "diagnostics": ""
+    },
+    {
+      "case": "u64_max",
+      "input": "#include <cstddef>\nstatic_assert(sizeof(std::size_t)==4);\nstatic_assert(18446744073709551615ULL <= static_cast<unsigned long long>(static_cast<std::size_t>(-1)), \"audit_value_max_len exceeds target usize\");\n",
+      "expected_compile_success": false,
+      "exit_code": 1,
+      "diagnostics": "/tmp/teaql_privacy_width_506.cpp:3:39: error: static assertion failed: audit_value_max_len exceeds target usize\n    3 | static_assert(18446744073709551615ULL <= static_cast<unsigned long long>(static_cast<std::size_t>(-1)), \"audit_value_max_len exceeds target usize\");\n      |               ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/tmp/teaql_privacy_width_506.cpp:3:39: note: the comparison reduces to '(18446744073709551615 <= 4294967295)'\n"
+    }
+  ]
+}

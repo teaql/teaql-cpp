@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "complete private typed-aggregate replay and focused lifecycle integration qualified; full capabilities remain partial",
+  "observations": 146,
+  "historical_inputs": 48,
+  "explicit_controls": 98,
+  "initial_production_gaps": 12,
+  "profiles": {
+    "native": {
+      "passed": 3,
+      "total": 3,
+      "tests": [
+        "typed_aggregate_context_contracts",
+        "dynamic_query_contracts",
+        "typed_aggregate_scope_rust_parity"
+      ],
+      "log": "/tmp/teaql_typed_aggregate_native_tests_506.log",
+      "log_sha256": "6f876e28b5092e22c153fe1ee777add4fa481914a94ea1b47e248a6dcc83a276",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 259: typed_aggregate_scope_rust_parity\n    Start 369: dynamic_query_contracts\n    Start 258: typed_aggregate_context_contracts\n1/3 Test #258: typed_aggregate_context_contracts ...   Passed    0.00 sec\n2/3 Test #369: dynamic_query_contracts .............   Passed    0.02 sec\n3/3 Test #259: typed_aggregate_scope_rust_parity ...   Passed    0.10 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.12 sec\n"
+    },
+    "modules": {
+      "passed": 3,
+      "total": 3,
+      "tests": [
+        "module_typed_aggregate_context_contracts",
+        "module_dynamic_query_contracts",
+        "module_typed_aggregate_scope_rust_parity"
+      ],
+      "log": "/tmp/teaql_typed_aggregate_modules_tests_506.log",
+      "log_sha256": "a94793c0b98f1522b9822588b0a5df834edad4186dd145c00d220f133fbca129",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 772: module_typed_aggregate_scope_rust_parity\n    Start 698: module_dynamic_query_contracts\n    Start 697: module_typed_aggregate_context_contracts\n1/3 Test #697: module_typed_aggregate_context_contracts ...   Passed    0.00 sec\n2/3 Test #698: module_dynamic_query_contracts .............   Passed    0.01 sec\n3/3 Test #772: module_typed_aggregate_scope_rust_parity ...   Passed    0.07 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.08 sec\n"
+    },
+    "sanitize": {
+      "passed": 3,
+      "total": 3,
+      "tests": [
+        "typed_aggregate_context_contracts",
+        "dynamic_query_contracts",
+        "typed_aggregate_scope_rust_parity"
+      ],
+      "log": "/tmp/teaql_typed_aggregate_sanitize_tests_506.log",
+      "log_sha256": "062de6d4732a50cda46ad6798886070317c418a743c55ff31803839bf27ae88f",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 369: dynamic_query_contracts\n    Start 259: typed_aggregate_scope_rust_parity\n    Start 258: typed_aggregate_context_contracts\n1/3 Test #258: typed_aggregate_context_contracts ...   Passed    0.02 sec\n2/3 Test #369: dynamic_query_contracts .............   Passed    0.09 sec\n3/3 Test #259: typed_aggregate_scope_rust_parity ...   Passed    0.26 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.27 sec\n"
+    }
+  },
+  "canonical_bodies": 491,
+  "catalog_exports": 1479,
+  "formatted_handwritten_cpp": 1354,
+  "source_reproduction": true,
+  "module_source_reproduction": true,
+  "complete_original_runtime": true,
+  "original_archive_files": 610,
+  "append_only_access_bridges": 1,
+  "original_registry_versions_preserved": true,
+  "record_sha256": {
+    "docs/parity/typed_aggregate_5_0_6.json": "1644b5a6568184ed163513446ae693e7bc6c3e47d4cbe6fcc046b1adc13573cc",
+    "docs/parity/typed_aggregate_5_0_6_initial_gaps.json": "df41e968328bc3771a1df809799637077152cffd52882d6cf3da641598dbfd6c",
+    "docs/parity/typed_aggregate_5_0_6_fixture_lifetime_failure.json.gz": "c570f0054cf56007224275e551fef7ca89377d879707bef0f351cb604fe9b5e2"
+  },
+  "production_sha256": {
+    "teaql_runtime/include/teaql/runtime/detail/data_service/typed_aggregate.hpp": "e18c3692ab59f07713f498445f6736c156cbad15c5d3e62776274975ac84b750",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp": "238e86c8112d84155ba19f8887ee4b6c111c3cef41b2d947dde821e0c606c893"
+  },
+  "fixture_sha256": {
+    "teaql_runtime/tests/dynamic_query_tests.cpp": "b3b3bc5b271dd0f34166becbfdc57c0b83df264216a5997b1ecbf95821a0da49",
+    "tests/parity/typed_aggregate_scope_probe.cpp": "a6bbef20afb543dd1130fdfdc2345978944581aab216ff16a35287c6abea9007"
+  },
+  "historical_module_root_gate": {
+    "passed": false,
+    "reason": "Existing module root contract and source-test disposition ledgers retain the historical Rust 5.0.5 baseline. Current verifier rejects them; migrate locators from source instead of retagging.",
+    "ledger_baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a"
+  },
+  "remaining_recorded_baseline_failures": 15,
+  "full_native_rerun": false,
+  "mips_qemu_run": false,
+  "physical_device_run": false,
+  "sanitizer_leak_scanning": false,
+  "complete_capability_acceptance": false,
+  "generator_changed_this_checkpoint": false
+}

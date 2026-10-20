@@ -1,0 +1,15 @@
+[package]
+name = "query_schema_builder_source_506"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "query_schema_builder_source_506"
+path = "../query_schema_builder_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+serde_json = "=1.0.150"
+
+[workspace]

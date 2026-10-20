@@ -1,5 +1,10 @@
 # Shared loaded-state kernel checkpoint for Rust 5.0.6
 
+This is the original scoped checkpoint. The
+[current G15 responsibility review](shared_load_state_requirements_5_0_6.md)
+reconciles its historical remaining work with later generated, initialized-cache
+and composition evidence. Historical counts and boundaries below are preserved.
+
 Status: this scoped kernel checkpoint is qualified in native, sanitizer and
 named-module gates. This checkpoint covers the kernel geometry and
 readonly property schema, not complete G15/G16 or generator parity.

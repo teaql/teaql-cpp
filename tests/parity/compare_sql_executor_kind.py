@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("sql_executor_kind_cases.json", "SQL executor backend capture"))
+    raise SystemExit(main("sql_executor_kind_protocol_5_0_6_cases.json.gz", "SQL executor backend capture"))

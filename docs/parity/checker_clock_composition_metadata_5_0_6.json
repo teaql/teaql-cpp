@@ -1,0 +1,179 @@
+{
+  "rust": {
+    "models": [
+      {
+        "name": "tenant",
+        "view": false,
+        "value_object": false,
+        "fields": [
+          {
+            "name": "id",
+            "context_root": false
+          },
+          {
+            "name": "name",
+            "context_root": false
+          },
+          {
+            "name": "version",
+            "context_root": false
+          }
+        ]
+      },
+      {
+        "name": "record",
+        "view": false,
+        "value_object": false,
+        "fields": [
+          {
+            "name": "id",
+            "context_root": false
+          },
+          {
+            "name": "code",
+            "context_root": false,
+            "createFunction": "now",
+            "updateFunction": "now"
+          },
+          {
+            "name": "count",
+            "context_root": false,
+            "createFunction": "now",
+            "updateFunction": "now"
+          },
+          {
+            "name": "payload",
+            "context_root": false,
+            "optional": "false,createFunction=now,updateFunction=now"
+          },
+          {
+            "name": "version",
+            "context_root": false
+          }
+        ]
+      },
+      {
+        "name": "note",
+        "view": false,
+        "value_object": false,
+        "parent": "record",
+        "fields": [
+          {
+            "name": "id",
+            "context_root": false
+          },
+          {
+            "name": "owner",
+            "context_root": false,
+            "contextRoot": "true,createFunction=now,updateFunction=now"
+          },
+          {
+            "name": "linked",
+            "context_root": false,
+            "createFunction": "now,updateFunction=now"
+          },
+          {
+            "name": "optional_linked",
+            "context_root": false,
+            "createFunction": "now,updateFunction=now",
+            "optional": "true"
+          }
+        ]
+      }
+    ],
+    "selected_entities": [
+      "tenant",
+      "record",
+      "note"
+    ]
+  },
+  "cpp": {
+    "models": [
+      {
+        "name": "tenant",
+        "view": false,
+        "value_object": false,
+        "fields": [
+          {
+            "name": "id",
+            "context_root": false
+          },
+          {
+            "name": "name",
+            "context_root": false
+          },
+          {
+            "name": "version",
+            "context_root": false
+          }
+        ]
+      },
+      {
+        "name": "record",
+        "view": false,
+        "value_object": false,
+        "fields": [
+          {
+            "name": "id",
+            "context_root": false
+          },
+          {
+            "name": "code",
+            "context_root": false,
+            "createFunction": "now",
+            "updateFunction": "now"
+          },
+          {
+            "name": "count",
+            "context_root": false,
+            "createFunction": "now",
+            "updateFunction": "now"
+          },
+          {
+            "name": "payload",
+            "context_root": false,
+            "optional": "false,createFunction=now,updateFunction=now"
+          },
+          {
+            "name": "version",
+            "context_root": false
+          }
+        ]
+      },
+      {
+        "name": "note",
+        "view": false,
+        "value_object": false,
+        "parent": "record",
+        "fields": [
+          {
+            "name": "id",
+            "context_root": false
+          },
+          {
+            "name": "owner",
+            "context_root": false,
+            "contextRoot": "true,createFunction=now,updateFunction=now"
+          },
+          {
+            "name": "linked",
+            "context_root": false,
+            "createFunction": "now,updateFunction=now"
+          },
+          {
+            "name": "optional_linked",
+            "context_root": false,
+            "createFunction": "now,updateFunction=now",
+            "optional": "true"
+          }
+        ]
+      }
+    ],
+    "selected_entities": [
+      "tenant",
+      "record",
+      "note"
+    ]
+  },
+  "source_condition": "SKYNETObjectAdaptor resolves exact Boolean tokens to Boolean; other nonempty attribute strings are truthy in StringTemplate. C++ Checker generation previously used FieldDescriptor strict boolean instead."
+}

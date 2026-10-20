@@ -1,5 +1,10 @@
 # Context-bound round-trip references
 
+The historical 5.0.5 review below is retained. The
+[5.0.6 protocol acceptance](document_reference_acceptance_5_0_6.md) records the
+exact source delta, complete current source/dependency replays and terminal
+native/imported checks. Other Context/runtime/privacy/P7 obligations remain open.
+
 This implements the separate Rust v5.0.5 round_trip_reference module and all
 associated UserContext methods. The older [entity-reference codec](entity_reference.md)
 remains independent. Neither portable token type is a process-local Context

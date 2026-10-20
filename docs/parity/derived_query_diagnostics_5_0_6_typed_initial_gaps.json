@@ -1,0 +1,479 @@
+{
+  "count": 6,
+  "differences": [
+    {
+      "index": 492,
+      "input": {
+        "kind": "facet",
+        "endpoint": "entities",
+        "logging": true,
+        "failure": false,
+        "invalid_intent": false,
+        "secret": "PRIVATE-DESCENDANT"
+      },
+      "rust": {
+        "error": null,
+        "independent_logs": [
+          {
+            "comment": "PRIVATE-DESCENDANT",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id FROM example_orders LIMIT 1",
+            "outcome": "Success",
+            "params": [],
+            "purpose": "independent query",
+            "sql": "SELECT id FROM example_orders LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "logs": [
+          {
+            "comment": "count ACTIVE including [REDACTED]",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Success",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with [REDACTED]",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [
+          [
+            9,
+            1,
+            null
+          ]
+        ],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including PRIVATE-DESCENDANT\"), purpose: Some(\"page ACTIVE with PRIVATE-DESCENDANT\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including PRIVATE-DESCENDANT\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with PRIVATE-DESCENDANT\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      },
+      "cpp": {
+        "error": null,
+        "independent_logs": [
+          {
+            "comment": "PRIVATE-DESCENDANT",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id FROM example_orders LIMIT 1",
+            "outcome": "Success",
+            "params": [],
+            "purpose": "independent query",
+            "sql": "SELECT id FROM example_orders LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "logs": [
+          {
+            "comment": "count ACTIVE including PRIVATE-DESCENDANT",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Success",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with PRIVATE-DESCENDANT",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [
+          [
+            9,
+            1,
+            null
+          ]
+        ],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including PRIVATE-DESCENDANT\"), purpose: Some(\"page ACTIVE with PRIVATE-DESCENDANT\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including PRIVATE-DESCENDANT\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with PRIVATE-DESCENDANT\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      }
+    },
+    {
+      "index": 493,
+      "input": {
+        "kind": "facet",
+        "endpoint": "entities",
+        "logging": true,
+        "failure": false,
+        "invalid_intent": false,
+        "secret": "private-\u03b1-\ud83d\ude42"
+      },
+      "rust": {
+        "error": null,
+        "independent_logs": [
+          {
+            "comment": "private-\u03b1-\ud83d\ude42",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id FROM example_orders LIMIT 1",
+            "outcome": "Success",
+            "params": [],
+            "purpose": "independent query",
+            "sql": "SELECT id FROM example_orders LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "logs": [
+          {
+            "comment": "count ACTIVE including [REDACTED]",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Success",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with [REDACTED]",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [
+          [
+            9,
+            1,
+            null
+          ]
+        ],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including private-\u03b1-\ud83d\ude42\"), purpose: Some(\"page ACTIVE with private-\u03b1-\ud83d\ude42\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including private-\u03b1-\ud83d\ude42\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with private-\u03b1-\ud83d\ude42\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      },
+      "cpp": {
+        "error": null,
+        "independent_logs": [
+          {
+            "comment": "private-\u03b1-\ud83d\ude42",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id FROM example_orders LIMIT 1",
+            "outcome": "Success",
+            "params": [],
+            "purpose": "independent query",
+            "sql": "SELECT id FROM example_orders LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "logs": [
+          {
+            "comment": "count ACTIVE including private-\u03b1-\ud83d\ude42",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Success",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with private-\u03b1-\ud83d\ude42",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [
+          [
+            9,
+            1,
+            null
+          ]
+        ],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including private-\u03b1-\ud83d\ude42\"), purpose: Some(\"page ACTIVE with private-\u03b1-\ud83d\ude42\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including private-\u03b1-\ud83d\ude42\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with private-\u03b1-\ud83d\ude42\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      }
+    },
+    {
+      "index": 494,
+      "input": {
+        "kind": "facet",
+        "endpoint": "entities",
+        "logging": true,
+        "failure": false,
+        "invalid_intent": false,
+        "secret": "long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "rust": {
+        "error": null,
+        "independent_logs": [
+          {
+            "comment": "long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id FROM example_orders LIMIT 1",
+            "outcome": "Success",
+            "params": [],
+            "purpose": "independent query",
+            "sql": "SELECT id FROM example_orders LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "logs": [
+          {
+            "comment": "count ACTIVE including [REDACTED]",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Success",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with [REDACTED]",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [
+          [
+            9,
+            1,
+            null
+          ]
+        ],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"), purpose: Some(\"page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      },
+      "cpp": {
+        "error": null,
+        "independent_logs": [
+          {
+            "comment": "long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id FROM example_orders LIMIT 1",
+            "outcome": "Success",
+            "params": [],
+            "purpose": "independent query",
+            "sql": "SELECT id FROM example_orders LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "logs": [
+          {
+            "comment": "count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Success",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [
+          [
+            9,
+            1,
+            null
+          ]
+        ],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"), purpose: Some(\"page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      }
+    },
+    {
+      "index": 498,
+      "input": {
+        "kind": "facet",
+        "endpoint": "entities",
+        "logging": true,
+        "failure": true,
+        "invalid_intent": false,
+        "secret": "PRIVATE-DESCENDANT"
+      },
+      "rust": {
+        "error": "Transport error: no such table: example_orders",
+        "logs": [
+          {
+            "comment": "count ACTIVE including [REDACTED]",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Failure",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with [REDACTED]",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including PRIVATE-DESCENDANT\"), purpose: Some(\"page ACTIVE with PRIVATE-DESCENDANT\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including PRIVATE-DESCENDANT\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with PRIVATE-DESCENDANT\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      },
+      "cpp": {
+        "error": "Transport error: no such table: example_orders",
+        "logs": [
+          {
+            "comment": "count ACTIVE including PRIVATE-DESCENDANT",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Failure",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with PRIVATE-DESCENDANT",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including PRIVATE-DESCENDANT\"), purpose: Some(\"page ACTIVE with PRIVATE-DESCENDANT\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including PRIVATE-DESCENDANT\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with PRIVATE-DESCENDANT\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      }
+    },
+    {
+      "index": 499,
+      "input": {
+        "kind": "facet",
+        "endpoint": "entities",
+        "logging": true,
+        "failure": true,
+        "invalid_intent": false,
+        "secret": "private-\u03b1-\ud83d\ude42"
+      },
+      "rust": {
+        "error": "Transport error: no such table: example_orders",
+        "logs": [
+          {
+            "comment": "count ACTIVE including [REDACTED]",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Failure",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with [REDACTED]",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including private-\u03b1-\ud83d\ude42\"), purpose: Some(\"page ACTIVE with private-\u03b1-\ud83d\ude42\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including private-\u03b1-\ud83d\ude42\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with private-\u03b1-\ud83d\ude42\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      },
+      "cpp": {
+        "error": "Transport error: no such table: example_orders",
+        "logs": [
+          {
+            "comment": "count ACTIVE including private-\u03b1-\ud83d\ude42",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Failure",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with private-\u03b1-\ud83d\ude42",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including private-\u03b1-\ud83d\ude42\"), purpose: Some(\"page ACTIVE with private-\u03b1-\ud83d\ude42\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including private-\u03b1-\ud83d\ude42\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with private-\u03b1-\ud83d\ude42\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      }
+    },
+    {
+      "index": 500,
+      "input": {
+        "kind": "facet",
+        "endpoint": "entities",
+        "logging": true,
+        "failure": true,
+        "invalid_intent": false,
+        "secret": "long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "rust": {
+        "error": "Transport error: no such table: example_orders",
+        "logs": [
+          {
+            "comment": "count ACTIVE including [REDACTED]",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Failure",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with [REDACTED]",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"), purpose: Some(\"page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      },
+      "cpp": {
+        "error": "Transport error: no such table: example_orders",
+        "logs": [
+          {
+            "comment": "count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "debug_sql": "-- TeaQL SAFE\nSELECT id, version FROM example_orders WHERE (status = 'ACTIVE') LIMIT 1",
+            "outcome": "Failure",
+            "params": [
+              "Text(\"ACTIVE\")"
+            ],
+            "purpose": "page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "sql": "SELECT id, version FROM example_orders WHERE (status = ?) LIMIT 1",
+            "trace": [
+              "TraceNode { kind: Operation, entity_type: \"Order\", entity_id: None, comment: \"query\" }",
+              "TraceNode { kind: Request, entity_type: \"Order\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }",
+              "TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }"
+            ]
+          }
+        ],
+        "rows": [],
+        "wrapper": "PurposedSelectQuery { query: SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"status\"), op: Eq, right: Value(Text(\"ACTIVE\")) }), having: None, order_by: [], slice: Some(Slice { limit: Some(1), offset: 0 }), partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"), purpose: Some(\"page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"), trace_chain: [TraceNode { kind: Comment, entity_type: \"Order\", entity_id: None, comment: \"count ACTIVE including long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" }, TraceNode { kind: Purpose, entity_type: \"Order\", entity_id: None, comment: \"page ACTIVE with long-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, has_diagnostic_source: true }"
+      }
+    }
+  ]
+}

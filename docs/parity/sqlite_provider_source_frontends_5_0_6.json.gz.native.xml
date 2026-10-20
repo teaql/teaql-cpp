@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="27"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="8"
+	timestamp="2026-10-18T23:04:34"
+	>
+	<testcase name="provider_sqlite_schema_contracts" classname="provider_sqlite_schema_contracts" time="0.0122192" status="run">
+		<properties/>
+		<system-out>SQLite schema provider contracts passed
+</system-out>
+	</testcase>
+	<testcase name="original_provider_storage_contracts" classname="original_provider_storage_contracts" time="0.0132737" status="run">
+		<properties/>
+		<system-out>Original fifteen SQLite storage contracts passed
+</system-out>
+	</testcase>
+	<testcase name="original_provider_schema_contracts" classname="original_provider_schema_contracts" time="0.203739" status="run">
+		<properties/>
+		<system-out>Original seventeen SQLite schema contracts passed
+</system-out>
+	</testcase>
+	<testcase name="original_provider_query_contracts" classname="original_provider_query_contracts" time="0.530737" status="run">
+		<properties/>
+		<system-out>Original seven SQLite row/query contracts passed
+</system-out>
+	</testcase>
+	<testcase name="original_provider_transaction_contracts" classname="original_provider_transaction_contracts" time="0.0184046" status="run">
+		<properties/>
+		<system-out>[TeaQL][MUTATION-POLICY-001] request=TransactionSchool.saveGraph source=GeneratedDefault approval=NotApplicable
+Original final three SQLite provider contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_unicode_contracts" classname="provider_sqlite_unicode_contracts" time="8.63246" status="run">
+		<properties/>
+		<system-out>All Unicode scalar lowercase and four sigma contexts match Rust
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_business_id_contracts" classname="provider_sqlite_business_id_contracts" time="0.0332452" status="run">
+		<properties/>
+		<system-out>SQLite business ID contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_id_contracts" classname="provider_sqlite_id_contracts" time="0.0490652" status="run">
+		<properties/>
+		<system-out>SQLite ID-space contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sqlite_chunk_capacity_rust_parity" classname="sqlite_chunk_capacity_rust_parity" time="4.05034" status="run">
+		<properties/>
+		<system-out>SQLite cursor capacities parity: 858/858 observations match
+</system-out>
+	</testcase>
+	<testcase name="sqlite_chunk_capacity_contracts" classname="sqlite_chunk_capacity_contracts" time="0.0454897" status="run">
+		<properties/>
+		<system-out>CPP_STREAM_ARENA_BLOCKS,0,73,0,0
+CPP_STREAM_ARENA_BLOCKS,1,73,0,0
+CPP_STREAM_ARENA_BLOCKS,73,73,1,13888
+CPP_STREAM_ARENA_BLOCKS,74,73,1,13888
+CPP_STREAM_ARENA_BLOCKS,219,73,1,31168
+CPP_STREAM_ARENA_BLOCKS,223,73,1,31168
+CPP_STREAM_ARENA_BLOCKS,4096,128,2,885888
+Original three cursor allocation contracts and actual Context deletion passed
+</system-out>
+	</testcase>
+	<testcase name="sqlite_lease_binding_rust_parity" classname="sqlite_lease_binding_rust_parity" time="0.0638423" status="run">
+		<properties/>
+		<system-out>SQLite lease/binding parity: 15/15 observations match
+</system-out>
+	</testcase>
+	<testcase name="sqlite_lease_binding_guard_rust_parity" classname="sqlite_lease_binding_guard_rust_parity" time="0.0808086" status="run">
+		<properties/>
+		<system-out>SQLite binding guards parity: 72/72 observations match
+</system-out>
+	</testcase>
+	<testcase name="sqlite_async_lease_rust_parity" classname="sqlite_async_lease_rust_parity" time="0.146443" status="run">
+		<properties/>
+		<system-out>SQLite asynchronous leases parity: 144/144 observations match
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_transport_contracts" classname="provider_sqlite_transport_contracts" time="0.0171972" status="run">
+		<properties/>
+		<system-out>Production SQLite transport contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_decoding_contracts" classname="provider_sqlite_decoding_contracts" time="0.0031524" status="run">
+		<properties/>
+		<system-out>SQLite decoding contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_binding_contracts" classname="provider_sqlite_binding_contracts" time="0.00300055" status="run">
+		<properties/>
+		<system-out>SQLite binding contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_model_contracts" classname="provider_sqlite_model_contracts" time="0.0026266" status="run">
+		<properties/>
+		<system-out>SQLite provider model and scoped clone contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_error_contracts" classname="provider_sqlite_error_contracts" time="0.0407914" status="run">
+		<properties/>
+		<system-out>SQLite provider error contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_driver_error_contracts" classname="provider_sqlite_driver_error_contracts" time="0.146814" status="run">
+		<properties/>
+		<system-out>SQLite structured driver error contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_simple_error_contracts" classname="provider_sqlite_simple_error_contracts" time="0.0160102" status="run">
+		<properties/>
+		<system-out>SQLite scalar/text/unit error scope contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_boxed_error_contracts" classname="provider_sqlite_boxed_error_contracts" time="0.00543399" status="run">
+		<properties/>
+		<system-out>SQLite boxed Error ownership contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_from_sql_error_contracts" classname="provider_sqlite_from_sql_error_contracts" time="0.00254494" status="run">
+		<properties/>
+		<system-out>SQLite column-conversion scope contracts passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_transaction_stream_contracts" classname="provider_sqlite_transaction_stream_contracts" time="0.0105885" status="run">
+		<properties/>
+		<system-out>All three original lease bodies and four native transaction stream lifecycle bodies passed
+</system-out>
+	</testcase>
+	<testcase name="provider_sqlite_dialect_contracts" classname="provider_sqlite_dialect_contracts" time="0.00238461" status="run">
+		<properties/>
+		<system-out>SQLite provider dialect contracts passed
+</system-out>
+	</testcase>
+	<testcase name="dynamic_query_contracts" classname="dynamic_query_contracts" time="0.0190367" status="run">
+		<properties/>
+		<system-out>Dynamic query hydration contracts passed
+</system-out>
+	</testcase>
+	<testcase name="dynamic_storage_contracts" classname="dynamic_storage_contracts" time="0.00270795" status="run">
+		<properties/>
+		<system-out>Dynamic storage contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sqlite_contracts" classname="sqlite_contracts" time="0.0189195" status="run">
+		<properties/>
+		<system-out>Production SQLite regression contracts passed
+</system-out>
+	</testcase>
+</testsuite>

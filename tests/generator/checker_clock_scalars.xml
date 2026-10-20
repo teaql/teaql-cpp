@@ -1,0 +1,15 @@
+<root name="cpp_checker_clock_scalars" org="teaql" data_service="sqlite">
+    <note
+          text="string(createFunction=now,updateFunction=now)" optional_text="string(createFunction=now,updateFunction=now)?"
+          code="uniStr(createFunction=now,updateFunction=now)" optional_code="uniStr(createFunction=now,updateFunction=now)?"
+          integer="integer(createFunction=now,updateFunction=now)" optional_integer="integer(createFunction=now,updateFunction=now)?"
+          long="long(createFunction=now,updateFunction=now)" optional_long="long(createFunction=now,updateFunction=now)?"
+          decimal="number(createFunction=now,updateFunction=now)" optional_decimal="number(createFunction=now,updateFunction=now)?"
+          float="float(createFunction=now,updateFunction=now)" optional_float="float(createFunction=now,updateFunction=now)?"
+          double="double(createFunction=now,updateFunction=now)" optional_double="double(createFunction=now,updateFunction=now)?"
+          active="bool(createFunction=now,updateFunction=now)" optional_active="bool(createFunction=now,updateFunction=now)?"
+          date="date(createFunction=now,updateFunction=now)" optional_date="date(createFunction=now,updateFunction=now)?"
+          time="time(createFunction=now,updateFunction=now)" optional_time="time(createFunction=now,updateFunction=now)?"
+          payload="jsonMe(createFunction=now,updateFunction=now)" optional_payload="jsonMe(createFunction=now,updateFunction=now)?"
+          timestamp="dateTime(createFunction=now,updateFunction=now)" />
+</root>

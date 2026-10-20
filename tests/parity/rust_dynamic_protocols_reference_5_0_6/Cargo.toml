@@ -1,0 +1,53 @@
+[package]
+name = "teaql_dynamic_protocols_reference_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "teaql_dynamic_fields_reference_506"
+path = "../rust_field_layout/src/bin/dynamic_fields_5_0_6.rs"
+
+[[bin]]
+name = "teaql_dynamic_storage_reference_506"
+path = "../rust_field_layout/src/bin/dynamic_storage_5_0_6.rs"
+
+[[bin]]
+name = "teaql_dynamic_ledger_reference_506"
+path = "../rust_field_layout/src/bin/dynamic_ledger_5_0_6.rs"
+
+[[bin]]
+name = "teaql_dynamic_graph_debug_reference_506"
+path = "../rust_field_layout/src/bin/dynamic_graph_debug_5_0_6.rs"
+
+[[bin]]
+name = "teaql_dynamic_governance_reference_506"
+path = "../rust_field_layout/src/bin/dynamic_governance_5_0_6.rs"
+
+[[bin]]
+name = "teaql_dynamic_query_reference_506"
+path = "../rust_field_layout/src/bin/dynamic_query_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+serde = "=1.0.228"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype"] }
+
+school_management_service_core = { package = "school-management-service-core", path = "../../../.reference/teaql-rs/examples/shared-load-state/fixtures/narrow/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }

@@ -309,21 +309,21 @@ inline PriorityExpression LabelExpression::getPriority() const {
 
 struct E {
     static PriorityExpression priority(const Priority& value) {
-        return PriorityExpression(entity_expression(value));
+        return PriorityExpression(entity_expression(value, StaticString{"priority"}));
     }
 
     static PriorityExpression priority(Priority&&) = delete;
     static PriorityExpression priority(const Priority&&) = delete;
 
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value));
+        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static LabelExpression label(const Label& value) {
-        return LabelExpression(entity_expression(value));
+        return LabelExpression(entity_expression(value, StaticString{"label"}));
     }
 
     static LabelExpression label(Label&&) = delete;

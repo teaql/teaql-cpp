@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Separate source/CPP alias audit; not an accepted corpus and no normalization. Physical identifier quoting affects primitive alias acceptance.",
+  "cases": [
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "order": 3
+        }
+      },
+      "rust": {
+        "error": "Line: JSON_ENTITY_INPUT: unknown model field: order"
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "order_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "order": false,
+            "order_id": true,
+            "product": false,
+            "product_id": false,
+            "quantity": false,
+            "version": false
+          }
+        }
+      },
+      "match": false
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "order": null
+        }
+      },
+      "rust": {
+        "error": "Line: JSON_ENTITY_INPUT: graph relation requires an explicitly loaded owner id"
+      },
+      "cpp": {
+        "error": "Line: JSON_ENTITY_INPUT: graph relation requires an explicitly loaded owner id"
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "order": {
+            "id": 3
+          }
+        }
+      },
+      "rust": {
+        "error": "Line: JSON_ENTITY_INPUT: graph relation requires an explicitly loaded owner id"
+      },
+      "cpp": {
+        "error": "Line: JSON_ENTITY_INPUT: graph relation requires an explicitly loaded owner id"
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "order_id": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "order_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "order": false,
+            "order_id": true,
+            "product": false,
+            "product_id": false,
+            "quantity": false,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "order_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "order": false,
+            "order_id": true,
+            "product": false,
+            "product_id": false,
+            "quantity": false,
+            "version": false
+          }
+        }
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "order_id": null
+        }
+      },
+      "rust": {
+        "error": "Line: JSON_ENTITY_INPUT: invalid field type: order_id"
+      },
+      "cpp": {
+        "error": "Line: JSON_ENTITY_INPUT: invalid field type: order_id"
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "order_id": {
+            "id": 3
+          }
+        }
+      },
+      "rust": {
+        "error": "Line: JSON_ENTITY_INPUT: invalid field type: order_id"
+      },
+      "cpp": {
+        "error": "Line: JSON_ENTITY_INPUT: invalid field type: order_id"
+      },
+      "match": true
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "\"order\"": 3
+        }
+      },
+      "rust": {
+        "row": {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "order_id": 3
+          },
+          "loaded": {
+            "id": false,
+            "order": false,
+            "order_id": true,
+            "product": false,
+            "product_id": false,
+            "quantity": false,
+            "version": false
+          }
+        }
+      },
+      "cpp": {
+        "error": "Line: JSON_ENTITY_INPUT: unknown model field: \"order\""
+      },
+      "match": false
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "\"order\"": null
+        }
+      },
+      "rust": {
+        "error": "Line: JSON_ENTITY_INPUT: invalid field type: order_id"
+      },
+      "cpp": {
+        "error": "Line: JSON_ENTITY_INPUT: unknown model field: \"order\""
+      },
+      "match": false
+    },
+    {
+      "input": {
+        "entity": "Line",
+        "array": false,
+        "value": {
+          "\"order\"": {
+            "id": 3
+          }
+        }
+      },
+      "rust": {
+        "error": "Line: JSON_ENTITY_INPUT: invalid field type: order_id"
+      },
+      "cpp": {
+        "error": "Line: JSON_ENTITY_INPUT: unknown model field: \"order\""
+      },
+      "match": false
+    }
+  ]
+}

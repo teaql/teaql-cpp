@@ -1,0 +1,52 @@
+{
+  "recorded_utc": "2026-10-14T17:38:08.258960+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "JSON with trusted readonly/query selections and actual RequestPolicy; provider-missing protection boundaries, not positive persistent hydration or complete G16/G17.",
+  "exact_original_native_outcomes": 9216,
+  "successes": 5340,
+  "errors": 3876,
+  "policy_denials": 2304,
+  "provider_missing_errors": 1572,
+  "policy_callbacks": 11904,
+  "safe_sql_log_records": 4320,
+  "denied_cases_with_select_authorizer_callbacks": 0,
+  "reference_registry_difference_count": 0,
+  "checks": {
+    "native_new": {
+      "passed": 1,
+      "selected": 1
+    },
+    "native_json_integration": {
+      "passed": 9,
+      "selected": 9
+    },
+    "modules": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize": {
+      "passed": 1,
+      "selected": 1,
+      "leak_scanning": false
+    },
+    "format_files": 1443,
+    "canonical_consumer_bodies": 659,
+    "module_exports": 1485
+  },
+  "existing_debug_adaptation": "Exact quoted-Line descriptor spelling only; no SQL/value/error rewriting.",
+  "production_or_generator_functions_changed": false,
+  "original_generated_or_historical_files_changed": false,
+  "raw_validation": "docs/parity/dynamic_json_composition_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "tests/parity/generated_dynamic_json_composition_probe.cpp": "9f01650ee1ac1c2ee5b5c53d6918c3fb1a5f16a2625b5045934832a7aeec2b21",
+    "tests/parity/compare_dynamic_json_composition_5_0_6.py": "3f2ca5ac33e06a05d80ba9e569e1803b5a642e7ebb332c6b2dfd42fc08881764",
+    "tests/parity/rust_dynamic_json_composition_5_0_6/Cargo.toml": "febc48f1682d7ec3767ecde362d5f27d901c99393f76dcad5499ed854fd27b96",
+    "tests/parity/rust_dynamic_json_composition_5_0_6/Cargo.lock": "6ef975bd3901f3d163882a73abffef356526af31eaab15539010dcd70ddf834d",
+    "tests/parity/rust_dynamic_json_composition_5_0_6/src/bin/dynamic_json_composition_5_0_6.rs": "713f3d0158d9d5bfcfc031ea68cd52f6ee86602c32488e6cdcd82602fe8be2e7",
+    "tests/parity/dynamic_json_composition_5_0_6_cases.json.gz": "26ea88e219b8e188a50cb00ecff8d7fe611b3d6c02e900f36452153818d55c76",
+    "docs/parity/dynamic_json_composition_source_body_review_5_0_6.json": "65408d948cc6e84ff10ac2c0ef9b30062a444d032630752827165b56f5385b80"
+  },
+  "complete_capability_acceptance": false,
+  "full_suite_java_generation_mips_device_run": false
+}

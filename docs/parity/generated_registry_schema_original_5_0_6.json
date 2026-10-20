@@ -1,0 +1,288 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_inputs": {
+    "tests/parity/rust_runtime_configuration_models_5_0_6/src/bin/registries.rs": "b44b39da1d708b1409b74a7ea39e4ef231e60065485e6308318309577d64c819",
+    "tests/parity/rust_runtime_configuration_models_5_0_6/Cargo.lock": "93fbda756491621fa2a54df6b98e00f56dc3797a95e72057e7f70c2b17fdc8e1",
+    "tests/generator/parity/business_ids_rust/PROVENANCE.json": "e5f8aec219847029c280f4b4a2eac1fb1bb2db6b3d992b78d2c024f4b01dad9c",
+    "tests/generator/parity/business_ids_rust/lib/src/runtime.rs": "fb5673825e4d57f2e3e11c7421aaad8e8ccfad6c310cd3ea6c2ebd7541e1a12c"
+  },
+  "build_exit_code": 0,
+  "cases": [
+    {
+      "input": {
+        "name": "Tenant",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": true,
+        "behavior_success": true,
+        "checker": "Tenant",
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": true,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": "EntityDescriptor { name: \"Tenant\", table_name: \"tenant_data\", data_service: Some(\"sqlite\"), properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: false, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"name\", data_type: Text, nullable: false, column_name: \"name\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"version\", data_type: I64, nullable: false, column_name: \"version\", is_id: false, is_version: true, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"receipt_list\", target_entity: \"Receipt\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"ticket_list\", target_entity: \"Ticket\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: true, audit_value_max_len: None }",
+        "schema_clone_equal": true,
+        "schema_fresh": true
+      }
+    },
+    {
+      "input": {
+        "name": "Receipt",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": true,
+        "behavior_success": true,
+        "checker": "Receipt",
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": true,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": "EntityDescriptor { name: \"Receipt\", table_name: \"receipt_data\", data_service: Some(\"sqlite\"), properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: false, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"name\", data_type: Text, nullable: false, column_name: \"name\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"receipt_number\", data_type: Text, nullable: false, column_name: \"receipt_number\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"version\", data_type: I64, nullable: false, column_name: \"version\", is_id: false, is_version: true, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"tenant_id\", data_type: U64, nullable: false, column_name: \"tenant\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"tenant\", target_entity: \"Tenant\", local_key: \"tenant_id\", foreign_key: \"id\", many: false, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: true, audit_value_max_len: None }",
+        "schema_clone_equal": true,
+        "schema_fresh": true
+      }
+    },
+    {
+      "input": {
+        "name": "Ticket",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": true,
+        "behavior_success": true,
+        "checker": "Ticket",
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": true,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": "EntityDescriptor { name: \"Ticket\", table_name: \"ticket_data\", data_service: Some(\"sqlite\"), properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: false, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"name\", data_type: Text, nullable: false, column_name: \"name\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"ticket_number\", data_type: Text, nullable: false, column_name: \"ticket_number\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"version\", data_type: I64, nullable: false, column_name: \"version\", is_id: false, is_version: true, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"tenant_id\", data_type: U64, nullable: false, column_name: \"tenant\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"tenant\", target_entity: \"Tenant\", local_key: \"tenant_id\", foreign_key: \"id\", many: false, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: true, audit_value_max_len: None }",
+        "schema_clone_equal": true,
+        "schema_fresh": true
+      }
+    },
+    {
+      "input": {
+        "name": "tenant",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": false,
+        "behavior_success": null,
+        "checker": null,
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": false,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": null,
+        "schema_clone_equal": null,
+        "schema_fresh": null
+      }
+    },
+    {
+      "input": {
+        "name": "unknown",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": false,
+        "behavior_success": null,
+        "checker": null,
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": false,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": null,
+        "schema_clone_equal": null,
+        "schema_fresh": null
+      }
+    },
+    {
+      "input": {
+        "name": "Receipt\u0000x",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": false,
+        "behavior_success": null,
+        "checker": null,
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": false,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": null,
+        "schema_clone_equal": null,
+        "schema_fresh": null
+      }
+    },
+    {
+      "input": {
+        "name": "",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": false,
+        "behavior_success": null,
+        "checker": null,
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": false,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": null,
+        "schema_clone_equal": null,
+        "schema_fresh": null
+      }
+    },
+    {
+      "input": {
+        "name": "ExternalEntity",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": false,
+        "behavior_success": null,
+        "checker": null,
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": false,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": null,
+        "schema_clone_equal": null,
+        "schema_fresh": null
+      }
+    },
+    {
+      "input": {
+        "name": "TENANT",
+        "value": "valid"
+      },
+      "source_expected": {
+        "behavior": false,
+        "behavior_success": null,
+        "checker": null,
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": false,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": null,
+        "schema_clone_equal": null,
+        "schema_fresh": null
+      }
+    },
+    {
+      "input": {
+        "name": "Tenant",
+        "value": ""
+      },
+      "source_expected": {
+        "behavior": true,
+        "behavior_success": true,
+        "checker": "Tenant",
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": true,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": "EntityDescriptor { name: \"Tenant\", table_name: \"tenant_data\", data_service: Some(\"sqlite\"), properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: false, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"name\", data_type: Text, nullable: false, column_name: \"name\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"version\", data_type: I64, nullable: false, column_name: \"version\", is_id: false, is_version: true, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"receipt_list\", target_entity: \"Receipt\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"ticket_list\", target_entity: \"Ticket\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: true, audit_value_max_len: None }",
+        "schema_clone_equal": true,
+        "schema_fresh": true
+      }
+    },
+    {
+      "input": {
+        "name": "Tenant",
+        "value": "   "
+      },
+      "source_expected": {
+        "behavior": true,
+        "behavior_success": true,
+        "checker": "Tenant",
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": true,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": "EntityDescriptor { name: \"Tenant\", table_name: \"tenant_data\", data_service: Some(\"sqlite\"), properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: false, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"name\", data_type: Text, nullable: false, column_name: \"name\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"version\", data_type: I64, nullable: false, column_name: \"version\", is_id: false, is_version: true, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"receipt_list\", target_entity: \"Receipt\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"ticket_list\", target_entity: \"Ticket\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: true, audit_value_max_len: None }",
+        "schema_clone_equal": true,
+        "schema_fresh": true
+      }
+    },
+    {
+      "input": {
+        "name": "Tenant",
+        "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "source_expected": {
+        "behavior": true,
+        "behavior_success": true,
+        "checker": "Tenant",
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": true,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": "EntityDescriptor { name: \"Tenant\", table_name: \"tenant_data\", data_service: Some(\"sqlite\"), properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: false, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"name\", data_type: Text, nullable: false, column_name: \"name\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"version\", data_type: I64, nullable: false, column_name: \"version\", is_id: false, is_version: true, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"receipt_list\", target_entity: \"Receipt\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"ticket_list\", target_entity: \"Ticket\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: true, audit_value_max_len: None }",
+        "schema_clone_equal": true,
+        "schema_fresh": true
+      }
+    },
+    {
+      "input": {
+        "name": "Tenant",
+        "value": "\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00\ud83d\ude00"
+      },
+      "source_expected": {
+        "behavior": true,
+        "behavior_success": true,
+        "checker": "Tenant",
+        "clone_has_extension": true,
+        "findings": [],
+        "original_has_extension": false,
+        "replacement_keeps_receipt_behavior": true,
+        "replacement_keeps_receipt_checker": true,
+        "repository": true,
+        "repository_debug": "InMemoryEntityRegistry { entities: {\"Receipt\": \"Receipt\", \"Tenant\": \"Tenant\", \"Ticket\": \"Ticket\"} }",
+        "schema": "EntityDescriptor { name: \"Tenant\", table_name: \"tenant_data\", data_service: Some(\"sqlite\"), properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: false, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"name\", data_type: Text, nullable: false, column_name: \"name\", is_id: false, is_version: false, max_length: Some(100), numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"version\", data_type: I64, nullable: false, column_name: \"version\", is_id: false, is_version: true, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"receipt_list\", target_entity: \"Receipt\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"ticket_list\", target_entity: \"Ticket\", local_key: \"id\", foreign_key: \"tenant_id\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: true, audit_value_max_len: None }",
+        "schema_clone_equal": true,
+        "schema_fresh": true
+      }
+    }
+  ],
+  "stderr": "",
+  "notice": "Actual unchanged generated registry/schema methods. C++ generator public factories remain pending."
+}

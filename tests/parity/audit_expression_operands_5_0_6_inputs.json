@@ -1,0 +1,934 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Actual-source ignored expression, operand/group validity and later-attribute continuation; retains macro controls and all prior expression/container mismatches. Does not claim full Rust syntax coverage.",
+  "cases": [
+    [
+      "audit_macro_expression_macro_parentheses",
+      "17, audit_value_max_len=ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_brackets",
+      "17, audit_value_max_len=ignored![not Rust +], audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_braces",
+      "17, audit_value_max_len=ignored!{anything, +}, audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_qualified_macro",
+      "17, audit_value_max_len=module::ignored!{tokens}, audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_absolute_macro",
+      "17, audit_value_max_len=::module::ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_lifetime",
+      "17, audit_value_max_len=ignored!{'a}, audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_character",
+      "17, audit_value_max_len=ignored!{'a'}, audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_nested",
+      "17, audit_value_max_len=ignored!{a(b[c{d}])}, audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_raw_string",
+      "17, audit_value_max_len=ignored!{r#\"}\"#}, audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_crate_path",
+      "17, audit_value_max_len=crate::ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_byte_prefix_name",
+      "17, audit_value_max_len=brackets![], audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_c_prefix_name",
+      "17, audit_value_max_len=crates!{}, audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_raw_identifier",
+      "17, audit_value_max_len=r#type!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_integer_bang",
+      "17, audit_value_max_len=17!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_string_bang",
+      "17, audit_value_max_len=\"17\"!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_boolean_bang",
+      "17, audit_value_max_len=true!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_parentheses_bang",
+      "17, audit_value_max_len=(17)!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_missing_group",
+      "17, audit_value_max_len=ignored!, audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_mismatched_delimiter",
+      "17, audit_value_max_len=ignored!(], audit_value_max_len=21"
+    ],
+    [
+      "audit_macro_expression_macro_unclosed_group",
+      "17, audit_value_max_len=ignored!{, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_macro_parentheses",
+      "17, audit_value_max_len=ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_macro_brackets",
+      "17, audit_value_max_len=ignored![not Rust +], audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_macro_braces",
+      "17, audit_value_max_len=ignored!{anything, +}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_qualified_macro",
+      "17, audit_value_max_len=module::ignored!{tokens}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_absolute_macro",
+      "17, audit_value_max_len=::module::ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_macro_lifetime",
+      "17, audit_value_max_len=ignored!{'a}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_macro_character",
+      "17, audit_value_max_len=ignored!{'a'}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_macro_nested",
+      "17, audit_value_max_len=ignored!{a(b[c{d}])}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_macro_raw_string",
+      "17, audit_value_max_len=ignored!{r#\"}\"#}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_path_call",
+      "17, audit_value_max_len=some::call(1,2), audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_if_block",
+      "17, audit_value_max_len=if flag {1} else {2}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_async_block",
+      "17, audit_value_max_len=async {1}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_const_block",
+      "17, audit_value_max_len=const {1}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_closure",
+      "17, audit_value_max_len=|| 1, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_return_expr",
+      "17, audit_value_max_len=return 1, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_loop_expr",
+      "17, audit_value_max_len=loop {}, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_array_expr",
+      "17, audit_value_max_len=[1,2], audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_tuple_expr",
+      "17, audit_value_max_len=(1,2), audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_bad_paren",
+      "17, audit_value_max_len=(17 +), audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_bad_binary",
+      "17, audit_value_max_len=17 +, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_character",
+      "17, audit_value_max_len='a', audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_byte_string",
+      "17, audit_value_max_len=b\"17\", audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_float",
+      "17, audit_value_max_len=17.5, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_entity_override",
+      "17, entity=\"Other\", audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_table_override",
+      "17, table=\"other_data\", audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_service_override",
+      "17, data_service=\"other\", audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_indexed_flag",
+      "17, indexed_layout, audit_value_max_len=21"
+    ],
+    [
+      "audit_expression_continuation_reverse_relation",
+      "17, reverse_relation(name=\"others\",target=\"Other\",many), audit_value_max_len=21"
+    ],
+    [
+      "if_without_else_audit_value_max_len_limit",
+      "17, audit_value_max_len=if flag {1}, audit_value_max_len=21"
+    ],
+    [
+      "if_without_else_audit_value_max_len_mask",
+      "17, audit_value_max_len=if flag {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "if_without_else_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=if flag {1}, audit_value_max_len=21"
+    ],
+    [
+      "if_without_else_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=if flag {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "if_with_else_audit_value_max_len_limit",
+      "17, audit_value_max_len=if flag {1} else {2}, audit_value_max_len=21"
+    ],
+    [
+      "if_with_else_audit_value_max_len_mask",
+      "17, audit_value_max_len=if flag {1} else {2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "if_with_else_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=if flag {1} else {2}, audit_value_max_len=21"
+    ],
+    [
+      "if_with_else_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=if flag {1} else {2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "if_else_if_audit_value_max_len_limit",
+      "17, audit_value_max_len=if flag {1} else if other {2} else {3}, audit_value_max_len=21"
+    ],
+    [
+      "if_else_if_audit_value_max_len_mask",
+      "17, audit_value_max_len=if flag {1} else if other {2} else {3}, audit_mask_fields=\"name\""
+    ],
+    [
+      "if_else_if_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=if flag {1} else if other {2} else {3}, audit_value_max_len=21"
+    ],
+    [
+      "if_else_if_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=if flag {1} else if other {2} else {3}, audit_mask_fields=\"name\""
+    ],
+    [
+      "async_block_audit_value_max_len_limit",
+      "17, audit_value_max_len=async {1}, audit_value_max_len=21"
+    ],
+    [
+      "async_block_audit_value_max_len_mask",
+      "17, audit_value_max_len=async {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "async_block_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=async {1}, audit_value_max_len=21"
+    ],
+    [
+      "async_block_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=async {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "async_move_block_audit_value_max_len_limit",
+      "17, audit_value_max_len=async move {1}, audit_value_max_len=21"
+    ],
+    [
+      "async_move_block_audit_value_max_len_mask",
+      "17, audit_value_max_len=async move {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "async_move_block_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=async move {1}, audit_value_max_len=21"
+    ],
+    [
+      "async_move_block_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=async move {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "const_block_audit_value_max_len_limit",
+      "17, audit_value_max_len=const {1}, audit_value_max_len=21"
+    ],
+    [
+      "const_block_audit_value_max_len_mask",
+      "17, audit_value_max_len=const {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "const_block_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=const {1}, audit_value_max_len=21"
+    ],
+    [
+      "const_block_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=const {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "unsafe_block_audit_value_max_len_limit",
+      "17, audit_value_max_len=unsafe {1}, audit_value_max_len=21"
+    ],
+    [
+      "unsafe_block_audit_value_max_len_mask",
+      "17, audit_value_max_len=unsafe {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "unsafe_block_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=unsafe {1}, audit_value_max_len=21"
+    ],
+    [
+      "unsafe_block_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=unsafe {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "loop_block_audit_value_max_len_limit",
+      "17, audit_value_max_len=loop {}, audit_value_max_len=21"
+    ],
+    [
+      "loop_block_audit_value_max_len_mask",
+      "17, audit_value_max_len=loop {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "loop_block_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=loop {}, audit_value_max_len=21"
+    ],
+    [
+      "loop_block_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=loop {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "return_value_audit_value_max_len_limit",
+      "17, audit_value_max_len=return 1, audit_value_max_len=21"
+    ],
+    [
+      "return_value_audit_value_max_len_mask",
+      "17, audit_value_max_len=return 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "return_value_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=return 1, audit_value_max_len=21"
+    ],
+    [
+      "return_value_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=return 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "return_empty_audit_value_max_len_limit",
+      "17, audit_value_max_len=return, audit_value_max_len=21"
+    ],
+    [
+      "return_empty_audit_value_max_len_mask",
+      "17, audit_value_max_len=return, audit_mask_fields=\"name\""
+    ],
+    [
+      "return_empty_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=return, audit_value_max_len=21"
+    ],
+    [
+      "return_empty_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=return, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_empty_audit_value_max_len_limit",
+      "17, audit_value_max_len=|| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_empty_audit_value_max_len_mask",
+      "17, audit_value_max_len=|| 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_empty_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=|| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_empty_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=|| 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_move_audit_value_max_len_limit",
+      "17, audit_value_max_len=move || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_move_audit_value_max_len_mask",
+      "17, audit_value_max_len=move || 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_move_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=move || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_move_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=move || 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_one_audit_value_max_len_limit",
+      "17, audit_value_max_len=|x| x, audit_value_max_len=21"
+    ],
+    [
+      "closure_one_audit_value_max_len_mask",
+      "17, audit_value_max_len=|x| x, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_one_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=|x| x, audit_value_max_len=21"
+    ],
+    [
+      "closure_one_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=|x| x, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_two_audit_value_max_len_limit",
+      "17, audit_value_max_len=|x, y| x + y, audit_value_max_len=21"
+    ],
+    [
+      "closure_two_audit_value_max_len_mask",
+      "17, audit_value_max_len=|x, y| x + y, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_two_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=|x, y| x + y, audit_value_max_len=21"
+    ],
+    [
+      "closure_two_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=|x, y| x + y, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_typed_audit_value_max_len_limit",
+      "17, audit_value_max_len=|x: usize| x, audit_value_max_len=21"
+    ],
+    [
+      "closure_typed_audit_value_max_len_mask",
+      "17, audit_value_max_len=|x: usize| x, audit_mask_fields=\"name\""
+    ],
+    [
+      "closure_typed_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=|x: usize| x, audit_value_max_len=21"
+    ],
+    [
+      "closure_typed_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=|x: usize| x, audit_mask_fields=\"name\""
+    ],
+    [
+      "unit_audit_value_max_len_limit",
+      "17, audit_value_max_len=(), audit_value_max_len=21"
+    ],
+    [
+      "unit_audit_value_max_len_mask",
+      "17, audit_value_max_len=(), audit_mask_fields=\"name\""
+    ],
+    [
+      "unit_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=(), audit_value_max_len=21"
+    ],
+    [
+      "unit_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=(), audit_mask_fields=\"name\""
+    ],
+    [
+      "tuple_audit_value_max_len_limit",
+      "17, audit_value_max_len=(1, 2,), audit_value_max_len=21"
+    ],
+    [
+      "tuple_audit_value_max_len_mask",
+      "17, audit_value_max_len=(1, 2,), audit_mask_fields=\"name\""
+    ],
+    [
+      "tuple_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=(1, 2,), audit_value_max_len=21"
+    ],
+    [
+      "tuple_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=(1, 2,), audit_mask_fields=\"name\""
+    ],
+    [
+      "array_audit_value_max_len_limit",
+      "17, audit_value_max_len=[1, 2,], audit_value_max_len=21"
+    ],
+    [
+      "array_audit_value_max_len_mask",
+      "17, audit_value_max_len=[1, 2,], audit_mask_fields=\"name\""
+    ],
+    [
+      "array_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=[1, 2,], audit_value_max_len=21"
+    ],
+    [
+      "array_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=[1, 2,], audit_mask_fields=\"name\""
+    ],
+    [
+      "array_repeat_audit_value_max_len_limit",
+      "17, audit_value_max_len=[1; 2], audit_value_max_len=21"
+    ],
+    [
+      "array_repeat_audit_value_max_len_mask",
+      "17, audit_value_max_len=[1; 2], audit_mask_fields=\"name\""
+    ],
+    [
+      "array_repeat_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=[1; 2], audit_value_max_len=21"
+    ],
+    [
+      "array_repeat_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=[1; 2], audit_mask_fields=\"name\""
+    ],
+    [
+      "nested_arithmetic_audit_value_max_len_limit",
+      "17, audit_value_max_len=(1 + (2 * 3)), audit_value_max_len=21"
+    ],
+    [
+      "nested_arithmetic_audit_value_max_len_mask",
+      "17, audit_value_max_len=(1 + (2 * 3)), audit_mask_fields=\"name\""
+    ],
+    [
+      "nested_arithmetic_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=(1 + (2 * 3)), audit_value_max_len=21"
+    ],
+    [
+      "nested_arithmetic_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=(1 + (2 * 3)), audit_mask_fields=\"name\""
+    ],
+    [
+      "call_arguments_audit_value_max_len_limit",
+      "17, audit_value_max_len=function(1, 2,), audit_value_max_len=21"
+    ],
+    [
+      "call_arguments_audit_value_max_len_mask",
+      "17, audit_value_max_len=function(1, 2,), audit_mask_fields=\"name\""
+    ],
+    [
+      "call_arguments_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=function(1, 2,), audit_value_max_len=21"
+    ],
+    [
+      "call_arguments_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=function(1, 2,), audit_mask_fields=\"name\""
+    ],
+    [
+      "index_arithmetic_audit_value_max_len_limit",
+      "17, audit_value_max_len=value[1 + 2], audit_value_max_len=21"
+    ],
+    [
+      "index_arithmetic_audit_value_max_len_mask",
+      "17, audit_value_max_len=value[1 + 2], audit_mask_fields=\"name\""
+    ],
+    [
+      "index_arithmetic_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=value[1 + 2], audit_value_max_len=21"
+    ],
+    [
+      "index_arithmetic_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=value[1 + 2], audit_mask_fields=\"name\""
+    ],
+    [
+      "method_question_audit_value_max_len_limit",
+      "17, audit_value_max_len=value.method(2)?, audit_value_max_len=21"
+    ],
+    [
+      "method_question_audit_value_max_len_mask",
+      "17, audit_value_max_len=value.method(2)?, audit_mask_fields=\"name\""
+    ],
+    [
+      "method_question_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=value.method(2)?, audit_value_max_len=21"
+    ],
+    [
+      "method_question_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=value.method(2)?, audit_mask_fields=\"name\""
+    ],
+    [
+      "mutable_reference_audit_value_max_len_limit",
+      "17, audit_value_max_len=&mut value, audit_value_max_len=21"
+    ],
+    [
+      "mutable_reference_audit_value_max_len_mask",
+      "17, audit_value_max_len=&mut value, audit_mask_fields=\"name\""
+    ],
+    [
+      "mutable_reference_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=&mut value, audit_value_max_len=21"
+    ],
+    [
+      "mutable_reference_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=&mut value, audit_mask_fields=\"name\""
+    ],
+    [
+      "open_range_audit_value_max_len_limit",
+      "17, audit_value_max_len=17.., audit_value_max_len=21"
+    ],
+    [
+      "open_range_audit_value_max_len_mask",
+      "17, audit_value_max_len=17.., audit_mask_fields=\"name\""
+    ],
+    [
+      "open_range_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=17.., audit_value_max_len=21"
+    ],
+    [
+      "open_range_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=17.., audit_mask_fields=\"name\""
+    ],
+    [
+      "inclusive_range_audit_value_max_len_limit",
+      "17, audit_value_max_len=17..=19, audit_value_max_len=21"
+    ],
+    [
+      "inclusive_range_audit_value_max_len_mask",
+      "17, audit_value_max_len=17..=19, audit_mask_fields=\"name\""
+    ],
+    [
+      "inclusive_range_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=17..=19, audit_value_max_len=21"
+    ],
+    [
+      "inclusive_range_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=17..=19, audit_mask_fields=\"name\""
+    ],
+    [
+      "cast_audit_value_max_len_limit",
+      "17, audit_value_max_len=17 as usize, audit_value_max_len=21"
+    ],
+    [
+      "cast_audit_value_max_len_mask",
+      "17, audit_value_max_len=17 as usize, audit_mask_fields=\"name\""
+    ],
+    [
+      "cast_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=17 as usize, audit_value_max_len=21"
+    ],
+    [
+      "cast_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=17 as usize, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_parenthesized_rhs_audit_value_max_len_limit",
+      "17, audit_value_max_len=(17 +), audit_value_max_len=21"
+    ],
+    [
+      "bad_parenthesized_rhs_audit_value_max_len_mask",
+      "17, audit_value_max_len=(17 +), audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_parenthesized_rhs_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=(17 +), audit_value_max_len=21"
+    ],
+    [
+      "bad_parenthesized_rhs_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=(17 +), audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_rhs_audit_value_max_len_limit",
+      "17, audit_value_max_len=17 +, audit_value_max_len=21"
+    ],
+    [
+      "bad_rhs_audit_value_max_len_mask",
+      "17, audit_value_max_len=17 +, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_rhs_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=17 +, audit_value_max_len=21"
+    ],
+    [
+      "bad_rhs_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=17 +, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_nested_rhs_audit_value_max_len_limit",
+      "17, audit_value_max_len=17 + *, audit_value_max_len=21"
+    ],
+    [
+      "bad_nested_rhs_audit_value_max_len_mask",
+      "17, audit_value_max_len=17 + *, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_nested_rhs_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=17 + *, audit_value_max_len=21"
+    ],
+    [
+      "bad_nested_rhs_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=17 + *, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_index_audit_value_max_len_limit",
+      "17, audit_value_max_len=17[], audit_value_max_len=21"
+    ],
+    [
+      "bad_index_audit_value_max_len_mask",
+      "17, audit_value_max_len=17[], audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_index_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=17[], audit_value_max_len=21"
+    ],
+    [
+      "bad_index_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=17[], audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_call_audit_value_max_len_limit",
+      "17, audit_value_max_len=17(,), audit_value_max_len=21"
+    ],
+    [
+      "bad_call_audit_value_max_len_mask",
+      "17, audit_value_max_len=17(,), audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_call_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=17(,), audit_value_max_len=21"
+    ],
+    [
+      "bad_call_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=17(,), audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_tuple_audit_value_max_len_limit",
+      "17, audit_value_max_len=(1, +), audit_value_max_len=21"
+    ],
+    [
+      "bad_tuple_audit_value_max_len_mask",
+      "17, audit_value_max_len=(1, +), audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_tuple_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=(1, +), audit_value_max_len=21"
+    ],
+    [
+      "bad_tuple_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=(1, +), audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_array_count_audit_value_max_len_limit",
+      "17, audit_value_max_len=[1;], audit_value_max_len=21"
+    ],
+    [
+      "bad_array_count_audit_value_max_len_mask",
+      "17, audit_value_max_len=[1;], audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_array_count_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=[1;], audit_value_max_len=21"
+    ],
+    [
+      "bad_array_count_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=[1;], audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_if_audit_value_max_len_limit",
+      "17, audit_value_max_len=if flag, audit_value_max_len=21"
+    ],
+    [
+      "bad_if_audit_value_max_len_mask",
+      "17, audit_value_max_len=if flag, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_if_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=if flag, audit_value_max_len=21"
+    ],
+    [
+      "bad_if_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=if flag, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_else_audit_value_max_len_limit",
+      "17, audit_value_max_len=if flag {} else, audit_value_max_len=21"
+    ],
+    [
+      "bad_else_audit_value_max_len_mask",
+      "17, audit_value_max_len=if flag {} else, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_else_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=if flag {} else, audit_value_max_len=21"
+    ],
+    [
+      "bad_else_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=if flag {} else, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_async_audit_value_max_len_limit",
+      "17, audit_value_max_len=async, audit_value_max_len=21"
+    ],
+    [
+      "bad_async_audit_value_max_len_mask",
+      "17, audit_value_max_len=async, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_async_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=async, audit_value_max_len=21"
+    ],
+    [
+      "bad_async_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=async, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_async_move_audit_value_max_len_limit",
+      "17, audit_value_max_len=async move, audit_value_max_len=21"
+    ],
+    [
+      "bad_async_move_audit_value_max_len_mask",
+      "17, audit_value_max_len=async move, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_async_move_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=async move, audit_value_max_len=21"
+    ],
+    [
+      "bad_async_move_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=async move, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_const_audit_value_max_len_limit",
+      "17, audit_value_max_len=const 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_const_audit_value_max_len_mask",
+      "17, audit_value_max_len=const 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_const_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=const 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_const_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=const 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_loop_audit_value_max_len_limit",
+      "17, audit_value_max_len=loop 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_loop_audit_value_max_len_mask",
+      "17, audit_value_max_len=loop 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_loop_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=loop 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_loop_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=loop 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_return_audit_value_max_len_limit",
+      "17, audit_value_max_len=return +, audit_value_max_len=21"
+    ],
+    [
+      "bad_return_audit_value_max_len_mask",
+      "17, audit_value_max_len=return +, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_return_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=return +, audit_value_max_len=21"
+    ],
+    [
+      "bad_return_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=return +, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_closure_audit_value_max_len_limit",
+      "17, audit_value_max_len=||, audit_value_max_len=21"
+    ],
+    [
+      "bad_closure_audit_value_max_len_mask",
+      "17, audit_value_max_len=||, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_closure_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=||, audit_value_max_len=21"
+    ],
+    [
+      "bad_closure_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=||, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_closure_rhs_audit_value_max_len_limit",
+      "17, audit_value_max_len=|| 1 +, audit_value_max_len=21"
+    ],
+    [
+      "bad_closure_rhs_audit_value_max_len_mask",
+      "17, audit_value_max_len=|| 1 +, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_closure_rhs_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=|| 1 +, audit_value_max_len=21"
+    ],
+    [
+      "bad_closure_rhs_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=|| 1 +, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_move_audit_value_max_len_limit",
+      "17, audit_value_max_len=move 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_move_audit_value_max_len_mask",
+      "17, audit_value_max_len=move 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_move_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=move 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_move_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=move 1, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_member_audit_value_max_len_limit",
+      "17, audit_value_max_len=value., audit_value_max_len=21"
+    ],
+    [
+      "bad_member_audit_value_max_len_mask",
+      "17, audit_value_max_len=value., audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_member_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=value., audit_value_max_len=21"
+    ],
+    [
+      "bad_member_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=value., audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_cast_audit_value_max_len_limit",
+      "17, audit_value_max_len=17 as, audit_value_max_len=21"
+    ],
+    [
+      "bad_cast_audit_value_max_len_mask",
+      "17, audit_value_max_len=17 as, audit_mask_fields=\"name\""
+    ],
+    [
+      "bad_cast_audit_value_max_len_int_limit",
+      "17, audit_value_max_len_int=17 as, audit_value_max_len=21"
+    ],
+    [
+      "bad_cast_audit_value_max_len_int_mask",
+      "17, audit_value_max_len_int=17 as, audit_mask_fields=\"name\""
+    ]
+  ]
+}

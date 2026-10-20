@@ -78,8 +78,15 @@ void attach_object_group_rows(std::span<CompactRow> parents,
     for (auto& parent : parents) {
         if (auto* key = parent.get(group.storage_field)) {
             auto it = index.find(graph_identity_key(r, *key));
+            (void)parent.take_loaded_relation(group.property_name);
             parent.insert(group.property_name,
                           it == index.end() ? Value(r) : Value(r, it->second.into_map(r)));
+            if (it != index.end()) {
+                Vector<CompactRow> selected(r);
+                selected.emplace_back(it->second);
+                SmartList<CompactRow> loaded(std::allocator_arg, Allocator(r), std::move(selected));
+                parent.set_loaded_relation(group.property_name, loaded);
+            }
         }
     }
 }

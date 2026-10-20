@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "eight unchanged SQL families plus actual grouped-partition controls qualified; request protocol adapters and full goal remain open",
+  "historical_inputs": 6894,
+  "additional_sqlite_controls": 146,
+  "actual_sqlite_executions": 144,
+  "compile_error_controls": 2,
+  "changed_historical_source_outputs": 12,
+  "profiles": {
+    "native": {
+      "passed": 10,
+      "total": 10,
+      "tests": [
+        "sql_transport_rust_parity",
+        "sql_dialect_in_rust_parity",
+        "sql_dialect_hooks_rust_parity",
+        "sql_dialect_helpers_rust_parity",
+        "sql_schema_rust_parity",
+        "sql_dialect_contracts",
+        "sql_projection_scope_rust_parity",
+        "sql_grouped_partition_rust_parity",
+        "sql_dialect_rust_parity",
+        "sql_mutation_rust_parity"
+      ],
+      "log": "/tmp/teaql_sql_baselines_native_tests_506.log",
+      "log_sha256": "1a938e747d1c990c48b2af64528b91137bb3f68a4e14d92365f3d8852e2e2845"
+    },
+    "modules": {
+      "passed": 10,
+      "total": 10,
+      "tests": [
+        "module_sql_dialect_contracts",
+        "module_sql_projection_scope_rust_parity",
+        "module_sql_dialect_helpers_rust_parity",
+        "module_sql_dialect_in_rust_parity",
+        "module_sql_dialect_hooks_rust_parity",
+        "module_sql_transport_rust_parity",
+        "module_sql_grouped_partition_rust_parity",
+        "module_sql_schema_rust_parity",
+        "module_sql_dialect_rust_parity",
+        "module_sql_mutation_rust_parity"
+      ],
+      "log": "/tmp/teaql_sql_baselines_modules_tests_506.log",
+      "log_sha256": "f6b565bf2560048afc61f14449825e0d34fdb10f07abd368bf91f7ca77ed2071"
+    },
+    "sanitize": {
+      "passed": 2,
+      "total": 2,
+      "tests": [
+        "sql_dialect_contracts",
+        "sql_grouped_partition_rust_parity"
+      ],
+      "log": "/tmp/teaql_sql_baselines_sanitize_tests_506.log",
+      "log_sha256": "eb822a6dc1cb4e83269bfc20e8fff9875149d676bd19fc0e4ae26c6db3b69974"
+    }
+  },
+  "source_reproduction": true,
+  "module_source_reproduction": true,
+  "canonical_bodies": 459,
+  "catalog_exports": 1479,
+  "formatted_handwritten_cpp": 1352,
+  "record_sha256": {
+    "docs/parity/sql_baselines_5_0_6.json": "7f6ce8c057d1c9b7eb5538c51c419941f36c802148cf237c74890b02beb60661",
+    "docs/parity/sql_baselines_5_0_6_protocol_compile_failure_replay.json": "45115a08b01467450be81e88d8576447ba8651ec8d6e911cfd57233869d298b6"
+  },
+  "production_sha256": {
+    "teaql_sql/src/dialect.cpp": "0abf88ea1cf4c552aa6a2cc55489e3b488f0a89f65091f31879f91b697a8a567"
+  },
+  "pending_protocol_adapters": [
+    "executor_defaults_scope_oracle",
+    "sql_execution_oracle",
+    "sql_query_oracle",
+    "sql_stream_oracle"
+  ],
+  "historical_adapter_compile_errors": 9,
+  "remaining_recorded_baseline_failures": 43,
+  "sanitizer_leak_scanning": false,
+  "full_native_rerun": false,
+  "mips_qemu_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false
+}

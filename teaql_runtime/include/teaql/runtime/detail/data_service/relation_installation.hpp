@@ -5,6 +5,11 @@
 namespace teaql::detail {
 Result<EntityRuntimeState, EntityError>
 attach_flat_relation_graph(const UserContext&, std::string_view, std::span<CompactRow>);
+EntityGraphDecodeResult attach_flat_relation_graph(const UserContext&,
+                                                   std::string_view,
+                                                   std::span<CompactRow>,
+                                                   const EntityRuntimeState&,
+                                                   EntityGraphBuilder&);
 void validate_relation_domain(const UserContext&,
                               std::span<const CompactRow>,
                               const EntityRuntimeState* = nullptr,

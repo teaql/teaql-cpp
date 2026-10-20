@@ -1,4 +1,5 @@
 #include <teaql/runtime/context.hpp>
+#include <teaql/runtime/dynamic_fields.hpp>
 #include <teaql/runtime/module.hpp>
 
 namespace teaql {
@@ -33,6 +34,25 @@ public:
             }
             if (!*result) {
                 return result;
+            }
+            phase_ = Phase::Dynamic;
+        }
+        if (phase_ == Phase::Dynamic) {
+            if (!dynamic_child_ && context_.get_resource<DynamicFieldsProvider>()) {
+                dynamic_child_ = &context_.ensure_dynamic_fields_schema();
+            }
+            if (dynamic_child_) {
+                forwarding_.attach(dynamic_child_->wake_signal(), wake);
+                auto* result = dynamic_child_->poll();
+                if (!result) {
+                    return {};
+                }
+                forwarding_.reset();
+                dynamic_child_ = nullptr;
+                if (!*result) {
+                    return RuntimeSchemaResult::err(
+                        resource_, RuntimeError::dynamic_field(resource_, result->error()));
+                }
             }
             phase_ = Phase::Business;
         }
@@ -76,12 +96,17 @@ public:
         closing_.reset();
         forwarding_.reset();
         child_ = nullptr;
+        dynamic_child_ = nullptr;
         release_borrow();
     }
 
     void cancel_and_wait() noexcept {
         closing_.reset();
         forwarding_.reset();
+        if (dynamic_child_) {
+            dynamic_child_->cancel();
+            dynamic_child_ = nullptr;
+        }
         if (child_) {
             if (phase_ == Phase::Bootstrap) {
                 Scope scope(context_.global_.generated_schema_bootstrap_);
@@ -107,7 +132,7 @@ private:
             active = previous;
         }
     };
-    enum class Phase { Provider, Business, Bootstrap };
+    enum class Phase { Provider, Dynamic, Business, Bootstrap };
 
     void check_child() {
         if (child_->memory_resource() != resource_) {
@@ -142,6 +167,7 @@ private:
     const UserContext& context_;
     Phase phase_ = Phase::Provider;
     AsyncOperation<RuntimeSchemaResult>* child_ = nullptr;
+    DynamicStorageFuture<std::monostate>* dynamic_child_ = nullptr;
     std::size_t index_ = 0;
     WakeSignal::Forward forwarding_;
     Arena::Quiescence closing_;

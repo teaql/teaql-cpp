@@ -1,0 +1,1339 @@
+[
+  {
+    "case": "negative_one",
+    "input": [
+      "-1",
+      "2"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": -1,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": -1,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": false,
+      "error_type": "java.lang.IllegalArgumentException",
+      "error": "C++ constant identity is negative: status(-1)"
+    },
+    "rust_compile": {
+      "exit_code": 101,
+      "errors": [
+        {
+          "code": null,
+          "message": "expected a pattern, found an expression",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 261
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "`mut` must be followed by a named binding",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 262
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "`mut` must be followed by a named binding",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 268
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `rows_constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 262
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 264
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 264
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 265
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 265
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 266
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 269
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 270
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 271
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 272
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 273
+            }
+          ]
+        },
+        {
+          "code": "E0600",
+          "message": "cannot apply unary operator `-` to type `u64`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 261
+            }
+          ]
+        },
+        {
+          "code": "E0610",
+          "message": "`{integer}` is a primitive type and therefore doesn't have fields",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 262
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `platform_id` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 264
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_platform_id` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 264
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `code` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 265
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_code` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 265
+            }
+          ]
+        },
+        {
+          "code": "E0689",
+          "message": "can't call method `audit_as` on ambiguous numeric type `{integer}`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 266
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_id` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 269
+            }
+          ]
+        },
+        {
+          "code": "E0600",
+          "message": "cannot apply unary operator `-` to type `u64`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 269
+            }
+          ]
+        },
+        {
+          "code": "E0600",
+          "message": "cannot apply unary operator `-` to type `u64`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 270
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_platform_id` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 271
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_code` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 272
+            }
+          ]
+        },
+        {
+          "code": "E0689",
+          "message": "can't call method `audit_as` on ambiguous numeric type `{integer}`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 273
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "expected a pattern, found an expression",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 262
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "expected a pattern, found an expression",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 268
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "case": "negative_min",
+    "input": [
+      "-9223372036854775808",
+      "2"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": -9223372036854775808,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": -9223372036854775808,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": false,
+      "error_type": "java.lang.IllegalArgumentException",
+      "error": "C++ constant identity is negative: status(-9223372036854775808)"
+    },
+    "rust_compile": {
+      "exit_code": 101,
+      "errors": [
+        {
+          "code": null,
+          "message": "expected a pattern, found an expression",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 261
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "`mut` must be followed by a named binding",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 262
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "`mut` must be followed by a named binding",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 268
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `rows_constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 262
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 264
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 264
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 265
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 265
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 266
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 269
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 270
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 271
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 272
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find value `constant_status_` in this scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 273
+            }
+          ]
+        },
+        {
+          "code": "E0600",
+          "message": "cannot apply unary operator `-` to type `u64`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 261
+            }
+          ]
+        },
+        {
+          "code": "E0610",
+          "message": "`{integer}` is a primitive type and therefore doesn't have fields",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 262
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `platform_id` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 264
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_platform_id` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 264
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `code` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 265
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_code` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 265
+            }
+          ]
+        },
+        {
+          "code": "E0689",
+          "message": "can't call method `audit_as` on ambiguous numeric type `{integer}`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 266
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_id` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 269
+            }
+          ]
+        },
+        {
+          "code": "E0600",
+          "message": "cannot apply unary operator `-` to type `u64`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 269
+            }
+          ]
+        },
+        {
+          "code": "E0600",
+          "message": "cannot apply unary operator `-` to type `u64`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 270
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_platform_id` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 271
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `update_code` found for type `{integer}` in the current scope",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 272
+            }
+          ]
+        },
+        {
+          "code": "E0689",
+          "message": "can't call method `audit_as` on ambiguous numeric type `{integer}`",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 273
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "expected a pattern, found an expression",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 262
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "expected a pattern, found an expression",
+          "primary": [
+            {
+              "file": "runtime.rs",
+              "line": 268
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "case": "signed_overflow",
+    "input": [
+      "9223372036854775808",
+      "2"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 9223372036854775807,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 9223372036854775807,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 11
+    },
+    "rust_compile": {
+      "exit_code": 0,
+      "errors": []
+    },
+    "cpp_compile": {
+      "exit_code": 0
+    }
+  },
+  {
+    "case": "unsigned_max",
+    "input": [
+      "18446744073709551615",
+      "2"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 9223372036854775807,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 9223372036854775807,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 11
+    },
+    "rust_compile": {
+      "exit_code": 0,
+      "errors": []
+    },
+    "cpp_compile": {
+      "exit_code": 0
+    }
+  },
+  {
+    "case": "zero",
+    "input": [
+      "0",
+      "2"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 0,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 0,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 11
+    },
+    "rust_compile": {
+      "exit_code": 0,
+      "errors": []
+    },
+    "cpp_compile": {
+      "exit_code": 0
+    }
+  },
+  {
+    "case": "signed_max",
+    "input": [
+      "9223372036854775807",
+      "2"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 9223372036854775807,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 9223372036854775807,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 11
+    },
+    "rust_compile": {
+      "exit_code": 0,
+      "errors": []
+    },
+    "cpp_compile": {
+      "exit_code": 0
+    }
+  },
+  {
+    "case": "duplicate",
+    "input": [
+      "1",
+      "1"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 1,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 1,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 1,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 1,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": false,
+      "error_type": "java.lang.IllegalArgumentException",
+      "error": "C++ candidate naming collision: status.id"
+    },
+    "rust_compile": {
+      "exit_code": 101,
+      "errors": [
+        {
+          "code": "E0592",
+          "message": "duplicate definitions with name `with_id_is_value_1`",
+          "primary": [
+            {
+              "file": "request.rs",
+              "line": 1254
+            }
+          ]
+        },
+        {
+          "code": "E0592",
+          "message": "duplicate definitions with name `with_id_is_not_value_1`",
+          "primary": [
+            {
+              "file": "request.rs",
+              "line": 1260
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "case": "fallback_text",
+    "input": [
+      "nonnumeric",
+      "2"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 62970894,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 62970894,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 2,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 11
+    },
+    "rust_compile": {
+      "exit_code": 0,
+      "errors": []
+    },
+    "cpp_compile": {
+      "exit_code": 0
+    }
+  },
+  {
+    "case": "default_missing",
+    "input": [
+      null,
+      "2"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 2,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 1038262983,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 2,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 1038262983,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 11
+    },
+    "rust_compile": {
+      "exit_code": 0,
+      "errors": []
+    },
+    "cpp_compile": {
+      "exit_code": 0
+    }
+  },
+  {
+    "case": "positive",
+    "input": [
+      "1",
+      "22"
+    ],
+    "rust": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 1,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 22,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "metadata": [
+        {
+          "entity": "platform",
+          "constant": false,
+          "root": true
+        },
+        {
+          "entity": "status",
+          "constant": true,
+          "root": false,
+          "candidates": [
+            {
+              "id": 1,
+              "key": "STATUS_BASIC",
+              "value": "Basic",
+              "line": 1
+            },
+            {
+              "id": 22,
+              "key": "STATUS_EXTENDED",
+              "value": "Extended",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 11
+    },
+    "rust_compile": {
+      "exit_code": 0,
+      "errors": []
+    },
+    "cpp_compile": {
+      "exit_code": 0
+    }
+  }
+]

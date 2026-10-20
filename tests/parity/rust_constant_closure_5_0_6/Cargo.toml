@@ -1,0 +1,49 @@
+[package]
+name = "teaql_constant_closure_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+serde_json = "=1.0.150"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype", "functions"] }
+cpp_candidates_core = { package = "cpp-candidates-core", path = "../../generator/parity/candidates_rust/lib" }
+cpp_constants_numeric_core = { package = "cpp-constants-numeric-core", path = "../../generator/parity/constants_numeric_rust/lib" }
+cpp_constants_catalog_core = { package = "cpp-constants-catalog-core", path = "../../generator/parity/constants_catalog_rust/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+[[bin]]
+name = "constant_candidates_closure_506"
+path = "../rust_field_layout/src/bin/generated_candidates_5_0_6.rs"
+
+[[bin]]
+name = "constant_bootstrap_closure_506"
+path = "../rust_field_layout/src/bin/generated_bootstrap_5_0_6.rs"
+
+[[bin]]
+name = "constant_variants_closure_506"
+path = "../rust_constant_variants/src/main.rs"
+
+[[bin]]
+name = "constant_extensions_closure_506"
+path = "../rust_constant_variants/src/bin/bootstrap_extensions.rs"
+
+[[bin]]
+name = "constant_conflict_closure_506"
+path = "../rust_constant_variants/src/bin/bootstrap_conflict.rs"
+
+[[bin]]
+name = "constant_resources_closure_506"
+path = "../rust_constant_variants/src/bin/resource_bindings.rs"

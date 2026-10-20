@@ -1,5 +1,6 @@
 #include "../../tests/support/dynamic_hydration_fixture.hpp"
 #include <teaql/runtime/entity_query.hpp>
+#include <teaql/runtime/detail/data_service/typed_aggregate.hpp>
 #include <sqlite3.h>
 #include <iostream>
 
@@ -79,7 +80,8 @@ static void root_queries_and_carriers() {
     auto r = user_context->memory_resource();
     SqliteConnection* connection = nullptr;
     auto& executor = dynamic_hydration_fixture::setup(*user_context, &connection);
-    sql(*connection,
+    ::sql(
+        *connection,
         "CREATE TABLE school_data(id INTEGER PRIMARY KEY,name TEXT,version INTEGER);INSERT INTO school_data VALUES(7,'alpha',1),(8,'beta',2)");
     auto service = user_context->entity_data_service<Executor>("School");
     check(bool(service), "service resolves");
@@ -96,6 +98,21 @@ static void root_queries_and_carriers() {
     check(first.dynamic_field_values()->values().at(String("count", r)).is_null(),
           "explicit NULL is loaded");
     check(first.root.current_change_set().is_empty(), "hydration creates no ledger mutations");
+    auto aggregate_query = description.clone(r);
+    aggregate_query.purpose("Hydrate the private typed aggregate result");
+    auto aggregate = completed(
+        detail::EntityDataServiceAccess::fetch_entities_with_relation_aggregates<Executor, School>(
+            service.value().get(), aggregate_query, {}));
+    check(aggregate && aggregate.value().data.size() == 2 &&
+              aggregate.value().data.front().is_field_loaded("#title") &&
+              aggregate.value().data.front().is_field_loaded("#count") &&
+              aggregate.value().data.front().dynamic_field_values()->values().size() == 2 &&
+              aggregate.value().data.front().root.current_change_set().is_empty(),
+          "private typed aggregate hydrates persistent extensions through shared decoding");
+    check(aggregate.value().data[0].loaded_state_snapshot()->identity() !=
+                  aggregate.value().data[1].loaded_state_snapshot()->identity() &&
+              !aggregate.value().data[1].is_field_loaded("#title"),
+          "typed aggregate preserves distinct extension availability for each row");
     check(!first.root.original_snapshot()->fields.contains("#title"),
           "extensions are absent from native originals");
     auto enhanced =
@@ -199,7 +216,8 @@ static void database_stream_and_cleanup() {
     auto r = user_context->memory_resource();
     SqliteConnection* connection = nullptr;
     auto& executor = dynamic_hydration_fixture::setup(*user_context, &connection, false);
-    sql(*connection,
+    ::sql(
+        *connection,
         "CREATE TABLE school_data(id INTEGER PRIMARY KEY,name TEXT,version INTEGER);INSERT INTO school_data VALUES(7,'alpha',1),(8,'beta',2),(9,'gamma',3)");
     const std::array fields{DynamicFieldDefinitions::Field{"title", DataType::Text},
                             DynamicFieldDefinitions::Field{"count", DataType::I64}};
@@ -283,9 +301,103 @@ static void database_stream_and_cleanup() {
           "stream cleanup leaves no transaction");
 }
 
+struct PendingDynamicCounts {
+    unsigned loads = 0;
+    unsigned cancelled = 0;
+    unsigned destroyed = 0;
+    std::size_t joined_ids = 0;
+};
+
+struct PendingDynamicBatch {
+    using allocator_type = Allocator;
+    PendingDynamicCounts& counts;
+    Vector<std::uint64_t> ids;
+    bool joined = false;
+
+    PendingDynamicBatch(std::allocator_arg_t,
+                        Allocator a,
+                        PendingDynamicCounts& counts,
+                        std::span<const std::uint64_t> ids)
+        : counts(counts), ids(ids.begin(), ids.end(), a.resource()) {}
+
+    ~PendingDynamicBatch() {
+        ++counts.destroyed;
+    }
+
+    std::optional<Result<DynamicFieldBatch, DynamicFieldError>> poll(WakeSignal&) {
+        return {};
+    }
+
+    void cancel_and_wait() noexcept {
+        if (!joined) {
+            counts.joined_ids = ids.size();
+            ++counts.cancelled;
+            joined = true;
+        }
+    }
+
+    void finish_and_wait() noexcept {
+        cancel_and_wait();
+    }
+};
+
+struct PendingDynamicProvider final : DynamicFieldsProvider {
+    using allocator_type = Allocator;
+    PendingDynamicCounts& counts;
+
+    PendingDynamicProvider(std::allocator_arg_t, Allocator, PendingDynamicCounts& counts)
+        : counts(counts) {}
+
+    DynamicStorageFuture<DynamicFieldBatch>& load_values(const UserContext& user_context,
+                                                         std::string_view,
+                                                         std::span<const std::uint64_t> ids,
+                                                         const DynamicFieldSelection&,
+                                                         const QueryIntent&) const override {
+        ++counts.loads;
+        return make_operation<Result<DynamicFieldBatch, DynamicFieldError>, PendingDynamicBatch>(
+            user_context.memory_resource(), counts, ids);
+    }
+};
+
+static void typed_aggregate_dynamic_cleanup() {
+    for (bool explicit_cancel : {false, true}) {
+        GlobalContext global;
+        PendingDynamicCounts counts;
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
+        SqliteConnection* connection = nullptr;
+        auto& executor = dynamic_hydration_fixture::setup(*user_context, &connection, false);
+        ::sql(
+            *connection,
+            "CREATE TABLE school_data(id INTEGER PRIMARY KEY,name TEXT,version INTEGER);INSERT INTO school_data VALUES(7,'alpha',1),(8,'beta',2)");
+        auto& provider = user_context->make<PendingDynamicProvider>(counts);
+        user_context->set_dynamic_fields_provider(*user_context, provider);
+        auto& service = EntityDataService<Executor>::for_executor(
+            *user_context, "School", *user_context, executor);
+        auto& description = user_context->make<SelectQuery>(query(r));
+        description.purpose("Verify typed aggregate dynamic-work cleanup");
+        auto& work =
+            detail::EntityDataServiceAccess::fetch_entities_with_relation_aggregates<Executor,
+                                                                                     School>(
+                service, description, {});
+        check(!work.poll() && counts.loads == 1,
+              "typed aggregate reaches the pending dynamic provider after loading native rows");
+        if (explicit_cancel) {
+            work.cancel();
+            check(counts.cancelled == 1 && counts.joined_ids == 2,
+                  "typed aggregate cancellation joins its dynamic provider before releasing rows");
+        }
+        user_context.reset();
+        check(counts.cancelled == 1 && counts.destroyed == 1 && counts.joined_ids == 2 &&
+                  global.live_user_bytes() == 0,
+              "actual Context deletion joins and destroys dynamic work before arena reclamation");
+    }
+}
+
 int main() {
     root_queries_and_carriers();
     decode_metadata_and_batch_validation();
     database_stream_and_cleanup();
+    typed_aggregate_dynamic_cleanup();
     std::cout << "Dynamic query hydration contracts passed\n";
 }

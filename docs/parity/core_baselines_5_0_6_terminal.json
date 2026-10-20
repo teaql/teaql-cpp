@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "declared core historical families requalified; complete goal remains open",
+  "observations": 3867,
+  "changed_source_outputs": 0,
+  "profiles": {
+    "native": {
+      "passed": 8,
+      "total": 8,
+      "tests": [
+        "system_time_arithmetic_scope_rust_parity",
+        "system_time_rust_parity",
+        "search_rust_parity",
+        "presentation_rust_parity",
+        "timestamp_api_rust_parity",
+        "chrono_value_rust_parity",
+        "presentation_api_rust_parity",
+        "core_graph_api_rust_parity"
+      ],
+      "log": "/tmp/teaql_core_baselines_native_tests_506.log",
+      "log_sha256": "cae00937a76c6521ac24b561a34c05e48e1f797a127048b48f34c0bac8d53592"
+    },
+    "modules": {
+      "passed": 8,
+      "total": 8,
+      "tests": [
+        "module_chrono_value_rust_parity",
+        "module_timestamp_api_rust_parity",
+        "module_presentation_rust_parity",
+        "module_system_time_arithmetic_scope_rust_parity",
+        "module_system_time_rust_parity",
+        "module_search_rust_parity",
+        "module_presentation_api_rust_parity",
+        "module_core_graph_api_rust_parity"
+      ],
+      "log": "/tmp/teaql_core_baselines_modules_tests_506.log",
+      "log_sha256": "1a6d44af5a28d3d74d6c6c50dc9359a6c750c82ddf8d537f963dfe62ef71b244"
+    }
+  },
+  "canonical_bodies": 474,
+  "catalog_exports": 1479,
+  "formatted_handwritten_cpp": 1354,
+  "all_dependency_versions_match_reference_lock": true,
+  "source_reproduction": true,
+  "module_source_reproduction": true,
+  "record_sha256": {
+    "docs/parity/core_baselines_5_0_6.json": "b03d604f0836d966a966368e430b37db9b54c187bfa8262b023cb48e31f2c830",
+    "docs/parity/core_baselines_5_0_6_dependency_negative_control.json": "32e098d35136c650a93e68c6eadb1ce13643cb6f9cc0bae867799ae45589afd4"
+  },
+  "production_changed": false,
+  "sanitizer_run": false,
+  "mips_qemu_run": false,
+  "physical_device_run": false,
+  "full_native_rerun": false,
+  "complete_capability_acceptance": false,
+  "remaining_recorded_baseline_failures": 29
+}

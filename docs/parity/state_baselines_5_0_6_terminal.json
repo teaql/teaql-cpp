@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "four state/model/I18n families qualified; private typed-aggregate harness remains pending",
+  "observations": 4916,
+  "entity_state_changed_source_outcomes": 25,
+  "current_request_model_changed_outcomes": 40,
+  "profiles": {
+    "native": {
+      "passed": 4,
+      "total": 4,
+      "tests": [
+        "i18n_rust_parity",
+        "data_service_model_scope_rust_parity",
+        "entity_runtime_rust_parity",
+        "i18n_debug_scope_rust_parity"
+      ],
+      "log": "/tmp/teaql_state_baselines_native_tests_506.log",
+      "log_sha256": "4c11ce73268ee6a049673c582682e8d0ded1d019d564fe460a2ce9b4eecd9dfc"
+    },
+    "modules": {
+      "passed": 4,
+      "total": 4,
+      "tests": [
+        "module_i18n_rust_parity",
+        "module_data_service_model_scope_rust_parity",
+        "module_entity_runtime_rust_parity",
+        "module_i18n_debug_scope_rust_parity"
+      ],
+      "log": "/tmp/teaql_state_baselines_modules_tests_506.log",
+      "log_sha256": "405984ad21d2682769051c3d83949692f3acb5217eff184b5390d80b82a10ede"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "tests": [
+        "data_service_model_scope_rust_parity"
+      ],
+      "log": "/tmp/teaql_state_baselines_sanitize_tests_506.log",
+      "log_sha256": "b0b77879b888a37dce2c1c5070e987651634bf76623c426dd99236edc81e3377"
+    }
+  },
+  "canonical_bodies": 487,
+  "catalog_exports": 1479,
+  "formatted_handwritten_cpp": 1354,
+  "source_reproduction": true,
+  "module_source_reproduction": true,
+  "reference_dependency_versions": true,
+  "entity_adapter_only_type_import_and_relative_helper_path": true,
+  "record_sha256": {
+    "docs/parity/state_baselines_5_0_6.json": "0bc06f3d43811fffd7083a26ca7cc04fa93cdd5633371db00c12c5a8f5c25668",
+    "docs/parity/state_baselines_5_0_6_initial_compiler_failures.json": "09a7d00b47f8578dcf9698d71dce9197bfa50bdb93d9467cf68f6f37c7986718"
+  },
+  "fixture_sha256": {
+    "tests/parity/data_service_model_scope_probe.cpp": "102fd92140536a4d5a2bc7fa7e8d6623d1c3239de254dd76911726d7285434e4"
+  },
+  "production_changed": false,
+  "typed_aggregate_historical_inputs_pending": 48,
+  "full_native_rerun": false,
+  "mips_qemu_run": false,
+  "physical_device_run": false,
+  "sanitizer_leak_scanning": false,
+  "complete_capability_acceptance": false,
+  "remaining_recorded_baseline_failures": 16
+}

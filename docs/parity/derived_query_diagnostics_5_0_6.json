@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "Complete native build and focused gates passed; full native integration terminal with historical corpus rejections and one fixture failure",
+  "observations": {
+    "cases": 576,
+    "successes": 144,
+    "errors": 432,
+    "initial_sql_logs": 144,
+    "independent_query_logs": 144,
+    "normalization": "none"
+  },
+  "ownership": {
+    "cases": 8,
+    "global_retention_after_origin_deletion": 2,
+    "pending_executor_cancel_or_user_deletion": 4,
+    "actual_sqlite_busy_cursor_user_deletion": 2,
+    "default_pmr": "null",
+    "log": "/tmp/teaql_derived_query_cursor_lifetime_retry.log",
+    "exit_code": 0
+  },
+  "initial_differences": [
+    {
+      "path": "docs/parity/derived_query_diagnostics_5_0_6_initial_gaps.json",
+      "sha256": "4794480cfffeb1775b20c06b9b6cacd3d23cfaa061c79012d9d30b2a7a788477"
+    },
+    {
+      "path": "docs/parity/derived_query_diagnostics_5_0_6_typed_initial_gaps.json",
+      "sha256": "217ae836830d4d6824a885f131f04ca2ec4cd45f834474a3ba111a6b43322fe3"
+    }
+  ],
+  "original_count_tests": {
+    "passed": 3,
+    "failed": 0,
+    "unchanged": true,
+    "log": "/tmp/teaql_exact_count_original_tests.log"
+  },
+  "corpus_sha256": "9ef13e94d7054e4e83da1e9fb3ceefc36b742587a1b0e1fd1fbee45026735a63",
+  "comparator_negative_control": "Known wrong privacy projection rejected with exit status 1",
+  "production_files": [
+    "teaql_runtime/include/teaql/runtime/purposed_query.hpp",
+    "teaql_runtime/include/teaql/runtime/purposed_query_debug.hpp",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/diagnostic_query.hpp",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp",
+    "teaql_runtime/src/data_service/mod.cpp"
+  ],
+  "generator_changes": [],
+  "pending": [
+    {
+      "profile": "complete native CTest",
+      "handle": 25624,
+      "log": "/tmp/teaql_native_integration_full_tests.log"
+    }
+  ],
+  "remaining": [
+    "Full generated/private facet/model/storage/protected-sink qualification",
+    "Full capability and P0-P7 exit criteria"
+  ],
+  "production_sha256": {
+    "teaql_runtime/include/teaql/runtime/purposed_query.hpp": "b14cc12a0df2e2c122f86d953e7ae071b06ced038b980431d45477c487ddfdeb",
+    "teaql_runtime/include/teaql/runtime/purposed_query_debug.hpp": "9cf9067bf56f6fdbb58e76bcb597e1b395226b559c2c6bfdae438f1687367633",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/diagnostic_query.hpp": "0ede7872948d81856d53d9132e440a7665015e225db6a97b469edf979bd8c169",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp": "47e0b3c850f1433237707ebcf0ec4fe3065eb2ec0f232231e5c508acfb6d8673",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp": "c6f95a7067945f755b2aaf16e040030ac04f008fe8a0d312dbd57330e43512f5",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp": "ba8467a4e6aca28fd504b8b674bf17cf5d13718b39acff7086d96c35ee9eba97",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp": "243ad6b44705775a26cd494bbf13b7778b65fa40004d5e68ba8f35c63e8a608a",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp": "2d2c96672f0d70115567ca3ccbcead2e459868be319f4f1edbbc36d2606e0e0b",
+    "teaql_runtime/src/data_service/mod.cpp": "46ef5a64766a3704c729826b4b8efe9788111fc620edae4eaece0d9017e98323"
+  },
+  "focused_native_gate": {
+    "passed": 2,
+    "failed": 0,
+    "log": "/tmp/teaql_derived_query_native_focused_tests.log",
+    "exit_code": 0
+  },
+  "live_reproduction": {
+    "observations": 576,
+    "log": "/tmp/teaql_derived_query_reproduce.log",
+    "exit_code": 0
+  },
+  "structure": {
+    "production_headers": 246,
+    "include_edges": 692,
+    "acyclic_modules": 7,
+    "catalog_exports": 1479,
+    "canonical_consumer_bodies": 164
+  },
+  "build_history": [
+    {
+      "path": "/tmp/teaql_derived_query_native_full_build.log",
+      "exit_code": 1,
+      "reason": "Existing unsigned callback-fixture error formatter; isolated original wrapper also fails."
+    },
+    {
+      "path": "/tmp/teaql_derived_query_native_full_build_retry.log",
+      "exit_code": 130,
+      "reason": "Intentionally interrupted to prevent concurrent Ninja mutation of the same build directory; no terminal gate claimed."
+    },
+    {
+      "path": "/tmp/teaql_derived_query_cursor_lifetime.log",
+      "exit_code": 1,
+      "reason": "Fixture violated connection/transport ownership; both now Global and explicitly borrowed."
+    },
+    {
+      "path": "/tmp/teaql_derived_query_native_full_build_final.log",
+      "exit_code": 1,
+      "reason": "Hydration fixture included only low-level hydration declarations; newly instantiated facet service method definition missing at link. Fixture now includes existing full data_service.hpp."
+    }
+  ],
+  "module_gate": {
+    "passed": 4,
+    "failed": 0,
+    "exit_code": 0,
+    "log": "/tmp/teaql_derived_query_modules_tests.log",
+    "sha256": "c05c060160c3e98bef6ff0124c993a97443abf1d8f52ebdf26952023bc71c053"
+  },
+  "sanitize_gate": {
+    "passed": 4,
+    "failed": 0,
+    "exit_code": 0,
+    "leak_scanning": "disabled",
+    "log": "/tmp/teaql_derived_query_sanitize_tests.log",
+    "sha256": "89770084a0b125383b790985fa28f58b7c2f109d6f6cb6922e311f2fb482ce4f"
+  },
+  "original_facet_tests": [
+    {
+      "name": "repeated_facet_diagnostics_merge_with_removed_count_sources",
+      "passed": 1,
+      "exit_code": 0,
+      "unchanged_test_source": true,
+      "log": "/tmp/teaql_original_facet_diagnostics_506_tests.log"
+    },
+    {
+      "name": "future_facet_bindings_are_safe_before_root_rows_entities_and_stream",
+      "passed": 1,
+      "exit_code": 0,
+      "unchanged_test_source": true,
+      "log": "/tmp/teaql_original_facet_future_506_tests.log"
+    }
+  ],
+  "source_facet_reproduction": {
+    "command": "python3 scripts/verify_original_facet_diagnostics.py",
+    "exit_code": 0,
+    "tests": 2,
+    "log": "/tmp/teaql_original_facet_diagnostics_reproduce.log"
+  },
+  "native_integration_tests": {
+    "total": 549,
+    "passed": 472,
+    "failed": 77,
+    "exit_code": 8,
+    "wall_seconds": 972.09,
+    "status": "terminal; failures remain unresolved",
+    "log": "/tmp/teaql_native_integration_full_tests.log",
+    "evidence": "docs/parity/native_integration_5_0_6_pending.json",
+    "generated_api_compiler_gate": "passed"
+  },
+  "complete_original_facet_suite": {
+    "passed": 10,
+    "failed": 0,
+    "exit_code": 0,
+    "log": "/tmp/teaql_original_facet_complete_506_tests.log",
+    "scope": "Original only; not proof of corresponding complete native coverage",
+    "reproduce_command": "python3 scripts/verify_original_facet_diagnostics.py --complete",
+    "reproduce_log": "/tmp/teaql_original_facet_complete_reproduce.log",
+    "reproduce_exit_code": 0
+  },
+  "native_complete_build": {
+    "exit_code": 0,
+    "log": "/tmp/teaql_native_integration_resume_build.log",
+    "sha256": "0d3d58664f888389b44780e64459a22b152964b9f83521fed4f95196c3160660"
+  }
+}

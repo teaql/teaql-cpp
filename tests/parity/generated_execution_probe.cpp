@@ -47,6 +47,47 @@ list_result(Json::Object& output, Memory r, const teaql::Result<SmartList<T>, Er
 }
 
 template <class Request>
+static Request pagination(Request request, const Json& input) {
+    auto* operations = optional(input, "pagination");
+    if (!operations) {
+        return request;
+    }
+    for (const auto& operation : std::get<Json::Array>(operations->data)) {
+        auto name = text(field(operation, "op"));
+        auto number = std::get<std::uint64_t>(field(operation, "number").data);
+        auto size = std::get<std::uint64_t>(field(operation, "size").data);
+        if (name == "limit") {
+            request.limit(size);
+        } else if (name == "skip") {
+            request.skip(number);
+        } else if (name == "offset_only") {
+            request.offsetOnly(number);
+        } else if (name == "offset") {
+            request.offset(number, size);
+        } else if (name == "page_offset") {
+            request.pageOffset(number, size);
+        } else if (name == "offset_size") {
+            request.offsetSize(number, size);
+        } else if (name == "top") {
+            request.top(size);
+        } else if (name == "page_number") {
+            request.pageNumber(number, size);
+        } else if (name == "page_number_default") {
+            request.pageNumberDefault(number);
+        } else if (name == "page") {
+            request.page(number, size);
+        } else if (name == "page_default") {
+            request.pageDefault(number);
+        } else if (name == "unlimited") {
+            request.unlimited();
+        } else {
+            throw std::runtime_error("unknown pagination operation");
+        }
+    }
+    return request;
+}
+
+template <class Request>
 static Json execute(UserContext& user_context, Request request, const Json& input) {
     auto r = user_context.memory_resource();
     for (const auto& filter : std::get<Json::Array>(field(input, "filters").data)) {
@@ -62,9 +103,16 @@ static Json execute(UserContext& user_context, Request request, const Json& inpu
             request.optimizeForContinuousPageFetchWith("execution_fixture", 60);
         }
     }
+    const auto* stage = optional(input, "after_purpose");
+    if (!stage || !std::get<bool>(stage->data)) {
+        request = pagination(std::move(request), input);
+    }
     auto executable = std::move(request)
                           .comment("inspect generated execution")
                           .purpose("qualify generated execution");
+    if (stage && std::get<bool>(stage->data)) {
+        executable = pagination(std::move(executable), input);
+    }
     Json::Object output(r);
     for (const auto* key : {"value", "total_count", "error"}) {
         output.emplace(String(key, r), Json(r));

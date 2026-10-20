@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "matrices": [
+    {
+      "matrix": "generated_candidates",
+      "observations": 388,
+      "corpus_sha256": "80976712e1f8f5310be51efb57d9cc995175573d94b11f3a58b90d209ce94af4",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_candidates_5_0_6.rs",
+      "unchanged_driver_sha256": "698b4ba503febb90a0fa10c41a797f21d6fa6c29eef6b7265da345ef3a9e116f",
+      "source_recorded_outputs_equal": true,
+      "comparator": "compare_generated_candidates.py",
+      "comparator_sha256": "fc2de90fb9e9d8c2d1f0160c7c83109d237352028e38cef9b16f7d1ba4667e72",
+      "cpp_exit_code": 0
+    },
+    {
+      "matrix": "generated_bootstrap",
+      "observations": 99,
+      "corpus_sha256": "bf80cde136d4c5c676becbc0e01ad0e93570c56cf1bcb3f4b1e618eddb654328",
+      "unchanged_driver": "tests/parity/rust_field_layout/src/bin/generated_bootstrap_5_0_6.rs",
+      "unchanged_driver_sha256": "56714e697dd85bb148036c34652a5c3097f58bd494748076dd305f2e266fab4f",
+      "source_recorded_outputs_equal": true,
+      "comparator": "compare_generated_bootstrap.py",
+      "comparator_sha256": "3431eeb46d19c074d6344397f78fbad94cc39ff1070470135391c0903e7ca98e",
+      "cpp_exit_code": 0
+    },
+    {
+      "matrix": "generated_constant_variants",
+      "observations": 36,
+      "corpus_sha256": "03d5ec50507814f95fed12f2292b8813d286c0c855a8a3f472697c33f213fbff",
+      "unchanged_driver": "tests/parity/rust_constant_variants/src/main.rs",
+      "unchanged_driver_sha256": "75584ce0e602642de414e602c57e618af4b836aedee0bdd864869c5b44452cfd",
+      "source_recorded_outputs_equal": true,
+      "comparator": "compare_generated_constant_variants.py",
+      "comparator_sha256": "bb366af9f3787a5a35f42a33ccf13cdb3efa165f5dda6d4f3961e7be3dd0ebab",
+      "cpp_exit_code": 0
+    },
+    {
+      "matrix": "constant_governance",
+      "observations": 960,
+      "corpus_sha256": "389e722319e9a7e71e9c05833e1f2cfb7909d5efabd2cb5f6c8a930dfc850b34",
+      "unchanged_driver": "tests/parity/rust_constant_variants/src/main.rs",
+      "unchanged_driver_sha256": "75584ce0e602642de414e602c57e618af4b836aedee0bdd864869c5b44452cfd",
+      "source_recorded_outputs_equal": true,
+      "comparator": "compare_constant_governance_5_0_6.py",
+      "comparator_sha256": "b07fd921487857f6198bfc955ce086e99ebd59bf17a4e97ed63cf94ba8fc82a8",
+      "cpp_exit_code": 0
+    },
+    {
+      "matrix": "bootstrap_extensions",
+      "observations": 2304,
+      "corpus_sha256": "6f523320c8d3aa1bef47ce8061ad465371c0c3e81f2fcb20e9af3d327f00d224",
+      "unchanged_driver": "tests/parity/rust_constant_variants/src/bin/bootstrap_extensions.rs",
+      "unchanged_driver_sha256": "7b911554a271ffa1ca147b8ccd5b1eaa9bd55bbadf14c01a2e869da388ab96e0",
+      "source_recorded_outputs_equal": true,
+      "comparator": "compare_bootstrap_extensions_5_0_6.py",
+      "comparator_sha256": "31ad30e058c488c5f3e81961a85592f21464b09aa617bda57f491044be2bab43",
+      "cpp_exit_code": 0
+    },
+    {
+      "matrix": "bootstrap_conflict",
+      "observations": 768,
+      "corpus_sha256": "31c0298047a3fd1f05651970b65d179db41212040fd6bff5a031bd45407dd164",
+      "unchanged_driver": "tests/parity/rust_constant_variants/src/bin/bootstrap_conflict.rs",
+      "unchanged_driver_sha256": "7a04c9fd85f8c88fc55ecb8cf555ce6af46fe72908dc65651eec76356eec0931",
+      "source_recorded_outputs_equal": true,
+      "comparator": "compare_bootstrap_conflict_5_0_6.py",
+      "comparator_sha256": "4777b5de8232c1b61f986f49a2720540cc96abd650faa64b7b62e6c3f159fc3c",
+      "cpp_exit_code": 0
+    },
+    {
+      "matrix": "resource_bindings",
+      "observations": 384,
+      "corpus_sha256": "a061fc1cda99743499917d61c9d87aa4af1ba8242211245aba77ba663ff86e69",
+      "unchanged_driver": "tests/parity/rust_constant_variants/src/bin/resource_bindings.rs",
+      "unchanged_driver_sha256": "de4c670cc18631c43fbf1a434f4ae7e85da41546899a3e873e6a8d3a0d7bf171",
+      "source_recorded_outputs_equal": true,
+      "comparator": "compare_resource_bindings_5_0_6.py",
+      "comparator_sha256": "a922e0590d7f4db49bb8b5307590e71f39262f71fd2503f58db91d9f1de92530",
+      "cpp_exit_code": 0
+    }
+  ],
+  "observations": 4939,
+  "manifest_sha256": "85759d51f562feeac448a6076c4660139936462ab20157cb7b150a38c44e1acc",
+  "lock_sha256": "4c030d378f03a4167071ce4f1d19f98ff38d23ce8d6222e5a90428812a9251ec",
+  "reference_lock_sha256": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+  "original_sdk_provenance": {
+    "candidates": "006c848c381c179962ae83c885a57bd8eacade2a93b0c162d898326f5bd654c0",
+    "constants_numeric": "dc9d5a0fdc9c7b822a0736ba9c3cee8567bd84de1bd8cb830b3dce8036565cf2",
+    "constants_catalog": "92e7352b2b9ba9aca108aeb7563beb69bc089c68964a5f700966487bc3b8986d"
+  },
+  "source_dependency_versions_preserved": true,
+  "source_dependency_checksums_preserved": true,
+  "original_drivers_changed": false,
+  "original_generated_source_changed": false,
+  "resource_ownership_adaptation": "Rust replacement Drop is immediate; C++ arena destruction occurs at Context close. Existing comparator checks each timing contract separately.",
+  "complete_capability_acceptance": false
+}

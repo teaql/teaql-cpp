@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 1296,
+  "models": 1,
+  "operations": 3,
+  "behavior_callbacks": 864,
+  "request_policy_callbacks": 576,
+  "raw_events": 84,
+  "sql_log_records": 144,
+  "successful_return_counts": 42,
+  "profiles": {
+    "native": {
+      "passed": 4,
+      "total": 4,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 428: generated_checker_commit_rust_parity\n    Start  63: generated_behavior_hooks_rust_parity\n    Start 604: example_custom_checker_behavior\n    Start  62: protected_behavior_rust_parity\n1/4 Test #604: example_custom_checker_behavior ........   Passed    0.01 sec\n2/4 Test  #63: generated_behavior_hooks_rust_parity ...   Passed    0.65 sec\n3/4 Test  #62: protected_behavior_rust_parity .........   Passed    2.07 sec\n4/4 Test #428: generated_checker_commit_rust_parity ...   Passed    2.60 sec\n\n100% tests passed out of 4\n\nTotal Test time (real) =   2.62 sec\n",
+      "sha256": "0171f40fe8615cf0f67d2782a318d803b7d72a7cc7da7be79a8ded7da396b789"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 874: module_protected_behavior_rust_parity\n1/1 Test #874: module_protected_behavior_rust_parity ...   Passed    1.86 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   1.88 sec\n",
+      "sha256": "7e376c2b477331cf2cd5c9e9608849a49d3fdb239de27f916eba0ff8904a53b0"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 62: protected_behavior_rust_parity\n1/1 Test #62: protected_behavior_rust_parity ...   Passed    4.55 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   4.56 sec\n",
+      "sha256": "b81686fb084b9fe9c5132ca4f50e2dd70fa491c8bbc6b4e54e63b5807cf44b18"
+    }
+  },
+  "original_source_files": 610,
+  "appended_source_files": 1,
+  "original_method_bodies_changed": false,
+  "original_generated_rust_changed": false,
+  "production_runtime_changed": false,
+  "producer_changed": false,
+  "normalization": "none",
+  "execution": "Raw EntityDataService autocommit on real SQLite. RequestPolicy and raw event sink; no whole-plan MutationPolicy or audited graph Save claim.",
+  "default_pmr_disabled": true,
+  "explicit_global_output_copy": true,
+  "actual_user_deletion": true,
+  "leak_scanning": false,
+  "canonical_bodies": 556,
+  "format_cpp_count": 1376,
+  "mips_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "hashes": {
+    "tests/parity/protected_behavior_5_0_6.rs": "b4fd8b4a028e44cb46cf2e317d4d5e193568b497c64a7919b54b5532b537e103",
+    "tests/parity/protected_behavior_probe.cpp": "b2f029935165258befa28d5826076a87bdf88b5836bf9fba2a2026d1f6a63372",
+    "tests/parity/compare_protected_behavior_5_0_6.py": "8c891ed0ee63e2b98c1df9a807579cc77ef793c914be6cca7dedb4f614645c7e",
+    "tests/parity/protected_behavior_5_0_6_cases.json.gz": "83f158e5283e3948e6d686aab6a2ad7cfcba027fff5070bb1f3f6a3107103d3f",
+    "tests/parity/build_protected_behavior_oracle_5_0_6.py": "7369349566e6a913c7e6be5f15af2e98c3c1d62e4808bd96e4c02a1b3bdf8abd",
+    "scripts/verify_protected_behavior_5_0_6.py": "112009250843731be28fba3f94415e573352c4f1cd58301f62d79fb74d8b8099",
+    "tests/parity/rust_protected_behavior_5_0_6/Cargo.toml": "7a5de0ce708835c13a2e95fda32a98897383b53a39db4dfab77310854d2cb509",
+    "tests/parity/rust_protected_behavior_5_0_6/Cargo.lock": "bf79a641d1a50f2da0bae08ba372bec4b2ace0f50cdebe201414043e04d6b62c",
+    "docs/parity/protected_behavior_source_5_0_6.json": "8d4293c384a8625e99e3b15dbf61aaecf17f54c0279d4fa012402ed3e108d7d5",
+    "docs/protected_behavior_5_0_6.md": "a2ebddf186b2fad38c01c5adb113fdc3689fc18754c1a462c12124ff6ea52256"
+  }
+}

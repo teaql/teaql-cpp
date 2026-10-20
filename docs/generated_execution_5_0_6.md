@@ -118,6 +118,17 @@ remain clean; no production dependency was added.
 
 ## Remaining scope
 
+The [current execution responsibility matrix](execution_qualification_matrix_5_0_6.md)
+reconciles the historical list below with subsequent deferred-page, store and
+interleaving evidence. Those earlier remaining statements are checkpoint history;
+the matrix identifies the complete requirements still awaiting acceptance.
+
+The [subsequent grouped execution and dependency replay](generated_execution_shapes_5_0_6.md)
+qualifies 6,048 additional execution outcomes and replays this entire 1,440-case
+corpus, pagination conveniences and deferred protocols with original registry
+versions/checksums. Historical records remain unchanged; broader capabilities
+retain the requirements below.
+
 - Further inherited/constant/candidate/temporal/dynamic model configurations,
   grouped/aggregate/facet pages and complete policy/trace/privacy matrices.
 - Deferred typed-page stages, both cancellation branches, custom store behaviors,

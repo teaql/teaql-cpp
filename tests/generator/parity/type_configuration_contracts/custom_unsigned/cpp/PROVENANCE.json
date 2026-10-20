@@ -1,0 +1,20 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "hand_edited": false,
+  "model": "tests/generator/parity/type_configuration_contracts/custom_unsigned/model.xml",
+  "model_sha256": "268ca2c0666921ab7527014bf5a67601962a9e6d60973128e0cba9a19fec01df",
+  "files": {
+    "OBSERVATION.json": "3099a8473105412e412f26f55a5fcfd8636ec37adb0ccb6e0c63e1fa5bba76c4"
+  },
+  "formatter": "18.1.8",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "273714eec6d91763330c694ce44cb7a52c7dfe410135509fa438fcaf1ed53a7e",
+    "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "eacbf2fc53f99c648e27d4506a2ed6ceae9b0be2a625ec0a47cc07449d37c257",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "309b7efe8a525a79b362d57bc2e6e45f0b5b5531c5c95cbd632b75f499e02b0d",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java": "9d66eea7ed5d83d2cbff9376c462faf4ff056581bdaa53605f00a16f3b0f605c"
+  }
+}

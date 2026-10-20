@@ -13,6 +13,8 @@ struct PropertyDescriptor {
     String name;
     DataType data_type;
     String column_name;
+    // Authentic presentation input alias when SQL uses a different spelling.
+    std::optional<String> json_column_name;
     bool nullable = true, is_id = false, is_version = false;
     std::optional<std::uint32_t> max_length, numeric_precision, numeric_scale;
 
@@ -35,6 +37,7 @@ struct PropertyDescriptor {
         max_length = other.max_length;
         numeric_precision = other.numeric_precision;
         numeric_scale = other.numeric_scale;
+        json_column_name = detail::clone_in(a.resource(), other.json_column_name);
     }
 
     PropertyDescriptor(const PropertyDescriptor&) = delete;

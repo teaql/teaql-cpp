@@ -100,7 +100,7 @@ def cpp_metadata(models):
         masks = re.search(r'd\.mask_fields\(\{(.*?)\}\);', body, re.S).group(1)
         limit = re.search(r'd\.audit_max_length\((\d+)\);', body)
         result.append(dict(entity=entity, table=string_call('table'), service=string_call('service'),
-                           mask_storage_keys=json.loads('[' + masks + ']'),
+                           mask_keys=json.loads('[' + masks + ']'),
                            audit_limit=limit.group(1) if limit else None))
     return sorted(result, key=lambda item: item['entity'])
 
@@ -146,7 +146,10 @@ def main():
             subprocess.run(['java', '-cp', cpp_cp, 'com.skynet.codegenerator.cpp.CppCoreGenerator',
                             str(model), str(generated), '--qualify-inheritance'], check=True)
             observed = cpp_metadata((generated / 'include/privacy_fixture/models.hpp').read_text())
-            expected = [{key: value for key, value in item.items() if key != 'mask_model_keys'}
+            # The original derive carries the emitted model keys unchanged;
+            # it does not remap a relation name to its FK storage member.
+            expected = [dict(entity=item['entity'], table=item['table'], service=item['service'],
+                             mask_keys=item['mask_model_keys'], audit_limit=item['audit_limit'])
                         for item in source]
             if observed != expected:
                 raise SystemExit(f'{name}: C++ metadata differs\nexpected={expected}\nactual={observed}')

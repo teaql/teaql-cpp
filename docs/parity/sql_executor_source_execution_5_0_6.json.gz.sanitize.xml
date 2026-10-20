@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="0"
+	timestamp="2026-10-18T21:00:20"
+	>
+	<testcase name="sql_dynamic_stream_source_rust_parity" classname="sql_dynamic_stream_source_rust_parity" time="0.496233" status="run">
+		<properties/>
+		<system-out>SQL dynamic stream entry parity: 720/720 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_move_only_context_contracts" classname="sql_move_only_context_contracts" time="0.0106501" status="run">
+		<properties/>
+		<system-out>Move-only SQL completion contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_stream_execution_contracts" classname="sql_stream_execution_contracts" time="0.0171949" status="run">
+		<properties/>
+		<system-out>SQL stream execution contracts passed
+</system-out>
+	</testcase>
+</testsuite>

@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "declared 13-model metadata/compiler dispositions and eight-domain actual SQLite/Q/E matrix qualified; complete G05/P3 and all capabilities/phases remain partial",
+  "metadata_configurations": 13,
+  "successful_full_compilers": 8,
+  "source_root_failures": 3,
+  "source_candidate_collision_failures": 1,
+  "source_compiler_errors": {
+    "E0425": 3,
+    "E0592": 2
+  },
+  "identical_parser_failures": 1,
+  "counts": {
+    "scenarios": 768,
+    "rounds": 1152,
+    "sql_entries": 3052,
+    "typed_values": 1080,
+    "bootstrap_success": 1032,
+    "query_success": 1152
+  },
+  "errors": {
+    "graph write error: Transport error: UNIQUE constraint failed: status_data.id": 120
+  },
+  "models": {
+    "comma_identifier_value": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 560,
+      "typed_values": 288,
+      "bootstrap_success": 120,
+      "query_success": 144
+    },
+    "empty_identifier_value": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 168,
+      "typed_values": 24,
+      "bootstrap_success": 144,
+      "query_success": 144
+    },
+    "missing_identifier": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 168,
+      "typed_values": 24,
+      "bootstrap_success": 144,
+      "query_success": 144
+    },
+    "missing_identifier_value": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 476,
+      "typed_values": 144,
+      "bootstrap_success": 120,
+      "query_success": 144
+    },
+    "missing_seed_field": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 560,
+      "typed_values": 288,
+      "bootstrap_success": 120,
+      "query_success": 144
+    },
+    "no_candidates": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 476,
+      "typed_values": 144,
+      "bootstrap_success": 120,
+      "query_success": 144
+    },
+    "unicode_identifier_value": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 476,
+      "typed_values": 144,
+      "bootstrap_success": 120,
+      "query_success": 144
+    },
+    "unknown_identifier": {
+      "scenarios": 96,
+      "rounds": 144,
+      "sql_entries": 168,
+      "typed_values": 24,
+      "bootstrap_success": 144,
+      "query_success": 144
+    }
+  },
+  "native": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 8,
+    "total": 8
+  },
+  "modules": {
+    "build_exit_code": 0,
+    "ctest_exit_code": 0,
+    "passed": 8,
+    "total": 8,
+    "canonical_bodies": 396
+  },
+  "format": {
+    "version": "18.1.8",
+    "files": 1287,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "artifact_reproduction_exit_code": 0,
+  "live_original_reproduction_exit_code": 0,
+  "all_database_snapshots_unchanged_by_user_close": true,
+  "runtime_changed": false,
+  "producer_changed": false,
+  "generated_fixture_family_added": true,
+  "guards_removed": false,
+  "comparison": "Exact full actual database rows/versions/ID floors/roots/errors, scalar/E values and SQL/binding/intent records. Timing is outside the observer. Source compiler failures remain compiler failures; early C++ rejection is a documented frontend adaptation.",
+  "ownership": "Global owns SQLite and retained observations; each round uses and actually deletes a fresh UserContext. Nested diagnostic/value copies belong to Global. Default PMR disabled; no implicit lifetime extension.",
+  "development_fixture_corrections": [
+    "Initial observer incorrectly called disable_all_sql_log; actual source/native API is disable_sql_log. Both observer build failures are retained in temporary logs; production APIs were unchanged.",
+    "Temporary native generation initially used default clang-format style. The fixture renderer now explicitly uses the repository configuration; all native artifacts were regenerated and their provenance refreshed. Initial/final parser/generator/compiler observation JSON remains identical. Controlled native regeneration never waives original verification or permits completion."
+  ],
+  "hashes": {
+    "scripts/audit_constant_metadata_contracts.py": "025e56035422bb434b7fc96942397f1e05b078a5a3695b8a69399d4999f8c1f1",
+    "scripts/verify_constant_metadata_execution.py": "2d32b34b5b05834a026d97608d889febc714c5902eed7c86bb51874dfa8b9d85",
+    "tests/generator/ConstantMetadataProbe.java": "218cd94f595c1747eb9d7c7c7820032051cb3b7076d52bf4c9bf70c0a55c6409",
+    "tests/generator/parity/constant_metadata_contracts/cases.json": "7c49847c6ebf7c94a997146fbc2e77d8953adf41dda371a720b605d5aea331b3",
+    "tests/parity/constant_metadata_execution_probe.cpp": "810ddc8021f2087a4e74b45e4fcfb0abdad25a99fb130a49a8ade8467df1bfc6",
+    "tests/parity/constant_metadata_execution_5_0_6.rs": "4543b4490fc564914407b5a801c864fd5a76d8cc96c7ca93e8f51144e2521cea",
+    "tests/parity/compare_constant_metadata_execution_5_0_6.py": "3e31aa8823571694c4bb8f37b516dd96cc766dba81554f867a20cf12c27a72c2",
+    "docs/parity/constant_metadata_contracts_5_0_6.json": "45c48feb54ea8d66dc48fe6a002124ba8a2499540a5dd03239d1550fc092e0dc",
+    "docs/parity/constant_metadata_contracts_5_0_6_initial_audit.json": "45c48feb54ea8d66dc48fe6a002124ba8a2499540a5dd03239d1550fc092e0dc",
+    "docs/parity/constant_metadata_contracts_5_0_6_source_review.json": "f17806beb6873d8c18ba2dbbd078a68524f9fd4c791945aeed00184fdb3888db",
+    "tests/parity/constant_metadata_execution_unicode_identifier_value_5_0_6_cases.json.gz": "c844fe2aa11e0f9f286391dc944331611698603acb401b6bd5f115866a936452",
+    "tests/parity/constant_metadata_execution_missing_identifier_5_0_6_cases.json.gz": "e4cf4f19f4e4e6538ff3568e722b52461cee2706f6dc624cf2a8d19d7df69702",
+    "tests/parity/constant_metadata_execution_empty_identifier_value_5_0_6_cases.json.gz": "30993aefb25c9e1c85d260842588408836110ccca531c24cd2b8f5969b1f4aa4",
+    "tests/parity/constant_metadata_execution_missing_seed_field_5_0_6_cases.json.gz": "c6c217510fc4b8dd4c0e2ebcb7565f24b05ba1d1a9a2aa9b9e9be027c3296022",
+    "tests/parity/constant_metadata_execution_unknown_identifier_5_0_6_cases.json.gz": "a258e287f05a33c227d696c361bf6b75948790bf64fdecba41ec6453c233cb16",
+    "tests/parity/constant_metadata_execution_comma_identifier_value_5_0_6_cases.json.gz": "33ddac53f63bd32e8df0579c2a7c2c49d3e3779a8ccadedf0b18ed24a69eb70e",
+    "tests/parity/constant_metadata_execution_no_candidates_5_0_6_cases.json.gz": "7ad71d73815dff190b9ab28dd899861c022352ca8bcceb263a97b18328927537",
+    "tests/parity/constant_metadata_execution_missing_identifier_value_5_0_6_cases.json.gz": "b480d758cfea7bc513e54df8edbe6316155ef1b5fb040dfe7d5a53c50bb592d7"
+  },
+  "logs": {
+    "initial_audit": {
+      "path": "/tmp/teaql_constant_metadata_contracts_initial_audit_506.log",
+      "sha256": "2260c3e3f9384d6def8221d98c459dfe50a198c394638e89358bea4ef2763cbc",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nno_root {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":181}]}]}}\nmultiple_roots {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":183}]}]}}\nmultiple_roots_reversed {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":183}]}]}}\nmissing_identifier {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nunknown_identifier {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nno_candidates {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nempty_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_seed_field {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\ncomma_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\ncandidate_name_collision {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0592\",\"message\":\"duplicate definitions with name `with_code_is_a_b`\",\"primary\":[{\"file\":\"request.rs\",\"line\":1558}]},{\"code\":\"E0592\",\"message\":\"duplicate definitions with name `with_code_is_not_a_b`\",\"primary\":[{\"file\":\"request.rs\",\"line\":1564}]}]}}\nunicode_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmalformed_xml {}\nRecorded 13 complete original/native metadata contracts\n"
+    },
+    "formatted_audit": {
+      "path": "/tmp/teaql_constant_metadata_contracts_audit_final_506.log",
+      "sha256": "2260c3e3f9384d6def8221d98c459dfe50a198c394638e89358bea4ef2763cbc",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nno_root {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":181}]}]}}\nmultiple_roots {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":183}]}]}}\nmultiple_roots_reversed {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":183}]}]}}\nmissing_identifier {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nunknown_identifier {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nno_candidates {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nempty_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_seed_field {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\ncomma_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\ncandidate_name_collision {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0592\",\"message\":\"duplicate definitions with name `with_code_is_a_b`\",\"primary\":[{\"file\":\"request.rs\",\"line\":1558}]},{\"code\":\"E0592\",\"message\":\"duplicate definitions with name `with_code_is_not_a_b`\",\"primary\":[{\"file\":\"request.rs\",\"line\":1564}]}]}}\nunicode_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmalformed_xml {}\nRecorded 13 complete original/native metadata contracts\n"
+    },
+    "compiler_artifact_reproduction": {
+      "path": "/tmp/teaql_constant_metadata_contracts_reproduce_506.log",
+      "sha256": "db7cf72d82e35575fda072fa2118876ee3c271d65a449245b9a7158b0959ee50",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nno_root {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":181}]}]}}\nmultiple_roots {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":183}]}]}}\nmultiple_roots_reversed {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0425\",\"message\":\"cannot find function `module_with_behaviors_and_checkers` in this scope\",\"primary\":[{\"file\":\"runtime.rs\",\"line\":183}]}]}}\nmissing_identifier {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nunknown_identifier {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nno_candidates {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nempty_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmissing_seed_field {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\ncomma_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\ncandidate_name_collision {\"rust_compile\":{\"exit_code\":101,\"errors\":[{\"code\":\"E0592\",\"message\":\"duplicate definitions with name `with_code_is_a_b`\",\"primary\":[{\"file\":\"request.rs\",\"line\":1558}]},{\"code\":\"E0592\",\"message\":\"duplicate definitions with name `with_code_is_not_a_b`\",\"primary\":[{\"file\":\"request.rs\",\"line\":1564}]}]}}\nunicode_identifier_value {\"rust_compile\":{\"exit_code\":0,\"errors\":[]},\"cpp_compile\":{\"exit_code\":0}}\nmalformed_xml {}\nVerified 13 complete original/native metadata contracts\n"
+    },
+    "native_build": {
+      "path": "/tmp/teaql_constant_metadata_native_build_retry_506.log",
+      "sha256": "23b2fce3b5b5623cb50965def214de9c04ed507962b35bb536e8cc4a809e7d49",
+      "output": "[1/16] Building CXX object CMakeFiles/teaql_constant_metadata_unknown_identifier_probe.dir/tests/parity/constant_metadata_unknown_identifier_probe.cpp.o\n[2/16] Building CXX object CMakeFiles/teaql_constant_metadata_missing_identifier_probe.dir/tests/parity/constant_metadata_missing_identifier_probe.cpp.o\n[3/16] Building CXX object CMakeFiles/teaql_constant_metadata_no_candidates_probe.dir/tests/parity/constant_metadata_no_candidates_probe.cpp.o\n[4/16] Building CXX object CMakeFiles/teaql_constant_metadata_empty_identifier_value_probe.dir/tests/parity/constant_metadata_empty_identifier_value_probe.cpp.o\n[5/16] Building CXX object CMakeFiles/teaql_constant_metadata_missing_identifier_value_probe.dir/tests/parity/constant_metadata_missing_identifier_value_probe.cpp.o\n[6/16] Building CXX object CMakeFiles/teaql_constant_metadata_missing_seed_field_probe.dir/tests/parity/constant_metadata_missing_seed_field_probe.cpp.o\n[7/16] Building CXX object CMakeFiles/teaql_constant_metadata_comma_identifier_value_probe.dir/tests/parity/constant_metadata_comma_identifier_value_probe.cpp.o\n[8/16] Building CXX object CMakeFiles/teaql_constant_metadata_unicode_identifier_value_probe.dir/tests/parity/constant_metadata_unicode_identifier_value_probe.cpp.o\n[9/16] Linking CXX executable teaql_constant_metadata_missing_identifier_probe\n[10/16] Linking CXX executable teaql_constant_metadata_unknown_identifier_probe\n[11/16] Linking CXX executable teaql_constant_metadata_no_candidates_probe\n[12/16] Linking CXX executable teaql_constant_metadata_empty_identifier_value_probe\n[13/16] Linking CXX executable teaql_constant_metadata_missing_identifier_value_probe\n[14/16] Linking CXX executable teaql_constant_metadata_missing_seed_field_probe\n[15/16] Linking CXX executable teaql_constant_metadata_comma_identifier_value_probe\n[16/16] Linking CXX executable teaql_constant_metadata_unicode_identifier_value_probe\n"
+    },
+    "module_build": {
+      "path": "/tmp/teaql_constant_metadata_module_build_506.log",
+      "sha256": "c8710cec7e9a9effce4c8d5d7f7edc27dc1a6b7afff665de144260e3dc4f09ed",
+      "output": "[1/53] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd\n[2/51] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd\n[3/49] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd\n[4/47] Generating CXX dyndep file modules/CMakeFiles/teaql_data_service_module.dir/CXX.dd\n[5/45] Generating CXX dyndep file modules/CMakeFiles/teaql_sql_module.dir/CXX.dd\n[6/43] Generating CXX dyndep file modules/CMakeFiles/teaql_runtime_module.dir/CXX.dd\n[7/41] Generating CXX dyndep file modules/CMakeFiles/teaql_provider_sqlite_module.dir/CXX.dd\n[8/39] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_metadata_missing_identifier_probe.cpp for CXX dependencies\n[9/39] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_metadata_unknown_identifier_probe.cpp for CXX dependencies\n[10/39] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_metadata_no_candidates_probe.cpp for CXX dependencies\n[11/39] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_metadata_empty_identifier_value_probe.cpp for CXX dependencies\n[12/39] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_metadata_missing_identifier_value_probe.cpp for CXX dependencies\n[13/39] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_metadata_missing_seed_field_probe.cpp for CXX dependencies\n[14/39] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_metadata_comma_identifier_value_probe.cpp for CXX dependencies\n[15/39] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_metadata_missing_identifier_probe.dir/CXX.dd\n[16/39] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_metadata_unknown_identifier_probe.dir/CXX.dd\n[17/39] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_metadata_no_candidates_probe.dir/CXX.dd\n[18/39] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_metadata_empty_identifier_value_probe.dir/CXX.dd\n[19/39] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_metadata_missing_identifier_value_probe.dir/CXX.dd\n[20/39] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_metadata_missing_seed_field_probe.dir/CXX.dd\n[21/39] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_metadata_comma_identifier_value_probe.dir/CXX.dd\n[22/39] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/constant_metadata_unicode_identifier_value_probe.cpp for CXX dependencies\n[23/39] Generating CXX dyndep file modules/CMakeFiles/teaql_module_constant_metadata_unicode_identifier_value_probe.dir/CXX.dd\n[24/39] Building CXX object modules/CMakeFiles/teaql_module_constant_metadata_missing_identifier_probe.dir/consumers/constant_metadata_missing_identifier_probe.cpp.o\n[25/39] Building CXX object modules/CMakeFiles/teaql_module_constant_metadata_unknown_identifier_probe.dir/consumers/constant_metadata_unknown_identifier_probe.cpp.o\n[26/39] Building CXX object modules/CMakeFiles/teaql_module_constant_metadata_no_candidates_probe.dir/consumers/constant_metadata_no_candidates_probe.cpp.o\n[27/39] Building CXX object modules/CMakeFiles/teaql_module_constant_metadata_empty_identifier_value_probe.dir/consumers/constant_metadata_empty_identifier_value_probe.cpp.o\n[28/39] Building CXX object modules/CMakeFiles/teaql_module_constant_metadata_missing_seed_field_probe.dir/consumers/constant_metadata_missing_seed_field_probe.cpp.o\n[29/39] Building CXX object modules/CMakeFiles/teaql_module_constant_metadata_missing_identifier_value_probe.dir/consumers/constant_metadata_missing_identifier_value_probe.cpp.o\n[30/39] Building CXX object modules/CMakeFiles/teaql_module_constant_metadata_comma_identifier_value_probe.dir/consumers/constant_metadata_comma_identifier_value_probe.cpp.o\n[31/39] Building CXX object modules/CMakeFiles/teaql_module_constant_metadata_unicode_identifier_value_probe.dir/consumers/constant_metadata_unicode_identifier_value_probe.cpp.o\n[32/39] Linking CXX executable modules/teaql_module_constant_metadata_missing_identifier_probe\n[33/39] Linking CXX executable modules/teaql_module_constant_metadata_unknown_identifier_probe\n[34/39] Linking CXX executable modules/teaql_module_constant_metadata_no_candidates_probe\n[35/39] Linking CXX executable modules/teaql_module_constant_metadata_empty_identifier_value_probe\n[36/39] Linking CXX executable modules/teaql_module_constant_metadata_missing_identifier_value_probe\n[37/39] Linking CXX executable modules/teaql_module_constant_metadata_missing_seed_field_probe\n[38/39] Linking CXX executable modules/teaql_module_constant_metadata_comma_identifier_value_probe\n[39/39] Linking CXX executable modules/teaql_module_constant_metadata_unicode_identifier_value_probe\n"
+    },
+    "original_observer_build": {
+      "path": "/tmp/teaql_constant_metadata_rust_build_retry_506.log",
+      "sha256": "d85b575d546ae8dab2dcfddf3e48615d227f8dfe991f47e759a90daaa7bf7867",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nmissing_identifier: complete original observer built\nunknown_identifier: complete original observer built\nno_candidates: complete original observer built\nempty_identifier_value: complete original observer built\nmissing_identifier_value: complete original observer built\nmissing_seed_field: complete original observer built\ncomma_identifier_value: complete original observer built\nunicode_identifier_value: complete original observer built\n"
+    },
+    "comparison": {
+      "path": "/tmp/teaql_constant_metadata_execution_compare_506.log",
+      "sha256": "59cd23ae3ea647f24ff71f4a7bfe6cc9688ca061b2f28e14f79c8e71f45a6964",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nmissing_identifier: 96/96 metadata SQLite/Q/E outcomes match\nunknown_identifier: 96/96 metadata SQLite/Q/E outcomes match\nno_candidates: 96/96 metadata SQLite/Q/E outcomes match\nempty_identifier_value: 96/96 metadata SQLite/Q/E outcomes match\nmissing_identifier_value: 96/96 metadata SQLite/Q/E outcomes match\nmissing_seed_field: 96/96 metadata SQLite/Q/E outcomes match\ncomma_identifier_value: 96/96 metadata SQLite/Q/E outcomes match\nunicode_identifier_value: 96/96 metadata SQLite/Q/E outcomes match\n"
+    },
+    "native_tests": {
+      "path": "/tmp/teaql_constant_metadata_native_tests_506.log",
+      "sha256": "41da2f17d05462b0096168e7cf113d3081e1a38776765e135d5fe97526ed2460",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 49: constant_metadata_missing_identifier_rust_parity\n    Start 50: constant_metadata_unknown_identifier_rust_parity\n    Start 51: constant_metadata_no_candidates_rust_parity\n    Start 52: constant_metadata_empty_identifier_value_rust_parity\n1/8 Test #52: constant_metadata_empty_identifier_value_rust_parity .....   Passed    1.33 sec\n    Start 53: constant_metadata_missing_identifier_value_rust_parity\n2/8 Test #50: constant_metadata_unknown_identifier_rust_parity .........   Passed    1.73 sec\n    Start 54: constant_metadata_missing_seed_field_rust_parity\n3/8 Test #49: constant_metadata_missing_identifier_rust_parity .........   Passed    1.74 sec\n    Start 55: constant_metadata_comma_identifier_value_rust_parity\n4/8 Test #51: constant_metadata_no_candidates_rust_parity ..............   Passed    3.98 sec\n    Start 56: constant_metadata_unicode_identifier_value_rust_parity\n5/8 Test #53: constant_metadata_missing_identifier_value_rust_parity ...   Passed    4.29 sec\n6/8 Test #55: constant_metadata_comma_identifier_value_rust_parity .....   Passed    4.49 sec\n7/8 Test #54: constant_metadata_missing_seed_field_rust_parity .........   Passed    5.02 sec\n8/8 Test #56: constant_metadata_unicode_identifier_value_rust_parity ...   Passed    3.25 sec\n\n100% tests passed out of 8\n\nTotal Test time (real) =   7.24 sec\n"
+    },
+    "module_tests": {
+      "path": "/tmp/teaql_constant_metadata_module_tests_506.log",
+      "sha256": "b19a73bc2208efe1cad3630bca6a581e4e8a092b101c2fbe18764d9b48787bf0",
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 745: module_constant_metadata_missing_identifier_rust_parity\n    Start 746: module_constant_metadata_unknown_identifier_rust_parity\n    Start 747: module_constant_metadata_no_candidates_rust_parity\n    Start 748: module_constant_metadata_empty_identifier_value_rust_parity\n1/8 Test #748: module_constant_metadata_empty_identifier_value_rust_parity .....   Passed    1.36 sec\n    Start 749: module_constant_metadata_missing_identifier_value_rust_parity\n2/8 Test #746: module_constant_metadata_unknown_identifier_rust_parity .........   Passed    1.47 sec\n    Start 750: module_constant_metadata_missing_seed_field_rust_parity\n3/8 Test #745: module_constant_metadata_missing_identifier_rust_parity .........   Passed    1.71 sec\n    Start 751: module_constant_metadata_comma_identifier_value_rust_parity\n4/8 Test #747: module_constant_metadata_no_candidates_rust_parity ..............   Passed    3.18 sec\n    Start 752: module_constant_metadata_unicode_identifier_value_rust_parity\n5/8 Test #749: module_constant_metadata_missing_identifier_value_rust_parity ...   Passed    4.03 sec\n6/8 Test #750: module_constant_metadata_missing_seed_field_rust_parity .........   Passed    4.87 sec\n7/8 Test #751: module_constant_metadata_comma_identifier_value_rust_parity .....   Passed    5.05 sec\n8/8 Test #752: module_constant_metadata_unicode_identifier_value_rust_parity ...   Passed    3.67 sec\n\n100% tests passed out of 8\n\nTotal Test time (real) =   6.87 sec\n"
+    },
+    "live_original_reproduction": {
+      "path": "/tmp/teaql_constant_metadata_execution_reproduce_506.log",
+      "sha256": "59cd23ae3ea647f24ff71f4a7bfe6cc9688ca061b2f28e14f79c8e71f45a6964",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 36 locked generator sources and 17 capability records; 17 remain unqualified\nmissing_identifier: 96/96 metadata SQLite/Q/E outcomes match\nunknown_identifier: 96/96 metadata SQLite/Q/E outcomes match\nno_candidates: 96/96 metadata SQLite/Q/E outcomes match\nempty_identifier_value: 96/96 metadata SQLite/Q/E outcomes match\nmissing_identifier_value: 96/96 metadata SQLite/Q/E outcomes match\nmissing_seed_field: 96/96 metadata SQLite/Q/E outcomes match\ncomma_identifier_value: 96/96 metadata SQLite/Q/E outcomes match\nunicode_identifier_value: 96/96 metadata SQLite/Q/E outcomes match\n"
+    },
+    "module_bodies": {
+      "path": "/tmp/teaql_constant_metadata_module_bodies_506.log",
+      "sha256": "b01b64e6850031cb51bb9bb264d8be2664348a703c445ab2dcf08d86c819b556",
+      "output": "Verified 396 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n"
+    },
+    "module_paths": {
+      "path": "/tmp/teaql_constant_metadata_module_paths_506.log",
+      "sha256": "95dd3feb3ed003aa5edeb5aac251b95102d25da5ebc7f536f34434d3d61f8282",
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nVerified 124 Rust source files, 378 declarations, 693 source tests; source inventory only (not parity acceptance)\nVerified 7 active packages, 121 source units, 124 source ownership/disposition links and 769 retained move destinations; structure/provenance only, not unchanged-body or semantic acceptance\n"
+    },
+    "format": {
+      "path": "/tmp/teaql_constant_metadata_format_final_506.log",
+      "sha256": "b4a5a9d2b8a4928b82505b27be821fe5b6d60d02f935e1d49a8f1b6da2d1689d",
+      "output": "Formatted 1287 handwritten C++ files with clang-format 18.1.8\n"
+    },
+    "format_check": {
+      "path": "/tmp/teaql_constant_metadata_format_check_final_506.log",
+      "sha256": "0b2eb8929dfdadc9683009c9c56334f6924d300fa939add8a869c01100447604",
+      "output": "Checked 1287 handwritten C++ files with clang-format 18.1.8\n"
+    }
+  },
+  "remaining": [
+    "Broader root/constant dependency cycles and model topologies.",
+    "Further pathological naming/seed, opaque/configured type and time/resource override cases.",
+    "Complete G01-G17 and P0-P7 final integration/guard removal remain required."
+  ]
+}

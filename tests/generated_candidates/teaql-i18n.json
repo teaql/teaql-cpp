@@ -1,0 +1,121 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.platform.name": "Name",
+                "property.record.name": "Name",
+                "property.person.id": "Id",
+                "property.orderStatus.version": "Version",
+                "property.record.tag": "Tag",
+                "property.orderStatus.code": "Code",
+                "property.record.status": "Status",
+                "property.person.status": "Status",
+                "property.person.version": "Version",
+                "property.person.phase": "Phase",
+                "entity.record": "Record",
+                "entity.platform": "Platform",
+                "property.platform.id": "Id",
+                "property.record.version": "Version",
+                "property.orderStatus.id": "Id",
+                "property.person.name": "Name",
+                "property.record.id": "Id",
+                "property.record.platform": "Platform",
+                "entity.orderStatus": "Order Status",
+                "property.person.platform": "Platform",
+                "property.orderStatus.platform": "Platform",
+                "entity.person": "Person",
+                "property.orderStatus.name": "Name",
+                "property.record.phase": "Phase",
+                "property.platform.version": "Version"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

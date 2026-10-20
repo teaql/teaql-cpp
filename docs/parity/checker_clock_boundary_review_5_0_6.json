@@ -1,0 +1,707 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Compiler and model-selection boundary review only; no live semantic/save acceptance claim.",
+  "configurations": [
+    {
+      "case": "relation_required",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "tenant",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "tenant",
+          "field": "name",
+          "type_name": "string",
+          "storage_type": "String",
+          "root_seed": "\"string()\""
+        },
+        {
+          "entity": "tenant",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "tenant",
+          "storage_type": "u64",
+          "root_seed": "\"tenant(createFunction=now\""
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "relation_optional",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "tenant",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "tenant",
+          "field": "name",
+          "type_name": "string",
+          "storage_type": "String",
+          "root_seed": "\"string()\""
+        },
+        {
+          "entity": "tenant",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "tenant",
+          "storage_type": "Option<u64>",
+          "root_seed": "\"tenant(createFunction=now\""
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "context_root_required",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "tenant",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "tenant",
+          "field": "name",
+          "type_name": "string",
+          "storage_type": "String",
+          "root_seed": "\"string()\""
+        },
+        {
+          "entity": "tenant",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "tenant",
+          "storage_type": "u64",
+          "root_seed": "\"tenant(contextRoot=true\""
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "context_root_optional",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 101,
+      "cpp_compile": 0,
+      "source_errors": [
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        }
+      ],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "tenant",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "tenant",
+          "field": "name",
+          "type_name": "string",
+          "storage_type": "String",
+          "root_seed": "\"string()\""
+        },
+        {
+          "entity": "tenant",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "tenant",
+          "storage_type": "Option<u64>",
+          "root_seed": "\"tenant(contextRoot=true\""
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "business_id_required",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 101,
+      "cpp_compile": 1,
+      "source_errors": [
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        }
+      ],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "tenant",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "tenant",
+          "field": "name",
+          "type_name": "string",
+          "storage_type": "String",
+          "root_seed": "\"string()\""
+        },
+        {
+          "entity": "tenant",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "tenant",
+          "storage_type": "u64",
+          "root_seed": "\"tenant(contextRoot=true)\""
+        },
+        {
+          "entity": "note",
+          "field": "number",
+          "type_name": "businessId",
+          "storage_type": "String",
+          "root_seed": "\"businessId(prefix=RCP namespace=receipts createFunction=now\""
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "business_id_optional",
+      "source_generated": true,
+      "cpp_generated": false,
+      "source_compile": 101,
+      "cpp_compile": null,
+      "source_errors": [
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `is_empty` found for enum `Option<T>` in the current scope"
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `as_str` found for enum `Option<T>` in the current scope"
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types"
+        }
+      ],
+      "cpp_generation_error": "KSML-BUSINESS-ID note.number: Business ID fields must be required; remove '?'.",
+      "field_metadata": [
+        {
+          "entity": "tenant",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "tenant",
+          "field": "name",
+          "type_name": "string",
+          "storage_type": "String",
+          "root_seed": "\"string()\""
+        },
+        {
+          "entity": "tenant",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "tenant",
+          "storage_type": "u64",
+          "root_seed": "\"tenant(contextRoot=true)\""
+        },
+        {
+          "entity": "note",
+          "field": "number",
+          "type_name": "businessId",
+          "storage_type": "Option<String>",
+          "root_seed": "\"businessId(prefix=RCP namespace=receipts createFunction=now\""
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "json_override_required",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "sample_value",
+          "type_name": "jsonMe",
+          "storage_type": "serde_json::Value",
+          "root_seed": "serde_json::json!(\"jsonMe(optional=false,createFunction=now,updateFunction=now)\")"
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "json_override_optional",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "sample_value",
+          "type_name": "jsonMe",
+          "storage_type": "serde_json::Value",
+          "root_seed": "serde_json::json!(\"jsonMe(optional=true,createFunction=now,updateFunction=now)\")"
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "string_alias",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "sample_value",
+          "type_name": "word",
+          "field_rust_type": "String",
+          "type_rust_type": "String",
+          "storage_type": "String",
+          "root_seed": "\"word()\""
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "integer_alias",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "sample_value",
+          "type_name": "integer",
+          "field_rust_type": "i64",
+          "type_rust_type": "i64",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "integer_field_override",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "sample_value",
+          "type_name": "integer",
+          "field_rust_type": "u64,createFunction=now,updateFunction=now",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        }
+      ]
+    },
+    {
+      "case": "inherited_scalar",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "record",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "record",
+          "field": "count",
+          "type_name": "integer",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "record",
+          "field": "code",
+          "type_name": "uniStr",
+          "storage_type": "String",
+          "root_seed": "\"uniStr()\""
+        },
+        {
+          "entity": "record",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "amount",
+          "type_name": "number",
+          "storage_type": "rust_decimal::Decimal",
+          "root_seed": "\"number(createFunction=now\""
+        }
+      ]
+    },
+    {
+      "case": "inherited_json",
+      "source_generated": true,
+      "cpp_generated": true,
+      "source_compile": 0,
+      "cpp_compile": 0,
+      "source_errors": [],
+      "cpp_generation_error": null,
+      "field_metadata": [
+        {
+          "entity": "record",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "record",
+          "field": "payload",
+          "type_name": "jsonMe",
+          "storage_type": "Option<serde_json::Value>",
+          "root_seed": "serde_json::json!(\"jsonMe(createFunction=now,updateFunction=now)\")"
+        },
+        {
+          "entity": "record",
+          "field": "version",
+          "type_name": "version",
+          "storage_type": "i64",
+          "root_seed": "1_i64"
+        },
+        {
+          "entity": "note",
+          "field": "id",
+          "type_name": "id",
+          "storage_type": "u64",
+          "root_seed": "1_u64"
+        },
+        {
+          "entity": "note",
+          "field": "code",
+          "type_name": "uniStr",
+          "storage_type": "String",
+          "root_seed": "\"uniStr()\""
+        }
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "case": "view",
+      "source_selection": {
+        "models": [
+          {
+            "name": "note",
+            "view": true,
+            "value_object": false
+          }
+        ],
+        "selected_entities": []
+      },
+      "cpp_selection": {
+        "models": [
+          {
+            "name": "note",
+            "view": true,
+            "value_object": false
+          }
+        ],
+        "selected_entities": []
+      },
+      "source_compile": 101,
+      "cpp_compile": 0
+    },
+    {
+      "case": "value_object",
+      "source_selection": {
+        "models": [
+          {
+            "name": "note",
+            "view": false,
+            "value_object": true
+          }
+        ],
+        "selected_entities": []
+      },
+      "cpp_selection": {
+        "models": [
+          {
+            "name": "note",
+            "view": false,
+            "value_object": true
+          }
+        ],
+        "selected_entities": []
+      },
+      "source_compile": 101,
+      "cpp_compile": 0
+    }
+  ],
+  "initial_role_inputs": "The original boundary audit used _view/_value_object, which do not set the source viewObject/valueObject flags. Those two ordinary-model results are not role evidence; the corrected, observed role inputs are recorded separately.",
+  "complete_capability_acceptance": false,
+  "original_source_files_changed": false,
+  "hashes": {
+    "scripts/audit_checker_clock_configurations_5_0_6.py": "ab8d43cc672b54720958a758bda46d03f7daddd572ba4b0a626a262588d1c6c1",
+    "tests/generator/CheckerConfigurationProbe.java": "842b7acd5f7c0afb5198987ec8fb80764666736cca2d461e95df72bc0f08d436",
+    "docs/parity/checker_clock_boundary_audit_5_0_6.json.gz": "9d28c2d411929946468635f7f3e8642b81fa37dce979232797fad51bcfb79475",
+    "docs/parity/checker_model_role_selection_5_0_6.json.gz": "b28e7fe2c2aa01af9d32be6cf8a4c1ff8014cf84be5dcb2456dc76cbb53ddbe5",
+    "docs/checker_clock_boundary_review_5_0_6.md": "8bb60c899062bd0e60fabc8d6b05ed37b51f6699169d347ca0709af6bb3b266e"
+  }
+}

@@ -1,0 +1,119 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.entry.label": "Label",
+                "property.entry.id": "Id",
+                "property.entry.ratio": "Ratio",
+                "property.entry.optionalDay": "Optional Day",
+                "property.entry.optionalLabel": "Optional Label",
+                "property.entry.height": "Height",
+                "property.entry.tenant": "Tenant",
+                "property.tenant.id": "Id",
+                "property.entry.notes": "Notes",
+                "property.entry.day": "Day",
+                "property.entry.version": "Version",
+                "property.entry.amount": "Amount",
+                "property.entry.optionalAmount": "Optional Amount",
+                "property.entry.counter": "Counter",
+                "property.entry.active": "Active",
+                "property.entry.optionalActive": "Optional Active",
+                "entity.entry": "Entry",
+                "property.entry.moment": "Moment",
+                "property.entry.optionalMoment": "Optional Moment",
+                "property.tenant.name": "Name",
+                "property.tenant.version": "Version",
+                "property.entry.secret": "Secret",
+                "entity.tenant": "Tenant"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

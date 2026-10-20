@@ -1,5 +1,7 @@
 # Generated indexed dynamic-field carriers
 
+Current G16 qualification is recorded in the [complete acceptance audit](dynamic_storage_acceptance_5_0_6.md). The text below preserves this earlier checkpoint and its original remaining-work boundaries.
+
 Recorded: 2026-10-12. Runtime baseline:
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`. Frozen generator producer:
 `45e1572c4956ca963410d8ea436ead3c8857087a`. The independent cpp_support workspace

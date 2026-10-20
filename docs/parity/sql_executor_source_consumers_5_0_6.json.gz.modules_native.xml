@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="1"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="0"
+	timestamp="2026-10-18T21:04:52"
+	>
+	<testcase name="module_dynamic_query_contracts" classname="module_dynamic_query_contracts" time="0.0148313" status="run">
+		<properties/>
+		<system-out>Dynamic query hydration contracts passed
+</system-out>
+	</testcase>
+</testsuite>

@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == '__main__':
-    raise SystemExit(main('system_time_arithmetic_scope_cases.json', 'System-time arithmetic'))
+    raise SystemExit(main('system_time_arithmetic_scope_baseline_5_0_6_cases.json.gz', 'System-time arithmetic'))

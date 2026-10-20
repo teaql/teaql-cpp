@@ -2,6 +2,8 @@
 """Compare actual pinned formatter output (only wall-clock prefixes are removed)."""
 import argparse
 import json
+import gzip
+import os
 import subprocess
 from pathlib import Path
 from compare_values import observe, same
@@ -21,7 +23,7 @@ def main():
     parser.add_argument('--cpp-emulator', default='')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    corpus = json.loads(Path(__file__).with_name('log_formatter_cases.json').read_text())
+    corpus = json.loads(gzip.decompress(Path(__file__).with_name('log_formatter_baseline_5_0_6_cases.json.gz').read_bytes()))
     if corpus['baseline'] != json.loads((root / 'upstream.lock.json').read_text())['commit']:
         raise RuntimeError('Formatter observations belong to a different baseline')
     if args.rust:
@@ -38,7 +40,8 @@ def main():
         expected = [c['expected'] for c in cases]
         if args.rust and not same(expected, observe(str(Path(args.rust) / rust), inputs)):
             raise RuntimeError(f'{group}: stored observations differ from actual Rust')
-        executable = str(Path(args.cpp) / cpp)
+        prefix = os.environ.get('TEAQL_PARITY_CPP_PREFIX', 'teaql_')
+        executable = str(Path(args.cpp) / cpp.replace('teaql_', prefix, 1))
         if group == 'audit':
             bits = int(subprocess.check_output(emulator + [executable, '--pointer-bits'], text=True))
             if bits not in (32, 64):

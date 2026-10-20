@@ -223,11 +223,15 @@ static void construction_and_execution() {
     check(cpp_examples::require_value(moved.executeForList(*user_context).wait()).len() == 2,
           "moving retains description storage");
     auto missing_context = global.make_user_context();
-    rejects(
-        [&] {
-            product_request(*missing_context).executeForList(*missing_context);
-        },
-        "missing setup fails closed");
+    const auto& missing_result =
+        product_request(*missing_context).executeForList(*missing_context).wait();
+    check(!missing_result &&
+              missing_result.error().kind() ==
+                  DataServiceError<ExampleExecutor::Error>::Kind::Runtime &&
+              missing_result.error().runtime_error().kind() == RuntimeError::Kind::Graph &&
+              missing_result.error().runtime_error().message() ==
+                  "missing entity data service for entity: Product",
+          "missing setup returns the source-shaped Graph error through its operation");
     rejects(
         [&] {
             Query(*user_context).purpose("Intent").executeForOne(*user_context);

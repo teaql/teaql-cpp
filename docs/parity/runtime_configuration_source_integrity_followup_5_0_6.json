@@ -1,0 +1,16 @@
+{
+  "scope": "Source and imported-consumer integrity after configuration registration and provider lifetime repair; semantic gates remain separate",
+  "exit_code": 0,
+  "canonical_consumer_bodies": 684,
+  "exports": 1493,
+  "modules": 7,
+  "module_contract_executable": "passed actual import/Context/template/ownership/core/ABI checks",
+  "locked_generator_sources": 36,
+  "capability_records": 17,
+  "unqualified_capabilities": 11,
+  "active_packages": 7,
+  "active_production_units": 124,
+  "source_ownership_links": 124,
+  "historical_move_destinations": 769,
+  "full_generated_compiler_gate": "live session74678,42 completed cases at last observation; not a passing full result"
+}

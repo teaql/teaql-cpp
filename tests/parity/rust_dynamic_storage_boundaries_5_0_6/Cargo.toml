@@ -1,0 +1,29 @@
+[package]
+name = "teaql_dynamic_storage_boundaries_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "teaql_dynamic_storage_boundaries_506"
+path = "../rust_field_layout/src/bin/sqlite_dynamic_storage_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+serde_json = "=1.0.150"
+serde = "=1.0.228"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype"] }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }

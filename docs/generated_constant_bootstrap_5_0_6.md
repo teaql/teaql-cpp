@@ -1,5 +1,10 @@
 # Generated constant bootstrap checkpoint: Rust 5.0.6
 
+Current status: G05/P3 is now qualified with documented language/ownership
+adaptations and constants use normal generation. See
+[the acceptance record](constants_acceptance_5_0_6.md). The text and counts below
+retain this earlier checkpoint, including its then-active generation guard.
+
 Status: P3/G05 remains partial; normal constant generation is still guarded.
 The qualification fixture now uses actual generated bootstrap, replacing the
 explicit C++ root/constant seed setup in the earlier candidate probe. The runtime

@@ -1,0 +1,82 @@
+{
+  "capability": "G07",
+  "status": "qualified",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "requirements": [
+    {
+      "id": "PP01",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP02",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP03",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP04",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP05",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP06",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP07",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP08",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP09",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP10",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP11",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    },
+    {
+      "id": "PP12",
+      "status": "qualified",
+      "contract": "docs/predicate_projection_requirements_5_0_6.md"
+    }
+  ],
+  "source_review": "docs/parity/predicate_projection_source_review_after_alias_fix_5_0_6.json",
+  "terminal_record": "docs/parity/query_alias_terminal_5_0_6.json.gz",
+  "previous_entry": "docs/parity/predicate_projection_pre_acceptance_5_0_6.json.gz",
+  "phase_complete": false,
+  "goal_complete": false,
+  "preserved_phase_obligations": [
+    "G06 general queries, raw trust and return mapping",
+    "G08 complete relationship/aggregate execution",
+    "G09 pagination/stream optimization",
+    "G10 dynamic JSON",
+    "G12 complete assembly and Assist",
+    "G13-G17 complete model/configuration/privacy/trace/load-state/storage integration",
+    "P4/P5/P7 final integration and exit criteria"
+  ]
+}

@@ -1,0 +1,38 @@
+[package]
+name = "teaql_dynamic_save_reference_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "teaql_dynamic_save_audit_reference_506"
+path = "../rust_field_layout/src/bin/dynamic_save_audit_5_0_6.rs"
+
+[[bin]]
+name = "teaql_dynamic_audit_projection_reference_506"
+path = "../rust_field_layout/src/bin/dynamic_audit_projection_5_0_6.rs"
+
+[dependencies]
+sha2 = "=0.10.9"
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+serde = "=1.0.228"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype"] }
+
+cpp_dynamic_json_core = { package = "cpp-dynamic-json-core", path = "../../generator/parity/dynamic_json_rust/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }

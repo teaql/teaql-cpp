@@ -1,0 +1,14 @@
+{
+  "input": {
+    "decl": "TIMESTAMP",
+    "sql_value": "CAST(x'323032342d30322d32392030313a2d323a30332e3132332b30383a3030' AS TEXT)"
+  },
+  "wrapper_expected": {
+    "checked_failure": "arithmetic_overflow",
+    "message": "attempt to subtract with overflow"
+  },
+  "exit_code": 101,
+  "stdout": "",
+  "stderr": "\nthread 'main' (2716681) panicked at /home/philip/githome/teaql-cpp/.reference/teaql-rs/teaql-provider-sqlite/src/lib.rs:1788:55:\nattempt to subtract with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3"
+}

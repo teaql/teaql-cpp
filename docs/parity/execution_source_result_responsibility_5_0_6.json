@@ -1,0 +1,73 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "previous_review": "docs/parity/execution_responsibility_after_lookup_results_5_0_6.json",
+  "previous_review_sha256": "13484e253c4c2ab34dc9546f0609a1ad20e98dcea176c24793a9afdc220602cc",
+  "source_path": ".reference/teaql_code_gen/generator/src/main/resources/generator/rust-lib-core/request/index.stg",
+  "source_sha256": "d886a74d7636d774cd1744f4a4b78ca783a435cd89bb3719ec1cf9f6b344bc59",
+  "source_return_type": {
+    "start_line": 674,
+    "end_line": 683,
+    "text": "    pub fn return_type\\<T\\>(self) -> <objectDescriptor.rustStructName>Request\\<T\\> {\n        <objectDescriptor.rustStructName>Request {\n            query: self.query,\n            relation_selections: self.relation_selections,\n            relation_filters: self.relation_filters,\n            child_enhancements: self.child_enhancements,\n            query_options: self.query_options,\n            marker: PhantomData,\n        }\n    }",
+    "sha256": "a70f3b8341b394925890aceebaedd0718711e01ad2ce464e8a03dbd2ce4167d4"
+  },
+  "native_path": "teaql_runtime/include/teaql/runtime/entity_query.hpp",
+  "native_sha256": "27c3e82e6a1061ea53043d75dc388b698efe5fadfcbb30d4770e90eb8431f6c1",
+  "native_overloads": [
+    {
+      "start_line": 175,
+      "end_line": 178,
+      "text": "EntityQuery<T, E, Purposed, Result> returnType() const& {\n        auto copy = binding_.get().make_ref<detail::QueryDescription>(description());\n        return EntityQuery<T, E, Purposed, Result>(binding_, copy);\n    }",
+      "sha256": "5ad9ffa98ee90f5766a5994ea55c4f33829768f8e4415f72cad9ed3d4adae1ca"
+    },
+    {
+      "start_line": 181,
+      "end_line": 184,
+      "text": "EntityQuery<T, E, Purposed, Result> returnType() && {\n        (void)description();\n        return EntityQuery<T, E, Purposed, Result>(binding_, std::exchange(description_, {}));\n    }",
+      "sha256": "4f10cdf1dc31abd514266921696b7c684d10c4414cec07864f215fce6e94aff6"
+    }
+  ],
+  "method_responsibilities": {
+    "list": {
+      "source_entity": "literal source model name",
+      "decode_result": "R",
+      "helper": "fetch_entity_smart_list<R>"
+    },
+    "rows": {
+      "source_entity": "literal source model name",
+      "decode_result": null,
+      "helper": "fetch_compact_smart_list"
+    },
+    "stream": {
+      "source_entity": "literal source model name",
+      "decode_result": "R",
+      "helper": "fetch_entity_stream<R>"
+    },
+    "first": {
+      "source_entity": "unchanged request",
+      "decode_result": "R",
+      "helper": "limit(1)._execute_for_list"
+    },
+    "one": {
+      "source_entity": "unchanged request",
+      "decode_result": "R",
+      "helper": "_execute_for_first"
+    },
+    "page": {
+      "source_entity": "unchanged request",
+      "decode_result": "R",
+      "helper": "source count/list ordering; typed list carries R"
+    },
+    "count": {
+      "source_entity": "literal source model name",
+      "decode_result": null,
+      "helper": "fetch_compact_rows and try_u64"
+    },
+    "exists": {
+      "source_entity": "literal source model name",
+      "decode_result": null,
+      "helper": "fetch_compact_rows presence"
+    }
+  },
+  "disposition": "Source/request identities and complete typed states are checked against actual original execution; no model/storage/phase acceptance follows from body inventory alone."
+}

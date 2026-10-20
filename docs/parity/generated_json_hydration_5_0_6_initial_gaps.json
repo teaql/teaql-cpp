@@ -1,0 +1,1546 @@
+[
+  {
+    "index": 14,
+    "input": {
+      "entity": "Platform",
+      "array": false,
+      "value": {
+        "id": 1,
+        "name": "tenant",
+        "person_list": []
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 1,
+          "name": "tenant",
+          "person_list": []
+        },
+        "loaded": {
+          "company_list": false,
+          "id": true,
+          "name": true,
+          "order_list": false,
+          "person_list": true,
+          "product_list": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 1,
+          "name": "tenant"
+        },
+        "loaded": {
+          "company_list": false,
+          "id": true,
+          "name": true,
+          "order_list": false,
+          "person_list": true,
+          "product_list": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 15,
+    "input": {
+      "entity": "Platform",
+      "array": false,
+      "value": {
+        "id": 1,
+        "person_list": [
+          {
+            "id": 2,
+            "name": "Ada",
+            "platform": {
+              "id": 1
+            }
+          }
+        ]
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 1,
+          "person_list": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "platform": {
+                "id": 1
+              },
+              "platform_id": 1
+            }
+          ]
+        },
+        "loaded": {
+          "company_list": false,
+          "id": true,
+          "name": false,
+          "order_list": false,
+          "person_list": true,
+          "product_list": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 1
+        },
+        "loaded": {
+          "company_list": false,
+          "id": true,
+          "name": false,
+          "order_list": false,
+          "person_list": true,
+          "product_list": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 19,
+    "input": {
+      "entity": "Platform",
+      "array": true,
+      "value": [
+        {
+          "id": 1,
+          "name": "tenant",
+          "person_list": []
+        },
+        {
+          "id": 1,
+          "person_list": [
+            {
+              "id": 2,
+              "name": "Ada",
+              "platform": {
+                "id": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "rust": {
+      "rows": [
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 1,
+            "name": "tenant",
+            "person_list": []
+          },
+          "loaded": {
+            "company_list": false,
+            "id": true,
+            "name": true,
+            "order_list": false,
+            "person_list": true,
+            "product_list": false,
+            "version": false
+          }
+        },
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 1,
+            "person_list": [
+              {
+                "id": 2,
+                "name": "Ada",
+                "platform": {
+                  "id": 1
+                },
+                "platform_id": 1
+              }
+            ]
+          },
+          "loaded": {
+            "company_list": false,
+            "id": true,
+            "name": false,
+            "order_list": false,
+            "person_list": true,
+            "product_list": false,
+            "version": false
+          }
+        }
+      ]
+    },
+    "cpp": {
+      "rows": [
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 1,
+            "name": "tenant"
+          },
+          "loaded": {
+            "company_list": false,
+            "id": true,
+            "name": true,
+            "order_list": false,
+            "person_list": true,
+            "product_list": false,
+            "version": false
+          }
+        },
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 1
+          },
+          "loaded": {
+            "company_list": false,
+            "id": true,
+            "name": false,
+            "order_list": false,
+            "person_list": true,
+            "product_list": false,
+            "version": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "index": 37,
+    "input": {
+      "entity": "Person",
+      "array": false,
+      "value": {
+        "id": 2,
+        "platform": {
+          "id": 1
+        }
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2,
+          "platform": {
+            "id": 1
+          },
+          "platform_id": 1
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": false,
+          "platform": true,
+          "platform_id": true,
+          "profile": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2,
+          "platform_id": 1
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": false,
+          "platform": true,
+          "platform_id": true,
+          "profile": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 39,
+    "input": {
+      "entity": "Person",
+      "array": false,
+      "value": {
+        "id": 2,
+        "profile": null
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2,
+          "profile": null
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": false,
+          "platform": false,
+          "platform_id": false,
+          "profile": true,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": false,
+          "platform": false,
+          "platform_id": false,
+          "profile": true,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 40,
+    "input": {
+      "entity": "Person",
+      "array": false,
+      "value": {
+        "id": 2,
+        "profile": {
+          "id": 3,
+          "note": null
+        }
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2,
+          "profile": {
+            "id": 3,
+            "note": null
+          }
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": false,
+          "platform": false,
+          "platform_id": false,
+          "profile": true,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": false,
+          "platform": false,
+          "platform_id": false,
+          "profile": true,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 41,
+    "input": {
+      "entity": "Person",
+      "array": false,
+      "value": {
+        "id": 2,
+        "orders": []
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2,
+          "orders": []
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": true,
+          "platform": false,
+          "platform_id": false,
+          "profile": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": true,
+          "platform": false,
+          "platform_id": false,
+          "profile": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 42,
+    "input": {
+      "entity": "Person",
+      "array": false,
+      "value": {
+        "id": 2,
+        "orders": [
+          {
+            "id": 3,
+            "code": "first"
+          },
+          {
+            "id": 3,
+            "priority": 4
+          }
+        ]
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2,
+          "orders": [
+            {
+              "code": "first",
+              "id": 3
+            },
+            {
+              "id": 3,
+              "priority": 4
+            }
+          ]
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": true,
+          "platform": false,
+          "platform_id": false,
+          "profile": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 2
+        },
+        "loaded": {
+          "email": false,
+          "id": true,
+          "name": false,
+          "orders": true,
+          "platform": false,
+          "platform_id": false,
+          "profile": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 64,
+    "input": {
+      "entity": "Order",
+      "array": false,
+      "value": {
+        "id": 3,
+        "customer": {
+          "id": 2,
+          "name": "Ada"
+        }
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "customer": {
+            "id": 2,
+            "name": "Ada"
+          },
+          "customer_id": 2,
+          "id": 3
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": true,
+          "customer_id": true,
+          "id": true,
+          "lines": false,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "customer_id": 2,
+          "id": 3
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": true,
+          "customer_id": true,
+          "id": true,
+          "lines": false,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 67,
+    "input": {
+      "entity": "Order",
+      "array": false,
+      "value": {
+        "id": 3,
+        "lines": []
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 3,
+          "lines": []
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": false,
+          "customer_id": false,
+          "id": true,
+          "lines": true,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 3
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": false,
+          "customer_id": false,
+          "id": true,
+          "lines": true,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 68,
+    "input": {
+      "entity": "Order",
+      "array": false,
+      "value": {
+        "id": 3,
+        "lines": [
+          {
+            "id": 4,
+            "quantity": 2,
+            "product": {
+              "id": 5,
+              "sku": "p"
+            }
+          }
+        ]
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 3,
+          "lines": [
+            {
+              "id": 4,
+              "product": {
+                "id": 5,
+                "sku": "p"
+              },
+              "product_id": 5,
+              "quantity": 2
+            }
+          ]
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": false,
+          "customer_id": false,
+          "id": true,
+          "lines": true,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 3
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": false,
+          "customer_id": false,
+          "id": true,
+          "lines": true,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 69,
+    "input": {
+      "entity": "Order",
+      "array": false,
+      "value": {
+        "id": 3,
+        "lines": [
+          {
+            "id": 4,
+            "order_id": 3,
+            "order": {
+              "id": 3
+            }
+          }
+        ]
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 3,
+          "lines": [
+            {
+              "id": 4,
+              "order": {
+                "id": 3
+              },
+              "order_id": 3
+            }
+          ]
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": false,
+          "customer_id": false,
+          "id": true,
+          "lines": true,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 3
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": false,
+          "customer_id": false,
+          "id": true,
+          "lines": true,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 70,
+    "input": {
+      "entity": "Order",
+      "array": false,
+      "value": {
+        "id": 3,
+        "customer": {
+          "id": 2,
+          "orders": [
+            {
+              "id": 3
+            }
+          ]
+        }
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "customer": {
+            "id": 2,
+            "orders": [
+              {
+                "id": 3
+              }
+            ]
+          },
+          "customer_id": 2,
+          "id": 3
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": true,
+          "customer_id": true,
+          "id": true,
+          "lines": false,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "customer_id": 2,
+          "id": 3
+        },
+        "loaded": {
+          "amount": false,
+          "code": false,
+          "customer": true,
+          "customer_id": true,
+          "id": true,
+          "lines": false,
+          "platform": false,
+          "platform_id": false,
+          "priority": false,
+          "seller": false,
+          "seller_id": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 93,
+    "input": {
+      "entity": "Line",
+      "array": false,
+      "value": {
+        "id": 4,
+        "order": {
+          "id": 3,
+          "code": "order"
+        }
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 4,
+          "order": {
+            "code": "order",
+            "id": 3
+          },
+          "order_id": 3
+        },
+        "loaded": {
+          "id": true,
+          "order": true,
+          "order_id": true,
+          "product": false,
+          "product_id": false,
+          "quantity": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 4,
+          "order_id": 3
+        },
+        "loaded": {
+          "id": true,
+          "order": true,
+          "order_id": true,
+          "product": false,
+          "product_id": false,
+          "quantity": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 95,
+    "input": {
+      "entity": "Line",
+      "array": false,
+      "value": {
+        "id": 4,
+        "product": {
+          "id": 5,
+          "price": "1.20"
+        }
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 4,
+          "product": {
+            "id": 5,
+            "price": "1.20"
+          },
+          "product_id": 5
+        },
+        "loaded": {
+          "id": true,
+          "order": false,
+          "order_id": false,
+          "product": true,
+          "product_id": true,
+          "quantity": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 4,
+          "product_id": 5
+        },
+        "loaded": {
+          "id": true,
+          "order": false,
+          "order_id": false,
+          "product": true,
+          "product_id": true,
+          "quantity": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 99,
+    "input": {
+      "entity": "Line",
+      "array": true,
+      "value": [
+        {
+          "id": 4,
+          "quantity": 2
+        },
+        {
+          "id": 4,
+          "product": {
+            "id": 5,
+            "price": "1.20"
+          }
+        }
+      ]
+    },
+    "rust": {
+      "rows": [
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 4,
+            "quantity": 2
+          },
+          "loaded": {
+            "id": true,
+            "order": false,
+            "order_id": false,
+            "product": false,
+            "product_id": false,
+            "quantity": true,
+            "version": false
+          }
+        },
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 4,
+            "product": {
+              "id": 5,
+              "price": "1.20"
+            },
+            "product_id": 5
+          },
+          "loaded": {
+            "id": true,
+            "order": false,
+            "order_id": false,
+            "product": true,
+            "product_id": true,
+            "quantity": false,
+            "version": false
+          }
+        }
+      ]
+    },
+    "cpp": {
+      "rows": [
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 4,
+            "quantity": 2
+          },
+          "loaded": {
+            "id": true,
+            "order": false,
+            "order_id": false,
+            "product": false,
+            "product_id": false,
+            "quantity": true,
+            "version": false
+          }
+        },
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 4,
+            "product_id": 5
+          },
+          "loaded": {
+            "id": true,
+            "order": false,
+            "order_id": false,
+            "product": true,
+            "product_id": true,
+            "quantity": false,
+            "version": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "index": 116,
+    "input": {
+      "entity": "Product",
+      "array": false,
+      "value": {
+        "id": 5,
+        "line_list": []
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 5,
+          "line_list": []
+        },
+        "loaded": {
+          "id": true,
+          "line_list": true,
+          "platform": false,
+          "platform_id": false,
+          "price": false,
+          "sku": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 5
+        },
+        "loaded": {
+          "id": true,
+          "line_list": true,
+          "platform": false,
+          "platform_id": false,
+          "price": false,
+          "sku": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 117,
+    "input": {
+      "entity": "Product",
+      "array": false,
+      "value": {
+        "id": 5,
+        "line_list": [
+          {
+            "id": 4,
+            "product_id": 5
+          }
+        ]
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 5,
+          "line_list": [
+            {
+              "id": 4,
+              "product_id": 5
+            }
+          ]
+        },
+        "loaded": {
+          "id": true,
+          "line_list": true,
+          "platform": false,
+          "platform_id": false,
+          "price": false,
+          "sku": false,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 5
+        },
+        "loaded": {
+          "id": true,
+          "line_list": true,
+          "platform": false,
+          "platform_id": false,
+          "price": false,
+          "sku": false,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 121,
+    "input": {
+      "entity": "Product",
+      "array": true,
+      "value": [
+        {
+          "id": 5,
+          "sku": "p",
+          "price": "1.20"
+        },
+        {
+          "id": 5,
+          "line_list": [
+            {
+              "id": 4,
+              "product_id": 5
+            }
+          ]
+        }
+      ]
+    },
+    "rust": {
+      "rows": [
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 5,
+            "price": "1.20",
+            "sku": "p"
+          },
+          "loaded": {
+            "id": true,
+            "line_list": false,
+            "platform": false,
+            "platform_id": false,
+            "price": true,
+            "sku": true,
+            "version": false
+          }
+        },
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 5,
+            "line_list": [
+              {
+                "id": 4,
+                "product_id": 5
+              }
+            ]
+          },
+          "loaded": {
+            "id": true,
+            "line_list": true,
+            "platform": false,
+            "platform_id": false,
+            "price": false,
+            "sku": false,
+            "version": false
+          }
+        }
+      ]
+    },
+    "cpp": {
+      "rows": [
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 5,
+            "price": "1.20",
+            "sku": "p"
+          },
+          "loaded": {
+            "id": true,
+            "line_list": false,
+            "platform": false,
+            "platform_id": false,
+            "price": true,
+            "sku": true,
+            "version": false
+          }
+        },
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 5
+          },
+          "loaded": {
+            "id": true,
+            "line_list": true,
+            "platform": false,
+            "platform_id": false,
+            "price": false,
+            "sku": false,
+            "version": false
+          }
+        }
+      ]
+    }
+  },
+  {
+    "index": 138,
+    "input": {
+      "entity": "Profile",
+      "array": false,
+      "value": {
+        "id": 6,
+        "note": "text",
+        "person": {
+          "id": 2
+        }
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 6,
+          "note": "text",
+          "person": {
+            "id": 2
+          },
+          "person_id": 2
+        },
+        "loaded": {
+          "id": true,
+          "note": true,
+          "person": true,
+          "person_id": true,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 6,
+          "note": "text",
+          "person_id": 2
+        },
+        "loaded": {
+          "id": true,
+          "note": true,
+          "person": true,
+          "person_id": true,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 159,
+    "input": {
+      "entity": "Company",
+      "array": false,
+      "value": {
+        "id": 7,
+        "name": "company",
+        "platform": {
+          "id": 1
+        }
+      }
+    },
+    "rust": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 7,
+          "name": "company",
+          "platform": {
+            "id": 1
+          },
+          "platform_id": 1
+        },
+        "loaded": {
+          "id": true,
+          "name": true,
+          "order_list": false,
+          "platform": true,
+          "platform_id": true,
+          "version": false
+        }
+      }
+    },
+    "cpp": {
+      "row": {
+        "deleted": false,
+        "dirty": null,
+        "is_new": false,
+        "json": {
+          "id": 7,
+          "name": "company",
+          "platform_id": 1
+        },
+        "loaded": {
+          "id": true,
+          "name": true,
+          "order_list": false,
+          "platform": true,
+          "platform_id": true,
+          "version": false
+        }
+      }
+    }
+  },
+  {
+    "index": 163,
+    "input": {
+      "entity": "Company",
+      "array": true,
+      "value": [
+        {
+          "id": 7,
+          "name": "company",
+          "platform": {
+            "id": 1
+          }
+        },
+        {
+          "id": 7,
+          "name": "company",
+          "platform": {
+            "id": 1
+          }
+        }
+      ]
+    },
+    "rust": {
+      "rows": [
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 7,
+            "name": "company",
+            "platform": {
+              "id": 1
+            },
+            "platform_id": 1
+          },
+          "loaded": {
+            "id": true,
+            "name": true,
+            "order_list": false,
+            "platform": true,
+            "platform_id": true,
+            "version": false
+          }
+        },
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 7,
+            "name": "company",
+            "platform": {
+              "id": 1
+            },
+            "platform_id": 1
+          },
+          "loaded": {
+            "id": true,
+            "name": true,
+            "order_list": false,
+            "platform": true,
+            "platform_id": true,
+            "version": false
+          }
+        }
+      ]
+    },
+    "cpp": {
+      "rows": [
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 7,
+            "name": "company",
+            "platform_id": 1
+          },
+          "loaded": {
+            "id": true,
+            "name": true,
+            "order_list": false,
+            "platform": true,
+            "platform_id": true,
+            "version": false
+          }
+        },
+        {
+          "deleted": false,
+          "dirty": null,
+          "is_new": false,
+          "json": {
+            "id": 7,
+            "name": "company",
+            "platform_id": 1
+          },
+          "loaded": {
+            "id": true,
+            "name": true,
+            "order_list": false,
+            "platform": true,
+            "platform_id": true,
+            "version": false
+          }
+        }
+      ]
+    }
+  }
+]

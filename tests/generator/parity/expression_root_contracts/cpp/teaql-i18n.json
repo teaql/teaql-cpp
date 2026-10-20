@@ -1,0 +1,126 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.platform.name": "Name",
+                "property.class.name": "Name",
+                "property.namespace.platform": "Platform",
+                "property.operator.name": "Name",
+                "property.namespace.version": "Version",
+                "property.template.platform": "Platform",
+                "entity.template": "Template",
+                "property.plainRecord.version": "Version",
+                "property.class.version": "Version",
+                "entity.plainRecord": "Plain Record",
+                "entity.class": "Class",
+                "property.class.operator": "Operator",
+                "property.template.id": "Id",
+                "property.namespace.name": "Name",
+                "entity.platform": "Platform",
+                "property.platform.id": "Id",
+                "property.class.platform": "Platform",
+                "property.operator.id": "Id",
+                "property.template.name": "Name",
+                "property.operator.platform": "Platform",
+                "entity.operator": "Operator",
+                "property.class.id": "Id",
+                "property.plainRecord.id": "Id",
+                "entity.namespace": "Namespace",
+                "property.plainRecord.name": "Name",
+                "property.operator.version": "Version",
+                "property.plainRecord.platform": "Platform",
+                "property.template.version": "Version",
+                "property.namespace.id": "Id",
+                "property.platform.version": "Version"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

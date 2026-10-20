@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == '__main__':
-    raise SystemExit(main('chrono_value_cases.json', 'UTC Value conversion'))
+    raise SystemExit(main('chrono_value_baseline_5_0_6_cases.json.gz', 'UTC Value conversion'))

@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "gates": {
+    "native_exit_code": 0,
+    "sanitize_exit_code": 0,
+    "source_connection_cases": 13,
+    "default_pmr_disabled": true,
+    "actual_user_deletion": true,
+    "sqlite_close_before_host_object_destruction": true,
+    "expired_connection_reference": true,
+    "sanitize_leak_scanning": false
+  },
+  "source_projection": "Only successful original query_error is excluded, because this boundary establishes connections without generated runtime metadata/executor/query assembly. All errors, values and resulting files are compared exactly; original20 records remain unchanged.",
+  "initial_mismatches": 2,
+  "repair": "Source mkdir ancestor order preserves existing-file errno17; source CannotOpen path context retained over the unchanged native filename exception API. Initial comparison retained.",
+  "files": {
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/runtime_connection.hpp": "c2a42e70ae626b75c9137c397d15fc078bdc5d1a53294e378615e3abd64832e0",
+    "teaql_provider_sqlite/src/runtime_connection.cpp": "c6f095605d53c2a315805b7e37f38d0416886be8d4ae57b190ff06ab46965fee",
+    "teaql_provider_sqlite/src/runtime_config.cpp": "29a6af62c048662af78a46d587c4103ca099a176dc05989d4e3d5d9a628c2619",
+    "teaql_provider_sqlite/tests/runtime_connection_tests.cpp": "1c7896c37e5a4c61b57955bc060e633486bea965da1a5dbf39054f9f7d6167df",
+    "tests/parity/runtime_connection_probe.cpp": "ce27ba13b87d0e4bd62b20c9a1ce1353b87bbe39874bbda5d4afbce2789fdea9",
+    "scripts/verify_runtime_connection_5_0_6.py": "32470afc7aca4c44a4b452c784d8dd7d4533e59cb2ca31ad5777e9194aee3360"
+  },
+  "dependency_archives": {
+    "native": {
+      "/home/philip/githome/teaql-cpp/build_native_current/teaql_provider_sqlite/libteaql_provider_sqlite.a": "f3bb3c1db0e3975262755233868ecbfef572778f336064d0231eb045925b449a",
+      "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime/libteaql_runtime.a": "073d8190e4d199361a1bfe411662e566b205a6ac2a7570ccea8a0584ca6f1a18",
+      "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql/libteaql_sql.a": "3ea9e34a8fb8e1736407982f7d25ac9e4327b8bb870eb5dae398370641b67908",
+      "/home/philip/githome/teaql-cpp/build_native_current/teaql_data_service/libteaql_data_service.a": "170b0180ba1967f52d64e596b8b7558a2c3c1657aef36b4b2bdb8cb1812b8234",
+      "/home/philip/githome/teaql-cpp/build_native_current/teaql_core/libteaql_core.a": "caf476063db3845cce46af38482adac09f05ea1dd456207b13d39df9bf01b255",
+      "/home/philip/githome/teaql-cpp/build_native_current/teaql_memory/libteaql_memory.a": "f94d03a41a82c99fd168ee5d1b7aa4e6249165032c7fbec732d90c008cb7d2b7"
+    },
+    "sanitize": {
+      "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_provider_sqlite/libteaql_provider_sqlite.a": "5b2df0eb807653b70af9625bc4566ccd826c19c1966d427b79730176108ecdb8",
+      "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_runtime/libteaql_runtime.a": "51a14174420ed6dd77adb1dfe3350a44b4baeb91b6e5100a23e858630ccd4ae2",
+      "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_sql/libteaql_sql.a": "749d14800dc57fc14a3752d7a73dd1dea7b42e3b559eee27c726873c01e2c2aa",
+      "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_data_service/libteaql_data_service.a": "c0bbdaf5356b0d172f6f6a3e3e648d92811c347271d6b5b6d25b408fb3f23427",
+      "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_core/libteaql_core.a": "1ab47a87704c6c158f9d4a1c5bb6119e7968b64ab150e9e397308387215fe4d2",
+      "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_memory/libteaql_memory.a": "2a33379e7d79f5ea2d2d2a55777ae8aeee45271dbf10cbf3b9e3f2c16138ca22"
+    }
+  },
+  "remaining": "Production/module registration, actual generated service assembly/query boundary, thin generator APIs/Assist/reproduction and complete G12/P6/P7 acceptance. Full native CTest still running with known failures."
+}

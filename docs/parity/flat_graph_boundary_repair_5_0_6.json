@@ -1,0 +1,26 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "gates": {
+    "native": 7,
+    "sanitize": 7,
+    "module": 4,
+    "module_source_cases": [
+      2032,
+      2808,
+      1944
+    ],
+    "cache_cases": 204,
+    "compiler_positive": 1,
+    "compiler_negative": 1,
+    "leak_scanning": false
+  },
+  "files": {
+    "teaql_runtime/src/data_service/relation_graph.cpp": "e079e64bd7cafe782b9990a15b59f97f56201aa2969145c340658ff2976779b3",
+    "tests/parity/generated_aggregation_cache_probe.cpp": "d4e7d58e6ef47c8a3eb55b4a6dd8d29cd91a05a78990d538dbf06dbd3a1f40c1",
+    "scripts/verify_generated_type_errors.py": "64a34d3c2527adc33bba2d54b49d9a285762e36c4a36f1d3daa8c68f70a2ea42",
+    ".reference/teaql-rs/teaql-runtime/src/data_service/resolved.rs": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+    "tests/parity/rust_field_layout/src/bin/generated_aggregation_cache_5_0_6.rs": "8585b5d14eb9f18ae3f5a9b4fc3a682bdb032f52cb6a9dfe5b0b49fa0badae09"
+  },
+  "remaining": "Bootstrap isolated timeout replay and full updated compiler gate pending; no full capability/phase acceptance."
+}

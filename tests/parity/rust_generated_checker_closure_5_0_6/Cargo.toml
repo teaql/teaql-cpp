@@ -1,0 +1,39 @@
+[package]
+name = "teaql_generated_checker_closure_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype"] }
+cpp_inheritance_core = { package = "cpp-inheritance-core", path = "../../generator/parity/inheritance_rust/lib" }
+cpp_inheritance_graph_core = { package = "cpp-inheritance-graph-core", path = "../../generator/parity/inheritance_graph_rust/lib" }
+cpp_inheritance_variants_core = { package = "cpp-inheritance-variants-core", path = "../../generator/parity/inheritance_variants_rust/lib" }
+
+cpp_checker_fixture_core = { package = "cpp-checker-fixture-core", path = "../../generator/parity/checkers_rust/lib" }
+cpp_constants_numeric_core = { package = "cpp-constants-numeric-core", path = "../../generator/parity/constants_numeric_rust/lib" }
+
+chrono = "=0.4.45"
+cpp_relations_core = { package = "cpp-relations-core", path = "../../generator/parity/relations_rust/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+[[bin]]
+name="checker_flow_closure_506"
+path="../rust_field_layout/src/bin/generated_checker_flow_5_0_6.rs"
+
+[[bin]]
+name="runtime_assembly_closure_506"
+path="../rust_field_layout/src/bin/generated_runtime_assembly_5_0_6.rs"

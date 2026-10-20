@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "360/360 exact original/native and standalone sanitizer comparisons pass; formal native and module CTest gates pass; full native suite retains unresolved historical corpora",
+  "source": "tests/parity/derived_query_composition_probe.cpp",
+  "source_sha256": "24181e2ae3e80b7088e02a68de7552007c7b012aa656b409ab7b2cb8d822a075",
+  "runtime_changed": false,
+  "generator_changed": false,
+  "fixture_reuse": "Includes the existing diagnostic observer under a renamed unused driver and injects composed PurposedSelectQuery through its established request override. Existing observer body is unchanged.",
+  "build_log": "/tmp/teaql_derived_query_composition_native_build.log",
+  "binary": "/tmp/teaql_derived_query_composition_native",
+  "qualification": "360 exact native/source observations passed and reproduced; standalone sanitizer passed; canonical integration gates pending",
+  "integration": "Full native run terminal with 472/549 passing and 77 recorded failures; no full-suite acceptance. Follow-up scope documented in scalar_baselines_5_0_6.md.",
+  "first_build_exit_code": 0,
+  "first_compare_exit_code": 0,
+  "first_compare_log": "/tmp/teaql_derived_query_composition_compare.log",
+  "binary_sha256": "c862a4358fb3ce79c01cc51c11725a06a021ec9c32347f473e46b1a1c55a9c15",
+  "remaining": [
+    "Register canonical CMake/native and module targets after the current full build exits",
+    "Run corresponding CMake/module gates and complete full integration",
+    "Preserve original-only corpus bytes and existing qualified corpus while broadening configurations"
+  ],
+  "reproduction_build": {
+    "command": "python3 scripts/build_derived_query_composition_probe.py",
+    "exit_code": 0,
+    "log": "/tmp/teaql_derived_query_composition_reproduce_build.log"
+  },
+  "reproduction_compare": {
+    "exit_code": 0,
+    "observations": 360,
+    "log": "/tmp/teaql_derived_query_composition_reproduce_compare.log"
+  },
+  "comparator_negative_control": "Known wrong privacy projection produces an actual mismatch and exits 1",
+  "sanitize_gate": {
+    "exit_code": 0,
+    "observations": 360,
+    "leak_scanning": "disabled",
+    "build_log": "/tmp/teaql_derived_query_composition_sanitize_build.log",
+    "compare_log": "/tmp/teaql_derived_query_composition_sanitize_compare.log",
+    "binary_sha256": "9908057e7de8d3189db5374f04aaf9fd593fbe90992ca457fb2ab84e979647ee"
+  },
+  "module_harness_initial_failure": {
+    "exit_code": 1,
+    "log": "/tmp/teaql_derived_query_composition_modules_build.log",
+    "reason": "Standalone -pthread changed PCM compilation configuration. Use link-only -lpthread for canonical module consumers.",
+    "production_changed": false
+  },
+  "standalone_module_gate": {
+    "exit_code": 0,
+    "observations": 360,
+    "build_log": "/tmp/teaql_derived_query_composition_modules_build_retry.log",
+    "compare_log": "/tmp/teaql_derived_query_composition_modules_compare.log",
+    "binary_sha256": "c90baf5bc25a733d2639e0a50636868422527324f2853c8eb1f22381e5de0bd7",
+    "adaptation": "Only include path selects the existing canonical import consumer; adapter and observer bodies are unchanged. Reuses terminal PCM maps and module archives."
+  },
+  "formal_native_registration": {
+    "target": "teaql_derived_query_composition_probe",
+    "test": "derived_query_composition_rust_parity",
+    "passed_in_full_suite": true,
+    "passed_in_focused_follow_up": true
+  },
+  "formal_module_registration": {
+    "target": "teaql_module_derived_query_composition_probe",
+    "test": "module_derived_query_composition_rust_parity",
+    "passed": true,
+    "observations": 360,
+    "build_log": "/tmp/teaql_diagnostic_composition_module_final_build.log",
+    "test_log": "/tmp/teaql_diagnostic_composition_module_final_tests.log",
+    "canonical_consumers": 166,
+    "production_changed": false
+  },
+  "module_registration_failures": [
+    {
+      "exit_code": 1,
+      "log": "/tmp/teaql_diagnostic_composition_module_build.log",
+      "reason": "Prepared-source deduplication discarded the actual canonical destination, leaving a nonexistent quoted include path."
+    },
+    {
+      "exit_code": 1,
+      "log": "/tmp/teaql_diagnostic_composition_module_retry_build.log",
+      "reason": "Entry preparation moved the driver include before its main-renaming macro; scanner succeeded but compilation rejected conflicting main declarations."
+    }
+  ],
+  "module_preparer_correction": "Reuse the prepared destination and retain fixture include position/macro context. Verifier checks include existence and exact canonical body with normalized fixture paths.",
+  "module_fixture_regression_controls": [
+    {
+      "control": "missing fixture path",
+      "exit_code": 1,
+      "diagnostic": "Consumer fixture include is missing: derived_query_composition_probe.cpp: missing_fixture.cpp"
+    },
+    {
+      "control": "include moved before driver rename macro",
+      "exit_code": 1,
+      "diagnostic": "Canonical contract body changed: tests/parity/derived_query_composition_probe.cpp"
+    },
+    {
+      "control": "unchanged canonical consumers",
+      "exit_code": 0,
+      "diagnostic": "Verified 166 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ"
+    }
+  ]
+}

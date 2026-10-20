@@ -1,0 +1,20 @@
+[
+  {
+    "source": "tests/parity/rust_field_layout/src/bin/deferred_plain_page_5_0_6.rs",
+    "copy": "tests/parity/rust_execution_shapes_5_0_6/src/bin/deferred_plain_page_5_0_6.rs",
+    "sha256": "f28abde836e172cbc141b1893a5bb86fc0b98ded01d46f95f68f94e84d3e3188",
+    "byte_identical": true
+  },
+  {
+    "source": "tests/parity/rust_field_layout/src/bin/deferred_id_set_page_5_0_6.rs",
+    "copy": "tests/parity/rust_execution_shapes_5_0_6/src/bin/deferred_id_set_page_5_0_6.rs",
+    "sha256": "35a930ac697de1aae4df9871b0e9e8b02631b819955fb6272d82fcd2d67b574d",
+    "byte_identical": true
+  },
+  {
+    "source": "tests/parity/rust_field_layout/src/bin/deferred_continuous_page_5_0_6.rs",
+    "copy": "tests/parity/rust_execution_shapes_5_0_6/src/bin/deferred_continuous_page_5_0_6.rs",
+    "sha256": "80791d5a3268eb4925571c0618378b2d3877a9cc01213d8a6baee201d8866248",
+    "byte_identical": true
+  }
+]

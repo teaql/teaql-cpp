@@ -1,0 +1,3 @@
+<root name="constant_topology_fixture" org="teaql" data_service="sqlite">
+<status id="id()" platform="platform(contextRoot=true)" category="category()" code="string()" _constant="true" _identifier="code"><_value id="11" code="OPEN" category="22"/><_value id="12" code="CLOSED" category="22"/></status><category id="id()" platform="platform(contextRoot=true)" code="string()" _constant="true" _identifier="code"><_value id="1" code="C1"/><_value id="22" code="C22"/></category><platform name="string()"/>
+</root>

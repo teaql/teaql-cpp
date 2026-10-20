@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/runtime/detail/data_service/entity_service.hpp>
+#include <teaql/runtime/detail/data_service/diagnostic_query.hpp>
 #include <teaql/runtime/detail/data_service/relation_enhancement.hpp>
 #include <teaql/runtime/detail/context/pagination.hpp>
 #include <teaql/runtime/detail/query_keys.hpp>
@@ -280,7 +281,17 @@ public:
                     EntityDataServiceAccess::context_service(service_)
                         .metadata.capture_execution_metadata()) {
                     if (!EntityDataServiceAccess::has_intent(service_)) {
-                        service_ = EntityDataServiceAccess::query_scoped(service_);
+                        auto source = query_.clone(r);
+                        for (const auto& aggregate : aggregates_) {
+                            source.child_enhancements.emplace_back(aggregate.query);
+                        }
+                        auto scoped = EntityDataServiceAccess::query_scoped(service_, source);
+                        if (!scoped) {
+                            return R::err(r,
+                                          DataServiceError<typename E::Error>::runtime(
+                                              r, std::move(scoped).error()));
+                        }
+                        service_ = std::move(scoped).value();
                     }
                 }
                 phase_ = Phase::Cursor;
@@ -748,7 +759,15 @@ namespace teaql {
 template <class E>
 auto EntityDataService<E>::fetch_all(const PurposedSelectQuery& query) const
     -> DataServiceOperationResult<Vector<CompactRow>, DataServiceError<Error>>& {
-    return detail::EntityDataServiceAccess::fetch_all(*this, query.as_query());
+    return detail::execute_purposed_query<Vector<CompactRow>>(
+        *this,
+        query,
+        {},
+        +[](const EntityDataService<E>& service,
+            const SelectQuery& actual,
+            std::span<const RelationAggregate>) -> auto& {
+            return detail::EntityDataServiceAccess::fetch_all(service, actual);
+        });
 }
 
 template <class E>
@@ -761,16 +780,32 @@ template <class E>
 auto EntityDataService<E>::fetch_all_with_relation_aggregates(
     const PurposedSelectQuery& query, std::span<const RelationAggregate> aggregates) const
     -> DataServiceOperationResult<Vector<CompactRow>, DataServiceError<Error>>& {
-    return make_operation<detail::RelationRowsResult<E>, detail::EntityRowsOperation<E>>(
-        memory_resource(), *this, query.as_query(), aggregates, true);
+    return detail::execute_purposed_query<Vector<CompactRow>>(
+        *this,
+        query,
+        aggregates,
+        +[](const EntityDataService<E>& service,
+            const SelectQuery& actual,
+            std::span<const RelationAggregate> items) -> auto& {
+            return make_operation<detail::RelationRowsResult<E>, detail::EntityRowsOperation<E>>(
+                service.memory_resource(), service, actual, items, true);
+        });
 }
 
 template <class E>
 auto EntityDataService<E>::fetch_smart_list(const PurposedSelectQuery& query) const
     -> DataServiceOperationResult<SmartList<CompactRow>, DataServiceError<Error>>& {
     using R = Result<SmartList<CompactRow>, DataServiceError<Error>>;
-    return make_operation<R, detail::EntityBasicListOperation<E, CompactRow>>(
-        memory_resource(), *this, query.as_query());
+    return detail::execute_purposed_query<SmartList<CompactRow>>(
+        *this,
+        query,
+        {},
+        +[](const EntityDataService<E>& service,
+            const SelectQuery& actual,
+            std::span<const RelationAggregate>) -> auto& {
+            return make_operation<R, detail::EntityBasicListOperation<E, CompactRow>>(
+                service.memory_resource(), service, actual);
+        });
 }
 
 template <class E>
@@ -787,7 +822,15 @@ template <Entity T>
 auto EntityDataService<E>::fetch_entities(const PurposedSelectQuery& query) const
     -> DataServiceOperationResult<SmartList<T>, DataServiceError<Error>>& {
     using R = Result<SmartList<T>, DataServiceError<Error>>;
-    return make_operation<R, detail::EntityBasicListOperation<E, T>>(
-        memory_resource(), *this, query.as_query());
+    return detail::execute_purposed_query<SmartList<T>>(
+        *this,
+        query,
+        {},
+        +[](const EntityDataService<E>& service,
+            const SelectQuery& actual,
+            std::span<const RelationAggregate>) -> auto& {
+            return make_operation<R, detail::EntityBasicListOperation<E, T>>(
+                service.memory_resource(), service, actual);
+        });
 }
 }

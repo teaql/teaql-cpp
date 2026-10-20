@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "contracts": [
+    "markInternalDepth checks every descriptor through reverse references; multi-entity cycles and depth beyond 20 produce DomainGraphException with actual XML attribute paths. Immediate self references are skipped by the depth traversal.",
+    "rustGeneratedBootstrap iterates constant descriptors in their actual domain order, after the ordinary root; it does not topologically reorder constant writes.",
+    "rustTypedConstantValue assigns object-reference bootstrap fields 1_u64 regardless of explicit _value reference data.",
+    "Original optional constant-reference identity helpers compare Option<u64> with u64; complete optional-self and optional-forward crates each fail with two E0308 errors. Native complete umbrellas independently compile; these are not paired runtime oracles."
+  ],
+  "source_sha256": {
+    ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/meta/BaseDomainManager.java": "6956cd0acec5bfa277f74b1e4559d9cfbb99b7fa1604d1efa7a0e434c3c28f9a",
+    ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/meta/DomainGraphException.java": "546e4da1061c5604ce3d09a52bc99be4a886d6dc3e8c39583e62da3fbe94fc4b",
+    ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/naming/RustDomainNaming.java": "14112576e1eec2ea38c46c733f8efa6e384b99cf7ad1686c8156f1c3a7fadbbd",
+    ".reference/teaql_code_gen/generator/src/main/resources/generator/rust-lib-core/runtime/index.stg": "590214978302c3af88142572b7a54a129d0fcd5b303cc57d51a0e954f508fe1e"
+  }
+}

@@ -1,5 +1,9 @@
 # Generated Business IDs for Rust 5.0.6
 
+The later [typed Q lookup migration](generated_business_id_lookups_5_0_6.md)
+adds own-field factories over these distinct identifier types. Earlier gate
+counts and open-scope statements below retain their checkpoint scope.
+
 Status: supported-model implementation and focused source/native/lifetime/module
 checks passed. G01/G03 and complete P1 remain open pending the full model/governance
 matrix; this does not change the P0-P7 completion criteria.
@@ -31,12 +35,16 @@ On update, predefined load checks precede the Business-ID dirty-field rejection.
 That rejection preserves the source InvalidType rule and immutable-after-create
 message. No new governance or allocation algorithm is emitted into a model.
 
-setup installs the existing SQLite Business-ID allocator as both allocation service
-and schema contributor when a model declares Business IDs. A daily-permuted-v1
-application registers its explicit key provider through UserContext. C++ does not
-read an environment key or introduce an implicit owner; this is the Context-owned
-bootstrap adaptation of the source runtime's configured key provider. Assist lists
-the actual typed methods, provider requirement and root setup.
+The filename `setup` path installs the existing SQLite Business-ID allocator as
+both allocation service and schema contributor when a model declares Business
+IDs. A daily-permuted-v1 application using that path registers its explicit key
+provider through UserContext. This earlier manual-key checkpoint did not read
+environment keys. The later
+[source-shaped startup implementation](generated_business_environment_startup_5_0_6.md)
+adds managed environment key installation and typed failures to the three
+`serviceRuntime` entries, with separate qualification evidence. Neither path
+introduces an implicit owner. Assist lists the actual typed methods, key setup
+and root requirements.
 
 ## Producer metadata and validation
 

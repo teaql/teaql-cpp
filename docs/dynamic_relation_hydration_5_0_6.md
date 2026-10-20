@@ -1,5 +1,7 @@
 # Dynamic relation and child-query hydration in Rust 5.0.6
 
+Current G16 qualification is recorded in the [complete acceptance audit](dynamic_storage_acceptance_5_0_6.md). The text below preserves this earlier checkpoint and its original remaining-work boundaries.
+
 Status: scoped implementation and original-source comparisons; G16 remains
 partial. Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`, principally
 `teaql-runtime/src/data_service/relation.rs` and `resolved.rs`.

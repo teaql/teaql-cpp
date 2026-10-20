@@ -1,0 +1,43 @@
+[package]
+name="entity_runtime_source_506"
+version="0.0.0"
+edition="2024"
+publish=false
+
+[[bin]]
+name="entity_runtime_source_506"
+path="../entity_runtime_equality_source_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+[workspace]
+
+[[bin]]
+name="entity_runtime_identity_source_506"
+path="../entity_runtime_root_source_5_0_6.rs"
+
+[[bin]]
+name="entity_runtime_model_source_506"
+path="../rust_field_layout/src/bin/entity_runtime_model_5_0_6.rs"
+
+[[bin]]
+name="dynamic_ledger_entity_runtime_source_506"
+path="../rust_field_layout/src/bin/dynamic_ledger_5_0_6.rs"
+
+[[bin]]
+name="json_graph_views_entity_runtime_source_506"
+path="../rust_private_save_5_0_6/src/bin/json_graph_views_5_0_6.rs"
+
+[[bin]]
+name="loaded_view_move_entity_runtime_source_506"
+path="../loaded_view_move_driver_5_0_6.rs"
+
+[[bin]]
+name="entity_runtime_dynamic_debug_source_506"
+path="../entity_runtime_dynamic_debug_source_5_0_6.rs"

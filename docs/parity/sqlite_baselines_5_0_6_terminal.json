@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "declared SQLite matrices qualified; complete capabilities and integration remain open",
+  "historical_inputs_per_profile": 14355,
+  "timestamp_controls_per_profile": 64,
+  "checked_failures_in_historical_decoding": 10,
+  "checked_failures_in_controls": 19,
+  "unchecked_failures_in_controls": 0,
+  "profiles": {
+    "native_checked": {
+      "passed": 9,
+      "total": 9,
+      "tests": [
+        "provider_sqlite_schema_rust_parity",
+        "sqlite_error_model_rust_parity",
+        "sqlite_from_sql_raw_debug_rust_parity",
+        "sqlite_from_sql_error_rust_parity",
+        "sqlite_bindings_rust_parity",
+        "provider_sqlite_decoding_contracts",
+        "sqlite_simple_error_rust_parity",
+        "sqlite_decoding_rust_parity",
+        "sqlite_native_diagnostics_rust_parity"
+      ],
+      "log": "/tmp/teaql_sqlite_baselines_native_tests_506.log",
+      "log_sha256": "6577bf9d601903185a44d9d463911895c56e40a4be088dcfb379f2b83c813167"
+    },
+    "native_unchecked": {
+      "passed": 9,
+      "total": 9,
+      "tests": [
+        "provider_sqlite_decoding_contracts",
+        "provider_sqlite_schema_rust_parity",
+        "sqlite_decoding_rust_parity",
+        "sqlite_bindings_rust_parity",
+        "sqlite_error_model_rust_parity",
+        "sqlite_native_diagnostics_rust_parity",
+        "sqlite_simple_error_rust_parity",
+        "sqlite_from_sql_error_rust_parity",
+        "sqlite_from_sql_raw_debug_rust_parity"
+      ],
+      "log": "/tmp/teaql_sqlite_baselines_release_tests_506.log",
+      "log_sha256": "089f6b9d6f273ab391ee852bbaaba935cfa94a2c82d1dce41b94401d9eb6f282"
+    },
+    "modules_checked": {
+      "passed": 9,
+      "total": 9,
+      "tests": [
+        "module_provider_sqlite_decoding_contracts",
+        "module_sqlite_bindings_rust_parity",
+        "module_sqlite_schema_rust_parity",
+        "module_sqlite_error_model_rust_parity",
+        "module_sqlite_simple_error_rust_parity",
+        "module_sqlite_from_sql_error_rust_parity",
+        "module_sqlite_from_sql_raw_debug_rust_parity",
+        "module_sqlite_decoding_rust_parity",
+        "module_sqlite_native_diagnostics_rust_parity"
+      ],
+      "log": "/tmp/teaql_sqlite_baselines_modules_tests_506.log",
+      "log_sha256": "b0da4b93bcc8f238d4948a8cc0a49167fe4c972f156c51669fe9d0cf2d5db043"
+    },
+    "sanitize_checked": {
+      "passed": 2,
+      "total": 2,
+      "tests": [
+        "provider_sqlite_decoding_contracts",
+        "sqlite_decoding_rust_parity"
+      ],
+      "log": "/tmp/teaql_sqlite_baselines_sanitize_tests_506.log",
+      "log_sha256": "bae71ac75de9c3d8d781ab2341c6cc5a79d047fa9b9550aa456ec9b4b2dc8e3f"
+    }
+  },
+  "record_sha256": {
+    "docs/parity/sqlite_baselines_5_0_6.json": "3013eed8cf24102d8aa25e35475f3b264c981829ece2caef7fca095cd52516e5",
+    "docs/parity/sqlite_baselines_unchecked_5_0_6.json": "86140ed55263d9fdb337fc90a54b091dce812e2a7f18584702b123d555d6e8ac",
+    "docs/parity/sqlite_decoding_profile_negative_control_5_0_6.json": "10d7e1b152aedbfd36a0fcea41ca0c8415e4e1dc9aad38b294b2eb505fcc86c1",
+    "docs/parity/sqlite_timestamp_checked_source_failure_5_0_6.json": "2a3c5b0752f6f3b9aa54d13d35bbfb111cbe88bd5b65dff44e9188cf11a13d5c"
+  },
+  "canonical_bodies": 452,
+  "catalog_exports": 1479,
+  "formatted_handwritten_cpp": 1351,
+  "sanitizer_leak_scanning": false,
+  "full_native_rerun": false,
+  "mips_qemu_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "production_sha256": {
+    "teaql_provider_sqlite/src/decoding.cpp": "7fc38477e23803c8915dff6e1599d4bccf602e2ede8223dcdeee47cac036d27f"
+  },
+  "source_failure_adaptation": "Only exact checked byte-subtraction panic/exception is exposed as a tagged observer failure. Raw diagnostics retained; ordinary outputs compared without normalization.",
+  "build_configuration_repair": "Five runtime test paths use source-root absolute paths, allowing an external Release binary directory."
+}

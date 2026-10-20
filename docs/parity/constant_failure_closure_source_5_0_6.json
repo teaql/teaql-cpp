@@ -1,0 +1,245 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "reference_lock_sha256": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+  "cases": [
+    {
+      "case": "scalar_root",
+      "source_exit_code": 101,
+      "errors": [
+        {
+          "code": "E0061",
+          "message": "this method takes 1 argument but 2 arguments were supplied",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3983
+            }
+          ]
+        },
+        {
+          "code": "E0061",
+          "message": "this method takes 1 argument but 2 arguments were supplied",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3989
+            }
+          ]
+        },
+        {
+          "code": "E0061",
+          "message": "this method takes 1 argument but 2 arguments were supplied",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3994
+            }
+          ]
+        },
+        {
+          "code": "E0061",
+          "message": "this method takes 1 argument but 2 arguments were supplied",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 4000
+            }
+          ]
+        },
+        {
+          "code": "E0425",
+          "message": "cannot find function `module_with_behaviors_and_checkers` in this scope",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_root_rust/lib/src/runtime.rs",
+              "line": 181
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `with_active_is_not` found for struct `priority::request::PriorityRequest<R>` in the current scope",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3851
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `with_active_is_not` found for struct `priority::request::PriorityRequest<R>` in the current scope",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3862
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `with_active_is` found for struct `priority::request::PriorityRequest<R>` in the current scope",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3845
+            }
+          ]
+        },
+        {
+          "code": "E0599",
+          "message": "no method named `with_active_is` found for struct `priority::request::PriorityRequest<R>` in the current scope",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3856
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "expected one of `)`, `,`, `.`, `?`, or an operator, found `\":1}\"`",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3983
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "expected one of `)`, `,`, `.`, `?`, or an operator, found `\":1}\"`",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3989
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "expected one of `)`, `,`, `.`, `?`, or an operator, found `\":2}\"`",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3994
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "expected one of `)`, `,`, `.`, `?`, or an operator, found `\":2}\"`",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 4000
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "suffixes on string literals are invalid",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3983
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "suffixes on string literals are invalid",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3989
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "suffixes on string literals are invalid",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 3994
+            }
+          ]
+        },
+        {
+          "code": null,
+          "message": "suffixes on string literals are invalid",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_scalar_rust/lib/src/priority/request.rs",
+              "line": 4000
+            }
+          ]
+        }
+      ],
+      "original_error_record": "constant_source_failures_5_0_6.json",
+      "original_error_record_sha256": "26f3703b0002c94890363c4556c9567732ef7e84a2adff7b0c57c6f672d9d6a4",
+      "manifest_sha256": "5bd947cbdc3b6d8bd4aba255cb4dd290b1c1528874fcc059c938920e1df09afc",
+      "lock_sha256": "de9affe1b15edf23827593146c8a7cb76f3361c8a3b638ac7cad68b2e148a29f",
+      "source_dependency_versions_preserved": true,
+      "source_dependency_checksums_preserved": true
+    },
+    {
+      "case": "optional_timestamp",
+      "source_exit_code": 101,
+      "errors": [
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_temporal_rust/lib/src/runtime.rs",
+              "line": 272
+            }
+          ]
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_temporal_rust/lib/src/runtime.rs",
+              "line": 284
+            }
+          ]
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_temporal_rust/lib/src/runtime.rs",
+              "line": 296
+            }
+          ]
+        },
+        {
+          "code": "E0308",
+          "message": "mismatched types",
+          "primary": [
+            {
+              "file": "tests/generator/parity/constants_temporal_rust/lib/src/runtime.rs",
+              "line": 308
+            }
+          ]
+        }
+      ],
+      "original_error_record": "constant_temporal_source_failure_5_0_6.json",
+      "original_error_record_sha256": "024e1623f8097373d657187fe101c8f1988f258e1f8d2c1389905780e8c1e2a7",
+      "manifest_sha256": "391da70a98b1a77062af8a346977e01a6feb49f32065a6fcac65393100477b2e",
+      "lock_sha256": "bb9760af1fa639d9a8df17edd2c748175d68c4a8ae1a3dda0976ad42444dca27",
+      "source_dependency_versions_preserved": true,
+      "source_dependency_checksums_preserved": true
+    }
+  ],
+  "original_generated_source_changed": false,
+  "historical_error_records_changed": false,
+  "total_errors": 21,
+  "disposition": "These generated Rust crates are not runnable runtime oracles. Their exact compiler failures remain explicit; independently compiling C++ bindings do not prove source runtime parity for these models."
+}

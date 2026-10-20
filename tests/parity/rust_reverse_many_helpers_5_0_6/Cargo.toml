@@ -1,0 +1,28 @@
+[package]
+name = "teaql_reverse_many_helpers_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype"] }
+
+cpp_relations_core = { package = "cpp-relations-core", path = "../../generator/parity/relations_rust/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+
+[[bin]]
+name="generated_reverse_many_helpers_506"
+path="../generated_reverse_many_helpers_5_0_6.rs"

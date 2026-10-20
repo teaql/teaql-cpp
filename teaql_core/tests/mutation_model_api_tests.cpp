@@ -19,8 +19,15 @@ static_assert(std::equality_comparable<InsertCommand> && std::equality_comparabl
               std::equality_comparable<BatchInsertCommand> &&
               std::equality_comparable<BatchUpdateCommand>);
 static_assert(std::ranges::range<MutationValues> && std::ranges::range<const MutationValues>);
-static_assert(!std::is_convertible_v<GeneratedValues, MutationValues> &&
-              !std::is_convertible_v<EntitySnapshot, MutationValues>);
+template <class Destination, class Source>
+constexpr bool DistinctMutationRole =
+    !std::is_convertible_v<Source, Destination> && !std::is_assignable_v<Destination&, Source>;
+static_assert(DistinctMutationRole<MutationValues, GeneratedValues> &&
+              DistinctMutationRole<MutationValues, EntitySnapshot> &&
+              DistinctMutationRole<GeneratedValues, MutationValues> &&
+              DistinctMutationRole<GeneratedValues, EntitySnapshot> &&
+              DistinctMutationRole<EntitySnapshot, MutationValues> &&
+              DistinctMutationRole<EntitySnapshot, GeneratedValues>);
 template <class T>
 concept LvalueConsumption = requires(T& value, Memory r) { value.into_map(r); };
 static_assert(!LvalueConsumption<MutationValues> && !LvalueConsumption<GeneratedValues> &&

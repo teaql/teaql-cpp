@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 4.4)
+project(cpp_sample_types_numeric_alias LANGUAGES CXX)
+find_package(teaql_cpp CONFIG REQUIRED)
+add_library(cpp_sample_types_numeric_alias INTERFACE)
+target_include_directories(cpp_sample_types_numeric_alias INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(cpp_sample_types_numeric_alias INTERFACE cxx_std_20)
+target_link_libraries(cpp_sample_types_numeric_alias INTERFACE teaql::provider_sqlite)

@@ -114,6 +114,14 @@ SQL transport/executor and concrete SQLite provider remain independent layers.
 
 ## Modules qualification
 
+The module build preset includes every imported contract registered in
+`modules/contracts.json`. `verify_module_consumers.py --build-dir build_modules_native`
+checks this registration coverage as well as canonical source bodies. The
+2026-10-17 audit repaired 93 omissions; all 279 preset names resolve in the
+configured build graph. This mechanical check does not compile or execute them.
+Focused builds may still select explicit targets. Complete Rust 5.0.6 module
+integration remains part of the active generator parity plan.
+
 The installed versions are sufficient candidates for CMake named-module builds.
 A separate probe uses `FILE_SET CXX_MODULES`, dependency scanning, a real import
 consumer and existing checked-reference/quota/time types. It must compile, link

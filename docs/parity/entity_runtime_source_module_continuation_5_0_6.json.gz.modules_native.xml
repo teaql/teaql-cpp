@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="17"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="12"
+	timestamp="2026-10-18T19:20:03"
+	>
+	<testcase name="module_entity_runtime_model_contracts" classname="module_entity_runtime_model_contracts" time="0.00547807" status="run">
+		<properties/>
+		<system-out>Entity-runtime model contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_json_graph_views_context_contracts" classname="module_json_graph_views_context_contracts" time="0.00349635" status="run">
+		<properties/>
+		<system-out>JSON graph view lifetime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_dynamic_ledger_contracts" classname="module_dynamic_ledger_contracts" time="0.00526605" status="run">
+		<properties/>
+		<system-out>Dynamic ledger contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_request_trace_scope_contracts" classname="module_request_trace_scope_contracts" time="0.00727192" status="run">
+		<properties/>
+		<system-out>Request intent and trace scope contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_loaded_view_move_context_contracts" classname="module_loaded_view_move_context_contracts" time="0.00353365" status="run">
+		<properties/>
+		<system-out>loaded-view: empty move, self transfer, explicit retention and User deletion
+</system-out>
+	</testcase>
+	<testcase name="module_entity_runtime_contracts" classname="module_entity_runtime_contracts" time="0.177131" status="run">
+		<properties/>
+		<system-out>Entity identity graph and ledger contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_original_runtime_graph_reference_contracts" classname="module_original_runtime_graph_reference_contracts" time="0.00329365" status="run">
+		<properties/>
+		<system-out>Graph-reference role and Context lifetime adaptation contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_original_runtime_flat_identity_graph_contracts" classname="module_original_runtime_flat_identity_graph_contracts" time="0.00325354" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_original_runtime_incremental_ledger_contracts" classname="module_original_runtime_incremental_ledger_contracts" time="1.71896" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_ledger_entity_guard_contracts" classname="module_ledger_entity_guard_contracts" time="0.00292708" status="run">
+		<properties/>
+		<system-out>ledger-entity: valid target and source; checked missing state
+</system-out>
+	</testcase>
+	<testcase name="module_json_graph_views_rust_parity" classname="module_json_graph_views_rust_parity" time="12.444" status="run">
+		<properties/>
+		<system-out>JSON graph views parity: 2304/2304 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_entity_runtime_rust_parity" classname="module_entity_runtime_rust_parity" time="4.93645" status="run">
+		<properties/>
+		<system-out>Identity graph and mutation ledger parity: 241/241 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_dynamic_ledger_rust_parity" classname="module_dynamic_ledger_rust_parity" time="0.378138" status="run">
+		<properties/>
+		<system-out>Rust 5.0.6 dynamic ledger parity: 147/147 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_loaded_view_move_rust_parity" classname="module_loaded_view_move_rust_parity" time="0.84505" status="run">
+		<properties/>
+		<system-out>Consuming loaded view parity: 512/512 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_entity_runtime_model_rust_parity" classname="module_entity_runtime_model_rust_parity" time="1.06703" status="run">
+		<properties/>
+		<system-out>entity_runtime_model 5.0.6 parity: 252/252 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_entity_runtime_equality_rust_parity" classname="module_entity_runtime_equality_rust_parity" time="0.185891" status="run">
+		<properties/>
+		<system-out>Entity runtime equality parity: 338/338 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_entity_runtime_dynamic_debug_rust_parity" classname="module_entity_runtime_dynamic_debug_rust_parity" time="1.25812" status="run">
+		<properties/>
+		<system-out>Dynamic entity-state diagnostics parity: 432/432 observations match
+</system-out>
+	</testcase>
+</testsuite>

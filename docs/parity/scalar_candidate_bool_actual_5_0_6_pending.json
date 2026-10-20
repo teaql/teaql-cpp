@@ -1,0 +1,450 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "complete unchanged original bool candidate crate fails compilation; no runtime parity claim",
+  "rust": {
+    "fields": [
+      {
+        "entity": "platform",
+        "field": "name",
+        "type": "String",
+        "candidates": [
+          {
+            "id": 1795007698,
+            "key": "string()",
+            "value": "string()",
+            "method": "string",
+            "filter": "string()"
+          }
+        ]
+      },
+      {
+        "entity": "record",
+        "field": "choice",
+        "type": "bool",
+        "candidates": [
+          {
+            "id": 3569038,
+            "key": "true",
+            "value": "true",
+            "method": "true",
+            "filter": "true"
+          },
+          {
+            "id": 97196323,
+            "key": "false",
+            "value": "false",
+            "method": "false",
+            "filter": "false"
+          }
+        ]
+      }
+    ],
+    "generated": true,
+    "files": 19
+  },
+  "cpp": {
+    "fields": [
+      {
+        "entity": "platform",
+        "field": "name",
+        "type": "String",
+        "candidates": [
+          {
+            "id": 1795007698,
+            "key": "string()",
+            "value": "string()",
+            "method": "string",
+            "filter": "string()"
+          }
+        ]
+      },
+      {
+        "entity": "record",
+        "field": "choice",
+        "type": "bool",
+        "candidates": [
+          {
+            "id": 3569038,
+            "key": "true",
+            "value": "true",
+            "method": "true",
+            "filter": "true"
+          },
+          {
+            "id": 97196323,
+            "key": "false",
+            "value": "false",
+            "method": "false",
+            "filter": "false"
+          }
+        ]
+      }
+    ],
+    "generated": true,
+    "files": 11
+  },
+  "note": "bool(...) parses as bool on both producers. Named true/false candidates use Text operands; which_are_choice uses a typed Boolean operand. Preserve both distinct source APIs.",
+  "source_compile": {
+    "exit_code": 101,
+    "error_count": 4,
+    "code": "E0599",
+    "log": "/tmp/teaql_scalar_candidate_execution_506/bool_actual/rust_build.log",
+    "sha256": "815312a6a8469b90230393d6020ea7d482e3e81ec92db21f91c588967c912f8c",
+    "cause": "Named bool candidate methods call with_choice_is/with_choice_is_not, omitted by the original boolean predicate template.",
+    "structured_errors": [
+      {
+        "rendered": "error[E0599]: no method named `with_choice_is` found for struct `record::request::RecordRequest<R>` in the current scope\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs:1374:14\n     |\n  23 | pub struct RecordRequest<R = crate::Record> {\n     | ------------------------------------------- method `with_choice_is` not found for this struct\n...\n1374 |         self.with_choice_is(\"true\")\n     |              ^^^^^^^^^^^^^^\n     |\nhelp: there is a method `with_choice_is_true` with a similar name, but with different arguments\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs:1373:5\n     |\n1373 |     pub fn with_choice_is_true(self) -> Self {\n     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n",
+        "$message_type": "diagnostic",
+        "children": [
+          {
+            "children": [],
+            "code": null,
+            "level": "help",
+            "message": "there is a method `with_choice_is_true` with a similar name, but with different arguments",
+            "rendered": null,
+            "spans": [
+              {
+                "byte_end": 40579,
+                "byte_start": 40539,
+                "column_end": 45,
+                "column_start": 5,
+                "expansion": null,
+                "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+                "is_primary": true,
+                "label": null,
+                "line_end": 1373,
+                "line_start": 1373,
+                "suggested_replacement": null,
+                "suggestion_applicability": null,
+                "text": [
+                  {
+                    "highlight_end": 45,
+                    "highlight_start": 5,
+                    "text": "    pub fn with_choice_is_true(self) -> Self {"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "level": "error",
+        "message": "no method named `with_choice_is` found for struct `record::request::RecordRequest<R>` in the current scope",
+        "spans": [
+          {
+            "byte_end": 741,
+            "byte_start": 698,
+            "column_end": 44,
+            "column_start": 1,
+            "expansion": null,
+            "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+            "is_primary": false,
+            "label": "method `with_choice_is` not found for this struct",
+            "line_end": 23,
+            "line_start": 23,
+            "suggested_replacement": null,
+            "suggestion_applicability": null,
+            "text": [
+              {
+                "highlight_end": 44,
+                "highlight_start": 1,
+                "text": "pub struct RecordRequest<R = crate::Record> {"
+              }
+            ]
+          },
+          {
+            "byte_end": 40609,
+            "byte_start": 40595,
+            "column_end": 28,
+            "column_start": 14,
+            "expansion": null,
+            "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+            "is_primary": true,
+            "label": null,
+            "line_end": 1374,
+            "line_start": 1374,
+            "suggested_replacement": null,
+            "suggestion_applicability": null,
+            "text": [
+              {
+                "highlight_end": 28,
+                "highlight_start": 14,
+                "text": "        self.with_choice_is(\"true\")"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "code": "E0599",
+          "explanation": "This error occurs when a method is used on a type which doesn't implement it:\n\nErroneous code example:\n\n```compile_fail,E0599\nstruct Mouth;\n\nlet x = Mouth;\nx.chocolate(); // error: no method named `chocolate` found for type `Mouth`\n               //        in the current scope\n```\n\nIn this case, you need to implement the `chocolate` method to fix the error:\n\n```\nstruct Mouth;\n\nimpl Mouth {\n    fn chocolate(&self) { // We implement the `chocolate` method here.\n        println!(\"Hmmm! I love chocolate!\");\n    }\n}\n\nlet x = Mouth;\nx.chocolate(); // ok!\n```\n"
+        }
+      },
+      {
+        "rendered": "error[E0599]: no method named `with_choice_is_not` found for struct `record::request::RecordRequest<R>` in the current scope\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs:1380:14\n     |\n  23 | pub struct RecordRequest<R = crate::Record> {\n     | ------------------------------------------- method `with_choice_is_not` not found for this struct\n...\n1380 |         self.with_choice_is_not(\"true\")\n     |              ^^^^^^^^^^^^^^^^^^\n     |\nhelp: there is a method `with_choice_is_not_true` with a similar name, but with different arguments\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs:1379:5\n     |\n1379 |     pub fn with_choice_is_not_true(self) -> Self {\n     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n",
+        "$message_type": "diagnostic",
+        "children": [
+          {
+            "children": [],
+            "code": null,
+            "level": "help",
+            "message": "there is a method `with_choice_is_not_true` with a similar name, but with different arguments",
+            "rendered": null,
+            "spans": [
+              {
+                "byte_end": 40675,
+                "byte_start": 40631,
+                "column_end": 49,
+                "column_start": 5,
+                "expansion": null,
+                "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+                "is_primary": true,
+                "label": null,
+                "line_end": 1379,
+                "line_start": 1379,
+                "suggested_replacement": null,
+                "suggestion_applicability": null,
+                "text": [
+                  {
+                    "highlight_end": 49,
+                    "highlight_start": 5,
+                    "text": "    pub fn with_choice_is_not_true(self) -> Self {"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "level": "error",
+        "message": "no method named `with_choice_is_not` found for struct `record::request::RecordRequest<R>` in the current scope",
+        "spans": [
+          {
+            "byte_end": 741,
+            "byte_start": 698,
+            "column_end": 44,
+            "column_start": 1,
+            "expansion": null,
+            "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+            "is_primary": false,
+            "label": "method `with_choice_is_not` not found for this struct",
+            "line_end": 23,
+            "line_start": 23,
+            "suggested_replacement": null,
+            "suggestion_applicability": null,
+            "text": [
+              {
+                "highlight_end": 44,
+                "highlight_start": 1,
+                "text": "pub struct RecordRequest<R = crate::Record> {"
+              }
+            ]
+          },
+          {
+            "byte_end": 40709,
+            "byte_start": 40691,
+            "column_end": 32,
+            "column_start": 14,
+            "expansion": null,
+            "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+            "is_primary": true,
+            "label": null,
+            "line_end": 1380,
+            "line_start": 1380,
+            "suggested_replacement": null,
+            "suggestion_applicability": null,
+            "text": [
+              {
+                "highlight_end": 32,
+                "highlight_start": 14,
+                "text": "        self.with_choice_is_not(\"true\")"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "code": "E0599",
+          "explanation": "This error occurs when a method is used on a type which doesn't implement it:\n\nErroneous code example:\n\n```compile_fail,E0599\nstruct Mouth;\n\nlet x = Mouth;\nx.chocolate(); // error: no method named `chocolate` found for type `Mouth`\n               //        in the current scope\n```\n\nIn this case, you need to implement the `chocolate` method to fix the error:\n\n```\nstruct Mouth;\n\nimpl Mouth {\n    fn chocolate(&self) { // We implement the `chocolate` method here.\n        println!(\"Hmmm! I love chocolate!\");\n    }\n}\n\nlet x = Mouth;\nx.chocolate(); // ok!\n```\n"
+        }
+      },
+      {
+        "rendered": "error[E0599]: no method named `with_choice_is` found for struct `record::request::RecordRequest<R>` in the current scope\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs:1385:14\n     |\n  23 | pub struct RecordRequest<R = crate::Record> {\n     | ------------------------------------------- method `with_choice_is` not found for this struct\n...\n1385 |         self.with_choice_is(\"false\")\n     |              ^^^^^^^^^^^^^^\n     |\nhelp: there is a method `with_choice_is_true` with a similar name, but with different arguments\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs:1373:5\n     |\n1373 |     pub fn with_choice_is_true(self) -> Self {\n     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n",
+        "$message_type": "diagnostic",
+        "children": [
+          {
+            "children": [],
+            "code": null,
+            "level": "help",
+            "message": "there is a method `with_choice_is_true` with a similar name, but with different arguments",
+            "rendered": null,
+            "spans": [
+              {
+                "byte_end": 40579,
+                "byte_start": 40539,
+                "column_end": 45,
+                "column_start": 5,
+                "expansion": null,
+                "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+                "is_primary": true,
+                "label": null,
+                "line_end": 1373,
+                "line_start": 1373,
+                "suggested_replacement": null,
+                "suggestion_applicability": null,
+                "text": [
+                  {
+                    "highlight_end": 45,
+                    "highlight_start": 5,
+                    "text": "    pub fn with_choice_is_true(self) -> Self {"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "level": "error",
+        "message": "no method named `with_choice_is` found for struct `record::request::RecordRequest<R>` in the current scope",
+        "spans": [
+          {
+            "byte_end": 741,
+            "byte_start": 698,
+            "column_end": 44,
+            "column_start": 1,
+            "expansion": null,
+            "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+            "is_primary": false,
+            "label": "method `with_choice_is` not found for this struct",
+            "line_end": 23,
+            "line_start": 23,
+            "suggested_replacement": null,
+            "suggestion_applicability": null,
+            "text": [
+              {
+                "highlight_end": 44,
+                "highlight_start": 1,
+                "text": "pub struct RecordRequest<R = crate::Record> {"
+              }
+            ]
+          },
+          {
+            "byte_end": 40801,
+            "byte_start": 40787,
+            "column_end": 28,
+            "column_start": 14,
+            "expansion": null,
+            "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+            "is_primary": true,
+            "label": null,
+            "line_end": 1385,
+            "line_start": 1385,
+            "suggested_replacement": null,
+            "suggestion_applicability": null,
+            "text": [
+              {
+                "highlight_end": 28,
+                "highlight_start": 14,
+                "text": "        self.with_choice_is(\"false\")"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "code": "E0599",
+          "explanation": "This error occurs when a method is used on a type which doesn't implement it:\n\nErroneous code example:\n\n```compile_fail,E0599\nstruct Mouth;\n\nlet x = Mouth;\nx.chocolate(); // error: no method named `chocolate` found for type `Mouth`\n               //        in the current scope\n```\n\nIn this case, you need to implement the `chocolate` method to fix the error:\n\n```\nstruct Mouth;\n\nimpl Mouth {\n    fn chocolate(&self) { // We implement the `chocolate` method here.\n        println!(\"Hmmm! I love chocolate!\");\n    }\n}\n\nlet x = Mouth;\nx.chocolate(); // ok!\n```\n"
+        }
+      },
+      {
+        "rendered": "error[E0599]: no method named `with_choice_is_not` found for struct `record::request::RecordRequest<R>` in the current scope\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs:1391:14\n     |\n  23 | pub struct RecordRequest<R = crate::Record> {\n     | ------------------------------------------- method `with_choice_is_not` not found for this struct\n...\n1391 |         self.with_choice_is_not(\"false\")\n     |              ^^^^^^^^^^^^^^^^^^\n     |\nhelp: there is a method `with_choice_is_not_true` with a similar name, but with different arguments\n    --> /home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs:1379:5\n     |\n1379 |     pub fn with_choice_is_not_true(self) -> Self {\n     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n",
+        "$message_type": "diagnostic",
+        "children": [
+          {
+            "children": [],
+            "code": null,
+            "level": "help",
+            "message": "there is a method `with_choice_is_not_true` with a similar name, but with different arguments",
+            "rendered": null,
+            "spans": [
+              {
+                "byte_end": 40675,
+                "byte_start": 40631,
+                "column_end": 49,
+                "column_start": 5,
+                "expansion": null,
+                "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+                "is_primary": true,
+                "label": null,
+                "line_end": 1379,
+                "line_start": 1379,
+                "suggested_replacement": null,
+                "suggestion_applicability": null,
+                "text": [
+                  {
+                    "highlight_end": 49,
+                    "highlight_start": 5,
+                    "text": "    pub fn with_choice_is_not_true(self) -> Self {"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "level": "error",
+        "message": "no method named `with_choice_is_not` found for struct `record::request::RecordRequest<R>` in the current scope",
+        "spans": [
+          {
+            "byte_end": 741,
+            "byte_start": 698,
+            "column_end": 44,
+            "column_start": 1,
+            "expansion": null,
+            "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+            "is_primary": false,
+            "label": "method `with_choice_is_not` not found for this struct",
+            "line_end": 23,
+            "line_start": 23,
+            "suggested_replacement": null,
+            "suggestion_applicability": null,
+            "text": [
+              {
+                "highlight_end": 44,
+                "highlight_start": 1,
+                "text": "pub struct RecordRequest<R = crate::Record> {"
+              }
+            ]
+          },
+          {
+            "byte_end": 40903,
+            "byte_start": 40885,
+            "column_end": 32,
+            "column_start": 14,
+            "expansion": null,
+            "file_name": "/home/philip/githome/teaql-cpp/tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/lib/src/record/request.rs",
+            "is_primary": true,
+            "label": null,
+            "line_end": 1391,
+            "line_start": 1391,
+            "suggested_replacement": null,
+            "suggestion_applicability": null,
+            "text": [
+              {
+                "highlight_end": 32,
+                "highlight_start": 14,
+                "text": "        self.with_choice_is_not(\"false\")"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "code": "E0599",
+          "explanation": "This error occurs when a method is used on a type which doesn't implement it:\n\nErroneous code example:\n\n```compile_fail,E0599\nstruct Mouth;\n\nlet x = Mouth;\nx.chocolate(); // error: no method named `chocolate` found for type `Mouth`\n               //        in the current scope\n```\n\nIn this case, you need to implement the `chocolate` method to fix the error:\n\n```\nstruct Mouth;\n\nimpl Mouth {\n    fn chocolate(&self) { // We implement the `chocolate` method here.\n        println!(\"Hmmm! I love chocolate!\");\n    }\n}\n\nlet x = Mouth;\nx.chocolate(); // ok!\n```\n"
+        }
+      }
+    ],
+    "reproduced_exit_code": 101
+  },
+  "disposition": "Keep original artifacts unchanged. C++ compilation and explicit supported/unsupported disposition still require qualification.",
+  "follow_up": {
+    "evidence": "docs/parity/scalar_candidate_bool_actual_5_0_6.json",
+    "status": "Complete C++ method instantiation passes; unchanged original still fails four E0599 errors. No bool runtime parity claim.",
+    "note": "Earlier pending C++ wording is historical and superseded by the terminal record."
+  }
+}

@@ -1,0 +1,8 @@
+<root name="cpp_query_branches" org="teaql" data_service="sqlite">
+    <tenant name="string()" />
+    <entry tenant="tenant(contextRoot=true)" label="string()" optional_label="string()?"
+           notes="text()" secret="password()" active="true" optional_active="bool()?"
+           amount="number()" optional_amount="number()?" height="double()" ratio="float()"
+           counter="integer()" day="date()" optional_day="date()?"
+           moment="dateTime()" optional_moment="dateTime()?" />
+</root>

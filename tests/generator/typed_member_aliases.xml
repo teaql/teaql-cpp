@@ -1,0 +1,7 @@
+<root name="cpp_member_aliases" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <record platform="platform(contextRoot=true)" name="string()"
+            type="string(column=legacy_type)?" />
+    <child_record _parent="record" label="string()?" />
+    <holder platform="platform(contextRoot=true)" name="string()" record="record()?" />
+</root>

@@ -1,4 +1,4 @@
-// All fifteen original mutation-execution diagnostic contracts.
+// All twenty-one locked Rust 5.0.6 mutation-execution diagnostic contracts.
 #include "execution_fixture.hpp"
 #include <iostream>
 
@@ -16,7 +16,7 @@ mutation(Memory r, Operation operation, std::uint64_t id, std::int64_t recover_v
         return MutationRequest(std::allocator_arg,
                                Allocator(r),
                                std::move(command),
-                               "original mutation execution fixture");
+                               "audited provider conformance test");
     }
     if (operation == Operation::Delete) {
         DeleteCommand command(std::allocator_arg, Allocator(r), "Customer", id);
@@ -24,13 +24,11 @@ mutation(Memory r, Operation operation, std::uint64_t id, std::int64_t recover_v
         return MutationRequest(std::allocator_arg,
                                Allocator(r),
                                std::move(command),
-                               "original mutation execution fixture");
+                               "audited provider conformance test");
     }
     RecoverCommand command(std::allocator_arg, Allocator(r), "Customer", id, recover_version);
-    return MutationRequest(std::allocator_arg,
-                           Allocator(r),
-                           std::move(command),
-                           "original mutation execution fixture");
+    return MutationRequest(
+        std::allocator_arg, Allocator(r), std::move(command), "audited provider conformance test");
 }
 
 static void assert_write(const ExecutionMetadata& metadata,
@@ -64,6 +62,14 @@ static void mutation_target_id_provenance() {
                     }
                 },
                 request.data);
+            request = std::visit(
+                [&](auto& command) {
+                    return MutationRequest(std::allocator_arg,
+                                           Allocator(f.resource),
+                                           std::move(command),
+                                           "what: mutate customer 1001");
+                },
+                request.data);
             const auto& result =
                 f.executor.mutate_observed(f.resource, std::move(request), f.observer).wait();
             check(bool(result) != failure, "all mutation target fixtures execute");
@@ -77,7 +83,7 @@ static void mutation_target_id_provenance() {
                           write.params.end() &&
                       std::ranges::any_of(write.trace_chain,
                                           [](const TraceNode& node) {
-                                              return node.entity_id == 1001;
+                                              return node.comment.find("1001") != String::npos;
                                           }),
                   "target remains plain in execution parameters and structured trace identity");
             Vector<String> secrets(f.resource);
@@ -86,6 +92,169 @@ static void mutation_target_id_provenance() {
                   "target ID is intent provenance");
             f.released_before_observers();
         }
+    }
+}
+
+static void native_batch_repeated_root() {
+    Fixture f(Mode::Success);
+    MutationRequest::Batch inner(f.resource), outer(f.resource);
+    inner.emplace_back(insert(f.resource, 1));
+    outer.emplace_back(std::move(inner), "group native items");
+    MutationRequest request(
+        std::allocator_arg, Allocator(f.resource), std::move(outer), "audited test");
+    const auto& result = f.executor.mutate(f.resource, std::move(request)).wait();
+    check(bool(result), "nested native batch executes");
+    const auto& item = result.value().metadata.statements.at(0).statements.at(0);
+    Vector<const TraceNode*> reasons(f.resource);
+    for (const auto& node : item.trace_chain) {
+        if (node.kind == TraceKind::AuditReason) {
+            reasons.push_back(&node);
+        }
+    }
+    check(item.comment == "audited test" && reasons.size() == 2 &&
+              reasons[0]->comment == "audited test" && reasons[0]->entity_id == 1 &&
+              reasons[1]->comment == "group native items" && f.entries.empty(),
+          "repeated root has one slot retaining the real leaf identity");
+    f.released_before_observers();
+}
+
+static void inherited_batch_old_value_provenance() {
+    Fixture f(Mode::FailRead);
+    auto& tx = f.begin();
+    UpdateCommand sibling(std::allocator_arg, Allocator(f.resource), "Customer", std::uint64_t(2));
+    sibling.value("status", "ACTIVE");
+    sibling.old_values.emplace(f.resource);
+    sibling.old_values->fields.emplace("name", Value(f.resource, "OLD-NAME-CANARY"));
+    sibling.old_values->fields.emplace("password", Value(f.resource, "OLD-CREDENTIAL-CANARY"));
+    MutationRequest::Batch children(f.resource);
+    children.emplace_back(insert(f.resource, 1));
+    children.emplace_back(std::move(sibling), "update sibling");
+    MutationRequest request(std::allocator_arg,
+                            Allocator(f.resource),
+                            std::move(children),
+                            "batch OLD-NAME-CANARY OLD-CREDENTIAL-CANARY ACTIVE");
+    const auto& result = tx.mutate_observed(f.resource, std::move(request), f.observer).wait();
+    check(!result, "first item readback fails before sibling execution");
+    driver_error(result.error(), "original readback error");
+    check(f.entries.size() == 2 && f.controls.writes == 1,
+          "only the first item write and readback execute");
+    Vector<Value> expected(f.resource);
+    expected.emplace_back(Value(f.resource, std::uint64_t(1)));
+    expected.emplace_back(Value(f.resource, std::int64_t(1)));
+    expected.emplace_back(Value(f.resource, "Riverside"));
+    check(f.entries[0].params == expected, "inherited intent never changes driver bindings");
+    for (const auto& metadata : f.entries) {
+        check(metadata.comment == "batch OLD-NAME-CANARY OLD-CREDENTIAL-CANARY ACTIVE",
+              "root owned intent remains the statement comment");
+        Vector<String> hidden(f.resource), debug_hidden(f.resource);
+        metadata.sql_log.intent_redactions.extend_secrets(false, hidden);
+        metadata.sql_log.intent_redactions.extend_secrets(true, debug_hidden);
+        auto contains = [&](const Vector<String>& values, std::string_view value) {
+            return std::ranges::any_of(values, [&](const String& item) {
+                return item == value;
+            });
+        };
+        check(contains(hidden, "OLD-NAME-CANARY") && contains(hidden, "OLD-CREDENTIAL-CANARY") &&
+                  !contains(hidden, "ACTIVE"),
+              "inherited ordinary provenance includes sensitive old values only");
+        check(!contains(debug_hidden, "OLD-NAME-CANARY") &&
+                  contains(debug_hidden, "OLD-CREDENTIAL-CANARY") && contains(debug_hidden, "2"),
+              "debug opt-in still protects credentials and target identity");
+    }
+    f.released_before_observers();
+}
+
+static void
+assert_successful_readback_pair(Memory r, const ExecutionMetadata& metadata, std::uint64_t id) {
+    check(metadata.statements.size() == 2, "write and readback are physical statements");
+    const auto& write = metadata.statements[0];
+    const auto& readback = metadata.statements[1];
+    check(write.statements.empty() && readback.statements.empty(), "physical facts are leaves");
+    check(write.operation == metadata.operation &&
+              write.sql_log.execution_outcome == Outcome::Success && write.affected_rows == 1 &&
+              readback.operation == Operation::Query &&
+              readback.sql_log.execution_outcome == Outcome::Success && readback.result_count == 1,
+          "write and successful readback keep distinct operations and counts");
+    check(readback.parameterized_query && readback.parameterized_query->starts_with("SELECT") &&
+              std::ranges::find(readback.params, Value(r, id)) != readback.params.end(),
+          "readback executes a SELECT for this item identity");
+    TraceChain write_reasons(r), read_reasons(r);
+    for (const auto& node : write.trace_chain) {
+        if (node.kind == TraceKind::AuditReason) {
+            write_reasons.emplace_back(node);
+        }
+    }
+    for (const auto& node : readback.trace_chain) {
+        if (node.kind == TraceKind::AuditReason) {
+            read_reasons.emplace_back(node);
+        }
+    }
+    check(write_reasons == read_reasons && readback.comment == write.comment,
+          "derived readback inherits the exact typed audit lineage and owned intent");
+    check(std::ranges::any_of(readback.trace_chain,
+                              [](const TraceNode& node) {
+                                  return node.kind == TraceKind::Purpose &&
+                                         node.comment == "verify the persisted mutation result";
+                              }),
+          "readback declares its own verification purpose");
+    Vector<String> hidden(r);
+    readback.sql_log.intent_redactions.extend_secrets(false, hidden);
+    check(std::ranges::find(hidden, String("Riverside", r)) != hidden.end() &&
+              std::ranges::find(write.params, Value(r, "Riverside")) != write.params.end(),
+          "readback inherits write privacy while raw driver bindings stay intact");
+}
+
+static void successful_transaction_readback() {
+    for (bool observe : {false, true}) {
+        Fixture f(Mode::Success);
+        auto& tx = f.begin();
+        const auto& result = tx.mutate_observed(f.resource,
+                                                insert(f.resource, 1),
+                                                observe ? std::optional(f.observer) : std::nullopt)
+                                 .wait();
+        check(bool(result), "successful transaction insert");
+        assert_successful_readback_pair(f.resource, result.value().metadata, 1);
+        check(result.value().affected_rows == 1 && result.value().persisted_snapshot &&
+                  f.entries.empty(),
+              "success returns one snapshot without fallback notification");
+        f.released_before_observers();
+    }
+}
+
+static void successful_batch_readbacks() {
+    Fixture f(Mode::Success);
+    auto& tx = f.begin();
+    const auto& result = tx.mutate_observed(f.resource, batch(f.resource), f.observer).wait();
+    check(result && result.value().affected_rows == 3 &&
+              result.value().metadata.statements.size() == 3,
+          "three native items retain grouping and count writes only");
+    for (std::size_t i = 0; i < result.value().metadata.statements.size(); ++i) {
+        assert_successful_readback_pair(f.resource, result.value().metadata.statements[i], i + 1);
+    }
+    check(f.entries.empty(), "successful grouped facts are delivered only once");
+    f.released_before_observers();
+}
+
+static void unsuccessful_match_and_hard_delete() {
+    for (bool hard_delete : {false, true}) {
+        Fixture f(hard_delete ? Mode::Success : Mode::NoMatch);
+        auto& tx = f.begin();
+        auto request = insert(f.resource, 1);
+        if (hard_delete) {
+            DeleteCommand command(std::allocator_arg, Allocator(f.resource), "Customer", 1);
+            command.hard_delete();
+            request = MutationRequest(std::allocator_arg,
+                                      Allocator(f.resource),
+                                      std::move(command),
+                                      "physically remove customer");
+        }
+        const auto& result = tx.mutate_observed(f.resource, std::move(request), f.observer).wait();
+        check(result && result.value().affected_rows == (hard_delete ? 1 : 0) &&
+                  !result.value().persisted_snapshot &&
+                  result.value().metadata.statements.empty() && f.entries.empty() &&
+                  f.controls.reads == 0,
+              "unmatched writes and physical deletes invent no readback");
+        f.released_before_observers();
     }
 }
 
@@ -214,11 +383,11 @@ static void successful_batch_and_later_compile_failure() {
         MutationRequest::Batch children(f.resource);
         children.emplace_back(insert(f.resource, 1));
         InsertCommand missing(std::allocator_arg, Allocator(f.resource), "Missing");
-        children.emplace_back(std::move(missing), "ported missing mutation");
+        children.emplace_back(std::move(missing), "audited provider conformance test");
         auto request = MutationRequest(std::allocator_arg,
                                        Allocator(f.resource),
                                        std::move(children),
-                                       "ported mutation execution fixture");
+                                       "audited provider conformance test");
         const auto& result =
             f.executor.mutate_observed(f.resource, std::move(request), f.observer).wait();
         check(!result && result.error().kind() == Error::Kind::Compile && f.entries.size() == 1 &&
@@ -235,6 +404,28 @@ static GuardedMutationRequest guarded(Fixture& f) {
                                   Allocator(f.resource),
                                   request,
                                   Expr::eq(f.resource, "status", "ACTIVE"));
+}
+
+static void successful_guarded_readback() {
+    for (bool observe : {false, true}) {
+        Fixture f(Mode::Success);
+        const auto& result =
+            f.executor
+                .mutate_guarded_observed(
+                    f.resource, guarded(f), observe ? std::optional(f.observer) : std::nullopt)
+                .wait();
+        check(bool(result), "successful guarded update");
+        assert_successful_readback_pair(f.resource, result.value().metadata, 1);
+        for (const auto& metadata : result.value().metadata.statements) {
+            check(metadata.parameterized_query &&
+                      metadata.parameterized_query->find("status") != String::npos &&
+                      std::ranges::find(metadata.params, Value(f.resource, "ACTIVE")) !=
+                          metadata.params.end(),
+                  "both successful physical statements retain the guard");
+        }
+        check(f.entries.empty(), "guarded success has no fallback notifications");
+        f.released_before_observers();
+    }
 }
 
 static void guarded_readback_failure() {
@@ -280,11 +471,11 @@ static void nested_batch_failure() {
     inner.emplace_back(insert(f.resource, 2));
     inner.emplace_back(insert(f.resource, 3));
     outer.emplace_back(insert(f.resource, 1));
-    outer.emplace_back(std::move(inner), "ported nested batch");
+    outer.emplace_back(std::move(inner), "audited provider conformance test");
     auto request = MutationRequest(std::allocator_arg,
                                    Allocator(f.resource),
                                    std::move(outer),
-                                   "ported mutation execution fixture");
+                                   "audited provider conformance test");
     const auto& result =
         f.executor.mutate_observed(f.resource, std::move(request), f.observer).wait();
     check(!result && f.entries.size() == 2, "nested batch does not duplicate prior leaf");
@@ -311,6 +502,8 @@ static void all_mutation_kinds_preserve_failure_kind() {
 
 int main() {
     try {
+        native_batch_repeated_root();
+        inherited_batch_old_value_provenance();
         mutation_target_id_provenance();
         cached_query_intent_uses_current_values();
         transaction_cached_query_intent();
@@ -318,6 +511,10 @@ int main() {
         partial_batch_failure_and_cancellation();
         write_success_then_readback_outcomes();
         successful_batch_and_later_compile_failure();
+        successful_transaction_readback();
+        successful_batch_readbacks();
+        successful_guarded_readback();
+        unsuccessful_match_and_hard_delete();
         guarded_readback_failure();
         guarded_transaction_write_failure();
         nested_batch_failure();

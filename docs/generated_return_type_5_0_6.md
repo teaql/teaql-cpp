@@ -1,5 +1,15 @@
 # Generated query return types: Rust 5.0.6
 
+The later [result-marker qualification](generated_query_result_marker_5_0_6.md)
+supersedes this checkpoint's early non-Entity construction refusal. Ordinary
+requests now admit arbitrary markers, matching the original; public execution
+and creation retain the enclosing Entity guard. The original compiler fixture
+and previous behavior remain archived separately.
+
+Current status: G04/P2 is qualified with documented language/ownership adaptations;
+normal inheritance generation is enabled. See [the final acceptance](inheritance_acceptance_5_0_6.md).
+The checkpoint status and guard statements below are retained historical evidence.
+
 Status: partial G04/G06/G09 evidence. Normal inheritance generation remains
 guarded. This extends the earlier inherited field, query-construction and SQLite
 enhancement checkpoints; it does not qualify complete graph/save behavior.

@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 165,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native_runtime": {
+      "passed": 8,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "generated_json_hydration_rust_parity",
+        "generated_json_hydration_context_contracts",
+        "generated_api_contracts",
+        "example_generated_query_expression",
+        "generated_inheritance_contracts",
+        "generated_readonly_property_contracts",
+        "generated_relation_contracts",
+        "generated_optional_types_contracts"
+      ]
+    },
+    "sanitize": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0
+    }
+  },
+  "full_compiler_gate": {
+    "status": "failed",
+    "result": "CTest timeout",
+    "limit_seconds": 1500,
+    "exit_code": 8,
+    "test": "generated_api_type_errors",
+    "cases": 57,
+    "terminal_record": "docs/parity/generated_api_compiler_timeout_after_json_readback_5_0_6.json"
+  },
+  "additional_alias_audit": {
+    "cases": 9,
+    "gaps": 4,
+    "status": "open"
+  },
+  "java": {
+    "passed": 34,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "generated_artifacts": {
+    "workspaces": 18,
+    "files": 216,
+    "reproduction_exit_code": 0
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 122,
+  "catalog_exports": 1479,
+  "formatting": {
+    "handwritten_files": 1012,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "teaql_runtime/include/teaql/runtime/generated_entity_json.hpp": "16d877689730159ae573687920fe6a32acc8144bef0dd7a766343f63432498d0",
+    "tests/parity/generated_json_hydration_probe.cpp": "d35f372c8ed1c06f382bf7a51ba20358121ce8d530f69068a9e71368f2353ec9",
+    "tests/parity/rust_field_layout/src/bin/generated_json_hydration_5_0_6.rs": "535e94ed532eddaa947c3d839a3ec47c1443476ca4778f847324a55fc726753c",
+    "tests/parity/generated_json_hydration_5_0_6_cases.json.gz": "36b93e0f4ca8788dbfb18a5c46833f4853858c236d6f3706e5738a18c076ef27"
+  },
+  "notice": "Declared generated JSON matrix only. Authentic column alias gaps and full compiler terminal gate remain open, together with complete capabilities/P0-P7. No MIPS or physical-device test."
+}

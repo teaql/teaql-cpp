@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "counts": {
+    "observations": 864,
+    "registered": 720,
+    "callbacks": 576,
+    "denials": 240
+  },
+  "profiles": {
+    "native": {
+      "passed": 5,
+      "total": 5,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 426: generated_checker_flow_rust_parity\n    Start 427: generated_checker_commit_rust_parity\n    Start 582: generated_runtime_assembly_rust_parity\n    Start  62: generated_behavior_hooks_rust_parity\n1/5 Test  #62: generated_behavior_hooks_rust_parity .....   Passed    1.31 sec\n    Start 603: example_custom_checker_behavior\n2/5 Test #603: example_custom_checker_behavior ..........   Passed    0.03 sec\n3/5 Test #582: generated_runtime_assembly_rust_parity ...   Passed    1.56 sec\n4/5 Test #427: generated_checker_commit_rust_parity .....   Passed    3.86 sec\n5/5 Test #426: generated_checker_flow_rust_parity .......   Passed    6.14 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =   6.16 sec\n",
+      "sha256": "25cbce66863947a1548359a7ed4fa7a33ccc971a03a4307a9f8fc00ade107a17"
+    },
+    "modules": {
+      "passed": 2,
+      "total": 2,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 606: module_custom_checker_behavior\n    Start 872: module_generated_behavior_hooks_rust_parity\n1/2 Test #606: module_custom_checker_behavior ................   Passed    0.02 sec\n2/2 Test #872: module_generated_behavior_hooks_rust_parity ...   Passed    0.77 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.80 sec\n",
+      "sha256": "5794f2343dc51724f82f9dd61869770127e0cfb35b56233923c0c258606c59bd"
+    },
+    "sanitize": {
+      "passed": 2,
+      "total": 2,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start  62: generated_behavior_hooks_rust_parity\n    Start 603: example_custom_checker_behavior\n1/2 Test #603: example_custom_checker_behavior ........   Passed    0.05 sec\n2/2 Test  #62: generated_behavior_hooks_rust_parity ...   Passed    1.70 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   1.71 sec\n",
+      "sha256": "70110699d54c60be95117f14253c344a2dbd75c427d301e3aad4a3a6c41e44cb"
+    }
+  },
+  "java": [
+    {
+      "suite": "com.skynet.codegenerator.CppGenerationTest",
+      "passed": 41,
+      "sha256": "03b6225bfd99354bdb9e4fb6c4be4afe23c8a9f2766d5dd3546e5ed3f237432d"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+      "passed": 2,
+      "sha256": "11d6a2c99c64e1abf13537dacc1ceaa36eed2416ff32d85d93d7e494d515b702"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+      "passed": 2,
+      "sha256": "0f98ecb8e7b262aa804c3065e55c5171a79d8f63240808e7f42730623ccbe406"
+    }
+  ],
+  "source_contract": "Direct actual registered callbacks only; original generated defaults, module factories and command models unchanged. No SQL execution or authorization claim for the 864-input observer.",
+  "language_adaptation": "Rust composes original Behavior values; C++ extends generated Behavior classes.",
+  "source_closure_observations": 3096,
+  "workspaces": 20,
+  "reproduced_files": 240,
+  "contract_sdks": 44,
+  "canonical_bodies": 555,
+  "format_cpp_count": 1375,
+  "original_generated_rust_changed": false,
+  "production_runtime_changed": false,
+  "producer_runtime_bodies_changed": false,
+  "producer_assist_changed": true,
+  "default_pmr_disabled": true,
+  "explicit_global_output_copy": true,
+  "actual_user_deletion": true,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "hashes": {
+    "tests/parity/generated_behavior_hooks_5_0_6.rs": "013ea169b8faabdfb423b98686adce18446ff818c2e0f4575dbd5ec73262cc0c",
+    "tests/parity/generated_behavior_hooks_probe.cpp": "d1e4edab75d0cf81f7cb88402efabcac07983661e148d3de08e5441dcb71d1d3",
+    "tests/parity/compare_generated_behavior_hooks_5_0_6.py": "259739953b2b4fb972091ed68d2b48033dc7dc66fa5d7e134ca74d7fe8be876d",
+    "tests/parity/generated_behavior_hooks_5_0_6_cases.json.gz": "e7799d52ad3a0b6c431756da48efeb780cb4610974a4b031beed2c44e3ddac36",
+    "tests/parity/rust_generated_behavior_hooks_5_0_6/Cargo.toml": "45eb0327c991074edad10a2d4df966f72aee59e31efc76b3fe2eb7694a627779",
+    "tests/parity/rust_generated_behavior_hooks_5_0_6/Cargo.lock": "1b0aa840e1175ca5ad6d8714af4e1681d760433593ed65a06a9b99649a08ce56",
+    "examples/custom_checker_behavior.cpp": "b516e2f4538e39cb93a04a2ec9883cd7860531f702b1a768135831ffb96214af",
+    "docs/parity/checker_behavior_source_closure_5_0_6.json": "63212d41bd6c7501560aca266198acc88985f005199999d922b87c3d4b92670c",
+    "docs/parity/behavior_guidance_sdk_regeneration_5_0_6.json": "f179e1340dfcf7f2525d15f5811ddd8d5ba404220197ccdd32e3b5b337a5f310",
+    "docs/parity/generated_behavior_example_initial_failures_5_0_6.json.gz": "b93f1c3d0d30dfc94534e97346c0186b45b38002dda6413ac22ba73cf60e2d96"
+  },
+  "producer_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "6c9fb72caa0d1aa9c39d9276253811fd3f1e3d13277488ff08c8ed33898ff1ab",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "5ac3ad405485d3f926ba6baeeb88f06d1b14acdaea7cac5932a0d4e3b293bcd4"
+  }
+}

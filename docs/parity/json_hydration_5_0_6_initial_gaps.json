@@ -1,0 +1,162 @@
+[
+  {
+    "index": 1975,
+    "input": {
+      "kind": 1,
+      "metadata": 0,
+      "registered": false,
+      "array": false,
+      "value": {
+        "label": "first",
+        "stored_label": "second",
+        "unknown": 1
+      }
+    },
+    "rust": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: unknown model field: unknown"
+    },
+    "cpp": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: duplicate aliases for field: label"
+    }
+  },
+  {
+    "index": 2196,
+    "input": {
+      "kind": 1,
+      "metadata": 0,
+      "registered": true,
+      "array": false,
+      "value": {
+        "label": "first",
+        "stored_label": "second",
+        "unknown": 1
+      }
+    },
+    "rust": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: unknown model field: unknown"
+    },
+    "cpp": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: duplicate aliases for field: label"
+    }
+  },
+  {
+    "index": 3301,
+    "input": {
+      "kind": 1,
+      "metadata": 3,
+      "registered": false,
+      "array": false,
+      "value": {
+        "label": "first",
+        "stored_label": "second",
+        "unknown": 1
+      }
+    },
+    "rust": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: unknown model field: unknown"
+    },
+    "cpp": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: duplicate aliases for field: label"
+    }
+  },
+  {
+    "index": 3522,
+    "input": {
+      "kind": 1,
+      "metadata": 3,
+      "registered": true,
+      "array": false,
+      "value": {
+        "label": "first",
+        "stored_label": "second",
+        "unknown": 1
+      }
+    },
+    "rust": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: unknown model field: unknown"
+    },
+    "cpp": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: duplicate aliases for field: label"
+    }
+  },
+  {
+    "index": 3743,
+    "input": {
+      "kind": 2,
+      "metadata": 0,
+      "registered": false,
+      "array": false,
+      "value": {
+        "label": "first",
+        "stored_label": "second",
+        "unknown": 1
+      }
+    },
+    "rust": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: unknown model field: unknown"
+    },
+    "cpp": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: duplicate aliases for field: label"
+    }
+  },
+  {
+    "index": 3964,
+    "input": {
+      "kind": 2,
+      "metadata": 0,
+      "registered": true,
+      "array": false,
+      "value": {
+        "label": "first",
+        "stored_label": "second",
+        "unknown": 1
+      }
+    },
+    "rust": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: unknown model field: unknown"
+    },
+    "cpp": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: duplicate aliases for field: label"
+    }
+  },
+  {
+    "index": 5069,
+    "input": {
+      "kind": 2,
+      "metadata": 3,
+      "registered": false,
+      "array": false,
+      "value": {
+        "label": "first",
+        "stored_label": "second",
+        "unknown": 1
+      }
+    },
+    "rust": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: unknown model field: unknown"
+    },
+    "cpp": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: duplicate aliases for field: label"
+    }
+  },
+  {
+    "index": 5290,
+    "input": {
+      "kind": 2,
+      "metadata": 3,
+      "registered": true,
+      "array": false,
+      "value": {
+        "label": "first",
+        "stored_label": "second",
+        "unknown": 1
+      }
+    },
+    "rust": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: unknown model field: unknown"
+    },
+    "cpp": {
+      "error": "JsonNode: JSON_ENTITY_INPUT: duplicate aliases for field: label"
+    }
+  }
+]

@@ -1,0 +1,46 @@
+[package]
+name = "teaql_core_query_source_506"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "query_api_query_source_506"
+path = "../rust_field_layout/src/bin/query_api_5_0_6.rs"
+
+[[bin]]
+name = "query_debug_query_source_506"
+path = "../rust_field_layout/src/bin/query_debug_5_0_6.rs"
+
+[[bin]]
+name = "compact_row_api_query_source_506"
+path = "../rust_field_layout/src/bin/compact_row_api_5_0_6.rs"
+
+[[bin]]
+name = "model_debug_query_source_506"
+path = "../rust_field_layout/src/bin/model_debug_5_0_6.rs"
+
+[[bin]]
+name = "core_shape_presentation_query_source_506"
+path = "../rust_field_layout/src/bin/core_shape_presentation_5_0_6.rs"
+
+[[bin]]
+name = "dynamic_carrier_query_source_506"
+path = "../rust_field_layout/src/bin/dynamic_carrier_5_0_6.rs"
+
+[[bin]]
+name = "initialized_snapshot_cache_query_source_506"
+path = "../initialized_snapshot_cache_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+serde_json = "=1.0.150"
+
+[workspace]
+
+[[bin]]
+name = "core_query_intent_source_query_source_506"
+path = "../core_query_intent_source_5_0_6.rs"

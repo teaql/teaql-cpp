@@ -1,0 +1,210 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Original lexical versus literal interpretation under ignored fields, macro tokens and actual expression values; outputs are obtained from actual Rust.",
+  "cases": [
+    [
+      "delimiter_literal_unknown_0",
+      "17, other=b\"\\xff\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_0",
+      "17, audit_value_max_len=ignored!{b\"\\xff\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_0",
+      "17, audit_value_max_len=b\"\\xff\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_1",
+      "17, other=b\"\\x80\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_1",
+      "17, audit_value_max_len=ignored!{b\"\\x80\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_1",
+      "17, audit_value_max_len=b\"\\x80\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_2",
+      "17, other=b\"\\x7f\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_2",
+      "17, audit_value_max_len=ignored!{b\"\\x7f\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_2",
+      "17, audit_value_max_len=b\"\\x7f\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_3",
+      "17, other=c\"\\xff\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_3",
+      "17, audit_value_max_len=ignored!{c\"\\xff\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_3",
+      "17, audit_value_max_len=c\"\\xff\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_4",
+      "17, other=\"\\q\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_4",
+      "17, audit_value_max_len=ignored!{\"\\q\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_4",
+      "17, audit_value_max_len=\"\\q\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_5",
+      "17, other=\"\\xFF\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_5",
+      "17, audit_value_max_len=ignored!{\"\\xFF\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_5",
+      "17, audit_value_max_len=\"\\xFF\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_6",
+      "17, other=\"\\u{110000}\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_6",
+      "17, audit_value_max_len=ignored!{\"\\u{110000}\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_6",
+      "17, audit_value_max_len=\"\\u{110000}\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_7",
+      "17, other=\"\\u{1f600}\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_7",
+      "17, audit_value_max_len=ignored!{\"\\u{1f600}\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_7",
+      "17, audit_value_max_len=\"\\u{1f600}\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_8",
+      "17, other=br#\"(]\"#, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_8",
+      "17, audit_value_max_len=ignored!{br#\"(]\"#}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_8",
+      "17, audit_value_max_len=br#\"(]\"#, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_9",
+      "17, other=cr#\"(]\"#, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_9",
+      "17, audit_value_max_len=ignored!{cr#\"(]\"#}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_9",
+      "17, audit_value_max_len=cr#\"(]\"#, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_10",
+      "17, other=r#\"(]\"#, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_10",
+      "17, audit_value_max_len=ignored!{r#\"(]\"#}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_10",
+      "17, audit_value_max_len=r#\"(]\"#, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_11",
+      "17, other=b\"\\\\\\\"(]\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_11",
+      "17, audit_value_max_len=ignored!{b\"\\\\\\\"(]\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_11",
+      "17, audit_value_max_len=b\"\\\\\\\"(]\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_12",
+      "17, other='a', audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_12",
+      "17, audit_value_max_len=ignored!{'a'}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_12",
+      "17, audit_value_max_len='a', audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_13",
+      "17, other='\u96ea', audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_13",
+      "17, audit_value_max_len=ignored!{'\u96ea'}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_13",
+      "17, audit_value_max_len='\u96ea', audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_14",
+      "17, other=b'\\xff', audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_14",
+      "17, audit_value_max_len=ignored!{b'\\xff'}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_14",
+      "17, audit_value_max_len=b'\\xff', audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_15",
+      "17, other='label, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_15",
+      "17, audit_value_max_len=ignored!{'label}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_15",
+      "17, audit_value_max_len='label, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_unknown_16",
+      "17, other=\"\\\"[}\", audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_macro_16",
+      "17, audit_value_max_len=ignored!{\"\\\"[}\"}, audit_value_max_len=21"
+    ],
+    [
+      "delimiter_literal_expression_16",
+      "17, audit_value_max_len=\"\\\"[}\", audit_value_max_len=21"
+    ]
+  ]
+}

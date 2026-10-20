@@ -1,0 +1,26 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source": [
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "start_line": 311,
+      "end_line": 317,
+      "text": "    pub fn match_types(\n        mut self,\n        types: impl IntoIterator<Item = impl Into<teaql_core::Value>>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::in_list(TYPE_FIELD, types.into_iter().map(Into::into)));\n        self\n    }\n",
+      "sha256": "09090ff2a60a55c5213f929ab0135e9b8c7beecc3457d4313fbe9fcced5a8b3b",
+      "responsibility": "IntoIterator elements convert to Value, then append the core internal_type IN predicate."
+    },
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "start_line": 311,
+      "end_line": 317,
+      "text": "    pub fn match_types(\n        mut self,\n        types: impl IntoIterator<Item = impl Into<teaql_core::Value>>,\n    ) -> Self {\n        self.query = self.query.and_filter(Expr::in_list(TYPE_FIELD, types.into_iter().map(Into::into)));\n        self\n    }\n",
+      "sha256": "09090ff2a60a55c5213f929ab0135e9b8c7beecc3457d4313fbe9fcced5a8b3b",
+      "responsibility": "IntoIterator elements convert to Value, then append the core internal_type IN predicate."
+    }
+  ],
+  "cpp_runtime": "teaql_runtime/include/teaql/runtime/entity_query.hpp",
+  "cpp_generator": "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java",
+  "mapping": "Constrained input ranges reuse criteria_values in the bound Context and the existing Value-span matchTypes/Expr::in_list path. Scalar Values are not ranges; unsupported elements reject. C++ native integral/character conversions retain their existing language bindings. No type-name validation, type-column creation, SQL or metadata lookup is invented.",
+  "complete_capability_acceptance": false
+}

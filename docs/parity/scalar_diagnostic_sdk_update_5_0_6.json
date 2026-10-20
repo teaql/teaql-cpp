@@ -1,0 +1,463 @@
+{
+  "schema": 1,
+  "snapshot_sha256": "257e2a762179f6cb72e9b834e6f3f812f01a9dbe35c643101fc50b31007fa2ed",
+  "records": [
+    {
+      "directory": "examples/generated",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_types",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_checkers",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_checker_unique_string",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_checker_clock_scalars",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_checker_clock_scalars/expressions.hpp",
+        "include/cpp_checker_clock_scalars/queries.hpp"
+      ],
+      "scalar_aliases": [
+        {
+          "select": "selectModelLong",
+          "unselect": "unselectModelLong",
+          "type": "std::int64_t",
+          "identity": "long",
+          "get": "getModelLong",
+          "unselect_alias": "unselectLong",
+          "select_alias": "selectLong",
+          "entity": "Note",
+          "get_alias": "getLong"
+        },
+        {
+          "select": "selectModelFloat",
+          "unselect": "unselectModelFloat",
+          "type": "float",
+          "identity": "float",
+          "get": "getModelFloat",
+          "unselect_alias": "unselectFloat",
+          "select_alias": "selectFloat",
+          "entity": "Note",
+          "get_alias": "getFloat"
+        },
+        {
+          "select": "selectModelDouble",
+          "unselect": "unselectModelDouble",
+          "type": "double",
+          "identity": "double",
+          "get": "getModelDouble",
+          "unselect_alias": "unselectDouble",
+          "select_alias": "selectDouble",
+          "entity": "Note",
+          "get_alias": "getDouble"
+        }
+      ]
+    },
+    {
+      "directory": "tests/generated_checker_clock_composition",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_relations",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_business_ids",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_optional_types",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_query_field_branches",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_inheritance",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_inheritance_graph",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_inheritance_variants",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_inheritance_business_ids",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_candidates",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_constants_scalar",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_constants_numeric",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_constants_catalog",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_constants_temporal",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_constants_temporal_required",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_dynamic_json",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_sample_fields",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_sample_fields_runtime",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generated_sample_fields_temporal",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/number/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/integer/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/nullable_integer/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/boolean/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/double/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/bool_actual/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/text/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/date/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/scalar_candidate_contracts/timestamp/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/unsigned_recipe/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/integer_as_string/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/equivalent_string_alias/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/field_parameter/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/custom_unsigned/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/numeric_alias/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/equivalent_integer/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/integer_as_unsigned/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/type_configuration_contracts/string_alias/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/unsigned_recipe/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/equivalent_string_alias/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/field_parameter/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/numeric_alias/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/equivalent_integer/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/sample_type_configuration_contracts/string_alias/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/multiple_roots/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/multiple_roots_reversed/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/no_candidates/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_identifier_value/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/empty_identifier_value/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/comma_identifier_value/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/candidate_name_collision/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_identifier/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/unknown_identifier/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/malformed_xml/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/missing_seed_field/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/unicode_identifier_value/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_metadata_contracts/no_root/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/depth_exceeded/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/foreign_value_one/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/cycle_three/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/cycle_pair/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/reversed/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/self_reference/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/optional_forward/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/missing_target_one/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/ordered/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/constant_topology_contracts/self_reference_required/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/wide_unsigned/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/byte_vector/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/opaque_type_configuration_contracts/named_opaque/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/relation_identity_contracts/cpp",
+      "changed_files": [],
+      "scalar_aliases": []
+    },
+    {
+      "directory": "tests/generator/parity/query_alias_contracts/cpp",
+      "changed_files": [
+        "ASSIST.md",
+        "include/cpp_query_aliases/expressions.hpp",
+        "include/cpp_query_aliases/queries.hpp"
+      ],
+      "scalar_aliases": [
+        {
+          "select": "selectModelClass",
+          "unselect": "unselectModelClass",
+          "type": "Decimal",
+          "identity": "class",
+          "get": "getModelClass",
+          "unselect_alias": "unselectClass",
+          "select_alias": "selectClass",
+          "entity": "Record",
+          "get_alias": "getClass"
+        },
+        {
+          "select": "selectModelOperator",
+          "unselect": "unselectModelOperator",
+          "type": "Decimal",
+          "identity": "operator",
+          "get": "getModelOperator",
+          "unselect_alias": "unselectOperator",
+          "select_alias": "selectOperator",
+          "entity": "Record",
+          "get_alias": "getOperator"
+        },
+        {
+          "select": "selectModelTemplate",
+          "unselect": "unselectModelTemplate",
+          "type": "Decimal",
+          "identity": "template",
+          "get": "getModelTemplate",
+          "unselect_alias": "unselectTemplate",
+          "select_alias": "selectTemplate",
+          "entity": "Record",
+          "get_alias": "getTemplate"
+        }
+      ]
+    }
+  ],
+  "all_existing_generated_bodies_unchanged": true
+}

@@ -1,3 +1,4 @@
+#include <limits>
 #include <teaql/runtime/entity_runtime.hpp>
 #include <teaql/runtime/entity_runtime_debug.hpp>
 #include <teaql/runtime/resources.hpp>
@@ -246,6 +247,7 @@ EntityGraphBuilder::EntityGraphBuilder(std::allocator_arg_t,
                                        Allocator a,
                                        const EntityGraphBuilder& other)
     : EntityGraphBuilder(std::allocator_arg, a) {
+    last_read_view_ = other.last_read_view_;
     detail::EntityCloneScope scope(a.resource());
     for (const auto& [type, table] : other.tables_) {
         auto [out, _] = tables_.try_emplace(type);
@@ -272,6 +274,15 @@ void EntityGraphBuilder::install_relation_facets(std::string_view owner,
                                                  std::uint64_t id,
                                                  std::string_view relation,
                                                  const RelationFacets& facets) {
+    install_relation_facets(0, owner, id, relation, facets);
+}
+
+void EntityGraphBuilder::install_relation_facets(std::uint64_t view,
+                                                 std::string_view owner,
+                                                 std::uint64_t id,
+                                                 std::string_view relation,
+                                                 const RelationFacets& facets) {
+    reserve_read_view(view);
     if (facets.empty()) {
         return;
     }
@@ -279,9 +290,20 @@ void EntityGraphBuilder::install_relation_facets(std::string_view owner,
     if (!relation_facets_) {
         relation_facets_.emplace(r);
     }
-    detail::EntityRelationKey key(std::allocator_arg, Allocator(r), owner, id, relation);
+    detail::EntityRelationKey key(std::allocator_arg, Allocator(r), view, owner, id, relation);
     relation_facets_->erase(key);
     relation_facets_->emplace(std::move(key), facets);
+}
+
+std::uint64_t EntityGraphBuilder::allocate_read_view() {
+    if (last_read_view_ == std::numeric_limits<std::uint64_t>::max()) {
+        throw std::overflow_error("Embedded relation view limit exhausted");
+    }
+    return ++last_read_view_;
+}
+
+void EntityGraphBuilder::reserve_read_view(std::uint64_t view) noexcept {
+    last_read_view_ = std::max(last_read_view_, view);
 }
 
 std::size_t EntityGraphBuilder::entity_count() const noexcept {
@@ -595,10 +617,18 @@ void EntityRuntimeState::copy_loaded_view_from(const EntityRuntimeState& other) 
 }
 
 EntityRuntimeState
-EntityRuntimeState::with_loaded_view_from(const EntityRuntimeState& source) const {
+EntityRuntimeState::with_loaded_view_from(const EntityRuntimeState& source) const& {
     EntityRuntimeState result(std::allocator_arg, Allocator(resource_), *this);
     result.copy_loaded_view_from(source);
     return result;
+}
+
+EntityRuntimeState EntityRuntimeState::with_loaded_view_from(const EntityRuntimeState& source) && {
+    detail::resource_arena(resource_);
+    if (this != &source) {
+        copy_loaded_view_from(source);
+    }
+    return std::move(*this);
 }
 
 detail::EntityLedgerSlot& EntityRuntimeState::shared_ledger_slot() const {
@@ -740,7 +770,7 @@ EntityChangeSet EntityRuntimeState::current_change_set() const {
 bool EntityRuntimeState::operator==(const EntityRuntimeState& other) const {
     const auto* left = loaded_dynamic_fields();
     const auto* right = other.loaded_dynamic_fields();
-    return (left == right || (left && right && *left == *right)) &&
+    return ((!left && !right) || (left && right && *left == *right)) &&
            (this == &other || (inner_ && inner_ == other.inner_));
 }
 

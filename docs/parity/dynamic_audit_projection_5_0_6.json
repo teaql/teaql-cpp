@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "observations": 3968,
+  "source_and_cpp_exit_code": 0,
+  "production_function_bodies_changed": false,
+  "profiles": {
+    "native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "audit_event_projection_5_0_6_rust_parity",
+        "dynamic_audit_projection_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 74: audit_event_projection_5_0_6_rust_parity\n1/2 Test #74: audit_event_projection_5_0_6_rust_parity ...   Passed    0.10 sec\n    Start 75: dynamic_audit_projection_rust_parity\n2/2 Test #75: dynamic_audit_projection_rust_parity .......   Passed    3.31 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   3.41 sec\n"
+    },
+    "sanitize": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "dynamic_audit_projection_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 75: dynamic_audit_projection_rust_parity\n1/1 Test #75: dynamic_audit_projection_rust_parity ...   Passed    9.83 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   9.84 sec\n"
+    },
+    "modules_native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_dynamic_audit_projection_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 652: module_dynamic_audit_projection_rust_parity\n1/1 Test #652: module_dynamic_audit_projection_rust_parity ...   Passed    3.23 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   3.24 sec\n"
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 135,
+  "formatting": {
+    "handwritten_files": 1015,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "tests/parity/dynamic_audit_projection_probe.cpp": "649a15ede4b4a5af50da34df4c55bfaab9cbdbfa4a666fed15dc1b768102cd5c",
+    "tests/parity/rust_field_layout/src/bin/dynamic_audit_projection_5_0_6.rs": "247757c0a4645c5a6940985817f6fc5a34ba0151fe2f134984e4714ee0f2e00d",
+    "tests/parity/generate_dynamic_audit_projection_5_0_6.py": "9527db139165eba6ac10a5bca3c4181f6c11d7d532d75a2ec3bbc3c91423114a",
+    "tests/parity/compare_dynamic_audit_projection_5_0_6.py": "22c7d5a92ac1ca4cbeddb6aa24cab968c8618c64677b28f882f51bf52ea57a01",
+    "tests/parity/dynamic_audit_projection_5_0_6_cases.json.gz": "4ede38228b21188913968c4fc143fba887f4237a59f4623eacce845aafe73aee"
+  },
+  "original_sources_sha256": {
+    "teaql-runtime/src/event.rs": "8ce0ccadf2a2e5da385b65db4a38e05ce193242222554afc6a92a9d674225801",
+    "teaql-runtime/src/log_privacy.rs": "a56d52323fbcdc6be8bc4a94efb2b73aa72942ddadb98cc486a274236122a288"
+  },
+  "live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 3968 actual original/native dynamic audit projections\n",
+  "scope": "Updated event field projections, # dynamic default masking, old/new absence versus NULL, nested credentials, explicit plaintext acknowledgement, Unicode scalar lengths, truncation, trace/bootstrap scrubbing, independent invocation provenance; full output without normalization.",
+  "notice": "Original production modules are directly included without edits. Presentation projection is not durable save/transaction/log-sink qualification. Full model/async/provider/guarded configurations and G01-G17/P0-P7 remain partial. No generator production change, MIPS or physical-device execution.",
+  "reproduction_exit_code": 0,
+  "reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 3968 actual original/native dynamic audit projections\n",
+  "binding_inventory": {
+    "active_baseline": 152,
+    "custom_dispatcher_requires_review": 21,
+    "historical_baseline_requires_replay": 63
+  }
+}

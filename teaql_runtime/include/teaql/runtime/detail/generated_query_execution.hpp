@@ -4,6 +4,22 @@
 #include <teaql/runtime/detail/generated_query_facets.hpp>
 
 namespace teaql::detail {
+inline PurposedSelectQuery reauthorize_generated_query(const SelectQuery& source) {
+    auto r = source.memory_resource();
+    auto query = source.clone(r);
+    // Generated authorization replaces the last purpose frame before the
+    // runtime wrapper appends it. Earlier ancestry remains distinct.
+    auto purpose =
+        std::find_if(query.trace_chain.rbegin(), query.trace_chain.rend(), [](const auto& node) {
+            return node.kind == TraceKind::Purpose;
+        });
+    if (purpose == query.trace_chain.rend() || !query.purpose_text) {
+        throw std::logic_error("Generated derived query requires its authorized purpose");
+    }
+    query.trace_chain.erase(std::prev(purpose.base()));
+    return PurposedSelectQuery(std::allocator_arg, Allocator(r), query, *query.purpose_text);
+}
+
 template <class Error, bool Count>
 class GeneratedScalarQueryOperation {
 public:
@@ -82,7 +98,7 @@ auto& execute_generated_scalar_query(const EntityDataService<E>& service,
         query.limit(1);
     }
     query.relations.clear();
-    PurposedSelectQuery authorized(std::allocator_arg, Allocator(r), query, *query.purpose_text);
+    auto authorized = reauthorize_generated_query(query);
     auto& rows = service.fetch_all(authorized);
     using State = GeneratedScalarQueryOperation<typename E::Error, Count>;
     return make_operation<typename State::Output, State>(r, rows, query.entity);
@@ -111,8 +127,7 @@ public:
             if (!list_ && (list_first_ || count_)) {
                 auto query = source_.as_query().clone(r);
                 query.page(offset_, limit_);
-                PurposedSelectQuery authorized(
-                    std::allocator_arg, Allocator(r), query, *query.purpose_text);
+                auto authorized = reauthorize_generated_query(query);
                 list_ = &execute_generated_list_query<T>(service_, authorized);
             }
             if (list_ && !rows_) {

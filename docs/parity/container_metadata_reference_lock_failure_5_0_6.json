@@ -1,0 +1,7 @@
+{
+  "complete": false,
+  "scope": "Preserved first dependency-identity rejection before comparison; not a successful source gate.",
+  "log": "Traceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/scripts/verify_container_metadata_5_0_6.py\", line 138, in <module>\n    main()\n  File \"/home/philip/githome/teaql-cpp/scripts/verify_container_metadata_5_0_6.py\", line 95, in main\n    assert registry_identities(PROJECT / 'Cargo.lock') <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')\nAssertionError\n",
+  "initial_receipt_sha256": "6d4858345c80249c7cef20c5977462d440be6deb3b6088e6dc710e14b9999538",
+  "resolution": "Seeded the new isolated lock from the existing exact-reference parser lock; Cargo updated only its root package identity, then the registry-identity assertion and locked build passed."
+}

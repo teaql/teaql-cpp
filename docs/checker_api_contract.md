@@ -1,5 +1,11 @@
 # Checker production API and wire contract review
 
+The [complete 5.0.6 Checker review](checker_source_review_5_0_6.md) qualifies
+CK01-CK22 with fresh original/native/imported evidence and the separate
+[generic-constructor repair](checker_constructor_boundary_5_0_6.md). The earlier
+review below remains historical; its passing value/dispatch cases did not prove
+the previously missing constructor boundary and are not relabeled.
+
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 Complete checker.rs production body is reviewed through line 624; embedded tests
 are independent evidence. This group remains partial until complete installed

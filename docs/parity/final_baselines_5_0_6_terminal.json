@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "status": "nine remaining historical native bindings qualified; full native integration running separately",
+  "observations_debug": 9762,
+  "observations_release": 114,
+  "profiles": {
+    "native": {
+      "passed": 17,
+      "total": 17,
+      "tests": [
+        "runtime_error_debug_rust_parity",
+        "context_locking_contracts",
+        "round_trip_reference_rust_parity",
+        "inmemory_rust_parity",
+        "context_locking_rust_parity",
+        "runtime_id_model_rust_parity",
+        "decimal_pointer_scope_rust_parity",
+        "entity_reference_context_contracts",
+        "unified_buffer_clone_rust_parity",
+        "round_trip_reference_context_contracts",
+        "inmemory_context_contracts",
+        "runtime_check_error_contracts",
+        "decimal_contracts",
+        "unified_buffer_clone_contracts",
+        "runtime_id_model_contracts",
+        "entity_query_boundary_rust_parity",
+        "entity_reference_rust_parity"
+      ],
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n      Start 101: entity_reference_rust_parity\n      Start 104: inmemory_rust_parity\n      Start  97: round_trip_reference_rust_parity\n      Start 291: runtime_error_debug_rust_parity\n 1/17 Test #291: runtime_error_debug_rust_parity ..........   Passed    0.63 sec\n      Start 105: context_locking_contracts\n 2/17 Test #105: context_locking_contracts ................   Passed    0.41 sec\n      Start 106: context_locking_rust_parity\n 3/17 Test  #97: round_trip_reference_rust_parity .........   Passed    1.21 sec\n      Start 488: decimal_pointer_scope_rust_parity\n 4/17 Test #104: inmemory_rust_parity .....................   Passed    1.22 sec\n      Start  30: runtime_id_model_rust_parity\n 5/17 Test #106: context_locking_rust_parity ..............   Passed    0.27 sec\n      Start 432: entity_query_boundary_rust_parity\n 6/17 Test  #30: runtime_id_model_rust_parity .............   Passed    0.09 sec\n      Start 128: unified_buffer_clone_rust_parity\n 7/17 Test #488: decimal_pointer_scope_rust_parity ........   Passed    0.13 sec\n      Start  98: entity_reference_context_contracts\n 8/17 Test  #98: entity_reference_context_contracts .......   Passed    0.02 sec\n      Start  94: round_trip_reference_context_contracts\n 9/17 Test #128: unified_buffer_clone_rust_parity .........   Passed    0.05 sec\n      Start 103: inmemory_context_contracts\n10/17 Test  #94: round_trip_reference_context_contracts ...   Passed    0.01 sec\n      Start 288: runtime_check_error_contracts\n11/17 Test #103: inmemory_context_contracts ...............   Passed    0.01 sec\n      Start 336: decimal_contracts\n12/17 Test #288: runtime_check_error_contracts ............   Passed    0.01 sec\n13/17 Test #336: decimal_contracts ........................   Passed    0.00 sec\n      Start 127: unified_buffer_clone_contracts\n      Start  29: runtime_id_model_contracts\n14/17 Test #127: unified_buffer_clone_contracts ...........   Passed    0.00 sec\n15/17 Test  #29: runtime_id_model_contracts ...............   Passed    0.00 sec\n16/17 Test #432: entity_query_boundary_rust_parity ........   Passed    0.07 sec\n17/17 Test #101: entity_reference_rust_parity .............   Passed    3.96 sec\n\n100% tests passed out of 17\n\nTotal Test time (real) =   3.97 sec\n",
+      "log_sha256": "641b084ce7a0c3b33c8bd6eea5e59ae69cf8483c888bbee6e6d7b88c8bd5818a"
+    },
+    "modules": {
+      "passed": 16,
+      "total": 16,
+      "tests": [
+        "module_decimal_contracts",
+        "module_inmemory_context_contracts",
+        "module_runtime_id_model_contracts",
+        "module_entity_reference_context_contracts",
+        "module_unified_buffer_clone_contracts",
+        "module_round_trip_reference_context_contracts",
+        "module_unified_buffer_clone_rust_parity",
+        "module_runtime_id_model_rust_parity",
+        "module_context_locking_rust_parity",
+        "module_context_locking_contracts",
+        "module_runtime_error_debug_rust_parity",
+        "module_decimal_pointer_scope_rust_parity",
+        "module_entity_query_boundary_rust_parity",
+        "module_inmemory_rust_parity",
+        "module_round_trip_reference_rust_parity",
+        "module_entity_reference_rust_parity"
+      ],
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n      Start 649: module_entity_reference_context_contracts\n      Start 646: module_round_trip_reference_context_contracts\n      Start 645: module_inmemory_context_contracts\n      Start 603: module_decimal_contracts\n 1/16 Test #603: module_decimal_contracts ........................   Passed    0.01 sec\n      Start 701: module_runtime_id_model_contracts\n 2/16 Test #645: module_inmemory_context_contracts ...............   Passed    0.01 sec\n      Start 702: module_context_locking_contracts\n 3/16 Test #701: module_runtime_id_model_contracts ...............   Passed    0.00 sec\n      Start 703: module_unified_buffer_clone_contracts\n 4/16 Test #649: module_entity_reference_context_contracts .......   Passed    0.02 sec\n      Start 783: module_runtime_id_model_rust_parity\n 5/16 Test #703: module_unified_buffer_clone_contracts ...........   Passed    0.00 sec\n      Start 784: module_runtime_error_debug_rust_parity\n 6/16 Test #646: module_round_trip_reference_context_contracts ...   Passed    0.02 sec\n      Start 785: module_unified_buffer_clone_rust_parity\n 7/16 Test #785: module_unified_buffer_clone_rust_parity .........   Passed    0.03 sec\n      Start 786: module_context_locking_rust_parity\n 8/16 Test #783: module_runtime_id_model_rust_parity .............   Passed    0.07 sec\n      Start 787: module_inmemory_rust_parity\n 9/16 Test #786: module_context_locking_rust_parity ..............   Passed    0.21 sec\n      Start 788: module_entity_reference_rust_parity\n10/16 Test #702: module_context_locking_contracts ................   Passed    0.41 sec\n      Start 789: module_round_trip_reference_rust_parity\n11/16 Test #784: module_runtime_error_debug_rust_parity ..........   Passed    0.55 sec\n      Start 790: module_decimal_pointer_scope_rust_parity\n12/16 Test #790: module_decimal_pointer_scope_rust_parity ........   Passed    0.14 sec\n      Start 791: module_entity_query_boundary_rust_parity\n13/16 Test #791: module_entity_query_boundary_rust_parity ........   Passed    0.08 sec\n14/16 Test #787: module_inmemory_rust_parity .....................   Passed    1.30 sec\n15/16 Test #789: module_round_trip_reference_rust_parity .........   Passed    1.28 sec\n16/16 Test #788: module_entity_reference_rust_parity .............   Passed    4.22 sec\n\n100% tests passed out of 16\n\nTotal Test time (real) =   4.50 sec\n",
+      "log_sha256": "3efc7078156252dde8a3e9c4c4ce088b9ebe7753e7972e1d2711ae8f2b48f31e"
+    },
+    "release": {
+      "passed": 2,
+      "total": 2,
+      "tests": [
+        "runtime_id_model_rust_parity",
+        "entity_query_boundary_rust_parity"
+      ],
+      "output": "Test project /tmp/teaql_cpp_sqlite_release_506\n    Start  30: runtime_id_model_rust_parity\n1/2 Test  #30: runtime_id_model_rust_parity ........   Passed    0.06 sec\n    Start 432: entity_query_boundary_rust_parity\n2/2 Test #432: entity_query_boundary_rust_parity ...   Passed    0.06 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.13 sec\n",
+      "log_sha256": "2ef5dea070ac8eba4275f13ffba5d90b90f510b7892f6c1090e82274b36405d7"
+    }
+  },
+  "source_reproduction": true,
+  "module_source_reproduction": true,
+  "canonical_bodies": 510,
+  "catalog_exports": 1479,
+  "production_cpp_changed": false,
+  "generator_changed_this_checkpoint": false,
+  "historical_drivers_preserved": true,
+  "normalization": "none",
+  "native_pointer_bits": 64,
+  "historical_32_bit_evidence_promoted": false,
+  "record_sha256": {
+    "docs/parity/final_baselines_5_0_6.json": "51df2ad6ea9c5253cdc8bb0b31be76b8703888d5967ef4e0c5006fd9277efe18"
+  },
+  "remaining_recorded_baseline_failures": 0,
+  "full_native_rerun": false,
+  "full_native_status": "Initial full run: 583/585 passed with two timeouts; both exact comparators and selected CTest follow-ups passed. A fresh full rerun has not been claimed.",
+  "sanitize_run": false,
+  "mips_qemu_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "full_native_build_exit_code": 0,
+  "full_native_observed_timeouts": [
+    "constant_temporal_rust_parity",
+    "bootstrap_extensions_rust_parity"
+  ],
+  "full_native_test_log": "/tmp/teaql_final_baselines_full_native_tests_506.log",
+  "full_native_test_exit_code": 8,
+  "full_native_result": "docs/parity/full_native_integration_5_0_6_initial.json",
+  "full_native_timeout_followups": "docs/parity/full_native_integration_5_0_6_timeout_followups.json"
+}

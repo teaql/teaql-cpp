@@ -367,21 +367,21 @@ inline SampleRecordExpression SampleLinkExpression::getSecondRecord() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value));
+        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static SampleRecordExpression sampleRecord(const SampleRecord& value) {
-        return SampleRecordExpression(entity_expression(value));
+        return SampleRecordExpression(entity_expression(value, StaticString{"sampleRecord"}));
     }
 
     static SampleRecordExpression sampleRecord(SampleRecord&&) = delete;
     static SampleRecordExpression sampleRecord(const SampleRecord&&) = delete;
 
     static SampleLinkExpression sampleLink(const SampleLink& value) {
-        return SampleLinkExpression(entity_expression(value));
+        return SampleLinkExpression(entity_expression(value, StaticString{"sampleLink"}));
     }
 
     static SampleLinkExpression sampleLink(SampleLink&&) = delete;

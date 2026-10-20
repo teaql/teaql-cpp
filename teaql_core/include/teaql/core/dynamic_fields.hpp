@@ -105,7 +105,7 @@ public:
     }
 
     const Types& fields() const {
-        return fields_;
+        return shared_fields_ ? shared_fields_->get().fields : fields_;
     }
 
     Result<DataType, DynamicFieldError> data_type(std::string_view) const;
@@ -125,11 +125,29 @@ public:
 private:
     friend void write_debug(DebugWriter&, const DynamicFieldDefinitions&);
 
+    struct FieldDictionary {
+        using allocator_type = Allocator;
+        Types fields;
+
+        FieldDictionary(std::allocator_arg_t, Allocator a, Types value)
+            : fields(std::move(value), a.resource()) {}
+
+        FieldDictionary(std::allocator_arg_t, Allocator a, const FieldDictionary& other)
+            : fields(other.fields, a.resource()) {}
+
+        Memory memory_resource() const noexcept {
+            return fields.get_allocator().resource();
+        }
+    };
+
+    void freeze_fields();
+
     DynamicFieldDefinitions(Memory r, std::string_view owner, std::string_view revision)
         : owner_type_(owner, r), revision_(revision, r), fields_(r), profile_(r) {}
 
     String owner_type_, revision_;
     Types fields_;
+    std::optional<ArenaBorrow<FieldDictionary>> shared_fields_;
     String profile_;
     std::optional<std::uint64_t> executor_;
 };

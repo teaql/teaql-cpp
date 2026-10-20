@@ -106,20 +106,35 @@ Result<DynamicFieldDefinitions, DynamicFieldError> DynamicFieldDefinitions::from
         return Result<DynamicFieldDefinitions, DynamicFieldError>::err(
             r, std::move(validation).error());
     }
+    definitions.freeze_fields();
     return Result<DynamicFieldDefinitions, DynamicFieldError>::ok(r, std::move(definitions));
+}
+
+void DynamicFieldDefinitions::freeze_fields() {
+    if (auto* arena = dynamic_cast<Arena*>(memory_resource())) {
+        auto& dictionary = arena->make<FieldDictionary>(std::move(fields_));
+        shared_fields_.emplace(std::allocator_arg, Allocator(memory_resource()), dictionary);
+    }
 }
 
 DynamicFieldDefinitions::DynamicFieldDefinitions(std::allocator_arg_t,
                                                  Allocator a,
                                                  const DynamicFieldDefinitions& other)
     : owner_type_(other.owner_type_, a.resource()), revision_(other.revision_, a.resource()),
-      fields_(other.fields_, a.resource()), profile_(other.profile_, a.resource()),
-      executor_(other.executor_) {}
+      fields_(a.resource()), profile_(other.profile_, a.resource()), executor_(other.executor_) {
+    if (other.shared_fields_ && dynamic_cast<Arena*>(a.resource())) {
+        shared_fields_ = retain(a.resource(), other.shared_fields_->get());
+    } else {
+        fields_ = Types(other.fields(), a.resource());
+        freeze_fields();
+    }
+}
 
 Result<DataType, DynamicFieldError>
 DynamicFieldDefinitions::data_type(std::string_view code) const {
-    auto found = fields_.find(code);
-    if (found == fields_.end()) {
+    const auto& dictionary = fields();
+    auto found = dictionary.find(code);
+    if (found == dictionary.end()) {
         return error<DataType>(memory_resource(), "DYNAMIC_FIELD_NOT_FOUND", code);
     }
     return Result<DataType, DynamicFieldError>::ok(memory_resource(), found->second);
@@ -191,7 +206,7 @@ ArenaBorrow<DynamicFieldDefinitions> DynamicFieldDefinitions::with_storage_bindi
 
 bool DynamicFieldDefinitions::same_schema(const DynamicFieldDefinitions& other) const {
     return owner_type_ == other.owner_type_ && revision_ == other.revision_ &&
-           fields_ == other.fields_;
+           fields() == other.fields();
 }
 
 bool DynamicFieldDefinitions::operator==(const DynamicFieldDefinitions& other) const {

@@ -88,16 +88,16 @@ void NoteDynamicJsonRecipe::apply_chain(Query& query,
     }
 }
 }
-template <bool Purposed = false, Entity Result = Tenant>
+template <bool Purposed = false, class Result = Tenant>
 class TenantRequest;
-template <bool Purposed = false, Entity Result = Note>
+template <bool Purposed = false, class Result = Note>
 class NoteRequest;
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class TenantRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class TenantRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class NoteRequest;
 
 public:
@@ -121,6 +121,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -133,6 +139,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     TenantRequest<true, Result> purpose(std::string_view text) const& {
         return TenantRequest<true, Result>(query_.purpose(text));
     }
@@ -141,12 +177,12 @@ public:
         return TenantRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     TenantRequest<Purposed, Return> returnType() const& {
         return TenantRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     TenantRequest<Purposed, Return> returnType() && {
         return TenantRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
     }
@@ -298,6 +334,20 @@ public:
 
     TenantRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -755,15 +805,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     TenantRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     TenantRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    TenantRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    TenantRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -929,73 +999,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     Tenant& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -1010,6 +1080,449 @@ public:
 
     TenantRequest rebindGlobal(UserContext& user_context) const {
         return TenantRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& withNoteListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "tenant_id",
+                              Note::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "note_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& withNoteListMatching(const ChildRequest& child) && {
+        this->withNoteListMatching(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& withNoteListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "tenant_id",
+                              Note::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "note_list");
+        return *this;
+    }
+
+    TenantRequest&& withNoteListMatching(const SelectQuery& child) && {
+        this->withNoteListMatching(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& withNoteListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "tenant_id",
+                              Note::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "note_list");
+        return *this;
+    }
+
+    TenantRequest&& withNoteListMatching(const request::QuerySelection& child) && {
+        this->withNoteListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& withoutNoteListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "tenant_id",
+                              Note::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "note_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& withoutNoteListMatching(const ChildRequest& child) && {
+        this->withoutNoteListMatching(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& withoutNoteListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "tenant_id",
+                              Note::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "note_list");
+        return *this;
+    }
+
+    TenantRequest&& withoutNoteListMatching(const SelectQuery& child) && {
+        this->withoutNoteListMatching(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& withoutNoteListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "tenant_id",
+                              Note::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "note_list");
+        return *this;
+    }
+
+    TenantRequest&& withoutNoteListMatching(const request::QuerySelection& child) && {
+        this->withoutNoteListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& countNotesWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("note_list", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& countNotesWith(std::string_view alias, const ChildRequest& child) && {
+        this->countNotesWith(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& countNotesWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("note_list", alias, child, true);
+        return *this;
+    }
+
+    TenantRequest&& countNotesWith(std::string_view alias, const SelectQuery& child) && {
+        this->countNotesWith(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& countNotesWith(std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelation("note_list", alias, child, true);
+        return *this;
+    }
+
+    TenantRequest&& countNotesWith(std::string_view alias,
+                                   const request::QuerySelection& child) && {
+        this->countNotesWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& statsFromNotes(const ChildRequest& child) & {
+        query_.aggregateRelation("note_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& statsFromNotes(const ChildRequest& child) && {
+        this->statsFromNotes(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& statsFromNotes(const SelectQuery& child) & {
+        query_.aggregateRelation("note_list", "refinements", child, false);
+        return *this;
+    }
+
+    TenantRequest&& statsFromNotes(const SelectQuery& child) && {
+        this->statsFromNotes(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& statsFromNotes(const request::QuerySelection& child) & {
+        query_.aggregateRelation("note_list", "refinements", child, false);
+        return *this;
+    }
+
+    TenantRequest&& statsFromNotes(const request::QuerySelection& child) && {
+        this->statsFromNotes(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& statsFromNotesAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("note_list", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& statsFromNotesAs(std::string_view alias, const ChildRequest& child) && {
+        this->statsFromNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& statsFromNotesAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("note_list", alias, child, false);
+        return *this;
+    }
+
+    TenantRequest&& statsFromNotesAs(std::string_view alias, const SelectQuery& child) && {
+        this->statsFromNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& statsFromNotesAs(std::string_view alias,
+                                    const request::QuerySelection& child) & {
+        query_.aggregateRelation("note_list", alias, child, false);
+        return *this;
+    }
+
+    TenantRequest&& statsFromNotesAs(std::string_view alias,
+                                     const request::QuerySelection& child) && {
+        this->statsFromNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& groupByNotesWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("note_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& groupByNotesWithDetails(const ChildRequest& child) && {
+        this->groupByNotesWithDetails(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& groupByNotesWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("note_list", "refinements", child, false);
+        return *this;
+    }
+
+    TenantRequest&& groupByNotesWithDetails(const SelectQuery& child) && {
+        this->groupByNotesWithDetails(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& groupByNotesWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("note_list", "refinements", child, false);
+        return *this;
+    }
+
+    TenantRequest&& groupByNotesWithDetails(const request::QuerySelection& child) && {
+        this->groupByNotesWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& minCreatedAtOfNotesAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelationField("note_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "created_at",
+                                      "min_created_at",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& minCreatedAtOfNotesAs(std::string_view alias, const ChildRequest& child) && {
+        this->minCreatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& minCreatedAtOfNotesAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "note_list", alias, child, "created_at", "min_created_at", AggregateFunction::Min);
+        return *this;
+    }
+
+    TenantRequest&& minCreatedAtOfNotesAs(std::string_view alias, const SelectQuery& child) && {
+        this->minCreatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& minCreatedAtOfNotesAs(std::string_view alias,
+                                         const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "note_list", alias, child, "created_at", "min_created_at", AggregateFunction::Min);
+        return *this;
+    }
+
+    TenantRequest&& minCreatedAtOfNotesAs(std::string_view alias,
+                                          const request::QuerySelection& child) && {
+        this->minCreatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& maxCreatedAtOfNotesAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelationField("note_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "created_at",
+                                      "max_created_at",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& maxCreatedAtOfNotesAs(std::string_view alias, const ChildRequest& child) && {
+        this->maxCreatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& maxCreatedAtOfNotesAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "note_list", alias, child, "created_at", "max_created_at", AggregateFunction::Max);
+        return *this;
+    }
+
+    TenantRequest&& maxCreatedAtOfNotesAs(std::string_view alias, const SelectQuery& child) && {
+        this->maxCreatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& maxCreatedAtOfNotesAs(std::string_view alias,
+                                         const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "note_list", alias, child, "created_at", "max_created_at", AggregateFunction::Max);
+        return *this;
+    }
+
+    TenantRequest&& maxCreatedAtOfNotesAs(std::string_view alias,
+                                          const request::QuerySelection& child) && {
+        this->maxCreatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& minUpdatedAtOfNotesAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelationField("note_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "updated_at",
+                                      "min_updated_at",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& minUpdatedAtOfNotesAs(std::string_view alias, const ChildRequest& child) && {
+        this->minUpdatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& minUpdatedAtOfNotesAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "note_list", alias, child, "updated_at", "min_updated_at", AggregateFunction::Min);
+        return *this;
+    }
+
+    TenantRequest&& minUpdatedAtOfNotesAs(std::string_view alias, const SelectQuery& child) && {
+        this->minUpdatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& minUpdatedAtOfNotesAs(std::string_view alias,
+                                         const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "note_list", alias, child, "updated_at", "min_updated_at", AggregateFunction::Min);
+        return *this;
+    }
+
+    TenantRequest&& minUpdatedAtOfNotesAs(std::string_view alias,
+                                          const request::QuerySelection& child) && {
+        this->minUpdatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& maxUpdatedAtOfNotesAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelationField("note_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "updated_at",
+                                      "max_updated_at",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& maxUpdatedAtOfNotesAs(std::string_view alias, const ChildRequest& child) && {
+        this->maxUpdatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& maxUpdatedAtOfNotesAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "note_list", alias, child, "updated_at", "max_updated_at", AggregateFunction::Max);
+        return *this;
+    }
+
+    TenantRequest&& maxUpdatedAtOfNotesAs(std::string_view alias, const SelectQuery& child) && {
+        this->maxUpdatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    TenantRequest& maxUpdatedAtOfNotesAs(std::string_view alias,
+                                         const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "note_list", alias, child, "updated_at", "max_updated_at", AggregateFunction::Max);
+        return *this;
+    }
+
+    TenantRequest&& maxUpdatedAtOfNotesAs(std::string_view alias,
+                                          const request::QuerySelection& child) && {
+        this->maxUpdatedAtOfNotesAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest& selectNoteListWith(const ChildRequest& child) & {
+        query_.selectRelation("note_list", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    TenantRequest&& selectNoteListWith(const ChildRequest& child) && {
+        this->selectNoteListWith(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& selectNoteListWith(const SelectQuery& child) & {
+        query_.selectRelation("note_list", child);
+        return *this;
+    }
+
+    TenantRequest&& selectNoteListWith(const SelectQuery& child) && {
+        this->selectNoteListWith(child);
+        return std::move(*this);
+    }
+
+    TenantRequest& selectNoteListWith(const request::QuerySelection& child) & {
+        query_.selectRelation("note_list", child);
+        return *this;
+    }
+
+    TenantRequest&& selectNoteListWith(const request::QuerySelection& child) && {
+        this->selectNoteListWith(child);
+        return std::move(*this);
     }
 
     TenantRequest& selectId() & {
@@ -2362,7 +2875,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& withNoteListMatching(const NoteRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2372,7 +2885,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& withNoteListMatching(const NoteRequest<P, ChildResult>& child) && {
         this->withNoteListMatching(child);
@@ -2392,7 +2905,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& withoutNoteListMatching(const NoteRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2402,7 +2915,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& withoutNoteListMatching(const NoteRequest<P, ChildResult>& child) && {
         this->withoutNoteListMatching(child);
@@ -2435,7 +2948,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& countNotesWith(std::string_view alias,
                                   const NoteRequest<P, ChildResult>& child) & {
@@ -2446,7 +2959,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& countNotesWith(std::string_view alias,
                                    const NoteRequest<P, ChildResult>& child) && {
@@ -2454,7 +2967,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& statsFromNotes(const NoteRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2464,14 +2977,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& statsFromNotes(const NoteRequest<P, ChildResult>& child) && {
         this->statsFromNotes(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& statsFromNotesAs(std::string_view alias,
                                     const NoteRequest<P, ChildResult>& child) & {
@@ -2482,7 +2995,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& statsFromNotesAs(std::string_view alias,
                                      const NoteRequest<P, ChildResult>& child) && {
@@ -2490,7 +3003,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& groupByNotesWithDetails(const NoteRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2500,7 +3013,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& groupByNotesWithDetails(const NoteRequest<P, ChildResult>& child) && {
         this->groupByNotesWithDetails(child);
@@ -2524,7 +3037,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& minCreatedAtOfNotesAs(std::string_view alias,
                                          const NoteRequest<P, ChildResult>& child) & {
@@ -2540,7 +3053,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& minCreatedAtOfNotesAs(std::string_view alias,
                                           const NoteRequest<P, ChildResult>& child) && {
@@ -2565,7 +3078,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& maxCreatedAtOfNotesAs(std::string_view alias,
                                          const NoteRequest<P, ChildResult>& child) & {
@@ -2581,7 +3094,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& maxCreatedAtOfNotesAs(std::string_view alias,
                                           const NoteRequest<P, ChildResult>& child) && {
@@ -2606,7 +3119,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& minUpdatedAtOfNotesAs(std::string_view alias,
                                          const NoteRequest<P, ChildResult>& child) & {
@@ -2622,7 +3135,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& minUpdatedAtOfNotesAs(std::string_view alias,
                                           const NoteRequest<P, ChildResult>& child) && {
@@ -2647,7 +3160,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& maxUpdatedAtOfNotesAs(std::string_view alias,
                                          const NoteRequest<P, ChildResult>& child) & {
@@ -2663,7 +3176,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& maxUpdatedAtOfNotesAs(std::string_view alias,
                                           const NoteRequest<P, ChildResult>& child) && {
@@ -2683,24 +3196,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& selectNoteListWith(const NoteRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("note_list", child.query());
-        });
+        query_.selectRelation("note_list", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& selectNoteListWith(const NoteRequest<P, ChildResult>& child) && {
         this->selectNoteListWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest& withNoteList(const NoteRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2712,10 +3222,66 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     TenantRequest&& withNoteList(const NoteRequest<P, ChildResult>& child) && {
         this->withNoteList(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -2737,6 +3303,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withNameSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withNameSoundingLike(const Input& value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withNameIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withNameIs(const Input& value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withNameIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withNameIsNot(const Input& value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withNameGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withNameGreaterThan(const Input& value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withNameGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withNameGreaterThanOrEqualTo(const Input& value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withNameLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withNameLessThan(const Input& value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest& withNameLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    TenantRequest&& withNameLessThanOrEqualTo(const Input& value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    TenantRequest& withNameBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    TenantRequest&& withNameBetween(const Lower& lower, const Upper& upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest& withNameIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest&& withNameIn(Inputs&& inputs) && {
+        this->withNameIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest& withNameNotIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    TenantRequest&& withNameNotIn(Inputs&& inputs) && {
+        this->withNameNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -2802,11 +3510,11 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class NoteRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class TenantRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class NoteRequest;
 
 public:
@@ -2830,6 +3538,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -2842,6 +3556,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     NoteRequest<true, Result> purpose(std::string_view text) const& {
         return NoteRequest<true, Result>(query_.purpose(text));
     }
@@ -2850,12 +3594,12 @@ public:
         return NoteRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     NoteRequest<Purposed, Return> returnType() const& {
         return NoteRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     NoteRequest<Purposed, Return> returnType() && {
         return NoteRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
     }
@@ -3007,6 +3751,20 @@ public:
 
     NoteRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -3463,15 +4221,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     NoteRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     NoteRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    NoteRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    NoteRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -3640,73 +4418,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     Note& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -3721,6 +4499,347 @@ public:
 
     NoteRequest rebindGlobal(UserContext& user_context) const {
         return NoteRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <request::EntityReference Reference>
+    NoteRequest& filterByTenant(Reference&& value) & {
+        query_.andFilter(
+            Expr::eq(memory_resource(),
+                     "tenant_id",
+                     request::entity_id_value(memory_resource(), std::forward<Reference>(value))));
+        return *this;
+    }
+
+    template <request::EntityReference Reference>
+    NoteRequest&& filterByTenant(Reference&& value) && {
+        this->filterByTenant(std::forward<Reference>(value));
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest& selectTenantWith(const ChildRequest& child) & {
+        query_.selectRelation("tenant", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest&& selectTenantWith(const ChildRequest& child) && {
+        this->selectTenantWith(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& selectTenantWith(const SelectQuery& child) & {
+        query_.selectRelation("tenant", child);
+        return *this;
+    }
+
+    NoteRequest&& selectTenantWith(const SelectQuery& child) && {
+        this->selectTenantWith(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& selectTenantWith(const request::QuerySelection& child) & {
+        query_.selectRelation("tenant", child);
+        return *this;
+    }
+
+    NoteRequest&& selectTenantWith(const request::QuerySelection& child) && {
+        this->selectTenantWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest& withTenantMatching(const ChildRequest& child) & {
+        query_.filterRelation("tenant_id",
+                              "id",
+                              Tenant::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "tenant");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest&& withTenantMatching(const ChildRequest& child) && {
+        this->withTenantMatching(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& withTenantMatching(const SelectQuery& child) & {
+        query_.filterRelation("tenant_id",
+                              "id",
+                              Tenant::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "tenant");
+        return *this;
+    }
+
+    NoteRequest&& withTenantMatching(const SelectQuery& child) && {
+        this->withTenantMatching(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& withTenantMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("tenant_id",
+                              "id",
+                              Tenant::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "tenant");
+        return *this;
+    }
+
+    NoteRequest&& withTenantMatching(const request::QuerySelection& child) && {
+        this->withTenantMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest& withoutTenantMatching(const ChildRequest& child) & {
+        query_.filterRelation("tenant_id",
+                              "id",
+                              Tenant::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "tenant");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest&& withoutTenantMatching(const ChildRequest& child) && {
+        this->withoutTenantMatching(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& withoutTenantMatching(const SelectQuery& child) & {
+        query_.filterRelation(
+            "tenant_id", "id", Tenant::entity_descriptor(memory_resource()), child, true, "tenant");
+        return *this;
+    }
+
+    NoteRequest&& withoutTenantMatching(const SelectQuery& child) && {
+        this->withoutTenantMatching(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& withoutTenantMatching(const request::QuerySelection& child) & {
+        query_.filterRelation(
+            "tenant_id", "id", Tenant::entity_descriptor(memory_resource()), child, true, "tenant");
+        return *this;
+    }
+
+    NoteRequest&& withoutTenantMatching(const request::QuerySelection& child) && {
+        this->withoutTenantMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest& rollUpToTenantWith(const ChildRequest& child) & {
+        query_.filterRelation("tenant_id",
+                              "id",
+                              Tenant::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "tenant");
+        query_.groupByObject("tenant", "tenant_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest&& rollUpToTenantWith(const ChildRequest& child) && {
+        this->rollUpToTenantWith(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& rollUpToTenantWith(const SelectQuery& child) & {
+        query_.filterRelation("tenant_id",
+                              "id",
+                              Tenant::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "tenant");
+        query_.groupByObject("tenant", "tenant_id", child);
+        return *this;
+    }
+
+    NoteRequest&& rollUpToTenantWith(const SelectQuery& child) && {
+        this->rollUpToTenantWith(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& rollUpToTenantWith(const request::QuerySelection& child) & {
+        query_.filterRelation("tenant_id",
+                              "id",
+                              Tenant::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "tenant");
+        query_.groupByObject("tenant", "tenant_id", child);
+        return *this;
+    }
+
+    NoteRequest&& rollUpToTenantWith(const request::QuerySelection& child) && {
+        this->rollUpToTenantWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest& facetByTenantAs(std::string_view facet_name, const ChildRequest& child) & {
+        query_.facetBy("tenant", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest&& facetByTenantAs(std::string_view facet_name, const ChildRequest& child) && {
+        this->facetByTenantAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    NoteRequest& facetByTenantAs(std::string_view facet_name, const SelectQuery& child) & {
+        query_.facetBy("tenant", facet_name, child);
+        return *this;
+    }
+
+    NoteRequest&& facetByTenantAs(std::string_view facet_name, const SelectQuery& child) && {
+        this->facetByTenantAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    NoteRequest& facetByTenantAs(std::string_view facet_name,
+                                 const request::QuerySelection& child) & {
+        query_.facetBy("tenant", facet_name, child);
+        return *this;
+    }
+
+    NoteRequest&& facetByTenantAs(std::string_view facet_name,
+                                  const request::QuerySelection& child) && {
+        this->facetByTenantAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest& facetByTenantAsWithOptions(std::string_view facet_name,
+                                            const ChildRequest& child,
+                                            bool include_all_facets) & {
+        query_.facetBy("tenant", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest&& facetByTenantAsWithOptions(std::string_view facet_name,
+                                             const ChildRequest& child,
+                                             bool include_all_facets) && {
+        this->facetByTenantAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    NoteRequest& facetByTenantAsWithOptions(std::string_view facet_name,
+                                            const SelectQuery& child,
+                                            bool include_all_facets) & {
+        query_.facetBy("tenant", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    NoteRequest&& facetByTenantAsWithOptions(std::string_view facet_name,
+                                             const SelectQuery& child,
+                                             bool include_all_facets) && {
+        this->facetByTenantAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    NoteRequest& facetByTenantAsWithOptions(std::string_view facet_name,
+                                            const request::QuerySelection& child,
+                                            bool include_all_facets) & {
+        query_.facetBy("tenant", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    NoteRequest&& facetByTenantAsWithOptions(std::string_view facet_name,
+                                             const request::QuerySelection& child,
+                                             bool include_all_facets) && {
+        this->facetByTenantAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest& groupByTenantWith(const ChildRequest& child) & {
+        query_.groupByObject("tenant", "tenant_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest&& groupByTenantWith(const ChildRequest& child) && {
+        this->groupByTenantWith(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& groupByTenantWith(const SelectQuery& child) & {
+        query_.groupByObject("tenant", "tenant_id", child);
+        return *this;
+    }
+
+    NoteRequest&& groupByTenantWith(const SelectQuery& child) && {
+        this->groupByTenantWith(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& groupByTenantWith(const request::QuerySelection& child) & {
+        query_.groupByObject("tenant", "tenant_id", child);
+        return *this;
+    }
+
+    NoteRequest&& groupByTenantWith(const request::QuerySelection& child) && {
+        this->groupByTenantWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest& groupByTenantWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("tenant", "tenant_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    NoteRequest&& groupByTenantWithDetailsFrom(const ChildRequest& child) && {
+        this->groupByTenantWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& groupByTenantWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("tenant", "tenant_id", child);
+        return *this;
+    }
+
+    NoteRequest&& groupByTenantWithDetailsFrom(const SelectQuery& child) && {
+        this->groupByTenantWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    NoteRequest& groupByTenantWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("tenant", "tenant_id", child);
+        return *this;
+    }
+
+    NoteRequest&& groupByTenantWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupByTenantWithDetailsFrom(child);
+        return std::move(*this);
     }
 
     NoteRequest& selectId() & {
@@ -6296,24 +7415,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& selectTenantWith(const TenantRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("tenant", child.query());
-        });
+        query_.selectRelation("tenant", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& selectTenantWith(const TenantRequest<P, ChildResult>& child) && {
         this->selectTenantWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& withTenant(const TenantRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6325,14 +7441,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& withTenant(const TenantRequest<P, ChildResult>& child) && {
         this->withTenant(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& withTenantMatching(const TenantRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6342,7 +7458,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& withTenantMatching(const TenantRequest<P, ChildResult>& child) && {
         this->withTenantMatching(child);
@@ -6361,7 +7477,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& withoutTenantMatching(const TenantRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6371,7 +7487,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& withoutTenantMatching(const TenantRequest<P, ChildResult>& child) && {
         this->withoutTenantMatching(child);
@@ -6390,7 +7506,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& facetByTenantAs(std::string_view facet_name,
                                  const TenantRequest<P, ChildResult>& child) & {
@@ -6401,7 +7517,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& facetByTenantAs(std::string_view facet_name,
                                   const TenantRequest<P, ChildResult>& child) && {
@@ -6409,7 +7525,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& facetByTenantAsWithOptions(std::string_view facet_name,
                                             const TenantRequest<P, ChildResult>& child,
@@ -6421,7 +7537,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& facetByTenantAsWithOptions(std::string_view facet_name,
                                              const TenantRequest<P, ChildResult>& child,
@@ -6430,7 +7546,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& groupByTenantWith(const TenantRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6440,14 +7556,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& groupByTenantWith(const TenantRequest<P, ChildResult>& child) && {
         this->groupByTenantWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& groupByTenantWithDetailsFrom(const TenantRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6457,7 +7573,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& groupByTenantWithDetailsFrom(const TenantRequest<P, ChildResult>& child) && {
         this->groupByTenantWithDetailsFrom(child);
@@ -6491,7 +7607,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest& rollUpToTenantWith(const TenantRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6502,10 +7618,66 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     NoteRequest&& rollUpToTenantWith(const TenantRequest<P, ChildResult>& child) && {
         this->rollUpToTenantWith(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -6527,6 +7699,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withNameSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withNameSoundingLike(const Input& value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withNameIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withNameIs(const Input& value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withNameIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withNameIsNot(const Input& value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withNameGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withNameGreaterThan(const Input& value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withNameGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withNameGreaterThanOrEqualTo(const Input& value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withNameLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withNameLessThan(const Input& value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withNameLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withNameLessThanOrEqualTo(const Input& value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    NoteRequest& withNameBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    NoteRequest&& withNameBetween(const Lower& lower, const Upper& upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& withNameIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& withNameIn(Inputs&& inputs) && {
+        this->withNameIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& withNameNotIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& withNameNotIn(Inputs&& inputs) && {
+        this->withNameNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -6591,6 +7905,135 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withCreatedAtIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "created_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withCreatedAtIs(const Input& value) && {
+        this->withCreatedAtIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withCreatedAtIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "created_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withCreatedAtIsNot(const Input& value) && {
+        this->withCreatedAtIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withCreatedAtGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "created_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withCreatedAtGreaterThan(const Input& value) && {
+        this->withCreatedAtGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withCreatedAtGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "created_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withCreatedAtGreaterThanOrEqualTo(const Input& value) && {
+        this->withCreatedAtGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withCreatedAtLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "created_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withCreatedAtLessThan(const Input& value) && {
+        this->withCreatedAtLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withCreatedAtLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "created_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withCreatedAtLessThanOrEqualTo(const Input& value) && {
+        this->withCreatedAtLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    NoteRequest& withCreatedAtBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "created_at", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    NoteRequest&& withCreatedAtBetween(const Lower& lower, const Upper& upper) && {
+        this->withCreatedAtBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& withCreatedAtIn(Inputs&& inputs) & {
+        query_.filterField("created_at", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& withCreatedAtIn(Inputs&& inputs) && {
+        this->withCreatedAtIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& withCreatedAtNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "created_at", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& withCreatedAtNotIn(Inputs&& inputs) && {
+        this->withCreatedAtNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     NoteRequest& withCreatedAt(request::FieldOperator op, Inputs&& inputs) & {
@@ -6650,6 +8093,135 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     NoteRequest&& withCreatedAtAfter(const T& value) && {
         this->withCreatedAtAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withUpdatedAtIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "updated_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withUpdatedAtIs(const Input& value) && {
+        this->withUpdatedAtIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withUpdatedAtIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "updated_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withUpdatedAtIsNot(const Input& value) && {
+        this->withUpdatedAtIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withUpdatedAtGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "updated_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withUpdatedAtGreaterThan(const Input& value) && {
+        this->withUpdatedAtGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withUpdatedAtGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "updated_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withUpdatedAtGreaterThanOrEqualTo(const Input& value) && {
+        this->withUpdatedAtGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withUpdatedAtLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "updated_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withUpdatedAtLessThan(const Input& value) && {
+        this->withUpdatedAtLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest& withUpdatedAtLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "updated_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    NoteRequest&& withUpdatedAtLessThanOrEqualTo(const Input& value) && {
+        this->withUpdatedAtLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    NoteRequest& withUpdatedAtBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "updated_at", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    NoteRequest&& withUpdatedAtBetween(const Lower& lower, const Upper& upper) && {
+        this->withUpdatedAtBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& withUpdatedAtIn(Inputs&& inputs) & {
+        query_.filterField("updated_at", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& withUpdatedAtIn(Inputs&& inputs) && {
+        this->withUpdatedAtIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest& withUpdatedAtNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "updated_at", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    NoteRequest&& withUpdatedAtNotIn(Inputs&& inputs) && {
+        this->withUpdatedAtNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -6716,12 +8288,12 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 TenantRequest<Purposed, Result>& TenantRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 NoteRequest<Purposed, Result>& NoteRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }

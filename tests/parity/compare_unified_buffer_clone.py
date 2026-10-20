@@ -2,4 +2,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("unified_buffer_clone_cases.json", "Unified buffer Clone"))
+    raise SystemExit(main("unified_buffer_clone_baseline_5_0_6_cases.json.gz", "Unified buffer Clone"))

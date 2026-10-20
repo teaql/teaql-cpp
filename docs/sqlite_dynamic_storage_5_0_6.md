@@ -1,5 +1,7 @@
 # SQLite durable extension storage
 
+Current G16 qualification is recorded in the [complete acceptance audit](dynamic_storage_acceptance_5_0_6.md). The text below preserves this earlier checkpoint and its original remaining-work boundaries.
+
 Status: concrete SQLite store and native transaction integration implemented;
 runtime provider configuration, generated graph save, dynamic audit/readback and
 cursor enhancement qualification remain open. Reference: Rust v5.0.6
@@ -35,9 +37,10 @@ the responsibility of the pending runtime provider/graph preparation layer.
 
 The codec prepares one upsert/delete pair per apply batch and one read statement
 per 400-ID chunk, then finalizes them through RAII before releasing its lease.
-This initially uses short-lived native statements rather than admitting dynamic
-statements into the existing prepared-statement cache. Native query caches remain
-unchanged; dynamic cache tuning is not qualified by this checkpoint.
+This historical checkpoint initially used short-lived native statements. The
+[shared cache follow-up](sqlite_dynamic_statement_cache_5_0_6.md) now returns dynamic
+statements to the existing connection cache with explicit simultaneous-borrow
+tracking. Historical results below retain their original verification scope.
 
 ## Binding, exclusive connection access and cleanup
 

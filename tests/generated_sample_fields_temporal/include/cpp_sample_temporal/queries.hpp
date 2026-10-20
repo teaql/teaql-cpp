@@ -197,20 +197,20 @@ void SampleLinkDynamicJsonRecipe::apply_chain(Query& query,
     }
 }
 }
-template <bool Purposed = false, Entity Result = Platform>
+template <bool Purposed = false, class Result = Platform>
 class PlatformRequest;
-template <bool Purposed = false, Entity Result = SampleRecord>
+template <bool Purposed = false, class Result = SampleRecord>
 class SampleRecordRequest;
-template <bool Purposed = false, Entity Result = SampleLink>
+template <bool Purposed = false, class Result = SampleLink>
 class SampleLinkRequest;
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class PlatformRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class PlatformRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class SampleRecordRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class SampleLinkRequest;
 
 public:
@@ -234,6 +234,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -246,6 +252,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     PlatformRequest<true, Result> purpose(std::string_view text) const& {
         return PlatformRequest<true, Result>(query_.purpose(text));
     }
@@ -254,12 +290,12 @@ public:
         return PlatformRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     PlatformRequest<Purposed, Return> returnType() const& {
         return PlatformRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     PlatformRequest<Purposed, Return> returnType() && {
         return PlatformRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
     }
@@ -411,6 +447,20 @@ public:
 
     PlatformRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -869,15 +919,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     PlatformRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     PlatformRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    PlatformRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    PlatformRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -1043,73 +1113,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     Platform& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -1124,6 +1194,4582 @@ public:
 
     PlatformRequest rebindGlobal(UserContext& user_context) const {
         return PlatformRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& withSampleRecordListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "sample_record_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& withSampleRecordListMatching(const ChildRequest& child) && {
+        this->withSampleRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withSampleRecordListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "sample_record_list");
+        return *this;
+    }
+
+    PlatformRequest&& withSampleRecordListMatching(const SelectQuery& child) && {
+        this->withSampleRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withSampleRecordListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "sample_record_list");
+        return *this;
+    }
+
+    PlatformRequest&& withSampleRecordListMatching(const request::QuerySelection& child) && {
+        this->withSampleRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& withoutSampleRecordListMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "sample_record_list");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& withoutSampleRecordListMatching(const ChildRequest& child) && {
+        this->withoutSampleRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withoutSampleRecordListMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "sample_record_list");
+        return *this;
+    }
+
+    PlatformRequest&& withoutSampleRecordListMatching(const SelectQuery& child) && {
+        this->withoutSampleRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& withoutSampleRecordListMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "platform_id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "sample_record_list");
+        return *this;
+    }
+
+    PlatformRequest&& withoutSampleRecordListMatching(const request::QuerySelection& child) && {
+        this->withoutSampleRecordListMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& countSampleRecordsWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("sample_record_list", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& countSampleRecordsWith(std::string_view alias, const ChildRequest& child) && {
+        this->countSampleRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& countSampleRecordsWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("sample_record_list", alias, child, true);
+        return *this;
+    }
+
+    PlatformRequest&& countSampleRecordsWith(std::string_view alias, const SelectQuery& child) && {
+        this->countSampleRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& countSampleRecordsWith(std::string_view alias,
+                                            const request::QuerySelection& child) & {
+        query_.aggregateRelation("sample_record_list", alias, child, true);
+        return *this;
+    }
+
+    PlatformRequest&& countSampleRecordsWith(std::string_view alias,
+                                             const request::QuerySelection& child) && {
+        this->countSampleRecordsWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& statsFromSampleRecords(const ChildRequest& child) & {
+        query_.aggregateRelation("sample_record_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& statsFromSampleRecords(const ChildRequest& child) && {
+        this->statsFromSampleRecords(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromSampleRecords(const SelectQuery& child) & {
+        query_.aggregateRelation("sample_record_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromSampleRecords(const SelectQuery& child) && {
+        this->statsFromSampleRecords(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromSampleRecords(const request::QuerySelection& child) & {
+        query_.aggregateRelation("sample_record_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromSampleRecords(const request::QuerySelection& child) && {
+        this->statsFromSampleRecords(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& statsFromSampleRecordsAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("sample_record_list", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& statsFromSampleRecordsAs(std::string_view alias,
+                                               const ChildRequest& child) && {
+        this->statsFromSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromSampleRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("sample_record_list", alias, child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromSampleRecordsAs(std::string_view alias,
+                                               const SelectQuery& child) && {
+        this->statsFromSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& statsFromSampleRecordsAs(std::string_view alias,
+                                              const request::QuerySelection& child) & {
+        query_.aggregateRelation("sample_record_list", alias, child, false);
+        return *this;
+    }
+
+    PlatformRequest&& statsFromSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) && {
+        this->statsFromSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& groupBySampleRecordsWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("sample_record_list", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& groupBySampleRecordsWithDetails(const ChildRequest& child) && {
+        this->groupBySampleRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& groupBySampleRecordsWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("sample_record_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& groupBySampleRecordsWithDetails(const SelectQuery& child) && {
+        this->groupBySampleRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& groupBySampleRecordsWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("sample_record_list", "refinements", child, false);
+        return *this;
+    }
+
+    PlatformRequest&& groupBySampleRecordsWithDetails(const request::QuerySelection& child) && {
+        this->groupBySampleRecordsWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "quantity",
+                                      "sum_quantity",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) && {
+        this->sumQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "quantity", "sum_quantity", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) && {
+        this->sumQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "quantity", "sum_quantity", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) && {
+        this->sumQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "quantity",
+                                      "min_quantity",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) && {
+        this->minQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "quantity", "min_quantity", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) && {
+        this->minQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "quantity", "min_quantity", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) && {
+        this->minQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "quantity",
+                                      "max_quantity",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) && {
+        this->maxQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "quantity", "max_quantity", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) && {
+        this->maxQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "quantity", "max_quantity", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) && {
+        this->maxQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "quantity",
+                                      "avg_quantity",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) && {
+        this->avgQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "quantity", "avg_quantity", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) && {
+        this->avgQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgQuantityOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "quantity", "avg_quantity", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgQuantityOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) && {
+        this->avgQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "quantity",
+                                      "stdDev_quantity",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& standardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                 const ChildRequest& child) && {
+        this->standardDeviationQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "quantity",
+                                      "stdDev_quantity",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                 const SelectQuery& child) && {
+        this->standardDeviationQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "quantity",
+                                      "stdDev_quantity",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) && {
+        this->standardDeviationQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "quantity",
+                                      "stdDevPop_quantity",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                     const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "quantity",
+                                      "stdDevPop_quantity",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                     const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "quantity",
+                                      "stdDevPop_quantity",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                             const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "quantity",
+                                      "varSamp_quantity",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                              const ChildRequest& child) && {
+        this->sampleVarianceQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                             const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "quantity",
+                                      "varSamp_quantity",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                              const SelectQuery& child) && {
+        this->sampleVarianceQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    sampleVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                            const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "quantity",
+                                      "varSamp_quantity",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                            const request::QuerySelection& child) && {
+        this->sampleVarianceQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    samplePopulationVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                      const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "quantity",
+                                      "varPop_quantity",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    samplePopulationVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                      const ChildRequest& child) && {
+        this->samplePopulationVarianceQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& samplePopulationVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                                       const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "quantity",
+                                      "varPop_quantity",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                      const SelectQuery& child) && {
+        this->samplePopulationVarianceQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                      const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "quantity",
+                                      "varPop_quantity",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceQuantityOfSampleRecordsAs(std::string_view alias,
+                                                      const request::QuerySelection& child) && {
+        this->samplePopulationVarianceQuantityOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "zero_bound",
+                                      "sum_zero_bound",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->sumZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "sum_zero_bound",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) && {
+        this->sumZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "sum_zero_bound",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->sumZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "zero_bound",
+                                      "min_zero_bound",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->minZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "min_zero_bound",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) && {
+        this->minZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "min_zero_bound",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->minZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "zero_bound",
+                                      "max_zero_bound",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->maxZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "max_zero_bound",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) && {
+        this->maxZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "max_zero_bound",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->maxZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "zero_bound",
+                                      "avg_zero_bound",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->avgZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "avg_zero_bound",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) && {
+        this->avgZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "avg_zero_bound",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->avgZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                                 const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "zero_bound",
+                                      "stdDev_zero_bound",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& standardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                                  const ChildRequest& child) && {
+        this->standardDeviationZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                                 const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "stdDev_zero_bound",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                                  const SelectQuery& child) && {
+        this->standardDeviationZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "stdDev_zero_bound",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) && {
+        this->standardDeviationZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                                      const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "zero_bound",
+                                      "stdDevPop_zero_bound",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(
+        std::string_view alias, const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                                      const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "stdDevPop_zero_bound",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                                      const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "stdDevPop_zero_bound",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                              const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "zero_bound",
+                                      "varSamp_zero_bound",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                               const ChildRequest& child) && {
+        this->sampleVarianceZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                              const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "varSamp_zero_bound",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                               const SelectQuery& child) && {
+        this->sampleVarianceZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    sampleVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "varSamp_zero_bound",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) && {
+        this->sampleVarianceZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    samplePopulationVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                       const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "zero_bound",
+                                      "varPop_zero_bound",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    samplePopulationVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                       const ChildRequest& child) && {
+        this->samplePopulationVarianceZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                       const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "varPop_zero_bound",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                       const SelectQuery& child) && {
+        this->samplePopulationVarianceZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                       const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "zero_bound",
+                                      "varPop_zero_bound",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
+                                                       const request::QuerySelection& child) && {
+        this->samplePopulationVarianceZeroBoundOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "negative_max",
+                                      "sum_negative_max",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const ChildRequest& child) && {
+        this->sumNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "sum_negative_max",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const SelectQuery& child) && {
+        this->sumNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "sum_negative_max",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const request::QuerySelection& child) && {
+        this->sumNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "negative_max",
+                                      "min_negative_max",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const ChildRequest& child) && {
+        this->minNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "min_negative_max",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const SelectQuery& child) && {
+        this->minNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "min_negative_max",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const request::QuerySelection& child) && {
+        this->minNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "negative_max",
+                                      "max_negative_max",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const ChildRequest& child) && {
+        this->maxNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "max_negative_max",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const SelectQuery& child) && {
+        this->maxNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "max_negative_max",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const request::QuerySelection& child) && {
+        this->maxNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "negative_max",
+                                      "avg_negative_max",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const ChildRequest& child) && {
+        this->avgNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "avg_negative_max",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const SelectQuery& child) && {
+        this->avgNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "avg_negative_max",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                      const request::QuerySelection& child) && {
+        this->avgNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "negative_max",
+                                      "stdDev_negative_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& standardDeviationNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                                    const ChildRequest& child) && {
+        this->standardDeviationNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "stdDev_negative_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                                    const SelectQuery& child) && {
+        this->standardDeviationNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "stdDev_negative_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) && {
+        this->standardDeviationNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(
+        std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "negative_max",
+                                      "stdDevPop_negative_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(
+        std::string_view alias, const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(
+        std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "stdDevPop_negative_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(
+        std::string_view alias, const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "stdDevPop_negative_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "negative_max",
+                                      "varSamp_negative_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                                 const ChildRequest& child) && {
+        this->sampleVarianceNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                                const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "varSamp_negative_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                                 const SelectQuery& child) && {
+        this->sampleVarianceNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    sampleVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "varSamp_negative_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) && {
+        this->sampleVarianceNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    samplePopulationVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                         const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "negative_max",
+                                      "varPop_negative_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    samplePopulationVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                         const ChildRequest& child) && {
+        this->samplePopulationVarianceNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                         const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "varPop_negative_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                         const SelectQuery& child) && {
+        this->samplePopulationVarianceNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                         const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "negative_max",
+                                      "varPop_negative_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
+                                                         const request::QuerySelection& child) && {
+        this->samplePopulationVarianceNegativeMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "signed_max",
+                                      "sum_signed_max",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->sumSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "sum_signed_max",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) && {
+        this->sumSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "sum_signed_max",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->sumSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "signed_max",
+                                      "min_signed_max",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->minSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "min_signed_max",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) && {
+        this->minSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "min_signed_max",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->minSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "signed_max",
+                                      "max_signed_max",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->maxSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "max_signed_max",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) && {
+        this->maxSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "max_signed_max",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->maxSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "signed_max",
+                                      "avg_signed_max",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->avgSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "avg_signed_max",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) && {
+        this->avgSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "avg_signed_max",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->avgSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                                 const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "signed_max",
+                                      "stdDev_signed_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& standardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                                  const ChildRequest& child) && {
+        this->standardDeviationSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                                 const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "stdDev_signed_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                                  const SelectQuery& child) && {
+        this->standardDeviationSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "stdDev_signed_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) && {
+        this->standardDeviationSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                                      const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "signed_max",
+                                      "stdDevPop_signed_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(
+        std::string_view alias, const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                                      const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "stdDevPop_signed_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                                      const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "stdDevPop_signed_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                              const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "signed_max",
+                                      "varSamp_signed_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                               const ChildRequest& child) && {
+        this->sampleVarianceSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                              const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "varSamp_signed_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                               const SelectQuery& child) && {
+        this->sampleVarianceSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    sampleVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "varSamp_signed_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) && {
+        this->sampleVarianceSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    samplePopulationVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                       const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "signed_max",
+                                      "varPop_signed_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    samplePopulationVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                       const ChildRequest& child) && {
+        this->samplePopulationVarianceSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                       const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "varPop_signed_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                       const SelectQuery& child) && {
+        this->samplePopulationVarianceSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                       const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "signed_max",
+                                      "varPop_signed_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
+                                                       const request::QuerySelection& child) && {
+        this->samplePopulationVarianceSignedMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "wide_max",
+                                      "sum_wide_max",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const ChildRequest& child) && {
+        this->sumWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "wide_max", "sum_wide_max", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const SelectQuery& child) && {
+        this->sumWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "wide_max", "sum_wide_max", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) && {
+        this->sumWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "wide_max",
+                                      "min_wide_max",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const ChildRequest& child) && {
+        this->minWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "wide_max", "min_wide_max", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const SelectQuery& child) && {
+        this->minWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "wide_max", "min_wide_max", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) && {
+        this->minWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "wide_max",
+                                      "max_wide_max",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const ChildRequest& child) && {
+        this->maxWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "wide_max", "max_wide_max", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const SelectQuery& child) && {
+        this->maxWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "wide_max", "max_wide_max", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) && {
+        this->maxWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "wide_max",
+                                      "avg_wide_max",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const ChildRequest& child) && {
+        this->avgWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "wide_max", "avg_wide_max", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const SelectQuery& child) && {
+        this->avgWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "wide_max", "avg_wide_max", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                  const request::QuerySelection& child) && {
+        this->avgWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                               const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "wide_max",
+                                      "stdDev_wide_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& standardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                                const ChildRequest& child) && {
+        this->standardDeviationWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                               const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "wide_max",
+                                      "stdDev_wide_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                                const SelectQuery& child) && {
+        this->standardDeviationWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                              const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "wide_max",
+                                      "stdDev_wide_max",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                              const request::QuerySelection& child) && {
+        this->standardDeviationWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                                    const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "wide_max",
+                                      "stdDevPop_wide_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                                    const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                                    const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "wide_max",
+                                      "stdDevPop_wide_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                                    const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "wide_max",
+                                      "stdDevPop_wide_max",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                            const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "wide_max",
+                                      "varSamp_wide_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                             const ChildRequest& child) && {
+        this->sampleVarianceWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                            const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "wide_max",
+                                      "varSamp_wide_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                             const SelectQuery& child) && {
+        this->sampleVarianceWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    sampleVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                           const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "wide_max",
+                                      "varSamp_wide_max",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                           const request::QuerySelection& child) && {
+        this->sampleVarianceWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& samplePopulationVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                                      const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "wide_max",
+                                      "varPop_wide_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    samplePopulationVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) && {
+        this->samplePopulationVarianceWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& samplePopulationVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                                      const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "wide_max",
+                                      "varPop_wide_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) && {
+        this->samplePopulationVarianceWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "wide_max",
+                                      "varPop_wide_max",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) && {
+        this->samplePopulationVarianceWideMaxOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumAmountOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "amount",
+                                      "sum_amount",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->sumAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumAmountOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "amount", "sum_amount", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->sumAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumAmountOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "amount", "sum_amount", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->sumAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minAmountOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "amount",
+                                      "min_amount",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->minAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minAmountOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "amount", "min_amount", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->minAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minAmountOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "amount", "min_amount", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->minAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxAmountOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "amount",
+                                      "max_amount",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->maxAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxAmountOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "amount", "max_amount", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->maxAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxAmountOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "amount", "max_amount", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->maxAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgAmountOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "amount",
+                                      "avg_amount",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->avgAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgAmountOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "amount", "avg_amount", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->avgAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgAmountOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "amount", "avg_amount", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgAmountOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->avgAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                                              const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "amount",
+                                      "stdDev_amount",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& standardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                                               const ChildRequest& child) && {
+        this->standardDeviationAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                                              const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "amount",
+                                      "stdDev_amount",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                                               const SelectQuery& child) && {
+        this->standardDeviationAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "amount",
+                                      "stdDev_amount",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) && {
+        this->standardDeviationAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "amount",
+                                      "stdDevPop_amount",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                                                   const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "amount",
+                                      "stdDevPop_amount",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(std::string_view alias,
+                                                                   const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "amount",
+                                      "stdDevPop_amount",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                           const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "amount",
+                                      "varSamp_amount",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                            const ChildRequest& child) && {
+        this->sampleVarianceAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                           const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "amount",
+                                      "varSamp_amount",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                            const SelectQuery& child) && {
+        this->sampleVarianceAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                           const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "amount",
+                                      "varSamp_amount",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                          const request::QuerySelection& child) && {
+        this->sampleVarianceAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& samplePopulationVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "amount",
+                                      "varPop_amount",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    samplePopulationVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->samplePopulationVarianceAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& samplePopulationVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "amount",
+                                      "varPop_amount",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&& samplePopulationVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                                      const SelectQuery& child) && {
+        this->samplePopulationVarianceAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "amount",
+                                      "varPop_amount",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceAmountOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->samplePopulationVarianceAmountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumHeightOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "height",
+                                      "sum_height",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->sumHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumHeightOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "height", "sum_height", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->sumHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumHeightOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "height", "sum_height", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->sumHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minHeightOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "height",
+                                      "min_height",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->minHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minHeightOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "height", "min_height", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->minHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minHeightOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "height", "min_height", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->minHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxHeightOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "height",
+                                      "max_height",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->maxHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxHeightOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "height", "max_height", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->maxHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxHeightOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "height", "max_height", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->maxHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgHeightOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "height",
+                                      "avg_height",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->avgHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgHeightOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "height", "avg_height", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->avgHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgHeightOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "height", "avg_height", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgHeightOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->avgHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                                              const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "height",
+                                      "stdDev_height",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& standardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                                               const ChildRequest& child) && {
+        this->standardDeviationHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                                              const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "height",
+                                      "stdDev_height",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                                               const SelectQuery& child) && {
+        this->standardDeviationHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "height",
+                                      "stdDev_height",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) && {
+        this->standardDeviationHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                                                   const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "height",
+                                      "stdDevPop_height",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                                                   const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                                                   const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "height",
+                                      "stdDevPop_height",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(std::string_view alias,
+                                                                   const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "height",
+                                      "stdDevPop_height",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                           const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "height",
+                                      "varSamp_height",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                            const ChildRequest& child) && {
+        this->sampleVarianceHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                           const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "height",
+                                      "varSamp_height",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                            const SelectQuery& child) && {
+        this->sampleVarianceHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                           const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "height",
+                                      "varSamp_height",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                          const request::QuerySelection& child) && {
+        this->sampleVarianceHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& samplePopulationVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "height",
+                                      "varPop_height",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    samplePopulationVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->samplePopulationVarianceHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& samplePopulationVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "height",
+                                      "varPop_height",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&& samplePopulationVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                                      const SelectQuery& child) && {
+        this->samplePopulationVarianceHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "height",
+                                      "varPop_height",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceHeightOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->samplePopulationVarianceHeightOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_count",
+                                      "sum_optional_count",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const ChildRequest& child) && {
+        this->sumOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "sum_optional_count",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const SelectQuery& child) && {
+        this->sumOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "sum_optional_count",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const request::QuerySelection& child) && {
+        this->sumOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_count",
+                                      "min_optional_count",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const ChildRequest& child) && {
+        this->minOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "min_optional_count",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const SelectQuery& child) && {
+        this->minOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "min_optional_count",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const request::QuerySelection& child) && {
+        this->minOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_count",
+                                      "max_optional_count",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const ChildRequest& child) && {
+        this->maxOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "max_optional_count",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const SelectQuery& child) && {
+        this->maxOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "max_optional_count",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const request::QuerySelection& child) && {
+        this->maxOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_count",
+                                      "avg_optional_count",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const ChildRequest& child) && {
+        this->avgOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "avg_optional_count",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const SelectQuery& child) && {
+        this->avgOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                       const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "avg_optional_count",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                        const request::QuerySelection& child) && {
+        this->avgOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_count",
+                                      "stdDev_optional_count",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    standardDeviationOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) && {
+        this->standardDeviationOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "stdDev_optional_count",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                                      const SelectQuery& child) && {
+        this->standardDeviationOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "stdDev_optional_count",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) && {
+        this->standardDeviationOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(
+        std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_count",
+                                      "stdDevPop_optional_count",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(
+        std::string_view alias, const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(
+        std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "stdDevPop_optional_count",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(
+        std::string_view alias, const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "stdDevPop_optional_count",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                                  const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_count",
+                                      "varSamp_optional_count",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                                   const ChildRequest& child) && {
+        this->sampleVarianceOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                                  const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "varSamp_optional_count",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                                   const SelectQuery& child) && {
+        this->sampleVarianceOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    sampleVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "varSamp_optional_count",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->sampleVarianceOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    samplePopulationVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                           const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_count",
+                                      "varPop_optional_count",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    samplePopulationVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                           const ChildRequest& child) && {
+        this->samplePopulationVarianceOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                           const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "varPop_optional_count",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                           const SelectQuery& child) && {
+        this->samplePopulationVarianceOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceOptionalCountOfSampleRecordsAs(std::string_view alias,
+                                                           const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_count",
+                                      "varPop_optional_count",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&& samplePopulationVarianceOptionalCountOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->samplePopulationVarianceOptionalCountOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minDayOfSampleRecordsAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "day",
+                                      "min_day",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minDayOfSampleRecordsAs(std::string_view alias,
+                                              const ChildRequest& child) && {
+        this->minDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minDayOfSampleRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "day", "min_day", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minDayOfSampleRecordsAs(std::string_view alias, const SelectQuery& child) && {
+        this->minDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minDayOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "day", "min_day", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minDayOfSampleRecordsAs(std::string_view alias,
+                                              const request::QuerySelection& child) && {
+        this->minDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxDayOfSampleRecordsAs(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "day",
+                                      "max_day",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxDayOfSampleRecordsAs(std::string_view alias,
+                                              const ChildRequest& child) && {
+        this->maxDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxDayOfSampleRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "day", "max_day", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxDayOfSampleRecordsAs(std::string_view alias, const SelectQuery& child) && {
+        this->maxDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxDayOfSampleRecordsAs(std::string_view alias,
+                                             const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "day", "max_day", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxDayOfSampleRecordsAs(std::string_view alias,
+                                              const request::QuerySelection& child) && {
+        this->maxDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_day",
+                                      "min_optional_day",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                      const ChildRequest& child) && {
+        this->minOptionalDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_day",
+                                      "min_optional_day",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                      const SelectQuery& child) && {
+        this->minOptionalDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_day",
+                                      "min_optional_day",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                      const request::QuerySelection& child) && {
+        this->minOptionalDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_day",
+                                      "max_optional_day",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                      const ChildRequest& child) && {
+        this->maxOptionalDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_day",
+                                      "max_optional_day",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                      const SelectQuery& child) && {
+        this->maxOptionalDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_day",
+                                      "max_optional_day",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxOptionalDayOfSampleRecordsAs(std::string_view alias,
+                                                      const request::QuerySelection& child) && {
+        this->maxOptionalDayOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "recorded_at",
+                                      "min_recorded_at",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) && {
+        this->minRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "recorded_at",
+                                      "min_recorded_at",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) && {
+        this->minRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "recorded_at",
+                                      "min_recorded_at",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) && {
+        this->minRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                    const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "recorded_at",
+                                      "max_recorded_at",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                     const ChildRequest& child) && {
+        this->maxRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                    const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "recorded_at",
+                                      "max_recorded_at",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                     const SelectQuery& child) && {
+        this->maxRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                    const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "recorded_at",
+                                      "max_recorded_at",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                     const request::QuerySelection& child) && {
+        this->maxRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                            const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_recorded_at",
+                                      "min_optional_recorded_at",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                             const ChildRequest& child) && {
+        this->minOptionalRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                            const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_recorded_at",
+                                      "min_optional_recorded_at",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                             const SelectQuery& child) && {
+        this->minOptionalRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    minOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                           const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_recorded_at",
+                                      "min_optional_recorded_at",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&&
+    minOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                           const request::QuerySelection& child) && {
+        this->minOptionalRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                            const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "optional_recorded_at",
+                                      "max_optional_recorded_at",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                             const ChildRequest& child) && {
+        this->maxOptionalRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                            const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_recorded_at",
+                                      "max_optional_recorded_at",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                                             const SelectQuery& child) && {
+        this->maxOptionalRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    maxOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                           const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "optional_recorded_at",
+                                      "max_optional_recorded_at",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&&
+    maxOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
+                                           const request::QuerySelection& child) && {
+        this->maxOptionalRecordedAtOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sumRatioOfSampleRecordsAs(std::string_view alias,
+                                               const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "ratio",
+                                      "sum_ratio",
+                                      AggregateFunction::Sum);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sumRatioOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) && {
+        this->sumRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumRatioOfSampleRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "sum_ratio", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumRatioOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) && {
+        this->sumRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sumRatioOfSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "sum_ratio", AggregateFunction::Sum);
+        return *this;
+    }
+
+    PlatformRequest&& sumRatioOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) && {
+        this->sumRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& minRatioOfSampleRecordsAs(std::string_view alias,
+                                               const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "ratio",
+                                      "min_ratio",
+                                      AggregateFunction::Min);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& minRatioOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) && {
+        this->minRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minRatioOfSampleRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "min_ratio", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minRatioOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) && {
+        this->minRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& minRatioOfSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "min_ratio", AggregateFunction::Min);
+        return *this;
+    }
+
+    PlatformRequest&& minRatioOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) && {
+        this->minRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& maxRatioOfSampleRecordsAs(std::string_view alias,
+                                               const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "ratio",
+                                      "max_ratio",
+                                      AggregateFunction::Max);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& maxRatioOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) && {
+        this->maxRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxRatioOfSampleRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "max_ratio", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxRatioOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) && {
+        this->maxRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& maxRatioOfSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "max_ratio", AggregateFunction::Max);
+        return *this;
+    }
+
+    PlatformRequest&& maxRatioOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) && {
+        this->maxRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& avgRatioOfSampleRecordsAs(std::string_view alias,
+                                               const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "ratio",
+                                      "avg_ratio",
+                                      AggregateFunction::Avg);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& avgRatioOfSampleRecordsAs(std::string_view alias,
+                                                const ChildRequest& child) && {
+        this->avgRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgRatioOfSampleRecordsAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "avg_ratio", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgRatioOfSampleRecordsAs(std::string_view alias,
+                                                const SelectQuery& child) && {
+        this->avgRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& avgRatioOfSampleRecordsAs(std::string_view alias,
+                                               const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "avg_ratio", AggregateFunction::Avg);
+        return *this;
+    }
+
+    PlatformRequest&& avgRatioOfSampleRecordsAs(std::string_view alias,
+                                                const request::QuerySelection& child) && {
+        this->avgRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& standardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                                             const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "ratio",
+                                      "stdDev_ratio",
+                                      AggregateFunction::Stddev);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& standardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                                              const ChildRequest& child) && {
+        this->standardDeviationRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& standardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                                             const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "stdDev_ratio", AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&& standardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                                              const SelectQuery& child) && {
+        this->standardDeviationRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    standardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                            const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "stdDev_ratio", AggregateFunction::Stddev);
+        return *this;
+    }
+
+    PlatformRequest&&
+    standardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                            const request::QuerySelection& child) && {
+        this->standardDeviationRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                                                  const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "ratio",
+                                      "stdDevPop_ratio",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                                                  const ChildRequest& child) && {
+        this->squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                                                  const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "ratio",
+                                      "stdDevPop_ratio",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(std::string_view alias,
+                                                                  const SelectQuery& child) && {
+        this->squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "ratio",
+                                      "stdDevPop_ratio",
+                                      AggregateFunction::StddevPop);
+        return *this;
+    }
+
+    PlatformRequest&& squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(
+        std::string_view alias, const request::QuerySelection& child) && {
+        this->squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& sampleVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                          const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "ratio",
+                                      "varSamp_ratio",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& sampleVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                           const ChildRequest& child) && {
+        this->sampleVarianceRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                          const SelectQuery& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "ratio",
+                                      "varSamp_ratio",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&& sampleVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                           const SelectQuery& child) && {
+        this->sampleVarianceRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& sampleVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                          const request::QuerySelection& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child,
+                                      "ratio",
+                                      "varSamp_ratio",
+                                      AggregateFunction::VarSamp);
+        return *this;
+    }
+
+    PlatformRequest&&
+    sampleVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                         const request::QuerySelection& child) && {
+        this->sampleVarianceRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& samplePopulationVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                                    const ChildRequest& child) & {
+        query_.aggregateRelationField("sample_record_list",
+                                      alias,
+                                      child.runtimeQuery(),
+                                      "ratio",
+                                      "varPop_ratio",
+                                      AggregateFunction::VarPop);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& samplePopulationVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                                     const ChildRequest& child) && {
+        this->samplePopulationVarianceRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& samplePopulationVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                                    const SelectQuery& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "varPop_ratio", AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&& samplePopulationVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                                     const SelectQuery& child) && {
+        this->samplePopulationVarianceRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    PlatformRequest&
+    samplePopulationVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) & {
+        query_.aggregateRelationField(
+            "sample_record_list", alias, child, "ratio", "varPop_ratio", AggregateFunction::VarPop);
+        return *this;
+    }
+
+    PlatformRequest&&
+    samplePopulationVarianceRatioOfSampleRecordsAs(std::string_view alias,
+                                                   const request::QuerySelection& child) && {
+        this->samplePopulationVarianceRatioOfSampleRecordsAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest& selectSampleRecordListWith(const ChildRequest& child) & {
+        query_.selectRelation("sample_record_list", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PlatformRequest&& selectSampleRecordListWith(const ChildRequest& child) && {
+        this->selectSampleRecordListWith(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& selectSampleRecordListWith(const SelectQuery& child) & {
+        query_.selectRelation("sample_record_list", child);
+        return *this;
+    }
+
+    PlatformRequest&& selectSampleRecordListWith(const SelectQuery& child) && {
+        this->selectSampleRecordListWith(child);
+        return std::move(*this);
+    }
+
+    PlatformRequest& selectSampleRecordListWith(const request::QuerySelection& child) & {
+        query_.selectRelation("sample_record_list", child);
+        return *this;
+    }
+
+    PlatformRequest&& selectSampleRecordListWith(const request::QuerySelection& child) && {
+        this->selectSampleRecordListWith(child);
+        return std::move(*this);
     }
 
     PlatformRequest& selectId() & {
@@ -2480,7 +7126,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     withSampleRecordListMatching(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -2491,7 +7137,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     withSampleRecordListMatching(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -2515,7 +7161,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     withoutSampleRecordListMatching(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -2526,7 +7172,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     withoutSampleRecordListMatching(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -2564,7 +7210,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& countSampleRecordsWith(std::string_view alias,
                                             const SampleRecordRequest<P, ChildResult>& child) & {
@@ -2575,7 +7221,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& countSampleRecordsWith(std::string_view alias,
                                              const SampleRecordRequest<P, ChildResult>& child) && {
@@ -2583,7 +7229,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& statsFromSampleRecords(const SampleRecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -2593,14 +7239,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& statsFromSampleRecords(const SampleRecordRequest<P, ChildResult>& child) && {
         this->statsFromSampleRecords(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& statsFromSampleRecordsAs(std::string_view alias,
                                               const SampleRecordRequest<P, ChildResult>& child) & {
@@ -2611,7 +7257,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     statsFromSampleRecordsAs(std::string_view alias,
@@ -2620,7 +7266,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     groupBySampleRecordsWithDetails(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -2631,7 +7277,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     groupBySampleRecordsWithDetails(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -2656,7 +7302,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sumQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2673,7 +7319,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2699,7 +7345,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2716,7 +7362,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2742,7 +7388,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2759,7 +7405,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2785,7 +7431,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     avgQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2802,7 +7448,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2828,7 +7474,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     standardDeviationQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2845,7 +7491,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& standardDeviationQuantityOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -2871,7 +7517,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -2887,7 +7533,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationQuantityOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -2912,7 +7558,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sampleVarianceQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2929,7 +7575,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sampleVarianceQuantityOfSampleRecordsAs(std::string_view alias,
@@ -2955,7 +7601,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceQuantityOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -2971,7 +7617,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceQuantityOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -2996,7 +7642,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sumZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3013,7 +7659,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3039,7 +7685,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3056,7 +7702,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3082,7 +7728,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3099,7 +7745,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3125,7 +7771,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     avgZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3142,7 +7788,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3168,7 +7814,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& standardDeviationZeroBoundOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3184,7 +7830,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& standardDeviationZeroBoundOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3210,7 +7856,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3226,7 +7872,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationZeroBoundOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3251,7 +7897,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sampleVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3268,7 +7914,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sampleVarianceZeroBoundOfSampleRecordsAs(std::string_view alias,
@@ -3294,7 +7940,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceZeroBoundOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3310,7 +7956,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceZeroBoundOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3335,7 +7981,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sumNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3352,7 +7998,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3378,7 +8024,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3395,7 +8041,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3421,7 +8067,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3438,7 +8084,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3464,7 +8110,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     avgNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3481,7 +8127,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3507,7 +8153,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& standardDeviationNegativeMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3523,7 +8169,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& standardDeviationNegativeMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3549,7 +8195,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3565,7 +8211,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationNegativeMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3590,7 +8236,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sampleVarianceNegativeMaxOfSampleRecordsAs(std::string_view alias,
@@ -3607,7 +8253,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& sampleVarianceNegativeMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3633,7 +8279,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceNegativeMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3649,7 +8295,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceNegativeMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3674,7 +8320,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sumSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3691,7 +8337,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3717,7 +8363,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3734,7 +8380,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3760,7 +8406,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3777,7 +8423,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3803,7 +8449,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     avgSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3820,7 +8466,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3846,7 +8492,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& standardDeviationSignedMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3862,7 +8508,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& standardDeviationSignedMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3888,7 +8534,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3904,7 +8550,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationSignedMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -3929,7 +8575,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sampleVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3946,7 +8592,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sampleVarianceSignedMaxOfSampleRecordsAs(std::string_view alias,
@@ -3972,7 +8618,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceSignedMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -3988,7 +8634,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceSignedMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -4013,7 +8659,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sumWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4030,7 +8676,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4056,7 +8702,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4073,7 +8719,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4099,7 +8745,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4116,7 +8762,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4142,7 +8788,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     avgWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4159,7 +8805,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4185,7 +8831,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     standardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4202,7 +8848,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     standardDeviationWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4229,7 +8875,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -4245,7 +8891,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationWideMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -4270,7 +8916,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sampleVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4287,7 +8933,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sampleVarianceWideMaxOfSampleRecordsAs(std::string_view alias,
@@ -4313,7 +8959,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceWideMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -4329,7 +8975,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceWideMaxOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -4354,7 +9000,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sumAmountOfSampleRecordsAs(std::string_view alias,
@@ -4371,7 +9017,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumAmountOfSampleRecordsAs(std::string_view alias,
@@ -4397,7 +9043,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minAmountOfSampleRecordsAs(std::string_view alias,
@@ -4414,7 +9060,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minAmountOfSampleRecordsAs(std::string_view alias,
@@ -4440,7 +9086,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxAmountOfSampleRecordsAs(std::string_view alias,
@@ -4457,7 +9103,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxAmountOfSampleRecordsAs(std::string_view alias,
@@ -4483,7 +9129,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     avgAmountOfSampleRecordsAs(std::string_view alias,
@@ -4500,7 +9146,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgAmountOfSampleRecordsAs(std::string_view alias,
@@ -4526,7 +9172,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     standardDeviationAmountOfSampleRecordsAs(std::string_view alias,
@@ -4543,7 +9189,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     standardDeviationAmountOfSampleRecordsAs(std::string_view alias,
@@ -4570,7 +9216,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -4586,7 +9232,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationAmountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -4611,7 +9257,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sampleVarianceAmountOfSampleRecordsAs(std::string_view alias,
@@ -4628,7 +9274,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sampleVarianceAmountOfSampleRecordsAs(std::string_view alias,
@@ -4654,7 +9300,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceAmountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -4670,7 +9316,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceAmountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -4695,7 +9341,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sumHeightOfSampleRecordsAs(std::string_view alias,
@@ -4712,7 +9358,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumHeightOfSampleRecordsAs(std::string_view alias,
@@ -4738,7 +9384,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minHeightOfSampleRecordsAs(std::string_view alias,
@@ -4755,7 +9401,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minHeightOfSampleRecordsAs(std::string_view alias,
@@ -4781,7 +9427,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxHeightOfSampleRecordsAs(std::string_view alias,
@@ -4798,7 +9444,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxHeightOfSampleRecordsAs(std::string_view alias,
@@ -4824,7 +9470,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     avgHeightOfSampleRecordsAs(std::string_view alias,
@@ -4841,7 +9487,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgHeightOfSampleRecordsAs(std::string_view alias,
@@ -4867,7 +9513,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     standardDeviationHeightOfSampleRecordsAs(std::string_view alias,
@@ -4884,7 +9530,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     standardDeviationHeightOfSampleRecordsAs(std::string_view alias,
@@ -4911,7 +9557,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -4927,7 +9573,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationHeightOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -4952,7 +9598,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sampleVarianceHeightOfSampleRecordsAs(std::string_view alias,
@@ -4969,7 +9615,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sampleVarianceHeightOfSampleRecordsAs(std::string_view alias,
@@ -4995,7 +9641,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceHeightOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5011,7 +9657,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceHeightOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -5036,7 +9682,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sumOptionalCountOfSampleRecordsAs(std::string_view alias,
@@ -5053,7 +9699,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumOptionalCountOfSampleRecordsAs(std::string_view alias,
@@ -5079,7 +9725,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minOptionalCountOfSampleRecordsAs(std::string_view alias,
@@ -5096,7 +9742,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minOptionalCountOfSampleRecordsAs(std::string_view alias,
@@ -5122,7 +9768,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxOptionalCountOfSampleRecordsAs(std::string_view alias,
@@ -5139,7 +9785,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxOptionalCountOfSampleRecordsAs(std::string_view alias,
@@ -5165,7 +9811,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     avgOptionalCountOfSampleRecordsAs(std::string_view alias,
@@ -5182,7 +9828,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgOptionalCountOfSampleRecordsAs(std::string_view alias,
@@ -5208,7 +9854,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& standardDeviationOptionalCountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5224,7 +9870,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& standardDeviationOptionalCountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -5250,7 +9896,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5266,7 +9912,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationOptionalCountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -5291,7 +9937,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& sampleVarianceOptionalCountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5307,7 +9953,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& sampleVarianceOptionalCountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -5333,7 +9979,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceOptionalCountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5349,7 +9995,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceOptionalCountOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -5374,7 +10020,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& minDayOfSampleRecordsAs(std::string_view alias,
                                              const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5390,7 +10036,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& minDayOfSampleRecordsAs(std::string_view alias,
                                               const SampleRecordRequest<P, ChildResult>& child) && {
@@ -5415,7 +10061,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& maxDayOfSampleRecordsAs(std::string_view alias,
                                              const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5431,7 +10077,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& maxDayOfSampleRecordsAs(std::string_view alias,
                                               const SampleRecordRequest<P, ChildResult>& child) && {
@@ -5456,7 +10102,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minOptionalDayOfSampleRecordsAs(std::string_view alias,
@@ -5473,7 +10119,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minOptionalDayOfSampleRecordsAs(std::string_view alias,
@@ -5499,7 +10145,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxOptionalDayOfSampleRecordsAs(std::string_view alias,
@@ -5516,7 +10162,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxOptionalDayOfSampleRecordsAs(std::string_view alias,
@@ -5542,7 +10188,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minRecordedAtOfSampleRecordsAs(std::string_view alias,
@@ -5559,7 +10205,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minRecordedAtOfSampleRecordsAs(std::string_view alias,
@@ -5585,7 +10231,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxRecordedAtOfSampleRecordsAs(std::string_view alias,
@@ -5602,7 +10248,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxRecordedAtOfSampleRecordsAs(std::string_view alias,
@@ -5628,7 +10274,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     minOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
@@ -5645,7 +10291,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
@@ -5671,7 +10317,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     maxOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
@@ -5688,7 +10334,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxOptionalRecordedAtOfSampleRecordsAs(std::string_view alias,
@@ -5714,7 +10360,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& sumRatioOfSampleRecordsAs(std::string_view alias,
                                                const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5730,7 +10376,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sumRatioOfSampleRecordsAs(std::string_view alias,
@@ -5756,7 +10402,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& minRatioOfSampleRecordsAs(std::string_view alias,
                                                const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5772,7 +10418,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     minRatioOfSampleRecordsAs(std::string_view alias,
@@ -5798,7 +10444,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& maxRatioOfSampleRecordsAs(std::string_view alias,
                                                const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5814,7 +10460,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     maxRatioOfSampleRecordsAs(std::string_view alias,
@@ -5840,7 +10486,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& avgRatioOfSampleRecordsAs(std::string_view alias,
                                                const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5856,7 +10502,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     avgRatioOfSampleRecordsAs(std::string_view alias,
@@ -5882,7 +10528,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     standardDeviationRatioOfSampleRecordsAs(std::string_view alias,
@@ -5899,7 +10545,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     standardDeviationRatioOfSampleRecordsAs(std::string_view alias,
@@ -5926,7 +10572,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -5942,7 +10588,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& squareRootOfPopulationStandardDeviationRatioOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -5967,7 +10613,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     sampleVarianceRatioOfSampleRecordsAs(std::string_view alias,
@@ -5984,7 +10630,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     sampleVarianceRatioOfSampleRecordsAs(std::string_view alias,
@@ -6010,7 +10656,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& samplePopulationVarianceRatioOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) & {
@@ -6026,7 +10672,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& samplePopulationVarianceRatioOfSampleRecordsAs(
         std::string_view alias, const SampleRecordRequest<P, ChildResult>& child) && {
@@ -6046,18 +10692,15 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&
     selectSampleRecordListWith(const SampleRecordRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("sample_record_list", child.query());
-        });
+        query_.selectRelation("sample_record_list", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&&
     selectSampleRecordListWith(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -6065,7 +10708,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest& withSampleRecordList(const SampleRecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -6077,10 +10720,66 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     PlatformRequest&& withSampleRecordList(const SampleRecordRequest<P, ChildResult>& child) && {
         this->withSampleRecordList(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -6102,6 +10801,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameSoundingLike(const Input& value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameIs(const Input& value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameIsNot(const Input& value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameGreaterThan(const Input& value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameGreaterThanOrEqualTo(const Input& value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameLessThan(const Input& value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest& withNameLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    PlatformRequest&& withNameLessThanOrEqualTo(const Input& value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    PlatformRequest& withNameBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    PlatformRequest&& withNameBetween(const Lower& lower, const Upper& upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& withNameIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& withNameIn(Inputs&& inputs) && {
+        this->withNameIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest& withNameNotIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PlatformRequest&& withNameNotIn(Inputs&& inputs) && {
+        this->withNameNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -6167,13 +11008,13 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class SampleRecordRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class PlatformRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class SampleRecordRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class SampleLinkRequest;
 
 public:
@@ -6199,6 +11040,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -6211,6 +11058,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     SampleRecordRequest<true, Result> purpose(std::string_view text) const& {
         return SampleRecordRequest<true, Result>(query_.purpose(text));
     }
@@ -6219,12 +11096,12 @@ public:
         return SampleRecordRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     SampleRecordRequest<Purposed, Return> returnType() const& {
         return SampleRecordRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     SampleRecordRequest<Purposed, Return> returnType() && {
         return SampleRecordRequest<Purposed, Return>(
             std::move(query_).template returnType<Return>());
@@ -6377,6 +11254,20 @@ public:
 
     SampleRecordRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -6836,15 +11727,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     SampleRecordRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     SampleRecordRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    SampleRecordRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    SampleRecordRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -7032,73 +11943,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     SampleRecord& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -7113,6 +12024,913 @@ public:
 
     SampleRecordRequest rebindGlobal(UserContext& user_context) const {
         return SampleRecordRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <request::EntityReference Reference>
+    SampleRecordRequest& filterByPlatform(Reference&& value) & {
+        query_.andFilter(
+            Expr::eq(memory_resource(),
+                     "platform_id",
+                     request::entity_id_value(memory_resource(), std::forward<Reference>(value))));
+        return *this;
+    }
+
+    template <request::EntityReference Reference>
+    SampleRecordRequest&& filterByPlatform(Reference&& value) && {
+        this->filterByPlatform(std::forward<Reference>(value));
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& selectPlatformWith(const ChildRequest& child) & {
+        query_.selectRelation("platform", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& selectPlatformWith(const ChildRequest& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& selectPlatformWith(const SelectQuery& child) & {
+        query_.selectRelation("platform", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& selectPlatformWith(const SelectQuery& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& selectPlatformWith(const request::QuerySelection& child) & {
+        query_.selectRelation("platform", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& selectPlatformWith(const request::QuerySelection& child) && {
+        this->selectPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& withPlatformMatching(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& withPlatformMatching(const ChildRequest& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withPlatformMatching(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    SampleRecordRequest&& withPlatformMatching(const SelectQuery& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withPlatformMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        return *this;
+    }
+
+    SampleRecordRequest&& withPlatformMatching(const request::QuerySelection& child) && {
+        this->withPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& withoutPlatformMatching(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& withoutPlatformMatching(const ChildRequest& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withoutPlatformMatching(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    SampleRecordRequest&& withoutPlatformMatching(const SelectQuery& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withoutPlatformMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "platform");
+        return *this;
+    }
+
+    SampleRecordRequest&& withoutPlatformMatching(const request::QuerySelection& child) && {
+        this->withoutPlatformMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& rollUpToPlatformWith(const ChildRequest& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& rollUpToPlatformWith(const ChildRequest& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& rollUpToPlatformWith(const SelectQuery& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& rollUpToPlatformWith(const SelectQuery& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& rollUpToPlatformWith(const request::QuerySelection& child) & {
+        query_.filterRelation("platform_id",
+                              "id",
+                              Platform::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "platform");
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& rollUpToPlatformWith(const request::QuerySelection& child) && {
+        this->rollUpToPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& facetByPlatformAs(std::string_view facet_name,
+                                           const ChildRequest& child) & {
+        query_.facetBy("platform", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& facetByPlatformAs(std::string_view facet_name,
+                                            const ChildRequest& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& facetByPlatformAs(std::string_view facet_name,
+                                           const SelectQuery& child) & {
+        query_.facetBy("platform", facet_name, child);
+        return *this;
+    }
+
+    SampleRecordRequest&& facetByPlatformAs(std::string_view facet_name,
+                                            const SelectQuery& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& facetByPlatformAs(std::string_view facet_name,
+                                           const request::QuerySelection& child) & {
+        query_.facetBy("platform", facet_name, child);
+        return *this;
+    }
+
+    SampleRecordRequest&& facetByPlatformAs(std::string_view facet_name,
+                                            const request::QuerySelection& child) && {
+        this->facetByPlatformAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                      const ChildRequest& child,
+                                                      bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                       const ChildRequest& child,
+                                                       bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                      const SelectQuery& child,
+                                                      bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    SampleRecordRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                       const SelectQuery& child,
+                                                       bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                      const request::QuerySelection& child,
+                                                      bool include_all_facets) & {
+        query_.facetBy("platform", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    SampleRecordRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
+                                                       const request::QuerySelection& child,
+                                                       bool include_all_facets) && {
+        this->facetByPlatformAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& groupByPlatformWith(const ChildRequest& child) & {
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& groupByPlatformWith(const ChildRequest& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& groupByPlatformWith(const SelectQuery& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& groupByPlatformWith(const SelectQuery& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& groupByPlatformWith(const request::QuerySelection& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& groupByPlatformWith(const request::QuerySelection& child) && {
+        this->groupByPlatformWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& groupByPlatformWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("platform", "platform_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& groupByPlatformWithDetailsFrom(const ChildRequest& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& groupByPlatformWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& groupByPlatformWithDetailsFrom(const SelectQuery& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& groupByPlatformWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("platform", "platform_id", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& groupByPlatformWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupByPlatformWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& withFirstLinksMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "first_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "first_links");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& withFirstLinksMatching(const ChildRequest& child) && {
+        this->withFirstLinksMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withFirstLinksMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "first_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "first_links");
+        return *this;
+    }
+
+    SampleRecordRequest&& withFirstLinksMatching(const SelectQuery& child) && {
+        this->withFirstLinksMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withFirstLinksMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "first_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "first_links");
+        return *this;
+    }
+
+    SampleRecordRequest&& withFirstLinksMatching(const request::QuerySelection& child) && {
+        this->withFirstLinksMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& withoutFirstLinksMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "first_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "first_links");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& withoutFirstLinksMatching(const ChildRequest& child) && {
+        this->withoutFirstLinksMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withoutFirstLinksMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "first_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "first_links");
+        return *this;
+    }
+
+    SampleRecordRequest&& withoutFirstLinksMatching(const SelectQuery& child) && {
+        this->withoutFirstLinksMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withoutFirstLinksMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "first_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "first_links");
+        return *this;
+    }
+
+    SampleRecordRequest&& withoutFirstLinksMatching(const request::QuerySelection& child) && {
+        this->withoutFirstLinksMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& countFirstLinksWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("first_links", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& countFirstLinksWith(std::string_view alias,
+                                              const ChildRequest& child) && {
+        this->countFirstLinksWith(alias, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& countFirstLinksWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("first_links", alias, child, true);
+        return *this;
+    }
+
+    SampleRecordRequest&& countFirstLinksWith(std::string_view alias, const SelectQuery& child) && {
+        this->countFirstLinksWith(alias, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& countFirstLinksWith(std::string_view alias,
+                                             const request::QuerySelection& child) & {
+        query_.aggregateRelation("first_links", alias, child, true);
+        return *this;
+    }
+
+    SampleRecordRequest&& countFirstLinksWith(std::string_view alias,
+                                              const request::QuerySelection& child) && {
+        this->countFirstLinksWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& statsFromFirstLinks(const ChildRequest& child) & {
+        query_.aggregateRelation("first_links", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& statsFromFirstLinks(const ChildRequest& child) && {
+        this->statsFromFirstLinks(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& statsFromFirstLinks(const SelectQuery& child) & {
+        query_.aggregateRelation("first_links", "refinements", child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& statsFromFirstLinks(const SelectQuery& child) && {
+        this->statsFromFirstLinks(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& statsFromFirstLinks(const request::QuerySelection& child) & {
+        query_.aggregateRelation("first_links", "refinements", child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& statsFromFirstLinks(const request::QuerySelection& child) && {
+        this->statsFromFirstLinks(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& statsFromFirstLinksAs(std::string_view alias,
+                                               const ChildRequest& child) & {
+        query_.aggregateRelation("first_links", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& statsFromFirstLinksAs(std::string_view alias,
+                                                const ChildRequest& child) && {
+        this->statsFromFirstLinksAs(alias, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& statsFromFirstLinksAs(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("first_links", alias, child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& statsFromFirstLinksAs(std::string_view alias,
+                                                const SelectQuery& child) && {
+        this->statsFromFirstLinksAs(alias, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& statsFromFirstLinksAs(std::string_view alias,
+                                               const request::QuerySelection& child) & {
+        query_.aggregateRelation("first_links", alias, child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& statsFromFirstLinksAs(std::string_view alias,
+                                                const request::QuerySelection& child) && {
+        this->statsFromFirstLinksAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& groupByFirstLinksWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("first_links", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& groupByFirstLinksWithDetails(const ChildRequest& child) && {
+        this->groupByFirstLinksWithDetails(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& groupByFirstLinksWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("first_links", "refinements", child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& groupByFirstLinksWithDetails(const SelectQuery& child) && {
+        this->groupByFirstLinksWithDetails(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& groupByFirstLinksWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("first_links", "refinements", child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& groupByFirstLinksWithDetails(const request::QuerySelection& child) && {
+        this->groupByFirstLinksWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& withSecondLinksMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "second_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "second_links");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& withSecondLinksMatching(const ChildRequest& child) && {
+        this->withSecondLinksMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withSecondLinksMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "second_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "second_links");
+        return *this;
+    }
+
+    SampleRecordRequest&& withSecondLinksMatching(const SelectQuery& child) && {
+        this->withSecondLinksMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withSecondLinksMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "second_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "second_links");
+        return *this;
+    }
+
+    SampleRecordRequest&& withSecondLinksMatching(const request::QuerySelection& child) && {
+        this->withSecondLinksMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& withoutSecondLinksMatching(const ChildRequest& child) & {
+        query_.filterRelation("id",
+                              "second_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "second_links");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& withoutSecondLinksMatching(const ChildRequest& child) && {
+        this->withoutSecondLinksMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withoutSecondLinksMatching(const SelectQuery& child) & {
+        query_.filterRelation("id",
+                              "second_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "second_links");
+        return *this;
+    }
+
+    SampleRecordRequest&& withoutSecondLinksMatching(const SelectQuery& child) && {
+        this->withoutSecondLinksMatching(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& withoutSecondLinksMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("id",
+                              "second_record_id",
+                              SampleLink::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "second_links");
+        return *this;
+    }
+
+    SampleRecordRequest&& withoutSecondLinksMatching(const request::QuerySelection& child) && {
+        this->withoutSecondLinksMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& countSecondLinksWith(std::string_view alias, const ChildRequest& child) & {
+        query_.aggregateRelation("second_links", alias, child.runtimeQuery(), true);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& countSecondLinksWith(std::string_view alias,
+                                               const ChildRequest& child) && {
+        this->countSecondLinksWith(alias, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& countSecondLinksWith(std::string_view alias, const SelectQuery& child) & {
+        query_.aggregateRelation("second_links", alias, child, true);
+        return *this;
+    }
+
+    SampleRecordRequest&& countSecondLinksWith(std::string_view alias,
+                                               const SelectQuery& child) && {
+        this->countSecondLinksWith(alias, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& countSecondLinksWith(std::string_view alias,
+                                              const request::QuerySelection& child) & {
+        query_.aggregateRelation("second_links", alias, child, true);
+        return *this;
+    }
+
+    SampleRecordRequest&& countSecondLinksWith(std::string_view alias,
+                                               const request::QuerySelection& child) && {
+        this->countSecondLinksWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& statsFromSecondLinks(const ChildRequest& child) & {
+        query_.aggregateRelation("second_links", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& statsFromSecondLinks(const ChildRequest& child) && {
+        this->statsFromSecondLinks(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& statsFromSecondLinks(const SelectQuery& child) & {
+        query_.aggregateRelation("second_links", "refinements", child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& statsFromSecondLinks(const SelectQuery& child) && {
+        this->statsFromSecondLinks(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& statsFromSecondLinks(const request::QuerySelection& child) & {
+        query_.aggregateRelation("second_links", "refinements", child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& statsFromSecondLinks(const request::QuerySelection& child) && {
+        this->statsFromSecondLinks(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& statsFromSecondLinksAs(std::string_view alias,
+                                                const ChildRequest& child) & {
+        query_.aggregateRelation("second_links", alias, child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& statsFromSecondLinksAs(std::string_view alias,
+                                                 const ChildRequest& child) && {
+        this->statsFromSecondLinksAs(alias, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& statsFromSecondLinksAs(std::string_view alias,
+                                                const SelectQuery& child) & {
+        query_.aggregateRelation("second_links", alias, child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& statsFromSecondLinksAs(std::string_view alias,
+                                                 const SelectQuery& child) && {
+        this->statsFromSecondLinksAs(alias, child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& statsFromSecondLinksAs(std::string_view alias,
+                                                const request::QuerySelection& child) & {
+        query_.aggregateRelation("second_links", alias, child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& statsFromSecondLinksAs(std::string_view alias,
+                                                 const request::QuerySelection& child) && {
+        this->statsFromSecondLinksAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& groupBySecondLinksWithDetails(const ChildRequest& child) & {
+        query_.aggregateRelation("second_links", "refinements", child.runtimeQuery(), false);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& groupBySecondLinksWithDetails(const ChildRequest& child) && {
+        this->groupBySecondLinksWithDetails(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& groupBySecondLinksWithDetails(const SelectQuery& child) & {
+        query_.aggregateRelation("second_links", "refinements", child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& groupBySecondLinksWithDetails(const SelectQuery& child) && {
+        this->groupBySecondLinksWithDetails(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& groupBySecondLinksWithDetails(const request::QuerySelection& child) & {
+        query_.aggregateRelation("second_links", "refinements", child, false);
+        return *this;
+    }
+
+    SampleRecordRequest&& groupBySecondLinksWithDetails(const request::QuerySelection& child) && {
+        this->groupBySecondLinksWithDetails(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& selectFirstLinksWith(const ChildRequest& child) & {
+        query_.selectRelation("first_links", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& selectFirstLinksWith(const ChildRequest& child) && {
+        this->selectFirstLinksWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& selectFirstLinksWith(const SelectQuery& child) & {
+        query_.selectRelation("first_links", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& selectFirstLinksWith(const SelectQuery& child) && {
+        this->selectFirstLinksWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& selectFirstLinksWith(const request::QuerySelection& child) & {
+        query_.selectRelation("first_links", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& selectFirstLinksWith(const request::QuerySelection& child) && {
+        this->selectFirstLinksWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest& selectSecondLinksWith(const ChildRequest& child) & {
+        query_.selectRelation("second_links", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleRecordRequest&& selectSecondLinksWith(const ChildRequest& child) && {
+        this->selectSecondLinksWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& selectSecondLinksWith(const SelectQuery& child) & {
+        query_.selectRelation("second_links", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& selectSecondLinksWith(const SelectQuery& child) && {
+        this->selectSecondLinksWith(child);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& selectSecondLinksWith(const request::QuerySelection& child) & {
+        query_.selectRelation("second_links", child);
+        return *this;
+    }
+
+    SampleRecordRequest&& selectSecondLinksWith(const request::QuerySelection& child) && {
+        this->selectSecondLinksWith(child);
+        return std::move(*this);
     }
 
     SampleRecordRequest& selectId() & {
@@ -17827,6 +23645,32 @@ public:
         return std::move(*this);
     }
 
+    SampleRecordRequest& selectRatioWithFunction(AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("ratio", "ratio", function);
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& selectRatioWithFunction(AggregateFunction function) && {
+        this->selectRatioWithFunction(function);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& selectRatioAsWithFunction(std::string_view alias,
+                                                   AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("ratio", alias, function);
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& selectRatioAsWithFunction(std::string_view alias,
+                                                    AggregateFunction function) && {
+        this->selectRatioAsWithFunction(alias, function);
+        return std::move(*this);
+    }
+
     SampleRecordRequest& orderByRatioAsc() & {
         query_.mutate_selection([&](SelectQuery& selection) {
             selection.order_asc("ratio");
@@ -18159,6 +24003,103 @@ public:
 
     SampleRecordRequest&& maxRatioAs(std::string_view alias) && {
         this->maxRatioAs(alias);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& standardDeviationRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("ratio", "stdDev_ratio");
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& standardDeviationRatio() && {
+        this->standardDeviationRatio();
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& standardDeviationRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("ratio", alias);
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& standardDeviationRatioAs(std::string_view alias) && {
+        this->standardDeviationRatioAs(alias);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& squareRootOfPopulationStandardDeviationRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("ratio", "stdDevPop_ratio");
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& squareRootOfPopulationStandardDeviationRatio() && {
+        this->squareRootOfPopulationStandardDeviationRatio();
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& squareRootOfPopulationStandardDeviationRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("ratio", alias);
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&&
+    squareRootOfPopulationStandardDeviationRatioAs(std::string_view alias) && {
+        this->squareRootOfPopulationStandardDeviationRatioAs(alias);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& sampleVarianceRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("ratio", "varSamp_ratio");
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& sampleVarianceRatio() && {
+        this->sampleVarianceRatio();
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& sampleVarianceRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("ratio", alias);
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& sampleVarianceRatioAs(std::string_view alias) && {
+        this->sampleVarianceRatioAs(alias);
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& samplePopulationVarianceRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("ratio", "varPop_ratio");
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& samplePopulationVarianceRatio() && {
+        this->samplePopulationVarianceRatio();
+        return std::move(*this);
+    }
+
+    SampleRecordRequest& samplePopulationVarianceRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("ratio", alias);
+        });
+        return *this;
+    }
+
+    SampleRecordRequest&& samplePopulationVarianceRatioAs(std::string_view alias) && {
+        this->samplePopulationVarianceRatioAs(alias);
         return std::move(*this);
     }
 
@@ -18619,24 +24560,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& selectPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("platform", child.query());
-        });
+        query_.selectRelation("platform", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& selectPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->selectPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& withPlatform(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -18648,14 +24586,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& withPlatform(const PlatformRequest<P, ChildResult>& child) && {
         this->withPlatform(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& withPlatformMatching(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -18665,7 +24603,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& withPlatformMatching(const PlatformRequest<P, ChildResult>& child) && {
         this->withPlatformMatching(child);
@@ -18684,7 +24622,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& withoutPlatformMatching(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -18694,7 +24632,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& withoutPlatformMatching(const PlatformRequest<P, ChildResult>& child) && {
         this->withoutPlatformMatching(child);
@@ -18713,7 +24651,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& facetByPlatformAs(std::string_view facet_name,
                                            const PlatformRequest<P, ChildResult>& child) & {
@@ -18724,7 +24662,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& facetByPlatformAs(std::string_view facet_name,
                                             const PlatformRequest<P, ChildResult>& child) && {
@@ -18732,7 +24670,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& facetByPlatformAsWithOptions(std::string_view facet_name,
                                                       const PlatformRequest<P, ChildResult>& child,
@@ -18744,7 +24682,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& facetByPlatformAsWithOptions(std::string_view facet_name,
                                                        const PlatformRequest<P, ChildResult>& child,
@@ -18753,7 +24691,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& groupByPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -18763,14 +24701,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& groupByPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->groupByPlatformWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&
     groupByPlatformWithDetailsFrom(const PlatformRequest<P, ChildResult>& child) & {
@@ -18781,7 +24719,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&&
     groupByPlatformWithDetailsFrom(const PlatformRequest<P, ChildResult>& child) && {
@@ -18816,7 +24754,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& rollUpToPlatformWith(const PlatformRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -18827,7 +24765,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& rollUpToPlatformWith(const PlatformRequest<P, ChildResult>& child) && {
         this->rollUpToPlatformWith(child);
@@ -18850,7 +24788,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& withFirstLinksMatching(const SampleLinkRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -18860,7 +24798,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&&
     withFirstLinksMatching(const SampleLinkRequest<P, ChildResult>& child) && {
@@ -18884,7 +24822,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&
     withoutFirstLinksMatching(const SampleLinkRequest<P, ChildResult>& child) & {
@@ -18895,7 +24833,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&&
     withoutFirstLinksMatching(const SampleLinkRequest<P, ChildResult>& child) && {
@@ -18931,7 +24869,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& countFirstLinksWith(std::string_view alias,
                                              const SampleLinkRequest<P, ChildResult>& child) & {
@@ -18942,7 +24880,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& countFirstLinksWith(std::string_view alias,
                                               const SampleLinkRequest<P, ChildResult>& child) && {
@@ -18950,7 +24888,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& statsFromFirstLinks(const SampleLinkRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -18960,14 +24898,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& statsFromFirstLinks(const SampleLinkRequest<P, ChildResult>& child) && {
         this->statsFromFirstLinks(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& statsFromFirstLinksAs(std::string_view alias,
                                                const SampleLinkRequest<P, ChildResult>& child) & {
@@ -18978,7 +24916,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& statsFromFirstLinksAs(std::string_view alias,
                                                 const SampleLinkRequest<P, ChildResult>& child) && {
@@ -18986,7 +24924,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&
     groupByFirstLinksWithDetails(const SampleLinkRequest<P, ChildResult>& child) & {
@@ -18997,7 +24935,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&&
     groupByFirstLinksWithDetails(const SampleLinkRequest<P, ChildResult>& child) && {
@@ -19021,7 +24959,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& withSecondLinksMatching(const SampleLinkRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -19031,7 +24969,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&&
     withSecondLinksMatching(const SampleLinkRequest<P, ChildResult>& child) && {
@@ -19055,7 +24993,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&
     withoutSecondLinksMatching(const SampleLinkRequest<P, ChildResult>& child) & {
@@ -19066,7 +25004,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&&
     withoutSecondLinksMatching(const SampleLinkRequest<P, ChildResult>& child) && {
@@ -19104,7 +25042,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& countSecondLinksWith(std::string_view alias,
                                               const SampleLinkRequest<P, ChildResult>& child) & {
@@ -19115,7 +25053,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& countSecondLinksWith(std::string_view alias,
                                                const SampleLinkRequest<P, ChildResult>& child) && {
@@ -19123,7 +25061,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& statsFromSecondLinks(const SampleLinkRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -19133,14 +25071,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& statsFromSecondLinks(const SampleLinkRequest<P, ChildResult>& child) && {
         this->statsFromSecondLinks(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& statsFromSecondLinksAs(std::string_view alias,
                                                 const SampleLinkRequest<P, ChildResult>& child) & {
@@ -19151,7 +25089,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&&
     statsFromSecondLinksAs(std::string_view alias,
@@ -19160,7 +25098,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&
     groupBySecondLinksWithDetails(const SampleLinkRequest<P, ChildResult>& child) & {
@@ -19171,7 +25109,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&&
     groupBySecondLinksWithDetails(const SampleLinkRequest<P, ChildResult>& child) && {
@@ -19191,24 +25129,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& selectFirstLinksWith(const SampleLinkRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("first_links", child.query());
-        });
+        query_.selectRelation("first_links", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& selectFirstLinksWith(const SampleLinkRequest<P, ChildResult>& child) && {
         this->selectFirstLinksWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& withFirstLinks(const SampleLinkRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -19220,7 +25155,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& withFirstLinks(const SampleLinkRequest<P, ChildResult>& child) && {
         this->withFirstLinks(child);
@@ -19239,24 +25174,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& selectSecondLinksWith(const SampleLinkRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("second_links", child.query());
-        });
+        query_.selectRelation("second_links", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& selectSecondLinksWith(const SampleLinkRequest<P, ChildResult>& child) && {
         this->selectSecondLinksWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest& withSecondLinks(const SampleLinkRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -19268,10 +25200,66 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleRecordRequest&& withSecondLinks(const SampleLinkRequest<P, ChildResult>& child) && {
         this->withSecondLinks(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -19293,6 +25281,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withLabelSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "label", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withLabelSoundingLike(const Input& value) && {
+        this->withLabelSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withLabelIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "label", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withLabelIs(const Input& value) && {
+        this->withLabelIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withLabelIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "label", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withLabelIsNot(const Input& value) && {
+        this->withLabelIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withLabelGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "label", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withLabelGreaterThan(const Input& value) && {
+        this->withLabelGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withLabelGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "label", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withLabelGreaterThanOrEqualTo(const Input& value) && {
+        this->withLabelGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withLabelLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "label", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withLabelLessThan(const Input& value) && {
+        this->withLabelLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withLabelLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "label", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withLabelLessThanOrEqualTo(const Input& value) && {
+        this->withLabelLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withLabelBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "label", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withLabelBetween(const Lower& lower, const Upper& upper) && {
+        this->withLabelBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withLabelIn(Inputs&& inputs) & {
+        query_.filterField("label", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withLabelIn(Inputs&& inputs) && {
+        this->withLabelIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withLabelNotIn(Inputs&& inputs) & {
+        query_.filterField("label", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withLabelNotIn(Inputs&& inputs) && {
+        this->withLabelNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -19354,6 +25484,134 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     SampleRecordRequest&& withLabelAfter(const T& value) && {
         this->withLabelAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withQuantityIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "quantity", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withQuantityIs(const Input& value) && {
+        this->withQuantityIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withQuantityIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "quantity", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withQuantityIsNot(const Input& value) && {
+        this->withQuantityIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withQuantityGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "quantity", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withQuantityGreaterThan(const Input& value) && {
+        this->withQuantityGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withQuantityGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "quantity", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withQuantityGreaterThanOrEqualTo(const Input& value) && {
+        this->withQuantityGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withQuantityLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "quantity", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withQuantityLessThan(const Input& value) && {
+        this->withQuantityLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withQuantityLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "quantity", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withQuantityLessThanOrEqualTo(const Input& value) && {
+        this->withQuantityLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withQuantityBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "quantity", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withQuantityBetween(const Lower& lower, const Upper& upper) && {
+        this->withQuantityBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withQuantityIn(Inputs&& inputs) & {
+        query_.filterField("quantity", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withQuantityIn(Inputs&& inputs) && {
+        this->withQuantityIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withQuantityNotIn(Inputs&& inputs) & {
+        query_.filterField("quantity", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withQuantityNotIn(Inputs&& inputs) && {
+        this->withQuantityNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -19419,6 +25677,135 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withZeroBoundIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "zero_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withZeroBoundIs(const Input& value) && {
+        this->withZeroBoundIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withZeroBoundIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "zero_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withZeroBoundIsNot(const Input& value) && {
+        this->withZeroBoundIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withZeroBoundGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "zero_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withZeroBoundGreaterThan(const Input& value) && {
+        this->withZeroBoundGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withZeroBoundGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "zero_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withZeroBoundGreaterThanOrEqualTo(const Input& value) && {
+        this->withZeroBoundGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withZeroBoundLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "zero_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withZeroBoundLessThan(const Input& value) && {
+        this->withZeroBoundLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withZeroBoundLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "zero_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withZeroBoundLessThanOrEqualTo(const Input& value) && {
+        this->withZeroBoundLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withZeroBoundBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "zero_bound", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withZeroBoundBetween(const Lower& lower, const Upper& upper) && {
+        this->withZeroBoundBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withZeroBoundIn(Inputs&& inputs) & {
+        query_.filterField("zero_bound", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withZeroBoundIn(Inputs&& inputs) && {
+        this->withZeroBoundIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withZeroBoundNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "zero_bound", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withZeroBoundNotIn(Inputs&& inputs) && {
+        this->withZeroBoundNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withZeroBound(request::FieldOperator op, Inputs&& inputs) & {
@@ -19478,6 +25865,136 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     SampleRecordRequest&& withZeroBoundAfter(const T& value) && {
         this->withZeroBoundAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeMaxIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "negative_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeMaxIs(const Input& value) && {
+        this->withNegativeMaxIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeMaxIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "negative_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeMaxIsNot(const Input& value) && {
+        this->withNegativeMaxIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeMaxGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "negative_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeMaxGreaterThan(const Input& value) && {
+        this->withNegativeMaxGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeMaxGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "negative_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeMaxGreaterThanOrEqualTo(const Input& value) && {
+        this->withNegativeMaxGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeMaxLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "negative_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeMaxLessThan(const Input& value) && {
+        this->withNegativeMaxLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeMaxLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "negative_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeMaxLessThanOrEqualTo(const Input& value) && {
+        this->withNegativeMaxLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withNegativeMaxBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "negative_max", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withNegativeMaxBetween(const Lower& lower, const Upper& upper) && {
+        this->withNegativeMaxBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withNegativeMaxIn(Inputs&& inputs) & {
+        query_.filterField(
+            "negative_max", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withNegativeMaxIn(Inputs&& inputs) && {
+        this->withNegativeMaxIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withNegativeMaxNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "negative_max", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withNegativeMaxNotIn(Inputs&& inputs) && {
+        this->withNegativeMaxNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -19543,6 +26060,135 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withSignedMaxIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "signed_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withSignedMaxIs(const Input& value) && {
+        this->withSignedMaxIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withSignedMaxIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "signed_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withSignedMaxIsNot(const Input& value) && {
+        this->withSignedMaxIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withSignedMaxGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "signed_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withSignedMaxGreaterThan(const Input& value) && {
+        this->withSignedMaxGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withSignedMaxGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "signed_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withSignedMaxGreaterThanOrEqualTo(const Input& value) && {
+        this->withSignedMaxGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withSignedMaxLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "signed_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withSignedMaxLessThan(const Input& value) && {
+        this->withSignedMaxLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withSignedMaxLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "signed_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withSignedMaxLessThanOrEqualTo(const Input& value) && {
+        this->withSignedMaxLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withSignedMaxBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "signed_max", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withSignedMaxBetween(const Lower& lower, const Upper& upper) && {
+        this->withSignedMaxBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withSignedMaxIn(Inputs&& inputs) & {
+        query_.filterField("signed_max", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withSignedMaxIn(Inputs&& inputs) && {
+        this->withSignedMaxIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withSignedMaxNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "signed_max", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withSignedMaxNotIn(Inputs&& inputs) && {
+        this->withSignedMaxNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withSignedMax(request::FieldOperator op, Inputs&& inputs) & {
@@ -19605,6 +26251,134 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withWideMaxIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "wide_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withWideMaxIs(const Input& value) && {
+        this->withWideMaxIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withWideMaxIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "wide_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withWideMaxIsNot(const Input& value) && {
+        this->withWideMaxIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withWideMaxGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "wide_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withWideMaxGreaterThan(const Input& value) && {
+        this->withWideMaxGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withWideMaxGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "wide_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withWideMaxGreaterThanOrEqualTo(const Input& value) && {
+        this->withWideMaxGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withWideMaxLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "wide_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withWideMaxLessThan(const Input& value) && {
+        this->withWideMaxLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withWideMaxLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "wide_max", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withWideMaxLessThanOrEqualTo(const Input& value) && {
+        this->withWideMaxLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withWideMaxBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "wide_max", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withWideMaxBetween(const Lower& lower, const Upper& upper) && {
+        this->withWideMaxBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withWideMaxIn(Inputs&& inputs) & {
+        query_.filterField("wide_max", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withWideMaxIn(Inputs&& inputs) && {
+        this->withWideMaxIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withWideMaxNotIn(Inputs&& inputs) & {
+        query_.filterField("wide_max", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withWideMaxNotIn(Inputs&& inputs) && {
+        this->withWideMaxNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withWideMax(request::FieldOperator op, Inputs&& inputs) & {
@@ -19664,6 +26438,150 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     SampleRecordRequest&& withWideMaxAfter(const T& value) && {
         this->withWideMaxAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeBoundSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "negative_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeBoundSoundingLike(const Input& value) && {
+        this->withNegativeBoundSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeBoundIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "negative_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeBoundIs(const Input& value) && {
+        this->withNegativeBoundIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeBoundIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "negative_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeBoundIsNot(const Input& value) && {
+        this->withNegativeBoundIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeBoundGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "negative_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeBoundGreaterThan(const Input& value) && {
+        this->withNegativeBoundGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeBoundGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "negative_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeBoundGreaterThanOrEqualTo(const Input& value) && {
+        this->withNegativeBoundGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeBoundLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "negative_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeBoundLessThan(const Input& value) && {
+        this->withNegativeBoundLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withNegativeBoundLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "negative_bound", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withNegativeBoundLessThanOrEqualTo(const Input& value) && {
+        this->withNegativeBoundLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withNegativeBoundBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "negative_bound", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withNegativeBoundBetween(const Lower& lower, const Upper& upper) && {
+        this->withNegativeBoundBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withNegativeBoundIn(Inputs&& inputs) & {
+        query_.filterField(
+            "negative_bound", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withNegativeBoundIn(Inputs&& inputs) && {
+        this->withNegativeBoundIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withNegativeBoundNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "negative_bound", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withNegativeBoundNotIn(Inputs&& inputs) && {
+        this->withNegativeBoundNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -19730,6 +26648,134 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withAmountIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "amount", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withAmountIs(const Input& value) && {
+        this->withAmountIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withAmountIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "amount", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withAmountIsNot(const Input& value) && {
+        this->withAmountIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withAmountGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "amount", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withAmountGreaterThan(const Input& value) && {
+        this->withAmountGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withAmountGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "amount", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withAmountGreaterThanOrEqualTo(const Input& value) && {
+        this->withAmountGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withAmountLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "amount", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withAmountLessThan(const Input& value) && {
+        this->withAmountLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withAmountLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "amount", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withAmountLessThanOrEqualTo(const Input& value) && {
+        this->withAmountLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withAmountBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "amount", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withAmountBetween(const Lower& lower, const Upper& upper) && {
+        this->withAmountBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withAmountIn(Inputs&& inputs) & {
+        query_.filterField("amount", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withAmountIn(Inputs&& inputs) && {
+        this->withAmountIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withAmountNotIn(Inputs&& inputs) & {
+        query_.filterField("amount", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withAmountNotIn(Inputs&& inputs) && {
+        this->withAmountNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withAmount(request::FieldOperator op, Inputs&& inputs) & {
@@ -19792,6 +26838,134 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withHeightIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withHeightIs(const Input& value) && {
+        this->withHeightIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withHeightIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withHeightIsNot(const Input& value) && {
+        this->withHeightIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withHeightGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withHeightGreaterThan(const Input& value) && {
+        this->withHeightGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withHeightGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withHeightGreaterThanOrEqualTo(const Input& value) && {
+        this->withHeightGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withHeightLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withHeightLessThan(const Input& value) && {
+        this->withHeightLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withHeightLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withHeightLessThanOrEqualTo(const Input& value) && {
+        this->withHeightLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withHeightBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "height", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withHeightBetween(const Lower& lower, const Upper& upper) && {
+        this->withHeightBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withHeightIn(Inputs&& inputs) & {
+        query_.filterField("height", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withHeightIn(Inputs&& inputs) && {
+        this->withHeightIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withHeightNotIn(Inputs&& inputs) & {
+        query_.filterField("height", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withHeightNotIn(Inputs&& inputs) && {
+        this->withHeightNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withHeight(request::FieldOperator op, Inputs&& inputs) & {
@@ -19851,6 +27025,136 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     SampleRecordRequest&& withHeightAfter(const T& value) && {
         this->withHeightAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalCountIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "optional_count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalCountIs(const Input& value) && {
+        this->withOptionalCountIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalCountIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "optional_count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalCountIsNot(const Input& value) && {
+        this->withOptionalCountIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalCountGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "optional_count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalCountGreaterThan(const Input& value) && {
+        this->withOptionalCountGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalCountGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "optional_count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalCountGreaterThanOrEqualTo(const Input& value) && {
+        this->withOptionalCountGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalCountLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "optional_count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalCountLessThan(const Input& value) && {
+        this->withOptionalCountLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalCountLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "optional_count", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalCountLessThanOrEqualTo(const Input& value) && {
+        this->withOptionalCountLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withOptionalCountBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "optional_count", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withOptionalCountBetween(const Lower& lower, const Upper& upper) && {
+        this->withOptionalCountBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withOptionalCountIn(Inputs&& inputs) & {
+        query_.filterField(
+            "optional_count", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withOptionalCountIn(Inputs&& inputs) && {
+        this->withOptionalCountIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withOptionalCountNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "optional_count", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withOptionalCountNotIn(Inputs&& inputs) && {
+        this->withOptionalCountNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -19917,6 +27221,134 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withDayIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withDayIs(const Input& value) && {
+        this->withDayIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withDayIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withDayIsNot(const Input& value) && {
+        this->withDayIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withDayGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withDayGreaterThan(const Input& value) && {
+        this->withDayGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withDayGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withDayGreaterThanOrEqualTo(const Input& value) && {
+        this->withDayGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withDayLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withDayLessThan(const Input& value) && {
+        this->withDayLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withDayLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withDayLessThanOrEqualTo(const Input& value) && {
+        this->withDayLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withDayBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "day", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withDayBetween(const Lower& lower, const Upper& upper) && {
+        this->withDayBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withDayIn(Inputs&& inputs) & {
+        query_.filterField("day", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withDayIn(Inputs&& inputs) && {
+        this->withDayIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withDayNotIn(Inputs&& inputs) & {
+        query_.filterField("day", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withDayNotIn(Inputs&& inputs) && {
+        this->withDayNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withDay(request::FieldOperator op, Inputs&& inputs) & {
@@ -19976,6 +27408,136 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     SampleRecordRequest&& withDayAfter(const T& value) && {
         this->withDayAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalDayIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "optional_day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalDayIs(const Input& value) && {
+        this->withOptionalDayIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalDayIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "optional_day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalDayIsNot(const Input& value) && {
+        this->withOptionalDayIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalDayGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "optional_day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalDayGreaterThan(const Input& value) && {
+        this->withOptionalDayGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalDayGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "optional_day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalDayGreaterThanOrEqualTo(const Input& value) && {
+        this->withOptionalDayGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalDayLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "optional_day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalDayLessThan(const Input& value) && {
+        this->withOptionalDayLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalDayLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "optional_day", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalDayLessThanOrEqualTo(const Input& value) && {
+        this->withOptionalDayLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withOptionalDayBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "optional_day", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withOptionalDayBetween(const Lower& lower, const Upper& upper) && {
+        this->withOptionalDayBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withOptionalDayIn(Inputs&& inputs) & {
+        query_.filterField(
+            "optional_day", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withOptionalDayIn(Inputs&& inputs) && {
+        this->withOptionalDayIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withOptionalDayNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "optional_day", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withOptionalDayNotIn(Inputs&& inputs) && {
+        this->withOptionalDayNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -20041,6 +27603,135 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRecordedAtIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRecordedAtIs(const Input& value) && {
+        this->withRecordedAtIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRecordedAtIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRecordedAtIsNot(const Input& value) && {
+        this->withRecordedAtIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRecordedAtGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRecordedAtGreaterThan(const Input& value) && {
+        this->withRecordedAtGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRecordedAtGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRecordedAtGreaterThanOrEqualTo(const Input& value) && {
+        this->withRecordedAtGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRecordedAtLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRecordedAtLessThan(const Input& value) && {
+        this->withRecordedAtLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRecordedAtLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRecordedAtLessThanOrEqualTo(const Input& value) && {
+        this->withRecordedAtLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withRecordedAtBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "recorded_at", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withRecordedAtBetween(const Lower& lower, const Upper& upper) && {
+        this->withRecordedAtBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withRecordedAtIn(Inputs&& inputs) & {
+        query_.filterField("recorded_at", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withRecordedAtIn(Inputs&& inputs) && {
+        this->withRecordedAtIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withRecordedAtNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "recorded_at", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withRecordedAtNotIn(Inputs&& inputs) && {
+        this->withRecordedAtNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withRecordedAt(request::FieldOperator op, Inputs&& inputs) & {
@@ -20100,6 +27791,136 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     SampleRecordRequest&& withRecordedAtAfter(const T& value) && {
         this->withRecordedAtAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalRecordedAtIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "optional_recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalRecordedAtIs(const Input& value) && {
+        this->withOptionalRecordedAtIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalRecordedAtIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "optional_recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalRecordedAtIsNot(const Input& value) && {
+        this->withOptionalRecordedAtIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalRecordedAtGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "optional_recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalRecordedAtGreaterThan(const Input& value) && {
+        this->withOptionalRecordedAtGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalRecordedAtGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "optional_recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalRecordedAtGreaterThanOrEqualTo(const Input& value) && {
+        this->withOptionalRecordedAtGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalRecordedAtLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "optional_recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalRecordedAtLessThan(const Input& value) && {
+        this->withOptionalRecordedAtLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalRecordedAtLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "optional_recorded_at", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalRecordedAtLessThanOrEqualTo(const Input& value) && {
+        this->withOptionalRecordedAtLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withOptionalRecordedAtBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "optional_recorded_at", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withOptionalRecordedAtBetween(const Lower& lower, const Upper& upper) && {
+        this->withOptionalRecordedAtBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withOptionalRecordedAtIn(Inputs&& inputs) & {
+        query_.filterField(
+            "optional_recorded_at", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withOptionalRecordedAtIn(Inputs&& inputs) && {
+        this->withOptionalRecordedAtIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withOptionalRecordedAtNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "optional_recorded_at", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withOptionalRecordedAtNotIn(Inputs&& inputs) && {
+        this->withOptionalRecordedAtNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -20167,6 +27988,149 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withClockTextSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withClockTextSoundingLike(const Input& value) && {
+        this->withClockTextSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withClockTextIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withClockTextIs(const Input& value) && {
+        this->withClockTextIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withClockTextIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withClockTextIsNot(const Input& value) && {
+        this->withClockTextIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withClockTextGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withClockTextGreaterThan(const Input& value) && {
+        this->withClockTextGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withClockTextGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withClockTextGreaterThanOrEqualTo(const Input& value) && {
+        this->withClockTextGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withClockTextLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withClockTextLessThan(const Input& value) && {
+        this->withClockTextLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withClockTextLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withClockTextLessThanOrEqualTo(const Input& value) && {
+        this->withClockTextLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withClockTextBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "clock_text", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withClockTextBetween(const Lower& lower, const Upper& upper) && {
+        this->withClockTextBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withClockTextIn(Inputs&& inputs) & {
+        query_.filterField("clock_text", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withClockTextIn(Inputs&& inputs) && {
+        this->withClockTextIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withClockTextNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "clock_text", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withClockTextNotIn(Inputs&& inputs) && {
+        this->withClockTextNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withClockText(request::FieldOperator op, Inputs&& inputs) & {
@@ -20226,6 +28190,150 @@ public:
         requires std::constructible_from<Value, Memory, const T&>
     SampleRecordRequest&& withClockTextAfter(const T& value) && {
         this->withClockTextAfter(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalClockTextSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "optional_clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalClockTextSoundingLike(const Input& value) && {
+        this->withOptionalClockTextSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalClockTextIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "optional_clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalClockTextIs(const Input& value) && {
+        this->withOptionalClockTextIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalClockTextIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "optional_clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalClockTextIsNot(const Input& value) && {
+        this->withOptionalClockTextIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalClockTextGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "optional_clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalClockTextGreaterThan(const Input& value) && {
+        this->withOptionalClockTextGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalClockTextGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "optional_clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalClockTextGreaterThanOrEqualTo(const Input& value) && {
+        this->withOptionalClockTextGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalClockTextLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "optional_clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalClockTextLessThan(const Input& value) && {
+        this->withOptionalClockTextLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withOptionalClockTextLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "optional_clock_text", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withOptionalClockTextLessThanOrEqualTo(const Input& value) && {
+        this->withOptionalClockTextLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withOptionalClockTextBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "optional_clock_text", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withOptionalClockTextBetween(const Lower& lower, const Upper& upper) && {
+        this->withOptionalClockTextBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withOptionalClockTextIn(Inputs&& inputs) & {
+        query_.filterField(
+            "optional_clock_text", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withOptionalClockTextIn(Inputs&& inputs) && {
+        this->withOptionalClockTextIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withOptionalClockTextNotIn(Inputs&& inputs) & {
+        query_.filterField(
+            "optional_clock_text", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withOptionalClockTextNotIn(Inputs&& inputs) && {
+        this->withOptionalClockTextNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -20292,6 +28400,134 @@ public:
         return std::move(*this);
     }
 
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRatioIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRatioIs(const Input& value) && {
+        this->withRatioIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRatioIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRatioIsNot(const Input& value) && {
+        this->withRatioIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRatioGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRatioGreaterThan(const Input& value) && {
+        this->withRatioGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRatioGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRatioGreaterThanOrEqualTo(const Input& value) && {
+        this->withRatioGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRatioLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRatioLessThan(const Input& value) && {
+        this->withRatioLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest& withRatioLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleRecordRequest&& withRatioLessThanOrEqualTo(const Input& value) && {
+        this->withRatioLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest& withRatioBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "ratio", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleRecordRequest&& withRatioBetween(const Lower& lower, const Upper& upper) && {
+        this->withRatioBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withRatioIn(Inputs&& inputs) & {
+        query_.filterField("ratio", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withRatioIn(Inputs&& inputs) && {
+        this->withRatioIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest& withRatioNotIn(Inputs&& inputs) & {
+        query_.filterField("ratio", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleRecordRequest&& withRatioNotIn(Inputs&& inputs) && {
+        this->withRatioNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
     template <std::ranges::input_range Inputs>
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     SampleRecordRequest& withRatio(request::FieldOperator op, Inputs&& inputs) & {
@@ -20355,13 +28591,13 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 class SampleLinkRequest {
-    template <bool, Entity>
+    template <bool, class>
     friend class PlatformRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class SampleRecordRequest;
-    template <bool, Entity>
+    template <bool, class>
     friend class SampleLinkRequest;
 
 public:
@@ -20387,6 +28623,12 @@ public:
         return query_.query();
     }
 
+    SelectQuery coreQuery() const
+        requires(!Purposed)
+    {
+        return query_.coreQuery();
+    }
+
     const Query& runtimeQuery() const
         requires(!Purposed)
     {
@@ -20399,6 +28641,36 @@ public:
         return query_.selection();
     }
 
+    auto relationSelections() const
+        requires(!Purposed)
+    {
+        return query_.relationSelections();
+    }
+
+    auto relationFilters() const
+        requires(!Purposed)
+    {
+        return query_.relationFilters();
+    }
+
+    auto childEnhancements() const
+        requires(!Purposed)
+    {
+        return query_.childEnhancements();
+    }
+
+    auto queryOptions() const
+        requires(!Purposed)
+    {
+        return query_.queryOptions();
+    }
+
+    SelectQuery intoQuery() &&
+        requires(!Purposed)
+    {
+        return std::move(query_).intoQuery();
+    }
+
     SampleLinkRequest<true, Result> purpose(std::string_view text) const& {
         return SampleLinkRequest<true, Result>(query_.purpose(text));
     }
@@ -20407,12 +28679,12 @@ public:
         return SampleLinkRequest<true, Result>(std::move(query_).purpose(text));
     }
 
-    template <Entity Return>
+    template <class Return>
     SampleLinkRequest<Purposed, Return> returnType() const& {
         return SampleLinkRequest<Purposed, Return>(query_.template returnType<Return>());
     }
 
-    template <Entity Return>
+    template <class Return>
     SampleLinkRequest<Purposed, Return> returnType() && {
         return SampleLinkRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
     }
@@ -20564,6 +28836,20 @@ public:
 
     SampleLinkRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
         this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest& matchTypes(Inputs&& inputs) & {
+        query_.matchTypes(std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest&& matchTypes(Inputs&& inputs) && {
+        this->matchTypes(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -21022,15 +29308,35 @@ public:
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     SampleLinkRequest& enhanceChild(const ChildRequest& child) & {
-        query_.enhanceChild(child.query_);
+        query_.enhanceChild(child.runtimeQuery());
         return *this;
     }
 
     template <class ChildRequest>
-        requires requires(const ChildRequest& child) { child.query_.selection(); }
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
     SampleLinkRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& enhanceChild(const SelectQuery& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    SampleLinkRequest&& enhanceChild(const SelectQuery& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& enhanceChild(const request::QuerySelection& child) & {
+        query_.enhanceChild(child);
+        return *this;
+    }
+
+    SampleLinkRequest&& enhanceChild(const request::QuerySelection& child) && {
         this->enhanceChild(child);
         return std::move(*this);
     }
@@ -21199,73 +29505,73 @@ public:
     }
 
     auto& executeForList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForOne(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForFirst(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForFirst(user_context);
     }
 
     auto& executeForCount(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForCount(user_context);
     }
 
     auto& executeForExists(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForExists(user_context);
     }
 
     auto& executeForStream(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForStream(user_context);
     }
 
     auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForPage(user_context, offset, limit);
     }
 
     auto& execute(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForOne(user_context);
     }
 
     auto& executeForEntityList(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForList(user_context);
     }
 
     auto& executeForRows(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.executeForRows(user_context);
     }
 
     SampleLink& newEntity(UserContext& user_context) const
-        requires Purposed
+        requires Purposed && Entity<Result>
     {
         return query_.newEntity(user_context);
     }
@@ -21280,6 +29586,713 @@ public:
 
     SampleLinkRequest rebindGlobal(UserContext& user_context) const {
         return SampleLinkRequest(query_.rebindGlobal(user_context));
+    }
+
+    template <request::EntityReference Reference>
+    SampleLinkRequest& filterByFirstRecord(Reference&& value) & {
+        query_.andFilter(
+            Expr::eq(memory_resource(),
+                     "first_record_id",
+                     request::entity_id_value(memory_resource(), std::forward<Reference>(value))));
+        return *this;
+    }
+
+    template <request::EntityReference Reference>
+    SampleLinkRequest&& filterByFirstRecord(Reference&& value) && {
+        this->filterByFirstRecord(std::forward<Reference>(value));
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& selectFirstRecordWith(const ChildRequest& child) & {
+        query_.selectRelation("first_record", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& selectFirstRecordWith(const ChildRequest& child) && {
+        this->selectFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& selectFirstRecordWith(const SelectQuery& child) & {
+        query_.selectRelation("first_record", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& selectFirstRecordWith(const SelectQuery& child) && {
+        this->selectFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& selectFirstRecordWith(const request::QuerySelection& child) & {
+        query_.selectRelation("first_record", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& selectFirstRecordWith(const request::QuerySelection& child) && {
+        this->selectFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    template <request::EntityReference Reference>
+    SampleLinkRequest& filterBySecondRecord(Reference&& value) & {
+        query_.andFilter(
+            Expr::eq(memory_resource(),
+                     "second_record_id",
+                     request::entity_id_value(memory_resource(), std::forward<Reference>(value))));
+        return *this;
+    }
+
+    template <request::EntityReference Reference>
+    SampleLinkRequest&& filterBySecondRecord(Reference&& value) && {
+        this->filterBySecondRecord(std::forward<Reference>(value));
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& selectSecondRecordWith(const ChildRequest& child) & {
+        query_.selectRelation("second_record", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& selectSecondRecordWith(const ChildRequest& child) && {
+        this->selectSecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& selectSecondRecordWith(const SelectQuery& child) & {
+        query_.selectRelation("second_record", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& selectSecondRecordWith(const SelectQuery& child) && {
+        this->selectSecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& selectSecondRecordWith(const request::QuerySelection& child) & {
+        query_.selectRelation("second_record", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& selectSecondRecordWith(const request::QuerySelection& child) && {
+        this->selectSecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& withFirstRecordMatching(const ChildRequest& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "first_record");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& withFirstRecordMatching(const ChildRequest& child) && {
+        this->withFirstRecordMatching(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& withFirstRecordMatching(const SelectQuery& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "first_record");
+        return *this;
+    }
+
+    SampleLinkRequest&& withFirstRecordMatching(const SelectQuery& child) && {
+        this->withFirstRecordMatching(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& withFirstRecordMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "first_record");
+        return *this;
+    }
+
+    SampleLinkRequest&& withFirstRecordMatching(const request::QuerySelection& child) && {
+        this->withFirstRecordMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& withoutFirstRecordMatching(const ChildRequest& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "first_record");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& withoutFirstRecordMatching(const ChildRequest& child) && {
+        this->withoutFirstRecordMatching(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& withoutFirstRecordMatching(const SelectQuery& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "first_record");
+        return *this;
+    }
+
+    SampleLinkRequest&& withoutFirstRecordMatching(const SelectQuery& child) && {
+        this->withoutFirstRecordMatching(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& withoutFirstRecordMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "first_record");
+        return *this;
+    }
+
+    SampleLinkRequest&& withoutFirstRecordMatching(const request::QuerySelection& child) && {
+        this->withoutFirstRecordMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& rollUpToFirstRecordWith(const ChildRequest& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "first_record");
+        query_.groupByObject("first_record", "first_record_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& rollUpToFirstRecordWith(const ChildRequest& child) && {
+        this->rollUpToFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& rollUpToFirstRecordWith(const SelectQuery& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "first_record");
+        query_.groupByObject("first_record", "first_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& rollUpToFirstRecordWith(const SelectQuery& child) && {
+        this->rollUpToFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& rollUpToFirstRecordWith(const request::QuerySelection& child) & {
+        query_.filterRelation("first_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "first_record");
+        query_.groupByObject("first_record", "first_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& rollUpToFirstRecordWith(const request::QuerySelection& child) && {
+        this->rollUpToFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& facetByFirstRecordAs(std::string_view facet_name,
+                                            const ChildRequest& child) & {
+        query_.facetBy("first_record", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& facetByFirstRecordAs(std::string_view facet_name,
+                                             const ChildRequest& child) && {
+        this->facetByFirstRecordAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& facetByFirstRecordAs(std::string_view facet_name,
+                                            const SelectQuery& child) & {
+        query_.facetBy("first_record", facet_name, child);
+        return *this;
+    }
+
+    SampleLinkRequest&& facetByFirstRecordAs(std::string_view facet_name,
+                                             const SelectQuery& child) && {
+        this->facetByFirstRecordAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& facetByFirstRecordAs(std::string_view facet_name,
+                                            const request::QuerySelection& child) & {
+        query_.facetBy("first_record", facet_name, child);
+        return *this;
+    }
+
+    SampleLinkRequest&& facetByFirstRecordAs(std::string_view facet_name,
+                                             const request::QuerySelection& child) && {
+        this->facetByFirstRecordAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& facetByFirstRecordAsWithOptions(std::string_view facet_name,
+                                                       const ChildRequest& child,
+                                                       bool include_all_facets) & {
+        query_.facetBy("first_record", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& facetByFirstRecordAsWithOptions(std::string_view facet_name,
+                                                        const ChildRequest& child,
+                                                        bool include_all_facets) && {
+        this->facetByFirstRecordAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& facetByFirstRecordAsWithOptions(std::string_view facet_name,
+                                                       const SelectQuery& child,
+                                                       bool include_all_facets) & {
+        query_.facetBy("first_record", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    SampleLinkRequest&& facetByFirstRecordAsWithOptions(std::string_view facet_name,
+                                                        const SelectQuery& child,
+                                                        bool include_all_facets) && {
+        this->facetByFirstRecordAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& facetByFirstRecordAsWithOptions(std::string_view facet_name,
+                                                       const request::QuerySelection& child,
+                                                       bool include_all_facets) & {
+        query_.facetBy("first_record", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    SampleLinkRequest&& facetByFirstRecordAsWithOptions(std::string_view facet_name,
+                                                        const request::QuerySelection& child,
+                                                        bool include_all_facets) && {
+        this->facetByFirstRecordAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& groupByFirstRecordWith(const ChildRequest& child) & {
+        query_.groupByObject("first_record", "first_record_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& groupByFirstRecordWith(const ChildRequest& child) && {
+        this->groupByFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& groupByFirstRecordWith(const SelectQuery& child) & {
+        query_.groupByObject("first_record", "first_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& groupByFirstRecordWith(const SelectQuery& child) && {
+        this->groupByFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& groupByFirstRecordWith(const request::QuerySelection& child) & {
+        query_.groupByObject("first_record", "first_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& groupByFirstRecordWith(const request::QuerySelection& child) && {
+        this->groupByFirstRecordWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& groupByFirstRecordWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("first_record", "first_record_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& groupByFirstRecordWithDetailsFrom(const ChildRequest& child) && {
+        this->groupByFirstRecordWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& groupByFirstRecordWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("first_record", "first_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& groupByFirstRecordWithDetailsFrom(const SelectQuery& child) && {
+        this->groupByFirstRecordWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& groupByFirstRecordWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("first_record", "first_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& groupByFirstRecordWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupByFirstRecordWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& withSecondRecordMatching(const ChildRequest& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "second_record");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& withSecondRecordMatching(const ChildRequest& child) && {
+        this->withSecondRecordMatching(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& withSecondRecordMatching(const SelectQuery& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "second_record");
+        return *this;
+    }
+
+    SampleLinkRequest&& withSecondRecordMatching(const SelectQuery& child) && {
+        this->withSecondRecordMatching(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& withSecondRecordMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "second_record");
+        return *this;
+    }
+
+    SampleLinkRequest&& withSecondRecordMatching(const request::QuerySelection& child) && {
+        this->withSecondRecordMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& withoutSecondRecordMatching(const ChildRequest& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              true,
+                              "second_record");
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& withoutSecondRecordMatching(const ChildRequest& child) && {
+        this->withoutSecondRecordMatching(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& withoutSecondRecordMatching(const SelectQuery& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "second_record");
+        return *this;
+    }
+
+    SampleLinkRequest&& withoutSecondRecordMatching(const SelectQuery& child) && {
+        this->withoutSecondRecordMatching(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& withoutSecondRecordMatching(const request::QuerySelection& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              true,
+                              "second_record");
+        return *this;
+    }
+
+    SampleLinkRequest&& withoutSecondRecordMatching(const request::QuerySelection& child) && {
+        this->withoutSecondRecordMatching(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& rollUpToSecondRecordWith(const ChildRequest& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child.runtimeQuery(),
+                              false,
+                              "second_record");
+        query_.groupByObject("second_record", "second_record_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& rollUpToSecondRecordWith(const ChildRequest& child) && {
+        this->rollUpToSecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& rollUpToSecondRecordWith(const SelectQuery& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "second_record");
+        query_.groupByObject("second_record", "second_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& rollUpToSecondRecordWith(const SelectQuery& child) && {
+        this->rollUpToSecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& rollUpToSecondRecordWith(const request::QuerySelection& child) & {
+        query_.filterRelation("second_record_id",
+                              "id",
+                              SampleRecord::entity_descriptor(memory_resource()),
+                              child,
+                              false,
+                              "second_record");
+        query_.groupByObject("second_record", "second_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& rollUpToSecondRecordWith(const request::QuerySelection& child) && {
+        this->rollUpToSecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& facetBySecondRecordAs(std::string_view facet_name,
+                                             const ChildRequest& child) & {
+        query_.facetBy("second_record", facet_name, child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& facetBySecondRecordAs(std::string_view facet_name,
+                                              const ChildRequest& child) && {
+        this->facetBySecondRecordAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& facetBySecondRecordAs(std::string_view facet_name,
+                                             const SelectQuery& child) & {
+        query_.facetBy("second_record", facet_name, child);
+        return *this;
+    }
+
+    SampleLinkRequest&& facetBySecondRecordAs(std::string_view facet_name,
+                                              const SelectQuery& child) && {
+        this->facetBySecondRecordAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& facetBySecondRecordAs(std::string_view facet_name,
+                                             const request::QuerySelection& child) & {
+        query_.facetBy("second_record", facet_name, child);
+        return *this;
+    }
+
+    SampleLinkRequest&& facetBySecondRecordAs(std::string_view facet_name,
+                                              const request::QuerySelection& child) && {
+        this->facetBySecondRecordAs(facet_name, child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& facetBySecondRecordAsWithOptions(std::string_view facet_name,
+                                                        const ChildRequest& child,
+                                                        bool include_all_facets) & {
+        query_.facetBy("second_record", facet_name, child.runtimeQuery(), include_all_facets);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& facetBySecondRecordAsWithOptions(std::string_view facet_name,
+                                                         const ChildRequest& child,
+                                                         bool include_all_facets) && {
+        this->facetBySecondRecordAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& facetBySecondRecordAsWithOptions(std::string_view facet_name,
+                                                        const SelectQuery& child,
+                                                        bool include_all_facets) & {
+        query_.facetBy("second_record", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    SampleLinkRequest&& facetBySecondRecordAsWithOptions(std::string_view facet_name,
+                                                         const SelectQuery& child,
+                                                         bool include_all_facets) && {
+        this->facetBySecondRecordAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& facetBySecondRecordAsWithOptions(std::string_view facet_name,
+                                                        const request::QuerySelection& child,
+                                                        bool include_all_facets) & {
+        query_.facetBy("second_record", facet_name, child, include_all_facets);
+        return *this;
+    }
+
+    SampleLinkRequest&& facetBySecondRecordAsWithOptions(std::string_view facet_name,
+                                                         const request::QuerySelection& child,
+                                                         bool include_all_facets) && {
+        this->facetBySecondRecordAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& groupBySecondRecordWith(const ChildRequest& child) & {
+        query_.groupByObject("second_record", "second_record_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& groupBySecondRecordWith(const ChildRequest& child) && {
+        this->groupBySecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& groupBySecondRecordWith(const SelectQuery& child) & {
+        query_.groupByObject("second_record", "second_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& groupBySecondRecordWith(const SelectQuery& child) && {
+        this->groupBySecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& groupBySecondRecordWith(const request::QuerySelection& child) & {
+        query_.groupByObject("second_record", "second_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& groupBySecondRecordWith(const request::QuerySelection& child) && {
+        this->groupBySecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest& groupBySecondRecordWithDetailsFrom(const ChildRequest& child) & {
+        query_.groupByObject("second_record", "second_record_id", child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    SampleLinkRequest&& groupBySecondRecordWithDetailsFrom(const ChildRequest& child) && {
+        this->groupBySecondRecordWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& groupBySecondRecordWithDetailsFrom(const SelectQuery& child) & {
+        query_.groupByObject("second_record", "second_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&& groupBySecondRecordWithDetailsFrom(const SelectQuery& child) && {
+        this->groupBySecondRecordWithDetailsFrom(child);
+        return std::move(*this);
+    }
+
+    SampleLinkRequest& groupBySecondRecordWithDetailsFrom(const request::QuerySelection& child) & {
+        query_.groupByObject("second_record", "second_record_id", child);
+        return *this;
+    }
+
+    SampleLinkRequest&&
+    groupBySecondRecordWithDetailsFrom(const request::QuerySelection& child) && {
+        this->groupBySecondRecordWithDetailsFrom(child);
+        return std::move(*this);
     }
 
     SampleLinkRequest& selectId() & {
@@ -23321,24 +32334,21 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& selectFirstRecordWith(const SampleRecordRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("first_record", child.query());
-        });
+        query_.selectRelation("first_record", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&& selectFirstRecordWith(const SampleRecordRequest<P, ChildResult>& child) && {
         this->selectFirstRecordWith(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& withFirstRecord(const SampleRecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -23350,7 +32360,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&& withFirstRecord(const SampleRecordRequest<P, ChildResult>& child) && {
         this->withFirstRecord(child);
@@ -23369,17 +32379,14 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& selectSecondRecordWith(const SampleRecordRequest<P, ChildResult>& child) & {
-        query_.requireCompatible(child.query_);
-        query_.mutate_selection([&](SelectQuery& selection) {
-            selection.relation_query("second_record", child.query());
-        });
+        query_.selectRelation("second_record", child.runtimeQuery());
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     selectSecondRecordWith(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23387,7 +32394,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& withSecondRecord(const SampleRecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -23399,14 +32406,14 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&& withSecondRecord(const SampleRecordRequest<P, ChildResult>& child) && {
         this->withSecondRecord(child);
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& withFirstRecordMatching(const SampleRecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -23416,7 +32423,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     withFirstRecordMatching(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23436,7 +32443,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&
     withoutFirstRecordMatching(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -23447,7 +32454,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     withoutFirstRecordMatching(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23467,7 +32474,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& facetByFirstRecordAs(std::string_view facet_name,
                                             const SampleRecordRequest<P, ChildResult>& child) & {
@@ -23478,7 +32485,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&& facetByFirstRecordAs(std::string_view facet_name,
                                              const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23486,7 +32493,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&
     facetByFirstRecordAsWithOptions(std::string_view facet_name,
@@ -23499,7 +32506,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     facetByFirstRecordAsWithOptions(std::string_view facet_name,
@@ -23509,7 +32516,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& groupByFirstRecordWith(const SampleRecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -23519,7 +32526,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     groupByFirstRecordWith(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23527,7 +32534,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&
     groupByFirstRecordWithDetailsFrom(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -23538,7 +32545,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     groupByFirstRecordWithDetailsFrom(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23574,7 +32581,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& rollUpToFirstRecordWith(const SampleRecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -23585,7 +32592,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     rollUpToFirstRecordWith(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23593,7 +32600,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&
     withSecondRecordMatching(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -23604,7 +32611,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     withSecondRecordMatching(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23624,7 +32631,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&
     withoutSecondRecordMatching(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -23635,7 +32642,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     withoutSecondRecordMatching(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23655,7 +32662,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& facetBySecondRecordAs(std::string_view facet_name,
                                              const SampleRecordRequest<P, ChildResult>& child) & {
@@ -23666,7 +32673,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&& facetBySecondRecordAs(std::string_view facet_name,
                                               const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23674,7 +32681,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&
     facetBySecondRecordAsWithOptions(std::string_view facet_name,
@@ -23687,7 +32694,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     facetBySecondRecordAsWithOptions(std::string_view facet_name,
@@ -23697,7 +32704,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest& groupBySecondRecordWith(const SampleRecordRequest<P, ChildResult>& child) & {
         query_.requireCompatible(child.query_);
@@ -23707,7 +32714,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     groupBySecondRecordWith(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23715,7 +32722,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&
     groupBySecondRecordWithDetailsFrom(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -23726,7 +32733,7 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     groupBySecondRecordWithDetailsFrom(const SampleRecordRequest<P, ChildResult>& child) && {
@@ -23762,7 +32769,7 @@ public:
         return std::move(*this);
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&
     rollUpToSecondRecordWith(const SampleRecordRequest<P, ChildResult>& child) & {
@@ -23774,11 +32781,67 @@ public:
         return *this;
     }
 
-    template <bool P, Entity ChildResult>
+    template <bool P, class ChildResult>
         requires(!P)
     SampleLinkRequest&&
     rollUpToSecondRecordWith(const SampleRecordRequest<P, ChildResult>& child) && {
         this->rollUpToSecondRecordWith(child);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withIdIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withIdIs(const Input& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withIdIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "id", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withIdIsNot(const Input& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest& withIdIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest&& withIdIn(Inputs&& inputs) && {
+        this->withIdIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest& withIdNotIn(Inputs&& inputs) & {
+        query_.filterField("id", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest&& withIdNotIn(Inputs&& inputs) && {
+        this->withIdNotIn(std::forward<Inputs>(inputs));
         return std::move(*this);
     }
 
@@ -23800,6 +32863,148 @@ public:
         requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
     Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
         return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withNameSoundingLike(const Input& value) & {
+        query_.andFilter(Expr::sound_like(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withNameSoundingLike(const Input& value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withNameIs(const Input& value) & {
+        query_.andFilter(Expr::eq(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withNameIs(const Input& value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withNameIsNot(const Input& value) & {
+        query_.andFilter(Expr::ne(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withNameIsNot(const Input& value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withNameGreaterThan(const Input& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withNameGreaterThan(const Input& value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withNameGreaterThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::gte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withNameGreaterThanOrEqualTo(const Input& value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withNameLessThan(const Input& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withNameLessThan(const Input& value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest& withNameLessThanOrEqualTo(const Input& value) & {
+        query_.andFilter(Expr::lte(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class Input>
+        requires std::constructible_from<Value, Memory, const Input&>
+    SampleLinkRequest&& withNameLessThanOrEqualTo(const Input& value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleLinkRequest& withNameBetween(const Lower& lower, const Upper& upper) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", lower, upper));
+        return *this;
+    }
+
+    template <class Lower, class Upper>
+        requires std::constructible_from<Value, Memory, const Lower&> &&
+                 std::constructible_from<Value, Memory, const Upper&>
+    SampleLinkRequest&& withNameBetween(const Lower& lower, const Upper& upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest& withNameIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::In, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest&& withNameIn(Inputs&& inputs) && {
+        this->withNameIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest& withNameNotIn(Inputs&& inputs) & {
+        query_.filterField("name", request::FieldOperator::NotIn, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    SampleLinkRequest&& withNameNotIn(Inputs&& inputs) && {
+        this->withNameNotIn(std::forward<Inputs>(inputs));
+        return std::move(*this);
     }
 
     template <std::ranges::input_range Inputs>
@@ -23865,18 +33070,18 @@ public:
     }
 };
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 PlatformRequest<Purposed, Result>& PlatformRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 SampleRecordRequest<Purposed, Result>&
 SampleRecordRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;
 }
 
-template <bool Purposed, Entity Result>
+template <bool Purposed, class Result>
 SampleLinkRequest<Purposed, Result>&
 SampleLinkRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
     return *this;

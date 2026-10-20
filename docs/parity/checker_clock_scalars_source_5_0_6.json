@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "cases": 36,
+  "field_outcomes": 828,
+  "comparison_exit_code": 0,
+  "output": "Configured scalar clock Checkers: 36 cases / 828 field outcomes match\n",
+  "original_generated_files_changed": false,
+  "reference_registry_versions_preserved": true,
+  "reference_registry_checksums_preserved": true,
+  "normalization": "none",
+  "source_scope": "Original complete entity/Checker files imported by path; complete original crate retains eight Boolean request errors. No request/SQL/save acceptance claim.",
+  "complete_capability_acceptance": false,
+  "hashes": {
+    "scripts/verify_checker_clock_scalars_5_0_6.py": "2a473393bb62bfae504b9b0a9be22529910deffea6c2408bbad8fb0c86157ce5",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/rust_checker_clock_scalars_5_0_6/Cargo.toml": "130b10da2fc50f13939ebb5716ccc5d9cd38f68cbaf5dc6d4aee850edca425e8",
+    "tests/parity/rust_checker_clock_scalars_5_0_6/Cargo.lock": "8b33d28f9266ef72d16b0a41793d13bf14aed2c59771e117d888490d9ceb08b2",
+    "tests/parity/rust_checker_clock_scalars_5_0_6/lib.rs": "7e19030f921855fc0ec6a7dca7bd708fc30f411d54daacd7f9ce0c18cc69378b",
+    "tests/parity/checker_clock_scalars_5_0_6.rs": "91a4d98e3336489c0ab3483d634798123bfbee5121791673a761e8d9684fb9e7",
+    "tests/parity/checker_clock_scalars_probe.cpp": "3b7b7a76a57d66dda16c8047540789ed08ed0b9da22ae4ddb340397ff6d18191",
+    "tests/parity/compare_checker_clock_scalars_5_0_6.py": "98afb38bc499bb520dfc896e65f21e041f17bb4e94ea02e38a6c09effcaf4133",
+    "tests/parity/checker_clock_scalars_5_0_6_cases.json.gz": "4ced4fbf512c171fbee99e13b443b7733cf88167047ed58442a2768bfe793e22",
+    "tests/generator/parity/checker_clock_scalars_rust/PROVENANCE.json": "db40171f58f472f752b5151e98bd7f1b61a0a66ff6a8d17b4b1762b5dae67147",
+    "tests/generator/parity/checker_clock_scalars_rust/lib/src/note/entity.rs": "6e19d25407f0057e62cfd8ed20c8f2c9a844cbdd09998487b6d7d50bca0654ef",
+    "tests/generator/parity/checker_clock_scalars_rust/lib/src/note/checker.rs": "9927e50bb4a428674d59cf25c9e58f2fec41c50c9aa19e183ec4c44aed53d0be"
+  }
+}

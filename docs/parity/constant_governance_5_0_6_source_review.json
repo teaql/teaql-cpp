@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "review": [
+    {
+      "path": ".reference/teaql-rs/teaql-runtime/src/entity_save.rs",
+      "sha256": "ff04761be7223d57174a3ce3ed315f87a86ec728e48117e2a3ffb229a6427e5b",
+      "responsibility": "Generic AuditedSaveExt branches to the ledger only for pending/loaded dynamic fields; otherwise extracts, checks and plans a graph."
+    },
+    {
+      "path": ".reference/teaql-rs/teaql-runtime/src/mutation_policy.rs",
+      "sha256": "f571ff2deb5ecadf3217383f944b08b250874fca98fd9b0b6de86096f8cd0931",
+      "responsibility": "Graph policy uses planned create values/version; ledger policy uses pending changes and original-version state."
+    },
+    {
+      "path": "tests/generator/parity/constants_numeric_rust/lib/src/runtime.rs",
+      "sha256": "1860c1188a3db8be6d39fa046074cbe6724a6299a8d3862b8a650f7bda123dfc",
+      "responsibility": "Unmodified root/constant initialization calls generic AuditedSaveExt::save, not save_audited_ledger_entity."
+    },
+    {
+      "path": "tests/generator/parity/constants_catalog_rust/lib/src/runtime.rs",
+      "sha256": "116b85c7ad8b13943458d96f011a1719e84cc4f2d97769075c5141a778c0fb93",
+      "responsibility": "Unmodified catalog initialization follows the same generic audited-save entry."
+    },
+    {
+      "path": "teaql_runtime/include/teaql/runtime/generated_bootstrap.hpp",
+      "sha256": "3808be0d68f89ef68d38d68ceeb399a19e2cf3914f01d2d896ec2a490effb354",
+      "responsibility": "Recipes delegate to the existing generic automatic-save operation; generated business ledger facade remains intact."
+    }
+  ],
+  "initial_mismatches": 576,
+  "matrix_size": 960,
+  "initial_gap_record": "docs/parity/constant_governance_5_0_6_initial_gaps.json",
+  "adaptation": "Bootstrap bypasses the generated-business save facade to preserve the source generic-save path; no modified frozen source, generated artifact or comparison normalization.",
+  "qualification": "Declared 960 cases reproduce against live original source and native, with targeted native 7/7, sanitizer 3/3, module 2/2 and original 36-case module replay. Broader constant guard obligations remain open."
+}

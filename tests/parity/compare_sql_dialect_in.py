@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("sql_dialect_in_cases.json", "Direct SQL IN defaults"))
+    raise SystemExit(main("sql_dialect_in_5_0_6_cases.json.gz", "Direct SQL IN defaults"))

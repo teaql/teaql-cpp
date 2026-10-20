@@ -1,0 +1,262 @@
+[
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "rows",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      0
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "rows",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      18446744073709551614
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "rows",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      18446744073709551615
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "rows",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 2,
+    "offsets": [
+      18446744073709551614,
+      18446744073709551615
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "owned",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      0
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "owned",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      18446744073709551614
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "owned",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      18446744073709551615
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "owned",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 2,
+    "offsets": [
+      18446744073709551614,
+      18446744073709551615
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "aggregates",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      0
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "aggregates",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      18446744073709551614
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "aggregates",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      18446744073709551615
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "aggregates",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 2,
+    "offsets": [
+      18446744073709551614,
+      18446744073709551615
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "list",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      0
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "list",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      18446744073709551614
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "list",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 1,
+    "offsets": [
+      18446744073709551615
+    ]
+  },
+  {
+    "capture": false,
+    "cache": false,
+    "backend": false,
+    "aggregate": false,
+    "failure": false,
+    "mode": "list",
+    "continuous": true,
+    "purpose": "Inspect cursor boundaries",
+    "comment": "Verify continuous cursor boundary behavior",
+    "limit": null,
+    "calls": 2,
+    "offsets": [
+      18446744073709551614,
+      18446744073709551615
+    ]
+  }
+]

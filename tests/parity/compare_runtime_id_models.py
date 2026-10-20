@@ -15,7 +15,7 @@ def main():
     parser.add_argument("--rust")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    with gzip.open(Path(__file__).with_name("runtime_id_model_cases.json.gz"), "rt") as stream:
+    with gzip.open(Path(__file__).with_name("runtime_id_model_baseline_5_0_6_cases.json.gz"), "rt") as stream:
         corpus = json.load(stream)
     if corpus["baseline"] != json.loads((root / "upstream.lock.json").read_text())["commit"]:
         raise RuntimeError("Runtime ID observations belong to a different baseline")

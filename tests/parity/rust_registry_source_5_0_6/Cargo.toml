@@ -1,0 +1,42 @@
+[package]
+name="registry_source_506"
+version="0.0.0"
+edition="2024"
+publish=false
+
+[[bin]]
+name="runtime_registry_registry_source_506"
+path="../rust_values/src/bin/runtime_registry_oracle.rs"
+
+[[bin]]
+name="registry_debug_scope_registry_source_506"
+path="../rust_values/src/bin/registry_debug_scope_oracle.rs"
+
+[[bin]]
+name="entity_decoder_registry_source_506"
+path="../rust_private_save_5_0_6/src/bin/entity_decoder_5_0_6.rs"
+
+[[bin]]
+name="json_graph_decoder_registry_source_506"
+path="../rust_private_save_5_0_6/src/bin/json_graph_decoder_5_0_6.rs"
+
+[[bin]]
+name="runtime_graph_registry_source_506"
+path="../rust_field_layout/src/bin/runtime_graph_5_0_6.rs"
+
+[[bin]]
+name="schema_runtime_registry_source_506"
+path="../rust_values/src/bin/schema_runtime_oracle.rs"
+
+[[bin]]
+name="registry_smart_list_registry_source_506"
+path="../registry_smart_list_source_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+[workspace]

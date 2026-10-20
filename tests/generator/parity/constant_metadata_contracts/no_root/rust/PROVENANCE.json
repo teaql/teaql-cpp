@@ -1,0 +1,24 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/parity/constant_metadata_contracts/no_root/model.xml",
+  "model_sha256": "ff4754dff5a90772b7d289993d0d34b9f0d59be4a61e807e45c6d1c46e4a96bd",
+  "hand_edited": false,
+  "observer_sha256": "218cd94f595c1747eb9d7c7c7820032051cb3b7076d52bf4c9bf70c0a55c6409",
+  "files": {
+    "OBSERVATION.json": "9657616a8cf4d3fbf75df433402a32b0d5795f44c9cabd2932d83fee5c97557d",
+    "lib/Cargo.toml": "14c6d0491b6e7c788302983f9eed4ffe16b88e63231c9dc85ca34925fae215ee",
+    "lib/src/sample_data.rs": "0a46c2abb9231fe864f189d3be4c9f90b8c1f7db7b5b5c76451535573e1621f8",
+    "lib/src/request_support.rs": "df8bf1300bfac9a13f0066705176494bef0647b5e9d994b09c8948af47d47b9f",
+    "lib/src/q.rs": "ff6c3645871c53c0251f63a568e904c9727849a84f4183885c5adf5bc809961c",
+    "lib/src/e.rs": "ca183bbc7a47278f06aa23576d9c45f4b0fd96a57bc2cd605d956a5970b81d6f",
+    "lib/src/lib.rs": "0514f75fe674dbadaace848c909272379407a908dafda67681a87f29af150265",
+    "lib/src/runtime.rs": "ca3b6aece84dbc123fb14166bb40f86fc855a75432bfdc9d8c93a882c911a17a",
+    "lib/src/status/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/status/entity.rs": "8b77861a3f21f43f7969a26c060741dc970e15bb3ef04c1369bc04d18b60382d",
+    "lib/src/status/behavior.rs": "bae1119d9b55008cab29ef89cf2f849ff338fa806fbe4a944002fa9df914e11a",
+    "lib/src/status/checker.rs": "59429d10a6e5d5d8154e7e8b6759d044536fa9bf3ff9880a600a52e9bb7fcccb",
+    "lib/src/status/expression.rs": "dd7fbce921f766b63b7a205dde95ef0e9ff8bfa8b57de796e5306d8ea6a3fefa",
+    "lib/src/status/request.rs": "4ed10e3cce5407f802fb105f166b95431609a08ef412a1e50978fa98ee79b0ce"
+  }
+}

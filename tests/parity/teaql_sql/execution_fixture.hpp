@@ -50,6 +50,7 @@ private:
 
 enum class Mode {
     Success,
+    NoMatch,
     QueryFailure,
     PendingQuery,
     QueryPanic,
@@ -154,7 +155,8 @@ struct Write {
             return Result<std::uint64_t, String>::err(resource,
                                                       String("original write error", resource));
         }
-        return Result<std::uint64_t, String>::ok(resource, std::uint64_t(1));
+        return Result<std::uint64_t, String>::ok(
+            resource, controls.mode == Mode::NoMatch ? std::uint64_t(0) : std::uint64_t(1));
     }
 
     void finish_and_wait() noexcept {
@@ -331,7 +333,7 @@ inline MutationRequest batch(Memory r) {
         children.emplace_back(insert(r, id));
     }
     return MutationRequest(
-        std::allocator_arg, Allocator(r), std::move(children), "ported mutation execution fixture");
+        std::allocator_arg, Allocator(r), std::move(children), "audited provider conformance test");
 }
 
 inline void driver_error(const Error& error, std::string_view expected) {

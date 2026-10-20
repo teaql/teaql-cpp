@@ -291,6 +291,38 @@ static void unicode_quote_lifetime() {
           "explicit Global copy of quoted text survives User deletion");
 }
 
+static void grouped_partition_validation() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& dialect = user_context->make_resource<TestDialect>();
+    auto& entity = user_context->make<EntityDescriptor>("Metric");
+    entity.property("id", DataType::U64).id();
+    entity.property("owner", DataType::U64);
+    entity.property("category", DataType::Text);
+    auto& query = user_context->make<SelectQuery>("Metric");
+    query.group_by("owner")
+        .group_by("category")
+        .count_field("id", "rows")
+        .partition_by("owner")
+        .page(1, 1)
+        .order_expr_desc(Expr::count_all(r))
+        .having(Expr::binary(Expr::count_all(r), BinaryOp::Gte, Expr::value(r, std::uint64_t(2))));
+    auto compiled = dialect.compile_select(r, entity, query);
+    check(compiled.sql.find("GROUP BY owner, category HAVING (COUNT(*) >= ?)) AS") != String::npos,
+          "grouping and HAVING are retained inside the ranked relation query");
+    check(compiled.params.size() == 1 && compiled.params[0] == Value(r, std::uint64_t(2)),
+          "ranked HAVING retains its binding");
+    query.group_by("missing");
+    bool rejected = false;
+    try {
+        (void)dialect.compile_select(r, entity, query);
+    } catch (const SqlCompileError& error) {
+        rejected = error.code == SqlCompileError::Code::UnknownField;
+    }
+    check(rejected, "partitioning does not bypass grouped-field validation");
+}
+
 int main() {
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
@@ -299,6 +331,7 @@ int main() {
         destination_lifetime();
         schema_domains();
         unicode_quote_lifetime();
+        grouped_partition_validation();
         std::pmr::set_default_resource(previous);
         std::cout << "SQL dialect contracts passed\n";
     } catch (const SqlCompileError& e) {

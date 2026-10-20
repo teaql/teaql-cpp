@@ -1,0 +1,69 @@
+{
+  "source_runtime": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_generator": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "template_sha256": "d886a74d7636d774cd1744f4a4b78ca783a435cd89bb3719ec1cf9f6b344bc59",
+  "original_generated_file": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+  "original_generated_sha256": "4a9c067a846ef51294d20c36d216f00e3677dde3c0fb4c79640dded51e58a2b0",
+  "cpp_runtime": "teaql_runtime/include/teaql/runtime/generated_dynamic_json.hpp",
+  "cpp_runtime_sha256": "c0da0f5fba43efeeb9fd55ca000118e1abd1be75e4227d453636968d4f899055",
+  "functions": [
+    {
+      "function": "filter_with_json",
+      "line": 369,
+      "body_sha256": "ac35c5d5f65c4254129403d4a3f1e38bdb6795fee77ced915ad170ba117fa400",
+      "source_body": "{\n        self.merge_dynamic_json_expr(json_expr.into())\n    }"
+    },
+    {
+      "function": "merge_dynamic_json_expr",
+      "line": 373,
+      "body_sha256": "402866072da12c87076640f3d8c83c5e5abe45b31fd3dfe8fb921c1de743bbe1",
+      "source_body": "{\n        let json = serde_json::from_str::<JsonValue>(&json_expr)\n            .unwrap_or_else(|_| panic!(\"Input JSON format error: {json_expr}\"));\n        self.merge_dynamic_json(&json)\n    }"
+    },
+    {
+      "function": "merge_dynamic_json",
+      "line": 379,
+      "body_sha256": "e2f7a39f892f63d7e01ef58f1e8a6ed3cbc5cca2190a73e90aff6bd52179ba94",
+      "source_body": "{\n        let Some(object) = json.as_object() else {\n            return self;\n        };\n\n        for (field, value) in object {\n            if field.starts_with('_') {\n                continue;\n            }\n            self = self.apply_dynamic_json_filter(field, value);\n        }\n\n        self = self.apply_dynamic_json_order_by(object.get(\"_orderBy\"));\n\n        if let Some(offset) = dynamic_json_u64_field(object, \"_start\") {\n            self = self.skip(offset);\n        }\n        if let Some(size) = dynamic_json_u64_field(object, \"_size\") {\n            self = self.limit(size);\n        }\n\n        if let Some(page_size) = dynamic_json_u64_field(object, \"_pageSize\") {\n            self = self.limit(page_size);\n        }\n        if let Some(page_number) = dynamic_json_u64_field(object, \"_page\") {\n            if page_number > 0 {\n                let size = dynamic_json_u64_field(object, \"_pageSize\")\n                    .or_else(|| self.query.slice.as_ref().and_then(|slice| slice.limit))\n                    .unwrap_or(10);\n                let offset = page_number.saturating_sub(1).saturating_mul(size);\n                self = self.page_offset(offset, size);\n            }\n        }\n\n        self\n    }"
+    },
+    {
+      "function": "apply_dynamic_json_filter",
+      "line": 416,
+      "body_sha256": "601527e542844b7d698b836d1def43c428f158819c71de832b412740de68c77c",
+      "source_body": "{\n        if let Some((head, tail)) = field.split_once('.') {\n            self.apply_dynamic_json_chain_filter(head, tail, value)\n        } else if let Some(storage_field) = Self::dynamic_json_self_field(field) {\n            self.and_filter(dynamic_json_filter_expr(storage_field, value))\n        } else {\n            self\n        }\n    }"
+    },
+    {
+      "function": "apply_dynamic_json_order_by",
+      "line": 426,
+      "body_sha256": "62111b61bb868b27082e3b1e5873028c3c27e744aec34d84c018aa738f65e7bd",
+      "source_body": "{\n        match order_by {\n            Some(JsonValue::String(field)) => {\n                if let Some(storage_field) = Self::dynamic_json_self_field(field) {\n                    self.query = self.query.order_desc(storage_field);\n                }\n            }\n            Some(JsonValue::Object(order_by)) => {\n                self = self.apply_dynamic_json_single_order_by(order_by);\n            }\n            Some(JsonValue::Array(order_bys)) => {\n                for order_by in order_bys {\n                    if let Some(order_by) = order_by.as_object() {\n                        self = self.apply_dynamic_json_single_order_by(order_by);\n                    }\n                }\n            }\n            _ => {}\n        }\n        self\n    }"
+    },
+    {
+      "function": "apply_dynamic_json_single_order_by",
+      "line": 448,
+      "body_sha256": "92b97587a8363ebea377e4038a4af72d7819daa1cbc4f91ddce3291b42a63eb9",
+      "source_body": "{\n        let Some(field) = order_by.get(\"field\").and_then(JsonValue::as_str) else {\n            return self;\n        };\n        let Some(storage_field) = Self::dynamic_json_self_field(field) else {\n            return self;\n        };\n        if order_by\n            .get(\"useAsc\")\n            .and_then(JsonValue::as_bool)\n            .unwrap_or(false)\n        {\n            self.query = self.query.order_asc(storage_field);\n        } else {\n            self.query = self.query.order_desc(storage_field);\n        }\n        self\n    }"
+    },
+    {
+      "function": "dynamic_json_self_field",
+      "line": 470,
+      "body_sha256": "65d2c1af21224fab60e13881c9205046bbc90b78a8afa239030b340e69dbde0e",
+      "source_body": "{\n        match field {\n            \"id\" => Some(\"id\"),\n            \"name\" => Some(\"name\"),\n            \"email\" => Some(\"email\"),\n            \"version\" => Some(\"version\"),\n            \"platform\" | \"platform_id\" => Some(\"platform_id\"),\n            _ => None,\n        }\n    }"
+    },
+    {
+      "function": "apply_dynamic_json_chain_filter",
+      "line": 481,
+      "body_sha256": "14cf536e7c9114c3b5587373dfc7fd9bb562f00594ae641ba05ffb8d06539e4b",
+      "source_body": "{\n        let _ = (tail, value);\n        match head {\n            \"platform\" => {\n                self.with_platform_matching(\n                    crate::Q::platforms_minimal()\n                        .apply_dynamic_json_filter(tail, value),\n                )\n            }\n            \"profile\" => {\n                self.with_profile_matching(\n                    crate::Q::profiles_minimal()\n                        .apply_dynamic_json_filter(tail, value),\n                )\n            }\n            \"orders\" => {\n                self.with_orders_matching(\n                    crate::Q::orders_minimal()\n                        .apply_dynamic_json_filter(tail, value),\n                )\n            }\n            _ => self,\n        }\n    }"
+    }
+  ],
+  "review_scope": [
+    "JSON parse/error and non-object no-op; duplicate keys supplied by parser.",
+    "Object fields iterate in source order; only top-level underscore controls are skipped.",
+    "First-dot path split delegates trusted generated scalar/object/reverse recipes.",
+    "Ordering accepts self-field string/object/array forms, strict bool direction and ignores invalid fields/types.",
+    "Offset/limit/page-size/page precedence and saturating multiplication preserve existing selection.",
+    "Context allocation and explicit diagnostic lifetime replace owning Rust strings without extending User lifetime."
+  ],
+  "complete_capability_acceptance": false,
+  "note": "Body hashes and mappings accompany actual matrices; source inventory alone is not semantic acceptance."
+}

@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 7072,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 6,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "json_hydration_rust_parity",
+        "json_hydration_context_contracts",
+        "json_graph_decoder_rust_parity",
+        "json_graph_views_rust_parity",
+        "json_graph_views_context_contracts",
+        "entity_decoder_contracts"
+      ]
+    },
+    "sanitize": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "json_hydration_rust_parity",
+        "json_hydration_context_contracts",
+        "json_graph_views_context_contracts"
+      ]
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_json_hydration_context_contracts",
+        "module_json_hydration_rust_parity"
+      ]
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 121,
+  "catalog_exports": 1477,
+  "module_paths_exit_code": 0,
+  "module_dependencies_exit_code": 0,
+  "formatting": {
+    "handwritten_files": 1010,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "corpus_binding_inventory": {
+    "active_baseline": 147,
+    "historical_baseline_requires_replay": 63,
+    "custom_dispatcher_requires_review": 21
+  },
+  "source_files_sha256": {
+    "teaql_runtime/include/teaql/runtime/context.hpp": "22324f064870edbbdeb4109d7bd39df7620199b6eb9d22c9eabaac44909eb529",
+    "teaql_runtime/include/teaql/runtime/detail/json_hydration.hpp": "e0d9626126fae9ddcef089d05bf4c386583b36b6bd9cbf47615703a9ded3c27f",
+    "teaql_runtime/src/context/json.cpp": "baa8a94679ca699dc9053d862b9dd619212dab5e032cb86c087d041bd141306f",
+    "tests/parity/json_hydration_probe.cpp": "e0c9a1786ee4b28caccfeccdb399aa1af42a4750407ffe56e0f3585bd9f1f323",
+    "tests/support/json_hydration_fixture.hpp": "85a47e4a1d896d8297749f1d86638cc6de2ba71a491bc08778de39bea0fdfe20",
+    "tests/parity/rust_private_save_5_0_6/src/bin/json_hydration_5_0_6.rs": "999cfd8d3784cfdb1e40a2b2fd155df43cdb88d40e6904b974e3cb49684091e7",
+    "tests/parity/json_hydration_5_0_6_cases.json.gz": "8b091997e407d8e4638c271607035bb0bc1161cda6429b2f53b25382a902ace5"
+  },
+  "notice": "Focused Context scalar/graph presentation decoding and lifetime/module checkpoint. Generated facades, complete inheritance/dynamic/configuration and capabilities/P0-P7 remain open. No MIPS or physical-device validation in this checkpoint."
+}

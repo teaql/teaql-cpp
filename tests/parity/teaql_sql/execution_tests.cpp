@@ -9,7 +9,7 @@ static QueryRequest input(Fixture& f, bool capture) {
     query.filter(Expr::eq(f.resource, "name", "Riverside"))
         .limit(10)
         .comment("bounded diagnostic query")
-        .purpose("ported query execution fixture");
+        .purpose("verify provider query behavior");
     auto compiled = f.dialect.compile_select(f.resource, f.entity, query);
     check(compiled.params[0].try_text() == "Riverside" &&
               compiled.log_context.parameter_policies[0] == SqlParameterLogPolicy::Masked,

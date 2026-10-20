@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_observations": 189,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "original_165_corpus_bytes_preserved": true,
+  "profiles": {
+    "native": {
+      "passed": 7,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "sanitize": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "modules_native": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0
+    }
+  },
+  "compiler_gate": {
+    "status": "passed",
+    "cases": 57,
+    "positive": 17,
+    "negative": 40,
+    "failed": 0,
+    "exit_code": 0,
+    "seconds": 693.2,
+    "workers": 4,
+    "operation_local_pch": true,
+    "terminal_record": "docs/parity/generated_api_compiler_after_json_alias_5_0_6.json"
+  },
+  "no_pch_control": {
+    "passed": 2,
+    "failed": 0,
+    "exit_code": 0,
+    "positive": 1,
+    "negative": 1
+  },
+  "sanitizer_leak_scan": false,
+  "java": {
+    "passed": 37,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "generated_artifacts": {
+    "workspaces": 18,
+    "files": 216,
+    "reproduction_exit_code": 0
+  },
+  "canonical_consumer_bodies": 122,
+  "catalog_exports": 1479,
+  "formatting": {
+    "handwritten_files": 1012,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "teaql_core/include/teaql/core/meta.hpp": "5e0cc949d9b21644298a870a9dc51ecf59dec3b7817601b5ab31c564f392cb48",
+    "teaql_runtime/src/context/json.cpp": "be6490641058ff71c1f13aa4b19c0a92dd6ce9e5b4498b5356518bc68c3d64ad",
+    "scripts/verify_generated_type_errors.py": "7315b1f97dd4f161ed31e21f6b09be15c6c101fc78a6c37fa911380ef7b0958f",
+    "tests/parity/generated_json_column_alias_5_0_6_cases.json.gz": "bebf89961380d6077bb2aabd039e3d15c1d15787fe0f24ba10515ff885106578"
+  },
+  "notice": "Alias/ownership profile checkpoint; complete compiler result and model/configuration/capability qualification remain open. No MIPS or physical-device test."
+}

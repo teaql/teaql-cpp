@@ -1,0 +1,1717 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Complete authentic parser/producer/compiler observations; runtime qualification remains separate",
+  "cases": [
+    {
+      "case": "custom_unsigned",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "quantity",
+            "field_rust_type": "u64",
+            "type_rust_type": "u64",
+            "storage_type": "u64",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "quantity",
+            "field_rust_type": "u64",
+            "type_rust_type": "u64",
+            "storage_type": "u64",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0277",
+            "message": "can't compare `u64` with `&str`",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 267,
+                "label": "no implementation for `u64 == &str`"
+              }
+            ]
+          },
+          {
+            "code": "E0277",
+            "message": "can't compare `u64` with `&str`",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 285,
+                "label": "no implementation for `u64 == &str`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 78,
+                "label": "expected `u64`, found `String`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 181,
+                "label": "expected `String`, found `u64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 181,
+                "label": "expected `u64`, found `String`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 186,
+                "label": "expected `String`, found `u64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 186,
+                "label": "expected `u64`, found `String`"
+              }
+            ]
+          }
+        ]
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    },
+    {
+      "case": "equivalent_integer",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "integer",
+            "field_rust_type": "i64",
+            "type_rust_type": "i64",
+            "storage_type": "i64",
+            "root_seed": "7_i64",
+            "constant_seed": "7_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "integer",
+            "field_rust_type": "i64",
+            "type_rust_type": "i64",
+            "storage_type": "i64",
+            "root_seed": "7_i64",
+            "constant_seed": "7_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    },
+    {
+      "case": "equivalent_string_alias",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "word",
+            "field_rust_type": "String",
+            "type_rust_type": "String",
+            "storage_type": "String",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "word",
+            "field_rust_type": "String",
+            "type_rust_type": "String",
+            "storage_type": "String",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    },
+    {
+      "case": "field_parameter",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "integer",
+            "field_rust_type": "u64",
+            "storage_type": "i64",
+            "root_seed": "7_i64",
+            "constant_seed": "7_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "integer",
+            "field_rust_type": "u64",
+            "storage_type": "i64",
+            "root_seed": "7_i64",
+            "constant_seed": "7_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    },
+    {
+      "case": "integer_as_string",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "integer",
+            "field_rust_type": "String",
+            "type_rust_type": "String",
+            "storage_type": "String",
+            "root_seed": "7_i64",
+            "constant_seed": "7_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "integer",
+            "field_rust_type": "String",
+            "type_rust_type": "String",
+            "storage_type": "String",
+            "root_seed": "7_i64",
+            "constant_seed": "7_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0277",
+            "message": "can't compare `std::string::String` with `i64`",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 267,
+                "label": "no implementation for `std::string::String == i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0277",
+            "message": "can't compare `std::string::String` with `i64`",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 285,
+                "label": "no implementation for `std::string::String == i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 78,
+                "label": "expected `String`, found `i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 181,
+                "label": "expected `i64`, found `String`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 181,
+                "label": "expected `String`, found `i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 186,
+                "label": "expected `i64`, found `String`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 186,
+                "label": "expected `String`, found `i64`"
+              }
+            ]
+          }
+        ]
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    },
+    {
+      "case": "integer_as_unsigned",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "integer",
+            "field_rust_type": "u64",
+            "type_rust_type": "u64",
+            "storage_type": "u64",
+            "root_seed": "7_i64",
+            "constant_seed": "7_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "integer",
+            "field_rust_type": "u64",
+            "type_rust_type": "u64",
+            "storage_type": "u64",
+            "root_seed": "7_i64",
+            "constant_seed": "7_i64"
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 267,
+                "label": "expected `u64`, found `i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0277",
+            "message": "can't compare `u64` with `i64`",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 267,
+                "label": "no implementation for `u64 == i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 285,
+                "label": "expected `u64`, found `i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0277",
+            "message": "can't compare `u64` with `i64`",
+            "primary": [
+              {
+                "file": "runtime.rs",
+                "line": 285,
+                "label": "no implementation for `u64 == i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 78,
+                "label": "expected `u64`, found `i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 181,
+                "label": "expected `i64`, found `u64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 181,
+                "label": "expected `u64`, found `i64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 186,
+                "label": "expected `i64`, found `u64`"
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 186,
+                "label": "expected `u64`, found `i64`"
+              }
+            ]
+          }
+        ]
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    },
+    {
+      "case": "numeric_alias",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "quantity",
+            "storage_type": "String",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "quantity",
+            "storage_type": "String",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    },
+    {
+      "case": "string_alias",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "word",
+            "storage_type": "String",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "word",
+            "storage_type": "String",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    },
+    {
+      "case": "unsigned_recipe",
+      "rust": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 19
+      },
+      "cpp": {
+        "fields": [
+          {
+            "entity": "priority",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "platform",
+            "storage_type": "u64",
+            "root_seed": "\"platform(contextRoot=true)\"",
+            "constant_seed": "1_u64"
+          },
+          {
+            "entity": "priority",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"Basic\"",
+            "constant_seed": "\"Basic\""
+          },
+          {
+            "entity": "priority",
+            "field": "code",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"BASIC\"",
+            "constant_seed": "\"BASIC\""
+          },
+          {
+            "entity": "priority",
+            "field": "value",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"7\"",
+            "constant_seed": "\"7\""
+          },
+          {
+            "entity": "priority",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64",
+            "constant_seed": "1_i64"
+          },
+          {
+            "entity": "platform",
+            "field": "id",
+            "type_name": "id",
+            "storage_type": "u64",
+            "root_seed": "1_u64"
+          },
+          {
+            "entity": "platform",
+            "field": "name",
+            "type_name": "string",
+            "storage_type": "String",
+            "root_seed": "\"string()\""
+          },
+          {
+            "entity": "platform",
+            "field": "version",
+            "type_name": "version",
+            "storage_type": "i64",
+            "root_seed": "1_i64"
+          }
+        ],
+        "generated": true,
+        "file_count": 11
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp_compile": {
+        "exit_code": 0,
+        "diagnostics": ""
+      }
+    }
+  ]
+}

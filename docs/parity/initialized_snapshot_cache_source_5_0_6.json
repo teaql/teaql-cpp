@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_scope": "Unchanged original public core APIs; no private bridge, local implementation or source rewrite.",
+  "exact_semantic_cases": 80,
+  "ownership_adaptations": 1,
+  "comparison_exit_code": 0,
+  "output": "Initialized snapshot caches: 80 exact semantic cases and one explicit ownership adaptation\n",
+  "reference_registry_versions_preserved": true,
+  "reference_registry_checksums_preserved": true,
+  "diagnostics": "Actual raw original/native initialized output retained independently; randomized/address-bearing text is not compared or normalized.",
+  "complete_capability_acceptance": false,
+  "hashes": {
+    "scripts/verify_initialized_snapshot_cache_5_0_6.py": "6c36df1837a70a5fd2fedf3bf84fb41121ccc26bfe073524d76a2e3d09d11471",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/rust_initialized_snapshot_cache_5_0_6/Cargo.toml": "db53c85138849a604056bb22ec84f1cd23b7f7dbe95500a8c7d40128ca8a8396",
+    "tests/parity/rust_initialized_snapshot_cache_5_0_6/Cargo.lock": "6b1b318bd7338203d9166b359b93ebfc3523555013d3573eefaff569f72f82e8",
+    "tests/parity/initialized_snapshot_cache_5_0_6.rs": "d2952fbaf408726542d205f72701ba6d7ade6ef1d001537008d70f2b709525ef",
+    "tests/parity/initialized_snapshot_cache_probe.cpp": "043155ad72fc233653408303ac29717cbc116c37f10838a8b49da8bc86e3a8f7",
+    "tests/parity/compare_initialized_snapshot_cache_5_0_6.py": "de716355558da3818af35e8703321455301575a536446c455690c5b565174e80",
+    "tests/parity/initialized_snapshot_cache_5_0_6_cases.json.gz": "de3c4aace11a11e44dc52eba6bb956d9da13f82f1b9c5d813ff78be142d6e808",
+    ".reference/teaql-rs/teaql-core/src/load_state.rs": "8fd4ffed7debf7e5d63f5c7e194d1e9b68d29a76cbe21317a46a1ec13ca0cf31",
+    ".reference/teaql-rs/teaql-core/src/query.rs": "02fd38d61f2505cb7cafe74c383ca03cccbc5aab633982900bd167b55f65194f",
+    ".reference/teaql-rs/teaql-core/src/dynamic_properties.rs": "9640444b772bf8c26cbc300e2ee8f796db232316c9165c7d4f7efb46d375227e"
+  }
+}

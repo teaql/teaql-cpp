@@ -1,0 +1,312 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_path": ".reference/teaql_code_gen/generator/src/main/resources/generator/rust-lib-core/request/index.stg",
+  "source_sha256": "d886a74d7636d774cd1744f4a4b78ca783a435cd89bb3719ec1cf9f6b344bc59",
+  "methods": [
+    {
+      "group": "authorization",
+      "name": "authorize_query",
+      "start_line": 150,
+      "end_line": 170,
+      "sha256": "2c15749a1c8c005d78f42058308188a451c200370f0ef53cc3ab33148f7ffd37",
+      "source": "pub(crate) fn authorize_query(mut query: SelectQuery) -> Result\\<PurposedSelectQuery, RuntimeError\\> {\n    if query.comment.as_deref().map(str::trim).filter(|value| !value.is_empty()).is_none() {\n        return Err(RuntimeError::Graph(\n            \"generated query reached the repository without .comment(...)\".to_owned()\n        ));\n    }\n    let purpose_index = query\n        .trace_chain\n        .iter()\n        .rposition(|node| node.kind == teaql_core::TraceKind::Purpose)\n        .ok_or_else(|| RuntimeError::Graph(\n            \"generated query reached the repository without .purpose(...)\".to_owned()\n        ))?;\n    let purpose = query.trace_chain.remove(purpose_index).comment;\n    if purpose.trim().is_empty() {\n        return Err(RuntimeError::Graph(\n            \"generated query reached the repository without .purpose(...)\".to_owned()\n        ));\n    }\n    Ok(PurposedSelectQuery::new(query, purpose))\n}"
+    },
+    {
+      "group": "execution",
+      "name": "purpose",
+      "start_line": 710,
+      "end_line": 712,
+      "sha256": "eb7736e83b2e468302d5c00a348fbe896c99f55b989542d78b434e0c25c3b5be",
+      "source": "    pub fn purpose(self, purpose: impl Into\\<String\\>) -> crate::PurposedQuery\\<Self\\> {\n        crate::PurposedQuery::new(self, purpose)\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "_execute_for_list",
+      "start_line": 714,
+      "end_line": 748,
+      "sha256": "a9136be44cb312d70fecfb482c62c30b4aa195a1dd0ccb0dd5b72fca7b60ae34",
+      "source": "    pub(crate) async fn _execute_for_list\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<SmartList\\<R\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        let query_options = self.query_options.clone();\n        let relation_aggregates = runtime_relation_aggregates(&query_options);\n        let query = authorize_query(apply_runtime_metadata(\n            self.query,\n            &query_options,\n            &self.child_enhancements,\n        ))?;\n        let (mut rows, facets) = if query_options.facets.is_empty() {\n            let rows = context.fetch_entity_smart_list::\\<R\\>(\n                \"<objectDescriptor.rustStructName>\",\n                query,\n                relation_aggregates,\n            ).await?;\n            (rows, std::collections::BTreeMap::new())\n        } else {\n            let rows = context.fetch_entity_smart_list::\\<R\\>(\n                \"<objectDescriptor.rustStructName>\",\n                query.clone(),\n                relation_aggregates,\n            ).await?;\n            let facets = execute_facets(context, query.as_query(), &query_options)\n                .await?;\n            (rows, facets)\n        };\n        attach_facets(&mut rows, facets);\n        Ok(rows)\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "_execute_for_rows",
+      "start_line": 750,
+      "end_line": 763,
+      "sha256": "a66425df2e1352fcd5589ceae45d53f9c5b5b6b0b44d5754a44a1022edcb3a36",
+      "source": "    pub(crate) async fn _execute_for_rows\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<SmartList\\<teaql_core::CompactRow\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n    {\n        let query = authorize_query(apply_runtime_metadata(\n            self.query,\n            &self.query_options,\n            &self.child_enhancements,\n        ))?;\n        context.fetch_compact_smart_list(\"<objectDescriptor.rustStructName>\", &query).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "_execute_for_stream",
+      "start_line": 765,
+      "end_line": 779,
+      "sha256": "42bcd0c3f7ecc58a0a159cd37e43f0f8a52f458514f8c624ef580c6a0f43b76e",
+      "source": "    pub(crate) async fn _execute_for_stream\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<TeaqlEntityStream\\<'a, R, RuntimeError\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        let query = authorize_query(apply_runtime_metadata(\n            self.query,\n            &self.query_options,\n            &self.child_enhancements,\n        ))?;\n        Ok(context.fetch_entity_stream(\"<objectDescriptor.rustStructName>\", query))\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "_execute_for_first",
+      "start_line": 781,
+      "end_line": 791,
+      "sha256": "772a2cd2bdf67d867d110819feba57acfbe8301d961eba0fd26972a571ccb4a9",
+      "source": "    pub(crate) async fn _execute_for_first\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<Option\\<R\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        let rows = self.limit(1)._execute_for_list(context).await?;\n        Ok(rows.into_iter().next())\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "_execute_for_one",
+      "start_line": 793,
+      "end_line": 802,
+      "sha256": "5003280418e037fa2ce4e277d05fd9806e034b8d2c10b1364808671328e0eb0d",
+      "source": "    pub(crate) async fn _execute_for_one\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<Option\\<R\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self._execute_for_first(context).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "_execute_for_page",
+      "start_line": 805,
+      "end_line": 830,
+      "sha256": "037f4bce585fbd5201275b2cb7d57d230f01b47cfe7eb15a4dbcd2446877a018",
+      "source": "    pub(crate) async fn _execute_for_page\\<'a, C\\>(\n        self,\n        context: &'a C,\n        offset: u64,\n        limit: u64,\n    ) -> Result\\<SmartList\\<R\\>, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        if self.query.id_set_pagination.is_some() {\n            let mut rows = self\n                .clone()\n                .page_offset(offset, limit)\n                ._execute_for_list(context)\n                .await?;\n            if rows.total_count.is_none() {\n                rows.total_count = Some(self._execute_for_count(context).await?);\n            }\n            return Ok(rows);\n        }\n        let total_count = self.clone()._execute_for_count(context).await?;\n        let mut rows = self.page_offset(offset, limit)._execute_for_list(context).await?;\n        rows.total_count = Some(total_count);\n        Ok(rows)\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "_execute_for_count",
+      "start_line": 832,
+      "end_line": 857,
+      "sha256": "cd76126c0ea5955dd35bf023dd81fec25f7b7f4698bcc15bb953c1ee2c0831f2",
+      "source": "    pub(crate) async fn _execute_for_count\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<u64, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n    {\n        let query_options = self.query_options.clone();\n        let mut query = apply_runtime_metadata(\n            self.query,\n            &query_options,\n            &self.child_enhancements,\n        );\n        query.projection.clear();\n        query.expr_projection.clear();\n        query.order_by.clear();\n        query.slice = None;\n        query.relations.clear();\n        query = query.count(COUNT_ALIAS);\n        let query = authorize_query(query)?;\n        let rows = context.fetch_compact_rows(\"<objectDescriptor.rustStructName>\", &query).await?;\n        rows.first()\n            .and_then(|row| row.get(COUNT_ALIAS))\n            .and_then(teaql_core::Value::try_u64)\n            .ok_or_else(|| RuntimeError::Graph(format!(\"count result for <objectDescriptor.rustStructName> is missing or not numeric\")))\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "_execute_for_exists",
+      "start_line": 859,
+      "end_line": 875,
+      "sha256": "3cd59315c01be63ca2f2642f889002a480bd20ce487d816c3de52145051b6a80",
+      "source": "    pub(crate) async fn _execute_for_exists\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<bool, RuntimeError\\>\n    where\n        C: TeaqlRuntime + ?Sized,\n    {\n        let mut query = apply_runtime_metadata(\n            self.query,\n            &self.query_options,\n            &self.child_enhancements,\n        ).limit(1);\n        query.relations.clear();\n        let query = authorize_query(query)?;\n        let rows = context.fetch_compact_rows(\"<objectDescriptor.rustStructName>\", &query).await?;\n        Ok(!rows.is_empty())\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "execute_for_list",
+      "start_line": 1487,
+      "end_line": 1493,
+      "sha256": "58d64d17d32720873b195ee571a69f963b632b004a936752a0da0705e8be449c",
+      "source": "    pub async fn execute_for_list\\<'a, C\\>(self, context: &'a C) -> Result\\<teaql_core::SmartList\\<R\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_list(context).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "execute_for_rows",
+      "start_line": 1495,
+      "end_line": 1500,
+      "sha256": "d5a50d6cfcc8d0605e548651eb396123725b24935e51ffae2a8016bb5d2b542f",
+      "source": "    pub async fn execute_for_rows\\<'a, C\\>(self, context: &'a C) -> Result\\<teaql_core::SmartList\\<teaql_core::CompactRow\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n    {\n        self.into_inner_with_trace()._execute_for_rows(context).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "execute_for_stream",
+      "start_line": 1504,
+      "end_line": 1510,
+      "sha256": "2f0d060a5fabe4b6ac010432d15844d55f804639b41ccac7b5cb42b098ecd715",
+      "source": "    pub async fn execute_for_stream\\<'a, C\\>(self, context: &'a C) -> Result\\<crate::request_support::TeaqlEntityStream\\<'a, R, teaql_runtime::RuntimeError\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_stream(context).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "execute_for_first",
+      "start_line": 1512,
+      "end_line": 1518,
+      "sha256": "2f54601a5422532eb707db3c38ff9c59d0f8f1440ae4c6b314ba870a70ce6c34",
+      "source": "    pub async fn execute_for_first\\<'a, C\\>(self, context: &'a C) -> Result\\<Option\\<R\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_first(context).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "execute_for_one",
+      "start_line": 1520,
+      "end_line": 1526,
+      "sha256": "545c06839d3c956798cbc55ce9894138531cda2c2b38507f8d724fa31068bb72",
+      "source": "    pub async fn execute_for_one\\<'a, C\\>(self, context: &'a C) -> Result\\<Option\\<R\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_one(context).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "execute_for_page",
+      "start_line": 1464,
+      "end_line": 1475,
+      "sha256": "6bdf756e55f13a754ab9b73c422245acb0f128f973927c764eaea9056022451c",
+      "source": "    pub async fn execute_for_page\\<'a, C\\>(\n        self,\n        context: &'a C,\n        offset: u64,\n        limit: u64,\n    ) -> Result\\<teaql_core::SmartList\\<R\\>, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n        R: teaql_core::Entity + Send + 'a,\n    {\n        self.into_inner_with_trace()._execute_for_page(context, offset, limit).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "execute_for_count",
+      "start_line": 1529,
+      "end_line": 1534,
+      "sha256": "b9afab9aa76a0ab349bea42b7650094f7a9b57bceda5098e154b5987262957fb",
+      "source": "    pub async fn execute_for_count\\<'a, C\\>(self, context: &'a C) -> Result\\<u64, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n    {\n        self.into_inner_with_trace()._execute_for_count(context).await\n    }"
+    },
+    {
+      "group": "execution",
+      "name": "execute_for_exists",
+      "start_line": 1477,
+      "end_line": 1485,
+      "sha256": "62ace6119f86412294f2ee1c9ab56a839477f9453e474ae3e5661de0285aa200",
+      "source": "    pub async fn execute_for_exists\\<'a, C\\>(\n        self,\n        context: &'a C,\n    ) -> Result\\<bool, teaql_runtime::RuntimeError\\>\n    where\n        C: crate::TeaqlRuntime + ?Sized,\n    {\n        self.into_inner_with_trace()._execute_for_exists(context).await\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "limit",
+      "start_line": 1124,
+      "end_line": 1127,
+      "sha256": "56fbc75c0599a47a4c77fc790d2f96c5a700bc43fd259b613530e3f4db7eb765",
+      "source": "    pub fn limit(mut self, limit: u64) -> Self {\n        self.query = self.query.limit(limit);\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "stream",
+      "start_line": 1129,
+      "end_line": 1133,
+      "sha256": "60cf156bd93de38a5266442b243ce7bb37a595eb19bd74a6a2eb56d864d92ed8",
+      "source": "    pub fn stream(mut self, chunk_size: usize) -> Self {\n        assert!(chunk_size > 0, \"stream chunk size must be positive\");\n        self.query = self.query.stream(chunk_size);\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "stream_default",
+      "start_line": 1135,
+      "end_line": 1138,
+      "sha256": "ba898138a1e303995d97ac6bb0945a113cb4067e46eca554c272a1071eaceecb",
+      "source": "    pub fn stream_default(mut self) -> Self {\n        self.query = self.query.stream_default();\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "skip",
+      "start_line": 1140,
+      "end_line": 1143,
+      "sha256": "21741117351c52f7ea1dd266e1090e4d5fee91fa5ff4f0887128de6d1c6f3cd3",
+      "source": "    pub fn skip(mut self, offset: u64) -> Self {\n        self.query = self.query.offset(offset);\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "offset_only",
+      "start_line": 1145,
+      "end_line": 1147,
+      "sha256": "243a93b77d669cae83b978435c9affff301b2284ad2f15f7129dad44d13732d6",
+      "source": "    pub fn offset_only(self, offset: u64) -> Self {\n        self.skip(offset)\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "offset",
+      "start_line": 1149,
+      "end_line": 1151,
+      "sha256": "e73f3fccb7ad2e9325d477aa74496f16c87641f73706b8d72418a50d39cfc99e",
+      "source": "    pub fn offset(self, offset: u64, size: u64) -> Self {\n        self.page_offset(offset, size)\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "page_offset",
+      "start_line": 1153,
+      "end_line": 1156,
+      "sha256": "f94a48e26a31157f393789fe88477ee19296cafa17e121a0f32b568e1014cc40",
+      "source": "    pub fn page_offset(mut self, offset: u64, limit: u64) -> Self {\n        self.query = self.query.page(offset, limit);\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "optimize_for_continuous_page_fetch",
+      "start_line": 1158,
+      "end_line": 1161,
+      "sha256": "d59d3971b3403f8a38d93f98bc8f1c72729295af62eba79c5783432c73e42909",
+      "source": "    pub fn optimize_for_continuous_page_fetch(mut self) -> Self {\n        self.query = self.query.optimize_for_continuous_page_fetch();\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "optimize_for_continuous_page_fetch_with",
+      "start_line": 1163,
+      "end_line": 1172,
+      "sha256": "2f0613a59bab89eccce26ef725a9ab034cd8367f54614858d0454aa8c6f84628",
+      "source": "    pub fn optimize_for_continuous_page_fetch_with(\n        mut self,\n        namespace: impl Into\\<String\\>,\n        ttl_seconds: u64,\n    ) -> Self {\n        self.query = self\n            .query\n            .optimize_for_continuous_page_fetch_with(namespace, ttl_seconds);\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "optimize_pagination_with_id_set",
+      "start_line": 1174,
+      "end_line": 1177,
+      "sha256": "3697cc209038cd129f262554c86fcc495a34b57892e7b4c928ea853ebe153bc9",
+      "source": "    pub fn optimize_pagination_with_id_set(mut self) -> Self {\n        self.query = self.query.optimize_pagination_with_id_set();\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "optimize_pagination_with_id_set_config",
+      "start_line": 1179,
+      "end_line": 1189,
+      "sha256": "15618158cea896b1d57a81adc9a5fb421e3643348a777b46ebeb131d251544fe",
+      "source": "    pub fn optimize_pagination_with_id_set_config(\n        mut self,\n        namespace: impl Into\\<String\\>,\n        ttl_seconds: u64,\n        max_ids: u64,\n    ) -> Self {\n        self.query = self\n            .query\n            .optimize_pagination_with_id_set_config(namespace, ttl_seconds, max_ids);\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "top_n_probe_parent_threshold",
+      "start_line": 1194,
+      "end_line": 1197,
+      "sha256": "2262a3ec9b26af0cf360b2197aec32c27db5a832fdf8234d732303a41426f773",
+      "source": "    pub fn top_n_probe_parent_threshold(mut self, threshold: usize) -> Self {\n        self.query = self.query.top_n_probe_parent_threshold(threshold);\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "top",
+      "start_line": 1199,
+      "end_line": 1201,
+      "sha256": "64b2870f754c69fedbd0f74e39935b6ee23a943b6a57829e756298b59ce68644",
+      "source": "    pub fn top(self, top_n: u64) -> Self {\n        self.limit(top_n)\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "offset_size",
+      "start_line": 1203,
+      "end_line": 1205,
+      "sha256": "4fe9b47086d54cbec709f06fead8c8945f10fde6576d766c501153ba8bb7bf34",
+      "source": "    pub fn offset_size(self, offset: u64, size: u64) -> Self {\n        self.offset(offset, size)\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "unlimited",
+      "start_line": 1207,
+      "end_line": 1210,
+      "sha256": "cc8ca040feb580697c061ba45d1ac07474a2b16293a05db1f6aa6b2c1becbdf7",
+      "source": "    pub fn unlimited(mut self) -> Self {\n        self.query.slice = None;\n        self\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "page_number",
+      "start_line": 1212,
+      "end_line": 1215,
+      "sha256": "1f3b7c918e31280a409367df5154f61dd48b9dd8f4365c44d85358824544838d",
+      "source": "    pub fn page_number(self, page_number: u64, page_size: u64) -> Self {\n        let offset = page_number.saturating_sub(1).saturating_mul(page_size);\n        self.page_offset(offset, page_size)\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "page_number_default",
+      "start_line": 1217,
+      "end_line": 1219,
+      "sha256": "0990fcae832df89666edf2377c6f5d6575fc515020971cb66756d37994130dc1",
+      "source": "    pub fn page_number_default(self, page_number: u64) -> Self {\n        self.page_number(page_number, 10)\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "page",
+      "start_line": 1221,
+      "end_line": 1223,
+      "sha256": "cfdb93663fb28374fdf20e5fb75e61b32256290307b36555806899625a7c95c8",
+      "source": "    pub fn page(self, page_number: u64, page_size: u64) -> Self {\n        self.page_number(page_number, page_size)\n    }"
+    },
+    {
+      "group": "pagination",
+      "name": "page_default",
+      "start_line": 1225,
+      "end_line": 1227,
+      "sha256": "7597800acbcf47959e99cce794d1d4b553bde2e9da6f1ed126cbff7fa02a2668",
+      "source": "    pub fn page_default(self, page_number: u64) -> Self {\n        self.page_number_default(page_number)\n    }"
+    }
+  ],
+  "cpp_review_inputs": {
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "f187eb3c960bcc32a69fb39a2b007e2e4d3a1e190d693630832f83ad704d4833",
+    "teaql_runtime/include/teaql/runtime/detail/generated_query_execution.hpp": "54d35a3128f4f4f564b2cf4e85f6f48004a468c3a8d2e8ac46fe48dac466bfc6",
+    "teaql_runtime/include/teaql/runtime/detail/generated_query_facets.hpp": "94f3ef200306b02b82876012dc14df6b77cf046409a919ee0a132b247029e4de",
+    "teaql_runtime/include/teaql/runtime/detail/query_results.hpp": "5b246d394f51c7a865829c186db474e2950be7598ad888da01373a17e6a91ce4"
+  },
+  "notice": "Complete source-body anchors for execution and pagination review; hashes establish inspected source identity, not semantic acceptance. Qualification obligations are tracked in docs/execution_qualification_matrix_5_0_6.md."
+}

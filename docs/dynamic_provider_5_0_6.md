@@ -1,7 +1,14 @@
 # Context dynamic-field providers in Rust 5.0.6
 
-Status: runtime provider implementation and scoped source comparisons; G16 remains
-partial. Reference: `teaql-runtime/src/dynamic_fields.rs` at
+The current [reference-dependency replay](parity/dynamic_provider_reference_5_0_6.json.gz)
+compiles the unchanged observer through an independent manifest with the exact
+original registry versions/checksums. All 72 original/native results reproduce
+the retained corpus without differences; earlier evidence below keeps its scope.
+
+Current G16 status: qualified by the separate
+[complete acceptance audit](dynamic_storage_acceptance_5_0_6.md). The provider
+checkpoint below retains its original narrower evidence and pending boundaries.
+Reference: `teaql-runtime/src/dynamic_fields.rs` at
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 
 ## Responsibilities
@@ -123,7 +130,12 @@ path/source verifier records 114 production source units and keeps semantic
 dispositions pending. Formatting checks cover 782 handwritten C++ files. These
 counts qualify only the selected contracts, not the complete migration.
 
-## Remaining integration
+## Historical remaining integration at the initial checkpoint
+
+This list records the initial provider checkpoint. Later storage, graph Save,
+generated carrier and hydration implementations are reconciled in the current
+[G16 requirements](dynamic_storage_requirements_5_0_6.md); they are not missing
+implementations merely because they appear in this preserved historical list.
 
 The ledger's temporary pre-I/O save guard remains. Actual native/dynamic graph
 transaction preflight, writes, persisted-value readback and audit emission still
@@ -132,3 +144,24 @@ cursor-local dynamic loading must consume these providers. Generated typed
 carriers, dynamic JSON decoding, complete diagnostics/configurations and shared
 SQLite dynamic statement caching remain open. This checkpoint does not qualify
 full G16, full 5.0.6 parity, or phases P0-P7.
+
+
+## Provider canonical module checkpoint
+
+The complete provider observer and native lifecycle/audit contract now have
+canonical imported consumers. The first build found an existing helper omitted
+from the runtime facade: `teaql::detail::mutation_audit_value` was declared in
+its public header but unavailable to import-only consumers. The
+[initial failure](parity/dynamic_provider_module_missing_export_5_0_6.json.gz)
+retains every diagnostic and the pre-repair source hashes.
+
+The repair adds its existing declaration to the module facade, export catalog
+and isolated lookup. Provider algorithms, header declarations and the complete
+canonical contract body remain byte-identical. The reviewed catalog now contains
+1,499 exports. Native2/module2 and the rebuilt module import contract pass; 806
+canonical bodies verify. Full pinned formatting/check passes 1,649 files without
+timestamp changes. The [terminal provider record](parity/dynamic_provider_reference_terminal_5_0_6.json.gz)
+and [exact export-only proof](parity/dynamic_provider_export_only_proof_5_0_6.json.gz)
+retain the completed gates and original failure. That checkpoint did not qualify
+G16 by itself; the later complete acceptance above does. Its current catalog
+contains 1,503 exports and 820 canonical bodies.

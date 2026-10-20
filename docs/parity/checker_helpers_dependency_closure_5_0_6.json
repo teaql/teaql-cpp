@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "observations": 1318,
+  "matrices": [
+    {
+      "project": "rust_checker_helpers_closure_5_0_6",
+      "observations": 274,
+      "build_exit_code": 0,
+      "comparison_exit_code": 0,
+      "output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nRust 5.0.6 Checker helpers and entity comments parity: 274/274 observations match\n",
+      "compiled_observer_sha256": "18a366074d90020c9d06d9d9c1c278613fdce01ee94cdd9e84e3e913618ee5d6",
+      "adaptation": "none"
+    },
+    {
+      "project": "rust_business_id_helper_closure_5_0_6",
+      "observations": 1044,
+      "build_exit_code": 0,
+      "comparison_exit_code": 0,
+      "output": "Compared 1044 generated Business-ID inputs with declared resource type-name adaptation\n",
+      "compiled_observer_sha256": "ecf2b96a1aac8e07c74b120c435d2f09d8841f20af1c3733a7ba95776d1493b7",
+      "adaptation": "resource type-name diagnostics"
+    }
+  ],
+  "original_observer_bodies_changed": false,
+  "original_generated_files_changed": false,
+  "historical_manifests_changed": false,
+  "reference_registry_versions_preserved": true,
+  "reference_registry_checksums_preserved": true,
+  "complete_capability_acceptance": false,
+  "hashes": {
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/rust_field_layout/src/main.rs": "4c29db7de75f7e7c805f3059b9d7f266dc967475dc946ef6872a2ad76f5f5502",
+    "scripts/verify_checker_helpers_source_closure_5_0_6.py": "a22cf07e21980094ef16b13929766c54daf4d567bd74daf6b812d8871487914c",
+    "tests/parity/rust_checker_helpers_closure_5_0_6/Cargo.toml": "44ed875b5ad1d668a67553481cf1027ed66e404316696103c43315761fc36e18",
+    "tests/parity/rust_checker_helpers_closure_5_0_6/Cargo.lock": "7958c3c653cb0c15e34968ced55baf97af70f1f8f602c8e974f81bb04cf54f40",
+    "tests/parity/rust_checker_helpers_closure_5_0_6/build.rs": "cb9caf75187c25bf56ab5b7e1b23d5bdb51f9618b402e4d462e12c363ad8476c",
+    "tests/parity/rust_checker_helpers_closure_5_0_6/src/main.rs": "bd65489c9dbd60b61074ca38d318cdadf284cabad1fc34c81b2f37c976522303",
+    "tests/parity/compare_checker_helpers.py": "ff5de649cfe9345d1999b4dadb1146cd00fc5f7982547138dc5a920c43b19afe",
+    "tests/parity/checker_provenance_5_0_6_cases.json": "071965e3378ca6581f511ea6ba5f9cb19dacdda602b4d67cd13b9fb0af68eb58",
+    "tests/parity/rust_business_id_helper_closure_5_0_6/Cargo.toml": "5d6f3a8119aea86e17a95f5ae49d1ccd85f35e862a1f605d3f120d9e66aa9cb5",
+    "tests/parity/rust_business_id_helper_closure_5_0_6/Cargo.lock": "b682a8775159c2de8be2b508688a74c0f2ceae3e10b5da606c20aa131b441b2d",
+    "tests/parity/rust_business_id_helper_closure_5_0_6/build.rs": "5fa0473a53b7979b953efedc331ea6eadef0b08e3064b9884d1e50fe3bebb06e",
+    "tests/parity/rust_business_id_helper_closure_5_0_6/src/main.rs": "57437f4af1b98038046148146327986d743acf080a676418924c673e154f5607",
+    "tests/parity/compare_business_ids.py": "43c1d8108cafcbef35706fcd8d393fa414f68873cdf885ec3590d19de9b3e5d7",
+    "tests/parity/business_ids_5_0_6_cases.json.gz": "95196b2b288739230a0ee4d1b55aeac2b3c83b833a96f4a44538af76d884c93e"
+  }
+}

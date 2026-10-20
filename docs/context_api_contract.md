@@ -1,5 +1,11 @@
 # Context API and lifecycle review
 
+The [complete 5.0.6 Context review](context_source_review_5_0_6.md) now accepts
+UC01-UC25 with its own current-source, native/imported and reused lifecycle
+evidence, including the separately qualified
+[dynamic schema repair](context_dynamic_schema_lifecycle_5_0_6.md). The review
+below remains a historical 5.0.5 checkpoint; its evidence is not relabeled.
+
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`,
 `teaql-runtime/src/context.rs`. The complete Context source group is accepted
 after the final review and validation recorded below. Earlier partial/running

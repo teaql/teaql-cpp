@@ -13,7 +13,11 @@ struct ScopedDelete {
     std::pmr::memory_resource* resource = nullptr;
 
     void operator()(T* p) const noexcept {
-        std::pmr::polymorphic_allocator<T>(resource).delete_object(p);
+        // Null denotes a registered arena payload. Its arena runs destruction;
+        // this ordinary wrapper neither owns nor extends that lifetime.
+        if (resource) {
+            std::pmr::polymorphic_allocator<T>(resource).delete_object(p);
+        }
     }
 };
 template <class T>

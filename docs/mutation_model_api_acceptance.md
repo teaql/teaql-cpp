@@ -178,3 +178,16 @@ The corpus generator records original public calls only. The complete model
 review above closes this source group; downstream execution and privacy/log
 audits and six-stage acceptance remain open. Physical-router execution is
 unverified.
+
+## Current 5.0.6 whole-source continuation
+
+The preceding checkpoints remain historical 5.0.5 evidence. The complete current
+[MU01-MU14 review](core_mutation_source_review_5_0_6.md) now accepts the
+291-line mutation source. All 2,048 original/native/imported outcomes per
+frontend, one positive/fourteen precise negative source compiler controls and
+native 5/imported 5 pass. Four complete canonical consumers are permanently
+imported; native model assertions cover all six role conversion/assignment
+directions. Existing function bodies and all production implementations remain
+unchanged. Whole execution, governance, privacy and G13/G14/G17/P0-P7 retain
+their separate obligations. No historical full or sanitizer/MIPS result is
+relabeled as a new run.

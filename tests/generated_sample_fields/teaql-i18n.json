@@ -1,0 +1,131 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.platform.name": "Name",
+                "property.sampleRecord.platform": "Platform",
+                "property.sampleRecord.optionalActive": "Optional Active",
+                "property.sampleRecord.optionalClockText": "Optional Clock Text",
+                "property.sampleRecord.negativeMax": "Negative Max",
+                "property.sampleRecord.amount": "Amount",
+                "property.sampleRecord.id": "Id",
+                "property.sampleRecord.active": "Active",
+                "property.sampleRecord.optionalDay": "Optional Day",
+                "property.sampleRecord.version": "Version",
+                "property.sampleRecord.signedMax": "Signed Max",
+                "property.sampleRecord.day": "Day",
+                "property.sampleRecord.quantity": "Quantity",
+                "property.sampleRecord.payload": "Payload",
+                "property.sampleLink.name": "Name",
+                "entity.platform": "Platform",
+                "property.platform.id": "Id",
+                "entity.sampleLink": "Sample Link",
+                "property.sampleRecord.label": "Label",
+                "property.sampleRecord.negativeBound": "Negative Bound",
+                "property.sampleRecord.recordedAt": "Recorded At",
+                "entity.sampleRecord": "Sample Record",
+                "property.sampleRecord.optionalRecordedAt": "Optional Recorded At",
+                "property.sampleRecord.wideMax": "Wide Max",
+                "property.sampleRecord.disabled": "Disabled",
+                "property.sampleLink.version": "Version",
+                "property.sampleRecord.clockText": "Clock Text",
+                "property.sampleRecord.optionalCount": "Optional Count",
+                "property.sampleLink.id": "Id",
+                "property.sampleRecord.ratio": "Ratio",
+                "property.sampleLink.secondRecord": "Second Record",
+                "property.sampleRecord.zeroBound": "Zero Bound",
+                "property.platform.version": "Version",
+                "property.sampleRecord.height": "Height",
+                "property.sampleLink.firstRecord": "First Record"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

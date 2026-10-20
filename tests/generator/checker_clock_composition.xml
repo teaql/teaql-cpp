@@ -1,0 +1,13 @@
+<root name="cpp_checker_clock_composition" org="teaql" data_service="sqlite">
+    <_type_definition name="word" parent="string" rustType="String"
+                      createFunction="now" updateFunction="now" />
+    <_type_definition name="integer" parent="number" rustType="i64"
+                      createFunction="now" updateFunction="now" />
+    <tenant name="string()" />
+    <record code="word()" count="integer()"
+            payload="jsonMe(optional=false,createFunction=now,updateFunction=now)" />
+    <note _parent="record"
+          owner="tenant(contextRoot=true,createFunction=now,updateFunction=now)"
+          linked="tenant(createFunction=now,updateFunction=now)"
+          optional_linked="tenant(createFunction=now,updateFunction=now)?" />
+</root>

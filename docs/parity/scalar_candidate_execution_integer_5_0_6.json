@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "case": "integer",
+  "status": "52 exact actual original/native SQLite outcomes passed; broader models and formal gates pending",
+  "observations": 52,
+  "successes": 52,
+  "errors": 0,
+  "corpus_sha256": "bf856f55677d1dd498ab8c2ae62ae3456a3c943bc7730a636f1a0138ea6dea17",
+  "normalization": "none",
+  "scope": "All named integer candidates, negative variants, known/unknown NULL predicates and compositions; ordinary/minimal projections and logging switches. Complete returned entity JSON, SQL/parameter/intent and exact errors compare.",
+  "builds": {
+    "rust": 0,
+    "cpp": 0
+  },
+  "runtime_changed": false,
+  "generator_changed": false,
+  "log": "/tmp/teaql_scalar_candidate_integer_execution_qualified.log",
+  "remaining": [
+    "Nullable, Decimal, floating and temporal model execution",
+    "True Boolean candidate semantics",
+    "Formal native/module/lifetime gates and complete G05/P3 qualification"
+  ]
+}

@@ -44,7 +44,7 @@ struct RawBody {
                 child = &scope.mutate(MutationRequest(std::allocator_arg,
                                                       Allocator(owner),
                                                       std::move(insert),
-                                                      "insert transaction scope fixture"));
+                                                      "audited provider conformance test"));
             }
             forwarding.attach(child->wake_signal(), wake);
             auto* result = child->poll();

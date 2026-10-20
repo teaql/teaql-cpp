@@ -1,5 +1,13 @@
 # Generated runtime support contract
 
+This is the historical 5.0.5 contract and acceptance record. Current 5.0.6
+purpose, facet provenance and private diagnostic-source behavior differ; see the
+[exact-reference replay](generated_support_reference_5_0_6.md) and
+[derived-query implementation](derived_query_diagnostics_5_0_6.md). Historical
+results below do not establish current whole-source acceptance.
+The subsequent [complete 5.0.6 review](generated_support_source_review_5_0_6.md)
+qualifies GS01-GS19 with its own current and explicitly reused unchanged evidence.
+
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`,
 `teaql-runtime/src/generated_support.rs`. This is a runtime module used by
 handwritten or generated callers. Porting it does not modify the generator.

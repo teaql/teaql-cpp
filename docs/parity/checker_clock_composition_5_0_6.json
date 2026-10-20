@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "cases": 216,
+  "field_outcomes": 1296,
+  "initial_semantic_differences": 88,
+  "live_comparison_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 3,
+      "total": 3,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start  62: checker_clock_composition_rust_parity\n    Start 582: generated_optional_types_contracts\n    Start 580: generated_checker_contracts\n1/3 Test #580: generated_checker_contracts .............   Passed    0.01 sec\n2/3 Test #582: generated_optional_types_contracts ......   Passed    0.02 sec\n3/3 Test  #62: checker_clock_composition_rust_parity ...   Passed    0.30 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   0.31 sec\n",
+      "sha256": "0475680cdc488d2549bfdc626dfa1c4fec07b9840aae9dece61aba9f9e0b7ffc"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 878: module_checker_clock_composition_rust_parity\n1/1 Test #878: module_checker_clock_composition_rust_parity ...   Passed    0.56 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.58 sec\n",
+      "sha256": "2e43894d89205d39370421169d1fdef216a6b370ab0a6bcd3a6ffc52890cfb97"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 62: checker_clock_composition_rust_parity\n1/1 Test #62: checker_clock_composition_rust_parity ...   Passed    1.29 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   1.30 sec\n",
+      "sha256": "5f985042396a2177c17c8cb9595689a8e6cd1d9b89b0da604d25dd9d89bfedc1"
+    }
+  },
+  "java": [
+    {
+      "suite": "com.skynet.codegenerator.CppGenerationTest",
+      "passed": 44,
+      "sha256": "ebd548c74d22d0bdbf4668d9c0ab44776fd6b8eb33c3963988d5f2551f69d4fd"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+      "passed": 2,
+      "sha256": "773093046e4a9b8f3188568a5576bde39442f50fab66e414e3841df3b6731b7e"
+    },
+    {
+      "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+      "passed": 2,
+      "sha256": "342449fc06cee726877266ee481f01dd697daa19b23200e6ce6e8ebf3d400bbf"
+    }
+  ],
+  "workspaces": 23,
+  "reproduced_files": 276,
+  "contract_sdks": 44,
+  "canonical_bodies": 584,
+  "format_cpp_count": 1404,
+  "source_scope": "Original complete Tenant/Record/Note entity/Checker imports; original full runtime assembly error retained. Direct Checker only.",
+  "default_pmr_disabled": true,
+  "explicit_global_copy": true,
+  "actual_user_deletion": true,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "complete_capability_acceptance": false,
+  "hashes": {
+    "docs/checker_clock_composition_5_0_6.md": "f1bdb40c8ae3e00a21d1e190f212944a646c01ab15f934011f52a2b7d9fdf832",
+    "tests/generator/checker_clock_composition.xml": "72050998a707b532f0dac1039ee0f90ac58ea0a900f7457fb709aef4211f6ba1",
+    "tests/generated_checker_clock_composition/manifest.json": "424d684f79359cf1def61c8b92f1dc1c30170c6fd419737aa649620f1de2f7b7",
+    "tests/parity/checker_clock_composition_5_0_6.rs": "8b2438342d0c29a08b8bd43bbe479f9e7404b0162b73e03826b1c9f6970790f5",
+    "tests/parity/checker_clock_composition_probe.cpp": "27af377b6d3462ec2443e2dabde1bdc2ea0552bab3c6d4dda91e3e1e3cd046bd",
+    "tests/parity/compare_checker_clock_composition_5_0_6.py": "82a885ad110b41b374216c2ced40c2c36a546c0e1d2493091c1bf5777745a7f7",
+    "scripts/verify_checker_clock_composition_5_0_6.py": "871c99f03ebff4cc31f5b3d6e0e4922a95cc29260c09128cf3dd194cd2ec08fa",
+    "tests/parity/checker_clock_composition_5_0_6_cases.json.gz": "b59c50f8777a2a3557046c14853a5cb94d9f00762aa0737b3b5159b21b42385c",
+    "docs/parity/checker_clock_composition_source_5_0_6.json": "4b571ab12b6ff49438486ad0ef0c7c0a26dae50eed8ccd21e2e36d0e74049c70",
+    "docs/parity/checker_clock_composition_metadata_5_0_6.json": "14daa6751c54cfcf247c13135d28b6c1c3584babd1661f8a17605f656863c0b0",
+    "docs/parity/checker_clock_composition_initial_gaps_5_0_6.json.gz": "95a0afce8c164fe0736fdb414723c84e58515bdca87a31b89cde28e5a4aead14",
+    "docs/parity/checker_clock_composition_complete_source_error_5_0_6.json.gz": "6c1ca07751bee3ce5c204bf8c22cc5abb6c0a0b9fd7f36b457caed20add76680",
+    "docs/parity/checker_clock_composition_initial_alias_failure_5_0_6.json.gz": "8fcc9fd7edbe193ad684252f603428dc4e48919adcea001197cc7fd7340a5fc6",
+    "docs/parity/clock_composition_sdk_regeneration_5_0_6.json": "f92c5422262024dfd9e77ddfc3c99c545588c8c8837ae520acbf5db298350d17"
+  },
+  "producer_hashes": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "69c215fb238a78e519c1ffe764d8535a66df4508a2b9c711f177a8a8a1760232",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "bdf71350c7e89b94f182e98439625131372625dc26f0dcb60309b52f5c94d60e"
+  }
+}

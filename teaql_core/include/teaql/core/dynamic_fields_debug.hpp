@@ -3,6 +3,17 @@
 #include <teaql/core/debug.hpp>
 
 namespace teaql {
+inline void write_debug(DebugWriter& writer, const DynamicFieldError& value) {
+    writer.structure("DynamicFieldError", [&](auto& fields) {
+        fields.field("code", [&](auto& out) {
+            out.text(value.code);
+        });
+        fields.field("field", [&](auto& out) {
+            out.text(value.field);
+        });
+    });
+}
+
 inline void write_debug(DebugWriter& writer, const DynamicFieldDefinitions& value) {
     writer.structure("DynamicFieldDefinitions", [&](auto& fields) {
         fields.field("owner_type", [&](auto& out) {

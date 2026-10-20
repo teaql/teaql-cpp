@@ -1,0 +1,11 @@
+[package]
+name="teaql_i18n_source_units_506"
+version="0.0.0"
+edition="2024"
+[workspace]
+[lib]
+path="lib.rs"
+[dependencies]
+teaql-runtime={path="../../../.reference/teaql-rs/teaql-runtime"}
+teaql-core={path="../../../.reference/teaql-rs/teaql-core"}
+serde_json="=1.0.150"

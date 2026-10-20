@@ -1,0 +1,304 @@
+{
+  "schema": 1,
+  "scope": "Actual Surefire suite results and executed test names; XML environment properties intentionally omitted.",
+  "reports": [
+    {
+      "report": "TEST-com.skynet.codegenerator.CppGenerationTest.xml",
+      "sha256": "16d367e9b398e7fabb0117832aedba44ff211735b44a2ba18a22d65a6a2f057c",
+      "suite": "com.skynet.codegenerator.CppGenerationTest",
+      "tests": 49,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "testcases": [
+        {
+          "name": "jsonInputKeepsRustQuotedAliasesSeparateFromSqlIdentifiers",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.798"
+        },
+        {
+          "name": "relationshipAnalysisUsesSourceVocabularyAndRuntimeLayers",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.105"
+        },
+        {
+          "name": "typedJsonPresentationUsesInstalledRuntimeAndBorrowedProjection",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.076"
+        },
+        {
+          "name": "entitiesQueriesAndExpressionsUseProductionContracts",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.078"
+        },
+        {
+          "name": "customAssemblyGuidancePreservesRegistrationOrder",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.059"
+        },
+        {
+          "name": "outputIsDeterministic",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.144"
+        },
+        {
+          "name": "candidateMethodCollisionsFailBeforeEmittingInvalidCpp",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.15"
+        },
+        {
+          "name": "bootstrapRootPrecedesConstantsEvenWhenDeclaredLast",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.06"
+        },
+        {
+          "name": "auditLengthsRetainIgnoredValuesAndTargetWidthGuard",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.289"
+        },
+        {
+          "name": "dynamicJsonDelegatesToRuntimeWithAuthenticAliasesAndRelationKeys",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.058"
+        },
+        {
+          "name": "inheritedAuditMasksResolveAtEachDeclaringModel",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.071"
+        },
+        {
+          "name": "inheritedBusinessIdDeclaresItsSharedTypeOnce",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.065"
+        },
+        {
+          "name": "checkerLogicFixesAndRegistrationUseRuntimeMechanics",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.058"
+        },
+        {
+          "name": "checkerConditionsUseSourceTemplateBooleanAndStringTruth",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.061"
+        },
+        {
+          "name": "standaloneConstantRetainsIdentityOneAlongsideOrdinaryRoot",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.045"
+        },
+        {
+          "name": "unsupportedDatabaseFailsInsteadOfProducingWrongRuntime",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.027"
+        },
+        {
+          "name": "negativeConstantIdsRejectBeforeEmission",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.05"
+        },
+        {
+          "name": "defaultInheritancePreservesFlattenedFieldsAndLegacyEntryOutput",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.133"
+        },
+        {
+          "name": "constantIdsKeepOriginalSaturationAndZero",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.157"
+        },
+        {
+          "name": "facetAdaptersKeepSourceArgumentOrderAndRuntimeResponsibility",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.042"
+        },
+        {
+          "name": "configuredScalarStorageCannotSilentlyChangeItsDomain",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.065"
+        },
+        {
+          "name": "numericAndJsonClockFixesRetainSourceValueConversions",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.035"
+        },
+        {
+          "name": "opaqueConfiguredTypesCannotFallBackToTextStorage",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.064"
+        },
+        {
+          "name": "entityIdentityAndLoadStateHelpersUseExistingScopedRuntime",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.036"
+        },
+        {
+          "name": "childSelectionsRequireUnpurposedRequests",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.037"
+        },
+        {
+          "name": "generalQueriesUseRuntimeAdaptersAndAuthenticPredicateVocabulary",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.048"
+        },
+        {
+          "name": "fieldCriteriaUseContextOwnedRuntimeRoots",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.046"
+        },
+        {
+          "name": "wireMappingsUseOwnFieldsAndSelectedProfile",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.121"
+        },
+        {
+          "name": "runtimeConstructorsPreserveRequiredTimestampDefaults",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.041"
+        },
+        {
+          "name": "auditLengthsUseOriginalRustIntegerSemantics",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.151"
+        },
+        {
+          "name": "sampleScalarAdaptersPreserveSourceNumericAttributesAndJsonText",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.03"
+        },
+        {
+          "name": "defaultConstantsPreserveLegacyOutputAndModelAwareBootstrapGuidance",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.072"
+        },
+        {
+          "name": "normalConstantsStillRejectInvalidDomainRoots",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.018"
+        },
+        {
+          "name": "auditLengthStringsDecodeEscapesButKeepRawPayloads",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.191"
+        },
+        {
+          "name": "invalidBusinessIdDefinitionsFailBeforeEmission",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.1"
+        },
+        {
+          "name": "candidateNamesKeepNumericAndPunctuationFallbacks",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.02"
+        },
+        {
+          "name": "contextRootSettersStayInternalAndAssistOmitsThem",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.033"
+        },
+        {
+          "name": "auditMasksKeepOriginalModelKeys",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.027"
+        },
+        {
+          "name": "constantOnlyDomainHasNoDomainRoot",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.019"
+        },
+        {
+          "name": "nullCandidateKeepsLiteralEqualityAndSourceUnknownKnownNullChecks",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.037"
+        },
+        {
+          "name": "centralPluralizationAndHumanPredicatesMatchRustAndJava",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.044"
+        },
+        {
+          "name": "stringUpdatesDelegateStoredAndLedgerSemanticsToRuntime",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.04"
+        },
+        {
+          "name": "candidateShortcutsUseCentralNamesAndConstantStorageIds",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.045"
+        },
+        {
+          "name": "stringClockFixesRetainValueOperandsThroughRuntime",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.024"
+        },
+        {
+          "name": "relationEvaluationDelegatesToRuntimeAndModelHelpers",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.04"
+        },
+        {
+          "name": "fieldTypeParametersAndEquivalentDeclarationsRetainSourceTyping",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.073"
+        },
+        {
+          "name": "businessIdsUseDistinctValuesAndExistingServices",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.027"
+        },
+        {
+          "name": "aggregateMethodsPreserveSourceNamesAliasesAndFieldEligibility",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.032"
+        },
+        {
+          "name": "executionAdaptersPreserveTheDistinctServiceWrapper",
+          "classname": "com.skynet.codegenerator.CppGenerationTest",
+          "time": "0.023"
+        }
+      ]
+    },
+    {
+      "report": "TEST-com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest.xml",
+      "sha256": "b8c8245c0a7efd94c7354180511d44265c6245c2372db58c4f60134bcf089c88",
+      "suite": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "testcases": [
+        {
+          "name": "metadataMatchesFrozenRust506SchoolFixture",
+          "classname": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+          "time": "0.0"
+        },
+        {
+          "name": "metadataPositionsIncludeOverflowAndRevisionChanges",
+          "classname": "com.skynet.codegenerator.cpp.CppFieldLayoutMetadataTest",
+          "time": "0.004"
+        }
+      ]
+    },
+    {
+      "report": "TEST-com.skynet.codegenerator.cpp.CppJsonInputMetadataTest.xml",
+      "sha256": "b7bffb55184513e7f1553f5ab43c711119ff62b5ab8688ea5e53ce3ed2511b96",
+      "suite": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "testcases": [
+        {
+          "name": "rustLiteralEscapesRetainTheirSemanticCharacters",
+          "classname": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+          "time": "0.0"
+        },
+        {
+          "name": "cppViewsRetainEmbeddedZeroAndUtf8ByteLength",
+          "classname": "com.skynet.codegenerator.cpp.CppJsonInputMetadataTest",
+          "time": "0.0"
+        }
+      ]
+    }
+  ]
+}

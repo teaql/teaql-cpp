@@ -1,0 +1,35 @@
+[package]
+name = "teaql_checker_clock_scalars_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# Compile the original entity-only access harness unchanged. This independent
+# manifest uses the current reference registry versions; the historical project
+# and the generated Rust entity/Checker bodies remain untouched.
+[lib]
+name = "cpp_checker_clock_scalars_core"
+path = "lib.rs"
+
+[[bin]]
+name = "teaql_checker_clock_scalars_506"
+path = "../checker_clock_scalars_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+serde_json = "=1.0.150"
+serde = { version = "=1.0.228", features = ["derive"] }
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }

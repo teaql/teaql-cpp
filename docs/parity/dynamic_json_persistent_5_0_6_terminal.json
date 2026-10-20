@@ -1,0 +1,52 @@
+{
+  "recorded_utc": "2026-10-14T17:57:14.060934+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Positive trusted SQLite dynamic-field hydration with JSON conditions and policy; separate readonly configurations, not simultaneous readonly/persistent/facet/privacy or complete capability acceptance.",
+  "exact_original_native_outcomes": 9216,
+  "successes": 6912,
+  "policy_denials": 2304,
+  "policy_callbacks": 11904,
+  "safe_sql_log_records": 4608,
+  "denied_cases_with_select_authorizer_callbacks": 0,
+  "loaded_title_snapshots": 1128,
+  "text_title_snapshots": 712,
+  "null_title_snapshots": 416,
+  "readonly_snapshots": 1128,
+  "non_denied_stream_reuse_successes": 1152,
+  "reference_registry_difference_count": 0,
+  "checks": {
+    "native_json_integration": {
+      "passed": 10,
+      "selected": 10
+    },
+    "modules": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize": {
+      "passed": 1,
+      "selected": 1,
+      "leak_scanning": false
+    },
+    "format_files": 1444,
+    "canonical_consumer_bodies": 660,
+    "module_exports": 1485
+  },
+  "existing_debug_adaptation": "Exact quoted-Line descriptor spelling only; no SQL/value/error rewriting.",
+  "production_or_generator_functions_changed": false,
+  "original_generated_or_historical_files_changed": false,
+  "raw_validation": "docs/parity/dynamic_json_persistent_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "tests/parity/generated_dynamic_json_persistent_probe.cpp": "a9326cb25f69bd0f2a34b427ea63a5e34cd91db531fbaba0fb89f2e46a5eed04",
+    "tests/parity/compare_dynamic_json_persistent_5_0_6.py": "35dc8c29453a480e9685ce122a5729a12a89671dfc49537de71e00a8ba454965",
+    "tests/parity/rust_dynamic_json_persistent_5_0_6/Cargo.toml": "6d9f81d8bf4c5041681db2a60e3fb6392c98c6005c8e48c64a726fc47ebc8c40",
+    "tests/parity/rust_dynamic_json_persistent_5_0_6/Cargo.lock": "c62b816177385f9fd5e8412e8df10c66ae91e863c1448cb8e1e693f8c7a4178e",
+    "tests/parity/rust_dynamic_json_persistent_5_0_6/src/bin/dynamic_json_persistent_5_0_6.rs": "7e7aafb0b83e0d3929696d9034ef3097855bdb9654ab31854a1d6d5b4c9b9614",
+    "tests/parity/dynamic_json_persistent_5_0_6_cases.json.gz": "0b0803146a704cc4c648de31f0058e31a7beaae4c87a296abc1c41a270f9ee12",
+    "docs/parity/dynamic_json_persistent_source_review_5_0_6.json": "cbbb35d3be9321b124d7582a5db7deb3774c925541c45bf11f7e7ca4f5d3675e",
+    "scripts/verify_dynamic_json_persistent_5_0_6.py": "5ae695e5c4d3faf7ec0f3b682adb15a1e93a554c1bae8ffcd908ca9668b4a84f"
+  },
+  "complete_capability_acceptance": false,
+  "full_suite_java_generation_mips_device_run": false
+}

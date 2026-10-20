@@ -1,0 +1,1 @@
+{"metadata":[{"entity":"status","constant":true,"root":true,"candidates":[{"id":1,"key":"STATUS_FIRST","value":"First","line":1},{"id":22,"key":"STATUS_SECOND","value":"Second","line":2}]},{"entity":"platform","constant":false,"root":true}],"generated":true,"files":37}

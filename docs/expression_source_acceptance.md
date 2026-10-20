@@ -94,3 +94,13 @@ source inventory, independent layer, 451-test-disposition, formatting and
 whitespace checks pass. This accepts the complete expression source group;
 SelectQuery/row and downstream SQL/runtime/governance/privacy contracts,
 physical-router execution and all stage 2–6 acceptance remain open.
+
+## Separate current 5.0.6 source receipts
+
+The preceding review remains historical 5.0.5 evidence. The complete current
+[Expr EX01-EX12 review](core_expression_source_review_5_0_6.md) and
+[SafeExpression SE01-SE16 review](safe_expression_source_review_5_0_6.md) now
+have independent full-source acceptance receipts. Their actual-source outcomes,
+current canonical imported bodies, compiler capabilities and explicit Context
+ownership contracts are recorded separately. This does not accept complete
+SelectQuery, generated E integration, protected callers or whole P0-P7.

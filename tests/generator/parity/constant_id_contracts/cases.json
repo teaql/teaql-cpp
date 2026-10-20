@@ -1,0 +1,42 @@
+{
+  "negative_one": [
+    "-1",
+    "2"
+  ],
+  "negative_min": [
+    "-9223372036854775808",
+    "2"
+  ],
+  "signed_overflow": [
+    "9223372036854775808",
+    "2"
+  ],
+  "unsigned_max": [
+    "18446744073709551615",
+    "2"
+  ],
+  "zero": [
+    "0",
+    "2"
+  ],
+  "signed_max": [
+    "9223372036854775807",
+    "2"
+  ],
+  "duplicate": [
+    "1",
+    "1"
+  ],
+  "fallback_text": [
+    "nonnumeric",
+    "2"
+  ],
+  "default_missing": [
+    null,
+    "2"
+  ],
+  "positive": [
+    "1",
+    "22"
+  ]
+}

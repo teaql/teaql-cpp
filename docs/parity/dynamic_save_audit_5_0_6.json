@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 24,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 24 actual source/native durable dynamic save/audit observations\n",
+  "reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 24 actual source/native durable dynamic save/audit observations\n",
+  "profiles": {
+    "native": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "dynamic_save_audit_rust_parity",
+        "dynamic_audit_projection_rust_parity",
+        "generated_dynamic_field_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start  75: dynamic_save_audit_rust_parity\n1/3 Test  #75: dynamic_save_audit_rust_parity .........   Passed    0.21 sec\n    Start  76: dynamic_audit_projection_rust_parity\n2/3 Test  #76: dynamic_audit_projection_rust_parity ...   Passed    3.01 sec\n    Start 507: generated_dynamic_field_contracts\n3/3 Test #507: generated_dynamic_field_contracts ......   Passed    0.02 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   3.24 sec\n"
+    },
+    "sanitize": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "dynamic_save_audit_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 75: dynamic_save_audit_rust_parity\n1/1 Test #75: dynamic_save_audit_rust_parity ...   Passed    0.57 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.58 sec\n"
+    },
+    "modules_native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_dynamic_save_audit_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 654: module_dynamic_save_audit_rust_parity\n1/1 Test #654: module_dynamic_save_audit_rust_parity ...   Passed    0.15 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.16 sec\n"
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 136,
+  "production_function_bodies_changed": false,
+  "formatting": {
+    "handwritten_files": 1016,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "tests/parity/dynamic_save_audit_probe.cpp": "137a94e83401874cbcda7b0d283f1155df5b93e17b2870cd8137658efe3285e8",
+    "tests/parity/rust_field_layout/src/bin/dynamic_save_audit_5_0_6.rs": "1ef36b402b23d33b630ead00cda016d933b89282b23c03650beeb83b7f6c04c8",
+    "tests/parity/generate_dynamic_save_audit_5_0_6.py": "8bbf00d19a65e64ca7c21b866c4e9207233d56f7e32f362910d0b7e792f0cc9b",
+    "tests/parity/compare_dynamic_save_audit_5_0_6.py": "3f1fc388a70d3c02a10c315f43a8791f31393207dda0b8406bbc823bb459c181",
+    "tests/parity/dynamic_save_audit_5_0_6_cases.json.gz": "e848d71cd48853f1da45ed8d5bfd8baeb796b28ac26216d720d4a4249d1a58ea",
+    "tests/support/dynamic_json_schema.sql": "b11a024137503d0b23f205b478185e09dec7aee74b09c99f1c2cbfdf1c25e226",
+    "tests/support/dynamic_json_dataset.sql": "f3c3983ddfb853fd7a86eba9352e7cb36d434107773836639d46f6673308bd59",
+    "tests/generator/parity/dynamic_json_rust/PROVENANCE.json": "79db4b2e529bae107d04b9889030f2d596d08b5db8bb067286ba39fbf61c2dcb"
+  },
+  "initial_fixture_compiler_errors": [
+    "Unqualified domain DataServiceExecutor was ambiguous with the runtime protocol; qualified the generated type.",
+    "Sink is an external virtual resource without allocator-aware managed-object construction; allocated through make_resource."
+  ],
+  "scope": "Same original generated Product model and SQLite data. Set/NULL/Delete, storage-trigger failure, optimistic conflict and committed audit delivery failure. Complete SafeAuditEvent Debug, ordered SQL/parameters/comment/purpose, persisted version/storage and pending ledger state agree. Clock/timing diagnostics are omitted symmetrically, not normalized.",
+  "notice": "Default generated governance only, one trusted Text dynamic definition. Existing schema setup is explicit fixture SQL; not generated ensure_schema/bootstrap evidence. Custom policy, inherited/constant/candidate/other dynamic storage types, stream/save interleavings, log sinks and complete capabilities/P0-P7 remain open. No production runtime/generator change, MIPS or physical-device execution.",
+  "binding_inventory": {
+    "active_baseline": 153,
+    "custom_dispatcher_requires_review": 21,
+    "historical_baseline_requires_replay": 63
+  }
+}

@@ -447,6 +447,18 @@ inline void write_debug(DebugWriter& writer, const Value& value) {
         value.data);
 }
 
+inline void write_debug(DebugWriter& writer, const Record& record) {
+    writer.sequence(
+        record,
+        [](auto& out, const auto& pair) {
+            out.text(pair.first);
+            out.raw(": ");
+            write_debug(out, pair.second);
+        },
+        "{",
+        "}");
+}
+
 void write_debug(DebugWriter&, const FieldLayout&);
 void write_debug(DebugWriter&, const LoadedSnapshot&);
 void write_debug(DebugWriter&, const DynamicPropertyDefinitions&);

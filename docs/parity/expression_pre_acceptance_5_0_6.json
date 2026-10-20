@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "capability": {
+    "id": "G11",
+    "responsibility": "Complete E missing-load diagnostic contract",
+    "phase": "P6",
+    "rust_sources": [
+      "generator/src/main/resources/generator/rust-lib-core/expression/index.stg"
+    ],
+    "runtime_dependencies": [
+      "teaql_runtime/include/teaql/runtime/entity_expression.hpp"
+    ],
+    "status": "partial",
+    "cpp_api_mapping": [
+      "RuntimeExpression retains Context-owned root identity through composition and explicit snapshot copies; generated E delegates entry capture to runtime.",
+      "ExpressionNotLoadedError borrows structured ExpressionDiagnostic; JSON fields preserve source contracts with explicit C++ spelling/English presentation adaptations.",
+      "Nested selection suggestions adapt source renderer placeholders to the actual C++ select...With(child) interface; Assist preserves and explains source leaf-only diagnostic paths.",
+      "GeneratedRelationAccess distinguishes explicitly installed graph-view availability from its stored SmartList payload flag, while retaining checked identity and Context borrows.",
+      "Strict entity field decode and generated E scalar checkpoint: actual original E/entity files expose 24 TypedNull discrepancies in the 120-case matrix. Shared GeneratedScalarCodec now preserves untyped Null defaults, optional wrapping, source-specific scalar conversions/range errors and scoped copies; emitted support methods are thin adapters. All 816 complete source/native observations match, including 1520 actual resolutions and 512 decoder rejections. The original 120 inputs/results remain a checked prefix. Native11/SAN2/module2/compiler3-positive-2-negative/Java53, 3364 refreshed entity helper outcomes and 23-workspace/44-SDK strict reproduction pass. Thirty support headers are genuinely regenerated; all other SDK code/guidance and original artifacts remain unchanged. No complete G11/G13/P6/P7 or generator acceptance follows from this matrix."
+    ],
+    "evidence": [
+      "docs/generated_expression_diagnostics_5_0_6.md",
+      "tests/parity/generated_expression_diagnostics_5_0_6_cases.json",
+      "teaql_runtime/tests/entity_expression_tests.cpp",
+      "docs/parity/expression_loaded_relation_path_source_limit_5_0_6.json",
+      "docs/generated_expression_values_5_0_6.md",
+      "tests/parity/generated_expression_values_5_0_6_cases.json",
+      "tests/parity/generated_expression_values_probe.cpp",
+      "tests/parity/rust_field_layout/src/bin/generated_expression_values_5_0_6.rs",
+      {
+        "kind": "expression_diagnostic_text_checkpoint",
+        "path": "docs/expression_diagnostic_text_5_0_6.md",
+        "scope": "936 actual original panic/native structured diagnostics match with the already documented API/English presentation adaptations. Initial 216 underscore-root/multiple-parenthesis differences corrected in shared runtime renderer. Quote/control/NUL/Unicode/empty/repeated paths retain data; native JSON roundtrips and explicit Global copy/actual User destruction pass. Original 196 corpus remains unchanged and matches live source. Native 4/4, SAN 3/3 (leak scan disabled), module 2/2, 139 canonical bodies and 1017-file format/check pass. Fixture parser excludes embedded field-label delimiters; full model/Assist/extension/G11/P6/P7 remain open."
+      },
+      {
+        "kind": "expression_diagnostic_complete_framing_checkpoint",
+        "path": "docs/expression_diagnostic_framing_5_0_6.md",
+        "scope": "1200 complete original panic/native frames match through explicit casing/selectWith/language presentation. The old 936 raw outputs remain byte-preserved as a corpus prefix; 264 additional delimiter/method-name injection cases remove the fixture parser dependency. Actual native semantic fields/renderings are consumed without silent repair, with one positive/seven negative controls. Native 2/2 plus final adapter-control replay and module 1/1 pass. No C++ production or lifetime change and no SAN/MIPS rerun. Broader generated/model/Assist/extension and complete G11/P6/P7 remain open."
+      },
+      {
+        "kind": "configured_scalar_execution",
+        "path": "docs/parity/type_configuration_execution_5_0_6.json",
+        "scope": "Six complete unchanged source-compilable configured domains match 576 actual SQLite/bootstrap/typed Q/E scenarios over 864 rounds and 3456 successful typed reads. Full physical values/kinds/versions/ID floors/root/errors, scalar/E/projection JSON and 4656 SQL diagnostics compare exactly. All 144 soft-deleted fixed-ID bootstrap failures remain errors. Native/module targets pass 6/6 each; 321 canonical bodies and pinned format/check 1212 pass, and fresh original corpora reproduce. Explicit actual User deletion/null default PMR preserved. This completes the declared six-domain execution obligation only; arbitrary types, other constant rows and full capabilities/phases stay open."
+      },
+      {
+        "kind": "constant_metadata_frontend_and_execution",
+        "path": "docs/parity/constant_metadata_contracts_5_0_6_terminal.json",
+        "scope": "13 complete unchanged original/native metadata fixtures reproduce: eight full compile successes, three invalid ordinary-root E0425 failures, one candidate collision with two E0592 errors and one identical XML parser failure. Native rejects unusable models before emission. Eight supported domains match 768 actual SQLite/bootstrap/typed Q/E scenarios over 1152 User rounds, 1080 returned typed values and 3052 SQL diagnostics; all 120 soft-deleted fixed-ID failures remain errors. Absent/unknown identifiers and empty values, declaration-derived string() candidates, comma-derived IDs, independent column fallback/misalignment and Unicode retain actual source outcomes. Native/modules 8/8 each, 396 canonical bodies, full artifacts/compiler and live original corpus reproduction, pinned format/check 1287 pass. Actual User deletion/default PMR preserved. No production changes or guard removal; complete capabilities/phases remain partial."
+      },
+      {
+        "kind": "constant_topology_foreign_key_and_relation_outcomes",
+        "path": "docs/parity/constant_topology_contracts_5_0_6_terminal.json",
+        "scope": "Ten complete unchanged original/native topology fixtures reproduce: five source compile successes, two optional constant-reference crates preserve four E0308 errors, and two cycles/depth beyond 20 fail identically at parsing. Native seven umbrellas independently compile; failed source crates are not runtime oracles. Five supported domains match 480 actual SQLite/bootstrap/typed graph Q/E scenarios over 720 User rounds, 864 typed rows and 3444 SQL diagnostics. Declaration-order FK failures (288), soft-deleted Category fixed-ID failures (72), ignored explicit foreign seed IDs, required self-reference and related NotLoaded (72 Category/24 parent) retain source behavior. Native/modules 5/5 each, 442 canonical bodies, artifact/compiler and live original reproduction, pinned format/check 1349 pass. Raw language diagnostics are preserved separately; no Null or raw-text parity is claimed. Actual User deletion/default PMR preserved; no production changes/guard removal or complete capability/phase acceptance."
+      },
+      {
+        "kind": "entity_state_i18n_and_current_data_service_model_replay",
+        "path": "docs/parity/state_baselines_5_0_6_terminal.json",
+        "scope": "Four historical state/I18n/data-service-model families qualify 4916 exact original/native outcomes. Complete original entity_runtime body is compiled unchanged with only a new crate-root TraceScopeToken import and adjusted helper path; 25 source state outcomes change. Existing 5.0.6 request constructor observer has 40 changed model outcomes; C++ fixture now returns actual failed intent code/field/message instead of aborting after twelve inputs. Native/modules each 4/4, targeted ASan/UBSan 1/1 (leak scanning disabled), actual source/module reproduction, 487 canonical bodies, 1479 exports and 1354-file format/check pass. Original retired drivers and compiler/process failures preserved. Private typed aggregate shell remains uncompiled due actual new registry/request-scope/dynamic responsibilities; its 48 cases are not accepted and no stubs replace those paths. Four recorded integration failures have selected successful follow-ups, leaving 16. No production/generator/default-guard change, full native or MIPS/physical-device run; full G01-G17/P0-P7 remain partial."
+      },
+      "docs/expression_model_types_5_0_6.md",
+      "docs/parity/expression_model_types_5_0_6.json",
+      "docs/parity/expression_model_types_validation_5_0_6.json.gz",
+      "docs/parity/expression_model_types_initial_validation_5_0_6.json.gz",
+      "docs/parity/expression_model_types_initial_5_0_6.json.gz",
+      "docs/parity/expression_model_types_expanded_initial_5_0_6.json.gz",
+      "docs/parity/scalar_codec_sdk_regeneration_5_0_6.json",
+      "tests/parity/expression_model_types_5_0_6_cases.json.gz",
+      "tests/parity/expression_model_types_expanded_5_0_6_cases.json.gz",
+      "tests/parity/compare_expression_model_types_5_0_6.py",
+      "tests/parity/expression_model_types_probe.cpp",
+      "tests/parity/rust_expression_model_types_5_0_6/Cargo.toml",
+      "tests/parity/rust_expression_model_types_5_0_6/Cargo.lock",
+      "tests/parity/rust_expression_model_types_5_0_6/src/lib.rs",
+      "tests/parity/rust_expression_model_types_5_0_6/src/main.rs",
+      "teaql_runtime/include/teaql/runtime/generated_scalar_codec.hpp"
+    ],
+    "open_questions": [
+      "196 original diagnostic and 108 original Value/Null observations cover selected scalar/forward/reverse/list/constant/inherited resolution and fallbacks. Stored list flags no longer override installed relation-view availability. Quote/control/NUL/Unicode and root-structure presentation now have the separately scoped 936-input original/raw comparison. The separate complete-frame matrix covers embedded field-label/method-name injection without parsing original panic fields. Broader generated model configurations and full P6 Assist/sample/extension qualification remain open."
+    ]
+  },
+  "original_phase_row": "P6: Complete diagnostic fields and Value/Null/NotLoaded match source without implicit SQL; sample data and registration execute across supported configurations; generated guidance accurately documents emitted APIs, ownership and unsupported paths.",
+  "note": "Preserve original G11 status, evidence and open question before acceptance. P6/G12 assembly/sample/general extension responsibilities remain separate and cannot be waived."
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "case": "timestamp",
+  "status": "44 exact actual original/native SQLite observations match; broader/formal gates pending",
+  "observations": 44,
+  "successes": 44,
+  "errors": 0,
+  "corpus_sha256": "e1d1284dbb64065c09a8185a056283130b97c0485292cd99faa379e557b96b7b",
+  "normalization": "none",
+  "runtime_changed": false,
+  "generator_changed": false,
+  "log": "/tmp/teaql_scalar_candidate_remaining_execution.log"
+}

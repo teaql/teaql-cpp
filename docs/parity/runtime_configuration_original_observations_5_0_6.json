@@ -1,0 +1,245 @@
+{
+  "schema": 1,
+  "status": "original_observations_cpp_comparison_required",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_inputs": {
+    "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs": "2ec8634bffd0ba33046fec865feebb8796c9df087c93c40b3e3b1abc0ad361d5",
+    "tests/generator/parity/dynamic_json_rust/PROVENANCE.json": "79db4b2e529bae107d04b9889030f2d596d08b5db8bb067286ba39fbf61c2dcb",
+    "tests/parity/rust_execution_shapes_5_0_6/Cargo.lock": "2deb61ccf27c82a58eba825565a7c6d36c5b39d85bbb2998bcc6f782f607c866",
+    "tests/parity/rust_execution_shapes_5_0_6/src/bin/runtime_configuration_original_5_0_6.rs": "47c58546b5db26b6b0b266199b57d9dd14ded05c2da629b3a7456c818bf45dc7"
+  },
+  "cases": [
+    {
+      "name": "config_missing",
+      "mode": "config",
+      "environment_hex": null,
+      "source_expected": {
+        "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotPresent }",
+        "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable not found",
+        "ok": false,
+        "source": "environment variable not found"
+      },
+      "created_files": []
+    },
+    {
+      "name": "config_empty",
+      "mode": "config",
+      "environment_hex": "",
+      "source_expected": {
+        "clone_equal": true,
+        "database_url": "",
+        "debug": "ServiceRuntimeConfig { database_url: \"\" }",
+        "ok": true
+      },
+      "created_files": []
+    },
+    {
+      "name": "config_blank",
+      "mode": "config",
+      "environment_hex": "202020",
+      "source_expected": {
+        "clone_equal": true,
+        "database_url": "   ",
+        "debug": "ServiceRuntimeConfig { database_url: \"   \" }",
+        "ok": true
+      },
+      "created_files": []
+    },
+    {
+      "name": "config_memory",
+      "mode": "config",
+      "environment_hex": "3a6d656d6f72793a",
+      "source_expected": {
+        "clone_equal": true,
+        "database_url": ":memory:",
+        "debug": "ServiceRuntimeConfig { database_url: \":memory:\" }",
+        "ok": true
+      },
+      "created_files": []
+    },
+    {
+      "name": "config_sqlite_url",
+      "mode": "config",
+      "environment_hex": "73716c6974653a2f2f666f6c6465722f646174612e64623f6d6f64653d726f",
+      "source_expected": {
+        "clone_equal": true,
+        "database_url": "sqlite://folder/data.db?mode=ro",
+        "debug": "ServiceRuntimeConfig { database_url: \"sqlite://folder/data.db?mode=ro\" }",
+        "ok": true
+      },
+      "created_files": []
+    },
+    {
+      "name": "config_unicode",
+      "mode": "config",
+      "environment_hex": "666f6c6465722fe695b0e68dae2e6462",
+      "source_expected": {
+        "clone_equal": true,
+        "database_url": "folder/\u6570\u636e.db",
+        "debug": "ServiceRuntimeConfig { database_url: \"folder/\u6570\u636e.db\" }",
+        "ok": true
+      },
+      "created_files": []
+    },
+    {
+      "name": "config_invalid_unicode",
+      "mode": "config",
+      "environment_hex": "ff",
+      "source_expected": {
+        "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotUnicode(\"\\xFF\") }",
+        "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable was not valid unicode: \"\\xFF\"",
+        "ok": false,
+        "source": "environment variable was not valid unicode: \"\\xFF\""
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_missing",
+      "mode": "connect",
+      "environment_hex": null,
+      "source_expected": {
+        "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotPresent }",
+        "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable not found",
+        "ok": false,
+        "source": "environment variable not found"
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_invalid_unicode",
+      "mode": "connect",
+      "environment_hex": "ff",
+      "source_expected": {
+        "debug": "MissingEnv { name: \"CPP_DYNAMIC_JSON_CORE_DATABASE_URL\", source: NotUnicode(\"\\xFF\") }",
+        "display": "missing environment variable CPP_DYNAMIC_JSON_CORE_DATABASE_URL: environment variable was not valid unicode: \"\\xFF\"",
+        "ok": false,
+        "source": "environment variable was not valid unicode: \"\\xFF\""
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_memory",
+      "mode": "connect",
+      "environment_hex": "3a6d656d6f72793a",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_sqlite_memory",
+      "mode": "connect",
+      "environment_hex": "73716c6974653a3a6d656d6f72793a",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_two_slash_memory",
+      "mode": "connect",
+      "environment_hex": "73716c6974653a2f2f3a6d656d6f72793a",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_three_slash_memory",
+      "mode": "connect",
+      "environment_hex": "73716c6974653a2f2f2f3a6d656d6f72793a",
+      "source_expected": {
+        "debug": "ConnectionError(\"unable to open database file: /:memory:\")",
+        "display": "connection error: unable to open database file: /:memory:",
+        "ok": false,
+        "source": null
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_empty",
+      "mode": "connect",
+      "environment_hex": "",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_query_only",
+      "mode": "connect",
+      "environment_hex": "3f6d6f64653d6d656d6f7279",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": []
+    },
+    {
+      "name": "connect_plain_file",
+      "mode": "connect",
+      "environment_hex": "666f6c6465722f646174612e6462",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": [
+        "folder/data.db"
+      ]
+    },
+    {
+      "name": "connect_url_query_ignored",
+      "mode": "connect",
+      "environment_hex": "73716c6974653a2f2f666f6c6465722f646174612e64623f6d6f64653d726f",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": [
+        "folder/data.db"
+      ]
+    },
+    {
+      "name": "connect_literal_percent",
+      "mode": "connect",
+      "environment_hex": "73716c6974653a2f2f64622532306e616d652e64623f6d6f64653d726f",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": [
+        "db%20name.db"
+      ]
+    },
+    {
+      "name": "connect_file_uri",
+      "mode": "connect",
+      "environment_hex": "66696c653a6d656d6f727964623f6d6f64653d6d656d6f72792663616368653d736861726564",
+      "source_expected": {
+        "ok": true,
+        "query_error": "graph write error: Transport error: no such table: person_data"
+      },
+      "created_files": [
+        "memorydb"
+      ]
+    },
+    {
+      "name": "connect_parent_failure",
+      "mode": "connect",
+      "environment_hex": "626c6f636b65642f646174612e6462",
+      "source_expected": {
+        "debug": "ConnectionError(\"File exists (os error 17)\")",
+        "display": "connection error: File exists (os error 17)",
+        "ok": false,
+        "source": null
+      },
+      "created_files": []
+    }
+  ],
+  "notice": "Calls unchanged original public functions. No C++ outcome or full G12 acceptance is claimed."
+}

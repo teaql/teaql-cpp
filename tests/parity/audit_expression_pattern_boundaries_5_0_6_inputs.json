@@ -1,0 +1,365 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Source-observed early-block, nested-index, try-block, struct-rest and pattern modifier boundaries; no local expected outputs.",
+  "expressions": [
+    "try {1}",
+    "match value {_ => try {1} _ => 2}",
+    "{try {1} 2}",
+    "if values[Thing {value: 1}] {}",
+    "while values[Thing {value: 1}] {}",
+    "match value {_ => {} &&Other => 1}",
+    "match value {_ => {} +1}",
+    "match value {_ => {}.method() + 1, _ => 2}",
+    "{while flag {} +1}",
+    "{while flag {} -1}",
+    "if let Some(x) = value && flag {}",
+    "for x: usize in values {}",
+    "match value {Thing {ref mut value, ..} => value}",
+    "match value {Self::Thing {..} => value}",
+    "Thing {..value, other:}",
+    "Thing {..value, +}",
+    "Thing {..1 +}",
+    "match value {Thing {.. nonsense} => value}",
+    "if let -name = value {}",
+    "if let Thing {ref} = value {}",
+    "if let Thing {mut} = value {}"
+  ],
+  "cases": [
+    [
+      "pattern_boundary_0_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=try {1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_0_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=try {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_0_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=try {1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_0_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=try {1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_1_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => try {1} _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_1_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => try {1} _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_1_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => try {1} _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_1_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => try {1} _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_2_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len={try {1} 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_2_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len={try {1} 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_2_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int={try {1} 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_2_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int={try {1} 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_3_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if values[Thing {value: 1}] {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_3_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if values[Thing {value: 1}] {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_3_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if values[Thing {value: 1}] {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_3_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if values[Thing {value: 1}] {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_4_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=while values[Thing {value: 1}] {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_4_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=while values[Thing {value: 1}] {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_4_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=while values[Thing {value: 1}] {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_4_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=while values[Thing {value: 1}] {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_5_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => {} &&Other => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_5_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => {} &&Other => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_5_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => {} &&Other => 1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_5_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => {} &&Other => 1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_6_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => {} +1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_6_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => {} +1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_6_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => {} +1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_6_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => {} +1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_7_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {_ => {}.method() + 1, _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_7_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {_ => {}.method() + 1, _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_7_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {_ => {}.method() + 1, _ => 2}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_7_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {_ => {}.method() + 1, _ => 2}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_8_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len={while flag {} +1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_8_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len={while flag {} +1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_8_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int={while flag {} +1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_8_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int={while flag {} +1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_9_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len={while flag {} -1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_9_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len={while flag {} -1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_9_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int={while flag {} -1}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_9_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int={while flag {} -1}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_10_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let Some(x) = value && flag {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_10_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let Some(x) = value && flag {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_10_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let Some(x) = value && flag {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_10_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let Some(x) = value && flag {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_11_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=for x: usize in values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_11_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=for x: usize in values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_11_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=for x: usize in values {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_11_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=for x: usize in values {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_12_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Thing {ref mut value, ..} => value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_12_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Thing {ref mut value, ..} => value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_12_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Thing {ref mut value, ..} => value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_12_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Thing {ref mut value, ..} => value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_13_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Self::Thing {..} => value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_13_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Self::Thing {..} => value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_13_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Self::Thing {..} => value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_13_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Self::Thing {..} => value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_14_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {..value, other:}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_14_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {..value, other:}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_14_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {..value, other:}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_14_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {..value, other:}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_15_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {..value, +}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_15_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {..value, +}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_15_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {..value, +}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_15_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {..value, +}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_16_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=Thing {..1 +}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_16_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=Thing {..1 +}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_16_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=Thing {..1 +}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_16_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=Thing {..1 +}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_17_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=match value {Thing {.. nonsense} => value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_17_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=match value {Thing {.. nonsense} => value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_17_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=match value {Thing {.. nonsense} => value}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_17_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=match value {Thing {.. nonsense} => value}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_18_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let -name = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_18_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let -name = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_18_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let -name = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_18_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let -name = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_19_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let Thing {ref} = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_19_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let Thing {ref} = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_19_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let Thing {ref} = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_19_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let Thing {ref} = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_20_audit_value_max_len_audit_value_max_len",
+      "17, audit_value_max_len=if let Thing {mut} = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_20_audit_value_max_len_audit_mask_fields",
+      "17, audit_value_max_len=if let Thing {mut} = value {}, audit_mask_fields=\"name\""
+    ],
+    [
+      "pattern_boundary_20_audit_value_max_len_int_audit_value_max_len",
+      "17, audit_value_max_len_int=if let Thing {mut} = value {}, audit_value_max_len=21"
+    ],
+    [
+      "pattern_boundary_20_audit_value_max_len_int_audit_mask_fields",
+      "17, audit_value_max_len_int=if let Thing {mut} = value {}, audit_mask_fields=\"name\""
+    ]
+  ]
+}

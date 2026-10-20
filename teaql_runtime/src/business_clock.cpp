@@ -1,5 +1,5 @@
 #include <teaql/runtime/business_clock.hpp>
-#include <chrono>
+#include <teaql/core/detail/system_clock.hpp>
 #include <stdexcept>
 
 namespace teaql {
@@ -38,14 +38,8 @@ std::optional<UtcDateTime> UtcDateTime::from_ymd_hms_nano(std::int32_t y,
 }
 
 UtcDateTime UtcDateTime::now() {
-    auto time = std::chrono::system_clock::now().time_since_epoch();
-    auto seconds = std::chrono::floor<std::chrono::seconds>(time);
-    auto nanos = std::chrono::duration_cast<std::chrono::nanoseconds>(time - seconds);
-    auto value = from_timestamp(seconds.count(), std::uint32_t(nanos.count()));
-    if (!value) {
-        throw std::out_of_range("System business time exceeds chrono's UTC date range");
-    }
-    return *value;
+    auto time = detail::system_utc_time();
+    return UtcDateTime(time.seconds, time.nanoseconds);
 }
 
 Date UtcDateTime::date_naive() const {

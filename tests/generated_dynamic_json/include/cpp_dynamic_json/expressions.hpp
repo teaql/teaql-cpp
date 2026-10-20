@@ -618,49 +618,49 @@ inline ProductExpression LineExpression::getProduct() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value));
+        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static PersonExpression person(const Person& value) {
-        return PersonExpression(entity_expression(value));
+        return PersonExpression(entity_expression(value, StaticString{"person"}));
     }
 
     static PersonExpression person(Person&&) = delete;
     static PersonExpression person(const Person&&) = delete;
 
     static ProfileExpression profile(const Profile& value) {
-        return ProfileExpression(entity_expression(value));
+        return ProfileExpression(entity_expression(value, StaticString{"profile"}));
     }
 
     static ProfileExpression profile(Profile&&) = delete;
     static ProfileExpression profile(const Profile&&) = delete;
 
     static CompanyExpression company(const Company& value) {
-        return CompanyExpression(entity_expression(value));
+        return CompanyExpression(entity_expression(value, StaticString{"company"}));
     }
 
     static CompanyExpression company(Company&&) = delete;
     static CompanyExpression company(const Company&&) = delete;
 
     static OrderExpression order(const Order& value) {
-        return OrderExpression(entity_expression(value));
+        return OrderExpression(entity_expression(value, StaticString{"order"}));
     }
 
     static OrderExpression order(Order&&) = delete;
     static OrderExpression order(const Order&&) = delete;
 
     static ProductExpression product(const Product& value) {
-        return ProductExpression(entity_expression(value));
+        return ProductExpression(entity_expression(value, StaticString{"product"}));
     }
 
     static ProductExpression product(Product&&) = delete;
     static ProductExpression product(const Product&&) = delete;
 
     static LineExpression line(const Line& value) {
-        return LineExpression(entity_expression(value));
+        return LineExpression(entity_expression(value, StaticString{"line"}));
     }
 
     static LineExpression line(Line&&) = delete;

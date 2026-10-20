@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="2"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="0"
+	timestamp="2026-10-18T20:08:08"
+	>
+	<testcase name="original_sql_mutation_execution_contracts" classname="original_sql_mutation_execution_contracts" time="0.0581039" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="original_sql_query_execution_contracts" classname="original_sql_query_execution_contracts" time="0.013963" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+</testsuite>

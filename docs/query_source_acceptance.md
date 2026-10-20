@@ -1,5 +1,11 @@
 # Complete query source responsibility review
 
+This is historical 5.0.5 acceptance. The active
+[5.0.6 source continuation](core_query_source_review_5_0_6.md) repairs core/runtime
+purpose lineage; the later [schema builder](query_schema_builder_5_0_6.md)
+closes its separately recorded helper gap. Whole 5.0.6
+query-source acceptance remains pending; the current model has 31 fields.
+
 Baseline: Rust v5.0.5 at
 `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 The complete 996-line query.rs body is reviewed, including private list-limit

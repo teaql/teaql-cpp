@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "source": "teaql_runtime/include/teaql/runtime/entity_runtime.hpp",
+  "before_sha256": "4fcb97675a2be1483f4ef4b709368b3c3b32226f6f1ae60cdee11bc36f3ece74",
+  "after_sha256": "43b2840c0b7dc7118d1e78378089a708e6317e4a065090e8400c99395e0af68f",
+  "entire_header_equal_after_exact_forwarding_extraction": true,
+  "new_wrapper": "    LedgerCompositionResult include_pending_mutations_from(const T& source) const {\n        return compose(static_cast<const Derived&>(*this), source);\n    }\n\n    // Generated facades can delegate without inheriting an application-visible snake_case API.\n    template <LedgerEntity T>\n    static LedgerCompositionResult compose(const Derived& self, const T& source) {",
+  "preserved_original_prologue": "    LedgerCompositionResult include_pending_mutations_from(const T& source) const {\n        const auto& self = static_cast<const Derived&>(*this);"
+}

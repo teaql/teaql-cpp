@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "adapted_source_only": true,
+  "observations": 60,
+  "successes": 15,
+  "errors": 45,
+  "corpus": "tests/parity/inherited_business_governed_adapted_source_5_0_6_cases.json.gz",
+  "observer_sha256": "cc5b45773f3ec2c5dcc01f96ee35b32d3cde2d37949583d6d2fdd7eb782b5b7a",
+  "lock_sha256": "415b135b976ff4c9d749152788deb6433ddb03ebfb661a1b6f5e4d3b1a697d3e",
+  "reference_lock_sha256": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+  "source_registry_versions_preserved": true,
+  "source_dependency_checksums_preserved": true,
+  "cpp_comparison": true,
+  "source_artifact_acceptance": false,
+  "inheritance_guard_removed": false,
+  "cpp_observer_sha256": "43897b1434798b1b56e9f3fe7c9553bbe24f4fc5b8b25b50ccaa1a650f7daa28"
+}

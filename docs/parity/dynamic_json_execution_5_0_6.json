@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scenarios": 2240,
+  "one_requests": 320,
+  "stream_requests": 1920,
+  "successful_outcomes": 2016,
+  "original_parse_panics": 224,
+  "translated_stream_reuse_successes": 1728,
+  "live_source_and_cpp_exit_code": 0,
+  "source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 2240 actual original/native generated JSON one/stream outcomes\n",
+  "source_reproduction_exit_code": 0,
+  "source_reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 2240 actual original/native generated JSON one/stream outcomes\n",
+  "legacy_observations": 1181,
+  "legacy_live_source_output": "Generated dynamic JSON: 1181/1181 observations match\n",
+  "profiles": {
+    "native": {
+      "exit_code": 0,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        "generated_dynamic_json_context_contracts",
+        "generated_dynamic_json_rust_parity",
+        "dynamic_json_execution_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 50: generated_dynamic_json_rust_parity\n    Start 51: generated_dynamic_json_context_contracts\n    Start 49: dynamic_json_execution_rust_parity\n1/3 Test #51: generated_dynamic_json_context_contracts ...   Passed    0.01 sec\n2/3 Test #50: generated_dynamic_json_rust_parity .........   Passed    1.21 sec\n3/3 Test #49: dynamic_json_execution_rust_parity .........   Passed    8.58 sec\n\n100% tests passed out of 3\n\nTotal Test time (real) =   8.59 sec\n",
+      "build_exit_code": 0
+    },
+    "sanitize": {
+      "exit_code": 0,
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        "generated_dynamic_json_rust_parity",
+        "dynamic_json_execution_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 50: generated_dynamic_json_rust_parity\n    Start 49: dynamic_json_execution_rust_parity\n1/2 Test #50: generated_dynamic_json_rust_parity ...   Passed    4.67 sec\n2/2 Test #49: dynamic_json_execution_rust_parity ...   Passed   27.46 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =  27.46 sec\n",
+      "build_exit_code": 0
+    },
+    "modules": {
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "tests": [
+        "module_dynamic_json_execution_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 671: module_dynamic_json_execution_rust_parity\n1/1 Test #671: module_dynamic_json_execution_rust_parity ...   Passed    7.74 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   7.75 sec\n",
+      "build_exit_code": 0
+    }
+  },
+  "context_rebuild_exit_code": 0,
+  "context_replay_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 51: generated_dynamic_json_context_contracts\n1/1 Test #51: generated_dynamic_json_context_contracts ...   Passed    0.00 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.01 sec\n",
+  "canonical_consumer_output": "Verified 158 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\n",
+  "module_export_output": "Verified 1479 catalog exports and isolated lookup across 7 modules\n",
+  "module_dependencies_output": "Verified 245 production headers, 687 include edges and 7 modules: acyclic and confined to supported layers\n",
+  "format_output": "Formatted 1019 handwritten C++ files with clang-format 18.1.8\n",
+  "format_check_output": "Checked 1019 handwritten C++ files with clang-format 18.1.8\n",
+  "default_pmr_disabled": true,
+  "actual_context_destruction": true,
+  "production_or_generator_body_changes": false,
+  "generated_artifacts_modified": false,
+  "sanitizer_leak_scanning": false,
+  "mips_or_physical_run": false,
+  "sha256": {
+    "tests/parity/dynamic_json_execution_5_0_6_cases.json.gz": "e98099f46809ffdace6761cee2b26d1881f75a21936ddef89d5835593c620247",
+    "tests/parity/generated_dynamic_json_5_0_6_cases.json.gz": "3bfcfb00ac91d7c532534c528206b4cf6d24d4aae4e29b8706b9a054488a9944",
+    "tests/parity/generated_dynamic_json_probe.cpp": "a36695d8d08c259fcb46b2f934e8d847568bd9135822607100e2f0a7973ce872",
+    "tests/parity/rust_field_layout/src/bin/generated_dynamic_json_5_0_6.rs": "400591831633cde3300c193c0f02ae10e366895eea02c0715d835f62c8cff394",
+    "docs/parity/dynamic_json_execution_5_0_6_source_review.json": "e0f0a49ccbd684ca3fcf567c8d9aaf3e5f03f77b656120521d8276828aa7b61e"
+  },
+  "remaining_scope": "Inherited/constant/candidate/temporal configurations, custom request policy, protected diagnostics, complete dynamic/readonly storage/facets and full integration remain required. G10/G13/G16/P0-P7 not complete."
+}

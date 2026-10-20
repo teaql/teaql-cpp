@@ -1,0 +1,5 @@
+#define TEAQL_CHECK_MODEL Document
+#define TEAQL_CHECK_CHECKER DocumentChecker
+#define TEAQL_CHECK_LOGIC DocumentCheckerLogic
+#define TEAQL_CHECK_CALLBACK checkAndFixDocument
+#include "inherited_checker_helpers_probe.cpp"

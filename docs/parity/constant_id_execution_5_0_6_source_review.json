@@ -1,0 +1,13 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "drivers": {
+    "tests/parity/constant_id_execution_5_0_6.rs": "a04a14d30502a43079df6c774ec14352817622aa3406ac10f133a9e2af8ffe6e",
+    "tests/parity/constant_id_execution_probe.cpp": "8e3fa414e2a8d0da852b8eaac014d34f44d1597724989dde02e1949f8af5fdf8",
+    "scripts/verify_constant_id_execution.py": "944ea9c5bb4a354991532d6f8b2f37e26fdc358ef622e6c1728a59f004ee2674"
+  },
+  "original_crates": "tests/generator/parity/constant_id_contracts/*/rust/lib",
+  "assembly": "Actual public domain module factories, native SQLite schema/provider/executor/ID services. SQLite connection retained by fixture; fresh User Context and ID service each round.",
+  "observations": "Exact before/after SQLite rows and ID space, active root, schema errors, controlled stored states and repeated rounds. No timing/log field normalization or handwritten bootstrap behavior.",
+  "scope": "Seven source-compilable fixtures; three rejected shapes remain original compiler dispositions. 504 scenarios, 1008 observed rounds plus controlled warmups."
+}

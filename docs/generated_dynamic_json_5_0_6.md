@@ -137,6 +137,23 @@ MIPS and physical-device execution are outside this checkpoint.
 
 ## Remaining qualification
 
+The [complete G10 requirement matrix](dynamic_json_qualification_matrix_5_0_6.md)
+now consolidates source obligations, scoped semantic evidence and remaining
+inheritance/protected-storage/policy/integration requirements. The subsequent
+[domain execution matrix](dynamic_json_domains_5_0_6.md) qualifies 5,910 actual
+constant/candidate/Business-ID JSON outcomes without ID allocation/bootstrap.
+
+The [subsequent scalar/optional/temporal SQLite checkpoint](dynamic_json_scalar_5_0_6.md)
+qualifies 5,088 additional outcomes and replays this complete corpus plus one/
+stream/policy matrices against original registry versions/checksums. Its explicit
+stream-reuse uint64 stimulus matches the original Rust argument; production
+generic conversion semantics remain unchanged.
+
+The [inherited recipe repair](dynamic_json_inheritance_5_0_6.md) subsequently
+qualifies six-model inheritance constructions and fixes 852 ignored ancestor
+field/path differences. Its 2,656 exact outcomes and separate compiler/profile
+gates supplement the historical records below without relabeling them.
+
 - Additional supported model combinations: inherited fields/discriminators,
   constant/candidate fields and more scalar/temporal/optional types.
 - Generated list/one/stream application integration beyond the recorded list

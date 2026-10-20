@@ -2,6 +2,39 @@
 #include <teaql/runtime/data_service.hpp>
 
 namespace teaql::detail {
+// Repository lookup is part of generated execution. Preserve its Graph result
+// boundary instead of throwing before callers receive their operation handle.
+template <class T, class Error>
+class GeneratedQueryLookupFailure {
+public:
+    using allocator_type = Allocator;
+    using Output = Result<T, DataServiceError<Error>>;
+
+    GeneratedQueryLookupFailure(std::allocator_arg_t, Allocator a, const ContextError& error)
+        : result_(
+              Output::err(a.resource(),
+                          DataServiceError<Error>::runtime(
+                              a.resource(),
+                              RuntimeError::graph(a.resource(), error.to_string(a.resource()))))) {}
+
+    std::optional<Output> poll(WakeSignal&) {
+        return std::move(result_);
+    }
+
+    void finish_and_wait() noexcept {}
+
+    void cancel_and_wait() noexcept {}
+
+private:
+    Output result_;
+};
+
+template <class T, class Error>
+auto& generated_query_lookup_failure(Memory r, const ContextError& error) {
+    using State = GeneratedQueryLookupFailure<T, Error>;
+    return make_operation<typename State::Output, State>(r, error);
+}
+
 // The generated Rust runtime maps service failures into RuntimeError::Graph.
 // Keep the C++ service-error carrier while preserving that application boundary.
 template <class Error>

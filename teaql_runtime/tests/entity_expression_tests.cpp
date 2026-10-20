@@ -1,4 +1,5 @@
 #include "../../examples/generated/include/cpp_examples.hpp"
+#include <array>
 #include <iostream>
 #include <optional>
 #include <string>
@@ -379,9 +380,185 @@ static void structured_diagnostics() {
     check(copied_rejected, "copied missing snapshot still rejects unwrap");
 }
 
-int main() {
+static void typed_member_alias_lookup(bool observe = false) {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    const std::array indexes{FieldLayout::Index{"id", 0},
+                             FieldLayout::Index{"version", 1},
+                             FieldLayout::Index{"business_name", 2}};
+    const std::array mappings{FieldLayout::Mapping{"id", "id", "id"},
+                              FieldLayout::Mapping{"version", "version", "version"},
+                              FieldLayout::Mapping{"business_name", "display_name", "legacy_url"}};
+    const std::array<std::string_view, 3> members{"id", "version", "display_name"};
+    auto& layout = user_context->make<FieldLayout>(
+        std::move(FieldLayout::from_generated(
+                      r, "ThreeNameRow", "three-name-v1", indexes, mappings, {}, members))
+            .value());
+    ArenaBorrow<FieldLayout> binding(std::allocator_arg, Allocator(r), layout);
+    auto& pool = user_context->make<SnapshotPool>();
+    const std::array<std::string_view, 4> aliases{
+        "business_name", "display_name", "legacy_url", "business_nmae"};
+    std::array<std::size_t, 4> order{};
+    auto visit = [&](auto&& self, std::size_t count, unsigned used) -> void {
+        for (bool null_value : {false, true}) {
+            Vector<String> columns(r);
+            columns.emplace_back("id");
+            columns.emplace_back("version");
+            Vector<Value> values(r);
+            values.emplace_back(std::uint64_t{1});
+            values.emplace_back(std::int64_t{1});
+            std::optional<std::string_view> expected;
+            for (std::size_t i = 0; i < count; ++i) {
+                auto name = aliases[order[i]];
+                columns.emplace_back(name);
+                if (null_value) {
+                    values.emplace_back(nullptr);
+                } else {
+                    values.emplace_back(name);
+                }
+                if (name != "business_nmae") {
+                    expected = name;
+                }
+            }
+            auto& shape = user_context->make<ColumnLayout>(std::move(columns));
+            CompactRow row(std::allocator_arg, Allocator(r), shape, std::move(values));
+            auto loaded = row.indexed_load_state(pool, layout);
+            auto found = GeneratedRelationAccess::lookupField(
+                r, row, "ThreeNameRow", "business_name", "legacy_url", false, binding);
+            check(found && !found.value().alias_present && !found.value().object_alias,
+                  "scalar aliases do not imply a loaded relation");
+            const auto* value = found.value().value;
+            check(bool(value) == expected.has_value(),
+                  "only known canonical/member/physical aliases decode a payload");
+            if (value) {
+                check(null_value ? value->is_null() : value->try_text() == expected,
+                      "last known alias in row iteration order supplies the value, including NULL");
+            }
+            for (auto name : {"business_name", "display_name", "legacy_url"}) {
+                check(loaded.is_loaded(name) == expected.has_value(),
+                      "all aliases share availability without loading a typo");
+            }
+            if (observe) {
+                std::cout << (value ? (value->is_null() ? "NULL" : *value->try_text()) : "MISSING")
+                          << ' ' << loaded.is_loaded("business_name") << ' '
+                          << loaded.is_loaded("display_name") << ' '
+                          << loaded.is_loaded("legacy_url") << '\n';
+            }
+        }
+        for (std::size_t i = 0; i < aliases.size(); ++i) {
+            if ((used & (1U << i)) == 0) {
+                order[count] = i;
+                self(self, count + 1, used | (1U << i));
+            }
+        }
+    };
+    visit(visit, 0, 0);
+    CompactRow empty(std::allocator_arg, Allocator(r));
+    auto& global_layout = global.make<FieldLayout>(layout);
+    ArenaBorrow<FieldLayout> global_binding(std::allocator_arg, Allocator(r), global_layout);
+    check(GeneratedRelationAccess::lookupField(
+              r, empty, "ThreeNameRow", "business_name", "legacy_url", false, global_binding)
+              .is_ok(),
+          "Global metadata may lend to a binding in this UserContext");
+    check(!GeneratedRelationAccess::lookupField(
+              r, empty, "AnotherRow", "business_name", "legacy_url", false, binding),
+          "metadata cannot silently decode another entity");
+    check(!GeneratedRelationAccess::lookupField(
+              r, empty, "ThreeNameRow", "business_name", "version", false, binding),
+          "canonical and physical names must refer to the same validated slot");
+    auto next_user_context = global.make_user_context();
+    rejects(
+        [&] {
+            GeneratedRelationAccess::lookupField(next_user_context->memory_resource(),
+                                                 empty,
+                                                 "ThreeNameRow",
+                                                 "business_name",
+                                                 "legacy_url",
+                                                 false,
+                                                 binding);
+        },
+        "metadata binding cannot silently cross UserContexts");
+}
+
+static void typed_alias_binding_lifetime() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& layout =
+        user_context->make<FieldLayout>(std::move(Product::create_field_layout(r)).value());
+    ArenaBorrow<FieldLayout> expired(std::allocator_arg, Allocator(r), layout);
+    user_context.reset();
+    auto global_resource = global.memory_resource();
+    CompactRow empty(std::allocator_arg, Allocator(global_resource));
+    rejects(
+        [&] {
+            GeneratedRelationAccess::lookupField(
+                global_resource, empty, "Product", "name", "name", false, expired);
+        },
+        "expired metadata is rejected before its freed layout or allocator is accessed");
+}
+
+static void typed_alias_forward_object_rules() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    const std::array indexes{FieldLayout::Index{"id", 0},
+                             FieldLayout::Index{"version", 1},
+                             FieldLayout::Index{"business_parent", 2}};
+    const std::array mappings{FieldLayout::Mapping{"id", "id", "id"},
+                              FieldLayout::Mapping{"version", "version", "version"},
+                              FieldLayout::Mapping{"business_parent", "parent_id", "parent"}};
+    const std::array<std::string_view, 3> members{"id", "version", "parent_id"};
+    const std::array<std::string_view, 1> relations{"parent"};
+    auto& layout = user_context->make<FieldLayout>(
+        std::move(FieldLayout::from_generated(
+                      r, "ParentLink", "parent-v1", indexes, mappings, relations, members))
+            .value());
+    ArenaBorrow<FieldLayout> binding(std::allocator_arg, Allocator(r), layout);
+    for (auto name : {"business_parent", "parent_id", "parent", "parent_typo"}) {
+        for (bool with_id : {false, true}) {
+            Value::Object object(r);
+            if (with_id) {
+                object.emplace(String("id", r), Value(r, std::uint64_t{42}));
+            }
+            Record record(r);
+            record.emplace(String(name, r), Value(r, std::move(object)));
+            CompactRow row(std::allocator_arg, Allocator(r), std::move(record));
+            auto found = GeneratedRelationAccess::lookupField(
+                r, row, "ParentLink", "business_parent", "parent", true, binding);
+            if (std::string_view(name) == "parent" && !with_id) {
+                check(!found, "physical forward object without id remains an error");
+            } else {
+                check(found.is_ok(), "nonphysical aliases are not parsed as reference objects");
+                const auto& value = found.value();
+                if (std::string_view(name) == "parent") {
+                    check(value.alias_present && value.object_alias && value.value &&
+                              value.value->try_u64() == 42,
+                          "only the physical forward alias unwraps its object's id");
+                } else {
+                    check(!value.alias_present && !value.object_alias &&
+                              (std::string_view(name) == "parent_typo"
+                                   ? value.value == nullptr
+                                   : value.value && value.value->as_object()),
+                          "canonical/member slots remain raw values; unknown names stay absent");
+                }
+            }
+        }
+    }
+}
+
+int main(int argc, char** argv) {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
+        if (argc == 2 && std::string_view(argv[1]) == "--alias-probe") {
+            typed_member_alias_lookup(true);
+            std::pmr::set_default_resource(previous);
+            return 0;
+        }
+        typed_member_alias_lookup();
+        typed_alias_binding_lifetime();
+        typed_alias_forward_object_rules();
         installed_list_view_lifetimes();
         structured_diagnostics();
         snapshots_and_lifetimes();

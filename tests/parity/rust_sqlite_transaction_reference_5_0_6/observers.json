@@ -1,0 +1,12 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "note": "Unchanged retained observer bodies and ordered inputs/expected outcomes. This project only repairs development dependency identity and gives the observers repository-relative paths.",
+  "files": {
+    "tests/parity/rust_field_layout/src/bin/sqlite_async_lease_5_0_6.rs": "2536142cbf8be8bb12b01cd4282411f2c1e311a513b3d6a9f1bc07906f998746",
+    "tests/parity/sqlite_async_lease_5_0_6_cases.json": "e0d969a91210a6be64ac1971e47720b3c9298c5901ffc11fd7636553d789f6ac",
+    "tests/parity/rust_field_layout/src/bin/sqlite_async_schedule_5_0_6.rs": "96bfb4ec45efee905c72b0fe1798aebcce5f92fa06192795f5812df0025e8718",
+    "tests/parity/sqlite_async_schedule_5_0_6_cases.json.gz": "2b6ef7b9494256458befa9dd82c8eacf53f7f002f3fcebdab398440b10935859",
+    "tests/parity/rust_field_layout/src/bin/sqlite_transport_5_0_6.rs": "d2aa6acb5d3afbeb10e6b41ac1c0858a74cb0cd470c9e1a25f36e9ae7dc6fc45",
+    "tests/parity/sqlite_sync_transaction_5_0_6_cases.json.gz": "d4a2840382959a5a7b674fd508b36dfe5db6e9cf726fa371b334ff4a0e880496"
+  }
+}

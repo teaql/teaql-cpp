@@ -1,5 +1,11 @@
 # SQL dialect responsibility review
 
+The sections below preserve historical 5.0.5 checkpoints. The active
+[complete dialect/root review](sql_compiler_source_review_5_0_6.md) qualifies
+all 5.0.6 compiler/default/helper/override/model responsibilities with exact
+dependencies, unchanged original tests and current native/imported observations.
+Provider/runtime callers and whole P0-P7 acceptance remain independent.
+
 ## Source acceptance, 2026-10-08
 
 The dialect source group is accepted after complete production lines 1–1522,

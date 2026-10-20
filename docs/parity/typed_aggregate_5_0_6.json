@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "observations": 146,
+  "historical_inputs": 48,
+  "explicit_controls": 98,
+  "changed_historical_source_outcomes": 48,
+  "complete_original_runtime": true,
+  "original_archive_files": 610,
+  "append_only_bridges": 1,
+  "original_registry_versions_preserved": true,
+  "historical_sha256": "8c23d78c73f72d9bb000aa50b41e56c609091ddaf1926d67ddc1ec5c93c7147f",
+  "controls_sha256": "135a7cce52997eab5076d2c3d1a8cec006bc9b1ec0b30f7a4a10dff5a8d0391c",
+  "original_method": "teaql-runtime/src/data_service/resolved.rs::fetch_entities_with_relation_aggregates_internal",
+  "original_module_sha256": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+  "corpus": "typed_aggregate_scope_5_0_6_cases.json.gz",
+  "full_capability_acceptance": false,
+  "corpus_sha256": "08804d508b232463c8403711f539b0930cccbddf812eada18e5df3816953b642"
+}

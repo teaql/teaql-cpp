@@ -13,12 +13,27 @@ static void check(bool condition, const char* message) {
     }
 }
 
+static void configure_facet_metadata(UserContext& user_context, std::string_view child_entity) {
+    auto r = user_context.memory_resource();
+    auto& metadata = user_context.make<InMemoryMetadataStore>();
+    EntityDescriptor parent(std::allocator_arg, Allocator(r), "Parent");
+    parent.property("id", DataType::U64).id();
+    parent.relation("ignored", child_entity).local("id").foreign("parent_id").to_many();
+    metadata.register_entity(std::move(parent));
+    EntityDescriptor child(std::allocator_arg, Allocator(r), child_entity);
+    child.property("id", DataType::U64).id();
+    child.relation("ignored", child_entity).local("id").foreign("parent_id").to_many();
+    metadata.register_entity(std::move(child));
+    user_context.set_metadata(user_context, metadata);
+}
+
 struct Runtime final : TeaqlRuntime {
     using allocator_type = Allocator;
     const UserContext& context;
     mutable Vector<SelectQuery> queries;
     mutable Vector<TraceChain> traces;
     bool pending = false;
+    std::optional<std::size_t> pending_at;
     unsigned* cancelled;
 
     Runtime(std::allocator_arg_t, Allocator a, const UserContext& context, unsigned& cancelled)
@@ -36,10 +51,11 @@ struct Runtime final : TeaqlRuntime {
         std::size_t call;
 
         std::optional<Result<SmartList<CompactRow>, RuntimeError>> poll(WakeSignal&) {
-            if (runtime.pending) {
+            if (runtime.pending || runtime.pending_at == call) {
                 return {};
             }
-            check(entity == query.as_query().entity && trace.back().entity_type == entity,
+            check(entity == query.as_query().entity && trace.empty() &&
+                      query.as_query().trace_chain.back().kind == TraceKind::Purpose,
                   "entity, purposed query and trace borrows survive suspended facet execution");
             auto r = query.memory_resource();
             SmartList<CompactRow> rows(std::allocator_arg, Allocator(r));
@@ -50,6 +66,9 @@ struct Runtime final : TeaqlRuntime {
         void finish_and_wait() noexcept {}
 
         void cancel_and_wait() noexcept {
+            if (query.as_query().entity != entity || !trace.empty()) {
+                std::terminate();
+            }
             ++*runtime.cancelled;
         }
     };
@@ -74,9 +93,12 @@ static void ordered_facets_and_shutdown() {
     auto& runtime = user->make_resource<Runtime>(*user, cancelled);
     {
         SelectQuery outer(std::allocator_arg, Allocator(r), "Parent");
+        outer.comment_text.emplace("load selected members", r);
+        outer.purpose_text.emplace("review selected members", r);
         outer.trace_chain.emplace_back(TraceKind::Purpose, "Parent", "outer request");
         request::QueryOptions options(std::allocator_arg, Allocator(r));
         SelectQuery facet(std::allocator_arg, Allocator(r), String(256, 'c', r));
+        configure_facet_metadata(*user, facet.entity);
         options.facets.emplace_back("same", "ignored", facet, true);
         options.facets.emplace_back("same", "ignored", facet, true);
         auto& operation = execute_facets(runtime, outer, options);
@@ -92,13 +114,17 @@ static void ordered_facets_and_shutdown() {
         check(result && result.value().size() == 1 &&
                   result.value().begin()->second.total_count == 2,
               "duplicate names preserve source last-result-wins semantics");
-        check(runtime.queries.size() == 2 && runtime.traces[0].size() == 2 &&
-                  runtime.traces[0][0].comment == "outer request" &&
-                  runtime.traces[0][1].kind == TraceKind::Relation &&
-                  runtime.traces[0][1].comment == "same" &&
+        check(runtime.queries.size() == 2 && runtime.traces[0].empty() &&
+                  runtime.queries[0].trace_chain[0].comment == "outer request" &&
+                  runtime.queries[0].trace_chain[1].kind == TraceKind::Relation &&
+                  runtime.queries[0].trace_chain[1].comment == "Parent.ignored" &&
+                  runtime.queries[0].trace_chain[1].entity_type == "ignored" &&
                   runtime.queries[0].trace_chain.back().kind == TraceKind::Purpose &&
-                  runtime.queries[0].trace_chain.back().comment == "Calculate facet same",
-              "outer provenance, relation trace and query purpose remain distinct");
+                  runtime.queries[0].trace_chain.back().comment == "review selected members" &&
+                  runtime.queries[0].comment_text == "load selected members",
+              "facet query owns root intent and ancestry without a duplicate repository prefix");
+        outer.comment_text.emplace("load selected members", r);
+        outer.purpose_text.emplace("review selected members", r);
         options.facets.emplace_back("pending", "ignored", runtime.queries[0], true);
         runtime.pending = true;
         auto& abandoned = execute_facets(runtime, outer, options);
@@ -137,6 +163,7 @@ static void restriction_errors_and_runtime_expiry() {
     outer.slice = Slice{3, 2};
     outer.hard_limit(99);
     outer.comment_text = String("keep", r);
+    outer.purpose_text.emplace("verify runtime expiry", r);
     auto restricted = restrict_facet_to_outer_query(
         runtime, request::QuerySelection(std::allocator_arg, Allocator(r), facet), outer, "kids");
     check(restricted && restricted.value().query.predicate &&
@@ -162,6 +189,68 @@ static void restriction_errors_and_runtime_expiry() {
     check(dead && cancelled == 0, "expired runtime is rejected before virtual facet dispatch");
 }
 
+static void required_intent_precedes_dispatch() {
+    unsigned cancelled = 0;
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& runtime = user_context->make_resource<Runtime>(*user_context, cancelled);
+    SelectQuery outer(std::allocator_arg, Allocator(r), "Parent");
+    request::QueryOptions options(std::allocator_arg, Allocator(r));
+    const auto& absent_comment = execute_facets(runtime, outer, options).wait();
+    check(!absent_comment && absent_comment.error().kind() == RuntimeError::Kind::RequestIntent &&
+              absent_comment.error().to_string(r).starts_with("REQUEST_COMMENT_REQUIRED"),
+          "even empty facet options require root comment before dispatch");
+    outer.comment_text.emplace("load selected members", r);
+    const auto& absent_purpose = execute_facets(runtime, outer, options).wait();
+    check(!absent_purpose &&
+              absent_purpose.error().to_string(r).starts_with("QUERY_PURPOSE_REQUIRED"),
+          "root purpose is validated independently of diagnostic trace frames");
+    outer.purpose_text.emplace("review selected members", r);
+    check(execute_facets(runtime, outer, options).wait().is_ok(),
+          "valid empty facet options complete without a service call");
+    SelectQuery child(std::allocator_arg, Allocator(r), "Child");
+    options.facets.emplace_back("all", "ignored", child, true);
+    const auto& missing_entity = execute_facets(runtime, outer, options).wait();
+    check(!missing_entity && missing_entity.error().kind() == RuntimeError::Kind::MissingEntity,
+          "include-all still requires the modeled outer entity");
+    configure_facet_metadata(*user_context, "Child");
+    options.facets.front().relation_name = "unmodeled";
+    const auto& missing_relation = execute_facets(runtime, outer, options).wait();
+    check(!missing_relation &&
+              missing_relation.error().kind() == RuntimeError::Kind::MissingRelation &&
+              runtime.queries.empty(),
+          "include-all validates its relation before invoking a service");
+}
+
+static void nested_facet_shutdown() {
+    unsigned cancelled = 0;
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    {
+        auto r = user_context->memory_resource();
+        configure_facet_metadata(*user_context, "Child");
+        auto& runtime = user_context->make_resource<Runtime>(*user_context, cancelled);
+        runtime.pending_at = 2;
+        SelectQuery outer(std::allocator_arg, Allocator(r), "Parent");
+        outer.comment_text.emplace("load nested members", r);
+        outer.purpose_text.emplace("review nested members", r);
+        SelectQuery child(std::allocator_arg, Allocator(r), "Child");
+        request::QueryOptions options(std::allocator_arg, Allocator(r));
+        options.facets.emplace_back("root", "ignored", child, true);
+        options.facets.back().query.query_options.facets.emplace_back(
+            "nested", "ignored", child, true);
+        auto& operation = execute_facets(runtime, outer, options);
+        check(!operation.poll() && runtime.queries.size() == 2 &&
+                  runtime.queries.back().comment_text == "load nested members" &&
+                  runtime.queries.back().purpose_text == "review nested members",
+              "nested execution suspends with root intent and parent query borrows intact");
+    }
+    user_context.reset();
+    check(cancelled == 1 && global.live_user_bytes() == 0,
+          "actual User deletion cancels the nested child before releasing ancestor storage");
+}
+
 static void retained_facet_results() {
     GlobalContext global;
     auto user = global.make_user_context();
@@ -170,9 +259,14 @@ static void retained_facet_results() {
     {
         auto& runtime = user->make_resource<support_fixture::Runtime>(*user);
         SelectQuery outer(std::allocator_arg, Allocator(r), "Parent");
+        outer.comment_text.emplace("load retained members", r);
+        outer.purpose_text.emplace("retain the selected graph", r);
         SelectQuery query(std::allocator_arg, Allocator(r), String(256, 'c', r));
+        configure_facet_metadata(*user, query.entity);
         request::QueryOptions options(std::allocator_arg, Allocator(r));
         options.facets.emplace_back("retained", "ignored", query, true);
+        auto& selection = options.facets.back().query;
+        selection.query_options.facets.emplace_back("nested", "ignored", query, true);
         const auto& result = execute_facets(runtime, outer, options).wait();
         check(result.is_ok(), "retention fixture completes the public facet entry");
         retained = user->make_global<FacetResults>(result.value());
@@ -310,7 +404,10 @@ static void foreign_future_is_not_cancelled() {
     {
         auto r = user->memory_resource();
         SelectQuery outer(std::allocator_arg, Allocator(r), "Parent");
+        outer.comment_text.emplace("load foreign members", r);
+        outer.purpose_text.emplace("verify operation ownership", r);
         SelectQuery child(std::allocator_arg, Allocator(r), "Child");
+        configure_facet_metadata(*user, child.entity);
         request::QueryOptions options(std::allocator_arg, Allocator(r));
         options.facets.emplace_back("foreign", "ignored", child, true);
         bool rejected = false;
@@ -351,6 +448,8 @@ int main() {
     std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
         ordered_facets_and_shutdown();
+        required_intent_precedes_dispatch();
+        nested_facet_shutdown();
         restriction_errors_and_runtime_expiry();
         retained_facet_results();
         generic_purpose_ownership();

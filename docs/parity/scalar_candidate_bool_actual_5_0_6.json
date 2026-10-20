@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "status": "original source compilation failure verified; independent C++ compiler gate passed; runtime parity unavailable",
+  "compiler_observation": {
+    "case": "bool_actual",
+    "rust": {
+      "fields": [
+        {
+          "entity": "platform",
+          "field": "name",
+          "type": "String",
+          "candidates": [
+            {
+              "id": 1795007698,
+              "key": "string()",
+              "value": "string()",
+              "method": "string",
+              "filter": "string()"
+            }
+          ]
+        },
+        {
+          "entity": "record",
+          "field": "choice",
+          "type": "bool",
+          "candidates": [
+            {
+              "id": 3569038,
+              "key": "true",
+              "value": "true",
+              "method": "true",
+              "filter": "true"
+            },
+            {
+              "id": 97196323,
+              "key": "false",
+              "value": "false",
+              "method": "false",
+              "filter": "false"
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 19
+    },
+    "cpp": {
+      "fields": [
+        {
+          "entity": "platform",
+          "field": "name",
+          "type": "String",
+          "candidates": [
+            {
+              "id": 1795007698,
+              "key": "string()",
+              "value": "string()",
+              "method": "string",
+              "filter": "string()"
+            }
+          ]
+        },
+        {
+          "entity": "record",
+          "field": "choice",
+          "type": "bool",
+          "candidates": [
+            {
+              "id": 3569038,
+              "key": "true",
+              "value": "true",
+              "method": "true",
+              "filter": "true"
+            },
+            {
+              "id": 97196323,
+              "key": "false",
+              "value": "false",
+              "method": "false",
+              "filter": "false"
+            }
+          ]
+        }
+      ],
+      "generated": true,
+      "files": 11
+    },
+    "source_disposition": "Complete unchanged original crate fails four E0599 checks; C++ compilation is an independent gate, not runtime parity.",
+    "rust_compile_exit_code": 101,
+    "rust_errors": [
+      {
+        "code": "E0599",
+        "message": "no method named `with_choice_is` found for struct `record::request::RecordRequest<R>` in the current scope",
+        "spans": [
+          {
+            "file": "request.rs",
+            "line": 23,
+            "primary": false
+          },
+          {
+            "file": "request.rs",
+            "line": 1374,
+            "primary": true
+          }
+        ]
+      },
+      {
+        "code": "E0599",
+        "message": "no method named `with_choice_is_not` found for struct `record::request::RecordRequest<R>` in the current scope",
+        "spans": [
+          {
+            "file": "request.rs",
+            "line": 23,
+            "primary": false
+          },
+          {
+            "file": "request.rs",
+            "line": 1380,
+            "primary": true
+          }
+        ]
+      },
+      {
+        "code": "E0599",
+        "message": "no method named `with_choice_is` found for struct `record::request::RecordRequest<R>` in the current scope",
+        "spans": [
+          {
+            "file": "request.rs",
+            "line": 23,
+            "primary": false
+          },
+          {
+            "file": "request.rs",
+            "line": 1385,
+            "primary": true
+          }
+        ]
+      },
+      {
+        "code": "E0599",
+        "message": "no method named `with_choice_is_not` found for struct `record::request::RecordRequest<R>` in the current scope",
+        "spans": [
+          {
+            "file": "request.rs",
+            "line": 23,
+            "primary": false
+          },
+          {
+            "file": "request.rs",
+            "line": 1391,
+            "primary": true
+          }
+        ]
+      }
+    ],
+    "cpp_compile_exit_code": 0,
+    "cpp_instantiated_query_methods": [
+      "whichAreChoice",
+      "whichAreNotChoice",
+      "withChoiceIsFalse",
+      "withChoiceIsKnown",
+      "withChoiceIsNotFalse",
+      "withChoiceIsNotNull",
+      "withChoiceIsNotTrue",
+      "withChoiceIsNull",
+      "withChoiceIsTrue",
+      "withChoiceIsUnknown"
+    ]
+  },
+  "original_fixture": "tests/generator/parity/scalar_candidate_contracts/bool_actual/rust/PROVENANCE.json",
+  "cpp_fixture": "tests/generator/parity/scalar_candidate_contracts/bool_actual/cpp/PROVENANCE.json",
+  "disposition": "Retain complete unchanged original outputs and exact four E0599 failures. C++ emits compilable Text candidate operands and separate typed Bool ordinary predicates. This is an explicit source-failure disposition, not a passing original crate, runtime oracle or generally qualified bool candidate model.",
+  "compiler_log": "/tmp/teaql_scalar_candidate_retained_compilers_506.log"
+}

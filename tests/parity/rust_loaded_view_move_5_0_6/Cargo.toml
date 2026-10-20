@@ -1,0 +1,19 @@
+[package]
+name="loaded_view_move_source_506"
+version="0.0.0"
+edition="2024"
+publish=false
+
+[[bin]]
+name="loaded_view_move_source_506"
+path="../loaded_view_move_driver_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+[workspace]

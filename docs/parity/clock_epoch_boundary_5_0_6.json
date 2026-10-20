@@ -1,0 +1,234 @@
+{
+  "cases": [
+    {
+      "wall_millis": -1001,
+      "mode": "timestamp",
+      "cpp": {
+        "outcome": "failure",
+        "reason": "system time before Unix epoch",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "system time before Unix epoch\n"
+      },
+      "rust": {
+        "outcome": "failure",
+        "reason": "system time before Unix epoch",
+        "exit_code": 101,
+        "stdout": "",
+        "stderr": "\nthread 'main' (2528934) panicked at /home/philip/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/chrono-0.4.44/src/offset/utc.rs:97:58:\nsystem time before Unix epoch: SystemTimeError(1.001s)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+      }
+    },
+    {
+      "wall_millis": -1001,
+      "mode": "utc",
+      "cpp": {
+        "outcome": "failure",
+        "reason": "system time before Unix epoch",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "system time before Unix epoch\n"
+      },
+      "rust": {
+        "outcome": "failure",
+        "reason": "system time before Unix epoch",
+        "exit_code": 101,
+        "stdout": "",
+        "stderr": "\nthread 'main' (2528937) panicked at /home/philip/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/chrono-0.4.44/src/offset/utc.rs:97:58:\nsystem time before Unix epoch: SystemTimeError(1.001s)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+      }
+    },
+    {
+      "wall_millis": -1001,
+      "mode": "negative_value",
+      "cpp": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": -1,
+      "mode": "timestamp",
+      "cpp": {
+        "outcome": "failure",
+        "reason": "system time before Unix epoch",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "system time before Unix epoch\n"
+      },
+      "rust": {
+        "outcome": "failure",
+        "reason": "system time before Unix epoch",
+        "exit_code": 101,
+        "stdout": "",
+        "stderr": "\nthread 'main' (2528941) panicked at /home/philip/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/chrono-0.4.44/src/offset/utc.rs:97:58:\nsystem time before Unix epoch: SystemTimeError(1ms)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+      }
+    },
+    {
+      "wall_millis": -1,
+      "mode": "utc",
+      "cpp": {
+        "outcome": "failure",
+        "reason": "system time before Unix epoch",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "system time before Unix epoch\n"
+      },
+      "rust": {
+        "outcome": "failure",
+        "reason": "system time before Unix epoch",
+        "exit_code": 101,
+        "stdout": "",
+        "stderr": "\nthread 'main' (2528944) panicked at /home/philip/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/chrono-0.4.44/src/offset/utc.rs:97:58:\nsystem time before Unix epoch: SystemTimeError(1ms)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+      }
+    },
+    {
+      "wall_millis": -1,
+      "mode": "negative_value",
+      "cpp": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 0,
+      "mode": "timestamp",
+      "cpp": {
+        "outcome": "value",
+        "output": "0\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "0\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 0,
+      "mode": "utc",
+      "cpp": {
+        "outcome": "value",
+        "output": "0\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "0\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 0,
+      "mode": "negative_value",
+      "cpp": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 1,
+      "mode": "timestamp",
+      "cpp": {
+        "outcome": "value",
+        "output": "1\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "1\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 1,
+      "mode": "utc",
+      "cpp": {
+        "outcome": "value",
+        "output": "1\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "1\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 1,
+      "mode": "negative_value",
+      "cpp": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 1790812800123,
+      "mode": "timestamp",
+      "cpp": {
+        "outcome": "value",
+        "output": "1790812800123\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "1790812800123\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 1790812800123,
+      "mode": "utc",
+      "cpp": {
+        "outcome": "value",
+        "output": "1790812800123\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "1790812800123\n",
+        "exit_code": 0
+      }
+    },
+    {
+      "wall_millis": 1790812800123,
+      "mode": "negative_value",
+      "cpp": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      },
+      "rust": {
+        "outcome": "value",
+        "output": "-1,-1\n",
+        "exit_code": 0
+      }
+    }
+  ],
+  "scope": "Clock success values compare exactly. Rust panic and C++ exception are separate language failure mechanisms; neither yields a successful timestamp. Explicit signed values remain supported.",
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_driver_sha256": "6e5521422cab6426f4959e18ea54aef8c5dfcb6495f40147f847e964ace12d77",
+  "cpp_driver_sha256": "6ab65ef8f42d4150332186ac25715efaaa75fa31c53f755d1e6dd2daad9bf040"
+}

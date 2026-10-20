@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 1152,
+  "original_policy_reviews": 864,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "legacy_observations": 24,
+  "legacy_reproduction_exit_code": 0,
+  "live_source_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 1152 actual source/native durable dynamic save/audit observations\n",
+  "reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 1152 actual source/native durable dynamic save/audit observations\n",
+  "legacy_reproduction_output": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\nCompared 24 actual source/native durable dynamic save/audit observations\n",
+  "profiles": {
+    "native": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "dynamic_typed_save_audit_rust_parity",
+        "dynamic_save_audit_rust_parity",
+        "dynamic_audit_projection_rust_parity",
+        "generated_dynamic_field_contracts"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start  75: dynamic_typed_save_audit_rust_parity\n1/4 Test  #75: dynamic_typed_save_audit_rust_parity ...   Passed    8.24 sec\n    Start  76: dynamic_save_audit_rust_parity\n2/4 Test  #76: dynamic_save_audit_rust_parity .........   Passed    0.25 sec\n    Start  77: dynamic_audit_projection_rust_parity\n3/4 Test  #77: dynamic_audit_projection_rust_parity ...   Passed    3.43 sec\n    Start 508: generated_dynamic_field_contracts\n4/4 Test #508: generated_dynamic_field_contracts ......   Passed    0.02 sec\n\n100% tests passed out of 4\n\nTotal Test time (real) =  11.95 sec\n"
+    },
+    "sanitize": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "dynamic_typed_save_audit_rust_parity",
+        "dynamic_save_audit_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 75: dynamic_typed_save_audit_rust_parity\n1/2 Test #75: dynamic_typed_save_audit_rust_parity ...   Passed   27.91 sec\n    Start 76: dynamic_save_audit_rust_parity\n2/2 Test #76: dynamic_save_audit_rust_parity .........   Passed    0.67 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =  28.59 sec\n"
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_dynamic_typed_save_audit_rust_parity",
+        "module_dynamic_save_audit_rust_parity"
+      ],
+      "ctest_output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 655: module_dynamic_typed_save_audit_rust_parity\n1/2 Test #655: module_dynamic_typed_save_audit_rust_parity ...   Passed    8.63 sec\n    Start 656: module_dynamic_save_audit_rust_parity\n2/2 Test #656: module_dynamic_save_audit_rust_parity .........   Passed    0.23 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   8.87 sec\n"
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 136,
+  "production_function_bodies_changed": false,
+  "formatting": {
+    "handwritten_files": 1016,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "tests/parity/dynamic_save_audit_probe.cpp": "80f49c05fd498c5d5b1fe83c6d0b5f6d7657cae6afe140058666e7d8c40a114c",
+    "tests/parity/rust_field_layout/src/bin/dynamic_save_audit_5_0_6.rs": "c1d545c691e35b07de84eb7974f786c676f8419b6b77b26fb0cb491a2bcb3c89",
+    "tests/parity/generate_dynamic_typed_save_audit_5_0_6.py": "f50c91dbf93a59488c1189df7880637fe89ea690b5e76bb1002c36ad689d6d42",
+    "tests/parity/compare_dynamic_typed_save_audit_5_0_6.py": "f2068bcfa6b28858c1f16dc18cdf14a4de7400f57c6b4c48cfe1892f119e68dd",
+    "tests/parity/dynamic_typed_save_audit_5_0_6_cases.json.gz": "df3aeab03d80086e2cdbf0d4d62c253b083d207c54810295976148dca6cc6fc7",
+    "tests/parity/dynamic_save_audit_5_0_6_cases.json.gz": "e848d71cd48853f1da45ed8d5bfd8baeb796b28ac26216d720d4a4249d1a58ea",
+    "tests/generator/parity/dynamic_json_rust/PROVENANCE.json": "79db4b2e529bae107d04b9889030f2d596d08b5db8bb067286ba39fbf61c2dcb"
+  },
+  "binding_inventory": {
+    "active_baseline": 154,
+    "custom_dispatcher_requires_review": 21,
+    "historical_baseline_requires_replay": 63
+  },
+  "scope": "Ten SQLite dynamic datatypes plus loaded NULL and typed NULL; native seeded values; Set/NULL/Delete with trigger/conflict/audit faults; generated-default or customer allow/no-approval, approved and deny. Complete policy plan Debug, safe audit Debug, ordered SQL/params/intents, physical storage/version and pending state without normalization.",
+  "notice": "Same Product model and explicit existing schema fixture. Production source/generator unchanged. Inherited/constant/candidate models, replacement storage identities, held streams/save, asynchronous delivery, log endpoints and full capabilities/P0-P7 remain unqualified. No MIPS or physical-device execution."
+}

@@ -1,0 +1,51 @@
+[
+  {
+    "model": "signed_overflow",
+    "rust_exit_code": 0,
+    "cpp_exit_code": 0,
+    "rust_binary_sha256": "9405e5f1c2c255335ea49d6c01ad8b73843939e2cdaebb9a42905b83082b09cb",
+    "cpp_binary_sha256": "6e11454cfdaeecb5207ac1461c20bca46f6d044d9502849553f1475e54c70417"
+  },
+  {
+    "model": "unsigned_max",
+    "rust_exit_code": 0,
+    "cpp_exit_code": 0,
+    "rust_binary_sha256": "a297bde3488e0e17ab8f36b51f8881c26b59c5723c7b6512d57367c2b7d35cd5",
+    "cpp_binary_sha256": "6a97e59735c82bfd416beeaf0c161f3fa7ae3e721df75b3a8010c2217a208340"
+  },
+  {
+    "model": "zero",
+    "rust_exit_code": 0,
+    "cpp_exit_code": 0,
+    "rust_binary_sha256": "4be9136dd28a905a353ca31f7f64bd28fd45cdea969f8f8efa7735f1809ca8b4",
+    "cpp_binary_sha256": "6a499f36bb659f4cfe9c65934def5f3451a1353644bc9b9edb5d76a702d403b1"
+  },
+  {
+    "model": "signed_max",
+    "rust_exit_code": 0,
+    "cpp_exit_code": 0,
+    "rust_binary_sha256": "ed5e3db9da88db757a1de0af2915fe523d28adb1af8772a9e99bcb5cdf1f8b4e",
+    "cpp_binary_sha256": "fcc66a1388b7076215798b1777191fafc871a2bbecde41bc3aff05051b4a5276"
+  },
+  {
+    "model": "fallback_text",
+    "rust_exit_code": 0,
+    "cpp_exit_code": 0,
+    "rust_binary_sha256": "bd7d981dea59d56718869f1c54b2a889a9756e29281ac82565f45929d1bc9e5a",
+    "cpp_binary_sha256": "ee1eb6db8bbeb256343c037e0035515097d6e968c722dc73f7ff7339319615f6"
+  },
+  {
+    "model": "default_missing",
+    "rust_exit_code": 0,
+    "cpp_exit_code": 0,
+    "rust_binary_sha256": "c0ca29661060e7d8374e6cb6ec4a861e42a28773ebaaa3c3887014a8dd4f0ba2",
+    "cpp_binary_sha256": "4fe896054cab7ed5c4d68601faf2361910499abc5d6e5cf72e49c666df52d338"
+  },
+  {
+    "model": "positive",
+    "rust_exit_code": 0,
+    "cpp_exit_code": 0,
+    "rust_binary_sha256": "02f0147c4dfb238be71002e9a58cdcca259d97d84eb025722436b6bb54f88d11",
+    "cpp_binary_sha256": "716778253d7cecb604ad143eb47cd9f01e6a0ca9bc770f95a048f4daec638e86"
+  }
+]

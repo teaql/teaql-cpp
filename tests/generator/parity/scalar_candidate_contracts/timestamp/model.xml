@@ -1,0 +1,1 @@
+<root name="scalar_candidate_fixture" org="teaql" data_service="sqlite"><platform name="string()"/><record platform="platform(contextRoot=true)" name="string()" choice="dateTime(candidates=2026-10-01,2026-10-02)"/></root>

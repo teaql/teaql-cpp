@@ -95,6 +95,21 @@ static Json observe_aggregate(UserContext& context, const Json& input) {
     for (const auto& field : std::get<Json::Array>(::field(input, "projection").data)) {
         query.project(std::get<String>(field.data));
     }
+    if (auto* value = optional(input, "comment")) {
+        if (auto* comment = std::get_if<String>(&value->data)) {
+            query.comment(*comment);
+        }
+    }
+    if (auto* value = optional(input, "purpose")) {
+        if (auto* purpose = std::get_if<String>(&value->data)) {
+            query.purpose(*purpose);
+        }
+    }
+    if (auto* value = optional(input, "dynamic")) {
+        if (auto* dynamic = std::get_if<bool>(&value->data); dynamic && *dynamic) {
+            query.select_dynamic_fields(DynamicFieldSelection::all(resource));
+        }
+    }
     auto& result =
         detail::EntityDataServiceAccess::fetch_entities_with_relation_aggregates<AggregateExecutor,
                                                                                  Model>(

@@ -1,0 +1,15 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "paths": {
+    ".reference/teaql-rs/teaql-runtime/src/context/pagination.rs": "b4aa60224bb200336c69304d1bd7ec3091e64d96338341523089ddfcc3643512",
+    ".reference/teaql-rs/teaql-runtime/src/data_service/resolved.rs": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+    "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs": "5f1ff86ad020908b486dfa0a425661379eda9c569f06d097106aa957d5273507",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp": "3b53bd023afbd801d11a9006bf15a16ed71052dee39903c770545b204ae1fb5d",
+    "tests/parity/deferred_continuous_page_probe.cpp": "c7f3dc28e0553f1369462441fb42b9de1e81e4edb53a734b7c1fae00644f76b6",
+    "tests/parity/rust_field_layout/src/bin/deferred_continuous_page_5_0_6.rs": "80791d5a3268eb4925571c0618378b2d3877a9cc01213d8a6baee201d8866248"
+  },
+  "source_boundary": "Complete unmodified generated list/continuous-page request, actual SQLite executor/provider and runtime cursor preparation/registration. Custom store only controls callback result/delay.",
+  "projection": "Only wall-clock-generated cursor IDs and absolute expiry projected to syntax/future validity; complete logical cursor content and callback keys/results retained.",
+  "native_scope": "Replacement, expired resource, cancellation and actual Context deletion are explicit C++ ownership adaptations; source mutable Context registration cannot change while borrowed."
+}

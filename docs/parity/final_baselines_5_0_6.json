@@ -1,0 +1,471 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "observations": 9762,
+  "release_observations": 114,
+  "matrices": [
+    {
+      "matrix": "runtime_id_model",
+      "observations": 82,
+      "release_observations": 82,
+      "source_changed": 0,
+      "historical_inputs": 82,
+      "native_differences": 0,
+      "active": "tests/parity/runtime_id_model_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/runtime_id_model_oracle.rs",
+      "original_driver_sha256": "d016cb781478599c306245333a9cb2071a508d375056f512b48a6ad0c893b6d0",
+      "historical_sha256": "cac1b1eecff9154724e240c0d29d1e51eb3f2a55251276bf8bddc41f1afb2ca0"
+    },
+    {
+      "matrix": "runtime_error_debug",
+      "observations": 1174,
+      "release_observations": 0,
+      "source_changed": 0,
+      "historical_inputs": 1174,
+      "native_differences": 0,
+      "active": "tests/parity/runtime_error_debug_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/runtime_check_oracle.rs",
+      "original_driver_sha256": "d6ee02396f3fb587b93524340ee29904df7c0851a354b40646fed2982bf90fe3",
+      "historical_sha256": "0c6033fea3cf9fdf23f6eeb860a51038515ac70457ebe1524ff33edb1792e617"
+    },
+    {
+      "matrix": "unified_buffer_clone",
+      "observations": 1,
+      "release_observations": 0,
+      "source_changed": 0,
+      "historical_inputs": 1,
+      "native_differences": 0,
+      "active": "tests/parity/unified_buffer_clone_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/log_model_oracle.rs",
+      "original_driver_sha256": "6f940f688ad81d29b46de80aac8f6e0bd4d1f08e26539d5df45323207b990d91",
+      "historical_sha256": "313bba39f10e9f06250e884c7de69e313742030bb47058434fb0c4f0a3d965d9"
+    },
+    {
+      "matrix": "locking",
+      "observations": 222,
+      "release_observations": 0,
+      "source_changed": 0,
+      "historical_inputs": 222,
+      "native_differences": 0,
+      "active": "tests/parity/locking_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/locking_oracle.rs",
+      "original_driver_sha256": "68427e809105e98108fbb1229cec2cf0110c9eb104f02e9492f379c427ce7346",
+      "historical_sha256": "fe30b0b99a2b3e585ac9278e0ea205798d6c968ca4571cd30be118ad2af29daa"
+    },
+    {
+      "matrix": "inmemory",
+      "observations": 6532,
+      "release_observations": 0,
+      "source_changed": 0,
+      "historical_inputs": 6532,
+      "native_differences": 0,
+      "active": "tests/parity/inmemory_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/inmemory_oracle.rs",
+      "original_driver_sha256": "31e037cc2409930afb606d31b0fddf3b268b9e2c5bdb2f9825039085bf03f2a3",
+      "historical_sha256": "84ca192948cebfb32e31378614b050cbc729cad4b2778497cadd9f6b9bf2b533"
+    },
+    {
+      "matrix": "entity_reference",
+      "observations": 548,
+      "release_observations": 0,
+      "source_changed": 0,
+      "historical_inputs": 548,
+      "native_differences": 0,
+      "active": "tests/parity/entity_reference_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/entity_reference_oracle.rs",
+      "original_driver_sha256": "3560e4a4957fb0a3f25969c6e71eb9bd19c0dd15826b79f36fab95f3bc7662f2",
+      "historical_sha256": "afcac340aa52a0369e27f395f41c2500733507bfdfd681fb6dfa81f584e91965"
+    },
+    {
+      "matrix": "round_trip_reference",
+      "observations": 933,
+      "release_observations": 0,
+      "source_changed": 0,
+      "historical_inputs": 933,
+      "native_differences": 0,
+      "active": "tests/parity/round_trip_reference_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/round_trip_reference_oracle.rs",
+      "original_driver_sha256": "21794e28998c032be444b7e5dd1c45b140cd152476945492921ce0b98e721136",
+      "historical_sha256": "54ef79605c6174ae0667c51c23cbd3f630419cc006dcf5e24c71ef864040f932"
+    },
+    {
+      "matrix": "decimal_pointer_scope",
+      "observations": 238,
+      "release_observations": 0,
+      "source_changed": 0,
+      "historical_inputs": 238,
+      "native_differences": 0,
+      "active": "tests/parity/decimal_pointer_scope_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_decimal_pointer/src/main.rs",
+      "original_driver_sha256": "701aad0ab26e146861dca6aa23aa669569e0448e9fca485729c28c0f8ceb71e2",
+      "historical_sha256": "60e2cbb2f39a2655635a4da87a84c8542f114b059a3b336b94334e3ee1a3f188"
+    },
+    {
+      "matrix": "entity_query_boundary",
+      "observations": 32,
+      "release_observations": 32,
+      "source_changed": 16,
+      "historical_inputs": 16,
+      "native_differences": 0,
+      "active": "tests/parity/entity_query_boundary_baseline_5_0_6_cases.json.gz",
+      "original_driver": "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_5_0_6.rs",
+      "original_driver_sha256": "16c19d92e27ced431888697fa4f2668482cf04718a7620250b8bc0fccda07d9f",
+      "historical_sha256": "36081429c8d7894d8b5c5dad9c6ed2ee0343faa8bdb1351e0fd9e2f88cd9590a"
+    }
+  ],
+  "dependency_versions": {
+    "aead": [
+      "0.5.2"
+    ],
+    "aes": [
+      "0.8.4"
+    ],
+    "aes-gcm": [
+      "0.10.3"
+    ],
+    "ahash": [
+      "0.7.8"
+    ],
+    "android_system_properties": [
+      "0.1.5"
+    ],
+    "arrayvec": [
+      "0.7.8"
+    ],
+    "async-trait": [
+      "0.1.89"
+    ],
+    "autocfg": [
+      "1.5.1"
+    ],
+    "base64": [
+      "0.22.1"
+    ],
+    "bitvec": [
+      "1.1.1"
+    ],
+    "block-buffer": [
+      "0.10.4"
+    ],
+    "borsh": [
+      "1.7.0"
+    ],
+    "borsh-derive": [
+      "1.7.0"
+    ],
+    "bumpalo": [
+      "3.20.3"
+    ],
+    "bytecheck": [
+      "0.6.12"
+    ],
+    "bytecheck_derive": [
+      "0.6.12"
+    ],
+    "bytes": [
+      "1.12.1"
+    ],
+    "cc": [
+      "1.2.67"
+    ],
+    "cfg-if": [
+      "1.0.4"
+    ],
+    "cfg_aliases": [
+      "0.2.1"
+    ],
+    "chrono": [
+      "0.4.45"
+    ],
+    "cipher": [
+      "0.4.4"
+    ],
+    "core-foundation-sys": [
+      "0.8.7"
+    ],
+    "cpufeatures": [
+      "0.2.17"
+    ],
+    "crypto-common": [
+      "0.1.7"
+    ],
+    "ctr": [
+      "0.9.2"
+    ],
+    "digest": [
+      "0.10.7"
+    ],
+    "equivalent": [
+      "1.0.2"
+    ],
+    "find-msvc-tools": [
+      "0.1.9"
+    ],
+    "funty": [
+      "2.0.0"
+    ],
+    "futures-core": [
+      "0.3.32"
+    ],
+    "futures-macro": [
+      "0.3.32"
+    ],
+    "futures-task": [
+      "0.3.32"
+    ],
+    "futures-util": [
+      "0.3.32"
+    ],
+    "generic-array": [
+      "0.14.7"
+    ],
+    "getrandom": [
+      "0.2.17"
+    ],
+    "ghash": [
+      "0.5.1"
+    ],
+    "hashbrown": [
+      "0.12.3",
+      "0.17.1"
+    ],
+    "hkdf": [
+      "0.12.4"
+    ],
+    "hmac": [
+      "0.12.1"
+    ],
+    "iana-time-zone": [
+      "0.1.65"
+    ],
+    "iana-time-zone-haiku": [
+      "0.1.2"
+    ],
+    "indexmap": [
+      "2.14.0"
+    ],
+    "inout": [
+      "0.1.4"
+    ],
+    "itoa": [
+      "1.0.18"
+    ],
+    "js-sys": [
+      "0.3.103"
+    ],
+    "libc": [
+      "0.2.186"
+    ],
+    "log": [
+      "0.4.33"
+    ],
+    "memchr": [
+      "2.8.3"
+    ],
+    "num-traits": [
+      "0.2.19"
+    ],
+    "once_cell": [
+      "1.21.4"
+    ],
+    "opaque-debug": [
+      "0.3.1"
+    ],
+    "pin-project-lite": [
+      "0.2.17"
+    ],
+    "polyval": [
+      "0.6.2"
+    ],
+    "ppv-lite86": [
+      "0.2.21"
+    ],
+    "proc-macro-crate": [
+      "3.5.0"
+    ],
+    "proc-macro2": [
+      "1.0.106"
+    ],
+    "ptr_meta": [
+      "0.1.4"
+    ],
+    "ptr_meta_derive": [
+      "0.1.4"
+    ],
+    "quote": [
+      "1.0.46"
+    ],
+    "radium": [
+      "0.7.0"
+    ],
+    "rand": [
+      "0.8.7"
+    ],
+    "rand_chacha": [
+      "0.3.1"
+    ],
+    "rand_core": [
+      "0.6.4"
+    ],
+    "rend": [
+      "0.4.2"
+    ],
+    "rkyv": [
+      "0.7.46"
+    ],
+    "rkyv_derive": [
+      "0.7.46"
+    ],
+    "rust_decimal": [
+      "1.42.1"
+    ],
+    "rustversion": [
+      "1.0.23"
+    ],
+    "seahash": [
+      "4.1.0"
+    ],
+    "serde": [
+      "1.0.228"
+    ],
+    "serde_core": [
+      "1.0.228"
+    ],
+    "serde_derive": [
+      "1.0.228"
+    ],
+    "serde_json": [
+      "1.0.150"
+    ],
+    "sha2": [
+      "0.10.9"
+    ],
+    "shlex": [
+      "2.0.1"
+    ],
+    "simdutf8": [
+      "0.1.5"
+    ],
+    "slab": [
+      "0.4.12"
+    ],
+    "smallvec": [
+      "1.15.2"
+    ],
+    "subtle": [
+      "2.6.1"
+    ],
+    "syn": [
+      "1.0.109",
+      "2.0.118"
+    ],
+    "tap": [
+      "1.0.1"
+    ],
+    "teaql-core": [
+      "5.0.6"
+    ],
+    "teaql-data-service": [
+      "5.0.6"
+    ],
+    "teaql-runtime": [
+      "5.0.6"
+    ],
+    "teaql-sql": [
+      "5.0.6"
+    ],
+    "teaql_final_baselines_506": [
+      "0.0.0"
+    ],
+    "tinyvec": [
+      "1.12.0"
+    ],
+    "tinyvec_macros": [
+      "0.1.1"
+    ],
+    "tokio": [
+      "1.52.3"
+    ],
+    "tokio-macros": [
+      "2.7.0"
+    ],
+    "toml_datetime": [
+      "1.1.1+spec-1.1.0"
+    ],
+    "toml_edit": [
+      "0.25.12+spec-1.1.0"
+    ],
+    "toml_parser": [
+      "1.1.2+spec-1.1.0"
+    ],
+    "typenum": [
+      "1.20.1"
+    ],
+    "unicode-ident": [
+      "1.0.24"
+    ],
+    "universal-hash": [
+      "0.5.1"
+    ],
+    "uuid": [
+      "1.23.5"
+    ],
+    "version_check": [
+      "0.9.5"
+    ],
+    "wasi": [
+      "0.11.1+wasi-snapshot-preview1"
+    ],
+    "wasm-bindgen": [
+      "0.2.126"
+    ],
+    "wasm-bindgen-macro": [
+      "0.2.126"
+    ],
+    "wasm-bindgen-macro-support": [
+      "0.2.126"
+    ],
+    "wasm-bindgen-shared": [
+      "0.2.126"
+    ],
+    "windows-core": [
+      "0.62.2"
+    ],
+    "windows-implement": [
+      "0.60.2"
+    ],
+    "windows-interface": [
+      "0.59.3"
+    ],
+    "windows-link": [
+      "0.2.1"
+    ],
+    "windows-result": [
+      "0.4.1"
+    ],
+    "windows-strings": [
+      "0.5.1"
+    ],
+    "winnow": [
+      "1.0.4"
+    ],
+    "wyz": [
+      "0.5.1"
+    ],
+    "zerocopy": [
+      "0.8.54"
+    ],
+    "zerocopy-derive": [
+      "0.8.54"
+    ],
+    "zmij": [
+      "1.0.23"
+    ]
+  },
+  "manifest_sha256": "815fccc43d9942fcd18ba1d0a3d01bb21b03c707128d9b3439b0cb34b37bcf84",
+  "lock_sha256": "caa3ce8bc303fd638ef22252086dc7c632a3bff4091ad3370be6acab044f1917",
+  "reference_lock_sha256": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+  "normalization": "none",
+  "status": "declared core family qualification only; complete capabilities and integration remain open",
+  "complete_capability_acceptance": false
+}

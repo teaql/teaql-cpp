@@ -1,0 +1,32 @@
+{
+  "acceptance_record": "docs/parity/general_query_acceptance_5_0_6.json.gz",
+  "acceptance_sha256": "3a15217caf980fbc7d2b28297f6979ff01ef3aa644d6b4516ce074d9e8f8c90d",
+  "ledger_sha256": "cce19a6cf3e75d9f1eb2821cb0888db2b594259df746cee4faf1427285f2a47c",
+  "session": 62241,
+  "exit_code": 0,
+  "stdout": "Verified 36 locked generator sources and 17 capability records; 9 remain unqualified\nVerified 97 complete generic request functions, seven templates, three runtime helpers, three model guards and eight native generation helpers; semantics require separate evidence\nVerified 63 complete field-template methods and 9 native generation helpers; semantics require execution evidence\nVerified 784 canonical consumer/fixture bodies; only prologues and recorded qualifiers differ\nVerified 1495 catalog exports and isolated lookup across 7 modules\n",
+  "documentation_link_checks": 368,
+  "qualified": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G11"
+  ],
+  "remaining": [
+    "G08",
+    "G09",
+    "G10",
+    "G12",
+    "G13",
+    "G14",
+    "G15",
+    "G16",
+    "G17"
+  ],
+  "complete_generator_goal": false,
+  "scope": "Post-acceptance source/ledger/module/body/path and whitespace integrity; not full P0-P7 or full-suite acceptance."
+}

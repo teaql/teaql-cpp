@@ -510,10 +510,50 @@ static void cross_context_cache_and_request() {
     check(rejected, "executor copies cannot implicitly retain another Context's cache");
 }
 
+static void cached_partition_having_bindings() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& descriptor = model(global);
+    auto& dialect = global.make_resource<Dialect>();
+    auto& schema = global.make_resource<Schema>(descriptor);
+    auto& transport = user_context->make<Transport>();
+    auto& cache = user_context->make<SqlExecutorState>();
+    auto& executor =
+        user_context->make<SqlDataServiceExecutor<Error>>(dialect, transport, schema, cache);
+    auto& query = user_context->make<SelectQuery>("Record");
+    query.project_expr("selected", Expr::value(r, "projection"))
+        .order_expr_asc(Expr::value(r, "ordering"))
+        .filter(Expr::eq(r, "id", std::uint64_t(7)))
+        .having(Expr::eq(r, "name", "first secret"))
+        .partition_by("id")
+        .page(0, 1)
+        .comment("Inspect cached partition bindings")
+        .purpose("Verify HAVING rebinding");
+    for (auto secret : {"first secret", "replacement secret"}) {
+        query.having(Expr::eq(r, "name", secret));
+        QueryRequest request(std::allocator_arg, Allocator(r), query, false, true);
+        auto& result = executor.query(r, std::move(request)).wait();
+        check(result.is_ok(), "cached partition query completes");
+        const auto& metadata = result.value().metadata;
+        check(transport.seen.back().params.size() == 4 && metadata.params.size() == 4,
+              "cached transport and diagnostics retain all four bindings");
+        check(transport.seen.back().params[3] == Value(r, secret) &&
+                  metadata.params[3] == Value(r, secret),
+              "cache reuse rebinds the current HAVING value");
+        check(metadata.sql_log.parameter_policies.size() == 4 &&
+                  metadata.sql_log.parameter_policies[3] == SqlParameterLogPolicy::Masked,
+              "HAVING rebinding preserves the descriptor's sensitive-field policy");
+    }
+    check(dialect.compiles == 1 && transport.calls == 2,
+          "changed HAVING values reuse the compiled statement");
+}
+
 int main() {
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         execution_and_diagnostics();
+        cached_partition_having_bindings();
         probes_and_cache();
         lowered_like_provenance();
         close_and_journal();

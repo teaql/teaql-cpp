@@ -1,0 +1,86 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Source-identified macro atom consumption and literal/trailing delimiter controls. Does not establish all Rust expression/lexical grammar or other container overrides.",
+  "cases": [
+    [
+      "macro_parentheses",
+      "17, audit_value_max_len=ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_brackets",
+      "17, audit_value_max_len=ignored![not Rust +], audit_value_max_len=21"
+    ],
+    [
+      "macro_braces",
+      "17, audit_value_max_len=ignored!{anything, +}, audit_value_max_len=21"
+    ],
+    [
+      "qualified_macro",
+      "17, audit_value_max_len=module::ignored!{tokens}, audit_value_max_len=21"
+    ],
+    [
+      "absolute_macro",
+      "17, audit_value_max_len=::module::ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_lifetime",
+      "17, audit_value_max_len=ignored!{'a}, audit_value_max_len=21"
+    ],
+    [
+      "macro_character",
+      "17, audit_value_max_len=ignored!{'a'}, audit_value_max_len=21"
+    ],
+    [
+      "macro_nested",
+      "17, audit_value_max_len=ignored!{a(b[c{d}])}, audit_value_max_len=21"
+    ],
+    [
+      "macro_raw_string",
+      "17, audit_value_max_len=ignored!{r#\"}\"#}, audit_value_max_len=21"
+    ],
+    [
+      "macro_crate_path",
+      "17, audit_value_max_len=crate::ignored!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_byte_prefix_name",
+      "17, audit_value_max_len=brackets![], audit_value_max_len=21"
+    ],
+    [
+      "macro_c_prefix_name",
+      "17, audit_value_max_len=crates!{}, audit_value_max_len=21"
+    ],
+    [
+      "macro_raw_identifier",
+      "17, audit_value_max_len=r#type!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_integer_bang",
+      "17, audit_value_max_len=17!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_string_bang",
+      "17, audit_value_max_len=\"17\"!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_boolean_bang",
+      "17, audit_value_max_len=true!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_parentheses_bang",
+      "17, audit_value_max_len=(17)!(), audit_value_max_len=21"
+    ],
+    [
+      "macro_missing_group",
+      "17, audit_value_max_len=ignored!, audit_value_max_len=21"
+    ],
+    [
+      "macro_mismatched_delimiter",
+      "17, audit_value_max_len=ignored!(], audit_value_max_len=21"
+    ],
+    [
+      "macro_unclosed_group",
+      "17, audit_value_max_len=ignored!{, audit_value_max_len=21"
+    ]
+  ]
+}

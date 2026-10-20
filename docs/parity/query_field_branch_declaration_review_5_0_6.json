@@ -1,0 +1,3793 @@
+{
+  "source_file": "tests/generator/parity/query_field_branches_rust/lib/src/entry/request.rs",
+  "source_sha256": "d4bd3c97004182d2b4bfed3be84a2d31fde144c68711d91fd8eb0823a0668075",
+  "cpp_file": "tests/generated_query_field_branches/include/cpp_query_branches/queries.hpp",
+  "cpp_sha256": "14d982ed38f37bc914375db8464fa50438a6e33727b07b54180d52b276526313",
+  "source_public_names": [
+    "aggregate_avg",
+    "aggregate_bit_and",
+    "aggregate_bit_or",
+    "aggregate_bit_xor",
+    "aggregate_count",
+    "aggregate_count_field",
+    "aggregate_max",
+    "aggregate_min",
+    "aggregate_stddev",
+    "aggregate_stddev_pop",
+    "aggregate_sum",
+    "aggregate_var_pop",
+    "aggregate_var_samp",
+    "aggregate_with_function",
+    "and_filter",
+    "append_search_criteria",
+    "avg_active",
+    "avg_active_as",
+    "avg_amount",
+    "avg_amount_as",
+    "avg_counter",
+    "avg_counter_as",
+    "avg_day",
+    "avg_day_as",
+    "avg_height",
+    "avg_height_as",
+    "avg_id",
+    "avg_id_as",
+    "avg_label",
+    "avg_label_as",
+    "avg_moment",
+    "avg_moment_as",
+    "avg_notes",
+    "avg_notes_as",
+    "avg_optional_active",
+    "avg_optional_active_as",
+    "avg_optional_amount",
+    "avg_optional_amount_as",
+    "avg_optional_day",
+    "avg_optional_day_as",
+    "avg_optional_label",
+    "avg_optional_label_as",
+    "avg_optional_moment",
+    "avg_optional_moment_as",
+    "avg_ratio",
+    "avg_ratio_as",
+    "avg_secret",
+    "avg_secret_as",
+    "avg_version",
+    "avg_version_as",
+    "child_enhancements",
+    "comment",
+    "count",
+    "count_active",
+    "count_active_as",
+    "count_amount",
+    "count_amount_as",
+    "count_as",
+    "count_counter",
+    "count_counter_as",
+    "count_day",
+    "count_day_as",
+    "count_height",
+    "count_height_as",
+    "count_id",
+    "count_id_as",
+    "count_label",
+    "count_label_as",
+    "count_moment",
+    "count_moment_as",
+    "count_notes",
+    "count_notes_as",
+    "count_optional_active",
+    "count_optional_active_as",
+    "count_optional_amount",
+    "count_optional_amount_as",
+    "count_optional_day",
+    "count_optional_day_as",
+    "count_optional_label",
+    "count_optional_label_as",
+    "count_optional_moment",
+    "count_optional_moment_as",
+    "count_ratio",
+    "count_ratio_as",
+    "count_secret",
+    "count_secret_as",
+    "count_tenant",
+    "count_tenant_as",
+    "count_version",
+    "count_version_as",
+    "create_amount_criteria",
+    "create_counter_criteria",
+    "create_day_criteria",
+    "create_height_criteria",
+    "create_id_criteria",
+    "create_label_criteria",
+    "create_moment_criteria",
+    "create_notes_criteria",
+    "create_optional_amount_criteria",
+    "create_optional_day_criteria",
+    "create_optional_label_criteria",
+    "create_optional_moment_criteria",
+    "create_property_as",
+    "create_ratio_criteria",
+    "create_secret_criteria",
+    "deleted_rows_only",
+    "enable_aggregation_cache",
+    "enable_aggregation_cache_for",
+    "enhance_child",
+    "enhance_children_if_needed",
+    "facet_by_tenant_as",
+    "facet_by_tenant_as_with_options",
+    "filter",
+    "filter_by_tenant",
+    "filter_property",
+    "filter_with_json",
+    "group_by",
+    "group_by_active",
+    "group_by_active_as",
+    "group_by_active_with_function",
+    "group_by_amount",
+    "group_by_amount_as",
+    "group_by_amount_with_function",
+    "group_by_counter",
+    "group_by_counter_as",
+    "group_by_counter_with_function",
+    "group_by_day",
+    "group_by_day_as",
+    "group_by_day_with_function",
+    "group_by_height",
+    "group_by_height_as",
+    "group_by_height_with_function",
+    "group_by_id",
+    "group_by_id_as",
+    "group_by_id_with_function",
+    "group_by_label",
+    "group_by_label_as",
+    "group_by_label_with_function",
+    "group_by_moment",
+    "group_by_moment_as",
+    "group_by_moment_with_function",
+    "group_by_notes",
+    "group_by_notes_as",
+    "group_by_notes_with_function",
+    "group_by_optional_active",
+    "group_by_optional_active_as",
+    "group_by_optional_active_with_function",
+    "group_by_optional_amount",
+    "group_by_optional_amount_as",
+    "group_by_optional_amount_with_function",
+    "group_by_optional_day",
+    "group_by_optional_day_as",
+    "group_by_optional_day_with_function",
+    "group_by_optional_label",
+    "group_by_optional_label_as",
+    "group_by_optional_label_with_function",
+    "group_by_optional_moment",
+    "group_by_optional_moment_as",
+    "group_by_optional_moment_with_function",
+    "group_by_ratio",
+    "group_by_ratio_as",
+    "group_by_ratio_with_function",
+    "group_by_secret",
+    "group_by_secret_as",
+    "group_by_secret_with_function",
+    "group_by_tenant",
+    "group_by_tenant_as",
+    "group_by_tenant_with",
+    "group_by_tenant_with_details",
+    "group_by_tenant_with_details_from",
+    "group_by_tenant_with_function",
+    "group_by_version",
+    "group_by_version_as",
+    "group_by_version_with_function",
+    "have_no_tenant",
+    "have_tenant",
+    "into_query",
+    "limit",
+    "match_any_of",
+    "match_types",
+    "matching_any_of",
+    "max_active",
+    "max_active_as",
+    "max_amount",
+    "max_amount_as",
+    "max_counter",
+    "max_counter_as",
+    "max_day",
+    "max_day_as",
+    "max_height",
+    "max_height_as",
+    "max_id",
+    "max_id_as",
+    "max_label",
+    "max_label_as",
+    "max_moment",
+    "max_moment_as",
+    "max_notes",
+    "max_notes_as",
+    "max_optional_active",
+    "max_optional_active_as",
+    "max_optional_amount",
+    "max_optional_amount_as",
+    "max_optional_day",
+    "max_optional_day_as",
+    "max_optional_label",
+    "max_optional_label_as",
+    "max_optional_moment",
+    "max_optional_moment_as",
+    "max_ratio",
+    "max_ratio_as",
+    "max_secret",
+    "max_secret_as",
+    "max_version",
+    "max_version_as",
+    "min_active",
+    "min_active_as",
+    "min_amount",
+    "min_amount_as",
+    "min_counter",
+    "min_counter_as",
+    "min_day",
+    "min_day_as",
+    "min_height",
+    "min_height_as",
+    "min_id",
+    "min_id_as",
+    "min_label",
+    "min_label_as",
+    "min_moment",
+    "min_moment_as",
+    "min_notes",
+    "min_notes_as",
+    "min_optional_active",
+    "min_optional_active_as",
+    "min_optional_amount",
+    "min_optional_amount_as",
+    "min_optional_day",
+    "min_optional_day_as",
+    "min_optional_label",
+    "min_optional_label_as",
+    "min_optional_moment",
+    "min_optional_moment_as",
+    "min_ratio",
+    "min_ratio_as",
+    "min_secret",
+    "min_secret_as",
+    "min_version",
+    "min_version_as",
+    "new_entity",
+    "offset",
+    "offset_only",
+    "offset_size",
+    "optimize_for_continuous_page_fetch",
+    "optimize_for_continuous_page_fetch_with",
+    "optimize_pagination_with_id_set",
+    "optimize_pagination_with_id_set_config",
+    "or_filter",
+    "order_by_active_asc",
+    "order_by_active_asc_using_gbk",
+    "order_by_active_desc",
+    "order_by_active_desc_using_gbk",
+    "order_by_amount_asc",
+    "order_by_amount_asc_using_gbk",
+    "order_by_amount_desc",
+    "order_by_amount_desc_using_gbk",
+    "order_by_counter_asc",
+    "order_by_counter_asc_using_gbk",
+    "order_by_counter_desc",
+    "order_by_counter_desc_using_gbk",
+    "order_by_day_asc",
+    "order_by_day_asc_using_gbk",
+    "order_by_day_desc",
+    "order_by_day_desc_using_gbk",
+    "order_by_height_asc",
+    "order_by_height_asc_using_gbk",
+    "order_by_height_desc",
+    "order_by_height_desc_using_gbk",
+    "order_by_id_asc",
+    "order_by_id_asc_using_gbk",
+    "order_by_id_desc",
+    "order_by_id_desc_using_gbk",
+    "order_by_label_asc",
+    "order_by_label_asc_using_gbk",
+    "order_by_label_desc",
+    "order_by_label_desc_using_gbk",
+    "order_by_moment_asc",
+    "order_by_moment_asc_using_gbk",
+    "order_by_moment_desc",
+    "order_by_moment_desc_using_gbk",
+    "order_by_notes_asc",
+    "order_by_notes_asc_using_gbk",
+    "order_by_notes_desc",
+    "order_by_notes_desc_using_gbk",
+    "order_by_optional_active_asc",
+    "order_by_optional_active_asc_using_gbk",
+    "order_by_optional_active_desc",
+    "order_by_optional_active_desc_using_gbk",
+    "order_by_optional_amount_asc",
+    "order_by_optional_amount_asc_using_gbk",
+    "order_by_optional_amount_desc",
+    "order_by_optional_amount_desc_using_gbk",
+    "order_by_optional_day_asc",
+    "order_by_optional_day_asc_using_gbk",
+    "order_by_optional_day_desc",
+    "order_by_optional_day_desc_using_gbk",
+    "order_by_optional_label_asc",
+    "order_by_optional_label_asc_using_gbk",
+    "order_by_optional_label_desc",
+    "order_by_optional_label_desc_using_gbk",
+    "order_by_optional_moment_asc",
+    "order_by_optional_moment_asc_using_gbk",
+    "order_by_optional_moment_desc",
+    "order_by_optional_moment_desc_using_gbk",
+    "order_by_ratio_asc",
+    "order_by_ratio_asc_using_gbk",
+    "order_by_ratio_desc",
+    "order_by_ratio_desc_using_gbk",
+    "order_by_secret_asc",
+    "order_by_secret_asc_using_gbk",
+    "order_by_secret_desc",
+    "order_by_secret_desc_using_gbk",
+    "order_by_version_asc",
+    "order_by_version_asc_using_gbk",
+    "order_by_version_desc",
+    "order_by_version_desc_using_gbk",
+    "page",
+    "page_default",
+    "page_number",
+    "page_number_default",
+    "page_offset",
+    "project_active",
+    "project_amount",
+    "project_counter",
+    "project_day",
+    "project_height",
+    "project_label",
+    "project_moment",
+    "project_notes",
+    "project_optional_active",
+    "project_optional_amount",
+    "project_optional_day",
+    "project_optional_label",
+    "project_optional_moment",
+    "project_ratio",
+    "project_secret",
+    "propagate_aggregation_cache",
+    "purpose",
+    "query",
+    "query_options",
+    "raw_sql",
+    "raw_sql_filter",
+    "relation_filters",
+    "relation_selections",
+    "return_type",
+    "roll_up_to_tenant",
+    "roll_up_to_tenant_with",
+    "sample_population_variance_amount",
+    "sample_population_variance_amount_as",
+    "sample_population_variance_counter",
+    "sample_population_variance_counter_as",
+    "sample_population_variance_height",
+    "sample_population_variance_height_as",
+    "sample_population_variance_optional_amount",
+    "sample_population_variance_optional_amount_as",
+    "sample_population_variance_ratio",
+    "sample_population_variance_ratio_as",
+    "sample_variance_amount",
+    "sample_variance_amount_as",
+    "sample_variance_counter",
+    "sample_variance_counter_as",
+    "sample_variance_height",
+    "sample_variance_height_as",
+    "sample_variance_optional_amount",
+    "sample_variance_optional_amount_as",
+    "sample_variance_ratio",
+    "sample_variance_ratio_as",
+    "search_with_text",
+    "select_active",
+    "select_active_raw",
+    "select_active_unsafe_raw",
+    "select_all",
+    "select_amount",
+    "select_amount_as_with_function",
+    "select_amount_raw",
+    "select_amount_unsafe_raw",
+    "select_amount_with_function",
+    "select_any",
+    "select_children",
+    "select_counter",
+    "select_counter_as_with_function",
+    "select_counter_raw",
+    "select_counter_unsafe_raw",
+    "select_counter_with_function",
+    "select_day",
+    "select_day_raw",
+    "select_day_unsafe_raw",
+    "select_dynamic_fields_with",
+    "select_height",
+    "select_height_as_with_function",
+    "select_height_raw",
+    "select_height_unsafe_raw",
+    "select_height_with_function",
+    "select_label",
+    "select_label_raw",
+    "select_label_unsafe_raw",
+    "select_moment",
+    "select_moment_raw",
+    "select_moment_unsafe_raw",
+    "select_notes",
+    "select_notes_raw",
+    "select_notes_unsafe_raw",
+    "select_optional_active",
+    "select_optional_active_raw",
+    "select_optional_active_unsafe_raw",
+    "select_optional_amount",
+    "select_optional_amount_as_with_function",
+    "select_optional_amount_raw",
+    "select_optional_amount_unsafe_raw",
+    "select_optional_amount_with_function",
+    "select_optional_day",
+    "select_optional_day_raw",
+    "select_optional_day_unsafe_raw",
+    "select_optional_label",
+    "select_optional_label_raw",
+    "select_optional_label_unsafe_raw",
+    "select_optional_moment",
+    "select_optional_moment_raw",
+    "select_optional_moment_unsafe_raw",
+    "select_ratio",
+    "select_ratio_as_with_function",
+    "select_ratio_raw",
+    "select_ratio_unsafe_raw",
+    "select_ratio_with_function",
+    "select_secret",
+    "select_secret_raw",
+    "select_secret_unsafe_raw",
+    "select_self",
+    "select_self_fields",
+    "select_self_without_parent",
+    "select_tenant",
+    "select_tenant_with",
+    "skip",
+    "square_root_of_population_standard_deviation_amount",
+    "square_root_of_population_standard_deviation_amount_as",
+    "square_root_of_population_standard_deviation_counter",
+    "square_root_of_population_standard_deviation_counter_as",
+    "square_root_of_population_standard_deviation_height",
+    "square_root_of_population_standard_deviation_height_as",
+    "square_root_of_population_standard_deviation_optional_amount",
+    "square_root_of_population_standard_deviation_optional_amount_as",
+    "square_root_of_population_standard_deviation_ratio",
+    "square_root_of_population_standard_deviation_ratio_as",
+    "standard_deviation_amount",
+    "standard_deviation_amount_as",
+    "standard_deviation_counter",
+    "standard_deviation_counter_as",
+    "standard_deviation_height",
+    "standard_deviation_height_as",
+    "standard_deviation_optional_amount",
+    "standard_deviation_optional_amount_as",
+    "standard_deviation_ratio",
+    "standard_deviation_ratio_as",
+    "stream",
+    "stream_default",
+    "sum_active",
+    "sum_active_as",
+    "sum_amount",
+    "sum_amount_as",
+    "sum_counter",
+    "sum_counter_as",
+    "sum_day",
+    "sum_day_as",
+    "sum_height",
+    "sum_height_as",
+    "sum_id",
+    "sum_id_as",
+    "sum_label",
+    "sum_label_as",
+    "sum_moment",
+    "sum_moment_as",
+    "sum_notes",
+    "sum_notes_as",
+    "sum_optional_active",
+    "sum_optional_active_as",
+    "sum_optional_amount",
+    "sum_optional_amount_as",
+    "sum_optional_day",
+    "sum_optional_day_as",
+    "sum_optional_label",
+    "sum_optional_label_as",
+    "sum_optional_moment",
+    "sum_optional_moment_as",
+    "sum_ratio",
+    "sum_ratio_as",
+    "sum_secret",
+    "sum_secret_as",
+    "sum_version",
+    "sum_version_as",
+    "top",
+    "top_n_probe_parent_threshold",
+    "unlimited",
+    "unsafe_create_property_as",
+    "unsafe_raw_sql",
+    "unsafe_raw_sql_filter",
+    "unselect_active",
+    "unselect_amount",
+    "unselect_counter",
+    "unselect_day",
+    "unselect_height",
+    "unselect_label",
+    "unselect_moment",
+    "unselect_notes",
+    "unselect_optional_active",
+    "unselect_optional_amount",
+    "unselect_optional_day",
+    "unselect_optional_label",
+    "unselect_optional_moment",
+    "unselect_ratio",
+    "unselect_secret",
+    "unselect_tenant",
+    "which_are_active",
+    "which_are_not_active",
+    "which_are_not_optional_active",
+    "which_are_optional_active",
+    "with_active_is_known",
+    "with_active_is_unknown",
+    "with_amount",
+    "with_amount_after",
+    "with_amount_before",
+    "with_amount_between",
+    "with_amount_between_range",
+    "with_amount_greater_than",
+    "with_amount_greater_than_or_equal_to",
+    "with_amount_in",
+    "with_amount_is",
+    "with_amount_is_known",
+    "with_amount_is_not",
+    "with_amount_is_unknown",
+    "with_amount_less_than",
+    "with_amount_less_than_or_equal_to",
+    "with_amount_not_in",
+    "with_counter",
+    "with_counter_after",
+    "with_counter_before",
+    "with_counter_between",
+    "with_counter_between_range",
+    "with_counter_greater_than",
+    "with_counter_greater_than_or_equal_to",
+    "with_counter_in",
+    "with_counter_is",
+    "with_counter_is_known",
+    "with_counter_is_not",
+    "with_counter_is_unknown",
+    "with_counter_less_than",
+    "with_counter_less_than_or_equal_to",
+    "with_counter_not_in",
+    "with_day",
+    "with_day_after",
+    "with_day_before",
+    "with_day_between",
+    "with_day_between_range",
+    "with_day_greater_than",
+    "with_day_greater_than_or_equal_to",
+    "with_day_in",
+    "with_day_is",
+    "with_day_is_known",
+    "with_day_is_not",
+    "with_day_is_unknown",
+    "with_day_less_than",
+    "with_day_less_than_or_equal_to",
+    "with_day_not_in",
+    "with_deleted_rows",
+    "with_height",
+    "with_height_after",
+    "with_height_before",
+    "with_height_between",
+    "with_height_between_range",
+    "with_height_greater_than",
+    "with_height_greater_than_or_equal_to",
+    "with_height_in",
+    "with_height_is",
+    "with_height_is_known",
+    "with_height_is_not",
+    "with_height_is_unknown",
+    "with_height_less_than",
+    "with_height_less_than_or_equal_to",
+    "with_height_not_in",
+    "with_id",
+    "with_id_in",
+    "with_id_is",
+    "with_id_is_not",
+    "with_id_not_in",
+    "with_label",
+    "with_label_after",
+    "with_label_before",
+    "with_label_between",
+    "with_label_between_range",
+    "with_label_containing",
+    "with_label_ending_with",
+    "with_label_greater_than",
+    "with_label_greater_than_or_equal_to",
+    "with_label_in",
+    "with_label_is",
+    "with_label_is_known",
+    "with_label_is_not",
+    "with_label_is_unknown",
+    "with_label_less_than",
+    "with_label_less_than_or_equal_to",
+    "with_label_not_containing",
+    "with_label_not_ending_with",
+    "with_label_not_in",
+    "with_label_not_starting_with",
+    "with_label_sounding_like",
+    "with_label_starting_with",
+    "with_moment",
+    "with_moment_after",
+    "with_moment_before",
+    "with_moment_between",
+    "with_moment_between_range",
+    "with_moment_greater_than",
+    "with_moment_greater_than_or_equal_to",
+    "with_moment_in",
+    "with_moment_is",
+    "with_moment_is_known",
+    "with_moment_is_not",
+    "with_moment_is_unknown",
+    "with_moment_less_than",
+    "with_moment_less_than_or_equal_to",
+    "with_moment_not_in",
+    "with_notes",
+    "with_notes_after",
+    "with_notes_before",
+    "with_notes_between",
+    "with_notes_between_range",
+    "with_notes_greater_than",
+    "with_notes_greater_than_or_equal_to",
+    "with_notes_in",
+    "with_notes_is",
+    "with_notes_is_known",
+    "with_notes_is_not",
+    "with_notes_is_unknown",
+    "with_notes_less_than",
+    "with_notes_less_than_or_equal_to",
+    "with_notes_not_in",
+    "with_optional_active_is_known",
+    "with_optional_active_is_unknown",
+    "with_optional_amount",
+    "with_optional_amount_after",
+    "with_optional_amount_before",
+    "with_optional_amount_between",
+    "with_optional_amount_between_range",
+    "with_optional_amount_greater_than",
+    "with_optional_amount_greater_than_or_equal_to",
+    "with_optional_amount_in",
+    "with_optional_amount_is",
+    "with_optional_amount_is_known",
+    "with_optional_amount_is_not",
+    "with_optional_amount_is_unknown",
+    "with_optional_amount_less_than",
+    "with_optional_amount_less_than_or_equal_to",
+    "with_optional_amount_not_in",
+    "with_optional_day",
+    "with_optional_day_after",
+    "with_optional_day_before",
+    "with_optional_day_between",
+    "with_optional_day_between_range",
+    "with_optional_day_greater_than",
+    "with_optional_day_greater_than_or_equal_to",
+    "with_optional_day_in",
+    "with_optional_day_is",
+    "with_optional_day_is_known",
+    "with_optional_day_is_not",
+    "with_optional_day_is_unknown",
+    "with_optional_day_less_than",
+    "with_optional_day_less_than_or_equal_to",
+    "with_optional_day_not_in",
+    "with_optional_label",
+    "with_optional_label_after",
+    "with_optional_label_before",
+    "with_optional_label_between",
+    "with_optional_label_between_range",
+    "with_optional_label_containing",
+    "with_optional_label_ending_with",
+    "with_optional_label_greater_than",
+    "with_optional_label_greater_than_or_equal_to",
+    "with_optional_label_in",
+    "with_optional_label_is",
+    "with_optional_label_is_known",
+    "with_optional_label_is_not",
+    "with_optional_label_is_unknown",
+    "with_optional_label_less_than",
+    "with_optional_label_less_than_or_equal_to",
+    "with_optional_label_not_containing",
+    "with_optional_label_not_ending_with",
+    "with_optional_label_not_in",
+    "with_optional_label_not_starting_with",
+    "with_optional_label_sounding_like",
+    "with_optional_label_starting_with",
+    "with_optional_moment",
+    "with_optional_moment_after",
+    "with_optional_moment_before",
+    "with_optional_moment_between",
+    "with_optional_moment_between_range",
+    "with_optional_moment_greater_than",
+    "with_optional_moment_greater_than_or_equal_to",
+    "with_optional_moment_in",
+    "with_optional_moment_is",
+    "with_optional_moment_is_known",
+    "with_optional_moment_is_not",
+    "with_optional_moment_is_unknown",
+    "with_optional_moment_less_than",
+    "with_optional_moment_less_than_or_equal_to",
+    "with_optional_moment_not_in",
+    "with_ratio",
+    "with_ratio_after",
+    "with_ratio_before",
+    "with_ratio_between",
+    "with_ratio_between_range",
+    "with_ratio_greater_than",
+    "with_ratio_greater_than_or_equal_to",
+    "with_ratio_in",
+    "with_ratio_is",
+    "with_ratio_is_known",
+    "with_ratio_is_not",
+    "with_ratio_is_unknown",
+    "with_ratio_less_than",
+    "with_ratio_less_than_or_equal_to",
+    "with_ratio_not_in",
+    "with_secret",
+    "with_secret_after",
+    "with_secret_before",
+    "with_secret_between",
+    "with_secret_between_range",
+    "with_secret_greater_than",
+    "with_secret_greater_than_or_equal_to",
+    "with_secret_in",
+    "with_secret_is",
+    "with_secret_is_known",
+    "with_secret_is_not",
+    "with_secret_is_unknown",
+    "with_secret_less_than",
+    "with_secret_less_than_or_equal_to",
+    "with_secret_not_in",
+    "with_tenant_matching",
+    "with_type_group",
+    "without_tenant_matching"
+  ],
+  "mappings": [
+    {
+      "source": "aggregate_avg",
+      "cpp": "aggregateAvg"
+    },
+    {
+      "source": "aggregate_bit_and",
+      "cpp": "aggregateBitAnd"
+    },
+    {
+      "source": "aggregate_bit_or",
+      "cpp": "aggregateBitOr"
+    },
+    {
+      "source": "aggregate_bit_xor",
+      "cpp": "aggregateBitXor"
+    },
+    {
+      "source": "aggregate_count",
+      "cpp": "aggregateCount"
+    },
+    {
+      "source": "aggregate_count_field",
+      "cpp": "aggregateCountField"
+    },
+    {
+      "source": "aggregate_max",
+      "cpp": "aggregateMax"
+    },
+    {
+      "source": "aggregate_min",
+      "cpp": "aggregateMin"
+    },
+    {
+      "source": "aggregate_stddev",
+      "cpp": "aggregateStddev"
+    },
+    {
+      "source": "aggregate_stddev_pop",
+      "cpp": "aggregateStddevPop"
+    },
+    {
+      "source": "aggregate_sum",
+      "cpp": "aggregateSum"
+    },
+    {
+      "source": "aggregate_var_pop",
+      "cpp": "aggregateVarPop"
+    },
+    {
+      "source": "aggregate_var_samp",
+      "cpp": "aggregateVarSamp"
+    },
+    {
+      "source": "aggregate_with_function",
+      "cpp": "aggregateWithFunction"
+    },
+    {
+      "source": "and_filter",
+      "cpp": "andFilter"
+    },
+    {
+      "source": "append_search_criteria",
+      "cpp": "appendSearchCriteria"
+    },
+    {
+      "source": "avg_active",
+      "cpp": "avgActive"
+    },
+    {
+      "source": "avg_active_as",
+      "cpp": "avgActiveAs"
+    },
+    {
+      "source": "avg_amount",
+      "cpp": "avgAmount"
+    },
+    {
+      "source": "avg_amount_as",
+      "cpp": "avgAmountAs"
+    },
+    {
+      "source": "avg_counter",
+      "cpp": "avgCounter"
+    },
+    {
+      "source": "avg_counter_as",
+      "cpp": "avgCounterAs"
+    },
+    {
+      "source": "avg_day",
+      "cpp": "avgDay"
+    },
+    {
+      "source": "avg_day_as",
+      "cpp": "avgDayAs"
+    },
+    {
+      "source": "avg_height",
+      "cpp": "avgHeight"
+    },
+    {
+      "source": "avg_height_as",
+      "cpp": "avgHeightAs"
+    },
+    {
+      "source": "avg_id",
+      "cpp": "avgId"
+    },
+    {
+      "source": "avg_id_as",
+      "cpp": "avgIdAs"
+    },
+    {
+      "source": "avg_label",
+      "cpp": "avgLabel"
+    },
+    {
+      "source": "avg_label_as",
+      "cpp": "avgLabelAs"
+    },
+    {
+      "source": "avg_moment",
+      "cpp": "avgMoment"
+    },
+    {
+      "source": "avg_moment_as",
+      "cpp": "avgMomentAs"
+    },
+    {
+      "source": "avg_notes",
+      "cpp": "avgNotes"
+    },
+    {
+      "source": "avg_notes_as",
+      "cpp": "avgNotesAs"
+    },
+    {
+      "source": "avg_optional_active",
+      "cpp": "avgOptionalActive"
+    },
+    {
+      "source": "avg_optional_active_as",
+      "cpp": "avgOptionalActiveAs"
+    },
+    {
+      "source": "avg_optional_amount",
+      "cpp": "avgOptionalAmount"
+    },
+    {
+      "source": "avg_optional_amount_as",
+      "cpp": "avgOptionalAmountAs"
+    },
+    {
+      "source": "avg_optional_day",
+      "cpp": "avgOptionalDay"
+    },
+    {
+      "source": "avg_optional_day_as",
+      "cpp": "avgOptionalDayAs"
+    },
+    {
+      "source": "avg_optional_label",
+      "cpp": "avgOptionalLabel"
+    },
+    {
+      "source": "avg_optional_label_as",
+      "cpp": "avgOptionalLabelAs"
+    },
+    {
+      "source": "avg_optional_moment",
+      "cpp": "avgOptionalMoment"
+    },
+    {
+      "source": "avg_optional_moment_as",
+      "cpp": "avgOptionalMomentAs"
+    },
+    {
+      "source": "avg_ratio",
+      "cpp": "avgRatio"
+    },
+    {
+      "source": "avg_ratio_as",
+      "cpp": "avgRatioAs"
+    },
+    {
+      "source": "avg_secret",
+      "cpp": "avgSecret"
+    },
+    {
+      "source": "avg_secret_as",
+      "cpp": "avgSecretAs"
+    },
+    {
+      "source": "avg_version",
+      "cpp": "avgVersion"
+    },
+    {
+      "source": "avg_version_as",
+      "cpp": "avgVersionAs"
+    },
+    {
+      "source": "child_enhancements",
+      "cpp": "childEnhancements"
+    },
+    {
+      "source": "comment",
+      "cpp": "comment"
+    },
+    {
+      "source": "count",
+      "cpp": "count"
+    },
+    {
+      "source": "count_active",
+      "cpp": "countActive"
+    },
+    {
+      "source": "count_active_as",
+      "cpp": "countActiveAs"
+    },
+    {
+      "source": "count_amount",
+      "cpp": "countAmount"
+    },
+    {
+      "source": "count_amount_as",
+      "cpp": "countAmountAs"
+    },
+    {
+      "source": "count_as",
+      "cpp": "countAs"
+    },
+    {
+      "source": "count_counter",
+      "cpp": "countCounter"
+    },
+    {
+      "source": "count_counter_as",
+      "cpp": "countCounterAs"
+    },
+    {
+      "source": "count_day",
+      "cpp": "countDay"
+    },
+    {
+      "source": "count_day_as",
+      "cpp": "countDayAs"
+    },
+    {
+      "source": "count_height",
+      "cpp": "countHeight"
+    },
+    {
+      "source": "count_height_as",
+      "cpp": "countHeightAs"
+    },
+    {
+      "source": "count_id",
+      "cpp": "countId"
+    },
+    {
+      "source": "count_id_as",
+      "cpp": "countIdAs"
+    },
+    {
+      "source": "count_label",
+      "cpp": "countLabel"
+    },
+    {
+      "source": "count_label_as",
+      "cpp": "countLabelAs"
+    },
+    {
+      "source": "count_moment",
+      "cpp": "countMoment"
+    },
+    {
+      "source": "count_moment_as",
+      "cpp": "countMomentAs"
+    },
+    {
+      "source": "count_notes",
+      "cpp": "countNotes"
+    },
+    {
+      "source": "count_notes_as",
+      "cpp": "countNotesAs"
+    },
+    {
+      "source": "count_optional_active",
+      "cpp": "countOptionalActive"
+    },
+    {
+      "source": "count_optional_active_as",
+      "cpp": "countOptionalActiveAs"
+    },
+    {
+      "source": "count_optional_amount",
+      "cpp": "countOptionalAmount"
+    },
+    {
+      "source": "count_optional_amount_as",
+      "cpp": "countOptionalAmountAs"
+    },
+    {
+      "source": "count_optional_day",
+      "cpp": "countOptionalDay"
+    },
+    {
+      "source": "count_optional_day_as",
+      "cpp": "countOptionalDayAs"
+    },
+    {
+      "source": "count_optional_label",
+      "cpp": "countOptionalLabel"
+    },
+    {
+      "source": "count_optional_label_as",
+      "cpp": "countOptionalLabelAs"
+    },
+    {
+      "source": "count_optional_moment",
+      "cpp": "countOptionalMoment"
+    },
+    {
+      "source": "count_optional_moment_as",
+      "cpp": "countOptionalMomentAs"
+    },
+    {
+      "source": "count_ratio",
+      "cpp": "countRatio"
+    },
+    {
+      "source": "count_ratio_as",
+      "cpp": "countRatioAs"
+    },
+    {
+      "source": "count_secret",
+      "cpp": "countSecret"
+    },
+    {
+      "source": "count_secret_as",
+      "cpp": "countSecretAs"
+    },
+    {
+      "source": "count_tenant",
+      "cpp": "countTenant"
+    },
+    {
+      "source": "count_tenant_as",
+      "cpp": "countTenantAs"
+    },
+    {
+      "source": "count_version",
+      "cpp": "countVersion"
+    },
+    {
+      "source": "count_version_as",
+      "cpp": "countVersionAs"
+    },
+    {
+      "source": "create_amount_criteria",
+      "cpp": "createAmountCriteria"
+    },
+    {
+      "source": "create_counter_criteria",
+      "cpp": "createCounterCriteria"
+    },
+    {
+      "source": "create_day_criteria",
+      "cpp": "createDayCriteria"
+    },
+    {
+      "source": "create_height_criteria",
+      "cpp": "createHeightCriteria"
+    },
+    {
+      "source": "create_id_criteria",
+      "cpp": "createIdCriteria"
+    },
+    {
+      "source": "create_label_criteria",
+      "cpp": "createLabelCriteria"
+    },
+    {
+      "source": "create_moment_criteria",
+      "cpp": "createMomentCriteria"
+    },
+    {
+      "source": "create_notes_criteria",
+      "cpp": "createNotesCriteria"
+    },
+    {
+      "source": "create_optional_amount_criteria",
+      "cpp": "createOptionalAmountCriteria"
+    },
+    {
+      "source": "create_optional_day_criteria",
+      "cpp": "createOptionalDayCriteria"
+    },
+    {
+      "source": "create_optional_label_criteria",
+      "cpp": "createOptionalLabelCriteria"
+    },
+    {
+      "source": "create_optional_moment_criteria",
+      "cpp": "createOptionalMomentCriteria"
+    },
+    {
+      "source": "create_property_as",
+      "cpp": "createPropertyAs"
+    },
+    {
+      "source": "create_ratio_criteria",
+      "cpp": "createRatioCriteria"
+    },
+    {
+      "source": "create_secret_criteria",
+      "cpp": "createSecretCriteria"
+    },
+    {
+      "source": "deleted_rows_only",
+      "cpp": "deletedRowsOnly"
+    },
+    {
+      "source": "enable_aggregation_cache",
+      "cpp": "enableAggregationCache"
+    },
+    {
+      "source": "enable_aggregation_cache_for",
+      "cpp": "enableAggregationCacheFor"
+    },
+    {
+      "source": "enhance_child",
+      "cpp": "enhanceChild"
+    },
+    {
+      "source": "enhance_children_if_needed",
+      "cpp": "enhanceChildrenIfNeeded"
+    },
+    {
+      "source": "facet_by_tenant_as",
+      "cpp": "facetByTenantAs"
+    },
+    {
+      "source": "facet_by_tenant_as_with_options",
+      "cpp": "facetByTenantAsWithOptions"
+    },
+    {
+      "source": "filter",
+      "cpp": "filter"
+    },
+    {
+      "source": "filter_by_tenant",
+      "cpp": "filterByTenant"
+    },
+    {
+      "source": "filter_property",
+      "cpp": "filterProperty"
+    },
+    {
+      "source": "filter_with_json",
+      "cpp": "filterWithJson"
+    },
+    {
+      "source": "group_by",
+      "cpp": "groupBy"
+    },
+    {
+      "source": "group_by_active",
+      "cpp": "groupByActive"
+    },
+    {
+      "source": "group_by_active_as",
+      "cpp": "groupByActiveAs"
+    },
+    {
+      "source": "group_by_active_with_function",
+      "cpp": "groupByActiveWithFunction"
+    },
+    {
+      "source": "group_by_amount",
+      "cpp": "groupByAmount"
+    },
+    {
+      "source": "group_by_amount_as",
+      "cpp": "groupByAmountAs"
+    },
+    {
+      "source": "group_by_amount_with_function",
+      "cpp": "groupByAmountWithFunction"
+    },
+    {
+      "source": "group_by_counter",
+      "cpp": "groupByCounter"
+    },
+    {
+      "source": "group_by_counter_as",
+      "cpp": "groupByCounterAs"
+    },
+    {
+      "source": "group_by_counter_with_function",
+      "cpp": "groupByCounterWithFunction"
+    },
+    {
+      "source": "group_by_day",
+      "cpp": "groupByDay"
+    },
+    {
+      "source": "group_by_day_as",
+      "cpp": "groupByDayAs"
+    },
+    {
+      "source": "group_by_day_with_function",
+      "cpp": "groupByDayWithFunction"
+    },
+    {
+      "source": "group_by_height",
+      "cpp": "groupByHeight"
+    },
+    {
+      "source": "group_by_height_as",
+      "cpp": "groupByHeightAs"
+    },
+    {
+      "source": "group_by_height_with_function",
+      "cpp": "groupByHeightWithFunction"
+    },
+    {
+      "source": "group_by_id",
+      "cpp": "groupById"
+    },
+    {
+      "source": "group_by_id_as",
+      "cpp": "groupByIdAs"
+    },
+    {
+      "source": "group_by_id_with_function",
+      "cpp": "groupByIdWithFunction"
+    },
+    {
+      "source": "group_by_label",
+      "cpp": "groupByLabel"
+    },
+    {
+      "source": "group_by_label_as",
+      "cpp": "groupByLabelAs"
+    },
+    {
+      "source": "group_by_label_with_function",
+      "cpp": "groupByLabelWithFunction"
+    },
+    {
+      "source": "group_by_moment",
+      "cpp": "groupByMoment"
+    },
+    {
+      "source": "group_by_moment_as",
+      "cpp": "groupByMomentAs"
+    },
+    {
+      "source": "group_by_moment_with_function",
+      "cpp": "groupByMomentWithFunction"
+    },
+    {
+      "source": "group_by_notes",
+      "cpp": "groupByNotes"
+    },
+    {
+      "source": "group_by_notes_as",
+      "cpp": "groupByNotesAs"
+    },
+    {
+      "source": "group_by_notes_with_function",
+      "cpp": "groupByNotesWithFunction"
+    },
+    {
+      "source": "group_by_optional_active",
+      "cpp": "groupByOptionalActive"
+    },
+    {
+      "source": "group_by_optional_active_as",
+      "cpp": "groupByOptionalActiveAs"
+    },
+    {
+      "source": "group_by_optional_active_with_function",
+      "cpp": "groupByOptionalActiveWithFunction"
+    },
+    {
+      "source": "group_by_optional_amount",
+      "cpp": "groupByOptionalAmount"
+    },
+    {
+      "source": "group_by_optional_amount_as",
+      "cpp": "groupByOptionalAmountAs"
+    },
+    {
+      "source": "group_by_optional_amount_with_function",
+      "cpp": "groupByOptionalAmountWithFunction"
+    },
+    {
+      "source": "group_by_optional_day",
+      "cpp": "groupByOptionalDay"
+    },
+    {
+      "source": "group_by_optional_day_as",
+      "cpp": "groupByOptionalDayAs"
+    },
+    {
+      "source": "group_by_optional_day_with_function",
+      "cpp": "groupByOptionalDayWithFunction"
+    },
+    {
+      "source": "group_by_optional_label",
+      "cpp": "groupByOptionalLabel"
+    },
+    {
+      "source": "group_by_optional_label_as",
+      "cpp": "groupByOptionalLabelAs"
+    },
+    {
+      "source": "group_by_optional_label_with_function",
+      "cpp": "groupByOptionalLabelWithFunction"
+    },
+    {
+      "source": "group_by_optional_moment",
+      "cpp": "groupByOptionalMoment"
+    },
+    {
+      "source": "group_by_optional_moment_as",
+      "cpp": "groupByOptionalMomentAs"
+    },
+    {
+      "source": "group_by_optional_moment_with_function",
+      "cpp": "groupByOptionalMomentWithFunction"
+    },
+    {
+      "source": "group_by_ratio",
+      "cpp": "groupByRatio"
+    },
+    {
+      "source": "group_by_ratio_as",
+      "cpp": "groupByRatioAs"
+    },
+    {
+      "source": "group_by_ratio_with_function",
+      "cpp": "groupByRatioWithFunction"
+    },
+    {
+      "source": "group_by_secret",
+      "cpp": "groupBySecret"
+    },
+    {
+      "source": "group_by_secret_as",
+      "cpp": "groupBySecretAs"
+    },
+    {
+      "source": "group_by_secret_with_function",
+      "cpp": "groupBySecretWithFunction"
+    },
+    {
+      "source": "group_by_tenant",
+      "cpp": "groupByTenant"
+    },
+    {
+      "source": "group_by_tenant_as",
+      "cpp": "groupByTenantAs"
+    },
+    {
+      "source": "group_by_tenant_with",
+      "cpp": "groupByTenantWith"
+    },
+    {
+      "source": "group_by_tenant_with_details",
+      "cpp": "groupByTenantWithDetails"
+    },
+    {
+      "source": "group_by_tenant_with_details_from",
+      "cpp": "groupByTenantWithDetailsFrom"
+    },
+    {
+      "source": "group_by_tenant_with_function",
+      "cpp": "groupByTenantWithFunction"
+    },
+    {
+      "source": "group_by_version",
+      "cpp": "groupByVersion"
+    },
+    {
+      "source": "group_by_version_as",
+      "cpp": "groupByVersionAs"
+    },
+    {
+      "source": "group_by_version_with_function",
+      "cpp": "groupByVersionWithFunction"
+    },
+    {
+      "source": "have_no_tenant",
+      "cpp": "haveNoTenant"
+    },
+    {
+      "source": "have_tenant",
+      "cpp": "haveTenant"
+    },
+    {
+      "source": "into_query",
+      "cpp": "intoQuery"
+    },
+    {
+      "source": "limit",
+      "cpp": "limit"
+    },
+    {
+      "source": "match_any_of",
+      "cpp": "matchAnyOf"
+    },
+    {
+      "source": "match_types",
+      "cpp": "matchTypes"
+    },
+    {
+      "source": "matching_any_of",
+      "cpp": "matchingAnyOf"
+    },
+    {
+      "source": "max_active",
+      "cpp": "maxActive"
+    },
+    {
+      "source": "max_active_as",
+      "cpp": "maxActiveAs"
+    },
+    {
+      "source": "max_amount",
+      "cpp": "maxAmount"
+    },
+    {
+      "source": "max_amount_as",
+      "cpp": "maxAmountAs"
+    },
+    {
+      "source": "max_counter",
+      "cpp": "maxCounter"
+    },
+    {
+      "source": "max_counter_as",
+      "cpp": "maxCounterAs"
+    },
+    {
+      "source": "max_day",
+      "cpp": "maxDay"
+    },
+    {
+      "source": "max_day_as",
+      "cpp": "maxDayAs"
+    },
+    {
+      "source": "max_height",
+      "cpp": "maxHeight"
+    },
+    {
+      "source": "max_height_as",
+      "cpp": "maxHeightAs"
+    },
+    {
+      "source": "max_id",
+      "cpp": "maxId"
+    },
+    {
+      "source": "max_id_as",
+      "cpp": "maxIdAs"
+    },
+    {
+      "source": "max_label",
+      "cpp": "maxLabel"
+    },
+    {
+      "source": "max_label_as",
+      "cpp": "maxLabelAs"
+    },
+    {
+      "source": "max_moment",
+      "cpp": "maxMoment"
+    },
+    {
+      "source": "max_moment_as",
+      "cpp": "maxMomentAs"
+    },
+    {
+      "source": "max_notes",
+      "cpp": "maxNotes"
+    },
+    {
+      "source": "max_notes_as",
+      "cpp": "maxNotesAs"
+    },
+    {
+      "source": "max_optional_active",
+      "cpp": "maxOptionalActive"
+    },
+    {
+      "source": "max_optional_active_as",
+      "cpp": "maxOptionalActiveAs"
+    },
+    {
+      "source": "max_optional_amount",
+      "cpp": "maxOptionalAmount"
+    },
+    {
+      "source": "max_optional_amount_as",
+      "cpp": "maxOptionalAmountAs"
+    },
+    {
+      "source": "max_optional_day",
+      "cpp": "maxOptionalDay"
+    },
+    {
+      "source": "max_optional_day_as",
+      "cpp": "maxOptionalDayAs"
+    },
+    {
+      "source": "max_optional_label",
+      "cpp": "maxOptionalLabel"
+    },
+    {
+      "source": "max_optional_label_as",
+      "cpp": "maxOptionalLabelAs"
+    },
+    {
+      "source": "max_optional_moment",
+      "cpp": "maxOptionalMoment"
+    },
+    {
+      "source": "max_optional_moment_as",
+      "cpp": "maxOptionalMomentAs"
+    },
+    {
+      "source": "max_ratio",
+      "cpp": "maxRatio"
+    },
+    {
+      "source": "max_ratio_as",
+      "cpp": "maxRatioAs"
+    },
+    {
+      "source": "max_secret",
+      "cpp": "maxSecret"
+    },
+    {
+      "source": "max_secret_as",
+      "cpp": "maxSecretAs"
+    },
+    {
+      "source": "max_version",
+      "cpp": "maxVersion"
+    },
+    {
+      "source": "max_version_as",
+      "cpp": "maxVersionAs"
+    },
+    {
+      "source": "min_active",
+      "cpp": "minActive"
+    },
+    {
+      "source": "min_active_as",
+      "cpp": "minActiveAs"
+    },
+    {
+      "source": "min_amount",
+      "cpp": "minAmount"
+    },
+    {
+      "source": "min_amount_as",
+      "cpp": "minAmountAs"
+    },
+    {
+      "source": "min_counter",
+      "cpp": "minCounter"
+    },
+    {
+      "source": "min_counter_as",
+      "cpp": "minCounterAs"
+    },
+    {
+      "source": "min_day",
+      "cpp": "minDay"
+    },
+    {
+      "source": "min_day_as",
+      "cpp": "minDayAs"
+    },
+    {
+      "source": "min_height",
+      "cpp": "minHeight"
+    },
+    {
+      "source": "min_height_as",
+      "cpp": "minHeightAs"
+    },
+    {
+      "source": "min_id",
+      "cpp": "minId"
+    },
+    {
+      "source": "min_id_as",
+      "cpp": "minIdAs"
+    },
+    {
+      "source": "min_label",
+      "cpp": "minLabel"
+    },
+    {
+      "source": "min_label_as",
+      "cpp": "minLabelAs"
+    },
+    {
+      "source": "min_moment",
+      "cpp": "minMoment"
+    },
+    {
+      "source": "min_moment_as",
+      "cpp": "minMomentAs"
+    },
+    {
+      "source": "min_notes",
+      "cpp": "minNotes"
+    },
+    {
+      "source": "min_notes_as",
+      "cpp": "minNotesAs"
+    },
+    {
+      "source": "min_optional_active",
+      "cpp": "minOptionalActive"
+    },
+    {
+      "source": "min_optional_active_as",
+      "cpp": "minOptionalActiveAs"
+    },
+    {
+      "source": "min_optional_amount",
+      "cpp": "minOptionalAmount"
+    },
+    {
+      "source": "min_optional_amount_as",
+      "cpp": "minOptionalAmountAs"
+    },
+    {
+      "source": "min_optional_day",
+      "cpp": "minOptionalDay"
+    },
+    {
+      "source": "min_optional_day_as",
+      "cpp": "minOptionalDayAs"
+    },
+    {
+      "source": "min_optional_label",
+      "cpp": "minOptionalLabel"
+    },
+    {
+      "source": "min_optional_label_as",
+      "cpp": "minOptionalLabelAs"
+    },
+    {
+      "source": "min_optional_moment",
+      "cpp": "minOptionalMoment"
+    },
+    {
+      "source": "min_optional_moment_as",
+      "cpp": "minOptionalMomentAs"
+    },
+    {
+      "source": "min_ratio",
+      "cpp": "minRatio"
+    },
+    {
+      "source": "min_ratio_as",
+      "cpp": "minRatioAs"
+    },
+    {
+      "source": "min_secret",
+      "cpp": "minSecret"
+    },
+    {
+      "source": "min_secret_as",
+      "cpp": "minSecretAs"
+    },
+    {
+      "source": "min_version",
+      "cpp": "minVersion"
+    },
+    {
+      "source": "min_version_as",
+      "cpp": "minVersionAs"
+    },
+    {
+      "source": "new_entity",
+      "cpp": "newEntity"
+    },
+    {
+      "source": "offset",
+      "cpp": "offset"
+    },
+    {
+      "source": "offset_only",
+      "cpp": "offsetOnly"
+    },
+    {
+      "source": "offset_size",
+      "cpp": "offsetSize"
+    },
+    {
+      "source": "optimize_for_continuous_page_fetch",
+      "cpp": "optimizeForContinuousPageFetch"
+    },
+    {
+      "source": "optimize_for_continuous_page_fetch_with",
+      "cpp": "optimizeForContinuousPageFetchWith"
+    },
+    {
+      "source": "optimize_pagination_with_id_set",
+      "cpp": "optimizePaginationWithIdSet"
+    },
+    {
+      "source": "optimize_pagination_with_id_set_config",
+      "cpp": "optimizePaginationWithIdSetConfig"
+    },
+    {
+      "source": "or_filter",
+      "cpp": "orFilter"
+    },
+    {
+      "source": "order_by_active_asc",
+      "cpp": "orderByActiveAsc"
+    },
+    {
+      "source": "order_by_active_asc_using_gbk",
+      "cpp": "orderByActiveAscUsingGbk"
+    },
+    {
+      "source": "order_by_active_desc",
+      "cpp": "orderByActiveDesc"
+    },
+    {
+      "source": "order_by_active_desc_using_gbk",
+      "cpp": "orderByActiveDescUsingGbk"
+    },
+    {
+      "source": "order_by_amount_asc",
+      "cpp": "orderByAmountAsc"
+    },
+    {
+      "source": "order_by_amount_asc_using_gbk",
+      "cpp": "orderByAmountAscUsingGbk"
+    },
+    {
+      "source": "order_by_amount_desc",
+      "cpp": "orderByAmountDesc"
+    },
+    {
+      "source": "order_by_amount_desc_using_gbk",
+      "cpp": "orderByAmountDescUsingGbk"
+    },
+    {
+      "source": "order_by_counter_asc",
+      "cpp": "orderByCounterAsc"
+    },
+    {
+      "source": "order_by_counter_asc_using_gbk",
+      "cpp": "orderByCounterAscUsingGbk"
+    },
+    {
+      "source": "order_by_counter_desc",
+      "cpp": "orderByCounterDesc"
+    },
+    {
+      "source": "order_by_counter_desc_using_gbk",
+      "cpp": "orderByCounterDescUsingGbk"
+    },
+    {
+      "source": "order_by_day_asc",
+      "cpp": "orderByDayAsc"
+    },
+    {
+      "source": "order_by_day_asc_using_gbk",
+      "cpp": "orderByDayAscUsingGbk"
+    },
+    {
+      "source": "order_by_day_desc",
+      "cpp": "orderByDayDesc"
+    },
+    {
+      "source": "order_by_day_desc_using_gbk",
+      "cpp": "orderByDayDescUsingGbk"
+    },
+    {
+      "source": "order_by_height_asc",
+      "cpp": "orderByHeightAsc"
+    },
+    {
+      "source": "order_by_height_asc_using_gbk",
+      "cpp": "orderByHeightAscUsingGbk"
+    },
+    {
+      "source": "order_by_height_desc",
+      "cpp": "orderByHeightDesc"
+    },
+    {
+      "source": "order_by_height_desc_using_gbk",
+      "cpp": "orderByHeightDescUsingGbk"
+    },
+    {
+      "source": "order_by_id_asc",
+      "cpp": "orderByIdAsc"
+    },
+    {
+      "source": "order_by_id_asc_using_gbk",
+      "cpp": "orderByIdAscUsingGbk"
+    },
+    {
+      "source": "order_by_id_desc",
+      "cpp": "orderByIdDesc"
+    },
+    {
+      "source": "order_by_id_desc_using_gbk",
+      "cpp": "orderByIdDescUsingGbk"
+    },
+    {
+      "source": "order_by_label_asc",
+      "cpp": "orderByLabelAsc"
+    },
+    {
+      "source": "order_by_label_asc_using_gbk",
+      "cpp": "orderByLabelAscUsingGbk"
+    },
+    {
+      "source": "order_by_label_desc",
+      "cpp": "orderByLabelDesc"
+    },
+    {
+      "source": "order_by_label_desc_using_gbk",
+      "cpp": "orderByLabelDescUsingGbk"
+    },
+    {
+      "source": "order_by_moment_asc",
+      "cpp": "orderByMomentAsc"
+    },
+    {
+      "source": "order_by_moment_asc_using_gbk",
+      "cpp": "orderByMomentAscUsingGbk"
+    },
+    {
+      "source": "order_by_moment_desc",
+      "cpp": "orderByMomentDesc"
+    },
+    {
+      "source": "order_by_moment_desc_using_gbk",
+      "cpp": "orderByMomentDescUsingGbk"
+    },
+    {
+      "source": "order_by_notes_asc",
+      "cpp": "orderByNotesAsc"
+    },
+    {
+      "source": "order_by_notes_asc_using_gbk",
+      "cpp": "orderByNotesAscUsingGbk"
+    },
+    {
+      "source": "order_by_notes_desc",
+      "cpp": "orderByNotesDesc"
+    },
+    {
+      "source": "order_by_notes_desc_using_gbk",
+      "cpp": "orderByNotesDescUsingGbk"
+    },
+    {
+      "source": "order_by_optional_active_asc",
+      "cpp": "orderByOptionalActiveAsc"
+    },
+    {
+      "source": "order_by_optional_active_asc_using_gbk",
+      "cpp": "orderByOptionalActiveAscUsingGbk"
+    },
+    {
+      "source": "order_by_optional_active_desc",
+      "cpp": "orderByOptionalActiveDesc"
+    },
+    {
+      "source": "order_by_optional_active_desc_using_gbk",
+      "cpp": "orderByOptionalActiveDescUsingGbk"
+    },
+    {
+      "source": "order_by_optional_amount_asc",
+      "cpp": "orderByOptionalAmountAsc"
+    },
+    {
+      "source": "order_by_optional_amount_asc_using_gbk",
+      "cpp": "orderByOptionalAmountAscUsingGbk"
+    },
+    {
+      "source": "order_by_optional_amount_desc",
+      "cpp": "orderByOptionalAmountDesc"
+    },
+    {
+      "source": "order_by_optional_amount_desc_using_gbk",
+      "cpp": "orderByOptionalAmountDescUsingGbk"
+    },
+    {
+      "source": "order_by_optional_day_asc",
+      "cpp": "orderByOptionalDayAsc"
+    },
+    {
+      "source": "order_by_optional_day_asc_using_gbk",
+      "cpp": "orderByOptionalDayAscUsingGbk"
+    },
+    {
+      "source": "order_by_optional_day_desc",
+      "cpp": "orderByOptionalDayDesc"
+    },
+    {
+      "source": "order_by_optional_day_desc_using_gbk",
+      "cpp": "orderByOptionalDayDescUsingGbk"
+    },
+    {
+      "source": "order_by_optional_label_asc",
+      "cpp": "orderByOptionalLabelAsc"
+    },
+    {
+      "source": "order_by_optional_label_asc_using_gbk",
+      "cpp": "orderByOptionalLabelAscUsingGbk"
+    },
+    {
+      "source": "order_by_optional_label_desc",
+      "cpp": "orderByOptionalLabelDesc"
+    },
+    {
+      "source": "order_by_optional_label_desc_using_gbk",
+      "cpp": "orderByOptionalLabelDescUsingGbk"
+    },
+    {
+      "source": "order_by_optional_moment_asc",
+      "cpp": "orderByOptionalMomentAsc"
+    },
+    {
+      "source": "order_by_optional_moment_asc_using_gbk",
+      "cpp": "orderByOptionalMomentAscUsingGbk"
+    },
+    {
+      "source": "order_by_optional_moment_desc",
+      "cpp": "orderByOptionalMomentDesc"
+    },
+    {
+      "source": "order_by_optional_moment_desc_using_gbk",
+      "cpp": "orderByOptionalMomentDescUsingGbk"
+    },
+    {
+      "source": "order_by_ratio_asc",
+      "cpp": "orderByRatioAsc"
+    },
+    {
+      "source": "order_by_ratio_asc_using_gbk",
+      "cpp": "orderByRatioAscUsingGbk"
+    },
+    {
+      "source": "order_by_ratio_desc",
+      "cpp": "orderByRatioDesc"
+    },
+    {
+      "source": "order_by_ratio_desc_using_gbk",
+      "cpp": "orderByRatioDescUsingGbk"
+    },
+    {
+      "source": "order_by_secret_asc",
+      "cpp": "orderBySecretAsc"
+    },
+    {
+      "source": "order_by_secret_asc_using_gbk",
+      "cpp": "orderBySecretAscUsingGbk"
+    },
+    {
+      "source": "order_by_secret_desc",
+      "cpp": "orderBySecretDesc"
+    },
+    {
+      "source": "order_by_secret_desc_using_gbk",
+      "cpp": "orderBySecretDescUsingGbk"
+    },
+    {
+      "source": "order_by_version_asc",
+      "cpp": "orderByVersionAsc"
+    },
+    {
+      "source": "order_by_version_asc_using_gbk",
+      "cpp": "orderByVersionAscUsingGbk"
+    },
+    {
+      "source": "order_by_version_desc",
+      "cpp": "orderByVersionDesc"
+    },
+    {
+      "source": "order_by_version_desc_using_gbk",
+      "cpp": "orderByVersionDescUsingGbk"
+    },
+    {
+      "source": "page",
+      "cpp": "page"
+    },
+    {
+      "source": "page_default",
+      "cpp": "pageDefault"
+    },
+    {
+      "source": "page_number",
+      "cpp": "pageNumber"
+    },
+    {
+      "source": "page_number_default",
+      "cpp": "pageNumberDefault"
+    },
+    {
+      "source": "page_offset",
+      "cpp": "pageOffset"
+    },
+    {
+      "source": "project_active",
+      "cpp": "projectActive"
+    },
+    {
+      "source": "project_amount",
+      "cpp": "projectAmount"
+    },
+    {
+      "source": "project_counter",
+      "cpp": "projectCounter"
+    },
+    {
+      "source": "project_day",
+      "cpp": "projectDay"
+    },
+    {
+      "source": "project_height",
+      "cpp": "projectHeight"
+    },
+    {
+      "source": "project_label",
+      "cpp": "projectLabel"
+    },
+    {
+      "source": "project_moment",
+      "cpp": "projectMoment"
+    },
+    {
+      "source": "project_notes",
+      "cpp": "projectNotes"
+    },
+    {
+      "source": "project_optional_active",
+      "cpp": "projectOptionalActive"
+    },
+    {
+      "source": "project_optional_amount",
+      "cpp": "projectOptionalAmount"
+    },
+    {
+      "source": "project_optional_day",
+      "cpp": "projectOptionalDay"
+    },
+    {
+      "source": "project_optional_label",
+      "cpp": "projectOptionalLabel"
+    },
+    {
+      "source": "project_optional_moment",
+      "cpp": "projectOptionalMoment"
+    },
+    {
+      "source": "project_ratio",
+      "cpp": "projectRatio"
+    },
+    {
+      "source": "project_secret",
+      "cpp": "projectSecret"
+    },
+    {
+      "source": "propagate_aggregation_cache",
+      "cpp": "propagateAggregationCache"
+    },
+    {
+      "source": "purpose",
+      "cpp": "purpose"
+    },
+    {
+      "source": "query",
+      "cpp": "coreQuery"
+    },
+    {
+      "source": "query_options",
+      "cpp": "queryOptions"
+    },
+    {
+      "source": "raw_sql",
+      "cpp": "rawSql"
+    },
+    {
+      "source": "raw_sql_filter",
+      "cpp": "rawSqlFilter"
+    },
+    {
+      "source": "relation_filters",
+      "cpp": "relationFilters"
+    },
+    {
+      "source": "relation_selections",
+      "cpp": "relationSelections"
+    },
+    {
+      "source": "return_type",
+      "cpp": "returnType"
+    },
+    {
+      "source": "roll_up_to_tenant",
+      "cpp": "rollUpToTenant"
+    },
+    {
+      "source": "roll_up_to_tenant_with",
+      "cpp": "rollUpToTenantWith"
+    },
+    {
+      "source": "sample_population_variance_amount",
+      "cpp": "samplePopulationVarianceAmount"
+    },
+    {
+      "source": "sample_population_variance_amount_as",
+      "cpp": "samplePopulationVarianceAmountAs"
+    },
+    {
+      "source": "sample_population_variance_counter",
+      "cpp": "samplePopulationVarianceCounter"
+    },
+    {
+      "source": "sample_population_variance_counter_as",
+      "cpp": "samplePopulationVarianceCounterAs"
+    },
+    {
+      "source": "sample_population_variance_height",
+      "cpp": "samplePopulationVarianceHeight"
+    },
+    {
+      "source": "sample_population_variance_height_as",
+      "cpp": "samplePopulationVarianceHeightAs"
+    },
+    {
+      "source": "sample_population_variance_optional_amount",
+      "cpp": "samplePopulationVarianceOptionalAmount"
+    },
+    {
+      "source": "sample_population_variance_optional_amount_as",
+      "cpp": "samplePopulationVarianceOptionalAmountAs"
+    },
+    {
+      "source": "sample_population_variance_ratio",
+      "cpp": "samplePopulationVarianceRatio"
+    },
+    {
+      "source": "sample_population_variance_ratio_as",
+      "cpp": "samplePopulationVarianceRatioAs"
+    },
+    {
+      "source": "sample_variance_amount",
+      "cpp": "sampleVarianceAmount"
+    },
+    {
+      "source": "sample_variance_amount_as",
+      "cpp": "sampleVarianceAmountAs"
+    },
+    {
+      "source": "sample_variance_counter",
+      "cpp": "sampleVarianceCounter"
+    },
+    {
+      "source": "sample_variance_counter_as",
+      "cpp": "sampleVarianceCounterAs"
+    },
+    {
+      "source": "sample_variance_height",
+      "cpp": "sampleVarianceHeight"
+    },
+    {
+      "source": "sample_variance_height_as",
+      "cpp": "sampleVarianceHeightAs"
+    },
+    {
+      "source": "sample_variance_optional_amount",
+      "cpp": "sampleVarianceOptionalAmount"
+    },
+    {
+      "source": "sample_variance_optional_amount_as",
+      "cpp": "sampleVarianceOptionalAmountAs"
+    },
+    {
+      "source": "sample_variance_ratio",
+      "cpp": "sampleVarianceRatio"
+    },
+    {
+      "source": "sample_variance_ratio_as",
+      "cpp": "sampleVarianceRatioAs"
+    },
+    {
+      "source": "search_with_text",
+      "cpp": "searchWithText"
+    },
+    {
+      "source": "select_active",
+      "cpp": "selectActive"
+    },
+    {
+      "source": "select_active_raw",
+      "cpp": "selectActiveRaw"
+    },
+    {
+      "source": "select_active_unsafe_raw",
+      "cpp": "selectActiveUnsafeRaw"
+    },
+    {
+      "source": "select_all",
+      "cpp": "selectAll"
+    },
+    {
+      "source": "select_amount",
+      "cpp": "selectAmount"
+    },
+    {
+      "source": "select_amount_as_with_function",
+      "cpp": "selectAmountAsWithFunction"
+    },
+    {
+      "source": "select_amount_raw",
+      "cpp": "selectAmountRaw"
+    },
+    {
+      "source": "select_amount_unsafe_raw",
+      "cpp": "selectAmountUnsafeRaw"
+    },
+    {
+      "source": "select_amount_with_function",
+      "cpp": "selectAmountWithFunction"
+    },
+    {
+      "source": "select_any",
+      "cpp": "selectAny"
+    },
+    {
+      "source": "select_children",
+      "cpp": "selectChildren"
+    },
+    {
+      "source": "select_counter",
+      "cpp": "selectCounter"
+    },
+    {
+      "source": "select_counter_as_with_function",
+      "cpp": "selectCounterAsWithFunction"
+    },
+    {
+      "source": "select_counter_raw",
+      "cpp": "selectCounterRaw"
+    },
+    {
+      "source": "select_counter_unsafe_raw",
+      "cpp": "selectCounterUnsafeRaw"
+    },
+    {
+      "source": "select_counter_with_function",
+      "cpp": "selectCounterWithFunction"
+    },
+    {
+      "source": "select_day",
+      "cpp": "selectDay"
+    },
+    {
+      "source": "select_day_raw",
+      "cpp": "selectDayRaw"
+    },
+    {
+      "source": "select_day_unsafe_raw",
+      "cpp": "selectDayUnsafeRaw"
+    },
+    {
+      "source": "select_dynamic_fields_with",
+      "cpp": "selectDynamicFields"
+    },
+    {
+      "source": "select_height",
+      "cpp": "selectHeight"
+    },
+    {
+      "source": "select_height_as_with_function",
+      "cpp": "selectHeightAsWithFunction"
+    },
+    {
+      "source": "select_height_raw",
+      "cpp": "selectHeightRaw"
+    },
+    {
+      "source": "select_height_unsafe_raw",
+      "cpp": "selectHeightUnsafeRaw"
+    },
+    {
+      "source": "select_height_with_function",
+      "cpp": "selectHeightWithFunction"
+    },
+    {
+      "source": "select_label",
+      "cpp": "selectLabel"
+    },
+    {
+      "source": "select_label_raw",
+      "cpp": "selectLabelRaw"
+    },
+    {
+      "source": "select_label_unsafe_raw",
+      "cpp": "selectLabelUnsafeRaw"
+    },
+    {
+      "source": "select_moment",
+      "cpp": "selectMoment"
+    },
+    {
+      "source": "select_moment_raw",
+      "cpp": "selectMomentRaw"
+    },
+    {
+      "source": "select_moment_unsafe_raw",
+      "cpp": "selectMomentUnsafeRaw"
+    },
+    {
+      "source": "select_notes",
+      "cpp": "selectNotes"
+    },
+    {
+      "source": "select_notes_raw",
+      "cpp": "selectNotesRaw"
+    },
+    {
+      "source": "select_notes_unsafe_raw",
+      "cpp": "selectNotesUnsafeRaw"
+    },
+    {
+      "source": "select_optional_active",
+      "cpp": "selectOptionalActive"
+    },
+    {
+      "source": "select_optional_active_raw",
+      "cpp": "selectOptionalActiveRaw"
+    },
+    {
+      "source": "select_optional_active_unsafe_raw",
+      "cpp": "selectOptionalActiveUnsafeRaw"
+    },
+    {
+      "source": "select_optional_amount",
+      "cpp": "selectOptionalAmount"
+    },
+    {
+      "source": "select_optional_amount_as_with_function",
+      "cpp": "selectOptionalAmountAsWithFunction"
+    },
+    {
+      "source": "select_optional_amount_raw",
+      "cpp": "selectOptionalAmountRaw"
+    },
+    {
+      "source": "select_optional_amount_unsafe_raw",
+      "cpp": "selectOptionalAmountUnsafeRaw"
+    },
+    {
+      "source": "select_optional_amount_with_function",
+      "cpp": "selectOptionalAmountWithFunction"
+    },
+    {
+      "source": "select_optional_day",
+      "cpp": "selectOptionalDay"
+    },
+    {
+      "source": "select_optional_day_raw",
+      "cpp": "selectOptionalDayRaw"
+    },
+    {
+      "source": "select_optional_day_unsafe_raw",
+      "cpp": "selectOptionalDayUnsafeRaw"
+    },
+    {
+      "source": "select_optional_label",
+      "cpp": "selectOptionalLabel"
+    },
+    {
+      "source": "select_optional_label_raw",
+      "cpp": "selectOptionalLabelRaw"
+    },
+    {
+      "source": "select_optional_label_unsafe_raw",
+      "cpp": "selectOptionalLabelUnsafeRaw"
+    },
+    {
+      "source": "select_optional_moment",
+      "cpp": "selectOptionalMoment"
+    },
+    {
+      "source": "select_optional_moment_raw",
+      "cpp": "selectOptionalMomentRaw"
+    },
+    {
+      "source": "select_optional_moment_unsafe_raw",
+      "cpp": "selectOptionalMomentUnsafeRaw"
+    },
+    {
+      "source": "select_ratio",
+      "cpp": "selectRatio"
+    },
+    {
+      "source": "select_ratio_as_with_function",
+      "cpp": "selectRatioAsWithFunction"
+    },
+    {
+      "source": "select_ratio_raw",
+      "cpp": "selectRatioRaw"
+    },
+    {
+      "source": "select_ratio_unsafe_raw",
+      "cpp": "selectRatioUnsafeRaw"
+    },
+    {
+      "source": "select_ratio_with_function",
+      "cpp": "selectRatioWithFunction"
+    },
+    {
+      "source": "select_secret",
+      "cpp": "selectSecret"
+    },
+    {
+      "source": "select_secret_raw",
+      "cpp": "selectSecretRaw"
+    },
+    {
+      "source": "select_secret_unsafe_raw",
+      "cpp": "selectSecretUnsafeRaw"
+    },
+    {
+      "source": "select_self",
+      "cpp": "selectSelf"
+    },
+    {
+      "source": "select_self_fields",
+      "cpp": "selectSelfFields"
+    },
+    {
+      "source": "select_self_without_parent",
+      "cpp": "selectSelfWithoutParent"
+    },
+    {
+      "source": "select_tenant",
+      "cpp": "selectTenant"
+    },
+    {
+      "source": "select_tenant_with",
+      "cpp": "selectTenantWith"
+    },
+    {
+      "source": "skip",
+      "cpp": "skip"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_amount",
+      "cpp": "squareRootOfPopulationStandardDeviationAmount"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_amount_as",
+      "cpp": "squareRootOfPopulationStandardDeviationAmountAs"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_counter",
+      "cpp": "squareRootOfPopulationStandardDeviationCounter"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_counter_as",
+      "cpp": "squareRootOfPopulationStandardDeviationCounterAs"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_height",
+      "cpp": "squareRootOfPopulationStandardDeviationHeight"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_height_as",
+      "cpp": "squareRootOfPopulationStandardDeviationHeightAs"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_optional_amount",
+      "cpp": "squareRootOfPopulationStandardDeviationOptionalAmount"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_optional_amount_as",
+      "cpp": "squareRootOfPopulationStandardDeviationOptionalAmountAs"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_ratio",
+      "cpp": "squareRootOfPopulationStandardDeviationRatio"
+    },
+    {
+      "source": "square_root_of_population_standard_deviation_ratio_as",
+      "cpp": "squareRootOfPopulationStandardDeviationRatioAs"
+    },
+    {
+      "source": "standard_deviation_amount",
+      "cpp": "standardDeviationAmount"
+    },
+    {
+      "source": "standard_deviation_amount_as",
+      "cpp": "standardDeviationAmountAs"
+    },
+    {
+      "source": "standard_deviation_counter",
+      "cpp": "standardDeviationCounter"
+    },
+    {
+      "source": "standard_deviation_counter_as",
+      "cpp": "standardDeviationCounterAs"
+    },
+    {
+      "source": "standard_deviation_height",
+      "cpp": "standardDeviationHeight"
+    },
+    {
+      "source": "standard_deviation_height_as",
+      "cpp": "standardDeviationHeightAs"
+    },
+    {
+      "source": "standard_deviation_optional_amount",
+      "cpp": "standardDeviationOptionalAmount"
+    },
+    {
+      "source": "standard_deviation_optional_amount_as",
+      "cpp": "standardDeviationOptionalAmountAs"
+    },
+    {
+      "source": "standard_deviation_ratio",
+      "cpp": "standardDeviationRatio"
+    },
+    {
+      "source": "standard_deviation_ratio_as",
+      "cpp": "standardDeviationRatioAs"
+    },
+    {
+      "source": "stream",
+      "cpp": "stream"
+    },
+    {
+      "source": "stream_default",
+      "cpp": "streamDefault"
+    },
+    {
+      "source": "sum_active",
+      "cpp": "sumActive"
+    },
+    {
+      "source": "sum_active_as",
+      "cpp": "sumActiveAs"
+    },
+    {
+      "source": "sum_amount",
+      "cpp": "sumAmount"
+    },
+    {
+      "source": "sum_amount_as",
+      "cpp": "sumAmountAs"
+    },
+    {
+      "source": "sum_counter",
+      "cpp": "sumCounter"
+    },
+    {
+      "source": "sum_counter_as",
+      "cpp": "sumCounterAs"
+    },
+    {
+      "source": "sum_day",
+      "cpp": "sumDay"
+    },
+    {
+      "source": "sum_day_as",
+      "cpp": "sumDayAs"
+    },
+    {
+      "source": "sum_height",
+      "cpp": "sumHeight"
+    },
+    {
+      "source": "sum_height_as",
+      "cpp": "sumHeightAs"
+    },
+    {
+      "source": "sum_id",
+      "cpp": "sumId"
+    },
+    {
+      "source": "sum_id_as",
+      "cpp": "sumIdAs"
+    },
+    {
+      "source": "sum_label",
+      "cpp": "sumLabel"
+    },
+    {
+      "source": "sum_label_as",
+      "cpp": "sumLabelAs"
+    },
+    {
+      "source": "sum_moment",
+      "cpp": "sumMoment"
+    },
+    {
+      "source": "sum_moment_as",
+      "cpp": "sumMomentAs"
+    },
+    {
+      "source": "sum_notes",
+      "cpp": "sumNotes"
+    },
+    {
+      "source": "sum_notes_as",
+      "cpp": "sumNotesAs"
+    },
+    {
+      "source": "sum_optional_active",
+      "cpp": "sumOptionalActive"
+    },
+    {
+      "source": "sum_optional_active_as",
+      "cpp": "sumOptionalActiveAs"
+    },
+    {
+      "source": "sum_optional_amount",
+      "cpp": "sumOptionalAmount"
+    },
+    {
+      "source": "sum_optional_amount_as",
+      "cpp": "sumOptionalAmountAs"
+    },
+    {
+      "source": "sum_optional_day",
+      "cpp": "sumOptionalDay"
+    },
+    {
+      "source": "sum_optional_day_as",
+      "cpp": "sumOptionalDayAs"
+    },
+    {
+      "source": "sum_optional_label",
+      "cpp": "sumOptionalLabel"
+    },
+    {
+      "source": "sum_optional_label_as",
+      "cpp": "sumOptionalLabelAs"
+    },
+    {
+      "source": "sum_optional_moment",
+      "cpp": "sumOptionalMoment"
+    },
+    {
+      "source": "sum_optional_moment_as",
+      "cpp": "sumOptionalMomentAs"
+    },
+    {
+      "source": "sum_ratio",
+      "cpp": "sumRatio"
+    },
+    {
+      "source": "sum_ratio_as",
+      "cpp": "sumRatioAs"
+    },
+    {
+      "source": "sum_secret",
+      "cpp": "sumSecret"
+    },
+    {
+      "source": "sum_secret_as",
+      "cpp": "sumSecretAs"
+    },
+    {
+      "source": "sum_version",
+      "cpp": "sumVersion"
+    },
+    {
+      "source": "sum_version_as",
+      "cpp": "sumVersionAs"
+    },
+    {
+      "source": "top",
+      "cpp": "top"
+    },
+    {
+      "source": "top_n_probe_parent_threshold",
+      "cpp": "topNProbeParentThreshold"
+    },
+    {
+      "source": "unlimited",
+      "cpp": "unlimited"
+    },
+    {
+      "source": "unsafe_create_property_as",
+      "cpp": "unsafeCreatePropertyAs"
+    },
+    {
+      "source": "unsafe_raw_sql",
+      "cpp": "unsafeRawSql"
+    },
+    {
+      "source": "unsafe_raw_sql_filter",
+      "cpp": "unsafeRawSqlFilter"
+    },
+    {
+      "source": "unselect_active",
+      "cpp": "unselectActive"
+    },
+    {
+      "source": "unselect_amount",
+      "cpp": "unselectAmount"
+    },
+    {
+      "source": "unselect_counter",
+      "cpp": "unselectCounter"
+    },
+    {
+      "source": "unselect_day",
+      "cpp": "unselectDay"
+    },
+    {
+      "source": "unselect_height",
+      "cpp": "unselectHeight"
+    },
+    {
+      "source": "unselect_label",
+      "cpp": "unselectLabel"
+    },
+    {
+      "source": "unselect_moment",
+      "cpp": "unselectMoment"
+    },
+    {
+      "source": "unselect_notes",
+      "cpp": "unselectNotes"
+    },
+    {
+      "source": "unselect_optional_active",
+      "cpp": "unselectOptionalActive"
+    },
+    {
+      "source": "unselect_optional_amount",
+      "cpp": "unselectOptionalAmount"
+    },
+    {
+      "source": "unselect_optional_day",
+      "cpp": "unselectOptionalDay"
+    },
+    {
+      "source": "unselect_optional_label",
+      "cpp": "unselectOptionalLabel"
+    },
+    {
+      "source": "unselect_optional_moment",
+      "cpp": "unselectOptionalMoment"
+    },
+    {
+      "source": "unselect_ratio",
+      "cpp": "unselectRatio"
+    },
+    {
+      "source": "unselect_secret",
+      "cpp": "unselectSecret"
+    },
+    {
+      "source": "unselect_tenant",
+      "cpp": "unselectTenant"
+    },
+    {
+      "source": "which_are_active",
+      "cpp": "whichAreActive"
+    },
+    {
+      "source": "which_are_not_active",
+      "cpp": "whichAreNotActive"
+    },
+    {
+      "source": "which_are_not_optional_active",
+      "cpp": "whichAreNotOptionalActive"
+    },
+    {
+      "source": "which_are_optional_active",
+      "cpp": "whichAreOptionalActive"
+    },
+    {
+      "source": "with_active_is_known",
+      "cpp": "withActiveIsKnown"
+    },
+    {
+      "source": "with_active_is_unknown",
+      "cpp": "withActiveIsUnknown"
+    },
+    {
+      "source": "with_amount",
+      "cpp": "withAmount"
+    },
+    {
+      "source": "with_amount_after",
+      "cpp": "withAmountAfter"
+    },
+    {
+      "source": "with_amount_before",
+      "cpp": "withAmountBefore"
+    },
+    {
+      "source": "with_amount_between",
+      "cpp": "withAmountBetween"
+    },
+    {
+      "source": "with_amount_between_range",
+      "cpp": "withAmountBetweenRange"
+    },
+    {
+      "source": "with_amount_greater_than",
+      "cpp": "withAmountGreaterThan"
+    },
+    {
+      "source": "with_amount_greater_than_or_equal_to",
+      "cpp": "withAmountGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_amount_in",
+      "cpp": "withAmountIn"
+    },
+    {
+      "source": "with_amount_is",
+      "cpp": "withAmountIs"
+    },
+    {
+      "source": "with_amount_is_known",
+      "cpp": "withAmountIsKnown"
+    },
+    {
+      "source": "with_amount_is_not",
+      "cpp": "withAmountIsNot"
+    },
+    {
+      "source": "with_amount_is_unknown",
+      "cpp": "withAmountIsUnknown"
+    },
+    {
+      "source": "with_amount_less_than",
+      "cpp": "withAmountLessThan"
+    },
+    {
+      "source": "with_amount_less_than_or_equal_to",
+      "cpp": "withAmountLessThanOrEqualTo"
+    },
+    {
+      "source": "with_amount_not_in",
+      "cpp": "withAmountNotIn"
+    },
+    {
+      "source": "with_counter",
+      "cpp": "withCounter"
+    },
+    {
+      "source": "with_counter_after",
+      "cpp": "withCounterAfter"
+    },
+    {
+      "source": "with_counter_before",
+      "cpp": "withCounterBefore"
+    },
+    {
+      "source": "with_counter_between",
+      "cpp": "withCounterBetween"
+    },
+    {
+      "source": "with_counter_between_range",
+      "cpp": "withCounterBetweenRange"
+    },
+    {
+      "source": "with_counter_greater_than",
+      "cpp": "withCounterGreaterThan"
+    },
+    {
+      "source": "with_counter_greater_than_or_equal_to",
+      "cpp": "withCounterGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_counter_in",
+      "cpp": "withCounterIn"
+    },
+    {
+      "source": "with_counter_is",
+      "cpp": "withCounterIs"
+    },
+    {
+      "source": "with_counter_is_known",
+      "cpp": "withCounterIsKnown"
+    },
+    {
+      "source": "with_counter_is_not",
+      "cpp": "withCounterIsNot"
+    },
+    {
+      "source": "with_counter_is_unknown",
+      "cpp": "withCounterIsUnknown"
+    },
+    {
+      "source": "with_counter_less_than",
+      "cpp": "withCounterLessThan"
+    },
+    {
+      "source": "with_counter_less_than_or_equal_to",
+      "cpp": "withCounterLessThanOrEqualTo"
+    },
+    {
+      "source": "with_counter_not_in",
+      "cpp": "withCounterNotIn"
+    },
+    {
+      "source": "with_day",
+      "cpp": "withDay"
+    },
+    {
+      "source": "with_day_after",
+      "cpp": "withDayAfter"
+    },
+    {
+      "source": "with_day_before",
+      "cpp": "withDayBefore"
+    },
+    {
+      "source": "with_day_between",
+      "cpp": "withDayBetween"
+    },
+    {
+      "source": "with_day_between_range",
+      "cpp": "withDayBetweenRange"
+    },
+    {
+      "source": "with_day_greater_than",
+      "cpp": "withDayGreaterThan"
+    },
+    {
+      "source": "with_day_greater_than_or_equal_to",
+      "cpp": "withDayGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_day_in",
+      "cpp": "withDayIn"
+    },
+    {
+      "source": "with_day_is",
+      "cpp": "withDayIs"
+    },
+    {
+      "source": "with_day_is_known",
+      "cpp": "withDayIsKnown"
+    },
+    {
+      "source": "with_day_is_not",
+      "cpp": "withDayIsNot"
+    },
+    {
+      "source": "with_day_is_unknown",
+      "cpp": "withDayIsUnknown"
+    },
+    {
+      "source": "with_day_less_than",
+      "cpp": "withDayLessThan"
+    },
+    {
+      "source": "with_day_less_than_or_equal_to",
+      "cpp": "withDayLessThanOrEqualTo"
+    },
+    {
+      "source": "with_day_not_in",
+      "cpp": "withDayNotIn"
+    },
+    {
+      "source": "with_deleted_rows",
+      "cpp": "withDeletedRows"
+    },
+    {
+      "source": "with_height",
+      "cpp": "withHeight"
+    },
+    {
+      "source": "with_height_after",
+      "cpp": "withHeightAfter"
+    },
+    {
+      "source": "with_height_before",
+      "cpp": "withHeightBefore"
+    },
+    {
+      "source": "with_height_between",
+      "cpp": "withHeightBetween"
+    },
+    {
+      "source": "with_height_between_range",
+      "cpp": "withHeightBetweenRange"
+    },
+    {
+      "source": "with_height_greater_than",
+      "cpp": "withHeightGreaterThan"
+    },
+    {
+      "source": "with_height_greater_than_or_equal_to",
+      "cpp": "withHeightGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_height_in",
+      "cpp": "withHeightIn"
+    },
+    {
+      "source": "with_height_is",
+      "cpp": "withHeightIs"
+    },
+    {
+      "source": "with_height_is_known",
+      "cpp": "withHeightIsKnown"
+    },
+    {
+      "source": "with_height_is_not",
+      "cpp": "withHeightIsNot"
+    },
+    {
+      "source": "with_height_is_unknown",
+      "cpp": "withHeightIsUnknown"
+    },
+    {
+      "source": "with_height_less_than",
+      "cpp": "withHeightLessThan"
+    },
+    {
+      "source": "with_height_less_than_or_equal_to",
+      "cpp": "withHeightLessThanOrEqualTo"
+    },
+    {
+      "source": "with_height_not_in",
+      "cpp": "withHeightNotIn"
+    },
+    {
+      "source": "with_id",
+      "cpp": "withId"
+    },
+    {
+      "source": "with_id_in",
+      "cpp": "withIdIn"
+    },
+    {
+      "source": "with_id_is",
+      "cpp": "withIdIs"
+    },
+    {
+      "source": "with_id_is_not",
+      "cpp": "withIdIsNot"
+    },
+    {
+      "source": "with_id_not_in",
+      "cpp": "withIdNotIn"
+    },
+    {
+      "source": "with_label",
+      "cpp": "withLabel"
+    },
+    {
+      "source": "with_label_after",
+      "cpp": "withLabelAfter"
+    },
+    {
+      "source": "with_label_before",
+      "cpp": "withLabelBefore"
+    },
+    {
+      "source": "with_label_between",
+      "cpp": "withLabelBetween"
+    },
+    {
+      "source": "with_label_between_range",
+      "cpp": "withLabelBetweenRange"
+    },
+    {
+      "source": "with_label_containing",
+      "cpp": "withLabelContaining"
+    },
+    {
+      "source": "with_label_ending_with",
+      "cpp": "withLabelEndingWith"
+    },
+    {
+      "source": "with_label_greater_than",
+      "cpp": "withLabelGreaterThan"
+    },
+    {
+      "source": "with_label_greater_than_or_equal_to",
+      "cpp": "withLabelGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_label_in",
+      "cpp": "withLabelIn"
+    },
+    {
+      "source": "with_label_is",
+      "cpp": "withLabelIs"
+    },
+    {
+      "source": "with_label_is_known",
+      "cpp": "withLabelIsKnown"
+    },
+    {
+      "source": "with_label_is_not",
+      "cpp": "withLabelIsNot"
+    },
+    {
+      "source": "with_label_is_unknown",
+      "cpp": "withLabelIsUnknown"
+    },
+    {
+      "source": "with_label_less_than",
+      "cpp": "withLabelLessThan"
+    },
+    {
+      "source": "with_label_less_than_or_equal_to",
+      "cpp": "withLabelLessThanOrEqualTo"
+    },
+    {
+      "source": "with_label_not_containing",
+      "cpp": "withLabelNotContaining"
+    },
+    {
+      "source": "with_label_not_ending_with",
+      "cpp": "withLabelNotEndingWith"
+    },
+    {
+      "source": "with_label_not_in",
+      "cpp": "withLabelNotIn"
+    },
+    {
+      "source": "with_label_not_starting_with",
+      "cpp": "withLabelNotStartingWith"
+    },
+    {
+      "source": "with_label_sounding_like",
+      "cpp": "withLabelSoundingLike"
+    },
+    {
+      "source": "with_label_starting_with",
+      "cpp": "withLabelStartingWith"
+    },
+    {
+      "source": "with_moment",
+      "cpp": "withMoment"
+    },
+    {
+      "source": "with_moment_after",
+      "cpp": "withMomentAfter"
+    },
+    {
+      "source": "with_moment_before",
+      "cpp": "withMomentBefore"
+    },
+    {
+      "source": "with_moment_between",
+      "cpp": "withMomentBetween"
+    },
+    {
+      "source": "with_moment_between_range",
+      "cpp": "withMomentBetweenRange"
+    },
+    {
+      "source": "with_moment_greater_than",
+      "cpp": "withMomentGreaterThan"
+    },
+    {
+      "source": "with_moment_greater_than_or_equal_to",
+      "cpp": "withMomentGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_moment_in",
+      "cpp": "withMomentIn"
+    },
+    {
+      "source": "with_moment_is",
+      "cpp": "withMomentIs"
+    },
+    {
+      "source": "with_moment_is_known",
+      "cpp": "withMomentIsKnown"
+    },
+    {
+      "source": "with_moment_is_not",
+      "cpp": "withMomentIsNot"
+    },
+    {
+      "source": "with_moment_is_unknown",
+      "cpp": "withMomentIsUnknown"
+    },
+    {
+      "source": "with_moment_less_than",
+      "cpp": "withMomentLessThan"
+    },
+    {
+      "source": "with_moment_less_than_or_equal_to",
+      "cpp": "withMomentLessThanOrEqualTo"
+    },
+    {
+      "source": "with_moment_not_in",
+      "cpp": "withMomentNotIn"
+    },
+    {
+      "source": "with_notes",
+      "cpp": "withNotes"
+    },
+    {
+      "source": "with_notes_after",
+      "cpp": "withNotesAfter"
+    },
+    {
+      "source": "with_notes_before",
+      "cpp": "withNotesBefore"
+    },
+    {
+      "source": "with_notes_between",
+      "cpp": "withNotesBetween"
+    },
+    {
+      "source": "with_notes_between_range",
+      "cpp": "withNotesBetweenRange"
+    },
+    {
+      "source": "with_notes_greater_than",
+      "cpp": "withNotesGreaterThan"
+    },
+    {
+      "source": "with_notes_greater_than_or_equal_to",
+      "cpp": "withNotesGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_notes_in",
+      "cpp": "withNotesIn"
+    },
+    {
+      "source": "with_notes_is",
+      "cpp": "withNotesIs"
+    },
+    {
+      "source": "with_notes_is_known",
+      "cpp": "withNotesIsKnown"
+    },
+    {
+      "source": "with_notes_is_not",
+      "cpp": "withNotesIsNot"
+    },
+    {
+      "source": "with_notes_is_unknown",
+      "cpp": "withNotesIsUnknown"
+    },
+    {
+      "source": "with_notes_less_than",
+      "cpp": "withNotesLessThan"
+    },
+    {
+      "source": "with_notes_less_than_or_equal_to",
+      "cpp": "withNotesLessThanOrEqualTo"
+    },
+    {
+      "source": "with_notes_not_in",
+      "cpp": "withNotesNotIn"
+    },
+    {
+      "source": "with_optional_active_is_known",
+      "cpp": "withOptionalActiveIsKnown"
+    },
+    {
+      "source": "with_optional_active_is_unknown",
+      "cpp": "withOptionalActiveIsUnknown"
+    },
+    {
+      "source": "with_optional_amount",
+      "cpp": "withOptionalAmount"
+    },
+    {
+      "source": "with_optional_amount_after",
+      "cpp": "withOptionalAmountAfter"
+    },
+    {
+      "source": "with_optional_amount_before",
+      "cpp": "withOptionalAmountBefore"
+    },
+    {
+      "source": "with_optional_amount_between",
+      "cpp": "withOptionalAmountBetween"
+    },
+    {
+      "source": "with_optional_amount_between_range",
+      "cpp": "withOptionalAmountBetweenRange"
+    },
+    {
+      "source": "with_optional_amount_greater_than",
+      "cpp": "withOptionalAmountGreaterThan"
+    },
+    {
+      "source": "with_optional_amount_greater_than_or_equal_to",
+      "cpp": "withOptionalAmountGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_optional_amount_in",
+      "cpp": "withOptionalAmountIn"
+    },
+    {
+      "source": "with_optional_amount_is",
+      "cpp": "withOptionalAmountIs"
+    },
+    {
+      "source": "with_optional_amount_is_known",
+      "cpp": "withOptionalAmountIsKnown"
+    },
+    {
+      "source": "with_optional_amount_is_not",
+      "cpp": "withOptionalAmountIsNot"
+    },
+    {
+      "source": "with_optional_amount_is_unknown",
+      "cpp": "withOptionalAmountIsUnknown"
+    },
+    {
+      "source": "with_optional_amount_less_than",
+      "cpp": "withOptionalAmountLessThan"
+    },
+    {
+      "source": "with_optional_amount_less_than_or_equal_to",
+      "cpp": "withOptionalAmountLessThanOrEqualTo"
+    },
+    {
+      "source": "with_optional_amount_not_in",
+      "cpp": "withOptionalAmountNotIn"
+    },
+    {
+      "source": "with_optional_day",
+      "cpp": "withOptionalDay"
+    },
+    {
+      "source": "with_optional_day_after",
+      "cpp": "withOptionalDayAfter"
+    },
+    {
+      "source": "with_optional_day_before",
+      "cpp": "withOptionalDayBefore"
+    },
+    {
+      "source": "with_optional_day_between",
+      "cpp": "withOptionalDayBetween"
+    },
+    {
+      "source": "with_optional_day_between_range",
+      "cpp": "withOptionalDayBetweenRange"
+    },
+    {
+      "source": "with_optional_day_greater_than",
+      "cpp": "withOptionalDayGreaterThan"
+    },
+    {
+      "source": "with_optional_day_greater_than_or_equal_to",
+      "cpp": "withOptionalDayGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_optional_day_in",
+      "cpp": "withOptionalDayIn"
+    },
+    {
+      "source": "with_optional_day_is",
+      "cpp": "withOptionalDayIs"
+    },
+    {
+      "source": "with_optional_day_is_known",
+      "cpp": "withOptionalDayIsKnown"
+    },
+    {
+      "source": "with_optional_day_is_not",
+      "cpp": "withOptionalDayIsNot"
+    },
+    {
+      "source": "with_optional_day_is_unknown",
+      "cpp": "withOptionalDayIsUnknown"
+    },
+    {
+      "source": "with_optional_day_less_than",
+      "cpp": "withOptionalDayLessThan"
+    },
+    {
+      "source": "with_optional_day_less_than_or_equal_to",
+      "cpp": "withOptionalDayLessThanOrEqualTo"
+    },
+    {
+      "source": "with_optional_day_not_in",
+      "cpp": "withOptionalDayNotIn"
+    },
+    {
+      "source": "with_optional_label",
+      "cpp": "withOptionalLabel"
+    },
+    {
+      "source": "with_optional_label_after",
+      "cpp": "withOptionalLabelAfter"
+    },
+    {
+      "source": "with_optional_label_before",
+      "cpp": "withOptionalLabelBefore"
+    },
+    {
+      "source": "with_optional_label_between",
+      "cpp": "withOptionalLabelBetween"
+    },
+    {
+      "source": "with_optional_label_between_range",
+      "cpp": "withOptionalLabelBetweenRange"
+    },
+    {
+      "source": "with_optional_label_containing",
+      "cpp": "withOptionalLabelContaining"
+    },
+    {
+      "source": "with_optional_label_ending_with",
+      "cpp": "withOptionalLabelEndingWith"
+    },
+    {
+      "source": "with_optional_label_greater_than",
+      "cpp": "withOptionalLabelGreaterThan"
+    },
+    {
+      "source": "with_optional_label_greater_than_or_equal_to",
+      "cpp": "withOptionalLabelGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_optional_label_in",
+      "cpp": "withOptionalLabelIn"
+    },
+    {
+      "source": "with_optional_label_is",
+      "cpp": "withOptionalLabelIs"
+    },
+    {
+      "source": "with_optional_label_is_known",
+      "cpp": "withOptionalLabelIsKnown"
+    },
+    {
+      "source": "with_optional_label_is_not",
+      "cpp": "withOptionalLabelIsNot"
+    },
+    {
+      "source": "with_optional_label_is_unknown",
+      "cpp": "withOptionalLabelIsUnknown"
+    },
+    {
+      "source": "with_optional_label_less_than",
+      "cpp": "withOptionalLabelLessThan"
+    },
+    {
+      "source": "with_optional_label_less_than_or_equal_to",
+      "cpp": "withOptionalLabelLessThanOrEqualTo"
+    },
+    {
+      "source": "with_optional_label_not_containing",
+      "cpp": "withOptionalLabelNotContaining"
+    },
+    {
+      "source": "with_optional_label_not_ending_with",
+      "cpp": "withOptionalLabelNotEndingWith"
+    },
+    {
+      "source": "with_optional_label_not_in",
+      "cpp": "withOptionalLabelNotIn"
+    },
+    {
+      "source": "with_optional_label_not_starting_with",
+      "cpp": "withOptionalLabelNotStartingWith"
+    },
+    {
+      "source": "with_optional_label_sounding_like",
+      "cpp": "withOptionalLabelSoundingLike"
+    },
+    {
+      "source": "with_optional_label_starting_with",
+      "cpp": "withOptionalLabelStartingWith"
+    },
+    {
+      "source": "with_optional_moment",
+      "cpp": "withOptionalMoment"
+    },
+    {
+      "source": "with_optional_moment_after",
+      "cpp": "withOptionalMomentAfter"
+    },
+    {
+      "source": "with_optional_moment_before",
+      "cpp": "withOptionalMomentBefore"
+    },
+    {
+      "source": "with_optional_moment_between",
+      "cpp": "withOptionalMomentBetween"
+    },
+    {
+      "source": "with_optional_moment_between_range",
+      "cpp": "withOptionalMomentBetweenRange"
+    },
+    {
+      "source": "with_optional_moment_greater_than",
+      "cpp": "withOptionalMomentGreaterThan"
+    },
+    {
+      "source": "with_optional_moment_greater_than_or_equal_to",
+      "cpp": "withOptionalMomentGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_optional_moment_in",
+      "cpp": "withOptionalMomentIn"
+    },
+    {
+      "source": "with_optional_moment_is",
+      "cpp": "withOptionalMomentIs"
+    },
+    {
+      "source": "with_optional_moment_is_known",
+      "cpp": "withOptionalMomentIsKnown"
+    },
+    {
+      "source": "with_optional_moment_is_not",
+      "cpp": "withOptionalMomentIsNot"
+    },
+    {
+      "source": "with_optional_moment_is_unknown",
+      "cpp": "withOptionalMomentIsUnknown"
+    },
+    {
+      "source": "with_optional_moment_less_than",
+      "cpp": "withOptionalMomentLessThan"
+    },
+    {
+      "source": "with_optional_moment_less_than_or_equal_to",
+      "cpp": "withOptionalMomentLessThanOrEqualTo"
+    },
+    {
+      "source": "with_optional_moment_not_in",
+      "cpp": "withOptionalMomentNotIn"
+    },
+    {
+      "source": "with_ratio",
+      "cpp": "withRatio"
+    },
+    {
+      "source": "with_ratio_after",
+      "cpp": "withRatioAfter"
+    },
+    {
+      "source": "with_ratio_before",
+      "cpp": "withRatioBefore"
+    },
+    {
+      "source": "with_ratio_between",
+      "cpp": "withRatioBetween"
+    },
+    {
+      "source": "with_ratio_between_range",
+      "cpp": "withRatioBetweenRange"
+    },
+    {
+      "source": "with_ratio_greater_than",
+      "cpp": "withRatioGreaterThan"
+    },
+    {
+      "source": "with_ratio_greater_than_or_equal_to",
+      "cpp": "withRatioGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_ratio_in",
+      "cpp": "withRatioIn"
+    },
+    {
+      "source": "with_ratio_is",
+      "cpp": "withRatioIs"
+    },
+    {
+      "source": "with_ratio_is_known",
+      "cpp": "withRatioIsKnown"
+    },
+    {
+      "source": "with_ratio_is_not",
+      "cpp": "withRatioIsNot"
+    },
+    {
+      "source": "with_ratio_is_unknown",
+      "cpp": "withRatioIsUnknown"
+    },
+    {
+      "source": "with_ratio_less_than",
+      "cpp": "withRatioLessThan"
+    },
+    {
+      "source": "with_ratio_less_than_or_equal_to",
+      "cpp": "withRatioLessThanOrEqualTo"
+    },
+    {
+      "source": "with_ratio_not_in",
+      "cpp": "withRatioNotIn"
+    },
+    {
+      "source": "with_secret",
+      "cpp": "withSecret"
+    },
+    {
+      "source": "with_secret_after",
+      "cpp": "withSecretAfter"
+    },
+    {
+      "source": "with_secret_before",
+      "cpp": "withSecretBefore"
+    },
+    {
+      "source": "with_secret_between",
+      "cpp": "withSecretBetween"
+    },
+    {
+      "source": "with_secret_between_range",
+      "cpp": "withSecretBetweenRange"
+    },
+    {
+      "source": "with_secret_greater_than",
+      "cpp": "withSecretGreaterThan"
+    },
+    {
+      "source": "with_secret_greater_than_or_equal_to",
+      "cpp": "withSecretGreaterThanOrEqualTo"
+    },
+    {
+      "source": "with_secret_in",
+      "cpp": "withSecretIn"
+    },
+    {
+      "source": "with_secret_is",
+      "cpp": "withSecretIs"
+    },
+    {
+      "source": "with_secret_is_known",
+      "cpp": "withSecretIsKnown"
+    },
+    {
+      "source": "with_secret_is_not",
+      "cpp": "withSecretIsNot"
+    },
+    {
+      "source": "with_secret_is_unknown",
+      "cpp": "withSecretIsUnknown"
+    },
+    {
+      "source": "with_secret_less_than",
+      "cpp": "withSecretLessThan"
+    },
+    {
+      "source": "with_secret_less_than_or_equal_to",
+      "cpp": "withSecretLessThanOrEqualTo"
+    },
+    {
+      "source": "with_secret_not_in",
+      "cpp": "withSecretNotIn"
+    },
+    {
+      "source": "with_tenant_matching",
+      "cpp": "withTenantMatching"
+    },
+    {
+      "source": "with_type_group",
+      "cpp": "withTypeGroup"
+    },
+    {
+      "source": "without_tenant_matching",
+      "cpp": "withoutTenantMatching"
+    }
+  ],
+  "missing": [
+    [
+      "filter_by_tenant",
+      "filterByTenant"
+    ],
+    [
+      "sample_population_variance_ratio",
+      "samplePopulationVarianceRatio"
+    ],
+    [
+      "sample_population_variance_ratio_as",
+      "samplePopulationVarianceRatioAs"
+    ],
+    [
+      "sample_variance_ratio",
+      "sampleVarianceRatio"
+    ],
+    [
+      "sample_variance_ratio_as",
+      "sampleVarianceRatioAs"
+    ],
+    [
+      "select_ratio_as_with_function",
+      "selectRatioAsWithFunction"
+    ],
+    [
+      "select_ratio_with_function",
+      "selectRatioWithFunction"
+    ],
+    [
+      "square_root_of_population_standard_deviation_ratio",
+      "squareRootOfPopulationStandardDeviationRatio"
+    ],
+    [
+      "square_root_of_population_standard_deviation_ratio_as",
+      "squareRootOfPopulationStandardDeviationRatioAs"
+    ],
+    [
+      "standard_deviation_ratio",
+      "standardDeviationRatio"
+    ],
+    [
+      "standard_deviation_ratio_as",
+      "standardDeviationRatioAs"
+    ]
+  ],
+  "inventory_only": true,
+  "semantic_acceptance": false
+}

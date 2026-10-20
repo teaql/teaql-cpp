@@ -1,0 +1,21 @@
+[package]
+name = "teaql_generated_state_bridge_reference_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+cpp_member_aliases_core = { package = "cpp-member-aliases-core", path = "../../generator/parity/typed_member_aliases_rust/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }

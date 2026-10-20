@@ -3,4 +3,4 @@
 from compare_values import main
 
 if __name__ == "__main__":
-    raise SystemExit(main("decimal_parsing_cases.json", "Decimal parsing"))
+    raise SystemExit(main("decimal_parsing_5_0_6_cases.json.gz", "Decimal parsing"))

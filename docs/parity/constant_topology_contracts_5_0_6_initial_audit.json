@@ -1,0 +1,845 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "cases": [
+    {
+      "case": "ordered",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "reversed",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "missing_target_one",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 1
+              },
+              {
+                "id": 33,
+                "key": "CATEGORY_C33",
+                "value": "C33",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 1
+              },
+              {
+                "id": 33,
+                "key": "CATEGORY_C33",
+                "value": "C33",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "foreign_value_one",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "self_reference",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 236
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 243
+              }
+            ]
+          }
+        ]
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "cycle_pair",
+      "rust": {
+        "generated": false,
+        "error_type": "com.skynet.codegenerator.meta.DomainGraphException",
+        "error": "KSML XML reference cycle detected. Element cycle: alpha -> beta -> alpha. The evaluator followed these XML reference attributes: /root/beta/@alpha, /root/alpha/@beta. Edit the KSML XML itself and delete at least one of those reference attributes to break the cycle. Do not merely rename the attribute. If a relationship only stores descriptive data, change its value from an entity reference such as target() to string()."
+      },
+      "cpp": {
+        "generated": false,
+        "error_type": "com.skynet.codegenerator.meta.DomainGraphException",
+        "error": "KSML XML reference cycle detected. Element cycle: alpha -> beta -> alpha. The evaluator followed these XML reference attributes: /root/beta/@alpha, /root/alpha/@beta. Edit the KSML XML itself and delete at least one of those reference attributes to break the cycle. Do not merely rename the attribute. If a relationship only stores descriptive data, change its value from an entity reference such as target() to string()."
+      }
+    },
+    {
+      "case": "cycle_three",
+      "rust": {
+        "generated": false,
+        "error_type": "com.skynet.codegenerator.meta.DomainGraphException",
+        "error": "KSML XML reference cycle detected. Element cycle: alpha -> gamma -> beta -> alpha. The evaluator followed these XML reference attributes: /root/gamma/@alpha, /root/beta/@gamma, /root/alpha/@beta. Edit the KSML XML itself and delete at least one of those reference attributes to break the cycle. Do not merely rename the attribute. If a relationship only stores descriptive data, change its value from an entity reference such as target() to string()."
+      },
+      "cpp": {
+        "generated": false,
+        "error_type": "com.skynet.codegenerator.meta.DomainGraphException",
+        "error": "KSML XML reference cycle detected. Element cycle: alpha -> gamma -> beta -> alpha. The evaluator followed these XML reference attributes: /root/gamma/@alpha, /root/beta/@gamma, /root/alpha/@beta. Edit the KSML XML itself and delete at least one of those reference attributes to break the cycle. Do not merely rename the attribute. If a relationship only stores descriptive data, change its value from an entity reference such as target() to string()."
+      }
+    },
+    {
+      "case": "depth_exceeded",
+      "rust": {
+        "generated": false,
+        "error_type": "com.skynet.codegenerator.meta.DomainGraphException",
+        "error": "The KSML XML reference graph exceeds the maximum supported depth of 20. Deepest explored element chain: platform -> node_0 -> node_1 -> node_2 -> node_3 -> node_4 -> node_5 -> node_6 -> node_7 -> node_8 -> node_9 -> node_10 -> node_11 -> node_12 -> node_13 -> node_14 -> node_15 -> node_16 -> node_17 -> node_18 -> node_19 -> node_20. XML reference attributes on this chain: /root/node_0/@parent, /root/node_1/@parent, /root/node_2/@parent, /root/node_3/@parent, /root/node_4/@parent, /root/node_5/@parent, /root/node_6/@parent, /root/node_7/@parent, /root/node_8/@parent, /root/node_9/@parent, /root/node_10/@parent, /root/node_11/@parent, /root/node_12/@parent, /root/node_13/@parent, /root/node_14/@parent, /root/node_15/@parent, /root/node_16/@parent, /root/node_17/@parent, /root/node_18/@parent, /root/node_19/@parent, /root/node_20/@parent. Edit the KSML XML itself and delete at least one nested reference attribute, or change a descriptive entity reference to string()."
+      },
+      "cpp": {
+        "generated": false,
+        "error_type": "com.skynet.codegenerator.meta.DomainGraphException",
+        "error": "The KSML XML reference graph exceeds the maximum supported depth of 20. Deepest explored element chain: platform -> node_0 -> node_1 -> node_2 -> node_3 -> node_4 -> node_5 -> node_6 -> node_7 -> node_8 -> node_9 -> node_10 -> node_11 -> node_12 -> node_13 -> node_14 -> node_15 -> node_16 -> node_17 -> node_18 -> node_19 -> node_20. XML reference attributes on this chain: /root/node_0/@parent, /root/node_1/@parent, /root/node_2/@parent, /root/node_3/@parent, /root/node_4/@parent, /root/node_5/@parent, /root/node_6/@parent, /root/node_7/@parent, /root/node_8/@parent, /root/node_9/@parent, /root/node_10/@parent, /root/node_11/@parent, /root/node_12/@parent, /root/node_13/@parent, /root/node_14/@parent, /root/node_15/@parent, /root/node_16/@parent, /root/node_17/@parent, /root/node_18/@parent, /root/node_19/@parent, /root/node_20/@parent. Edit the KSML XML itself and delete at least one nested reference attribute, or change a descriptive entity reference to string()."
+      }
+    },
+    {
+      "case": "self_reference_required",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 0,
+        "errors": []
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    },
+    {
+      "case": "optional_forward",
+      "rust": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 25
+      },
+      "rust_compile": {
+        "exit_code": 101,
+        "errors": [
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 234
+              }
+            ]
+          },
+          {
+            "code": "E0308",
+            "message": "mismatched types",
+            "primary": [
+              {
+                "file": "entity.rs",
+                "line": 241
+              }
+            ]
+          }
+        ]
+      },
+      "cpp": {
+        "metadata": [
+          {
+            "entity": "platform",
+            "constant": false,
+            "root": true
+          },
+          {
+            "entity": "category",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 1,
+                "key": "CATEGORY_C1",
+                "value": "C1",
+                "line": 1
+              },
+              {
+                "id": 22,
+                "key": "CATEGORY_C22",
+                "value": "C22",
+                "line": 2
+              }
+            ]
+          },
+          {
+            "entity": "status",
+            "constant": true,
+            "root": false,
+            "candidates": [
+              {
+                "id": 11,
+                "key": "STATUS_OPEN",
+                "value": "Open",
+                "line": 1
+              },
+              {
+                "id": 12,
+                "key": "STATUS_CLOSED",
+                "value": "Closed",
+                "line": 2
+              }
+            ]
+          }
+        ],
+        "generated": true,
+        "files": 11
+      },
+      "cpp_compile": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "scope": "Complete unchanged original/native metadata generation and full crate/umbrella compiler outcomes. Source failures are retained, not runtime parity evidence."
+}

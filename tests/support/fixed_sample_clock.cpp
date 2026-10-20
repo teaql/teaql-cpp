@@ -27,3 +27,10 @@ extern "C" int clock_gettime(clockid_t clock, timespec* result) noexcept {
     }
     return static_cast<int>(syscall(SYS_clock_gettime, clock, result));
 }
+
+extern "C" int timespec_get(timespec* result, int base) noexcept {
+    if (base != TIME_UTC) {
+        return 0;
+    }
+    return clock_gettime(CLOCK_REALTIME, result) == 0 ? TIME_UTC : 0;
+}

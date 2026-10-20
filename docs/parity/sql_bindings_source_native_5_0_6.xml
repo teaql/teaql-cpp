@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="6"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="2"
+	timestamp="2026-10-18T12:41:48"
+	>
+	<testcase name="original_sql_binding_policy_contracts" classname="original_sql_binding_policy_contracts" time="0.00623219" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="sql_query_executor_contracts" classname="sql_query_executor_contracts" time="0.087643" status="run">
+		<properties/>
+		<system-out>SQL query executor contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_dialect_contracts" classname="sql_dialect_contracts" time="0.00247838" status="run">
+		<properties/>
+		<system-out>SQL dialect contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_model_api_contracts" classname="sql_model_api_contracts" time="0.0197416" status="run">
+		<properties/>
+		<system-out>SQL model API contracts passed
+</system-out>
+	</testcase>
+	<testcase name="sql_model_api_rust_parity" classname="sql_model_api_rust_parity" time="2.31955" status="run">
+		<properties/>
+		<system-out>SQL model API 5.0.6 parity: 40/40 observations match
+</system-out>
+	</testcase>
+	<testcase name="sql_bindings_source_rust_parity" classname="sql_bindings_source_rust_parity" time="1.02891" status="run">
+		<properties/>
+		<system-out>SQL binding source parity: 1169/1169 observations match
+</system-out>
+	</testcase>
+</testsuite>

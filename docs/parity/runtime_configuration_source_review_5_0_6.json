@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_bodies": [
+    {
+      "file": "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs",
+      "method": "from_env",
+      "start_line": 22,
+      "end_line": 26,
+      "source": "    pub fn from_env() -> Result<Self, ServiceRuntimeError> {\n        Ok(Self {\n            database_url: env_value(DATABASE_URL_ENV)?,\n        })\n    }",
+      "sha256": "5fc05a3cf26b03b84ca94d67d69f0142182dde8436bce33429dabea8ba75670a"
+    },
+    {
+      "file": "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs",
+      "method": "service_runtime_from_env",
+      "start_line": 176,
+      "end_line": 178,
+      "source": "pub async fn service_runtime_from_env() -> Result<ServiceRuntime, ServiceRuntimeError> {\n    service_runtime(ServiceRuntimeConfig::from_env()?).await\n}",
+      "sha256": "a295b75322cbac6f1e56746dc956f030689075d7d78ed3a87b5906dcacf8cd6a"
+    },
+    {
+      "file": "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs",
+      "method": "service_runtime",
+      "start_line": 180,
+      "end_line": 183,
+      "source": "pub async fn service_runtime(config: ServiceRuntimeConfig) -> Result<ServiceRuntime, ServiceRuntimeError> {\n    let pool = connect_data_service_pool(&config).await?;\n    service_runtime_from_pool(pool).await\n}",
+      "sha256": "835d4a83a56afa4a4a0530d93ccd2f40538e51f024f07ea49d637a52566fd781"
+    },
+    {
+      "file": "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs",
+      "method": "service_runtime_from_pool",
+      "start_line": 185,
+      "end_line": 199,
+      "source": "pub async fn service_runtime_from_pool(pool: DataServicePool) -> Result<ServiceRuntime, ServiceRuntimeError> {\n    let mutation_executor = DataServiceMutationExecutor::new(pool);\n    let id_generator = DataServiceIdGenerator::from_executor(mutation_executor.clone());let mut context = module_with_behaviors_and_checkers().into_context();\n    context.set_internal_id_generator(id_generator);\n    context.use_sqlite_provider(mutation_executor.clone());\n    let executor = ServiceRuntimeExecutor::new(mutation_executor);\n    context.register_executor(executor.clone());\n    context.insert_resource(executor);\n\n    // SQL logging is owned by teaql-runtime. The legacy teaql-tool-core\n    // environment whitelist rejects runtime logging variables and must not\n    // gate generated application startup. Schema remains explicit.\n\n    Ok(context)\n}",
+      "sha256": "3ebe09725bd8126b3b2a11c7d1544e83bf5f65ca9c9ed7a4eb8fad9e48ca2a8f"
+    },
+    {
+      "file": "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs",
+      "method": "env_value",
+      "start_line": 203,
+      "end_line": 205,
+      "source": "fn env_value(name: &'static str) -> Result<String, ServiceRuntimeError> {\n    std::env::var(name).map_err(|source| ServiceRuntimeError::MissingEnv { name, source })\n}",
+      "sha256": "7b845c3b7e1fc1b488831fdec3fad2848b4d46515de60d4e6afcb2eb25d4b0d0"
+    },
+    {
+      "file": "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs",
+      "method": "connect_data_service_pool",
+      "start_line": 207,
+      "end_line": 214,
+      "source": "async fn connect_data_service_pool(config: &ServiceRuntimeConfig) -> Result<DataServicePool, ServiceRuntimeError> {\n    let url = &config.database_url;\n    let sanitized_url = if url.starts_with(\"sqlite:\") { url.strip_prefix(\"sqlite:\").unwrap().trim_start_matches(\"//\") } else { url };\n    let pure_file_path = sanitized_url.split('?').next().unwrap_or(sanitized_url);\n    let path = std::path::Path::new(pure_file_path);\n    if let Some(parent) = path.parent() { if !parent.as_os_str().is_empty() { std::fs::create_dir_all(parent).map_err(|e| ServiceRuntimeError::ConnectionError(e.to_string()))?; } }\n    Ok(std::sync::Arc::new(std::sync::Mutex::new(rusqlite::Connection::open(pure_file_path).map_err(|e| ServiceRuntimeError::ConnectionError(e.to_string()))?)))\n}",
+      "sha256": "0ed00d9e5d6278f9322ee7655bae4ed968354423e8d4438ab3c3fb3f622bd5b9"
+    },
+    {
+      "file": ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/naming/RustDomainNaming.java",
+      "method": "rustCrateName",
+      "start_line": 16,
+      "end_line": 22,
+      "source": "    public static String rustCrateName(Domain domain) {\n        return firstPresentAttribute(\n                domain,\n                NamingCase.toKebabCase(domain.getName()).replace('_', '-') + \"-core\",\n                \"rust_crate_name\",\n                \"rust_project_name\");\n    }",
+      "sha256": "ade455759e3107ad88fa6c2a373aaad9eecb27fa633566319950eefbc9bb76c0"
+    },
+    {
+      "file": ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/naming/RustDomainNaming.java",
+      "method": "rustModuleName",
+      "start_line": 24,
+      "end_line": 26,
+      "source": "    public static String rustModuleName(Domain domain) {\n        return rustCrateName(domain).replace('-', '_');\n    }",
+      "sha256": "e0b27d2f383ec7527bb1913836706a4225bd41a54128f04377c89bb1d202f96a"
+    },
+    {
+      "file": ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/naming/RustDomainNaming.java",
+      "method": "rustEnvPrefix",
+      "start_line": 28,
+      "end_line": 30,
+      "source": "    public static String rustEnvPrefix(Domain domain) {\n        return rustModuleName(domain).toUpperCase();\n    }",
+      "sha256": "e4add3e5296e5a08299608c858c5817e87c002e317bd883ea2e1c2534a5ddf90"
+    },
+    {
+      "file": ".reference/teaql_code_gen/model/src/main/java/com/skynet/codegenerator/naming/DataServiceNaming.java",
+      "method": "rustSqlConnectPoolCode",
+      "start_line": 402,
+      "end_line": 429,
+      "source": "    public static String rustSqlConnectPoolCode(DataService dataService) {\n        if (dataService == null || dataService.getName() == null) return null;\n        switch (dataService.getName()) {\n            case \"postgres\":\n            case \"pg\":\n                return \"    let mut pg_config = config.database_url.parse::<tokio_postgres::Config>().map_err(|e| ServiceRuntimeError::ConnectionError(e.to_string()))?;\\n\" +\n                       \"    pg_config.user(&config.database_user).password(&config.database_password);\\n\" +\n                       \"    let mgr = deadpool_postgres::Manager::new(pg_config, tokio_postgres::NoTls);\\n\" +\n                       \"    let pool = deadpool_postgres::Pool::builder(mgr).build().map_err(|e| ServiceRuntimeError::ConnectionError(e.to_string()))?;\\n\" +\n                       \"    Ok(pool)\";\n            case \"mysql\":\n                return \"    let opts = mysql_async::Opts::from_url(&config.database_url).map_err(|e| ServiceRuntimeError::ConnectionError(e.to_string()))?;\\n\" +\n                       \"    let opts = mysql_async::OptsBuilder::from_opts(opts)\\n\" +\n                       \"        .user(Some(config.database_user.clone()))\\n\" +\n                       \"        .pass(Some(config.database_password.clone()));\\n\" +\n                       \"    Ok(mysql_async::Pool::new(opts))\";\n            case \"sqlite\":\n            case \"rusqlite\":\n                return \"    let url = &config.database_url;\\n\" +\n                       \"    let sanitized_url = if url.starts_with(\\\"sqlite:\\\") { url.strip_prefix(\\\"sqlite:\\\").unwrap().trim_start_matches(\\\"//\\\") } else { url };\\n\" +\n                       \"    let pure_file_path = sanitized_url.split('?').next().unwrap_or(sanitized_url);\\n\" +\n                       \"    let path = std::path::Path::new(pure_file_path);\\n\" +\n                       \"    if let Some(parent) = path.parent() { if !parent.as_os_str().is_empty() { std::fs::create_dir_all(parent).map_err(|e| ServiceRuntimeError::ConnectionError(e.to_string()))?; } }\\n\" +\n                       \"    Ok(std::sync::Arc::new(std::sync::Mutex::new(rusqlite::Connection::open(pure_file_path).map_err(|e| ServiceRuntimeError::ConnectionError(e.to_string()))?)))\";\n            default:\n                return null;\n        }\n    }",
+      "sha256": "a072ffbe8c5b699f4694aa8dae3c936c986ab6e970e8279239fe56d18728ed0e"
+    }
+  ],
+  "cpp_configuration_gap": {
+    "file": "tests/generated_dynamic_json/include/cpp_dynamic_json/runtime.hpp",
+    "sha256": "d129f9a6542866c5a6f5dad13cdd2d8a405f4d8fc072cf4227ff3c81fa21af72",
+    "filename_assembly_present": true,
+    "separate_config_type_absent": true
+  },
+  "notice": "Complete source anchors and confirmed existing C++ filename entry. Shared configuration/URL mechanics and generated adapters remain required; source identity does not prove parity."
+}

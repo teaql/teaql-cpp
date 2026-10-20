@@ -1,0 +1,21 @@
+[package]
+name = "teaql_safe_expression_source_506"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "safe_expression_api_source_506"
+path = "../rust_field_layout/src/bin/safe_expression_api_5_0_6.rs"
+
+[[bin]]
+name = "safe_expression_empty_source_506"
+path = "../safe_expression_empty_source_5_0_6.rs"
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+serde_json = "=1.0.150"
+
+[workspace]

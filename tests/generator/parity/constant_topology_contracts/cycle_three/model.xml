@@ -1,0 +1,3 @@
+<root name="constant_topology_fixture" org="teaql" data_service="sqlite">
+<platform name="string()"/><alpha beta="beta()" code="string()" _constant="true" _identifier="code"/><beta gamma="gamma()" code="string()" _constant="true" _identifier="code"/><gamma alpha="alpha()" code="string()" _constant="true" _identifier="code"/>
+</root>

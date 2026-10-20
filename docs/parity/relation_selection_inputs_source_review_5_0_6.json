@@ -1,0 +1,52 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "methods": [
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+      "name": "select_platform_with",
+      "body": "pub fn select_platform_with(mut self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query = self.query.relation_query(\"platform\", selection.into_query());\n        self\n}",
+      "sha256": "0f715a658037d1a26b32e8215253b1d1eabd731c531a6096be16e90db75c2774"
+    },
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+      "name": "select_customer_with",
+      "body": "pub fn select_customer_with(mut self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query = self.query.relation_query(\"customer\", selection.into_query());\n        self\n}",
+      "sha256": "7fee3a798bd8faf201ec3bd77d63f0e8f8c4f9faf64c403a1774ac51c9d2e12a"
+    },
+    {
+      "source": "tests/generator/parity/dynamic_json_rust/lib/src/platform/request.rs",
+      "name": "select_person_list_with",
+      "body": "pub fn select_person_list_with(mut self, request: impl Into<QuerySelection>) -> Self {\n        let selection = request.into();\n        self.query = self.query.relation_query(\"person_list\", selection.into_query());\n        self\n}",
+      "sha256": "f040395708209cf27d68db166f837cb6db3ee1ae75c647897246af3c26781b86"
+    },
+    {
+      "source": ".reference/teaql-rs/teaql-core/src/request.rs",
+      "name": "QuerySelection::into_query",
+      "body": "pub fn into_query(self) -> SelectQuery {\n        let query = apply_relation_selections(self.query, self.relation_selections);\n        apply_runtime_metadata(query, &self.query_options, &self.child_enhancements)\n    }",
+      "sha256": "0b7271cb139e7e42c0205baf6c253fc04e52b2524e1808b09336c7f7289d418b"
+    }
+  ],
+  "stage": "Runtime, thin generated adapters and focused integration gates qualified; complete capability/phase scope remains open",
+  "files_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "03c019b40fc2ab79b645568f84b09089cd7ae010d69220e8401df6fa6fa6a57c",
+    "teaql_core/src/request.cpp": "002a0532258f2339639f0beca8b5164b15f483a02bbf5bf1c248f133d29b28e7",
+    "tests/parity/generated_relation_selection_inputs_probe.cpp": "7c076a5c08175a58022ce9f7c54746fea90315cdd43f8fa0563e1ed1b0756d3a",
+    "teaql_runtime/tests/relation_selection_input_tests.cpp": "7440bd35763f033c255c256ec171c05f1f67d6a2c9380396e8b1fb68d87e5206",
+    "tests/parity/rust_relation_selection_inputs_5_0_6/src/main.rs": "2c1000535c1ac0a5c71cb09b8be1ce9ce43e34e902188892ad15734328fff046",
+    "tests/parity/rust_relation_selection_inputs_5_0_6/Cargo.lock": "b29032470357050eb50d885e1729933880678c767f9f231122bdc50e659fadca",
+    "tests/parity/rust_relation_selection_inputs_5_0_6/src/bin/relation_selection_typing_5_0_6.rs": "6dd7aefacd76ec83332c6d7b6fb3721c15ee0dbd98cbf985a361b759caf21ebc",
+    "scripts/verify_relation_selection_inputs_5_0_6.py": "679042dfc493d3959e8e76080686a532ba2db21d445370db032dea515ae7fbfb",
+    "scripts/reproduce_cpp_contract_fixtures.py": "a39dbb8864c4d9f94b26eec89e4365d6dd1f466e0331d450c413336f726e01ac"
+  },
+  "fixture_sha256": {
+    "dynamic_json_schema.sql": "b11a024137503d0b23f205b478185e09dec7aee74b09c99f1c2cbfdf1c25e226",
+    "dynamic_json_dataset.sql": "f3c3983ddfb853fd7a86eba9352e7cb36d434107773836639d46f6673308bd59"
+  },
+  "original_typing_probe": "tests/parity/rust_relation_selection_inputs_5_0_6/src/bin/relation_selection_typing_5_0_6.rs",
+  "producer_files_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "be8ad3fe95c72fe8f8f4d8633c5b8e812ad5b55a8cd3824186df31c9a0f8f0bf",
+    "generator/src/test/java/com/skynet/codegenerator/CppGenerationTest.java": "cbadf83cb11c289e87ca12febe9cdcad60d57ce6fc6e34687f08a333d31e5d1d"
+  },
+  "source_template_sha256": "d886a74d7636d774cd1744f4a4b78ca783a435cd89bb3719ec1cf9f6b344bc59"
+}

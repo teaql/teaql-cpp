@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "status": "declared_inherited_sample_matrix_verified",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "configurations": 92,
+  "invocations": 144,
+  "ordered_sql_diagnostics": 26868,
+  "rejected_invocations": 12,
+  "post_round_business_row_observations": 11808,
+  "unique_created_entity_count_claimed": false,
+  "smoke_configurations": 8,
+  "smoke_sql_records": 1472,
+  "profiles": {
+    "native": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 591: inherited_sample_execution_rust_parity\n1/1 Test #591: inherited_sample_execution_rust_parity ...   Passed   87.69 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  87.70 sec\n",
+      "sha256": "3f785531a08adfc485bedb9bff0088ec2c805353a9278d7ff8edb21fca08b34e"
+    },
+    "native_regression": {
+      "passed": 2,
+      "total": 2,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 594: generated_sample_save_async_contracts\n    Start 590: generated_sample_execution_contracts\n1/2 Test #590: generated_sample_execution_contracts ....   Passed    1.32 sec\n2/2 Test #594: generated_sample_save_async_contracts ...   Passed    2.48 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   2.50 sec\n",
+      "sha256": "b273eb88c412ee588d66540429dc11dfd53bf55849a5ac592edb8710bc839e01"
+    },
+    "module": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 894: module_inherited_sample_execution_rust_parity\n1/1 Test #894: module_inherited_sample_execution_rust_parity ...   Passed  109.03 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) = 109.05 sec\n",
+      "sha256": "0e67f29e149529d6f322d7cf918a3770001fac1f5212c80d84102eef17e4c3f5"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 591: inherited_sample_execution_rust_parity\n1/1 Test #591: inherited_sample_execution_rust_parity ...   Passed  334.17 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) = 334.19 sec\n",
+      "sha256": "7a22624aa0e5e63c1d3298eca8d84d0f37da4739557d56b45adb639e646893eb"
+    }
+  },
+  "canonical_bodies": 621,
+  "format_cpp_count": 1411,
+  "exports": 1483,
+  "default_pmr_disabled": true,
+  "actual_user_deletion": true,
+  "live_user_bytes_zero_after_each_case": true,
+  "reference_dependency_versions_and_registry_checksums_preserved": true,
+  "original_generated_bodies_changed": false,
+  "production_runtime_changed": false,
+  "generator_changed": false,
+  "complete_capability_acceptance": false,
+  "complete_phase_acceptance": false,
+  "complete_generator_acceptance": false,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "normalization": "none; only started_at/ended_at/elapsed nondeterministic clocks omitted",
+  "hashes": {
+    "docs/inherited_sample_execution_5_0_6.md": "6be2c6ed25925649f9c2b5dd79c277b1b44a304192ba99a207c29c9cd6562c2f",
+    "docs/parity/inherited_sample_source_5_0_6.json.gz": "4f0c4039d0293c1776b83fd1708dcfb59339479aacf225ac9dad07d352d77e21",
+    "docs/parity/inherited_sample_smoke_5_0_6.json.gz": "ca609905fffaa099fc76568d2ef68ff6644bcffa81c49126a8370386e77aa7d5",
+    "docs/parity/inherited_sample_validation_5_0_6.json.gz": "00da80c23052091c07d855c5e4b012deccb37291fe5e5004feec37afd0e28b2a",
+    "docs/parity/inherited_sample_initial_validation_5_0_6.json.gz": "e7033bae058586fda69871d60ae59194e1bf0630f21685b97ef30e76b5c41a55",
+    "docs/parity/inherited_sample_cpp_initial_validation_5_0_6.json.gz": "2ffe80c1fe556328b655567db7881a47b7c5a0dd347b19dbe71eb5b0113d7071",
+    "docs/parity/inherited_sample_writer_initial_validation_5_0_6.json.gz": "7f73d4cffdaeb9fde29e8c28d6d546623944a77870a6feb32a9714c7ba60617d",
+    "tests/parity/inherited_sample_execution_5_0_6_cases.json.gz": "67bf06304800c186096a2bd9b2c43fe77969ae9a24b784ba8fc014f9d1ec5692",
+    "tests/parity/compare_inherited_sample_execution_5_0_6.py": "6eb1254399689d2da7524453d7c4e5af51288c6ac43986966dd9ea0a01fe90b4",
+    "tests/parity/inherited_sample_execution_probe.cpp": "7dddc4216d0210c6a40a31e5a224a55e61153b01e4f88f2f42b55a13413baf72",
+    "tests/parity/rust_inherited_sample_5_0_6/Cargo.toml": "19e5bd74b3bd664d7a4239d19bc66f301b8c3c9f3d33eabfbb869913fa510457",
+    "tests/parity/rust_inherited_sample_5_0_6/Cargo.lock": "e80a16a519c7f76cb9bb30aa855882dcf0134efba9d5a4c74f9b8b47999ad9f6",
+    "tests/parity/rust_inherited_sample_5_0_6/src/main.rs": "8a25a9477d8aea088e84712cad248e9ee73ae8862b8505cfc13beb0e620ba672",
+    "modules/contracts.json": "a7572a46b3455bdb08fa766f70b426877513563206cce698604212b33860cbbe",
+    "tests/generator/parity/inheritance_rust/PROVENANCE.json": "e1cddd3817c7f3e3d8465e6830d3d3e89fdea47741cf80e9ad527fab8579560b"
+  }
+}

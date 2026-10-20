@@ -88,6 +88,7 @@ public:
     }
 
     static Result<Platform, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -246,6 +247,7 @@ public:
     }
 
     static Result<Specialist, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -466,6 +468,7 @@ public:
     }
 
     static Result<School, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -718,6 +721,7 @@ public:
     }
 
     static Result<Academy, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -996,6 +1000,7 @@ public:
     }
 
     static Result<ResearchAcademy, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -1282,6 +1287,7 @@ public:
     }
 
     static Result<Enrollment, EntityError> from_compact_row(Memory, CompactRow);
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const;
     MutationValues into_values() &&;
     void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
@@ -1451,6 +1457,35 @@ inline eval::EvalResult<EntityListBorrow<School>> Platform::evalSchoolList() con
     return GeneratedRelationAccess::list(*this, schoolList(), "school_list");
 }
 
+inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.reverse_many<Specialist>("specialist_list", load_state.is_loaded("specialist_list"));
+    projection.reverse_many<School>("school_list", load_state.is_loaded("school_list"));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void Platform::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
 }
@@ -1513,17 +1548,20 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
@@ -1612,6 +1650,53 @@ inline eval::EvalResult<EntityListBorrow<School>> Specialist::evalSchoolList() c
     return GeneratedRelationAccess::list(*this, schoolList(), "school_list");
 }
 
+inline std::optional<Json> Specialist::borrowed_json(Memory r,
+                                                     EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "platform_id",
+        [&] {
+            return generated_detail::encode(r, platform_id_);
+        },
+        load_state.is_loaded("platform_id"),
+        false);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "active",
+        [&] {
+            return generated_detail::encode(r, active_);
+        },
+        load_state.is_loaded("active"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.forward<Platform>("platform",
+                                 platform_ ? &*platform_ : nullptr,
+                                 load_state.is_loaded("platform"),
+                                 generated_detail::encode(r, platform_id_));
+    projection.reverse_many<School>("school_list", load_state.is_loaded("school_list"));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void Specialist::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
     if (platform_) {
@@ -1690,27 +1775,30 @@ inline Result<Specialist, EntityError> Specialist::from_compact_row(Memory r, Co
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto platform_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "platform_id", "platform", true);
+    auto platform_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "platform_id", "platform", true, field_layout_binding);
     if (!platform_id_lookup) {
         return Outcome::err(r, std::move(platform_id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto active_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "active", "active", false);
+    auto active_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "active", "active", false, field_layout_binding);
     if (!active_lookup) {
         return Outcome::err(r, std::move(active_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
@@ -1854,6 +1942,63 @@ inline eval::EvalResult<EntityListBorrow<Enrollment>> School::evalEnrollmentList
     return GeneratedRelationAccess::list(*this, enrollmentList(), "enrollment_list");
 }
 
+inline std::optional<Json> School::borrowed_json(Memory r, EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "platform_id",
+        [&] {
+            return generated_detail::encode(r, platform_id_);
+        },
+        load_state.is_loaded("platform_id"),
+        false);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "rank",
+        [&] {
+            return generated_detail::encode(r, rank_);
+        },
+        load_state.is_loaded("rank"),
+        false);
+    projection.field(
+        "advisor_id",
+        [&] {
+            return generated_detail::encode(r, advisor_id_);
+        },
+        load_state.is_loaded("advisor_id"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.forward<Platform>("platform",
+                                 platform_ ? &*platform_ : nullptr,
+                                 load_state.is_loaded("platform"),
+                                 generated_detail::encode(r, platform_id_));
+    projection.forward<Specialist>("advisor",
+                                   advisor_ ? &*advisor_ : nullptr,
+                                   load_state.is_loaded("advisor"),
+                                   generated_detail::encode(r, advisor_id_));
+    projection.reverse_many<Enrollment>("enrollment_list", load_state.is_loaded("enrollment_list"));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void School::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
     if (platform_) {
@@ -1949,32 +2094,35 @@ inline Result<School, EntityError> School::from_compact_row(Memory r, CompactRow
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto platform_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "platform_id", "platform", true);
+    auto platform_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "platform_id", "platform", true, field_layout_binding);
     if (!platform_id_lookup) {
         return Outcome::err(r, std::move(platform_id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto rank_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "rank", "rank", false);
+    auto rank_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "rank", "rank", false, field_layout_binding);
     if (!rank_lookup) {
         return Outcome::err(r, std::move(rank_lookup).error());
     }
-    auto advisor_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "advisor_id", "advisor", true);
+    auto advisor_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "advisor_id", "advisor", true, field_layout_binding);
     if (!advisor_id_lookup) {
         return Outcome::err(r, std::move(advisor_id_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
@@ -2123,6 +2271,69 @@ inline eval::EvalResult<EntityBorrow<Specialist>> Academy::evalAdvisor() const {
         memory_resource(), "advisor", advisor(), is_loaded("advisor_id") && !advisorId());
 }
 
+inline std::optional<Json> Academy::borrowed_json(Memory r, EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "platform_id",
+        [&] {
+            return generated_detail::encode(r, platform_id_);
+        },
+        load_state.is_loaded("platform_id"),
+        false);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "rank",
+        [&] {
+            return generated_detail::encode(r, rank_);
+        },
+        load_state.is_loaded("rank"),
+        false);
+    projection.field(
+        "advisor_id",
+        [&] {
+            return generated_detail::encode(r, advisor_id_);
+        },
+        load_state.is_loaded("advisor_id"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.field(
+        "campus_code",
+        [&] {
+            return generated_detail::encode(r, campus_code_);
+        },
+        load_state.is_loaded("campus_code"),
+        false);
+    projection.dynamic(dynamic);
+    projection.forward<Platform>("platform",
+                                 platform_ ? &*platform_ : nullptr,
+                                 load_state.is_loaded("platform"),
+                                 generated_detail::encode(r, platform_id_));
+    projection.forward<Specialist>("advisor",
+                                   advisor_ ? &*advisor_ : nullptr,
+                                   load_state.is_loaded("advisor"),
+                                   generated_detail::encode(r, advisor_id_));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void Academy::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
     if (platform_) {
@@ -2217,37 +2428,40 @@ inline Result<Academy, EntityError> Academy::from_compact_row(Memory r, CompactR
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto platform_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "platform_id", "platform", true);
+    auto platform_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "platform_id", "platform", true, field_layout_binding);
     if (!platform_id_lookup) {
         return Outcome::err(r, std::move(platform_id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto rank_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "rank", "rank", false);
+    auto rank_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "rank", "rank", false, field_layout_binding);
     if (!rank_lookup) {
         return Outcome::err(r, std::move(rank_lookup).error());
     }
-    auto advisor_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "advisor_id", "advisor", true);
+    auto advisor_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "advisor_id", "advisor", true, field_layout_binding);
     if (!advisor_id_lookup) {
         return Outcome::err(r, std::move(advisor_id_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
     auto campus_code_lookup = GeneratedRelationAccess::lookupField(
-        r, row, ENTITY_NAME, "campus_code", "campus_code", false);
+        r, row, ENTITY_NAME, "campus_code", "campus_code", false, field_layout_binding);
     if (!campus_code_lookup) {
         return Outcome::err(r, std::move(campus_code_lookup).error());
     }
@@ -2400,6 +2614,77 @@ inline eval::EvalResult<EntityBorrow<Specialist>> ResearchAcademy::evalAdvisor()
         memory_resource(), "advisor", advisor(), is_loaded("advisor_id") && !advisorId());
 }
 
+inline std::optional<Json> ResearchAcademy::borrowed_json(Memory r,
+                                                          EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "platform_id",
+        [&] {
+            return generated_detail::encode(r, platform_id_);
+        },
+        load_state.is_loaded("platform_id"),
+        false);
+    projection.field(
+        "name",
+        [&] {
+            return generated_detail::encode(r, name_);
+        },
+        load_state.is_loaded("name"),
+        false);
+    projection.field(
+        "rank",
+        [&] {
+            return generated_detail::encode(r, rank_);
+        },
+        load_state.is_loaded("rank"),
+        false);
+    projection.field(
+        "advisor_id",
+        [&] {
+            return generated_detail::encode(r, advisor_id_);
+        },
+        load_state.is_loaded("advisor_id"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.field(
+        "campus_code",
+        [&] {
+            return generated_detail::encode(r, campus_code_);
+        },
+        load_state.is_loaded("campus_code"),
+        false);
+    projection.field(
+        "budget",
+        [&] {
+            return generated_detail::encode(r, budget_);
+        },
+        load_state.is_loaded("budget"),
+        false);
+    projection.dynamic(dynamic);
+    projection.forward<Platform>("platform",
+                                 platform_ ? &*platform_ : nullptr,
+                                 load_state.is_loaded("platform"),
+                                 generated_detail::encode(r, platform_id_));
+    projection.forward<Specialist>("advisor",
+                                   advisor_ ? &*advisor_ : nullptr,
+                                   load_state.is_loaded("advisor"),
+                                   generated_detail::encode(r, advisor_id_));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void ResearchAcademy::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
     if (platform_) {
@@ -2504,42 +2789,45 @@ inline Result<ResearchAcademy, EntityError> ResearchAcademy::from_compact_row(Me
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto platform_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "platform_id", "platform", true);
+    auto platform_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "platform_id", "platform", true, field_layout_binding);
     if (!platform_id_lookup) {
         return Outcome::err(r, std::move(platform_id_lookup).error());
     }
-    auto name_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    auto name_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "name", "name", false, field_layout_binding);
     if (!name_lookup) {
         return Outcome::err(r, std::move(name_lookup).error());
     }
-    auto rank_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "rank", "rank", false);
+    auto rank_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "rank", "rank", false, field_layout_binding);
     if (!rank_lookup) {
         return Outcome::err(r, std::move(rank_lookup).error());
     }
-    auto advisor_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "advisor_id", "advisor", true);
+    auto advisor_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "advisor_id", "advisor", true, field_layout_binding);
     if (!advisor_id_lookup) {
         return Outcome::err(r, std::move(advisor_id_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }
     auto campus_code_lookup = GeneratedRelationAccess::lookupField(
-        r, row, ENTITY_NAME, "campus_code", "campus_code", false);
+        r, row, ENTITY_NAME, "campus_code", "campus_code", false, field_layout_binding);
     if (!campus_code_lookup) {
         return Outcome::err(r, std::move(campus_code_lookup).error());
     }
-    auto budget_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "budget", "budget", false);
+    auto budget_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "budget", "budget", false, field_layout_binding);
     if (!budget_lookup) {
         return Outcome::err(r, std::move(budget_lookup).error());
     }
@@ -2679,6 +2967,45 @@ inline eval::EvalResult<EntityBorrow<School>> Enrollment::evalSchool() const {
     return GeneratedRelationAccess::object(memory_resource(), "school", school(), false);
 }
 
+inline std::optional<Json> Enrollment::borrowed_json(Memory r,
+                                                     EntityJsonTraversal& traversal) const {
+    GeneratedEntityJson projection(r, traversal, ENTITY_NAME, this, root, id_for_runtime());
+    projection.field(
+        "id",
+        [&] {
+            return generated_detail::encode(r, id_);
+        },
+        load_state.is_loaded("id"),
+        true);
+    projection.field(
+        "school_id",
+        [&] {
+            return generated_detail::encode(r, school_id_);
+        },
+        load_state.is_loaded("school_id"),
+        false);
+    projection.field(
+        "note",
+        [&] {
+            return generated_detail::encode(r, note_);
+        },
+        load_state.is_loaded("note"),
+        false);
+    projection.field(
+        "version",
+        [&] {
+            return generated_detail::encode(r, version_);
+        },
+        load_state.is_loaded("version"),
+        true);
+    projection.dynamic(dynamic);
+    projection.forward<School>("school",
+                               school_ ? &*school_ : nullptr,
+                               load_state.is_loaded("school"),
+                               generated_detail::encode(r, school_id_));
+    return projection.finish(dynamic_field_values());
+}
+
 inline void Enrollment::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
     root.attach_runtime_state(target);
     if (school_) {
@@ -2743,22 +3070,25 @@ inline Result<Enrollment, EntityError> Enrollment::from_compact_row(Memory r, Co
     if (!captured) {
         return Outcome::err(r, std::move(captured).error());
     }
-    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    ArenaBorrow<FieldLayout> field_layout_binding(
+        std::allocator_arg, Allocator(r), field_layout(r));
+    auto id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "id", "id", false, field_layout_binding);
     if (!id_lookup) {
         return Outcome::err(r, std::move(id_lookup).error());
     }
-    auto school_id_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "school_id", "school", true);
+    auto school_id_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "school_id", "school", true, field_layout_binding);
     if (!school_id_lookup) {
         return Outcome::err(r, std::move(school_id_lookup).error());
     }
-    auto note_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "note", "note", false);
+    auto note_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "note", "note", false, field_layout_binding);
     if (!note_lookup) {
         return Outcome::err(r, std::move(note_lookup).error());
     }
-    auto version_lookup =
-        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    auto version_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "version", "version", false, field_layout_binding);
     if (!version_lookup) {
         return Outcome::err(r, std::move(version_lookup).error());
     }

@@ -1,0 +1,47 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "previous_review": "docs/parity/execution_responsibility_after_lookup_results_5_0_6.json",
+  "previous_review_sha256": "13484e253c4c2ab34dc9546f0609a1ad20e98dcea176c24793a9afdc220602cc",
+  "source_path": ".reference/teaql-rs/teaql-core/src/query.rs",
+  "source_sha256": "02fd38d61f2505cb7cafe74c383ca03cccbc5aab633982900bd167b55f65194f",
+  "option_types_and_constructors": {
+    "start_line": 371,
+    "end_line": 425,
+    "text": "#[derive(Debug, Clone, PartialEq, Eq)]\npub struct ContinuousPageFetchOptions {\n    pub namespace: String,\n    pub ttl_seconds: u64,\n}\n\n#[derive(Debug, Clone, PartialEq, Eq)]\npub struct IdSetPaginationOptions {\n    pub namespace: String,\n    pub ttl_seconds: u64,\n    pub max_ids: u64,\n}\n\nimpl IdSetPaginationOptions {\n    pub const DEFAULT_TTL_SECONDS: u64 = 600;\n    pub const DEFAULT_MAX_IDS: u64 = 3_000_000;\n\n    pub fn new(namespace: impl Into<String>, ttl_seconds: u64, max_ids: u64) -> Self {\n        let namespace = namespace.into();\n        assert!(\n            !namespace.trim().is_empty(),\n            \"ID set pagination namespace must not be empty\"\n        );\n        assert!(\n            ttl_seconds > 0,\n            \"ID set pagination ttl_seconds must be positive\"\n        );\n        assert!(max_ids > 0, \"ID set pagination max_ids must be positive\");\n        Self {\n            namespace,\n            ttl_seconds,\n            max_ids,\n        }\n    }\n}\n\nimpl ContinuousPageFetchOptions {\n    pub const DEFAULT_TTL_SECONDS: u64 = 600;\n\n    pub fn new(namespace: impl Into<String>, ttl_seconds: u64) -> Self {\n        let namespace = namespace.into();\n        assert!(\n            !namespace.trim().is_empty(),\n            \"continuous page namespace must not be empty\"\n        );\n        assert!(\n            ttl_seconds > 0,\n            \"continuous page ttl_seconds must be positive\"\n        );\n        Self {\n            namespace,\n            ttl_seconds,\n        }\n    }\n}\n",
+    "sha256": "cc8ebe39e064f22e35394188870de5f431671a8b1d58158a76fc11a65b04fa0d"
+  },
+  "core_configuration_methods": {
+    "start_line": 843,
+    "end_line": 878,
+    "text": "    pub fn optimize_for_continuous_page_fetch(mut self) -> Self {\n        self.continuous_page_fetch = Some(ContinuousPageFetchOptions::new(\n            \"default\",\n            ContinuousPageFetchOptions::DEFAULT_TTL_SECONDS,\n        ));\n        self\n    }\n\n    pub fn optimize_for_continuous_page_fetch_with(\n        mut self,\n        namespace: impl Into<String>,\n        ttl_seconds: u64,\n    ) -> Self {\n        self.continuous_page_fetch = Some(ContinuousPageFetchOptions::new(namespace, ttl_seconds));\n        self\n    }\n\n    pub fn optimize_pagination_with_id_set(mut self) -> Self {\n        self.id_set_pagination = Some(IdSetPaginationOptions::new(\n            \"default\",\n            IdSetPaginationOptions::DEFAULT_TTL_SECONDS,\n            IdSetPaginationOptions::DEFAULT_MAX_IDS,\n        ));\n        self\n    }\n\n    pub fn optimize_pagination_with_id_set_config(\n        mut self,\n        namespace: impl Into<String>,\n        ttl_seconds: u64,\n        max_ids: u64,\n    ) -> Self {\n        self.id_set_pagination = Some(IdSetPaginationOptions::new(namespace, ttl_seconds, max_ids));\n        self\n    }\n\n",
+    "sha256": "11c6ac888eb67abcd3cf309395a2f6745ed4ca7e9bad9fb2e3e42e996490073a"
+  },
+  "top_n_configuration": {
+    "start_line": 887,
+    "end_line": 896,
+    "text": "    }\n\n    /// Override the provider's per-parent Top-N execution policy.\n    ///\n    /// `0` selects the window plan. A positive threshold selects bounded\n    /// probes only when the parent rows already in memory are at or below it.\n    pub fn top_n_probe_parent_threshold(mut self, threshold: usize) -> Self {\n        self.top_n_probe_parent_threshold = Some(threshold);\n        self\n    }\n",
+    "sha256": "8c619a9eb0dad44d148b01861d8cffe556f48f832a4fc134e0c40cf564a1225e"
+  },
+  "native_inputs": {
+    "teaql_core/src/query.cpp": "aa23298e9816408e61e2d0a9b1f65ccf540bea904d930145c21c69679662bd39",
+    "teaql_core/include/teaql/core/query.hpp": "c7f5294b6b91a4baf9e50e35541200f00a7b846ef07eac3c76231dc68d524ee8",
+    "teaql_runtime/include/teaql/runtime/entity_query.hpp": "27c3e82e6a1061ea53043d75dc388b698efe5fadfcbb30d4770e90eb8431f6c1",
+    "tests/generated_inheritance_graph/include/cpp_inheritance_graph/queries.hpp": "47bf47021419aa685768a3a6673914af7ee087d929780bad126c6785959170c1"
+  },
+  "delegation": "All five template bodies are retained in the prior 37-method review. They assign only core option fields; no per-model branch or provider lookup exists. Core namespace/TTL/max validation precedes option replacement. Native lvalue and rvalue facades delegate to the same core methods.",
+  "adaptations": [
+    "Native Context-bound allocation; no source ownership extension.",
+    "Rust panic maps to C++ invalid_argument. Rust observer applies each consuming operation to a clone; its prior clone survives a panic. The observer does not claim Rust can reuse a moved failed request.",
+    "Threshold is native64 usize/size_t in this comparison; MIPS was not rerun."
+  ],
+  "evidence": [
+    "tests/parity/execution_options_5_0_6_cases.json.gz",
+    "docs/parity/execution_options_initial_5_0_6.json.gz",
+    "docs/query_optimization_5_0_6.md",
+    "docs/execution_hot_cache_and_lookup_5_0_6.md",
+    "docs/deferred_id_set_page_5_0_6.md",
+    "docs/deferred_continuous_page_5_0_6.md",
+    "docs/relation_planning_extensions_5_0_6.md"
+  ]
+}

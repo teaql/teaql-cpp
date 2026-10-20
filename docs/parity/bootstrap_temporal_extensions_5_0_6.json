@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "observations": 480,
+  "rounds": 720,
+  "original_source_unchanged": true,
+  "source_manifest_sha256": "8cf3708a8d2763a636f2060973dba9f7a2c3de86c1f54cabca5209ca03c2bcda",
+  "source_lock_sha256": "b7a4e9e71cdfdcf6e843d52b18e9cf2722e34a6edab7ec622a0784d819b6cc7e",
+  "reference_lock_sha256": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+  "source_registry_versions_preserved": true,
+  "bootstrap_checker_hooks": 840,
+  "ordinary_checker_hooks": 360,
+  "ordinary_save_rejections": 120,
+  "corpus_sha256": "92537a5796829ea5ffe51224895d87acf52a300ae590615575cd79e969732530",
+  "normalization": "none",
+  "full_capability_acceptance": false,
+  "bootstrap_failures": 240,
+  "source_dependency_checksums_preserved": true,
+  "rust_observer_sha256": "6d3cfc73044ac029cef57c0db68e2470db49fc90cb81bceacc09ac9939a2af4d",
+  "cpp_observer_sha256": "9da1cda61b12af372898fa073270b7c7f3cc566e7273220143b2f5ddeeaa8b09",
+  "comparison_script_sha256": "6437ec13f22fd056f40ff5bc3a839cd7a29a8f74c204315661173b404cd9703e",
+  "profiles": {
+    "native": {
+      "passed": 1,
+      "total": 1,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 574: bootstrap_temporal_extensions_rust_parity\n1/1 Test #574: bootstrap_temporal_extensions_rust_parity ...   Passed   41.53 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  41.54 sec\n",
+      "sha256": "60914f142bcdc289f7b4da3fff27304a97e248b79eb2946d49c59075157b951b"
+    },
+    "modules": {
+      "passed": 1,
+      "total": 1,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 757: module_bootstrap_temporal_extensions_rust_parity\n1/1 Test #757: module_bootstrap_temporal_extensions_rust_parity ...   Passed   41.41 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  41.43 sec\n",
+      "sha256": "c042e788c80b8987e7f4847c5f862afaf6efcf57af5da69050ebfe5913b072a6"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 574: bootstrap_temporal_extensions_rust_parity\n1/1 Test #574: bootstrap_temporal_extensions_rust_parity ...   Passed  105.44 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) = 105.45 sec\n",
+      "sha256": "4691f5e531f28092262b56f9d4465b3960bab25b3150a7b63953d0b22d2e270f"
+    }
+  },
+  "canonical_bodies": 522,
+  "format_cpp_count": 1358,
+  "sanitizer_leak_scanning": false
+}

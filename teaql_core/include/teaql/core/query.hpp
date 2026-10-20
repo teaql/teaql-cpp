@@ -313,6 +313,7 @@ struct SelectQuery {
     SelectQuery& project_expr(std::string_view, const Expr&);
     SelectQuery& project_raw(std::string_view, std::string_view);
     SelectQuery& dynamic_property_raw(std::string_view, std::string_view);
+    SelectQuery& with_dynamic_property_definitions(const DynamicPropertyDefinitions&);
     SelectQuery& select_dynamic_fields(const DynamicFieldSelection&);
     SelectQuery& search_with_text(std::string_view);
     SelectQuery& filter(const Expr&);

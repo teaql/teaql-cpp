@@ -1,0 +1,15 @@
+{
+  "purpose": "Replay the complete retained generated-facet observer with original registry identities; both source bodies are copied byte for byte.",
+  "files": [
+    {
+      "source": "tests/parity/rust_field_layout/src/bin/generated_facets_5_0_6.rs",
+      "copy": "tests/parity/rust_dynamic_json_facets_5_0_6/src/bin/generated_facets_5_0_6.rs",
+      "sha256": "3e39d33e16dff5c3337cf96ba6b0325a6c5e6e820cd054f46dd213ded8bc9a50"
+    },
+    {
+      "source": "tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs",
+      "copy": "tests/parity/rust_dynamic_json_facets_5_0_6/src/bin/original_like_privacy_5_0_6.rs",
+      "sha256": "b293ead8f720c253047747af509a2923c7d325224677639aff40b306ecde139d"
+    }
+  ]
+}

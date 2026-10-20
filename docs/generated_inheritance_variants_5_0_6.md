@@ -1,5 +1,9 @@
 # Inheritance variants: Rust 5.0.6
 
+Current status: G04/P2 is qualified with documented language/ownership adaptations;
+normal inheritance generation is enabled. See [the final acceptance](inheritance_acceptance_5_0_6.md).
+The checkpoint status and guard statements below are retained historical evidence.
+
 Status: partial G01/G03/G04/G13 evidence. The branched scalar/clock fixture is
 source-qualified within its observed contracts. Inherited Business-ID generation
 has C++ integration evidence and an original-producer compilation defect; it is

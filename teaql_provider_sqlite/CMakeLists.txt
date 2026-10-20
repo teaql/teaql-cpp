@@ -12,6 +12,8 @@ add_library(teaql_provider_sqlite
     src/native_diagnostics.cpp
     src/simple_error.cpp
     src/from_sql_error.cpp
+    src/runtime_config.cpp
+    src/runtime_connection.cpp
 )
 add_library(teaql::provider_sqlite ALIAS teaql_provider_sqlite)
 teaql_configure_package(teaql_provider_sqlite)

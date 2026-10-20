@@ -1,0 +1,31 @@
+{
+  "source_contract": "Locked ObjectDescriptor.getPredefinedFields ancestor-first merge; RustObjectDescriptorNaming uses that collection for scalar and object request fields.",
+  "native_adapter": "CppFieldLayoutMetadata.fields shared for dynamic recipes, object analysis and Assist enumeration.",
+  "records": [
+    {
+      "fixture": "inheritance",
+      "file": "tests/generated_inheritance/include/cpp_inheritance/queries.hpp",
+      "sha256": "d162474180ece9169dac0f55fa34e5b7889dcec8ef686d23893de60199537797",
+      "inheritance_helper_used": true
+    },
+    {
+      "fixture": "inheritance_graph",
+      "file": "tests/generated_inheritance_graph/include/cpp_inheritance_graph/queries.hpp",
+      "sha256": "4e437083da7fc78e5a006104703e0a102e19b2298e3747de0876de6277bac9cf",
+      "inheritance_helper_used": true
+    },
+    {
+      "fixture": "inheritance_business_ids",
+      "file": "tests/generated_inheritance_business_ids/include/cpp_inheritance_business_ids/queries.hpp",
+      "sha256": "90ad3004767c8dc22205a90034835d6ccf21051695a8021d04230b8b2447ac6a",
+      "inheritance_helper_used": true
+    },
+    {
+      "fixture": "inheritance_variants",
+      "file": "tests/generated_inheritance_variants/include/cpp_inheritance_variants/queries.hpp",
+      "sha256": "3e0fc84d98df28a5fdcf612d80a2e3ffb3af3c264d7766a719ad5aa51d948975",
+      "inheritance_helper_used": true
+    }
+  ],
+  "scope": "Body/declaration review supplements actual source observations; no independent semantic acceptance from inventory."
+}

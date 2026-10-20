@@ -1,0 +1,26 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/parity/expression_root_contracts/model.xml",
+  "model_sha256": "26bba8202866d864e4e95c18d157564e3f79e732daa18fe8d53cbfab6767ea4e",
+  "hand_edited": false,
+  "files": {
+    "CMakeLists.txt": "0ee350a09de975e6b38dc10e58fdcd4b54dcfa3c152adfbed13fa77d9002d6b8",
+    "OBSERVATION.json": "5e229c16bc74c973fb5b9ba3f362ad1080a68758eda0712cbc7109e6aa791e19",
+    "ASSIST.md": "64a445f39305f70174064e1c2b6b5ff6f7e1a834d5f4c004c8d374e0702727a2",
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "include/cpp_expression_roots.hpp": "0a4ae7e1816a5ee462ef2dbee811534b413b206a996e2336592e2a0611a2b7e8",
+    "include/cpp_expression_roots/runtime.hpp": "b074623b3af4a668310f665d86d8a7abfcb6f8132191bd14e5140990bc4bbb7e",
+    "include/cpp_expression_roots/expressions.hpp": "e60c922f5c4d8ae5dbe1c5e65f2f55aa3d51be86e38a28caab4609d8884ba9ba",
+    "include/cpp_expression_roots/support.hpp": "602acd6ff4d0f3b4c38051e74f433104c6169dc88405389172edd5359363e241",
+    "include/cpp_expression_roots/queries.hpp": "0ea978c2c8156f184ef8afe1c2ed4c8ee100768afa3c7795e68356881a617163",
+    "include/cpp_expression_roots/sample_data.hpp": "24373c80cb5fdd3f32b00db16d3d7b774129a3e89f473ac7933e879ac65c2ede",
+    "include/cpp_expression_roots/checkers.hpp": "eb7fcc77a755f279e3a50bb8869bde72bb6a5235830f95a611f5cc12ddf5c0b7",
+    "include/cpp_expression_roots/models.hpp": "9e1a586fa51759e8895e0e60a6e8337466eb6f8ae8311e0b2133dd5da2b938c2"
+  },
+  "formatter": "18.1.8",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "48c762043ef597bd4844534a073f713bdbdd71ab13f3446a17187c03096c9f47",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "35ce5ad5564394ff2ecaa66bb1bba204d0da58919966f2920bc57d8d8d7f4307"
+  }
+}

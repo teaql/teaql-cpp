@@ -2,6 +2,9 @@
 #include <teaql/runtime/data_service.hpp>
 #include <teaql/core/request.hpp>
 #include <teaql/runtime/facet_runtime.hpp>
+#include <teaql/runtime/generated_entity_json.hpp>
+#include <teaql/runtime/generated_scalar_codec.hpp>
+#include <teaql/runtime/generated_wire_fields.hpp>
 
 namespace teaql {
 // Structural C++20 counterparts of the source query/entity service traits.

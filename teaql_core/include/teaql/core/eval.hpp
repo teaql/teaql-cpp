@@ -496,6 +496,12 @@ private:
 };
 
 inline void write_debug(DebugWriter& writer, const LoadState& state) {
+    if (state.kind() == LoadState::Kind::Indexed) {
+        writer.tuple("Indexed", [&](auto& out) {
+            teaql::write_debug(out, state.indexed_snapshot()->get());
+        });
+        return;
+    }
     if (state.kind() == LoadState::Kind::NotLoaded ||
         state.kind() == LoadState::Kind::FullyLoaded) {
         writer.raw(state.variant_name());

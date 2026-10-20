@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "observations": 7200,
+  "models": 5,
+  "statistics": {
+    "callbacks": 7200,
+    "policy_reviews": 594,
+    "errors": 2880,
+    "findings": 12072,
+    "evidence": 6400
+  },
+  "profiles": {
+    "native": {
+      "passed": 5,
+      "total": 5,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_native_current\n    Start 58: inherited_checker_helpers_document_rust_parity\n    Start 59: inherited_checker_helpers_intermediate_record_rust_parity\n    Start 60: inherited_checker_helpers_invoice_rust_parity\n    Start 61: inherited_checker_helpers_receipt_rust_parity\n1/5 Test #59: inherited_checker_helpers_intermediate_record_rust_parity ...   Passed   15.79 sec\n    Start 62: inherited_checker_helpers_special_invoice_rust_parity\n2/5 Test #58: inherited_checker_helpers_document_rust_parity ..............   Passed   16.65 sec\n3/5 Test #61: inherited_checker_helpers_receipt_rust_parity ...............   Passed   17.38 sec\n4/5 Test #60: inherited_checker_helpers_invoice_rust_parity ...............   Passed   18.64 sec\n5/5 Test #62: inherited_checker_helpers_special_invoice_rust_parity .......   Passed   12.72 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =  28.54 sec\n",
+      "sha256": "5251ba3e4c3d207f06ccc7ae2c8fde4f4ab27b3edcc44a58b9c9eeeb737bc9af"
+    },
+    "modules": {
+      "passed": 5,
+      "total": 5,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 854: module_inherited_checker_helpers_document_rust_parity\n    Start 855: module_inherited_checker_helpers_intermediate_record_rust_parity\n    Start 856: module_inherited_checker_helpers_invoice_rust_parity\n    Start 857: module_inherited_checker_helpers_receipt_rust_parity\n1/5 Test #854: module_inherited_checker_helpers_document_rust_parity ..............   Passed    9.43 sec\n    Start 858: module_inherited_checker_helpers_special_invoice_rust_parity\n2/5 Test #855: module_inherited_checker_helpers_intermediate_record_rust_parity ...   Passed    9.54 sec\n3/5 Test #856: module_inherited_checker_helpers_invoice_rust_parity ...............   Passed    9.66 sec\n4/5 Test #857: module_inherited_checker_helpers_receipt_rust_parity ...............   Passed    9.77 sec\n5/5 Test #858: module_inherited_checker_helpers_special_invoice_rust_parity .......   Passed    7.15 sec\n\n100% tests passed out of 5\n\nTotal Test time (real) =  16.60 sec\n",
+      "sha256": "f6f7a1b3cbbfe2391efc7cc185f653455a550e218c132e190899a17752a26743"
+    },
+    "sanitize": {
+      "passed": 1,
+      "total": 1,
+      "exit_code": 0,
+      "output": "Test project /home/philip/githome/teaql-cpp/build_sanitize_current\n    Start 58: inherited_checker_helpers_document_rust_parity\n1/1 Test #58: inherited_checker_helpers_document_rust_parity ...   Passed   35.67 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =  35.69 sec\n",
+      "sha256": "3f393db876b59ec2d7231d1c5233b5907ad3b3312c29ccd41a98ea54acd010b4"
+    }
+  },
+  "source_registry_versions_preserved": true,
+  "source_registry_checksums_preserved": true,
+  "original_generated_domain_provenance_sha256": "8b408c9b74717e2100d4b6cf8c3abc797dd400a8e4ba0923ece231279ce4e08d",
+  "hashes": {
+    "tests/parity/inherited_checker_helpers_5_0_6.rs": "9515723934e8b4bcd0494a103391f6ac0149dcc055c5ad57286a0cee4540b318",
+    "tests/parity/inherited_checker_helpers_probe.cpp": "b5aa1543577cd64e89fd0751f272859ce16c742043746c4733b0405c252a55ea",
+    "tests/parity/compare_inherited_checker_helpers_5_0_6.py": "2bbc243b1e2a32cf520b1831eef2989280e6c922970d49aab34822817996d336",
+    "tests/parity/rust_inherited_checker_helpers_5_0_6/Cargo.toml": "d2740b3e19b03fe5e7e5de8cf17bac661c47971c4b02b6810a4e102e477a08e5",
+    "tests/parity/rust_inherited_checker_helpers_5_0_6/Cargo.lock": "fef3bdf9692930d385435ddc61edf8b6251c48c525c06ccb87f584a45780e8ea",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/inherited_checker_helpers_5_0_6_cases.json.gz": "927f9a1ee247b5dd316f61782009a83c07feba3bbd4a8382debb86d17788f8e4"
+  },
+  "normalization": "none",
+  "actual_user_context_deletion": true,
+  "default_pmr_disabled": true,
+  "explicit_global_output_copy": true,
+  "canonical_bodies": 541,
+  "format_cpp_count": 1368,
+  "production_runtime_changed": false,
+  "generator_changed": false,
+  "original_generated_domain_changed": false,
+  "complete_capability_acceptance": false,
+  "leak_scanning": false,
+  "mips_run": false,
+  "physical_device_run": false,
+  "catalog_exports": 1479
+}

@@ -1,0 +1,26 @@
+[package]
+name = "teaql_inherited_business_extensions_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+cpp_inheritance_business_ids_core = { package = "cpp-inheritance-business-ids-core", path = "../../../build_inherited_business_binding_bridge_5_0_6/lib" }
+serde_json = "=1.0.150"
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+rusqlite = { version = "=0.40.1", features = ["bundled", "chrono", "column_decltype"] }
+chrono = "=0.4.45"
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+[[bin]]
+name="inherited_business_extensions_506"
+path="../inherited_business_extensions_5_0_6.rs"

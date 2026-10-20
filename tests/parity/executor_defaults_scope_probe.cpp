@@ -106,12 +106,41 @@ static Json evaluate(UserContext& user, const Json& input) {
     auto name = text(field(input, "name"));
     auto flags = std::get<std::uint64_t>(field(input, "flags").data);
     SelectQuery query(std::allocator_arg, Allocator(owner), name);
-    query.comment(name).purpose("inspect executor default fixture");
-    QueryRequest request(std::allocator_arg, Allocator(owner), query, flags & 1, flags & 2);
+    query.comment(name);
+    auto failure = [&](const RequestIntentError& error, std::string_view phase) {
+        auto output = detail::model_json(owner);
+        detail::model_put(output, "intent_error", error.to_string(owner));
+        detail::model_put(output, "phase", phase);
+        detail::model_put(output, "before", counters(state));
+        detail::model_put(output, "after", counters(state));
+        detail::model_put(output, "requests", Json(owner, Json::Array(owner)));
+        detail::model_put(output, "results", Json(owner, Json::Array(owner)));
+        return output;
+    };
+    auto purpose = optional(input, "purpose");
+    auto intent =
+        QueryIntent::from_optional(owner,
+                                   name,
+                                   purpose && std::holds_alternative<String>(purpose->data)
+                                       ? std::optional<std::string_view>(text(*purpose))
+                                       : std::nullopt);
+    if (!intent) {
+        return failure(intent.error(), "query");
+    }
+    QueryRequest request(
+        std::allocator_arg, Allocator(owner), query, intent.value(), flags & 1, flags & 2);
     InsertCommand insert(std::allocator_arg, Allocator(owner), name);
     insert.trace_chain.emplace_back(TraceKind::Comment, name, name, std::nullopt);
-    MutationRequest mutation(
-        std::allocator_arg, Allocator(owner), insert, "inspect executor mutation default fixture");
+    auto audit_text = optional(input, "audit");
+    auto audit =
+        MutationIntent::from_optional(owner,
+                                      audit_text && std::holds_alternative<String>(audit_text->data)
+                                          ? std::optional<std::string_view>(text(*audit_text))
+                                          : std::nullopt);
+    if (!audit) {
+        return failure(audit.error(), "mutation");
+    }
+    MutationRequest mutation(std::allocator_arg, Allocator(owner), insert, audit.value().comment());
     auto observer =
         std::make_obj_using_allocator<ExecutionObserver>(Allocator(owner), [&](ExecutionMetadata) {
             ++state.notifications;

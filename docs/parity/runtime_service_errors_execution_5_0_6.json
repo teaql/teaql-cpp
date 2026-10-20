@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "gates": {
+    "original_build_exit_code": 0,
+    "native_exit_code": 0,
+    "sanitize_exit_code": 0,
+    "source_branches": 5,
+    "default_pmr_disabled": true,
+    "actual_user_deletion": true,
+    "all_source_references_expire": true,
+    "global_typed_provider_runtime_copies": true,
+    "sanitize_leak_scanning": false
+  },
+  "files": {
+    "teaql_runtime/include/teaql/runtime/generated_service_runtime_error.hpp": "30240ddd292ed37a59c352e4c98751a9cfdd4cae2e9abca8812c49c9774f84df",
+    "teaql_runtime/tests/service_runtime_error_tests.cpp": "0dca0fb2a8d2dd4762f7b8fcf7c21510fd7e2a89a373718ff13634c17ff6df4c",
+    "teaql_runtime/include/teaql/runtime/generated_runtime_config.hpp": "22e31c503e30fbabc75bb7ff064e9f65b489f4869fe30d48a05d5c72172cae72",
+    "teaql_runtime/src/generated_runtime_config.cpp": "984ce6f338d965d0b09cf1746c1affd39b8b6e2a9dea19206b85f637daf98725"
+  },
+  "sanitize_archives": {
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_provider_sqlite/libteaql_provider_sqlite.a": "5b2df0eb807653b70af9625bc4566ccd826c19c1966d427b79730176108ecdb8",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_runtime/libteaql_runtime.a": "51a14174420ed6dd77adb1dfe3350a44b4baeb91b6e5100a23e858630ccd4ae2",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_sql/libteaql_sql.a": "749d14800dc57fc14a3752d7a73dd1dea7b42e3b559eee27c726873c01e2c2aa",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_data_service/libteaql_data_service.a": "c0bbdaf5356b0d172f6f6a3e3e648d92811c347271d6b5b6d25b408fb3f23427",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_core/libteaql_core.a": "1ab47a87704c6c158f9d4a1c5bb6119e7968b64ab150e9e397308387215fe4d2",
+    "/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_memory/libteaql_memory.a": "2a33379e7d79f5ea2d2d2a55777ae8aeee45271dbf10cbf3b9e3f2c16138ca22"
+  },
+  "scope": "Independent native/SAN targets using no-work dependency archives; compilers/linkers terminal before execution. All five original Display/Debug/source/sourceDebug values match. Carrier retains concrete provider/runtime payloads; destination copies and actual source deletion pass. Production/module/generated assembly and full G12/P6/P7 remain unqualified. Full native build1067/1067 is terminal zero; full native CTest and formatter still running."
+}

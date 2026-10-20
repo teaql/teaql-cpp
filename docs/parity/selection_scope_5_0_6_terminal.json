@@ -1,0 +1,55 @@
+{
+  "recorded_utc": "2026-10-14T19:16:31.841922+00:00",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Complete reviewed ordinary selection/removal/search/alias bodies and actual Person/Order/Product typed/compact execution. Named relation default includes deleted children; explicit child Q retains filters. Broader no-forward/inherited/constant/candidate and full phase obligations remain.",
+  "exact_original_native_sqlite_outcomes": 288,
+  "successes": 288,
+  "safe_sql_log_records": 468,
+  "typed_json_loaded_state_snapshots": 330,
+  "complete_old_general_reference_registry_replay": 892,
+  "original_registry_difference_count": 0,
+  "checks": {
+    "native": {
+      "passed": 4,
+      "selected": 4
+    },
+    "modules": {
+      "passed": 1,
+      "selected": 1
+    },
+    "sanitize": {
+      "passed": 1,
+      "selected": 1,
+      "leak_scanning": false
+    },
+    "java_tests": 57,
+    "generated_workspaces": 24,
+    "generated_workspace_files": 288,
+    "strict_contract_sdks": 44,
+    "changed_sdk_code_files": 0,
+    "changed_sdk_assist_files": 30,
+    "format_files": 1449,
+    "canonical_consumer_bodies": 665,
+    "module_exports": 1485
+  },
+  "runtime_functions_changed": false,
+  "generator_change": "Accurate named-relation/live-row filter instruction only; generated C++ code unchanged.",
+  "original_generated_or_historical_files_changed": false,
+  "raw_validation": "docs/parity/selection_scope_validation_5_0_6.json.gz",
+  "file_sha256": {
+    "tests/parity/generated_selection_scope_probe.cpp": "b0065e18baa92d9a8de4fa71ffea62395ba8d0f535ef3c995d422e7647044b2f",
+    "tests/parity/compare_generated_selection_scope_5_0_6.py": "40ad17cbdfec9cd285da19e3a184a54950a78fedd527cf70e5fd1b1f58bb3f56",
+    "tests/parity/rust_selection_scope_5_0_6/Cargo.toml": "96eb271cfb2911dbc08fc6c9d5fc619798e2ae53f0764f1493aaebe435ebea39",
+    "tests/parity/rust_selection_scope_5_0_6/Cargo.lock": "ea3fdb6c06111200c6c455cd79115fcc3f0d895fb6fdeb8561c720c145249f68",
+    "tests/parity/rust_selection_scope_5_0_6/src/main.rs": "5409ae800a900d7a54c9a7fdda2fe3c78e8970027af99fdf555c05dfe2fd7803",
+    "tests/parity/rust_selection_scope_5_0_6/src/bin/general_query_5_0_6.rs": "82144bf8bf92320c62e5f3e4800cb0a576c970a97f257aaa7ddc6234d1108d0e",
+    "tests/parity/rust_selection_scope_5_0_6/src/bin/original_like_privacy_5_0_6.rs": "b293ead8f720c253047747af509a2923c7d325224677639aff40b306ecde139d",
+    "tests/parity/generated_selection_scope_5_0_6_cases.json.gz": "df44f48a0f2bf370df85a47b75e8171074817083f3ae25fa513a1bc0728d4320",
+    "docs/parity/selection_scope_source_review_5_0_6.json": "729e9dbc4bcf150115f6a389a513ef2ed5a7772e8c692def94f389bad633cd50",
+    "docs/parity/selection_scope_sdk_assist_change_5_0_6.json": "1d18f00f2e12edc61a2a4ecb05fe5af8390e06ab9f2224fc0355d6da4e31e1fd",
+    "scripts/verify_selection_scope_5_0_6.py": "8f1b76d30c9bd1811113da89cc3f8d8f6101334a5334720fc90c096aeaa84782"
+  },
+  "complete_capability_acceptance": false,
+  "full_suite_mips_device_run": false
+}
