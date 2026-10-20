@@ -335,6 +335,20 @@
     },
     {
       "package": "teaql_runtime",
+      "stem": "transaction_send_tests",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "transaction_send_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
       "stem": "runtime_graph_tests",
       "cases": [
         {
@@ -4579,6 +4593,192 @@
           ]
         }
       ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "chrono_value_tests",
+      "source": "teaql_core/tests/chrono_value_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "chrono_value_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "datatype_debug_probe",
+      "source": "tests/parity/datatype_debug_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "dynamic_search_clone_probe",
+      "source": "tests/parity/dynamic_search_clone_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "original_core_functional_tests",
+      "source": "tests/parity/teaql_core/functional_contracts.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "original_core_functional_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "original_core_search_tests",
+      "source": "tests/parity/teaql_core/dynamic_search.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "original_core_dynamic_search_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "original_core_value_tests",
+      "source": "tests/parity/teaql_core/value_contracts.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "original_core_value_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "request_api_probe",
+      "source": "tests/parity/request_api_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "request_api_tests",
+      "source": "teaql_core/tests/request_api_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "request_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "request_helpers_probe",
+      "source": "tests/parity/request_helpers_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "request_helpers_tests",
+      "source": "teaql_core/tests/request_helpers_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "request_helpers_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "request_search_tests",
+      "source": "teaql_core/tests/request_search_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "request_search_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "smart_list_api_probe",
+      "source": "tests/parity/smart_list_api_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "smart_list_api_tests",
+      "source": "teaql_core/tests/smart_list_api_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "smart_list_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "value_api_probe",
+      "source": "tests/parity/value_api_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "value_model_tests",
+      "source": "teaql_core/tests/value_model_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "value_model_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "value_owned_api_probe",
+      "source": "tests/parity/value_owned_api_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_core",
+      "stem": "value_owned_api_tests",
+      "source": "teaql_core/tests/value_owned_api_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "value_owned_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "value_probe",
+      "source": "tests/parity/value_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
     }
   ],
   "fixtures": [

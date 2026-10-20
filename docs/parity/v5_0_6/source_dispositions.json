@@ -1082,9 +1082,16 @@
       "source_change": "changed",
       "cpp_target": "teaql_runtime/include/teaql/runtime/transaction.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned 212-line TransactionScope source responsibility is accepted after full public/private completion, trait/protocol and ownership review. Typed executor lookup, transaction-bound service/query/mutation/audited save, FnOnce output without Clone, observed metadata, commit-only deduplicated ledger clearing and rollback error precedence preserve source semantics. Installed output/error/ledger capability repairs and foreign-child cancellation pass current native/ASan-UBSan/MIPS selections, each 11/11; native/MIPS match 1,288 transaction, 16 non-Clone callback and 356 non-Clone entity-save live original observations. Latest complete native regression is 369/369. Cancellation joins child work and cleans the native transaction before actual User reclamation; explicit destination copies preserve retained Global results. This accepts this source group, not complete graph/governance/privacy or Stage 5. Physical-router testing is deferred by the user; current target acceptance uses QEMU.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "CT01-CT20: complete266-line 5.0.6 source. Preserve typed begin, transaction-bound services/query/mutation/audited Save, FnOnce move-only output, ordinary and Send entry names, operation-local audit collection, observed metadata, commit-only deduplicated ledger clearing, rollback-error precedence, post-commit AuditAfterCommit delivery and actual pending-work cleanup. Both C++ Send entries delegate existing ordinary machinery under the approved Context-owner threading adaptation without a thread-transfer guarantee. Actual reference-locked ordinary/Send entries each match68 immutable SQLite observations; positive source traits and two specific Rc non-Send refusals pass. Installed native4/imported4, 1029 canonical bodies, dedicated runtime-only links and three complete programs per frontend pass. Whole runtime/event/privacy/caller/provider and G17/P0-P7 acceptance remain independent.",
+      "evidence": [
+        "docs/transaction_scope_source_review_5_0_6.md",
+        "docs/parity/transaction_scope_source_acceptance_5_0_6.json.gz",
+        "docs/parity/transaction_send_installed_source_5_0_6.json.gz",
+        "docs/parity/transaction_send_installation_5_0_6.json.gz"
+      ],
+      "current_review": "docs/transaction_scope_source_review_5_0_6.md",
+      "acceptance_scope": "Only complete context/transaction.rs266 under CT01-CT20 and approved Context/threading adapters; no cross-thread Context, full capability or full-suite acceptance."
     },
     {
       "source": "teaql-runtime/src/data_service/base.rs",

@@ -97,6 +97,12 @@ public:
         }
     }
 
+    // C++ Context ownership adapts Rust Send/Sync; this does not transfer threads.
+    template <class T, class F>
+    AsyncOperation<Result<T, RuntimeError>>& execute_send(F&& operation) {
+        return execute<T>(std::forward<F>(operation));
+    }
+
 private:
     friend struct detail::TransactionScopeAccess;
 
@@ -491,6 +497,12 @@ private:
     AsyncOperation<R>* child_ = nullptr;
     WakeSignal::Forward forwarding_;
 };
+}
+
+template <class E, class T, class F>
+AsyncOperation<Result<T, RuntimeError>>&
+UserContext::execute_in_send_transaction(F&& operation) const {
+    return execute_in_transaction<E, T>(std::forward<F>(operation));
 }
 
 template <class E, class T, class F>

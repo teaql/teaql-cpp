@@ -1,19 +1,39 @@
 #!/usr/bin/env python3
 """Compare original typed Q lookups with shared composition or generated factories."""
 import argparse
+from contextlib import redirect_stdout
 import gzip
 import hashlib
+import importlib.util
+import io
 import itertools
 import json
 import os
 from pathlib import Path
 import sys
+import tempfile
 from compare_values import observe, same
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'scripts'))
 from verify_constant_closure_5_0_6 import registry_identities
 from verify_state_baselines_5_0_6 import versions
 CORPUS=Path(__file__).with_name('business_id_lookups_5_0_6_cases.json.gz')
+
+
+def inherited_bridge_identity():
+    """Reconstruct the guarded fixture without relying on a prior build tree."""
+    builder = ROOT / 'tests/parity/build_inherited_business_binding_bridge_5_0_6.py'
+    spec = importlib.util.spec_from_file_location('teaql_lookup_bridge_fixture', builder)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    with tempfile.TemporaryDirectory(prefix='teaql_lookup_bridge_506_') as directory:
+        module.DESTINATION = Path(directory) / 'lib'
+        with redirect_stdout(io.StringIO()):
+            module.main()
+        original = ROOT / 'tests/generator/parity/inheritance_business_ids_rust/lib'
+        assert (module.DESTINATION / 'src/q.rs').read_bytes() == (original / 'src/q.rs').read_bytes(), \
+            'Lookup source must remain original'
+        return json.loads((Path(directory) / 'provenance.json').read_text())
 
 
 def inputs():
@@ -51,10 +71,7 @@ def identity():
             assert hashlib.sha256((sdk/p).read_bytes()).hexdigest()==digest,p
         assert hashlib.sha256((ROOT/record['model']).read_bytes()).hexdigest()==record['model_sha256']
         provenance[name]=record
-    bridge=ROOT/'build_inherited_business_binding_bridge_5_0_6/lib'
-    original=ROOT/'tests/generator/parity/inheritance_business_ids_rust/lib'
-    assert (bridge/'src/q.rs').read_bytes()==(original/'src/q.rs').read_bytes(),'Lookup source must remain original'
-    bridge_record=json.loads((bridge.parent/'provenance.json').read_text())
+    bridge_record=inherited_bridge_identity()
     for name in ['tests/support/business_id_lookup_rows.sql',
                  'tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs',
                  'tests/parity/build_inherited_business_binding_bridge_5_0_6.py']:

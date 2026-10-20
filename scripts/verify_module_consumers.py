@@ -38,6 +38,12 @@ def main():
                    if record["consumer"] == entry and record.get("entry")]
         if len(matches) != 1:
             raise SystemExit(f"Missing or duplicate canonical entry view: {entry}")
+        consumer = (directory / entry).read_text()
+        prologue = consumer.split("// TEAQL canonical consumer begin\n", 1)[0]
+        imports = re.findall(r"^import ([a-z_0-9]+);$", prologue, re.M)
+        expected_import = contract.get("import_module", "teaql_provider_sqlite")
+        if imports != [expected_import]:
+            raise SystemExit(f"Incorrect contract import module: {entry}: {imports}")
     for record in manifest:
         original = (ROOT / record["source"]).read_text()
         consumer = (directory / record["consumer"]).read_text()

@@ -60,8 +60,23 @@ static void sqlite_execution() {
     events[1].sql_log.intent_redactions.extend_secrets(false, secrets);
     check(
         std::ranges::find(secrets, String("new", r)) != secrets.end() &&
-            std::ranges::find(secrets, String("INHERITED-SECRET", r)) != secrets.end(),
-        "readback preserves inherited provenance while extending current mutation binding policies");
+            std::ranges::find(secrets, String("INHERITED-SECRET", r)) == secrets.end(),
+        "guarded readback captures current bindings and omits inherited sidecars like the source");
+    events.clear();
+    auto ordinary_request = update(r);
+    ordinary_request.with_diagnostic_redactions(&inherited_privacy);
+    const auto& ordinary_failure =
+        detail::execute_mutation(
+            r, d, t, schema, cache, std::move(ordinary_request), true, observer)
+            .wait();
+    check(ordinary_failure.error().kind() == SqlExecutorError<String>::Kind::Transport &&
+              events.size() == 2 && events[1].operation == DataServiceOperation::Query,
+          "ordinary readback failure publishes the write and read diagnostics");
+    secrets.clear();
+    events[1].sql_log.intent_redactions.extend_secrets(false, secrets);
+    check(std::ranges::find(secrets, String("new", r)) != secrets.end() &&
+              std::ranges::find(secrets, String("INHERITED-SECRET", r)) != secrets.end(),
+          "ordinary readback retains inherited sidecars alongside current binding policies");
     t.fail_read = false;
     events.clear();
     MutationRequest::Batch children(r);

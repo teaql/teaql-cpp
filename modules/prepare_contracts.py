@@ -30,16 +30,15 @@ def main():
     preamble = "".join(f"#include <{header}>\n" for header in standard)
     # Preserve the platform facilities used by original identity contracts.
     preamble += "#if defined(__linux__)\n#include <sys/syscall.h>\n#include <unistd.h>\n#endif\n"
-    imports = "import teaql_provider_sqlite;\n"
     args.output.mkdir(parents=True, exist_ok=True)
     manifest = []
     prepared = {}
 
-    def adapt(source, destination, entry=False, qualified_calls=()):
+    def adapt(source, destination, entry=False, qualified_calls=(), import_module="teaql_provider_sqlite"):
         source = source.resolve()
         # The same source can be included under a macro and also provide its
         # own executable entry. Only the entry view receives an import prologue.
-        key = (source, entry)
+        key = (source, entry, import_module if entry else None)
         if key in prepared:
             return prepared[key]
         prepared[key] = destination
@@ -78,7 +77,7 @@ def main():
                     return "::" + name
 
                 text = re.sub(rf"(?<![\w:]){name}(?=\s*\()", qualify, text)
-            text = (preamble + "".join(includes) + imports +
+            text = (preamble + "".join(includes) + f"import {import_module};\n" +
                     "// TEAQL canonical consumer begin\n" + text)
         write_if_changed(destination, text)
         manifest.append({"source": str(source.relative_to(root)),
@@ -93,8 +92,12 @@ def main():
     for contract in contracts["contracts"]:
         source = (root / contract["source"] if "source" in contract else
                   root / contract["package"] / "tests" / (contract["stem"] + ".cpp"))
+        import_module = contract.get("import_module", "teaql_provider_sqlite")
+        if import_module not in {"teaql_memory", "teaql_async", "teaql_core", "teaql_data_service",
+                                 "teaql_sql", "teaql_runtime", "teaql_provider_sqlite"}:
+            raise RuntimeError(f"Unknown contract import module: {import_module}")
         adapt(source, args.output / (contract["stem"] + ".cpp"), entry=True,
-              qualified_calls=contract.get("qualified_calls", ()))
+              qualified_calls=contract.get("qualified_calls", ()), import_module=import_module)
     for example in contracts.get("examples", []):
         adapt(root / example, args.output / Path(example).name, entry=True)
     write_if_changed(args.output / "manifest.json", json.dumps(manifest, indent=2) + "\n")

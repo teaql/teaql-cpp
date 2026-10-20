@@ -1085,6 +1085,10 @@ public:
 
     template <class E, class T, class F>
     AsyncOperation<Result<T, RuntimeError>>& execute_in_transaction(F&& operation) const;
+
+    // Source Send entry; allocation and polling retain Context owner-thread rules.
+    template <class E, class T, class F>
+    AsyncOperation<Result<T, RuntimeError>>& execute_in_send_transaction(F&& operation) const;
     std::span<const GraphNode> initial_graphs() const;
     std::span<const GraphNode> root_graphs() const;
     void set_initial_graphs(std::span<const GraphNode>);

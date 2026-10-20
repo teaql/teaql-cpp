@@ -1669,6 +1669,24 @@ with the new entry. Compiler/fixture/import-guard failures remain preserved.
 Installed application, CMake configuration and the staged permanent reproduction
 command still require qualification after the epoch ends.
 
+The subsequent [installed checkpoint](transaction_scope_source_review_5_0_6.md#installed-additive-entries-2026-10-20)
+applies those eleven archived files after the full epoch terminates and its four
+failures receive separate passing follow-up. All original and staged hashes
+match. The Context/Scope adapters, runtime-only six-case unit and optional
+per-contract module selection are installed; their permanent build/execution
+and exact-source gates remain required before source promotion.
+
+Those installed gates subsequently finish successfully. The complete
+[CT01-CT20 acceptance](transaction_scope_source_review_5_0_6.md#complete-installed-source-acceptance)
+retains actual original ordinary/Send 68-per-entry outcomes, two specific source
+non-Send compiler refusals, three complete programs per native/imported frontend,
+registered native4/imported4, 1,029 canonical bodies and runtime-only dedicated
+links. All captured inputs, completed artifacts and reference identities remain
+unchanged. Only the complete 266-line Context transaction file advances: current
+source counts are **67 accepted / 55 pending / 2 excluded_external**. C++ keeps
+the approved owner-thread adaptation; no cross-thread Context, whole runtime,
+full-suite, G17 or P0-P7 acceptance is inferred.
+
 The [complete request-intent source acceptance](request_intent_acceptance_5_0_6.md)
 qualifies all RI01-RI08 responsibilities of `request_intent.rs`: 4,571 unchanged
 historical observations plus 84 lexical controls match actual exact-dependency
@@ -3365,6 +3383,40 @@ link inputs. Permanent module registration/reproduction must follow the frozen
 epoch. The source file, all six partial capabilities and every P0-P7 exit remain
 pending within their original scope; no additional sanitizer/MIPS claim is made.
 
+## Permanent core source cohort staged, 2026-10-20
+
+The [restored staged cohort](parity/core_source_staged_reconstruction_5_0_6.json.gz)
+preserves twelve complete file contents and their current/staged hashes after
+the earlier temporary working directories expired. It retains the previous
+complete Value, SmartList, request and dynamic-search reviews, thirteen exact
+matrices totaling 5,071 observations, ten complete native contract bodies and
+the real dynamic-warning subprocess check. Eighteen missing canonical module
+entries explicitly import runtime; existing entries retain their bindings.
+The reference-locked common observer manifest and lock are preserved verbatim.
+
+The new clone corpus reconstructs the original receipt's unchanged 32 inputs
+and expected observations with explicit provenance metadata; its new container
+hash is recorded rather than presented as the expired staged file's bytes.
+The original temporary qualification remains historical evidence. The restored
+permanent verifier Python-parses and provides its CLI, and the restored C++ probe
+passes the pinned formatting check. Installation, source replay, current native/
+module execution and formal source decisions are still required. This stage
+does not change live execution inputs or promote any capability/source status.
+
+The restored twelve files are subsequently installed after their complete
+original/content hash checks. The [installation receipt](parity/core_source_installation_5_0_6.json.gz)
+records the transition. The permanent original/native/imported source gate must
+finish before any of these core source groups can advance; previous temporary
+observations are not relabeled as installed execution.
+
+The [installed scoped gate](core_sources_installed_5_0_6.md) then terminates
+successfully: all thirteen original/native/imported matrices match 5,071 outcomes
+per frontend, all 23 original tests pass, and native24/imported24 include ten
+complete units and the actual warning-canary subprocess. All eighteen new links
+exclude SQLite/provider, selected final builds have no work, and all captured
+inputs/references remain unchanged. The five source files stay pending their
+explicit whole-native integration requirement; source counts remain 67/55/2.
+
 ## Complete SQLite provider root replay checkpoint
 
 The [SP01-SP30 source review](sqlite_provider_source_review_5_0_6.md)
@@ -3383,8 +3435,19 @@ Discovery is 782 native/587 imported, not full-suite acceptance.
 
 The [new whole native epoch](native_integration_5_0_6.md)
 freezes 10,653 inputs. Its complete consumer build, no-work rebuild and registry
-checks pass; full CTest is running all 782 registered tests. Its result remains
-pending.
+checks pass; full CTest terminates with **778/782** passes, four failures, no
+errors and no skips. Final input/reference checks and the no-work build pass.
+This remains a failed whole-suite epoch.
+
+The separate [four-failure follow-up](native_782_followup_5_0_6.md) passes
+native 9/9 and imported 9/9. Actual original/native/imported Entity 230 and
+Eval 18/180 replays preserve all inputs and expected outcomes before refreshing
+only the metadata-observer manifest anchor. Lookup validation reconstructs its
+unchanged adapted fixture in temporary storage; both factory and runtime forms
+retain all 528 outcomes per frontend. The SQL contract now distinguishes the
+source's guarded omission from ordinary inherited sidecar propagation. No
+production body or source-disposition verdict changes, and the failed whole
+epoch is not relabeled by this focused result.
 The containing provider source remains pending; source counts stay 66 accepted,
 56 pending and two external exclusions. All six partial capabilities and every
 P0-P7 exit remain open. No new sanitizer, MIPS, physical-device or GPU claim is
@@ -3412,3 +3475,32 @@ checks cover 1,011 canonical bodies and 1,516 exports. Discovery is 782 native/
 66 accepted/56 pending/2 external. All capability verdicts, containing-provider/
 caller responsibilities, current complete integration and every P0-P7 exit remain
 unchanged. No new whole native epoch, MIPS/device, Java or generation gate is claimed.
+
+## Current Context locking source replay
+
+The [LC01-LC14 review](context_locking_source_review_5_0_6.md) reconciles the
+complete unchanged 137-line source with the existing explicit Global namespace
+and owner-thread adaptations. Actual original/imported 222 outcomes, both exact
+original local/remote tests and imported3 pass. The initial one-of-three CTest
+selection is rejected and preserved before correcting its registered names.
+All 10,665 frozen inputs and references remain unchanged against the then-active
+whole native epoch. Source promotion still awaits complete native integration;
+no source or capability verdict changes from this scoped replay.
+
+## Installed closure metadata parser correction
+
+The [closure continuation](container_closure_5_0_6.md) reproduces nine actual
+source/current differences and repairs modifier/lifetime prefixes, parameters,
+patterns and types without evaluating expressions. Initial malformed-binder and
+byte-character/box-pattern omissions remain preserved. The final candidate and
+installed producer each match 1,763 original outcomes; six complete Java classes
+pass104 after installation. All78 active SDKs reproduce with unchanged code/
+guidance/data bytes and refreshed producer fingerprints only.
+
+The verified 784-test Ninja build is explicitly superseded for this actual
+generator correction: build130/controller1, no CTest, unchanged frozen inputs
+and references. That checkpoint remains unsuccessful. Installed generated-code
+compiler/integration gates and a fresh complete native epoch remain required.
+The five core source files and Context locking remain pending; current source
+counts stay67 accepted/55 pending/2 external. Full AP02 grammar/type binding,
+other capability decisions and complete P0-P7 exits remain open.

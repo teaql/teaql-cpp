@@ -1,0 +1,213 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Complete Value, SmartList, request-builder and UI dynamic-search source bodies; not complete core lib reexports or full generator parity",
+  "source_sha256": {
+    "teaql-core/src/value.rs": "fe0f61e499a4dcd8ac68368fb75916a47bde804aef313aa6b04d0ae0fed6c645",
+    "teaql-core/src/list.rs": "41e9033d182ba4984a0e7799df2bad28ce186a0a3c62fd433a9d76f94ff9db6e",
+    "teaql-core/src/request.rs": "87df211a8920a2d2ddd7bb7a1554f3e2e0ca246482795ab817c4d2d713ac2095",
+    "teaql-core/src/dynamic_search.rs": "ec11edc1d1c3fa03399cee06fa58f9065f989aebfd4d42c0157fd645549d5df3",
+    "teaql-core/tests/dynamic_search.rs": "cb040356bda021e1b02fc6ee9441a44d21edb81f17fbcaa50e01b2b5fde9695c"
+  },
+  "matrices": [
+    {
+      "name": "value_api",
+      "driver": "tests/parity/rust_field_layout/src/bin/value_api_5_0_6.rs",
+      "driver_sha256": "50b4a0bba0f3993f4e16e40d86f22eb76d55ee8ff825f9ceccce5201bcbc0fc9",
+      "corpus": "tests/parity/value_api_5_0_6_cases.json.gz",
+      "corpus_sha256": "b26d047a4905ed02fff7b536dd937aa8941cc2adfecf965744fcb0586d2d61da",
+      "cpp_probe": "value_api_probe",
+      "cases": 115
+    },
+    {
+      "name": "value_owned_api",
+      "driver": "tests/parity/rust_field_layout/src/bin/value_owned_api_5_0_6.rs",
+      "driver_sha256": "ec4e025742ccd776bf681396d500f410e1b359a1a15b259a3d7b0a4a3614f7c1",
+      "corpus": "tests/parity/value_owned_api_5_0_6_cases.json.gz",
+      "corpus_sha256": "94c052fbea15c18be72aad520fdd48d1b06099effda28f046497994a089fb91d",
+      "cpp_probe": "value_owned_api_probe",
+      "cases": 171
+    },
+    {
+      "name": "value",
+      "driver": "tests/parity/rust_values/src/main.rs",
+      "driver_sha256": "cbb2ea4581cd09db2074aec34552553e63efc6728fcf6f80b018201d2943e860",
+      "corpus": "tests/parity/value_5_0_6_cases.json.gz",
+      "corpus_sha256": "a206b16f4b12c852b90f4fec5b81d02a05b2c5dfdf35e254b144a824105b969b",
+      "cpp_probe": "value_probe",
+      "cases": 722
+    },
+    {
+      "name": "chrono_value",
+      "driver": "tests/parity/rust_values/src/bin/chrono_value_oracle.rs",
+      "driver_sha256": "6f64ce0520882cd4e8274794f3ab9f0701baa588d3f6a18ea42bdc0789e4f566",
+      "corpus": "tests/parity/chrono_value_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "2e4df03a6d60add3504fe273a7271c7bd8d4bedc9b9cb700dc0329f8d1f1230e",
+      "cpp_probe": "chrono_value_probe",
+      "cases": 64
+    },
+    {
+      "name": "datatype_debug",
+      "driver": "tests/parity/rust_field_layout/src/bin/datatype_debug_5_0_6.rs",
+      "driver_sha256": "5dbeb66b6676649c61e828c5c7dd2c461f1ec7d17d57d4db3720d2165db9b598",
+      "corpus": "tests/parity/datatype_debug_5_0_6_cases.json.gz",
+      "corpus_sha256": "b780fc46be517c27c63a322edada76c2917a8d8a0b8520f999c4d02b11197175",
+      "cpp_probe": "datatype_debug_probe",
+      "cases": 10
+    },
+    {
+      "name": "smart_list_api",
+      "driver": "tests/parity/rust_field_layout/src/bin/smart_list_api_5_0_6.rs",
+      "driver_sha256": "0e861c04440a560cc3e48957bb508b907a914b7433bf6daea4bf922a366594ec",
+      "corpus": "tests/parity/smart_list_api_5_0_6_cases.json.gz",
+      "corpus_sha256": "dca45afb8d9101be4beb8d0f98dc4d01055d0ba70111eb399bfab0a63ff607cc",
+      "cpp_probe": "smart_list_api_probe",
+      "cases": 1291
+    },
+    {
+      "name": "model_debug",
+      "driver": "tests/parity/rust_field_layout/src/bin/model_debug_5_0_6.rs",
+      "driver_sha256": "5484b736ed3f1166281df0d703aa7a3fbf8b5bc3242c53dd1d73f5f8cb3aa763",
+      "corpus": "tests/parity/model_debug_5_0_6_cases.json.gz",
+      "corpus_sha256": "a2a64ac6f4e2d6b9e4b77ec20bbdefa63143d03bfba37eb5731faad39efae223",
+      "cpp_probe": "model_debug_probe",
+      "cases": 169
+    },
+    {
+      "name": "request_api",
+      "driver": "tests/parity/rust_field_layout/src/bin/request_api_5_0_6.rs",
+      "driver_sha256": "013e85163ff8d2a212562c5ad87e357c2fa7fd3718d262f8952af55b8c8cd42d",
+      "corpus": "tests/parity/request_api_5_0_6_cases.json.gz",
+      "corpus_sha256": "79f1882302f83db1d1b07d12a3054de60c630f497ae52df955228d123aba9553",
+      "cpp_probe": "request_api_probe",
+      "cases": 174
+    },
+    {
+      "name": "request_helpers",
+      "driver": "tests/parity/rust_field_layout/src/bin/request_helpers_5_0_6.rs",
+      "driver_sha256": "0029f442a93b652ee238f20e6d330954af55bcaaab0d5c272a02f905be52565a",
+      "corpus": "tests/parity/request_helpers_5_0_6_cases.json.gz",
+      "corpus_sha256": "7bbe91561123580f860d95290f6beea7123ccd791befc126fcd3df005123bea4",
+      "cpp_probe": "request_helpers_probe",
+      "cases": 872
+    },
+    {
+      "name": "search",
+      "driver": "tests/parity/rust_values/src/bin/search_oracle.rs",
+      "driver_sha256": "99a8ca7f9c7c759041479d47ff4f4fe6a13c4f4b59498191386419065805f204",
+      "corpus": "tests/parity/search_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "23bfcc8578e1a8d0a44189a54860c39a705234ae8a08728710584a5c78594c8b",
+      "cpp_probe": "search_probe",
+      "cases": 509
+    },
+    {
+      "name": "core_aux_debug",
+      "driver": "tests/parity/rust_values/src/bin/core_aux_debug_oracle.rs",
+      "driver_sha256": "21aa393295495bc90ee81a12b4e3fb3ec20d9d77404e1fb3de370f3d679c2703",
+      "corpus": "tests/parity/core_aux_debug_5_0_6_cases.json.gz",
+      "corpus_sha256": "25654dd2cf61715dffa9c0a4283dbf9029b8098154d96903aaf526e266e1140f",
+      "cpp_probe": "core_aux_debug_probe",
+      "cases": 94
+    },
+    {
+      "name": "format",
+      "driver": "tests/parity/rust_values/src/main.rs",
+      "driver_sha256": "cbb2ea4581cd09db2074aec34552553e63efc6728fcf6f80b018201d2943e860",
+      "corpus": "tests/parity/format_5_0_6_cases.json.gz",
+      "corpus_sha256": "543e0e8eed89ab19cc9c53bcc0dff2e4e70945cd3766953ee9548e0b5fff65e9",
+      "cpp_probe": "value_probe",
+      "cases": 848
+    },
+    {
+      "name": "dynamic_search_clone",
+      "driver": "tests/parity/dynamic_search_clone_source_5_0_6.rs",
+      "driver_sha256": "5256ff467184bd95b2b50ab557dcaba233b1416bc03db1e06627490e422bd26f",
+      "corpus": "tests/parity/dynamic_search_clone_5_0_6_cases.json.gz",
+      "corpus_sha256": "1b70b6939c9bbf22b4cd064af5026a5a5bc78b71d1888c5d6431926dcb4e1afb",
+      "cpp_probe": "dynamic_search_clone_probe",
+      "cases": 32
+    }
+  ],
+  "units": {
+    "value_model_tests": "value_model_contracts",
+    "value_owned_api_tests": "value_owned_api_contracts",
+    "original_core_value_tests": "original_core_value_contracts",
+    "chrono_value_tests": "chrono_value_contracts",
+    "smart_list_api_tests": "smart_list_api_contracts",
+    "original_core_functional_tests": "original_core_functional_contracts",
+    "request_api_tests": "request_api_contracts",
+    "request_helpers_tests": "request_helpers_contracts",
+    "request_search_tests": "request_search_contracts",
+    "original_core_search_tests": "original_core_dynamic_search_contracts"
+  },
+  "families": {
+    "value": {
+      "matrices": [
+        "value_api",
+        "value_owned_api",
+        "value",
+        "chrono_value",
+        "datatype_debug"
+      ],
+      "units": [
+        "value_model_tests",
+        "value_owned_api_tests",
+        "original_core_value_tests",
+        "chrono_value_tests"
+      ],
+      "tests": [
+        "value_api_rust_parity",
+        "value_owned_api_rust_parity",
+        "value_rust_parity",
+        "chrono_value_rust_parity",
+        "datatype_debug_rust_parity"
+      ]
+    },
+    "smart_list": {
+      "matrices": [
+        "smart_list_api",
+        "model_debug",
+        "format"
+      ],
+      "units": [
+        "smart_list_api_tests",
+        "original_core_functional_tests"
+      ],
+      "tests": [
+        "smart_list_api_rust_parity",
+        "model_debug_rust_parity",
+        "format_rust_parity"
+      ]
+    },
+    "request": {
+      "matrices": [
+        "request_api",
+        "request_helpers"
+      ],
+      "units": [
+        "request_api_tests",
+        "request_helpers_tests"
+      ],
+      "tests": [
+        "request_api_rust_parity",
+        "request_helpers_rust_parity"
+      ]
+    },
+    "dynamic_search": {
+      "matrices": [
+        "search",
+        "core_aux_debug",
+        "dynamic_search_clone"
+      ],
+      "units": [
+        "request_search_tests",
+        "original_core_search_tests"
+      ],
+      "tests": [
+        "search_rust_parity",
+        "core_aux_debug_rust_parity",
+        "dynamic_search_clone_rust_parity",
+        "original_core_dynamic_search_warning_privacy"
+      ]
+    }
+  }
+}

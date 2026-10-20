@@ -7,10 +7,14 @@ This review covers all 266 lines of
 `teaql_runtime/include/teaql/runtime/transaction.hpp`, with its public Context
 declaration in `context.hpp`. The source file has no embedded original tests.
 
-Status: pending. The current C++ implementation already contains the new
-transaction-local audit collection and post-commit delivery. It lacks the two
-new named Send entry points. An isolated additive header repair passes without
-changing the execution inputs of the running full native epoch. Its
+Status: accepted for this complete source group under CT01-CT20 and the approved
+C++ Context-owner threading adaptation. Both named Send entries are installed
+and delegate to the existing transaction-local audit and completion machinery.
+The [installed source gate](parity/transaction_send_installed_source_5_0_6.json.gz)
+passes actual original ordinary/Send calls, compiler constraints and complete
+native/imported programs. Broader capability, integration and P0-P7 acceptance
+remain separate. The earlier isolated additive header repair passed without
+changing the execution inputs of the then-running full native epoch. Its
 [terminal shadow receipt](parity/transaction_send_shadow_5_0_6.json.gz) records
 68 exact original/shadow SQLite outcomes, both expected Rust Send refusals and
 two complete C++ move-only cleanup programs. Neither a temporary repair nor
@@ -23,7 +27,7 @@ historical 5.0.5 evidence establishes installed 5.0.6 source acceptance.
 | CT01 | Scope structure and must-use contract | A distinct `TransactionScope<E>` borrows its Context, owns access to one native transaction and remembers flushed ledger identities. C++ marks the scope `nodiscard` and prevents copying; retaining a wrapper does not retain its Context. |
 | CT02 | Private typed start | `ExecuteInTransaction::poll` requires the registered exact executor type, awaits begin, maps errors to `RuntimeError::Transaction`, then allocates the scope. Begin failure does not invoke the business callback. |
 | CT03 | Ordinary Context entry | `execute_in_transaction` stores one callback and returns a Context-bound operation. Source callback output has no Clone requirement. Ordinary source work may use a thread-local future. |
-| CT04 | New Send Context entry | Rust adds `execute_in_send_transaction`, requiring the callback's boxed future to implement Send. The current C++ name is absent; the isolated repair delegates to the existing execution implementation under the documented owner-thread adaptation. |
+| CT04 | New Send Context entry | Rust adds `execute_in_send_transaction`, requiring the callback's boxed future to implement Send. The installed C++ entry delegates to the existing execution implementation under the documented owner-thread adaptation. |
 | CT05 | Context getter and ambient execution | `context()` returns the original Context. Scope services and requests use the transaction executor. Explicitly calling the surrounding Context still uses its ambient executor; opening a scope does not install an implicit transaction into Context. |
 | CT06 | Transaction access after completion | Rust consumes `self` and takes its optional transaction at completion. C++ prevents repeat execution and later provider access using checked state and native consumed state. Repeated public completion is a C++ misuse diagnostic, not a new source Result variant. |
 | CT07 | Transaction-bound entity service | Check entity registration first, preserve `MissingEntityDataService`, then construct the service against the actual transaction. No ambient executor fallback is allowed for that service. |
@@ -32,7 +36,7 @@ historical 5.0.5 evidence establishes installed 5.0.6 source acceptance.
 | CT10 | Audited ledger save | `ScopeAuditedSave` calls the shared ledger saver with the same transaction and Context. Returned entities retain their source loading and ownership contracts. This entry does not duplicate graph persistence. |
 | CT11 | Pending ledger collection | Remember only a returned ledger, deduplicate by ledger identity and keep pending intent until commit succeeds. Rust recovers a poisoned ledger mutex; the approved C++ owner-thread profile uses a Context-owned vector rather than a separately poisonable mutex. |
 | CT12 | Ordinary scope execution | Invoke the FnOnce callback once inside transaction-local audit collection. C++ `ContextOnceFunction`, `AuditActivation` and `ScopeExecution` retain callback work across suspension without putting the queue on Context or extending Context lifetime. |
-| CT13 | New Send scope execution | Rust adds `execute_send` with the same body and completion sequence as ordinary `execute`, changing the callback future bound. The C++ named entry is absent; the isolated repair delegates to `execute<T>` without duplicating completion logic. |
+| CT13 | New Send scope execution | Rust adds `execute_send` with the same body and completion sequence as ordinary `execute`, changing the callback future bound. The installed C++ entry delegates to `execute<T>` without duplicating completion logic. |
 | CT14 | Successful completion | Consume the transaction and await commit. Only successful commit drains and clears every distinct remembered ledger. C++ holds callback output across a suspended terminal operation and supports move-only output. |
 | CT15 | Failed commit | Return the mapped transaction error before ledger clearing or audit delivery. Pending facts are discarded, and provider cleanup releases the consumed transaction. A failed commit is distinct from post-commit audit delivery failure. |
 | CT16 | Business failure and rollback | Await rollback. Successful rollback returns the original business error; failed rollback returns the exact combined operation/rollback diagnostic. Pending ledger intent remains retryable. |
@@ -141,8 +145,8 @@ successfully before the controller uses its output.
 
 The [staged patch](parity/transaction_send_staged_patch_isolated_bins_5_0_6.json.gz) preserves
 all eleven proposed file contents, original/staged hashes and reviewable diffs.
-The working copy is `/tmp/teaql_transaction_send_install_5_0_6`; nothing in that
-patch is installed while the current native epoch runs. It includes both public
+The temporary working copy was `/tmp/teaql_transaction_send_install_5_0_6`;
+nothing in that patch was installed during the native epoch. It includes both public
 entries, a six-scenario runtime unit, the original Rust callback trait fixture,
 an exact-source reproduction command, native/module registration and optional
 per-contract module selection.
@@ -183,3 +187,64 @@ permanent compiler/source reproduction, canonical module consumers and relevant
 native/module tests. No new sanitizer, MIPS, physical-device result, source
 promotion or complete G17/P0-P7 acceptance follows from this temporary check.
 Source dispositions remain 66 accepted, 56 pending and two external exclusions.
+
+## Installed additive entries, 2026-10-20
+
+The failed whole-native epoch is terminal and its separate
+[four-failure follow-up](native_782_followup_5_0_6.md) passes native 9/9 and
+imported 9/9. After that follow-up, the eleven archived files were restored from
+the immutable staged receipt. Every current original hash and restored-content
+hash matched before installation. The
+[installation receipt](parity/transaction_send_installation_5_0_6.json.gz)
+records the exact transition.
+
+The public Context and Scope entries delegate to the existing ordinary
+transaction machinery. They retain the approved owner-thread adaptation and
+make no C++ thread-transfer guarantee. The dedicated six-scenario unit imports
+and links only runtime; the optional module selection keeps existing contracts'
+provider-facade default. Installed build, source/compiler reproduction and
+module execution must finish before formal source acceptance. The archived
+temporary successes remain separate from those installed gates. Source and
+capability verdicts are unchanged at installation.
+
+Both installed selected builds now terminate successfully. The registered
+ordinary-intent, dedicated Send, full scope and full transaction-audit selection
+passes native **4/4** and imported **4/4**, without errors or skips. Both dedicated
+Send units link without the SQLite provider or SQLite itself; the imported unit
+uses `teaql_runtime`. The canonical validator accepts all **1,029** prepared
+consumer/fixture bodies. Pinned formatting and its check pass for **1,709** C++
+files. These results are retained in the installation receipt. The independent
+permanent original-source/compiler gate remains required before source promotion;
+no new whole-suite or sanitizer/MIPS result follows from these scoped tests.
+
+## Complete installed source acceptance
+
+The permanent reproduction command now finishes successfully:
+
+```bash
+source scripts/toolchains/activate.sh
+python3 scripts/verify_transaction_send_5_0_6.py \
+    --record /tmp/teaql_transaction_send_source_replay.json.gz
+```
+
+Its [terminal receipt](parity/transaction_send_installed_source_5_0_6.json.gz)
+retains all 53 executed steps. Both actual original ordinary and Send entries
+match the 68 immutable SQLite observations. Positive source compilation retains
+ordinary non-Send callbacks and Send-compatible callbacks; two negative builds
+reject an Rc held across await specifically because it cannot be sent safely.
+All 129 registry identities retain exact reference versions/checksums.
+
+Through each C++ frontend, the permanently installed entries match the same 68
+SQLite observations and pass three complete programs: the unchanged scope body,
+the unchanged transaction-audit body and the dedicated six-case move-only unit.
+The first two bodies substitute only the Context entry name. Canonical fixture
+checks, actual Context destruction, callback uniqueness, commit/rollback ordering,
+ledger clearing and committed-audit failure assertions remain active. Completed
+archives, BMIs, fixtures, all captured execution inputs and both references remain
+unchanged throughout the gate.
+
+The [acceptance decision](parity/transaction_scope_source_acceptance_5_0_6.json.gz)
+accepts exactly the complete 266-line Context transaction source under CT01-CT20.
+Source counts advance to **67 accepted / 55 pending / 2 excluded_external**.
+It does not add a C++ Send auto-trait, accept cross-thread Context use or promote
+the containing runtime, G17, other capability verdicts or complete P0-P7 exits.

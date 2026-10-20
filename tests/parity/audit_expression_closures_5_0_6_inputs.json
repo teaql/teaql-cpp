@@ -1,0 +1,982 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Actual original grammar continuation witness; not complete grammar acceptance",
+  "cases": [
+    [
+      "const_closure",
+      "17, audit_value_max_len=const || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_move_closure",
+      "17, audit_value_max_len=const move || 1, audit_value_max_len=21"
+    ],
+    [
+      "static_closure",
+      "17, audit_value_max_len=static || { yield 1; }, audit_value_max_len=21"
+    ],
+    [
+      "static_move_closure",
+      "17, audit_value_max_len=static move || { yield 1; }, audit_value_max_len=21"
+    ],
+    [
+      "static_async_closure",
+      "17, audit_value_max_len=static async || 1, audit_value_max_len=21"
+    ],
+    [
+      "hrtb_closure",
+      "17, audit_value_max_len=for<'a> |x: &'a u8| x, audit_value_max_len=21"
+    ],
+    [
+      "hrtb_move_closure",
+      "17, audit_value_max_len=for<'a> move |x: &'a u8| x, audit_value_max_len=21"
+    ],
+    [
+      "hrtb_async_closure",
+      "17, audit_value_max_len=for<'a> async |x: &'a u8| x, audit_value_max_len=21"
+    ],
+    [
+      "hrtb_const_closure",
+      "17, audit_value_max_len=for<'a> const |x: &'a u8| x, audit_value_max_len=21"
+    ],
+    [
+      "gen_block",
+      "17, audit_value_max_len=gen { yield 1; }, audit_value_max_len=21"
+    ],
+    [
+      "gen_move_block",
+      "17, audit_value_max_len=gen move { yield 1; }, audit_value_max_len=21"
+    ],
+    [
+      "async_gen_block",
+      "17, audit_value_max_len=async gen { yield 1; }, audit_value_max_len=21"
+    ],
+    [
+      "const_typed_closure",
+      "17, audit_value_max_len=const move |x: usize| -> usize { x }, audit_value_max_len=21"
+    ],
+    [
+      "bad_const_closure",
+      "17, audit_value_max_len=const || -> usize 1, audit_value_max_len=21"
+    ],
+    [
+      "bad_hrtb_closure",
+      "17, audit_value_max_len=for<'a> |x:| 1, audit_value_max_len=21"
+    ],
+    [
+      "raw_gen_struct",
+      "17, audit_value_max_len=r#gen { field: 1 }, audit_value_max_len=21"
+    ],
+    [
+      "precise_capture_type",
+      "17, reverse_relation(name=\"items\", target=\"Child\", json_type=\"impl Trait + use<'a, T>\"), audit_value_max_len=21"
+    ],
+    [
+      "hrtb_bare_fn",
+      "17, reverse_relation(name=\"items\", target=\"Child\", json_type=\"for<'a> unsafe extern \\\"C-unwind\\\" fn(&'a u8, ...) -> !\"), audit_value_max_len=21"
+    ],
+    [
+      "dyn_parenthesized_bound",
+      "17, reverse_relation(name=\"items\", target=\"Child\", json_type=\"dyn (Trait)\"), audit_value_max_len=21"
+    ],
+    [
+      "trailing_fn_args",
+      "17, reverse_relation(name=\"items\", target=\"Child\", json_type=\"fn(u8, ...,) -> u8\"), audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_0",
+      "17, audit_value_max_len=for<> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_1",
+      "17, audit_value_max_len=for<'a,> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_2",
+      "17, audit_value_max_len=for<'a: 'b> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_3",
+      "17, audit_value_max_len=for<'a: 'b + 'c, 'b> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_4",
+      "17, audit_value_max_len=for<T> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_5",
+      "17, audit_value_max_len=for<const N: usize> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_6",
+      "17, audit_value_max_len=for<T: Trait + Send> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_7",
+      "17, audit_value_max_len=for<T=usize> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_8",
+      "17, audit_value_max_len=for<const N: usize=3> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_9",
+      "17, audit_value_max_len=for<#[cfg(any())] 'a> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_10",
+      "17, audit_value_max_len=for<42> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_11",
+      "17, audit_value_max_len=for<'a 'b> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_12",
+      "17, audit_value_max_len=for<const> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_13",
+      "17, audit_value_max_len=for<T:> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_binder_14",
+      "17, audit_value_max_len=for<=> || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_False_0",
+      "17, audit_value_max_len= || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_False_1",
+      "17, audit_value_max_len= |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_False_2",
+      "17, audit_value_max_len= |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_False_3",
+      "17, audit_value_max_len= |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_False_4",
+      "17, audit_value_max_len= |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_True_0",
+      "17, audit_value_max_len=for<'a>  || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_True_1",
+      "17, audit_value_max_len=for<'a>  |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_True_2",
+      "17, audit_value_max_len=for<'a>  |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_True_3",
+      "17, audit_value_max_len=for<'a>  |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0000_True_4",
+      "17, audit_value_max_len=for<'a>  |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_False_0",
+      "17, audit_value_max_len=move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_False_1",
+      "17, audit_value_max_len=move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_False_2",
+      "17, audit_value_max_len=move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_False_3",
+      "17, audit_value_max_len=move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_False_4",
+      "17, audit_value_max_len=move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_True_0",
+      "17, audit_value_max_len=for<'a> move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_True_1",
+      "17, audit_value_max_len=for<'a> move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_True_2",
+      "17, audit_value_max_len=for<'a> move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_True_3",
+      "17, audit_value_max_len=for<'a> move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0001_True_4",
+      "17, audit_value_max_len=for<'a> move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_False_0",
+      "17, audit_value_max_len=async || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_False_1",
+      "17, audit_value_max_len=async |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_False_2",
+      "17, audit_value_max_len=async |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_False_3",
+      "17, audit_value_max_len=async |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_False_4",
+      "17, audit_value_max_len=async |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_True_0",
+      "17, audit_value_max_len=for<'a> async || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_True_1",
+      "17, audit_value_max_len=for<'a> async |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_True_2",
+      "17, audit_value_max_len=for<'a> async |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_True_3",
+      "17, audit_value_max_len=for<'a> async |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0010_True_4",
+      "17, audit_value_max_len=for<'a> async |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_False_0",
+      "17, audit_value_max_len=async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_False_1",
+      "17, audit_value_max_len=async move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_False_2",
+      "17, audit_value_max_len=async move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_False_3",
+      "17, audit_value_max_len=async move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_False_4",
+      "17, audit_value_max_len=async move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_True_0",
+      "17, audit_value_max_len=for<'a> async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_True_1",
+      "17, audit_value_max_len=for<'a> async move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_True_2",
+      "17, audit_value_max_len=for<'a> async move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_True_3",
+      "17, audit_value_max_len=for<'a> async move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0011_True_4",
+      "17, audit_value_max_len=for<'a> async move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_False_0",
+      "17, audit_value_max_len=static || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_False_1",
+      "17, audit_value_max_len=static |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_False_2",
+      "17, audit_value_max_len=static |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_False_3",
+      "17, audit_value_max_len=static |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_False_4",
+      "17, audit_value_max_len=static |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_True_0",
+      "17, audit_value_max_len=for<'a> static || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_True_1",
+      "17, audit_value_max_len=for<'a> static |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_True_2",
+      "17, audit_value_max_len=for<'a> static |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_True_3",
+      "17, audit_value_max_len=for<'a> static |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0100_True_4",
+      "17, audit_value_max_len=for<'a> static |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_False_0",
+      "17, audit_value_max_len=static move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_False_1",
+      "17, audit_value_max_len=static move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_False_2",
+      "17, audit_value_max_len=static move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_False_3",
+      "17, audit_value_max_len=static move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_False_4",
+      "17, audit_value_max_len=static move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_True_0",
+      "17, audit_value_max_len=for<'a> static move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_True_1",
+      "17, audit_value_max_len=for<'a> static move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_True_2",
+      "17, audit_value_max_len=for<'a> static move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_True_3",
+      "17, audit_value_max_len=for<'a> static move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0101_True_4",
+      "17, audit_value_max_len=for<'a> static move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_False_0",
+      "17, audit_value_max_len=static async || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_False_1",
+      "17, audit_value_max_len=static async |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_False_2",
+      "17, audit_value_max_len=static async |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_False_3",
+      "17, audit_value_max_len=static async |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_False_4",
+      "17, audit_value_max_len=static async |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_True_0",
+      "17, audit_value_max_len=for<'a> static async || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_True_1",
+      "17, audit_value_max_len=for<'a> static async |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_True_2",
+      "17, audit_value_max_len=for<'a> static async |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_True_3",
+      "17, audit_value_max_len=for<'a> static async |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0110_True_4",
+      "17, audit_value_max_len=for<'a> static async |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_False_0",
+      "17, audit_value_max_len=static async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_False_1",
+      "17, audit_value_max_len=static async move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_False_2",
+      "17, audit_value_max_len=static async move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_False_3",
+      "17, audit_value_max_len=static async move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_False_4",
+      "17, audit_value_max_len=static async move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_True_0",
+      "17, audit_value_max_len=for<'a> static async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_True_1",
+      "17, audit_value_max_len=for<'a> static async move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_True_2",
+      "17, audit_value_max_len=for<'a> static async move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_True_3",
+      "17, audit_value_max_len=for<'a> static async move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_0111_True_4",
+      "17, audit_value_max_len=for<'a> static async move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_False_0",
+      "17, audit_value_max_len=const || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_False_1",
+      "17, audit_value_max_len=const |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_False_2",
+      "17, audit_value_max_len=const |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_False_3",
+      "17, audit_value_max_len=const |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_False_4",
+      "17, audit_value_max_len=const |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_True_0",
+      "17, audit_value_max_len=for<'a> const || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_True_1",
+      "17, audit_value_max_len=for<'a> const |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_True_2",
+      "17, audit_value_max_len=for<'a> const |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_True_3",
+      "17, audit_value_max_len=for<'a> const |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1000_True_4",
+      "17, audit_value_max_len=for<'a> const |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_False_0",
+      "17, audit_value_max_len=const move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_False_1",
+      "17, audit_value_max_len=const move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_False_2",
+      "17, audit_value_max_len=const move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_False_3",
+      "17, audit_value_max_len=const move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_False_4",
+      "17, audit_value_max_len=const move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_True_0",
+      "17, audit_value_max_len=for<'a> const move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_True_1",
+      "17, audit_value_max_len=for<'a> const move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_True_2",
+      "17, audit_value_max_len=for<'a> const move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_True_3",
+      "17, audit_value_max_len=for<'a> const move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1001_True_4",
+      "17, audit_value_max_len=for<'a> const move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_False_0",
+      "17, audit_value_max_len=const async || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_False_1",
+      "17, audit_value_max_len=const async |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_False_2",
+      "17, audit_value_max_len=const async |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_False_3",
+      "17, audit_value_max_len=const async |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_False_4",
+      "17, audit_value_max_len=const async |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_True_0",
+      "17, audit_value_max_len=for<'a> const async || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_True_1",
+      "17, audit_value_max_len=for<'a> const async |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_True_2",
+      "17, audit_value_max_len=for<'a> const async |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_True_3",
+      "17, audit_value_max_len=for<'a> const async |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1010_True_4",
+      "17, audit_value_max_len=for<'a> const async |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_False_0",
+      "17, audit_value_max_len=const async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_False_1",
+      "17, audit_value_max_len=const async move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_False_2",
+      "17, audit_value_max_len=const async move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_False_3",
+      "17, audit_value_max_len=const async move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_False_4",
+      "17, audit_value_max_len=const async move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_True_0",
+      "17, audit_value_max_len=for<'a> const async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_True_1",
+      "17, audit_value_max_len=for<'a> const async move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_True_2",
+      "17, audit_value_max_len=for<'a> const async move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_True_3",
+      "17, audit_value_max_len=for<'a> const async move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1011_True_4",
+      "17, audit_value_max_len=for<'a> const async move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_False_0",
+      "17, audit_value_max_len=const static || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_False_1",
+      "17, audit_value_max_len=const static |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_False_2",
+      "17, audit_value_max_len=const static |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_False_3",
+      "17, audit_value_max_len=const static |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_False_4",
+      "17, audit_value_max_len=const static |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_True_0",
+      "17, audit_value_max_len=for<'a> const static || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_True_1",
+      "17, audit_value_max_len=for<'a> const static |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_True_2",
+      "17, audit_value_max_len=for<'a> const static |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_True_3",
+      "17, audit_value_max_len=for<'a> const static |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1100_True_4",
+      "17, audit_value_max_len=for<'a> const static |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_False_0",
+      "17, audit_value_max_len=const static move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_False_1",
+      "17, audit_value_max_len=const static move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_False_2",
+      "17, audit_value_max_len=const static move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_False_3",
+      "17, audit_value_max_len=const static move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_False_4",
+      "17, audit_value_max_len=const static move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_True_0",
+      "17, audit_value_max_len=for<'a> const static move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_True_1",
+      "17, audit_value_max_len=for<'a> const static move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_True_2",
+      "17, audit_value_max_len=for<'a> const static move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_True_3",
+      "17, audit_value_max_len=for<'a> const static move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1101_True_4",
+      "17, audit_value_max_len=for<'a> const static move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_False_0",
+      "17, audit_value_max_len=const static async || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_False_1",
+      "17, audit_value_max_len=const static async |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_False_2",
+      "17, audit_value_max_len=const static async |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_False_3",
+      "17, audit_value_max_len=const static async |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_False_4",
+      "17, audit_value_max_len=const static async |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_True_0",
+      "17, audit_value_max_len=for<'a> const static async || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_True_1",
+      "17, audit_value_max_len=for<'a> const static async |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_True_2",
+      "17, audit_value_max_len=for<'a> const static async |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_True_3",
+      "17, audit_value_max_len=for<'a> const static async |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1110_True_4",
+      "17, audit_value_max_len=for<'a> const static async |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_False_0",
+      "17, audit_value_max_len=const static async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_False_1",
+      "17, audit_value_max_len=const static async move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_False_2",
+      "17, audit_value_max_len=const static async move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_False_3",
+      "17, audit_value_max_len=const static async move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_False_4",
+      "17, audit_value_max_len=const static async move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_True_0",
+      "17, audit_value_max_len=for<'a> const static async move || 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_True_1",
+      "17, audit_value_max_len=for<'a> const static async move |x| x, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_True_2",
+      "17, audit_value_max_len=for<'a> const static async move |mut x: usize| -> usize {x}, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_True_3",
+      "17, audit_value_max_len=for<'a> const static async move |#[cfg(a)] (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "modifiers_1111_True_4",
+      "17, audit_value_max_len=for<'a> const static async move |x: &'a str| x, audit_value_max_len=21"
+    ],
+    [
+      "const_default_0",
+      "17, audit_value_max_len=for<const N: usize=0> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_1",
+      "17, audit_value_max_len=for<const N: usize=18446744073709551616> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_2",
+      "17, audit_value_max_len=for<const N: usize=-1> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_3",
+      "17, audit_value_max_len=for<const N: usize=- 1> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_4",
+      "17, audit_value_max_len=for<const N: usize=1.5> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_5",
+      "17, audit_value_max_len=for<const N: usize=1.> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_6",
+      "17, audit_value_max_len=for<const N: usize=1e+2> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_7",
+      "17, audit_value_max_len=for<const N: usize=1.f32> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_8",
+      "17, audit_value_max_len=for<const N: usize=1._> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_9",
+      "17, audit_value_max_len=for<const N: usize=0xffu8> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_10",
+      "17, audit_value_max_len=for<const N: usize=1\u732b> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_11",
+      "17, audit_value_max_len=for<const N: usize='>'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_12",
+      "17, audit_value_max_len=for<const N: usize='<'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_13",
+      "17, audit_value_max_len=for<const N: usize=b'x'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_14",
+      "17, audit_value_max_len=for<const N: usize=\"text\"> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_15",
+      "17, audit_value_max_len=for<const N: usize=r#\">\"#> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_16",
+      "17, audit_value_max_len=for<const N: usize=c\"text\"> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_17",
+      "17, audit_value_max_len=for<const N: usize=true> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_18",
+      "17, audit_value_max_len=for<const N: usize=CONST> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_19",
+      "17, audit_value_max_len=for<const N: usize=path::CONST> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_20",
+      "17, audit_value_max_len=for<const N: usize=1+2> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_21",
+      "17, audit_value_max_len=for<const N: usize={1+2}> || 1, audit_value_max_len=21"
+    ],
+    [
+      "const_default_22",
+      "17, audit_value_max_len=for<const N: usize=-CONST> || 1, audit_value_max_len=21"
+    ],
+    [
+      "binder_name_0",
+      "17, audit_value_max_len=for<_> || 1, audit_value_max_len=21"
+    ],
+    [
+      "binder_name_1",
+      "17, audit_value_max_len=for<self> || 1, audit_value_max_len=21"
+    ],
+    [
+      "binder_name_2",
+      "17, audit_value_max_len=for<Self> || 1, audit_value_max_len=21"
+    ],
+    [
+      "binder_name_3",
+      "17, audit_value_max_len=for<type> || 1, audit_value_max_len=21"
+    ],
+    [
+      "binder_name_4",
+      "17, audit_value_max_len=for<for> || 1, audit_value_max_len=21"
+    ],
+    [
+      "binder_name_5",
+      "17, audit_value_max_len=for<gen> || 1, audit_value_max_len=21"
+    ],
+    [
+      "binder_name_6",
+      "17, audit_value_max_len=for<r#type> || 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_0",
+      "17, audit_value_max_len=const |?| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_1",
+      "17, audit_value_max_len=const |x + y| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_2",
+      "17, audit_value_max_len=const |x:| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_3",
+      "17, audit_value_max_len=const |x: u8 u16| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_4",
+      "17, audit_value_max_len=const |x,,y| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_5",
+      "17, audit_value_max_len=const |#[ ] x| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_6",
+      "17, audit_value_max_len=const |#[42] x| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_7",
+      "17, audit_value_max_len=const |ref mut x| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_8",
+      "17, audit_value_max_len=const |S {field: A | B}| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_9",
+      "17, audit_value_max_len=const |x @ (A | B)| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_10",
+      "17, audit_value_max_len=const |box x| 1, audit_value_max_len=21"
+    ],
+    [
+      "closure_parameters_11",
+      "17, audit_value_max_len=const |x: fn(u8)->u8| 1, audit_value_max_len=21"
+    ],
+    [
+      "prefix_boundary_0",
+      "17, audit_value_max_len=move const ||1, audit_value_max_len=21"
+    ],
+    [
+      "prefix_boundary_1",
+      "17, audit_value_max_len=async static ||1, audit_value_max_len=21"
+    ],
+    [
+      "prefix_boundary_2",
+      "17, audit_value_max_len=static const ||1, audit_value_max_len=21"
+    ],
+    [
+      "prefix_boundary_3",
+      "17, audit_value_max_len=for<'a> for<'b> ||1, audit_value_max_len=21"
+    ],
+    [
+      "prefix_boundary_4",
+      "17, audit_value_max_len=const {1}, audit_value_max_len=21"
+    ],
+    [
+      "prefix_boundary_5",
+      "17, audit_value_max_len=async move {1}, audit_value_max_len=21"
+    ],
+    [
+      "prefix_boundary_6",
+      "17, audit_value_max_len=for x in values {}, audit_value_max_len=21"
+    ]
+  ]
+}

@@ -1017,6 +1017,10 @@ if(BUILD_TESTING)
     add_executable(teaql_transaction_move_only_tests teaql_runtime/tests/transaction_move_only_tests.cpp)
     target_link_libraries(teaql_transaction_move_only_tests PRIVATE teaql::runtime)
     add_test(NAME transaction_move_only_contracts COMMAND teaql_transaction_move_only_tests)
+    add_executable(teaql_transaction_send_tests teaql_runtime/tests/transaction_send_tests.cpp)
+    target_link_libraries(teaql_transaction_send_tests PRIVATE teaql::runtime)
+    add_test(NAME transaction_send_contracts COMMAND teaql_transaction_send_tests)
+    set_tests_properties(transaction_send_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     add_executable(teaql_transaction_provider_error_tests teaql_runtime/tests/transaction_provider_error_tests.cpp)
     target_link_libraries(teaql_transaction_provider_error_tests PRIVATE teaql::runtime)
     add_test(NAME transaction_provider_error_contracts COMMAND teaql_transaction_provider_error_tests)
@@ -3413,4 +3417,13 @@ if(BUILD_TESTING)
             --cpp $<TARGET_FILE:teaql_inmemory_source_probe>
             "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     endif()
+endif()
+
+if(BUILD_TESTING)
+    add_executable(teaql_dynamic_search_clone_probe tests/parity/dynamic_search_clone_probe.cpp)
+    target_link_libraries(teaql_dynamic_search_clone_probe PRIVATE teaql::runtime)
+    add_test(NAME dynamic_search_clone_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_dynamic_search_clone_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_dynamic_search_clone_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
 endif()

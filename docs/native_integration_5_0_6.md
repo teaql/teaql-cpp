@@ -1,6 +1,38 @@
 # Current full native integration
 
-## Current 782-test provider execution epoch
+## Superseded 784-test core and transaction epoch
+
+The fresh full native epoch follows the installed
+[transaction source acceptance](transaction_scope_source_review_5_0_6.md#complete-installed-source-acceptance)
+and [core cohort's passing scoped gates](core_sources_installed_5_0_6.md).
+The current registry has 784 distinct native tests. Reference, generator and
+configure steps pass. Its
+[input snapshot](parity/native_current_784_core_inputs_5_0_6.json.gz) and
+[execution receipt](parity/native_current_784_core_terminal_5_0_6.json.gz)
+belong to this independent epoch; logs/state use
+`/tmp/teaql_native_current_784_core_5_0_6`.
+The snapshot freezes 10,665 execution inputs and both exact references. During
+the consumer build, an independent original-source comparison reproduced nine
+generator closure-parser differences: valid const/static/higher-rank closure
+forms stopped parsing before subsequent metadata took effect. A separate staged
+repair passed 1,763 exact source comparisons and 104 complete Java tests.
+
+The [supersession receipt](parity/native_current_784_core_supersession_5_0_6.json.gz)
+records SIGINT sent only to the verified task-owned native Ninja process.
+The build exits **130** and its controller exits **1**; CTest never starts.
+All 10,665 frozen inputs and both references remain unchanged before and after
+termination. This is an interrupted build, not a compiler rejection or a
+passing full-suite result. Completed work is retained for incremental rebuilding.
+
+The verified two-file parser/test repair is subsequently installed in the
+independent producer and passes the actual Maven 104-test selection. A new
+complete native epoch must follow installed parser and SDK reproduction gates;
+this unsuccessful epoch is preserved unchanged.
+Current source counts are 67 accepted, 55 pending and two external exclusions.
+The five core source verdicts explicitly await this full integration gate.
+All previous unsuccessful epochs below remain unchanged.
+
+## Preserved failed 782-test provider epoch
 
 The fresh full native epoch has built all current consumers after the
 [complete-root replay](sqlite_provider_source_review_5_0_6.md#complete-root-replay-and-module-registration-repair).
@@ -20,6 +52,19 @@ The failed tests are `business_id_lookups_rust_parity`,
 `eval_indexed_rust_parity`. They remain unresolved in this recorded epoch;
 subsequent focused repairs require separate evidence and cannot relabel it as
 a passing full-suite run.
+
+The separate [four-failure follow-up](native_782_followup_5_0_6.md) now passes
+native 9/9 and imported 9/9. It replays the original Entity/Eval observers before
+refreshing only their manifest anchors, removes an ignored-build dependency from
+the lookup comparator and corrects the stale guarded-readback assertion while
+adding a positive ordinary-readback control. The original failed epoch and all
+remaining full-suite/source/capability requirements retain their scope.
+
+The later [installed transaction Send source gate](transaction_scope_source_review_5_0_6.md#complete-installed-source-acceptance)
+qualifies only its complete Context source group, with separate native4/imported4
+and exact-source/compiler results. Current source dispositions become 67 accepted,
+55 pending and two external exclusions. Subsequent core registration work belongs
+to a new input state; neither change supplies a new complete native suite result.
 
 Before this epoch, the scoped provider gate passes native 27/27 and imported
 27/27, with 15,676 exact source outcomes per frontend, all 42 original root

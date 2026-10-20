@@ -243,7 +243,14 @@ if(BUILD_TESTING)
         add_executable(teaql_module_${contract} ${import_contracts}/${contract}.cpp)
         set_target_properties(teaql_module_${contract} PROPERTIES CXX_EXTENSIONS OFF
             CXX_SCAN_FOR_MODULES ON)
-        target_link_libraries(teaql_module_${contract} PRIVATE teaql_provider_sqlite_module)
+        string(JSON contract_import ERROR_VARIABLE import_error GET "${contract_manifest}" contracts ${index} import_module)
+        if(import_error)
+            set(contract_import teaql_provider_sqlite)
+        endif()
+        if(NOT TARGET "${contract_import}_module")
+            message(FATAL_ERROR "Unknown contract import module: ${contract_import}")
+        endif()
+        target_link_libraries(teaql_module_${contract} PRIVATE ${contract_import}_module)
         if(package STREQUAL "teaql_provider_sqlite")
             target_link_libraries(teaql_module_${contract} PRIVATE
                 SQLite3::SQLite3)
@@ -1820,4 +1827,64 @@ if(TARGET teaql_module_sql_diagnostics_guard_probe)
     add_test(NAME module_sql_diagnostics_guard_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/tests/parity/compare_sql_diagnostics_guard_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_sql_diagnostics_guard_probe>)
+endif()
+
+if(TARGET teaql_module_value_api_probe)
+    add_test(NAME module_value_api_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_value_api_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_value_api_probe>)
+endif()
+
+if(TARGET teaql_module_value_owned_api_probe)
+    add_test(NAME module_value_owned_api_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_value_owned_api_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_value_owned_api_probe>)
+endif()
+
+if(TARGET teaql_module_value_probe)
+    add_test(NAME module_value_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_values.py
+        --cpp $<TARGET_FILE:teaql_module_value_probe>)
+endif()
+
+if(TARGET teaql_module_datatype_debug_probe)
+    add_test(NAME module_datatype_debug_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_datatype_debug_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_datatype_debug_probe>)
+endif()
+
+if(TARGET teaql_module_smart_list_api_probe)
+    add_test(NAME module_smart_list_api_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_smart_list_api_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_smart_list_api_probe>)
+endif()
+
+if(TARGET teaql_module_request_api_probe)
+    add_test(NAME module_request_api_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_request_api_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_request_api_probe>)
+endif()
+
+if(TARGET teaql_module_request_helpers_probe)
+    add_test(NAME module_request_helpers_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_request_helpers_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_request_helpers_probe>)
+endif()
+
+if(TARGET teaql_module_value_probe)
+    add_test(NAME module_format_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_formats.py
+        --cpp $<TARGET_FILE:teaql_module_value_probe>)
+endif()
+
+if(TARGET teaql_module_dynamic_search_clone_probe)
+    add_test(NAME module_dynamic_search_clone_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_dynamic_search_clone_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_dynamic_search_clone_probe>)
+endif()
+
+if(TARGET teaql_module_original_core_search_tests)
+    add_test(NAME module_original_core_dynamic_search_warning_privacy COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/check_search_warning_canary.py
+        --cpp $<TARGET_FILE:teaql_module_original_core_search_tests>)
 endif()
