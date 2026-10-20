@@ -1,13 +1,13 @@
 # Runtime data-service shared types: Rust 5.0.6 source review
 
-Current requalification: **pending_review** after the [independent privacy preparation counterexample](parity/context_privacy_preparation_before_5_0_6.json.gz). The accepted cohort paragraph below records the previous checkpoint, whose callers bound intent before privacy.
+Current requalification: **accepted** after the independent privacy preparation correction, installed source/native/imported24, unchanged shared-type258, native4/module4 and native5/module5 gates, and scoped ASan/UBSan1. The [supplemental acceptance receipt](parity/context_privacy_preparation_requalified_5_0_6.json.gz) binds these results to the unchanged implementation inputs. Earlier cohort paragraphs retain their original checkpoint scope.
 
 Historical source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
 
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 Scope: the complete 333-line `teaql-runtime/src/data_service/types.rs`, SHA256
 `2a5a666d476fd77772d6b7ea71cb53754db18063ef1f823f216806b033127bf9`.
-The source remains pending review in the active disposition ledger. This
+The source is accepted in the active disposition ledger. This
 reconciliation and its scoped witnesses do not accept the other runtime
 data-service files, complete graph execution or generator phases.
 
@@ -155,7 +155,7 @@ including the complete lifetime programs and final no-work builds. The
 [focused sanitizer check](parity/context_privacy_preparation_sanitize_5_0_6.json.gz)
 passes its single registered test with ASan/UBSan and leak scanning disabled.
 
-This commit retains the reopened pending disposition until the supplemental
-evidence is joined into a formal source acceptance record. Current source
-totals are 82 accepted, 40 pending and 2 excluded_external. Earlier acceptance
-receipts remain unchanged; complete Context and generator parity stay separate.
+The supplemental acceptance joins these independent preparation/forwarding controls
+with RT01-RT17 and restores only this source disposition. Current source totals
+are 83 accepted, 39 pending and 2 excluded_external. Earlier acceptance receipts
+remain unchanged; complete Context and generator parity stay separate.

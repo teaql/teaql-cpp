@@ -19,6 +19,42 @@ void attach_object_group_rows(std::span<CompactRow>,
 Result<std::monostate, DynamicFieldError> attach_child_query_rows(std::span<CompactRow>,
                                                                   std::span<const CompactRow>);
 
+inline Result<Vector<CompactRow>, RuntimeError>
+relation_aggregate_key_rows(const UserContext& context,
+                            std::string_view entity,
+                            std::span<const CompactRow> parents,
+                            std::span<const RelationAggregate> aggregates) {
+    using R = Result<Vector<CompactRow>, RuntimeError>;
+    auto r = context.memory_resource();
+    Vector<CompactRow> keys(r);
+    if (aggregates.empty()) {
+        return R::ok(r, std::move(keys));
+    }
+    validate_relation_domain(context, parents);
+    auto descriptor = context.require_entity(entity);
+    if (!descriptor) {
+        return R::err(r, std::move(descriptor).error());
+    }
+    Vector<String> fields(r);
+    for (const auto& aggregate : aggregates) {
+        auto* relation = descriptor.value().get().relation_by_name(aggregate.relation_name);
+        if (!relation) {
+            return R::err(r, RuntimeError::missing_relation(r, entity, aggregate.relation_name));
+        }
+        fields.emplace_back(relation->local_key);
+    }
+    for (const auto& parent : parents) {
+        Record values(r);
+        for (const auto& field : fields) {
+            if (auto* value = parent.get(field)) {
+                values.emplace(String(field, r), Value(r, *value));
+            }
+        }
+        keys.emplace_back(values);
+    }
+    return R::ok(r, std::move(keys));
+}
+
 // Parent rows are stable, same-Context borrows, as in relation hydration. Query
 // inputs are snapshots; the fetch callback keeps the entity-runtime boundary.
 template <class E>
@@ -42,41 +78,33 @@ public:
         validate_relation_domain(context(), parents);
     }
 
+    RelationAggregateOperation(std::allocator_arg_t,
+                               Allocator a,
+                               const EntityDataService<E>& service,
+                               std::span<CompactRow> parents,
+                               std::span<const CompactRow> keys,
+                               std::span<const RelationAggregate> aggregates,
+                               std::optional<AggregationCacheOptions> cache,
+                               std::span<const TraceNode> trace,
+                               const EntityRelationFetch<E>& fetch)
+        : RelationAggregateOperation(
+              std::allocator_arg, a, service, parents, aggregates, cache, trace, fetch) {
+        validate_relation_domain(context(), keys);
+        provided_keys_ = keys;
+    }
+
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
-        if (!keys_) {
-            keys_.emplace(r);
-            if (!aggregates_.empty()) {
-                auto descriptor = context().require_entity(service_.entity());
-                if (!descriptor) {
-                    return R::err(r,
-                                  DataServiceError<typename E::Error>::runtime(
-                                      r, std::move(descriptor).error()));
-                }
-                Vector<String> fields(r);
-                for (const auto& aggregate : aggregates_) {
-                    auto* relation =
-                        descriptor.value().get().relation_by_name(aggregate.relation_name);
-                    if (!relation) {
-                        return R::err(r,
-                                      DataServiceError<typename E::Error>::runtime(
-                                          r,
-                                          RuntimeError::missing_relation(
-                                              r, service_.entity(), aggregate.relation_name)));
-                    }
-                    fields.emplace_back(relation->local_key);
-                }
-                for (const auto& parent : parents_) {
-                    Record values(r);
-                    for (const auto& field : fields) {
-                        if (auto* value = parent.get(field)) {
-                            values.emplace(String(field, r), Value(r, *value));
-                        }
-                    }
-                    keys_->emplace_back(values);
-                }
+        if (!provided_keys_ && !keys_) {
+            auto keys =
+                relation_aggregate_key_rows(context(), service_.entity(), parents_, aggregates_);
+            if (!keys) {
+                return R::err(
+                    r, DataServiceError<typename E::Error>::runtime(r, std::move(keys).error()));
             }
+            keys_.emplace(std::move(keys).value());
         }
+        auto keys = provided_keys_ ? *provided_keys_ : std::span<const CompactRow>(*keys_);
         while (index_ < aggregates_.size()) {
             const auto& aggregate = aggregates_[index_];
             if (!child_) {
@@ -98,7 +126,7 @@ public:
                 }
                 plan_.emplace(std::move(plans.value().front()));
                 Vector<Value> ids(r);
-                for (const auto& parent : *keys_) {
+                for (const auto& parent : keys) {
                     if (auto* id = parent.get(plan_->local_key)) {
                         ids.emplace_back(*id);
                     }
@@ -165,7 +193,7 @@ public:
                     }
                 }
             }
-            attach_relation_aggregate_rows(parents_, *keys_, *plan_, aggregate, std::move(rows));
+            attach_relation_aggregate_rows(parents_, keys, *plan_, aggregate, std::move(rows));
             forwarding_.reset();
             child_ = nullptr;
             plan_.reset();
@@ -195,6 +223,7 @@ private:
     EntityDataService<E> service_;
     std::span<CompactRow> parents_;
     std::optional<Vector<CompactRow>> keys_;
+    std::optional<std::span<const CompactRow>> provided_keys_;
     Vector<RelationAggregate> aggregates_;
     std::optional<AggregationCacheOptions> cache_;
     TraceChain trace_;
@@ -392,6 +421,18 @@ auto& enhance_relation_aggregates(const EntityDataService<E>& service,
                                   const EntityRelationFetch<E>& fetch) {
     return make_operation<RelationHydrationResult<E>, RelationAggregateOperation<E>>(
         service.memory_resource(), service, rows, aggregates, cache, trace, fetch);
+}
+
+template <class E>
+auto& enhance_relation_aggregates(const EntityDataService<E>& service,
+                                  std::span<CompactRow> rows,
+                                  std::span<const CompactRow> keys,
+                                  std::span<const RelationAggregate> aggregates,
+                                  std::optional<AggregationCacheOptions> cache,
+                                  std::span<const TraceNode> trace,
+                                  const EntityRelationFetch<E>& fetch) {
+    return make_operation<RelationHydrationResult<E>, RelationAggregateOperation<E>>(
+        service.memory_resource(), service, rows, keys, aggregates, cache, trace, fetch);
 }
 
 template <class E>

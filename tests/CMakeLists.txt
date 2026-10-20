@@ -3536,3 +3536,64 @@ if(BUILD_TESTING)
         set_tests_properties(context_privacy_preparation_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     endif()
 endif()
+
+if(BUILD_TESTING)
+    add_executable(teaql_context_helpers_probe tests/parity/context_helpers_probe.cpp)
+    target_link_libraries(teaql_context_helpers_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME context_helpers_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_context_helpers_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_context_helpers_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+        set_tests_properties(context_helpers_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endif()
+
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME loaded_graph_protocol_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_loaded_graph_protocol_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_loaded_row_graph_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(loaded_graph_protocol_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(BUILD_TESTING)
+    add_executable(teaql_enhanced_aggregate_probe tests/parity/enhanced_aggregate_probe.cpp)
+    target_link_libraries(teaql_enhanced_aggregate_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME enhanced_aggregate_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_enhanced_aggregate_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_enhanced_aggregate_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+        set_tests_properties(enhanced_aggregate_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endif()
+
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME query_entry_protocol_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_query_entry_protocol_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_enhanced_aggregate_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(query_entry_protocol_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME query_entry_cursor_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_query_entry_cursor_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_enhanced_aggregate_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(query_entry_cursor_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_test(NAME query_entry_cursor_context_contracts COMMAND teaql_enhanced_aggregate_probe --self-test)
+endif()
+
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME aggregate_membership_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_aggregate_membership_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_enhanced_aggregate_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(aggregate_membership_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(BUILD_TESTING)
+    add_test(NAME aggregate_membership_context_contracts COMMAND teaql_enhanced_aggregate_probe --membership-self-test)
+endif()

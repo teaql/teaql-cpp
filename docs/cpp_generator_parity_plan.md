@@ -1,5 +1,22 @@
 # C++ generator parity plan
 
+Current scalar membership continuation: [snapshot timing and ownership](aggregate_membership_snapshot_5_0_6.md) repairs 864/10,560 differences per frontend. Actual-source/native/imported comparisons, native15/module9 and focused ASan/UBSan3 pass. Complete resolved.rs, wider compositions and all remaining phase exits stay open; source totals **84/38/2** and capability totals **11 qualified / 6 partial** remain unchanged.
+
+Current query-entry continuation: [cursor publication and entry protocols](query_entry_cursor_5_0_6.md) repairs3136/8000 actual-source differences per frontend, including504 cursor side effects. Installed native51/module18 includes the retained G09 native37/module10 selection, source/native/imported8000, canonical/no-work and scoped ASan/UBSan3. The independently found fixture lifetime error and G09 reopening/restoration remain recorded. Source totals **84/38/2**, all other capability verdicts and P0-P7 exits remain unchanged.
+
+Current runtime continuation: [query-owned enhanced relationship aggregates](enhanced_aggregate_execution_5_0_6.md)
+repairs96/320 source differences per frontend; installed320, native11/module5,
+canonical consumers, lifetime programs and generated Q/E example pass. The
+[loaded graph replay](loaded_graph_protocol_5_0_6.md) requalifies retained2032
+and adds1536 shared-identity/projection controls with exact source dependencies,
+original1/caller1 and native3/module3. Only the two enhanced shortcut guards
+change. Source totals **84/38/2**, capability statuses and P0-P7 exits remain
+unchanged; complete resolved/graph/provider/governance responsibilities stay open.
+
+Current Context source acceptance: [CD01-CD15 review](runtime_context_source_review_5_0_6.md) joins six original-body callers and **7,746** matching observations per frontend, native8/module8, complete lifecycle programs and final no-work builds. Source totals are **84 accepted / 38 pending / 2 excluded_external**; all capability verdicts and P0-P7 exits remain unchanged. The helper continuation changes no production function. Earlier notes retain their checkpoint scope.
+
+Current shared-type requalification: [supplemental acceptance](parity/context_privacy_preparation_requalified_5_0_6.json.gz) restores types.rs after independent preparation/forwarding24, unchanged shared-type258, both frontend gates and scoped ASan/UBSan1. Source totals are **83 accepted / 39 pending / 2 excluded_external**. Complete Context, capability verdicts and P0-P7 exits remain unchanged. Earlier notes retain their checkpoint scope.
+
 Current commit checkpoint: independent privacy preparation and forwarding now
 match all 24 original-source observations on native and imported frontends,
 with native4/module4 selected gates and a scoped ASan/UBSan1 check passing.

@@ -3,8 +3,7 @@
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 Scope: all 362 lines of `teaql-runtime/src/data_service/context.rs`, SHA256
 `c0207f22d4935d6ab67ca5558cccaf5fc6697b1b6f8806939164f701f6fcef48`.
-Disposition remains **pending_review**. This source has no embedded unit tests;
-the private caller below is additional evidence, not an original Rust test.
+Current disposition: **accepted** under CD01-CD15 at the [joined source acceptance](parity/runtime_context_source_acceptance_5_0_6.json.gz). This source has no embedded unit tests; the six added original-body callers are additional evidence. Earlier pending/checkpoint paragraphs below retain their historical scope.
 
 ## Complete responsibility map
 
@@ -14,10 +13,10 @@ the private caller below is additional evidence, not an original Rust test.
 | CD02 | Public entity-service factory | Check entity-service registration first, then delegate metadata/executor assembly. Empty trace, request intent and query privacy are defaults. `entity_service.hpp` keeps this distinct from direct compatibility execution. |
 | CD03 | Executor registration | Install the type-erased GraphSaverFor before registering the typed executor. `graph_saver.hpp` retains both roles. The 96-case actual caller distinguishes plain resource insertion from executor registration and observes both resource identities and saver presence. The approved C++ owner-thread/resource-borrow adaptation replaces source Send/Sync transfer guarantees; this is registration evidence rather than graph-save execution or a thread-transfer claim. |
 | CD04 | Replace mutation intent | Change only intent, retaining privacy. Both one-argument C++ setters now preserve an already configured privacy value; the actual-source eighteen-case supplemental witness passes both frontends. |
-| CD05 | Noop observation | With noop telemetry, await work without evaluating the name closure or starting either scope. The actual-source query replay covers noop behavior; an independently instrumented name closure remains a separate targeted witness. |
+| CD05 | Noop observation | With noop telemetry, await work without evaluating the name closure or starting either scope. The independently instrumented helper witness verifies name-call counts, skipped throwing closures, pending completion and cancellation against the actual original FnOnce entry. |
 | CD06 | Outer observation | Create the requested family/name with the entity-type attribute. Scope activation encloses polling, not suspension. Completion records success or `data_service_error`; callback failures remain fail-open through the telemetry SPI. |
 | CD07 | Nested provider observation | Inside the outer activation, start a provider scope using the actual executor type and operation family. Preserve both provider attributes, nested activation, completion and drop order. C++ uses its authentic type spelling under the documented language adaptation. |
-| CD08 | Base-service forwarding | Create a separate RuntimeDataService and forward intent and privacy. `declarations.hpp` retains checked metadata/executor borrows and explicit destination copies instead of implicit shared ownership. Independent pre-intent privacy preparation still requires caller qualification. |
+| CD08 | Base-service forwarding | Create a separate RuntimeDataService and forward intent and privacy. `declarations.hpp` retains checked metadata/executor borrows and explicit destination copies instead of implicit shared ownership. The independent preparation/forwarding witness covers both binding orders, absent intent, present empty/nonempty privacy and explicit clearing. |
 | CD09 | Plain row query | Observe `query` / `entity.list` and delegate owned query execution. The 5.0.6 method preserves the request comment and does not substitute a user/trace-derived diagnostic string. |
 | CD10 | List, typed and enhanced queries | Observe the same family/name and delegate each distinct base entry. Entity decoding and final metadata behavior stay in the base layer; this Context wrapper does not implement relation loading itself. |
 | CD11 | Insert and update | Observe `mutation` with the corresponding action name, delegate to base, then invalidate cache only after success. Zero successful affected rows still trigger invalidation unless base semantics classify a conflict. The 4,608-case actual Context witness covers these success/error branches with separately registered caches. |
@@ -203,7 +202,63 @@ Only the two reviewed implementation guard hashes were refreshed in the
 [contract update](parity/context_privacy_contract_refresh_5_0_6.json.gz);
 original observers, corpora and earlier receipts remain unchanged.
 
-The shared-type source remains reopened pending a joined supplemental acceptance
-record. Current source totals are **82 accepted / 40 pending / 2 excluded_external**.
+The [supplemental shared-type acceptance](parity/context_privacy_preparation_requalified_5_0_6.json.gz) restores only types.rs. Current source totals are **83 accepted / 39 pending / 2 excluded_external**.
 Complete Context remains pending on the remaining helper/caller review; these
 focused gates do not advance capability verdicts or generator phase exits.
+
+
+## Comment and lazy-name helpers
+
+The [installed helper replay](parity/context_helpers_installed_5_0_6.json.gz)
+matches **1,128/1,128** actual source/native/imported observations per frontend.
+The caller is appended to the complete original Context module and calls its
+private helpers directly; it does not copy their implementations. The original
+source has no embedded tests. The added caller is counted separately.
+
+The 1,080 comment controls cross absent, empty, whitespace and Unicode user IDs
+and business comments with all nine trace kinds, absent/zero/maximum unsigned
+IDs, multiple nodes, embedded NUL/newline characters and a 108-node chain.
+They preserve trace-over-comment precedence, ordered arrows, `pending`, numeric
+formatting and the source's non-trimming empty-string behavior. This helper does
+not grant query/mutation intent or rewrite ordinary query comments.
+
+The 48 observation controls independently instrument the name closure and work
+poll count. They vary noop telemetry, a throwing name, work success/error,
+immediate/pending work and cancellation before or during polling. Rust supplies
+an actual FnOnce closure that consumes its name token. C++ supplies a Context-bound
+non-owning callback; the existing operation adapter guarantees at most one
+invocation. Both are lazy, skip the name and both scopes when telemetry is noop,
+and preserve result/error propagation. Fixture executors reject database calls.
+
+Both frontends pass **8/8** selected registered gates, covering helper1,128,
+factory96, mutation/cache4,608, independent privacy24, Context query1,872,
+intent/privacy18 and the complete Context lifecycle program. Canonical imported
+consumer checks and final no-work builds pass. Default PMR is disabled in the
+new probe and each input has its own GlobalContext/UserContext. No production
+function changes are needed for these helper outcomes.
+
+## Joined complete-source acceptance
+
+CD01-CD15 covers every constructor, bound, method and branch in the complete
+362-line source. The joined receipt verifies six original-body source callers,
+**7,746** exact outcomes per installed frontend and the current native8/module8
+gates. Earlier source witnesses are reused only after checking the same locked
+original commit and unchanged retained fixture/probe/corpus bytes; current
+frontends rerun their matching corpora. Fixed mutation operation families and
+all six action suffixes are additionally reviewed against the original call
+sites and `MutationOperationName`/Context mutation entry mappings. Query and
+mutation services remain distinct from executors, graph savers and providers.
+
+The approved C++ adaptation keeps explicit Context-bound metadata/executor
+borrows, destination allocator copies, owner-thread checks and cancellation
+before arena reclamation. It does not promise Rust Send/Sync transfer or shared
+ownership. The complete lifecycle programs retain pending cancellation, closed
+borrow rejection, foreign work, non-Clone results and explicit Global retention.
+The earlier scoped privacy sanitizer receipt retains its own scope; this
+fixture-only continuation does not add a new full sanitizer, full native-suite,
+Release, MIPS, physical-router, external-provider or graph-save execution claim.
+
+Only `data_service/context.rs` advances at this checkpoint: **84 accepted /
+38 pending / 2 excluded_external**. All seventeen capability verdicts remain
+unchanged. Full runtime/entity service, governance/log privacy, G13/G17 and all
+P0-P7 exits retain their independent requirements.

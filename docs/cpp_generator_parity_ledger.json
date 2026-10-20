@@ -4913,11 +4913,31 @@
         "docs/parity/generated_support_source_execution_5_0_6.json.gz",
         "docs/parity/generated_support_source_frontends_5_0_6.json.gz",
         "docs/parity/generated_support_source_preservation_5_0_6.json.gz",
-        "docs/parity/generated_support_source_qualification_5_0_6.json.gz"
+        "docs/parity/generated_support_source_qualification_5_0_6.json.gz",
+        "docs/loaded_graph_protocol_5_0_6.md",
+        "docs/enhanced_aggregate_execution_5_0_6.md",
+        "docs/parity/loaded_graph_protocol_installed_5_0_6.json.gz",
+        "docs/parity/enhanced_aggregate_before_5_0_6.json.gz",
+        "docs/parity/enhanced_aggregate_installed_5_0_6.json.gz",
+        "docs/parity/loaded_graph_aggregate_checkpoint_5_0_6.json.gz",
+        "docs/query_entry_cursor_5_0_6.md",
+        "docs/runtime_resolved_source_review_5_0_6.md",
+        "docs/parity/query_entry_cursor_before_5_0_6.json.gz",
+        "docs/parity/query_entry_cursor_installed_repaired_5_0_6.json.gz",
+        "docs/parity/query_entry_cursor_sanitize_requalified_5_0_6.json.gz",
+        "docs/parity/query_entry_cursor_requalified_5_0_6.json.gz",
+        "docs/aggregate_membership_snapshot_5_0_6.md",
+        "docs/parity/aggregate_membership_source_5_0_6.json.gz",
+        "docs/parity/aggregate_membership_before_5_0_6.json.gz",
+        "docs/parity/aggregate_membership_installed_5_0_6.json.gz",
+        "docs/parity/aggregate_membership_sanitize_5_0_6.json.gz"
       ],
       "open_questions": [
         "AG07: user behavior clarification remains pending for546 quoted-column foreign-key attachment results. Current frozen Rust returns default zero/empty while native raw identifiers attach actual data,with identical SQL. Fresh witness and strict-completion refusal are retained. The raw MetadataStore control isolates only the column representation and matches7122/7122 native results; it is candidate evidence,not permission or unchanged-source qualification.",
-        "Complete G08 only after the AG07 decision,corresponding implementation or explicitly accepted representation/source-defect disposition,and strict/current gates. Preserve every AG01-AG18 responsibility in aggregation_qualification_matrix_5_0_6.md. Current33 selected native checks and zero partial-comparator exits do not close the whole capability."
+        "Complete G08 only after the AG07 decision,corresponding implementation or explicitly accepted representation/source-defect disposition,and strict/current gates. Preserve every AG01-AG18 responsibility in aggregation_qualification_matrix_5_0_6.md. Current33 selected native checks and zero partial-comparator exits do not close the whole capability.",
+        "Loaded-graph exact-dependency replay passes retained2032 plus shared-identity1536, original1/caller1 and native3/module3. Query-owned relationship aggregates reproduce96/320 differences per frontend; both enhanced shortcuts now require empty inline declarations. Source/native/imported320, native11/module5 and unchanged lifetime/generated-example regressions pass. Source84/38/2 and all17 capability statuses stay unchanged; complete resolved/graph/provider/governance and P0-P7 exits remain open.",
+        "Query entry/cursor continuation matches8000 actual-source/native/imported results after3136 reproduced differences, with504 cursor-publication discrepancies. Preserve distinct ordinary versus enhanced entry semantics, normalize after preparation, clear aggregate-only disabled observations and publish only finalized successful rows. Existing G09 native37/module10 plus new entry/lifetime checks and scoped ASan/UBSan3 pass; G09 reopening/restoration is recorded separately. Complete resolved.rs, graph/hydration membership snapshots, governance and P0-P7 stay open.",
+        "Scalar membership snapshot continuation reproduces864/10560 differences per frontend after object-valued grouping overwrites local keys. The shared row operation now captures Context-owned scalar keys immediately after root fetch, before enhancement, and lends them to the existing aggregate assembler. Actual-source/native/imported10560, native15/module9, canonical/no-work and scoped ASan/UBSan3 pass, including unchanged legacy helper behavior, foreign-Context rejection and actual-close cancellation. Complete resolved.rs, wider compositions, AG07 and P0-P7 remain open; source84/38/2 and capability11-qualified/6-partial totals are unchanged."
       ],
       "cross_capability_requirements": [
         "G09 qualified execution/optimization/startup/Context adaptations remain enforced",
@@ -5222,6 +5242,18 @@
           "path": "docs/execution_acceptance_5_0_6.md",
           "terminal": "docs/parity/execution_acceptance_5_0_6.json.gz",
           "scope": "All EX01-EX14 complete source bodies, finite branch/configuration/delegate responsibilities and explicit C++ adaptations reconciled. Current native37/module10/compiler1-positive24-negative/Java71/strict24-workspace288-file gates pass. Every prior G09 question is preserved and disposed; eight independent capabilities and phase/release exits remain active."
+        },
+        {
+          "kind": "query_entry_cursor_counterexample_reopening",
+          "path": "docs/parity/query_entry_cursor_reopened_5_0_6.json.gz",
+          "scope": "Known original-source counterexample; G09 stays partial until repair and supplemental execution/ownership regression gates pass."
+        },
+        {
+          "kind": "query_entry_cursor_supplemental_requalification",
+          "path": "docs/parity/query_entry_cursor_requalified_5_0_6.json.gz",
+          "review": "docs/query_entry_cursor_5_0_6.md",
+          "previous_question": "QEP01: reopen the G09 cursor publication/observation contract after actual-source/native/imported8000 reproduces3136 differences per frontend. Query-owned aggregates, ordinary versus enhanced entry semantics, stale pagination observations and publication before failing/finalized aggregates require correction and supplemental requalification. Preserve prior EX01-EX14 acceptance and its unchanged compiler/Java/artifact evidence as historical checkpoints.",
+          "disposition": "QEP01 resolved: source/native/imported8000, all retained G09 native37/module10 tests plus new entry/cursor checks, canonical consumers, no-work and focused ASan/UBSan3 pass. Earlier compiler/Java/artifact receipts retain their historical scope; current producer inputs and public entry definitions remain unchanged. Only G09 restores its preceding qualified state; complete resolved/graph/governance and P0-P7 remain separate."
         }
       ],
       "open_questions": [],
@@ -7501,7 +7533,27 @@
         "docs/parity/context_cache_factory_checkpoint_5_0_6.json.gz",
         "docs/parity/context_privacy_preparation_installed_5_0_6.json.gz",
         "docs/parity/context_privacy_preparation_sanitize_5_0_6.json.gz",
-        "docs/parity/service_types_privacy_requalified_source_5_0_6.json.gz"
+        "docs/parity/service_types_privacy_requalified_source_5_0_6.json.gz",
+        "docs/parity/context_privacy_preparation_requalified_5_0_6.json.gz",
+        "docs/parity/context_helpers_installed_5_0_6.json.gz",
+        "docs/parity/runtime_context_source_acceptance_5_0_6.json.gz",
+        "docs/loaded_graph_protocol_5_0_6.md",
+        "docs/enhanced_aggregate_execution_5_0_6.md",
+        "docs/parity/loaded_graph_protocol_installed_5_0_6.json.gz",
+        "docs/parity/enhanced_aggregate_before_5_0_6.json.gz",
+        "docs/parity/enhanced_aggregate_installed_5_0_6.json.gz",
+        "docs/parity/loaded_graph_aggregate_checkpoint_5_0_6.json.gz",
+        "docs/query_entry_cursor_5_0_6.md",
+        "docs/runtime_resolved_source_review_5_0_6.md",
+        "docs/parity/query_entry_cursor_before_5_0_6.json.gz",
+        "docs/parity/query_entry_cursor_installed_repaired_5_0_6.json.gz",
+        "docs/parity/query_entry_cursor_sanitize_requalified_5_0_6.json.gz",
+        "docs/parity/query_entry_cursor_requalified_5_0_6.json.gz",
+        "docs/aggregate_membership_snapshot_5_0_6.md",
+        "docs/parity/aggregate_membership_source_5_0_6.json.gz",
+        "docs/parity/aggregate_membership_before_5_0_6.json.gz",
+        "docs/parity/aggregate_membership_installed_5_0_6.json.gz",
+        "docs/parity/aggregate_membership_sanitize_5_0_6.json.gz"
       ],
       "open_questions": [
         "SQ01: complete the remaining source/model matrix across every capability and wider ordinary/generated-ledger caller configurations. The bounded nonempty borrowed-root adapter now passes its complete source/runtime/ownership, Java,196 compiler and78-SDK artifact gates in generated_runtime_state_bridge_5_0_6.md; shared ordinary carrier dispatch is separately qualified in runtime_state_bridge_5_0_6.md. Neither slice accepts complete entity_save.rs or every generated caller. G08 quoted-column and G12 invalid naming dispositions still await the user; wider G15 quoted-FK5 remains unaccepted.",
@@ -7517,7 +7569,12 @@
         "Complete base.rs491 acceptance advances only that source:83 accepted/39 pending/2 excluded. Actual query5120/statement1638/mutation8832 per frontend, original1/caller3, native11/module6, isolated Release8832 (76 counter differences) and scoped ASan/UBSan2 pass. Remaining39 sources, complete G13/G17 and P0-P7 stay open; no full Release/module Release, full sanitizer, later full native, MIPS or router claim.",
         "Real Context queries remove shadow-wrapper provenance gap:1872 per frontend, native4/module3. A new actual-source setter sequence found8/18 privacy differences; base qualification was reopened and restored only after source/native/imported18 plus native5/module5 passed. Base remains accepted, complete Context stays pending; source totals83/39/2, all capabilities and P0-P7 unchanged.",
         "Focused complete-original Context calls add mutation/cache4608 and factory/registration96 per frontend, each native5/module5 and no-work. These do not close noop name-closure/diagnostic helper/pre-intent privacy and joined caller obligations. Context source stays pending, source totals83/39/2 and all seventeen capability statuses remain unchanged; registration is not graph-save execution.",
-        "Independent privacy preparation reproduced24/24 frontend differences and is now repaired: installed24/native4/module4, unchanged shared-type258/native5/module5 and scoped sanitizer1 pass. Shared types remain reopened pending a joined supplemental acceptance record; current source totals82/40/2. Complete Context, all capability statuses and P0-P7 exits remain unchanged."
+        "Independent privacy preparation reproduced24/24 frontend differences and is now repaired: installed24/native4/module4, unchanged shared-type258/native5/module5 and scoped sanitizer1 pass. Shared types remain reopened pending a joined supplemental acceptance record; current source totals82/40/2. Complete Context, all capability statuses and P0-P7 exits remain unchanged.",
+        "Supplemental shared-type acceptance restores types.rs only after independent privacy preparation24, unchanged shared-type258, native4/module4 and native5/module5 plus scoped ASan/UBSan1. Source83/39/2, complete Context and all capability/P0-P7 exits stay separate; previous reopening/checkpoint notes remain historical.",
+        "Complete Context362 acceptance joins CD01-CD15: six actual original-body callers7746 outcomes per frontend, helper1128, native8/module8, complete lifecycle programs, canonical consumers and no-work. Only Context advances tosource84/38/2; fixed mutation families/suffixes have direct body review and generic observed u64 result tests. All17 capability statuses, complete governance/privacy, remaining38 sources and P0-P7 exits retain their independent scope.",
+        "Loaded-graph exact-dependency replay passes retained2032 plus shared-identity1536, original1/caller1 and native3/module3. Query-owned relationship aggregates reproduce96/320 differences per frontend; both enhanced shortcuts now require empty inline declarations. Source/native/imported320, native11/module5 and unchanged lifetime/generated-example regressions pass. Source84/38/2 and all17 capability statuses stay unchanged; complete resolved/graph/provider/governance and P0-P7 exits remain open.",
+        "Query entry/cursor continuation matches8000 actual-source/native/imported results after3136 reproduced differences, with504 cursor-publication discrepancies. Preserve distinct ordinary versus enhanced entry semantics, normalize after preparation, clear aggregate-only disabled observations and publish only finalized successful rows. Existing G09 native37/module10 plus new entry/lifetime checks and scoped ASan/UBSan3 pass; G09 reopening/restoration is recorded separately. Complete resolved.rs, graph/hydration membership snapshots, governance and P0-P7 stay open.",
+        "Scalar membership snapshot continuation reproduces864/10560 differences per frontend after object-valued grouping overwrites local keys. The shared row operation now captures Context-owned scalar keys immediately after root fetch, before enhancement, and lends them to the existing aggregate assembler. Actual-source/native/imported10560, native15/module9, canonical/no-work and scoped ASan/UBSan3 pass, including unchanged legacy helper behavior, foreign-Context rejection and actual-close cancellation. Complete resolved.rs, wider compositions, AG07 and P0-P7 remain open; source84/38/2 and capability11-qualified/6-partial totals are unchanged."
       ],
       "runtime_sources": [
         "teaql-core/src/entity.rs",

@@ -1993,3 +1993,45 @@ if(TARGET teaql_module_context_privacy_preparation_probe)
         --cpp $<TARGET_FILE:teaql_module_context_privacy_preparation_probe>)
     set_tests_properties(module_context_privacy_preparation_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
 endif()
+
+if(TARGET teaql_module_context_helpers_probe)
+    add_test(NAME module_context_helpers_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_context_helpers_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_context_helpers_probe>)
+    set_tests_properties(module_context_helpers_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_loaded_row_graph_probe)
+    add_test(NAME module_loaded_graph_protocol_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_loaded_graph_protocol_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_loaded_row_graph_probe>)
+    set_tests_properties(module_loaded_graph_protocol_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_enhanced_aggregate_probe)
+    add_test(NAME module_enhanced_aggregate_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_enhanced_aggregate_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_enhanced_aggregate_probe>)
+    set_tests_properties(module_enhanced_aggregate_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_enhanced_aggregate_probe)
+    add_test(NAME module_query_entry_protocol_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_query_entry_protocol_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_enhanced_aggregate_probe>)
+    set_tests_properties(module_query_entry_protocol_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_enhanced_aggregate_probe)
+    add_test(NAME module_query_entry_cursor_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_query_entry_cursor_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_enhanced_aggregate_probe>)
+    set_tests_properties(module_query_entry_cursor_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_enhanced_aggregate_probe)
+    add_test(NAME module_aggregate_membership_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_aggregate_membership_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_enhanced_aggregate_probe>)
+    set_tests_properties(module_aggregate_membership_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()

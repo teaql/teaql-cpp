@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="3"
+	failures="1"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="31"
+	timestamp="2026-10-20T18:14:22"
+	>
+	<testcase name="deferred_continuous_page_context_contracts" classname="deferred_continuous_page_context_contracts" time="0.280742" status="run">
+		<properties/>
+		<system-out>8 continuous cursor replacement/destruction scenarios passed
+</system-out>
+	</testcase>
+	<testcase name="query_entry_cursor_rust_parity" classname="query_entry_cursor_rust_parity" time="31.8253" status="run">
+		<properties/>
+		<system-out>Query entry/cursor protocols 5.0.6 parity: 8000/8000 observations match
+</system-out>
+	</testcase>
+	<testcase name="query_entry_cursor_context_contracts" classname="query_entry_cursor_context_contracts" time="0.566758" status="fail">
+		<failure message="Failed"/>
+		<properties/>
+		<system-out>=================================================================
+==720830==ERROR: AddressSanitizer: heap-use-after-free on address 0x7c87da1e0968 at pc 0x5cfaed7da9fa bp 0x7fffa5280d80 sp 0x7fffa5280d78
+READ of size 8 at 0x7c87da1e0968 thread T0
+    #0 0x5cfaed7da9f9 in std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::pmr::polymorphic_allocator&lt;char&gt;&gt;::_M_data() const /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/basic_string.h:238:28
+    #1 0x5cfaed7da3c4 in std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::pmr::polymorphic_allocator&lt;char&gt;&gt;::_M_is_local() const /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/basic_string.h:279:6
+    #2 0x5cfaed7dc7e4 in std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::pmr::polymorphic_allocator&lt;char&gt;&gt;::_M_dispose() /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/basic_string.h:297:7
+    #3 0x5cfaed7c5074 in std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::pmr::polymorphic_allocator&lt;char&gt;&gt;::~basic_string() /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/basic_string.h:920:9
+    #4 0x5cfaed858938 in teaql::TraceNode::~TraceNode() /home/philip/githome/teaql-cpp/teaql_core/include/teaql/core/trace.hpp:17:8
+    #5 0x5cfaed8588e0 in void std::allocator_traits&lt;std::pmr::polymorphic_allocator&lt;teaql::TraceNode&gt;&gt;::destroy&lt;teaql::TraceNode&gt;(std::pmr::polymorphic_allocator&lt;teaql::TraceNode&gt;&amp;, teaql::TraceNode*) /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/memory_resource.h:527:10
+    #6 0x5cfaed858516 in void std::_Destroy&lt;teaql::TraceNode*, std::pmr::polymorphic_allocator&lt;teaql::TraceNode&gt;&gt;(teaql::TraceNode*, teaql::TraceNode*, std::pmr::polymorphic_allocator&lt;teaql::TraceNode&gt;&amp;) /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/alloc_traits.h:1073:2
+    #7 0x5cfaed85848c in std::vector&lt;teaql::TraceNode, std::pmr::polymorphic_allocator&lt;teaql::TraceNode&gt;&gt;::~vector() /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/stl_vector.h:792:2
+    #8 0x5cfaee7863eb in teaql::SelectQuery::~SelectQuery() /home/philip/githome/teaql-cpp/teaql_core/src/query.cpp:281:27
+    #9 0x5cfaed7caa54 in teaql::PurposedSelectQuery::~PurposedSelectQuery() /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/purposed_query.hpp:93:7
+    #10 0x5cfaed7b8946 in cursor_lifetime_contracts() /home/philip/githome/teaql-cpp/tests/parity/enhanced_aggregate_probe.cpp:371:5
+    #11 0x5cfaed7b63b2 in main /home/philip/githome/teaql-cpp/tests/parity/enhanced_aggregate_probe.cpp:378:9
+    #12 0x7e37dae29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #13 0x7e37dae29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #14 0x5cfaed6c4774 in _start (/home/philip/githome/teaql-cpp/build_sanitize_current/teaql_enhanced_aggregate_probe+0xfd6774)
+
+0x7c87da1e0968 is located 2152 bytes inside of 9280-byte region [0x7c87da1e0100,0x7c87da1e2540)
+freed by thread T0 here:
+    #0 0x5cfaed7b5eb7 in operator delete(void*, unsigned long, std::align_val_t) /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:212:3
+    #1 0x5cfaed7ce784 in std::pmr::memory_resource::deallocate(void*, unsigned long, unsigned long) /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/memory_resource.h:84:14
+    #2 0x5cfaedb386eb in teaql::detail::ByteBudgetResource::do_deallocate(void*, unsigned long, unsigned long) /home/philip/githome/teaql-cpp/teaql_memory/include/teaql/memory/limits.hpp:94:20
+    #3 0x5cfaed7ce784 in std::pmr::memory_resource::deallocate(void*, unsigned long, unsigned long) /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/memory_resource.h:84:14
+    #4 0x5cfaee7f01db in teaql::Arena::TrackingResource::do_deallocate(void*, unsigned long, unsigned long) /home/philip/githome/teaql-cpp/teaql_memory/src/arena.cpp:47:16
+    #5 0x7e37db3ba6da in std::pmr::memory_resource::deallocate(void*, unsigned long, unsigned long) /home/conda/feedstock_root/build_artifacts/gcc_compilers_1790300741325/work/build/x86_64-conda-linux-gnu/libstdc++-v3/include/bits/memory_resource.h:84:27
+    #6 0x7e37db3ba6da in std::pmr::monotonic_buffer_resource::_Chunk::release(std::pmr::monotonic_buffer_resource::_Chunk*&amp;, std::pmr::memory_resource*) /home/conda/feedstock_root/build_artifacts/gcc_compilers_1790300741325/work/build/x86_64-conda-linux-gnu/libstdc++-v3/src/c++17/../../../../../libstdc++-v3/src/c++17/memory_resource.cc:278:19
+    #7 0x7e37db3ba6da in std::pmr::monotonic_buffer_resource::_M_release_buffers() /home/conda/feedstock_root/build_artifacts/gcc_compilers_1790300741325/work/build/x86_64-conda-linux-gnu/libstdc++-v3/src/c++17/../../../../../libstdc++-v3/src/c++17/memory_resource.cc:305:20
+
+previously allocated by thread T0 here:
+    #0 0x5cfaed7b5062 in operator new(unsigned long, std::align_val_t) /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:122:3
+    #1 0x5cfaed7cbabf in std::pmr::memory_resource::allocate(unsigned long, unsigned long) /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/memory_resource.h:79:38
+    #2 0x5cfaedb384be in teaql::detail::ByteBudgetResource::do_allocate(unsigned long, unsigned long) /home/philip/githome/teaql-cpp/teaql_memory/include/teaql/memory/limits.hpp:85:35
+    #3 0x5cfaed7cbabf in std::pmr::memory_resource::allocate(unsigned long, unsigned long) /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/memory_resource.h:79:38
+    #4 0x5cfaee7efe6c in teaql::Arena::TrackingResource::do_allocate(unsigned long, unsigned long) /home/philip/githome/teaql-cpp/teaql_memory/src/arena.cpp:38:28
+    #5 0x7e37db3ba57f in std::pmr::memory_resource::allocate(unsigned long, unsigned long) /home/conda/feedstock_root/build_artifacts/gcc_compilers_1790300741325/work/build/x86_64-conda-linux-gnu/libstdc++-v3/include/bits/memory_resource.h:79:28
+    #6 0x7e37db3ba57f in std::pmr::monotonic_buffer_resource::_Chunk::allocate(std::pmr::memory_resource*, unsigned long, unsigned long, std::pmr::monotonic_buffer_resource::_Chunk*&amp;) /home/conda/feedstock_root/build_artifacts/gcc_compilers_1790300741325/work/build/x86_64-conda-linux-gnu/libstdc++-v3/src/c++17/../../../../../libstdc++-v3/src/c++17/memory_resource.cc:255:32
+    #7 0x7e37db3ba57f in std::pmr::monotonic_buffer_resource::_M_new_buffer(unsigned long, unsigned long) /home/conda/feedstock_root/build_artifacts/gcc_compilers_1790300741325/work/build/x86_64-conda-linux-gnu/libstdc++-v3/src/c++17/../../../../../libstdc++-v3/src/c++17/memory_resource.cc:296:38
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/philip/githome/teaql-cpp/teaql_core/include/teaql/core/trace.hpp:17:8 in teaql::TraceNode::~TraceNode()
+Shadow bytes around the buggy address:
+  0x7c87da1e0680: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7c87da1e0700: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7c87da1e0780: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7c87da1e0800: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7c87da1e0880: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+=&gt;0x7c87da1e0900: fd fd fd fd fd fd fd fd fd fd fd fd fd[fd]fd fd
+  0x7c87da1e0980: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7c87da1e0a00: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7c87da1e0a80: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7c87da1e0b00: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7c87da1e0b80: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==720830==ABORTING
+</system-out>
+	</testcase>
+</testsuite>

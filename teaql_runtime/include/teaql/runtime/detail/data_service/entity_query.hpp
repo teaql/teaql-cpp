@@ -229,24 +229,13 @@ public:
                         bool prepared = false)
         : service_(std::allocator_arg, a, service), query_(std::allocator_arg, a, query),
           aggregates_(aggregates.begin(), aggregates.end(), a.resource()), rows_(a.resource()),
-          cursor_key_(a.resource()), cursor_id_(a.resource()),
+          aggregate_keys_(a.resource()), cursor_key_(a.resource()), cursor_id_(a.resource()),
           fetch_(std::allocator_arg,
                  a,
                  [](const EntityDataService<E>& repo, SelectQuery query) -> AsyncOperation<R>& {
                      return EntityDataServiceAccess::fetch_all(repo, query);
                  }),
-          aggregate_entry_(aggregate_entry), prepared_(prepared) {
-        if (!query_.relation_aggregates.empty()) {
-            Vector<RelationAggregate> combined(query_.relation_aggregates, a.resource());
-            for (const auto& aggregate : aggregates_) {
-                if (std::find(combined.begin(), combined.end(), aggregate) == combined.end()) {
-                    combined.emplace_back(aggregate);
-                }
-            }
-            aggregates_.swap(combined);
-            query_.relation_aggregates.clear();
-        }
-    }
+          aggregate_entry_(aggregate_entry), prepared_(prepared) {}
 
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
@@ -260,6 +249,21 @@ public:
                                           r, std::move(prepared).error()));
                     }
                     query_ = std::move(prepared).value();
+                }
+                if (!query_.relation_aggregates.empty() &&
+                    (aggregate_entry_ || query_.continuous_page_fetch ||
+                     !query_.object_group_bys.empty() || !query_.child_enhancements.empty() ||
+                     !query_.relations.empty())) {
+                    Vector<RelationAggregate> combined(query_.relation_aggregates, r);
+                    for (const auto& aggregate : aggregates_) {
+                        if (std::find(combined.begin(), combined.end(), aggregate) ==
+                            combined.end()) {
+                            combined.emplace_back(aggregate);
+                        }
+                    }
+                    aggregates_.swap(combined);
+                    query_.relation_aggregates.clear();
+                    aggregate_entry_ = true;
                 }
                 auto intent = EntityDataServiceAccess::request_intent(service_, query_);
                 if (!intent) {
@@ -347,6 +351,16 @@ public:
                 rows_ = Vector<CompactRow>(result->value(), r);
                 forwarding_.reset();
                 row_work_ = nullptr;
+                if (!aggregates_.empty()) {
+                    auto keys = relation_aggregate_key_rows(
+                        context(), service_.entity(), rows_, aggregates_);
+                    if (!keys) {
+                        return R::err(r,
+                                      DataServiceError<typename E::Error>::runtime(
+                                          r, std::move(keys).error()));
+                    }
+                    aggregate_keys_ = std::move(keys).value();
+                }
                 phase_ = query_.continuous_page_fetch || !query_.object_group_bys.empty() ||
                                  !query_.child_enhancements.empty() || !query_.relations.empty()
                              ? Phase::Groups
@@ -389,6 +403,7 @@ public:
                     case Phase::Aggregates:
                         enhancement_ = &enhance_relation_aggregates(service_,
                                                                     rows_,
+                                                                    aggregate_keys_,
                                                                     aggregates_,
                                                                     query_.aggregation_cache,
                                                                     query_.trace_chain,
@@ -412,7 +427,7 @@ public:
                 continue;
             }
             if (phase_ == Phase::Register) {
-                // fetch_prepared_all registers before outer relation aggregates.
+                // Publish a cursor only after all result enhancements succeed.
                 if (cursor_enabled_ && rows_.size() == page_size_ && !rows_.empty()) {
                     if (auto* boundary = rows_.back().get("id")) {
 #ifndef NDEBUG
@@ -462,7 +477,7 @@ public:
                     forwarding_.reset();
                     cursor_write_ = nullptr;
                 }
-                phase_ = aggregate_entry_ ? Phase::Aggregates : Phase::Done;
+                phase_ = Phase::Done;
                 continue;
             }
             if (phase_ == Phase::Done) {
@@ -504,9 +519,9 @@ private:
         Groups,
         Children,
         Relations,
+        Aggregates,
         Register,
         Store,
-        Aggregates,
         Done
     };
 
@@ -522,8 +537,8 @@ private:
         auto r = service_.memory_resource();
         if (!query_.continuous_page_fetch) {
             // The direct owned path does not enter prepare_continuous_page.
-            if (!query_.object_group_bys.empty() || !query_.child_enhancements.empty() ||
-                !query_.relations.empty()) {
+            if (!aggregates_.empty() || !query_.object_group_bys.empty() ||
+                !query_.child_enhancements.empty() || !query_.relations.empty()) {
                 observe("DISABLED");
             }
             return;
@@ -603,6 +618,7 @@ private:
     SelectQuery query_;
     Vector<RelationAggregate> aggregates_;
     Vector<CompactRow> rows_;
+    Vector<CompactRow> aggregate_keys_;
     String cursor_key_, cursor_id_;
     EntityRelationFetch<E> fetch_;
     std::optional<ResourceBorrow<ContinuousPageCursorStore>> cursor_store_;

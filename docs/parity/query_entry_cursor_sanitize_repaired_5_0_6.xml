@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="29"
+	timestamp="2026-10-20T18:21:05"
+	>
+	<testcase name="deferred_continuous_page_context_contracts" classname="deferred_continuous_page_context_contracts" time="0.331308" status="run">
+		<properties/>
+		<system-out>8 continuous cursor replacement/destruction scenarios passed
+</system-out>
+	</testcase>
+	<testcase name="query_entry_cursor_rust_parity" classname="query_entry_cursor_rust_parity" time="29.9764" status="run">
+		<properties/>
+		<system-out>Query entry/cursor protocols 5.0.6 parity: 8000/8000 observations match
+</system-out>
+	</testcase>
+	<testcase name="query_entry_cursor_context_contracts" classname="query_entry_cursor_context_contracts" time="0.0424454" status="run">
+		<properties/>
+		<system-out>Query cursor lifetime contracts passed
+</system-out>
+	</testcase>
+</testsuite>

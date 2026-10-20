@@ -74,9 +74,9 @@ public:
                 }
                 query_ = clone_in(r, result->value().query);
                 total_ = result->value().total_count;
-                direct_ = aggregates_.empty() && !query_.continuous_page_fetch &&
-                          query_.object_group_bys.empty() && query_.child_enhancements.empty() &&
-                          query_.relations.empty();
+                direct_ = aggregates_.empty() && query_.relation_aggregates.empty() &&
+                          !query_.continuous_page_fetch && query_.object_group_bys.empty() &&
+                          query_.child_enhancements.empty() && query_.relations.empty();
                 if (!direct_) {
                     auto plans = EntityDataServiceAccess::flat_relation_plans(service_, query_);
                     if (!plans) {
@@ -86,8 +86,8 @@ public:
                         plans_.emplace(std::allocator_arg, Allocator(r), *plans.value());
                         query_.relations.clear();
                     }
-                    compact_ = aggregates_.empty() && !query_.continuous_page_fetch &&
-                               query_.object_group_bys.empty() &&
+                    compact_ = aggregates_.empty() && query_.relation_aggregates.empty() &&
+                               !query_.continuous_page_fetch && query_.object_group_bys.empty() &&
                                query_.child_enhancements.empty() && bool(plans_);
                 }
                 if (direct_ || compact_) {

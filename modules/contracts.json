@@ -4929,6 +4929,39 @@
       "source": "tests/parity/context_privacy_preparation_probe.cpp",
       "import_module": "teaql_runtime",
       "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_helpers_probe",
+      "source": "tests/parity/context_helpers_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "enhanced_aggregate_probe",
+      "source": "tests/parity/enhanced_aggregate_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "query_entry_cursor_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name": "aggregate_membership_context_contracts",
+          "arguments": [
+            "--membership-self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
     }
   ],
   "fixtures": [

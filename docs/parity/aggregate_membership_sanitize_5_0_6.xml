@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="3"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="108"
+	timestamp="2026-10-20T19:09:22"
+	>
+	<testcase name="query_entry_cursor_context_contracts" classname="query_entry_cursor_context_contracts" time="0.104276" status="run">
+		<properties/>
+		<system-out>Query cursor lifetime contracts passed
+</system-out>
+	</testcase>
+	<testcase name="aggregate_membership_rust_parity" classname="aggregate_membership_rust_parity" time="108.722" status="run">
+		<properties/>
+		<system-out>Aggregate membership 5.0.6 parity: 10560/10560 observations match
+</system-out>
+	</testcase>
+	<testcase name="aggregate_membership_context_contracts" classname="aggregate_membership_context_contracts" time="0.0941807" status="run">
+		<properties/>
+		<system-out>Aggregate membership lifetime contracts passed
+</system-out>
+	</testcase>
+</testsuite>
