@@ -602,7 +602,16 @@
         "teaql_module_value_model_tests",
         "teaql_module_value_owned_api_probe",
         "teaql_module_value_owned_api_tests",
-        "teaql_module_value_probe"
+        "teaql_module_value_probe",
+        "teaql_module_event_model_probe",
+        "teaql_module_policy_model_probe",
+        "teaql_module_mutation_policy_probe",
+        "teaql_module_policy_plan_probe",
+        "teaql_module_policy_model_tests",
+        "teaql_module_runtime_completion_tests",
+        "teaql_module_relation_key_snapshot_probe",
+        "teaql_module_runtime_service_types_probe",
+        "teaql_module_relation_model_probe"
       ]
     },
     {

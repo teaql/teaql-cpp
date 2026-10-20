@@ -1,0 +1,17 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "guards": {
+    ".reference/teaql-rs/teaql-runtime/src/event.rs": "8ce0ccadf2a2e5da385b65db4a38e05ce193242222554afc6a92a9d674225801",
+    ".reference/teaql-rs/teaql-runtime/src/log_privacy.rs": "a56d52323fbcdc6be8bc4a94efb2b73aa72942ddadb98cc486a274236122a288",
+    "tests/parity/rust_field_layout/src/bin/event_model_5_0_6.rs": "f6e986d1bdd1309ca462a4c049f34b8b148a2cfbf50d3f31774cdbaf673f31a0",
+    "tests/parity/rust_field_layout/src/bin/audit_event_projection_5_0_6.rs": "42d4087daa6a1a973ce7552514f0ed7fb1efa2be484959a00014421b0dfb90e7",
+    "tests/parity/rust_field_layout/src/bin/dynamic_audit_projection_5_0_6.rs": "247757c0a4645c5a6940985817f6fc5a34ba0151fe2f134984e4714ee0f2e00d",
+    "tests/parity/rust_values/src/bin/audit_event_oracle.rs": "48dd645355bc26edd47be2a1120e73b288a36286141a440a510d32c083c1d388",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_values/src/formatter_fixture.rs": "7af9ba6fb78d56461665dd66a0fa44c5aa374ecf9ad433eb7ba3c58aaed32773",
+    "tests/parity/event_model_5_0_6_cases.json.gz": "d0226f6727913a9c7c8832a86a69c2d51029fb7fb9c28da5c22e0f76258ef754",
+    "tests/parity/audit_event_projection_5_0_6_cases.json.gz": "d46938d184af4ca28cb54afe50611902e15916cba99eed2aca75ef17c1b437d7",
+    "tests/parity/dynamic_audit_projection_5_0_6_cases.json.gz": "4ede38228b21188913968c4fc143fba887f4237a59f4623eacce845aafe73aee",
+    "tests/parity/audit_event_baseline_5_0_6_cases.json.gz": "e6b017d192d0fff49f4f607791e394fd35bb4916898e93d03d02760966807179"
+  }
+}

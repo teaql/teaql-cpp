@@ -70,9 +70,18 @@
       "source_change": "unchanged",
       "cpp_target": "teaql_core/include/teaql/core/request.hpp; teaql_core/include/teaql/core/dynamic_search.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned request.rs/dynamic_search.rs production responsibilities are reviewed: constants/18 operators/11 request structs/all43 fields/generic EntityReference and both builtins, constructors/conversions/every helper, seven search models and both normalize/merge entries. Builder/core models remain distinct; stored relation filters are retained without invented conversion behavior. Source Defaults/Clone/PartialEq/Eq/Debug/Error/sole warning Serialize protocol are accounted for. Receiver constraints now reflect actual invocation and missing Error source() is repaired. Strict UI decoding, permissive JSON helpers, warning ordering/default privacy/custom sinks and raw diagnostics remain separate. All174 request/509 search/872 helper inputs match live original Rust native/MIPS. Eight unchanged source search tests pass. Six final native/MIPS/ASanUBSan selections pass; current leak scanning is unavailable under tracing and not claimed passing, while explicit lifetime/block return checks remain active. Final full native consumer rebuild/regression passes281/28170.86s after last declaration change. This accepts only this two-file group, not downstream runtime/privacy or all stages.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "DS01-DS19: complete named 5.0.6 source under the detailed responsibility review. 5071 source/native/imported outcomes; original Value13/List2/Dynamic8; native24/module24. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/core_dynamic_search_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/core_sources_installed_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/core_dynamic_search_source_review_5_0_6.md",
+      "current_review_sha256": "0db54e9a9738fd3e4b5c540220f7d968143d8cc754755b54dae8788f35e98061",
+      "acceptance_scope": "Only complete teaql-core/src/dynamic_search.rs under DS01-DS19; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-core/src/entity.rs",
@@ -185,9 +194,18 @@
       "source_change": "unchanged",
       "cpp_target": "teaql_core/include/teaql/core/list.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "The complete pinned list.rs production responsibilities are reviewed: six distinct fields,44 public methods, three derived and12 explicit traits, plus every public-observable private ID key case. Explicit scoped default/owned construction, borrowed/consuming iteration, optional replacement, stable retention, maps/groups/merges/facets, entity projections and ID/version adapters preserve original semantics and bounds. Conditional Clone/equality declarations are repaired; owned outputs/keys need no extra Clone and replacement needs no entity assignment. Scoped Boolean storage restores actual pointer/slice semantics. Owned mapper/entity failure releases unvisited objects before unwind; f32 Debug preserves binary32 width. All1291 original API inputs match native/MIPS; prior3042 raw model outputs remain. Current native/MIPS selections and ASan/UBSan pass; current LeakSanitizer cannot run under tracing and is explicitly not counted as passing. Native ownership counters prove all arena blocks return and exactly-once cleanup. Complete fresh native consumer/probe refresh and regression pass281/281 in69.60s with no pending build work. This accepts only the list group, not surrounding query/entity/runtime/privacy or all stages.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "SL01-SL25: complete named 5.0.6 source under the detailed responsibility review. 5071 source/native/imported outcomes; original Value13/List2/Dynamic8; native24/module24. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/core_smart_list_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/core_sources_installed_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/core_smart_list_source_review_5_0_6.md",
+      "current_review_sha256": "98d5f70d30b285ec1d1426d8aa49d450f3e5216f9f2336aa7a8c4a7d246ac4a1",
+      "acceptance_scope": "Only complete teaql-core/src/list.rs under SL01-SL25; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-core/src/load_state.rs",
@@ -318,14 +336,22 @@
       "source_change": "changed",
       "cpp_target": "teaql_core/include/teaql/core/request.hpp; teaql_core/include/teaql/core/dynamic_search.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned request.rs/dynamic_search.rs production responsibilities are reviewed: constants/18 operators/11 request structs/all43 fields/generic EntityReference and both builtins, constructors/conversions/every helper, seven search models and both normalize/merge entries. Builder/core models remain distinct; stored relation filters are retained without invented conversion behavior. Source Defaults/Clone/PartialEq/Eq/Debug/Error/sole warning Serialize protocol are accounted for. Receiver constraints now reflect actual invocation and missing Error source() is repaired. Strict UI decoding, permissive JSON helpers, warning ordering/default privacy/custom sinks and raw diagnostics remain separate. All174 request/509 search/872 helper inputs match live original Rust native/MIPS. Eight unchanged source search tests pass. Six final native/MIPS/ASanUBSan selections pass; current leak scanning is unavailable under tracing and not claimed passing, while explicit lifetime/block return checks remain active. Final full native consumer rebuild/regression passes281/28170.86s after last declaration change. This accepts only this two-file group, not downstream runtime/privacy or all stages.",
+      "status": "accepted",
+      "responsibility": "RQ01-RQ20: complete named 5.0.6 source under the detailed responsibility review. 5071 source/native/imported outcomes; original Value13/List2/Dynamic8; native24/module24. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
       "evidence": [
         "docs/generated_dynamic_json_5_0_6.md",
         "tests/parity/generated_dynamic_json_5_0_6_cases.json.gz",
         "docs/general_query_5_0_6.md",
-        "tests/parity/general_query_5_0_6_cases.json.gz"
-      ]
+        "tests/parity/general_query_5_0_6_cases.json.gz",
+        "docs/core_request_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/core_sources_installed_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/core_request_source_review_5_0_6.md",
+      "current_review_sha256": "afd66651b48abba1738c2a2b37430a92a9493cf863c1e17f84e30f69a2251883",
+      "acceptance_scope": "Only complete teaql-core/src/request.rs under RQ01-RQ20; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-core/src/request_intent.rs",
@@ -424,9 +450,18 @@
       "source_change": "unchanged",
       "cpp_target": "teaql_core/include/teaql/core/value.hpp; teaql_core/include/teaql/core/decimal.hpp; teaql_core/include/teaql/core/json.hpp; teaql_core/include/teaql/core/time.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "All Value variants, conversions, JSON projection, and recursive explicit-domain copies have implementations and fixed Rust comparisons. Timestamp transparent integer serialization is present; Value has no derived serde protocol. Decimal provides five checked arithmetic operations, saturation, ordering, truncation/integral operations/normalization, and all rounding modes, with 963 comparisons. Scale/significant-digit operations, binary encoding, and errors have 1,148. Exact/radix parsing adds 8,576 original-call comparisons including error variants and panic boundaries. Primitive numeric conversions add 6,058 comparisons, including IEEE32/64 retained precision, portable signed/unsigned 128-bit values and structured conversion errors. Scientific construction, active constants, Signed/unpack/Hash inputs and ordered Sum/Product add 3,495 original-call comparisons; extended alignment failures preserve original panic boundaries rather than substituting saturation results. Default Decimal serde JSON and Display/Debug/Exp formatting add 3,008 original-call comparisons, with scoped outputs and diagnostics. Complete serialization/API/reexport audits, extended-scale arithmetic combinations, and provider codecs need acceptance. SQLite decoding adds structured Decimal errors, JSON reasons/locations, Unicode timestamp offset signs, and boundary leap seconds. Audit comparisons include Rust Debug text for every Value variant, Unicode escaping, float exponent boundaries, and JSON Debug. Timestamp now preserves signed millisecond total ordering and standard hashing, with 67 original public-call inputs and 16698 pairwise comparisons. See the Core API acceptance contract; complete core acceptance remains separate. The complete rebuilt native suite passes 191/191; the Core API/model selections pass 3/3 under ASan/UBSan with leak detection and 3/3 under OpenWrt MIPS/QEMU. All 259 observations match live original Rust on native and MIPS; original core unit tests pass 65/65. This does not establish complete core acceptance. Extended binary arithmetic now has 8,056 unchanged original public-call observations after rescale, preserving raw result scale, signed zero, division power-table/constructor failures and staged remainder window behavior. Native old Decimal checks pass 7/7. Rebuilt ASan/UBSan with leak detection and OpenWrt MIPS/QEMU each pass all eight Decimal checks; all 8,056 MIPS observations match live original Rust. The full native consumer rebuild remains pending at this checkpoint. See decimal_extended_acceptance.md; this matrix is not complete Decimal API or stage acceptance. Native UTC conversion is now provided through chrono_value.hpp: value_from_utc maps standard signed integral system-clock seconds/milliseconds/microseconds/nanoseconds to the existing Timestamp Value. It preserves negative fractional floor and rejects seconds overflow before multiplication; native milliseconds beyond source calendar range are a documented input extension. All 64 actual original Value::from(DateTime<Utc>) observations match native and MIPS; standalone native/ASan/UBSan/MIPS ownership checks pass with null default PMR and Global retention after actual User deletion. The core.hpp facade and named UTC tests are now registered. Final rebuilt native regression passes 215/215; the fourteen selected checks pass on ASan/UBSan with leak detection and MIPS/QEMU. Named native/MIPS UTC probes match all 64 live original observations. Complete surrounding Value/Decimal/API/source-test acceptance remains separate. Standalone DataType Debug now preserves every original unit variant; TypedNull delegates without an intermediate wrapped diagnostic. Ten direct original inputs compare 180 formatter outputs and 100 pairwise equality results on native/MIPS. Final full native regression passes 217/217; seven selected ASan/UBSan with leak detection and MIPS/QEMU checks each pass 7/7, including complete row/list and Entity Debug corpora. DataType introduces no source serde protocol and its ordinary C++ enum copy/equality remain value capabilities. See datatype_debug_acceptance.md; complete surrounding Value/Decimal/API/source-test acceptance is still separate. Owning String/List/Object constructors now transfer same-domain payload storage; foreign retention deep-copies before publication without consuming source data, matching the existing C++ Value domain adaptation. 171 original owning constructor calls compare full Debug/JSON, Clone equality and transferred payload addresses. Native contracts check long character/vector/map-node identity, capacity, payload failure after metadata precharge, all nested destination allocators, actual User destruction and all Global block reclamation. The Expr IN-list path uses the formal constructor. Named checks are registered; the new full native consumer and sanitizer builds remain running. Fresh MIPS/QEMU passes all ten selected checks and all 171 live original observations; Fresh ASan/UBSan with leak detection also completed all ten selected checks successfully; full native terminal acceptance remains pending. This does not establish complete surrounding model/API/privacy/source-test acceptance. The complete Value enum API mapping now observes all sixteen From responsibilities through the combined new scalar, owning and UTC audits. The new 115-input matrix calls all eight extractors and compares 13225 pairwise equalities, preserving Some(NaN) separately from missing output. Timestamp adds 99 original public/derive observations including chrono fallback and raw transparent JSON acceptance; both unchanged source time tests and latest native/ASan/UBSan/MIPS ownership ports pass. Standalone native Value and native/MIPS Timestamp probes match; Value MIPS rerun and formal named registration remain pending. See value_api_acceptance.md and timestamp_api_acceptance.md; surrounding Decimal/serialization diagnostics and all-stage acceptance remain separate. The owning constructor full native build has now completed successfully with 219/219 checks and 171/171 live original observations; prior running statements are historical. The new Value scalar probe matches 115/115 on native and MIPS, applying only documented width-changing NaN classification. Five metadata/scalar checks are registered; native full regression and ten selected sanitizer/MIPS checks are running. Final integrated checkpoint: full native build and regression completed successfully with 224/224 checks; the ten selected ASan/UBSan with leak detection and MIPS/QEMU checks each pass 10/10. Fresh named native/MIPS probes match all 160 metadata, 99 Timestamp and 115 Value live original inputs. Prior running statements are historical checkpoints. Full surrounding stage acceptance remains separate. Decimal now exposes the original allocation-free array_string capability through a 33-byte inline scalar carrier. Its unsigned characters, retained scale and fixed 32-character capacity are distinct from signed Display; source buffer panics map to length_error. Copies own bytes without extending a Context. All 484 original calls, including 50 original buffer failures, match native production; all ten native Decimal checks pass. Native contracts instrument ordinary heap allocation, disable default PMR, verify independent inline-copy addresses and actual source User deletion. Named inline contracts/parity and cross emulation are registered. Full native 238-check and twelve selected sanitizer/MIPS acceptance remain running. This does not establish complete supported Decimal APIs or all stages. The grouped standalone core diagnostic repair supplies the original BusinessId/search/Decimal-helper Debug capabilities through three focused headers. Native and MIPS each match all 94 actual original inputs and 34216 string observations. Native and ASan/UBSan ownership contracts pass with null default PMR, nested Global allocator checks and complete output after actual User deletion. Public core facade exposure and named CMake integration remain pending until the active 238-check consumer checkpoint completes; standalone evidence is not that integration or full API/privacy acceptance. Final grouped diagnostic integration: core.hpp exposes all eighteen new overloads, including qualified core::write_debug for dynamic-search models. Full native consumer rebuild and CTest pass 240/240; nine selected ASan/UBSan with leak detection and nine MIPS/QEMU checks pass. Named native/MIPS probes match all 94 live original inputs. The correctly mapped presence probe sees all 79 core/dependency diagnostic declarations. Presence remains weaker than semantic acceptance. The per-source-test ledger still has 427 applicable entries awaiting individual review; these are audit gaps rather than proven implementation defects. Complete time.rs review reproduces missing writable public Timestamp storage. The public signed millis field restores tuple-field mutation and mutable borrowing without extra storage. Nine original mutable-field observations extend the earlier 99 Timestamp inputs to 108; current-source standalone native contracts and all 108 live comparisons pass. Native consumer and selected sanitizer/MIPS rebuilds remain pending. Enabled Decimal Inv was reproduced missing and is now implemented through the existing ONE/divisor kernel. Ninety actual locked-trait reciprocal observations and ninety inherited Zero/One default sequences extend 3,495 unchanged foundation cases to 3,675, including sixteen reciprocal source failures. Native scalar/default contracts and all 3,675 live observations pass. Entity/Timestamp selected ASan/UBSan (leak scanning disabled) and MIPS checks pass 12/12, predating the final identity-header refresh. Current platform and final consumer integration remain pending; the complete Value/time group remains partial. A later enabled Decimal review adds actual pointer-width source evidence: 238 inputs execute original ToPrimitive/TryFrom/FromPrimitive/From at native 64-bit and ARMv7 musl 32-bit Rust widths. Native C++ and MIPS match their respective live source widths exactly, retaining raw state, optional results, full error Display/Debug and primitive input rejection. The isolated oracle uses existing locked dependency versions/checksums only. A compile fixture also reproduces missing constexpr construction/raw scalar observations/bounds/serialization; allocation-free source const-fn responsibilities are restored without runtime/representation/ownership changes. Source word-width constant assertions compile. Scoped Result/Error factories retain their explicit-domain adaptation. Fresh sanitizer/MIPS and full native 644-task consumers are running; the Value/time/Decimal group and complete stages stay partial. Fresh final Decimal/auxiliary selections pass 13/13 under ASan/UBSan with leak scanning disabled (64.18 seconds) and 13/13 on MIPS/QEMU (35.42 seconds). Final selected build refreshes report no work; all 147 sanitizer and 324 MIPS compiled dependency records are nonempty. A full-byte static assertion is added to the Decimal native contract and its affected unit is refreshed separately. The complete native 644-task consumer build remains live; full Value/time/Decimal and stage acceptance remain open. Complete inherited standard Ord default review identifies omitted min/max/clamp responsibilities. C++ ord_min/ord_max/clamp now remain separate from inherent min/max, preserving second-argument Ord max ties and first-argument inherent max ties, full representation selection and reversed-bound failure with unchanged inputs. Six hundred five direct original calls extend 3675 unchanged observations to 4280, all matching live native/MIPS Rust. Named Decimal selections pass 13/13 on ASan/UBSan with leak scanning disabled and13/13 on MIPS. Time now() also switches from truncating duration_cast to chrono::floor<milliseconds>, matching source negative-epoch submillisecond semantics; its clock-bracket fixture observes the same floor. Fresh Value/time/Decimal consumers and final whole-native refresh remain running; full group/stage acceptance is open. Complete pre-test Value/time bodies are additionally traced through all 16 From conversions, eight distinct extractors, recursive projection, mutable Timestamp field and every source derive. Enabled Decimal factories, arithmetic/reference/assignment/fold/error/default-serde bodies and inherited standard/num-traits responsibilities are reviewed separately. Fresh Ord selections pass 13/13 on sanitizer (76.28 seconds) and MIPS (45.67 seconds), and all 4,280 observations match live MIPS original Rust. Combined latest Value/time consumers and final complete native refresh/regression remain required; status stays partial. Combined final Value/time/Decimal consumers subsequently pass 21/21 under ASan/UBSan with leak scanning disabled (78.13 seconds) and 21/21 on MIPS/QEMU (59.04 seconds). This includes the linked clock-floor correction, original Value source tests, owning/scalar and Timestamp/UTC contracts, all enabled Decimal matrices/defaults and actual pointer widths. Full final native header refresh and complete CTest remain live; group status remains partial. Additional fresh scalar/DataType/memory consumers pass 13/13 under ASan/UBSan with leak scanning disabled (2.63 seconds) and 13/13 on MIPS/QEMU (4.24 seconds), including all original Value extraction/format, DataType diagnostics, bounded reference/arena/native-resource/async teardown and the lifetime example. The first native 644-task build finishes, followed by a live 452-task final refresh for later header/clock changes. The explicit Stage 2 completion audit is added to migration_plan.md; full current native and last source-group acceptance remain required. Complete grouped source acceptance now follows the full Value/time and enabled Decimal public/default/trait/protocol/ownership reviews. Final native no-work integration passes 303/303 in 74.81 seconds with all 375 dependency records nonempty. Combined 21/21 and separate scalar/DataType/memory 13/13 selections pass on sanitizer and MIPS. This accepts the last Stage 2 source group; stages 3\u20136 and SQL projection-state gaps remain open.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "VL01-VL21: complete named 5.0.6 source under the detailed responsibility review. 5071 source/native/imported outcomes; original Value13/List2/Dynamic8; native24/module24. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/core_value_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/core_sources_installed_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/core_value_source_review_5_0_6.md",
+      "current_review_sha256": "9c34d26230d33cb2af7e9943282220f9038b62601dd061fc5d003ad43393e586",
+      "acceptance_scope": "Only complete teaql-core/src/value.rs under VL01-VL21; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-core/src/web.rs",
@@ -514,9 +549,18 @@
       "source_change": "unchanged",
       "cpp_target": "tests/parity/teaql_core/dynamic_search.cpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete221-line test file: all eight original test bodies/helpers, seven-field/two-model metadata, full submitted inputs and subprocess parent/child assertions. Explicit arena and default-PMR-disabled containers preserve source data while the child process forwards the configured emulator. No hidden Context owner or replacement search implementation is introduced. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "complete221-line test source: complete named 5.0.6 source under the detailed responsibility review. 5071 source/native/imported outcomes; original Value13/List2/Dynamic8; native24/module24. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/core_dynamic_search_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/core_sources_installed_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/core_dynamic_search_source_review_5_0_6.md",
+      "current_review_sha256": "0db54e9a9738fd3e4b5c540220f7d968143d8cc754755b54dae8788f35e98061",
+      "acceptance_scope": "Only complete teaql-core/tests/dynamic_search.rs under complete221-line test source; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-core/tests/load_state_allocations.rs",
@@ -912,9 +956,18 @@
       "source_change": "unchanged",
       "cpp_target": "teaql_runtime/include/teaql/runtime/business_id.hpp; teaql_runtime/include/teaql/runtime/business_clock.hpp; teaql_runtime/include/teaql/runtime/id.hpp; teaql_runtime/include/teaql/runtime/id_space.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Preserve time/scope/sequence/encoding/schema contribution/allocation; clocks are injectable and no hidden C++ global owns data. Canonical ID-space naming has SQLite observations. Legacy/V1 strategies, versioned 32-byte keys, key-provider/static implementation, and V1 HMAC-SHA256/eight-round permutation have 2,150 comparisons and close/copy tests. BusinessIdSchemaContributor and SQLite implementation exist. BusinessClock/nanosecond UTC/BusinessDate/in-memory allocation/service/passive Context installation have 859 time/allocation/order observations and explicit-borrow/retention/poisoning/SQLite tests. The in-memory allocator is owner-thread-bound, not proven cross-thread-equivalent. InternalIdGenerator/AtomicCounter/Snowflake/Context registration/generate_id/next_id/bootstrap have 171 observations; the Global fallback is shared by its Users. Tests cover pure-counter thread safety, clock rollback/sequence exhaustion, and SQLite error adaptation. Schema contribution has 384 order/mode comparisons; physical SQLite schema and transactional audit have 735. Business save/audit call sites remain pending. Context generator registrations are checked borrows; User-only Ref registration supports delegated Global generators. Early destruction rejects generation before virtual dispatch; synchronous generation and floor callbacks reject reentrant close. Complete production review in docs/runtime_id_api_contract.md maps clock/date/schema/strategy/key/provider/permutation/allocator/service and all internal generator/default/state/Context responsibilities. A public umbrella compile reproduces seven missing source Debug derives; secret encoding keys/provider/service do not derive Debug and are not given invented formatters. Eighty-two actual original model/transition inputs agree twice in nine modes. Native diagnostic implementation/counterpart and complete current integration remain required; this is not passing parity. No running build input is changed. Complete source review reproduces seven missing Debug derives. A separate staged native repair matches 82/82 live original Debug cases and passes lifetime contracts; standalone sanitizer and MIPS checks also match all 82 for their original build profiles. Actual original Debug/Release executions are recorded independently twice; nine counter-overflow cases differ by profile. The reviewable staged patch includes umbrella and CMake registrations, without changing production inputs during entity-runtime integration. Full production/CMake/native regression and source acceptance remain open. Subsequent lifetime review reproduces a managed clock destroyed after registration: installed raw pointer dispatch terminates instead of checked Dead rejection. The cumulative checked clock/registry/schema borrow repair and six future contracts are staged separately outside active343 inputs; installed full consumer rebuild and native/sanitizer/MIPS validation remain required before acceptance. Complete runtime ID source acceptance follows review of all business_id.rs1\u2013563/id.rs1\u2013187 production methods/defaults/traits/protocol/ownership, checked clock/provider dispatch and synchronous service callback repair. Final native361/361 with no-work/417 dependencies and both sanitizer/MIPS40/40 selections validate the installed snapshot; live original82 Debug/Release models,859 service and171 internal-ID observations match. Source Clock/Schema/Allocator/Key/Profile/Service/InternalIdGenerator responsibilities remain separate; Context metadata/telemetry, relation, graph/governance/privacy and complete Stage4 remain independent.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "RB01-RB12: complete named 5.0.6 source under the detailed responsibility review. 3262 exact source/native/imported observations; native22/module5; 82 original Release versus isolated Release-ID outcomes, not a full Release runtime. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/runtime_ids_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/runtime_ids_source_replay_final_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/runtime_ids_source_review_5_0_6.md",
+      "current_review_sha256": "579e6d2630e58b311f153db675bdb47a7a6874aa61df34f37d5af5088f2e7264",
+      "acceptance_scope": "Only complete teaql-runtime/src/business_id.rs under RB01-RB12; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/src/checker.rs",
@@ -1023,9 +1076,18 @@
       "source_change": "unchanged",
       "cpp_target": "teaql_runtime/include/teaql/runtime/locking.hpp; teaql_runtime/src/context/locking.cpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Local lock ownership, zero-timeout attempts, reentry/lease renewal, wrong-owner release, expiry takeover, and optional RemoteLockProvider delegation are implemented with 222 direct unchanged public Rust scripts. Remote owner tokens retain equality across provider replacement and identifier changes, differ across recreated Users, and pass timeout/expiry unchanged. Provider lookup occurs at first poll; checked resource access, key snapshots, wake forwarding and cancellation keep pending native work within User. Local entries own Global key copies and scalar owners; User teardown does not implicitly release leases or retain User blocks. u64 millisecond deadlines use wide monotonic seconds/nanoseconds and bounded condition-variable waits. C++ explicit Global application ownership replaces Rust process-static table; separate Globals are separate lock namespaces and Context calls remain owner-thread confined. Native tests exercise quota failure, release without allocation, Context reconstruction, expired resources, suspend/cancel/close and cross-thread rejection. No remote/cloud service is implemented. Full cross-application policy and runtime API acceptance remain documented rather than inferred from presence. Complete source-group acceptance is now recorded after full public/default/trait/protocol/ownership review and coherent final native 302/302 integration. Fresh Entity/locking/original-tail selections pass 11/11 under ASan/UBSan with leak scanning disabled and 11/11 on MIPS/QEMU. Explicit C++ ownership adaptations are documented; remaining source groups, runtime/save/privacy and complete stages remain open.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "LC01-LC14: complete named 5.0.6 source under the detailed responsibility review. actual original local/remote2; 222 source/imported observations and imported3 with explicit Global namespace/owner-thread adaptation. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/context_locking_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/context_locking_source_replay_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/context_locking_source_review_5_0_6.md",
+      "current_review_sha256": "57fb02032243524ac07066b5a7cfe6bdb2ad4f767689910ab04944082167f947",
+      "acceptance_scope": "Only complete teaql-runtime/src/context/locking.rs under LC01-LC14; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/src/context/logging.rs",
@@ -1174,9 +1236,18 @@
       "source_change": "changed",
       "cpp_target": "teaql_runtime/include/teaql/runtime/data_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp; teaql_runtime/src/data_service/mod.cpp; teaql_runtime/include/teaql/runtime/detail/query_keys.hpp; teaql_runtime/src/data_service/query_keys.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/id_set_page.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp; teaql_runtime/src/data_service/relation_graph.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/base_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/context_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete six-file runtime service responsibilities are accepted after all public/private/default/trait/protocol/ownership and execution body reviews. Separate RuntimeDataService, ContextDataService, EntityDataService and live metadata interfaces preserve typed/row/stream/cache/pagination/relation/mutation roles. Cursor counters match checked Debug versus wrapping Release, and the formerly missing private typed-aggregate path preserves a fresh decoding root without enhanced ID paging. Native 378/378 after 338 consumer tasks, 420 nonempty dependencies and no-work before/after; current sanitizer/MIPS 56/56 plus independent base/stream 3/3 pass. Thirteen live original matrices match all recorded cases on both profiles, including 165 public entity-query, 48 actual private helper bodies and 1502 mutation observations. Checked origins, concrete non-Clone error/output completion, foreign-work cancellation, default-PMR-disabled actual User destruction and explicit Global nested retention remain mandatory. 32-bit key field adaptation and controlled private-helper rows are explicit; they do not claim native Rust/router execution. Complete graph/save/runtime-root and stages 5\u20136 remain separate.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "RH01-RH12: complete named 5.0.6 source under the detailed responsibility review. original cache-key2 plus caller1; source/native/imported64 and installed native7/module7; shorter-span snapshot attachment matches source zip semantics. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/runtime_service_helpers_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/relation_key_snapshot_installed_source_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/runtime_service_helpers_source_review_5_0_6.md",
+      "current_review_sha256": "b349292692564e90550d54d6915a7017eee6e49bd8e66339ac46cf1bd6e53c07",
+      "acceptance_scope": "Only complete teaql-runtime/src/data_service/helpers.rs under RH01-RH12; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/src/data_service/mod.rs",
@@ -1235,14 +1306,22 @@
       "source_change": "changed",
       "cpp_target": "teaql_runtime/include/teaql/runtime/data_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp; teaql_runtime/src/data_service/mod.cpp; teaql_runtime/include/teaql/runtime/detail/query_keys.hpp; teaql_runtime/src/data_service/query_keys.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/id_set_page.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp; teaql_runtime/src/data_service/relation_graph.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/base_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/context_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete six-file runtime service responsibilities are accepted after all public/private/default/trait/protocol/ownership and execution body reviews. Separate RuntimeDataService, ContextDataService, EntityDataService and live metadata interfaces preserve typed/row/stream/cache/pagination/relation/mutation roles. Cursor counters match checked Debug versus wrapping Release, and the formerly missing private typed-aggregate path preserves a fresh decoding root without enhanced ID paging. Native 378/378 after 338 consumer tasks, 420 nonempty dependencies and no-work before/after; current sanitizer/MIPS 56/56 plus independent base/stream 3/3 pass. Thirteen live original matrices match all recorded cases on both profiles, including 165 public entity-query, 48 actual private helper bodies and 1502 mutation observations. Checked origins, concrete non-Clone error/output completion, foreign-work cancellation, default-PMR-disabled actual User destruction and explicit Global nested retention remain mandatory. 32-bit key field adaptation and controlled private-helper rows are explicit; they do not claim native Rust/router execution. Complete graph/save/runtime-root and stages 5\u20136 remain separate.",
+      "status": "accepted",
+      "responsibility": "RT01-RT17: complete named 5.0.6 source under the detailed responsibility review. source/native/imported258, original private caller1, installed native5/module5 and three complete lifetime programs per frontend; separate Runtime/Context/entity services. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
       "evidence": [
         "docs/dynamic_ledger_5_0_6.md",
         "teaql_runtime/tests/dynamic_ledger_tests.cpp",
         "docs/generated_execution_5_0_6.md",
-        "tests/parity/generated_execution_5_0_6_cases.json.gz"
-      ]
+        "tests/parity/generated_execution_5_0_6_cases.json.gz",
+        "docs/runtime_service_types_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/service_types_installed_source_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/runtime_service_types_source_review_5_0_6.md",
+      "current_review_sha256": "eda351d16e92b97e563dc83ccfc76b297735d8cbaf539ed62afc582141294fff",
+      "acceptance_scope": "Only complete teaql-runtime/src/data_service/types.rs under RT01-RT17; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/src/document_round_trip.rs",
@@ -1359,9 +1438,18 @@
       "source_change": "unchanged",
       "cpp_target": "teaql_runtime/include/teaql/runtime/entity_status.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete production contract reviewed: seven statuses/four actions, eleven valid/seventeen invalid transitions with exact reasons, all five predicates, default New, native Copy/Clone/Eq/Hash, Display and four derived Debug modes. All 28 state/action pairs match actual Rust calls; sixteen source tests and native hash containers pass. No source serde protocol is invented. C++ std::invalid_argument adapts the String Result error; no identical cross-language hash bytes are promised. Runtime/save composition and complete stages remain separate.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "ES01-ES10: complete named 5.0.6 source under the detailed responsibility review. actual original16; 1174 source/native/imported observations and complete counterpart/imported2. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/entity_status_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/entity_status_source_replay_final_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/entity_status_source_review_5_0_6.md",
+      "current_review_sha256": "5bb842d496bdede136f5f804c39cf4a00d19e7f4bac2d238d9a48f1e722c4dcb",
+      "acceptance_scope": "Only complete teaql-runtime/src/entity_status.rs under ES01-ES10; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/src/error.rs",
@@ -1387,11 +1475,19 @@
       "source_change": "changed",
       "cpp_target": "teaql_runtime/include/teaql/runtime/event.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned572-line event production source responsibility is accepted after full public/private factory, model/default/trait/diagnostic, privacy helper and sink review. Current native375/375, sanitizer20/20 and MIPS20/20 pass with no-work before/after; native/MIPS match live original model/projection/Context observations and explicitly validate target-width rejection. Direct fan-out protects each distinct Context/owner/event/result arena with stack-only quiescence records; ordinary exceptions detach before actual User reclamation and first Result failure preserves source ordering. Raw/safe/bootstrap/governance/sink concepts remain independent. Complete Context/service/graph/log-privacy/runtime-root and stage acceptance remain separate.",
+      "status": "accepted",
+      "responsibility": "EV01-EV24: complete named 5.0.6 source under the detailed responsibility review. 5611 exact source/native/imported outcomes; original-public caller5; installed native10/module10; no original embedded Event tests. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
       "evidence": [
-        "docs/dynamic_typed_save_audit_5_0_6.md"
-      ]
+        "docs/dynamic_typed_save_audit_5_0_6.md",
+        "docs/event_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/event_sources_installed_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/event_source_review_5_0_6.md",
+      "current_review_sha256": "02aeb464c83f6b0dfc9b058c0ce7c9d8849c8a0475ca25754361f21152484f52",
+      "acceptance_scope": "Only complete teaql-runtime/src/event.rs under EV01-EV24; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/src/generated_support.rs",
@@ -1448,9 +1544,18 @@
       "source_change": "unchanged",
       "cpp_target": "teaql_runtime/include/teaql/runtime/business_id.hpp; teaql_runtime/include/teaql/runtime/business_clock.hpp; teaql_runtime/include/teaql/runtime/id.hpp; teaql_runtime/include/teaql/runtime/id_space.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Preserve time/scope/sequence/encoding/schema contribution/allocation; clocks are injectable and no hidden C++ global owns data. Canonical ID-space naming has SQLite observations. Legacy/V1 strategies, versioned 32-byte keys, key-provider/static implementation, and V1 HMAC-SHA256/eight-round permutation have 2,150 comparisons and close/copy tests. BusinessIdSchemaContributor and SQLite implementation exist. BusinessClock/nanosecond UTC/BusinessDate/in-memory allocation/service/passive Context installation have 859 time/allocation/order observations and explicit-borrow/retention/poisoning/SQLite tests. The in-memory allocator is owner-thread-bound, not proven cross-thread-equivalent. InternalIdGenerator/AtomicCounter/Snowflake/Context registration/generate_id/next_id/bootstrap have 171 observations; the Global fallback is shared by its Users. Tests cover pure-counter thread safety, clock rollback/sequence exhaustion, and SQLite error adaptation. Schema contribution has 384 order/mode comparisons; physical SQLite schema and transactional audit have 735. Business save/audit call sites remain pending. Context generator registrations are checked borrows; User-only Ref registration supports delegated Global generators. Early destruction rejects generation before virtual dispatch; synchronous generation and floor callbacks reject reentrant close. Complete production review in docs/runtime_id_api_contract.md maps clock/date/schema/strategy/key/provider/permutation/allocator/service and all internal generator/default/state/Context responsibilities. A public umbrella compile reproduces seven missing source Debug derives; secret encoding keys/provider/service do not derive Debug and are not given invented formatters. Eighty-two actual original model/transition inputs agree twice in nine modes. Native diagnostic implementation/counterpart and complete current integration remain required; this is not passing parity. No running build input is changed. Complete source review reproduces seven missing Debug derives. A separate staged native repair matches 82/82 live original Debug cases and passes lifetime contracts; standalone sanitizer and MIPS checks also match all 82 for their original build profiles. Actual original Debug/Release executions are recorded independently twice; nine counter-overflow cases differ by profile. The reviewable staged patch includes umbrella and CMake registrations, without changing production inputs during entity-runtime integration. Full production/CMake/native regression and source acceptance remain open. Subsequent lifetime review reproduces a managed clock destroyed after registration: installed raw pointer dispatch terminates instead of checked Dead rejection. The cumulative checked clock/registry/schema borrow repair and six future contracts are staged separately outside active343 inputs; installed full consumer rebuild and native/sanitizer/MIPS validation remain required before acceptance. Complete runtime ID source acceptance follows review of all business_id.rs1\u2013563/id.rs1\u2013187 production methods/defaults/traits/protocol/ownership, checked clock/provider dispatch and synchronous service callback repair. Final native361/361 with no-work/417 dependencies and both sanitizer/MIPS40/40 selections validate the installed snapshot; live original82 Debug/Release models,859 service and171 internal-ID observations match. Source Clock/Schema/Allocator/Key/Profile/Service/InternalIdGenerator responsibilities remain separate; Context metadata/telemetry, relation, graph/governance/privacy and complete Stage4 remain independent.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "RI01-RI08: complete named 5.0.6 source under the detailed responsibility review. 3262 exact source/native/imported observations; native22/module5; 82 original Release versus isolated Release-ID outcomes, not a full Release runtime. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/runtime_ids_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/runtime_ids_source_replay_final_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/runtime_ids_source_review_5_0_6.md",
+      "current_review_sha256": "579e6d2630e58b311f153db675bdb47a7a6874aa61df34f37d5af5088f2e7264",
+      "acceptance_scope": "Only complete teaql-runtime/src/id.rs under RI01-RI08; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/src/inmemory_engine.rs",
@@ -1570,13 +1675,21 @@
       "source_change": "changed",
       "cpp_target": "teaql_runtime/include/teaql/runtime/mutation_policy.hpp; teaql_runtime/include/teaql/runtime/mutation_governance.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. All545 production lines: constants, identity/operation/plan/decision, policy/registry/callable/default adapters, approval/provider, governance models/sinks, Context setters/review/warnings, activation, execution sequence and graph/ledger projections. Models retain nested destination allocators and explicit Global copies after User deletion. Checked provider borrows, review quiescence and owner-thread activation preserve callback lifetime. Poll/exception/cancel restore nested governance; child work joins under its snapshot before reclamation. Scalar process sequence uses a mutex without Context payload ownership. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
+      "status": "accepted",
+      "responsibility": "MP01-MP26: complete named 5.0.6 source under the detailed responsibility review. actual original6 plus private caller1; 2606 exact source/native/imported observations and installed native9/module9. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
       "evidence": [
         "docs/pending_dynamic_preflight_5_0_6.md",
         "tests/parity/dynamic_governance_5_0_6_cases.json",
-        "docs/dynamic_typed_save_audit_5_0_6.md"
-      ]
+        "docs/dynamic_typed_save_audit_5_0_6.md",
+        "docs/mutation_policy_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/policy_sources_installed_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/mutation_policy_source_review_5_0_6.md",
+      "current_review_sha256": "4d4b84c4475d4282e38cb2fff594b9a7be61e0e63b6a2a978ca5508acc96509e",
+      "acceptance_scope": "Only complete teaql-runtime/src/mutation_policy.rs under MP01-MP26; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/src/registry.rs",
@@ -1659,9 +1772,18 @@
       "source_change": "unchanged",
       "cpp_target": "tests/parity/teaql_runtime/business_clock.cpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "The complete source-only business_clock integration file is reviewed against its handwritten C++ port. Both exact source tests retain the 2032-02-29 10:15:30 UTC fixture and 2040-01-02 date-only resource override, every original assertion and independent time/date responsibilities. A fresh unchanged-source Rust run passes 2/2. The freshly compiled native port and named native CTest pass; rebuilt ASan/UBSan with leak detection and MIPS/QEMU named checks pass. Native clocks/resources are allocated in UserContext with default PMR disabled. This accepts only the complete integration-test file, not the separately partial production clock/business-service/runtime APIs, full stage acceptance or physical-device execution.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "BI01-BI08 clock source: complete named 5.0.6 source under the detailed responsibility review. complete original clock2/permutation4 tests and freshly compiled complete C++ counterparts; no new imported-test claim. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/business_integration_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/business_integration_source_replay_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/business_integration_source_review_5_0_6.md",
+      "current_review_sha256": "26eee8c94b0b78a5b5aa8027fcf9119b7ccbca59cfe29e766623ef1bf0e7d857",
+      "acceptance_scope": "Only complete teaql-runtime/tests/business_clock.rs under BI01-BI08 clock source; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/tests/business_id_permutation.rs",
@@ -1669,9 +1791,18 @@
       "source_change": "unchanged",
       "cpp_target": "tests/parity/teaql_runtime/business_id_permutation.cpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "All four original permutation contracts are ported, including the unchanged ten-row CSV, full 20000-sequence determinism/reconstruction/canonicality/uniqueness range, exhaustion/version/blank-scope errors and invalid allocation range. Original Rust passes 4/4; the full C++ range passes ASan/UBSan with leak detection. The original fixture is copied byte for byte, not generated from C++ output; complete surrounding API acceptance remains separate. Complete source-test acceptance on 2026-10-09 follows direct comparison of every original test body/input/assertion, fresh unchanged Rust execution, native353/353 with post-test no-work and416 nonempty compiler dependencies, and fresh sanitizer/MIPS source/ID selections4/4. Production API/privacy/runtime source groups and complete Stage6 remain independent.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "BI01-BI08 permutation source: complete named 5.0.6 source under the detailed responsibility review. complete original clock2/permutation4 tests and freshly compiled complete C++ counterparts; no new imported-test claim. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
+      "evidence": [
+        "docs/business_integration_source_review_5_0_6.md",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/business_integration_source_replay_5_0_6.json.gz",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+      ],
+      "current_review": "docs/business_integration_source_review_5_0_6.md",
+      "current_review_sha256": "26eee8c94b0b78a5b5aa8027fcf9119b7ccbca59cfe29e766623ef1bf0e7d857",
+      "acceptance_scope": "Only complete teaql-runtime/tests/business_id_permutation.rs under BI01-BI08 permutation source; not entire runtime, provider, generator capability or full P0-P7 qualification."
     },
     {
       "source": "teaql-runtime/tests/dynamic_field_query.rs",

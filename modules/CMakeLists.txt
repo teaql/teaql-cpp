@@ -1888,3 +1888,48 @@ if(TARGET teaql_module_original_core_search_tests)
         ${PROJECT_SOURCE_DIR}/tests/parity/check_search_warning_canary.py
         --cpp $<TARGET_FILE:teaql_module_original_core_search_tests>)
 endif()
+
+# Preserve the complete event-model observer through the runtime-only import.
+if(TARGET teaql_module_event_model_probe)
+    add_test(NAME module_event_model_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_event_model_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_event_model_probe>)
+endif()
+
+if(TARGET teaql_module_policy_model_probe)
+    add_test(NAME module_policy_model_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_policy_model_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_policy_model_probe>)
+endif()
+
+if(TARGET teaql_module_mutation_policy_probe)
+    add_test(NAME module_mutation_policy_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_mutation_policy_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_mutation_policy_probe>)
+endif()
+
+if(TARGET teaql_module_policy_plan_probe)
+    add_test(NAME module_policy_plan_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_policy_plan_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_policy_plan_probe>)
+endif()
+
+if(TARGET teaql_module_relation_key_snapshot_probe)
+    add_test(NAME module_relation_key_snapshot_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_relation_key_snapshot_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_relation_key_snapshot_probe>)
+    set_tests_properties(module_relation_key_snapshot_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_runtime_service_types_probe)
+    add_test(NAME module_runtime_service_types_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_runtime_service_types_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_runtime_service_types_probe>)
+    set_tests_properties(module_runtime_service_types_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+if(TARGET teaql_module_relation_model_probe)
+    add_test(NAME module_relation_model_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_relation_model_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_relation_model_probe>)
+    set_tests_properties(module_relation_model_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()

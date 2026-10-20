@@ -1,10 +1,12 @@
 # Complete audit event source review: Rust 5.0.6
 
+Current source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
+
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 Scope: all 607 lines of `teaql-runtime/src/event.rs`. Status: complete body
-reconciliation with an isolated current-dependency replay; permanent observer/
-consumer installation, formal source disposition and complete current native
-integration remain open. No runtime or generated implementation changes here.
+reconciliation and permanent native/imported source gates pass after the
+preceding 784-test native epoch. Formal source disposition remains separate.
+No runtime or generated implementation changes here.
 
 The [historical 5.0.5 review](audit_event_api_contract.md) remains historical.
 Its 572-line source and completed profiles do not establish acceptance of the
@@ -123,9 +125,29 @@ The later [merged Event/Policy archive](parity/event_policy_merged_staged_instal
 combines this tested candidate with the separately qualified policy observers and
 consumers. Its shared metadata preserves both additions. It is the reviewable
 installation candidate; the individual archives remain historical evidence.
-It is not installed during the running full native epoch.
+It was held outside the frozen full native epoch before the later installed
+checkpoint below.
+
+## Installed native and imported source gates
+
+The [cohort controller](parity/event_policy_installed_cohort_5_0_6.json.gz)
+verifies the complete **784/784** native terminal, no-work rebuild, frozen
+execution inputs/references and all proposed before hashes, then installs the
+merged twelve-file package. Both configurations and portable helpers pass.
+
+The [installed Event gate](parity/event_sources_installed_5_0_6.json.gz)
+freshly executes all **5,611** original observations and matches them on native
+and imported frontends. All five original-public caller fixtures pass; these
+are additional caller tests, not embedded Event source tests. Native **10/10**
+and imported **10/10** registered checks pass with exact JUnit case sets and
+no skips, and final selected builds report no work. The new complete model
+consumer imports and links runtime without SQLite or its provider. Source,
+observer, corpus, execution inputs and references retain their guarded hashes.
+The portable helper is now installed; formal source/capability promotion remains
+an explicit separate audit.
 
 Whole Context delivery, post-commit audit failure, graph Save, mutation policy,
 generated model configurations, durable dynamic storage, arbitrary sinks and
 complete G14/G17/P0-P7 remain outside this file's acceptance. No new sanitizer,
-MIPS, physical-device or full-suite success is claimed here.
+MIPS or physical-device success is claimed here. The preceding full native
+checkpoint does not relabel subsequent scoped installation gates.

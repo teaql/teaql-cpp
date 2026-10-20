@@ -1,10 +1,12 @@
 # Complete mutation policy source review: Rust 5.0.6
 
+Current source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
+
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 Scope: all 739 lines of `teaql-runtime/src/mutation_policy.rs`, including its
-six embedded tests. Status: current original tests pass; isolated source/imported
-reconciliation is separate from permanent installation, formal source disposition
-and complete current native integration. No production function changes here.
+six embedded tests. Status: permanent source/native/imported gates pass after the
+preceding complete native epoch. Formal source disposition remains separate.
+No production function changes here.
 
 The [historical review](mutation_policy_api_contract.md) retains its original
 5.0.5 scope. The complete source diff has two production changes: governance work
@@ -124,8 +126,26 @@ two candidates' shared CMake, preset and consumer-catalog additions structurally
 so neither candidate overwrites the other's registrations. The package adds six
 runtime-only consumers and four missing comparator registrations, preserving all
 original C++ function bodies. It contains both tested portable helpers and exact
-observer workspaces. Installation and both default frontend gates remain pending
-the active native epoch's terminal state.
+observer workspaces. These staged results precede the installed checkpoint below.
+
+## Installed native and imported source gates
+
+The [cohort controller](parity/event_policy_installed_cohort_5_0_6.json.gz)
+verifies the preceding **784/784** native terminal, no-work rebuild, frozen
+execution inputs/references and every proposed before hash, then installs the
+merged twelve-file Event/Policy package. Both complete portable helpers pass.
+
+The [installed Policy gate](parity/policy_sources_installed_5_0_6.json.gz)
+freshly executes the six unchanged original embedded tests and appended private
+plan caller: **7/7** pass. It replays all **2,606** actual source observations,
+including the 2,129 private plan inputs, without reusing earlier executions.
+All outcomes match independently through native and imported frontends.
+Native **9/9** and imported **9/9** registered checks pass with exact JUnit sets,
+no skips and final selected no-work builds. The five new complete consumers
+import/link runtime without SQLite or its provider, retaining all original
+scope, pending/error/cancel, nested activation and lifetime assertions. Source,
+observer, corpus and execution inputs/references keep their guarded identities.
+Formal source, capability and phase promotion remain explicit separate audits.
 
 An incomplete receipt is not a successful gate. Complete callback, nested
 activation, pending cancellation, explicit Global retention and actual User

@@ -1,6 +1,6 @@
 # Current full native integration
 
-## Running native epoch after character lexing correction
+## Completed native epoch after character lexing correction
 
 The [character lexing continuation](character_lexing_5_0_6.md) passes installed
 Java107, 3,147 exact original/current parser observations and complete 78-SDK
@@ -15,29 +15,87 @@ confirms the verified compiler controller is terminal and has launched the fresh
 full native controller. Its independent
 [input snapshot](parity/native_current_character_inputs_5_0_6.json.gz) and
 [execution receipt](parity/native_current_character_terminal_5_0_6.json.gz)
-belong to this new epoch. A running record is not a passing result. No previous
-failed or superseded epoch is relabeled. The new prefix is
-`/tmp/teaql_native_current_character_5_0_6`. Current source dispositions remain
-67/55/2.
+belong to this epoch. No previous failed or superseded epoch is relabeled. Its prefix is
+`/tmp/teaql_native_current_character_5_0_6`. Source dispositions at that frozen
+checkpoint were 67/55/2; the later installed source audit below is separate.
 
-The complete native consumer build now exits zero, followed by a successful
-no-work rebuild. Actual registry discovery is **784** distinct tests. The full
-CTest process is running, including the generated API compiler gate; neither a
-registry count nor successful linking is a passing full-suite result.
+The complete native consumer build exits zero, followed by a successful no-work
+rebuild. Actual registry discovery and terminal JUnit both contain **784**
+distinct tests. All **784/784** pass, with zero failures, errors or skips, in
+4,737.98 seconds. This includes the complete generated API compiler gate,
+which takes 3,381.95 seconds. The final selected-free native rebuild reports
+no work. All **10,668** frozen execution inputs and both reference identities
+remain unchanged. The controller is terminal and its complete flag is true.
+This acceptance belongs to the preceding frozen epoch; subsequent installations
+have separate scoped gates and are not relabeled as part of this full run.
 
 The [post-native coordinator](parity/event_policy_installed_cohort_5_0_6.json.gz)
-waits for this verified native controller to become terminal. It installs the
-merged Event/Policy observer/consumer package only if the full native receipt
-passes, all frozen execution inputs/references still match and every proposed
-file's before hash is unchanged. It then runs both portable helpers with their
-default native/imported frontends. A waiting coordinator is not an installed or
-accepted source result; a failed native gate prevents installation.
+has verified this complete native terminal, frozen inputs/references and every
+proposed before hash, then installed the twelve-file merged Event/Policy package.
+Both configurations pass. The Event portable helper now completes its default
+native/imported gates, matching 5,611 source outcomes on each selected frontend;
+Policy's default gate also completes, matching 2,606 source outcomes per frontend
+with native9/module9 and original6/caller1. Event's native10/module10 and five
+original-public caller tests pass. Canonical/path/generator checks finish
+successfully and the merged cohort is terminal and complete. Formal source
+acceptance remains a separate audit.
+
+The subsequent [key-snapshot package](runtime_service_helpers_source_review_5_0_6.md#permanent-package-and-guarded-installation)
+is staged and its permanent input-driven probe is qualified against actual
+source outcomes on native and imported frontends. Its
+[coordinator](parity/relation_key_snapshot_installed_cohort_final_5_0_6.json.gz)
+waits for the Event/Policy coordinator's successful terminal state, preserving
+the frozen epoch and both cohorts' registrations. It then installs the minimal
+helper repair and requires the default source/native7/module7 gates. A queued
+package or completed provisional comparison is not an installed-source result.
+
+The [shared-type package](runtime_service_types_source_review_5_0_6.md#permanent-package)
+follows the key-snapshot cohort. Its
+[coordinator](parity/service_types_installed_cohort_final_5_0_6.json.gz) requires
+that cohort's installed source/native/imported gates before adding the permanent
+258-observation verifier and missing module consumers. Both coordinators
+use independent before-input snapshots after a documented pre-installation
+[correction](parity/installation_snapshot_copy_correction_5_0_6.json.gz).
 
 The [EntityStatus source replay](entity_status_source_review_5_0_6.md) and
 [business integration source replay](business_integration_source_review_5_0_6.md)
 provide additional scoped whole-file reconciliation without changing production
-or observer bodies. Their formal source dispositions and the installed core/
-locking cohort still await the required full current native result.
+or observer bodies. These and the installed core/locking cohort are accepted
+at the later installed source audit below.
+
+The [runtime ID source review](runtime_ids_source_review_5_0_6.md) adds 3,262
+exact actual-source/native/imported observations, native22/module5 checks and
+82 original Release versus isolated C++ Release-ID observations. The scoped
+controller is terminal and successful; its mixed-profile variant is not a full
+Release runtime. Its initial Unicode JSON Lines harness failure is preserved.
+The two unchanged ID source files are accepted at the later installed source
+audit below, retaining that explicit profile boundary.
+
+The [runtime service shared-type review](runtime_service_types_source_review_5_0_6.md)
+adds 96 actual private-source calls and 162 retained RelationLoadPlan cases,
+matching all 258 observations independently on native and imported frontends.
+Three complete existing C++ lifetime/scope programs pass per frontend with
+stable binaries and 1,048 verified canonical bodies. Those provisional witnesses
+remain separate from the later installed gates and source acceptance below.
+
+## Installed follow-ups and formal source acceptance
+
+All three follow-up coordinators are now terminal with successful installed gates:
+Event/Policy passes source5,611/native10/module10/caller5 and
+source2,606/native9/module9/original6/caller1. The key-snapshot repair passes
+source/native/imported64 each, original2/caller1 and native7/module7. Shared
+service types pass source/native/imported258 each, caller1 and native5/module5.
+Pinned format apply/check, canonical/path/generator validation and selected
+no-work rebuilds pass. Their changes and their scoped results remain distinct
+from the earlier 784-test frozen epoch.
+
+The [formal installed audit](source_cohort_acceptance_5_0_6.md) accepts fifteen
+complete named source responsibilities after joining their detailed body reviews
+and actual-source/lifetime/integration evidence. Source status is **82 accepted /
+40 pending / 2 excluded_external**. Capability status remains eleven qualified
+and six partial, with all complete P0-P7 exits still requiring their independent
+remaining obligations. No sanitizer, MIPS, GPU, external-provider or physical
+device result is inferred from this checkpoint.
 
 ## Superseded 784-test core and transaction epoch
 

@@ -3427,3 +3427,25 @@ if(BUILD_TESTING)
         --cpp $<TARGET_FILE:teaql_dynamic_search_clone_probe>
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
 endif()
+
+# Private-helper source comparison; runtime-only executable.
+add_executable(teaql_relation_key_snapshot_probe tests/parity/relation_key_snapshot_probe.cpp)
+target_link_libraries(teaql_relation_key_snapshot_probe PRIVATE teaql::runtime)
+if(Python3_Interpreter_FOUND)
+    add_test(NAME relation_key_snapshot_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_relation_key_snapshot_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_relation_key_snapshot_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(relation_key_snapshot_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+# Complete private service-type observations; no database provider dependency.
+add_executable(teaql_runtime_service_types_probe tests/parity/runtime_service_types_probe.cpp)
+target_link_libraries(teaql_runtime_service_types_probe PRIVATE teaql::runtime)
+if(Python3_Interpreter_FOUND)
+    add_test(NAME runtime_service_types_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_runtime_service_types_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_runtime_service_types_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(runtime_service_types_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()

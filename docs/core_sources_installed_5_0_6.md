@@ -1,9 +1,10 @@
 # Installed core source cohort: Rust 5.0.6
 
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
-Status: permanent scoped gates pass. The five source files remain pending
-their required complete current native integration. This is not complete
-core-library reexport, capability or P0-P7 acceptance.
+Status: the five complete source files are accepted at the
+[installed source checkpoint](source_cohort_acceptance_5_0_6.md), following
+the complete 784-test native epoch and installed scoped gates. This is not
+complete core-library reexport, capability or P0-P7 acceptance.
 
 ## Source responsibilities and installation
 
@@ -70,10 +71,13 @@ selects native or module execution; a subset does not qualify omitted families.
 The checked-in [contract](parity/core_source_contract_5_0_6.json) guards exact
 source, observer and corpus hashes, cardinalities and required unit/test names.
 
-The body reviews also require complete current native integration before formal
-source promotion. The failed 778/782 epoch and its separate four-failure repair
-remain preserved. A new whole native epoch is required for these installed
-inputs; the scoped source gate does not replace it. Current source counts remain
-67 accepted, 55 pending and two external exclusions. Broader query/save, model,
+The required complete native integration now passes 784/784 with no failures,
+errors or skips, unchanged frozen execution inputs/references and a final
+no-work build. The failed 778/782 epoch and its separate four-failure repair
+remain preserved. The installed source audit accepts these five files together
+with ten separately reviewed responsibilities, making the overall source count
+82 accepted, 40 pending and two external exclusions. Broader query/save, model,
 privacy, source-grammar and user behavior decisions retain their own gates.
-No new sanitizer, MIPS, physical-device or full-suite pass is claimed here.
+The native receipt is a preceding frozen checkpoint, not a relabeled run after
+every follow-up installation. No new sanitizer, MIPS or physical-device result
+is claimed here.

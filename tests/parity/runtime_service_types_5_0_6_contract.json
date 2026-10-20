@@ -1,0 +1,53 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "teaql-runtime/src/data_service/types.rs",
+  "source_sha256": "2a5a666d476fd77772d6b7ea71cb53754db18063ef1f823f216806b033127bf9",
+  "assets": {
+    "tests/parity/runtime_service_types_probe.cpp": "1d037ba0aea1da08c06fb7ab4ba0bb5d5e6be1987ad0d061ca24bed275a168df",
+    "tests/parity/runtime_service_types_source_5_0_6.rs": "dd3f10e22ad0807b269a5c6140e62149c95673b9d426e21d532a3f83a393ec92",
+    "tests/parity/runtime_service_types_5_0_6_cases.json.gz": "27b1ee4d11369d5162a3d78ceacd668fcbe46cb79fdc4109658ea5c14664cbc6",
+    "tests/parity/compare_runtime_service_types_5_0_6.py": "06bba08d9caa983e7614761a28b8c33e045abce632685fb8392a37239be2f554",
+    "tests/parity/rust_runtime_service_types_5_0_6/Cargo.toml": "69f342ccff93c25c7f9c60199cfbfc28a00468aa0f00eb8110758381e6b668bc",
+    "tests/parity/rust_runtime_service_types_5_0_6/Cargo.lock": "8171a9d527ef2397dc6bb9fea4557730c715ab7d1cfdde4ec14b4f80926fa407"
+  },
+  "guards": {
+    "teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp": "47e0b3c850f1433237707ebcf0ec4fe3065eb2ec0f232231e5c508acfb6d8673",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp": "238e86c8112d84155ba19f8887ee4b6c111c3cef41b2d947dde821e0c606c893",
+    "teaql_runtime/src/data_service/mod.cpp": "46ef5a64766a3704c729826b4b8efe9788111fc620edae4eaece0d9017e98323",
+    "teaql_runtime/src/data_service/mutation_privacy.cpp": "c217edf0541ad6cb8f0d46086216a2729909d39ca515dfbe4e9db7ebfe80112e",
+    "teaql_runtime/include/teaql/runtime/relation.hpp": "9b29196f246065b0679d68dccc01db3c8447864b0866f6ef281f7fd9e77b828a",
+    "teaql_runtime/include/teaql/runtime/relation_model_debug.hpp": "32ebd53a0b2e803fda5410850489b96d73ba0ea5372e1731c2fabeb3ce24650b",
+    "teaql_runtime/include/teaql/runtime/context.hpp": "7c39487ffcb1a682fdc8425fc8422a1afb5ff10feb077cc2645b52548215ffb4",
+    "tests/support/relation_hydration_fixture.hpp": "28b93e3154ed5e4235ddfeaf4a5411681a9c2407d2b068a3287647e34db6c24a",
+    "tests/parity/relation_model_5_0_6_cases.json.gz": "2f5b0e053dc950326ef929f5bc0a3d1f45d5fd4e0384523b0b79ed0f0a91dc09",
+    "tests/parity/rust_field_layout/src/bin/relation_model_5_0_6.rs": "e6177a73af8cc8dc3a7d0c3ffcadc31b965b93e33c5b4f09fc201d70a7505c6d",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/relation_model_probe.cpp": "8db68dc57a9e6fe8c9dce4d67122e6b021177f5103a46f4ed4a041adb08f6a92",
+    "tests/parity/fixture_value.hpp": "b5c6ae54108d72a2e8373763fc18f3b3107129256a8a91fc0c7a1cac326865c0",
+    "tests/parity/debug_modes.hpp": "1d72d708461860117b4f7e36505c2a262923cbc77cbf3316c5f99781e8c7c38d",
+    "tests/parity/compare_relation_model_5_0_6.py": "7e47f9655b9fdc59bd4fde73c526528b1455f0f3e00351637b5ed2e0b72100aa"
+  },
+  "targets": [
+    "runtime_service_types_probe",
+    "relation_model_probe",
+    "request_trace_scope_tests",
+    "data_service_scope_tests",
+    "dynamic_ledger_tests"
+  ],
+  "tests": {
+    "native": [
+      "runtime_service_types_rust_parity",
+      "relation_model_rust_parity",
+      "request_trace_scope_contracts",
+      "data_service_scope_contracts",
+      "dynamic_ledger_contracts"
+    ],
+    "modules_native": [
+      "module_runtime_service_types_rust_parity",
+      "module_relation_model_rust_parity",
+      "module_request_trace_scope_contracts",
+      "module_data_service_scope_contracts",
+      "module_dynamic_ledger_contracts"
+    ]
+  }
+}

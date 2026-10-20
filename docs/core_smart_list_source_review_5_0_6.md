@@ -1,5 +1,7 @@
 # Core SmartList source review: Rust 5.0.6
 
+Current source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
+
 Status: complete-body pre-acceptance review. The full `teaql-core/src/list.rs`
 remains `pending_review`; permanent module/reproduction and current full native
 integration are still required. Complete G13/G15/P0-P7 acceptance is separate.

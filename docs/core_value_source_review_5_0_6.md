@@ -1,5 +1,7 @@
 # Core Value source review: Rust 5.0.6
 
+Current source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
+
 Status: complete-body pre-acceptance review. `teaql-core/src/value.rs` remains
 `pending_review`; permanent module/reproduction and complete native integration
 remain required. Broader Decimal reexport, JSON/runtime boundaries and complete

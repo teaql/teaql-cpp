@@ -3554,3 +3554,95 @@ compiler/integration gates and a fresh complete native epoch remain required.
 The five core source files and Context locking remain pending; current source
 counts stay67 accepted/55 pending/2 external. Full AP02 grammar/type binding,
 other capability decisions and complete P0-P7 exits remain open.
+
+## Runtime ID whole-source reconciliation
+
+The [RI01-RI08/RB01-RB12 review](runtime_ids_source_review_5_0_6.md)
+reconciles both complete unchanged runtime ID files against the 5.0.6 reference.
+The corrected scoped replay is terminal with 3,262 exact source/native/imported
+outcomes, native22/module5 and 82 original Release versus isolated Release-ID
+outcomes. Its first Unicode JSON Lines observer failure remains preserved;
+only LF record splitting changes in the corrected controller. No runtime,
+observer, corpus or expected output changes. The Release-ID variant recompiles
+`id.cpp` and its probe and links other completed Debug archives; it is not a
+full Release runtime qualification. Source counts remain 67/55/2 pending the
+current full native epoch and formal disposition audit.
+
+## Relation aggregate key-snapshot length boundary
+
+The [complete helper review](runtime_service_helpers_source_review_5_0_6.md)
+reconciles the changed 364-line helper source and reproduces an additional
+boundary difference: Rust zips parent rows with a separate key snapshot, while
+current C++ rejects unequal lengths. All 48 unequal-length witnesses differ;
+all 16 equal-length controls preserve ordinary and overwritten-ID behavior.
+The isolated candidate iterates the shorter span and matches all 64 actual
+source outcomes through native and Runtime-only imported execution. Both
+unchanged original cache-key tests and the new original-body caller test pass.
+Two unsuccessful observer harness attempts remain preserved without changing
+production APIs or expected source behavior. The candidate is not installed
+while the frozen full native epoch and queued Event/Policy cohort are pending.
+Permanent regression registration, installed gates and source promotion remain
+required; current source/capability dispositions do not change.
+
+The eleven-file permanent package now has a complete input-driven probe,
+64 original-body outcomes and thin native/imported comparison registrations.
+Both newly compiled probes reproduce current48/candidate0 differences with
+Runtime-only links and default PMR disabled. Its portable verifier freshly
+passes original2/caller1 plus source/native/imported64 each. The
+[guarded coordinator](parity/relation_key_snapshot_installed_cohort_final_5_0_6.json.gz)
+requires successful complete native and Event/Policy terminal gates before
+installing the package and running its default native7/module7 selections.
+Staging preserves the prior cohort's complete CMake/module changes and all
+unsuccessful observer records. Installed gates, formal source promotion and
+complete P0-P7 acceptance remain open.
+
+## Runtime service shared-type reconciliation
+
+The [RT01-RT17 review](runtime_service_types_source_review_5_0_6.md)
+maps the complete changed 333-line types source, preserving separate Runtime,
+Context and entity services, explicit origin checks, request-owned intent,
+operation-private privacy, live metadata and the complete RelationLoadPlan.
+Fresh actual private-source calls cover 64 intent, eight metadata, eight plan,
+twelve ledger and four statement-inheritance cases. Native and canonical
+Runtime-only imported witnesses match all 96 outcomes, with default PMR disabled
+and executors that reject database I/O. A reference-locked public observer also
+matches all 162 retained relation-model cases on both frontends, including the
+previously missing imported full consumer body. Source/native/imported each
+match 258 observations without normalization. Three complete C++ scope/lifetime
+programs pass on each frontend; 1,048 canonical bodies and selected binary/source
+hashes verify. No production, module export, generator or generated SDK changes.
+The observers/imported model remain provisional; permanent registrations,
+formal source disposition and complete P0-P7 exits remain independent.
+
+The shared types now have a twelve-file permanent package with a reference-locked
+public observer workspace, the actual private caller, guarded corpora, a portable
+verifier and native/module registrations. The portable staged verifier freshly
+matches all source/native/imported258 observations. Its default mode requires
+native5/module5, canonical complete bodies and no-work rebuilds. The
+[coordinator](parity/service_types_installed_cohort_final_5_0_6.json.gz) waits for
+the installed key-snapshot cohort and preserves all earlier registration changes.
+The two first waiting coordinators are superseded before installation to copy
+their before-input dictionaries independently; cancellation and replacement
+evidence remains separate from test results. Production, source disposition,
+capability and full P0-P7 status are not promoted by queued packages.
+
+## Installed source cohort acceptance
+
+The [formal installed checkpoint](source_cohort_acceptance_5_0_6.md) accepts
+fifteen complete source responsibilities after the native epoch passes784/784,
+retains all10,668 frozen inputs/references and finishes with no build work.
+All installed follow-up coordinators then complete: Event source5,611 with
+native10/module10/caller5, Policy source2,606 with native9/module9/original6/caller1,
+key-snapshot source64 with native7/module7/original2/caller1, and shared types
+source258 with native5/module5/caller1. Source/body/corpus identities, exact
+reference dependencies, complete lifecycle programs and independent before/after
+snapshots remain explicit in the joined receipts. The shorter-span repair is
+installed rather than left as a provisional candidate.
+
+Source status is now **82 accepted / 40 pending / 2 excluded_external**. The
+original failed/superseded receipts and historical5.0.5 qualification remain
+unchanged. All17 capability verdicts retain their prior values: eleven qualified
+and six partial. Complete G08/G12/G13/G14/G15/G17, unanswered source-behavior
+decisions, remaining whole-source work and all full P0-P7 exit requirements stay
+open. The preceding native full run is not relabeled as a new full run after
+the scoped installations, and no extra sanitizer/MIPS/device acceptance follows.

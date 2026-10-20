@@ -4779,6 +4779,85 @@
       "source": "tests/parity/value_probe.cpp",
       "import_module": "teaql_runtime",
       "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "event_model_probe",
+      "source": "tests/parity/event_model_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "policy_model_probe",
+      "source": "tests/parity/policy_model_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "mutation_policy_probe",
+      "source": "tests/parity/mutation_policy_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "policy_plan_probe",
+      "source": "tests/parity/policy_plan_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "policy_model_tests",
+      "source": "teaql_runtime/tests/policy_model_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "policy_model_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_completion_tests",
+      "source": "teaql_runtime/tests/runtime_completion_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "runtime_generic_completion_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "relation_key_snapshot_probe",
+      "source": "tests/parity/relation_key_snapshot_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_service_types_probe",
+      "source": "tests/parity/runtime_service_types_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "relation_model_probe",
+      "source": "tests/parity/relation_model_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
     }
   ],
   "fixtures": [

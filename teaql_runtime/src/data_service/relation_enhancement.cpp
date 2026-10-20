@@ -1,4 +1,5 @@
 #include <teaql/runtime/detail/data_service/relation_enhancement.hpp>
+#include <algorithm>
 
 namespace teaql::detail {
 Value default_aggregate_value(Memory r, bool single) {
@@ -25,9 +26,6 @@ void attach_relation_aggregate_rows(std::span<CompactRow> parents,
                                     const RelationLoadPlan& plan,
                                     const RelationAggregate& aggregate,
                                     Vector<CompactRow> rows) {
-    if (parents.size() != keys.size()) {
-        throw std::invalid_argument("Aggregate key snapshots must correspond to parent rows");
-    }
     auto r = plan.memory_resource();
     std::pmr::map<String, Vector<CompactRow>, std::less<>> buckets(r);
     for (auto& row : rows) {
@@ -36,7 +34,7 @@ void attach_relation_aggregate_rows(std::span<CompactRow> parents,
                 .first->second.emplace_back(std::move(row));
         }
     }
-    for (std::size_t index = 0; index < parents.size(); ++index) {
+    for (std::size_t index = 0; index < std::min(parents.size(), keys.size()); ++index) {
         auto& parent = parents[index];
         auto value = default_aggregate_value(r, aggregate.single_result);
         if (auto* key = keys[index].get(plan.local_key)) {

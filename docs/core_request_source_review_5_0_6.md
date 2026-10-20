@@ -1,5 +1,7 @@
 # Core request builder source review: Rust 5.0.6
 
+Current source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
+
 Status: complete-body pre-acceptance review; `teaql-core/src/request.rs` remains
 `pending_review`. Temporary imported consumers do not replace permanent module
 registration or the current full native integration gate. Complete G08/G13/G17

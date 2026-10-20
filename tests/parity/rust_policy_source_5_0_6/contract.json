@@ -1,0 +1,17 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "guards": {
+    ".reference/teaql-rs/teaql-runtime/src/mutation_policy.rs": "f571ff2deb5ecadf3217383f944b08b250874fca98fd9b0b6de86096f8cd0931",
+    "tests/parity/rust_field_layout/src/bin/policy_model_5_0_6.rs": "4484b8de90eb3ff93c41ae64f02a68c61c1c2cbd8500efc29195dac11d1f6475",
+    "tests/parity/rust_field_layout/src/bin/mutation_policy_5_0_6.rs": "f1a047620f6b6c5c13e4954d5293845dd956ae86e12438c69e0b5a624f4daf2e",
+    "tests/parity/rust_private_save_5_0_6/src/bin/policy_plan_5_0_6.rs": "eadab4ef6b3d365dff16735a80ce62d2c7bb26a53dbfd43c7fbadba1f9b3e78e",
+    "tests/parity/rust_field_layout/src/bin/dynamic_governance_5_0_6.rs": "91087215107f58c6e1b6a3119d79bc3acac0eb1f5ccf7f7e4df63d00b8d89ba6",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_dynamic_protocols_reference_5_0_6/Cargo.toml": "e6a02700d6a7ed7b2e52730edcbd05c1e178ec6242da28c73951771d844e6cd0",
+    "tests/parity/rust_dynamic_protocols_reference_5_0_6/Cargo.lock": "2af784ff5b65a90944d649c0d435a1c1f2743749be18b24362113975341ad308",
+    "tests/parity/policy_model_5_0_6_cases.json.gz": "3eaa9d8c55a952bf056c00436fc7d1bf2ce30cefc7092f581eb9918d74d615d4",
+    "tests/parity/mutation_policy_5_0_6_cases.json.gz": "ecedbc83b2b666ca2b95ab0c7ee065693e8ba43a99213f3271705669bf419d11",
+    "tests/parity/policy_plan_5_0_6_cases.json.gz": "4d171322ef4c8fd65f6f325f00d98cacfdad435e25149b0011ddae624f44a067",
+    "tests/parity/dynamic_governance_5_0_6_cases.json": "3beb0c5ef34191e502496ae2c873dd2a4d06154119205ee5fa5733ece9545a34"
+  }
+}

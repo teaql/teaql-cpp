@@ -7489,7 +7489,9 @@
         "docs/parity/sqlite_chunk_capacity_static_5_0_6.json.gz",
         "docs/parity/sqlite_chunk_capacity_preservation_5_0_6.json.gz",
         "tests/parity/sqlite_chunk_capacity_5_0_6_cases.json.gz",
-        "scripts/verify_sqlite_chunk_capacity_5_0_6.py"
+        "scripts/verify_sqlite_chunk_capacity_5_0_6.py",
+        "docs/source_cohort_acceptance_5_0_6.md",
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz"
       ],
       "open_questions": [
         "SQ01: complete the remaining source/model matrix across every capability and wider ordinary/generated-ledger caller configurations. The bounded nonempty borrowed-root adapter now passes its complete source/runtime/ownership, Java,196 compiler and78-SDK artifact gates in generated_runtime_state_bridge_5_0_6.md; shared ordinary carrier dispatch is separately qualified in runtime_state_bridge_5_0_6.md. Neither slice accepts complete entity_save.rs or every generated caller. G08 quoted-column and G12 invalid naming dispositions still await the user; wider G15 quoted-FK5 remains unaccepted.",
@@ -7500,7 +7502,8 @@
         "SQ06: preserve explicit Context/source identities, allocator/deep-copy and actual destruction/cancel/join guarantees through relevant current imported and lifetime gates. Do not substitute body/name counts for execution or claim physical-router support.",
         "SQ07: join complete governed query/mutation/transaction and protected-I/O/privacy/trace evidence with G14/G17; G15/G16 and the new document protocol observations do not independently accept those wider configurations.",
         "Complete query.rs CQ01-CQ17 is now accepted on body/guard/trait review, current source/frontend evidence, explicit unchanged-source reuse and actual source User destruction after destination copies. New Record Debug and constructor-diagnostic gaps are repaired; native25/imported25 pass with final no-work builds. Source status is51/71/2; current registry762 is not whole integration. Preserve independent generated quoted-FK decisions, other whole source/caller/model/privacy/governance responsibilities and all P0-P7 exits.",
-        "Complete in-memory source IM01-IM14 and its19 original tests are accepted on8732 exact original/native/imported outputs, current4+4 gates and unchanged production/SDK bytes. Source status is52/70/2; current discovery763 does not qualify full integration, remaining sources or higher caller/governance responsibilities."
+        "Complete in-memory source IM01-IM14 and its19 original tests are accepted on8732 exact original/native/imported outputs, current4+4 gates and unchanged production/SDK bytes. Source status is52/70/2; current discovery763 does not qualify full integration, remaining sources or higher caller/governance responsibilities.",
+        "Installed source cohort accepts fifteen complete files, moving source status to82/40/2 after preceding native784 and installed Event/Policy, helper and shared-type gates. Forty sources and complete G13/P0-P7 remain pending; no capability verdict changes."
       ],
       "runtime_sources": [
         "teaql-core/src/entity.rs",

@@ -1,5 +1,7 @@
 # Business clock and permutation test source review: Rust 5.0.6
 
+Current source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
+
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 Scope: the complete 29-line `teaql-runtime/tests/business_clock.rs` and
 128-line `teaql-runtime/tests/business_id_permutation.rs`, including fixture
