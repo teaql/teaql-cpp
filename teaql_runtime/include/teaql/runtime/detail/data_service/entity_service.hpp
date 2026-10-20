@@ -495,6 +495,14 @@ struct EntityDataServiceAccess {
         -> AsyncOperation<Result<std::uint64_t, DataServiceError<typename E::Error>>>&;
 
     template <class E>
+    static auto load_dynamic_fields_into_rows(const EntityDataService<E>&,
+                                              std::span<CompactRow>,
+                                              std::string_view,
+                                              const DynamicFieldSelection&,
+                                              const QueryIntent&)
+        -> AsyncOperation<Result<std::monostate, DataServiceError<typename E::Error>>>&;
+
+    template <class E>
     static bool has_intent(const EntityDataService<E>& service) {
         return service.query_log_intent_ != nullptr;
     }

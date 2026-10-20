@@ -87,11 +87,9 @@ public:
                         resource,
                         DataServiceError<Error>::runtime(resource, std::move(intent).error()));
                 }
-                dynamic_ = &make_operation<typename DynamicRowsOperation<Error>::Output,
-                                           DynamicRowsOperation<Error>>(
-                    resource,
-                    EntityDataServiceAccess::context(service_),
-                    std::span<CompactRow>(rows_),
+                dynamic_ = &EntityDataServiceAccess::load_dynamic_fields_into_rows(
+                    service_,
+                    rows_,
                     T::ENTITY_NAME,
                     *query_.dynamic_field_selection,
                     intent.value());

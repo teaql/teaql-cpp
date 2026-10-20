@@ -330,6 +330,42 @@ static Json evaluate(Memory target, const Json& j) {
     user->set_internal_id_generator(*user, id);
     auto& executor = user->make_resource<Executor>(s);
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
+    if (const auto* bound = optional(j, "bound_intent"); bound && std::get<bool>(bound->data)) {
+        auto result = Access::bind_mutation_intent(service, "verify event execution");
+        if (!result) {
+            throw std::logic_error("fixture intent binding failed");
+        }
+    }
+    const auto* probe = optional(j, "privacy_probe");
+    const bool privacy_probe = probe && std::get<bool>(probe->data);
+    if (privacy_probe) {
+        auto mode = text(field(j, "privacy"));
+        if (mode != "none") {
+            SqlIntentRedactions redactions(r);
+            if (mode == "id") {
+                redactions.capture_target_id(Value(r, std::uint64_t(7)));
+            } else if (mode != "empty") {
+                SqlLogContext context(std::allocator_arg, Allocator(r));
+                context.parameter_policies = {mode == "masked" ? SqlParameterLogPolicy::Masked
+                                              : mode == "credential"
+                                                  ? SqlParameterLogPolicy::Credential
+                                                  : SqlParameterLogPolicy::Unknown};
+                Vector<Value> operands(r);
+                operands.emplace_back("PRIVATE-OPERAND");
+                redactions = SqlIntentRedactions::from_bindings(r, context, operands, "");
+            }
+            auto result = Access::bind_mutation_privacy(service, redactions);
+            if (!result) {
+                throw std::logic_error("fixture privacy binding failed");
+            }
+        }
+        if (flag(j, "replace_intent")) {
+            auto result = Access::bind_mutation_intent(service, "replacement event reason");
+            if (!result) {
+                throw std::logic_error("fixture replacement intent failed");
+            }
+        }
+    }
     auto lineage = trace(r, field(j, "lineage"));
     service.with_trace_context(lineage);
     auto entity = text(field(j, "entity"));
@@ -442,7 +478,16 @@ static Json evaluate(Memory target, const Json& j) {
         notes.emplace_back(n);
     }
     for (const auto& request : s.requests) {
-        requests.emplace_back(request_out(r, request));
+        auto observed = request_out(r, request);
+        if (privacy_probe) {
+            detail::model_put(observed,
+                              "privacy",
+                              request.diagnostic_redactions()
+                                  ? Json(r, request.diagnostic_redactions()->is_empty())
+                                  : Json(r));
+            detail::model_put(observed, "intent", request.comment());
+        }
+        requests.emplace_back(std::move(observed));
     }
     for (const auto& event : s.events) {
         events.emplace_back(event_out(r, event));
@@ -452,6 +497,42 @@ static Json evaluate(Memory target, const Json& j) {
     detail::model_put(out, "events", events);
     detail::model_put(out, "logs", user->sql_logs().size());
     detail::model_put(out, "next_id", id.next);
+    if (privacy_probe) {
+        Json::Array privacy_events(r);
+        for (const auto& event : s.events) {
+            auto observed = detail::model_json(r);
+            detail::model_put(observed,
+                              "privacy",
+                              event.diagnostic_redactions()
+                                  ? Json(r, event.diagnostic_redactions()->is_empty())
+                                  : Json(r));
+            auto safe = event.build_safe_event(r, {}, {});
+            Json::Array fields(r);
+            for (const auto& field : safe.fields) {
+                auto item = detail::model_json(r);
+                detail::model_put(item, "name", field.name);
+                detail::model_put(item, "value", field.value ? Json(r, *field.value) : Json(r));
+                detail::model_put(item, "masked", field.masked);
+                detail::model_put(item, "truncated", field.truncated);
+                detail::model_put(
+                    item, "raw_length", field.raw_length ? Json(r, *field.raw_length) : Json(r));
+                detail::model_put(item,
+                                  "output_length",
+                                  field.output_length ? Json(r, *field.output_length) : Json(r));
+                detail::model_put(
+                    item, "mask_reason", field.mask_reason ? Json(r, *field.mask_reason) : Json(r));
+                detail::model_put(item,
+                                  "truncate_reason",
+                                  field.truncate_reason ? Json(r, *field.truncate_reason)
+                                                        : Json(r));
+                fields.emplace_back(std::move(item));
+            }
+            detail::model_put(observed, "fields", fields);
+            detail::model_put(observed, "trace", trace_out(r, safe.trace_chain));
+            privacy_events.emplace_back(std::move(observed));
+        }
+        detail::model_put(out, "event_privacy", privacy_events);
+    }
     return Json(target, out);
 }
 

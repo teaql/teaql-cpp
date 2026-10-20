@@ -93,4 +93,16 @@ private:
     DynamicStorageFuture<DynamicFieldBatch>* pending_ = nullptr;
     WakeSignal::Forward forward_;
 };
+
+template <class E>
+auto EntityDataServiceAccess::load_dynamic_fields_into_rows(const EntityDataService<E>& service,
+                                                            std::span<CompactRow> rows,
+                                                            std::string_view owner,
+                                                            const DynamicFieldSelection& selection,
+                                                            const QueryIntent& intent)
+    -> AsyncOperation<Result<std::monostate, DataServiceError<typename E::Error>>>& {
+    using Work = DynamicRowsOperation<typename E::Error>;
+    return make_operation<typename Work::Output, Work>(
+        service.memory_resource(), context(service), rows, owner, selection, intent);
+}
 }

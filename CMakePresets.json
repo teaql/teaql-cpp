@@ -622,7 +622,11 @@
         "teaql_module_context_factory_probe",
         "teaql_module_context_privacy_preparation_probe",
         "teaql_module_context_helpers_probe",
-        "teaql_module_enhanced_aggregate_probe"
+        "teaql_module_enhanced_aggregate_probe",
+        "teaql_module_resolved_select_preparation_probe",
+        "teaql_module_resolved_mutation_preparation_probe",
+        "teaql_module_runtime_mutation_probe",
+        "teaql_module_resolved_dynamic_rows_probe"
       ]
     },
     {

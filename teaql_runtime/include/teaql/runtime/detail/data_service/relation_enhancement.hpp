@@ -335,11 +335,9 @@ public:
             } else {
                 if (dynamic_) {
                     if (!dynamic_->work) {
-                        dynamic_
-                            ->work = &make_operation<R, DynamicRowsOperation<typename E::Error>>(
-                            r,
-                            EntityDataServiceAccess::context_service(service_).metadata.context(),
-                            std::span<CompactRow>(dynamic_->rows),
+                        dynamic_->work = &EntityDataServiceAccess::load_dynamic_fields_into_rows(
+                            service_,
+                            dynamic_->rows,
                             dynamic_->query.entity,
                             *dynamic_->query.dynamic_field_selection,
                             dynamic_->intent);

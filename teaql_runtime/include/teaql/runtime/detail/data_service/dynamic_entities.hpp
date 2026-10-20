@@ -75,14 +75,12 @@ public:
                 if (!intent) {
                     return runtime(std::move(intent).error());
                 }
-                dynamic_ =
-                    &make_operation<typename DynamicRowsOperation<Error>::Output,
-                                    DynamicRowsOperation<Error>>(r,
-                                                                 user_context,
-                                                                 std::span<CompactRow>(rows_),
-                                                                 T::ENTITY_NAME,
-                                                                 *query_.dynamic_field_selection,
-                                                                 intent.value());
+                dynamic_ = &EntityDataServiceAccess::load_dynamic_fields_into_rows(
+                    service_,
+                    rows_,
+                    T::ENTITY_NAME,
+                    *query_.dynamic_field_selection,
+                    intent.value());
             }
             forward_.attach(dynamic_->wake_signal(), wake);
             auto* result = dynamic_->poll();

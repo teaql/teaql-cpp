@@ -4962,6 +4962,34 @@
           ]
         }
       ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "resolved_select_preparation_probe",
+      "source": "tests/parity/resolved_select_preparation_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "resolved_mutation_preparation_probe",
+      "source": "tests/parity/resolved_mutation_preparation_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_mutation_probe",
+      "source": "tests/parity/runtime_mutation_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "resolved_dynamic_rows_probe",
+      "source": "tests/parity/resolved_dynamic_rows_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
     }
   ],
   "fixtures": [

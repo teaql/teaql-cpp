@@ -217,15 +217,12 @@ public:
                         if (!intent) {
                             return runtime(std::move(intent).error());
                         }
-                        dynamic_work_ =
-                            &make_operation<typename DynamicRowsOperation<Error>::Output,
-                                            DynamicRowsOperation<Error>>(
-                                r,
-                                context(),
-                                std::span<CompactRow>(rows_),
-                                T::ENTITY_NAME,
-                                *query_.dynamic_field_selection,
-                                intent.value());
+                        dynamic_work_ = &EntityDataServiceAccess::load_dynamic_fields_into_rows(
+                            service_,
+                            rows_,
+                            T::ENTITY_NAME,
+                            *query_.dynamic_field_selection,
+                            intent.value());
                     }
                     forwarding_.attach(dynamic_work_->wake_signal(), wake);
                     auto* result = dynamic_work_->poll();

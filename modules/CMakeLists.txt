@@ -2035,3 +2035,45 @@ if(TARGET teaql_module_enhanced_aggregate_probe)
         --cpp $<TARGET_FILE:teaql_module_enhanced_aggregate_probe>)
     set_tests_properties(module_aggregate_membership_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
 endif()
+
+if(TARGET teaql_module_resolved_select_preparation_probe)
+    add_test(NAME module_resolved_select_preparation_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_select_preparation_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_resolved_select_preparation_probe>)
+    set_tests_properties(module_resolved_select_preparation_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_resolved_mutation_preparation_probe)
+    add_test(NAME module_resolved_mutation_preparation_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_mutation_preparation_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_resolved_mutation_preparation_probe>)
+    set_tests_properties(module_resolved_mutation_preparation_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_runtime_mutation_probe)
+    add_test(NAME module_resolved_mutation_execution_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_mutation_execution_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_runtime_mutation_probe>)
+    set_tests_properties(module_resolved_mutation_execution_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_runtime_mutation_probe)
+    add_test(NAME module_resolved_mutation_privacy_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_mutation_privacy_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_runtime_mutation_probe>)
+    set_tests_properties(module_resolved_mutation_privacy_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_resolved_dynamic_rows_probe)
+    add_test(NAME module_resolved_dynamic_rows_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_dynamic_rows_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_resolved_dynamic_rows_probe>)
+    set_tests_properties(module_resolved_dynamic_rows_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_entity_query_probe)
+    add_test(NAME module_resolved_query_schema_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_query_schema_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_entity_query_probe>)
+    set_tests_properties(module_resolved_query_schema_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
