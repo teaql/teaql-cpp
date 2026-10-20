@@ -5121,6 +5121,104 @@
           ]
         }
       ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "original_provider_guard_tests",
+      "source": "tests/parity/teaql_provider_sqlite/guarded_mutation.cpp",
+      "cases": [
+        {
+          "name": "original_provider_guarded_mutation_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_live_query_tests",
+      "source": "tests/parity/teaql_provider_sqlite/live_query_trace.cpp",
+      "cases": [
+        {
+          "name": "provider_live_query_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_like_privacy_tests",
+      "source": "tests/parity/teaql_provider_sqlite/like_intent_privacy.cpp",
+      "cases": [
+        {
+          "name": "provider_like_privacy_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_request_trace_tests",
+      "source": "tests/parity/teaql_provider_sqlite/request_trace_log.cpp",
+      "cases": [
+        {
+          "name": "provider_request_trace_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "original_provider_search_tests",
+      "source": "tests/parity/teaql_provider_sqlite/dynamic_search.cpp",
+      "cases": [
+        {
+          "name": "original_provider_dynamic_search_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_dynamic_storage_source_tests",
+      "source": "tests/parity/teaql_provider_sqlite/dynamic_field_storage.cpp",
+      "cases": [
+        {
+          "name": "provider_dynamic_storage_source_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_numeric_partition_tests",
+      "source": "tests/parity/teaql_provider_sqlite/numeric_partition_trace.cpp",
+      "cases": [
+        {
+          "name": "provider_numeric_partition_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
     }
   ],
   "fixtures": [

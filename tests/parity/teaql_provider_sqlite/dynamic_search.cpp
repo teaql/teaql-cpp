@@ -1,4 +1,4 @@
-// Semantic port of the unchanged provider dynamic-search integration test.
+// Semantic port of the locked Rust 5.0.6 provider dynamic-search integration test.
 #include "fixture.hpp"
 #include <teaql/core/dynamic_search.hpp>
 
@@ -60,7 +60,6 @@ static void scoped_dynamic_search_retains_outer_and_related_tenant_filters() {
         .order_desc("id")
         .limit(2)
         .comment("what: search tenant schools")
-        .purpose("why: verify schema drift isolation")
         .hard_limit(2);
     base.trace_chain.emplace_back(
         TraceKind::Purpose, "School", "why: verify schema drift isolation");
@@ -98,7 +97,13 @@ static void scoped_dynamic_search_retains_outer_and_related_tenant_filters() {
     check(result && base == before && result.value().query.hard_limit_value == 2 &&
               result.value().query.trace_chain == base.trace_chain,
           "schema drift does not alter original scope, limit or provenance");
-    QueryRequest request(std::allocator_arg, Allocator(r), result.value().query, true, true);
+    auto intent = QueryIntent::create(r, *base.comment_text, "verify dynamic search");
+    check(bool(intent), "original 5.0.6 explicit query intent is valid");
+    QueryRequest request(
+        std::allocator_arg, Allocator(r), result.value().query, intent.value(), true, true);
+    check(request.intent.comment() == "what: search tenant schools" &&
+              request.intent.purpose() == "verify dynamic search",
+          "owned request intent remains distinct from the original purpose trace");
     request.trace_chain = detail::clone_in(r, base.trace_chain);
     const auto& response = fixture.executor.query(r, std::move(request)).wait();
     check(response && response.value().rows.size() == 2 && response.value().rows[0].get("id") &&

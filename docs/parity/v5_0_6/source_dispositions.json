@@ -827,11 +827,19 @@
       "source": "teaql-provider-sqlite/tests/dynamic_field_storage.rs",
       "sha256": "988e10b88fd6d8b99949b614e3e4cb9308959c3a7d22ba76ec88772b5b80beec",
       "source_change": "new",
-      "cpp_target": "teaql_provider_sqlite",
+      "cpp_target": "tests/parity/teaql_provider_sqlite/dynamic_field_storage.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 550-line source and five tests: repeatable Context/provider schema and ambient write rejection; native data-service transaction binding/source identity, same-transaction ordinary/dynamic rollback and committed owner/namespace isolation; all 13 exact scalar values, float bits and JSON-null/SQL-NULL field states; whole-batch NaN rejection before writes, NULL/Delete/NotLoaded and shared selection identity; explicit C++ transaction abandonment and all 1200 requested empty owners. Field borrows use registered UserContext carriers. Original5 and installed native2/module2/sanitizer2 pass with retained storage regressions, canonical bodies, no-work and input/reference guards.",
+      "evidence": [
+        "docs/dynamic_storage_source_audit_5_0_6.md",
+        "docs/parity/dynamic_field_storage_original_5_0_6.json.gz",
+        "docs/parity/dynamic_storage_source_installed_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/dynamic_storage_source_audit_5_0_6.md",
+      "current_review_sha256": "92a4f371c038c0e3a0e12a30336ee45f625b8908e4e94a12edc5bf848da9de2c",
+      "acceptance_scope": "Only the complete named SQLite storage integration-test source under existing explicit Context carrier registration and Transaction::cancel abandonment adaptations. Other pending provider/runtime sources, remaining generator capabilities, physical-router execution and P0-P7 completion remain open."
     },
     {
       "source": "teaql-provider-sqlite/tests/dynamic_search.rs",
@@ -839,9 +847,17 @@
       "source_change": "changed",
       "cpp_target": "tests/parity/teaql_provider_sqlite/dynamic_search.cpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete142-line test and helpers: both descriptors/models, physical schema through Context, two platforms/six schools, trusted outer/related tenant predicates, provenance/limits and exact I64 result IDs3/2 plus four warnings. Descriptors/requests/results and connection wrappers belong to explicit User lifetimes; native cleanup precedes arena reclamation. Default PMR is disabled and real SQL executor/transport/provider layers execute. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 146-line source: schema lookup, exact Platform/School descriptors and eight native seed rows, trusted models and name/relation/order binders, exact stale-field JSON, immutable base, hard limit/trace retention, explicit 5.0.6 QueryIntent distinct from the Purpose trace, both capture flags, actual SQLite I64 IDs 3 then 2 and four warnings. Existing warning-value privacy assertion retained as extra coverage. Original1/native1/module1, canonical bodies, no-work and input/reference guards pass.",
+      "evidence": [
+        "docs/dynamic_search_source_audit_5_0_6.md",
+        "docs/parity/dynamic_search_original_5_0_6.json.gz",
+        "docs/parity/dynamic_search_installed_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete142-line test and helpers: both descriptors/models, physical schema through Context, two platforms/six schools, trusted outer/related tenant predicates, provenance/limits and exact I64 result IDs3/2 plus four warnings. Descriptors/requests/results and connection wrappers belong to explicit User lifetimes; native cleanup precedes arena reclamation. Default PMR is disabled and real SQL executor/transport/provider layers execute. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
+      "current_review": "docs/dynamic_search_source_audit_5_0_6.md",
+      "current_review_sha256": "24dc7236af8709109e50d9ab3136b2e0e878f12987834122aea44849003463e2",
+      "acceptance_scope": "Only the complete named SQLite dynamic-search integration source. No full dynamic-field/provider qualification, remaining capability acceptance, physical-router execution or P0-P7 completion."
     },
     {
       "source": "teaql-provider-sqlite/tests/facet_trace.rs",
@@ -859,9 +875,17 @@
       "source_change": "changed",
       "cpp_target": "tests/parity/teaql_provider_sqlite/guarded_mutation.cpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete203-line test/helpers: exact Order descriptor/three rows, all nine ordered guarded update/delete/recover/hard-delete/transaction calls, rollback and final database assertions; supplementary write-boundary race retains atomic guard. Explicit User request/result allocation and native connection/transaction cleanup preserve current owner lifetime. The guard lives in the mutation statement and failed writes return no foreign persisted snapshot. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 229-line locked source: schema lookup, exact Order descriptor and three compiled seed inserts; nine ordered guarded update/delete/recover/hard-delete/transaction requests with the 5.0.6 nonempty audit reason; rollback and typed final database assertions. Existing supplementary write-boundary tenant change regression remains intact. Original Rust1 and installed native1/module1 pass, with canonical bodies, no-work and input/reference guards. Explicit Context allocations and independent SQL executor/SQLite transport remain unchanged.",
+      "evidence": [
+        "docs/guarded_mutation_source_audit_5_0_6.md",
+        "docs/parity/guarded_mutation_original_5_0_6.json.gz",
+        "docs/parity/guarded_mutation_installed_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete203-line test/helpers: exact Order descriptor/three rows, all nine ordered guarded update/delete/recover/hard-delete/transaction calls, rollback and final database assertions; supplementary write-boundary race retains atomic guard. Explicit User request/result allocation and native connection/transaction cleanup preserve current owner lifetime. The guard lives in the mutation statement and failed writes return no foreign persisted snapshot. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
+      "current_review": "docs/guarded_mutation_source_audit_5_0_6.md",
+      "current_review_sha256": "c56414cab725eb34b2a23623fd005b03061477b623f51c6053baa85073e54949",
+      "acceptance_scope": "Only the complete named SQLite integration-test source. Does not accept the whole provider, other pending sources, remaining generator capabilities, physical-router execution or P0-P7 completion."
     },
     {
       "source": "teaql-provider-sqlite/tests/ledger_allocated_trace.rs",
@@ -877,31 +901,55 @@
       "source": "teaql-provider-sqlite/tests/like_intent_privacy.rs",
       "sha256": "5d9dc4a01f188946c6c8958d0acf51ccbf74300611f3630a3fd34a91e87bf15f",
       "source_change": "new",
-      "cpp_target": "teaql_provider_sqlite",
+      "cpp_target": "tests/parity/teaql_provider_sqlite/like_intent_privacy.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 451-line source and all five tests: exact schema/transactional seed, unchanged native SQL observation and original Policy intent, two 48-case typed LIKE matrices across direct/child scope, operands, operators, mask policy and logging; unchanged physical bindings/results, complete safe-log operand exclusion and request-local isolation; raw LIKE provenance, cached-current operand and four rewritten-AST controls. Original5 and installed native1/module1 pass, including canonical bodies, no-work and source/reference guards. No production behavior change or cross-thread Context guarantee.",
+      "evidence": [
+        "docs/like_privacy_source_audit_5_0_6.md",
+        "docs/parity/like_intent_privacy_original_5_0_6.json.gz",
+        "docs/parity/like_privacy_installed_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/like_privacy_source_audit_5_0_6.md",
+      "current_review_sha256": "fc6286e4b39d4eb4199c003c902c3a980f6da15e6e6f9519f8f529d479dba945",
+      "acceptance_scope": "Only the complete named SQLite LIKE privacy integration-test source. Does not accept other provider/request-log sources, remaining generator capabilities, physical-router execution or P0-P7 completion."
     },
     {
       "source": "teaql-provider-sqlite/tests/live_query_trace.rs",
       "sha256": "465d67b396555f9122d673295f14bed68e5284d3ed855f74adf9d5d5cbb254cc",
       "source_change": "new",
-      "cpp_target": "teaql_provider_sqlite",
+      "cpp_target": "tests/parity/teaql_provider_sqlite/live_query_trace.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 332-line source: four exact descriptors and native schema/seeding, delegating observer and two overlapping real root results on one Context, alpha/beta intent isolation, three nested relation levels, exact physical/log counts and trace routes with logging on/off. C++ uses the established owner-thread cooperative scheduling adaptation, not unrestricted shared-Context threading or Rust stack-cost equivalence. Original1 and installed native1/module1/sanitizer1 pass, with canonical bodies, no-work and source/reference guards.",
+      "evidence": [
+        "docs/live_query_source_audit_5_0_6.md",
+        "docs/parity/live_query_trace_original_5_0_6.json.gz",
+        "docs/parity/live_query_installed_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/live_query_source_audit_5_0_6.md",
+      "current_review_sha256": "87879a295f311abd926c470936f51e56ce44ac622a910bdd9ef54c22e8bdb197",
+      "acceptance_scope": "Only this complete SQLite live-query source under the documented Context scheduling adaptation. Other request/privacy/provider sources, remaining capabilities and P0-P7 completion remain open. No physical-router execution or cross-thread Context guarantee."
     },
     {
       "source": "teaql-provider-sqlite/tests/numeric_partition_trace.rs",
       "sha256": "6d40235ce0c15b72168bfe310e80c66b0287846b19b440824ac8cc9bbdca5965",
       "source_change": "new",
-      "cpp_target": "teaql_provider_sqlite",
+      "cpp_target": "tests/parity/teaql_provider_sqlite/numeric_partition_trace.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 400-line source and four tests: exact descriptors/runtime transaction seed, 12 root/window/probe grouped-query scenarios across logging/HAVING, I64 group results, caller query immutability, exact real trace routes with no scalar relation invention, future-child privacy and independent request isolation; four same-executor cached HAVING queries preserve current bindings/results/provenance and forbid private interpolation. Original4 and installed native1/module1 pass with canonical bodies, no-work and source/reference guards.",
+      "evidence": [
+        "docs/numeric_partition_source_audit_5_0_6.md",
+        "docs/parity/numeric_partition_trace_original_5_0_6.json.gz",
+        "docs/parity/numeric_partition_source_installed_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/numeric_partition_source_audit_5_0_6.md",
+      "current_review_sha256": "e1f822c5dabbcbcf7384416277226c3988559ac5fca1a96ec8da7ede014b0598",
+      "acceptance_scope": "Only the complete named SQLite numeric-partition integration-test source. Other pending relation/facet/aggregate sources, remaining generator capabilities, physical-router execution and P0-P7 completion stay open."
     },
     {
       "source": "teaql-provider-sqlite/tests/relation_membership.rs",
@@ -917,11 +965,20 @@
       "source": "teaql-provider-sqlite/tests/request_trace_log.rs",
       "sha256": "7c7bd3cd32fe5b2d9de9cc20b4192fbe728ca761ab5910da25dd8c03148e6b71",
       "source_change": "new",
-      "cpp_target": "teaql_provider_sqlite",
+      "cpp_target": "tests/parity/teaql_provider_sqlite/request_trace_log.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 770-line source and nine tests: derived-count provenance/privacy including failure, logging-off intent and legacy negative control; real transactional recovery and query-owned intent; six blank typed tail cases; nested success/failure batches with exact root/local lineage, unchanged physical bindings, future-sibling privacy and actual rollback; two overlapping Context-owned operations waiting on the real SQLite lease with isolated reasons and committed rows. Original9 and installed native1/module1/sanitizer1 pass, with canonical bodies, no-work and final input/reference guards. Existing C++ owner-thread cooperative scheduling replaces Rust worker threads; no unrestricted cross-thread guarantee.",
+      "evidence": [
+        "docs/request_trace_source_audit_5_0_6.md",
+        "docs/parity/request_trace_log_original_5_0_6.json.gz",
+        "docs/parity/request_trace_count_installed_5_0_6.json.gz",
+        "docs/parity/request_trace_complete_installed_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility. Partial continuation: all original nine tests pass; three derived-count counterparts pass installed native/module with real SQLite, safe logs, failure and leaking negative controls. Six recovery/route/batch/overlap tests remain unqualified; source stays pending.",
+      "current_review": "docs/request_trace_source_audit_5_0_6.md",
+      "current_review_sha256": "d42149d3b96d8b1a3121401626f13fc8c363a5f126b7e799b12f0725a7016951",
+      "acceptance_scope": "Only the complete named SQLite request-trace integration source under documented Context scheduling and snapshot representation adaptations. Other provider/runtime sources, remaining generator capabilities, physical-router execution and P0-P7 completion remain open."
     },
     {
       "source": "teaql-provider-sqlite/tests/stream_chunk_allocations.rs",

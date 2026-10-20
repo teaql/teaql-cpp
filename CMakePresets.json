@@ -636,7 +636,14 @@
         "teaql_module_original_core_mapping_tests",
         "teaql_module_original_core_composition_tests",
         "teaql_module_presentation_api_tests",
-        "teaql_module_graph_readback_tests"
+        "teaql_module_graph_readback_tests",
+        "teaql_module_original_provider_guard_tests",
+        "teaql_module_provider_live_query_tests",
+        "teaql_module_provider_like_privacy_tests",
+        "teaql_module_provider_request_trace_tests",
+        "teaql_module_original_provider_search_tests",
+        "teaql_module_provider_dynamic_storage_source_tests",
+        "teaql_module_provider_numeric_partition_tests"
       ]
     },
     {

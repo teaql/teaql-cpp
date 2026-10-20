@@ -1,4 +1,4 @@
-// Semantic port of the unchanged provider guarded-mutation integration test.
+// Semantic port of the locked Rust 5.0.6 provider guarded-mutation integration test.
 #include "fixture.hpp"
 
 using namespace original_provider;
@@ -31,8 +31,10 @@ static void tenant_guard_is_atomic_for_update_delete_and_recover() {
                                        MutationRequest(std::allocator_arg,
                                                        Allocator(r),
                                                        std::move(command),
-                                                       "original mutation execution fixture"),
+                                                       "audited provider conformance test"),
                                        Expr::eq(r, "tenant_id", tenant));
+        check(request.mutation.comment() == "audited provider conformance test",
+              "original 5.0.6 governed request reason");
         const auto& result = executor.mutate_guarded(r, std::move(request)).wait();
         check(result && result.value().affected_rows == affected,
               "guarded affected-row result matches the original tenant test");
