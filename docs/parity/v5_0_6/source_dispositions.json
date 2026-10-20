@@ -1876,11 +1876,21 @@
       "source": "teaql-runtime/tests/bootstrap_safe_audit.rs",
       "sha256": "b6b1fa4b205d84f2d08868950fe649666e3ad5bdb31a350566276fba0cb93ab0",
       "source_change": "new",
-      "cpp_target": "teaql_runtime",
+      "cpp_target": "teaql_runtime/tests/event_model_tests.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete bootstrap attribution test: credential and target-ID prose redaction preserves actor/category/reason structure, version and timestamp, leaves raw attribution unchanged and preserves absence. Current original4+1/native1/module1, canonical consumers, no-work and unchanged-input/reference guards qualify the complete source. Direct event projection is not transaction commit, audit delivery or protected sink acceptance; retained Context-copy/destruction checks are supporting regressions.",
+      "evidence": [
+        "docs/safe_audit_test_sources_review_5_0_6.md",
+        "docs/parity/safe_audit_sources_installed_5_0_6.json.gz",
+        "docs/parity/safe_audit_test_sources_acceptance_5_0_6.json.gz",
+        "teaql_runtime/tests/event_model_tests.cpp",
+        "scripts/verify_safe_audit_sources_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "acceptance_scope": "Complete integration-test file and helpers; separate from whole logging/privacy integration and phase acceptance.",
+      "current_review": "docs/safe_audit_test_sources_review_5_0_6.md",
+      "current_review_sha256": "16575693a2beb30799c82a05972df8766c4216c1013523998301ac11212347ea"
     },
     {
       "source": "teaql-runtime/tests/business_clock.rs",
@@ -1927,8 +1937,17 @@
       "cpp_target": "teaql_runtime",
       "previous_status": null,
       "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "responsibility": "Complete 1759-line/23-test dynamic-query integration source remains pending. Focused child_enhancement_dynamic_selection_reaches_typed_views_and_survives_root_loading and malformed_dynamic_child_enhancement_fails_without_returning_partial_entities now have unchanged original2 and actual generated Product/SQLite counterpart7, native1/module1 and SDK reproduction. Two success cases preserve note/extra merge states, shared availability and generated JSON; five malformed child batches reject without partial entities or canary disclosure. Remaining readonly allocation, graph serialization, stream, ordinary/duplicate query, ledger and mutation responsibilities require complete reconciliation; do not infer whole-file acceptance from these seven cases. A further focused original3/generated3/native1/module1 continuation covers readonly schema through lists/streams, actual aggregation-cache miss/hit with one SQLite statement, and 1003 streamed rows in 14 chunks with retained schema after cursor close. The SQLite fixture explicitly projects the readonly result column; remaining source contracts are not accepted by these three cases.",
+      "evidence": [
+        "docs/dynamic_child_selection_5_0_6.md",
+        "docs/parity/dynamic_child_installed_5_0_6.json.gz",
+        "teaql_runtime/tests/dynamic_relation_tests.cpp",
+        "scripts/verify_dynamic_child_source_5_0_6.py",
+        "docs/generated_readonly_stream_5_0_6.md",
+        "docs/parity/generated_readonly_stream_installed_5_0_6.json.gz",
+        "scripts/verify_generated_readonly_stream_source_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility."
     },
     {
       "source": "teaql-runtime/tests/flat_identity_graph.rs",
@@ -1936,9 +1955,24 @@
       "source_change": "changed",
       "cpp_target": "tests/parity/teaql_runtime/flat_identity_graph.cpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete113-line file and four bodies/helpers retain identical frozen entity addresses with independent ledgers, type-namespaced IDs, stable typed to-many views and loaded-null versus missing to-one views. Graph roots/payloads and independent ledgers use explicit User ownership. Sharing a frozen graph does not share mutable ledger state or extend Context lifetime. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete six-test Rust 5.0.6 flat-identity source accepted. Unchanged original6 and native2/module2 pass with byte-identical SDK reproduction, canonical consumers, no-work rebuilds and unchanged input/reference guards. Both handwritten and actual generated hydration preserve shared immutable identity with independent mutation ledgers, original versions, snapshots, request and entity intent; type-namespaced IDs, ordered typed lists and loaded-null versus absent relations remain covered. Generated Owner/Platform model adaptation is explicit. This does not accept whole graph/resolved implementations, all generated APIs or the full goal.",
+      "evidence": [
+        "docs/flat_identity_graph_5_0_6.md",
+        "docs/parity/flat_identity_source_installed_5_0_6.json.gz",
+        "tests/parity/teaql_runtime/flat_identity_graph.cpp",
+        "scripts/verify_flat_identity_source_5_0_6.py",
+        "docs/flat_identity_graph_source_review_5_0_6.md",
+        "docs/parity/flat_identity_generated_installed_5_0_6.json.gz",
+        "docs/parity/flat_identity_graph_acceptance_5_0_6.json.gz",
+        "tests/generator/ledger_composition_tests.cpp",
+        "scripts/generate_relation_identity_contracts_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete113-line file and four bodies/helpers retain identical frozen entity addresses with independent ledgers, type-namespaced IDs, stable typed to-many views and loaded-null versus missing to-one views. Graph roots/payloads and independent ledgers use explicit User ownership. Sharing a frozen graph does not share mutable ledger state or extend Context lifetime. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
+      "previous_pending_responsibility": "Rust 5.0.6 has six flat-identity tests, including hydration ownership and shared-reference snapshot/intent isolation added since the historical four-test acceptance. All six original tests and the six-scenario native/imported C++ executable pass. The C++ LoadedOrder adapter is handwritten: generated-model hydration acceptance remains required before complete source acceptance. Shared graph identity must not share mutation ledgers, original versions, comments or pending-key sets, or extend Context lifetime.",
+      "acceptance_scope": "All six tests and helpers of flat_identity_graph.rs, including generated-model hydration counterpart; separate from graph algorithm and phase acceptance.",
+      "current_review": "docs/flat_identity_graph_source_review_5_0_6.md",
+      "current_review_sha256": "cf512ff0ef22dbe4097d6d9a6adcf172699cf94da38568403b47732f3e881a42"
     },
     {
       "source": "teaql-runtime/tests/hydration_allocations.rs",
@@ -1954,11 +1988,21 @@
       "source": "teaql-runtime/tests/json_runtime_state.rs",
       "sha256": "dd2d4f5b82c1fa8aec785c791f2d3b04d33ae0382cf76d53e89bfce4abf7f81e",
       "source_change": "new",
-      "cpp_target": "teaql_runtime",
+      "cpp_target": "tests/generator/generated_readonly_property_tests.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete two-test Rust 5.0.6 JSON runtime-state source accepted after original2/native1/module1, complete generated example SDK reproduction, canonical consumers, no-work and unchanged-input/reference guards. Actual generated Product and metadata-only Context reject all seven reserved keys for entity and batch inputs without exposing the canary. Legitimate readonly properties preserve native scalar, NULL versus absent semantics, absent fixed slots/loaded bits, and no scalar or dynamic mutation intent. Model-name/layout adaptation is explicit; this does not accept whole Context JSON/graph implementation, external privacy sinks, authorization or persistence.",
+      "evidence": [
+        "docs/json_runtime_state_source_review_5_0_6.md",
+        "docs/parity/json_runtime_state_installed_5_0_6.json.gz",
+        "docs/parity/json_runtime_state_acceptance_5_0_6.json.gz",
+        "tests/generator/generated_readonly_property_tests.cpp",
+        "scripts/verify_json_runtime_state_source_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "acceptance_scope": "All two integration-test bodies, indexed-model helper and metadata-only Context setup; independent of containing implementation and phase acceptance.",
+      "current_review": "docs/json_runtime_state_source_review_5_0_6.md",
+      "current_review_sha256": "981617e066d9467e9c201317070af13b4c21b1a7e1d24fa254f7b1c4e64a97e5"
     },
     {
       "source": "teaql-runtime/tests/otlp_smoke.rs",
@@ -1979,11 +2023,21 @@
       "source": "teaql-runtime/tests/safe_audit_target.rs",
       "sha256": "cb58fad7abfc557d1b6613a4c1e7f8a0c7f80477b12e5139c089f90ee71f83a3",
       "source_change": "new",
-      "cpp_target": "teaql_runtime",
+      "cpp_target": "teaql_runtime/tests/event_model_tests.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "All four safe-target tests and root_only helper: four mutation constructors, unchanged root-only lineage, non-ID updates, distinct entity identities for equal IDs, owned authoritative target snapshots, absent/schema/invalid IDs and full-width positive integer IDs. Current original4+1/native1/module1, canonical consumers, no-work and unchanged-input/reference guards qualify the complete source. Direct event projection is not transaction commit, audit delivery or protected sink acceptance; retained Context-copy/destruction checks are supporting regressions.",
+      "evidence": [
+        "docs/safe_audit_test_sources_review_5_0_6.md",
+        "docs/parity/safe_audit_sources_installed_5_0_6.json.gz",
+        "docs/parity/safe_audit_test_sources_acceptance_5_0_6.json.gz",
+        "teaql_runtime/tests/event_model_tests.cpp",
+        "scripts/verify_safe_audit_sources_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "acceptance_scope": "Complete integration-test file and helpers; separate from whole logging/privacy integration and phase acceptance.",
+      "current_review": "docs/safe_audit_test_sources_review_5_0_6.md",
+      "current_review_sha256": "16575693a2beb30799c82a05972df8766c4216c1013523998301ac11212347ea"
     },
     {
       "source": "teaql-runtime/tests/state_cache_cost.rs",
@@ -2011,9 +2065,19 @@
       "source_change": "unchanged",
       "cpp_target": "tests/parity/teaql_runtime/test_incremental_ledger.cpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete393-line file and four bodies/helpers: sequential source ID provider, full observability fixture, commit cleanup, eight seeds/three roots/2048 steps and nested4096/depth8 with each source operation/assertion. Runtime roots/change-set snapshots allocate explicitly in User; each seed uses independent ownership and standard-container expectations. Cleanup removes every replayable marker/version/comment; no iteration range or production responsibility is reduced. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete unchanged four-test Rust 5.0.6 source requalified with original4/native1/module1, canonical module consumers, no-work rebuilds and unchanged-input/reference guards. Retains sequential source ID fixture, complete observability values and batch membership, commit cleanup, eight seeds/three roots/2048 steps and nested4096/depth8. Runtime objects use UserContext; independent standard-container expectations check all roots on every step. Test output headings/order are not runtime log contracts. Direct cleanup and simulated batching do not qualify physical transactions or full executor/graph behavior.",
+      "evidence": [
+        "docs/incremental_ledger_source_review_5_0_6.md",
+        "docs/parity/incremental_ledger_installed_5_0_6.json.gz",
+        "docs/parity/incremental_ledger_acceptance_5_0_6.json.gz",
+        "tests/parity/teaql_runtime/test_incremental_ledger.cpp",
+        "scripts/verify_incremental_ledger_source_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete393-line file and four bodies/helpers: sequential source ID provider, full observability fixture, commit cleanup, eight seeds/three roots/2048 steps and nested4096/depth8 with each source operation/assertion. Runtime roots/change-set snapshots allocate explicitly in User; each seed uses independent ownership and standard-container expectations. Cleanup removes every replayable marker/version/comment; no iteration range or production responsibility is reduced. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
+      "acceptance_scope": "All four integration-test bodies and complete helper/seed/operation/assertion scope; independent of implementation-source and phase acceptance.",
+      "current_review": "docs/incremental_ledger_source_review_5_0_6.md",
+      "current_review_sha256": "66467f989c14c934053f55b0e9e68fe8bdd6070b6bf0d81c43d81e284954ef0c"
     },
     {
       "source": "teaql-runtime/tests/trace_chain_requests.rs",

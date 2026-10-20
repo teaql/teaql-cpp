@@ -61,11 +61,11 @@ private:
     mutable std::atomic<std::uint64_t> current_;
 };
 
-static void incremental_ledger_observability(UserContext& user) {
-    auto r = user.memory_resource();
-    auto& root = user.make<EntityRuntimeState>();
+static void incremental_ledger_observability(UserContext& user_context) {
+    auto r = user_context.memory_resource();
+    auto& root = user_context.make<EntityRuntimeState>();
     // The original generator is an independent sequential internal-ID provider.
-    auto& generator = user.make<SequentialIdGenerator>(1);
+    auto& generator = user_context.make<SequentialIdGenerator>(1);
     auto next = [&](std::string_view entity) {
         auto generated = generator.generate_id(r, entity);
         check(bool(generated), "sequential internal ID");
@@ -104,6 +104,18 @@ static void incremental_ledger_observability(UserContext& user) {
               root.get(task100, "version")->try_u64() == 999 &&
               root.get_original_version(task100) == 5,
           "observability retains latest writes and separate expected versions");
+    check(root.get(task1, "name")->try_text() == "New Task 1" &&
+              root.get(task1, "status")->try_u64() == 1001 &&
+              root.get(task2, "name")->try_text() == "New Task 2" &&
+              root.get(task2, "status")->try_u64() == 1001 &&
+              root.get(task100, "name")->try_text() == "Another Updated Name" &&
+              root.get(task101, "name")->try_text() == "Different Sig" &&
+              root.get(task101, "status")->try_u64() == 1004,
+          "every original printed field retains its expected value");
+    check(root.get_original_version(task99) == 3 && root.get_original_version(task101) == 2 &&
+              root.get_original_version(task200) == 1 && root.get_original_version(task201) == 1 &&
+              root.get_comment() == "Hacker tries to override version",
+          "all original version registrations and latest request comment are preserved");
     std::map<std::string, std::set<std::uint64_t>> batches;
     for (const auto& [entity, values] : changes.changes()) {
         std::string signature;
@@ -122,9 +134,9 @@ static void incremental_ledger_observability(UserContext& user) {
           "original printed batches and deleted IDs now asserted");
 }
 
-static void successful_commit_cleanup(UserContext& user) {
-    auto r = user.memory_resource();
-    auto& root = user.make<EntityRuntimeState>();
+static void successful_commit_cleanup(UserContext& user_context) {
+    auto r = user_context.memory_resource();
+    auto& root = user_context.make<EntityRuntimeState>();
     auto created = key(r, "CompanyTenant", 1);
     auto deleted = key(r, "UserAccount", 2);
     root.set(created, "name", Value(r, "TeaQL"));
@@ -148,11 +160,11 @@ static void randomized_ledger_sequences(GlobalContext& global) {
     constexpr std::uint64_t seeds[] = {
         0x544541514c52554e, 1, 2, 3, 0xdeadbeef, 0x0123456789abcdef, UINT64_MAX - 1, UINT64_MAX};
     for (auto seed : seeds) {
-        auto user = global.make_user_context();
-        auto r = user->memory_resource();
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
         std::array<EntityRuntimeState*, 3> roots;
         for (auto& root : roots) {
-            root = &user->make<EntityRuntimeState>();
+            root = &user_context->make<EntityRuntimeState>();
         }
         std::array<Fields, 3> fields;
         std::array<std::set<ModelKey>, 3> new_keys, deleted_keys;
@@ -220,9 +232,9 @@ static void randomized_ledger_sequences(GlobalContext& global) {
     }
 }
 
-static void nested_change_sets(UserContext& user) {
-    auto r = user.memory_resource();
-    auto& root = user.make<EntityRuntimeState>();
+static void nested_change_sets(UserContext& user_context) {
+    auto r = user_context.memory_resource();
+    auto& root = user_context.make<EntityRuntimeState>();
     std::vector<Fields> stack(1);
     std::uint64_t random = 0x4348414e47455345;
     for (std::size_t step = 0; step < 4096; ++step) {
@@ -268,12 +280,13 @@ int main() {
     try {
         GlobalContext global;
         {
-            auto user = global.make_user_context();
-            incremental_ledger_observability(*user);
-            successful_commit_cleanup(*user);
-            nested_change_sets(*user);
+            auto user_context = global.make_user_context();
+            incremental_ledger_observability(*user_context);
+            successful_commit_cleanup(*user_context);
+            nested_change_sets(*user_context);
         }
         randomized_ledger_sequences(global);
+        std::cout << "INCREMENTAL_LEDGER_CONTRACTS=4;RANDOM_STEPS=16384;NESTED_STEPS=4096\n";
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n';
         return 1;

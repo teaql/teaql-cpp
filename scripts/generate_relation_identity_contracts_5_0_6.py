@@ -46,10 +46,12 @@ def main():
     records, staged = [], []
     with tempfile.TemporaryDirectory(prefix='teaql_relation_identity_generation_') as temporary:
         work = Path(temporary)
-        for language, repo, cache in (
-                ('rust', reference, '/tmp/teaql_constant_metadata_original_classpath.txt'),
-                ('cpp', producer, '/tmp/teaql_constant_metadata_cpp_classpath.txt')):
-            cp = ':'.join(str(repo / path) for path in ('generator/target/classes', 'model/target/classes')) + ':' + Path(cache).read_text().strip()
+        for language, repo in (('rust', reference), ('cpp', producer)):
+            classpath_file = work / (language + '_classpath.txt')
+            subprocess.run(['mvn', '-q', '-o', '-pl', 'generator',
+                            'dependency:build-classpath', f'-Dmdep.outputFile={classpath_file}'],
+                           cwd=repo, check=True)
+            cp = ':'.join(str(repo / path) for path in ('generator/target/classes', 'model/target/classes')) + ':' + classpath_file.read_text().strip()
             probes = ['TypeConfigurationProbe'] + (['RelationIdentityMetadataProbe', 'ScalarDiagnosticMetadataProbe', 'BusinessIdLookupMetadataProbe'] if language == 'cpp' else [])
             subprocess.run(['javac', '-cp', cp, '-d', str(work),
                             *(str(ROOT / 'tests/generator' / (probe + '.java')) for probe in probes)], check=True)

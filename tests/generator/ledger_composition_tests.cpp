@@ -13,6 +13,79 @@ static void check(bool condition, const char* message) {
     }
 }
 
+// The real generated carrier must share read-only identity without adopting
+// the decoding source's or another hydrated object's mutable ledger.
+static void generated_flat_identity_isolation() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto row = [&](std::uint64_t id, std::int64_t version, std::string_view name) {
+        Record fields(r);
+        fields.emplace(String("id", r), Value(r, id));
+        fields.emplace(String("version", r), Value(r, version));
+        fields.emplace(String("name", r), Value(r, name));
+        fields.emplace(String("platform_id", r), Value(r, std::uint64_t{1}));
+        return CompactRow(std::allocator_arg, Allocator(r), std::move(fields));
+    };
+    auto& graph = user_context->make<EntityRuntimeState>();
+    auto reference = Platform::from_compact_row(r, row(1, 11, "Unmodified Platform"));
+    check(bool(reference), "Decode generated reference");
+    auto reference_state = reference.value().entity_runtime_state();
+    check(bool(reference_state), "Generated reference exposes its runtime state");
+    auto reference_snapshot = reference_state->original_snapshot();
+    EntityGraphBuilder builder(std::allocator_arg, Allocator(r));
+    builder.install(1, std::move(reference).value());
+    check(bool(graph.freeze_graph(std::move(builder))), "Freeze generated reference graph");
+    auto left = Owner::from_compact_row_with_context(r, row(1, 3, "loaded order"), AnyRef(graph));
+    auto right = Owner::from_compact_row_with_context(r, row(2, 8, "loaded order"), AnyRef(graph));
+    check(bool(left) && bool(right), "Hydrate both generated owners");
+    auto left_state = left.value().entity_runtime_state();
+    auto right_state = right.value().entity_runtime_state();
+    check(left_state && right_state && reference_state && *left_state != *right_state &&
+              *left_state != *reference_state && *right_state != *reference_state,
+          "Generated hydration keeps three independent mutation owners");
+    auto a = left_state->resolve_entity<Platform>(1);
+    auto b = right_state->resolve_entity<Platform>(1);
+    check(a && a == b && a->name() == "Unmodified Platform",
+          "Generated roots resolve the same immutable entity address");
+    EntityKey ka(std::allocator_arg, Allocator(r), "Owner", Value(r, std::uint64_t{1}));
+    EntityKey kb(std::allocator_arg, Allocator(r), "Owner", Value(r, std::uint64_t{2}));
+    EntityKey kr(std::allocator_arg, Allocator(r), "Platform", Value(r, std::uint64_t{1}));
+    left.value().updateName("A");
+    right.value().updateName("B");
+    left.value().set_comment("revise order A");
+    right.value().set_comment("revise order B");
+    left_state->set_comment("revise graph A");
+    right_state->set_comment("revise graph B");
+    check(left.value().changedName() && right.value().changedName() &&
+              left.value().evalName().get() == "A" && right.value().evalName().get() == "B",
+          "Actual generated setters and readers observe their own edits");
+    check(!left_state->get(kb, "name") && !right_state->get(ka, "name") &&
+              !left_state->get_entity_comment(kb) && !right_state->get_entity_comment(ka),
+          "Generated changes and entity comments never contaminate siblings");
+    check(left.value().get_comment() == "revise order A" &&
+              right.value().get_comment() == "revise order B" &&
+              left_state->get_comment() == "revise graph A" &&
+              right_state->get_comment() == "revise graph B",
+          "Entity and request intent remain distinct and root local");
+    check(left_state->get_original_version(ka) == 3 && right_state->get_original_version(kb) == 8 &&
+              !left_state->get_original_version(kr) &&
+              reference_state->get_original_version(kr) == 11,
+          "Generated hydration preserves each original version authority");
+    check(graph.current_change_set().changes().empty() && !graph.get_entity_comment(ka) &&
+              !graph.get_entity_comment(kb) && !graph.get_comment(),
+          "Hydration source acquires no edit or audit intent");
+    check(reference_state->current_change_set().changes().empty() &&
+              !reference_state->get_comment() && !reference_state->get_entity_comment(kr) &&
+              reference_state->new_keys().empty() && reference_state->deleted_keys().empty(),
+          "Shared generated reference remains unmodified");
+    check(reference_state->original_snapshot() == reference_snapshot &&
+              a->entity_runtime_state() == reference_state &&
+              b->entity_runtime_state() == reference_state,
+          "Shared reference preserves snapshot and runtime identity");
+    std::cout << "GENERATED_FLAT_IDENTITY_ISOLATION=passed\n";
+}
+
 static void explicit_composition_lifetimes() {
     GlobalContext global;
     auto connection = global.make_resource_ref<SqliteConnection>();
@@ -152,6 +225,7 @@ static void explicit_composition_lifetimes() {
 int main() {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
+        generated_flat_identity_isolation();
         explicit_composition_lifetimes();
     } catch (const std::exception& error) {
         std::pmr::set_default_resource(previous);
