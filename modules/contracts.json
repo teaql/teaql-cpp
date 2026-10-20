@@ -4858,6 +4858,77 @@
       "source": "tests/parity/relation_model_probe.cpp",
       "import_module": "teaql_runtime",
       "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_statement_trace_probe",
+      "source": "tests/parity/runtime_statement_trace_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_base_probe",
+      "source": "tests/parity/runtime_base_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_mutation_protocol_probe",
+      "source": "tests/parity/runtime_mutation_protocol_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_query_probe",
+      "source": "tests/parity/context_query_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_query_tests",
+      "source": "teaql_runtime/tests/context_query_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "context_query_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "mutation_intent_privacy_probe",
+      "source": "tests/parity/mutation_intent_privacy_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_mutation_cache_probe",
+      "source": "tests/parity/context_mutation_cache_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_factory_probe",
+      "source": "tests/parity/context_factory_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "context_privacy_preparation_probe",
+      "source": "tests/parity/context_privacy_preparation_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
     }
   ],
   "fixtures": [

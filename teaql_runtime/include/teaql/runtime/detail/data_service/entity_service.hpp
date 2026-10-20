@@ -557,14 +557,8 @@ struct EntityDataServiceAccess {
     static RuntimeHookResult bind_mutation_privacy(EntityDataService<E>& service,
                                                    const SqlIntentRedactions& redactions) {
         auto r = service.memory_resource();
-        auto* intent = service.data_service_.mutation_intent();
-        if (!intent) {
-            RequestIntentError error(
-                std::allocator_arg, Allocator(r), RequestKind::Mutation, "comment");
-            return RuntimeHookResult::err(r, RuntimeError::request_intent(r, error));
-        }
         auto& retained = service.context().template make<SqlIntentRedactions>(redactions);
-        service.data_service_.with_mutation_intent(*intent, &retained);
+        service.data_service_.with_mutation_privacy(&retained);
         service.query_log_intent_ = &retained;
         return RuntimeHookResult::ok(r, {});
     }

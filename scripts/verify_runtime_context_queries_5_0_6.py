@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+"""Replay Context queries using actual Context/base/telemetry/logging source bodies."""
+import argparse
+import gzip
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+import tempfile
+import xml.etree.ElementTree as ET
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--record', type=Path, required=True)
+    parser.add_argument('--cpp', type=Path)
+    parser.add_argument('--module', type=Path)
+    parser.add_argument('--check-gates', action='store_true')
+    args = parser.parse_args()
+    if args.record.exists() or args.record.suffix != '.gz':
+        parser.error('Use a fresh .gz receipt; retain earlier evidence')
+    if args.check_gates and (args.cpp is None or args.module is None):
+        parser.error('Installed gates require both frontend binaries')
+    root = Path(__file__).resolve().parents[1]
+    sys.path[:0] = [str(root / 'scripts'), str(root / 'tests/parity')]
+    from compare_values import observe, same
+    from reference_runtime_view_5_0_6 import ReferenceRuntimeView
+    from run_native_integration_epoch_5_0_6 import capture_inputs, references
+
+    fixture = root / 'tests/parity/runtime_context_query_source_5_0_6.rs'
+    watched = [fixture, Path(__file__).resolve(), root / 'tests/parity/context_query_probe.cpp',
+               root / 'tests/support/context_query_fixture.hpp',
+               root / 'teaql_runtime/tests/context_query_tests.cpp']
+    record = dict(complete=False, source_promoted=False, steps=[], profiles={},
+                  inputs=capture_inputs(), references=references(),
+                  reproduction_sources={str(p.relative_to(root)): p.read_text() for p in watched})
+    environment = dict(os.environ, TEAQL_LOG_ENDPOINT='off',
+        CARGO_TARGET_DIR='/tmp/teaql_cpp_sql_compiler_source_506',
+        CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER='/usr/bin/cc')
+
+    def save():
+        args.record.parent.mkdir(parents=True, exist_ok=True)
+        args.record.write_bytes(gzip.compress((json.dumps(record, indent=2) + '\n').encode(), mtime=0))
+
+    def run(command):
+        result = subprocess.run([str(x) for x in command], cwd=root, env=environment,
+                                text=True, capture_output=True)
+        record['steps'].append(dict(command=[str(x) for x in command], exit_code=result.returncode,
+                                    stdout=result.stdout, stderr=result.stderr))
+        save()
+        result.check_returncode()
+        return result.stdout
+
+    try:
+        run([sys.executable, root / 'scripts/verify_upstream.py'])
+        cases = []
+        for name in ['context_query', 'context_query_intent']:
+            path = root / ('tests/parity/' + name + '_5_0_6_cases.json.gz')
+            corpus = json.loads(gzip.decompress(path.read_bytes()))
+            assert corpus['baseline'] == record['references']['teaql-rs']
+            cases += corpus['cases']
+        assert len(cases) == 1872
+        rows = [case['input'] for case in cases]
+        expected = [case['expected'] for case in cases]
+        with tempfile.TemporaryDirectory(prefix='teaql_context_queries_506_') as temporary:
+            work = Path(temporary)
+            input_path = work / 'inputs.json'
+            input_path.write_text(json.dumps(rows) + '\n')
+            marker = '__TEAQL_CONTEXT_QUERY_INPUTS__'
+            assert fixture.read_text().count(marker) == 1
+            observer = work / 'observer.rs'
+            observer.write_text(fixture.read_text().replace(marker, str(input_path)))
+            view = ReferenceRuntimeView(root, work / 'runtime',
+                                        {'src/data_service/context.rs': observer}, run)
+            output = run(['cargo', 'test', '--offline', '--locked', '--manifest-path',
+                          view.directory / 'Cargo.toml', '-j2', '--lib',
+                          'data_service::context::', '--', '--nocapture', '--test-threads=1'])
+            names = re.findall(r'^test (\S+) \.\.\.', output, flags=re.M)
+            assert names == ['data_service::context::cpp_runtime_context_query_observer::replay_actual_context_query_and_telemetry']
+            assert '1 passed; 0 failed' in output
+            actual = [json.loads(line.split('TEAQL_CONTEXT_QUERY_JSON ', 1)[1])
+                      for line in output.split('\n') if 'TEAQL_CONTEXT_QUERY_JSON ' in line]
+            record['original'] = dict(tests=names, observations=actual, runtime_view=view.provenance())
+            save()
+            differences = [i for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
+            record['original']['differing_indices'] = differences
+            save()
+            assert len(actual) == len(expected) and not differences, len(differences)
+            for profile, binary in [('native', args.cpp), ('modules_native', args.module)]:
+                if binary is None:
+                    continue
+                gate = {}
+                if args.check_gates:
+                    imported = profile == 'modules_native'
+                    build = root / ('build_modules_native' if imported else 'build_native_current')
+                    prefix = 'teaql_module_' if imported else 'teaql_'
+                    assert binary.resolve() == build / ('modules' if imported else '') / (prefix + 'context_query_probe')
+                    targets = ['context_query_probe', 'context_query_tests']
+                    tests = ['context_query_rust_parity', 'context_query_intent_rust_parity', 'context_query_contracts']
+                    if imported:
+                        tests = ['module_' + name for name in tests]
+                    else:
+                        targets += ['runtime_foreign_work_tests']
+                        tests += ['runtime_foreign_query_cleanup']
+                    run(['cmake', '--preset', profile])
+                    command = ['cmake', '--build', '--preset', profile, '--parallel', '2',
+                               '--target', *[prefix + target for target in targets]]
+                    run(command)
+                    if imported:
+                        run([sys.executable, root / 'scripts/verify_module_consumers.py', '--build-dir', build])
+                    junit = work / (profile + '.xml')
+                    run(['ctest', '--preset', profile, '--output-on-failure', '--no-tests=error',
+                         '--output-junit', junit, '-R', '^(' + '|'.join(tests) + ')$'])
+                    tree = ET.parse(junit).getroot()
+                    assert sorted(c.attrib['name'] for c in tree.findall('.//testcase')) == sorted(tests)
+                    assert not any(tree.findall('.//' + tag) for tag in ['failure', 'error', 'skipped'])
+                    assert 'ninja: no work to do.' in run(command)
+                    gate = dict(tests=tests, junit=junit.read_text(), post_build_no_work=True)
+                observations = observe(str(binary.resolve()), rows)
+                assert same(expected, observations), profile
+                record['profiles'][profile] = dict(observations=observations,
+                    binary_sha256=digest(binary), gate=gate)
+                save()
+            view.verify()
+        assert capture_inputs() == record['inputs'] and references() == record['references']
+        record.update(complete=True, observations_per_frontend=1872, original_tests=0, added_caller_tests=1,
+                      unchanged_inputs=True, all_installed_frontends=set(record['profiles']) == {'native', 'modules_native'})
+        save()
+        print('Actual Context/base/telemetry/logging: 1872 unchanged observations per frontend; '
+              'original embedded0 + caller1; complete source acceptance remains separate', flush=True)
+    except BaseException as error:
+        record['controller_error'] = dict(type=type(error).__name__, message=str(error))
+        save()
+        raise
+
+
+if __name__ == '__main__':
+    main()

@@ -51,8 +51,7 @@ std::size_t mutation_size(const C& command) {
 }
 
 template <class C>
-MutationRequest
-mutation_item(Memory r, const C& command, std::size_t index, const MutationIntent& intent) {
+MutationCommand mutation_item(Memory r, const C& command, std::size_t index) {
     auto result = [&] {
         if constexpr (std::same_as<C, BatchInsertCommand>) {
             InsertCommand out(std::allocator_arg, Allocator(r), command.entity);
@@ -61,7 +60,7 @@ mutation_item(Memory r, const C& command, std::size_t index, const MutationInten
                 TraceChain trace(command.trace_chains[index], r);
                 out.trace_chain.swap(trace);
             }
-            return MutationRequest(std::allocator_arg, Allocator(r), std::move(out), intent);
+            return MutationCommand(std::allocator_arg, Allocator(r), std::move(out));
         } else if constexpr (std::same_as<C, BatchUpdateCommand>) {
             UpdateCommand out(
                 std::allocator_arg, Allocator(r), command.entity, command.batch_ids.at(index));
@@ -82,23 +81,34 @@ mutation_item(Memory r, const C& command, std::size_t index, const MutationInten
                 TraceChain trace(command.trace_chains[index], r);
                 out.trace_chain.swap(trace);
             }
-            return MutationRequest(std::allocator_arg, Allocator(r), std::move(out), intent);
+            return MutationCommand(std::allocator_arg, Allocator(r), std::move(out));
         } else if constexpr (requires { command.commands; }) {
-            return MutationRequest(
-                std::allocator_arg, Allocator(r), command.commands.at(index), intent);
+            return MutationCommand(std::allocator_arg, Allocator(r), command.commands.at(index));
         } else {
-            return MutationRequest(std::allocator_arg, Allocator(r), command, intent);
+            return MutationCommand(std::allocator_arg, Allocator(r), command);
         }
     }();
     std::visit(
         [](auto& cmd) {
             using T = std::decay_t<decltype(cmd)>;
             if constexpr (!std::same_as<T, MutationRequest::Batch>) {
-                if (std::none_of(
-                        cmd.trace_chain.begin(), cmd.trace_chain.end(), [&](const TraceNode& node) {
-                            return node.kind == TraceKind::Entity && node.entity_type == cmd.entity;
-                        })) {
-                    cmd.trace_chain.emplace_back(TraceKind::Entity, cmd.entity, "");
+                std::optional<std::uint64_t> id;
+                if constexpr (std::same_as<T, InsertCommand>) {
+                    auto found = cmd.values.fields.find("id");
+                    if (found != cmd.values.fields.end()) {
+                        id = found->second.try_u64();
+                    }
+                } else {
+                    id = cmd.id.try_u64();
+                }
+                auto last = std::find_if(
+                    cmd.trace_chain.rbegin(), cmd.trace_chain.rend(), [](const TraceNode& node) {
+                        return node.kind == TraceKind::Entity;
+                    });
+                if (last != cmd.trace_chain.rend() && last->entity_type == cmd.entity) {
+                    last->entity_id = id;
+                } else {
+                    cmd.trace_chain.emplace_back(TraceKind::Entity, cmd.entity, "", id);
                 }
             }
         },
@@ -128,6 +138,7 @@ public:
     std::optional<R> poll(WakeSignal& wake) {
         while (index_ < mutation_size(command_)) {
             if (!child_) {
+                auto command = mutation_item(resource_, command_, index_);
                 if (!intent_) {
                     RequestIntentError error(
                         std::allocator_arg, Allocator(resource_), RequestKind::Mutation, "comment");
@@ -135,7 +146,8 @@ public:
                                   DataServiceError<Error>::runtime(
                                       resource_, RuntimeError::request_intent(resource_, error)));
                 }
-                request_.emplace(mutation_item(resource_, command_, index_, *intent_));
+                request_.emplace(
+                    std::allocator_arg, Allocator(resource_), std::move(command), *intent_);
                 request_->with_diagnostic_redactions(privacy_ ? &*privacy_ : nullptr);
                 auto& work = executor_.get().mutate_observed(
                     resource_,

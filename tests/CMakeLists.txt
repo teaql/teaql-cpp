@@ -3449,3 +3449,90 @@ if(Python3_Interpreter_FOUND)
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     set_tests_properties(runtime_service_types_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
 endif()
+
+add_executable(teaql_runtime_statement_trace_probe tests/parity/runtime_statement_trace_probe.cpp)
+target_link_libraries(teaql_runtime_statement_trace_probe PRIVATE teaql::runtime)
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME runtime_statement_trace_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_runtime_statement_trace_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_runtime_statement_trace_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(runtime_statement_trace_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME runtime_query_protocol_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_runtime_query_protocol_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_runtime_base_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(runtime_query_protocol_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(BUILD_TESTING)
+    add_executable(teaql_runtime_mutation_protocol_probe tests/parity/runtime_mutation_protocol_probe.cpp)
+    target_link_libraries(teaql_runtime_mutation_protocol_probe PRIVATE teaql::runtime)
+    # Isolate the header-defined wrapping counter; this is not a full Release runtime.
+    add_executable(teaql_runtime_mutation_protocol_release_probe tests/parity/runtime_mutation_protocol_probe.cpp)
+    target_compile_definitions(teaql_runtime_mutation_protocol_release_probe PRIVATE NDEBUG)
+    target_link_libraries(teaql_runtime_mutation_protocol_release_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME runtime_mutation_protocol_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_runtime_mutation_protocol_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_runtime_mutation_protocol_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+        set_tests_properties(runtime_mutation_protocol_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+        add_test(NAME runtime_mutation_protocol_release_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_runtime_mutation_protocol_release_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_runtime_mutation_protocol_release_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+        set_tests_properties(runtime_mutation_protocol_release_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endif()
+
+if(BUILD_TESTING)
+    add_executable(teaql_mutation_intent_privacy_probe tests/parity/mutation_intent_privacy_probe.cpp)
+    target_link_libraries(teaql_mutation_intent_privacy_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME mutation_intent_privacy_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_mutation_intent_privacy_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_mutation_intent_privacy_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+        set_tests_properties(mutation_intent_privacy_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endif()
+
+if(BUILD_TESTING)
+    add_executable(teaql_context_mutation_cache_probe tests/parity/context_mutation_cache_probe.cpp)
+    target_link_libraries(teaql_context_mutation_cache_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME context_mutation_cache_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_context_mutation_cache_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_context_mutation_cache_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+        set_tests_properties(context_mutation_cache_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endif()
+
+if(BUILD_TESTING)
+    add_executable(teaql_context_factory_probe tests/parity/context_factory_probe.cpp)
+    target_link_libraries(teaql_context_factory_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME context_factory_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_context_factory_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_context_factory_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+        set_tests_properties(context_factory_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endif()
+
+if(BUILD_TESTING)
+    add_executable(teaql_context_privacy_preparation_probe tests/parity/context_privacy_preparation_probe.cpp)
+    target_link_libraries(teaql_context_privacy_preparation_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME context_privacy_preparation_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_context_privacy_preparation_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_context_privacy_preparation_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+        set_tests_properties(context_privacy_preparation_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endif()

@@ -1,5 +1,50 @@
 # C++ generator parity plan
 
+Current commit checkpoint: independent privacy preparation and forwarding now
+match all 24 original-source observations on native and imported frontends,
+with native4/module4 selected gates and a scoped ASan/UBSan1 check passing.
+The shared-type source remains explicitly reopened pending joined
+requalification; current totals are **82 accepted / 40 pending / 2 excluded_external**.
+Complete Context and all capability/phase exits retain their previous verdicts.
+The continuation notes below describe earlier checkpoints.
+
+Latest Context continuation: [actual Context review](runtime_context_source_review_5_0_6.md)
+adds mutation/cache4,608 and factory/registration96 matching source/native/imported,
+each with native5/module5, canonical consumers and no-work builds. All six Context
+mutation entries and factory/registration observations use complete original bodies.
+Context remains pending on its private helper/caller/privacy obligations; source
+totals83/39/2, capability verdicts and P0-P7 exits stay unchanged. Earlier notes
+below retain their checkpoint scope.
+
+Latest continuation: [actual Context service review](runtime_context_source_review_5_0_6.md)
+replays1872 unchanged results per frontend with real runtime types, native4/module3.
+A new setter sequence found8/18 privacy differences, temporarily reopened base
+acceptance, then restored it after the correction passed source/native/imported18
+and native5/module5. Source totals remain **83/39/2**; complete Context, all six
+partial capabilities and P0-P7 exits remain open. Earlier notes are checkpoints.
+
+Latest source checkpoint: [complete runtime base-service acceptance](runtime_base_source_review_5_0_6.md)
+joins DB01-DB18, 15,590 source/native/imported outcomes per frontend, original1/
+caller3, native11/module6, isolated Release8,832 and scoped ASan/UBSan2. Source
+status is **83 accepted / 39 pending / 2 excluded_external**. All capability
+verdicts and P0-P7 exits retain their values. The following continuation notes
+are historical checkpoints, not additional current acceptance claims.
+
+Current continuation: [complete base-service responsibility review](runtime_base_source_review_5_0_6.md).
+The actual complete runtime replays 1,024 legacy query controls and 4,096 new
+protocol cases. Both pre-repair C++ frontends reproduce 3,072 callback-order
+differences. The installed correction matches 4,096 protocol plus 1,024 legacy
+cases per frontend, with original1/caller1 and native6/module4 passing. The retained 1,502 mutation corpus has no
+provider-observed results and remains early-exit evidence. Source and capability
+verdicts do not advance from these focused checks.
+
+Current implementation work: [physical mutation statement identity](runtime_statement_trace_5_0_6.md).
+Actual unchanged 5.0.6 methods reproduce 1,028/1,638 differences per C++ frontend.
+The installed correction matches actual source/native/imported 1,638/1,638 each,
+with the original test, added caller and native10/module2 scoped gates passing.
+Complete source/capability/phase acceptance remains separate. The following
+checkpoint notes retain their historical scope.
+
 Current continuation: [character and byte-character lexing](character_lexing_5_0_6.md)
 repairs 13 reproduced whole-stream validation differences in the independent
 producer. Installed actual-source comparison passes 3,147/3,147 and actual Maven

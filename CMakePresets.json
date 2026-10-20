@@ -611,7 +611,16 @@
         "teaql_module_runtime_completion_tests",
         "teaql_module_relation_key_snapshot_probe",
         "teaql_module_runtime_service_types_probe",
-        "teaql_module_relation_model_probe"
+        "teaql_module_relation_model_probe",
+        "teaql_module_runtime_statement_trace_probe",
+        "teaql_module_runtime_base_probe",
+        "teaql_module_runtime_mutation_protocol_probe",
+        "teaql_module_context_query_probe",
+        "teaql_module_context_query_tests",
+        "teaql_module_mutation_intent_privacy_probe",
+        "teaql_module_context_mutation_cache_probe",
+        "teaql_module_context_factory_probe",
+        "teaql_module_context_privacy_preparation_probe"
       ]
     },
     {

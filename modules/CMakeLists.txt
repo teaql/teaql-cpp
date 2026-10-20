@@ -1933,3 +1933,63 @@ if(TARGET teaql_module_relation_model_probe)
         --cpp $<TARGET_FILE:teaql_module_relation_model_probe>)
     set_tests_properties(module_relation_model_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
 endif()
+
+if(TARGET teaql_module_runtime_statement_trace_probe)
+    add_test(NAME module_runtime_statement_trace_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_runtime_statement_trace_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_runtime_statement_trace_probe>)
+    set_tests_properties(module_runtime_statement_trace_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_runtime_base_probe)
+    foreach(probe_comparator IN ITEMS runtime_base runtime_base_intent runtime_query_protocol)
+        add_test(NAME module_${probe_comparator}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${probe_comparator}_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_module_runtime_base_probe>)
+        set_tests_properties(module_${probe_comparator}_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endforeach()
+endif()
+
+if(TARGET teaql_module_runtime_mutation_protocol_probe)
+    add_test(NAME module_runtime_mutation_protocol_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_runtime_mutation_protocol_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_runtime_mutation_protocol_probe>)
+    set_tests_properties(module_runtime_mutation_protocol_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_context_query_probe)
+    foreach(probe_comparator IN ITEMS context_query context_query_intent)
+        add_test(NAME module_${probe_comparator}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${probe_comparator}_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_module_context_query_probe>)
+        set_tests_properties(module_${probe_comparator}_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endforeach()
+endif()
+
+if(TARGET teaql_module_mutation_intent_privacy_probe)
+    add_test(NAME module_mutation_intent_privacy_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_mutation_intent_privacy_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_mutation_intent_privacy_probe>)
+    set_tests_properties(module_mutation_intent_privacy_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_context_mutation_cache_probe)
+    add_test(NAME module_context_mutation_cache_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_context_mutation_cache_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_context_mutation_cache_probe>)
+    set_tests_properties(module_context_mutation_cache_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_context_factory_probe)
+    add_test(NAME module_context_factory_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_context_factory_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_context_factory_probe>)
+    set_tests_properties(module_context_factory_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_context_privacy_preparation_probe)
+    add_test(NAME module_context_privacy_preparation_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_context_privacy_preparation_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_context_privacy_preparation_probe>)
+    set_tests_properties(module_context_privacy_preparation_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()

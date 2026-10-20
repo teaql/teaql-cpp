@@ -1,6 +1,8 @@
 # Runtime data-service shared types: Rust 5.0.6 source review
 
-Current source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
+Current requalification: **pending_review** after the [independent privacy preparation counterexample](parity/context_privacy_preparation_before_5_0_6.json.gz). The accepted cohort paragraph below records the previous checkpoint, whose callers bound intent before privacy.
+
+Historical source disposition: **accepted** at the [installed cohort checkpoint](source_cohort_acceptance_5_0_6.md). Earlier staged/pending paragraphs retain their historical scope.
 
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 Scope: the complete 333-line `teaql-runtime/src/data_service/types.rs`, SHA256
@@ -140,3 +142,20 @@ native epoch and already queued Event/Policy/key-snapshot cohorts are independen
 No production C++ body, module export, generator, generated SDK or runtime
 dependency changes in this reconciliation. No sanitizer, MIPS, physical-router
 or complete P0-P7 result is claimed.
+
+## Privacy preparation checkpoint
+
+The independent preparation counterexample is repaired. The [installed replay](parity/context_privacy_preparation_installed_5_0_6.json.gz)
+matches all 24 actual-source outcomes on native and imported frontends, with
+native4/module4 selected gates passing. Privacy may be prepared before intent
+without authorizing execution; absent intent still produces zero provider calls.
+The [unchanged shared-type regression](parity/service_types_privacy_requalified_source_5_0_6.json.gz)
+passes all 258 observations per frontend and native5/module5 selected gates,
+including the complete lifetime programs and final no-work builds. The
+[focused sanitizer check](parity/context_privacy_preparation_sanitize_5_0_6.json.gz)
+passes its single registered test with ASan/UBSan and leak scanning disabled.
+
+This commit retains the reopened pending disposition until the supplemental
+evidence is joined into a formal source acceptance record. Current source
+totals are 82 accepted, 40 pending and 2 excluded_external. Earlier acceptance
+receipts remain unchanged; complete Context and generator parity stay separate.

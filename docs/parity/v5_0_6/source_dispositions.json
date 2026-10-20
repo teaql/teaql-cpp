@@ -1161,12 +1161,33 @@
       "source_change": "changed",
       "cpp_target": "teaql_runtime/include/teaql/runtime/data_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp; teaql_runtime/src/data_service/mod.cpp; teaql_runtime/include/teaql/runtime/detail/query_keys.hpp; teaql_runtime/src/data_service/query_keys.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/id_set_page.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp; teaql_runtime/src/data_service/relation_graph.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/base_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/context_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete six-file runtime service responsibilities are accepted after all public/private/default/trait/protocol/ownership and execution body reviews. Separate RuntimeDataService, ContextDataService, EntityDataService and live metadata interfaces preserve typed/row/stream/cache/pagination/relation/mutation roles. Cursor counters match checked Debug versus wrapping Release, and the formerly missing private typed-aggregate path preserves a fresh decoding root without enhanced ID paging. Native 378/378 after 338 consumer tasks, 420 nonempty dependencies and no-work before/after; current sanitizer/MIPS 56/56 plus independent base/stream 3/3 pass. Thirteen live original matrices match all recorded cases on both profiles, including 165 public entity-query, 48 actual private helper bodies and 1502 mutation observations. Checked origins, concrete non-Clone error/output completion, foreign-work cancellation, default-PMR-disabled actual User destruction and explicit Global nested retention remain mandatory. 32-bit key field adaptation and controlled private-helper rows are explicit; they do not claim native Rust/router execution. Complete graph/save/runtime-root and stages 5\u20136 remain separate.",
+      "status": "accepted",
+      "responsibility": "DB01-DB18: complete491-line 5.0.6 base.rs, including its unchanged original statement test. Preserve separate RuntimeDataService, required intent and privacy, four query entries, independent capture/observer callbacks after intent, physical command identity before mutation intent, all six single/batch and four many entries, exact executor/runtime/entity error roles, metadata-before-conflict/decode ordering, batch filtering/optional arrays/final version guards and checked Debug versus wrapping Release counters. Joined actual-source/native/imported matches15590 each (query5120/statement1638/mutation8832), original1/addedcallers3 and permanent native11/module6 pass with canonical Runtime-only consumers and final no-work builds. Actual Release versus isolated C++ NDEBUG matches8832 with76 counter differences from Debug and permanent gate1; not a full Release runtime or module profile. Scoped ASan/UBSan2 passes with leaks disabled. Explicit Context borrows, nested allocators, destination privacy copies, foreign child cleanup and complete non-Clone completion bodies preserve the approved C++ ownership/threading adaptation. Only this complete source responsibility advances; Context/entity/callers, whole governance/privacy and G13/G17/P0-P7 remain separate. Supplemental intent/privacy correction preserves existing redactions on intent-only replacement; actual source/native/imported18 and native5/module5 pass after an honestly reopened eight-case failure. The same gates rerun mutation8832 and real Context query1872/lifecycle bodies; prior full-source, isolated Release and sanitizer receipts retain their historical scope.",
       "evidence": [
         "docs/generated_execution_5_0_6.md",
-        "tests/parity/generated_execution_5_0_6_cases.json.gz"
-      ]
+        "tests/parity/generated_execution_5_0_6_cases.json.gz",
+        "docs/runtime_statement_trace_5_0_6.md",
+        "docs/parity/runtime_statement_trace_before_5_0_6.json.gz",
+        "docs/parity/runtime_statement_trace_module_before_5_0_6.json.gz",
+        "docs/parity/runtime_statement_trace_installed_5_0_6.json.gz",
+        "docs/runtime_base_source_review_5_0_6.md",
+        "docs/parity/runtime_query_protocol_source_5_0_6.json.gz",
+        "docs/parity/runtime_query_protocol_before_5_0_6.json.gz",
+        "docs/parity/runtime_query_protocol_installed_5_0_6.json.gz",
+        "docs/parity/runtime_base_execution_installed_5_0_6.json.gz",
+        "docs/parity/runtime_base_execution_release_source_5_0_6.json.gz",
+        "docs/parity/runtime_base_execution_release_installed_5_0_6.json.gz",
+        "docs/parity/runtime_base_execution_sanitize_5_0_6.json.gz",
+        "docs/parity/runtime_base_source_acceptance_5_0_6.json.gz",
+        "docs/parity/mutation_intent_privacy_before_5_0_6.json.gz",
+        "docs/parity/mutation_intent_privacy_reopened_5_0_6.json.gz",
+        "docs/parity/mutation_intent_privacy_source_5_0_6.json.gz",
+        "docs/parity/mutation_intent_privacy_installed_5_0_6.json.gz",
+        "docs/parity/mutation_intent_privacy_requalified_5_0_6.json.gz"
+      ],
+      "current_review": "docs/runtime_base_source_review_5_0_6.md",
+      "acceptance_scope": "Complete base.rs491 under DB01-DB18 plus actual-source intent/privacy replacement qualification. Explicit C++ Context ownership and checked-exception adaptations; no complete Context/entity/governance, full Release/sanitizer/native suite, MIPS/router or P0-P7 acceptance.",
+      "current_review_sha256": "0e68e4552744842c32bce4f678567a38dea5630e398c786f2c3c81c5ac651602"
     },
     {
       "source": "teaql-runtime/src/data_service/cache.rs",
@@ -1192,10 +1213,19 @@
       "cpp_target": "teaql_runtime/include/teaql/runtime/data_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp; teaql_runtime/src/data_service/mod.cpp; teaql_runtime/include/teaql/runtime/detail/query_keys.hpp; teaql_runtime/src/data_service/query_keys.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/id_set_page.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp; teaql_runtime/src/data_service/relation_graph.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/base_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/context_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
       "previous_status": "accepted",
       "status": "pending_review",
-      "responsibility": "Complete six-file runtime service responsibilities are accepted after all public/private/default/trait/protocol/ownership and execution body reviews. Separate RuntimeDataService, ContextDataService, EntityDataService and live metadata interfaces preserve typed/row/stream/cache/pagination/relation/mutation roles. Cursor counters match checked Debug versus wrapping Release, and the formerly missing private typed-aggregate path preserves a fresh decoding root without enhanced ID paging. Native 378/378 after 338 consumer tasks, 420 nonempty dependencies and no-work before/after; current sanitizer/MIPS 56/56 plus independent base/stream 3/3 pass. Thirteen live original matrices match all recorded cases on both profiles, including 165 public entity-query, 48 actual private helper bodies and 1502 mutation observations. Checked origins, concrete non-Clone error/output completion, foreign-work cancellation, default-PMR-disabled actual User destruction and explicit Global nested retention remain mandatory. 32-bit key field adaptation and controlled private-helper rows are explicit; they do not claim native Rust/router execution. Complete graph/save/runtime-root and stages 5\u20136 remain separate.",
+      "responsibility": "CD01-CD15 map complete362-line Context source. Actual UserContext/ContextDataService/MetadataStore/base/telemetry/logging bodies replay1872 unchanged source/native/imported results with native4/module3. Provider identity mapping is constrained by exact actual-type/name assertions; the older shadow-Context fixture remains separate historical evidence. Intent/privacy correction preserves existing empty/nonempty redactions on intent replacement (source/native/imported18, native5/module5). Full factory/registration and Context mutation/cache lifecycle qualification remains open. Historical source/corpus or base acceptance does not establish this source disposition. Focused actual-source Context mutation/cache4608 and public-factory/registration96 each match both installed frontends, each with native5/module5, canonical Runtime-only consumers and no-work builds. The cache witness observes all six actual Context mutation methods, success/zero-row/empty-batch invalidation, error/partial-write no-invalidation and exact independent trait/concrete namespaces. The factory witness observes original private delegation/public error priority, defaults, authentic executor type errors and plain resource versus registered executor/saver presence, without running database or graph-save methods. Complete Context source qualification still requires the independently instrumented noop name closure, diagnostic comment helper, pre-intent privacy forwarding and remaining joined caller contracts.",
       "evidence": [
-        "docs/dynamic_typed_save_audit_5_0_6.md"
-      ]
+        "docs/dynamic_typed_save_audit_5_0_6.md",
+        "docs/runtime_context_source_review_5_0_6.md",
+        "docs/parity/runtime_context_queries_installed_5_0_6.json.gz",
+        "docs/parity/runtime_context_queries_installed_final_5_0_6.json.gz",
+        "docs/parity/mutation_intent_privacy_installed_5_0_6.json.gz",
+        "docs/parity/context_mutation_cache_installed_5_0_6.json.gz",
+        "docs/parity/context_factory_installed_5_0_6.json.gz",
+        "docs/parity/context_cache_factory_checkpoint_5_0_6.json.gz"
+      ],
+      "current_review": "docs/runtime_context_source_review_5_0_6.md",
+      "acceptance_scope": "Pending complete Context qualification. Installed actual-source query1872, intent/privacy18, mutation/cache4608 and factory/registration96 are focused witnesses; private helper/caller and independent privacy preparation obligations remain open."
     },
     {
       "source": "teaql-runtime/src/data_service/executor.rs",
@@ -1306,7 +1336,7 @@
       "source_change": "changed",
       "cpp_target": "teaql_runtime/include/teaql/runtime/data_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp; teaql_runtime/src/data_service/mod.cpp; teaql_runtime/include/teaql/runtime/detail/query_keys.hpp; teaql_runtime/src/data_service/query_keys.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/id_set_page.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp; teaql_runtime/src/data_service/relation_graph.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/base_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/context_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
       "previous_status": "accepted",
-      "status": "accepted",
+      "status": "pending_review",
       "responsibility": "RT01-RT17: complete named 5.0.6 source under the detailed responsibility review. source/native/imported258, original private caller1, installed native5/module5 and three complete lifetime programs per frontend; separate Runtime/Context/entity services. Preceding full native784/no-work and installed follow-up cohorts pass. Preserve explicit Context ownership and approved owner-thread/lifetime adapters. Complete provider/runtime/capability/P0-P7 acceptance remains separate.",
       "evidence": [
         "docs/dynamic_ledger_5_0_6.md",
@@ -1317,11 +1347,16 @@
         "docs/source_cohort_acceptance_5_0_6.md",
         "docs/parity/service_types_installed_source_5_0_6.json.gz",
         "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
-        "docs/parity/native_current_character_terminal_5_0_6.json.gz"
+        "docs/parity/native_current_character_terminal_5_0_6.json.gz",
+        "docs/parity/context_privacy_preparation_before_5_0_6.json.gz",
+        "docs/parity/context_privacy_preparation_reopened_5_0_6.json.gz",
+        "docs/parity/context_privacy_preparation_installed_5_0_6.json.gz",
+        "docs/parity/context_privacy_preparation_sanitize_5_0_6.json.gz",
+        "docs/parity/service_types_privacy_requalified_source_5_0_6.json.gz"
       ],
       "current_review": "docs/runtime_service_types_source_review_5_0_6.md",
-      "current_review_sha256": "eda351d16e92b97e563dc83ccfc76b297735d8cbaf539ed62afc582141294fff",
-      "acceptance_scope": "Only complete teaql-runtime/src/data_service/types.rs under RT01-RT17; not entire runtime, provider, generator capability or full P0-P7 qualification."
+      "current_review_sha256": "79940564f298d85c327c3ea947d9b50e59b2337c5b8f53184099ad62f5289b52",
+      "acceptance_scope": "Reopened after actual-source pre-intent privacy preparation counterexamples. Installed source/native/imported24 and unchanged shared-type258 plus scoped sanitizer pass; supplemental joined acceptance remains pending. Earlier receipts retain their historical scope."
     },
     {
       "source": "teaql-runtime/src/document_round_trip.rs",

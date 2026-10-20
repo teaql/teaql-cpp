@@ -22,8 +22,7 @@ public:
     std::optional<R> poll(WakeSignal& wake) {
         if (!child_) {
             const auto& store = metadata_.get();
-            auto checked = QueryRequest::from_query(
-                resource_, query_, store.capture_query_debug(), store.capture_execution_metadata());
+            auto checked = QueryRequest::from_query(resource_, query_);
             if (!checked) {
                 return R::err(
                     resource_,
@@ -31,6 +30,8 @@ public:
                         resource_, RuntimeError::request_intent(resource_, checked.error())));
             }
             auto request = std::move(checked).value();
+            request.capture_debug_query = store.capture_query_debug();
+            request.capture_execution_metadata = store.capture_execution_metadata();
             auto& child = executor_.get().query_observed(
                 resource_, std::move(request), store.query_diagnostic_observer(resource_));
             if (child.memory_resource() != resource_) {

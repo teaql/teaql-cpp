@@ -102,6 +102,23 @@ static Json evaluate(UserContext& c, const Json& j) {
     detail::model_put(out, "notes", notes);
     Json::Array ops(r);
     for (const auto& operation : state.operations) {
+        if (operation.family == "provider") {
+            auto kind = detail::resource_type_name<Mock>();
+            String expected(kind, r);
+            expected += ".query";
+            auto string_attribute = [&](std::string_view key) -> std::string_view {
+                auto found = operation.attributes.find(key);
+                if (found == operation.attributes.end()) {
+                    throw std::logic_error("provider attribute missing");
+                }
+                return std::get<String>(found->second.data);
+            };
+            if (operation.name != expected || string_attribute("teaql.provider.kind") != kind ||
+                string_attribute("teaql.provider.operation") != "query" ||
+                string_attribute("teaql.operation.name") != expected) {
+                throw std::logic_error("provider identity does not match the actual executor type");
+            }
+        }
         auto v = detail::model_json(r);
         detail::model_put(v, "family", operation.family);
         detail::model_put(v,
@@ -146,6 +163,7 @@ static Json evaluate(UserContext& c, const Json& j) {
 
 int main() {
     setenv("TEAQL_LOG_ENDPOINT", "off", 1);
+    auto previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     std::string line;
     while (std::getline(std::cin, line)) {
         GlobalContext g;
@@ -153,4 +171,5 @@ int main() {
         auto j = Json::parse(c->memory_resource(), line);
         std::cout << evaluate(*c, *j).dump(c->memory_resource()) << '\n';
     }
+    std::pmr::set_default_resource(previous);
 }

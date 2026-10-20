@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="1"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="3"
+	timestamp="2026-10-20T15:49:00"
+	>
+	<testcase name="runtime_mutation_protocol_release_rust_parity" classname="runtime_mutation_protocol_release_rust_parity" time="3.2966" status="run">
+		<properties/>
+		<system-out>Runtime mutation isolated Release counter 5.0.6 parity: 8832/8832 observations match
+</system-out>
+	</testcase>
+</testsuite>

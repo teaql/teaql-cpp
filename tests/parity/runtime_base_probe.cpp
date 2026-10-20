@@ -14,10 +14,19 @@ struct Spy : MetadataStore {
     using allocator_type = Allocator;
     Memory r;
     bool capture, debug;
+    bool protocol, observer;
     mutable Vector<std::size_t> logs;
+    mutable Vector<String> notes;
 
-    Spy(std::allocator_arg_t, Allocator a, bool c, bool d)
-        : r(a.resource()), capture(c), debug(d), logs(r) {}
+    Spy(std::allocator_arg_t, Allocator a, bool c, bool d, bool protocol, bool observer)
+        : r(a.resource()), capture(c), debug(d), protocol(protocol), observer(observer), logs(r),
+          notes(r) {}
+
+    void note(std::string_view name) const {
+        if (protocol) {
+            notes.emplace_back(name);
+        }
+    }
 
     Memory memory_resource() const noexcept override {
         return r;
@@ -32,15 +41,47 @@ struct Spy : MetadataStore {
     }
 
     bool capture_execution_metadata() const override {
+        note("capture_metadata");
         return capture;
     }
 
     bool capture_query_debug() const override {
+        note("capture_debug");
         return debug;
     }
 
     void record_metadata_log(const ExecutionMetadata& m) const override {
+        note("record_metadata");
         logs.push_back(m.result_count.value_or(0));
+    }
+
+    struct Observer {
+        using allocator_type = Allocator;
+        ResourceBorrow<const Spy> spy;
+
+        Observer(std::allocator_arg_t, Allocator a, const Spy& target)
+            : spy(std::allocator_arg, a, target, detail::resource_arena(target.r)) {}
+
+        Observer(std::allocator_arg_t, Allocator a, const Observer& other)
+            : spy(std::allocator_arg, a, other.spy) {}
+
+        void operator()(ExecutionMetadata metadata) const {
+            spy.get().note("callback");
+            spy.get().record_metadata_log(metadata);
+        }
+    };
+
+    std::optional<ExecutionObserver> query_diagnostic_observer(Memory target) const override {
+        if (!protocol) {
+            return MetadataStore::query_diagnostic_observer(target);
+        }
+        note("query_observer");
+        if (!observer) {
+            return {};
+        }
+        return ExecutionObserver(std::allocator_arg,
+                                 Allocator(target),
+                                 Observer(std::allocator_arg, Allocator(target), *this));
     }
 };
 
@@ -48,11 +89,12 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
     using allocator_type = Allocator;
     Memory r;
     bool failure, bad_model, event;
+    Spy& spy;
     Json seen;
 
-    Mock(std::allocator_arg_t, Allocator a, const Json& input)
+    Mock(std::allocator_arg_t, Allocator a, const Json& input, Spy& spy)
         : r(a.resource()), failure(flag(input, "failure")), bad_model(flag(input, "bad_model")),
-          event(flag(input, "event")), seen(r) {}
+          event(flag(input, "event")), spy(spy), seen(r) {}
 
     Memory memory_resource() const {
         return r;
@@ -84,6 +126,7 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
 
     DataServiceOperationResult<QueryResult, String>& query_observed(
         Memory target, QueryRequest q, std::optional<ExecutionObserver> observer) override {
+        spy.note("provider");
         seen = detail::model_json(r);
         detail::model_put(seen, "entity", q.query.entity);
         detail::model_put(seen, "trace", q.trace_chain.size());
@@ -91,6 +134,11 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
         detail::model_put(seen, "capture", q.capture_execution_metadata);
         detail::model_put(seen, "debug", q.capture_debug_query);
         detail::model_put(seen, "observer", observer.has_value());
+        if (spy.protocol) {
+            detail::model_put(seen, "purpose", q.purpose());
+            q.query.comment_text.reset();
+            q.query.trace_chain.clear();
+        }
         if (event && observer) {
             (*observer)(ExecutionMetadata::unrecorded_query(target, 99));
         }
@@ -115,13 +163,21 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
 
 static Json evaluate(UserContext& c, const Json& j) {
     auto r = c.memory_resource();
-    auto& spy = c.make<Spy>(flag(j, "capture"), flag(j, "debug"));
-    auto& mock = c.make<Mock>(j);
+    bool protocol = optional(j, "protocol") && flag(j, "protocol");
+    auto& spy = c.make<Spy>(
+        flag(j, "capture"), flag(j, "debug"), protocol, protocol && flag(j, "observer"));
+    auto& mock = c.make<Mock>(j, spy);
     ResourceBorrow<Mock> executor(
         std::allocator_arg, Allocator(r), mock, detail::resource_arena(r));
     auto& base = c.make<detail::RuntimeDataService<Spy, Mock>>(spy, executor);
     auto& q = c.make<SelectQuery>("Item");
-    q.comment_text.emplace("comment", r);
+    if (const auto* comment = optional(j, "comment")) {
+        if (!std::holds_alternative<std::monostate>(comment->data)) {
+            q.comment_text.emplace(text(*comment), r);
+        }
+    } else {
+        q.comment_text.emplace("comment", r);
+    }
     if (auto* purpose = optional(j, "purpose");
         purpose && !std::holds_alternative<std::monostate>(purpose->data)) {
         q.purpose_text.emplace(text(*purpose), r);
@@ -162,10 +218,23 @@ static Json evaluate(UserContext& c, const Json& j) {
     }
     detail::model_put(output, "logs", logs);
     detail::model_put(output, "request", mock.seen);
+    if (protocol) {
+        Json::Array notes(r);
+        for (const auto& note : spy.notes) {
+            notes.emplace_back(note);
+        }
+        detail::model_put(output, "notes", notes);
+        detail::model_put(
+            output, "input_comment", q.comment_text ? Json(r, *q.comment_text) : Json(r));
+        detail::model_put(
+            output, "input_purpose", q.purpose_text ? Json(r, *q.purpose_text) : Json(r));
+        detail::model_put(output, "input_trace", q.trace_chain.size());
+    }
     return output;
 }
 
 int main() {
+    auto previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     std::string line;
     while (std::getline(std::cin, line)) {
         GlobalContext g;
@@ -174,4 +243,5 @@ int main() {
         auto j = Json::parse(r, line);
         std::cout << evaluate(*c, *j).dump(r) << '\n';
     }
+    std::pmr::set_default_resource(previous);
 }

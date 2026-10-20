@@ -7491,7 +7491,17 @@
         "tests/parity/sqlite_chunk_capacity_5_0_6_cases.json.gz",
         "scripts/verify_sqlite_chunk_capacity_5_0_6.py",
         "docs/source_cohort_acceptance_5_0_6.md",
-        "docs/parity/source_cohort_acceptance_5_0_6.json.gz"
+        "docs/parity/source_cohort_acceptance_5_0_6.json.gz",
+        "docs/runtime_base_source_review_5_0_6.md",
+        "docs/parity/runtime_base_source_acceptance_5_0_6.json.gz",
+        "docs/runtime_context_source_review_5_0_6.md",
+        "docs/parity/mutation_intent_privacy_requalified_5_0_6.json.gz",
+        "docs/parity/context_mutation_cache_installed_5_0_6.json.gz",
+        "docs/parity/context_factory_installed_5_0_6.json.gz",
+        "docs/parity/context_cache_factory_checkpoint_5_0_6.json.gz",
+        "docs/parity/context_privacy_preparation_installed_5_0_6.json.gz",
+        "docs/parity/context_privacy_preparation_sanitize_5_0_6.json.gz",
+        "docs/parity/service_types_privacy_requalified_source_5_0_6.json.gz"
       ],
       "open_questions": [
         "SQ01: complete the remaining source/model matrix across every capability and wider ordinary/generated-ledger caller configurations. The bounded nonempty borrowed-root adapter now passes its complete source/runtime/ownership, Java,196 compiler and78-SDK artifact gates in generated_runtime_state_bridge_5_0_6.md; shared ordinary carrier dispatch is separately qualified in runtime_state_bridge_5_0_6.md. Neither slice accepts complete entity_save.rs or every generated caller. G08 quoted-column and G12 invalid naming dispositions still await the user; wider G15 quoted-FK5 remains unaccepted.",
@@ -7503,7 +7513,11 @@
         "SQ07: join complete governed query/mutation/transaction and protected-I/O/privacy/trace evidence with G14/G17; G15/G16 and the new document protocol observations do not independently accept those wider configurations.",
         "Complete query.rs CQ01-CQ17 is now accepted on body/guard/trait review, current source/frontend evidence, explicit unchanged-source reuse and actual source User destruction after destination copies. New Record Debug and constructor-diagnostic gaps are repaired; native25/imported25 pass with final no-work builds. Source status is51/71/2; current registry762 is not whole integration. Preserve independent generated quoted-FK decisions, other whole source/caller/model/privacy/governance responsibilities and all P0-P7 exits.",
         "Complete in-memory source IM01-IM14 and its19 original tests are accepted on8732 exact original/native/imported outputs, current4+4 gates and unchanged production/SDK bytes. Source status is52/70/2; current discovery763 does not qualify full integration, remaining sources or higher caller/governance responsibilities.",
-        "Installed source cohort accepts fifteen complete files, moving source status to82/40/2 after preceding native784 and installed Event/Policy, helper and shared-type gates. Forty sources and complete G13/P0-P7 remain pending; no capability verdict changes."
+        "Installed source cohort accepts fifteen complete files, moving source status to82/40/2 after preceding native784 and installed Event/Policy, helper and shared-type gates. Forty sources and complete G13/P0-P7 remain pending; no capability verdict changes.",
+        "Complete base.rs491 acceptance advances only that source:83 accepted/39 pending/2 excluded. Actual query5120/statement1638/mutation8832 per frontend, original1/caller3, native11/module6, isolated Release8832 (76 counter differences) and scoped ASan/UBSan2 pass. Remaining39 sources, complete G13/G17 and P0-P7 stay open; no full Release/module Release, full sanitizer, later full native, MIPS or router claim.",
+        "Real Context queries remove shadow-wrapper provenance gap:1872 per frontend, native4/module3. A new actual-source setter sequence found8/18 privacy differences; base qualification was reopened and restored only after source/native/imported18 plus native5/module5 passed. Base remains accepted, complete Context stays pending; source totals83/39/2, all capabilities and P0-P7 unchanged.",
+        "Focused complete-original Context calls add mutation/cache4608 and factory/registration96 per frontend, each native5/module5 and no-work. These do not close noop name-closure/diagnostic helper/pre-intent privacy and joined caller obligations. Context source stays pending, source totals83/39/2 and all seventeen capability statuses remain unchanged; registration is not graph-save execution.",
+        "Independent privacy preparation reproduced24/24 frontend differences and is now repaired: installed24/native4/module4, unchanged shared-type258/native5/module5 and scoped sanitizer1 pass. Shared types remain reopened pending a joined supplemental acceptance record; current source totals82/40/2. Complete Context, all capability statuses and P0-P7 exits remain unchanged."
       ],
       "runtime_sources": [
         "teaql-core/src/entity.rs",

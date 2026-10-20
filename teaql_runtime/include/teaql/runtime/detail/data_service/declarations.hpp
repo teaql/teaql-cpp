@@ -83,12 +83,20 @@ public:
         return metadata_.memory_resource();
     }
 
+    RuntimeDataService& with_mutation_intent(const MutationIntent& intent) & {
+        return with_mutation_intent(intent, mutation_privacy_ ? &*mutation_privacy_ : nullptr);
+    }
+
     RuntimeDataService& with_mutation_intent(const MutationIntent& intent,
-                                             const SqlIntentRedactions* privacy = nullptr) & {
+                                             const SqlIntentRedactions* privacy) & {
         intent.require_valid();
         if (!mutation_intent_ || &intent != &*mutation_intent_) {
             mutation_intent_.emplace(std::allocator_arg, Allocator(memory_resource()), intent);
         }
+        return with_mutation_privacy(privacy);
+    }
+
+    RuntimeDataService& with_mutation_privacy(const SqlIntentRedactions* privacy) & {
         if (privacy != (mutation_privacy_ ? &*mutation_privacy_ : nullptr)) {
             if (privacy) {
                 mutation_privacy_.emplace(
@@ -174,18 +182,27 @@ public:
         auto& view = metadata.context().template make<UserContextMetadata>(metadata);
         RuntimeDataService<UserContextMetadata, E> service(
             std::allocator_arg, Allocator(memory_resource()), view, executor);
+        service.with_mutation_privacy(mutation_privacy());
         if (mutation_intent_) {
-            service.with_mutation_intent(*mutation_intent_, mutation_privacy());
+            service.with_mutation_intent(*mutation_intent_);
         }
         return service;
     }
 
+    ContextDataService& with_mutation_intent(const MutationIntent& intent) & {
+        return with_mutation_intent(intent, mutation_privacy_ ? &*mutation_privacy_ : nullptr);
+    }
+
     ContextDataService& with_mutation_intent(const MutationIntent& intent,
-                                             const SqlIntentRedactions* privacy = nullptr) & {
+                                             const SqlIntentRedactions* privacy) & {
         intent.require_valid();
         if (!mutation_intent_ || &intent != &*mutation_intent_) {
             mutation_intent_.emplace(std::allocator_arg, Allocator(memory_resource()), intent);
         }
+        return with_mutation_privacy(privacy);
+    }
+
+    ContextDataService& with_mutation_privacy(const SqlIntentRedactions* privacy) & {
         if (privacy != (mutation_privacy_ ? &*mutation_privacy_ : nullptr)) {
             if (privacy) {
                 mutation_privacy_.emplace(
