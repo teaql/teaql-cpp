@@ -4997,6 +4997,21 @@
       "source": "tests/parity/entity_stream_probe.cpp",
       "import_module": "teaql_runtime",
       "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "runtime_query_future_probe",
+      "source": "tests/parity/runtime_query_future_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "runtime_query_future_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
     }
   ],
   "fixtures": [

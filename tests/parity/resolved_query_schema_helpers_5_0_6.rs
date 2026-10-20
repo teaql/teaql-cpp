@@ -47,12 +47,13 @@ impl crate::AggregationCacheBackend for RecordingCache {
 }
 
 #[derive(Clone)]
-struct SchemaItem { row:CompactRow }
-impl teaql_core::TeaqlEntity for SchemaItem {
+struct SchemaItem<const DYNAMIC_GUARD:bool=false> { row:CompactRow }
+impl<const DYNAMIC_GUARD:bool> teaql_core::TeaqlEntity for SchemaItem<DYNAMIC_GUARD> {
     const ENTITY_NAME:&'static str="Item";
     fn entity_descriptor()->EntityDescriptor {EntityDescriptor::new("Item").table_name("items")}
 }
-impl teaql_core::Entity for SchemaItem {
+impl<const DYNAMIC_GUARD:bool> teaql_core::Entity for SchemaItem<DYNAMIC_GUARD> {
+    fn supports_dynamic_field_load()->bool {DYNAMIC_GUARD}
     fn from_compact_row(row:CompactRow)->Result<Self,teaql_core::EntityError> {Ok(Self{row})}
     fn into_values(self)->teaql_core::MutationValues {self.row.into_map().into()}
 }
@@ -72,9 +73,60 @@ impl crate::EntityDataServiceBehavior for SelectionBehavior {
         select_dynamic_fields(&self.0,query,"behavior",&self.1)
     }
 }
-struct SelectionPolicy(Arc<State>,String);
+struct SelectionPolicy(Arc<State>,String,bool);
 impl crate::RequestPolicy for SelectionPolicy {
     fn enforce_select(&self,_:&crate::UserContext,query:&mut SelectQuery)->Result<(),crate::RuntimeError> {
+        if self.2 {query.comment=Some("rewritten query comment".into());query.purpose=Some("rewritten query purpose".into());}
         select_dynamic_fields(&self.0,query,"policy",&self.1)
+    }
+}
+
+struct IndexedSchemaItem {
+    row:CompactRow,
+    state:Option<crate::EntityRuntimeState>,
+    load_state:teaql_core::eval::LoadState,
+}
+impl teaql_core::TeaqlEntity for IndexedSchemaItem {
+    const ENTITY_NAME:&'static str="Item";
+    fn entity_descriptor()->EntityDescriptor {EntityDescriptor::new("Item").table_name("items")}
+}
+impl teaql_core::Entity for IndexedSchemaItem {
+    fn from_compact_row(row:CompactRow)->Result<Self,teaql_core::EntityError> {
+        let layout=teaql_core::FieldLayout::from_generated("Item","indexed-query-v1",
+            &[("id",0),("version",1)],&[("id","id","id"),("version","version","version")],&[],&["id","version"]).unwrap();
+        let load_state=row.indexed_load_state(layout);
+        Ok(Self{row,state:None,load_state})
+    }
+    fn into_values(self)->teaql_core::MutationValues {self.row.into_map().into()}
+    fn on_loaded(&mut self,context:&dyn std::any::Any) {
+        self.state=context.downcast_ref::<crate::EntityRuntimeState>().cloned();
+        if let Some(root)=self.state.as_mut() {root.set_original_compact_row("Item",self.row.clone());}
+    }
+    fn supports_dynamic_field_load()->bool {true}
+    fn loaded_state_snapshot(&self)->Option<Arc<teaql_core::LoadedSnapshot>> {
+        match &self.load_state {teaql_core::eval::LoadState::Indexed(snapshot)=>Some(snapshot.clone()),_=>None}
+    }
+    fn install_loaded_dynamic_fields(&mut self,fields:teaql_core::dynamic_fields::DynamicFieldValues,snapshot:Arc<teaql_core::LoadedSnapshot>)->Result<(),teaql_core::EntityError> {
+        self.state.as_mut().unwrap().install_loaded_dynamic_fields(fields);
+        self.load_state=teaql_core::eval::LoadState::Indexed(snapshot);Ok(())
+    }
+}
+fn indexed_schema(items:Vec<IndexedSchemaItem>)->J {
+    let hydration=items.iter().map(|item|json!({
+        "has_root":item.state.is_some(),"id_loaded":item.load_state.is_loaded("id"),
+        "result_loaded":item.load_state.is_loaded("_result"),"a_loaded":item.load_state.is_loaded("#a"),"b_loaded":item.load_state.is_loaded("#b"),
+        "values":item.state.as_ref().and_then(|root|root.loaded_dynamic_fields()).map(|fields|teaql_core::record_to_json_value(&fields.values().iter().map(|(k,v)|(k.clone(),v.clone())).collect()))
+    })).collect::<Vec<_>>();
+    json!({"rows":schema_rows(&items.into_iter().map(|item|item.row).collect::<Vec<_>>()),"hydration":hydration})
+}
+struct IndexedProvider(Arc<State>,String);
+#[async_trait::async_trait]
+impl crate::dynamic_fields::DynamicFieldsProvider for IndexedProvider {
+    async fn load_values(&self,_:&crate::UserContext,owner:&str,ids:&[u64],_:&teaql_core::dynamic_fields::DynamicFieldSelection,intent:&teaql_core::QueryIntent)->Result<crate::dynamic_fields::DynamicFieldBatch,teaql_core::dynamic_fields::DynamicFieldError> {
+        self.0.dynamic_calls.lock().unwrap().push(json!({"owner":owner,"ids":ids,"comment":intent.comment(),"purpose":intent.purpose()}));
+        if self.1=="error" {return Err(teaql_core::dynamic_fields::DynamicFieldError{code:"FIXTURE_DYNAMIC_FAILED",field:owner.into()});}
+        let definitions=teaql_core::dynamic_fields::DynamicFieldDefinitions::new(owner,"v1",[("a".into(),DataType::Text),("b".into(),DataType::I64)]).unwrap();
+        let rows=ids.iter().map(|id|(*id,if self.1=="empty" {std::collections::HashMap::new()}else{std::collections::HashMap::from([("a".into(),if self.1=="null" {Value::Null}else{Value::Text("loaded".into())})])})).collect();
+        Ok(crate::dynamic_fields::DynamicFieldBatch{definitions,rows})
     }
 }

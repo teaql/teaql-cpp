@@ -2,6 +2,7 @@
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/core/detail/query_debug.hpp>
 #include "../support/entity_decoder_fixture.hpp"
+#include "../support/indexed_query_fixture.hpp"
 #include <array>
 #include <iostream>
 
@@ -48,7 +49,9 @@ static std::span<const CompactRow> result_rows(const SmartList<CompactRow>& rows
     return rows.data;
 }
 
-static Vector<CompactRow> result_rows(const SmartList<decoder_fixture::Item<>>& list) {
+template <unsigned Kind, bool DynamicGuard>
+static Vector<CompactRow>
+result_rows(const SmartList<decoder_fixture::Item<Kind, DynamicGuard>>& list) {
     Vector<CompactRow> rows(list.data.get_allocator().resource());
     for (const auto& item : list.data) {
         rows.emplace_back(item.row);
@@ -113,15 +116,21 @@ struct SelectionPolicy final : RequestPolicy {
     using allocator_type = Allocator;
     SelectionCalls& calls;
     String action;
+    bool rewrite_intent;
 
     SelectionPolicy(std::allocator_arg_t,
                     Allocator a,
                     SelectionCalls& calls,
-                    std::string_view action)
-        : calls(calls), action(action, a.resource()) {}
+                    std::string_view action,
+                    bool rewrite_intent = false)
+        : calls(calls), action(action, a.resource()), rewrite_intent(rewrite_intent) {}
 
     RuntimeHookResult
     enforce_select(Memory, const UserContext& user_context, SelectQuery& query) const override {
+        if (rewrite_intent) {
+            query.comment_text.emplace("rewritten query comment", user_context.memory_resource());
+            query.purpose_text.emplace("rewritten query purpose", user_context.memory_resource());
+        }
         return select_dynamic_fields(user_context, query, calls, "policy", action);
     }
 };
@@ -202,6 +211,74 @@ struct Ready {
     }
 };
 
+struct IndexedProvider final : DynamicFieldsProvider {
+    using allocator_type = Allocator;
+    String payload;
+    mutable Json::Array events;
+
+    IndexedProvider(std::allocator_arg_t, Allocator a, std::string_view payload)
+        : payload(payload, a.resource()), events(a.resource()) {}
+
+    DynamicStorageFuture<DynamicFieldBatch>& load_values(const UserContext& user_context,
+                                                         std::string_view owner,
+                                                         std::span<const std::uint64_t> ids,
+                                                         const DynamicFieldSelection&,
+                                                         const QueryIntent& intent) const override {
+        auto r = user_context.memory_resource();
+        auto event = detail::model_json(r);
+        Json::Array identifiers(r);
+        for (auto id : ids) {
+            identifiers.emplace_back(id);
+        }
+        detail::model_put(event, "owner", owner);
+        detail::model_put(event, "ids", identifiers);
+        detail::model_put(event, "comment", intent.comment());
+        detail::model_put(event, "purpose", intent.purpose());
+        events.emplace_back(std::move(event));
+        using R = Result<DynamicFieldBatch, DynamicFieldError>;
+        if (payload == "error") {
+            return make_operation<R, Ready<R>>(
+                r, R::err(r, DynamicFieldError(r, "FIXTURE_DYNAMIC_FAILED", owner)));
+        }
+        const std::array fields{DynamicFieldDefinitions::Field{"a", DataType::Text},
+                                DynamicFieldDefinitions::Field{"b", DataType::I64}};
+        auto& definitions = user_context.make<DynamicFieldDefinitions>(
+            std::move(DynamicFieldDefinitions::from_fields(r, owner, "v1", fields)).value());
+        DynamicStorageRows rows(r);
+        for (auto id : ids) {
+            Value::Object values(r);
+            if (payload != "empty") {
+                values.emplace(String("a", r), payload == "null" ? Value(r) : Value(r, "loaded"));
+            }
+            rows.insert_or_assign(id, std::move(values));
+        }
+        return make_operation<R, Ready<R>>(
+            r, R::ok(r, DynamicFieldBatch(std::allocator_arg, Allocator(r), definitions, rows)));
+    }
+};
+
+static Json indexed_schema(Memory r, const SmartList<indexed_query_fixture::Item>& items) {
+    Vector<CompactRow> rows(r);
+    Json::Array hydration(r);
+    for (const auto& item : items.data) {
+        rows.emplace_back(item.row);
+        auto state = detail::model_json(r);
+        detail::model_put(state, "has_root", bool(item.state));
+        detail::model_put(state, "id_loaded", item.load_state.is_loaded("id"));
+        detail::model_put(state, "result_loaded", item.load_state.is_loaded("_result"));
+        detail::model_put(state, "a_loaded", item.load_state.is_loaded("#a"));
+        detail::model_put(state, "b_loaded", item.load_state.is_loaded("#b"));
+        auto* fields = item.dynamic_field_values();
+        detail::model_put(
+            state, "values", fields ? record_to_json_value(r, fields->values()) : Json(r));
+        hydration.emplace_back(std::move(state));
+    }
+    auto result = detail::model_json(r);
+    detail::model_put(result, "rows", schema_rows(r, rows));
+    detail::model_put(result, "hydration", hydration);
+    return result;
+}
+
 struct Mock : QueryExecutor<String>, MutationExecutor<String> {
     using allocator_type = Allocator;
     Memory r;
@@ -209,6 +286,7 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
     mutable Json::Array classifications;
     bool fail;
     bool schema_probe = false, empty = false;
+    bool enhanced_probe = false;
     bool delayed = false;
     unsigned* cancellations = nullptr;
     String result_kind;
@@ -228,6 +306,11 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
                             ? query.dynamic_property_definitions->data_type("_result")
                             : std::optional<DataType>{};
             detail::model_put(event, "schema", kind ? Json(r, unsigned(*kind)) : Json(r));
+            if (enhanced_probe) {
+                detail::model_put(event, "selected", bool(query.dynamic_field_selection));
+                detail::model_put(
+                    event, "comment", query.comment_text ? Json(r, *query.comment_text) : Json(r));
+            }
             classifications.emplace_back(std::move(event));
         }
         return SqlIntentRedactions::from_unclassified_query(target, query);
@@ -304,6 +387,7 @@ static Json evaluate(UserContext& context, const Json& input) {
         context.disable_sql_log();
     }
     const auto& options = std::get<Json::Object>(input.data);
+    const auto& mode = std::get<String>(field(input, "mode").data);
     if (options.contains("select_capture")) {
         context.set_sql_log_options(SqlLogOptions{
             .select = flag(input, "select_capture"),
@@ -329,11 +413,19 @@ static Json evaluate(UserContext& context, const Json& input) {
     }
     auto& executor = context.make<Mock>(flag(input, "failure"));
     executor.schema_probe = schema_probe;
+    executor.enhanced_probe = mode.starts_with("enhanced");
     if (schema_probe) {
         executor.empty = flag(input, "empty");
         executor.result_kind = std::get<String>(field(input, "result_kind").data);
     }
     const bool dynamic_probe = options.contains("dynamic_probe") && flag(input, "dynamic_probe");
+    IndexedProvider* indexed_provider = nullptr;
+    if (mode == "dynamic_loaded" || mode.starts_with("enhanced")) {
+        indexed_provider =
+            &context.make<IndexedProvider>(std::get<String>(field(input, "payload").data));
+        context.set_dynamic_fields_provider(context, *indexed_provider);
+    }
+
     SelectionCalls* selection_calls = nullptr;
     if (dynamic_probe) {
         selection_calls = &context.make<SelectionCalls>();
@@ -343,7 +435,9 @@ static Json evaluate(UserContext& context, const Json& input) {
         registry.register_behavior("Item", context, behavior);
         context.set_entity_data_service_behavior_registry(context, registry);
         auto& policy = context.make<SelectionPolicy>(
-            *selection_calls, std::get<String>(field(input, "selection_policy").data));
+            *selection_calls,
+            std::get<String>(field(input, "selection_policy").data),
+            options.contains("rewrite_intent") && flag(input, "rewrite_intent"));
         context.set_request_policy(context, policy);
     }
     auto& repo = EntityDataService<Mock>::for_executor(context, "Item", context, executor);
@@ -377,7 +471,6 @@ static Json evaluate(UserContext& context, const Json& input) {
     }
     Json::Array outcomes(r);
     auto calls = std::get<std::uint64_t>(field(input, "calls").data);
-    const auto& mode = std::get<String>(field(input, "mode").data);
     for (std::uint64_t i = 0; i < calls; ++i) {
         auto page = detail::clone_in(r, query);
         if (flag(input, "continuous")) {
@@ -412,7 +505,30 @@ static Json evaluate(UserContext& context, const Json& input) {
             }
         };
         try {
-            if (mode == "typed") {
+            if (mode == "dynamic_loaded" || mode.starts_with("enhanced")) {
+                auto& operation =
+                    mode == "enhanced"
+                        ? repo.fetch_enhanced_entities<indexed_query_fixture::Item>(*wrapped)
+                    : mode == "enhanced_aggregates"
+                        ? repo.fetch_enhanced_entities_with_relation_aggregates<
+                              indexed_query_fixture::Item>(*wrapped, {})
+                    : mode == "enhanced_owned"
+                        ? repo.fetch_enhanced_entities_with_relation_aggregates_owned<
+                              indexed_query_fixture::Item>(std::move(*wrapped), {})
+                        : repo.fetch_entities<indexed_query_fixture::Item>(*wrapped);
+                const auto& result = operation.wait();
+                if (result) {
+                    detail::model_put(outcome, "rows", std::uint64_t(result.value().data.size()));
+                    detail::model_put(outcome, "schema", indexed_schema(r, result.value()));
+                } else {
+                    detail::model_put(outcome, "error", result.error().to_string(r));
+                }
+            } else if (mode == "dynamic_guard") {
+                collect(repo.fetch_entities<decoder_fixture::Item<0, true>>(*wrapped).wait(),
+                        [](const auto& v) {
+                            return v.data.size();
+                        });
+            } else if (mode == "typed") {
                 collect(repo.fetch_entities<decoder_fixture::Item<>>(*wrapped).wait(),
                         [](const auto& v) {
                             return v.data.size();
@@ -444,6 +560,9 @@ static Json evaluate(UserContext& context, const Json& input) {
     if (schema_probe) {
         detail::model_put(output, "cache_events", recording->events);
         detail::model_put(output, "classifications", executor.classifications);
+    }
+    if (indexed_provider) {
+        detail::model_put(output, "dynamic_calls", indexed_provider->events);
     }
     if (dynamic_probe) {
         detail::model_put(output, "selection_calls", selection_calls->calls);

@@ -3677,6 +3677,18 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND)
 endif()
 
 if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME resolved_enhanced_typed_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_enhanced_typed_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_entity_query_probe>)
+    set_tests_properties(resolved_enhanced_typed_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_test(NAME resolved_dynamic_loaded_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_dynamic_loaded_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_entity_query_probe>)
+    set_tests_properties(resolved_dynamic_loaded_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_test(NAME resolved_dynamic_guard_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_dynamic_guard_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_entity_query_probe>)
+    set_tests_properties(resolved_dynamic_guard_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     add_test(NAME resolved_dynamic_typed_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_dynamic_typed_5_0_6.py
         --cpp $<TARGET_FILE:teaql_entity_query_probe>
@@ -3684,3 +3696,8 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND)
     set_tests_properties(resolved_dynamic_typed_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     add_test(NAME resolved_dynamic_typed_context_contracts COMMAND teaql_entity_query_probe --dynamic-self-test)
 endif()
+
+add_executable(teaql_runtime_query_future_probe tests/parity/runtime_query_future_probe.cpp)
+target_link_libraries(teaql_runtime_query_future_probe PRIVATE teaql::runtime)
+add_test(NAME runtime_query_future_contracts COMMAND teaql_runtime_query_future_probe)
+set_tests_properties(runtime_query_future_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")

@@ -38,6 +38,7 @@ public:
                     }
                     service_ = std::move(scoped).value();
                 }
+                dynamic_intent_bound_ = EntityDataServiceAccess::has_request_intent(service_);
                 auto prepared = EntityDataServiceAccess::prepare_select(service_, query_);
                 if (!prepared) {
                     return runtime(std::move(prepared).error());
@@ -76,6 +77,10 @@ public:
                             Allocator(r),
                             T::ENTITY_NAME,
                             "dynamic fields require a runtime-owned indexed entity carrier")));
+            }
+            if (!dynamic_intent_bound_) {
+                return runtime(RuntimeError::graph(
+                    r, "dynamic-field loading requires validated query intent"));
             }
             if (!dynamic_) {
                 auto intent = EntityDataServiceAccess::request_intent(service_, query_);
@@ -138,5 +143,6 @@ private:
     AsyncOperation<typename DynamicRowsOperation<Error>::Output>* dynamic_ = nullptr;
     WakeSignal::Forward forward_;
     bool fetched_ = false;
+    bool dynamic_intent_bound_ = false;
 };
 }

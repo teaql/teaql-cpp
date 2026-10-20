@@ -32,32 +32,31 @@ public:
         auto r = service_.memory_resource();
         for (;;) {
             if (phase_ == Phase::Prepare) {
-                if (query_.dynamic_field_selection) {
-                    auto root_intent = EntityDataServiceAccess::request_intent(service_, query_);
-                    if (!root_intent) {
-                        return runtime(std::move(root_intent).error());
-                    }
-                    EntityDataServiceAccess::bind_query_intent(service_, root_intent.value());
-                    if (!EntityDataServiceAccess::has_intent(service_)) {
-                        service_ = EntityDataServiceAccess::query_scoped(service_);
-                    }
-                }
                 auto prepared = EntityDataServiceAccess::prepare_select(service_, query_);
                 if (!prepared) {
                     return runtime(std::move(prepared).error());
                 }
                 query_ = std::move(prepared).value();
+                ensure_identity_projection(context(), query_);
+                if (!EntityDataServiceAccess::has_request_intent(service_)) {
+                    auto source = query_.clone(r);
+                    if (EntityDataServiceAccess::context_service(service_)
+                            .metadata.capture_execution_metadata()) {
+                        for (const auto& aggregate : aggregates_) {
+                            source.child_enhancements.emplace_back(aggregate.query);
+                        }
+                    }
+                    auto scoped = EntityDataServiceAccess::query_scoped(service_, source);
+                    if (!scoped) {
+                        return runtime(std::move(scoped).error());
+                    }
+                    service_ = std::move(scoped).value();
+                }
                 auto intent = EntityDataServiceAccess::request_intent(service_, query_);
                 if (!intent) {
                     return runtime(std::move(intent).error());
                 }
                 EntityDataServiceAccess::bind_query_intent(service_, intent.value());
-                ensure_identity_projection(context(), query_);
-                const auto& cs = EntityDataServiceAccess::context_service(service_);
-                if (!EntityDataServiceAccess::has_intent(service_) &&
-                    cs.metadata.capture_execution_metadata()) {
-                    service_ = EntityDataServiceAccess::query_scoped(service_);
-                }
                 page_ = &prepare_id_set_page(service_, query_);
                 phase_ = Phase::Page;
             }
@@ -325,7 +324,17 @@ template <class E>
 template <Entity T>
 auto EntityDataService<E>::fetch_enhanced_entities(const PurposedSelectQuery& query) const
     -> DataServiceOperationResult<SmartList<T>, DataServiceError<Error>>& {
-    return fetch_enhanced_entities_with_relation_aggregates<T>(query, {});
+    using R = Result<SmartList<T>, DataServiceError<Error>>;
+    return detail::execute_purposed_query<SmartList<T>>(
+        *this,
+        query,
+        {},
+        +[](const EntityDataService<E>& service,
+            const SelectQuery& actual,
+            std::span<const RelationAggregate> items) -> auto& {
+            return make_operation<R, detail::EnhancedEntitiesOperation<E, T>>(
+                service.memory_resource(), service, actual, items);
+        });
 }
 
 template <class E>

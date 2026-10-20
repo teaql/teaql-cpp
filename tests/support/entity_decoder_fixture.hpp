@@ -7,8 +7,8 @@ using namespace teaql;
 
 // Handwritten model: the same model contract is used by the Rust oracle. No
 // generator or entity-runtime algorithms are reproduced in this fixture.
-template <unsigned Kind = 0>
-struct Item : EntityDefaults<Item<Kind>> {
+template <unsigned Kind = 0, bool DynamicGuard = false>
+struct Item : EntityDefaults<Item<Kind, DynamicGuard>> {
     using allocator_type = Allocator;
     static constexpr std::string_view ENTITY_NAME = "Item";
     CompactRow row;
@@ -47,6 +47,11 @@ struct Item : EntityDefaults<Item<Kind>> {
                                       "handwritten model decode failed"));
         }
         return R::ok(r, Item(std::allocator_arg, Allocator(r), std::move(row)));
+    }
+
+    // Guard-only fixture: no dynamic provider is installed by this caller.
+    static constexpr bool supports_dynamic_field_load() {
+        return DynamicGuard;
     }
 
     Value id_value() const {

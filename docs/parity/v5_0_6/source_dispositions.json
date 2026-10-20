@@ -1237,9 +1237,19 @@
       "source_change": "unchanged",
       "cpp_target": "teaql_runtime/include/teaql/runtime/graph.hpp; teaql_runtime/include/teaql/runtime/entity_save.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_plan.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_execution.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/ledger_plan.hpp; teaql_runtime/src/data_service/ledger_plan.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/ledger_execution.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/graph_saver.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/audited_save.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/audited_auto_save.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_save_adapters.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/graph_node_commands.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/recursive_graph_write.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete four-file graph/save production responsibility is accepted after full model/public/private/default/trait/protocol/ownership and composition review. EntityValues, snapshots/generated/mutation types, all graph operations/plans/batches/trace scopes remain distinct. Raw ten-model Debug, repository extraction, six retained save adapters, reference/remove/checker-update/scoped-delete and both recursive routes are restored; actual-source matrices128/141/541/1620/792 preserve complete outputs/order/failures. Existing plan/ledger/governance/saver/audited/fix/privacy source observations remain covered. Transaction-owned authoritative rereads precede commit, caller-owned scopes never implicitly commit/clear, events remain at source call sites and quiescence precedes reclamation. Real SQLite foreign-key/trigger/rollback and actual User/Global lifetimes are asserted. Final native387/387 at79.85s follows344 consumer tasks plus2 ownership-fixture refresh tasks, with426 nonempty dependency records and no-work pre/post. ASan/UBSan-no-leakscan and MIPS/QEMU each pass44/44 after61 selected build tasks plus2 fixture tasks, with post-test no-work. No graph serde/Hash/delete-missing behavior is invented; ordinary CRUD is not substituted for graph save. This accepts the complete source group and Stage5; runtime-root and final Stage6 requirements remain independent, and physical hardware is deferred.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete6-line GraphTransactionBoundary enum: Started/AlreadyActive/Unsupported, Debug names, Copy/Clone and all nine equality pairs. Graph transaction execution remains a separate source responsibility.",
+      "evidence": [
+        "docs/runtime_service_surface_source_review_5_0_6.md",
+        "docs/parity/runtime_service_surface_installed_5_0_6.json.gz",
+        "docs/parity/runtime_service_surface_acceptance_5_0_6.json.gz",
+        "tests/parity/runtime_query_future_probe.cpp",
+        "scripts/verify_runtime_service_surface_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Complete four-file graph/save production responsibility is accepted after full model/public/private/default/trait/protocol/ownership and composition review. EntityValues, snapshots/generated/mutation types, all graph operations/plans/batches/trace scopes remain distinct. Raw ten-model Debug, repository extraction, six retained save adapters, reference/remove/checker-update/scoped-delete and both recursive routes are restored; actual-source matrices128/141/541/1620/792 preserve complete outputs/order/failures. Existing plan/ledger/governance/saver/audited/fix/privacy source observations remain covered. Transaction-owned authoritative rereads precede commit, caller-owned scopes never implicitly commit/clear, events remain at source call sites and quiescence precedes reclamation. Real SQLite foreign-key/trigger/rollback and actual User/Global lifetimes are asserted. Final native387/387 at79.85s follows344 consumer tasks plus2 ownership-fixture refresh tasks, with426 nonempty dependency records and no-work pre/post. ASan/UBSan-no-leakscan and MIPS/QEMU each pass44/44 after61 selected build tasks plus2 fixture tasks, with post-test no-work. No graph serde/Hash/delete-missing behavior is invented; ordinary CRUD is not substituted for graph save. This accepts the complete source group and Stage5; runtime-root and final Stage6 requirements remain independent, and physical hardware is deferred.",
+      "acceptance_scope": "Complete6-line GraphTransactionBoundary enum: Started/AlreadyActive/Unsupported, Debug names, Copy/Clone and all nine equality pairs. Graph transaction execution remains a separate source responsibility.",
+      "current_review": "docs/runtime_service_surface_source_review_5_0_6.md",
+      "current_review_sha256": "59a958f5791e19579cd0d824b4bc231d9722dbd1ce13987044b43edb586bbe3f"
     },
     {
       "source": "teaql-runtime/src/data_service/graph.rs",
@@ -1289,19 +1299,39 @@
       "source_change": "changed",
       "cpp_target": "teaql_runtime/include/teaql/runtime/data_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp; teaql_runtime/src/data_service/mod.cpp; teaql_runtime/include/teaql/runtime/detail/query_keys.hpp; teaql_runtime/src/data_service/query_keys.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/id_set_page.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp; teaql_runtime/src/data_service/relation_graph.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/base_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/context_mutation.hpp; teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete six-file runtime service responsibilities are accepted after all public/private/default/trait/protocol/ownership and execution body reviews. Separate RuntimeDataService, ContextDataService, EntityDataService and live metadata interfaces preserve typed/row/stream/cache/pagination/relation/mutation roles. Cursor counters match checked Debug versus wrapping Release, and the formerly missing private typed-aggregate path preserves a fresh decoding root without enhanced ID paging. Native 378/378 after 338 consumer tasks, 420 nonempty dependencies and no-work before/after; current sanitizer/MIPS 56/56 plus independent base/stream 3/3 pass. Thirteen live original matrices match all recorded cases on both profiles, including 165 public entity-query, 48 actual private helper bodies and 1502 mutation observations. Checked origins, concrete non-Clone error/output completion, foreign-work cancellation, default-PMR-disabled actual User destruction and explicit Global nested retention remain mandatory. 32-bit key field adaptation and controlled private-helper rows are explicit; they do not claim native Rust/router execution. Complete graph/save/runtime-root and stages 5\u20136 remain separate.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete17-line module wiring: nine production children, test-only graph-readback child, five public and three internal import identities. Public C++ aliases and distinct internal service types compile through native and imported module frontends. No child implementation is accepted by re-export.",
+      "evidence": [
+        "docs/runtime_service_surface_source_review_5_0_6.md",
+        "docs/parity/runtime_service_surface_installed_5_0_6.json.gz",
+        "docs/parity/runtime_service_surface_acceptance_5_0_6.json.gz",
+        "tests/parity/runtime_query_future_probe.cpp",
+        "scripts/verify_runtime_service_surface_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Complete six-file runtime service responsibilities are accepted after all public/private/default/trait/protocol/ownership and execution body reviews. Separate RuntimeDataService, ContextDataService, EntityDataService and live metadata interfaces preserve typed/row/stream/cache/pagination/relation/mutation roles. Cursor counters match checked Debug versus wrapping Release, and the formerly missing private typed-aggregate path preserves a fresh decoding root without enhanced ID paging. Native 378/378 after 338 consumer tasks, 420 nonempty dependencies and no-work before/after; current sanitizer/MIPS 56/56 plus independent base/stream 3/3 pass. Thirteen live original matrices match all recorded cases on both profiles, including 165 public entity-query, 48 actual private helper bodies and 1502 mutation observations. Checked origins, concrete non-Clone error/output completion, foreign-work cancellation, default-PMR-disabled actual User destruction and explicit Global nested retention remain mandatory. 32-bit key field adaptation and controlled private-helper rows are explicit; they do not claim native Rust/router execution. Complete graph/save/runtime-root and stages 5\u20136 remain separate.",
+      "acceptance_scope": "Complete17-line module wiring: nine production children, test-only graph-readback child, five public and three internal import identities. Public C++ aliases and distinct internal service types compile through native and imported module frontends. No child implementation is accepted by re-export.",
+      "current_review": "docs/runtime_service_surface_source_review_5_0_6.md",
+      "current_review_sha256": "59a958f5791e19579cd0d824b4bc231d9722dbd1ce13987044b43edb586bbe3f"
     },
     {
       "source": "teaql-runtime/src/data_service/query_future_tests.rs",
       "sha256": "95d77e4afb67776339cffe0ddd06f15050f42a9c1d733527384335d180d4157f",
       "source_change": "new",
-      "cpp_target": "teaql_runtime",
+      "cpp_target": "tests/parity/runtime_query_future_probe.cpp; teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete84-line original future regression and its scalar/executor fixture. Original unchanged test passes; native/imported counterparts verify validated intent, unpolled observation/provider laziness, one decoded row, ID_SET_DISABLED completion and the 8192-byte body-state ceiling. Rust boxed-future and C++ arena-state byte values are distinct ABI measurements; no total allocation or whole enhanced-query acceptance.",
+      "evidence": [
+        "docs/runtime_service_surface_source_review_5_0_6.md",
+        "docs/parity/runtime_service_surface_installed_5_0_6.json.gz",
+        "docs/parity/runtime_service_surface_acceptance_5_0_6.json.gz",
+        "tests/parity/runtime_query_future_probe.cpp",
+        "scripts/verify_runtime_service_surface_5_0_6.py"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "acceptance_scope": "Complete84-line original future regression and its scalar/executor fixture. Original unchanged test passes; native/imported counterparts verify validated intent, unpolled observation/provider laziness, one decoded row, ID_SET_DISABLED completion and the 8192-byte body-state ceiling. Rust boxed-future and C++ arena-state byte values are distinct ABI measurements; no total allocation or whole enhanced-query acceptance.",
+      "current_review": "docs/runtime_service_surface_source_review_5_0_6.md",
+      "current_review_sha256": "59a958f5791e19579cd0d824b4bc231d9722dbd1ce13987044b43edb586bbe3f"
     },
     {
       "source": "teaql-runtime/src/data_service/relation.rs",
