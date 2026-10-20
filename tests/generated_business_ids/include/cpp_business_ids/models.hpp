@@ -77,7 +77,7 @@ public:
     Tenant(std::allocator_arg_t, Allocator, const Tenant&);
 
     Tenant(std::allocator_arg_t, Allocator a, Tenant&& other)
-        : Tenant(std::allocator_arg, a, std::as_const(other)) {}
+        : Tenant(detail::move_to(a.resource(), std::move(other))) {}
 
     Tenant(const Tenant&) = delete;
     Tenant(Tenant&&) noexcept;
@@ -229,7 +229,7 @@ public:
     Receipt(std::allocator_arg_t, Allocator, const Receipt&);
 
     Receipt(std::allocator_arg_t, Allocator a, Receipt&& other)
-        : Receipt(std::allocator_arg, a, std::as_const(other)) {}
+        : Receipt(detail::move_to(a.resource(), std::move(other))) {}
 
     Receipt(const Receipt&) = delete;
     Receipt(Receipt&&) noexcept;
@@ -445,7 +445,7 @@ public:
     Ticket(std::allocator_arg_t, Allocator, const Ticket&);
 
     Ticket(std::allocator_arg_t, Allocator a, Ticket&& other)
-        : Ticket(std::allocator_arg, a, std::as_const(other)) {}
+        : Ticket(detail::move_to(a.resource(), std::move(other))) {}
 
     Ticket(const Ticket&) = delete;
     Ticket(Ticket&&) noexcept;
@@ -822,7 +822,7 @@ inline Result<Tenant, EntityError> Tenant::from_compact_row(Memory r, CompactRow
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1050,7 +1050,7 @@ inline Result<Receipt, EntityError> Receipt::from_compact_row(Memory r, CompactR
         }
         result.load_state.mark_loaded("tenant_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1285,7 +1285,7 @@ inline Result<Ticket, EntityError> Ticket::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("tenant_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

@@ -43,7 +43,7 @@ public:
     Priority(std::allocator_arg_t, Allocator, const Priority&);
 
     Priority(std::allocator_arg_t, Allocator a, Priority&& other)
-        : Priority(std::allocator_arg, a, std::as_const(other)) {}
+        : Priority(detail::move_to(a.resource(), std::move(other))) {}
 
     Priority(const Priority&) = delete;
     Priority(Priority&&) noexcept;
@@ -280,7 +280,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -433,7 +433,7 @@ public:
     SampleItem(std::allocator_arg_t, Allocator, const SampleItem&);
 
     SampleItem(std::allocator_arg_t, Allocator a, SampleItem&& other)
-        : SampleItem(std::allocator_arg, a, std::as_const(other)) {}
+        : SampleItem(detail::move_to(a.resource(), std::move(other))) {}
 
     SampleItem(const SampleItem&) = delete;
     SampleItem(SampleItem&&) noexcept;
@@ -884,7 +884,7 @@ inline Result<Priority, EntityError> Priority::from_compact_row(Memory r, Compac
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1094,7 +1094,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1346,7 +1346,7 @@ inline Result<SampleItem, EntityError> SampleItem::from_compact_row(Memory r, Co
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

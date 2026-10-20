@@ -348,7 +348,7 @@ struct Model : EntityDefaults<Derived> {
 
     void on_loaded(AnyRef context) {
         if (auto* source = context.get<EntityRuntimeState>()) {
-            root = root.with_shared_graph(*source);
+            root = std::move(root).with_shared_graph(*source);
         }
     }
 

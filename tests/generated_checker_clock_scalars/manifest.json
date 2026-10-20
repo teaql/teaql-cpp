@@ -4,7 +4,7 @@
   "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
   "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "00b38aa969c2a2fb535958ec9192333bc92f604e4504c90f9cd312c4696750f4",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
@@ -14,7 +14,7 @@
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "0a84df2e8f3c8f4aad0ca44634ae7d7fa6162ab16212f03abc250261f10071ef",
     "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
-    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "4182c269f7617e57a2a387f4a5782101c99eb8e92f60e47682f7172cfad4cb78"
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "432edde6b27a513e99f1efd067153079869a7dd965b95c65c07307324d2573d8"
   },
   "model": "tests/generator/checker_clock_scalars.xml",
   "model_sha256": "2aac0ea0438dac8d9a5f242385967b0c7a8ff7b19d9d258390d346c50e5b4350",
@@ -62,11 +62,11 @@
     "assist/runtime/tool_api.md": "7db1f1dd08a99a939082df4e52f1c05f9cad80f02abd9468d49b1d49ed52719c",
     "include/cpp_checker_clock_scalars/checkers.hpp": "931d1129cd5490a76d5d123c38d5e243f48ac8ca0d201f375d932a8c7ec3769c",
     "include/cpp_checker_clock_scalars/expressions.hpp": "5b527fba36cbfaddb20ef52dc242eaf68a8ca1fa9cbfa69a556c862db4ac6acd",
-    "include/cpp_checker_clock_scalars/models.hpp": "b26a7cc08e51c69e926f34100578178e09b5428f53a1493f81739ff4ab41512f",
+    "include/cpp_checker_clock_scalars/models.hpp": "e0098f0af8d1d19043919d47f5b2a612d8e1d333ed35b25ed680cf03877b9836",
     "include/cpp_checker_clock_scalars/queries.hpp": "c56a9a6803daec89ef11046622bb476d280052e70a93dc852f45ed517277f63b",
     "include/cpp_checker_clock_scalars/runtime.hpp": "b2da22cd71d1f214042e43028c08043a2ba820294df5c66ef60750c83b63ffc5",
     "include/cpp_checker_clock_scalars/sample_data.hpp": "e9b7dce4e10631f356888aad12d807c9a799bab8b68c8dbdbe14f5caeca60843",
-    "include/cpp_checker_clock_scalars/support.hpp": "c4c6657239487d3842f116236ce3ead409d06b260d3aa7dd853cb2df71b145ea",
+    "include/cpp_checker_clock_scalars/support.hpp": "63c2def5bf3b7f593bc6dcdbb18e8080d0378f8c75cde55d0f0880d1f8c209cc",
     "include/cpp_checker_clock_scalars.hpp": "506350a2f9ac19c793db09af1898071730973664b63152ddef56188bbc10f7cc",
     "teaql-i18n.json": "ee9033460791a635a1e77905f1b3e595d5c35e8227ccdd8be619d5f814d94c6c"
   }

@@ -46,7 +46,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -200,7 +200,7 @@ public:
     School(std::allocator_arg_t, Allocator, const School&);
 
     School(std::allocator_arg_t, Allocator a, School&& other)
-        : School(std::allocator_arg, a, std::as_const(other)) {}
+        : School(detail::move_to(a.resource(), std::move(other))) {}
 
     School(const School&) = delete;
     School(School&&) noexcept;
@@ -376,7 +376,7 @@ public:
     Profile(std::allocator_arg_t, Allocator, const Profile&);
 
     Profile(std::allocator_arg_t, Allocator a, Profile&& other)
-        : Profile(std::allocator_arg, a, std::as_const(other)) {}
+        : Profile(detail::move_to(a.resource(), std::move(other))) {}
 
     Profile(const Profile&) = delete;
     Profile(Profile&&) noexcept;
@@ -552,7 +552,7 @@ public:
     Device(std::allocator_arg_t, Allocator, const Device&);
 
     Device(std::allocator_arg_t, Allocator a, Device&& other)
-        : Device(std::allocator_arg, a, std::as_const(other)) {}
+        : Device(detail::move_to(a.resource(), std::move(other))) {}
 
     Device(const Device&) = delete;
     Device(Device&&) noexcept;
@@ -916,7 +916,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1123,7 +1123,7 @@ inline Result<School, EntityError> School::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1331,7 +1331,7 @@ inline Result<Profile, EntityError> Profile::from_compact_row(Memory r, CompactR
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1541,7 +1541,7 @@ inline Result<Device, EntityError> Device::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

@@ -39,7 +39,7 @@ public:
     Reading(std::allocator_arg_t, Allocator, const Reading&);
 
     Reading(std::allocator_arg_t, Allocator a, Reading&& other)
-        : Reading(std::allocator_arg, a, std::as_const(other)) {}
+        : Reading(detail::move_to(a.resource(), std::move(other))) {}
 
     Reading(const Reading&) = delete;
     Reading(Reading&&) noexcept;
@@ -690,7 +690,7 @@ inline Result<Reading, EntityError> Reading::from_compact_row(Memory r, CompactR
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

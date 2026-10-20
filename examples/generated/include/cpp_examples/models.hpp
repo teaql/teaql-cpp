@@ -33,7 +33,7 @@ public:
     Product(std::allocator_arg_t, Allocator, const Product&);
 
     Product(std::allocator_arg_t, Allocator a, Product&& other)
-        : Product(std::allocator_arg, a, std::as_const(other)) {}
+        : Product(detail::move_to(a.resource(), std::move(other))) {}
 
     Product(const Product&) = delete;
     Product(Product&&) noexcept;
@@ -178,7 +178,7 @@ public:
     Order(std::allocator_arg_t, Allocator, const Order&);
 
     Order(std::allocator_arg_t, Allocator a, Order&& other)
-        : Order(std::allocator_arg, a, std::as_const(other)) {}
+        : Order(detail::move_to(a.resource(), std::move(other))) {}
 
     Order(const Order&) = delete;
     Order(Order&&) noexcept;
@@ -326,7 +326,7 @@ public:
     OrderLine(std::allocator_arg_t, Allocator, const OrderLine&);
 
     OrderLine(std::allocator_arg_t, Allocator a, OrderLine&& other)
-        : OrderLine(std::allocator_arg, a, std::as_const(other)) {}
+        : OrderLine(detail::move_to(a.resource(), std::move(other))) {}
 
     OrderLine(const OrderLine&) = delete;
     OrderLine(OrderLine&&) noexcept;
@@ -661,7 +661,7 @@ inline Result<Product, EntityError> Product::from_compact_row(Memory r, CompactR
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -825,7 +825,7 @@ inline Result<Order, EntityError> Order::from_compact_row(Memory r, CompactRow r
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1098,7 +1098,7 @@ inline Result<OrderLine, EntityError> OrderLine::from_compact_row(Memory r, Comp
         }
         result.load_state.mark_loaded("product_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

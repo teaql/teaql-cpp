@@ -40,7 +40,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -209,7 +209,7 @@ public:
     SampleRecord(std::allocator_arg_t, Allocator, const SampleRecord&);
 
     SampleRecord(std::allocator_arg_t, Allocator a, SampleRecord&& other)
-        : SampleRecord(std::allocator_arg, a, std::as_const(other)) {}
+        : SampleRecord(detail::move_to(a.resource(), std::move(other))) {}
 
     SampleRecord(const SampleRecord&) = delete;
     SampleRecord(SampleRecord&&) noexcept;
@@ -977,7 +977,7 @@ public:
     SampleLink(std::allocator_arg_t, Allocator, const SampleLink&);
 
     SampleLink(std::allocator_arg_t, Allocator a, SampleLink&& other)
-        : SampleLink(std::allocator_arg, a, std::as_const(other)) {}
+        : SampleLink(detail::move_to(a.resource(), std::move(other))) {}
 
     SampleLink(const SampleLink&) = delete;
     SampleLink(SampleLink&&) noexcept;
@@ -1315,7 +1315,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2082,7 +2082,7 @@ inline Result<SampleRecord, EntityError> SampleRecord::from_compact_row(Memory r
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2400,7 +2400,7 @@ inline Result<SampleLink, EntityError> SampleLink::from_compact_row(Memory r, Co
         }
         result.load_state.mark_loaded("second_record_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

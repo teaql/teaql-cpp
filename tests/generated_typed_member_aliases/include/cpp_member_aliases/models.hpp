@@ -45,7 +45,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -200,7 +200,7 @@ public:
     Record(std::allocator_arg_t, Allocator, const Record&);
 
     Record(std::allocator_arg_t, Allocator a, Record&& other)
-        : Record(std::allocator_arg, a, std::as_const(other)) {}
+        : Record(detail::move_to(a.resource(), std::move(other))) {}
 
     Record(const Record&) = delete;
     Record(Record&&) noexcept;
@@ -417,7 +417,7 @@ public:
     ChildRecord(std::allocator_arg_t, Allocator, const ChildRecord&);
 
     ChildRecord(std::allocator_arg_t, Allocator a, ChildRecord&& other)
-        : ChildRecord(std::allocator_arg, a, std::as_const(other)) {}
+        : ChildRecord(detail::move_to(a.resource(), std::move(other))) {}
 
     ChildRecord(const ChildRecord&) = delete;
     ChildRecord(ChildRecord&&) noexcept;
@@ -655,7 +655,7 @@ public:
     Holder(std::allocator_arg_t, Allocator, const Holder&);
 
     Holder(std::allocator_arg_t, Allocator a, Holder&& other)
-        : Holder(std::allocator_arg, a, std::as_const(other)) {}
+        : Holder(detail::move_to(a.resource(), std::move(other))) {}
 
     Holder(const Holder&) = delete;
     Holder(Holder&&) noexcept;
@@ -1031,7 +1031,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1295,7 +1295,7 @@ inline Result<Record, EntityError> Record::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1558,7 +1558,7 @@ inline Result<ChildRecord, EntityError> ChildRecord::from_compact_row(Memory r, 
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1841,7 +1841,7 @@ inline Result<Holder, EntityError> Holder::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("record_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

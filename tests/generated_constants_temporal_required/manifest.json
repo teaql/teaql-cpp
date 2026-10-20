@@ -4,7 +4,7 @@
   "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
   "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "00b38aa969c2a2fb535958ec9192333bc92f604e4504c90f9cd312c4696750f4",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
@@ -14,7 +14,7 @@
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "0a84df2e8f3c8f4aad0ca44634ae7d7fa6162ab16212f03abc250261f10071ef",
     "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
-    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "4182c269f7617e57a2a387f4a5782101c99eb8e92f60e47682f7172cfad4cb78"
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "432edde6b27a513e99f1efd067153079869a7dd965b95c65c07307324d2573d8"
   },
   "model": "tests/generator/constants_temporal_required.xml",
   "model_sha256": "48df4d5b4cb80f21c082c9462731cdd87f4927152837575de45b8a7600b4f29e",
@@ -74,11 +74,11 @@
     "assist/runtime/tool_api.md": "7db1f1dd08a99a939082df4e52f1c05f9cad80f02abd9468d49b1d49ed52719c",
     "include/cpp_constants_temporal_required/checkers.hpp": "af050294b039a9c819270a0a0d281dda5f4c39284460830c2206533b2b41ef18",
     "include/cpp_constants_temporal_required/expressions.hpp": "5a84242b070c7455c52b16dd9ec03c355a89f65b1ae99370460b4b18221e9dc4",
-    "include/cpp_constants_temporal_required/models.hpp": "705e20dca526b37b6f4d82f7c1fdca7fa20ac011e4a906ebd864166b5dca21be",
+    "include/cpp_constants_temporal_required/models.hpp": "db79515454ecf96727fac06a4651f8886bf10bfae82163377a86ec7740746701",
     "include/cpp_constants_temporal_required/queries.hpp": "0c62d1109b4d9d6c48bbe4cdda6b1c24ac2776bde0306d6be49102869a73f0e2",
     "include/cpp_constants_temporal_required/runtime.hpp": "3b652c17cee0f4ca1273979d056aebf60bb8d5571c80847e8c8db2f8c31771ff",
     "include/cpp_constants_temporal_required/sample_data.hpp": "58e87bb5f7be9d6685c1496508e9bfb0f66105ce5dd004d7a197f815ff25f5cb",
-    "include/cpp_constants_temporal_required/support.hpp": "8af10896e9245a77b01d224d90a0975f988360a0cb8055006a42107955bec8d4",
+    "include/cpp_constants_temporal_required/support.hpp": "c9aea52b13073129dc9ed1267093e41d5a5efe26370c0ca056354568c570125c",
     "include/cpp_constants_temporal_required.hpp": "b3a00025b49955bd5603c910c64201ff3081802f36b6a2866a763a3c00953ce6",
     "teaql-i18n.json": "349d2ba7478b1b75a2b22239ef8bb3e43de7a01fcc61661ac6401313fe18b6fa"
   }

@@ -46,7 +46,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -205,7 +205,7 @@ public:
     OrderStatus(std::allocator_arg_t, Allocator, const OrderStatus&);
 
     OrderStatus(std::allocator_arg_t, Allocator a, OrderStatus&& other)
-        : OrderStatus(std::allocator_arg, a, std::as_const(other)) {}
+        : OrderStatus(detail::move_to(a.resource(), std::move(other))) {}
 
     OrderStatus(const OrderStatus&) = delete;
     OrderStatus(OrderStatus&&) noexcept;
@@ -426,7 +426,7 @@ public:
     Record(std::allocator_arg_t, Allocator, const Record&);
 
     Record(std::allocator_arg_t, Allocator a, Record&& other)
-        : Record(std::allocator_arg, a, std::as_const(other)) {}
+        : Record(detail::move_to(a.resource(), std::move(other))) {}
 
     Record(const Record&) = delete;
     Record(Record&&) noexcept;
@@ -728,7 +728,7 @@ public:
     Person(std::allocator_arg_t, Allocator, const Person&);
 
     Person(std::allocator_arg_t, Allocator a, Person&& other)
-        : Person(std::allocator_arg, a, std::as_const(other)) {}
+        : Person(detail::move_to(a.resource(), std::move(other))) {}
 
     Person(const Person&) = delete;
     Person(Person&&) noexcept;
@@ -1198,7 +1198,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1501,7 +1501,7 @@ inline Result<OrderStatus, EntityError> OrderStatus::from_compact_row(Memory r, 
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1837,7 +1837,7 @@ inline Result<Record, EntityError> Record::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("status_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2154,7 +2154,7 @@ inline Result<Person, EntityError> Person::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("status_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

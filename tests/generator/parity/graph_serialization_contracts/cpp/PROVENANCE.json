@@ -73,18 +73,18 @@
     "assist/serialization_parent/update.md": "885bced649dd2cea67b4b94b8fe4c9176d33f37b063087164b66c710f9a0b18c",
     "include/cpp_graph_serialization/checkers.hpp": "ca1f407505311bfc4bbe1158a92ea3b9c895a2dc399bece6e5edf6bd352cbae8",
     "include/cpp_graph_serialization/expressions.hpp": "d440af154bd934134b79370dea52df0e8c31327c56b9be790b9248cf005e1d38",
-    "include/cpp_graph_serialization/models.hpp": "a5d8d13b32d14f19959e1d80ccc014c4828827c16aacd2ea0281f24cc2bbf41f",
+    "include/cpp_graph_serialization/models.hpp": "daaf8cc9d5067cdc959d124f335eab8e6327ea68d90da476008a6817e0c11d7f",
     "include/cpp_graph_serialization/queries.hpp": "070d94e5de14562dca8ac1ada0d96894f6542c5a58ac0c105dcab9b480978d5b",
     "include/cpp_graph_serialization/runtime.hpp": "7ad9d79663968d9dde877242301150339d36b484416c6e13e2fd95490eaca64f",
     "include/cpp_graph_serialization/sample_data.hpp": "0ad3ee082f6787e3be1de5d8db00dcdf45d38f8884b474576ed65e0ecd40986e",
-    "include/cpp_graph_serialization/support.hpp": "e464a500bfc5167bab0decec05a20a4db74b84dfd2423ea7aae0cb33090e0fef",
+    "include/cpp_graph_serialization/support.hpp": "7a97bc77be33f37f9e99d331452e54dff7b646a8d6e8c76e21f6ccb9896905a4",
     "include/cpp_graph_serialization.hpp": "1a399e39d3c49f075ee54a84df8ab1ef4501576559a061a037f2b1040e1d68ff",
     "teaql-i18n.json": "db1c266b9b6e1db06cbb86d4f8c1a8de22ab7446623b87faf28deb82c82e83f3"
   },
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
-    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "4182c269f7617e57a2a387f4a5782101c99eb8e92f60e47682f7172cfad4cb78",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "00b38aa969c2a2fb535958ec9192333bc92f604e4504c90f9cd312c4696750f4",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "432edde6b27a513e99f1efd067153079869a7dd965b95c65c07307324d2573d8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a"

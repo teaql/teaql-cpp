@@ -440,3 +440,150 @@ profiles with fifteen focused tests: the preceding eight plus entity-runtime and
 graph model/contracts/parity regressions. Hydration measurements run only after
 that selection passes. The SDK migration controller now requires this enlarged
 kernel receipt. Lazy-graph and hydration source acceptance remain pending.
+
+## Lazy graph kernel checkpoint
+
+The first native/sanitizer replay each passed fourteen of fifteen tests. The
+retained [initial failure](parity/lazy_graph_initial_clone_count_5_0_6.json.gz)
+identifies an obsolete allocation expectation: first Clone now materializes
+both the deferred ledger binding and the deferred graph binding, rather than
+only the ledger binding after eager graph construction. The model test now
+requires exactly two registered bindings, no mutation ledger, and no additional
+bindings on subsequent Clone. Sharing and mutation visibility checks remain.
+
+The [completed kernel checkpoint](parity/combined_cleanup_runtime_5_0_6.json.gz)
+records native15/sanitizer15 passing and both subsequent builds reporting no
+work. The strict [native hydration probe](parity/hydration_allocation_combined_native_5_0_6.json.gz)
+and [sanitizer hydration probe](parity/hydration_allocation_combined_sanitize_5_0_6.json.gz)
+pass all twenty-four samples and positive controls. Allocation counts and byte
+counts match between profiles; elapsed times are not compared. At 10,000 rows,
+typed and Context hydration each request one arena allocation for the reserved
+result vector; graph batches request 20,014, below the unchanged 30,032 ceiling.
+The first Context attachment still registers the shared graph binding. All
+registered objects retain their existing ID and lifetime checks.
+
+This permits the restricted all-SDK adapter regeneration gate to proceed. It
+does not accept the complete hydration source: imported-module integration,
+all-SDK reproduction, allocation-counter thread isolation and final source
+review remain separate requirements. No source or capability is promoted here.
+
+The [all-SDK update receipt](parity/generated_hydration_sdks_update_5_0_6.json.gz)
+now records all eighty active SDKs reproduced and installed. Changed generated
+code is restricted to allocator-aware moves, consuming graph attachment and
+original-row transfer; 2,467 protected artifacts remain unchanged. A fresh,
+strict byte-for-byte reproduction is running before the repository generator
+verifier and native/imported-module integration. Installation alone does not
+qualify those downstream gates.
+
+## Allocation-counter thread isolation candidate
+
+During the unchanged-input SDK integration epoch, an isolated candidate is kept
+outside the worktree. Only the test helper's `Counts` and measurement flag become
+`thread_local`; this storage owns measurement scalars, never Context data. The
+[retained candidate experiment](parity/allocation_counter_thread_isolation_candidate_5_0_6.json.gz)
+includes the exact candidate and original helper sources, the test and command
+outputs. The original shared helper fails the same test; the candidate passes
+native and ASan/UBSan with leak scanning disabled.
+
+Two threads overlap measurement lifetimes but serialize actions with acquire/
+release handshakes. This makes the original-helper comparison deterministic
+without introducing a counter data race. Each thread must begin disabled and
+retain its own counts, requested bytes and enable flag despite another thread's
+reset and disable. Exact positive controls cover ordinary, array, zero-size and
+aligned allocations, arena-entry requests, non-counted frees and disabled
+allocations. Arena calls use an explicit stub in this isolated experiment; it
+proves helper isolation, not real Context or allocator integration. Installation,
+actual Context consumers, module verification and source acceptance remain open.
+No active build input was changed for this experiment.
+
+The [second all-SDK reproduction](parity/generated_hydration_sdks_reproduced_5_0_6.json.gz)
+has completed: all eighty SDKs are byte-identical to the installed outputs.
+`verify_generator_parity.py` now passes for the forty-two locked generator
+sources and seventeen capability records; six capabilities remain unqualified.
+The native/imported-module integration controller is running with frozen inputs.
+This closes the previously reported producer-fingerprint mismatch, not the
+remaining source or capability acceptance requirements.
+
+## Real Context counter-isolation follow-up
+
+The staged helper now also passes with actual thread-owned GlobalContext and
+UserContext arenas: [native](parity/allocation_counter_real_context_candidate_5_0_6.json.gz)
+and [ASan/UBSan](parity/allocation_counter_real_context_sanitize_candidate_5_0_6.json.gz).
+No arena stub is used in these two receipts. Each thread creates and warms its
+own Contexts outside measurement, then holds an overlapping measurement interval
+while acquire/release handshakes serialize observations. The parent observes
+exactly two arena requests totaling 62 requested bytes; the worker independently
+observes two totaling 100. Ordinary/aligned/array/zero-size heap controls retain
+the preceding exact counts, and deallocation/disabled operations add no counts.
+Default PMR is disabled, linked library hashes stay unchanged, and Contexts are
+destroyed after measurement on their creating threads. Leak scanning remains
+disabled for the sanitizer run.
+
+These are isolated candidate executions with the real runtime, not installed
+helper acceptance. The repository helper and all captured integration inputs
+remain unchanged. Installation must be followed by the readonly-property,
+state-cache and full hydration consumers plus canonical module execution. The
+complete helper review must also map each consumer's reset/timing/result and
+exception-disabling boundaries to the source `measured` contract; thread-local
+counter storage alone is not that complete review.
+
+## Queued installation after hydration integration
+
+The [post-integration controller record](parity/post_hydration_candidate_installation_5_0_6.json.gz)
+retains a queued, self-contained installer. It waits for the observed integration
+process to exit, requires its complete success receipt, and verifies the full
+captured input/reference map and destination hashes before writing anything.
+Failure or drift stops installation. While its state is `waiting_for_integration`,
+no candidate has been installed by this controller.
+
+The prepared changes install only the reviewed TLS helper, its real concurrent
+Context test, the seven-contract trace-chain counterpart, and the expanded core
+LIKE test. The existing hydration probe becomes a native/canonical-module CTest
+target. Both allocation executables receive the same pointer-width-specific
+arena wrapper used by existing cache measurements. Module contracts and preset
+targets are registered without modifying generated output.
+
+After installation the controller runs pinned formatting and exact native10/
+module10 selections covering allocation, hydration, trace-chain, core functional,
+readonly, cache, request-scope, loaded-view and entity-runtime behavior. A focused
+sanitizer allocation-counter gate follows. Canonical module-body, no-work and
+unchanged-input guards are required. The controller never promotes source or
+capability dispositions; terminal execution and source review remain separate.
+
+## Plain-decoder helper fidelity gap
+
+A full helper-body audit found a remaining limitation beyond the valid 24-row
+matrix. The source `plain` helper supports present Text notes as well as missing
+and Null notes, and matches U64 IDs/I64 versions exactly. The installed probe
+only checks its prepared missing/Null note inputs and uses permissive numeric
+accessors. Those samples still prove their recorded budgets and values, but do
+not establish the helper's complete branch behavior.
+
+The [staged C++ helper](parity/plain_hydration_helper_candidate_5_0_6.json.gz)
+uses exact variant checks and an allocator-propagated optional String. It passes
+four valid forms (absent, Null, empty Text, long Text) and rejects signed IDs,
+unsigned versions, numeric names and numeric notes. The
+[original helper observer](parity/plain_hydration_helper_original_5_0_6.json.gz)
+copies the exact Plain struct/function excerpt from the locked source into a
+supplemental temporary test, preserving every original runtime source/test body.
+Its four accepted/four rejected cases agree; actual source panic diagnostics are
+retained rather than normalized. The C++ candidate uses checked exceptions and
+does not claim byte-identical Rust panic formatting.
+
+This helper candidate is not part of the already queued installation controller.
+After that controller terminates, integrate the helper and its checks into the
+hydration executable and rerun the complete 24-row native/imported matrix with
+unchanged ceilings. Do not promote hydration_allocations.rs solely from the
+queued matrix, even if it passes. Existing standalone and queued receipts retain
+their exact earlier scope.
+
+The [complete staged hydration probe](parity/hydration_plain_complete_native_candidate_5_0_6.json.gz)
+now incorporates that helper and its eight branch checks into the full existing
+probe. Native execution passes all twenty-four matrix samples, move/row-transfer
+contracts, positive controls and unchanged ceilings. Every allocation-count and
+requested-byte column matches the preceding native combined-allocation receipt;
+elapsed times are excluded. The receipt retains the full candidate source,
+compile/link commands and unchanged runtime/generated/helper/library hashes.
+It remains outside active build inputs. Installation and canonical module replay
+must occur after the currently queued controller terminates, preserving that
+controller's immutable input snapshot and earlier scope.

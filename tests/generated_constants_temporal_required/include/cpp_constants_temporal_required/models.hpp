@@ -48,7 +48,7 @@ public:
     Priority(std::allocator_arg_t, Allocator, const Priority&);
 
     Priority(std::allocator_arg_t, Allocator a, Priority&& other)
-        : Priority(std::allocator_arg, a, std::as_const(other)) {}
+        : Priority(detail::move_to(a.resource(), std::move(other))) {}
 
     Priority(const Priority&) = delete;
     Priority(Priority&&) noexcept;
@@ -406,7 +406,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -619,7 +619,7 @@ public:
     Label(std::allocator_arg_t, Allocator, const Label&);
 
     Label(std::allocator_arg_t, Allocator a, Label&& other)
-        : Label(std::allocator_arg, a, std::as_const(other)) {}
+        : Label(detail::move_to(a.resource(), std::move(other))) {}
 
     Label(const Label&) = delete;
     Label(Label&&) noexcept;
@@ -1196,7 +1196,7 @@ inline Result<Priority, EntityError> Priority::from_compact_row(Memory r, Compac
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1460,7 +1460,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1736,7 +1736,7 @@ inline Result<Label, EntityError> Label::from_compact_row(Memory r, CompactRow r
         }
         result.load_state.mark_loaded("priority_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

@@ -4,7 +4,7 @@
   "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
   "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "00b38aa969c2a2fb535958ec9192333bc92f604e4504c90f9cd312c4696750f4",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
@@ -14,7 +14,7 @@
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "0a84df2e8f3c8f4aad0ca44634ae7d7fa6162ab16212f03abc250261f10071ef",
     "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
-    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "4182c269f7617e57a2a387f4a5782101c99eb8e92f60e47682f7172cfad4cb78"
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "432edde6b27a513e99f1efd067153079869a7dd965b95c65c07307324d2573d8"
   },
   "model": "tests/generator/checker_unique_string.xml",
   "model_sha256": "59f70dbc21fc643a777efb08d15489b17efdfd7ab07b6b91757f5bdbf1538e92",
@@ -40,11 +40,11 @@
     "assist/runtime/tool_api.md": "7db1f1dd08a99a939082df4e52f1c05f9cad80f02abd9468d49b1d49ed52719c",
     "include/cpp_checker_unique_string/checkers.hpp": "39eb95e5b20ef546ba98ea42a471b787fe116190c608cfb526816cac908b66c7",
     "include/cpp_checker_unique_string/expressions.hpp": "ff616f28ed5b7e5f9da4563ef849ebcec9b024f82397895ccc47993a39593c81",
-    "include/cpp_checker_unique_string/models.hpp": "dcba086f0dbb6ca0fd8f963049047be4b45285a63fa135ac99f276eefed20f25",
+    "include/cpp_checker_unique_string/models.hpp": "88f01430f640ba2a2a4552c9ac95ceda5fe57a452e239cb45e9b6b4515e635ce",
     "include/cpp_checker_unique_string/queries.hpp": "645dc2dd75555e8dc33a389a8b0762fe321345ace5e1d72ce56315a42a417164",
     "include/cpp_checker_unique_string/runtime.hpp": "9a7aecfa7b35b2984ba674366ef9d9470abcf41afecf176b75e47c793ba1cb03",
     "include/cpp_checker_unique_string/sample_data.hpp": "6a56ddb0e89d6efa62720141bbe01cdb6942a3d46a4d43f5b474e205a64d0483",
-    "include/cpp_checker_unique_string/support.hpp": "65b0a48903e45977b953241923971f01bbf85c07358743d16d2f994ed8cfc9f8",
+    "include/cpp_checker_unique_string/support.hpp": "0c861ce04f454716ea2d77d6f8579ab550bc67ea4c242824726c665b6f3d8e2c",
     "include/cpp_checker_unique_string.hpp": "6290ea548d363af2014e09346cedd56e63591aa28d5c297c03f4a7db3820d7e7",
     "teaql-i18n.json": "e0008650b4e02d0c3fde5c5a7436854fe5de748bd50ca36e13c7e36fff2891f5"
   }

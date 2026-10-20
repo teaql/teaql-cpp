@@ -8,12 +8,12 @@
   "model_sha256": "a8a09b04ff9b938c4985cf9411b9503c4d8754dab5f5195dc4bcf52d14d75a8f",
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "00b38aa969c2a2fb535958ec9192333bc92f604e4504c90f9cd312c4696750f4",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "eacbf2fc53f99c648e27d4506a2ed6ceae9b0be2a625ec0a47cc07449d37c257",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "0a84df2e8f3c8f4aad0ca44634ae7d7fa6162ab16212f03abc250261f10071ef",
     "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
-    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "4182c269f7617e57a2a387f4a5782101c99eb8e92f60e47682f7172cfad4cb78",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "432edde6b27a513e99f1efd067153079869a7dd965b95c65c07307324d2573d8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
@@ -54,11 +54,11 @@
     "assist/runtime/tool_api.md": "7db1f1dd08a99a939082df4e52f1c05f9cad80f02abd9468d49b1d49ed52719c",
     "include/scalar_candidate_fixture/checkers.hpp": "8a2742bfd5fcb22532add4436a691c430f5fc3ca318b069fa7ad4cbf14e83509",
     "include/scalar_candidate_fixture/expressions.hpp": "ca72e5251f8209b22f4051252e8c500934225300f72fe8436962320777eb5eba",
-    "include/scalar_candidate_fixture/models.hpp": "8e043fe9d8a7639430947974446159514abdbcc34d14cc5ac40cf8e4e5f21d0d",
+    "include/scalar_candidate_fixture/models.hpp": "56d8d8ab9833907ca39177091b7d6bef78a0b8948747d83eec210540fe0e0de8",
     "include/scalar_candidate_fixture/queries.hpp": "60b2bf4e00eb89b0b81c937eb78b0de76e275f493bf0fe1528810202d5d46754",
     "include/scalar_candidate_fixture/runtime.hpp": "5100032e4aff0a47fd4f34945bd1c17ad0eef5591579aff54fcd816ecfeb8a72",
     "include/scalar_candidate_fixture/sample_data.hpp": "c00ec58e0039acab2f7726c405bf2477199b80f8f907ead22a7dc63c8a16d6f8",
-    "include/scalar_candidate_fixture/support.hpp": "ae1efeea41adf4f839b1faf8c67b9fd7752c67a2a9ce3b8777cd02b7a1dd67ba",
+    "include/scalar_candidate_fixture/support.hpp": "a4ea40256030e0640efc4cfa5764ed8fccc87c101e5e31e6d6705752f91dec18",
     "include/scalar_candidate_fixture.hpp": "94f214da696767ed94a58c41f6a5da5ba4ef823463da4621e9acf6ad28e7ede8",
     "teaql-i18n.json": "fbe84c17c2fd3688587e93ea1cf8521f83e13af92449b2c7af328cf33f82a0c5"
   }

@@ -31,12 +31,12 @@ static void lazy_slot_and_complete_metadata() {
               user_context->allocation_stats().issued_objects == before,
           "empty diagnostics and reads allocate no managed ledger slot");
     auto copy = detail::clone_in(r, original);
-    check(user_context->allocation_stats().issued_objects == before + 1 && original == copy &&
+    check(user_context->allocation_stats().issued_objects == before + 2 && original == copy &&
               !detail::EntityRuntimeAccess::has_mutation_context(copy),
-          "first Clone publishes exactly one shared empty binding without a ledger");
+          "first Clone publishes ledger and graph bindings without a mutation ledger");
     auto second_copy = detail::clone_in(r, original);
-    check(user_context->allocation_stats().issued_objects == before + 1 && copy == second_copy,
-          "further Clones reuse that binding");
+    check(user_context->allocation_stats().issued_objects == before + 2 && copy == second_copy,
+          "further Clones reuse both bindings");
     copy.set(key, "name", Value(r, "native"));
     copy.set_entity_comment(key, "entity comment");
     check(original.get(key, "name")->try_text() == "native" &&

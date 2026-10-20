@@ -86,18 +86,18 @@
     "assist/runtime/tool_api.md": "7db1f1dd08a99a939082df4e52f1c05f9cad80f02abd9468d49b1d49ed52719c",
     "include/cpp_expression_roots/checkers.hpp": "eb7fcc77a755f279e3a50bb8869bde72bb6a5235830f95a611f5cc12ddf5c0b7",
     "include/cpp_expression_roots/expressions.hpp": "0459b9220b7f530c0d1330cdaa8288a27e4ed7f0af23025113b8eeb13c3198c7",
-    "include/cpp_expression_roots/models.hpp": "52871a3a57edf59a20c0a7fe1f8cd843d061849ed8faa057d4937075fa0ef1b6",
+    "include/cpp_expression_roots/models.hpp": "8d1023340807b9cb6c85875dc9afa91ddba4670ba33249b41cd669229bdcee0f",
     "include/cpp_expression_roots/queries.hpp": "10b5a8d378435841e6b963fa56a91af66a591f7065179d8f199112a469553956",
     "include/cpp_expression_roots/runtime.hpp": "163d87ec74243f40b1c53e99fd4a7b225d2722a67df058a6c5dceca4e679eb18",
     "include/cpp_expression_roots/sample_data.hpp": "24373c80cb5fdd3f32b00db16d3d7b774129a3e89f473ac7933e879ac65c2ede",
-    "include/cpp_expression_roots/support.hpp": "be483b5f26d7dd40488be67f54f0bfb9542616d1b17e1c53cfe7465e78e550b0",
+    "include/cpp_expression_roots/support.hpp": "4ef86d390bbd067246fa021ac428e5ba0b8c7fe6d18eef3e1cd9b75d457abada",
     "include/cpp_expression_roots.hpp": "0a4ae7e1816a5ee462ef2dbee811534b413b206a996e2336592e2a0611a2b7e8",
     "teaql-i18n.json": "c92e22b843530eb2c3359a543c67171bd1ba3889230574db3f806fca0d965a1c"
   },
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
-    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "4182c269f7617e57a2a387f4a5782101c99eb8e92f60e47682f7172cfad4cb78",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "00b38aa969c2a2fb535958ec9192333bc92f604e4504c90f9cd312c4696750f4",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "432edde6b27a513e99f1efd067153079869a7dd965b95c65c07307324d2573d8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a"

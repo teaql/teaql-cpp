@@ -52,7 +52,7 @@ public:
     Tenant(std::allocator_arg_t, Allocator, const Tenant&);
 
     Tenant(std::allocator_arg_t, Allocator a, Tenant&& other)
-        : Tenant(std::allocator_arg, a, std::as_const(other)) {}
+        : Tenant(detail::move_to(a.resource(), std::move(other))) {}
 
     Tenant(const Tenant&) = delete;
     Tenant(Tenant&&) noexcept;
@@ -203,7 +203,7 @@ public:
     Document(std::allocator_arg_t, Allocator, const Document&);
 
     Document(std::allocator_arg_t, Allocator a, Document&& other)
-        : Document(std::allocator_arg, a, std::as_const(other)) {}
+        : Document(detail::move_to(a.resource(), std::move(other))) {}
 
     Document(const Document&) = delete;
     Document(Document&&) noexcept;
@@ -504,7 +504,7 @@ public:
     IntermediateRecord(std::allocator_arg_t, Allocator, const IntermediateRecord&);
 
     IntermediateRecord(std::allocator_arg_t, Allocator a, IntermediateRecord&& other)
-        : IntermediateRecord(std::allocator_arg, a, std::as_const(other)) {}
+        : IntermediateRecord(detail::move_to(a.resource(), std::move(other))) {}
 
     IntermediateRecord(const IntermediateRecord&) = delete;
     IntermediateRecord(IntermediateRecord&&) noexcept;
@@ -806,7 +806,7 @@ public:
     Invoice(std::allocator_arg_t, Allocator, const Invoice&);
 
     Invoice(std::allocator_arg_t, Allocator a, Invoice&& other)
-        : Invoice(std::allocator_arg, a, std::as_const(other)) {}
+        : Invoice(detail::move_to(a.resource(), std::move(other))) {}
 
     Invoice(const Invoice&) = delete;
     Invoice(Invoice&&) noexcept;
@@ -1136,7 +1136,7 @@ public:
     Receipt(std::allocator_arg_t, Allocator, const Receipt&);
 
     Receipt(std::allocator_arg_t, Allocator a, Receipt&& other)
-        : Receipt(std::allocator_arg, a, std::as_const(other)) {}
+        : Receipt(detail::move_to(a.resource(), std::move(other))) {}
 
     Receipt(const Receipt&) = delete;
     Receipt(Receipt&&) noexcept;
@@ -1466,7 +1466,7 @@ public:
     SpecialInvoice(std::allocator_arg_t, Allocator, const SpecialInvoice&);
 
     SpecialInvoice(std::allocator_arg_t, Allocator a, SpecialInvoice&& other)
-        : SpecialInvoice(std::allocator_arg, a, std::as_const(other)) {}
+        : SpecialInvoice(detail::move_to(a.resource(), std::move(other))) {}
 
     SpecialInvoice(const SpecialInvoice&) = delete;
     SpecialInvoice(SpecialInvoice&&) noexcept;
@@ -1947,7 +1947,7 @@ inline Result<Tenant, EntityError> Tenant::from_compact_row(Memory r, CompactRow
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2243,7 +2243,7 @@ inline Result<Document, EntityError> Document::from_compact_row(Memory r, Compac
         }
         result.load_state.mark_loaded("tenant_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2555,7 +2555,7 @@ IntermediateRecord::from_compact_row(Memory r, CompactRow row) {
         }
         result.load_state.mark_loaded("tenant_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2888,7 +2888,7 @@ inline Result<Invoice, EntityError> Invoice::from_compact_row(Memory r, CompactR
         }
         result.load_state.mark_loaded("tenant_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -3222,7 +3222,7 @@ inline Result<Receipt, EntityError> Receipt::from_compact_row(Memory r, CompactR
         }
         result.load_state.mark_loaded("tenant_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -3585,7 +3585,7 @@ inline Result<SpecialInvoice, EntityError> SpecialInvoice::from_compact_row(Memo
         }
         result.load_state.mark_loaded("tenant_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

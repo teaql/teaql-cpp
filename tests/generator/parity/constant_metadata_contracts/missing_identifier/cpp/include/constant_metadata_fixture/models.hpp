@@ -36,7 +36,7 @@ public:
     Status(std::allocator_arg_t, Allocator, const Status&);
 
     Status(std::allocator_arg_t, Allocator a, Status&& other)
-        : Status(std::allocator_arg, a, std::as_const(other)) {}
+        : Status(detail::move_to(a.resource(), std::move(other))) {}
 
     Status(const Status&) = delete;
     Status(Status&&) noexcept;
@@ -203,7 +203,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -461,7 +461,7 @@ inline Result<Status, EntityError> Status::from_compact_row(Memory r, CompactRow
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -588,7 +588,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

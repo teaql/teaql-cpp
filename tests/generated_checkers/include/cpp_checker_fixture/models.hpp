@@ -36,7 +36,7 @@ public:
     Tenant(std::allocator_arg_t, Allocator, const Tenant&);
 
     Tenant(std::allocator_arg_t, Allocator a, Tenant&& other)
-        : Tenant(std::allocator_arg, a, std::as_const(other)) {}
+        : Tenant(detail::move_to(a.resource(), std::move(other))) {}
 
     Tenant(const Tenant&) = delete;
     Tenant(Tenant&&) noexcept;
@@ -185,7 +185,7 @@ public:
     Note(std::allocator_arg_t, Allocator, const Note&);
 
     Note(std::allocator_arg_t, Allocator a, Note&& other)
-        : Note(std::allocator_arg, a, std::as_const(other)) {}
+        : Note(detail::move_to(a.resource(), std::move(other))) {}
 
     Note(const Note&) = delete;
     Note(Note&&) noexcept;
@@ -553,7 +553,7 @@ inline Result<Tenant, EntityError> Tenant::from_compact_row(Memory r, CompactRow
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -800,7 +800,7 @@ inline Result<Note, EntityError> Note::from_compact_row(Memory r, CompactRow row
         }
         result.load_state.mark_loaded("tenant_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

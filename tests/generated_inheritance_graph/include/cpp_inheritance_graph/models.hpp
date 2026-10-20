@@ -53,7 +53,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -206,7 +206,7 @@ public:
     Specialist(std::allocator_arg_t, Allocator, const Specialist&);
 
     Specialist(std::allocator_arg_t, Allocator a, Specialist&& other)
-        : Specialist(std::allocator_arg, a, std::as_const(other)) {}
+        : Specialist(detail::move_to(a.resource(), std::move(other))) {}
 
     Specialist(const Specialist&) = delete;
     Specialist(Specialist&&) noexcept;
@@ -424,7 +424,7 @@ public:
     School(std::allocator_arg_t, Allocator, const School&);
 
     School(std::allocator_arg_t, Allocator a, School&& other)
-        : School(std::allocator_arg, a, std::as_const(other)) {}
+        : School(detail::move_to(a.resource(), std::move(other))) {}
 
     School(const School&) = delete;
     School(School&&) noexcept;
@@ -674,7 +674,7 @@ public:
     Academy(std::allocator_arg_t, Allocator, const Academy&);
 
     Academy(std::allocator_arg_t, Allocator a, Academy&& other)
-        : Academy(std::allocator_arg, a, std::as_const(other)) {}
+        : Academy(detail::move_to(a.resource(), std::move(other))) {}
 
     Academy(const Academy&) = delete;
     Academy(Academy&&) noexcept;
@@ -950,7 +950,7 @@ public:
     ResearchAcademy(std::allocator_arg_t, Allocator, const ResearchAcademy&);
 
     ResearchAcademy(std::allocator_arg_t, Allocator a, ResearchAcademy&& other)
-        : ResearchAcademy(std::allocator_arg, a, std::as_const(other)) {}
+        : ResearchAcademy(detail::move_to(a.resource(), std::move(other))) {}
 
     ResearchAcademy(const ResearchAcademy&) = delete;
     ResearchAcademy(ResearchAcademy&&) noexcept;
@@ -1249,7 +1249,7 @@ public:
     Enrollment(std::allocator_arg_t, Allocator, const Enrollment&);
 
     Enrollment(std::allocator_arg_t, Allocator a, Enrollment&& other)
-        : Enrollment(std::allocator_arg, a, std::as_const(other)) {}
+        : Enrollment(detail::move_to(a.resource(), std::move(other))) {}
 
     Enrollment(const Enrollment&) = delete;
     Enrollment(Enrollment&&) noexcept;
@@ -1587,7 +1587,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1851,7 +1851,7 @@ inline Result<Specialist, EntityError> Specialist::from_compact_row(Memory r, Co
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2196,7 +2196,7 @@ inline Result<School, EntityError> School::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("advisor_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2541,7 +2541,7 @@ inline Result<Academy, EntityError> Academy::from_compact_row(Memory r, CompactR
         }
         result.load_state.mark_loaded("advisor_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2913,7 +2913,7 @@ inline Result<ResearchAcademy, EntityError> ResearchAcademy::from_compact_row(Me
         }
         result.load_state.mark_loaded("advisor_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -3136,7 +3136,7 @@ inline Result<Enrollment, EntityError> Enrollment::from_compact_row(Memory r, Co
         }
         result.load_state.mark_loaded("school_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

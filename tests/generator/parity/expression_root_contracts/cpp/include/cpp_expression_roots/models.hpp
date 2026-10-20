@@ -56,7 +56,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -224,7 +224,7 @@ public:
     Class(std::allocator_arg_t, Allocator, const Class&);
 
     Class(std::allocator_arg_t, Allocator a, Class&& other)
-        : Class(std::allocator_arg, a, std::as_const(other)) {}
+        : Class(detail::move_to(a.resource(), std::move(other))) {}
 
     Class(const Class&) = delete;
     Class(Class&&) noexcept;
@@ -436,7 +436,7 @@ public:
     Operator(std::allocator_arg_t, Allocator, const Operator&);
 
     Operator(std::allocator_arg_t, Allocator a, Operator&& other)
-        : Operator(std::allocator_arg, a, std::as_const(other)) {}
+        : Operator(detail::move_to(a.resource(), std::move(other))) {}
 
     Operator(const Operator&) = delete;
     Operator(Operator&&) noexcept;
@@ -618,7 +618,7 @@ public:
     Template(std::allocator_arg_t, Allocator, const Template&);
 
     Template(std::allocator_arg_t, Allocator a, Template&& other)
-        : Template(std::allocator_arg, a, std::as_const(other)) {}
+        : Template(detail::move_to(a.resource(), std::move(other))) {}
 
     Template(const Template&) = delete;
     Template(Template&&) noexcept;
@@ -800,7 +800,7 @@ public:
     Namespace(std::allocator_arg_t, Allocator, const Namespace&);
 
     Namespace(std::allocator_arg_t, Allocator a, Namespace&& other)
-        : Namespace(std::allocator_arg, a, std::as_const(other)) {}
+        : Namespace(detail::move_to(a.resource(), std::move(other))) {}
 
     Namespace(const Namespace&) = delete;
     Namespace(Namespace&&) noexcept;
@@ -982,7 +982,7 @@ public:
     PlainRecord(std::allocator_arg_t, Allocator, const PlainRecord&);
 
     PlainRecord(std::allocator_arg_t, Allocator a, PlainRecord&& other)
-        : PlainRecord(std::allocator_arg, a, std::as_const(other)) {}
+        : PlainRecord(detail::move_to(a.resource(), std::move(other))) {}
 
     PlainRecord(const PlainRecord&) = delete;
     PlainRecord(PlainRecord&&) noexcept;
@@ -1432,7 +1432,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1669,7 +1669,7 @@ inline Result<Class, EntityError> Class::from_compact_row(Memory r, CompactRow r
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1878,7 +1878,7 @@ inline Result<Operator, EntityError> Operator::from_compact_row(Memory r, Compac
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2086,7 +2086,7 @@ inline Result<Template, EntityError> Template::from_compact_row(Memory r, Compac
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2295,7 +2295,7 @@ inline Result<Namespace, EntityError> Namespace::from_compact_row(Memory r, Comp
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2504,7 +2504,7 @@ inline Result<PlainRecord, EntityError> PlainRecord::from_compact_row(Memory r, 
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

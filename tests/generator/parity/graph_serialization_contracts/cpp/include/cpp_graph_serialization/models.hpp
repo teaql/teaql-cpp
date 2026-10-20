@@ -46,7 +46,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -210,7 +210,7 @@ public:
     JsonGraphRow(std::allocator_arg_t, Allocator, const JsonGraphRow&);
 
     JsonGraphRow(std::allocator_arg_t, Allocator a, JsonGraphRow&& other)
-        : JsonGraphRow(std::allocator_arg, a, std::as_const(other)) {}
+        : JsonGraphRow(detail::move_to(a.resource(), std::move(other))) {}
 
     JsonGraphRow(const JsonGraphRow&) = delete;
     JsonGraphRow(JsonGraphRow&&) noexcept;
@@ -483,7 +483,7 @@ public:
     SerializationParent(std::allocator_arg_t, Allocator, const SerializationParent&);
 
     SerializationParent(std::allocator_arg_t, Allocator a, SerializationParent&& other)
-        : SerializationParent(std::allocator_arg, a, std::as_const(other)) {}
+        : SerializationParent(detail::move_to(a.resource(), std::move(other))) {}
 
     SerializationParent(const SerializationParent&) = delete;
     SerializationParent(SerializationParent&&) noexcept;
@@ -742,7 +742,7 @@ public:
     SerializationMember(std::allocator_arg_t, Allocator, const SerializationMember&);
 
     SerializationMember(std::allocator_arg_t, Allocator a, SerializationMember&& other)
-        : SerializationMember(std::allocator_arg, a, std::as_const(other)) {}
+        : SerializationMember(detail::move_to(a.resource(), std::move(other))) {}
 
     SerializationMember(const SerializationMember&) = delete;
     SerializationMember(SerializationMember&&) noexcept;
@@ -1200,7 +1200,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1692,7 +1692,7 @@ inline Result<JsonGraphRow, EntityError> JsonGraphRow::from_compact_row(Memory r
         }
         result.load_state.mark_loaded("single_peer_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2163,7 +2163,7 @@ SerializationParent::from_compact_row(Memory r, CompactRow row) {
         }
         result.load_state.mark_loaded("boxed_child_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2559,7 +2559,7 @@ SerializationMember::from_compact_row(Memory r, CompactRow row) {
         }
         result.load_state.mark_loaded("boxed_parent_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

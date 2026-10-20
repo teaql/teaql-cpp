@@ -59,7 +59,7 @@ public:
     Platform(std::allocator_arg_t, Allocator, const Platform&);
 
     Platform(std::allocator_arg_t, Allocator a, Platform&& other)
-        : Platform(std::allocator_arg, a, std::as_const(other)) {}
+        : Platform(detail::move_to(a.resource(), std::move(other))) {}
 
     Platform(const Platform&) = delete;
     Platform(Platform&&) noexcept;
@@ -222,7 +222,7 @@ public:
     Person(std::allocator_arg_t, Allocator, const Person&);
 
     Person(std::allocator_arg_t, Allocator a, Person&& other)
-        : Person(std::allocator_arg, a, std::as_const(other)) {}
+        : Person(detail::move_to(a.resource(), std::move(other))) {}
 
     Person(const Person&) = delete;
     Person(Person&&) noexcept;
@@ -438,7 +438,7 @@ public:
     Profile(std::allocator_arg_t, Allocator, const Profile&);
 
     Profile(std::allocator_arg_t, Allocator a, Profile&& other)
-        : Profile(std::allocator_arg, a, std::as_const(other)) {}
+        : Profile(detail::move_to(a.resource(), std::move(other))) {}
 
     Profile(const Profile&) = delete;
     Profile(Profile&&) noexcept;
@@ -615,7 +615,7 @@ public:
     Company(std::allocator_arg_t, Allocator, const Company&);
 
     Company(std::allocator_arg_t, Allocator a, Company&& other)
-        : Company(std::allocator_arg, a, std::as_const(other)) {}
+        : Company(detail::move_to(a.resource(), std::move(other))) {}
 
     Company(const Company&) = delete;
     Company(Company&&) noexcept;
@@ -808,7 +808,7 @@ public:
     Order(std::allocator_arg_t, Allocator, const Order&);
 
     Order(std::allocator_arg_t, Allocator a, Order&& other)
-        : Order(std::allocator_arg, a, std::as_const(other)) {}
+        : Order(detail::move_to(a.resource(), std::move(other))) {}
 
     Order(const Order&) = delete;
     Order(Order&&) noexcept;
@@ -1120,7 +1120,7 @@ public:
     Product(std::allocator_arg_t, Allocator, const Product&);
 
     Product(std::allocator_arg_t, Allocator a, Product&& other)
-        : Product(std::allocator_arg, a, std::as_const(other)) {}
+        : Product(detail::move_to(a.resource(), std::move(other))) {}
 
     Product(const Product&) = delete;
     Product(Product&&) noexcept;
@@ -1336,7 +1336,7 @@ public:
     Line(std::allocator_arg_t, Allocator, const Line&);
 
     Line(std::allocator_arg_t, Allocator a, Line&& other)
-        : Line(std::allocator_arg, a, std::as_const(other)) {}
+        : Line(detail::move_to(a.resource(), std::move(other))) {}
 
     Line(const Line&) = delete;
     Line(Line&&) noexcept;
@@ -1778,7 +1778,7 @@ inline Result<Platform, EntityError> Platform::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2073,7 +2073,7 @@ inline Result<Person, EntityError> Person::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2289,7 +2289,7 @@ inline Result<Profile, EntityError> Profile::from_compact_row(Memory r, CompactR
         }
         result.load_state.mark_loaded("person_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2532,7 +2532,7 @@ inline Result<Company, EntityError> Company::from_compact_row(Memory r, CompactR
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2969,7 +2969,7 @@ inline Result<Order, EntityError> Order::from_compact_row(Memory r, CompactRow r
         }
         result.load_state.mark_loaded("seller_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -3264,7 +3264,7 @@ inline Result<Product, EntityError> Product::from_compact_row(Memory r, CompactR
         }
         result.load_state.mark_loaded("platform_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -3547,7 +3547,7 @@ inline Result<Line, EntityError> Line::from_compact_row(Memory r, CompactRow row
         }
         result.load_state.mark_loaded("product_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 

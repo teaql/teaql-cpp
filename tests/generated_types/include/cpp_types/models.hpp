@@ -51,7 +51,7 @@ public:
     Person(std::allocator_arg_t, Allocator, const Person&);
 
     Person(std::allocator_arg_t, Allocator a, Person&& other)
-        : Person(std::allocator_arg, a, std::as_const(other)) {}
+        : Person(detail::move_to(a.resource(), std::move(other))) {}
 
     Person(const Person&) = delete;
     Person(Person&&) noexcept;
@@ -452,7 +452,7 @@ public:
     Device(std::allocator_arg_t, Allocator, const Device&);
 
     Device(std::allocator_arg_t, Allocator a, Device&& other)
-        : Device(std::allocator_arg, a, std::as_const(other)) {}
+        : Device(detail::move_to(a.resource(), std::move(other))) {}
 
     Device(const Device&) = delete;
     Device(Device&&) noexcept;
@@ -652,7 +652,7 @@ public:
     OrderStatus(std::allocator_arg_t, Allocator, const OrderStatus&);
 
     OrderStatus(std::allocator_arg_t, Allocator a, OrderStatus&& other)
-        : OrderStatus(std::allocator_arg, a, std::as_const(other)) {}
+        : OrderStatus(detail::move_to(a.resource(), std::move(other))) {}
 
     OrderStatus(const OrderStatus&) = delete;
     OrderStatus(OrderStatus&&) noexcept;
@@ -791,7 +791,7 @@ public:
     Category(std::allocator_arg_t, Allocator, const Category&);
 
     Category(std::allocator_arg_t, Allocator a, Category&& other)
-        : Category(std::allocator_arg, a, std::as_const(other)) {}
+        : Category(detail::move_to(a.resource(), std::move(other))) {}
 
     Category(const Category&) = delete;
     Category(Category&&) noexcept;
@@ -930,7 +930,7 @@ public:
     Child(std::allocator_arg_t, Allocator, const Child&);
 
     Child(std::allocator_arg_t, Allocator a, Child&& other)
-        : Child(std::allocator_arg, a, std::as_const(other)) {}
+        : Child(detail::move_to(a.resource(), std::move(other))) {}
 
     Child(const Child&) = delete;
     Child(Child&&) noexcept;
@@ -1069,7 +1069,7 @@ public:
     Inventory(std::allocator_arg_t, Allocator, const Inventory&);
 
     Inventory(std::allocator_arg_t, Allocator a, Inventory&& other)
-        : Inventory(std::allocator_arg, a, std::as_const(other)) {}
+        : Inventory(detail::move_to(a.resource(), std::move(other))) {}
 
     Inventory(const Inventory&) = delete;
     Inventory(Inventory&&) noexcept;
@@ -1555,7 +1555,7 @@ inline Result<Person, EntityError> Person::from_compact_row(Memory r, CompactRow
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1788,7 +1788,7 @@ inline Result<Device, EntityError> Device::from_compact_row(Memory r, CompactRow
         }
         result.load_state.mark_loaded("owner_id", &pool).value();
     }
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -1927,7 +1927,7 @@ inline Result<OrderStatus, EntityError> OrderStatus::from_compact_row(Memory r, 
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2053,7 +2053,7 @@ inline Result<Category, EntityError> Category::from_compact_row(Memory r, Compac
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2179,7 +2179,7 @@ inline Result<Child, EntityError> Child::from_compact_row(Memory r, CompactRow r
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
@@ -2306,7 +2306,7 @@ inline Result<Inventory, EntityError> Inventory::from_compact_row(Memory r, Comp
     result.version_ = std::move(version_value).value();
     result.load_state = row.indexed_load_state(
         detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
-    result.root.set_original_compact_row(ENTITY_NAME, row);
+    result.root.set_original_compact_row(ENTITY_NAME, std::move(row));
     return Outcome::ok(r, std::move(result));
 }
 
