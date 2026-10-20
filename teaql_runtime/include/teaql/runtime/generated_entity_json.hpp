@@ -76,22 +76,39 @@ public:
     }
 
     template <Entity T>
+    void reverse_one(std::string_view name, bool loaded, const T* embedded) {
+        if (!expand_ || !valid_) {
+            return;
+        }
+        if (embedded) {
+            child(name, *embedded);
+            return;
+        }
+        reverse_one<T>(name, loaded);
+        if (loaded && valid_ && !root_.resolve_relation_option<T>(entity_, id_, name)) {
+            values_.insert_or_assign(String(name, resource_), Json(resource_));
+        }
+    }
+
+    template <Entity T>
     void reverse_many(std::string_view name, bool loaded) {
         if (expand_ && valid_ && loaded) {
             if (const auto* list = root_.resolve_relation_list<T>(entity_, id_, name)) {
-                Json::Array values(resource_);
-                values.reserve(list->data.size());
-                for (const auto& item : list->data) {
-                    auto json = item.borrowed_json(resource_, traversal_);
-                    if (!json) {
-                        valid_ = false;
-                        return;
-                    }
-                    values.emplace_back(std::move(*json));
-                }
-                values_.insert_or_assign(String(name, resource_), Json(resource_, values));
+                children(name, *list);
             }
         }
+    }
+
+    template <Entity T>
+    void reverse_many(std::string_view name, bool loaded, const SmartList<T>* embedded) {
+        if (!expand_ || !valid_) {
+            return;
+        }
+        if (embedded && embedded->is_loaded) {
+            children(name, *embedded);
+            return;
+        }
+        reverse_many<T>(name, loaded);
     }
 
     std::optional<Json> finish(const DynamicFieldValues* fields) {
@@ -116,6 +133,21 @@ public:
     }
 
 private:
+    template <Entity T>
+    void children(std::string_view name, const SmartList<T>& list) {
+        Json::Array values(resource_);
+        values.reserve(list.data.size());
+        for (const auto& item : list.data) {
+            auto json = item.borrowed_json(resource_, traversal_);
+            if (!json) {
+                valid_ = false;
+                return;
+            }
+            values.emplace_back(std::move(*json));
+        }
+        values_.insert_or_assign(String(name, resource_), Json(resource_, values));
+    }
+
     template <Entity T>
     void child(std::string_view name, const T& value) {
         auto json = value.borrowed_json(resource_, traversal_);

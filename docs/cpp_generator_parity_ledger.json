@@ -7670,6 +7670,42 @@
           "document": "docs/generated_readonly_stream_5_0_6.md",
           "terminal": "docs/parity/generated_readonly_stream_installed_5_0_6.json.gz",
           "scope": "Focused original3/generated3/native1/module1, complete SDK reproduction, canonical/no-work and unchanged inputs. Typed list/stream absent schema, actual cache hit, and all 1003 rows/14 chunks retain indexed schema after cursor close. Seven child-query cases remain passing. Explicit readonly SQL result projection adapts the original fixed-row fixture; whole dynamic-query/resolved sources and phase verdicts remain pending."
+        },
+        {
+          "kind": "focused_generated_dynamic_ledger",
+          "document": "docs/generated_dynamic_ledger_5_0_6.md",
+          "terminal": "docs/parity/generated_dynamic_ledger_installed_5_0_6.json.gz",
+          "scope": "Original2/generated2/native1/module1; SDK reproduction, canonical consumers and unchanged-input/no-work guards. Row-local state and explicit dynamic mutation/save rejection only; complete dynamic query source and phase exits remain pending."
+        },
+        {
+          "kind": "focused_generated_root_dynamic_boundaries",
+          "document": "docs/generated_root_dynamic_boundaries_5_0_6.md",
+          "terminal": "docs/parity/generated_root_dynamic_installed_5_0_6.json.gz",
+          "scope": "Original3/generated7/native1/module1 with SDK, canonical consumer and no-work/input guards. Exact malformed-root error reasons and pre-cursor rejection; complete dynamic query source and phase exits remain pending."
+        },
+        {
+          "kind": "focused_generated_typed_dynamic_batch",
+          "document": "docs/generated_typed_dynamic_batch_5_0_6.md",
+          "terminal": "docs/parity/generated_typed_dynamic_installed_5_0_6.json.gz",
+          "scope": "Original2/generated2/native1/module1/scoped-sanitize1, SDK reproduction and canonical/no-work/input guards. Typed batching, duplicate carriers and explicit Global retention after actual Context deletion; whole dynamic source/phase exits remain pending."
+        },
+        {
+          "kind": "focused_generated_readonly_allocations",
+          "document": "docs/generated_readonly_allocation_5_0_6.md",
+          "terminal": "docs/parity/generated_readonly_allocation_installed_5_0_6.json.gz",
+          "scope": "Original2/generated2/native1/module1; SDK and canonical/no-work/input guards. Six zero-allocation read regions with actual ContextArena and ordinary/aligned heap positive controls, generated nullable/readonly schema semantics. Whole dynamic source and phase exits remain pending."
+        },
+        {
+          "kind": "focused_generated_entity_serialization",
+          "document": "docs/generated_entity_serialization_5_0_6.md",
+          "terminal": "docs/parity/generated_entity_serialization_installed_5_0_6.json.gz",
+          "scope": "Original2/generated2/native1/module1 with SDK and canonical/no-work/input guards. Single-entity namespaces and sparse metadata, retaining readonly allocation controls and JSON/lifetime tests. Nested/graph and whole-source phase exits remain pending."
+        },
+        {
+          "kind": "focused_graph_read_metadata_and_defaults",
+          "document": "docs/generated_graph_read_metadata_5_0_6.md",
+          "terminal": "docs/parity/generated_graph_read_installed_5_0_6.json.gz",
+          "scope": "Original2/native1/module1, SDK and canonical/no-work/input guards. Actual generated graph decoder metadata through every source entry; handwritten no-carrier defaults explicitly separate. Whole dynamic source and phase exits remain pending."
         }
       ],
       "open_questions": [

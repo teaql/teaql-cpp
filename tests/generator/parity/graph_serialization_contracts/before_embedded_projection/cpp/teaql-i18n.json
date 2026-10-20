@@ -1,0 +1,121 @@
+{
+    "schema": "teaql.i18n/v1",
+    "defaultLocale": "en",
+    "locales": {
+        "de": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ko": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "pt": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-TW": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "fil": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "en": {
+            "vocabulary": {
+                "property.platform.name": "Name",
+                "property.jsonGraphRow.id": "Id",
+                "property.jsonGraphRow.peer": "Peer",
+                "property.jsonGraphRow.singlePeer": "Single Peer",
+                "property.serializationParent.boxedChild": "Boxed Child",
+                "property.serializationParent.version": "Version",
+                "property.serializationMember.boxedParent": "Boxed Parent",
+                "property.serializationMember.id": "Id",
+                "property.serializationParent.name": "Name",
+                "property.serializationMember.parent": "Parent",
+                "property.serializationMember.platform": "Platform",
+                "property.serializationParent.id": "Id",
+                "entity.platform": "Platform",
+                "property.platform.id": "Id",
+                "property.jsonGraphRow.platform": "Platform",
+                "property.serializationParent.child": "Child",
+                "property.jsonGraphRow.version": "Version",
+                "property.serializationMember.name": "Name",
+                "property.serializationParent.platform": "Platform",
+                "property.jsonGraphRow.name": "Name",
+                "property.serializationMember.version": "Version",
+                "entity.serializationMember": "Serialization Member",
+                "entity.jsonGraphRow": "Json Graph Row",
+                "property.platform.version": "Version",
+                "entity.serializationParent": "Serialization Parent"
+            },
+            "messages": {
+            }
+        },
+        "fr": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "zh-CN": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "es": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ar": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "vi": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "th": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "uk": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "ja": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        },
+        "id": {
+            "vocabulary": {
+            },
+            "messages": {
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<root name="cpp_graph_serialization" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <json_graph_row platform="platform(contextRoot=true)" name="string()"
+                    peer="json_graph_row(reverseName=child_rows)?"
+                    single_peer="json_graph_row(relationType=oneToOne reverseName=single_child)?" />
+    <serialization_parent platform="platform(contextRoot=true)" name="string()"
+                          child="json_graph_row(reverseName=parents)?"
+                          boxed_child="json_graph_row(reverseName=boxed_parents)?" />
+    <serialization_member platform="platform(contextRoot=true)" name="string()"
+                          parent="serialization_parent(reverseName=child_rows)?"
+                          boxed_parent="serialization_parent(reverseName=boxed_children)?" />
+</root>

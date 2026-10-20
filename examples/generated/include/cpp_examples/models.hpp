@@ -564,7 +564,8 @@ inline std::optional<Json> Product::borrowed_json(Memory r, EntityJsonTraversal&
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<OrderLine>("order_line_list", load_state.is_loaded("order_line_list"));
+    projection.reverse_many<OrderLine>(
+        "order_line_list", load_state.is_loaded("order_line_list"), &order_line_list_);
     return projection.finish(dynamic_field_values());
 }
 
@@ -728,7 +729,7 @@ inline std::optional<Json> Order::borrowed_json(Memory r, EntityJsonTraversal& t
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<OrderLine>("lines", load_state.is_loaded("lines"));
+    projection.reverse_many<OrderLine>("lines", load_state.is_loaded("lines"), &lines_);
     return projection.finish(dynamic_field_values());
 }
 

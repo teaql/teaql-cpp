@@ -162,9 +162,15 @@ struct ChildBatchReady {
 struct ChildProvider final : DynamicFieldsProvider {
     using allocator_type = Allocator;
     unsigned fault;
+    std::size_t expected_ids = 3;
     mutable unsigned calls = 0;
+    mutable String last_comment;
+    mutable String last_purpose;
+    mutable Vector<std::uint64_t> last_ids;
 
-    ChildProvider(std::allocator_arg_t, Allocator, unsigned fault) : fault(fault) {}
+    ChildProvider(std::allocator_arg_t, Allocator a, unsigned fault)
+        : fault(fault), last_comment(a.resource()), last_purpose(a.resource()),
+          last_ids(a.resource()) {}
 
     DynamicStorageFuture<DynamicFieldBatch>& load_values(const UserContext& user_context,
                                                          std::string_view owner,
@@ -174,11 +180,14 @@ struct ChildProvider final : DynamicFieldsProvider {
         auto r = user_context.memory_resource();
         check(bool(user_context.require_resource<ChildContextMarker>()),
               "provider receives trusted Context resource");
-        check(owner == "Product" && ids.size() == 3 &&
+        check(owner == "Product" && ids.size() == expected_ids &&
                   intent.comment() == "load dynamic state counterexamples" &&
                   !intent.purpose().empty(),
               "child provider receives owner IDs and validated query intent");
         ++calls;
+        last_comment = intent.comment();
+        last_purpose = intent.purpose();
+        last_ids.assign(ids.begin(), ids.end());
         const std::array fields{DynamicFieldDefinitions::Field{"note", DataType::Text},
                                 DynamicFieldDefinitions::Field{"extra", DataType::Text}};
         auto& definitions = user_context.make<DynamicFieldDefinitions>(
@@ -607,7 +616,375 @@ static void generated_dynamic_ledger_case(bool composition) {
     sqlite3_trace_v2(connection->native_handle(), 0, nullptr, nullptr);
 }
 
+static void generated_root_dynamic_boundary(unsigned mode) {
+    using Product = cpp_examples::Product;
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    SqliteConnection* connection = nullptr;
+    auto& executor = dynamic_hydration_fixture::setup(*user_context, &connection, false);
+    auto& metadata =
+        dynamic_cast<InMemoryMetadataStore&>(const_cast<SchemaProvider&>(executor.schema_provider));
+    metadata.register_entity(Product::entity_descriptor(r));
+    auto& registry = user_context->make<InMemoryEntityRegistry>();
+    registry.register_entity("Product");
+    user_context->set_entity_registry(*user_context, registry);
+    auto& marker = user_context->make<ChildContextMarker>();
+    user_context->insert_resource(*user_context, marker);
+    auto& provider = user_context->make<ChildProvider>(mode == 6 ? 0 : mode);
+    if (mode != 0) {
+        user_context->set_dynamic_fields_provider(*user_context, provider);
+    }
+    check(sqlite3_exec(
+              connection->native_handle(),
+              "CREATE TABLE product_data(id INTEGER PRIMARY KEY,version INTEGER,name TEXT);"
+              "INSERT INTO product_data VALUES(1,1,'school-1'),(2,1,'school-2'),(3,1,'school-3')",
+              nullptr,
+              nullptr,
+              nullptr) == SQLITE_OK,
+          "seed root dynamic boundary rows");
+    unsigned queries = 0;
+    sqlite3_trace_v2(
+        connection->native_handle(),
+        SQLITE_TRACE_STMT,
+        [](unsigned, void* count, void*, void*) -> int {
+            ++*static_cast<unsigned*>(count);
+            return 0;
+        },
+        &queries);
+    auto service = user_context->entity_data_service<Executor>("Product");
+    check(bool(service), "root dynamic service resolves");
+    SelectQuery query(std::allocator_arg, Allocator(r), "Product");
+    query.project("id").project("version").project("name").order_asc("id").limit(4);
+    query.comment("load dynamic state counterexamples");
+    if (mode == 0) {
+        auto plain = completed(service.value().get().fetch_enhanced_entities<Product>(
+            PurposedSelectQuery(std::allocator_arg,
+                                Allocator(r),
+                                query,
+                                "verify shared selection with private payloads")));
+        check(bool(plain) && plain.value().data.size() == 3 && provider.calls == 0,
+              "no selection needs no dynamic provider");
+        for (const auto& row : plain.value().data) {
+            check(!row.dynamic_field_values(), "unselected rows contain no dynamic payload");
+        }
+    }
+    const std::array selected{DynamicFieldSelection::Field{"note", DataType::Text}};
+    query.select_dynamic_fields(std::move(DynamicFieldSelection::fields(r, selected)).value());
+    PurposedSelectQuery request(
+        std::allocator_arg, Allocator(r), query, "verify shared selection with private payloads");
+    if (mode != 6) {
+        auto result = completed(service.value().get().fetch_enhanced_entities<Product>(request));
+        const std::array codes{"DYNAMIC_FIELD_PROVIDER_MISSING",
+                               "DYNAMIC_FIELD_BATCH_OMITTED_OWNER",
+                               "DYNAMIC_FIELD_UNREQUESTED_OWNER",
+                               "DYNAMIC_FIELD_UNSELECTED_VALUE",
+                               "DYNAMIC_FIELD_TYPE_MISMATCH",
+                               "DYNAMIC_FIELD_OWNER_MISMATCH"};
+        check(!result, "malformed or absent provider cannot yield partial root entities");
+        auto error = result.error().to_string(r);
+        check(error.find(codes[mode]) != String::npos &&
+                  error.find("PRIVATE-CANARY") == String::npos,
+              "root failure preserves exact source reason without disclosing payload");
+        check(provider.calls == (mode == 0 ? 0u : 1u),
+              "root dynamic values use one provider batch");
+    }
+    if (mode == 0 || mode == 6) {
+        auto before = queries;
+        auto streamed = completed(service.value().get().fetch_stream(request));
+        check(!streamed && queries == before && provider.calls == 0,
+              "dynamic selection rejects before SQL cursor or provider access");
+        if (mode == 6) {
+            check(queries == 0, "configured provider does not permit opening dynamic cursor");
+        }
+    }
+    sqlite3_trace_v2(connection->native_handle(), 0, nullptr, nullptr);
+}
+
+static void generated_typed_dynamic_batch(bool duplicate) {
+    using Product = cpp_examples::Product;
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    Ref<Product> retained;
+    Ref<Product> expired;
+    {
+        auto r = user_context->memory_resource();
+        SqliteConnection* connection = nullptr;
+        auto& executor = dynamic_hydration_fixture::setup(*user_context, &connection, false);
+        auto& metadata = dynamic_cast<InMemoryMetadataStore&>(
+            const_cast<SchemaProvider&>(executor.schema_provider));
+        metadata.register_entity(Product::entity_descriptor(r));
+        auto& registry = user_context->make<InMemoryEntityRegistry>();
+        registry.register_entity("Product");
+        user_context->set_entity_registry(*user_context, registry);
+        auto& marker = user_context->make<ChildContextMarker>();
+        user_context->insert_resource(*user_context, marker);
+        auto& provider = user_context->make<ChildProvider>(0);
+        provider.expected_ids = duplicate ? 4u : 3u;
+        user_context->set_dynamic_fields_provider(*user_context, provider);
+        check(
+            sqlite3_exec(
+                connection->native_handle(),
+                "CREATE TABLE product_data(id INTEGER,version INTEGER,name TEXT);"
+                "INSERT INTO product_data VALUES(1,1,'school-1'),(2,1,'school-2'),(3,1,'school-3')",
+                nullptr,
+                nullptr,
+                nullptr) == SQLITE_OK,
+            "seed typed dynamic rows");
+        if (duplicate) {
+            check(sqlite3_exec(connection->native_handle(),
+                               "INSERT INTO product_data VALUES(1,1,'school-1')",
+                               nullptr,
+                               nullptr,
+                               nullptr) == SQLITE_OK,
+                  "append duplicate owner row");
+        }
+
+        struct Trace {
+            unsigned calls = 0;
+            String sql;
+
+            explicit Trace(Memory r) : sql(r) {}
+        } trace(r);
+
+        sqlite3_trace_v2(
+            connection->native_handle(),
+            SQLITE_TRACE_STMT,
+            [](unsigned, void* state, void* statement, void*) -> int {
+                auto& trace = *static_cast<Trace*>(state);
+                ++trace.calls;
+                trace.sql = sqlite3_sql(static_cast<sqlite3_stmt*>(statement));
+                return 0;
+            },
+            &trace);
+        SelectQuery query(std::allocator_arg, Allocator(r), "Product");
+        query.project("id").project("version").project("name").limit(4);
+        query.comment("load dynamic state counterexamples");
+        const std::array selected{DynamicFieldSelection::Field{"note", DataType::Text}};
+        query.select_dynamic_fields(std::move(DynamicFieldSelection::fields(r, selected)).value());
+        PurposedSelectQuery request(std::allocator_arg,
+                                    Allocator(r),
+                                    query,
+                                    "verify shared selection with private payloads");
+        auto service = user_context->entity_data_service<Executor>("Product");
+        check(bool(service), "typed dynamic service resolves");
+        auto result =
+            duplicate ? completed(service.value().get().fetch_entities<Product>(request))
+                      : completed(service.value().get().fetch_enhanced_entities<Product>(request));
+        check(bool(result) && result.value().data.size() == (duplicate ? 4u : 3u),
+              "typed query retains all rows including duplicate owners");
+        auto& rows = result.value().data;
+        check(
+            provider.calls == 1 && provider.last_ids.size() == (duplicate ? 4u : 3u) &&
+                provider.last_comment == "load dynamic state counterexamples" &&
+                provider.last_purpose == "verify shared selection with private payloads" &&
+                trace.calls == 1 && trace.sql.find("note") == String::npos &&
+                trace.sql.find("extra") == String::npos,
+            "one physical query and one dynamic batch preserving duplicate owner IDs retain exact intent");
+        for (std::size_t i = 0; i < 3; ++i) {
+            check(rows[i].id() == i + 1 && !rows[i].dirty_fields(),
+                  "fixture preserves ordered owner IDs and clean loaded state");
+        }
+        check(rows[0].loaded_state_snapshot()->identity() ==
+                      rows[1].loaded_state_snapshot()->identity() &&
+                  rows[1].loaded_state_snapshot()->identity() !=
+                      rows[2].loaded_state_snapshot()->identity(),
+              "availability shares geometry independently of private values");
+        check(rows[0].dynamicFieldValues()->field("note").value().value()->try_text() ==
+                      "private-school" &&
+                  rows[1].dynamicFieldValues()->field("note").value().state() ==
+                      DynamicFieldState::Null &&
+                  rows[2].dynamicFieldValues()->field("note").value().state() ==
+                      DynamicFieldState::NotLoaded &&
+                  rows[0].dynamicFieldValues()->field("extra").value().state() ==
+                      DynamicFieldState::NotLoaded,
+              "typed dynamic carriers distinguish value NULL missing and unselected fields");
+        if (duplicate) {
+            check(rows[3].id() == 1 &&
+                      rows[0].loaded_state_snapshot()->identity() ==
+                          rows[3].loaded_state_snapshot()->identity() &&
+                      rows[0].dynamicFieldValues() != rows[3].dynamicFieldValues(),
+                  "duplicate rows share snapshot geometry but own separate payload carriers");
+            expired = user_context->make_ref<Product>(rows[0]);
+            retained = user_context->make_global<Product>(rows[0]);
+            check(user_context->get(retained).dynamicFieldValues()->memory_resource() ==
+                      global.memory_resource(),
+                  "retained dynamic payload is explicitly copied into Global storage");
+        } else {
+            auto state = rows[0].entity_runtime_state().value();
+            auto sibling = rows[1].entity_runtime_state().value();
+            check(!(state == sibling) && state.current_change_set().changes().empty(),
+                  "loaded entities have independent empty mutation ledgers");
+            state.set(
+                EntityKey(std::allocator_arg, Allocator(r), "Product", Value(r, std::uint64_t{1})),
+                "name",
+                Value(r, "local-change"));
+            check(sibling.current_change_set().changes().empty(),
+                  "mutation does not affect sibling ledger");
+            auto original = rows[1].loaded_state_snapshot().value();
+            Value::Object payload(r);
+            payload.emplace(String("note", r), Value(r, "private-school"));
+            payload.emplace(String("extra", r), Value(r, "private-extra"));
+            auto fields = DynamicFieldValues::from_values(
+                r, rows[0].dynamicFieldValues()->definitions(), payload);
+            check(bool(fields), "construct complete dynamic extension payload");
+            auto& pool = detail::ContextArena::from_memory(r).loaded_snapshots();
+            auto augmented = LoadedSnapshot::with_dynamic_fields(pool, original, fields.value());
+            check(bool(augmented) && bool(rows[0].install_loaded_dynamic_fields(fields.value(),
+                                                                                augmented.value())),
+                  "install augmented selection through generated carrier");
+            check(rows[1].loaded_state_snapshot()->identity() == original.identity() &&
+                      !rows[1].is_field_loaded("#extra") && rows[0].is_field_loaded("name") &&
+                      rows[1].is_field_loaded("#note") && !rows[2].is_field_loaded("#note"),
+                  "augmentation preserves sibling snapshot and native/dynamic availability");
+            auto values = Product(std::allocator_arg, Allocator(r), rows[0]).into_values();
+            check(!values.fields.contains("#note"),
+                  "loaded dynamic extension is not a native write column");
+        }
+        sqlite3_trace_v2(connection->native_handle(), 0, nullptr, nullptr);
+    }
+    if (duplicate) {
+        user_context.reset();
+        auto next_user_context = global.make_user_context();
+        const auto& copy = next_user_context->get(next_user_context->rebind_global(retained));
+        check(copy.dynamicFieldValues()->field("note").value().value()->try_text() ==
+                  "private-school",
+              "explicit Global copy remains readable after result and source Context destruction");
+        bool rejected = false;
+        try {
+            (void)next_user_context->get(expired);
+        } catch (const ReferenceError&) {
+            rejected = true;
+        }
+        check(rejected, "ordinary Context reference cannot extend source lifetime");
+    }
+}
+
+static void plain_carrier_readonly_defaults() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    Record fields(r);
+    fields.emplace(String("id", r), Value(r, std::uint64_t{1}));
+    fields.emplace(String("name", r), Value(r, "native"));
+    auto row =
+        example::Product::from_compact_row(r, CompactRow(std::allocator_arg, Allocator(r), fields));
+    check(bool(row) && row.value().id == 1 && row.value().name == "native",
+          "decode original handwritten model without a readonly carrier");
+    check(!example::Product::supports_dynamic_property_load(),
+          "plain carrier does not advertise readonly support");
+    for (std::string_view key : {"_missing", "name", "#name"}) {
+        check(!row.value().dynamic_property(key) && !row.value().has_dynamic_property(key),
+              "default trait hooks return no value or presence");
+    }
+}
+
+static void generated_graph_read_metadata() {
+    using Product = cpp_examples::Product;
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    const std::array types{DynamicFieldDefinitions::Field{"note", DataType::Text}};
+    auto& definitions = user_context->make<DynamicFieldDefinitions>(
+        std::move(DynamicFieldDefinitions::from_fields(r, "Product", "graph-dynamic-v1", types))
+            .value());
+    Vector<DynamicFieldValues::Values> payloads(r);
+    payloads.resize(3);
+    payloads[0].emplace(String("note", r), Value(r, "private value"));
+    payloads[1].emplace(String("note", r), Value(r));
+    auto fields = DynamicFieldValues::from_batch(r, definitions, payloads);
+    check(bool(fields), "construct value NULL and missing graph payloads");
+    auto& layout = user_context->make<ColumnLayout>(
+        std::initializer_list<std::string_view>{"id", "version", "name"});
+    Vector<CompactRow> rows(r);
+    for (std::size_t index = 0; index < 3; ++index) {
+        Vector<Value> native(r);
+        native.emplace_back(std::uint64_t(index + 1));
+        native.emplace_back(std::int64_t{1});
+        String name("row-", r);
+        name += std::to_string(index);
+        native.emplace_back(std::move(name));
+        rows.emplace_back(layout, std::move(native));
+        rows.back().set_loaded_dynamic_fields(fields.value()[index]);
+        check(rows.back().len() == 3 && !rows.back().into_map(r).contains("#note"),
+              "trusted dynamic sidecar does not become a native row column");
+    }
+    auto& root = user_context->make<EntityRuntimeState>();
+    auto decoded =
+        decode_compact_rows_with_read_metadata<Product>(r, Vector<CompactRow>(rows, r), root);
+    check(bool(decoded) && decoded.value().size() == 3,
+          "shared typed decoder accepts generated graph carriers");
+    const std::array expected{
+        DynamicFieldState::Value, DynamicFieldState::Null, DynamicFieldState::NotLoaded};
+    auto inspect = [&](const auto& entities) {
+        check(entities[0].loaded_state_snapshot()->identity() ==
+                      entities[1].loaded_state_snapshot()->identity() &&
+                  entities[0].loaded_state_snapshot()->identity() !=
+                      entities[2].loaded_state_snapshot()->identity(),
+              "graph decoding shares equal availability and separates absent selections");
+        for (std::size_t index = 0; index < 3; ++index) {
+            check(entities[index].dynamicFieldValues() &&
+                      entities[index].dynamicFieldValues()->field("note").value().state() ==
+                          expected[index] &&
+                      !entities[index].hasPendingDynamicMutations(),
+                  "graph decoding preserves private read states without creating mutation intent");
+        }
+    };
+    inspect(decoded.value());
+    auto& registry = user_context->make<InMemoryEntityGraphDecoderRegistry>();
+    registry.register_entity<Product>();
+    auto& builder = user_context->make<EntityGraphBuilder>();
+    check(
+        bool(registry.decode_compact_batch("Product", Vector<CompactRow>(rows, r), root, builder)),
+        "registry batch decoder retains dynamic read metadata");
+    check(
+        bool(registry.decode_compact_list(
+            "Product", Vector<CompactRow>(rows, r), root, builder, "JsonGraphRow", 77, "children")),
+        "registry list decoder retains dynamic read metadata");
+    Vector<CompactRow> single(r);
+    single.emplace_back(rows[0]);
+    check(bool(registry.decode_compact_option(
+              "Product", std::move(single), root, builder, "JsonGraphRow", 77, "single_child")),
+          "registry option decoder retains dynamic read metadata");
+    check(bool(registry.decode_compact(
+              "Product", CompactRow(std::allocator_arg, Allocator(r), rows[0]), root, builder)),
+          "registry single decoder retains dynamic read metadata");
+    check(bool(root.freeze_graph(std::move(builder))), "freeze the decoded graph through runtime");
+    const auto* list = root.resolve_relation_list<Product>("JsonGraphRow", 77, "children");
+    check(list && list->len() == 3, "resolve all frozen list members");
+    inspect(*list);
+    check((*list)[0].dynamicFieldValues()->field("note").value().value()->try_text() ==
+              "private value",
+          "frozen list retains the actual private value");
+    const auto* entity = root.resolve_entity<Product>(1);
+    const auto* child = root.resolve_relation_option<Product>("JsonGraphRow", 77, "single_child");
+    check(entity && child && child->has_value(), "resolve frozen entity and selected child");
+    for (const auto* item : {entity, &child->value()}) {
+        check(item->dynamicFieldValues()->field("note").value().value()->try_text() ==
+                  "private value",
+              "frozen entity and option retain private dynamic payload");
+        auto json = Product(std::allocator_arg, Allocator(r), *item).into_json(r);
+        check(std::get<Json::Object>(json.data).at(String("#note", r)).dump(r) ==
+                  "\"private value\"",
+              "generated frozen graph JSON retains selected persistent value");
+    }
+    auto cleared = CompactRow(std::allocator_arg, Allocator(r), rows[0]);
+    cleared.clear_loaded_relations();
+    check(!cleared.take_loaded_dynamic_fields(),
+          "clearing trusted row read metadata clears the dynamic sidecar");
+}
+
 int main() {
+    plain_carrier_readonly_defaults();
+    generated_graph_read_metadata();
+    std::cout << "GRAPH_READ_METADATA_CASES=1;PLAIN_CARRIER_DEFAULT_CASES=1\n";
+    generated_typed_dynamic_batch(false);
+    generated_typed_dynamic_batch(true);
+    std::cout << "GENERATED_TYPED_DYNAMIC_BATCH_CASES=2\n";
+    for (unsigned mode = 0; mode <= 6; ++mode) {
+        generated_root_dynamic_boundary(mode);
+    }
+    std::cout << "GENERATED_ROOT_DYNAMIC_BOUNDARY_CASES=7\n";
     generated_dynamic_ledger_case(true);
     generated_dynamic_ledger_case(false);
     std::cout << "GENERATED_DYNAMIC_LEDGER_CASES=2\n";
