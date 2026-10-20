@@ -649,7 +649,8 @@ public:
     }
 
     static EntityRuntimeState fresh_with_shared_graph(Memory, const EntityRuntimeState&);
-    EntityRuntimeState with_shared_graph(const EntityRuntimeState&) const;
+    EntityRuntimeState with_shared_graph(const EntityRuntimeState&) const&;
+    EntityRuntimeState with_shared_graph(const EntityRuntimeState&) &&;
     void adopt_mutations_from(const EntityRuntimeState&) const;
     void attach_runtime_state(const EntityRuntimeState&);
     Result<std::monostate, EntityGraphBuilder> freeze_graph(EntityGraphBuilder) const;
@@ -803,7 +804,7 @@ private:
 
     Memory resource_;
     mutable detail::EntityLedgerSlot* inner_ = nullptr;
-    detail::EntityGraphReference graph_;
+    mutable detail::EntityGraphReference graph_;
     std::uint64_t json_view_ = 0;
     detail::EntityLifetimeAnchor lifetime_;
     mutable std::optional<LoadedSnapshot> loaded_snapshot_;
@@ -813,6 +814,7 @@ private:
     void copy_loaded_view_from(const EntityRuntimeState&);
     std::optional<EntitySnapshot> original_values_for(const EntityKey&) const;
     detail::EntityLedgerSlot& shared_ledger_slot() const;
+    detail::EntityGraphSlot& shared_graph_slot() const;
     detail::EntityMutationLedger& context() const;
     const EntityGraphBuilder* frozen() const;
     const detail::EntityGraphValue*

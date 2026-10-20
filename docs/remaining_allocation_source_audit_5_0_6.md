@@ -122,3 +122,321 @@ that one source with original1/native2/module2, exact21-sample grids, allocation
 positive controls, snapshot regressions and canonical/no-work/input guards. The
 preceding exploration paragraphs retain their earlier checkpoint scope. The
 full hydration probe and allocation-counter source remain pending.
+
+## Full hydration native exploration
+
+The dedicated generated `cpp_hydration_allocation::HydrationProbe` now has an
+executed native probe in `tests/parity/hydration_allocation_probe.cpp`. Reproduce
+with the activated native toolchain and existing native libraries:
+
+```bash
+source scripts/toolchains/activate.sh
+python3 scripts/probe_hydration_allocations_5_0_6.py
+```
+
+The [exploratory receipt](parity/hydration_allocation_exploration_5_0_6.json.gz)
+retains the source, compiler/link commands, generated SDK and library hashes,
+binary hash, exact 24-row matrix and allocation positive controls. Compilation,
+linking and execution completed successfully. This is not source acceptance;
+the original and imported-module comparison and budget qualification remain open.
+The script uses the native dynamic-relation compilation environment and links
+existing libraries without changing their outputs; it checks their hashes after
+execution. It does not build missing or stale native libraries on the caller's
+behalf. Its wrapping symbol is specific to the native 64-bit ABI.
+
+All sparse/full projections and 1/100/10,000-row sizes execute typed,
+Context-state-bound, graph-batch and plain paths. Typed outputs check every
+scalar, note availability, shared snapshot identity and clean dirty state.
+Context-bound outputs also check private comments. Graph freezing is outside the
+measurement; first/last graph snapshots share the warmed identity. Prepared input
+rows and registry setup are outside measurement, while graph-builder creation
+and output-vector storage are inside. A test-only 512 MiB Context limit permits
+the cumulative matrix; the initial run exhausted the unchanged default budget.
+
+For 10,000 rows, both projections produced these arena request counts:
+
+| Path | Arena requests | Locked Rust allocation ceiling |
+| --- | ---: | ---: |
+| Typed | 70,475 | 30,001 |
+| Context-bound | 70,470 | 20,001 |
+| Graph batch | 90,484 | 30,032 |
+| Plain | 1 | No ceiling |
+
+These observation surfaces differ, so this table identifies an unresolved cost
+gap rather than claiming a failed Rust-equivalent allocator assertion. Low heap
+call counts do not establish the allocation budget: requests inside the arena
+must remain visible. The short name uses C++ small-string storage; no equal
+payload-allocation or cross-language timing claim follows. Graph/table storage
+and private original snapshots must be separated from avoidable temporary state
+before qualifying an adapted budget. Generated field order is id/name/note/version;
+prepared SQL columns remain id/version/name[/note], exercising mapped decoding.
+
+One candidate for investigation is the generated decoder's final
+`set_original_compact_row(ENTITY_NAME, row)` call: it uses the copying overload,
+although the runtime also has a move overload. This is a source observation, not
+an attribution of all measured costs or authorization to discard original values
+or relation metadata. Any optimization must preserve read metadata, original
+snapshots and subsequent mutation behavior, then regenerate the SDKs.
+
+## Allocator-aware entity move correction
+
+The first follow-up changes the C++ producer to emit allocator-aware entity moves
+through the existing `detail::move_to` runtime helper. That helper moves within
+the same resource and invokes the allocator-aware copy across resources. It is
+already used by handwritten runtime carriers; no alternate ownership domain or
+new allocation API is introduced. The original-row copy remains unchanged in
+this checkpoint.
+
+The old generated allocator-aware move delegated unconditionally to its copy
+constructor. A native debugger trace of the first typed row identified graph-slot
+creation, original-row copying, and ledger/snapshot promotion during insertion
+into the allocator-aware result vector. The latter work followed the generated
+move-to-copy delegation. This attribution applies to that row and path, not to
+every request in the complete matrix.
+
+Only the dedicated hydration SDK is regenerated at this checkpoint. Other SDKs
+still retain the previous producer fingerprint; a complete SDK migration and its
+integration gates remain required before general generator qualification.
+`generate_hydration_allocation_contracts_5_0_6.py --refresh-cpp` regenerates both
+languages in staging, requires the locked Rust artifacts to remain byte-identical,
+and permits only the C++ model header plus provenance to change on installation.
+
+The [native follow-up](parity/hydration_allocation_move_exploration_5_0_6.json.gz)
+retains all 24 measured rows. At 10,000 rows, typed hydration falls from 70,475 to
+30,161 arena requests for both projections. Context-bound hydration still uses
+70,472 and graph batches 90,485 requests. These remain observations, not accepted
+budget substitutions. Arena object registration and other batch costs remain
+visible; no ceiling is relaxed to fit the results.
+
+The probe additionally verifies that moving a generated model within its Context
+performs zero arena/heap allocations and retains its indexed snapshot identity,
+long string, id/version and comment. An allocator-aware move into Global storage
+must preserve the source and deep-copy to the destination, then retain values,
+NULL/load state, comment and an original snapshot after actual source Context
+deletion. The original exploratory receipt retains its old source and SDK hashes;
+it is not relabeled as evidence for the changed constructor.
+
+The [Java receipt](parity/hydration_move_java_5_0_6.json.gz) records 75/75 passing
+`CppGenerationTest` cases, including normal and inherited emitted constructors.
+It also retains the preceding failed run: one existing scope-registration test
+raised an unsupported-scope error while packaging overlapped with that test run.
+The subsequent run was serialized after generation completed and passed. The
+failure is retained rather than treated as a passing or skipped test.
+
+The [sanitizer follow-up](parity/hydration_allocation_move_sanitize_exploration_5_0_6.json.gz)
+executes the same 24 rows and move/actual-Context-deletion checks against the
+existing ASan/UBSan native libraries, with leak scanning disabled as required.
+Arena counts match the native follow-up. The
+[SDK reproduction receipt](parity/hydration_move_reproduction_5_0_6.json.gz)
+confirms exact dedicated Rust/C++ artifacts and provenance. These focused gates
+do not replace full generated-API, imported-module or all-SDK migration checks.
+
+The remaining Context-bound path calls generated `on_loaded`, which currently
+assigns `root.with_shared_graph(*source)`. The existing const runtime overload
+copies the loaded view and promotes its private snapshot/ledger to shared slots.
+A consuming graph-binding path is a candidate for the next runtime-first change;
+it must preserve private mutation state, snapshot contents, graph identity and
+cross-domain checks rather than merely suppress allocation accounting.
+
+Current repository-wide status: module-path verification and the full formatting
+check pass. `verify_generator_parity.py` currently fails its producer fingerprint
+assertion (line 143), because retained SDK manifests outside the dedicated fixture
+still identify the previous generator implementation. This is an outstanding
+migration gate, not a baseline/source parity acceptance or a reason to weaken the
+fingerprint check. Regenerate the complete active SDK inventory and requalify its
+integration after the runtime/generator optimization is finalized.
+
+## Consuming graph binding: implementation checkpoint
+
+A runtime rvalue overload of `EntityRuntimeState::with_shared_graph` now transfers
+the receiver's private ledger, native original snapshot and dynamic read values
+without first cloning them. Its graph binding and JSON view come from the source,
+matching the existing lvalue operation. The lvalue operation retains copy
+semantics; consumers must explicitly move a receiver to select the new path.
+Same-domain binding preserves the existing graph slot and its weak/strong flag.
+Cross-domain binding invokes the existing graph clone scope before replacing the
+receiver's graph slot; no source-owned graph pointer is retained implicitly.
+Both allocation resources are validated before mutation.
+
+The runtime-only self-test extends the retained loaded-view probe with weak and
+strong sources, empty and active private ledgers, original-row payload-buffer retention,
+no additional registered arena objects, source JSON view selection, private
+comments, publication authority and self-binding. A separate destination Context
+must retain both its private loaded values and a copied source graph after actual
+source Context deletion. Native and scoped sanitizer builds are being qualified
+before updating the generated `on_loaded` adapter. No source or capability
+acceptance is promoted by this implementation checkpoint.
+
+The [unchanged original hydration receipt](parity/hydration_allocation_original_exploration_5_0_6.json.gz)
+now records the complete locked Rust `typed_hydration_allocation_probe` test:
+1/1 passes and all 24 matrix entries are present. At 10,000 rows, both sparse and
+full projections report 20,001 typed calls, 10,001 Context-bound calls, 20,015
+graph-batch calls and 10,001 plain calls. These are measured values beneath the
+source's ceilings, not replacement ceilings. The isolated byte-checked runtime
+view, command output and original source hash are retained. This adds original
+allocation evidence without accepting the outstanding C++ cost/ownership work.
+
+The [runtime follow-up receipt](parity/consuming_graph_binding_runtime_5_0_6.json.gz)
+now records native2/sanitizer2 and Java75 success. The initial new test incorrectly
+required the address of the inline row wrapper to survive moving its containing
+state. That failure is preserved in
+[the initial assertion receipt](parity/graph_binding_initial_assertion_5_0_6.json.gz).
+The corrected assertion checks the owned row-values buffer identity, which is
+the relevant no-copy property. The existing Rust loaded-view corpus remains green.
+
+After the runtime gate passed, the generated `on_loaded` adapter was changed to
+`root = std::move(root).with_shared_graph(*source)`. The dedicated refresh accepts
+only this exact support-header replacement in addition to the reviewed model
+header, and still requires unchanged locked Rust output. The
+[native generated follow-up](parity/hydration_allocation_graph_binding_native_5_0_6.json.gz)
+passes all 24 samples and the generated move/deletion checks. At 10,000 rows it
+reports 30,163 typed, 30,158 Context-bound and 50,171 graph-batch arena requests
+for each projection. Approximately four requests per Context-bound/graph row
+have been removed. Registration bookkeeping and remaining ownership costs are
+still counted; the allocation budget remains explicitly unaccepted.
+
+The [generated sanitizer matrix](parity/hydration_allocation_graph_binding_sanitize_5_0_6.json.gz)
+now passes all 24 rows plus the move/deletion contracts. All arena and heap count/
+byte columns match the native matrix; elapsed time is deliberately excluded from
+comparison. Both receipts identify identical probe/runtime inputs and SDK hashes.
+The [dedicated reproduction](parity/hydration_graph_binding_reproduction_5_0_6.json.gz)
+is exact. The runtime receipt also retains a final native no-work build. Full
+formatting and module-path checks pass. All-SDK fingerprint migration and imported
+module qualification remain pending, and the hydration source stays unaccepted.
+
+## Transfer the consumed decoder input row
+
+The existing runtime rvalue `set_original_compact_row` already transfers the
+native value buffer and clears read sidecars before retaining the snapshot.
+The strengthened `immutable_original_row_sharing` contract installs both a loaded
+relation and dynamic-field values, then compares copied and moved original rows:
+both preserve identical native scalar values and strip the sidecars. The moved
+row retains its prepared native buffer. Existing immutable sharing, independent
+materialization, mutation overlay and cross-domain retention assertions still
+execute. The [runtime receipt](parity/original_row_transfer_runtime_5_0_6.json.gz)
+records native1/sanitizer1 and Java75 success.
+
+The generator now passes `std::move(row)` only at the final original-snapshot
+installation, after native fields, forward relations and indexed availability
+have been decoded. No runtime implementation was changed for this step. The
+generated probe additionally checks that the actual decoder retains the input
+value-buffer identity, then exercises its existing local move and cross-domain
+retention after source deletion.
+
+The [native 24-row matrix](parity/hydration_allocation_original_row_native_5_0_6.json.gz)
+reports 20,163 typed, 20,158 Context-bound and 40,171 graph-batch arena requests
+at 10,000 rows, identically for sparse/full projections. The decrease of exactly
+10,000 requests on each path follows elimination of one native-row vector copy
+per entity. Context-bound and graph budgets remain unqualified; metadata and
+cleanup requests have not been excluded from the measurement.
+
+The next allocation-site review is `Arena::construct`: nontrivial objects
+currently allocate a cleanup record and object storage separately. Co-locating
+those two storage regions could reduce request count without removing cleanup,
+object IDs or lifetime checks. Any such kernel change requires alignment, nested
+construction, throwing constructors, explicit destruction, budget and actual
+Context-close verification; it is not implemented or accepted at this checkpoint.
+
+The [original-row transfer sanitizer matrix](parity/hydration_allocation_original_row_sanitize_5_0_6.json.gz)
+passes the same 24 rows and generated buffer-transfer/Context-deletion assertions.
+The [comparison and reproduction receipt](parity/original_row_transfer_reproduction_5_0_6.json.gz)
+checks identical native/sanitizer allocation counts and requested bytes for the
+same source/runtime/SDK inputs, excluding timing, and retains exact dedicated SDK
+reproduction. These focused gates do not close the whole-source allocation budget
+or all-SDK/module gates.
+
+## Combined cleanup/object allocation: pending kernel qualification
+
+`Arena::construct` now reserves nontrivial object storage and its cleanup record
+in one arena request. The object starts at a base aligned for both types; the
+cleanup record follows the object at its own aligned offset. Padding is counted
+inside the requested size, and size arithmetic has a compile-time overflow guard.
+The cleanup chain is published only after successful object construction, exactly
+as before. Object registration, live bits, destruction callbacks, explicit
+resource domains and terminal block reclamation remain separate responsibilities.
+Trivially destructible objects retain their existing storage path.
+
+The Context-memory test adds a request-counting Arena to verify one storage
+request for payloads and warmed identified objects, including 64/256-byte
+alignment. It checks explicit destruction followed by repeated close, nested
+construction/destruction ordering, successful child cleanup after a parent
+constructor throws, and no destructor registration after a capacity rejection.
+The existing Context-memory/reference/entity-runtime contracts remain part of
+the focused gate. The payload-first layout is the qualification candidate;
+intermediate compilation outputs are not acceptance evidence.
+
+The hydration probe now also checks shared generated field-layout/entity-name
+identity and enforces the original call ceilings independently on arena requests
+and heap calls. It still reports all requested bytes and does not compare timings
+or impose a Rust byte ceiling. The unchanged thresholds are typed `3*n+1`,
+Context-bound `2*n+1`, graph batch `3*n+32`, with plain hydration unbounded.
+Until executed evidence and the remaining source/module review are complete,
+source acceptance stays false.
+
+`scripts/regenerate_hydration_adapters_5_0_6.py` prepares an all-active-SDK migration.
+Before permitting updates it requires both current native and sanitizer hydration
+receipts to pass those thresholds, checks runtime/SDK/producer fingerprints,
+regenerates to staging, and allows only the three reviewed adapter transformations.
+Undoing those transformations and applying the pinned formatter must reproduce
+each old file exactly. Historical Rust and C++ fixtures remain protected. The
+inverse transform has been checked against the dedicated SDK at committed HEAD;
+the all-SDK migration itself has not yet run.
+
+The first native and sanitizer smoke selections each pass the three Context
+memory/reference/entity-runtime tests. Because the public arena header was
+refined to the payload-first layout during that initial compilation, these smoke
+results do not qualify a stable final input set. Both profiles are now rebuilding
+against the fixed layout, followed by eight focused tests covering memory,
+references, entity runtime, asynchronous shutdown, provider shutdown, loaded-view
+parity/contracts and retained cache costs. Only after those commands complete
+will the controller execute the full hydration matrix with allocation ceilings.
+The all-SDK update remains gated on the resulting fresh receipts.
+
+The prepared all-SDK integration controller now selects native26/module20,
+including runtime and generated runtime-state bridge contracts/parity alongside
+graph/JSON/ledger and ownership regressions. It retains the complete generated
+positive/negative compiler gate, canonical module consumers, no-work builds and
+unchanged-input checks. This controller has not run yet. SDK installation also
+requires the final native8/sanitizer8 kernel safety receipt, not just allocation
+measurements.
+
+A separate remaining helper discrepancy is confirmed by source inspection:
+Rust's allocation counter enables/counts per thread, while the existing C++ test
+helper uses executable-global counters. The current hydration and cache-cost
+probes perform their measured work on one thread, so their receipts do not claim
+thread-isolated counting. Qualification of `support/allocation_counter.rs` still
+requires a thread-isolation adaptation and tests; that source remains pending.
+Do not change instrumentation during the active final kernel measurement epoch.
+
+## Stable combined-allocation outcome and lazy graph follow-up
+
+The [stable kernel receipt](parity/combined_cleanup_runtime_pre_graph_5_0_6.json.gz)
+records native8/sanitizer8 and no-work builds before the next graph change.
+The full hydration ceiling check nevertheless fails. The
+[detailed native failure](parity/hydration_allocation_combined_native_failure_5_0_6.json.gz)
+retains partial output and the failing command: sparse 10,000-row graph batch
+uses 30,170 arena requests against 30,032 allowed. Typed/context paths at that
+size use 10,163/10,158 requests and are below their respective limits. The probe
+now flushes each measured row before checking its ceiling, and its controller
+retains failed commands as incomplete receipts. No failing receipt can authorize
+SDK migration. The old buffered failures did not preserve per-case output.
+
+An unbound entity previously allocated a graph slot during construction, even
+when a later Context attachment immediately replaced that slot. The new runtime
+candidate leaves an unbound graph unmaterialized. First copying/sharing or graph
+publication materializes its slot through the same registered `Arena::make` path;
+object IDs, allocation ceilings and cleanup are not bypassed. Empty graph reads
+and diagnostic rendering handle the unmaterialized state without allocation.
+Copying an empty root materializes a shared identity before either view publishes,
+so later publication remains visible through both. Weak/strong roles, JSON views,
+private ledger/loaded values and explicit cross-domain graph cloning are retained.
+Construction still validates the allocation resource and thread before binding
+its lifetime anchor.
+
+The loaded-view self-test now verifies allocation-free unbound construction/read,
+exactly one registered slot on first sharing, publication through aliases, and
+copy-before-publication identity. The stable candidate is rebuilding under both
+profiles with fifteen focused tests: the preceding eight plus entity-runtime and
+graph model/contracts/parity regressions. Hydration measurements run only after
+that selection passes. The SDK migration controller now requires this enlarged
+kernel receipt. Lazy-graph and hydration source acceptance remain pending.

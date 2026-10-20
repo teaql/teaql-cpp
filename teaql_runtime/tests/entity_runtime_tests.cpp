@@ -26,8 +26,27 @@ static void immutable_original_row_sharing() {
     values.emplace(String("version", r), Value(r, std::int64_t{3}));
     values.emplace(String("name", r), Value(r, String(4096, 'x', r)));
     CompactRow row(std::allocator_arg, Allocator(r), std::move(values));
+    SmartList<CompactRow> related(std::allocator_arg, Allocator(r));
+    related.is_loaded = true;
+    row.set_loaded_relation("children", related);
+    const std::array definitions_input{DynamicFieldDefinitions::Field{"extra", DataType::I64}};
+    auto definitions = DynamicFieldDefinitions::from_fields(r, "Child", "v1", definitions_input);
+    auto& owned_definitions =
+        user_context->make<DynamicFieldDefinitions>(std::move(definitions).value());
+    Value::Object dynamic_values(r);
+    dynamic_values.emplace(String("extra", r), Value(r, std::int64_t{42}));
+    auto loaded_dynamic = DynamicFieldValues::from_values(r, owned_definitions, dynamic_values);
+    row.set_loaded_dynamic_fields(loaded_dynamic.value());
+    auto& copied = user_context->make<EntityRuntimeState>();
+    copied.set_original_compact_row("Child", row);
     auto* value_buffer = row.values().data();
     root.set_original_compact_row("Child", std::move(row));
+    const auto* moved_original = detail::EntityRuntimeAccess::original_row(root);
+    const auto* copied_original = detail::EntityRuntimeAccess::original_row(copied);
+    check(!moved_original->has_loaded_relations() && !moved_original->loaded_dynamic_fields() &&
+              !copied_original->has_loaded_relations() &&
+              !copied_original->loaded_dynamic_fields() && *moved_original == *copied_original,
+          "moved and copied original rows strip read sidecars and retain identical native values");
     check(detail::EntityRuntimeAccess::original_row(root)->values().data() == value_buffer,
           "hydration transfers the original value buffer without copying it");
     EntityRuntimeState alias(std::allocator_arg, Allocator(r), root);

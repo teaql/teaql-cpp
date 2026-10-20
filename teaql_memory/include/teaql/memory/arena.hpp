@@ -2,6 +2,7 @@
 #include <teaql/memory/reference.hpp>
 #include <array>
 #include <cstddef>
+#include <limits>
 #include <memory>
 #include <memory_resource>
 #include <stdexcept>
@@ -230,10 +231,20 @@ private:
         static_assert(std::is_nothrow_destructible_v<T>,
                       "Context cleanup requires noexcept destruction");
         Cleanup* cleanup = nullptr;
+        T* object = nullptr;
         if constexpr (!std::is_trivially_destructible_v<T>) {
-            cleanup = static_cast<Cleanup*>(allocate(sizeof(Cleanup), alignof(Cleanup)));
+            // Reserve cleanup and payload together; publish cleanup only after construction.
+            constexpr auto alignment =
+                alignof(T) > alignof(Cleanup) ? alignof(T) : alignof(Cleanup);
+            constexpr auto offset =
+                (sizeof(T) + alignof(Cleanup) - 1) / alignof(Cleanup) * alignof(Cleanup);
+            static_assert(sizeof(Cleanup) <= std::numeric_limits<std::size_t>::max() - offset);
+            auto* storage = static_cast<std::byte*>(allocate(offset + sizeof(Cleanup), alignment));
+            object = reinterpret_cast<T*>(storage);
+            cleanup = reinterpret_cast<Cleanup*>(storage + offset);
+        } else {
+            object = static_cast<T*>(allocate(sizeof(T), alignof(T)));
         }
-        auto* object = static_cast<T*>(allocate(sizeof(T), alignof(T)));
         ++constructing_;
         try {
             std::uninitialized_construct_using_allocator(

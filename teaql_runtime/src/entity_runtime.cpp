@@ -545,15 +545,17 @@ String LedgerCompositionError::to_string(Memory r) const {
 }
 
 EntityRuntimeState::EntityRuntimeState(std::allocator_arg_t, Allocator a)
-    : resource_(a.resource()),
-      graph_{&detail::resource_arena(resource_).make<detail::EntityGraphSlot>(), false},
-      lifetime_(resource_) {}
+    : resource_([&] {
+          detail::resource_arena(a.resource()).check_thread();
+          return a.resource();
+      }()),
+      graph_{nullptr, false}, lifetime_(resource_) {}
 
 EntityRuntimeState::EntityRuntimeState(std::allocator_arg_t,
                                        Allocator a,
                                        const EntityRuntimeState& other)
-    : resource_(a.resource()), inner_(&other.shared_ledger_slot()), graph_(other.graph_.promote()),
-      lifetime_(resource_) {
+    : resource_(a.resource()), inner_(&other.shared_ledger_slot()),
+      graph_{&other.shared_graph_slot(), false}, lifetime_(resource_) {
     detail::resource_arena(other.resource_);
     detail::resource_arena(resource_);
     if (resource_ != other.resource_) {
@@ -568,7 +570,7 @@ EntityRuntimeState::EntityRuntimeState(std::allocator_arg_t,
 EntityRuntimeState EntityRuntimeState::fresh_with_shared_graph(Memory r,
                                                                const EntityRuntimeState& source) {
     EntityRuntimeState result(std::allocator_arg, Allocator(r));
-    detail::resource_arena(source.resource_);
+    source.shared_graph_slot();
     if (r == source.resource_) {
         result.graph_ = source.graph_.preserve();
     } else {
@@ -580,8 +582,9 @@ EntityRuntimeState EntityRuntimeState::fresh_with_shared_graph(Memory r,
     return result;
 }
 
-EntityRuntimeState EntityRuntimeState::with_shared_graph(const EntityRuntimeState& source) const {
+EntityRuntimeState EntityRuntimeState::with_shared_graph(const EntityRuntimeState& source) const& {
     EntityRuntimeState result(std::allocator_arg, Allocator(resource_), *this);
+    source.shared_graph_slot();
     if (resource_ == source.resource_) {
         result.graph_ = source.graph_.preserve();
     } else {
@@ -591,6 +594,20 @@ EntityRuntimeState EntityRuntimeState::with_shared_graph(const EntityRuntimeStat
     result.graph_.is_weak = source.graph_.is_weak;
     result.json_view_ = source.json_view_;
     return result;
+}
+
+EntityRuntimeState EntityRuntimeState::with_shared_graph(const EntityRuntimeState& source) && {
+    detail::resource_arena(resource_);
+    source.shared_graph_slot();
+    if (resource_ == source.resource_) {
+        graph_ = source.graph_.preserve();
+    } else {
+        detail::EntityCloneScope scope(resource_);
+        graph_.slot = scope.get().graph(source.graph_.slot);
+    }
+    graph_.is_weak = source.graph_.is_weak;
+    json_view_ = source.json_view_;
+    return std::move(*this);
 }
 
 void EntityRuntimeState::copy_loaded_view_from(const EntityRuntimeState& other) {
@@ -631,6 +648,14 @@ EntityRuntimeState EntityRuntimeState::with_loaded_view_from(const EntityRuntime
     return std::move(*this);
 }
 
+detail::EntityGraphSlot& EntityRuntimeState::shared_graph_slot() const {
+    auto& arena = detail::resource_arena(resource_);
+    if (!graph_.slot) {
+        graph_.slot = &arena.make<detail::EntityGraphSlot>();
+    }
+    return *graph_.slot;
+}
+
 detail::EntityLedgerSlot& EntityRuntimeState::shared_ledger_slot() const {
     auto& arena = detail::resource_arena(resource_);
     if (!inner_) {
@@ -657,17 +682,18 @@ detail::EntityMutationLedger& EntityRuntimeState::context() const {
 
 const EntityGraphBuilder* EntityRuntimeState::frozen() const {
     detail::resource_arena(resource_);
-    return graph_.slot->value ? &graph_.slot->value->contents : nullptr;
+    return graph_.slot && graph_.slot->value ? &graph_.slot->value->contents : nullptr;
 }
 
 Result<std::monostate, EntityGraphBuilder>
 EntityRuntimeState::freeze_graph(EntityGraphBuilder builder) const {
     using R = Result<std::monostate, EntityGraphBuilder>;
     detail::resource_arena(resource_);
-    if (graph_.is_weak || graph_.slot->value) {
+    if (graph_.is_weak || (graph_.slot && graph_.slot->value)) {
         return R::err(resource_, std::move(builder));
     }
-    graph_.slot->value = detail::make_box<detail::FrozenEntityGraph>(resource_, std::move(builder));
+    auto& slot = shared_graph_slot();
+    slot.value = detail::make_box<detail::FrozenEntityGraph>(resource_, std::move(builder));
     return R::ok(resource_, {});
 }
 
@@ -1554,7 +1580,7 @@ void write_debug(DebugWriter& writer, const EntityRuntimeState& value) {
                     inner.raw("(Weak)");
                 } else {
                     inner.tuple("OnceLock", [&](auto& item) {
-                        if (value.graph_.slot->value) {
+                        if (value.graph_.slot && value.graph_.slot->value) {
                             write_runtime_frozen(item, value.graph_.slot->value->contents);
                         } else {
                             item.raw("<uninit>");

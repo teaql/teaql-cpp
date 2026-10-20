@@ -126,6 +126,104 @@ static Json evaluate(UserContext& user_context, const Json& input) {
     return output;
 }
 
+static void graph_binding_contracts() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    {
+        const auto before = user_context->allocation_stats().issued_objects;
+        EntityRuntimeState source(std::allocator_arg, Allocator(r));
+        if (source.resolve_entity<std::int64_t>(17) ||
+            user_context->allocation_stats().issued_objects != before) {
+            throw std::runtime_error("An unbound empty root allocated graph identity");
+        }
+        auto shared = EntityRuntimeState::fresh_with_shared_graph(r, source);
+        if (user_context->allocation_stats().issued_objects != before + 1) {
+            throw std::runtime_error("First graph sharing must register exactly one graph slot");
+        }
+        EntityRuntimeState alias(std::allocator_arg, Allocator(r), shared);
+        EntityGraphBuilder builder(std::allocator_arg, Allocator(r));
+        builder.install(17, std::int64_t{19});
+        if (!source.freeze_graph(std::move(builder)) || !alias.resolve_entity<std::int64_t>(17) ||
+            *alias.resolve_entity<std::int64_t>(17) != 19 ||
+            !shared.resolve_entity<std::int64_t>(17)) {
+            throw std::runtime_error("Lazy graph identity lost publication through aliases");
+        }
+        EntityRuntimeState original(std::allocator_arg, Allocator(r));
+        EntityRuntimeState copy(std::allocator_arg, Allocator(r), original);
+        EntityGraphBuilder copied_graph(std::allocator_arg, Allocator(r));
+        copied_graph.install(23, std::int64_t{29});
+        if (!copy.freeze_graph(std::move(copied_graph)) ||
+            !original.resolve_entity<std::int64_t>(23)) {
+            throw std::runtime_error("Copying an empty root must preserve future graph sharing");
+        }
+    }
+    for (bool weak : {false, true}) {
+        for (bool active : {false, true}) {
+            auto& graph_root = user_context->make<EntityRuntimeState>();
+            auto source = weak ? detail::EntityRuntimeAccess::fresh_with_weak_graph(r, graph_root)
+                               : EntityRuntimeState::fresh_with_shared_graph(r, graph_root);
+            source = std::move(source).with_json_view(17);
+            EntityRuntimeState receiver(std::allocator_arg, Allocator(r));
+            load(*user_context, receiver, 3, 22);
+            if (active) {
+                receiver.set_comment("receiver");
+            }
+            auto* original = detail::EntityRuntimeAccess::original_row(receiver)->values().data();
+            auto before = user_context->allocation_stats().issued_objects;
+            auto result = std::move(receiver).with_shared_graph(source);
+            if (user_context->allocation_stats().issued_objects != before ||
+                detail::EntityRuntimeAccess::original_row(result)->values().data() != original ||
+                detail::EntityRuntimeAccess::has_mutation_context(result) != active ||
+                result.json_view_id() != 17 || !result.loaded_dynamic_fields()) {
+                throw std::runtime_error("Consuming graph binding changed private loaded state");
+            }
+            result.set_comment("private result");
+            if (source.get_comment()) {
+                throw std::runtime_error("Graph binding merged mutation ledgers");
+            }
+            EntityGraphBuilder builder(std::allocator_arg, Allocator(r));
+            builder.install(91, std::int64_t{777});
+            auto publication = result.freeze_graph(std::move(builder));
+            if (weak) {
+                if (publication || !graph_root.freeze_graph(std::move(publication).error())) {
+                    throw std::runtime_error("Weak graph binding gained publication authority");
+                }
+            } else if (!publication) {
+                throw std::runtime_error("Strong graph binding lost publication authority");
+            }
+            if (!graph_root.resolve_entity<std::int64_t>(91) ||
+                *graph_root.resolve_entity<std::int64_t>(91) != 777) {
+                throw std::runtime_error("Graph binding did not preserve shared publication");
+            }
+            auto self = std::move(result).with_shared_graph(result);
+            if (self.get_comment() != "private result" || !self.resolve_entity<std::int64_t>(91)) {
+                throw std::runtime_error("Self graph binding lost state");
+            }
+        }
+    }
+    auto& source = user_context->make<EntityRuntimeState>();
+    EntityGraphBuilder builder(std::allocator_arg, Allocator(r));
+    builder.install(15, String("A long graph payload retained across Context destruction", r));
+    if (!source.freeze_graph(std::move(builder))) {
+        throw std::runtime_error("Cross-domain graph fixture");
+    }
+    auto other_user_context = global.make_user_context();
+    EntityRuntimeState receiver(std::allocator_arg,
+                                Allocator(other_user_context->memory_resource()));
+    load(*other_user_context, receiver, 3, 55);
+    receiver.set_comment("destination");
+    auto result = std::move(receiver).with_shared_graph(source);
+    user_context.reset();
+    auto* value = result.resolve_entity<String>(15);
+    if (!value || *value != "A long graph payload retained across Context destruction" ||
+        result.get_comment() != "destination" || !result.original_snapshot() ||
+        !result.loaded_dynamic_fields()) {
+        throw std::runtime_error("Cross-domain consuming graph binding lost retained state");
+    }
+    std::cout << "graph-binding: consuming, weak, private ledger, self and cross-domain passed\n";
+}
+
 static void contracts() {
     GlobalContext global;
     auto user_context = global.make_user_context();
@@ -198,6 +296,7 @@ static void contracts() {
 int main(int argc, char** argv) {
     std::pmr::set_default_resource(std::pmr::null_memory_resource());
     if (argc == 2 && std::string_view(argv[1]) == "--self-test") {
+        graph_binding_contracts();
         contracts();
         return 0;
     }

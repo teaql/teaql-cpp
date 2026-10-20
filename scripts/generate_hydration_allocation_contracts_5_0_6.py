@@ -26,6 +26,7 @@ def main():
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument('--write', action='store_true')
     mode.add_argument('--check', action='store_true')
+    mode.add_argument('--refresh-cpp', action='store_true', help='Regenerate only C++; require unchanged locked Rust output')
     args = parser.parse_args()
     producer = ROOT.parent / 'teaql_code_gen_cpp'
     reference = ROOT / '.reference/teaql_code_gen'
@@ -67,14 +68,24 @@ def main():
                          'generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java']
                 provenance.update(formatter='18.1.8', generator_implementation_sha256={p: digest(producer / p) for p in paths})
             target = BASE / language
-            if args.check:
+            if args.check or (args.refresh_cpp and language == 'rust'):
                 assert files(target) == provenance['files'], language
                 assert json.loads((target / 'PROVENANCE.json').read_text()) == provenance, language
             else:
                 (output / 'PROVENANCE.json').write_text(json.dumps(provenance, indent=2) + '\n')
                 staged.append((output, target))
         for output, target in staged:
-            shutil.copytree(output, target)
+            if args.refresh_cpp:
+                previous = files(target)
+                changed = {name for name in set(previous) | set(files(output)) if previous.get(name) != files(output).get(name)}
+                assert changed <= {'include/cpp_hydration_allocation/models.hpp', 'include/cpp_hydration_allocation/support.hpp'}, changed
+                support = 'include/cpp_hydration_allocation/support.hpp'
+                if support in changed:
+                    expected = (target / support).read_text().replace('root = root.with_shared_graph(*source);', 'root = std::move(root).with_shared_graph(*source);')
+                    assert (output / support).read_text() == expected, 'Unexpected support change'
+                shutil.copytree(output, target, dirs_exist_ok=True)
+            else:
+                shutil.copytree(output, target)
     print('Complete hydration allocation SDKs ' + ('reproduced' if args.check else 'generated'))
 
 

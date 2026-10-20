@@ -74,6 +74,105 @@ struct alignas(256) Aligned {
     std::array<std::byte, 256> data;
 };
 
+class RequestCountingArena final : public Arena {
+public:
+    using Arena::Arena;
+    std::size_t requests = 0;
+
+private:
+    void* do_allocate(std::size_t bytes, std::size_t alignment) override {
+        ++requests;
+        return Arena::do_allocate(bytes, alignment);
+    }
+};
+
+template <std::size_t Alignment>
+struct alignas(Alignment) CleanupAligned {
+    int* destroyed;
+
+    explicit CleanupAligned(int& count) : destroyed(&count) {}
+
+    ~CleanupAligned() noexcept {
+        ++*destroyed;
+    }
+};
+
+struct NestedResource {
+    std::vector<int>& order;
+
+    NestedResource(Arena& arena, std::vector<int>& events, TrackingResource& upstream, bool fail)
+        : order(events) {
+        arena.make_payload<Resource>(2, order, upstream);
+        if (fail) {
+            throw std::runtime_error("nested construction failure");
+        }
+    }
+
+    ~NestedResource() noexcept {
+        order.push_back(1);
+    }
+};
+
+static void combined_cleanup_storage() {
+    TrackingResource upstream;
+    int destroyed = 0;
+    {
+        RequestCountingArena arena(128, &upstream);
+        auto test_alignment = [&]<std::size_t Alignment>() {
+            const auto before = arena.requests;
+            auto& object = arena.make_payload<CleanupAligned<Alignment>>(destroyed);
+            check(arena.requests == before + 1, "cleanup and payload use one arena request");
+            check(reinterpret_cast<std::uintptr_t>(&object) % alignof(CleanupAligned<Alignment>) ==
+                      0,
+                  "nontrivial object remains aligned");
+        };
+        test_alignment.template operator()<8>();
+        test_alignment.template operator()<64>();
+        test_alignment.template operator()<256>();
+        arena.make<int>(1); // Warm the object-ID page before counting an identified payload.
+        auto before = arena.requests;
+        auto object = arena.make_identified<CleanupAligned<256>>(destroyed);
+        check(arena.requests == before + 1, "identified payload also uses one storage request");
+        arena.destroy(object.slot, typeid(CleanupAligned<256>), object.slot);
+        check(destroyed == 1, "explicit object destruction runs once");
+        arena.close();
+        arena.close();
+        check(destroyed == 4, "close destroys remaining objects exactly once");
+        check(upstream.allocations.empty(), "combined storage returns all upstream blocks");
+    }
+    for (bool fail : {false, true}) {
+        std::vector<int> order;
+        order.reserve(2);
+        {
+            RequestCountingArena arena(128, &upstream);
+            bool caught = false;
+            try {
+                arena.make_payload<NestedResource>(arena, order, upstream, fail);
+            } catch (const std::runtime_error&) {
+                caught = true;
+            }
+            check(caught == fail, "constructor failure propagates");
+            arena.close();
+        }
+        check(order == (fail ? std::vector<int>{2} : std::vector<int>{1, 2}),
+              "nested cleanup order and failed-parent cleanup are preserved");
+        check(upstream.allocations.empty(), "nested construction releases all blocks");
+    }
+    MemoryLimits limits;
+    limits.max_bytes = 128;
+    limits.shutdown_reserve_bytes = 0;
+    RequestCountingArena bounded(64, &upstream, nullptr, limits);
+    bool rejected = false;
+    try {
+        bounded.make_payload<CleanupAligned<256>>(destroyed);
+    } catch (const MemoryLimitError&) {
+        rejected = true;
+    }
+    check(rejected && destroyed == 4, "budget failure never registers an unconstructed destructor");
+    bounded.close();
+    check(upstream.allocations.empty(), "budget failure retains no upstream allocation");
+}
+
 static void growth_and_cleanup() {
     TrackingResource upstream;
     std::vector<int> order;
@@ -199,6 +298,7 @@ static void explicit_domains() {
 
 int main() {
     try {
+        combined_cleanup_storage();
         growth_and_cleanup();
         exception_and_isolation();
         explicit_domains();
