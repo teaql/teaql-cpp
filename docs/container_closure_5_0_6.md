@@ -71,9 +71,10 @@ sanitizer, MIPS, physical-device or full-suite success is claimed here.
 A subsequent [character lexical witness](parity/character_lexical_source_witness_5_0_6.json.gz)
 executes 25 controls and reproduces 13 unresolved differences in character and
 byte-character validation, including invalid escapes, Unicode scalar values and
-byte contents. Its execution is complete, but qualification fails. This is a
-separate remaining lexical responsibility; the closure repair and its passing
-bounded controls do not resolve it.
+byte contents. Its execution is complete, but qualification fails. The separate
+[character lexing continuation](character_lexing_5_0_6.md) installs a repair and
+matches 3,147 actual-source outcomes; its SDK/compiler/integration requirements
+remain independent of this historical closure checkpoint.
 
 ## Reproduction
 

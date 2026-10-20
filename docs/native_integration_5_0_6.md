@@ -1,5 +1,44 @@
 # Current full native integration
 
+## Running native epoch after character lexing correction
+
+The [character lexing continuation](character_lexing_5_0_6.md) passes installed
+Java107, 3,147 exact original/current parser observations and complete 78-SDK
+reproduction with all prior code/guidance/data bytes unchanged. Its seven new
+compiled character models, eleven retained descriptor models and ten typed-JSON/
+compiler cases all pass. The compiler controller is terminal with exit zero;
+all 28 complete original/current observations agree, with unchanged frozen inputs,
+references and all six completed native archives.
+
+The [pipeline record](parity/native_after_character_pipeline_5_0_6.json.gz)
+confirms the verified compiler controller is terminal and has launched the fresh
+full native controller. Its independent
+[input snapshot](parity/native_current_character_inputs_5_0_6.json.gz) and
+[execution receipt](parity/native_current_character_terminal_5_0_6.json.gz)
+belong to this new epoch. A running record is not a passing result. No previous
+failed or superseded epoch is relabeled. The new prefix is
+`/tmp/teaql_native_current_character_5_0_6`. Current source dispositions remain
+67/55/2.
+
+The complete native consumer build now exits zero, followed by a successful
+no-work rebuild. Actual registry discovery is **784** distinct tests. The full
+CTest process is running, including the generated API compiler gate; neither a
+registry count nor successful linking is a passing full-suite result.
+
+The [post-native coordinator](parity/event_policy_installed_cohort_5_0_6.json.gz)
+waits for this verified native controller to become terminal. It installs the
+merged Event/Policy observer/consumer package only if the full native receipt
+passes, all frozen execution inputs/references still match and every proposed
+file's before hash is unchanged. It then runs both portable helpers with their
+default native/imported frontends. A waiting coordinator is not an installed or
+accepted source result; a failed native gate prevents installation.
+
+The [EntityStatus source replay](entity_status_source_review_5_0_6.md) and
+[business integration source replay](business_integration_source_review_5_0_6.md)
+provide additional scoped whole-file reconciliation without changing production
+or observer bodies. Their formal source dispositions and the installed core/
+locking cohort still await the required full current native result.
+
 ## Superseded 784-test core and transaction epoch
 
 The fresh full native epoch follows the installed

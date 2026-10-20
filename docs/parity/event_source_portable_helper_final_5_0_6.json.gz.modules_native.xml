@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="9"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="10"
+	timestamp="2026-10-20T12:28:12"
+	>
+	<testcase name="module_audit_event_contracts" classname="module_audit_event_contracts" time="0.0168098" status="run">
+		<properties/>
+		<system-out>Audit event contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_audit_event_context_reentrant_close" classname="module_audit_event_context_reentrant_close" time="0.0133609" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_audit_event_owner_reentrant_close" classname="module_audit_event_owner_reentrant_close" time="0.00931178" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_audit_event_payload_reentrant_close" classname="module_audit_event_payload_reentrant_close" time="0.0115567" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_audit_event_result_reentrant_close" classname="module_audit_event_result_reentrant_close" time="0.0115022" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_event_model_contracts" classname="module_event_model_contracts" time="0.0166814" status="run">
+		<properties/>
+		<system-out>Raw/safe event model ownership and privacy contracts pass
+</system-out>
+	</testcase>
+	<testcase name="module_dynamic_audit_projection_rust_parity" classname="module_dynamic_audit_projection_rust_parity" time="10.2039" status="run">
+		<properties/>
+		<system-out>Dynamic audit projection 5.0.6 parity: 3968/3968 observations match
+</system-out>
+	</testcase>
+	<testcase name="module_audit_event_rust_parity" classname="module_audit_event_rust_parity" time="1.80316" status="run">
+		<properties/>
+		<system-out>Audit events and privacy parity: 1427/1427 outputs match; 0 target-width inputs reject before execution
+</system-out>
+	</testcase>
+	<testcase name="module_audit_event_projection_5_0_6_rust_parity" classname="module_audit_event_projection_5_0_6_rust_parity" time="0.465198" status="run">
+		<properties/>
+		<system-out>Audit event projection 5.0.6 parity: 104/104 observations match
+</system-out>
+	</testcase>
+</testsuite>

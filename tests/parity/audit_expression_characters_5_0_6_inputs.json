@@ -1,0 +1,5541 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "cases": [
+    [
+      "witness_0",
+      "17, audit_value_max_len='a', audit_value_max_len=21"
+    ],
+    [
+      "witness_1",
+      "17, audit_value_max_len='\u96ea', audit_value_max_len=21"
+    ],
+    [
+      "witness_2",
+      "17, audit_value_max_len='\ud83e\uddca', audit_value_max_len=21"
+    ],
+    [
+      "witness_3",
+      "17, audit_value_max_len='\\n', audit_value_max_len=21"
+    ],
+    [
+      "witness_4",
+      "17, audit_value_max_len='\\x7f', audit_value_max_len=21"
+    ],
+    [
+      "witness_5",
+      "17, audit_value_max_len='\\u{10FFFF}', audit_value_max_len=21"
+    ],
+    [
+      "witness_6",
+      "17, audit_value_max_len='', audit_value_max_len=21"
+    ],
+    [
+      "witness_7",
+      "17, audit_value_max_len='ab', audit_value_max_len=21"
+    ],
+    [
+      "witness_8",
+      "17, audit_value_max_len='\\xFF', audit_value_max_len=21"
+    ],
+    [
+      "witness_9",
+      "17, audit_value_max_len='\\u{D800}', audit_value_max_len=21"
+    ],
+    [
+      "witness_10",
+      "17, audit_value_max_len='\\u{110000}', audit_value_max_len=21"
+    ],
+    [
+      "witness_11",
+      "17, audit_value_max_len='\n', audit_value_max_len=21"
+    ],
+    [
+      "witness_12",
+      "17, audit_value_max_len='\\q', audit_value_max_len=21"
+    ],
+    [
+      "witness_13",
+      "17, audit_value_max_len='\\u{}', audit_value_max_len=21"
+    ],
+    [
+      "witness_14",
+      "17, audit_value_max_len=b'a', audit_value_max_len=21"
+    ],
+    [
+      "witness_15",
+      "17, audit_value_max_len=b'\\xff', audit_value_max_len=21"
+    ],
+    [
+      "witness_16",
+      "17, audit_value_max_len=b'\\0', audit_value_max_len=21"
+    ],
+    [
+      "witness_17",
+      "17, audit_value_max_len=b'\\'', audit_value_max_len=21"
+    ],
+    [
+      "witness_18",
+      "17, audit_value_max_len=b'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "witness_19",
+      "17, audit_value_max_len=b'\ud83e\uddca', audit_value_max_len=21"
+    ],
+    [
+      "witness_20",
+      "17, audit_value_max_len=b'ab', audit_value_max_len=21"
+    ],
+    [
+      "witness_21",
+      "17, audit_value_max_len=b'', audit_value_max_len=21"
+    ],
+    [
+      "witness_22",
+      "17, audit_value_max_len=b'\\u{41}', audit_value_max_len=21"
+    ],
+    [
+      "witness_23",
+      "17, audit_value_max_len=b'\\q', audit_value_max_len=21"
+    ],
+    [
+      "witness_24",
+      "17, audit_value_max_len='life, audit_value_max_len=21"
+    ],
+    [
+      "char_0_0",
+      "17, audit_value_max_len='a', audit_value_max_len=21"
+    ],
+    [
+      "char_0_1",
+      "17, audit_value_max_len=ignored!('a'), audit_value_max_len=21"
+    ],
+    [
+      "char_0_2",
+      "17, audit_value_max_len=|| 'a', audit_value_max_len=21"
+    ],
+    [
+      "char_0_3",
+      "17, audit_value_max_len=for<const N: usize='a'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_0_4",
+      "17, audit_value_max_len=|'a'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_1_0",
+      "17, audit_value_max_len='\u96ea', audit_value_max_len=21"
+    ],
+    [
+      "char_1_1",
+      "17, audit_value_max_len=ignored!('\u96ea'), audit_value_max_len=21"
+    ],
+    [
+      "char_1_2",
+      "17, audit_value_max_len=|| '\u96ea', audit_value_max_len=21"
+    ],
+    [
+      "char_1_3",
+      "17, audit_value_max_len=for<const N: usize='\u96ea'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_1_4",
+      "17, audit_value_max_len=|'\u96ea'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_2_0",
+      "17, audit_value_max_len='\ud83e\uddca', audit_value_max_len=21"
+    ],
+    [
+      "char_2_1",
+      "17, audit_value_max_len=ignored!('\ud83e\uddca'), audit_value_max_len=21"
+    ],
+    [
+      "char_2_2",
+      "17, audit_value_max_len=|| '\ud83e\uddca', audit_value_max_len=21"
+    ],
+    [
+      "char_2_3",
+      "17, audit_value_max_len=for<const N: usize='\ud83e\uddca'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_2_4",
+      "17, audit_value_max_len=|'\ud83e\uddca'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_3_0",
+      "17, audit_value_max_len='\\x00', audit_value_max_len=21"
+    ],
+    [
+      "char_3_1",
+      "17, audit_value_max_len=ignored!('\\x00'), audit_value_max_len=21"
+    ],
+    [
+      "char_3_2",
+      "17, audit_value_max_len=|| '\\x00', audit_value_max_len=21"
+    ],
+    [
+      "char_3_3",
+      "17, audit_value_max_len=for<const N: usize='\\x00'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_3_4",
+      "17, audit_value_max_len=|'\\x00'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_4_0",
+      "17, audit_value_max_len='\\x7f', audit_value_max_len=21"
+    ],
+    [
+      "char_4_1",
+      "17, audit_value_max_len=ignored!('\\x7f'), audit_value_max_len=21"
+    ],
+    [
+      "char_4_2",
+      "17, audit_value_max_len=|| '\\x7f', audit_value_max_len=21"
+    ],
+    [
+      "char_4_3",
+      "17, audit_value_max_len=for<const N: usize='\\x7f'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_4_4",
+      "17, audit_value_max_len=|'\\x7f'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_5_0",
+      "17, audit_value_max_len='\\xff', audit_value_max_len=21"
+    ],
+    [
+      "char_5_1",
+      "17, audit_value_max_len=ignored!('\\xff'), audit_value_max_len=21"
+    ],
+    [
+      "char_5_2",
+      "17, audit_value_max_len=|| '\\xff', audit_value_max_len=21"
+    ],
+    [
+      "char_5_3",
+      "17, audit_value_max_len=for<const N: usize='\\xff'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_5_4",
+      "17, audit_value_max_len=|'\\xff'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_6_0",
+      "17, audit_value_max_len='\\u{0}', audit_value_max_len=21"
+    ],
+    [
+      "char_6_1",
+      "17, audit_value_max_len=ignored!('\\u{0}'), audit_value_max_len=21"
+    ],
+    [
+      "char_6_2",
+      "17, audit_value_max_len=|| '\\u{0}', audit_value_max_len=21"
+    ],
+    [
+      "char_6_3",
+      "17, audit_value_max_len=for<const N: usize='\\u{0}'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_6_4",
+      "17, audit_value_max_len=|'\\u{0}'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_7_0",
+      "17, audit_value_max_len='\\u{D7FF}', audit_value_max_len=21"
+    ],
+    [
+      "char_7_1",
+      "17, audit_value_max_len=ignored!('\\u{D7FF}'), audit_value_max_len=21"
+    ],
+    [
+      "char_7_2",
+      "17, audit_value_max_len=|| '\\u{D7FF}', audit_value_max_len=21"
+    ],
+    [
+      "char_7_3",
+      "17, audit_value_max_len=for<const N: usize='\\u{D7FF}'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_7_4",
+      "17, audit_value_max_len=|'\\u{D7FF}'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_8_0",
+      "17, audit_value_max_len='\\u{E000}', audit_value_max_len=21"
+    ],
+    [
+      "char_8_1",
+      "17, audit_value_max_len=ignored!('\\u{E000}'), audit_value_max_len=21"
+    ],
+    [
+      "char_8_2",
+      "17, audit_value_max_len=|| '\\u{E000}', audit_value_max_len=21"
+    ],
+    [
+      "char_8_3",
+      "17, audit_value_max_len=for<const N: usize='\\u{E000}'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_8_4",
+      "17, audit_value_max_len=|'\\u{E000}'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_9_0",
+      "17, audit_value_max_len='\\u{10FFFF}', audit_value_max_len=21"
+    ],
+    [
+      "char_9_1",
+      "17, audit_value_max_len=ignored!('\\u{10FFFF}'), audit_value_max_len=21"
+    ],
+    [
+      "char_9_2",
+      "17, audit_value_max_len=|| '\\u{10FFFF}', audit_value_max_len=21"
+    ],
+    [
+      "char_9_3",
+      "17, audit_value_max_len=for<const N: usize='\\u{10FFFF}'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_9_4",
+      "17, audit_value_max_len=|'\\u{10FFFF}'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_10_0",
+      "17, audit_value_max_len='\\u{_41}', audit_value_max_len=21"
+    ],
+    [
+      "char_10_1",
+      "17, audit_value_max_len=ignored!('\\u{_41}'), audit_value_max_len=21"
+    ],
+    [
+      "char_10_2",
+      "17, audit_value_max_len=|| '\\u{_41}', audit_value_max_len=21"
+    ],
+    [
+      "char_10_3",
+      "17, audit_value_max_len=for<const N: usize='\\u{_41}'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_10_4",
+      "17, audit_value_max_len=|'\\u{_41}'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_11_0",
+      "17, audit_value_max_len='\\u{41_}', audit_value_max_len=21"
+    ],
+    [
+      "char_11_1",
+      "17, audit_value_max_len=ignored!('\\u{41_}'), audit_value_max_len=21"
+    ],
+    [
+      "char_11_2",
+      "17, audit_value_max_len=|| '\\u{41_}', audit_value_max_len=21"
+    ],
+    [
+      "char_11_3",
+      "17, audit_value_max_len=for<const N: usize='\\u{41_}'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_11_4",
+      "17, audit_value_max_len=|'\\u{41_}'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_12_0",
+      "17, audit_value_max_len='\\u{0000041}', audit_value_max_len=21"
+    ],
+    [
+      "char_12_1",
+      "17, audit_value_max_len=ignored!('\\u{0000041}'), audit_value_max_len=21"
+    ],
+    [
+      "char_12_2",
+      "17, audit_value_max_len=|| '\\u{0000041}', audit_value_max_len=21"
+    ],
+    [
+      "char_12_3",
+      "17, audit_value_max_len=for<const N: usize='\\u{0000041}'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_12_4",
+      "17, audit_value_max_len=|'\\u{0000041}'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_13_0",
+      "17, audit_value_max_len=''', audit_value_max_len=21"
+    ],
+    [
+      "char_13_1",
+      "17, audit_value_max_len=ignored!('''), audit_value_max_len=21"
+    ],
+    [
+      "char_13_2",
+      "17, audit_value_max_len=|| ''', audit_value_max_len=21"
+    ],
+    [
+      "char_13_3",
+      "17, audit_value_max_len=for<const N: usize='''> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_13_4",
+      "17, audit_value_max_len=|'''| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_14_0",
+      "17, audit_value_max_len='\\'', audit_value_max_len=21"
+    ],
+    [
+      "char_14_1",
+      "17, audit_value_max_len=ignored!('\\''), audit_value_max_len=21"
+    ],
+    [
+      "char_14_2",
+      "17, audit_value_max_len=|| '\\'', audit_value_max_len=21"
+    ],
+    [
+      "char_14_3",
+      "17, audit_value_max_len=for<const N: usize='\\''> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_14_4",
+      "17, audit_value_max_len=|'\\''| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_15_0",
+      "17, audit_value_max_len='\\\\', audit_value_max_len=21"
+    ],
+    [
+      "char_15_1",
+      "17, audit_value_max_len=ignored!('\\\\'), audit_value_max_len=21"
+    ],
+    [
+      "char_15_2",
+      "17, audit_value_max_len=|| '\\\\', audit_value_max_len=21"
+    ],
+    [
+      "char_15_3",
+      "17, audit_value_max_len=for<const N: usize='\\\\'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_15_4",
+      "17, audit_value_max_len=|'\\\\'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_16_0",
+      "17, audit_value_max_len='\\\"', audit_value_max_len=21"
+    ],
+    [
+      "char_16_1",
+      "17, audit_value_max_len=ignored!('\\\"'), audit_value_max_len=21"
+    ],
+    [
+      "char_16_2",
+      "17, audit_value_max_len=|| '\\\"', audit_value_max_len=21"
+    ],
+    [
+      "char_16_3",
+      "17, audit_value_max_len=for<const N: usize='\\\"'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_16_4",
+      "17, audit_value_max_len=|'\\\"'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_17_0",
+      "17, audit_value_max_len='\r', audit_value_max_len=21"
+    ],
+    [
+      "char_17_1",
+      "17, audit_value_max_len=ignored!('\r'), audit_value_max_len=21"
+    ],
+    [
+      "char_17_2",
+      "17, audit_value_max_len=|| '\r', audit_value_max_len=21"
+    ],
+    [
+      "char_17_3",
+      "17, audit_value_max_len=for<const N: usize='\r'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_17_4",
+      "17, audit_value_max_len=|'\r'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_18_0",
+      "17, audit_value_max_len='\t', audit_value_max_len=21"
+    ],
+    [
+      "char_18_1",
+      "17, audit_value_max_len=ignored!('\t'), audit_value_max_len=21"
+    ],
+    [
+      "char_18_2",
+      "17, audit_value_max_len=|| '\t', audit_value_max_len=21"
+    ],
+    [
+      "char_18_3",
+      "17, audit_value_max_len=for<const N: usize='\t'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_18_4",
+      "17, audit_value_max_len=|'\t'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_19_0",
+      "17, audit_value_max_len='\u0000', audit_value_max_len=21"
+    ],
+    [
+      "char_19_1",
+      "17, audit_value_max_len=ignored!('\u0000'), audit_value_max_len=21"
+    ],
+    [
+      "char_19_2",
+      "17, audit_value_max_len=|| '\u0000', audit_value_max_len=21"
+    ],
+    [
+      "char_19_3",
+      "17, audit_value_max_len=for<const N: usize='\u0000'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_19_4",
+      "17, audit_value_max_len=|'\u0000'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_20_0",
+      "17, audit_value_max_len=b'a', audit_value_max_len=21"
+    ],
+    [
+      "char_20_1",
+      "17, audit_value_max_len=ignored!(b'a'), audit_value_max_len=21"
+    ],
+    [
+      "char_20_2",
+      "17, audit_value_max_len=|| b'a', audit_value_max_len=21"
+    ],
+    [
+      "char_20_3",
+      "17, audit_value_max_len=for<const N: usize=b'a'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_20_4",
+      "17, audit_value_max_len=|b'a'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_21_0",
+      "17, audit_value_max_len=b'\\xff', audit_value_max_len=21"
+    ],
+    [
+      "char_21_1",
+      "17, audit_value_max_len=ignored!(b'\\xff'), audit_value_max_len=21"
+    ],
+    [
+      "char_21_2",
+      "17, audit_value_max_len=|| b'\\xff', audit_value_max_len=21"
+    ],
+    [
+      "char_21_3",
+      "17, audit_value_max_len=for<const N: usize=b'\\xff'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_21_4",
+      "17, audit_value_max_len=|b'\\xff'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_22_0",
+      "17, audit_value_max_len=b'\\x7f', audit_value_max_len=21"
+    ],
+    [
+      "char_22_1",
+      "17, audit_value_max_len=ignored!(b'\\x7f'), audit_value_max_len=21"
+    ],
+    [
+      "char_22_2",
+      "17, audit_value_max_len=|| b'\\x7f', audit_value_max_len=21"
+    ],
+    [
+      "char_22_3",
+      "17, audit_value_max_len=for<const N: usize=b'\\x7f'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_22_4",
+      "17, audit_value_max_len=|b'\\x7f'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_23_0",
+      "17, audit_value_max_len=b'\\u{41}', audit_value_max_len=21"
+    ],
+    [
+      "char_23_1",
+      "17, audit_value_max_len=ignored!(b'\\u{41}'), audit_value_max_len=21"
+    ],
+    [
+      "char_23_2",
+      "17, audit_value_max_len=|| b'\\u{41}', audit_value_max_len=21"
+    ],
+    [
+      "char_23_3",
+      "17, audit_value_max_len=for<const N: usize=b'\\u{41}'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_23_4",
+      "17, audit_value_max_len=|b'\\u{41}'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_24_0",
+      "17, audit_value_max_len=b'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_24_1",
+      "17, audit_value_max_len=ignored!(b'\u00e9'), audit_value_max_len=21"
+    ],
+    [
+      "char_24_2",
+      "17, audit_value_max_len=|| b'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_24_3",
+      "17, audit_value_max_len=for<const N: usize=b'\u00e9'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_24_4",
+      "17, audit_value_max_len=|b'\u00e9'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_25_0",
+      "17, audit_value_max_len=b''', audit_value_max_len=21"
+    ],
+    [
+      "char_25_1",
+      "17, audit_value_max_len=ignored!(b'''), audit_value_max_len=21"
+    ],
+    [
+      "char_25_2",
+      "17, audit_value_max_len=|| b''', audit_value_max_len=21"
+    ],
+    [
+      "char_25_3",
+      "17, audit_value_max_len=for<const N: usize=b'''> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_25_4",
+      "17, audit_value_max_len=|b'''| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_26_0",
+      "17, audit_value_max_len=b'\\'', audit_value_max_len=21"
+    ],
+    [
+      "char_26_1",
+      "17, audit_value_max_len=ignored!(b'\\''), audit_value_max_len=21"
+    ],
+    [
+      "char_26_2",
+      "17, audit_value_max_len=|| b'\\'', audit_value_max_len=21"
+    ],
+    [
+      "char_26_3",
+      "17, audit_value_max_len=for<const N: usize=b'\\''> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_26_4",
+      "17, audit_value_max_len=|b'\\''| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_27_0",
+      "17, audit_value_max_len=b'\\\\', audit_value_max_len=21"
+    ],
+    [
+      "char_27_1",
+      "17, audit_value_max_len=ignored!(b'\\\\'), audit_value_max_len=21"
+    ],
+    [
+      "char_27_2",
+      "17, audit_value_max_len=|| b'\\\\', audit_value_max_len=21"
+    ],
+    [
+      "char_27_3",
+      "17, audit_value_max_len=for<const N: usize=b'\\\\'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_27_4",
+      "17, audit_value_max_len=|b'\\\\'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_28_0",
+      "17, audit_value_max_len=b'\\n', audit_value_max_len=21"
+    ],
+    [
+      "char_28_1",
+      "17, audit_value_max_len=ignored!(b'\\n'), audit_value_max_len=21"
+    ],
+    [
+      "char_28_2",
+      "17, audit_value_max_len=|| b'\\n', audit_value_max_len=21"
+    ],
+    [
+      "char_28_3",
+      "17, audit_value_max_len=for<const N: usize=b'\\n'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_28_4",
+      "17, audit_value_max_len=|b'\\n'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_29_0",
+      "17, audit_value_max_len=b'\n', audit_value_max_len=21"
+    ],
+    [
+      "char_29_1",
+      "17, audit_value_max_len=ignored!(b'\n'), audit_value_max_len=21"
+    ],
+    [
+      "char_29_2",
+      "17, audit_value_max_len=|| b'\n', audit_value_max_len=21"
+    ],
+    [
+      "char_29_3",
+      "17, audit_value_max_len=for<const N: usize=b'\n'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_29_4",
+      "17, audit_value_max_len=|b'\n'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_30_0",
+      "17, audit_value_max_len=b'\r', audit_value_max_len=21"
+    ],
+    [
+      "char_30_1",
+      "17, audit_value_max_len=ignored!(b'\r'), audit_value_max_len=21"
+    ],
+    [
+      "char_30_2",
+      "17, audit_value_max_len=|| b'\r', audit_value_max_len=21"
+    ],
+    [
+      "char_30_3",
+      "17, audit_value_max_len=for<const N: usize=b'\r'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_30_4",
+      "17, audit_value_max_len=|b'\r'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_31_0",
+      "17, audit_value_max_len=b'\u0000', audit_value_max_len=21"
+    ],
+    [
+      "char_31_1",
+      "17, audit_value_max_len=ignored!(b'\u0000'), audit_value_max_len=21"
+    ],
+    [
+      "char_31_2",
+      "17, audit_value_max_len=|| b'\u0000', audit_value_max_len=21"
+    ],
+    [
+      "char_31_3",
+      "17, audit_value_max_len=for<const N: usize=b'\u0000'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_31_4",
+      "17, audit_value_max_len=|b'\u0000'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_32_0",
+      "17, audit_value_max_len='a'suffix, audit_value_max_len=21"
+    ],
+    [
+      "char_32_1",
+      "17, audit_value_max_len=ignored!('a'suffix), audit_value_max_len=21"
+    ],
+    [
+      "char_32_2",
+      "17, audit_value_max_len=|| 'a'suffix, audit_value_max_len=21"
+    ],
+    [
+      "char_32_3",
+      "17, audit_value_max_len=for<const N: usize='a'suffix> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_32_4",
+      "17, audit_value_max_len=|'a'suffix| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_33_0",
+      "17, audit_value_max_len=b'a'suffix, audit_value_max_len=21"
+    ],
+    [
+      "char_33_1",
+      "17, audit_value_max_len=ignored!(b'a'suffix), audit_value_max_len=21"
+    ],
+    [
+      "char_33_2",
+      "17, audit_value_max_len=|| b'a'suffix, audit_value_max_len=21"
+    ],
+    [
+      "char_33_3",
+      "17, audit_value_max_len=for<const N: usize=b'a'suffix> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_33_4",
+      "17, audit_value_max_len=|b'a'suffix| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_34_0",
+      "17, audit_value_max_len='a'\u96ea, audit_value_max_len=21"
+    ],
+    [
+      "char_34_1",
+      "17, audit_value_max_len=ignored!('a'\u96ea), audit_value_max_len=21"
+    ],
+    [
+      "char_34_2",
+      "17, audit_value_max_len=|| 'a'\u96ea, audit_value_max_len=21"
+    ],
+    [
+      "char_34_3",
+      "17, audit_value_max_len=for<const N: usize='a'\u96ea> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_34_4",
+      "17, audit_value_max_len=|'a'\u96ea| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_35_0",
+      "17, audit_value_max_len=b'a'\u96ea, audit_value_max_len=21"
+    ],
+    [
+      "char_35_1",
+      "17, audit_value_max_len=ignored!(b'a'\u96ea), audit_value_max_len=21"
+    ],
+    [
+      "char_35_2",
+      "17, audit_value_max_len=|| b'a'\u96ea, audit_value_max_len=21"
+    ],
+    [
+      "char_35_3",
+      "17, audit_value_max_len=for<const N: usize=b'a'\u96ea> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_35_4",
+      "17, audit_value_max_len=|b'a'\u96ea| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_36_0",
+      "17, audit_value_max_len='life, audit_value_max_len=21"
+    ],
+    [
+      "char_36_1",
+      "17, audit_value_max_len=ignored!('life), audit_value_max_len=21"
+    ],
+    [
+      "char_36_2",
+      "17, audit_value_max_len=|| 'life, audit_value_max_len=21"
+    ],
+    [
+      "char_36_3",
+      "17, audit_value_max_len=for<const N: usize='life> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_36_4",
+      "17, audit_value_max_len=|'life| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_37_0",
+      "17, audit_value_max_len='life: loop {}, audit_value_max_len=21"
+    ],
+    [
+      "char_37_1",
+      "17, audit_value_max_len=ignored!('life: loop {}), audit_value_max_len=21"
+    ],
+    [
+      "char_37_2",
+      "17, audit_value_max_len=|| 'life: loop {}, audit_value_max_len=21"
+    ],
+    [
+      "char_37_3",
+      "17, audit_value_max_len=for<const N: usize='life: loop {}> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_37_4",
+      "17, audit_value_max_len=|'life: loop {}| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_38_0",
+      "17, audit_value_max_len='r#life, audit_value_max_len=21"
+    ],
+    [
+      "char_38_1",
+      "17, audit_value_max_len=ignored!('r#life), audit_value_max_len=21"
+    ],
+    [
+      "char_38_2",
+      "17, audit_value_max_len=|| 'r#life, audit_value_max_len=21"
+    ],
+    [
+      "char_38_3",
+      "17, audit_value_max_len=for<const N: usize='r#life> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_38_4",
+      "17, audit_value_max_len=|'r#life| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_39_0",
+      "17, audit_value_max_len=c'a', audit_value_max_len=21"
+    ],
+    [
+      "char_39_1",
+      "17, audit_value_max_len=ignored!(c'a'), audit_value_max_len=21"
+    ],
+    [
+      "char_39_2",
+      "17, audit_value_max_len=|| c'a', audit_value_max_len=21"
+    ],
+    [
+      "char_39_3",
+      "17, audit_value_max_len=for<const N: usize=c'a'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_39_4",
+      "17, audit_value_max_len=|c'a'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_40_0",
+      "17, audit_value_max_len=ab'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_40_1",
+      "17, audit_value_max_len=ignored!(ab'\u00e9'), audit_value_max_len=21"
+    ],
+    [
+      "char_40_2",
+      "17, audit_value_max_len=|| ab'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_40_3",
+      "17, audit_value_max_len=for<const N: usize=ab'\u00e9'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_40_4",
+      "17, audit_value_max_len=|ab'\u00e9'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_41_0",
+      "17, audit_value_max_len=r#b'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_41_1",
+      "17, audit_value_max_len=ignored!(r#b'\u00e9'), audit_value_max_len=21"
+    ],
+    [
+      "char_41_2",
+      "17, audit_value_max_len=|| r#b'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_41_3",
+      "17, audit_value_max_len=for<const N: usize=r#b'\u00e9'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_41_4",
+      "17, audit_value_max_len=|r#b'\u00e9'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_42_0",
+      "17, audit_value_max_len=17b'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_42_1",
+      "17, audit_value_max_len=ignored!(17b'\u00e9'), audit_value_max_len=21"
+    ],
+    [
+      "char_42_2",
+      "17, audit_value_max_len=|| 17b'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_42_3",
+      "17, audit_value_max_len=for<const N: usize=17b'\u00e9'> || 1, audit_value_max_len=21"
+    ],
+    [
+      "char_42_4",
+      "17, audit_value_max_len=|17b'\u00e9'| 1, audit_value_max_len=21"
+    ],
+    [
+      "char_raw_0",
+      "17, audit_value_max_len='\u0000', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_0",
+      "17, audit_value_max_len='\\x00', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_1",
+      "17, audit_value_max_len='\u0001', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_1",
+      "17, audit_value_max_len='\\x01', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_2",
+      "17, audit_value_max_len='\u0002', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_2",
+      "17, audit_value_max_len='\\x02', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_3",
+      "17, audit_value_max_len='\u0003', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_3",
+      "17, audit_value_max_len='\\x03', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_4",
+      "17, audit_value_max_len='\u0004', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_4",
+      "17, audit_value_max_len='\\x04', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_5",
+      "17, audit_value_max_len='\u0005', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_5",
+      "17, audit_value_max_len='\\x05', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_6",
+      "17, audit_value_max_len='\u0006', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_6",
+      "17, audit_value_max_len='\\x06', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_7",
+      "17, audit_value_max_len='\u0007', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_7",
+      "17, audit_value_max_len='\\x07', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_8",
+      "17, audit_value_max_len='\b', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_8",
+      "17, audit_value_max_len='\\x08', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_9",
+      "17, audit_value_max_len='\t', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_9",
+      "17, audit_value_max_len='\\x09', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_10",
+      "17, audit_value_max_len='\n', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_10",
+      "17, audit_value_max_len='\\x0a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_11",
+      "17, audit_value_max_len='\u000b', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_11",
+      "17, audit_value_max_len='\\x0b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_12",
+      "17, audit_value_max_len='\f', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_12",
+      "17, audit_value_max_len='\\x0c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_13",
+      "17, audit_value_max_len='\r', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_13",
+      "17, audit_value_max_len='\\x0d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_14",
+      "17, audit_value_max_len='\u000e', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_14",
+      "17, audit_value_max_len='\\x0e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_15",
+      "17, audit_value_max_len='\u000f', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_15",
+      "17, audit_value_max_len='\\x0f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_16",
+      "17, audit_value_max_len='\u0010', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_16",
+      "17, audit_value_max_len='\\x10', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_17",
+      "17, audit_value_max_len='\u0011', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_17",
+      "17, audit_value_max_len='\\x11', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_18",
+      "17, audit_value_max_len='\u0012', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_18",
+      "17, audit_value_max_len='\\x12', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_19",
+      "17, audit_value_max_len='\u0013', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_19",
+      "17, audit_value_max_len='\\x13', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_20",
+      "17, audit_value_max_len='\u0014', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_20",
+      "17, audit_value_max_len='\\x14', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_21",
+      "17, audit_value_max_len='\u0015', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_21",
+      "17, audit_value_max_len='\\x15', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_22",
+      "17, audit_value_max_len='\u0016', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_22",
+      "17, audit_value_max_len='\\x16', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_23",
+      "17, audit_value_max_len='\u0017', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_23",
+      "17, audit_value_max_len='\\x17', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_24",
+      "17, audit_value_max_len='\u0018', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_24",
+      "17, audit_value_max_len='\\x18', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_25",
+      "17, audit_value_max_len='\u0019', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_25",
+      "17, audit_value_max_len='\\x19', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_26",
+      "17, audit_value_max_len='\u001a', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_26",
+      "17, audit_value_max_len='\\x1a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_27",
+      "17, audit_value_max_len='\u001b', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_27",
+      "17, audit_value_max_len='\\x1b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_28",
+      "17, audit_value_max_len='\u001c', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_28",
+      "17, audit_value_max_len='\\x1c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_29",
+      "17, audit_value_max_len='\u001d', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_29",
+      "17, audit_value_max_len='\\x1d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_30",
+      "17, audit_value_max_len='\u001e', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_30",
+      "17, audit_value_max_len='\\x1e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_31",
+      "17, audit_value_max_len='\u001f', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_31",
+      "17, audit_value_max_len='\\x1f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_32",
+      "17, audit_value_max_len=' ', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_32",
+      "17, audit_value_max_len='\\x20', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_33",
+      "17, audit_value_max_len='!', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_33",
+      "17, audit_value_max_len='\\x21', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_34",
+      "17, audit_value_max_len='\"', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_34",
+      "17, audit_value_max_len='\\x22', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_35",
+      "17, audit_value_max_len='#', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_35",
+      "17, audit_value_max_len='\\x23', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_36",
+      "17, audit_value_max_len='$', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_36",
+      "17, audit_value_max_len='\\x24', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_37",
+      "17, audit_value_max_len='%', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_37",
+      "17, audit_value_max_len='\\x25', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_38",
+      "17, audit_value_max_len='&', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_38",
+      "17, audit_value_max_len='\\x26', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_39",
+      "17, audit_value_max_len=''', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_39",
+      "17, audit_value_max_len='\\x27', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_40",
+      "17, audit_value_max_len='(', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_40",
+      "17, audit_value_max_len='\\x28', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_41",
+      "17, audit_value_max_len=')', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_41",
+      "17, audit_value_max_len='\\x29', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_42",
+      "17, audit_value_max_len='*', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_42",
+      "17, audit_value_max_len='\\x2a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_43",
+      "17, audit_value_max_len='+', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_43",
+      "17, audit_value_max_len='\\x2b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_44",
+      "17, audit_value_max_len=',', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_44",
+      "17, audit_value_max_len='\\x2c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_45",
+      "17, audit_value_max_len='-', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_45",
+      "17, audit_value_max_len='\\x2d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_46",
+      "17, audit_value_max_len='.', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_46",
+      "17, audit_value_max_len='\\x2e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_47",
+      "17, audit_value_max_len='/', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_47",
+      "17, audit_value_max_len='\\x2f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_48",
+      "17, audit_value_max_len='0', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_48",
+      "17, audit_value_max_len='\\x30', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_49",
+      "17, audit_value_max_len='1', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_49",
+      "17, audit_value_max_len='\\x31', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_50",
+      "17, audit_value_max_len='2', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_50",
+      "17, audit_value_max_len='\\x32', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_51",
+      "17, audit_value_max_len='3', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_51",
+      "17, audit_value_max_len='\\x33', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_52",
+      "17, audit_value_max_len='4', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_52",
+      "17, audit_value_max_len='\\x34', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_53",
+      "17, audit_value_max_len='5', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_53",
+      "17, audit_value_max_len='\\x35', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_54",
+      "17, audit_value_max_len='6', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_54",
+      "17, audit_value_max_len='\\x36', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_55",
+      "17, audit_value_max_len='7', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_55",
+      "17, audit_value_max_len='\\x37', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_56",
+      "17, audit_value_max_len='8', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_56",
+      "17, audit_value_max_len='\\x38', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_57",
+      "17, audit_value_max_len='9', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_57",
+      "17, audit_value_max_len='\\x39', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_58",
+      "17, audit_value_max_len=':', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_58",
+      "17, audit_value_max_len='\\x3a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_59",
+      "17, audit_value_max_len=';', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_59",
+      "17, audit_value_max_len='\\x3b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_60",
+      "17, audit_value_max_len='<', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_60",
+      "17, audit_value_max_len='\\x3c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_61",
+      "17, audit_value_max_len='=', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_61",
+      "17, audit_value_max_len='\\x3d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_62",
+      "17, audit_value_max_len='>', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_62",
+      "17, audit_value_max_len='\\x3e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_63",
+      "17, audit_value_max_len='?', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_63",
+      "17, audit_value_max_len='\\x3f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_64",
+      "17, audit_value_max_len='@', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_64",
+      "17, audit_value_max_len='\\x40', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_65",
+      "17, audit_value_max_len='A', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_65",
+      "17, audit_value_max_len='\\x41', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_66",
+      "17, audit_value_max_len='B', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_66",
+      "17, audit_value_max_len='\\x42', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_67",
+      "17, audit_value_max_len='C', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_67",
+      "17, audit_value_max_len='\\x43', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_68",
+      "17, audit_value_max_len='D', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_68",
+      "17, audit_value_max_len='\\x44', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_69",
+      "17, audit_value_max_len='E', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_69",
+      "17, audit_value_max_len='\\x45', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_70",
+      "17, audit_value_max_len='F', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_70",
+      "17, audit_value_max_len='\\x46', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_71",
+      "17, audit_value_max_len='G', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_71",
+      "17, audit_value_max_len='\\x47', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_72",
+      "17, audit_value_max_len='H', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_72",
+      "17, audit_value_max_len='\\x48', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_73",
+      "17, audit_value_max_len='I', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_73",
+      "17, audit_value_max_len='\\x49', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_74",
+      "17, audit_value_max_len='J', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_74",
+      "17, audit_value_max_len='\\x4a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_75",
+      "17, audit_value_max_len='K', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_75",
+      "17, audit_value_max_len='\\x4b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_76",
+      "17, audit_value_max_len='L', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_76",
+      "17, audit_value_max_len='\\x4c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_77",
+      "17, audit_value_max_len='M', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_77",
+      "17, audit_value_max_len='\\x4d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_78",
+      "17, audit_value_max_len='N', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_78",
+      "17, audit_value_max_len='\\x4e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_79",
+      "17, audit_value_max_len='O', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_79",
+      "17, audit_value_max_len='\\x4f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_80",
+      "17, audit_value_max_len='P', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_80",
+      "17, audit_value_max_len='\\x50', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_81",
+      "17, audit_value_max_len='Q', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_81",
+      "17, audit_value_max_len='\\x51', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_82",
+      "17, audit_value_max_len='R', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_82",
+      "17, audit_value_max_len='\\x52', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_83",
+      "17, audit_value_max_len='S', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_83",
+      "17, audit_value_max_len='\\x53', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_84",
+      "17, audit_value_max_len='T', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_84",
+      "17, audit_value_max_len='\\x54', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_85",
+      "17, audit_value_max_len='U', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_85",
+      "17, audit_value_max_len='\\x55', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_86",
+      "17, audit_value_max_len='V', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_86",
+      "17, audit_value_max_len='\\x56', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_87",
+      "17, audit_value_max_len='W', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_87",
+      "17, audit_value_max_len='\\x57', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_88",
+      "17, audit_value_max_len='X', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_88",
+      "17, audit_value_max_len='\\x58', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_89",
+      "17, audit_value_max_len='Y', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_89",
+      "17, audit_value_max_len='\\x59', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_90",
+      "17, audit_value_max_len='Z', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_90",
+      "17, audit_value_max_len='\\x5a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_91",
+      "17, audit_value_max_len='[', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_91",
+      "17, audit_value_max_len='\\x5b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_92",
+      "17, audit_value_max_len='\\', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_92",
+      "17, audit_value_max_len='\\x5c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_93",
+      "17, audit_value_max_len=']', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_93",
+      "17, audit_value_max_len='\\x5d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_94",
+      "17, audit_value_max_len='^', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_94",
+      "17, audit_value_max_len='\\x5e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_95",
+      "17, audit_value_max_len='_', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_95",
+      "17, audit_value_max_len='\\x5f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_96",
+      "17, audit_value_max_len='`', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_96",
+      "17, audit_value_max_len='\\x60', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_97",
+      "17, audit_value_max_len='a', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_97",
+      "17, audit_value_max_len='\\x61', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_98",
+      "17, audit_value_max_len='b', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_98",
+      "17, audit_value_max_len='\\x62', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_99",
+      "17, audit_value_max_len='c', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_99",
+      "17, audit_value_max_len='\\x63', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_100",
+      "17, audit_value_max_len='d', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_100",
+      "17, audit_value_max_len='\\x64', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_101",
+      "17, audit_value_max_len='e', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_101",
+      "17, audit_value_max_len='\\x65', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_102",
+      "17, audit_value_max_len='f', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_102",
+      "17, audit_value_max_len='\\x66', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_103",
+      "17, audit_value_max_len='g', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_103",
+      "17, audit_value_max_len='\\x67', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_104",
+      "17, audit_value_max_len='h', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_104",
+      "17, audit_value_max_len='\\x68', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_105",
+      "17, audit_value_max_len='i', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_105",
+      "17, audit_value_max_len='\\x69', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_106",
+      "17, audit_value_max_len='j', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_106",
+      "17, audit_value_max_len='\\x6a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_107",
+      "17, audit_value_max_len='k', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_107",
+      "17, audit_value_max_len='\\x6b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_108",
+      "17, audit_value_max_len='l', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_108",
+      "17, audit_value_max_len='\\x6c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_109",
+      "17, audit_value_max_len='m', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_109",
+      "17, audit_value_max_len='\\x6d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_110",
+      "17, audit_value_max_len='n', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_110",
+      "17, audit_value_max_len='\\x6e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_111",
+      "17, audit_value_max_len='o', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_111",
+      "17, audit_value_max_len='\\x6f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_112",
+      "17, audit_value_max_len='p', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_112",
+      "17, audit_value_max_len='\\x70', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_113",
+      "17, audit_value_max_len='q', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_113",
+      "17, audit_value_max_len='\\x71', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_114",
+      "17, audit_value_max_len='r', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_114",
+      "17, audit_value_max_len='\\x72', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_115",
+      "17, audit_value_max_len='s', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_115",
+      "17, audit_value_max_len='\\x73', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_116",
+      "17, audit_value_max_len='t', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_116",
+      "17, audit_value_max_len='\\x74', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_117",
+      "17, audit_value_max_len='u', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_117",
+      "17, audit_value_max_len='\\x75', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_118",
+      "17, audit_value_max_len='v', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_118",
+      "17, audit_value_max_len='\\x76', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_119",
+      "17, audit_value_max_len='w', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_119",
+      "17, audit_value_max_len='\\x77', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_120",
+      "17, audit_value_max_len='x', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_120",
+      "17, audit_value_max_len='\\x78', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_121",
+      "17, audit_value_max_len='y', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_121",
+      "17, audit_value_max_len='\\x79', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_122",
+      "17, audit_value_max_len='z', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_122",
+      "17, audit_value_max_len='\\x7a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_123",
+      "17, audit_value_max_len='{', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_123",
+      "17, audit_value_max_len='\\x7b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_124",
+      "17, audit_value_max_len='|', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_124",
+      "17, audit_value_max_len='\\x7c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_125",
+      "17, audit_value_max_len='}', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_125",
+      "17, audit_value_max_len='\\x7d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_126",
+      "17, audit_value_max_len='~', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_126",
+      "17, audit_value_max_len='\\x7e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_127",
+      "17, audit_value_max_len='\u007f', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_127",
+      "17, audit_value_max_len='\\x7f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_128",
+      "17, audit_value_max_len='\u0080', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_128",
+      "17, audit_value_max_len='\\x80', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_129",
+      "17, audit_value_max_len='\u0081', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_129",
+      "17, audit_value_max_len='\\x81', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_130",
+      "17, audit_value_max_len='\u0082', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_130",
+      "17, audit_value_max_len='\\x82', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_131",
+      "17, audit_value_max_len='\u0083', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_131",
+      "17, audit_value_max_len='\\x83', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_132",
+      "17, audit_value_max_len='\u0084', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_132",
+      "17, audit_value_max_len='\\x84', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_133",
+      "17, audit_value_max_len='\u0085', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_133",
+      "17, audit_value_max_len='\\x85', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_134",
+      "17, audit_value_max_len='\u0086', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_134",
+      "17, audit_value_max_len='\\x86', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_135",
+      "17, audit_value_max_len='\u0087', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_135",
+      "17, audit_value_max_len='\\x87', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_136",
+      "17, audit_value_max_len='\u0088', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_136",
+      "17, audit_value_max_len='\\x88', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_137",
+      "17, audit_value_max_len='\u0089', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_137",
+      "17, audit_value_max_len='\\x89', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_138",
+      "17, audit_value_max_len='\u008a', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_138",
+      "17, audit_value_max_len='\\x8a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_139",
+      "17, audit_value_max_len='\u008b', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_139",
+      "17, audit_value_max_len='\\x8b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_140",
+      "17, audit_value_max_len='\u008c', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_140",
+      "17, audit_value_max_len='\\x8c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_141",
+      "17, audit_value_max_len='\u008d', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_141",
+      "17, audit_value_max_len='\\x8d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_142",
+      "17, audit_value_max_len='\u008e', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_142",
+      "17, audit_value_max_len='\\x8e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_143",
+      "17, audit_value_max_len='\u008f', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_143",
+      "17, audit_value_max_len='\\x8f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_144",
+      "17, audit_value_max_len='\u0090', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_144",
+      "17, audit_value_max_len='\\x90', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_145",
+      "17, audit_value_max_len='\u0091', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_145",
+      "17, audit_value_max_len='\\x91', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_146",
+      "17, audit_value_max_len='\u0092', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_146",
+      "17, audit_value_max_len='\\x92', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_147",
+      "17, audit_value_max_len='\u0093', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_147",
+      "17, audit_value_max_len='\\x93', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_148",
+      "17, audit_value_max_len='\u0094', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_148",
+      "17, audit_value_max_len='\\x94', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_149",
+      "17, audit_value_max_len='\u0095', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_149",
+      "17, audit_value_max_len='\\x95', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_150",
+      "17, audit_value_max_len='\u0096', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_150",
+      "17, audit_value_max_len='\\x96', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_151",
+      "17, audit_value_max_len='\u0097', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_151",
+      "17, audit_value_max_len='\\x97', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_152",
+      "17, audit_value_max_len='\u0098', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_152",
+      "17, audit_value_max_len='\\x98', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_153",
+      "17, audit_value_max_len='\u0099', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_153",
+      "17, audit_value_max_len='\\x99', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_154",
+      "17, audit_value_max_len='\u009a', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_154",
+      "17, audit_value_max_len='\\x9a', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_155",
+      "17, audit_value_max_len='\u009b', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_155",
+      "17, audit_value_max_len='\\x9b', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_156",
+      "17, audit_value_max_len='\u009c', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_156",
+      "17, audit_value_max_len='\\x9c', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_157",
+      "17, audit_value_max_len='\u009d', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_157",
+      "17, audit_value_max_len='\\x9d', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_158",
+      "17, audit_value_max_len='\u009e', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_158",
+      "17, audit_value_max_len='\\x9e', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_159",
+      "17, audit_value_max_len='\u009f', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_159",
+      "17, audit_value_max_len='\\x9f', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_160",
+      "17, audit_value_max_len='\u00a0', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_160",
+      "17, audit_value_max_len='\\xa0', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_161",
+      "17, audit_value_max_len='\u00a1', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_161",
+      "17, audit_value_max_len='\\xa1', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_162",
+      "17, audit_value_max_len='\u00a2', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_162",
+      "17, audit_value_max_len='\\xa2', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_163",
+      "17, audit_value_max_len='\u00a3', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_163",
+      "17, audit_value_max_len='\\xa3', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_164",
+      "17, audit_value_max_len='\u00a4', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_164",
+      "17, audit_value_max_len='\\xa4', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_165",
+      "17, audit_value_max_len='\u00a5', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_165",
+      "17, audit_value_max_len='\\xa5', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_166",
+      "17, audit_value_max_len='\u00a6', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_166",
+      "17, audit_value_max_len='\\xa6', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_167",
+      "17, audit_value_max_len='\u00a7', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_167",
+      "17, audit_value_max_len='\\xa7', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_168",
+      "17, audit_value_max_len='\u00a8', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_168",
+      "17, audit_value_max_len='\\xa8', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_169",
+      "17, audit_value_max_len='\u00a9', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_169",
+      "17, audit_value_max_len='\\xa9', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_170",
+      "17, audit_value_max_len='\u00aa', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_170",
+      "17, audit_value_max_len='\\xaa', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_171",
+      "17, audit_value_max_len='\u00ab', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_171",
+      "17, audit_value_max_len='\\xab', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_172",
+      "17, audit_value_max_len='\u00ac', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_172",
+      "17, audit_value_max_len='\\xac', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_173",
+      "17, audit_value_max_len='\u00ad', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_173",
+      "17, audit_value_max_len='\\xad', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_174",
+      "17, audit_value_max_len='\u00ae', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_174",
+      "17, audit_value_max_len='\\xae', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_175",
+      "17, audit_value_max_len='\u00af', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_175",
+      "17, audit_value_max_len='\\xaf', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_176",
+      "17, audit_value_max_len='\u00b0', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_176",
+      "17, audit_value_max_len='\\xb0', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_177",
+      "17, audit_value_max_len='\u00b1', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_177",
+      "17, audit_value_max_len='\\xb1', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_178",
+      "17, audit_value_max_len='\u00b2', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_178",
+      "17, audit_value_max_len='\\xb2', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_179",
+      "17, audit_value_max_len='\u00b3', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_179",
+      "17, audit_value_max_len='\\xb3', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_180",
+      "17, audit_value_max_len='\u00b4', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_180",
+      "17, audit_value_max_len='\\xb4', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_181",
+      "17, audit_value_max_len='\u00b5', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_181",
+      "17, audit_value_max_len='\\xb5', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_182",
+      "17, audit_value_max_len='\u00b6', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_182",
+      "17, audit_value_max_len='\\xb6', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_183",
+      "17, audit_value_max_len='\u00b7', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_183",
+      "17, audit_value_max_len='\\xb7', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_184",
+      "17, audit_value_max_len='\u00b8', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_184",
+      "17, audit_value_max_len='\\xb8', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_185",
+      "17, audit_value_max_len='\u00b9', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_185",
+      "17, audit_value_max_len='\\xb9', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_186",
+      "17, audit_value_max_len='\u00ba', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_186",
+      "17, audit_value_max_len='\\xba', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_187",
+      "17, audit_value_max_len='\u00bb', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_187",
+      "17, audit_value_max_len='\\xbb', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_188",
+      "17, audit_value_max_len='\u00bc', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_188",
+      "17, audit_value_max_len='\\xbc', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_189",
+      "17, audit_value_max_len='\u00bd', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_189",
+      "17, audit_value_max_len='\\xbd', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_190",
+      "17, audit_value_max_len='\u00be', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_190",
+      "17, audit_value_max_len='\\xbe', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_191",
+      "17, audit_value_max_len='\u00bf', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_191",
+      "17, audit_value_max_len='\\xbf', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_192",
+      "17, audit_value_max_len='\u00c0', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_192",
+      "17, audit_value_max_len='\\xc0', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_193",
+      "17, audit_value_max_len='\u00c1', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_193",
+      "17, audit_value_max_len='\\xc1', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_194",
+      "17, audit_value_max_len='\u00c2', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_194",
+      "17, audit_value_max_len='\\xc2', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_195",
+      "17, audit_value_max_len='\u00c3', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_195",
+      "17, audit_value_max_len='\\xc3', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_196",
+      "17, audit_value_max_len='\u00c4', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_196",
+      "17, audit_value_max_len='\\xc4', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_197",
+      "17, audit_value_max_len='\u00c5', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_197",
+      "17, audit_value_max_len='\\xc5', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_198",
+      "17, audit_value_max_len='\u00c6', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_198",
+      "17, audit_value_max_len='\\xc6', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_199",
+      "17, audit_value_max_len='\u00c7', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_199",
+      "17, audit_value_max_len='\\xc7', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_200",
+      "17, audit_value_max_len='\u00c8', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_200",
+      "17, audit_value_max_len='\\xc8', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_201",
+      "17, audit_value_max_len='\u00c9', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_201",
+      "17, audit_value_max_len='\\xc9', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_202",
+      "17, audit_value_max_len='\u00ca', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_202",
+      "17, audit_value_max_len='\\xca', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_203",
+      "17, audit_value_max_len='\u00cb', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_203",
+      "17, audit_value_max_len='\\xcb', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_204",
+      "17, audit_value_max_len='\u00cc', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_204",
+      "17, audit_value_max_len='\\xcc', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_205",
+      "17, audit_value_max_len='\u00cd', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_205",
+      "17, audit_value_max_len='\\xcd', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_206",
+      "17, audit_value_max_len='\u00ce', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_206",
+      "17, audit_value_max_len='\\xce', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_207",
+      "17, audit_value_max_len='\u00cf', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_207",
+      "17, audit_value_max_len='\\xcf', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_208",
+      "17, audit_value_max_len='\u00d0', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_208",
+      "17, audit_value_max_len='\\xd0', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_209",
+      "17, audit_value_max_len='\u00d1', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_209",
+      "17, audit_value_max_len='\\xd1', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_210",
+      "17, audit_value_max_len='\u00d2', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_210",
+      "17, audit_value_max_len='\\xd2', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_211",
+      "17, audit_value_max_len='\u00d3', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_211",
+      "17, audit_value_max_len='\\xd3', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_212",
+      "17, audit_value_max_len='\u00d4', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_212",
+      "17, audit_value_max_len='\\xd4', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_213",
+      "17, audit_value_max_len='\u00d5', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_213",
+      "17, audit_value_max_len='\\xd5', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_214",
+      "17, audit_value_max_len='\u00d6', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_214",
+      "17, audit_value_max_len='\\xd6', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_215",
+      "17, audit_value_max_len='\u00d7', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_215",
+      "17, audit_value_max_len='\\xd7', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_216",
+      "17, audit_value_max_len='\u00d8', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_216",
+      "17, audit_value_max_len='\\xd8', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_217",
+      "17, audit_value_max_len='\u00d9', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_217",
+      "17, audit_value_max_len='\\xd9', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_218",
+      "17, audit_value_max_len='\u00da', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_218",
+      "17, audit_value_max_len='\\xda', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_219",
+      "17, audit_value_max_len='\u00db', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_219",
+      "17, audit_value_max_len='\\xdb', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_220",
+      "17, audit_value_max_len='\u00dc', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_220",
+      "17, audit_value_max_len='\\xdc', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_221",
+      "17, audit_value_max_len='\u00dd', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_221",
+      "17, audit_value_max_len='\\xdd', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_222",
+      "17, audit_value_max_len='\u00de', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_222",
+      "17, audit_value_max_len='\\xde', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_223",
+      "17, audit_value_max_len='\u00df', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_223",
+      "17, audit_value_max_len='\\xdf', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_224",
+      "17, audit_value_max_len='\u00e0', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_224",
+      "17, audit_value_max_len='\\xe0', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_225",
+      "17, audit_value_max_len='\u00e1', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_225",
+      "17, audit_value_max_len='\\xe1', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_226",
+      "17, audit_value_max_len='\u00e2', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_226",
+      "17, audit_value_max_len='\\xe2', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_227",
+      "17, audit_value_max_len='\u00e3', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_227",
+      "17, audit_value_max_len='\\xe3', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_228",
+      "17, audit_value_max_len='\u00e4', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_228",
+      "17, audit_value_max_len='\\xe4', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_229",
+      "17, audit_value_max_len='\u00e5', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_229",
+      "17, audit_value_max_len='\\xe5', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_230",
+      "17, audit_value_max_len='\u00e6', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_230",
+      "17, audit_value_max_len='\\xe6', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_231",
+      "17, audit_value_max_len='\u00e7', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_231",
+      "17, audit_value_max_len='\\xe7', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_232",
+      "17, audit_value_max_len='\u00e8', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_232",
+      "17, audit_value_max_len='\\xe8', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_233",
+      "17, audit_value_max_len='\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_233",
+      "17, audit_value_max_len='\\xe9', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_234",
+      "17, audit_value_max_len='\u00ea', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_234",
+      "17, audit_value_max_len='\\xea', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_235",
+      "17, audit_value_max_len='\u00eb', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_235",
+      "17, audit_value_max_len='\\xeb', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_236",
+      "17, audit_value_max_len='\u00ec', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_236",
+      "17, audit_value_max_len='\\xec', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_237",
+      "17, audit_value_max_len='\u00ed', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_237",
+      "17, audit_value_max_len='\\xed', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_238",
+      "17, audit_value_max_len='\u00ee', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_238",
+      "17, audit_value_max_len='\\xee', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_239",
+      "17, audit_value_max_len='\u00ef', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_239",
+      "17, audit_value_max_len='\\xef', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_240",
+      "17, audit_value_max_len='\u00f0', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_240",
+      "17, audit_value_max_len='\\xf0', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_241",
+      "17, audit_value_max_len='\u00f1', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_241",
+      "17, audit_value_max_len='\\xf1', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_242",
+      "17, audit_value_max_len='\u00f2', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_242",
+      "17, audit_value_max_len='\\xf2', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_243",
+      "17, audit_value_max_len='\u00f3', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_243",
+      "17, audit_value_max_len='\\xf3', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_244",
+      "17, audit_value_max_len='\u00f4', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_244",
+      "17, audit_value_max_len='\\xf4', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_245",
+      "17, audit_value_max_len='\u00f5', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_245",
+      "17, audit_value_max_len='\\xf5', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_246",
+      "17, audit_value_max_len='\u00f6', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_246",
+      "17, audit_value_max_len='\\xf6', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_247",
+      "17, audit_value_max_len='\u00f7', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_247",
+      "17, audit_value_max_len='\\xf7', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_248",
+      "17, audit_value_max_len='\u00f8', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_248",
+      "17, audit_value_max_len='\\xf8', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_249",
+      "17, audit_value_max_len='\u00f9', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_249",
+      "17, audit_value_max_len='\\xf9', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_250",
+      "17, audit_value_max_len='\u00fa', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_250",
+      "17, audit_value_max_len='\\xfa', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_251",
+      "17, audit_value_max_len='\u00fb', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_251",
+      "17, audit_value_max_len='\\xfb', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_252",
+      "17, audit_value_max_len='\u00fc', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_252",
+      "17, audit_value_max_len='\\xfc', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_253",
+      "17, audit_value_max_len='\u00fd', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_253",
+      "17, audit_value_max_len='\\xfd', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_254",
+      "17, audit_value_max_len='\u00fe', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_254",
+      "17, audit_value_max_len='\\xfe', audit_value_max_len=21"
+    ],
+    [
+      "char_raw_255",
+      "17, audit_value_max_len='\u00ff', audit_value_max_len=21"
+    ],
+    [
+      "char_hex_255",
+      "17, audit_value_max_len='\\xff', audit_value_max_len=21"
+    ],
+    [
+      "unicode_0_literal",
+      "17, audit_value_max_len='\\u{0}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_0_macro",
+      "17, audit_value_max_len=ignored!('\\u{0}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_1_literal",
+      "17, audit_value_max_len='\\u{7f}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_1_macro",
+      "17, audit_value_max_len=ignored!('\\u{7f}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_2_literal",
+      "17, audit_value_max_len='\\u{80}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_2_macro",
+      "17, audit_value_max_len=ignored!('\\u{80}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_3_literal",
+      "17, audit_value_max_len='\\u{d7ff}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_3_macro",
+      "17, audit_value_max_len=ignored!('\\u{d7ff}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_4_literal",
+      "17, audit_value_max_len='\\u{d800}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_4_macro",
+      "17, audit_value_max_len=ignored!('\\u{d800}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_5_literal",
+      "17, audit_value_max_len='\\u{dfff}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_5_macro",
+      "17, audit_value_max_len=ignored!('\\u{dfff}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_6_literal",
+      "17, audit_value_max_len='\\u{e000}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_6_macro",
+      "17, audit_value_max_len=ignored!('\\u{e000}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_7_literal",
+      "17, audit_value_max_len='\\u{10ffff}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_7_macro",
+      "17, audit_value_max_len=ignored!('\\u{10ffff}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_8_literal",
+      "17, audit_value_max_len='\\u{110000}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_8_macro",
+      "17, audit_value_max_len=ignored!('\\u{110000}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_9_literal",
+      "17, audit_value_max_len='\\u{000000}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_9_macro",
+      "17, audit_value_max_len=ignored!('\\u{000000}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_10_literal",
+      "17, audit_value_max_len='\\u{0000000}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_10_macro",
+      "17, audit_value_max_len=ignored!('\\u{0000000}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_11_literal",
+      "17, audit_value_max_len='\\u{_41}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_11_macro",
+      "17, audit_value_max_len=ignored!('\\u{_41}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_12_literal",
+      "17, audit_value_max_len='\\u{41_}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_12_macro",
+      "17, audit_value_max_len=ignored!('\\u{41_}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_13_literal",
+      "17, audit_value_max_len='\\u{4__1}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_13_macro",
+      "17, audit_value_max_len=ignored!('\\u{4__1}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_14_literal",
+      "17, audit_value_max_len='\\u{FFFFFF}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_14_macro",
+      "17, audit_value_max_len=ignored!('\\u{FFFFFF}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_15_literal",
+      "17, audit_value_max_len='\\u{}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_15_macro",
+      "17, audit_value_max_len=ignored!('\\u{}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_16_literal",
+      "17, audit_value_max_len='\\u{12g}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_16_macro",
+      "17, audit_value_max_len=ignored!('\\u{12g}'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_17_literal",
+      "17, audit_value_max_len='\\u{41 }', audit_value_max_len=21"
+    ],
+    [
+      "unicode_17_macro",
+      "17, audit_value_max_len=ignored!('\\u{41 }'), audit_value_max_len=21"
+    ],
+    [
+      "unicode_18_literal",
+      "17, audit_value_max_len='\\u{+41}', audit_value_max_len=21"
+    ],
+    [
+      "unicode_18_macro",
+      "17, audit_value_max_len=ignored!('\\u{+41}'), audit_value_max_len=21"
+    ],
+    [
+      "escape_0",
+      "17, ignored!('\\n'), audit_value_max_len=21"
+    ],
+    [
+      "escape_1",
+      "17, ignored!('\\r'), audit_value_max_len=21"
+    ],
+    [
+      "escape_2",
+      "17, ignored!('\\t'), audit_value_max_len=21"
+    ],
+    [
+      "escape_3",
+      "17, ignored!('\\\\'), audit_value_max_len=21"
+    ],
+    [
+      "escape_4",
+      "17, ignored!('\\0'), audit_value_max_len=21"
+    ],
+    [
+      "escape_5",
+      "17, ignored!('\\''), audit_value_max_len=21"
+    ],
+    [
+      "escape_6",
+      "17, ignored!('\\\"'), audit_value_max_len=21"
+    ],
+    [
+      "escape_7",
+      "17, ignored!('\\q'), audit_value_max_len=21"
+    ],
+    [
+      "escape_8",
+      "17, ignored!('\\v'), audit_value_max_len=21"
+    ],
+    [
+      "escape_9",
+      "17, ignored!('\\a'), audit_value_max_len=21"
+    ],
+    [
+      "escape_10",
+      "17, ignored!('\\b'), audit_value_max_len=21"
+    ],
+    [
+      "escape_11",
+      "17, ignored!('\\f'), audit_value_max_len=21"
+    ],
+    [
+      "escape_12",
+      "17, ignored!('\\x'), audit_value_max_len=21"
+    ],
+    [
+      "escape_13",
+      "17, ignored!('\\x0'), audit_value_max_len=21"
+    ],
+    [
+      "escape_14",
+      "17, ignored!('\\xgg'), audit_value_max_len=21"
+    ],
+    [
+      "escape_15",
+      "17, ignored!('\\x0g'), audit_value_max_len=21"
+    ],
+    [
+      "escape_16",
+      "17, ignored!('\\x000'), audit_value_max_len=21"
+    ],
+    [
+      "escape_17",
+      "17, ignored!('\\u'), audit_value_max_len=21"
+    ],
+    [
+      "escape_18",
+      "17, ignored!('\\u41'), audit_value_max_len=21"
+    ],
+    [
+      "escape_19",
+      "17, ignored!('\\u{41}'), audit_value_max_len=21"
+    ],
+    [
+      "escape_20",
+      "17, ignored!('\\\n'), audit_value_max_len=21"
+    ],
+    [
+      "escape_21",
+      "17, ignored!('\\\r\n'), audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_0",
+      "17, audit_value_max_len=b'\u0000', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_0",
+      "17, audit_value_max_len=b'\\x00', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_1",
+      "17, audit_value_max_len=b'\u0001', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_1",
+      "17, audit_value_max_len=b'\\x01', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_2",
+      "17, audit_value_max_len=b'\u0002', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_2",
+      "17, audit_value_max_len=b'\\x02', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_3",
+      "17, audit_value_max_len=b'\u0003', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_3",
+      "17, audit_value_max_len=b'\\x03', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_4",
+      "17, audit_value_max_len=b'\u0004', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_4",
+      "17, audit_value_max_len=b'\\x04', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_5",
+      "17, audit_value_max_len=b'\u0005', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_5",
+      "17, audit_value_max_len=b'\\x05', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_6",
+      "17, audit_value_max_len=b'\u0006', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_6",
+      "17, audit_value_max_len=b'\\x06', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_7",
+      "17, audit_value_max_len=b'\u0007', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_7",
+      "17, audit_value_max_len=b'\\x07', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_8",
+      "17, audit_value_max_len=b'\b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_8",
+      "17, audit_value_max_len=b'\\x08', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_9",
+      "17, audit_value_max_len=b'\t', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_9",
+      "17, audit_value_max_len=b'\\x09', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_10",
+      "17, audit_value_max_len=b'\n', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_10",
+      "17, audit_value_max_len=b'\\x0a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_11",
+      "17, audit_value_max_len=b'\u000b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_11",
+      "17, audit_value_max_len=b'\\x0b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_12",
+      "17, audit_value_max_len=b'\f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_12",
+      "17, audit_value_max_len=b'\\x0c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_13",
+      "17, audit_value_max_len=b'\r', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_13",
+      "17, audit_value_max_len=b'\\x0d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_14",
+      "17, audit_value_max_len=b'\u000e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_14",
+      "17, audit_value_max_len=b'\\x0e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_15",
+      "17, audit_value_max_len=b'\u000f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_15",
+      "17, audit_value_max_len=b'\\x0f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_16",
+      "17, audit_value_max_len=b'\u0010', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_16",
+      "17, audit_value_max_len=b'\\x10', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_17",
+      "17, audit_value_max_len=b'\u0011', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_17",
+      "17, audit_value_max_len=b'\\x11', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_18",
+      "17, audit_value_max_len=b'\u0012', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_18",
+      "17, audit_value_max_len=b'\\x12', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_19",
+      "17, audit_value_max_len=b'\u0013', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_19",
+      "17, audit_value_max_len=b'\\x13', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_20",
+      "17, audit_value_max_len=b'\u0014', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_20",
+      "17, audit_value_max_len=b'\\x14', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_21",
+      "17, audit_value_max_len=b'\u0015', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_21",
+      "17, audit_value_max_len=b'\\x15', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_22",
+      "17, audit_value_max_len=b'\u0016', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_22",
+      "17, audit_value_max_len=b'\\x16', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_23",
+      "17, audit_value_max_len=b'\u0017', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_23",
+      "17, audit_value_max_len=b'\\x17', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_24",
+      "17, audit_value_max_len=b'\u0018', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_24",
+      "17, audit_value_max_len=b'\\x18', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_25",
+      "17, audit_value_max_len=b'\u0019', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_25",
+      "17, audit_value_max_len=b'\\x19', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_26",
+      "17, audit_value_max_len=b'\u001a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_26",
+      "17, audit_value_max_len=b'\\x1a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_27",
+      "17, audit_value_max_len=b'\u001b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_27",
+      "17, audit_value_max_len=b'\\x1b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_28",
+      "17, audit_value_max_len=b'\u001c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_28",
+      "17, audit_value_max_len=b'\\x1c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_29",
+      "17, audit_value_max_len=b'\u001d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_29",
+      "17, audit_value_max_len=b'\\x1d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_30",
+      "17, audit_value_max_len=b'\u001e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_30",
+      "17, audit_value_max_len=b'\\x1e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_31",
+      "17, audit_value_max_len=b'\u001f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_31",
+      "17, audit_value_max_len=b'\\x1f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_32",
+      "17, audit_value_max_len=b' ', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_32",
+      "17, audit_value_max_len=b'\\x20', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_33",
+      "17, audit_value_max_len=b'!', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_33",
+      "17, audit_value_max_len=b'\\x21', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_34",
+      "17, audit_value_max_len=b'\"', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_34",
+      "17, audit_value_max_len=b'\\x22', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_35",
+      "17, audit_value_max_len=b'#', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_35",
+      "17, audit_value_max_len=b'\\x23', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_36",
+      "17, audit_value_max_len=b'$', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_36",
+      "17, audit_value_max_len=b'\\x24', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_37",
+      "17, audit_value_max_len=b'%', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_37",
+      "17, audit_value_max_len=b'\\x25', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_38",
+      "17, audit_value_max_len=b'&', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_38",
+      "17, audit_value_max_len=b'\\x26', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_39",
+      "17, audit_value_max_len=b''', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_39",
+      "17, audit_value_max_len=b'\\x27', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_40",
+      "17, audit_value_max_len=b'(', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_40",
+      "17, audit_value_max_len=b'\\x28', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_41",
+      "17, audit_value_max_len=b')', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_41",
+      "17, audit_value_max_len=b'\\x29', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_42",
+      "17, audit_value_max_len=b'*', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_42",
+      "17, audit_value_max_len=b'\\x2a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_43",
+      "17, audit_value_max_len=b'+', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_43",
+      "17, audit_value_max_len=b'\\x2b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_44",
+      "17, audit_value_max_len=b',', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_44",
+      "17, audit_value_max_len=b'\\x2c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_45",
+      "17, audit_value_max_len=b'-', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_45",
+      "17, audit_value_max_len=b'\\x2d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_46",
+      "17, audit_value_max_len=b'.', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_46",
+      "17, audit_value_max_len=b'\\x2e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_47",
+      "17, audit_value_max_len=b'/', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_47",
+      "17, audit_value_max_len=b'\\x2f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_48",
+      "17, audit_value_max_len=b'0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_48",
+      "17, audit_value_max_len=b'\\x30', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_49",
+      "17, audit_value_max_len=b'1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_49",
+      "17, audit_value_max_len=b'\\x31', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_50",
+      "17, audit_value_max_len=b'2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_50",
+      "17, audit_value_max_len=b'\\x32', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_51",
+      "17, audit_value_max_len=b'3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_51",
+      "17, audit_value_max_len=b'\\x33', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_52",
+      "17, audit_value_max_len=b'4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_52",
+      "17, audit_value_max_len=b'\\x34', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_53",
+      "17, audit_value_max_len=b'5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_53",
+      "17, audit_value_max_len=b'\\x35', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_54",
+      "17, audit_value_max_len=b'6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_54",
+      "17, audit_value_max_len=b'\\x36', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_55",
+      "17, audit_value_max_len=b'7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_55",
+      "17, audit_value_max_len=b'\\x37', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_56",
+      "17, audit_value_max_len=b'8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_56",
+      "17, audit_value_max_len=b'\\x38', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_57",
+      "17, audit_value_max_len=b'9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_57",
+      "17, audit_value_max_len=b'\\x39', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_58",
+      "17, audit_value_max_len=b':', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_58",
+      "17, audit_value_max_len=b'\\x3a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_59",
+      "17, audit_value_max_len=b';', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_59",
+      "17, audit_value_max_len=b'\\x3b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_60",
+      "17, audit_value_max_len=b'<', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_60",
+      "17, audit_value_max_len=b'\\x3c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_61",
+      "17, audit_value_max_len=b'=', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_61",
+      "17, audit_value_max_len=b'\\x3d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_62",
+      "17, audit_value_max_len=b'>', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_62",
+      "17, audit_value_max_len=b'\\x3e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_63",
+      "17, audit_value_max_len=b'?', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_63",
+      "17, audit_value_max_len=b'\\x3f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_64",
+      "17, audit_value_max_len=b'@', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_64",
+      "17, audit_value_max_len=b'\\x40', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_65",
+      "17, audit_value_max_len=b'A', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_65",
+      "17, audit_value_max_len=b'\\x41', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_66",
+      "17, audit_value_max_len=b'B', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_66",
+      "17, audit_value_max_len=b'\\x42', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_67",
+      "17, audit_value_max_len=b'C', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_67",
+      "17, audit_value_max_len=b'\\x43', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_68",
+      "17, audit_value_max_len=b'D', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_68",
+      "17, audit_value_max_len=b'\\x44', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_69",
+      "17, audit_value_max_len=b'E', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_69",
+      "17, audit_value_max_len=b'\\x45', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_70",
+      "17, audit_value_max_len=b'F', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_70",
+      "17, audit_value_max_len=b'\\x46', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_71",
+      "17, audit_value_max_len=b'G', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_71",
+      "17, audit_value_max_len=b'\\x47', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_72",
+      "17, audit_value_max_len=b'H', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_72",
+      "17, audit_value_max_len=b'\\x48', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_73",
+      "17, audit_value_max_len=b'I', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_73",
+      "17, audit_value_max_len=b'\\x49', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_74",
+      "17, audit_value_max_len=b'J', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_74",
+      "17, audit_value_max_len=b'\\x4a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_75",
+      "17, audit_value_max_len=b'K', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_75",
+      "17, audit_value_max_len=b'\\x4b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_76",
+      "17, audit_value_max_len=b'L', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_76",
+      "17, audit_value_max_len=b'\\x4c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_77",
+      "17, audit_value_max_len=b'M', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_77",
+      "17, audit_value_max_len=b'\\x4d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_78",
+      "17, audit_value_max_len=b'N', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_78",
+      "17, audit_value_max_len=b'\\x4e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_79",
+      "17, audit_value_max_len=b'O', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_79",
+      "17, audit_value_max_len=b'\\x4f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_80",
+      "17, audit_value_max_len=b'P', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_80",
+      "17, audit_value_max_len=b'\\x50', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_81",
+      "17, audit_value_max_len=b'Q', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_81",
+      "17, audit_value_max_len=b'\\x51', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_82",
+      "17, audit_value_max_len=b'R', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_82",
+      "17, audit_value_max_len=b'\\x52', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_83",
+      "17, audit_value_max_len=b'S', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_83",
+      "17, audit_value_max_len=b'\\x53', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_84",
+      "17, audit_value_max_len=b'T', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_84",
+      "17, audit_value_max_len=b'\\x54', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_85",
+      "17, audit_value_max_len=b'U', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_85",
+      "17, audit_value_max_len=b'\\x55', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_86",
+      "17, audit_value_max_len=b'V', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_86",
+      "17, audit_value_max_len=b'\\x56', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_87",
+      "17, audit_value_max_len=b'W', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_87",
+      "17, audit_value_max_len=b'\\x57', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_88",
+      "17, audit_value_max_len=b'X', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_88",
+      "17, audit_value_max_len=b'\\x58', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_89",
+      "17, audit_value_max_len=b'Y', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_89",
+      "17, audit_value_max_len=b'\\x59', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_90",
+      "17, audit_value_max_len=b'Z', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_90",
+      "17, audit_value_max_len=b'\\x5a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_91",
+      "17, audit_value_max_len=b'[', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_91",
+      "17, audit_value_max_len=b'\\x5b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_92",
+      "17, audit_value_max_len=b'\\', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_92",
+      "17, audit_value_max_len=b'\\x5c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_93",
+      "17, audit_value_max_len=b']', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_93",
+      "17, audit_value_max_len=b'\\x5d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_94",
+      "17, audit_value_max_len=b'^', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_94",
+      "17, audit_value_max_len=b'\\x5e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_95",
+      "17, audit_value_max_len=b'_', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_95",
+      "17, audit_value_max_len=b'\\x5f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_96",
+      "17, audit_value_max_len=b'`', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_96",
+      "17, audit_value_max_len=b'\\x60', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_97",
+      "17, audit_value_max_len=b'a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_97",
+      "17, audit_value_max_len=b'\\x61', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_98",
+      "17, audit_value_max_len=b'b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_98",
+      "17, audit_value_max_len=b'\\x62', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_99",
+      "17, audit_value_max_len=b'c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_99",
+      "17, audit_value_max_len=b'\\x63', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_100",
+      "17, audit_value_max_len=b'd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_100",
+      "17, audit_value_max_len=b'\\x64', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_101",
+      "17, audit_value_max_len=b'e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_101",
+      "17, audit_value_max_len=b'\\x65', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_102",
+      "17, audit_value_max_len=b'f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_102",
+      "17, audit_value_max_len=b'\\x66', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_103",
+      "17, audit_value_max_len=b'g', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_103",
+      "17, audit_value_max_len=b'\\x67', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_104",
+      "17, audit_value_max_len=b'h', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_104",
+      "17, audit_value_max_len=b'\\x68', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_105",
+      "17, audit_value_max_len=b'i', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_105",
+      "17, audit_value_max_len=b'\\x69', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_106",
+      "17, audit_value_max_len=b'j', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_106",
+      "17, audit_value_max_len=b'\\x6a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_107",
+      "17, audit_value_max_len=b'k', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_107",
+      "17, audit_value_max_len=b'\\x6b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_108",
+      "17, audit_value_max_len=b'l', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_108",
+      "17, audit_value_max_len=b'\\x6c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_109",
+      "17, audit_value_max_len=b'm', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_109",
+      "17, audit_value_max_len=b'\\x6d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_110",
+      "17, audit_value_max_len=b'n', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_110",
+      "17, audit_value_max_len=b'\\x6e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_111",
+      "17, audit_value_max_len=b'o', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_111",
+      "17, audit_value_max_len=b'\\x6f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_112",
+      "17, audit_value_max_len=b'p', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_112",
+      "17, audit_value_max_len=b'\\x70', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_113",
+      "17, audit_value_max_len=b'q', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_113",
+      "17, audit_value_max_len=b'\\x71', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_114",
+      "17, audit_value_max_len=b'r', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_114",
+      "17, audit_value_max_len=b'\\x72', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_115",
+      "17, audit_value_max_len=b's', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_115",
+      "17, audit_value_max_len=b'\\x73', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_116",
+      "17, audit_value_max_len=b't', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_116",
+      "17, audit_value_max_len=b'\\x74', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_117",
+      "17, audit_value_max_len=b'u', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_117",
+      "17, audit_value_max_len=b'\\x75', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_118",
+      "17, audit_value_max_len=b'v', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_118",
+      "17, audit_value_max_len=b'\\x76', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_119",
+      "17, audit_value_max_len=b'w', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_119",
+      "17, audit_value_max_len=b'\\x77', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_120",
+      "17, audit_value_max_len=b'x', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_120",
+      "17, audit_value_max_len=b'\\x78', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_121",
+      "17, audit_value_max_len=b'y', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_121",
+      "17, audit_value_max_len=b'\\x79', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_122",
+      "17, audit_value_max_len=b'z', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_122",
+      "17, audit_value_max_len=b'\\x7a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_123",
+      "17, audit_value_max_len=b'{', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_123",
+      "17, audit_value_max_len=b'\\x7b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_124",
+      "17, audit_value_max_len=b'|', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_124",
+      "17, audit_value_max_len=b'\\x7c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_125",
+      "17, audit_value_max_len=b'}', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_125",
+      "17, audit_value_max_len=b'\\x7d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_126",
+      "17, audit_value_max_len=b'~', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_126",
+      "17, audit_value_max_len=b'\\x7e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_127",
+      "17, audit_value_max_len=b'\u007f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_127",
+      "17, audit_value_max_len=b'\\x7f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_128",
+      "17, audit_value_max_len=b'\u0080', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_128",
+      "17, audit_value_max_len=b'\\x80', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_129",
+      "17, audit_value_max_len=b'\u0081', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_129",
+      "17, audit_value_max_len=b'\\x81', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_130",
+      "17, audit_value_max_len=b'\u0082', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_130",
+      "17, audit_value_max_len=b'\\x82', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_131",
+      "17, audit_value_max_len=b'\u0083', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_131",
+      "17, audit_value_max_len=b'\\x83', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_132",
+      "17, audit_value_max_len=b'\u0084', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_132",
+      "17, audit_value_max_len=b'\\x84', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_133",
+      "17, audit_value_max_len=b'\u0085', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_133",
+      "17, audit_value_max_len=b'\\x85', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_134",
+      "17, audit_value_max_len=b'\u0086', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_134",
+      "17, audit_value_max_len=b'\\x86', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_135",
+      "17, audit_value_max_len=b'\u0087', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_135",
+      "17, audit_value_max_len=b'\\x87', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_136",
+      "17, audit_value_max_len=b'\u0088', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_136",
+      "17, audit_value_max_len=b'\\x88', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_137",
+      "17, audit_value_max_len=b'\u0089', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_137",
+      "17, audit_value_max_len=b'\\x89', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_138",
+      "17, audit_value_max_len=b'\u008a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_138",
+      "17, audit_value_max_len=b'\\x8a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_139",
+      "17, audit_value_max_len=b'\u008b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_139",
+      "17, audit_value_max_len=b'\\x8b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_140",
+      "17, audit_value_max_len=b'\u008c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_140",
+      "17, audit_value_max_len=b'\\x8c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_141",
+      "17, audit_value_max_len=b'\u008d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_141",
+      "17, audit_value_max_len=b'\\x8d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_142",
+      "17, audit_value_max_len=b'\u008e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_142",
+      "17, audit_value_max_len=b'\\x8e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_143",
+      "17, audit_value_max_len=b'\u008f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_143",
+      "17, audit_value_max_len=b'\\x8f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_144",
+      "17, audit_value_max_len=b'\u0090', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_144",
+      "17, audit_value_max_len=b'\\x90', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_145",
+      "17, audit_value_max_len=b'\u0091', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_145",
+      "17, audit_value_max_len=b'\\x91', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_146",
+      "17, audit_value_max_len=b'\u0092', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_146",
+      "17, audit_value_max_len=b'\\x92', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_147",
+      "17, audit_value_max_len=b'\u0093', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_147",
+      "17, audit_value_max_len=b'\\x93', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_148",
+      "17, audit_value_max_len=b'\u0094', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_148",
+      "17, audit_value_max_len=b'\\x94', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_149",
+      "17, audit_value_max_len=b'\u0095', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_149",
+      "17, audit_value_max_len=b'\\x95', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_150",
+      "17, audit_value_max_len=b'\u0096', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_150",
+      "17, audit_value_max_len=b'\\x96', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_151",
+      "17, audit_value_max_len=b'\u0097', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_151",
+      "17, audit_value_max_len=b'\\x97', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_152",
+      "17, audit_value_max_len=b'\u0098', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_152",
+      "17, audit_value_max_len=b'\\x98', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_153",
+      "17, audit_value_max_len=b'\u0099', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_153",
+      "17, audit_value_max_len=b'\\x99', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_154",
+      "17, audit_value_max_len=b'\u009a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_154",
+      "17, audit_value_max_len=b'\\x9a', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_155",
+      "17, audit_value_max_len=b'\u009b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_155",
+      "17, audit_value_max_len=b'\\x9b', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_156",
+      "17, audit_value_max_len=b'\u009c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_156",
+      "17, audit_value_max_len=b'\\x9c', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_157",
+      "17, audit_value_max_len=b'\u009d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_157",
+      "17, audit_value_max_len=b'\\x9d', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_158",
+      "17, audit_value_max_len=b'\u009e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_158",
+      "17, audit_value_max_len=b'\\x9e', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_159",
+      "17, audit_value_max_len=b'\u009f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_159",
+      "17, audit_value_max_len=b'\\x9f', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_160",
+      "17, audit_value_max_len=b'\u00a0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_160",
+      "17, audit_value_max_len=b'\\xa0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_161",
+      "17, audit_value_max_len=b'\u00a1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_161",
+      "17, audit_value_max_len=b'\\xa1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_162",
+      "17, audit_value_max_len=b'\u00a2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_162",
+      "17, audit_value_max_len=b'\\xa2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_163",
+      "17, audit_value_max_len=b'\u00a3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_163",
+      "17, audit_value_max_len=b'\\xa3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_164",
+      "17, audit_value_max_len=b'\u00a4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_164",
+      "17, audit_value_max_len=b'\\xa4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_165",
+      "17, audit_value_max_len=b'\u00a5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_165",
+      "17, audit_value_max_len=b'\\xa5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_166",
+      "17, audit_value_max_len=b'\u00a6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_166",
+      "17, audit_value_max_len=b'\\xa6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_167",
+      "17, audit_value_max_len=b'\u00a7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_167",
+      "17, audit_value_max_len=b'\\xa7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_168",
+      "17, audit_value_max_len=b'\u00a8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_168",
+      "17, audit_value_max_len=b'\\xa8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_169",
+      "17, audit_value_max_len=b'\u00a9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_169",
+      "17, audit_value_max_len=b'\\xa9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_170",
+      "17, audit_value_max_len=b'\u00aa', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_170",
+      "17, audit_value_max_len=b'\\xaa', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_171",
+      "17, audit_value_max_len=b'\u00ab', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_171",
+      "17, audit_value_max_len=b'\\xab', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_172",
+      "17, audit_value_max_len=b'\u00ac', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_172",
+      "17, audit_value_max_len=b'\\xac', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_173",
+      "17, audit_value_max_len=b'\u00ad', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_173",
+      "17, audit_value_max_len=b'\\xad', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_174",
+      "17, audit_value_max_len=b'\u00ae', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_174",
+      "17, audit_value_max_len=b'\\xae', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_175",
+      "17, audit_value_max_len=b'\u00af', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_175",
+      "17, audit_value_max_len=b'\\xaf', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_176",
+      "17, audit_value_max_len=b'\u00b0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_176",
+      "17, audit_value_max_len=b'\\xb0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_177",
+      "17, audit_value_max_len=b'\u00b1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_177",
+      "17, audit_value_max_len=b'\\xb1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_178",
+      "17, audit_value_max_len=b'\u00b2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_178",
+      "17, audit_value_max_len=b'\\xb2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_179",
+      "17, audit_value_max_len=b'\u00b3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_179",
+      "17, audit_value_max_len=b'\\xb3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_180",
+      "17, audit_value_max_len=b'\u00b4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_180",
+      "17, audit_value_max_len=b'\\xb4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_181",
+      "17, audit_value_max_len=b'\u00b5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_181",
+      "17, audit_value_max_len=b'\\xb5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_182",
+      "17, audit_value_max_len=b'\u00b6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_182",
+      "17, audit_value_max_len=b'\\xb6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_183",
+      "17, audit_value_max_len=b'\u00b7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_183",
+      "17, audit_value_max_len=b'\\xb7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_184",
+      "17, audit_value_max_len=b'\u00b8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_184",
+      "17, audit_value_max_len=b'\\xb8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_185",
+      "17, audit_value_max_len=b'\u00b9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_185",
+      "17, audit_value_max_len=b'\\xb9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_186",
+      "17, audit_value_max_len=b'\u00ba', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_186",
+      "17, audit_value_max_len=b'\\xba', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_187",
+      "17, audit_value_max_len=b'\u00bb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_187",
+      "17, audit_value_max_len=b'\\xbb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_188",
+      "17, audit_value_max_len=b'\u00bc', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_188",
+      "17, audit_value_max_len=b'\\xbc', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_189",
+      "17, audit_value_max_len=b'\u00bd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_189",
+      "17, audit_value_max_len=b'\\xbd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_190",
+      "17, audit_value_max_len=b'\u00be', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_190",
+      "17, audit_value_max_len=b'\\xbe', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_191",
+      "17, audit_value_max_len=b'\u00bf', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_191",
+      "17, audit_value_max_len=b'\\xbf', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_192",
+      "17, audit_value_max_len=b'\u00c0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_192",
+      "17, audit_value_max_len=b'\\xc0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_193",
+      "17, audit_value_max_len=b'\u00c1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_193",
+      "17, audit_value_max_len=b'\\xc1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_194",
+      "17, audit_value_max_len=b'\u00c2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_194",
+      "17, audit_value_max_len=b'\\xc2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_195",
+      "17, audit_value_max_len=b'\u00c3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_195",
+      "17, audit_value_max_len=b'\\xc3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_196",
+      "17, audit_value_max_len=b'\u00c4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_196",
+      "17, audit_value_max_len=b'\\xc4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_197",
+      "17, audit_value_max_len=b'\u00c5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_197",
+      "17, audit_value_max_len=b'\\xc5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_198",
+      "17, audit_value_max_len=b'\u00c6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_198",
+      "17, audit_value_max_len=b'\\xc6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_199",
+      "17, audit_value_max_len=b'\u00c7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_199",
+      "17, audit_value_max_len=b'\\xc7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_200",
+      "17, audit_value_max_len=b'\u00c8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_200",
+      "17, audit_value_max_len=b'\\xc8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_201",
+      "17, audit_value_max_len=b'\u00c9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_201",
+      "17, audit_value_max_len=b'\\xc9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_202",
+      "17, audit_value_max_len=b'\u00ca', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_202",
+      "17, audit_value_max_len=b'\\xca', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_203",
+      "17, audit_value_max_len=b'\u00cb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_203",
+      "17, audit_value_max_len=b'\\xcb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_204",
+      "17, audit_value_max_len=b'\u00cc', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_204",
+      "17, audit_value_max_len=b'\\xcc', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_205",
+      "17, audit_value_max_len=b'\u00cd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_205",
+      "17, audit_value_max_len=b'\\xcd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_206",
+      "17, audit_value_max_len=b'\u00ce', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_206",
+      "17, audit_value_max_len=b'\\xce', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_207",
+      "17, audit_value_max_len=b'\u00cf', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_207",
+      "17, audit_value_max_len=b'\\xcf', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_208",
+      "17, audit_value_max_len=b'\u00d0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_208",
+      "17, audit_value_max_len=b'\\xd0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_209",
+      "17, audit_value_max_len=b'\u00d1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_209",
+      "17, audit_value_max_len=b'\\xd1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_210",
+      "17, audit_value_max_len=b'\u00d2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_210",
+      "17, audit_value_max_len=b'\\xd2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_211",
+      "17, audit_value_max_len=b'\u00d3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_211",
+      "17, audit_value_max_len=b'\\xd3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_212",
+      "17, audit_value_max_len=b'\u00d4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_212",
+      "17, audit_value_max_len=b'\\xd4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_213",
+      "17, audit_value_max_len=b'\u00d5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_213",
+      "17, audit_value_max_len=b'\\xd5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_214",
+      "17, audit_value_max_len=b'\u00d6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_214",
+      "17, audit_value_max_len=b'\\xd6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_215",
+      "17, audit_value_max_len=b'\u00d7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_215",
+      "17, audit_value_max_len=b'\\xd7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_216",
+      "17, audit_value_max_len=b'\u00d8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_216",
+      "17, audit_value_max_len=b'\\xd8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_217",
+      "17, audit_value_max_len=b'\u00d9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_217",
+      "17, audit_value_max_len=b'\\xd9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_218",
+      "17, audit_value_max_len=b'\u00da', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_218",
+      "17, audit_value_max_len=b'\\xda', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_219",
+      "17, audit_value_max_len=b'\u00db', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_219",
+      "17, audit_value_max_len=b'\\xdb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_220",
+      "17, audit_value_max_len=b'\u00dc', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_220",
+      "17, audit_value_max_len=b'\\xdc', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_221",
+      "17, audit_value_max_len=b'\u00dd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_221",
+      "17, audit_value_max_len=b'\\xdd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_222",
+      "17, audit_value_max_len=b'\u00de', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_222",
+      "17, audit_value_max_len=b'\\xde', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_223",
+      "17, audit_value_max_len=b'\u00df', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_223",
+      "17, audit_value_max_len=b'\\xdf', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_224",
+      "17, audit_value_max_len=b'\u00e0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_224",
+      "17, audit_value_max_len=b'\\xe0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_225",
+      "17, audit_value_max_len=b'\u00e1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_225",
+      "17, audit_value_max_len=b'\\xe1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_226",
+      "17, audit_value_max_len=b'\u00e2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_226",
+      "17, audit_value_max_len=b'\\xe2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_227",
+      "17, audit_value_max_len=b'\u00e3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_227",
+      "17, audit_value_max_len=b'\\xe3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_228",
+      "17, audit_value_max_len=b'\u00e4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_228",
+      "17, audit_value_max_len=b'\\xe4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_229",
+      "17, audit_value_max_len=b'\u00e5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_229",
+      "17, audit_value_max_len=b'\\xe5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_230",
+      "17, audit_value_max_len=b'\u00e6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_230",
+      "17, audit_value_max_len=b'\\xe6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_231",
+      "17, audit_value_max_len=b'\u00e7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_231",
+      "17, audit_value_max_len=b'\\xe7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_232",
+      "17, audit_value_max_len=b'\u00e8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_232",
+      "17, audit_value_max_len=b'\\xe8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_233",
+      "17, audit_value_max_len=b'\u00e9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_233",
+      "17, audit_value_max_len=b'\\xe9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_234",
+      "17, audit_value_max_len=b'\u00ea', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_234",
+      "17, audit_value_max_len=b'\\xea', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_235",
+      "17, audit_value_max_len=b'\u00eb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_235",
+      "17, audit_value_max_len=b'\\xeb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_236",
+      "17, audit_value_max_len=b'\u00ec', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_236",
+      "17, audit_value_max_len=b'\\xec', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_237",
+      "17, audit_value_max_len=b'\u00ed', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_237",
+      "17, audit_value_max_len=b'\\xed', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_238",
+      "17, audit_value_max_len=b'\u00ee', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_238",
+      "17, audit_value_max_len=b'\\xee', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_239",
+      "17, audit_value_max_len=b'\u00ef', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_239",
+      "17, audit_value_max_len=b'\\xef', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_240",
+      "17, audit_value_max_len=b'\u00f0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_240",
+      "17, audit_value_max_len=b'\\xf0', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_241",
+      "17, audit_value_max_len=b'\u00f1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_241",
+      "17, audit_value_max_len=b'\\xf1', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_242",
+      "17, audit_value_max_len=b'\u00f2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_242",
+      "17, audit_value_max_len=b'\\xf2', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_243",
+      "17, audit_value_max_len=b'\u00f3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_243",
+      "17, audit_value_max_len=b'\\xf3', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_244",
+      "17, audit_value_max_len=b'\u00f4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_244",
+      "17, audit_value_max_len=b'\\xf4', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_245",
+      "17, audit_value_max_len=b'\u00f5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_245",
+      "17, audit_value_max_len=b'\\xf5', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_246",
+      "17, audit_value_max_len=b'\u00f6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_246",
+      "17, audit_value_max_len=b'\\xf6', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_247",
+      "17, audit_value_max_len=b'\u00f7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_247",
+      "17, audit_value_max_len=b'\\xf7', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_248",
+      "17, audit_value_max_len=b'\u00f8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_248",
+      "17, audit_value_max_len=b'\\xf8', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_249",
+      "17, audit_value_max_len=b'\u00f9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_249",
+      "17, audit_value_max_len=b'\\xf9', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_250",
+      "17, audit_value_max_len=b'\u00fa', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_250",
+      "17, audit_value_max_len=b'\\xfa', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_251",
+      "17, audit_value_max_len=b'\u00fb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_251",
+      "17, audit_value_max_len=b'\\xfb', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_252",
+      "17, audit_value_max_len=b'\u00fc', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_252",
+      "17, audit_value_max_len=b'\\xfc', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_253",
+      "17, audit_value_max_len=b'\u00fd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_253",
+      "17, audit_value_max_len=b'\\xfd', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_254",
+      "17, audit_value_max_len=b'\u00fe', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_254",
+      "17, audit_value_max_len=b'\\xfe', audit_value_max_len=21"
+    ],
+    [
+      "bchar_raw_255",
+      "17, audit_value_max_len=b'\u00ff', audit_value_max_len=21"
+    ],
+    [
+      "bchar_hex_255",
+      "17, audit_value_max_len=b'\\xff', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_0_literal",
+      "17, audit_value_max_len=b'\\u{0}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_0_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{0}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_1_literal",
+      "17, audit_value_max_len=b'\\u{7f}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_1_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{7f}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_2_literal",
+      "17, audit_value_max_len=b'\\u{80}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_2_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{80}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_3_literal",
+      "17, audit_value_max_len=b'\\u{d7ff}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_3_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{d7ff}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_4_literal",
+      "17, audit_value_max_len=b'\\u{d800}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_4_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{d800}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_5_literal",
+      "17, audit_value_max_len=b'\\u{dfff}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_5_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{dfff}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_6_literal",
+      "17, audit_value_max_len=b'\\u{e000}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_6_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{e000}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_7_literal",
+      "17, audit_value_max_len=b'\\u{10ffff}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_7_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{10ffff}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_8_literal",
+      "17, audit_value_max_len=b'\\u{110000}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_8_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{110000}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_9_literal",
+      "17, audit_value_max_len=b'\\u{000000}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_9_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{000000}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_10_literal",
+      "17, audit_value_max_len=b'\\u{0000000}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_10_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{0000000}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_11_literal",
+      "17, audit_value_max_len=b'\\u{_41}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_11_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{_41}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_12_literal",
+      "17, audit_value_max_len=b'\\u{41_}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_12_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{41_}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_13_literal",
+      "17, audit_value_max_len=b'\\u{4__1}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_13_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{4__1}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_14_literal",
+      "17, audit_value_max_len=b'\\u{FFFFFF}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_14_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{FFFFFF}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_15_literal",
+      "17, audit_value_max_len=b'\\u{}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_15_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_16_literal",
+      "17, audit_value_max_len=b'\\u{12g}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_16_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{12g}'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_17_literal",
+      "17, audit_value_max_len=b'\\u{41 }', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_17_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{41 }'), audit_value_max_len=21"
+    ],
+    [
+      "bunicode_18_literal",
+      "17, audit_value_max_len=b'\\u{+41}', audit_value_max_len=21"
+    ],
+    [
+      "bunicode_18_macro",
+      "17, audit_value_max_len=ignored!(b'\\u{+41}'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_0",
+      "17, ignored!(b'\\n'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_1",
+      "17, ignored!(b'\\r'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_2",
+      "17, ignored!(b'\\t'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_3",
+      "17, ignored!(b'\\\\'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_4",
+      "17, ignored!(b'\\0'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_5",
+      "17, ignored!(b'\\''), audit_value_max_len=21"
+    ],
+    [
+      "bescape_6",
+      "17, ignored!(b'\\\"'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_7",
+      "17, ignored!(b'\\q'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_8",
+      "17, ignored!(b'\\v'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_9",
+      "17, ignored!(b'\\a'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_10",
+      "17, ignored!(b'\\b'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_11",
+      "17, ignored!(b'\\f'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_12",
+      "17, ignored!(b'\\x'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_13",
+      "17, ignored!(b'\\x0'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_14",
+      "17, ignored!(b'\\xgg'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_15",
+      "17, ignored!(b'\\x0g'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_16",
+      "17, ignored!(b'\\x000'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_17",
+      "17, ignored!(b'\\u'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_18",
+      "17, ignored!(b'\\u41'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_19",
+      "17, ignored!(b'\\u{41}'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_20",
+      "17, ignored!(b'\\\n'), audit_value_max_len=21"
+    ],
+    [
+      "bescape_21",
+      "17, ignored!(b'\\\r\n'), audit_value_max_len=21"
+    ]
+  ]
+}

@@ -1,5 +1,55 @@
 # C++ generator parity plan
 
+Current continuation: [character and byte-character lexing](character_lexing_5_0_6.md)
+repairs 13 reproduced whole-stream validation differences in the independent
+producer. Installed actual-source comparison passes 3,147/3,147 and actual Maven
+passes 107/107. SDK/compiler and complete native integration retain separate gates.
+No source, capability or phase verdict advances on these bounded results.
+
+The [complete EntityStatus source review](entity_status_source_review_5_0_6.md)
+maps ES01-ES10, with original 16/16, a fresh complete native counterpart,
+imported 2/2 and 1,174 exact diagnostic observations per frontend, including all
+28 status/action pairs. Production and observer bodies remain unchanged.
+Formal disposition and complete native integration remain open; source counts
+stay 67 accepted, 55 pending and two external exclusions.
+
+The [complete business clock/permutation test review](business_integration_source_review_5_0_6.md)
+maps BI01-BI08, passes all six original Rust tests and both fresh complete native
+programs, and retains all ten vectors and 20,000 range iterations. Original source,
+fixtures, native bodies and all six archives remain unchanged. This accepts no
+production clock/ID service or source disposition before its separate native gate.
+
+The [complete current event review](event_source_review_5_0_6.md) maps all
+607 source lines under EV01-EV24. An isolated exact-reference workspace repairs
+the historical observer's dependency-provenance gap and matches 5,611 unchanged
+original/imported outcomes, with nine imported checks and five new public-source
+caller tests. The missing model consumer additionally passes all 112 cases through
+a runtime-only import/link. A corrected portable helper repeats the complete
+requested imported gate; its initial JUnit-path failure remains preserved.
+The complete guarded eight-file installation patch is archived outside active
+execution inputs. Permanent installation, both installed frontends and formal
+source acceptance remain open; the running native epoch is unchanged.
+
+The [complete mutation-policy source review](mutation_policy_source_review_5_0_6.md)
+maps all 739 lines under MP01-MP26, including the 5.0.6 thin-work future and
+dynamic ledger changes. Actual original tests pass 6/6; the complete private
+plan fixture matches 2,129 unchanged inputs through byte-preserved source.
+The corrected isolated gate matches all 2,606 original/imported observations,
+passes four registered imported checks and executes both complete staged model/
+generic-completion programs. Five body-preserving consumers link runtime-only.
+The initial missing-target failure and explicit unchanged-source reuse remain
+separate evidence. Candidate workspace, fixtures, controllers and registration
+changes are archived without touching frozen native inputs. Portable installed
+verification, both permanent frontends and formal source acceptance remain open.
+
+The policy portable helper now independently repeats all six original tests plus
+the private plan fixture and all 2,606 original/imported observations. The tested
+[merged twelve-file candidate](parity/event_policy_merged_staged_installation_5_0_6.json.gz)
+preserves both Event/Policy registrations and original bodies. Its guarded
+coordinator waits for a successful complete native terminal before installation
+and both default frontend gates. Current native build/no-work/discovery pass;
+the 784-test CTest run is active. Source/capability/phase verdicts remain unchanged.
+
 Recorded: 2026-10-11. Status: active, authorized implementation goal.
 The completed Context-bound Q/E migration is a prerequisite, not evidence of
 complete Rust generator parity. This plan governs the remaining generator work.

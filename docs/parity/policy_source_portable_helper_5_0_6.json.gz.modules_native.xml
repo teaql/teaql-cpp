@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="4"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="0"
+	timestamp="2026-10-20T12:55:43"
+	>
+	<testcase name="module_mutation_policy_context_contracts" classname="module_mutation_policy_context_contracts" time="0.0162109" status="run">
+		<properties/>
+		<system-out>[TeaQL][MUTATION-POLICY-SINK-FAILED] request=Order.saveGraph error=entity event error: delivery failed
+[TeaQL][MUTATION-POLICY-SINK-FAILED] request=Order.saveGraph error=entity event error: delivery failed
+Mutation policy Context contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_mutation_policy_reentrant_close" classname="module_mutation_policy_reentrant_close" time="0.0105024" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="module_context_event_contracts" classname="module_context_event_contracts" time="0.0430009" status="run">
+		<properties/>
+		<system-out>Context event and governance scope contracts passed
+</system-out>
+	</testcase>
+	<testcase name="module_dynamic_governance_rust_parity" classname="module_dynamic_governance_rust_parity" time="0.307498" status="run">
+		<properties/>
+		<system-out>Rust 5.0.6 dynamic governance parity: 24/24 observations match
+</system-out>
+	</testcase>
+</testsuite>
