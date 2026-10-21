@@ -18,7 +18,8 @@ public:
 private:
     const UserContext& context_;
     Memory resource_;
-    std::pmr::map<Vector<String>, const ColumnLayout*> shapes_;
+    // Keys borrow the immutable Context-owned layout names, not input JSON.
+    std::pmr::map<Vector<std::string_view>, const ColumnLayout*> shapes_;
     CompactRow scalar_row(const EntityDescriptor&, const Json&, bool supports_dynamic, bool graph);
     CompactRow inferred_row(const EntityDescriptor&, const Json&, bool supports_dynamic);
     struct Plan;

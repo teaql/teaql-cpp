@@ -5219,6 +5219,58 @@
           ]
         }
       ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_relation_membership_tests",
+      "source": "tests/parity/teaql_provider_sqlite/relation_membership.cpp",
+      "cases": [
+        {
+          "name": "provider_relation_membership_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "json_shape_allocation_tests",
+      "cases": [
+        {
+          "name": "json_shape_allocation_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "json_graph_allocation_tests",
+      "cases": [
+        {
+          "name": "json_graph_allocation_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_json_isolation_probe",
+      "source": "tests/parity/generated_json_isolation_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "generated_json_ambiguous_probe",
+      "source": "tests/parity/generated_json_ambiguous_probe.cpp",
+      "cases": []
     }
   ],
   "fixtures": [

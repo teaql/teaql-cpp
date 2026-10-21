@@ -955,11 +955,20 @@
       "source": "teaql-provider-sqlite/tests/relation_membership.rs",
       "sha256": "e03cfb802d981f5c2a86e9eec888d1a06ac860d986b3b315255de78fa2f6f43b",
       "source_change": "new",
-      "cpp_target": "teaql_provider_sqlite",
+      "cpp_target": "tests/parity/teaql_provider_sqlite/relation_membership.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 874-line source and thirteen tests: real SQLite setup and typed graph adapters; 32 forward membership scenarios, 16 aggregate scenarios, alias collision, four owned identity views, sixteen explicit projection/inverse scenarios, six future-binding privacy cases and four nested typed aggregate scenarios. Embedded aggregate transfer now matches the locked Rust contract even without other enhancements. Original13/native1/module1/focused-sanitizer1 and three adjacent native regressions pass; canonical, no-work and captured-input/reference guards pass.",
+      "evidence": [
+        "docs/relation_membership_source_audit_5_0_6.md",
+        "docs/parity/relation_membership_original_5_0_6.json.gz",
+        "docs/parity/relation_membership_installed_5_0_6.json.gz",
+        "docs/parity/relation_membership_adjacent_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/relation_membership_source_audit_5_0_6.md",
+      "current_review_sha256": "3a3136fc0e03e0e500a74eb860c79c943a5ce70403e2d4a42ace3378511654c5",
+      "acceptance_scope": "Only the complete named SQLite relation-membership integration-test source. Other pending runtime and provider sources, remaining generator capabilities, physical-router execution and P0-P7 completion remain open."
     },
     {
       "source": "teaql-provider-sqlite/tests/request_trace_log.rs",
@@ -1104,33 +1113,40 @@
       "source": "teaql-runtime/src/context/json.rs",
       "sha256": "46854ba65946d60c0937a3d29ac4593a4318902c5bd11aee206d18eeac4190b5",
       "source_change": "new",
-      "cpp_target": "teaql_runtime/include/teaql/runtime/context.hpp; teaql_runtime/include/teaql/runtime/detail/json_hydration.hpp; teaql_runtime/src/context/json.cpp",
+      "cpp_target": "teaql_runtime/src/context/json.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Typed presentation decoding: installed descriptor/layout checks, scalar conversion, operation-local geometry, recursive graph plan/edge installation, JSON view identity and input limits. Focused actual-source comparison is recorded separately; complete generated/dynamic/configuration qualification remains open.",
+      "status": "accepted",
+      "responsibility": "Complete 243-line entry/scalar/shape source: Context single/list decode, exact installed metadata and field-layout checks, error precedence, trusted input boundaries, typed scalar conversion, sorted aliases, operation-local shared geometry and independent payloads. Shape lookup now borrows Context-owned layout names and copies names only for a new actual shape. Original14, native2/module2/focused-sanitizer2 and 7072 exact original outcomes per profile pass. Six public batch allocation samples show a constant 2016-byte long-name delta at 1/100/10000 rows; Context-copy/expiry, canonical/no-work and source/reference guards pass.",
       "evidence": [
-        {
-          "kind": "scoped_runtime_checkpoint",
-          "path": "docs/json_hydration_5_0_6.md",
-          "scope": "7072 actual original scalar/graph decoding observations; no persistence authority or complete capability acceptance."
-        }
-      ]
+        "docs/context_json_source_audit_5_0_6.md",
+        "docs/parity/context_json_original_5_0_6.json.gz",
+        "docs/parity/context_json_shape_installed_v2_5_0_6.json.gz",
+        "docs/json_hydration_5_0_6.md"
+      ],
+      "previous_active_responsibility": "Typed presentation decoding: installed descriptor/layout checks, scalar conversion, operation-local geometry, recursive graph plan/edge installation, JSON view identity and input limits. Focused actual-source comparison is recorded separately; complete generated/dynamic/configuration qualification remains open.",
+      "current_review": "docs/context_json_source_audit_5_0_6.md",
+      "current_review_sha256": "fdf7045ba4afafdc0901dc1aa9735caccfe363b820337b1592deab19e8956fdc",
+      "acceptance_scope": "Only the complete named Context JSON entry/scalar/shape source and its C++ lifetime adaptation. Separately inventoried context/json/graph.rs and context/json/tests.rs, other source reviews and remaining generator capabilities remain open."
     },
     {
       "source": "teaql-runtime/src/context/json/graph.rs",
       "sha256": "7bdb1c0d3b9b513c5b796ba97df5bb18e79b63a01743acdb87509312a2c5629f",
       "source_change": "new",
-      "cpp_target": "teaql_runtime/include/teaql/runtime/context.hpp; teaql_runtime/include/teaql/runtime/detail/json_hydration.hpp; teaql_runtime/src/context/json.cpp",
+      "cpp_target": "teaql_runtime/src/context/json.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Typed presentation decoding: installed descriptor/layout checks, scalar conversion, operation-local geometry, recursive graph plan/edge installation, JSON view identity and input limits. Focused actual-source comparison is recorded separately; complete generated/dynamic/configuration qualification remains open.",
+      "status": "accepted",
+      "responsibility": "Complete 352-line graph source: relation detection and scalar dispatch, per-operation capabilities/view coordinates/node budget, exact cardinality and early node limits, modeled join inference and conflict checks, all repeated-identity projections, typed edge installation and freeze. First-view storage now avoids a vector allocation for unique identities while checking first and all additional prior views. Native3/module3/focused-sanitizer3 plus 7072 existing and 11 additional exact original observations per profile pass; allocation baselines, lifecycle, canonical/no-work and captured-source/reference guards retained.",
       "evidence": [
-        {
-          "kind": "scoped_runtime_checkpoint",
-          "path": "docs/json_hydration_5_0_6.md",
-          "scope": "7072 actual original scalar/graph decoding observations; no persistence authority or complete capability acceptance."
-        }
-      ]
+        "docs/context_json_graph_source_audit_5_0_6.md",
+        "docs/parity/context_json_original_5_0_6.json.gz",
+        "docs/parity/context_json_graph_unique_before_5_0_6.json.gz",
+        "docs/parity/context_json_graph_installed_5_0_6.json.gz",
+        "docs/parity/context_json_graph_limits_ctest_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Typed presentation decoding: installed descriptor/layout checks, scalar conversion, operation-local geometry, recursive graph plan/edge installation, JSON view identity and input limits. Focused actual-source comparison is recorded separately; complete generated/dynamic/configuration qualification remains open.",
+      "current_review": "docs/context_json_graph_source_audit_5_0_6.md",
+      "current_review_sha256": "29bea6befb47053ae50e89590afac5829796db0b7043532ebbcc70d02c57f684",
+      "acceptance_scope": "Only the complete named Context JSON graph implementation source. The separately inventoried JSON test source, other pending runtime/provider sources and remaining generator capabilities remain open."
     },
     {
       "source": "teaql-runtime/src/context/json/tests.rs",
@@ -1139,8 +1155,17 @@
       "cpp_target": "teaql_runtime",
       "previous_status": null,
       "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "responsibility": "Complete fourteen-test source remains pending. Original14 passes; four generated isolation contracts and two generated dual-forward contracts qualify snapshot matrices, private ledgers/payloads, owned address identity, detached projection readback, ambiguous identity-only lookup and contradictory inferred foreign keys across native/module/focused sanitizer. Exact source-model nullability/alias surfaces, target-descriptor control and remaining combined assertions stay open in the checklist.",
+      "evidence": [
+        "docs/context_json_tests_source_audit_5_0_6.md",
+        "docs/parity/context_json_original_5_0_6.json.gz",
+        "docs/parity/generated_json_isolation_installed_5_0_6.json.gz",
+        "docs/generated_json_ambiguous_views_5_0_6.md",
+        "docs/parity/generated_json_ambiguous_installed_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/context_json_tests_source_audit_5_0_6.md",
+      "current_review_sha256": "5cd1618b219b23d5c62f7d88e2af499bbe4a65f8b9097cdec6037863867cc69f"
     },
     {
       "source": "teaql-runtime/src/context/locking.rs",

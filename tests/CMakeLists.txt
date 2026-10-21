@@ -1475,6 +1475,10 @@ if(BUILD_TESTING)
     set_tests_properties(original_provider_schema_contracts PROPERTIES TIMEOUT 60)
     target_link_libraries(teaql_original_provider_search_tests PRIVATE teaql::provider_sqlite)
     add_test(NAME original_provider_dynamic_search_contracts COMMAND teaql_original_provider_search_tests)
+    add_executable(teaql_provider_relation_membership_tests tests/parity/teaql_provider_sqlite/relation_membership.cpp)
+    target_link_libraries(teaql_provider_relation_membership_tests PRIVATE teaql::provider_sqlite)
+    add_test(NAME provider_relation_membership_contracts COMMAND teaql_provider_relation_membership_tests)
+    set_tests_properties(provider_relation_membership_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 60)
     add_executable(teaql_provider_numeric_partition_tests tests/parity/teaql_provider_sqlite/numeric_partition_trace.cpp)
     target_link_libraries(teaql_provider_numeric_partition_tests PRIVATE teaql::provider_sqlite)
     add_test(NAME provider_numeric_partition_contracts COMMAND teaql_provider_numeric_partition_tests)
@@ -1595,6 +1599,18 @@ if(BUILD_TESTING)
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_json_graph_views_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_json_graph_views_probe>
         --cpp-emulator "${TEAQL_PARITY_EMULATOR}")
+    add_executable(teaql_generated_json_ambiguous_probe tests/parity/generated_json_ambiguous_probe.cpp)
+    target_link_libraries(teaql_generated_json_ambiguous_probe PRIVATE teaql::provider_sqlite)
+    add_test(NAME generated_json_ambiguous_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_json_ambiguous_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_generated_json_ambiguous_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    add_executable(teaql_generated_json_isolation_probe tests/parity/generated_json_isolation_probe.cpp)
+    target_link_libraries(teaql_generated_json_isolation_probe PRIVATE teaql::provider_sqlite)
+    add_test(NAME generated_json_isolation_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_json_isolation_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_generated_json_isolation_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     add_executable(teaql_generated_json_hydration_probe tests/parity/generated_json_hydration_probe.cpp)
     target_link_libraries(teaql_generated_json_hydration_probe PRIVATE teaql::provider_sqlite)
     add_test(NAME generated_json_hydration_rust_parity COMMAND ${Python3_EXECUTABLE}
@@ -1613,6 +1629,12 @@ if(BUILD_TESTING)
         --cpp $<TARGET_FILE:teaql_json_hydration_probe>
         --cpp-emulator "${TEAQL_PARITY_EMULATOR}")
     add_test(NAME json_hydration_context_contracts COMMAND teaql_json_hydration_probe --self-test)
+    add_test(NAME json_graph_limits_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_json_graph_limits_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_json_hydration_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    set_tests_properties(json_graph_limits_rust_parity PROPERTIES TIMEOUT 120)
+
     add_executable(teaql_json_graph_decoder_probe tests/parity/json_graph_decoder_probe.cpp)
     target_link_libraries(teaql_json_graph_decoder_probe PRIVATE teaql::runtime)
     add_test(NAME json_graph_decoder_rust_parity COMMAND ${Python3_EXECUTABLE}
@@ -2254,6 +2276,22 @@ if(BUILD_TESTING)
     add_executable(teaql_loaded_snapshot_tests teaql_core/tests/loaded_snapshot_tests.cpp)
     target_link_libraries(teaql_loaded_snapshot_tests PRIVATE teaql::core teaql::runtime)
     add_test(NAME loaded_snapshot_contracts COMMAND teaql_loaded_snapshot_tests)
+    add_executable(teaql_json_graph_allocation_tests teaql_runtime/tests/json_graph_allocation_tests.cpp)
+    target_link_libraries(teaql_json_graph_allocation_tests PRIVATE teaql::runtime)
+    add_test(NAME json_graph_allocation_contracts COMMAND teaql_json_graph_allocation_tests)
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        target_link_options(teaql_json_graph_allocation_tests PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEmm")
+    else()
+        target_link_options(teaql_json_graph_allocation_tests PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEjj")
+    endif()
+    add_executable(teaql_json_shape_allocation_tests teaql_runtime/tests/json_shape_allocation_tests.cpp)
+    target_link_libraries(teaql_json_shape_allocation_tests PRIVATE teaql::runtime)
+    add_test(NAME json_shape_allocation_contracts COMMAND teaql_json_shape_allocation_tests)
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        target_link_options(teaql_json_shape_allocation_tests PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEmm")
+    else()
+        target_link_options(teaql_json_shape_allocation_tests PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEjj")
+    endif()
     add_executable(teaql_state_cache_cost_tests teaql_runtime/tests/state_cache_cost_tests.cpp)
     target_link_libraries(teaql_state_cache_cost_tests PRIVATE teaql::core teaql::runtime)
     add_test(NAME state_cache_cost_contracts COMMAND teaql_state_cache_cost_tests)

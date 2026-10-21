@@ -240,7 +240,7 @@ CompactRow JsonReadSession::scalar_row(const EntityDescriptor& descriptor,
             fail(message);
         }
     }
-    Vector<String> names(resource_);
+    Vector<std::string_view> names(resource_);
     Vector<Value> payload(resource_);
     for (auto& [name, value] : values) {
         names.emplace_back(name);
@@ -251,12 +251,17 @@ CompactRow JsonReadSession::scalar_row(const EntityDescriptor& descriptor,
     if (found != shapes_.end()) {
         layout = found->second;
     } else {
-        layout = &resource_arena(resource_).make_payload<ColumnLayout>(std::move(names));
-        Vector<String> key(resource_);
-        for (const auto& name : layout->names()) {
-            key.emplace_back(name);
+        Vector<String> owned_names(resource_);
+        owned_names.reserve(names.size());
+        for (const auto name : names) {
+            owned_names.emplace_back(name);
         }
-        shapes_.emplace(std::move(key), layout);
+        layout = &resource_arena(resource_).make_payload<ColumnLayout>(std::move(owned_names));
+        names.clear();
+        for (const auto& name : layout->names()) {
+            names.emplace_back(name);
+        }
+        shapes_.emplace(std::move(names), layout);
     }
     return CompactRow(std::allocator_arg, Allocator(resource_), *layout, std::move(payload));
 }
@@ -275,12 +280,19 @@ struct JsonReadSession::Parsed {
 };
 
 struct JsonReadSession::Plan {
+    struct NativeViews {
+        NativeViews(Memory r, const Json* input) : first(input), additional(r) {}
+
+        const Json* first;
+        Vector<const Json*> additional;
+    };
+
     explicit Plan(Memory r)
         : capabilities(r), native_views(r), relation_shapes(std::allocator_arg, Allocator(r)) {}
 
     std::size_t nodes = 0;
     std::pmr::map<std::string_view, bool> capabilities;
-    std::pmr::map<std::pair<std::string_view, std::uint64_t>, Vector<const Json*>> native_views;
+    std::pmr::map<std::pair<std::string_view, std::uint64_t>, NativeViews> native_views;
     RelationShapeCache relation_shapes;
 };
 
@@ -409,8 +421,9 @@ JsonReadSession::Parsed JsonReadSession::parse_graph(const EntityDescriptor& des
               : row.get(identity->name)               ? row.get(identity->name)->try_u64()
                                                       : std::nullopt;
     if (id) {
-        auto [found, inserted] = plan.native_views.try_emplace({descriptor.name, *id});
-        for (const auto* previous : found->second) {
+        auto [found, inserted] =
+            plan.native_views.try_emplace({descriptor.name, *id}, resource_, &value);
+        auto verify_previous = [&](const Json* previous) {
             auto prior = inferred_row(descriptor, *previous, dynamic);
             for (const auto& p : descriptor.properties) {
                 const auto* left = prior.get(p.name);
@@ -419,8 +432,14 @@ JsonReadSession::Parsed JsonReadSession::parse_graph(const EntityDescriptor& des
                     fail("conflicting native values for one identity");
                 }
             }
+        };
+        if (!inserted) {
+            verify_previous(found->second.first);
+            for (const auto* previous : found->second.additional) {
+                verify_previous(previous);
+            }
+            found->second.additional.push_back(&value);
         }
-        found->second.push_back(&value);
     }
     return {view, &descriptor, std::move(row), std::move(edges)};
 }

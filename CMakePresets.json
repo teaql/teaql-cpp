@@ -643,7 +643,12 @@
         "teaql_module_provider_request_trace_tests",
         "teaql_module_original_provider_search_tests",
         "teaql_module_provider_dynamic_storage_source_tests",
-        "teaql_module_provider_numeric_partition_tests"
+        "teaql_module_provider_numeric_partition_tests",
+        "teaql_module_provider_relation_membership_tests",
+        "teaql_module_json_shape_allocation_tests",
+        "teaql_module_json_graph_allocation_tests",
+        "teaql_module_generated_json_isolation_probe",
+        "teaql_module_generated_json_ambiguous_probe"
       ]
     },
     {

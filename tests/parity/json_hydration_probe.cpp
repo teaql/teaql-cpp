@@ -157,7 +157,12 @@ static void self_test(GlobalContext& global) {
 
 int main(int argc, char** argv) {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
-    GlobalContext global;
+    ContextLimits limits;
+    if (argc == 2 && std::string_view(argv[1]) == "--large-fixture") {
+        limits.user.max_bytes = 512 * 1024 * 1024;
+        limits.max_live_user_bytes = limits.user.max_bytes;
+    }
+    GlobalContext global(std::pmr::new_delete_resource(), 4096, limits);
     if (argc == 2 && std::string_view(argv[1]) == "--self-test") {
         self_test(global);
         std::pmr::set_default_resource(previous);

@@ -265,10 +265,7 @@ public:
                     }
                     query_ = std::move(prepared).value();
                 }
-                if (!query_.relation_aggregates.empty() &&
-                    (aggregate_entry_ || query_.continuous_page_fetch ||
-                     !query_.object_group_bys.empty() || !query_.child_enhancements.empty() ||
-                     !query_.relations.empty())) {
+                if (!query_.relation_aggregates.empty()) {
                     Vector<RelationAggregate> combined(query_.relation_aggregates, r);
                     for (const auto& aggregate : aggregates_) {
                         if (std::find(combined.begin(), combined.end(), aggregate) ==
