@@ -602,8 +602,11 @@ static void public_query_boundary() {
     check(list.wait() && list.wait().value().is_loaded,
           "public SmartList retains the separate base-list path");
     auto& typed = service.fetch_entities<decoder_fixture::Item<>>(purposed);
-    check(typed.wait() && !typed.wait().value()[0].state,
-          "ordinary Entity decoding remains distinct from enhanced graph decoding");
+    check(typed.wait() && typed.wait().value()[0].state,
+          "ordinary Entity decoding installs read metadata as in Rust 5.0.6");
+    auto original = typed.wait().value()[0].state->original_snapshot();
+    check(original && original->fields == typed.wait().value()[0].row.into_map(r),
+          "ordinary Entity decoding retains the original loaded row");
     auto& cache = g.make<InMemoryAggregationCache>("integration");
     c->insert_resource(g, cache);
     auto cached_query = service.select();

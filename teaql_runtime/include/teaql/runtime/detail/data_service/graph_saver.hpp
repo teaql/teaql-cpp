@@ -180,6 +180,14 @@ public:
     std::optional<GraphSaveResult> poll(WakeSignal& wake) {
         auto r = context_.memory_resource();
         if (phase_ == Phase::Prepare) {
+            if (!root_ && !planning_) {
+                auto intent = MutationIntent::from_optional(
+                    r,
+                    node_.comment ? std::optional<std::string_view>(*node_.comment) : std::nullopt);
+                if (!intent) {
+                    return fail(RuntimeError::request_intent(r, intent.error()));
+                }
+            }
             if (root_ && root_->has_pending_dynamic_mutations()) {
                 auto provider = context_.dynamic_graph_provider();
                 if (!provider) {

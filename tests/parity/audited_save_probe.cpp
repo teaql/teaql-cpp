@@ -331,6 +331,10 @@ static Json evaluate(Memory target, const Json& input) {
     detail::model_put(out, "new", fresh);
     detail::model_put(out, "deleted", deleted);
     detail::model_put(out, "evidence", evidence);
+    if (std::get<Json::Object>(input.data).contains(String("observe_scope", r))) {
+        EntityKey root_key(std::allocator_arg, Allocator(r), "Order", Value(r, std::uint64_t{7}));
+        detail::model_put(out, "root_scope", trace_out(r, root.get_trace_chain(root_key)));
+    }
     return Json(target, out);
 }
 

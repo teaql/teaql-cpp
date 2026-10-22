@@ -180,6 +180,12 @@ public:
         return false;
     }
 
+    // Opt in only when relation members use the runtime graph representation.
+    // Ordinary Entity implementations retain their own row decoding semantics.
+    static constexpr bool requires_flat_graph_hydration() {
+        return false;
+    }
+
     std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const {
         return std::nullopt;
     }

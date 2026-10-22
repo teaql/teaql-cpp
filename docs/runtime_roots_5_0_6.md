@@ -119,3 +119,26 @@ reviews. Native/imported consumer correspondence, helper completeness and source
 acceptance remain separate. Integration-test executables and external provider
 tests are outside this `--lib` invocation; no source or capability disposition is
 promoted by this checkpoint.
+
+## Current root locator refresh after service reconciliation
+
+The [read-only current audit](parity/runtime_root_current_registration_audit_5_0_6.json.gz)
+found nine stale records, all restricted to the whole-file SHA-256 of
+`tests/parity/teaql_runtime/memory_service.cpp`. All nine C++ function hashes,
+lines, entry calls and original Rust bodies remain unchanged. The pre-refresh
+verifier correctly rejects this stale ledger; that rejection is retained.
+
+The locator ledger is refreshed from current source. The
+[focused current gate](parity/runtime_root_registration_refresh_5_0_6.json.gz)
+passes native2/module2: the memory-service roots and separate optimistic-conflict
+output contract. Both exact registries and terminal JUnit results have no skips.
+All 75 current source/fixture locators and imported registrations verify;
+canonical consumers and selected no-work rebuilds pass, with unchanged captured
+inputs. Owned registry/JUnit files are removed after retaining their contents.
+No root implementation or original reference source changes in this refresh.
+
+The earlier original 75-root/complete-library execution remains attached to its
+unchanged reference. This focused refresh does not relabel those historical
+consumer gates or accept all implementing leaves. Final current native
+integration remains required before the root source's pending disposition can
+change.

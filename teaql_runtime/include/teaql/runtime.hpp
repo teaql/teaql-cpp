@@ -21,6 +21,7 @@
 #include <teaql/runtime/entity_expression.hpp>
 #include <teaql/runtime/entity_runtime_debug.hpp>
 #include <teaql/runtime/graph_debug.hpp>
+#include <teaql/runtime/detail/ledger_execution_outcome_debug.hpp>
 #include <teaql/runtime/entity_save.hpp>
 #include <teaql/runtime/entity_status.hpp>
 #include <teaql/runtime/entity_status_debug.hpp>

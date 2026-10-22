@@ -58,3 +58,45 @@ The final suite observes `#a`/`#b` and asserts 30 hydrated results, exact instal
 values, provider-call counts, empty results and error ordering. A readonly
 `_result` property still does not acquire a fixed field slot. The existing direct dynamic-row
 loader matrix separately qualifies batch validation and partial merges.
+
+## Typed caller cancellation continuation
+
+The [eight-path cleanup checkpoint](parity/resolved_dynamic_cleanup_5_0_6.json.gz)
+extends the existing private typed-aggregate cancellation program to ordinary
+typed reads, enhanced reads and enhanced continuous-page reads. Every entry
+fetches two native rows from real SQLite, then reaches a deliberately pending
+dynamic-field provider. Each runs with explicit operation cancellation and with
+direct deletion of its owning UserContext. Assertions require exactly one load,
+one cancellation/join and one provider-operation destruction, two retained owner
+IDs counted at join, and zero remaining User arena bytes after deletion.
+
+The complete dynamic-query contract executable passes in native, canonical
+imported modules and focused ASan/UBSan (one executable per profile). The eight
+cases are C++ ownership-adaptation evidence, not eight new Rust differential
+observations. They close the pending-provider cleanup gap at these typed caller
+boundaries without claiming successful suspended-provider resumption or every
+graph/cursor path. Runtime and generated implementation bodies are unchanged;
+only the existing lifecycle test is extended. Leak scanning is disabled.
+
+## Suspended typed caller completion
+
+The [completion continuation](parity/resolved_dynamic_resume_5_0_6.json.gz)
+extends that fixture to sixteen scenarios: the same four entries each run with
+pending Context deletion, explicit cancellation, successful resumption and a
+resumed provider error. Two real SQLite rows precede each dynamic load. A
+controlled provider first returns pending, then notifies its wake signal before
+the caller resumes. The test checks that notification reaches the caller, only
+one provider load/delivery occurs, and repeated terminal polling reuses the
+completed result. Success preserves both IDs, Value/NULL/absent-field states and
+shared loaded-state identity; failure retains the provider error code. Cleanup
+reads and sums the retained IDs before arena reclamation, then verifies exactly
+one join/destruction and zero live User bytes.
+
+The complete dynamic-query executable passes native, canonical imported modules
+and focused ASan/UBSan. All runtime/fixture dependencies recorded by the earlier
+eight-case checkpoint retain their bytes; only the test program changes. The
+original eight-case receipt remains historical evidence. Format/check passes
+1,798 handwritten files. This is controlled owner-thread resumption and C++
+ownership-adaptation evidence, not a threaded-provider stress test, sixteen new
+Rust differential observations, or whole resolved-source acceptance. No generator,
+MIPS or physical-device gate is implied. Leak scanning remains disabled.

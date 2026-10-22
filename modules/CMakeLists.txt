@@ -333,6 +333,11 @@ if(BUILD_TESTING)
         COMMAND ${Python3_EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/tests/parity/teaql_runtime/optimistic_conflict_output.py
         --cpp $<TARGET_FILE:teaql_module_original_runtime_memory_service>)
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        target_link_options(teaql_module_sqlite_driver_query_benchmark PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEmm")
+    else()
+        target_link_options(teaql_module_sqlite_driver_query_benchmark PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEjj")
+    endif()
     foreach(example IN ITEMS sqlite_schema_crud sqlite_relations_graph)
         add_executable(teaql_module_${example} ${import_contracts}/${example}.cpp)
         set_target_properties(teaql_module_${example} PROPERTIES CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
@@ -2159,4 +2164,96 @@ if(TARGET teaql_module_entity_query_probe)
         --cpp $<TARGET_FILE:teaql_module_entity_query_probe>)
     set_tests_properties(module_resolved_dynamic_typed_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     add_test(NAME module_resolved_dynamic_typed_context_contracts COMMAND teaql_module_entity_query_probe --dynamic-self-test)
+endif()
+
+if(TARGET teaql_module_graph_execution_probe)
+    add_test(NAME module_legacy_graph_intent_extended_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_legacy_graph_intent_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_graph_execution_probe>
+        --original ${PROJECT_SOURCE_DIR}/docs/parity/legacy_graph_intent_extended_original_5_0_6.json.gz)
+    set_tests_properties(module_legacy_graph_intent_extended_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    foreach(graph_contract IN ITEMS legacy_graph_intent recursive_graph_write graph_node_command graph_execution graph_save_adapter)
+        add_test(NAME module_${graph_contract}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${graph_contract}_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_module_graph_execution_probe>)
+        set_tests_properties(module_${graph_contract}_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endforeach()
+endif()
+
+if(TARGET teaql_module_entity_graph_plan_probe)
+    foreach(planner_scope IN ITEMS graph_planner_scopes graph_planner_upsert_scopes graph_planner_complete_rows)
+        add_test(NAME module_${planner_scope}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_graph_planner_scopes_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_module_entity_graph_plan_probe>
+            --original ${PROJECT_SOURCE_DIR}/docs/parity/${planner_scope}_original_5_0_6.json.gz)
+        set_tests_properties(module_${planner_scope}_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endforeach()
+    foreach(planner_corpus IN ITEMS entity_graph_plan graph_plan_scopes)
+        add_test(NAME module_${planner_corpus}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${planner_corpus}_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_module_entity_graph_plan_probe>)
+        set_tests_properties(module_${planner_corpus}_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endforeach()
+endif()
+
+foreach(graph_model IN ITEMS runtime_graph_model)
+    if(TARGET teaql_module_${graph_model}_probe)
+        add_test(NAME module_${graph_model}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${graph_model}_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_module_${graph_model}_probe>)
+        set_tests_properties(module_${graph_model}_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endforeach()
+
+if(TARGET teaql_module_audited_save_probe)
+    add_test(NAME module_explicit_save_scope_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_explicit_save_scope_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_audited_save_probe>)
+    set_tests_properties(module_explicit_save_scope_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_audited_save_probe)
+    add_test(NAME module_audited_save_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_audited_save_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_audited_save_probe>)
+    set_tests_properties(module_audited_save_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+foreach(save_contract IN ITEMS save_preparation graph_fix graph_saver)
+    if(TARGET teaql_module_${save_contract}_probe)
+        add_test(NAME module_${save_contract}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${save_contract}_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_module_${save_contract}_probe>)
+        set_tests_properties(module_${save_contract}_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endforeach()
+
+if(TARGET teaql_module_ledger_plan_probe)
+    add_test(NAME module_ledger_plan_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_ledger_plan_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_ledger_plan_probe>)
+    set_tests_properties(module_ledger_plan_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+foreach(save_caller IN ITEMS generated_inheritance_save generated_inheritance_graph)
+    if(TARGET teaql_module_${save_caller}_probe)
+        add_test(NAME module_${save_caller}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${save_caller}.py
+            --cpp $<TARGET_FILE:teaql_module_${save_caller}_probe>)
+        set_tests_properties(module_${save_caller}_rust_parity PROPERTIES
+            ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    endif()
+endforeach()
+
+if(TARGET teaql_module_graph_outcome_models_probe)
+    add_test(NAME module_graph_outcome_models_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_graph_outcome_models_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_graph_outcome_models_probe>)
+endif()
+
+if(TARGET teaql_module_ledger_execution_probe)
+    add_test(NAME module_ledger_execution_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_ledger_execution_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_ledger_execution_probe>)
+    set_tests_properties(module_ledger_execution_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
 endif()

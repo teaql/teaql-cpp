@@ -30,6 +30,20 @@ inline std::optional<std::uint64_t> graph_trace_id(const GraphNode& node) {
     return {};
 }
 
+// Retained recursive callers use the signed-to-unsigned scope identity contract.
+// The graph planner deliberately uses the stricter graph_trace_id helper.
+inline std::optional<std::uint64_t> graph_legacy_trace_id(const GraphNode& node) {
+    if (const auto* value = node.id()) {
+        if (const auto* id = std::get_if<std::uint64_t>(&value->data)) {
+            return *id;
+        }
+        if (const auto* id = std::get_if<std::int64_t>(&value->data)) {
+            return static_cast<std::uint64_t>(*id);
+        }
+    }
+    return {};
+}
+
 inline bool graph_has_comment(const GraphNode& node) {
     auto text = node.comment ? std::string_view(*node.comment) : std::string_view{};
     trim(text);

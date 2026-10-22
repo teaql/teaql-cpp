@@ -146,6 +146,10 @@ public:
                 if (!pending) {
                     return fail(std::move(pending).error());
                 }
+                auto captured = capture_ledger_trace_scopes(*root_, *node_);
+                if (!captured) {
+                    return fail(std::move(captured).error());
+                }
                 bool dirty = root_->has_pending_dynamic_mutations() ||
                              !root_->current_change_set().changes().empty() ||
                              !root_->deleted_keys().empty() || !root_->new_keys().empty();
@@ -166,10 +170,6 @@ public:
                     id_property_ = id->name;
                     service_ = &context_.template make<EntityDataService<E>>(
                         context_, node_->entity, executor_);
-                    auto captured = capture_ledger_trace_scopes(*root_, *node_);
-                    if (!captured) {
-                        return fail(std::move(captured).error());
-                    }
                     auto bound = EntityDataServiceAccess::bind_mutation_intent(
                         *service_,
                         node_->comment ? std::optional<std::string_view>(*node_->comment)

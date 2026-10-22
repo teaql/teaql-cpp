@@ -1,0 +1,675 @@
+{
+  "status": "pending_review",
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "teaql-runtime/src/data_service/resolved.rs",
+  "source_sha256": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+  "function_count": 75,
+  "functions": [
+    {
+      "name": "with_total_count",
+      "line": 36,
+      "group": "RQ18"
+    },
+    {
+      "name": "decode_compact_rows",
+      "line": 43,
+      "group": "RQ18"
+    },
+    {
+      "name": "decode_with_dynamic_fields",
+      "line": 54,
+      "group": "RQ01"
+    },
+    {
+      "name": "load_dynamic_fields_into_rows",
+      "line": 86,
+      "group": "RQ02"
+    },
+    {
+      "name": "flatten_relation_graph",
+      "line": 125,
+      "group": "RQ03"
+    },
+    {
+      "name": "attach_flat_relation_graph",
+      "line": 287,
+      "group": "RQ04"
+    },
+    {
+      "name": "query_behavior",
+      "line": 304,
+      "group": "RQ05"
+    },
+    {
+      "name": "behavior",
+      "line": 322,
+      "group": "RQ05"
+    },
+    {
+      "name": "entity",
+      "line": 337,
+      "group": "RQ05"
+    },
+    {
+      "name": "select",
+      "line": 341,
+      "group": "RQ05"
+    },
+    {
+      "name": "insert_command",
+      "line": 345,
+      "group": "RQ07"
+    },
+    {
+      "name": "enforce_insert_policy",
+      "line": 349,
+      "group": "RQ07"
+    },
+    {
+      "name": "enforce_update_policy",
+      "line": 356,
+      "group": "RQ08"
+    },
+    {
+      "name": "enforce_delete_policy",
+      "line": 363,
+      "group": "RQ08"
+    },
+    {
+      "name": "enforce_recover_policy",
+      "line": 370,
+      "group": "RQ08"
+    },
+    {
+      "name": "prepare_select_query",
+      "line": 377,
+      "group": "RQ06"
+    },
+    {
+      "name": "prepare_select_query_owned",
+      "line": 381,
+      "group": "RQ06"
+    },
+    {
+      "name": "ensure_entity_identity_projection",
+      "line": 414,
+      "group": "RQ06"
+    },
+    {
+      "name": "prepare_insert_command",
+      "line": 433,
+      "group": "RQ07"
+    },
+    {
+      "name": "update_command",
+      "line": 477,
+      "group": "RQ08"
+    },
+    {
+      "name": "prepare_update_command",
+      "line": 481,
+      "group": "RQ08"
+    },
+    {
+      "name": "delete_command",
+      "line": 494,
+      "group": "RQ08"
+    },
+    {
+      "name": "recover_command",
+      "line": 498,
+      "group": "RQ08"
+    },
+    {
+      "name": "fetch_all_internal",
+      "line": 502,
+      "group": "RQ09"
+    },
+    {
+      "name": "fetch_all_owned_internal",
+      "line": 522,
+      "group": "RQ09"
+    },
+    {
+      "name": "fetch_compact_all_internal",
+      "line": 541,
+      "group": "RQ09"
+    },
+    {
+      "name": "prepare_continuous_page",
+      "line": 566,
+      "group": "RQ10"
+    },
+    {
+      "name": "register_continuous_page",
+      "line": 686,
+      "group": "RQ10"
+    },
+    {
+      "name": "continuous_page_query_key",
+      "line": 741,
+      "group": "RQ11"
+    },
+    {
+      "name": "id_set_query_key",
+      "line": 759,
+      "group": "RQ11"
+    },
+    {
+      "name": "prepare_id_set_page",
+      "line": 786,
+      "group": "RQ12"
+    },
+    {
+      "name": "id_set_page_query",
+      "line": 956,
+      "group": "RQ12"
+    },
+    {
+      "name": "fetch_stream_internal",
+      "line": 986,
+      "group": "RQ13"
+    },
+    {
+      "name": "fetch_stream_with_source_internal",
+      "line": 1005,
+      "group": "RQ13"
+    },
+    {
+      "name": "fetch_prepared_all",
+      "line": 1117,
+      "group": "RQ17"
+    },
+    {
+      "name": "fetch_prepared_all_with_aggregates",
+      "line": 1124,
+      "group": "RQ16"
+    },
+    {
+      "name": "fetch_prepared_query",
+      "line": 1194,
+      "group": "RQ14"
+    },
+    {
+      "name": "fetch_prepared_query_owned",
+      "line": 1251,
+      "group": "RQ14"
+    },
+    {
+      "name": "fetch_prepared_compact_owned",
+      "line": 1294,
+      "group": "RQ14"
+    },
+    {
+      "name": "fetch_prepared_query_with_cache",
+      "line": 1329,
+      "group": "RQ15"
+    },
+    {
+      "name": "fetch_all_with_relation_aggregates_internal",
+      "line": 1421,
+      "group": "RQ17"
+    },
+    {
+      "name": "fetch_smart_list_internal",
+      "line": 1442,
+      "group": "RQ18"
+    },
+    {
+      "name": "fetch_smart_list_with_relation_aggregates_internal",
+      "line": 1455,
+      "group": "RQ18"
+    },
+    {
+      "name": "fetch_entities_internal",
+      "line": 1465,
+      "group": "RQ18"
+    },
+    {
+      "name": "fetch_entities_with_relation_aggregates_internal",
+      "line": 1499,
+      "group": "RQ18"
+    },
+    {
+      "name": "fetch_enhanced_entities_with_relation_aggregates_internal",
+      "line": 1536,
+      "group": "RQ19"
+    },
+    {
+      "name": "fetch_enhanced_entities_with_relation_aggregates_owned_internal",
+      "line": 1552,
+      "group": "RQ19"
+    },
+    {
+      "name": "decode_simple_query",
+      "line": 1568,
+      "group": "RQ19"
+    },
+    {
+      "name": "fetch_enhanced_entities_with_relation_aggregates_prepared",
+      "line": 1597,
+      "group": "RQ19"
+    },
+    {
+      "name": "fetch_enhanced_entities_internal",
+      "line": 1751,
+      "group": "RQ19"
+    },
+    {
+      "name": "fetch_all",
+      "line": 1763,
+      "group": "RQ20"
+    },
+    {
+      "name": "fetch_all_owned",
+      "line": 1782,
+      "group": "RQ20"
+    },
+    {
+      "name": "fetch_stream",
+      "line": 1799,
+      "group": "RQ20"
+    },
+    {
+      "name": "fetch_smart_list",
+      "line": 1823,
+      "group": "RQ20"
+    },
+    {
+      "name": "fetch_smart_list_with_relation_aggregates",
+      "line": 1840,
+      "group": "RQ20"
+    },
+    {
+      "name": "fetch_entities",
+      "line": 1860,
+      "group": "RQ20"
+    },
+    {
+      "name": "fetch_enhanced_entities",
+      "line": 1880,
+      "group": "RQ20"
+    },
+    {
+      "name": "fetch_enhanced_entities_with_relation_aggregates",
+      "line": 1900,
+      "group": "RQ20"
+    },
+    {
+      "name": "fetch_enhanced_entities_with_relation_aggregates_owned",
+      "line": 1923,
+      "group": "RQ20"
+    },
+    {
+      "name": "insert_internal",
+      "line": 1945,
+      "group": "RQ21"
+    },
+    {
+      "name": "update_internal",
+      "line": 1956,
+      "group": "RQ21"
+    },
+    {
+      "name": "delete_internal",
+      "line": 1967,
+      "group": "RQ21"
+    },
+    {
+      "name": "delete_scoped_internal",
+      "line": 1979,
+      "group": "RQ21"
+    },
+    {
+      "name": "recover_internal",
+      "line": 2009,
+      "group": "RQ21"
+    },
+    {
+      "name": "emit_event",
+      "line": 2038,
+      "group": "RQ22"
+    },
+    {
+      "name": "execute_prepared_insert",
+      "line": 2044,
+      "group": "RQ23"
+    },
+    {
+      "name": "execute_prepared_insert_with_comment",
+      "line": 2052,
+      "group": "RQ23"
+    },
+    {
+      "name": "execute_prepared_batch_insert",
+      "line": 2065,
+      "group": "RQ23"
+    },
+    {
+      "name": "execute_prepared_update",
+      "line": 2086,
+      "group": "RQ24"
+    },
+    {
+      "name": "execute_prepared_update_with_comment",
+      "line": 2094,
+      "group": "RQ24"
+    },
+    {
+      "name": "execute_prepared_batch_update",
+      "line": 2135,
+      "group": "RQ24"
+    },
+    {
+      "name": "fetch_current_event_row",
+      "line": 2173,
+      "group": "RQ24"
+    },
+    {
+      "name": "scoped_data_service_internal",
+      "line": 2184,
+      "group": "RQ25"
+    },
+    {
+      "name": "query_scoped_service_with_aggregates",
+      "line": 2203,
+      "group": "RQ26"
+    },
+    {
+      "name": "query_scoped_service",
+      "line": 2221,
+      "group": "RQ26"
+    }
+  ],
+  "groups": [
+    {
+      "id": "RQ01",
+      "functions": [
+        "decode_with_dynamic_fields"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/dynamic_entities.hpp",
+      "evidence_entry": "docs/resolved_dynamic_typed_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ02",
+      "functions": [
+        "load_dynamic_fields_into_rows"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/dynamic_loading.hpp",
+      "evidence_entry": "docs/resolved_dynamic_rows_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ03",
+      "functions": [
+        "flatten_relation_graph"
+      ],
+      "candidate_entry": "teaql_runtime/src/data_service/relation_graph.cpp",
+      "evidence_entry": "docs/loaded_graph_protocol_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ04",
+      "functions": [
+        "attach_flat_relation_graph"
+      ],
+      "candidate_entry": "teaql_runtime/src/data_service/relation_graph.cpp",
+      "evidence_entry": "docs/loaded_graph_protocol_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ05",
+      "functions": [
+        "query_behavior",
+        "behavior",
+        "entity",
+        "select"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp",
+      "evidence_entry": "docs/resolved_select_preparation_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ06",
+      "functions": [
+        "prepare_select_query",
+        "prepare_select_query_owned",
+        "ensure_entity_identity_projection"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp",
+      "evidence_entry": "docs/resolved_select_preparation_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ07",
+      "functions": [
+        "insert_command",
+        "enforce_insert_policy",
+        "prepare_insert_command"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
+      "evidence_entry": "docs/resolved_mutation_preparation_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ08",
+      "functions": [
+        "enforce_update_policy",
+        "enforce_delete_policy",
+        "enforce_recover_policy",
+        "update_command",
+        "prepare_update_command",
+        "delete_command",
+        "recover_command"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
+      "evidence_entry": "docs/resolved_mutation_preparation_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ09",
+      "functions": [
+        "fetch_all_internal",
+        "fetch_all_owned_internal",
+        "fetch_compact_all_internal"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+      "evidence_entry": "docs/query_entry_cursor_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ10",
+      "functions": [
+        "prepare_continuous_page",
+        "register_continuous_page"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+      "evidence_entry": "docs/query_entry_cursor_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ11",
+      "functions": [
+        "continuous_page_query_key",
+        "id_set_query_key"
+      ],
+      "candidate_entry": "teaql_runtime/src/data_service/query_keys.cpp",
+      "evidence_entry": "docs/query_entry_cursor_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ12",
+      "functions": [
+        "prepare_id_set_page",
+        "id_set_page_query"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/id_set_page.hpp",
+      "evidence_entry": "docs/query_entry_cursor_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ13",
+      "functions": [
+        "fetch_stream_internal",
+        "fetch_stream_with_source_internal"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp",
+      "evidence_entry": "docs/resolved_stream_schema_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ14",
+      "functions": [
+        "fetch_prepared_query",
+        "fetch_prepared_query_owned",
+        "fetch_prepared_compact_owned"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+      "evidence_entry": "docs/resolved_query_schema_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ15",
+      "functions": [
+        "fetch_prepared_query_with_cache"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+      "evidence_entry": "docs/resolved_cache_intent_order_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ16",
+      "functions": [
+        "fetch_prepared_all_with_aggregates"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+      "evidence_entry": "docs/aggregate_membership_snapshot_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ17",
+      "functions": [
+        "fetch_prepared_all",
+        "fetch_all_with_relation_aggregates_internal"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+      "evidence_entry": "docs/relation_enhancement_complete_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ18",
+      "functions": [
+        "with_total_count",
+        "decode_compact_rows",
+        "fetch_smart_list_internal",
+        "fetch_smart_list_with_relation_aggregates_internal",
+        "fetch_entities_internal",
+        "fetch_entities_with_relation_aggregates_internal"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_results.hpp",
+      "evidence_entry": "docs/resolved_dynamic_typed_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ19",
+      "functions": [
+        "fetch_enhanced_entities_with_relation_aggregates_internal",
+        "fetch_enhanced_entities_with_relation_aggregates_owned_internal",
+        "decode_simple_query",
+        "fetch_enhanced_entities_with_relation_aggregates_prepared",
+        "fetch_enhanced_entities_internal"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp",
+      "evidence_entry": "docs/resolved_enhanced_typed_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ20",
+      "functions": [
+        "fetch_all",
+        "fetch_all_owned",
+        "fetch_stream",
+        "fetch_smart_list",
+        "fetch_smart_list_with_relation_aggregates",
+        "fetch_entities",
+        "fetch_enhanced_entities",
+        "fetch_enhanced_entities_with_relation_aggregates",
+        "fetch_enhanced_entities_with_relation_aggregates_owned"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp",
+      "evidence_entry": "docs/runtime_service_surface_source_review_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ21",
+      "functions": [
+        "insert_internal",
+        "update_internal",
+        "delete_internal",
+        "delete_scoped_internal",
+        "recover_internal"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
+      "evidence_entry": "docs/resolved_mutation_execution_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ22",
+      "functions": [
+        "emit_event"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
+      "evidence_entry": "docs/resolved_mutation_privacy_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ23",
+      "functions": [
+        "execute_prepared_insert",
+        "execute_prepared_insert_with_comment",
+        "execute_prepared_batch_insert"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
+      "evidence_entry": "docs/resolved_mutation_execution_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ24",
+      "functions": [
+        "execute_prepared_update",
+        "execute_prepared_update_with_comment",
+        "execute_prepared_batch_update",
+        "fetch_current_event_row"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp",
+      "evidence_entry": "docs/resolved_mutation_privacy_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ25",
+      "functions": [
+        "scoped_data_service_internal"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp",
+      "evidence_entry": "docs/resolved_scope_privacy_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    },
+    {
+      "id": "RQ26",
+      "functions": [
+        "query_scoped_service_with_aggregates",
+        "query_scoped_service"
+      ],
+      "candidate_entry": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp",
+      "evidence_entry": "docs/resolved_scope_tree_5_0_6.md",
+      "status": "requires_complete_source_reconciliation"
+    }
+  ],
+  "notes": [
+    "Coverage index only; evidence entry points are not proof of complete semantic qualification.",
+    "RQ27 belongs to query_future_tests.rs, included by path at the end of this source; it is not a function defined in resolved.rs.",
+    "ContinuousPageExecution is a state carrier for RQ10. Imports and impl bounds remain part of the whole-source review.",
+    "Some functions span several responsibilities; the primary group is unique and callers retain their cross-group obligations."
+  ]
+}

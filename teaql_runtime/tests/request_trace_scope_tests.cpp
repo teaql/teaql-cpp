@@ -487,6 +487,53 @@ static void graph_and_standalone_lineage() {
           "invalid entry intent cannot replace existing lineage or inherit a previous reason");
 }
 
+// Matches the eight original Rust scope ownership observations, including trace IDs.
+static void unallocated_scope_identity() {
+    for (bool standalone : {false, true}) {
+        for (int variant = 0; variant != 4; ++variant) {
+            GlobalContext global;
+            auto user_context = global.make_user_context();
+            auto r = user_context->memory_resource();
+            Value id(r);
+            if (variant == 1) {
+                id = Value(r, TypedNull{DataType::Text});
+            } else if (variant == 2) {
+                id = Value(r, std::int64_t{0});
+            } else if (variant == 3) {
+                id = Value(r, std::uint64_t{0});
+            }
+            auto& root = user_context->make<EntityRuntimeState>();
+            EntityKey key(std::allocator_arg, Allocator(r), "Child", id);
+            auto& graph = user_context->make<GraphNode>("Parent");
+            graph.value("id", std::uint64_t{10}).with_comment("root reason");
+            if (standalone) {
+                root.mark_as_new(key);
+                root.set_entity_comment(key, "child reason");
+            } else {
+                auto& child = user_context->make<GraphNode>("Child");
+                child.value("id", id).with_comment("child reason");
+                graph.relation("children", child);
+            }
+            check(bool(detail::capture_ledger_trace_scopes(root, graph)),
+                  "capture allocation matrix");
+            auto before = root.get_trace_chain(key);
+            check(before.size() == 2 && before.front().entity_id == 10 && !before.back().entity_id,
+                  "unallocated child trace before enrichment");
+            std::pmr::map<EntityKey, Value> ids(r);
+            ids.emplace(key, Value(r, std::uint64_t{200}));
+            detail::EntityRuntimeAccess::enrich_allocated_trace_scopes(root, ids);
+            auto after = root.get_trace_chain(key);
+            check(after.size() == 2 && after.front().entity_id == 10 &&
+                      after.front().comment == "root reason" &&
+                      after.back().comment == "child reason",
+                  "enrichment preserves ancestry");
+            check(after.back().entity_id == (variant == 1 ? std::optional<std::uint64_t>{}
+                                                          : std::optional<std::uint64_t>{200}),
+                  "typed NULL does not own an unallocated trace scope");
+        }
+    }
+}
+
 int main() {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
@@ -498,6 +545,7 @@ int main() {
         governed_mutation_privacy();
         mixed_owner_ancestor_copy();
         graph_and_standalone_lineage();
+        unallocated_scope_identity();
     } catch (...) {
         std::pmr::set_default_resource(previous);
         throw;

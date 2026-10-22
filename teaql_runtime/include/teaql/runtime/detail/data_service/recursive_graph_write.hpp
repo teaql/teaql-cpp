@@ -53,12 +53,12 @@ public:
                     return fail(message);
                 }
                 active_ = clone_in(r, parent_);
-                if ((!insert_ || node_.operation != GraphOperation::Reference) && node_.comment &&
-                    !node_.comment->empty()) {
+                if ((!insert_ || node_.operation != GraphOperation::Reference) &&
+                    graph_has_comment(node_)) {
                     active_.emplace_back(TraceKind::AuditReason,
                                          node_.entity,
                                          *node_.comment,
-                                         graph_trace_id(node_));
+                                         graph_legacy_trace_id(node_));
                 }
                 if (node_.operation == GraphOperation::Reference) {
                     graph_ = &EntityDataServiceAccess::validate_reference_node(

@@ -153,11 +153,104 @@ static void concurrent_connections() {
     }
 }
 
+static void transaction_resource_scope_isolation() {
+    GlobalContext global;
+    auto& connection = global.make_resource<SqliteConnection>();
+    auto& provider = global.make<SqliteMutationExecutor>(connection);
+    auto& generator = global.make<SqliteIdSpaceGenerator>(provider);
+    auto user_context = global.make_user_context();
+    auto other_user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    check(bool(generator.ensure_floor(r, "Scoped", 100)), "reserve scoped identity floor");
+    auto& transaction = provider.begin_sql(r).wait().value().get();
+    check(!generator.next_id(r, "Scoped"), "unbound generator cannot enter leased transaction");
+    bool wrong_domain = false;
+    try {
+        auto invalid =
+            transaction.bind_transaction_resources(other_user_context->memory_resource());
+    } catch (const std::invalid_argument&) {
+        wrong_domain = true;
+    }
+    check(wrong_domain, "resource scope rejects a different Context");
+    {
+        auto scope = transaction.bind_transaction_resources(r);
+        check(generator.next_id(r, "Scoped").value() == 101,
+              "bound generator enters its transaction");
+        check(!generator.next_id(other_user_context->memory_resource(), "Scoped"),
+              "another Context cannot borrow the active ID scope");
+        CompiledQuery query(std::allocator_arg, Allocator(r));
+        query.sql = "SELECT current_level FROM teaql_id_space";
+        check(!provider.fetch_all_compact(r, query),
+              "ID scope does not authorize ordinary parent SQL");
+
+        struct ScopeExit {};
+
+        try {
+            auto nested = transaction.bind_transaction_resources(r);
+            auto moved = std::move(nested);
+            check(generator.next_id(r, "Scoped").value() == 102,
+                  "nested moved scope retains authorization");
+            throw ScopeExit{};
+        } catch (const ScopeExit&) {
+        }
+        check(generator.next_id(r, "Scoped").value() == 103,
+              "nested exception restores outer authorization");
+        auto* streaming = dynamic_cast<StreamingSqlTransport<MutationExecutorError>*>(&transaction);
+        check(streaming != nullptr, "native transaction exposes actual streaming transport");
+        query.sql = "SELECT 1 AS id UNION ALL SELECT 2 AS id";
+        auto& stream = streaming->stream_sql(r, detail::clone_in(r, query), 1);
+        auto* first = stream.wait_next();
+        check(first && bool(*first), "transaction cursor acquires a real statement lease");
+        check(!generator.next_id(r, "Scoped"),
+              "ID scope cannot bypass an active transaction cursor");
+        stream.cancel();
+        check(generator.next_id(r, "Scoped").value() == 104,
+              "cursor cancellation releases statement lease");
+    }
+    check(!generator.next_id(r, "Scoped"),
+          "leaving scope revokes authorization before transaction end");
+    check(bool(transaction.rollback_sql(r).wait()),
+          "scoped allocations roll back with transaction");
+    check(generator.next_id(r, "Scoped").value() == 101, "rollback restores persisted floor");
+    bool consumed = false;
+    try {
+        auto invalid = transaction.bind_transaction_resources(r);
+    } catch (const std::logic_error&) {
+        consumed = true;
+    }
+    check(consumed, "consumed transaction cannot create a resource scope");
+    auto& cancelled = provider.begin_sql(r).wait().value().get();
+    {
+        auto scope = cancelled.bind_transaction_resources(r);
+        check(generator.next_id(r, "Scoped").value() == 102,
+              "second transaction allocates inside scope");
+        cancelled.cancel_sql();
+        check(!generator.next_id(r, "Scoped"),
+              "cancelled scope cannot silently allocate outside its transaction");
+    }
+    check(generator.next_id(r, "Scoped").value() == 102,
+          "cancel and scope destruction restore normal access");
+    {
+        auto short_user_context = global.make_user_context();
+        auto sr = short_user_context->memory_resource();
+        auto& abandoned = provider.begin_sql(sr).wait().value().get();
+        {
+            auto scope = abandoned.bind_transaction_resources(sr);
+            check(generator.next_id(sr, "Scoped").value() == 103,
+                  "short Context allocates inside transaction");
+        }
+        short_user_context.reset();
+    }
+    check(generator.next_id(r, "Scoped").value() == 103,
+          "Context close rolls back after scope release");
+}
+
 int main() {
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         lifetimes_and_transactions();
         strict_storage_and_failures();
+        transaction_resource_scope_isolation();
         concurrent_connections();
         std::pmr::set_default_resource(previous);
         std::cout << "SQLite ID-space contracts passed\n";

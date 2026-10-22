@@ -1,0 +1,346 @@
+#include <teaql/runtime/detail/data_service/relation_enhancement.hpp>
+#include "../support/relation_hydration_fixture.hpp"
+#include "fixture_sql.hpp"
+#include <teaql/core/detail/debug.hpp>
+#include <iostream>
+struct Fetch;
+using E = Fetch;
+
+static Json strings_out(Memory r, std::span<const String> values) {
+    Json::Array array(r);
+    for (const auto& s : values) {
+        array.emplace_back(s);
+    }
+    return Json(r, array);
+}
+
+static Vector<CompactRow> rows_in(Memory r, std::span<const Json> input) {
+    Vector<CompactRow> rows(r);
+    for (const auto& item : input) {
+        Record record(r);
+        for (const auto& [key, v] : std::get<Json::Object>(item.data)) {
+            record.emplace(String(key, r), value(r, v));
+        }
+        rows.emplace_back(record);
+    }
+    return rows;
+}
+
+static Json rows_out(Memory r, std::span<const CompactRow> rows) {
+    Json::Array out(r);
+    for (const auto& row : rows) {
+        auto j = detail::model_json(r);
+        for (const auto& key : row.keys()) {
+            detail::model_put(j, key, detail::debug_value(r, *row.get(key)));
+        }
+        out.emplace_back(std::move(j));
+    }
+    return Json(r, out);
+}
+
+static std::optional<AggregationCacheOptions> cache_in(const Json& j) {
+    auto* c = optional(j, "cache");
+    if (!c || std::holds_alternative<std::monostate>(c->data)) {
+        return {};
+    }
+    return AggregationCacheOptions{std::get<bool>(field(*c, "enabled").data),
+                                   integer(field(*c, "ttl")),
+                                   std::get<bool>(field(*c, "propagate").data),
+                                   integer(field(*c, "child_ttl"))};
+}
+
+static SelectQuery query_in(Memory r, const Json& j) {
+    auto q = query(r, j);
+    q.entity = text(field(j, "entity"));
+    if (auto* purpose = optional(j, "purpose");
+        purpose && !std::holds_alternative<std::monostate>(purpose->data)) {
+        q.purpose_text.emplace(text(*purpose), r);
+    }
+    q.aggregation_cache = cache_in(j);
+    for (const auto& l : items(j, "relations")) {
+        if (auto* child = optional(l, "query")) {
+            q.relations.emplace_back(text(field(l, "name")), query_in(r, *child));
+        } else {
+            q.relations.emplace_back(text(field(l, "name")));
+        }
+    }
+    q.trace_chain.emplace_back(TraceKind::Request, q.entity, "query trace");
+    return q;
+}
+
+static Json expr_out(Memory r, const Expr& e) {
+    auto out = detail::model_json(r);
+    unsigned kind;
+    switch (e.kind) {
+    case Expr::Kind::Column:
+        kind = 0;
+        break;
+    case Expr::Kind::Value:
+        kind = 1;
+        break;
+    case Expr::Kind::Binary:
+        kind = 3;
+        break;
+    case Expr::Kind::And:
+        kind = 8;
+        break;
+    case Expr::Kind::Or:
+        kind = 9;
+        break;
+    default:
+        throw std::logic_error("Unsupported planning fixture expression");
+    }
+    detail::model_put(out, "kind", kind);
+    detail::model_put(out, "op", unsigned(e.op));
+    detail::model_put(out, "name", e.name);
+    detail::model_put(out, "value", detail::debug_value(r, e.literal));
+    Json::Array args(r);
+    for (const auto& a : e.args) {
+        args.emplace_back(expr_out(r, a));
+    }
+    detail::model_put(out, "args", args);
+    return out;
+}
+
+static Json trace_out(Memory r, std::span<const TraceNode> trace) {
+    Json::Array out(r);
+    for (const auto& t : trace) {
+        auto j = detail::model_json(r);
+        detail::model_put(j, "kind", unsigned(t.kind));
+        detail::model_put(j, "entity", t.entity_type);
+        detail::model_put(j, "comment", t.comment);
+        out.emplace_back(std::move(j));
+    }
+    return Json(r, out);
+}
+
+static Json query_out(Memory r, const SelectQuery& q) {
+    auto out = detail::model_json(r);
+    detail::model_put(out, "entity", q.entity);
+    detail::model_put(out, "projection", strings_out(r, q.projection));
+    detail::model_put(out, "group", strings_out(r, q.group_by_fields));
+    detail::model_put(out, "filter", q.predicate ? expr_out(r, *q.predicate) : Json(r));
+    detail::model_put(
+        out, "having", q.having_predicate ? expr_out(r, *q.having_predicate) : Json(r));
+    detail::model_put(out, "partition", q.partition_field ? Json(r, *q.partition_field) : Json(r));
+    detail::model_put(out, "comment", q.comment_text ? Json(r, *q.comment_text) : Json(r));
+    detail::model_put(out, "search", q.search_text ? Json(r, *q.search_text) : Json(r));
+    detail::model_put(out, "raw_sql", q.raw_sql_text ? Json(r, *q.raw_sql_text) : Json(r));
+    detail::model_put(out, "raw_criteria", strings_out(r, q.raw_sql_search_criteria));
+    detail::model_put(out, "trace", trace_out(r, q.trace_chain));
+    Json slice(r);
+    if (q.slice) {
+        slice = detail::model_json(r);
+        detail::model_put(slice, "offset", q.slice->offset);
+        detail::model_put(slice, "limit", q.slice->limit ? Json(r, *q.slice->limit) : Json(r));
+    }
+    detail::model_put(out, "slice", slice);
+    Json cache(r);
+    if (q.aggregation_cache) {
+        cache = detail::model_json(r);
+        detail::model_put(cache, "enabled", q.aggregation_cache->enabled);
+        detail::model_put(cache, "ttl", q.aggregation_cache->cache_expired_millis);
+        detail::model_put(cache, "propagate", q.aggregation_cache->propagate);
+        detail::model_put(cache, "child_ttl", q.aggregation_cache->propagate_cache_expired_millis);
+    }
+    detail::model_put(out, "cache", cache);
+    Json::Array aggregates(r), exprs(r), order(r), relations(r);
+    for (const auto& a : q.aggregates) {
+        auto j = detail::model_json(r);
+        detail::model_put(j, "function", unsigned(a.function));
+        detail::model_put(j, "field", a.field);
+        detail::model_put(j, "alias", a.alias);
+        aggregates.emplace_back(std::move(j));
+    }
+    for (const auto& p : q.expr_projection) {
+        auto j = detail::model_json(r);
+        detail::model_put(j, "alias", p.alias);
+        detail::model_put(j, "expr", expr_out(r, p.expr));
+        exprs.emplace_back(std::move(j));
+    }
+    for (const auto& o : q.order_by) {
+        auto j = detail::model_json(r);
+        detail::model_put(j, "field", o.field);
+        detail::model_put(j, "direction", unsigned(o.direction));
+        order.emplace_back(std::move(j));
+    }
+    for (const auto& l : q.relations) {
+        auto j = detail::model_json(r);
+        detail::model_put(j, "name", l.name);
+        detail::model_put(j, "query", l.query ? query_out(r, *l.query) : Json(r));
+        relations.emplace_back(std::move(j));
+    }
+    detail::model_put(out, "aggregates", aggregates);
+    detail::model_put(out, "expr_projection", exprs);
+    detail::model_put(out, "order", order);
+    detail::model_put(out, "relations", relations);
+    auto raw = [&](const auto& projections) {
+        Json::Array array(r);
+        for (const auto& p : projections) {
+            auto j = detail::model_json(r);
+            detail::model_put(j, "alias", p.property_name);
+            detail::model_put(j, "sql", p.raw_sql_segment);
+            array.emplace_back(std::move(j));
+        }
+        return Json(r, array);
+    };
+    detail::model_put(out, "raw_projection", raw(q.raw_projections));
+    detail::model_put(out, "dynamic", raw(q.dynamic_properties));
+    return out;
+}
+
+struct Fetch : QueryExecutor<String>, MutationExecutor<String> {
+    using allocator_type = Allocator;
+    Memory r;
+    const Json& input;
+    Vector<Json> calls;
+    unsigned drops = 0;
+    mutable unsigned capability_calls = 0;
+
+    Memory memory_resource() const {
+        return r;
+    }
+
+    DataServiceCapabilities capabilities() const override {
+        ++capability_calls;
+        return {};
+    }
+
+    Fetch(std::allocator_arg_t, Allocator a, const Json& j) : r(a.resource()), input(j), calls(r) {}
+
+    struct Work {
+        using allocator_type = Allocator;
+        Memory r;
+        Fetch& fetch;
+        unsigned index, pending;
+
+        Work(std::allocator_arg_t, Allocator a, Fetch& f, unsigned i)
+            : r(a.resource()), fetch(f), index(i), pending(integer(field(f.input, "pending"))) {}
+
+        std::optional<Result<QueryResult, String>> poll(WakeSignal& wake) {
+            using R = Result<QueryResult, String>;
+            if (pending) {
+                --pending;
+                wake.notify();
+                return {};
+            }
+            if (index == integer(field(fetch.input, "fail_at"))) {
+                return R::err(r, String("fetch failed", r));
+            }
+            auto replies = items(fetch.input, "responses");
+            auto rows = index <= replies.size()
+                            ? rows_in(r, std::get<Json::Array>(replies[index - 1].data))
+                            : Vector<CompactRow>(r);
+            QueryResult result(std::allocator_arg,
+                               Allocator(r),
+                               ExecutionMetadata::unrecorded_query(r, rows.size()));
+            result.rows.swap(rows);
+            return R::ok(r, std::move(result));
+        }
+
+        void finish_and_wait() noexcept {
+            ++fetch.drops;
+        }
+
+        void cancel_and_wait() noexcept {
+            ++fetch.drops;
+        }
+    };
+
+    DataServiceOperationResult<QueryResult, String>& query(Memory target,
+                                                           QueryRequest request) override {
+        auto call = detail::model_json(r);
+        detail::model_put(call, "trace", trace_out(r, request.trace_chain));
+        detail::model_put(call, "query", query_out(r, request.query));
+        detail::model_put(call, "comment", request.intent.comment());
+        detail::model_put(call, "purpose", request.intent.purpose());
+        calls.emplace_back(std::move(call));
+        return make_operation<Result<QueryResult, String>, Work>(
+            target, *this, unsigned(calls.size()));
+    }
+
+    DataServiceOperationResult<MutationResult, String>& mutate(Memory, MutationRequest) override {
+        throw std::logic_error("unexpected mutation");
+    }
+};
+
+static Json evaluate(UserContext& c, const Json& j) {
+    auto r = c.memory_resource();
+    auto& store = c.make<InMemoryMetadataStore>();
+    for (const auto& input : items(j, "entities")) {
+        auto e = entity(r, input);
+        for (const auto& rel : items(input, "relations")) {
+            auto& relation = e.relation(text(field(rel, "name")), text(field(rel, "target")));
+            relation.local_key = text(field(rel, "local"));
+            relation.foreign_key = text(field(rel, "foreign"));
+            relation.many = true;
+        }
+        store.register_entity(std::move(e));
+    }
+    c.set_metadata(c, store);
+    auto& executor = c.make<E>(j);
+    auto& service = EntityDataService<E>::for_executor(c, "Parent", c, executor);
+    TraceChain repo_trace(r), trace(r);
+    repo_trace.emplace_back(TraceKind::Entity, "ignored repository", "repo trace");
+    service.with_trace_context(repo_trace);
+    trace.emplace_back(TraceKind::Request, "Parent", "parent trace");
+    auto& parents = c.make<Vector<CompactRow>>(rows_in(r, items(j, "parents")));
+    auto& fetch = executor;
+    detail::EntityRelationFetch<E> callback(
+        std::allocator_arg, Allocator(r), [&](const auto& service, SelectQuery q) -> auto& {
+            return detail::EntityDataServiceAccess::fetch_all(service, q);
+        });
+    Vector<RelationAggregate> aggregates(r);
+    Vector<ObjectGroupBy> groups(r);
+    Vector<SelectQuery> children(r);
+    auto mode = text(field(j, "mode"));
+    for (const auto& item : items(j, "enhancements")) {
+        auto q = query_in(r, field(item, "query"));
+        if (mode == "aggregate") {
+            aggregates.emplace_back(text(field(item, "relation")),
+                                    text(field(item, "alias")),
+                                    q,
+                                    std::get<bool>(field(item, "single").data));
+        } else if (mode == "group") {
+            groups.emplace_back(text(field(item, "property")), text(field(item, "storage")), q);
+        } else {
+            children.emplace_back(std::move(q));
+        }
+    }
+    auto& work = mode == "aggregate"
+                     ? detail::enhance_relation_aggregates(
+                           service, parents, aggregates, cache_in(j), trace, callback)
+                 : mode == "group"
+                     ? detail::enhance_object_group_bys(service, parents, groups, trace, callback)
+                     : detail::enhance_child_queries(service, parents, children, trace, callback);
+    auto out = detail::model_json(r);
+    bool ready = false;
+    for (std::uint64_t i = 0; i < integer(field(j, "polls")); ++i) {
+        if (auto* result = work.poll()) {
+            ready = true;
+            if (!*result) {
+                detail::model_put(out, "error", result->error().to_string(r));
+            }
+            break;
+        }
+    }
+    if (!ready) {
+        work.cancel();
+        detail::model_put(out, "cancelled", true);
+    }
+    detail::model_put(out, "parents", rows_out(r, parents));
+    detail::model_put(out, "calls", Json(r, fetch.calls));
+    detail::model_put(out, "drops", fetch.drops);
+    detail::model_put(out, "capabilities", executor.capability_calls);
+    return out;
+}
+
+int main() {
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        GlobalContext g;
+        auto c = g.make_user_context();
+        auto j = Json::parse(c->memory_resource(), line);
+        std::cout << evaluate(*c, *j).dump(c->memory_resource()) << '\n';
+    }
+}

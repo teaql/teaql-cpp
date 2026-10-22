@@ -91,6 +91,21 @@ struct SqliteConnectionState {
     // Identity only, never an owning pointer. Native autocommit invalidates the
     // identity so an old consumed handle cannot roll back a later transaction.
     const void* transaction_owner = nullptr;
+    // Present only inside an explicitly bound synchronous transaction scope.
+    const void* resource_transaction = nullptr;
+    Memory resource_context = nullptr;
+
+    const void* id_transaction(Memory r) const {
+        if (resource_transaction && resource_context == r) {
+            if (resource_transaction != transaction_owner || sqlite3_get_autocommit(db)) {
+                throw MutationExecutorError::lock(
+                    r, "SQLite transaction resource scope is no longer active");
+            }
+            return resource_transaction;
+        }
+        return nullptr;
+    }
+
     // Recovery for a synchronous allocation is not an asynchronous lease.
     const void* recovery_owner = nullptr;
 
@@ -586,7 +601,8 @@ struct SqliteIdAccess {
     SqliteCursor cursor;
     WakeSignal wake;
 
-    SqliteIdAccess(Memory r, SqliteProviderState& state) : resource(r), cursor(r, state) {
+    SqliteIdAccess(Memory r, SqliteProviderState& state)
+        : resource(r), cursor(r, state, state.connection.id_transaction(r)) {
         if (!cursor.lease.acquire(wake)) {
             throw MutationExecutorError::lock(
                 r, "connection is borrowed by an open SQLite stream; use the pollable transport");
@@ -970,6 +986,30 @@ struct SqliteNativeTransaction final : SqlTransportTransaction<MutationExecutorE
 
     QueryStream<MutationExecutorError>& stream_sql(Memory, CompiledQuery, std::size_t) override;
 
+    TransactionResourceScope do_bind_transaction_resources(Memory r) override {
+        auto& connection = provider.connection;
+        connection.require_owner();
+        if (connection.transaction_owner != this || sqlite3_get_autocommit(connection.db) ||
+            (connection.resource_transaction && connection.resource_transaction != this)) {
+            throw std::logic_error("SQLite resource scope requires its active native transaction");
+        }
+        if (resource_scope_depth == std::numeric_limits<std::size_t>::max()) {
+            throw std::overflow_error("SQLite transaction resource scope nesting exhausted");
+        }
+        ++resource_scope_depth;
+        connection.resource_transaction = this;
+        connection.resource_context = r;
+        return TransactionResourceScope(this, [](void* value) noexcept {
+            auto& transaction = *static_cast<SqliteNativeTransaction*>(value);
+            if (--transaction.resource_scope_depth == 0) {
+                transaction.provider.connection.resource_transaction = nullptr;
+                transaction.provider.connection.resource_context = nullptr;
+            }
+        });
+    }
+
+    std::size_t resource_scope_depth = 0;
+
     void activate() noexcept {
         provider.connection.transaction_owner = this;
     }
@@ -1328,10 +1368,12 @@ struct SqliteErrorStream {
 };
 
 template <class T>
-Result<T, MutationExecutorError>
-synchronous(Memory r, SqliteProviderState& state, const CompiledQuery& query) {
+Result<T, MutationExecutorError> synchronous(Memory r,
+                                             SqliteProviderState& state,
+                                             const CompiledQuery& query,
+                                             const void* transaction = nullptr) {
     state.connection.require_owner();
-    SqliteCall<T> call(std::allocator_arg, Allocator(r), state, query);
+    SqliteCall<T> call(std::allocator_arg, Allocator(r), state, query, transaction);
     WakeSignal wake;
     auto result = call.poll(wake);
     call.finish_and_wait();
@@ -1476,9 +1518,13 @@ SqliteMutationExecutor::fetch_stream(Memory r, const CompiledQuery& query, std::
 
 namespace {
 Result<std::monostate, MutationExecutorError>
-transaction_command(Memory r, detail::SqliteProviderState& state, std::string_view sql) {
+transaction_command(Memory r,
+                    detail::SqliteProviderState& state,
+                    std::string_view sql,
+                    const void* transaction = nullptr) {
     state.connection.require_owner();
-    auto result = detail::synchronous<std::uint64_t>(r, state, detail::transaction_query(r, sql));
+    auto result = detail::synchronous<std::uint64_t>(
+        r, state, detail::transaction_query(r, sql), transaction);
     if (!result) {
         return Result<std::monostate, MutationExecutorError>::err(r, std::move(result).error());
     }
@@ -1581,7 +1627,11 @@ SqliteMutationExecutor::ensure_id_space_table(Memory r, std::string_view table_n
     String sql("CREATE TABLE IF NOT EXISTS ", r);
     sql += quote_identifier_if_needed(r, table_name, '"');
     sql += " (type_name VARCHAR(100) PRIMARY KEY, current_level BIGINT NOT NULL)";
-    return transaction_command(r, state_, sql);
+    try {
+        return transaction_command(r, state_, sql, state_.connection.id_transaction(r));
+    } catch (MutationExecutorError& error) {
+        return Result<std::monostate, MutationExecutorError>::err(r, std::move(error));
+    }
 }
 
 SqliteIdSpaceGenerator::SqliteIdSpaceGenerator(std::allocator_arg_t,

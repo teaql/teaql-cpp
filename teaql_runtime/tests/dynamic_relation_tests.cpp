@@ -140,6 +140,93 @@ static void checked_merge_and_saved_keys() {
     (void)connection;
 }
 
+static void attached_relation_loaded_state(bool observations = false) {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    unsigned case_index = 0;
+    for (bool many : {false, true}) {
+        for (unsigned nested : {0u, 1u, 2u}) {
+            for (unsigned count : {0u, 2u}) {
+                for (bool facet : {false, true}) {
+                    RelationDescriptor specification(
+                        std::allocator_arg, Allocator(r), "peers", "School");
+                    specification.many = many;
+                    RelationLoadPlan plan(
+                        std::allocator_arg, Allocator(r), "School", specification);
+                    auto query = fixture_query_request(r);
+                    if (facet) {
+                        query.facets.emplace_back(
+                            "summary", "peers", fixture_query_request(r), false);
+                    }
+                    plan.query.emplace(std::allocator_arg, Allocator(r), query);
+                    Vector<CompactRow> parents(r), children(r);
+                    Record fields(r);
+                    fields.emplace(String("id", r), Value(r, std::uint64_t{7}));
+                    parents.emplace_back(fields);
+                    SmartList<CompactRow> descendant(std::allocator_arg, Allocator(r));
+                    descendant.loaded(nested == 2);
+                    for (unsigned index = 0; index < count; ++index) {
+                        children.emplace_back(fields);
+                        if (nested != 0) {
+                            children.back().set_loaded_relation("descendants", descendant);
+                        }
+                    }
+                    detail::attach_relation_rows(*user_context, parents, plan, std::move(children));
+                    const auto* attached = parents.front().loaded_relation("peers");
+                    const bool expected = facet || (count != 0 && nested != 0);
+                    check(bool(attached) == expected,
+                          "relation sidecar presence follows facets or nested results");
+                    if (attached) {
+                        check(attached->is_loaded,
+                              "attached relation is loaded independently of descendant load state");
+                        check(attached->data.size() == (many ? count : 1u),
+                              "relation sidecar preserves rows or a to-one identity fallback");
+                        for (const auto& row : attached->data) {
+                            const auto* child = row.loaded_relation("descendants");
+                            check(bool(child) == (count != 0 && nested != 0),
+                                  "identity fallback does not manufacture nested results");
+                            if (child) {
+                                check(child->is_loaded == (nested == 2),
+                                      "nested load state is preserved");
+                            }
+                        }
+                    }
+                    if (observations) {
+                        std::cout << std::boolalpha << "{\"case\":" << case_index
+                                  << ",\"many\":" << many << ",\"nested\":" << nested
+                                  << ",\"count\":" << count << ",\"facet\":" << facet
+                                  << ",\"loaded\":";
+                        if (!attached) {
+                            std::cout << "null,\"size\":null,\"nested_states\":null}";
+                        } else {
+                            std::cout << attached->is_loaded
+                                      << ",\"size\":" << attached->data.size()
+                                      << ",\"nested_states\":[";
+                            bool first = true;
+                            for (const auto& row : attached->data) {
+                                if (!first) {
+                                    std::cout << ',';
+                                }
+                                first = false;
+                                if (const auto* child = row.loaded_relation("descendants")) {
+                                    std::cout << child->is_loaded;
+                                } else {
+                                    std::cout << "null";
+                                }
+                            }
+                            std::cout << "]}";
+                        }
+                        std::cout << '\n';
+                    }
+                    ++case_index;
+                }
+            }
+        }
+    }
+    check(case_index == 24, "all attachment state combinations ran");
+}
+
 struct ChildContextMarker {};
 
 struct ChildBatchReady {
@@ -1000,7 +1087,11 @@ static void generated_graph_read_metadata() {
           "clearing trusted row read metadata clears the dynamic sidecar");
 }
 
-int main() {
+int main(int argc, char** argv) {
+    if (argc == 2 && std::string_view(argv[1]) == "--attachment-observations") {
+        attached_relation_loaded_state(true);
+        return 0;
+    }
     plain_carrier_readonly_defaults();
     generated_graph_read_metadata();
     std::cout << "GRAPH_READ_METADATA_CASES=1;PLAIN_CARRIER_DEFAULT_CASES=1\n";
@@ -1026,5 +1117,6 @@ int main() {
     std::cout << "DYNAMIC_CHILD_SOURCE_CASES=7\n";
     child_and_flat_loading();
     checked_merge_and_saved_keys();
+    attached_relation_loaded_state();
     std::cout << "Dynamic relation contracts passed\n";
 }

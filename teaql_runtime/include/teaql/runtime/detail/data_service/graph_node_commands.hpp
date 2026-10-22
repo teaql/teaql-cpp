@@ -108,6 +108,7 @@ public:
             GraphNode out(std::allocator_arg, Allocator(r), node_.entity);
             out.values.fields = current.into_map(r);
             out.operation = GraphOperation::Reference;
+            out.dynamic_fields = std::move(node_.dynamic_fields);
             return R::ok(r, std::move(out));
         }
     }
@@ -270,9 +271,11 @@ public:
                 }
             }
             auto lineage = clone_in(r, parent_);
-            if (node_.comment && !node_.comment->empty()) {
-                lineage.emplace_back(
-                    TraceKind::AuditReason, node_.entity, *node_.comment, graph_trace_id(node_));
+            if (graph_has_comment(node_)) {
+                lineage.emplace_back(TraceKind::AuditReason,
+                                     node_.entity,
+                                     *node_.comment,
+                                     graph_legacy_trace_id(node_));
             }
             child_ = &EntityDataServiceAccess::delete_scoped_internal(service_, command, lineage);
         }

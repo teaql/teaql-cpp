@@ -42,19 +42,22 @@ static TraceChain trace(Memory r, const Json& j) {
     return out;
 }
 
-static Json trace_out(Memory r, std::span<const TraceNode> nodes) {
+static Json trace_out(Memory r, std::span<const TraceNode> nodes, bool include_ids = false) {
     Json::Array out(r);
     for (const auto& n : nodes) {
         auto e = detail::model_json(r);
         detail::model_put(e, "kind", std::uint8_t(n.kind));
         detail::model_put(e, "entity", n.entity_type);
         detail::model_put(e, "comment", n.comment);
+        if (include_ids) {
+            detail::model_put(e, "entity_id", n.entity_id ? Json(r, *n.entity_id) : Json(r));
+        }
         out.emplace_back(std::move(e));
     }
     return Json(r, out);
 }
 
-static Json request_out(Memory r, const MutationRequest& request) {
+static Json request_out(Memory r, const MutationRequest& request, bool include_ids = false) {
     return std::visit(
         [&](const auto& c) {
             auto out = detail::model_json(r);
@@ -66,7 +69,7 @@ static Json request_out(Memory r, const MutationRequest& request) {
                                                                        : "recover";
                 detail::model_put(out, "kind", name);
                 detail::model_put(out, "entity", c.entity);
-                detail::model_put(out, "trace", trace_out(r, c.trace_chain));
+                detail::model_put(out, "trace", trace_out(r, c.trace_chain, include_ids));
                 if constexpr (std::same_as<C, InsertCommand> || std::same_as<C, UpdateCommand>) {
                     detail::model_put(out, "values", record_out(r, c.values.fields));
                 }
@@ -92,7 +95,7 @@ static Json request_out(Memory r, const MutationRequest& request) {
         request.data);
 }
 
-static Json event_out(Memory r, const RawAuditEvent& e) {
+static Json event_out(Memory r, const RawAuditEvent& e, bool include_ids = false) {
     auto out = detail::model_json(r);
     constexpr std::string_view names[]{"Created",
                                        "Updated",
@@ -112,7 +115,7 @@ static Json event_out(Memory r, const RawAuditEvent& e) {
         fields.emplace_back(name);
     }
     detail::model_put(out, "fields", fields);
-    detail::model_put(out, "trace", trace_out(r, e.trace_chain));
+    detail::model_put(out, "trace", trace_out(r, e.trace_chain, include_ids));
     if (e.mutation_governance) {
         auto g = detail::model_json(r);
         detail::model_put(g,
@@ -298,6 +301,7 @@ static auto& adapter_work(UserContext& user,
 static Json
 node_command(UserContext& user, const EntityDataService<Executor>& service, const Json& input) {
     auto r = user.memory_resource();
+    const bool include_ids = optional(input, "bound_intent") != nullptr;
     auto mode = text(field(input, "mode"));
     auto graph = node(r, field(input, "root"));
     auto out = detail::model_json(r);
@@ -352,7 +356,7 @@ node_command(UserContext& user, const EntityDataService<Executor>& service, cons
             if (result) {
                 MutationRequest request(
                     std::allocator_arg, Allocator(r), result.value(), "graph execution command");
-                detail::model_put(out, "command", request_out(r, request));
+                detail::model_put(out, "command", request_out(r, request, include_ids));
             } else {
                 detail::model_put(out, "error", result.error().to_string(r));
             }
@@ -464,6 +468,13 @@ static Json evaluate(Memory target, const Json& j) {
     auto& executor = user->make_resource<Executor>(s);
     auto& service = EntityDataService<Executor>::for_executor(
         *user, text(field(j, "service")), *user, executor);
+    const bool include_ids = optional(j, "bound_intent") != nullptr;
+    if (include_ids) {
+        auto binding = Access::bind_mutation_intent(service, text(field(j, "bound_intent")));
+        if (!binding) {
+            throw std::runtime_error("Invalid observer mutation intent");
+        }
+    }
     auto outcome = detail::model_json(r);
     auto mode = text(field(j, "mode"));
     if (mode.starts_with("node_") || mode.starts_with("recursive_")) {
@@ -506,10 +517,10 @@ static Json evaluate(Memory target, const Json& j) {
         notes.emplace_back(n);
     }
     for (const auto& request : s.requests) {
-        requests.emplace_back(request_out(r, request));
+        requests.emplace_back(request_out(r, request, include_ids));
     }
     for (const auto& event : s.events) {
-        events.emplace_back(event_out(r, event));
+        events.emplace_back(event_out(r, event, include_ids));
     }
     for (const auto& q : s.queries) {
         auto value = detail::model_json(r);
@@ -518,7 +529,7 @@ static Json evaluate(Memory target, const Json& j) {
                           "filter",
                           q.query.predicate ? Json(r, detail::debug_expr(r, *q.query.predicate))
                                             : Json(r));
-        detail::model_put(value, "trace", trace_out(r, q.query.trace_chain));
+        detail::model_put(value, "trace", trace_out(r, q.query.trace_chain, include_ids));
         detail::model_put(
             value, "comment", q.query.comment_text ? Json(r, *q.query.comment_text) : Json(r));
         queries.emplace_back(std::move(value));

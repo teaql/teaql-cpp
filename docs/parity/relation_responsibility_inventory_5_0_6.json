@@ -1,0 +1,637 @@
+{
+  "status": "accepted_named_source",
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "teaql-runtime/src/data_service/relation.rs",
+  "source_sha256": "fb28e3d7a93a7eba937154db25c899cd768d3a0b2d1a1353e821573543e874ad",
+  "function_count": 43,
+  "functions": [
+    {
+      "name": "user_context",
+      "line": 20,
+      "group": "R01"
+    },
+    {
+      "name": "fetch_facet_smart_list",
+      "line": 24,
+      "group": "R01"
+    },
+    {
+      "name": "from_value",
+      "line": 46,
+      "group": "R02"
+    },
+    {
+      "name": "unique_relation_values",
+      "line": 55,
+      "group": "R02"
+    },
+    {
+      "name": "relation_key_rows",
+      "line": 70,
+      "group": "R02"
+    },
+    {
+      "name": "relation_top_n_operation",
+      "line": 96,
+      "group": "R03"
+    },
+    {
+      "name": "relation_top_n_execution_plan",
+      "line": 141,
+      "group": "R03"
+    },
+    {
+      "name": "provider_owns_relation_probe_batch",
+      "line": 164,
+      "group": "R03"
+    },
+    {
+      "name": "relation_loads",
+      "line": 184,
+      "group": "R04"
+    },
+    {
+      "name": "relation_plans",
+      "line": 190,
+      "group": "R04"
+    },
+    {
+      "name": "relation_query",
+      "line": 194,
+      "group": "R04"
+    },
+    {
+      "name": "enhance_relations_internal",
+      "line": 210,
+      "group": "R07"
+    },
+    {
+      "name": "enhance_query_relations_internal",
+      "line": 222,
+      "group": "R07"
+    },
+    {
+      "name": "hydrate_flat_plans_internal",
+      "line": 242,
+      "group": "R08"
+    },
+    {
+      "name": "hydrate_compact_flat_plans_internal",
+      "line": 256,
+      "group": "R08"
+    },
+    {
+      "name": "flat_relation_plans",
+      "line": 275,
+      "group": "R04"
+    },
+    {
+      "name": "supported",
+      "line": 283,
+      "group": "R04"
+    },
+    {
+      "name": "relation_aggregate_key_rows",
+      "line": 295,
+      "group": "R09"
+    },
+    {
+      "name": "enhance_relation_aggregates_internal",
+      "line": 337,
+      "group": "R09"
+    },
+    {
+      "name": "enhance_object_group_bys_internal",
+      "line": 362,
+      "group": "R10"
+    },
+    {
+      "name": "enhance_child_queries_internal",
+      "line": 409,
+      "group": "R10"
+    },
+    {
+      "name": "enhance_relation_aggregate",
+      "line": 467,
+      "group": "R09"
+    },
+    {
+      "name": "build_relation_plans",
+      "line": 562,
+      "group": "R04"
+    },
+    {
+      "name": "build_relation_plans_from_loads",
+      "line": 610,
+      "group": "R04"
+    },
+    {
+      "name": "enhance_plan",
+      "line": 647,
+      "group": "R07"
+    },
+    {
+      "name": "hydrate_flat_plan",
+      "line": 721,
+      "group": "R08"
+    },
+    {
+      "name": "hydrate_compact_flat_plan",
+      "line": 898,
+      "group": "R08"
+    },
+    {
+      "name": "hydrate_compact_flat_leaf",
+      "line": 976,
+      "group": "R08"
+    },
+    {
+      "name": "install_compact_flat_relation",
+      "line": 995,
+      "group": "R08"
+    },
+    {
+      "name": "install_unfetched_forward_detail",
+      "line": 1153,
+      "group": "R08"
+    },
+    {
+      "name": "relation_child_repo",
+      "line": 1193,
+      "group": "R05"
+    },
+    {
+      "name": "query_for_plan",
+      "line": 1205,
+      "group": "R05"
+    },
+    {
+      "name": "fetch_relation_rows",
+      "line": 1233,
+      "group": "R06"
+    },
+    {
+      "name": "fetch_native_relation_rows",
+      "line": 1259,
+      "group": "R06"
+    },
+    {
+      "name": "relation_facets",
+      "line": 1310,
+      "group": "R11"
+    },
+    {
+      "name": "base_relation_query",
+      "line": 1348,
+      "group": "R05"
+    },
+    {
+      "name": "ensure_stable_top_n_order",
+      "line": 1364,
+      "group": "R05"
+    },
+    {
+      "name": "query_for_compact_plan",
+      "line": 1400,
+      "group": "R05"
+    },
+    {
+      "name": "attach_relation_rows",
+      "line": 1431,
+      "group": "R07"
+    },
+    {
+      "name": "limited_many_plan",
+      "line": 1567,
+      "group": "T01"
+    },
+    {
+      "name": "single_parent_probe_does_not_delegate_to_a_multi_parent_provider_batch",
+      "line": 1582,
+      "group": "T01"
+    },
+    {
+      "name": "topn_001_002_003_004_plan_respects_default_threshold_and_sqlite_policy",
+      "line": 1602,
+      "group": "T01"
+    },
+    {
+      "name": "topn_010_plan_telemetry_is_safe_and_complete",
+      "line": 1645,
+      "group": "T01"
+    }
+  ],
+  "groups": [
+    {
+      "id": "R01",
+      "title": "Facet runtime adapter",
+      "functions": [
+        "user_context",
+        "fetch_facet_smart_list"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_facets.hpp"
+      ],
+      "evidence_candidates": [
+        "docs/public_facets_5_0_6.md",
+        "docs/hydration_owner_facets_async_5_0_6.md"
+      ],
+      "review_note": "Retains the existing UserContext and delegates through scoped services. Public facet evidence and owner async observations must be correlated with the final source-wide gate."
+    },
+    {
+      "id": "R02",
+      "title": "Identity sets and key snapshots",
+      "functions": [
+        "from_value",
+        "unique_relation_values",
+        "relation_key_rows"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/src/data_service/relation.cpp",
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_hydration.hpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_planning_replay_5_0_6.md",
+        "docs/relationship_identity_contracts_5_0_6.md",
+        "docs/dynamic_relation_hydration_5_0_6.md"
+      ],
+      "review_note": "Normalizes nonnegative integer identity, excludes NULL keys, and snapshots declared local keys before overlays. Signed/unsigned representative choice is not guaranteed by the Rust unstable sort."
+    },
+    {
+      "id": "R03",
+      "title": "Top-N planning and telemetry",
+      "functions": [
+        "relation_top_n_operation",
+        "relation_top_n_execution_plan",
+        "provider_owns_relation_probe_batch"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_execution.hpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_dispatch_enhancement_replay_5_0_6.md"
+      ],
+      "review_note": "Provider batching requires at least two identities, provider capability and no explicit threshold; capture mode controls execution route. The C++ batching decision is integrated into the operation, rather than a separately named helper."
+    },
+    {
+      "id": "R04",
+      "title": "Repository and explicit relation plans",
+      "functions": [
+        "relation_loads",
+        "relation_plans",
+        "relation_query",
+        "build_relation_plans",
+        "build_relation_plans_from_loads",
+        "flat_relation_plans",
+        "supported"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp",
+        "teaql_runtime/src/data_service/relation.cpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_planning_replay_5_0_6.md"
+      ],
+      "review_note": "Preserves behavior selection, missing metadata/relation errors, recursive explicit query plans, and all-descendant decoder eligibility. Nested supported is included in this inventory."
+    },
+    {
+      "id": "R05",
+      "title": "Child query construction and trace",
+      "functions": [
+        "relation_child_repo",
+        "query_for_plan",
+        "base_relation_query",
+        "ensure_stable_top_n_order",
+        "query_for_compact_plan"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp",
+        "teaql_runtime/src/data_service/relation.cpp",
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_execution.hpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_planning_extensions_5_0_6.md",
+        "docs/relation_planning_replay_5_0_6.md"
+      ],
+      "review_note": "Retains relation-path trace, target entity, projection keys, cleared nested loads/facets, stable group or ID ordering, and per-parent partitioning. Planning snapshots do not establish physical SQL execution."
+    },
+    {
+      "id": "R06",
+      "title": "Native fetch and selected dynamic values",
+      "functions": [
+        "fetch_relation_rows",
+        "fetch_native_relation_rows"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_execution.hpp",
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_hydration.hpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_dispatch_enhancement_replay_5_0_6.md",
+        "docs/dynamic_relation_hydration_5_0_6.md",
+        "docs/dynamic_storage_acceptance_5_0_6.md"
+      ],
+      "review_note": "Empty keys avoid native I/O; bounded probes preserve order and stop on error. Selected dynamic values load after native rows with trusted child intent. G16 acceptance supersedes its earlier partial checkpoint, but does not accept this entire source."
+    },
+    {
+      "id": "R07",
+      "title": "Embedded enhancement and attachment",
+      "functions": [
+        "enhance_relations_internal",
+        "enhance_query_relations_internal",
+        "enhance_plan",
+        "attach_relation_rows"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp",
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_hydration.hpp",
+        "teaql_runtime/src/data_service/relation_installation.cpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_hydration_replay_5_0_6.md",
+        "docs/dynamic_relation_hydration_5_0_6.md",
+        "docs/relation_loaded_state_5_0_6.md"
+      ],
+      "review_note": "Snapshots keys before descendant overlays; loads descendants by batch; suppresses inverse convenience wiring for an explicit child; preserves identity fallback and loaded sidecars. The new 24-case receipt closes only the loaded-state observation gap."
+    },
+    {
+      "id": "R08",
+      "title": "Flat graph hydration and installation",
+      "functions": [
+        "hydrate_flat_plans_internal",
+        "hydrate_compact_flat_plans_internal",
+        "hydrate_flat_plan",
+        "hydrate_compact_flat_plan",
+        "hydrate_compact_flat_leaf",
+        "install_compact_flat_relation",
+        "install_unfetched_forward_detail"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_hydration.hpp",
+        "teaql_runtime/src/data_service/relation_installation.cpp",
+        "teaql_runtime/src/data_service/relation_graph.cpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_hydration_replay_5_0_6.md",
+        "docs/hydration_flat_facets_5_0_6.md",
+        "docs/relation_membership_source_audit_5_0_6.md"
+      ],
+      "review_note": "Preserves decoder registration/errors, leaf dispatch, identity graph and edge-owned unfetched detail, reusable non-ID membership, inverse state and partial installation ordering. SQLite membership-source acceptance is supporting evidence, not automatic acceptance of the runtime source."
+    },
+    {
+      "id": "R09",
+      "title": "Relation aggregates and key ownership",
+      "functions": [
+        "relation_aggregate_key_rows",
+        "enhance_relation_aggregates_internal",
+        "enhance_relation_aggregate"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_enhancement.hpp",
+        "teaql_runtime/src/data_service/relation_enhancement.cpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_dispatch_enhancement_replay_5_0_6.md",
+        "docs/relation_membership_source_audit_5_0_6.md"
+      ],
+      "review_note": "Validates sibling relation names before fetch and snapshots only local fields; aliases cannot change later memberships. Earlier direct enhancement observations use a child-fetch SPI; complete-method coverage must be reconciled."
+    },
+    {
+      "id": "R10",
+      "title": "Object groups and child overlays",
+      "functions": [
+        "enhance_object_group_bys_internal",
+        "enhance_child_queries_internal"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_enhancement.hpp",
+        "teaql_runtime/src/data_service/relation_enhancement.cpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_dispatch_enhancement_replay_5_0_6.md",
+        "docs/dynamic_relation_hydration_5_0_6.md",
+        "docs/dynamic_storage_acceptance_5_0_6.md"
+      ],
+      "review_note": "Retains ID projection/filter, last-row identity lookup, missing-object NULL and checked dynamic merges. Intent rejection occurs before child fetch. Simplified SPI evidence remains distinguishable from full runtime execution."
+    },
+    {
+      "id": "R11",
+      "title": "Owner facet execution",
+      "functions": [
+        "relation_facets"
+      ],
+      "cpp_targets": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_facets.hpp"
+      ],
+      "evidence_candidates": [
+        "docs/hydration_owner_facets_5_0_6.md",
+        "docs/hydration_owner_facets_async_5_0_6.md",
+        "docs/hydration_flat_facets_5_0_6.md"
+      ],
+      "review_note": "Complete owner membership clears page/order/partition; missing or NULL owner becomes false filter. Intent and trace use child scope. Async evidence covers completion, failure, cancellation and Context close."
+    },
+    {
+      "id": "T01",
+      "title": "Original source tests and fixture",
+      "functions": [
+        "limited_many_plan",
+        "single_parent_probe_does_not_delegate_to_a_multi_parent_provider_batch",
+        "topn_001_002_003_004_plan_respects_default_threshold_and_sqlite_policy",
+        "topn_010_plan_telemetry_is_safe_and_complete"
+      ],
+      "cpp_targets": [
+        "tests/parity/teaql_runtime/cache_relation.cpp",
+        "teaql_runtime/include/teaql/runtime/detail/data_service/relation_execution.hpp"
+      ],
+      "evidence_candidates": [
+        "docs/relation_dispatch_enhancement_replay_5_0_6.md"
+      ],
+      "review_note": "Three original tests plus their fixture. Two named planner/telemetry counterparts exist; singleton batching is covered through execution-route evidence. Fresh original-test replay and complete test-to-evidence reconciliation remain required."
+    }
+  ],
+  "dispatch_corpus_audit": {
+    "path": "tests/parity/relation_execution_5_0_6_cases.json.gz",
+    "sha256": "2834f9086907f13fed79efec99ddc768ff9dc4a021905c418848345fa180ba17",
+    "case_count": 432,
+    "parent_counts": [
+      0,
+      1,
+      2,
+      3,
+      21
+    ],
+    "thresholds": [
+      "0",
+      "2",
+      "9",
+      "None"
+    ],
+    "missing_original_test_stimuli": [
+      "parent_count=32",
+      "explicit_threshold=32"
+    ],
+    "supplemental_closure": {
+      "review": "docs/relation_probe_boundaries_5_0_6.md",
+      "cases_per_profile": 32,
+      "receipts": {
+        "docs/parity/relation_probe_boundaries_native_5_0_6.json.gz": "326eb3e4f7b75245adabc6e23067dec6628416b546d2e3bcd80508ed4363950f",
+        "docs/parity/relation_probe_boundaries_modules_5_0_6.json.gz": "8fc060e843061933599c147bb18575d5361e059f6e2a04598e72b64c1df0e54e"
+      },
+      "scope": "source-derived C++ execution assertions, not a new original-output corpus"
+    }
+  },
+  "original_test_replay": {
+    "receipt": "docs/parity/relation_source_original_tests_5_0_6.json.gz",
+    "sha256": "c105efaa134ea2eaa49a597594e2cf4cae60aacd1c52a30af0e08742238937c1",
+    "tests": [
+      "data_service::relation::planner_tests::single_parent_probe_does_not_delegate_to_a_multi_parent_provider_batch",
+      "data_service::relation::planner_tests::topn_001_002_003_004_plan_respects_default_threshold_and_sqlite_policy",
+      "data_service::relation::planner_tests::topn_010_plan_telemetry_is_safe_and_complete"
+    ],
+    "cleanup_bytes": 160880381,
+    "cleanup_complete": true
+  },
+  "complete_enhancement_original": {
+    "receipt": "docs/parity/relation_enhancement_complete_combined_original_5_0_6.json.gz",
+    "sha256": "9213088d73c5ea59684a1c6e8975de5bc6d0659804f60bd9d8333e8c0c85763f",
+    "summaries": [
+      {
+        "input_mode": "unchanged",
+        "success": 41,
+        "failure": 295,
+        "cancelled": 41,
+        "executor_calls": 76,
+        "capability_calls": 0,
+        "errors": {
+          "REQUEST_COMMENT_REQUIRED: Query Request requires a non-blank comment; supply it at the request entry point": 168,
+          "QUERY_PURPOSE_REQUIRED: Query Request requires a non-blank purpose; supply it at the request entry point": 75,
+          "missing entity descriptor: Parent": 1,
+          "missing entity descriptor: Child": 1,
+          "missing relation absent on entity Parent": 1,
+          "missing relation absent on entity Child": 1,
+          "missing entity descriptor: Leaf": 1,
+          "missing relation absent on entity Leaf": 1,
+          "missing entity descriptor: IgnoredTarget": 25,
+          "fetch failed": 9,
+          "missing relation missing on entity Parent": 12
+        }
+      },
+      {
+        "input_mode": "explicit_intent",
+        "success": 183,
+        "failure": 135,
+        "cancelled": 59,
+        "executor_calls": 355,
+        "capability_calls": 0,
+        "errors": {
+          "missing entity descriptor: IgnoredTarget": 75,
+          "fetch failed": 42,
+          "missing entity descriptor: Parent": 1,
+          "missing entity descriptor: Child": 1,
+          "missing relation absent on entity Parent": 1,
+          "missing relation absent on entity Child": 1,
+          "missing entity descriptor: Leaf": 1,
+          "missing relation absent on entity Leaf": 1,
+          "missing relation missing on entity Parent": 12
+        }
+      }
+    ],
+    "cpp_comparison": {
+      "native_matches": 754,
+      "module_matches": 754,
+      "receipts": {
+        "docs/parity/relation_enhancement_complete_native_initial_5_0_6.json.gz": "3d2b2d61ee8a22fe24a0c91d7a8c1c730c31876fa1d7b3d7523570b920e9b1d8",
+        "docs/parity/relation_enhancement_complete_modules_5_0_6.json.gz": "ccf7efb9d91821b3a8ab3abd9e1fc53c6590a05cb6250934d0ac87dc9eaa0cdd"
+      }
+    }
+  },
+  "native_closure": {
+    "receipt": "docs/parity/relation_native_closure_5_0_6.json.gz",
+    "sha256": "da66e988c416d7eea575bce201050e2765be137b0492fbed81d748a37903e3d5",
+    "tests": [
+      "relation_model_contracts",
+      "relation_model_rust_parity",
+      "original_runtime_cache_relation_contracts",
+      "relation_execution_rust_parity",
+      "relation_probe_source_boundaries",
+      "relation_execution_contracts",
+      "relation_hydration_contracts",
+      "relation_enhancement_contracts",
+      "relation_hydration_rust_parity",
+      "relation_hydration_intent_rust_parity",
+      "relation_planning_extensions_contracts",
+      "relation_planning_extensions_rust_parity",
+      "hydration_flat_facets_rust_parity",
+      "hydration_flat_facets_context_close",
+      "hydration_owner_facets_rust_parity",
+      "hydration_owner_facets_async_rust_parity",
+      "hydration_owner_facets_async_context_close",
+      "graph_relation_facets_rust_parity",
+      "graph_relation_facets_context_contracts",
+      "hydration_sibling_keys_rust_parity",
+      "loaded_row_graph_rust_parity",
+      "loaded_row_graph_context_contracts",
+      "relation_enhancement_complete_rust_parity",
+      "dynamic_relation_contracts",
+      "relation_loaded_state_rust_parity",
+      "provider_relation_membership_contracts"
+    ],
+    "test_count": 26,
+    "targets": [
+      "relation_model_tests",
+      "relation_model_probe",
+      "original_cache_relation_tests",
+      "relation_execution_probe",
+      "relation_execution_tests",
+      "relation_hydration_tests",
+      "relation_enhancement_tests",
+      "relation_hydration_replay_probe",
+      "relation_planning_extensions_probe",
+      "hydration_flat_facets_probe",
+      "hydration_owner_facets_probe",
+      "hydration_owner_facets_async_probe",
+      "graph_relation_facets_probe",
+      "hydration_sibling_keys_probe",
+      "loaded_row_graph_probe",
+      "relation_enhancement_complete_probe",
+      "dynamic_relation_tests",
+      "provider_relation_membership_tests"
+    ],
+    "inputs_unchanged": true
+  },
+  "final_review": "docs/relation_source_acceptance_5_0_6.md",
+  "module_closure": {
+    "receipt": "docs/parity/relation_modules_closure_v2_5_0_6.json.gz",
+    "sha256": "d9ac77380de633d793f17afeb0f3e03bde9000056544c99f25d77a6b5db08e4f",
+    "tests": [
+      "relation_model_contracts",
+      "relation_model_rust_parity",
+      "original_runtime_cache_relation_contracts",
+      "provider_relation_membership_contracts",
+      "relation_enhancement_complete_rust_parity",
+      "relation_probe_source_boundaries",
+      "relation_execution_contracts",
+      "relation_hydration_contracts",
+      "relation_enhancement_contracts",
+      "relation_hydration_intent_rust_parity",
+      "loaded_row_graph_rust_parity",
+      "loaded_row_graph_context_contracts",
+      "hydration_flat_facets_rust_parity",
+      "hydration_flat_facets_context_close",
+      "graph_relation_facets_rust_parity",
+      "graph_relation_facets_context_contracts",
+      "hydration_owner_facets_async_rust_parity",
+      "hydration_owner_facets_async_context_close",
+      "hydration_owner_facets_rust_parity",
+      "hydration_sibling_keys_rust_parity",
+      "relation_planning_extensions_contracts",
+      "dynamic_relation_contracts",
+      "relation_loaded_state_rust_parity",
+      "relation_execution_rust_parity",
+      "relation_hydration_rust_parity",
+      "relation_planning_extensions_rust_parity"
+    ],
+    "test_count": 26,
+    "canonical_bodies": 1126
+  }
+}

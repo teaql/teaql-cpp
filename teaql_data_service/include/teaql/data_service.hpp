@@ -37,6 +37,7 @@ using ::teaql::SqlProjectionState;
 using ::teaql::StreamChunk;
 using ::teaql::StreamQueryExecutor;
 using ::teaql::Transaction;
+using ::teaql::TransactionResourceScope;
 using ::teaql::TransactionExecutor;
 using ::teaql::is_credential_log_name;
 using ::teaql::write_debug;

@@ -177,6 +177,9 @@ static Json evaluate(UserContext& context, const Json& input) {
     auto& repo = EntityDataService<Mock>::for_executor(context, "Item", context, executor);
     auto query = repo.select();
     query.project("label").comment("purpose");
+    if (auto purpose = fields.find("purpose"); purpose != fields.end()) {
+        query.purpose(std::get<String>(purpose->second.data));
+    }
     if (flag(input, "enabled")) {
         query.optimize_pagination_with_id_set_config("fixture", 600, number(input, "max_ids"));
     }

@@ -31,12 +31,6 @@ public:
         auto r = service_.memory_resource();
         if (!started_) {
             started_ = true;
-            auto intent = EntityDataServiceAccess::request_intent(service_, query_);
-            if (!intent) {
-                return R::err(
-                    r, DataServiceError<typename E::Error>::runtime(r, std::move(intent).error()));
-            }
-            EntityDataServiceAccess::bind_query_intent(service_, intent.value());
             if (!compact_ && query_.aggregation_cache && query_.aggregation_cache->enabled) {
                 auto& mutable_context = const_cast<UserContext&>(cs.metadata.context());
                 if (mutable_context.template get_resource<AggregationCacheBackend>()) {
@@ -113,6 +107,16 @@ private:
                     attach_property_definitions(*rows);
                     return R::ok(r, std::move(*rows));
                 }
+            }
+            // Prepared cache hits return before request construction in the source.
+            // Public entry points already validate intent before preparation.
+            auto intent = EntityDataServiceAccess::request_intent(service_, query_);
+            if (!intent) {
+                return R::err(
+                    r, DataServiceError<typename E::Error>::runtime(r, std::move(intent).error()));
+            }
+            EntityDataServiceAccess::bind_query_intent(service_, intent.value());
+            if (cache_) {
                 auto kind = resource_type_name<E>();
                 String name(kind, r);
                 name += ".query";
@@ -235,7 +239,8 @@ public:
                         const SelectQuery& query,
                         std::span<const RelationAggregate> aggregates,
                         bool aggregate_entry = false,
-                        bool prepared = false)
+                        bool prepared = false,
+                        bool compact_entry = false)
         : service_(std::allocator_arg, a, service), query_(std::allocator_arg, a, query),
           aggregates_(aggregates.begin(), aggregates.end(), a.resource()), rows_(a.resource()),
           aggregate_keys_(a.resource()), cursor_key_(a.resource()), cursor_id_(a.resource()),
@@ -244,7 +249,7 @@ public:
                  [](const EntityDataService<E>& repo, SelectQuery query) -> AsyncOperation<R>& {
                      return EntityDataServiceAccess::fetch_all(repo, query);
                  }),
-          aggregate_entry_(aggregate_entry), prepared_(prepared) {}
+          aggregate_entry_(aggregate_entry), prepared_(prepared), compact_entry_(compact_entry) {}
 
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
@@ -265,7 +270,11 @@ public:
                     }
                     query_ = std::move(prepared).value();
                 }
-                if (!query_.relation_aggregates.empty()) {
+                const bool enhances =
+                    prepared_ || aggregate_entry_ || compact_entry_ ||
+                    query_.continuous_page_fetch || !query_.object_group_bys.empty() ||
+                    !query_.child_enhancements.empty() || !query_.relations.empty();
+                if (enhances && !query_.relation_aggregates.empty()) {
                     Vector<RelationAggregate> combined(query_.relation_aggregates, r);
                     for (const auto& aggregate : aggregates_) {
                         if (std::find(combined.begin(), combined.end(), aggregate) ==
@@ -653,6 +662,7 @@ private:
     bool cursor_enabled_ = false, optimized_ = false;
     bool aggregate_entry_ = false;
     bool prepared_ = false;
+    bool compact_entry_ = false;
 };
 
 }
@@ -775,6 +785,20 @@ auto EntityDataServiceAccess::fetch_all(const EntityDataService<E>& service,
     return make_operation<RelationRowsResult<E>, EntityRowsOperation<E>>(
         service.memory_resource(), service, query, std::span<const RelationAggregate>{});
 }
+
+template <class E>
+auto EntityDataServiceAccess::fetch_compact_all(const EntityDataService<E>& service,
+                                                const SelectQuery& query)
+    -> AsyncOperation<RelationRowsResult<E>>& {
+    return make_operation<RelationRowsResult<E>, EntityRowsOperation<E>>(
+        service.memory_resource(),
+        service,
+        query,
+        std::span<const RelationAggregate>{},
+        false,
+        false,
+        true);
+}
 }
 
 namespace teaql {
@@ -835,8 +859,19 @@ auto EntityDataService<E>::fetch_smart_list_with_relation_aggregates(
     const PurposedSelectQuery& query, std::span<const RelationAggregate> aggregates) const
     -> DataServiceOperationResult<SmartList<CompactRow>, DataServiceError<Error>>& {
     using R = Result<SmartList<CompactRow>, DataServiceError<Error>>;
-    auto& rows = fetch_all_with_relation_aggregates(query, aggregates);
-    return make_operation<R, detail::EntityRowListOperation<E>>(memory_resource(), rows);
+    return detail::execute_scoped_purposed_query<SmartList<CompactRow>>(
+        *this,
+        query,
+        aggregates,
+        +[](const EntityDataService<E>& service,
+            const SelectQuery& actual,
+            std::span<const RelationAggregate> items) -> auto& {
+            auto& rows =
+                make_operation<detail::RelationRowsResult<E>, detail::EntityRowsOperation<E>>(
+                    service.memory_resource(), service, actual, items, true);
+            return make_operation<R, detail::EntityRowListOperation<E>>(service.memory_resource(),
+                                                                        rows);
+        });
 }
 
 template <class E>

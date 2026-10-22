@@ -548,10 +548,11 @@ static void nested_counts() {
                     "MembershipChild", *id, "parent");
                 const auto* parent =
                     owned && *owned ? &**owned : child.state->resolve_entity<MembershipParent>(100);
-                check(parent && parent->row.get("selected_count") &&
-                          parent->row.get("selected_count")->try_i64() == 1 &&
-                          !parent->is_field_loaded("name"),
-                      "nested projected count and load state");
+                check(parent, "nested projected parent exists");
+                check(parent->row.get("selected_count"), "nested projected count exists");
+                check(parent->row.get("selected_count")->try_i64() == 1,
+                      "nested projected count equals one");
+                check(!parent->is_field_loaded("name"), "nested projection leaves name unloaded");
                 if (cyclic) {
                     auto* members = parent->state->resolve_relation_list<MembershipChild>(
                         "MembershipParent", 100, "children");

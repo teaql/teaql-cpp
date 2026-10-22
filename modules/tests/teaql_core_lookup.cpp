@@ -438,3 +438,7 @@ using ::teaql::core::dynamic_fields::DynamicFieldValue;
 using ::teaql::core::dynamic_fields::DynamicFieldMergeShapes;
 using ::teaql::core::dynamic_fields::DynamicFieldValues;
 }
+
+namespace module_numeric_lookup {
+using ::teaql::detail::append_float;
+}

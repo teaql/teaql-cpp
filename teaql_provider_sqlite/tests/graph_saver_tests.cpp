@@ -258,9 +258,46 @@ static void independent_terminal_cancellation() {
           "transaction cancellation joins its terminal work without recursive cancellation");
 }
 
+static void intent_precedes_executor_lookup() {
+    GlobalContext global;
+    const std::array<std::string_view, 4> labels{"absent", "empty", "blank", "valid"};
+    const std::array<std::string_view, 4> comments{"", "", " \t", "review save"};
+    for (bool ledger : {false, true}) {
+        for (std::size_t index = 0; index < labels.size(); ++index) {
+            auto user_context = global.make_user_context();
+            auto r = user_context->memory_resource();
+            auto& saver = user_context->make<detail::GraphSaverFor<saver_fixture::Ambient>>();
+            auto& root = user_context->make<EntityRuntimeState>();
+            GraphNode node(std::allocator_arg, Allocator(r), "Order");
+            if (index) {
+                node.set_comment(comments[index]);
+            }
+            auto& operation = ledger ? saver.save_ledger_dyn(*user_context, std::move(node), root)
+                                     : saver.save_graph_dyn(*user_context, std::move(node));
+            const auto& result = operation.wait();
+            check(!result, "absent executor or request intent fails before I/O");
+            bool intent = result.error().kind() == RuntimeError::Kind::RequestIntent;
+            check(intent == (labels[index] != "valid"),
+                  "both saver routes validate intent before missing executor lookup");
+            if (intent) {
+                check(
+                    result.error().to_string(r) ==
+                        "REQUEST_COMMENT_REQUIRED: Mutation Request requires a non-blank comment; supply it at the request entry point",
+                    "intent diagnostic matches the locked source");
+            } else {
+                check(result.error().kind() == RuntimeError::Kind::Graph &&
+                          result.error().to_string(r).find("missing typed resource") !=
+                              String::npos,
+                      "valid intent still requires the configured executor");
+            }
+        }
+    }
+}
+
 int main() {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
+        intent_precedes_executor_lookup();
         cancellation_and_late_lookup();
         ledger_completion_and_errors();
         sqlite_transactional_save_and_cancel();

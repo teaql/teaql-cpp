@@ -1,5 +1,116 @@
 # C++ generator parity plan
 
+Current graph-service source closure: [complete SG01-SG26 acceptance](service_graph_source_acceptance_5_0_6.md) qualifies the complete locked service graph file after fresh original1+14 observer tests/9,694 outputs and native30/module30, each matching12,007 complete outputs. Four canonical consumers and two comparator registrations close missing ledger/adaptor/recursive verification. Canonical1,163, pinned format1,805, exact executable registries/JUnit, no-work builds and stable inputs/references pass. An observer documentation-placement compile failure is retained; production C++, fixtures, generated SDKs, producer and module exports remain unchanged. Source totals advance to **118 accepted / 4 pending / 2 excluded_external**; capabilities remain **11 qualified / 6 partial** and P0-P7 stay incomplete.
+
+Current entity-save source closure: [complete ES01-ES18 acceptance](entity_save_source_acceptance_5_0_6.md) qualifies the whole locked file after fresh original17+5576 and current native25/module25, each matching9,277 complete observations. Three generated module consumers now preserve their original bodies; the canonical example target mapping is verified after retaining two controller failures. Canonical1,159, format1,805, exact registries/JUnit, no-work builds and stable source/reference inputs pass. No runtime, generated SDK, producer or module export implementation changes. Source totals advance to **117 accepted / 5 pending / 2 excluded_external**; capabilities stay **11 qualified / 6 partial** and P0-P7 remain incomplete.
+
+Current nested Save continuation: [independent Fix scopes](nested_save_scope_5_0_6.md) correct three reproduced differences between nested public ledger/dynamic/executor saves and their unchanged Rust 5.0.6 counterparts. A clean ASan/UBSan counterfactual retains the previous header and final Context-owned fixture; fresh installed source/native4, native6/module2/sanitizer2, canonical1,156 and format/check1,805 pass. Plain generic saves retain inherited scope semantics. Initial fixture lifetime failures remain recorded. This runtime-only correction adds no generated implementation or module export changes; source/capability counts and P0-P7 remain unchanged.
+
+Current audit-parser continuation: [installed source correction](audit_lexical_boundaries_5_0_6.md#permanent-source-regression-gate-and-installation) replaces the prior uninstalled prototype after fresh original2,665/current Java2,665 and112 permanent tests pass. The old producer and new permanent corpus independently reproduce407 differences. The corpus includes2,575 complete accepted metadata effects and90 checked original refusals. [Fresh generated callers](audit_lexical_boundaries_5_0_6.md#fresh-generated-entity-compiler-and-privacy-callers) compile261 original Java sources, complete original entities and nine native facades; all27 entity/field-privacy observations match with actual Context deletion. Strict current25-example/50-contract/five-independent-SDK reproduction passes, preserving every implementation byte and refreshing only80 provenance records. The independent records additionally capture the actual field-layout/literal/XID helper identities. C++ runtime/ownership code is unchanged; no routine sanitizer/MIPS/full-suite rerun. Full AP02 and source/capability/P0-P7 statuses are not promoted.
+
+Current runtime-query follow-up: [installed Context-bound stream correction](container_identity_execution_5_0_6.md#installed-runtime-first-correction) passes native1/module1/ASan-UBSan1 after the full native epoch ends. The permanent query fixture covers deferred lookup/shape errors, late trusted runtime assembly, immutable execution snapshots, real SQLite lease suspension/resumption, cancellation, actual Context deletion and checked late access. All 1,155 canonical bodies, pinned format/check and stable inputs/no-work rebuilds pass. The installed checkpoint changes exactly two runtime headers and their permanent fixture; it is separate from the earlier full 877 result. The conditional producer is installed: source/native35 entry comparisons, provider5, new2+existing75 Java tests and actual installed Java77 pass. All25 example/50 contract destinations plus5 independent SDKs reproduce unchanged implementation bytes; only80 provenance records refresh. Actual installed identity SDKs reproduce the already compiled artifacts. Locked generator/upstream/path guards pass. The approved JSON payload exception remains explicit; source/capability totals and P0-P7 are not promoted.
+
+Current full native checkpoint: [complete integration](native_service_graph_integration_5_0_6.md) passes **877/877** with zero failures/errors/skips, unchanged **11,399** execution inputs and both references, complete registry/JUnit and no-work builds before/after. The controller and owning wrapper terminate successfully and remove 1,207,478 temporary state/log bytes. The input freeze has ended; subsequent changes need their own gates. Formal final source/caller reconciliation remains separate. Totals remain **116 accepted / 6 pending / 2 excluded_external**, **11 qualified / 6 partial**, P0-P7 incomplete.
+
+Current service graph reconciliation: [reference dynamic retention](service_graph_source_review_5_0_6.md#confirmed-dynamic-reference-loss) reproduces nine lost carriers among twelve direct/recursive reference controls against unchanged Rust 5.0.6. The full native epoch was deliberately interrupted before CTest, with build exit 130 and controller exit 1 retained. The Context-preserving carrier move and twelve permanent retention/actual-close controls now pass native7/module6/sanitizer1, with 1,153 canonical bodies and stable input/no-work guards. Private outcome/default diagnostics now match all15 original observations in native/module gates, with altered-output/baseline rejection controls. The one reproduced snapshot-timing discrepancy now matches all4 original controls after moving capture before delete validation; native4/module4, 1,155 canonical bodies and stable input/no-work checks pass. Final caller/evidence consolidation and frozen integration remain pending. Totals remain **116 accepted / 6 pending / 2 excluded_external**, **11 qualified / 6 partial**, P0-P7 incomplete.
+
+Current entity-save source reconciliation: [18-responsibility matrix](entity_save_responsibility_matrix_5_0_6.md) records completed focused corrections for dynamic status, entry ordering, saved-row decoding, Fix scope and saver intent precedence. Latest native4/module4 includes all expected comparator registrations, with 1,152 canonical bodies and generator locks verified. A full frozen native integration epoch is next; complete source/capability decisions remain open. Totals stay **116 accepted / 6 pending / 2 excluded_external**, **11 qualified / 6 partial**, P0-P7 incomplete.
+
+Current audited Save entry-order continuation: [eight original/candidate controls](runtime_entity_save_source_review_5_0_6.md#save-entry-ordering-and-optional-typed-carrier) exposes four typed-entry differences: an extra descriptor sample and premature rejection of an empty typed carrier. Runtime corrections and all eight regression controls pass native **4/4**; format/module/lifetime gates are running. Source totals remain **116 accepted / 6 pending / 2 excluded_external**, capabilities **11 qualified / 6 partial**, P0-P7 incomplete. Earlier completed gates below retain their original input checkpoints.
+
+Current audited Save checkpoint: [entity-save review](runtime_entity_save_source_review_5_0_6.md#plain-saved-row-gate-completed) closes generic dynamic Fix scope with native6/module2/sanitizer2 and ordinary saved-row decoding with native4/module2/sanitizer2. Four original/native explicit-executor controls confirm its graph fallback needs no matching correction; 1,151 canonical bodies and reference/path checks pass. Complete entry-point/source and integration reconciliation remain pending. Source totals stay **116 accepted / 6 pending / 2 excluded_external**, capabilities **11 qualified / 6 partial**, P0-P7 incomplete.
+
+Current SQLite driver benchmark source closure: [DB01-DB13 acceptance](sqlite_driver_benchmark_source_review_5_0_6.md#complete-source-acceptance) qualifies the unchanged original and final cached/real-state-observer counterpart through native/module/sanitizer correctness and Release sampling. All 744 samples, 60 layers, 24 summaries and 12 first-runtime observations validate; the disposable Release tree is removed. Totals are now **116 accepted / 6 pending / 2 excluded_external**, capabilities **11 qualified / 6 partial**, P0-P7 incomplete. No speedup, universal-memory or full provider claim follows. Earlier checkpoint counts below are historical.
+
+Current SQLite driver benchmark continuation: [DB01-DB13 source review](sqlite_driver_benchmark_source_review_5_0_6.md) records original Release execution in both log modes and native/module typed-driver correctness. The Debug layer gate validates 744 samples, 60 allocation-layer observations and 24 independently recomputed summaries. Final first-runtime observations, Release execution, lifetime qualification and complete source reconciliation remain pending; source totals stay **115 accepted / 7 pending / 2 excluded_external**, capabilities **11 qualified / 6 partial**, P0-P7 incomplete.
+
+Current entity-save review: [source responsibilities and evidence](runtime_entity_save_source_review_5_0_6.md) now includes all 17 original test ports, the TypedNull allocation-scope correction, explicit-executor empty-ledger scope capture correction, and registered preparation/Fix module consumers. The latest adjacent gate passes native 10/10 and module 4/4, with 1,149 canonical bodies; separate correction gates retain native/module/sanitizer results and original failure observations. Complete production-source reconciliation and final integration remain pending; totals stay **115 accepted / 7 pending / 2 excluded_external**, **11 qualified / 6 partial**, P0-P7 incomplete.
+
+Current legacy graph trace continuation: [source review and module closure](runtime_graph_source_review_5_0_6.md#module-closure-and-extended-legacy-execution) verifies 72 initial plus 284 extended valid-intent observations through native and module consumers. Five CTests pass in each profile; original runtime source is preserved, 1,139 canonical consumer/fixture bodies and 1,521 exports verify. This focused closure does not promote the remaining seven source dispositions or six partial capabilities, and does not supersede the failed full-native checkpoint.
+
+Current SQLite allocation-trace source closure: [complete source review](sqlite_ledger_allocated_trace_source_review_5_0_6.md)
+qualifies SLAT01-SLAT15 and all transitive helpers against the locked original
+15/15 execution and 106 source assertion sites. Final native, imported-module
+and focused ASan/UBSan entries each pass 1/1, executing all fifteen cases plus
+observer and scope-cleanup controls. Exact local-reason vectors, both logging
+modes and independent SQLite postcommit visibility are included. The
+[acceptance receipt](parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz)
+retains inputs and complete output. Source totals are now **115 accepted /
+7 pending / 2 excluded_external**; capabilities remain **11 qualified / 6 partial**,
+P0-P7 incomplete. Generated relation APIs and whole production-source closure
+remain separate. Earlier checkpoint counts below retain their historical scope.
+
+
+Current SQLite dynamic-query source closure: [complete source review](sqlite_dynamic_query_source_review_5_0_6.md)
+qualifies SDQ01-SDQ23 and their exercised helpers, with original23/23,163 original
+assertion sites, final native7/module3 and436 imported differential observations.
+Decoder precedence, indexed mutation entries, source schema and exact unselected
+Text inputs are reconciled; Context/identifier adaptations remain explicit.
+Active totals are **114 accepted / 8 pending / 2 excluded_external**;
+capabilities stay **11 qualified / 6 partial** and P0-P7 remain incomplete.
+Earlier checkpoint counts below retain their historical scope.
+
+Current SQLite facet source closure: [complete source review](sqlite_facet_source_review_5_0_6.md)
+qualifies all SF01-SF10 responsibilities with original ten tests, complete native
+and imported callers, and canonical1,135. Active source totals are **113 accepted
+/ 9 pending / 2 excluded_external**; capabilities stay **11 qualified / 6 partial**
+and P0-P7 remain incomplete. Source counts in preceding-work checkpoints below
+retain their historical scope.
+
+Current G09 status: **qualified** after [resolved-service requalification](resolved_g09_requalification_5_0_6.md): native37/module10, service31/31, compiler1+24, Java79 and strict25-workspace/1650-file reproduction. Active capabilities are **11 qualified / 6 partial**; source totals remain **112 accepted / 10 pending / 2 excluded_external**. Reopening notes below are retained historical checkpoints; whole resolved.rs and P0-P7 remain incomplete.
+
+Current joined-service regression: [retained native failure](resolved_joined_regression_5_0_6.md) found 29/31 passing tests with ordinary-row inline aggregate shortcut differences in query/cursor and membership corpora. After restoring the source shortcut, native31/module31 pass. G09 is reopened pending requalification under its original EX01-EX14 contract. Active capabilities are **10 qualified / 7 partial**; source totals remain **112 accepted / 10 pending / 2 excluded_external**. Earlier acceptance checkpoints below remain historical evidence.
+
+Current relation source closure: [complete 5.0.6 acceptance](relation_source_acceptance_5_0_6.md) reconciles all 43 definitions, fresh original planner3, native26/module26, complete-runtime enhancement754, attachment24 and supplemental dispatch32. Canonical1,126 passes; initial module registration failure is retained separately. Context ownership and asynchronous cleanup adaptations remain explicit. Active totals are **112 accepted / 10 pending / 2 excluded_external**; capabilities and incomplete P0-P7 remain unchanged. Prior checkpoints retain their historical counts.
+
+Current relation native closure: [whole-source review](relation_complete_responsibility_review_5_0_6.md) records successful builds of 18 affected targets and **26/26** selected native tests, including current hydration/facet differential corpora, real SQLite relationship contracts, dynamic metadata and Context-close checks. Current service headers/implementations remain unchanged across the recorded gate. Final module-union reconciliation and the source acceptance record remain open; totals stay **111 accepted / 11 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current complete enhancement comparison: [754 full-runtime outcomes](relation_enhancement_complete_5_0_6.md) match actual original/native/module execution, including prepared requests, intent failures, returned/partial rows, cancellation and executor counters. Native CTest1 and canonical1,124 pass; an altered-error control correctly fails. Runtime and generated code remain unchanged. Whole relation-source closure is still pending: **111 accepted / 11 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current complete enhancement reference: [754 original runtime observations](relation_enhancement_complete_5_0_6.md) replace no historical evidence and distinguish unchanged inputs from explicit-intent variants. Actual Context/service/request preparation and recording executor run without the earlier child-fetch shim. C++ full-boundary differential replay remains pending; diagnostic capability placeholders are corrected in the final reference. All owned source/build trees are reclaimed. Totals remain **111 accepted / 11 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current relation dispatch boundary closure: [32 source-derived execution scenarios](relation_probe_boundaries_5_0_6.md) cover all original singleton-provider stimuli, including parent count 32 and threshold 32, in both capture and compact modes. Native/module each pass 32/32; both retained 432-case differential regressions pass. Native CTest2, canonical1,123 and module paths pass. Runtime and generated code are unchanged. Whole relation-source evidence reconciliation remains open; totals stay **111 accepted / 11 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current relation whole-source review: [43-function responsibility inventory](relation_complete_responsibility_review_5_0_6.md) maps every production function, nested helper and source test to candidate implementation/evidence. Fresh locked original planner tests pass **3/3**, with owned cleanup confirmed. The 432-case dispatch corpus lacks the original parent-count-32 and explicit-threshold-32 stimuli; complete-method enhancement evidence and final source-wide reconciliation remain open. No source promotion: **111 accepted / 11 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current relation attachment checkpoint: [loaded-state regression](relation_loaded_state_5_0_6.md) repairs the missing outer SmartList loaded flag while retaining nested state and to-one truncation. An append-only original-source observer now supplies 24 facet/empty/nested/cardinality outcomes; native and module comparisons both match 24/24, native2/module1 pass, and an altered-state negative control fails as expected. Original disposable cleanup removed 160,950,750 bytes. Format/check, source baseline, module paths and 1,122 consumer bodies pass. This does not close the complete relation responsibility. Totals remain **111 accepted / 11 pending / 2 excluded_external**; P0-P7 remain incomplete.
+
+Current private memory source closure: [complete 5.0.6 acceptance](memory_source_acceptance_5_0_6.md) resolves D01-D03 and accepts the full test-oracle responsibility with explicit ownership, diagnostic and exception adaptations. Fresh original nine callers plus typed-LIKE pass; final native **18/18**, native/module **3,409** comparisons, module caller/controls, focused sanitizer **6/6** and canonical **1,122** pass. Owned original cleanup removed 160,879,927 bytes. Source totals are now **111 accepted / 11 pending / 2 excluded_external**; capability counts and incomplete P0-P7 remain unchanged. Prior checkpoints below retain their historical counts.
+
+Current private diagnostic-lock checkpoint: [five actual contention/failure outcomes](memory_debug_failure_5_0_6.md) fix quoted locked output and guard scope. Only formatter failure within the data-field guard poisons storage; lock-external failures preserve usability. Native/module/focused ASan-UBSan each match **5/5**, previous Debug12 remains exact, native3/sanitizer3/canonical1,122/format1,790 pass. D01/D02 are resolved; D03 final source replay remains open. Three owned builds were removed (482,743,304 bytes), retaining failed/intermediate observations honestly. Totals remain **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private Debug checkpoint: [separate error/service diagnostics](memory_debug_5_0_6.md) preserve conditional metadata formatting and reject mismatched metadata before output. Native/module/focused ASan-UBSan each match **12/12** exact compact/pretty outputs; native2/sanitizer3 and 1,144 mutation regressions pass after nonblocking diagnostic locking/atomic poison-state changes. Canonical1,121 passes. Contention/fault-injection evidence limits and final source replay remain explicit; owned original cleanup removed 160,907,901 bytes. Totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private aggregate-failure checkpoint: [12 original Decimal outcomes](memory_decimal_failure_5_0_6.md) qualify eight actual addition panics with explicit C++ overflow-exception adaptation. Unlocked query failure preserves stored rows, replacement seeding, insertion and subsequent aggregate reads. Native/module/focused ASan-UBSan each match **12/12**; native1/sanitizer1 and 1,120 canonical bodies pass. D02 is resolved without execution-body changes; Debug and final source replay remain open. Owned original build cleanup removed 160,993,029 bytes; totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private source consolidation: [whole responsibility review](memory_complete_responsibility_review_5_0_6.md) maps every function family and identifies remaining Debug, query-time Decimal failure and final source-replay closure. Relation results now use Context-owned identity buckets instead of repeated full scans. Fresh native **14/14** includes **3,380** retained-source comparisons; affected modules **1,662/1,662**, focused sanitizer3, canonical1,119 and format/check1,787 pass. No source disposition is promoted: **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private metadata checkpoint: [abstract MetadataStore dependency](memory_metadata_5_0_6.md) restores the generic source extension boundary, replacing the concrete-only dependency. Custom live lookup and same-User/Global borrowing pass; foreign retention and post-destruction access are rejected. Native2/module executable/focused ASan-UBSan1 and 1,119 canonical bodies pass. Query/mutation bodies and generated artifacts are unchanged. Complete Value/aggregate and source review remain open; totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private recursive-evaluator checkpoint: [272 original expression observations](memory_recursive_5_0_6.md) qualify AND/OR/NOT short-circuiting, empty trees, subquery rejection, scalar errors and operand error precedence. Native and canonical modules each match **272/272**; native CTest and 1,118 canonical bodies pass. No execution body changed. Original build cleanup removed 160,921,028 bytes. Consolidated Value/aggregate and complete responsibility review remain open; totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private ordering checkpoint: [stable Context-backed merge sorting](memory_sort_5_0_6.md) replaces quadratic insertion sorting. Native/module/focused ASan-UBSan each match **60/60** valid-order source observations; native3/sanitizer2, module complexity checks and 1,117 canonical bodies pass. Comparison bounds, stable duplicate keys and complete element retention qualify up to 8,193 items. Non-total comparator inputs remain subject to the original standard-library contract. The owned original build was removed (160,973,716 bytes). Recursive evaluator and consolidated source review remain open; totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private entry-point checkpoint: [43 original entry observations](memory_entries_5_0_6.md) qualify restored standalone enhancement, SmartList/typed wrappers, loaded metadata and partial-failure mutations. Native/module/focused ASan-UBSan each match **43/43**; native4/sanitizer2 and module close rejection pass. Explicit Context-borrowed sharing preserves the C++ lifetime contract. Original callers and 160 relation cases pass; 1,116 canonical bodies and 1,784-file format/check pass. The owned original build was removed (161,055,997 bytes). Recursive evaluator, ordering and whole-source review remain open; totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private relation-shape checkpoint: [160 original observations](memory_relations_5_0_6.md) qualify scalar/object/list shapes, child-query clearing/preservation, alias collisions, sequential enhancement and validation/error order. Native/module each match **160/160**; the new native CTest passes. No helper execution body changed. The [source closure checklist](memory_source_upgrade_audit_5_0_6.md#remaining-boundary) identifies concrete missing standalone enhancement and SmartList/typed wrapper entry points, plus the remaining evaluator/ordering/sharing audit. Partial evidence is now attached to the pending source ledger without promotion. Source totals remain **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private mutation/poison checkpoint: [1,144 original mutation observations](memory_mutation_5_0_6.md) qualify default/renamed metadata, strict IDs, version types, writes/conflicts and fourteen original debug-profile arithmetic panics. The C++ helper now checks overflow and scopes its mutex/poison state; the Rust-panic/C++-exception adaptation is explicit. Native/module/focused ASan-UBSan each match **1,144/1,144**; native6/module caller1/sanitizer1, previous comparisons, 1,114 canonical bodies, 1,782-file format/check and affected no-work builds pass. The disposable original build was removed (161,007,991 bytes). Full private-source, relation/error-precedence and remaining phase gates stay open; totals remain **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private grouping/relation identity checkpoint: [1,459 original observations](memory_grouping_5_0_6.md) cover all ordered pairs of 22 key values, combined groups, single/list relation aggregates and missing-parent-key shortcuts. Initial native evidence had 29 differences; native and canonical module results now match **1,459/1,459**. Native5/module caller1 plus earlier aggregate/pipeline/filter comparisons, 1,113 canonical bodies, 1,781-file format/check and affected no-work builds pass. Both disposable Rust attempts were removed (295,721,896 bytes total), retaining the observer compile failure separately. Broader relation shapes, error precedence and mutation coverage remain open; source totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private memory aggregate checkpoint: [208 source observations](memory_aggregates_5_0_6.md) cover twelve aggregates plus COUNT(*) across sixteen input families. Initial C++ evidence had 23 differences; repaired native, canonical module and focused ASan/UBSan each match **208/208**, with empty sanitizer diagnostics. Native4/module caller1/sanitizer1 and prior pipeline/filter regressions pass; 1,112 canonical bodies and affected no-work builds verify. The disposable original build was removed (160,929,158 bytes). Broader aggregate types/overflow, grouping, relation/mutation helper semantics remain open; source totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private memory row-pipeline repair: [eighteen source-observed queries](memory_pipeline_5_0_6.md) replace test-helper delegation for ordinary projection/ordering/slicing and aggregate projection/HAVING. Initial native evidence matched 7/18; repaired native and canonical module observations match **18/18**, retaining typed row values and complete errors. Native3/module caller1, the prior sixteen-filter comparison, 1,111 canonical consumer/fixture bodies and affected no-work builds pass. The original disposable build was removed (160,994,972 bytes). Complete aggregate arithmetic, relation/mutation helpers and broader ordering coverage remain open; source totals stay **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current private memory-filter repair: [source-based filter checkpoint](memory_source_upgrade_audit_5_0_6.md#filter-repair-checkpoint) replaces public-evaluator delegation in the test helper's fetch filter path. The retained initial comparison has 13 differences; repaired native and canonical module comparisons each match **16/16** original observations including errors. Native regression2/module caller1, canonical consumer verification and affected no-work builds pass. Ordinary projections, ordering, aggregate/HAVING paths and broader private-branch evidence remain open. Production runtime and generated artifacts are unchanged. Source totals remain **110 accepted / 12 pending / 2 excluded_external**, P0-P7 incomplete.
+
+Current Context JSON test-source closure: [complete fourteen-test responsibility review](context_json_tests_complete_5_0_6.md) qualifies nullable owned children and direct two-shape cache destruction/conversion at 1/100/10000 rows, alongside the earlier exact original contracts and approved JSON payload exception. Final native12/sanitizer2/module-import1 pass; exports, canonical consumers, no-work and source/reference guards pass. The missing JsonReadSession module export and an existing append_float catalog omission are repaired without function-body changes. Disposable Rust outputs are removed with measured cleanup evidence. Active totals: **110 accepted / 12 pending / 2 excluded_external**; capabilities **11 qualified / 6 partial**, P0-P7 incomplete.
+
+Current nullable JSON graph continuation: [20 actual generated graph inputs](generated_json_nullable_graph_5_0_6.md) match locked Rust across native, canonical modules and focused sanitizer, including NULL/omission, inferred keys, owned identity, reverse lists, malformed edges and private conflict values. Generated files, canonical/no-work/input/reference guards and negative comparator control pass. The fourteen-test source still needs nullable-child/repeated-view and direct shape-cache lifetime consolidation; totals remain **109 accepted / 13 pending / 2 excluded_external**, capabilities **11 qualified / 6 partial**, P0-P7 incomplete.
+
+Current generated JSON input continuation: [boundary diagnosis and qualification](generated_json_inputs_investigation_5_0_6.md) verifies five exact original/native/module/sanitizer contracts and the combined scalar/read-only roundtrip under the [user-approved JSON payload exception](json_payload_compatibility_exception_5_0_6.md). Native/sanitizer each pass two CTests; mismatch exit propagation has negative controls. Generated files remain unchanged and canonical/no-work/input/reference guards pass. Complete test-source consolidation remains pending: **109 accepted / 13 pending / 2 excluded_external**, capabilities **11 qualified / 6 partial**, P0-P7 incomplete.
+
 Current generated dual-forward JSON continuation: [ambiguous views and inferred keys](generated_json_ambiguous_views_5_0_6.md) qualifies two more actual generated-model contracts in native, canonical modules and focused sanitizer. Both explicit projections survive; identity-only lookup refuses ambiguity; conflicting inferred keys reject with the exact original error. Generated-file hashes, canonical/no-work and captured-input/reference guards pass. Runtime and generated artifacts are unchanged in this checkpoint. The [complete JSON test-source checklist](context_json_tests_source_audit_5_0_6.md) remains pending; source totals stay **109 accepted / 13 pending / 2 excluded_external**, capabilities **11 qualified / 6 partial**, and P0-P7 incomplete.
 
 Current JSON test-source continuation: [fourteen-test checklist](context_json_tests_source_audit_5_0_6.md) now includes four actual generated-model isolation contracts. Native, canonical modules and focused sanitizer match the original snapshot identity matrices, private ledgers/payloads, owned-edge address identity and detached view readback. Generated-file hashes, canonical bodies, no-work and captured-input/reference guards pass. No generated artifact or runtime body changes in this checkpoint. The complete JSON test source remains pending; source totals stay **109 accepted / 13 pending / 2 excluded_external**, capabilities **11 qualified / 6 partial**, and P0-P7 incomplete.
@@ -3790,3 +3901,96 @@ and six partial. Complete G08/G12/G13/G14/G15/G17, unanswered source-behavior
 decisions, remaining whole-source work and all full P0-P7 exit requirements stay
 open. The preceding native full run is not relabeled as a new full run after
 the scoped installations, and no extra sanitizer/MIPS/device acceptance follows.
+
+
+Current temporary AP02 continuation:
+[audit_statement_patterns_5_0_6.md](audit_statement_patterns_5_0_6.md) retains the
+original local/item/qualified/nested grammar discrepancies and intermediate
+regressions. The latest temporary Java proposal matches 2,143 original outcomes,
+with 236 improvements and zero regressions relative to the installed producer
+under that finite matrix. It remains uninstalled during the full native input
+freeze. The read-only follow-up checks 11,399 execution inputs with zero changes;
+the native controller/build child are still live. Neither result closes full
+AP02 syntax/identity, permanent producer/compiler/generated-artifact gates,
+G14/G17/G13 or P0-P7. The approved generated JSON payload exception remains
+limited to its documented metadata conflict; other unanswered source-behavior
+decisions are unchanged.
+
+
+Temporary AP02 type/expression/lexical continuation:
+[audit_type_rules_5_0_6.md](audit_type_rules_5_0_6.md) and
+[audit_lexical_boundaries_5_0_6.md](audit_lexical_boundaries_5_0_6.md) preserve new
+original discrepancies and the intermediate pattern/Unicode regressions. The
+latest uninstalled proposal matches 2,665 complete original outcomes with 407
+improvements and zero regressions relative to the frozen installed producer;
+its separate existing parser/metadata JUnit replay passes 30/30. Full native
+building has completed and 877 CTests are running on the frozen checkpoint.
+These are separate evidence scopes. Installation, permanent regressions, current
+source/compiler/generated-artifact/identity and complete AP02/G14/G17/G13/P0-P7
+requirements remain open; no source/capability ledger status is promoted.
+
+
+## Current native integration terminal checkpoint
+
+The [complete native checkpoint](native_service_graph_integration_5_0_6.md)
+passes **877/877** with no failures/errors/skips, unchanged **11,399** execution
+inputs and references, and no-work builds before and after CTest. The controller
+and owning wrapper both terminate successfully; 1,207,478 temporary log/state
+bytes are removed after preserving compressed evidence. Earlier failures and
+interrupted epochs remain unchanged. This closes the frozen native integration
+gate for its exact checkpoint; formal whole-source dispositions and complete
+P0-P7/capability decisions remain separate.
+
+The [identity/execution continuation](container_identity_execution_5_0_6.md)
+executes full original SDKs and identifies distinct canonical Q/provider versus
+typed runtime identities. A runtime-first temporary proposal preserves those
+roles and defers stream lookup/opening to first item polling. It matches all
+**35/35** execution entries across five complete generated SDK configurations.
+Its separate real SQLite lifecycle matrix passes **16/16**, covering unpolled,
+opened, partial, cancelled, drained, leased/pending and resumed streams, actual
+UserContext deletion, no prepared SQL at stream opening, exact-once connection
+close after statement finalization, checked late-access rejection and zero live
+User bytes. A failed observer compile is retained separately from the corrected
+run. Focused sanitizer verification is in progress; source installation,
+permanent regressions, current module/compiler/generated-artifact checks and
+full AP02/G14/G17/G13/P0-P7 acceptance remain outstanding. Only the documented
+JSON payload compatibility exception is approved.
+
+
+## Installed identity and deferred-stream continuation
+
+The [completed correction](container_identity_execution_5_0_6.md#current-installed-generation-closure)
+now includes runtime-first native1/module1/sanitizer1, actual-source35 entry and
+five provider boundary comparisons, permanent Java2+75 and installed Java77.
+A narrow conditional generator adapter keeps canonical Q/provider identities
+separate from typed runtime/ID identity, preserving established generated bytes
+when those names agree. Full current25-example/50-contract/five-independent-SDK
+reproduction changes only80 provenance records. The first global producer check
+correctly rejects a missed standalone SDK hash; its failed receipt remains,
+and the separate closure regenerates every affected standalone SDK byte for byte
+before refreshing those records. Original and historical SDKs remain unchanged.
+G06/G14 receive scoped evidence without any source/capability status promotion.
+Full AP02, the six partial capabilities, six pending source reviews and complete
+P0-P7 exits remain independent. The approved JSON payload exception is retained.
+
+
+## Installed audit-parser source, compiler and artifact gate
+
+The [completed parser continuation](audit_lexical_boundaries_5_0_6.md#installed-artifact-closure)
+installs the exact earlier source-backed candidate after a fresh permanent
+negative control reproduces407 differences. The new compact producer test corpus
+retains2,575 complete accepted effects and90 original refusals. Fresh unchanged
+Rust plus current Java match all2,665 contracts; all112 Java tests pass. The
+separate generated-caller gate compiles261 original Java sources and unchanged
+original entity files, then compares all27 descriptor/privacy outputs from nine
+native facades with actual Context deletion. These caller controls cover retained
+error recovery; the broader direct corpus retains successful continuations.
+
+The normal25 examples,50 contracts and five independent SDKs reproduce strictly
+with no implementation changes. Their80 producer-provenance records refresh only
+after byte equality, and the independent records now identify the three actual
+metadata helpers. A durable source/corpus gate, generated-caller gate and strict
+independent-SDK verifier remain available for maintenance. No C++ runtime,
+ownership, module export, sanitizer/MIPS/full-suite or source/capability verdict
+is changed. Complete AP02, remaining G08/G12/G13/G14/G15/G17 and all P0-P7 exit
+criteria stay open; the user-approved JSON payload exception remains limited.

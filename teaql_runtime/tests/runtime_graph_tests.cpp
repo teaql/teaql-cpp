@@ -117,6 +117,70 @@ static void lifetimes() {
     check(source->allocation_stats().live_blocks == 0, "all source graph blocks returned");
 }
 
+static void dynamic_graph_components() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    GraphNode* retained = nullptr;
+    {
+        auto make_child = [&](std::string_view revision, bool selected) {
+            const std::array fields{
+                DynamicFieldDefinitions::Field{"long_dynamic_title", DataType::Text}};
+            auto definitions = DynamicFieldDefinitions::from_fields(r, "Child", revision, fields);
+            check(bool(definitions), "valid dynamic graph definitions");
+            auto& managed = user_context->make<DynamicFieldDefinitions>(definitions.value());
+            Value::Object values(r);
+            if (selected) {
+                values.emplace(String("long_dynamic_title", r), Value(r));
+            }
+            auto payload = DynamicFieldValues::from_values(r, managed, values);
+            check(bool(payload), "valid dynamic graph values");
+            GraphNode child(std::allocator_arg, Allocator(r), "Child");
+            child.dynamic_fields = detail::make_box<DynamicFieldValues>(r, payload.value());
+            return child;
+        };
+        auto child = make_child("revision_one", true);
+        auto changed_definition = make_child("revision_two", true);
+        check(child.dynamic_fields->values() == changed_definition.dynamic_fields->values() &&
+                  child.dynamic_fields->selected_codes() ==
+                      changed_definition.dynamic_fields->selected_codes() &&
+                  !(child == changed_definition),
+              "graph equality observes definitions independently of values and selection");
+        auto empty = make_child("revision_one", false);
+        check(child.dynamic_fields->definitions() == empty.dynamic_fields->definitions() &&
+                  empty.dynamic_fields->values().empty() &&
+                  empty.dynamic_fields->selected_codes().empty() && !(child == empty),
+              "selected NULL differs from an unselected dynamic field");
+        GraphNode absent(std::allocator_arg, Allocator(r), "Child");
+        check(!(absent == empty), "absent payload differs from present empty payload");
+        GraphNode root(std::allocator_arg, Allocator(r), "Parent");
+        root.relation("children", child);
+        retained = &global.make<GraphNode>(root);
+        check(*retained == root, "recursive dynamic graph clone compares equal");
+        auto& nested = root.relations.find("children")->second.front();
+        check(bool(nested.dynamic_fields->assign(
+                  "long_dynamic_title", Value(r, "changed child value with allocated storage"))),
+              "nested dynamic assignment succeeds");
+        check(!(*retained == root), "recursive graph equality observes child value changes");
+        check(bool(nested.dynamic_fields->erase("long_dynamic_title")) && nested == empty,
+              "deletion restores unselected geometry and values together");
+    }
+    user_context->close();
+    const auto& child = retained->relations.find("children")->second.front();
+    check(child.dynamic_fields && child.dynamic_fields->values().size() == 1 &&
+              child.dynamic_fields->values().begin()->second.is_null() &&
+              child.dynamic_fields->selected_codes().size() == 1,
+          "Global recursive copy retains selected NULL after source close");
+    check(child.memory_resource() == global.memory_resource() &&
+              child.dynamic_fields->memory_resource() == global.memory_resource() &&
+              child.dynamic_fields->definitions().memory_resource() == global.memory_resource() &&
+              child.dynamic_fields->selected_codes().begin()->get_allocator().resource() ==
+                  global.memory_resource(),
+          "recursive dynamic values definitions and selection belong to destination Context");
+    check(user_context->allocation_stats().live_blocks == 0,
+          "recursive source dynamic graph releases every arena block");
+}
+
 static void trace_and_conversion() {
     GlobalContext global;
     auto user = global.make_user_context();
@@ -176,6 +240,7 @@ int main() {
     try {
         auto* old = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         lifetimes();
+        dynamic_graph_components();
         trace_and_conversion();
         std::pmr::set_default_resource(old);
         std::cout << "Runtime graph contracts passed\n";

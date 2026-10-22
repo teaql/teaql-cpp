@@ -1,0 +1,777 @@
+{
+  "source": "teaql-provider-sqlite/tests/ledger_allocated_trace.rs",
+  "reference_sha256": "ca8f6dcade2d52c343f609cbc6d70b929a149ddbe379f121b25357e1a294d773",
+  "status": "accepted",
+  "original_evidence": "docs/parity/sqlite_ledger_allocated_trace_original_5_0_6.json.gz",
+  "cases": [
+    {
+      "id": "SLAT01",
+      "reference_test": "root_allocated_during_ledger_planning_reaches_command_sql_and_committed_audit",
+      "reference_line": 469,
+      "required_contracts": [
+        "Runtime-allocated root id0 becomes assigned identity in lower-ledger INSERT, physical SQL, committed safe audit and authoritative readback",
+        "Exact trusted audit-reason chain; exported reason masks private fixture names"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "evidence": "docs/parity/sqlite_ledger_allocated_trace_root_5_0_6.json.gz",
+      "cpp_function": "root_allocated_during_ledger_planning_reaches_command_sql_and_committed_audit",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT02",
+      "reference_test": "child_allocated_during_ledger_planning_retains_its_own_and_parent_identity",
+      "reference_line": 519,
+      "required_contracts": [
+        "Existing root42 and new child0 preserve local child reason before and after composition",
+        "Allocated child trace includes own and parent identities; persisted root_id remains42"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "evidence": "docs/parity/sqlite_ledger_allocated_trace_child_gap_5_0_6.json.gz",
+      "cpp_function": "child_allocated_during_ledger_planning_retains_its_own_and_parent_identity",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT03",
+      "reference_test": "database_root_allocation_inside_transaction_reaches_all_trace_boundaries",
+      "reference_line": 607,
+      "required_contracts": [
+        "Observed SQLite ID generator asserts actual transaction active and no audit delivered during allocation",
+        "Assigned root501/version1, sequence floor501, one persisted row and autocommit restored",
+        "All command/SQL/log/audit trace boundaries qualified"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "evidence": "docs/parity/sqlite_ledger_id_scope_repair_5_0_6.json.gz",
+      "cpp_function": "database_root_allocation_inside_transaction_reaches_all_trace_boundaries",
+      "repair_plan": "docs/sqlite_ledger_id_transaction_gap_5_0_6.md",
+      "historical_failure_evidence": "docs/parity/sqlite_ledger_allocated_trace_child_gap_5_0_6.json.gz",
+      "historical_gap": "Configured SQLite ID generator lacks explicit active-transaction lease access; source succeeds while native/modules C++ fail.",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT04",
+      "reference_test": "database_child_allocation_preserves_existing_parent_and_local_reason",
+      "reference_line": 643,
+      "required_contracts": [
+        "Only child receives database ID801; existing root42 stays fixed and root sequence floor500 remains unchanged",
+        "Child foreign key and local reason survive"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "database_child_allocation_preserves_existing_parent_and_local_reason",
+      "evidence": "docs/parity/sqlite_ledger_allocated_graph_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT05",
+      "reference_test": "database_allocated_root_and_child_form_one_persisted_graph",
+      "reference_line": 688,
+      "required_contracts": [
+        "New root501/child801 graph with reverse relation metadata",
+        "Only actual foreign key rebounds; ordinary quantity0 does not",
+        "Exactly two committed safe audits"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "assert_new_database_graph(true, false)",
+      "evidence": "docs/parity/sqlite_ledger_allocated_graph_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT06",
+      "reference_test": "database_allocated_graph_resolves_forward_only_relation_metadata",
+      "reference_line": 693,
+      "required_contracts": [
+        "Same new graph through forward-only relation metadata",
+        "No dependency on reverse metadata"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "assert_new_database_graph(false, true)",
+      "evidence": "docs/parity/sqlite_ledger_allocated_graph_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT07",
+      "reference_test": "database_allocated_graph_resolves_both_relation_directions_without_duplicate_audit",
+      "reference_line": 698,
+      "required_contracts": [
+        "Same new graph with both relation directions",
+        "No duplicate writes or audit"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "assert_new_database_graph(true, true)",
+      "evidence": "docs/parity/sqlite_ledger_allocated_graph_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT08",
+      "reference_test": "database_allocation_rolls_back_and_retry_uses_new_identity_and_intent",
+      "reference_line": 762,
+      "required_contracts": [
+        "Root DML rejection rolls back ID floor500 and persisted rows, preserves original id0/new marker/pending intent",
+        "Retry after floor advancement uses701 and new intent; successful retry clears ledger"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "evidence": "docs/parity/sqlite_ledger_retry_overflow_5_0_6.json.gz",
+      "cpp_function": "database_allocation_rolls_back_and_retry_uses_new_identity_and_intent",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT09",
+      "reference_test": "database_id_failure_cannot_fall_back_to_an_in_process_identity",
+      "reference_line": 822,
+      "required_contracts": [
+        "SQLite ID overflow causes failure without in-process fallback, mutation commands, audits or persisted row",
+        "Sequence stays at i64::MAX and connection returns to autocommit"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "evidence": "docs/parity/sqlite_ledger_retry_overflow_5_0_6.json.gz",
+      "cpp_function": "database_id_failure_cannot_fall_back_to_an_in_process_identity",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT10",
+      "reference_test": "database_graph_failure_retains_assigned_trace_but_rolls_back_rows_and_retryable_ids",
+      "reference_line": 846,
+      "required_contracts": [
+        "Root INSERT succeeds then child INSERT fails; captured physical outcomes stay success/failure with assigned trace identities",
+        "Both rows and floors roll back; audits absent",
+        "Retry allocates901/1201 with fresh intent and commits the graph"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "database_graph_failure_retains_assigned_trace_but_rolls_back_rows_and_retryable_ids",
+      "evidence": "docs/parity/sqlite_ledger_graph_retry_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT11",
+      "reference_test": "database_allocated_explicit_transaction_delivers_audit_only_after_commit",
+      "reference_line": 967,
+      "required_contracts": [
+        "Explicit outer transaction saves allocated root501 but exposes no audit inside body",
+        "Commit then publishes correctly assigned audit and durable row/floor"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "evidence": "docs/parity/sqlite_ledger_id_scope_repair_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz",
+      "cpp_function": "database_allocated_explicit_transaction_delivers_audit_only_after_commit"
+    },
+    {
+      "id": "SLAT12",
+      "reference_test": "blank_local_reasons_inherit_at_real_sinks_logging_on",
+      "reference_line": 1309,
+      "required_contracts": [
+        "None, empty, ASCII and Unicode whitespace local reasons inherit owned request reason with logging enabled",
+        "Reject invalid owned root reason before any command/metadata/audit/log",
+        "Independent SQLite connection in safe sink sees committed row; all sink traces and physical INSERT counts agree"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "blank_local_execution(true)",
+      "evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT13",
+      "reference_test": "blank_local_reasons_inherit_at_real_sinks_logging_off",
+      "reference_line": 1324,
+      "required_contracts": [
+        "Same blank-local inheritance and commit visibility with logging disabled",
+        "Intent validation remains active; SQL log collection stays empty"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "blank_local_execution(false)",
+      "evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT14",
+      "reference_test": "non_white_space_local_reasons_survive_at_real_sinks_logging_on",
+      "reference_line": 1339,
+      "required_contracts": [
+        "U+001C..U+001F remain non-whitespace local reasons with logging enabled",
+        "Owned request reason remains submit order while descendant local reasons survive typed trace chains"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "non_white_space_local_execution(true)",
+      "evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SLAT15",
+      "reference_test": "non_white_space_local_reasons_survive_at_real_sinks_logging_off",
+      "reference_line": 1352,
+      "required_contracts": [
+        "Same non-whitespace local reasons with logging disabled",
+        "Safe audit/command/physical metadata semantics remain active"
+      ],
+      "status": "qualified_native_modules_sanitizer",
+      "planned_cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+      "cpp_function": "non_white_space_local_execution(false)",
+      "evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz",
+      "latest_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+    }
+  ],
+  "helper_responsibilities": [
+    "AllocationRoot/AllocationChild derive carriers: scalar id/version/name/root_id, new markers, local comments, root ledger and authoritative readback.",
+    "Schema/setup_with_relations: real SQLite schema, independent metadata/service/executor/provider responsibilities; reverse-only, forward-only and bidirectional variants.",
+    "Observed<E>: delegate actual query/mutation/transaction work unchanged; capture requests and metadata, including failures and physical statements; forward upstream observer.",
+    "Capture/assert_insert/assert_assigned_chain/assert_safe_insert_log: exact assigned AuditReason chains at trusted command and physical SQL boundaries, matching Entity frames, safe audit masking for every private sibling name, safe SQL path ending in Sql and excluding raw intent nodes.",
+    "ObservedDatabaseIds/install_database_ids: assert SQLite transaction active, audit absent, ensure canonical per-entity floors, record assigned IDs; no fallback allocator.",
+    "BlankLocalCommitProbe: independent SQLite connection must see committed id/version at audit delivery.",
+    "run_blank_local_execution: exact whitespace/non-whitespace vectors, logged/unlogged variants, owned intent validation, hierarchy/local reasons, one physical statement per insert and postcommit visibility."
+  ],
+  "existing_cpp_candidates": [
+    {
+      "source": "teaql_provider_sqlite/tests/ledger_execution_tests.cpp",
+      "scope": "late_identity_lineage_before_dispatch uses mock executor; sqlite_execution_and_rollback covers ordinary ledger persistence",
+      "limitation": "Not complete source proof of transaction-owned database IDs and every real trace sink."
+    },
+    {
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_id_tests.cpp",
+      "scope": "SQLite ID storage/lifetimes/rollback/overflow/concurrency",
+      "limitation": "Standalone allocator tests do not establish typed graph Save trace or audit propagation."
+    },
+    {
+      "source": "teaql_provider_sqlite/tests/commit_audit_transaction_tests.cpp",
+      "scope": "Explicit transaction and automatic ledger audit delivery",
+      "limitation": "Raw sink contracts are not the full source safe-audit/masked-SQL trace checks."
+    },
+    {
+      "source": "teaql_runtime/tests/request_trace_scope_tests.cpp",
+      "scope": "Intent validation and direct trace-scope enrichment",
+      "limitation": "Direct enrichment is not evidence of actual lower-ledger allocation reaching physical SQLite."
+    }
+  ],
+  "exit_requirements": [
+    "Implement shared capture fixture over real SQLite and source-shaped typed root/child models; do not fabricate expected traces or preassign the ID under test.",
+    "Run each SLAT01-SLAT15 counterpart and all transitive helper assertions, preserving negative cases, relation variants, privacy and transaction boundaries.",
+    "Inspect exact original assertions and compare native/imported outcomes; bind current inputs and original replay evidence before promoting this source.",
+    "Use relevant lifetime/sanitizer gates if implementation changes ownership or transaction cleanup; no physical-router run is required."
+  ],
+  "observer_infrastructure": {
+    "status": "qualified_controls_only",
+    "cpp_source": "teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp",
+    "evidence": "docs/parity/sqlite_ledger_allocated_trace_observer_5_0_6.json.gz",
+    "native_tests": 1,
+    "module_tests": 1,
+    "sanitizer_tests": 1,
+    "remaining": "None within this source; generated relation APIs and whole production sources remain separate."
+  },
+  "runtime_scope_repair": {
+    "status": "focused_gates_qualified",
+    "evidence": "docs/parity/sqlite_ledger_id_scope_repair_5_0_6.json.gz",
+    "design": "docs/sqlite_ledger_id_transaction_gap_5_0_6.md"
+  },
+  "acceptance_evidence": "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz",
+  "source_assertion_inventory": [
+    {
+      "line": 252,
+      "macro": "assert!"
+    },
+    {
+      "line": 256,
+      "macro": "assert!"
+    },
+    {
+      "line": 335,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 337,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 338,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 339,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 343,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 344,
+      "macro": "assert!"
+    },
+    {
+      "line": 366,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 392,
+      "macro": "assert!"
+    },
+    {
+      "line": 413,
+      "macro": "assert!"
+    },
+    {
+      "line": 461,
+      "macro": "assert!"
+    },
+    {
+      "line": 478,
+      "macro": "assert!"
+    },
+    {
+      "line": 489,
+      "macro": "assert!"
+    },
+    {
+      "line": 507,
+      "macro": "assert!"
+    },
+    {
+      "line": 508,
+      "macro": "assert!"
+    },
+    {
+      "line": 552,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 557,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 564,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 566,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 592,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 594,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 617,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 618,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 619,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 623,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 624,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 638,
+      "macro": "assert!"
+    },
+    {
+      "line": 658,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 659,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 663,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 664,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 683,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 717,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 718,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 725,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 726,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 750,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 751,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 752,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 780,
+      "macro": "assert!"
+    },
+    {
+      "line": 784,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 788,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 789,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 790,
+      "macro": "assert!"
+    },
+    {
+      "line": 791,
+      "macro": "assert!"
+    },
+    {
+      "line": 793,
+      "macro": "assert!"
+    },
+    {
+      "line": 798,
+      "macro": "assert!"
+    },
+    {
+      "line": 809,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 810,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 816,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 817,
+      "macro": "assert!"
+    },
+    {
+      "line": 835,
+      "macro": "assert!"
+    },
+    {
+      "line": 836,
+      "macro": "assert!"
+    },
+    {
+      "line": 837,
+      "macro": "assert!"
+    },
+    {
+      "line": 838,
+      "macro": "assert!"
+    },
+    {
+      "line": 839,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 840,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 841,
+      "macro": "assert!"
+    },
+    {
+      "line": 867,
+      "macro": "assert!"
+    },
+    {
+      "line": 873,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 880,
+      "macro": "assert!"
+    },
+    {
+      "line": 881,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 882,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 891,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 892,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 908,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 913,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 917,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 945,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 959,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 960,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 961,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 962,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 981,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 982,
+      "macro": "assert!"
+    },
+    {
+      "line": 988,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 994,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 995,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1016,
+      "macro": "assert!"
+    },
+    {
+      "line": 1025,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1128,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1158,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1159,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1160,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1161,
+      "macro": "assert!"
+    },
+    {
+      "line": 1162,
+      "macro": "assert!"
+    },
+    {
+      "line": 1163,
+      "macro": "assert!"
+    },
+    {
+      "line": 1164,
+      "macro": "assert!"
+    },
+    {
+      "line": 1206,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1221,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1234,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1235,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1242,
+      "macro": "assert!"
+    },
+    {
+      "line": 1262,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1268,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1281,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1283,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1284,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1285,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1292,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1294,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1299,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1300,
+      "macro": "assert_eq!"
+    },
+    {
+      "line": 1303,
+      "macro": "assert!"
+    },
+    {
+      "line": 1305,
+      "macro": "assert!"
+    }
+  ],
+  "whole_source_mapping": [
+    {
+      "source_lines": [
+        23,
+        46
+      ],
+      "responsibility": "Macro-derived root/child carriers",
+      "cpp": "AllocationModel, AllocationRoot, AllocationChild",
+      "adaptation": "Handwritten source-shaped test carriers use shared example decoding and runtime ledgers, scoped allocation and local comments. Not generated-model acceptance."
+    },
+    {
+      "source_lines": [
+        47,
+        209
+      ],
+      "responsibility": "Schema, capture, query/mutation/transaction observer and relation setup",
+      "cpp": "Capture, ResultCapture, ObservedExecutor, ObservedTransaction, Fixture",
+      "adaptation": "InMemoryMetadataStore implements the schema protocol. Context-owned capture replaces Arc/Mutex for this single-threaded executor; real provider work and observer forwarding remain intact. Resource binding delegates to the underlying transaction."
+    },
+    {
+      "source_lines": [
+        210,
+        242
+      ],
+      "responsibility": "New typed root/child and pending scalar changes",
+      "cpp": "new_root, new_child and earlier inline source-shaped construction",
+      "adaptation": "Explicit Context-backed CompactRow and shared ledger state."
+    },
+    {
+      "source_lines": [
+        243,
+        317
+      ],
+      "responsibility": "Real database ID generator, canonical floors, row counts and observation reset",
+      "cpp": "ObservedDatabaseIds, install_database_ids, root_floor, child_floor, Fixture::rows, child_rows and explicit capture clearing",
+      "adaptation": "Native statement RAII replaces rusqlite statement ownership; counters observe actual configured allocation."
+    },
+    {
+      "source_lines": [
+        318,
+        467
+      ],
+      "responsibility": "Actual safe SQL log, exact assigned lineage, lower-ledger/physical/audit INSERT assertions and all-private-name masking",
+      "cpp": "assert_safe_child_insert_log, assigned_chain, assigned_root_chain, child_chain, assert_insert, assert_root_sinks, insert_names, find_insert",
+      "adaptation": "Expected arrays are assertions only; no production trace or fallback reason is synthesized. Specialized early helpers cover the corresponding single-root/child inputs."
+    },
+    {
+      "source_lines": [
+        468,
+        1000
+      ],
+      "responsibility": "SLAT01-SLAT11 including shared new graph helper and explicit transaction closure",
+      "cpp": "cases SLAT01-SLAT11, assert_new_database_graph and ExplicitRootWork",
+      "adaptation": "Pollable C++ transaction body replaces async closure. Existing context lifetime and cancellation controls supplement original contracts."
+    },
+    {
+      "source_lines": [
+        1001,
+        1114
+      ],
+      "responsibility": "Independent committed-row visibility and four-entity file-backed metadata",
+      "cpp": "OwnedDatabaseDirectory, BlankLocalCommitProbe, BlankLocalFixture",
+      "adaptation": "Two real connections share an exclusively owned temporary database. Context closes both before the RAII directory cleanup. The original executor and sink layers remain separate."
+    },
+    {
+      "source_lines": [
+        1115,
+        1363
+      ],
+      "responsibility": "Exact invalid-intent boundary, blank/nonblank vectors, per-entity traces, physical outcomes, audit and logging switch cases",
+      "cpp": "run_blank_local_execution, blank_local_execution, non_white_space_local_execution",
+      "adaptation": "std::invalid_argument replaces caught Rust constructor panic with the same intent diagnostic; graph planning returns structured error. UTF-8 fixtures remain original data; no test-side inheritance is installed."
+    }
+  ]
+}

@@ -170,3 +170,107 @@ source scripts/toolchains/activate.sh
 python3 scripts/verify_sqlite_provider_source_5_0_6.py \
     --record /tmp/sqlite_provider_source_fresh_5_0_6.json.gz
 ```
+
+## Current native epoch follow-up
+
+The running `native_provider_closure` epoch preserves frozen executable inputs.
+Its build reports `-Wreturn-type` in the success paths of
+`tests/parity/generated_constant_variants_probe.cpp` and
+`tests/parity/document_round_trip_probe.cpp` when included by other probes with
+`main` renamed through a macro. The implicit return rule applies to the real
+main function, not these ordinary renamed functions. Add explicit success
+returns after the epoch reaches a terminal state, then format and check the
+affected standalone and including consumers. Do not change the files during
+the frozen epoch or call an unfinished build successful. This is a fixture
+follow-up, not evidence that provider source acceptance is complete.
+
+## Frozen native integration result (2026-10-21)
+
+The full native build completed all 1,394 build steps. The pre-test and post-test
+incremental builds reported no work. CTest executed all 869 registered cases:
+866 passed, three failed, none skipped. Generated API positive/negative compiler
+contracts completed successfully. All 11,367 frozen runtime/producer inputs and
+both locked reference revisions remained unchanged throughout this epoch.
+
+The immutable receipt is
+`parity/native_provider_closure_terminal_5_0_6.json.gz` (130,345 bytes), with
+input snapshot `parity/native_provider_closure_inputs_5_0_6.json.gz`.
+The task-owned temporary log/JUnit directory was automatically removed after
+terminal capture. This is a failed integration checkpoint, not acceptance.
+
+The failures are:
+
+- `provider_relation_membership_contracts`: nested projected count/load state;
+  the exact original Rust test requires these results. Preserve its assertions
+  and diagnose the candidate's actual graph state.
+- `original_runtime_context_contracts`: the exhaustion fixture assumed two new
+  graph-slot identities; the current runtime lazily creates one shared slot.
+  Exercise actual exhaustion by filling the configured quota before calling the
+  factory, preserving the requirement that previously published references stay
+  usable and Context destruction returns all memory.
+- `entity_service_contracts`: an old assertion required absent runtime state on
+  ordinary entity reads. Locked `resolved.rs::fetch_entities_internal` delegates
+  to `registry::decode_compact_rows_with_read_metadata`, which installs read
+  context. Verify the installed state and original loaded row instead.
+
+Follow-up edits and focused verification are separate from this immutable epoch.
+No provider/source/capability disposition is promoted by this result.
+
+### Compact relation fetch follow-up
+
+The focused reproduction separates parent presence, count presence, count value
+and projection load-state assertions. The first failure is the noncyclic,
+logging-disabled case: the parent exists but contains only `id`, `version` and
+`__teaql_partition_rank`; `selected_count` is missing. This is not solely a
+cyclic identity overwrite.
+
+Locked `resolved.rs::fetch_all_internal` deliberately allows a direct provider
+read when the only enhancement is a relation aggregate. Its separate
+`fetch_compact_all_internal` includes `relation_aggregates.is_empty()` in that
+fast-path condition. Compact relation hydration calls the latter. C++ had used
+one ordinary `fetch_all` callback for both modes, losing this caller distinction.
+
+The candidate adds the independent infrastructure entry
+`EntityDataServiceAccess::fetch_compact_all` and routes compact enhanced relation
+fetches through it. A compact-entry flag lets the existing row execution state
+machine consume the child query's relation aggregates. Ordinary `fetch_all`
+retains its source-shaped direct-read behavior; SQL/provider/transport and
+Context ownership responsibilities remain separate. No representation opt-in
+was added to the handwritten fixture to hide this execution-path defect.
+
+Focused native validation now passes `provider_relation_membership_contracts`,
+including its original count, projected load-state, cyclic relation, physical
+SQL count and trace-route assertions. The two corrected stale integration
+fixtures separately passed `original_runtime_context_contracts` and
+`entity_service_contracts` before this shared-header repair. Format/check passes
+1,800 files. This is focused evidence only: current-header ordinary-query and
+relation regressions, imported-module qualification and any relevant lifetime
+checks remain required before accepting the repair or superseding the failed
+full-native checkpoint. The original immutable receipt is retained unchanged.
+
+The follow-up native regression receipt
+`parity/compact_relation_fetch_native_5_0_6.json.gz` records seven passing tests
+built against the repaired headers: the three integration failures, public and
+private aggregate scope comparisons, flat-predecode comparison, and complete
+relation-enhancement comparison. Thus the ordinary-query and predecode controls
+continue to pass alongside restored compact nested counts. Six already
+registered imported counterparts are being rebuilt and replayed separately;
+`entity_service_contracts` has no registered imported counterpart in this gate
+and is not counted as imported evidence. No complete-suite acceptance is claimed.
+
+The imported follow-up has now completed: all six equivalent commands pass in
+`parity/compact_relation_fetch_modules_5_0_6.json.gz`. These include public/private
+aggregate scope (8/8 each), flat predecode (20/20), complete relation enhancement
+(754/754), the original Context fixture and the full provider relation-membership
+fixture. Canonical module verification passes all 1,136 consumer/fixture bodies.
+The three focused sanitizer contracts are being rebuilt separately; their status
+must be read from the terminal sanitizer receipt before claiming qualification.
+
+The focused ASan/UBSan follow-up also completes successfully: 3/3 contracts in
+`parity/compact_relation_fetch_sanitize_5_0_6.json.gz`, with leak scanning disabled
+by the committed preset. Native, imported and sanitizer receipts bind the same
+six changed runtime/fixture input hashes. Stable preset directories
+were reused, with no copied binaries or disposable build directories created.
+This closes the focused repair gates, not the whole provider/resolved source or
+P0-P7 acceptance. The original full-suite 866/869 result remains historical
+failed evidence until a later complete integration checkpoint supersedes it.

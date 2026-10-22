@@ -1069,6 +1069,10 @@
         "Sha256": {
           "kind": "CXXRecordDecl",
           "header": "teaql_core/include/teaql/core/detail/sha256.hpp"
+        },
+        "append_float": {
+          "kind": "FunctionDecl",
+          "header": "teaql_core/include/teaql/core/detail/number_text.hpp"
         }
       },
       "teaql::dynamic_search": {
@@ -2021,6 +2025,10 @@
         "DynamicStorageFuture": {
           "kind": "TypeAliasTemplateDecl",
           "header": "teaql_data_service/include/teaql/data_service/dynamic_fields.hpp"
+        },
+        "TransactionResourceScope": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_data_service/include/teaql/data_service/executor.hpp"
         }
       },
       "teaql::detail": {
@@ -2177,6 +2185,10 @@
         "DynamicStorageFuture": {
           "kind": "TypeAliasTemplateDecl",
           "header": "teaql_data_service/include/teaql/data_service/dynamic_fields.hpp"
+        },
+        "TransactionResourceScope": {
+          "kind": "UsingDecl",
+          "header": "teaql_data_service/include/teaql/data_service.hpp"
         }
       },
       "teaql::dynamic_fields": {
@@ -4863,6 +4875,26 @@
         "expand_query_facet_diagnostics": {
           "kind": "FunctionDecl",
           "header": "teaql_runtime/include/teaql/runtime/purposed_query.hpp"
+        },
+        "JsonReadSession": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/json_hydration.hpp"
+        },
+        "graph_legacy_trace_id": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_plan.hpp"
+        },
+        "DynamicReadbacks": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/ledger_execution_outcome.hpp"
+        },
+        "LedgerExecutionOutcome": {
+          "kind": "CXXRecordDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/ledger_execution_outcome.hpp"
+        },
+        "write_debug": {
+          "kind": "FunctionDecl",
+          "header": "teaql_runtime/include/teaql/runtime/detail/ledger_execution_outcome_debug.hpp"
         }
       },
       "teaql::runtime": {

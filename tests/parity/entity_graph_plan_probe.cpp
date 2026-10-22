@@ -227,8 +227,14 @@ static Json evaluate(Memory target, const Json& input) {
     auto& executor = user->make<graph_plan_fixture::Executor>();
     executor.failure_entity = text(field(input, "fail_entity"));
     if (flag(input, "exists")) {
-        executor.rows.emplace_back();
-        executor.rows.back().emplace(String("id", r), Value(r, std::uint64_t(999)));
+        if (const auto* rows = optional(input, "rows")) {
+            for (const auto& row : std::get<Json::Array>(rows->data)) {
+                executor.rows.emplace_back(record(r, row));
+            }
+        } else {
+            executor.rows.emplace_back();
+            executor.rows.back().emplace(String("id", r), Value(r, std::uint64_t(999)));
+        }
     }
     auto& service = EntityDataService<graph_plan_fixture::Executor>::for_executor(
         *user, text(field(input, "service")), *user, executor);

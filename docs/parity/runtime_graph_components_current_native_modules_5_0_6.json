@@ -1,0 +1,26 @@
+{
+  "native": {
+    "status": "fulfilled",
+    "value": {
+      "chunk_id": "9deeba",
+      "wall_time_seconds": 2.5353e-05,
+      "exit_code": 0,
+      "original_token_count": 126,
+      "output": "[1/3] Linking CXX executable teaql_original_policy_graph_tests\n[2/3] Linking CXX executable teaql_runtime_graph_tests\nTest project /home/philip/githome/teaql-cpp/build_native_current\n    Start 317: original_runtime_policy_graph_contracts\n1/2 Test #317: original_runtime_policy_graph_contracts ...   Passed    0.00 sec\n    Start 437: runtime_graph_contracts\n2/2 Test #437: runtime_graph_contracts ...................   Passed    0.00 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.04 sec\n"
+    }
+  },
+  "module": {
+    "chunk_id": "9c3271",
+    "wall_time_seconds": 0.849408821,
+    "exit_code": 0,
+    "original_token_count": 253,
+    "output": "[5/11] Building CXX object modules/CMakeFiles/teaql_provider_sqlite_module.dir/__/teaql_provider_sqlite/src/lib.cppm.o\n[6/11] Linking CXX static library modules/libteaql_provider_sqlite_module.a\n[7/11] Building CXX object modules/CMakeFiles/teaql_module_runtime_graph_tests.dir/consumers/runtime_graph_tests.cpp.o\n[8/11] Building CXX object modules/CMakeFiles/teaql_module_original_policy_graph_tests.dir/consumers/original_policy_graph_tests.cpp.o\n[9/11] Linking CXX executable modules/teaql_module_original_policy_graph_tests\n[10/11] Linking CXX executable modules/teaql_module_runtime_graph_tests\nTest project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 933: module_runtime_graph_contracts\n1/2 Test #933: module_runtime_graph_contracts ...................   Passed    0.00 sec\n    Start 996: module_original_runtime_policy_graph_contracts\n2/2 Test #996: module_original_runtime_policy_graph_contracts ...   Passed    0.00 sec\n\n100% tests passed out of 2\n\nTotal Test time (real) =   0.04 sec\n"
+  },
+  "note": "Native first attempted target teaql_original_runtime_policy_graph_tests did not exist (exit 1); corrected to registered teaql_original_policy_graph_tests. Terminal successful output below. No source changes to C++ fixtures.",
+  "source_sha256": {
+    "teaql_runtime/tests/runtime_graph_tests.cpp": "226587109c000d75a7ca001a592d820c8511d6562b4e606b48091aa1ebd409a6",
+    "tests/parity/teaql_runtime/policy_graph.cpp": "d4ca62783f5d0bf3fb70579f5b1b1539daf632e6eb3f6883fbf7833e12749eb6",
+    "tests/parity/runtime_graph_components_source_5_0_6.rs": "9efd9663a7c56622e60b55fc3a2b7c547b4d5e0c79e5ee7f80c0b6a9ee6df57c",
+    "scripts/observe_runtime_graph_components_5_0_6.py": "d346e22a1f4abb7c9c2a325ab1d167bd7fcfc21973dd7ecd6f788df140a70dfa"
+  }
+}

@@ -518,6 +518,18 @@ struct EntityDataServiceAccess {
     }
 
     template <class E>
+    static TransactionResourceScope
+    bind_transaction_resources(const EntityDataService<E>& service) {
+        auto& executor = service.data_service_.executor.get();
+        if constexpr (std::is_polymorphic_v<E>) {
+            if (auto* transaction = dynamic_cast<Transaction<typename E::Error>*>(&executor)) {
+                return transaction->bind_transaction_resources(service.memory_resource());
+            }
+        }
+        return {};
+    }
+
+    template <class E>
     static const DynamicFieldStore* dynamic_field_store(const EntityDataService<E>& service) {
         return service.data_service_.executor.get().dynamic_field_store();
     }
@@ -533,6 +545,10 @@ struct EntityDataServiceAccess {
     template <class E>
     static AsyncOperation<Result<Vector<CompactRow>, DataServiceError<typename E::Error>>>&
     fetch_all(const EntityDataService<E>&, const SelectQuery&);
+
+    template <class E>
+    static AsyncOperation<Result<Vector<CompactRow>, DataServiceError<typename E::Error>>>&
+    fetch_compact_all(const EntityDataService<E>&, const SelectQuery&);
 
     template <class E, Entity T>
     static auto fetch_entities_with_relation_aggregates(const EntityDataService<E>&,

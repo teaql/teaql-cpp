@@ -78,6 +78,8 @@ public:
             }
             deleted_ = root_.deleted_keys();
             new_ = root_.new_keys();
+            // Metadata callbacks must not change this execution's captured writes.
+            auto change_set = root_.current_change_set();
             for (const auto& key : deleted_) {
                 if (new_.contains(key)) {
                     continue;
@@ -92,7 +94,6 @@ public:
                 }
                 deletes_.emplace_back(key);
             }
-            auto change_set = root_.current_change_set();
             for (const auto& [key, record] : change_set.changes()) {
                 if (deleted_.contains(key)) {
                     continue;
@@ -186,13 +187,16 @@ public:
             if (!ordered) {
                 return fail(std::move(ordered).error());
             }
-            for (const auto& key : ordered.value()) {
-                if (graph_unassigned(&key.id)) {
-                    auto id = context.next_id(key.entity);
-                    if (!id) {
-                        return fail(std::move(id).error());
+            {
+                auto resources = EntityDataServiceAccess::bind_transaction_resources(service_);
+                for (const auto& key : ordered.value()) {
+                    if (graph_unassigned(&key.id)) {
+                        auto id = context.next_id(key.entity);
+                        if (!id) {
+                            return fail(std::move(id).error());
+                        }
+                        generated_.insert_or_assign(clone_in(r, key), Value(r, id.value()));
                     }
-                    generated_.insert_or_assign(clone_in(r, key), Value(r, id.value()));
                 }
             }
             EntityRuntimeAccess::enrich_allocated_trace_scopes(root_, generated_);

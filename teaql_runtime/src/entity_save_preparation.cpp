@@ -18,7 +18,7 @@ RuntimeHookResult capture_ledger_trace_scopes(const EntityRuntimeState& root,
         return !text.empty();
     };
     auto unallocated = [](const Value& value) {
-        if (value.is_null()) {
+        if (std::holds_alternative<std::monostate>(value.data)) {
             return true;
         }
         if (auto* id = std::get_if<std::uint64_t>(&value.data)) {
@@ -270,10 +270,8 @@ RuntimeHookResult preflight_pending_dynamic_entities(const UserContext& context,
         return RuntimeHookResult::ok(r, {});
     }
     auto locations = ledger_object_locations(r, node);
-    auto deleted = root.deleted_keys();
-    auto fresh = root.new_keys();
     for (const auto& [key, fields] : *dynamic) {
-        if (locations.contains(key) || deleted.contains(key)) {
+        if (locations.contains(key) || root.is_marked_as_delete(key)) {
             continue;
         }
         GraphNode pending(std::allocator_arg, Allocator(r), key.entity);
@@ -295,7 +293,7 @@ RuntimeHookResult preflight_pending_dynamic_entities(const UserContext& context,
         }
         pending.values.fields.insert_or_assign(String("_loaded_fields", r), Value(r, loaded));
         pending.dirty_fields.emplace(root.changed_field_names(key), r);
-        pending.operation = fresh.contains(key) ? GraphOperation::Create : GraphOperation::Upsert;
+        pending.operation = root.is_new(key) ? GraphOperation::Create : GraphOperation::Upsert;
         auto result = preflight_graph(context, pending, ObjectLocation::root(r), &root);
         if (!result) {
             return result;

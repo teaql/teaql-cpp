@@ -158,6 +158,10 @@ public:
     }
 
 protected:
+    TransactionResourceScope do_bind_transaction_resources(Memory r) override {
+        return transport.bind_transaction_resources(r);
+    }
+
     void cancel_transaction() noexcept override {
         transport.cancel_sql();
     }

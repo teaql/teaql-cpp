@@ -283,8 +283,15 @@ static void sqlite_stream_lifecycle() {
               .has_value(),
           "stream cancellation releases SQLite connection");
     auto relations = product_request(*user_context).selectRelation("unknown");
-    check(!relations.executeForStream(*user_context).wait(),
-          "unsupported stream shape fails closed");
+    const auto& unsupported = relations.executeForStream(*user_context).wait();
+    check(bool(unsupported), "generated stream opens before service shape validation");
+    auto& unsupported_stream = unsupported.value().get();
+    auto* shape_error = unsupported_stream.wait_next();
+    check(shape_error && !*shape_error &&
+              shape_error->error().to_string(r).find(
+                  "streaming relation or aggregate enhancement") != String::npos,
+          "unsupported stream shape yields its source error as the first item");
+    check(!unsupported_stream.wait_next(), "unsupported stream shape ends after one error");
     const auto& active = cpp_examples::require_value(
         product_request(*user_context).stream(1).executeForStream(*user_context).wait());
     check(active.get().wait_next() != nullptr, "active cursor at close");
@@ -298,6 +305,136 @@ static void sqlite_stream_lifecycle() {
         "stream handle expires at close");
     user_context.reset();
     check(global.live_user_bytes() == 0, "closing joins cursors and reclaims context blocks");
+}
+
+static void deferred_stream_lookup() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto& opening = product_request(*user_context).stream(1).executeForStream(*user_context);
+    const auto& opened = opening.wait();
+    check(bool(opened), "missing repository lookup is deferred until stream polling");
+    auto result = opening.take_result();
+    auto retained = std::move(result).value();
+    auto& stream = retained.get();
+    auto* item = stream.wait_next();
+    check(item && !*item &&
+              item->error().to_string(user_context->memory_resource()) ==
+                  "graph write error: missing entity data service for entity: Product",
+          "missing repository yields the original generated Graph error");
+    check(!stream.wait_next(), "missing repository yields one error and then EOF");
+    user_context.reset();
+    bool closed = false;
+    try {
+        (void)retained.get();
+    } catch (const ReferenceError& error) {
+        closed = error.kind() == ReferenceError::Kind::Closed;
+    }
+    check(closed && global.live_user_bytes() == 0,
+          "checked stream does not retain a deleted UserContext");
+
+    auto next_user_context = global.make_user_context();
+    auto& before_assembly =
+        product_request(*next_user_context).stream(1).executeForStream(*next_user_context);
+    const auto& before_assembly_result = before_assembly.wait();
+    check(bool(before_assembly_result), "stream opening needs no installed repository");
+    cpp_examples::setup(*next_user_context);
+    seed(*next_user_context, "assembled later");
+    auto& assembled_stream = before_assembly_result.value().get();
+    auto* loaded = assembled_stream.wait_next();
+    check(loaded && *loaded && loaded->value().name() == "assembled later",
+          "first poll resolves the then-current trusted Context repository");
+    check(!assembled_stream.wait_next(), "late assembly stream finishes normally");
+    next_user_context.reset();
+    check(global.live_user_bytes() == 0, "late runtime assembly preserves Context ownership");
+}
+
+static void deferred_sqlite_stream_cleanup() {
+    enum class Stage { Unpolled, CancelOpening, Opened, CancelStream, First, End, Pending, Resume };
+    using Handle = TypedEntityQueryStream<Product, ExampleExecutor::Error>;
+    for (auto stage : {Stage::Unpolled,
+                       Stage::CancelOpening,
+                       Stage::Opened,
+                       Stage::CancelStream,
+                       Stage::First,
+                       Stage::End,
+                       Stage::Pending,
+                       Stage::Resume}) {
+        GlobalContext global;
+        auto user_context = global.make_user_context();
+        auto executor_ref = cpp_examples::setup(*user_context);
+        seed(*user_context, "first");
+        seed(*user_context, "second");
+        auto r = user_context->memory_resource();
+        auto& executor = user_context->get(executor_ref);
+        auto request = product_request(*user_context).stream(1);
+        AsyncStream<Result<StreamChunk, MutationExecutorError>>* held = nullptr;
+        if (stage == Stage::Pending || stage == Stage::Resume) {
+            auto* descriptor = executor.schema_provider.get_entity("Product");
+            auto compiled = executor.dialect.compile_select(r, *descriptor, request.query());
+            held = &executor.transport.stream_sql(r, std::move(compiled), 1);
+            auto* first = held->wait_next();
+            check(first && *first, "hold a real SQLite cursor lease");
+        }
+        auto cached_before_open = executor.transport.connection().cached_statement_count();
+        auto& opening = request.executeForStream(*user_context);
+        // The operation owns its execution snapshot before a caller can reuse Q.
+        request.limit(0);
+        std::optional<Handle> retained;
+        if (stage == Stage::CancelOpening) {
+            opening.cancel();
+        } else if (stage != Stage::Unpolled) {
+            check(bool(opening.wait()), "deferred opening returns without acquiring a SQL lease");
+            auto result = opening.take_result();
+            retained.emplace(std::move(result).value());
+            check(executor.transport.connection().cached_statement_count() == cached_before_open,
+                  "stream opening does not prepare a cached SQL statement");
+            auto& stream = retained->get();
+            if (stage == Stage::CancelStream) {
+                stream.cancel();
+            } else if (stage != Stage::Opened) {
+                if (held) {
+                    auto next = stream.poll_next();
+                    check(next.kind == decltype(next)::Kind::Pending,
+                          "generated stream forwards a real provider lease suspension");
+                    if (stage == Stage::Resume) {
+                        held->cancel();
+                        auto* first = stream.wait_next();
+                        check(first && *first && first->value().name() == "first",
+                              "releasing the lease wakes the complete deferred chain");
+                        stream.cancel();
+                    }
+                } else {
+                    auto* first = stream.wait_next();
+                    check(first && *first && first->value().name() == "first",
+                          "execution snapshot survives later builder modification");
+                    if (stage == Stage::End) {
+                        auto* second = stream.wait_next();
+                        check(second && *second && second->value().name() == "second" &&
+                                  !stream.wait_next(),
+                              "deferred stream reads every row and reaches EOF");
+                    }
+                }
+            }
+            if (stage == Stage::CancelStream || stage == Stage::End || stage == Stage::Resume) {
+                const auto& reused =
+                    product_request(*user_context).executeForList(*user_context).wait();
+                check(reused && reused.value().data.size() == 2,
+                      "terminal stream cleanup releases the connection for reuse");
+            }
+        }
+        user_context.reset();
+        if (retained) {
+            bool closed = false;
+            try {
+                (void)retained->get();
+            } catch (const ReferenceError& error) {
+                closed = error.kind() == ReferenceError::Kind::Closed;
+            }
+            check(closed, "retained stream rejects access after actual Context deletion");
+        }
+        check(global.live_user_bytes() == 0,
+              "unpolled, opened, partial and pending streams release every Context block");
+    }
 }
 
 // Exercise pending, empty chunks, item errors and decoder failures independently
@@ -396,6 +533,8 @@ int main() {
         compact_list_trace_and_intent();
         construction_and_execution();
         sqlite_stream_lifecycle();
+        deferred_stream_lookup();
+        deferred_sqlite_stream_cleanup();
         stream_mapping_errors();
     } catch (...) {
         std::pmr::set_default_resource(previous);

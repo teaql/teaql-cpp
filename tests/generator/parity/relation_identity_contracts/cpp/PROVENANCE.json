@@ -71,16 +71,19 @@
     "include/cpp_relation_identities/queries.hpp": "8b039990dd019a0cb3513bd268c670f926db2af886a48ba25aeffffca75277fc",
     "include/cpp_relation_identities/runtime.hpp": "78ab95dc19dc87b75ff9bc3f396eaa0069e8c1e4d37bd89bf166ccdbc62d6b58",
     "include/cpp_relation_identities/sample_data.hpp": "c002924cae5af9c8e9b4964dda1a852878288343de578378184a54967ff79254",
-    "include/cpp_relation_identities/support.hpp": "08d5019bef535a72af5a095ab75c64dcba917687e339a9a5a069fb38298a6bf6",
+    "include/cpp_relation_identities/support.hpp": "ac6c212374b4381be3d6284bdcc5c36a28535b5d7fe19b037805d754bb217c2c",
     "include/cpp_relation_identities.hpp": "14290ef27c72936000a238dd04cd44f4afe01f12e0881bf0840489db7bb08567",
     "teaql-i18n.json": "418352f6fe6df67b047f0d4529b38561068110719d189a6df00486b13e5cc404"
   },
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "00b38aa969c2a2fb535958ec9192333bc92f604e4504c90f9cd312c4696750f4",
-    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "432edde6b27a513e99f1efd067153079869a7dd965b95c65c07307324d2573d8",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "8de867a18ca398525d982e81422ebfba377ebc19dd0d27832b4108833e1aa74f",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "0c83fc780340b6a228d7d9f94f50e40b015477e399d9446d34de389901bc90c8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a"
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "eacbf2fc53f99c648e27d4506a2ed6ceae9b0be2a625ec0a47cc07449d37c257",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "dfc3a04dbc8bbfd407bc2e786dc112a25aaa892d142c32863ea8b1f37285f705",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java": "9d66eea7ed5d83d2cbff9376c462faf4ff056581bdaa53605f00a16f3b0f605c"
   }
 }

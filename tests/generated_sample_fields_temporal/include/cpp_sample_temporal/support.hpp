@@ -254,6 +254,10 @@ struct Model : EntityDefaults<Derived> {
         return true;
     }
 
+    static constexpr bool requires_flat_graph_hydration() {
+        return true;
+    }
+
     static constexpr bool supports_dynamic_property_load() {
         return true;
     }

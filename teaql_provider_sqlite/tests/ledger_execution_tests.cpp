@@ -45,6 +45,90 @@ static EntityKey key(Memory r, std::uint64_t id) {
     return EntityKey(std::allocator_arg, Allocator(r), "Order", Value(r, id));
 }
 
+struct SnapshotMetadata final : MetadataStore {
+    using allocator_type = Allocator;
+    Memory resource;
+    const InMemoryMetadataStore& descriptors;
+    const EntityRuntimeState& root;
+    unsigned trigger;
+    mutable unsigned calls = 0;
+    mutable bool callback_fired = false;
+
+    SnapshotMetadata(std::allocator_arg_t,
+                     Allocator a,
+                     const InMemoryMetadataStore& descriptors,
+                     const EntityRuntimeState& root,
+                     unsigned trigger)
+        : resource(a.resource()), descriptors(descriptors), root(root), trigger(trigger) {}
+
+    Memory memory_resource() const noexcept override {
+        return resource;
+    }
+
+    const EntityDescriptor* entity(std::string_view name) const override {
+        if (name == "Deleted" && ++calls == trigger) {
+            root.set(key(resource, 7), "name", Value(resource, "after"));
+            callback_fired = true;
+        }
+        return descriptors.entity(name);
+    }
+
+    Vector<const EntityDescriptor*> all_entities(Memory destination) const override {
+        return descriptors.all_entities(destination);
+    }
+};
+
+static void change_snapshot_precedes_delete_validation() {
+    GlobalContext global;
+    for (unsigned trigger = 0; trigger != 4; ++trigger) {
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
+        auto& store = metadata(*user_context);
+        EntityDescriptor descriptor(std::allocator_arg, Allocator(r), "Deleted");
+        descriptor.property("id", DataType::U64).id();
+        descriptor.property("version", DataType::I64).version();
+        descriptor.property("name", DataType::Text);
+        store.register_entity(std::move(descriptor));
+        auto& root = user_context->make<EntityRuntimeState>();
+        root.set_comment("verify ledger snapshot timing");
+        auto order = key(r, 7);
+        EntityKey deleted(std::allocator_arg, Allocator(r), "Deleted", Value(r, std::uint64_t(9)));
+        root.set(order, "name", Value(r, "before"));
+        root.set_original_version(order, 1);
+        root.mark_as_delete(deleted);
+        root.set_original_version(deleted, 1);
+        auto& callback = user_context->make<SnapshotMetadata>(store, root, trigger);
+        user_context->set_metadata(*user_context, callback);
+        auto& state = user_context->make<State>();
+        state.allow_reads = true;
+        state.rows.emplace_back();
+        state.rows.back().emplace(String("id", r), Value(r, std::uint64_t(7)));
+        state.rows.back().emplace(String("version", r), Value(r, std::int64_t(1)));
+        state.rows.back().emplace(String("name", r), Value(r, "loaded"));
+        auto& executor = user_context->make_resource<Executor>(state);
+        auto& service = EntityDataService<Executor>::for_executor(
+            *user_context, "Order", *user_context, executor);
+        auto& locations = user_context->make<detail::LedgerObjectLocations>();
+        auto& result = Access::execute_ledger_plan_internal(service, root, locations).wait();
+        check(result && state.requests.size() == 2,
+              "snapshot controls execute one deletion and one update");
+        unsigned updates = 0;
+        for (const auto& request : state.requests) {
+            if (const auto* update = std::get_if<UpdateCommand>(&request.data);
+                update && update->entity == "Order") {
+                ++updates;
+                check(update->values.fields.find("name")->second.try_text() ==
+                          (trigger == 1 ? "after" : "before"),
+                      "only metadata changes before the snapshot enter this write");
+            }
+        }
+        const bool fired = trigger == 1 || trigger == 2;
+        check(updates == 1 && callback.callback_fired == fired &&
+                  root.get(order, "name")->try_text() == (fired ? "after" : "before"),
+              "later metadata changes remain pending without changing the captured write");
+    }
+}
+
 struct CountingChecker final : teaql::Checker {
     mutable unsigned calls = 0;
 
@@ -320,6 +404,7 @@ static void sqlite_execution_and_rollback() {
 int main() {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
+        change_snapshot_precedes_delete_validation();
         required_gate_before_deletes();
         late_identity_lineage_before_dispatch();
         pending_work_closes();

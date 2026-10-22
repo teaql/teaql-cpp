@@ -1,0 +1,1007 @@
+{
+  "reference_source": ".reference/teaql-rs/teaql-provider-sqlite/tests/dynamic_field_query.rs",
+  "reference_sha256": "c9c4f49da606d40c42062617f7eea6f91e8a6dae8ead0786092e9ede4e613d69",
+  "note": "Exact original assertion inventory associated with reviewed candidate callers. Extraction is coverage bookkeeping, not semantic proof or a replacement for original test replay. Source assertions inside loops count once; runtime observations may be more numerous.",
+  "cases": [
+    {
+      "id": "SDQ01",
+      "reference_test": "dynamic_stream_uses_native_cursor_and_keeps_value_null_missing_and_tail",
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "assertions": [
+        {
+          "reference_line": 144,
+          "macro": "assert_eq",
+          "expression": "(first.chunk_index, first.rows.len(), first.is_last),\n            (0, 2, false)"
+        },
+        {
+          "reference_line": 148,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_err(),\n            \"cursor must retain the original connection\""
+        },
+        {
+          "reference_line": 158,
+          "macro": "assert",
+          "expression": "Arc::ptr_eq(\n            &state,\n            &entities[1].loaded_state_snapshot().unwrap()\n        )"
+        },
+        {
+          "reference_line": 163,
+          "macro": "assert_eq",
+          "expression": "(tail.chunk_index, tail.rows.len(), tail.is_last),\n            (1, 1, true)"
+        },
+        {
+          "reference_line": 173,
+          "macro": "assert",
+          "expression": "stream.next().await.is_none()"
+        },
+        {
+          "reference_line": 175,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_ok()"
+        },
+        {
+          "reference_line": 177,
+          "macro": "assert_eq",
+          "expression": "row.id, index as u64 + 1"
+        },
+        {
+          "reference_line": 178,
+          "macro": "assert_eq",
+          "expression": "row.name, format!(\"school-{}\", row.id)"
+        },
+        {
+          "reference_line": 180,
+          "macro": "assert_eq",
+          "expression": "fields.field(\"note\").unwrap().state(),\n                match index {\n                    0 => DynamicFieldState::Value,\n                    1 => DynamicFieldState::Null,\n                    _ => DynamicFieldState::NotLoaded,\n                }"
+        },
+        {
+          "reference_line": 188,
+          "macro": "assert_eq",
+          "expression": "fields.field(\"untouched\").unwrap().state(),\n                DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 192,
+          "macro": "assert",
+          "expression": "row.dirty_fields().is_none()"
+        },
+        {
+          "reference_line": 194,
+          "macro": "assert_eq",
+          "expression": "entities[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"stream-value\".into())"
+        },
+        {
+          "reference_line": 203,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await.len(),\n            3,\n            \"completion releases transaction lease as well as the mutex\""
+        }
+      ]
+    },
+    {
+      "id": "SDQ02",
+      "reference_test": "dynamic_stream_drop_releases_native_cursor_and_allows_audited_save",
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "assertions": [
+        {
+          "reference_line": 231,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_err()"
+        },
+        {
+          "reference_line": 233,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_ok()"
+        },
+        {
+          "reference_line": 240,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"after-drop\".into())"
+        }
+      ]
+    },
+    {
+      "id": "SDQ03",
+      "reference_test": "dynamic_stream_invalid_stored_type_fails_the_batch_and_releases_locks",
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "assertions": [
+        {
+          "reference_line": 270,
+          "macro": "assert",
+          "expression": "error.contains(\"DYNAMIC_FIELD_DEFINITION_MISMATCH\")"
+        },
+        {
+          "reference_line": 271,
+          "macro": "assert",
+          "expression": "!error.contains(\"PRIVATE-CANARY\")"
+        },
+        {
+          "reference_line": 272,
+          "macro": "assert",
+          "expression": "stream.next().await.is_none()"
+        },
+        {
+          "reference_line": 274,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_ok()"
+        },
+        {
+          "reference_line": 286,
+          "macro": "assert_eq",
+          "expression": "rows.data.len(), 3"
+        }
+      ]
+    },
+    {
+      "id": "SDQ04",
+      "reference_test": "dynamic_stream_covers_empty_exact_full_and_large_batch_limits",
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "assertions": [
+        {
+          "reference_line": 307,
+          "macro": "assert",
+          "expression": "chunk.rows.len() <= size"
+        },
+        {
+          "reference_line": 315,
+          "macro": "assert",
+          "expression": "decoded\n                        .iter()\n                        .all(|row| row.dynamic_field_values().is_some())"
+        },
+        {
+          "reference_line": 321,
+          "macro": "assert_eq",
+          "expression": "count, 3"
+        },
+        {
+          "reference_line": 323,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_ok()"
+        },
+        {
+          "reference_line": 334,
+          "macro": "assert",
+          "expression": "stream.next().await.is_none()"
+        },
+        {
+          "reference_line": 336,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_ok()"
+        },
+        {
+          "reference_line": 341,
+          "macro": "assert",
+          "expression": "error\n                .to_string()\n                .contains(\"DYNAMIC_FIELD_STREAM_CHUNK_REQUIRED\")"
+        },
+        {
+          "reference_line": 346,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_ok()"
+        }
+      ]
+    },
+    {
+      "id": "SDQ05",
+      "reference_test": "dynamic_stream_plan_cannot_cross_executor_instances_even_on_the_same_connection",
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "assertions": [
+        {
+          "reference_line": 387,
+          "macro": "assert_eq",
+          "expression": "error.code, \"DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH\""
+        },
+        {
+          "reference_line": 388,
+          "macro": "assert",
+          "expression": "transport.connection().try_lock().is_ok()"
+        }
+      ]
+    },
+    {
+      "id": "SDQ06",
+      "reference_test": "dynamic_stream_plan_validates_complete_batches_before_exposing_any_sidecar",
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "assertions": [
+        {
+          "reference_line": 454,
+          "macro": "assert_eq",
+          "expression": "error.code, expected"
+        },
+        {
+          "reference_line": 455,
+          "macro": "assert",
+          "expression": "!error.to_string().contains(\"PRIVATE-CANARY\")"
+        },
+        {
+          "reference_line": 456,
+          "macro": "assert",
+          "expression": "rows.iter_mut()\n                    .all(|row| row.take_loaded_dynamic_fields().is_none())"
+        },
+        {
+          "reference_line": 470,
+          "macro": "assert",
+          "expression": "Arc::ptr_eq(first.definitions(), second.definitions())"
+        },
+        {
+          "reference_line": 471,
+          "macro": "assert",
+          "expression": "Arc::ptr_eq(first.selected_codes(), second.selected_codes())"
+        },
+        {
+          "reference_line": 472,
+          "macro": "assert_eq",
+          "expression": "first.field(\"note\").unwrap().value(),\n            Some(&\"duplicate\".into())"
+        },
+        {
+          "reference_line": 476,
+          "macro": "assert_eq",
+          "expression": "second.field(\"note\").unwrap().value(),\n            Some(&\"duplicate\".into())"
+        }
+      ]
+    },
+    {
+      "id": "SDQ07",
+      "reference_test": "held_dynamic_view_cannot_follow_a_changed_storage_profile",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "held_view_storage_provenance(false)",
+      "assertions": [
+        {
+          "reference_line": 501,
+          "macro": "assert",
+          "expression": "result.is_err(),\n            \"held view was silently written to a different profile\""
+        },
+        {
+          "reference_line": 505,
+          "macro": "assert",
+          "expression": "result\n                .unwrap_err()\n                .to_string()\n                .contains(\"DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH\")"
+        },
+        {
+          "reference_line": 511,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await[0].name, \"school-1\""
+        },
+        {
+          "reference_line": 512,
+          "macro": "assert",
+          "expression": "audits.lock().unwrap().is_empty()"
+        },
+        {
+          "reference_line": 520,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await[0].name,\n            \"must-not-cross-profile\""
+        }
+      ]
+    },
+    {
+      "id": "SDQ08",
+      "reference_test": "held_dynamic_view_cannot_follow_a_different_executor_instance",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "held_view_storage_provenance(true)",
+      "assertions": [
+        {
+          "reference_line": 586,
+          "macro": "assert",
+          "expression": "error\n                .to_string()\n                .contains(\"DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH\")"
+        },
+        {
+          "reference_line": 591,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&original).await[0].name, \"school-1\""
+        },
+        {
+          "reference_line": 592,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&other).await[0].name, \"school-1\""
+        },
+        {
+          "reference_line": 593,
+          "macro": "assert",
+          "expression": "audits.lock().unwrap().is_empty()"
+        },
+        {
+          "reference_line": 598,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&original).await[0].name,\n            \"must-not-cross-database\""
+        },
+        {
+          "reference_line": 602,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&other).await[0].name, \"school-1\""
+        }
+      ]
+    },
+    {
+      "id": "SDQ09",
+      "reference_test": "sqlite_child_enhancement_preserves_dynamic_union_through_native_save_and_readback",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "child_dynamic_union_save",
+      "assertions": [
+        {
+          "reference_line": 686,
+          "macro": "assert_eq",
+          "expression": "rows.len(), 3"
+        },
+        {
+          "reference_line": 689,
+          "macro": "assert_eq",
+          "expression": "row.dynamic_field_values()\n                        .unwrap()\n                        .field(code)\n                        .unwrap()\n                        .state(),\n                    [\n                        DynamicFieldState::Value,\n                        DynamicFieldState::Null,\n                        DynamicFieldState::NotLoaded\n                    ][index]"
+        },
+        {
+          "reference_line": 702,
+          "macro": "assert",
+          "expression": "!row.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 704,
+          "macro": "assert",
+          "expression": "Arc::ptr_eq(\n            &rows[0].loaded_state_snapshot().unwrap(),\n            &rows[1].loaded_state_snapshot().unwrap()\n        )"
+        },
+        {
+          "reference_line": 708,
+          "macro": "assert",
+          "expression": "!Arc::ptr_eq(\n            &rows[0].loaded_state_snapshot().unwrap(),\n            &rows[2].loaded_state_snapshot().unwrap()\n        )"
+        },
+        {
+          "reference_line": 719,
+          "macro": "assert_eq",
+          "expression": "saved.name, \"enhanced-native-save\""
+        },
+        {
+          "reference_line": 720,
+          "macro": "assert_eq",
+          "expression": "saved.version, 3"
+        },
+        {
+          "reference_line": 722,
+          "macro": "assert_eq",
+          "expression": "json[\"#note\"], \"enhanced-private\""
+        },
+        {
+          "reference_line": 723,
+          "macro": "assert_eq",
+          "expression": "json[\"#untouched\"], \"root-private\""
+        },
+        {
+          "reference_line": 724,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await[1].name, \"school-2\""
+        }
+      ]
+    },
+    {
+      "id": "SDQ10",
+      "reference_test": "fluent_save_uses_the_same_atomic_ledger_path_and_retains_selected_extensions",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "selected_dynamic_fluent_save",
+      "assertions": [
+        {
+          "reference_line": 741,
+          "macro": "assert_eq",
+          "expression": "saved.version, 2"
+        },
+        {
+          "reference_line": 742,
+          "macro": "assert_eq",
+          "expression": "saved\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"untouched\")\n                .unwrap()\n                .value(),\n            Some(&\"keep\".into())"
+        },
+        {
+          "reference_line": 753,
+          "macro": "assert_eq",
+          "expression": "row.dynamic_field_values()\n                .unwrap()\n                .field(\"untouched\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 767,
+          "macro": "assert_eq",
+          "expression": "saved.version, 3"
+        },
+        {
+          "reference_line": 768,
+          "macro": "assert_eq",
+          "expression": "saved\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"untouched\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 782,
+          "macro": "assert_eq",
+          "expression": "unchanged\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"changed\".into())"
+        },
+        {
+          "reference_line": 809,
+          "macro": "assert_eq",
+          "expression": "full[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"untouched\")\n                .unwrap()\n                .value(),\n            Some(&\"keep\".into())"
+        },
+        {
+          "reference_line": 819,
+          "macro": "assert_eq",
+          "expression": "unchanged\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"changed\".into())"
+        }
+      ]
+    },
+    {
+      "id": "SDQ11",
+      "reference_test": "configured_provider_on_separate_executor_cannot_borrow_native_transaction",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "separate_provider_transaction_binding",
+      "assertions": [
+        {
+          "reference_line": 861,
+          "macro": "assert",
+          "expression": "error\n                .to_string()\n                .contains(\"DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED\")"
+        },
+        {
+          "reference_line": 867,
+          "macro": "assert_eq",
+          "expression": "loaded.name, \"school-1\""
+        },
+        {
+          "reference_line": 868,
+          "macro": "assert_eq",
+          "expression": "loaded.version, 1"
+        },
+        {
+          "reference_line": 869,
+          "macro": "assert",
+          "expression": "row.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 870,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 3"
+        }
+      ]
+    },
+    {
+      "id": "SDQ12",
+      "reference_test": "invalid_dynamic_readback_rolls_back_both_sides_and_retry_retains_original_intent",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "invalid_readback_rollback_retry",
+      "assertions": [
+        {
+          "reference_line": 889,
+          "macro": "assert",
+          "expression": "error.to_string().contains(\"DYNAMIC_FIELD_INVALID_STORAGE\")"
+        },
+        {
+          "reference_line": 891,
+          "macro": "assert_eq",
+          "expression": "loaded.version, 1"
+        },
+        {
+          "reference_line": 892,
+          "macro": "assert_eq",
+          "expression": "loaded.name, \"school-1\""
+        },
+        {
+          "reference_line": 893,
+          "macro": "assert_eq",
+          "expression": "loaded\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 902,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 3"
+        },
+        {
+          "reference_line": 903,
+          "macro": "assert",
+          "expression": "row.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 910,
+          "macro": "assert_eq",
+          "expression": "row.audit_as(\"retry after correcting storage behavior\")\n                .save(&context)\n                .await\n                .unwrap()\n                .version,\n            2"
+        }
+      ]
+    },
+    {
+      "id": "SDQ13",
+      "reference_test": "changed_definitions_and_nonfinite_values_reject_before_native_dml",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "invalid_dynamic_preflight",
+      "assertions": [
+        {
+          "reference_line": 935,
+          "macro": "assert",
+          "expression": "error.to_string().contains(\"DYNAMIC_FIELD_NONFINITE_NUMBER\")"
+        },
+        {
+          "reference_line": 936,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await[0].name, \"school-1\""
+        },
+        {
+          "reference_line": 954,
+          "macro": "assert",
+          "expression": "error\n                .to_string()\n                .contains(\"DYNAMIC_FIELD_DEFINITION_MISMATCH\")"
+        },
+        {
+          "reference_line": 959,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await[0].version, 1"
+        },
+        {
+          "reference_line": 960,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 3"
+        }
+      ]
+    },
+    {
+      "id": "SDQ14",
+      "reference_test": "explicitly_composed_dynamic_graph_rolls_back_together_without_adopting_unrelated_rows",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "composed_dynamic_graph_rollback",
+      "assertions": [
+        {
+          "reference_line": 993,
+          "macro": "assert",
+          "expression": "parent\n                .clone()\n                .audit_as(\"rollback composed multi-entity graph\")\n                .save(&context)\n                .await\n                .is_err()"
+        },
+        {
+          "reference_line": 1002,
+          "macro": "assert",
+          "expression": "loaded.iter().all(|row| {\n            row.version == 1\n                && row\n                    .dynamic_field_values()\n                    .unwrap()\n                    .field(\"note\")\n                    .unwrap()\n                    .state()\n                    == DynamicFieldState::NotLoaded\n        })"
+        },
+        {
+          "reference_line": 1012,
+          "macro": "assert_eq",
+          "expression": "loaded[0].name, \"school-1\""
+        },
+        {
+          "reference_line": 1013,
+          "macro": "assert_eq",
+          "expression": "loaded[1].name, \"school-2\""
+        },
+        {
+          "reference_line": 1014,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 3"
+        },
+        {
+          "reference_line": 1015,
+          "macro": "assert",
+          "expression": "parent.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 1016,
+          "macro": "assert",
+          "expression": "unrelated.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 1028,
+          "macro": "assert_eq",
+          "expression": "saved.version, 2"
+        },
+        {
+          "reference_line": 1030,
+          "macro": "assert_eq",
+          "expression": "loaded[0].version, 2"
+        },
+        {
+          "reference_line": 1031,
+          "macro": "assert_eq",
+          "expression": "loaded[1].version, 2"
+        },
+        {
+          "reference_line": 1032,
+          "macro": "assert_eq",
+          "expression": "loaded[2].version, 1"
+        },
+        {
+          "reference_line": 1033,
+          "macro": "assert_eq",
+          "expression": "loaded[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"parent-extension\".into())"
+        },
+        {
+          "reference_line": 1042,
+          "macro": "assert_eq",
+          "expression": "loaded[1]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"child-extension\".into())"
+        },
+        {
+          "reference_line": 1051,
+          "macro": "assert_eq",
+          "expression": "loaded[2]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 1060,
+          "macro": "assert",
+          "expression": "unrelated.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 1061,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 5"
+        }
+      ]
+    },
+    {
+      "id": "SDQ15",
+      "reference_test": "incomplete_native_projection_cannot_bypass_full_checker_via_dynamic_only_save",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "incomplete_projection_dynamic_save",
+      "assertions": [
+        {
+          "reference_line": 1116,
+          "macro": "assert",
+          "expression": "matches!(error, teaql_runtime::RuntimeError::Check(_))"
+        },
+        {
+          "reference_line": 1117,
+          "macro": "assert",
+          "expression": "row.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 1118,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await[0].version, 1"
+        },
+        {
+          "reference_line": 1119,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 3"
+        }
+      ]
+    },
+    {
+      "id": "SDQ16",
+      "reference_test": "incompatible_dynamic_definition_composition_rejects_without_partial_import",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "incompatible_dynamic_composition",
+      "assertions": [
+        {
+          "reference_line": 1155,
+          "macro": "assert",
+          "expression": "matches!(\n            target.include_pending_mutations_from(&source),\n            Err(teaql_runtime::LedgerCompositionError::ConflictingDynamicDefinitions { .. })\n        )"
+        },
+        {
+          "reference_line": 1159,
+          "macro": "assert_eq",
+          "expression": "target.entity_runtime_state().unwrap().current_change_set(),\n            before"
+        }
+      ]
+    },
+    {
+      "id": "SDQ17",
+      "reference_test": "ordinary_ledger_save_persists_dynamic_null_delete_and_version_with_masked_audit",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "dynamic_null_delete_safe_audit",
+      "assertions": [
+        {
+          "reference_line": 1180,
+          "macro": "assert_eq",
+          "expression": "saved.version, 2"
+        },
+        {
+          "reference_line": 1181,
+          "macro": "assert_eq",
+          "expression": "saved.name, \"native-updated\""
+        },
+        {
+          "reference_line": 1182,
+          "macro": "assert_eq",
+          "expression": "saved\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"PRIVATE-DYNAMIC-CANARY\".into())"
+        },
+        {
+          "reference_line": 1191,
+          "macro": "assert",
+          "expression": "saved\n                .entity_runtime_state()\n                .unwrap()\n                .current_change_set()\n                .is_empty()"
+        },
+        {
+          "reference_line": 1198,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 4"
+        },
+        {
+          "reference_line": 1199,
+          "macro": "assert",
+          "expression": "!format!(\"{:?}\", audits.lock().unwrap()).contains(\"PRIVATE-DYNAMIC-CANARY\")"
+        },
+        {
+          "reference_line": 1200,
+          "macro": "assert",
+          "expression": "audits.lock().unwrap()[3]\n                .fields\n                .iter()\n                .any(|field| field.name == \"#note\" && field.masked)"
+        },
+        {
+          "reference_line": 1210,
+          "macro": "assert",
+          "expression": "Arc::ptr_eq(\n            &selected,\n            &row.loaded_state_snapshot().unwrap()\n        )"
+        },
+        {
+          "reference_line": 1220,
+          "macro": "assert_eq",
+          "expression": "saved.version, 3"
+        },
+        {
+          "reference_line": 1221,
+          "macro": "assert_eq",
+          "expression": "saved\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::Null"
+        },
+        {
+          "reference_line": 1230,
+          "macro": "assert",
+          "expression": "!format!(\"{:?}\", audits.lock().unwrap()).contains(\"PRIVATE-DYNAMIC-CANARY\")"
+        },
+        {
+          "reference_line": 1239,
+          "macro": "assert_eq",
+          "expression": "saved.version, 4"
+        },
+        {
+          "reference_line": 1240,
+          "macro": "assert_eq",
+          "expression": "saved\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 1249,
+          "macro": "assert_eq",
+          "expression": "atomic_rows(&context).await[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        }
+      ]
+    },
+    {
+      "id": "SDQ18",
+      "reference_test": "failed_dynamic_dml_rolls_back_native_and_preserves_intent_for_retry",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "dynamic_dml_failure_retry",
+      "assertions": [
+        {
+          "reference_line": 1284,
+          "macro": "assert",
+          "expression": "error.to_string().contains(\"DYNAMIC_FIELD_STORAGE_FAILED\")"
+        },
+        {
+          "reference_line": 1285,
+          "macro": "assert",
+          "expression": "!error.to_string().contains(\"PRIVATE-DRIVER-CANARY\")"
+        },
+        {
+          "reference_line": 1286,
+          "macro": "assert",
+          "expression": "!row.entity_runtime_state()\n                .unwrap()\n                .current_change_set()\n                .is_empty()"
+        },
+        {
+          "reference_line": 1293,
+          "macro": "assert_eq",
+          "expression": "loaded.name, \"school-1\""
+        },
+        {
+          "reference_line": 1294,
+          "macro": "assert_eq",
+          "expression": "loaded.version, 1"
+        },
+        {
+          "reference_line": 1295,
+          "macro": "assert_eq",
+          "expression": "loaded\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 1304,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 3"
+        },
+        {
+          "reference_line": 1317,
+          "macro": "assert_eq",
+          "expression": "saved.name, \"native-pending\""
+        },
+        {
+          "reference_line": 1318,
+          "macro": "assert_eq",
+          "expression": "saved.version, 2"
+        },
+        {
+          "reference_line": 1319,
+          "macro": "assert_eq",
+          "expression": "saved\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"private-pending\".into())"
+        },
+        {
+          "reference_line": 1328,
+          "macro": "assert_eq",
+          "expression": "audits.lock().unwrap().len(), 4"
+        }
+      ]
+    },
+    {
+      "id": "SDQ19",
+      "reference_test": "dynamic_only_update_rejects_stale_version_and_preserves_unrelated_context_rows",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "dynamic_stale_version_isolation",
+      "assertions": [
+        {
+          "reference_line": 1351,
+          "macro": "assert_eq",
+          "expression": "current.version, 2"
+        },
+        {
+          "reference_line": 1353,
+          "macro": "assert",
+          "expression": "teaql_runtime::save_audited_ledger_entity(\n                stale.clone().audit_as(\"reject stale extension-only write\"),\n                &context\n            )\n            .await\n            .is_err()"
+        },
+        {
+          "reference_line": 1362,
+          "macro": "assert_eq",
+          "expression": "rows[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"current\".into())"
+        },
+        {
+          "reference_line": 1371,
+          "macro": "assert_eq",
+          "expression": "rows[1].version, 1"
+        },
+        {
+          "reference_line": 1372,
+          "macro": "assert_eq",
+          "expression": "rows[1]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 1381,
+          "macro": "assert",
+          "expression": "stale.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 1382,
+          "macro": "assert",
+          "expression": "unrelated.has_pending_dynamic_mutations()"
+        }
+      ]
+    },
+    {
+      "id": "SDQ20",
+      "reference_test": "unbound_new_entity_definitions_cannot_be_silently_assigned_to_current_storage",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "new_dynamic_entity_provenance(false)",
+      "assertions": [
+        {
+          "reference_line": 1410,
+          "macro": "assert",
+          "expression": "rejected\n                .to_string()\n                .contains(\"DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH\")"
+        },
+        {
+          "reference_line": 1415,
+          "macro": "assert",
+          "expression": "atomic_rows(&context).await.is_empty()"
+        },
+        {
+          "reference_line": 1416,
+          "macro": "assert",
+          "expression": "row.has_pending_dynamic_mutations()"
+        },
+        {
+          "reference_line": 1417,
+          "macro": "assert",
+          "expression": "audits.lock().unwrap().is_empty()"
+        }
+      ]
+    },
+    {
+      "id": "SDQ21",
+      "reference_test": "new_entity_dynamic_intent_survives_id_allocation_and_readback_is_authoritative",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "new_dynamic_entity_provenance(true)",
+      "assertions": [
+        {
+          "reference_line": 1451,
+          "macro": "assert",
+          "expression": "saved.id > 0"
+        },
+        {
+          "reference_line": 1452,
+          "macro": "assert_eq",
+          "expression": "saved.version, 1"
+        },
+        {
+          "reference_line": 1453,
+          "macro": "assert_eq",
+          "expression": "saved\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&\"CANONICALIZE\".into())"
+        }
+      ]
+    },
+    {
+      "id": "SDQ22",
+      "reference_test": "durable_extensions_survive_reopening_and_decode_into_shared_typed_views",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "durable_dynamic_reopen",
+      "assertions": [
+        {
+          "reference_line": 1579,
+          "macro": "assert_eq",
+          "expression": "rows.len(), 3"
+        },
+        {
+          "reference_line": 1580,
+          "macro": "assert_eq",
+          "expression": "rows[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&Value::Text(\"stored-value\".into()))"
+        },
+        {
+          "reference_line": 1589,
+          "macro": "assert_eq",
+          "expression": "rows[1]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::Null"
+        },
+        {
+          "reference_line": 1598,
+          "macro": "assert_eq",
+          "expression": "rows[2]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 1607,
+          "macro": "assert",
+          "expression": "Arc::ptr_eq(\n            &rows[0].loaded_state_snapshot().unwrap(),\n            &rows[1].loaded_state_snapshot().unwrap()\n        )"
+        },
+        {
+          "reference_line": 1611,
+          "macro": "assert",
+          "expression": "!Arc::ptr_eq(\n            &rows[1].loaded_state_snapshot().unwrap(),\n            &rows[2].loaded_state_snapshot().unwrap()\n        )"
+        },
+        {
+          "reference_line": 1615,
+          "macro": "assert",
+          "expression": "Arc::ptr_eq(\n            rows[0].dynamic_field_values().unwrap().definitions(),\n            rows[2].dynamic_field_values().unwrap().definitions()\n        )"
+        },
+        {
+          "reference_line": 1619,
+          "macro": "assert",
+          "expression": "rows.iter()\n                .all(|row| row.name == format!(\"school-{}\", row.id) && row.version == 1)"
+        },
+        {
+          "reference_line": 1624,
+          "macro": "assert_eq",
+          "expression": "rows[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&Value::Text(\"stored-value\".into()))"
+        }
+      ]
+    },
+    {
+      "id": "SDQ23",
+      "reference_test": "sqlite_audited_roots_load_row_owned_extensions_with_shared_masks",
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "audited_roots_shared_dynamic_masks",
+      "assertions": [
+        {
+          "reference_line": 1658,
+          "macro": "assert_eq",
+          "expression": "saved.version, 1"
+        },
+        {
+          "reference_line": 1698,
+          "macro": "assert_eq",
+          "expression": "rows.len(), 3"
+        },
+        {
+          "reference_line": 1699,
+          "macro": "assert",
+          "expression": "Arc::ptr_eq(\n            &rows[0].loaded_state_snapshot().unwrap(),\n            &rows[1].loaded_state_snapshot().unwrap()\n        )"
+        },
+        {
+          "reference_line": 1703,
+          "macro": "assert",
+          "expression": "!Arc::ptr_eq(\n            &rows[1].loaded_state_snapshot().unwrap(),\n            &rows[2].loaded_state_snapshot().unwrap()\n        )"
+        },
+        {
+          "reference_line": 1707,
+          "macro": "assert_eq",
+          "expression": "rows[0]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .value(),\n            Some(&Value::Text(\"private-note\".into()))"
+        },
+        {
+          "reference_line": 1716,
+          "macro": "assert_eq",
+          "expression": "rows[1]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::Null"
+        },
+        {
+          "reference_line": 1725,
+          "macro": "assert_eq",
+          "expression": "rows[2]\n                .dynamic_field_values()\n                .unwrap()\n                .field(\"note\")\n                .unwrap()\n                .state(),\n            DynamicFieldState::NotLoaded"
+        },
+        {
+          "reference_line": 1734,
+          "macro": "assert_eq",
+          "expression": "rows[0].name, \"school-1\""
+        },
+        {
+          "reference_line": 1735,
+          "macro": "assert",
+          "expression": "rows.iter()\n                .all(|row| row.version == 1 && row.dirty_fields().is_none())"
+        }
+      ]
+    }
+  ],
+  "assertion_macro_count": 163
+}

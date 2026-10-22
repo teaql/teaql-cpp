@@ -99,3 +99,41 @@ or MIPS profile is repeated for fixture-only changes. Source totals remain
 84 accepted / 38 pending / 2 excluded; capabilities remain 11 qualified /
 6 partial. Whole resolved-service, governance, transaction and phase exits
 remain open.
+
+## Release arithmetic policy continuation
+
+The [original release-policy replay](parity/resolved_release_versions_5_0_6.json.gz)
+selects all 60 post-provider overflow cases from the retained privacy corpus and
+adds 60 otherwise-identical maximum-minus-one controls. The original runtime
+bodies and observer SPI remain unchanged; only the observer input filename is
+rebound into an owned temporary directory. Rust runs with release overflow checks
+and debug assertions disabled, optimization level zero and no debug information.
+The source/dependency provenance is retained by `ReferenceRuntimeView`.
+
+The C++ candidate compiles the complete retained mutation probe with `NDEBUG`,
+then links the completed native support archives. A symbol audit rejects those
+archives if they contain `mutation_next_version` or `EntityMutationOperation`
+instantiations, ensuring the mutation templates come from the candidate probe.
+This isolates the release arithmetic policy; it is **not a full Release runtime
+build or a module Release qualification**. No runtime implementation is changed.
+
+All 120 complete observations match, including provider requests, error ordering,
+event contents and privacy. The [explicit assertions](parity/resolved_release_versions_assertions_5_0_6.json.gz)
+check 60 event versions at `INT64_MIN`, 60 neighboring controls at `INT64_MAX`,
+144 provider calls and 144 attempted events. None of these source observations
+panics. The historical Debug panics remain valid separate-profile evidence.
+Provider success followed by audit failure is not reclassified as rollback.
+
+Reproduce with the pinned toolchain activated:
+
+```sh
+python3 scripts/verify_resolved_release_versions_5_0_6.py \
+    --record /tmp/resolved_release_versions_fresh.json.gz
+```
+
+The owned source/build directory (192,672,966 bytes) is removed after observation;
+compact receipts retain commands, outputs, dependency and binary fingerprints.
+No shared Cargo cache is removed. Whole governed writes, live SQLite commit
+behavior, complete Release builds and P0-P7 acceptance remain separate. Source
+counts remain 112 accepted / 10 pending / 2 excluded_external; no source or
+capability verdict is promoted.

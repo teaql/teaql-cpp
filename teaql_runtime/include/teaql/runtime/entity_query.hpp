@@ -47,11 +47,23 @@ class EntityQuery {
     template <Entity, class, bool, class>
     friend class EntityQuery;
 
+    // Generated request names remain model identities even when descriptor
+    // metadata overrides the entity trait identity.
+    static constexpr std::string_view query_entity_name() noexcept {
+        if constexpr (requires {
+                          { T::QUERY_ENTITY_NAME } -> std::convertible_to<std::string_view>;
+                      }) {
+            return T::QUERY_ENTITY_NAME;
+        } else {
+            return T::ENTITY_NAME;
+        }
+    }
+
 public:
     explicit EntityQuery(UserContext& user_context, bool minimal = false, bool live_rows = true)
         requires(!Purposed)
         : binding_(user_context),
-          description_(user_context.make_ref<detail::QueryDescription>(T::ENTITY_NAME)) {
+          description_(user_context.make_ref<detail::QueryDescription>(query_entity_name())) {
         auto descriptor = T::entity_descriptor(memory_resource());
         if constexpr (requires { T::QUERY_IDENTITY_FIELDS; }) {
             for (auto field : T::QUERY_IDENTITY_FIELDS) {
@@ -1614,7 +1626,7 @@ public:
         requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
-        auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
+        auto service = user_context.template entity_data_service<E>(query_entity_name());
         if (!service) {
             return detail::generated_query_lookup_failure<SmartList<R>, typename E::Error>(
                 user_context.memory_resource(), service.error());
@@ -1626,7 +1638,7 @@ public:
         requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
-        auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
+        auto service = user_context.template entity_data_service<E>(query_entity_name());
         if (!service) {
             return detail::generated_query_lookup_failure<std::optional<R>, typename E::Error>(
                 user_context.memory_resource(), service.error());
@@ -1649,7 +1661,7 @@ public:
         requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
-        auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
+        auto service = user_context.template entity_data_service<E>(query_entity_name());
         if (!service) {
             return detail::generated_query_lookup_failure<std::uint64_t, typename E::Error>(
                 user_context.memory_resource(), service.error());
@@ -1661,7 +1673,7 @@ public:
         requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
-        auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
+        auto service = user_context.template entity_data_service<E>(query_entity_name());
         if (!service) {
             return detail::generated_query_lookup_failure<bool, typename E::Error>(
                 user_context.memory_resource(), service.error());
@@ -1673,7 +1685,7 @@ public:
         requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
-        auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
+        auto service = user_context.template entity_data_service<E>(query_entity_name());
         if (!service) {
             return detail::generated_query_lookup_failure<SmartList<R>, typename E::Error>(
                 user_context.memory_resource(), service.error());
@@ -1687,7 +1699,7 @@ public:
         requires Purposed && Entity<R>
     {
         auto authorized = authorize(user_context);
-        auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
+        auto service = user_context.template entity_data_service<E>(query_entity_name());
         if (!service) {
             return detail::generated_query_lookup_failure<SmartList<CompactRow>, typename E::Error>(
                 user_context.memory_resource(), service.error());
@@ -1700,14 +1712,8 @@ public:
                  && Entity<R> && std::derived_from<E, StreamQueryExecutor<typename E::Error>>
     {
         auto authorized = authorize(user_context);
-        auto service = user_context.template entity_data_service<E>(T::ENTITY_NAME);
-        if (!service) {
-            return detail::generated_query_lookup_failure<
-                TypedEntityQueryStream<R, typename E::Error>,
-                typename E::Error>(user_context.memory_resource(), service.error());
-        }
-        return detail::generated_query_result(
-            service.value().get().template fetch_entity_stream<R>(authorized));
+        return detail::defer_generated_query_stream<R, E>(
+            user_context, query_entity_name(), authorized);
     }
 
     T& newEntity(UserContext& user_context) const

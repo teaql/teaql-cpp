@@ -175,7 +175,84 @@ static void deleted_keys_and_null_relations() {
           "deleted dynamic keys do not require update checker reconstruction");
 }
 
+struct RecheckingChecker final : Checker {
+    using allocator_type = Allocator;
+    EntityRuntimeState root;
+    std::string_view action;
+    mutable Vector<String> seen;
+
+    RecheckingChecker(std::allocator_arg_t,
+                      Allocator a,
+                      const EntityRuntimeState& root,
+                      std::string_view action)
+        : root(std::allocator_arg, a, root), action(action), seen(a.resource()) {}
+
+    std::string_view entity() const override {
+        return "Order";
+    }
+
+    void check_and_fix(const UserContext& user_context,
+                       EntityValues& values,
+                       const ObjectLocation&,
+                       CheckResults&) const override {
+        auto r = user_context.memory_resource();
+        auto id = *values.fields.at(String("id", r)).try_u64();
+        String message(std::to_string(id), r);
+        message += ':';
+        message += check_object_status_name(check_object_status(values));
+        seen.emplace_back(message);
+        if (id == 1) {
+            EntityKey key(std::allocator_arg, Allocator(r), "Order", Value(r, std::uint64_t{2}));
+            if (action == "delete") {
+                root.mark_as_delete(key);
+            } else if (action == "new") {
+                root.mark_as_new(key);
+            }
+        }
+    }
+};
+
+static void pending_status_rechecks() {
+    GlobalContext global;
+    for (auto action : {"none", "delete", "new"}) {
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
+        auto& root = user_context->make<EntityRuntimeState>();
+        const std::array fields{DynamicFieldDefinitions::Field{"score", DataType::I64}};
+        auto definitions = DynamicFieldDefinitions::from_fields(r, "Order", "1", fields);
+        auto& owned = user_context->make<DynamicFieldDefinitions>(definitions.value());
+        DynamicFieldValues::Values empty(r);
+        auto values = DynamicFieldValues::from_values(r, owned, empty);
+        root.install_loaded_dynamic_fields(values.value());
+        for (std::uint64_t id : {1, 2}) {
+            EntityKey key(std::allocator_arg, Allocator(r), "Order", Value(r, id));
+            check(bool(root.update_dynamic_field(key, "score", Value(r, std::int64_t{5}))),
+                  "stage pending dynamic status control");
+        }
+        auto& metadata = user_context->make<InMemoryMetadataStore>();
+        EntityDescriptor descriptor(std::allocator_arg, Allocator(r), "Order");
+        descriptor.property("id", DataType::U64).id();
+        metadata.register_entity(std::move(descriptor));
+        user_context->set_metadata(*user_context, metadata);
+        auto& checker = user_context->make_resource<RecheckingChecker>(root, action);
+        auto& registry = user_context->make<InMemoryCheckerRegistry>();
+        registry.register_checker(*user_context, checker);
+        user_context->set_checker_registry(*user_context, registry);
+        GraphNode node(std::allocator_arg, Allocator(r), "Parent");
+        auto result = detail::preflight_pending_dynamic_entities(*user_context, root, node);
+        check(bool(result), "pending dynamic status checks complete");
+        check(checker.seen.size() == (std::string_view(action) == "delete" ? 1u : 2u) &&
+                  checker.seen.front() == "1:update",
+              "later deleted entities are skipped after an earlier Checker");
+        if (checker.seen.size() == 2) {
+            check(checker.seen[1] == (std::string_view(action) == "new" ? "2:create" : "2:update"),
+                  "later entities use their current ledger creation status");
+        }
+    }
+}
+
 int main() {
+    pending_status_rechecks();
     relation_and_unrepresented_checks(false);
     relation_and_unrepresented_checks(true);
     deleted_keys_and_null_relations();

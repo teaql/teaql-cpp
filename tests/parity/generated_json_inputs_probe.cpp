@@ -6,7 +6,6 @@
 using namespace teaql;
 using cpp_sample_runtime::SampleRecord;
 using cpp_sample_runtime::SampleLink;
-using cpp_member_aliases::Record;
 
 static void check(bool value, const char* message) {
     if (!value) {
@@ -111,12 +110,13 @@ static Json run(GlobalContext& global, UserContext& user_context, const Json& in
         for (std::uint64_t i = 0; i < n; ++i) {
             auto value =
                 Json::parse(r,
-                            i % 2 == 0 ? R"({"id":1,"version":7,"type":null})"
+                            i % 2 == 0 ? R"({"id":1,"version":7,"type_field":null})"
                                        : R"({"legacy_type":"private","version":7,"id":2})");
             values.emplace_back(std::move(*value));
         }
         values.emplace_back(std::move(*Json::parse(r, R"({"id":3,"version":7})")));
-        auto result = user_context.decode_json_entities<Record>(Json(r, std::move(values)));
+        auto result = user_context.decode_json_entities<cpp_member_aliases::Record>(
+            Json(r, std::move(values)));
         check(bool(result) && result.value().size() == n + 1, "alias batch decoded");
         const auto& rows = result.value();
         auto first = rows[0].loaded_state_snapshot();
@@ -129,16 +129,17 @@ static Json run(GlobalContext& global, UserContext& user_context, const Json& in
         }
         auto other = rows[n].loaded_state_snapshot();
         check(bool(other), "other snapshot exists");
-        auto duplicate = Json::parse(r, R"({"type":"A","legacy_type":"B"})");
+        auto duplicate = Json::parse(r, R"({"type_field":"A","legacy_type":"B"})");
         detail::model_put(out, "count", n);
         detail::model_put(out, "same", same);
         detail::model_put(out, "distinct", first->identity() != other->identity());
-        detail::model_put(out, "first_loaded", rows[0].is_field_loaded("type"));
-        detail::model_put(out, "other_loaded", rows[n].is_field_loaded("type"));
+        detail::model_put(out, "first_loaded", rows[0].is_field_loaded("type_field"));
+        detail::model_put(out, "other_loaded", rows[n].is_field_loaded("type_field"));
         detail::model_put(out, "first", json(r, rows[0]));
         detail::model_put(out, "last", json(r, rows[n - 1]));
         detail::model_put(out, "other", json(r, rows[n]));
-        detail::model_put(out, "duplicate", rejected<Record>(user_context, *duplicate, r));
+        detail::model_put(
+            out, "duplicate", rejected<cpp_member_aliases::Record>(user_context, *duplicate, r));
     } else {
         throw std::runtime_error("unknown fixture");
     }

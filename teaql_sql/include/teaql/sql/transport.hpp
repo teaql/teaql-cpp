@@ -61,6 +61,12 @@ public:
         return pending_.track(rollback_sql_transaction(r));
     }
 
+    TransactionResourceScope bind_transaction_resources(Memory r) {
+        require_domain(r);
+        require_active();
+        return do_bind_transaction_resources(r);
+    }
+
     bool consumed() const noexcept {
         return consumed_;
     }
@@ -102,6 +108,10 @@ protected:
         if (r != resource_) {
             throw std::invalid_argument("SQL transaction work must remain in its owning Context");
         }
+    }
+
+    virtual TransactionResourceScope do_bind_transaction_resources(Memory) {
+        return {};
     }
 
     virtual DataServiceOperationResult<std::monostate, E>& commit_sql_transaction(Memory) = 0;

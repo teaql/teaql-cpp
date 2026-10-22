@@ -7,6 +7,22 @@ Disposition: **pending_review**. This draft separates complete-source obligation
 from focused witnesses; neither the table nor an accepted delegate proves this
 whole source. It introduces no additional migration scope or dependency.
 
+## Definition coverage
+
+The [locked-source inventory](parity/resolved_responsibility_inventory_5_0_6.json)
+maps all 75 function definitions to 26 primary responsibility groups. RQ27 is
+implemented in the separately included `query_future_tests.rs`; it is not counted
+as a definition in this file. `ContinuousPageExecution` is the RQ10 state carrier.
+The inventory includes the thin public wrappers, policy forwarding methods and
+command factories, rather than counting only asynchronous execution bodies.
+
+Run `python3 scripts/verify_resolved_inventory_5_0_6.py` to verify the clean locked
+reference, exact source hash, definition order/lines, one primary assignment per
+function, and local candidate/evidence entry paths. The recognizer is specific to
+this pinned source and does not claim to parse arbitrary Rust. A listed evidence
+entry is a review starting point; it does not prove the complete function or its
+composed callers. All groups remain subject to whole-source reconciliation.
+
 ## Responsibility map
 
 | Review | Original responsibility | C++ mapping and remaining reconciliation |
@@ -22,10 +38,10 @@ whole source. It introduces no additional migration scope or dependency.
 | RQ09 | Ordinary row/compact/owned entries | `entity_query.hpp`: preserve each original shortcut guard and query ownership/trace path. In particular, ordinary direct rows and compact relation probes do not share identical Query-owned aggregate guards. The entry matrix preserves those differences. |
 | RQ10 | Continuous-page preparation/publication | Validate slice/shape/order, build the scoped key, load and validate a cursor, apply seek conditions, then publish only after all enhancements succeed. Preserve observations and fail-open store errors. See the separate G09 reopening/supplement. |
 | RQ11 | Optimization keys | `query_keys.cpp` and pagination adapters: preserve normalized query shape, namespace, user/domain-root scope and original hashing/width adaptations. Reuse existing key/model source evidence only with its exact dependency/input guards. |
-| RQ12 | ID-set pagination | `id_set_page.hpp`: shape fallback, stable ID tie-break, store read/build lock/recheck, bounded ID fetch, bad-ID/limit/write fallback, TTL and page query. Generic store acceptance is not acceptance of every caller. |
+| RQ12 | ID-set pagination | `id_set_page.hpp`: shape fallback, stable ID tie-break, store read/build lock/recheck, bounded ID fetch, bad-ID/limit/write fallback, TTL and page query. The [explicit-intent continuation](resolved_id_set_intent_5_0_6.md) preserves233 historical outcomes and adds233 explicit-purpose controls: source/native/module466, native4 and canonical1132. It observes153 query calls and61 attempted puts, closing the earlier missing-purpose early-exit gap. Generic store acceptance is not acceptance of every caller. |
 | RQ13 | Stream execution | `entity_stream.hpp`: retain diagnostic source and validated intent, reject unsupported enhancement before opening, select observed/unobserved/dynamic provider contracts, attach dynamic property definitions and retain lazy errors/cleanup. The [readonly stream continuation](resolved_stream_schema_5_0_6.md) repairs 80/769 differences with a checked borrow of the registered Context schema: source/native/imported769, native10/module8 and scoped SAN4 pass. This closes RQS01 for G09 without whole-source acceptance. The [generated readonly-stream continuation](generated_readonly_stream_5_0_6.md) additionally checks the complete 1003-row/14-chunk original scenario, absent schema through list/stream calls and retained generated entities after cursor close (original3/native1/module1, SDK reproduction). |
 | RQ14 | Prepared provider query | Preserve enabled-cache delegation, separate capture switches, executor observer, final metadata recording and dynamic property definitions. The owned variant moves/clears query lineage into the physical request; it is not interchangeable with a borrowed query clone. The [schema continuation](resolved_query_schema_5_0_6.md) repairs readonly definition attachment across compact/owned/cache returns; its current gates are recorded separately. |
-| RQ15 | Aggregate cache | Preserve custom-backend precedence over concrete memory cache, canonical keys, TTL, cached empty rows, hit/miss/provider telemetry and propagation of provider errors. A hit reclassifies privacy from the current query/compiler without database I/O or a fabricated SQL-success log. Do not infer fail-open backend-panic behavior from the telemetry wrapper. Reconcile combined behavior/policy/privacy cases rather than relying on cache models alone. The [schema/cache witness](resolved_query_schema_5_0_6.md) covers raw-before-schema cache storage and logging-disabled hit classification, without whole-cache acceptance. The [generated readonly-cache continuation](generated_readonly_stream_5_0_6.md) adds two enhanced typed reads with shared snapshot/schema identity and exactly one physical SQLite statement, still without accepting every cache composition. |
+| RQ15 | Aggregate cache | Preserve custom-backend precedence over concrete memory cache, canonical keys, TTL, cached empty rows, hit/miss/provider telemetry and propagation of provider errors. A hit reclassifies privacy from the current query/compiler without database I/O or a fabricated SQL-success log. Do not infer fail-open backend-panic behavior from the telemetry wrapper. Reconcile combined behavior/policy/privacy cases rather than relying on cache models alone. The [cache execution continuation](resolved_cache_execution_5_0_6.md) adds288 original/native/module outcomes for custom-versus-concrete precedence, empty hits, cache bypass, classifier counts and exact ordered cache/provider telemetry; native5 and canonical1133 pass. The [schema/cache witness](resolved_query_schema_5_0_6.md) covers raw-before-schema cache storage and logging-disabled hit classification, without whole-cache acceptance. The [generated readonly-cache continuation](generated_readonly_stream_5_0_6.md) adds two enhanced typed reads with shared snapshot/schema identity and exactly one physical SQLite statement, still without accepting every cache composition. |
 | RQ16 | Enhancement membership snapshots | Original `fetch_prepared_all_with_aggregates` snapshots decoded scalar membership immediately after root fetch, before object-group, child-query or relation mutations. The independent [membership witness](aggregate_membership_snapshot_5_0_6.md) reproduces 864 late-snapshot/error-order differences per frontend. The correction prepares explicit Context-owned keys before enhancement and reuses the assembler; installed/sanitizer qualification is tracked separately. |
 | RQ17 | Enhancement order | Preserve groups, child queries, relation loading, relationship aggregates and finally cursor registration. Do not publish a cursor after a failed aggregate or use a pre-aggregate boundary. Current query/cursor witnesses address that specific correction. |
 | RQ18 | SmartList and ordinary typed entries | Preserve loaded/total metadata, raw versus typed rows and dynamic guards. Ordinary typed/SmartList methods do not implicitly acquire all enhanced-entry behavior. The [192-input typed continuation](resolved_query_schema_5_0_6.md) restores compact result metadata and fresh runtime state. The [288-input preparation continuation](resolved_dynamic_typed_5_0_6.md) unifies ordinary/dynamic typed decoding, scopes from incoming selection and uses post-Behavior/Policy selection while bypassing aggregation cache. Source/native/imported288, native10/module10 and SAN4 pass; full supported indexed/enhanced callers remain separate. |
@@ -87,6 +103,141 @@ close every child-query or relation-hydration composition in the whole source.
 
 Whole-source acceptance still requires the remaining callback/cache/stream/
 mutation/public-wrapper responsibilities and their composed callers, with
-unchanged-source reuse identified explicitly. Active source counts are 92 accepted,
-30 pending and two external exclusions. This draft advances no source,
+unchanged-source reuse identified explicitly. Active source counts are 112 accepted,
+10 pending and two external exclusions. This draft advances no source,
 capability, generator phase, full-profile or device verdict.
+
+## Prepared cache intent ordering follow-up
+
+For RQ14/RQ15, [prepared-cache intent ordering](resolved_cache_intent_order_5_0_6.md)
+records eight reproduced differences across 18 original-source observations.
+The shared prepared-query operation now consults the cache before constructing
+request intent, matching the private Rust helper. Public entries retain mandatory
+intent validation. Native and module comparisons match 18/18; public query,
+schema/cache and complete enhancement regressions also pass. This focused repair
+does not promote the complete source to accepted.
+
+## Scoped repository and privacy traversal readback
+
+The source's `scoped_data_service_internal` keeps the same Context/executor,
+clones mutation intent/privacy and request intent, clears repository trace and
+snapshots query privacy independently. `EntityDataService::scoped_data_service`
+retains these responsibilities through Context-bound allocator copies;
+`query_scoped_service` restores the parent trace for query execution. There is
+no shared ownership extension of the Context.
+
+For RQ26, the original `query_scoped_service` validates intent, expands diagnostic
+facets, and traverses a LIFO list containing relation queries, child enhancements,
+relation aggregates and object-group queries. `EntityDataServiceAccess::query_scoped`
+uses the same insertion/traversal order. Separate aggregate arguments are appended
+only to a diagnostic clone, conditioned on execution-metadata capture. The C++
+callers in `entity_query.hpp`, `enhanced_entities.hpp` and `diagnostic_query.hpp`
+retain that distinction from the actual executable query. Source and C++ differ
+in when the temporary scoped copy is allocated relative to intent validation;
+this readback does not assert allocation-count equivalence.
+
+This is implementation readback, not new execution evidence. The [direct scoped-privacy continuation](resolved_scope_privacy_5_0_6.md) now
+adds eight original/native/module observations of parent/child/sibling privacy
+independence, inherited intent and diagnostic child traversal. Complete trace,
+mutation privacy and other diagnostic tree compositions still require their
+separate evidence before closing RQ25/RQ26.
+
+## Diagnostic tree continuation
+
+For RQ26, the [direct tree replay](resolved_scope_tree_5_0_6.md) now compares
+28 actual-source/native/module observations across all five query-child carriers,
+their combined order, disabled capture, invalid intent and unchanged source query.
+It includes the existing facet-expansion behavior rather than replacing it with a
+generic recursive walk. Combined with the preceding eight snapshot observations,
+it supplies direct caller evidence beyond the accepted redaction/expansion models.
+Separate aggregate arguments retain their generated enhanced-entry witness in
+`dynamic_json_privacy_5_0_6.md`; physical protected-log publication remains the
+Context/provider responsibility. This continuation does not promote the whole
+source or rerun unrelated historical provider gates.
+
+## Public wrapper reconciliation
+
+Readback of the nine original public wrappers distinguishes optional diagnostic
+scoping for ordinary rows/SmartList/typed/enhanced reads, mandatory source scoping
+for streams, and mandatory aggregate-aware scoping for explicit aggregate list
+entries. Owned forms retain their corresponding request semantics; C++ stores
+Context-owned operation snapshots rather than extending a stack query lifetime.
+
+The [SmartList aggregate continuation](resolved_public_aggregate_scope_5_0_6.md)
+reproduces a wrapper gap with three differences: bound intent or an existing
+diagnostic source could suppress classification of separate aggregate arguments.
+The SmartList entry now delegates through the existing complete-scope operation
+before the unchanged row/list mechanics. This repair is necessary for RQ20/RQ26;
+ordinary wrapper reuse alone was not sufficient proof of parity.
+
+## Current joined regression gate
+
+The [31-test union](resolved_joined_regression_5_0_6.md) exposed an ordinary-row
+inline-aggregate shortcut regression despite the previous focused checkpoints.
+Conditional normalization is restored to the source enhancement-entry guards.
+The repaired native union passes all 31 tests, with current input hashes held
+stable across build and execution. The module union also passes all 31 equivalent commands. Complete source
+reconciliation remains outstanding. G09 was subsequently restored by its
+[separate requalification](resolved_g09_requalification_5_0_6.md); this source-level
+union does not replace capability acceptance.
+
+## Private typed-aggregate scope readback correction
+
+The earlier draft incorrectly stated that
+`fetch_entities_with_relation_aggregates_internal` calls
+`query_scoped_service(query)` directly. Readback of the clean, hash-verified
+locked source shows that line 1509 calls
+`query_scoped_service_with_aggregates(query, relation_aggregates)`. The helper at
+line 2203 appends separate aggregate queries as diagnostic child enhancements
+when execution metadata capture is enabled. It delegates unchanged when the
+aggregate list is empty or capture is disabled.
+
+`TypedAggregateOperation` follows this same initial dynamic-selection and
+unbound-intent guard and diagnostic-clone construction. The proposed source
+mismatch was a documentation error, not grounds for a runtime change. The [direct private-entry observer](resolved_private_aggregate_scope_5_0_6.md)
+now matches all eight original/native/module outcomes for dynamic selection,
+metadata capture and bound intent; native regression passes 3/3. Its missing-
+descriptor fixture isolates classification before query preparation; it does
+not prove successful dynamic aggregate hydration.
+Whole-source reconciliation remains pending.
+
+## Flat-plan representation boundary
+
+The [flat predecode review](resolved_flat_predecode_5_0_6.md) identifies an RQ19
+caller mismatch beyond the earlier preparation/scope corpus: unrequested inline
+children were decoded before ordinary Entity hydration. Four of twenty actual
+original-runtime observations differ. Removing the adaptation globally fixes
+those four but loses 36 generated nested-relation observations, so that candidate
+is explicitly rejected. The current repair makes graph-backed model hydration
+an explicit optional capability, defaulting to false and enabled by the generated
+model base. Installed native, module, lifecycle and complete active-SDK
+reproduction evidence is tracked in that review; this finding does not promote
+the whole source or replace the remaining P0-P7 acceptance requirements.
+
+## Joined repair and pending typed-work checkpoint
+
+The [37-check native/imported union](resolved_joined_regression_5_0_6.md#joined-regression-after-the-flat-graph-repair)
+passes after the explicit model representation repair, with frozen inputs and
+all previous 31 checks retained. RQ01/RQ19 now also have eight executed C++
+pending dynamic-work cleanup cases: ordinary, private aggregate, enhanced and
+continuous enhanced entries, each with explicit cancellation or actual Context
+deletion. Native/imported/focused sanitizer executions preserve the existing
+multirow query program and validate one join/destruction before arena reclamation.
+This closes those cancellation-path coverage gaps without replacing original
+ready-provider comparisons. The subsequent [sixteen-scenario continuation](resolved_dynamic_loaded_5_0_6.md#suspended-typed-caller-completion)
+adds controlled successful/error resumption at the same four entries, wake
+forwarding, single delivery, multirow loaded-state sharing and actual ID reads
+during cleanup. Native/imported/focused sanitizer each pass the complete program;
+threaded-provider stress and whole-source acceptance remain separate.
+The complete source remains pending_review.
+
+## Mutation Release-policy continuation
+
+The [release arithmetic replay](resolved_mutation_privacy_5_0_6.md#release-arithmetic-policy-continuation)
+resolves the missing maximum-version policy observation for RQ21/RQ22 without
+changing runtime bodies. Sixty retained Debug overflow inputs plus sixty adjacent
+controls match all120 actual original Release-policy/C++ NDEBUG observations,
+including144 provider calls and144 attempted events. C++ mutation templates are
+compiled in the probe with a support-archive symbol audit. This is an isolated
+policy qualification, not a complete Release build or live SQLite commit gate.
+Whole-source acceptance remains pending.

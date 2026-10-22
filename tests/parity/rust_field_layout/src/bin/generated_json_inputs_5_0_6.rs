@@ -7,6 +7,20 @@ use teaql_core::{Entity,TeaqlEntity,DataType};
 use teaql_runtime::{UserContext,InMemoryMetadataStore};
 fn run(input:&J)->J {
     match input["case"].as_str().unwrap() {
+        "payload_diagnostic" => {
+            let context=cpp_sample_runtime_core::module().into_context();
+            let descriptor=SampleRecord::entity_descriptor();
+            let property=descriptor.properties.iter().find(|p|p.name=="payload").unwrap();
+            let outcomes:Vec<J>=[json!(null),json!({"literal":"_comment"}),json!("{\"literal\":\"_comment\"}"),json!("plain")]
+                .into_iter().map(|payload| {
+                    let input=json!({"id":1,"payload":payload});
+                    match context.decode_json_entity::<SampleRecord>(&input) {
+                        Ok(row)=>json!({"input":input,"accepted":true,"output":row.into_json()}),
+                        Err(error)=>json!({"input":input,"accepted":false,"error":error.to_string()}),
+                    }
+                }).collect();
+            json!({"data_type":format!("{:?}",property.data_type),"nullable":property.nullable,"outcomes":outcomes})
+        },
         "combined" => {
             let context=cpp_sample_runtime_core::module().into_context();
             let value=json!({"id":1,"version":7,"optional_count":null,"quantity":0,"active":false,
@@ -50,15 +64,15 @@ fn run(input:&J)->J {
         "aliases" => {
             let context=cpp_member_aliases_core::module().into_context();
             let n=input["count"].as_u64().unwrap() as usize;
-            let values:Vec<J>=(0..n).map(|i|if i%2==0 {json!({"id":1,"version":7,"type":null})}else{json!({"legacy_type":"private","version":7,"id":2})}).collect();
+            let values:Vec<J>=(0..n).map(|i|if i%2==0 {json!({"id":1,"version":7,"type_field":null})}else{json!({"legacy_type":"private","version":7,"id":2})}).collect();
             let mut values=values;values.push(json!({"id":3,"version":7}));
             let rows=context.decode_json_entities::<Record>(&json!(values)).unwrap();
             let first=rows[0].loaded_state_snapshot().unwrap();
             let same=rows[..n].iter().all(|r|Arc::ptr_eq(&first,&r.loaded_state_snapshot().unwrap()));
             let distinct=!Arc::ptr_eq(&first,&rows[n].loaded_state_snapshot().unwrap());
-            let duplicate=match context.decode_json_entity::<Record>(&json!({"type":"A","legacy_type":"B"})){Ok(_)=>panic!("duplicate alias accepted"),Err(e)=>e.to_string()};
-            json!({"count":n,"same":same,"distinct":distinct,"first_loaded":rows[0].is_field_loaded("type"),
-                "other_loaded":rows[n].is_field_loaded("type"),"first":rows[0].clone().into_json(),
+            let duplicate=match context.decode_json_entity::<Record>(&json!({"type_field":"A","legacy_type":"B"})){Ok(_)=>panic!("duplicate alias accepted"),Err(e)=>e.to_string()};
+            json!({"count":n,"same":same,"distinct":distinct,"first_loaded":rows[0].is_field_loaded("type_field"),
+                "other_loaded":rows[n].is_field_loaded("type_field"),"first":rows[0].clone().into_json(),
                 "last":rows[n-1].clone().into_json(),"other":rows[n].clone().into_json(),"duplicate":duplicate})
         }, _=>panic!("unknown fixture"),
     }

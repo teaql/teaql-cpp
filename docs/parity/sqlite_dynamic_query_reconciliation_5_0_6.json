@@ -1,0 +1,673 @@
+{
+  "reference_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "teaql-provider-sqlite/tests/dynamic_field_query.rs",
+  "reference_sha256": "c9c4f49da606d40c42062617f7eea6f91e8a6dae8ead0786092e9ede4e613d69",
+  "status": "accepted",
+  "note": "An obligation inventory and focused-caller mapping, not an automated semantic proof or whole-source acceptance. Existing receipts record earlier source checkpoints; hashes below identify this review checkpoint.",
+  "review_checkpoint_inputs": {
+    "teaql_runtime/tests/dynamic_query_tests.cpp": "199cfd178b39396bfa331e0e223ff523426acf3dd6c86520b179192885942786",
+    "teaql_runtime/tests/dynamic_graph_save_tests.cpp": "bc4e08602a0d4154a3a68d277cd4daac2a4c6365fd1ca02a7ac83a22010ad44b",
+    "tests/support/dynamic_hydration_fixture.hpp": "86b33129158b684410dda9a98853ef5df1fe50f19e8b5cb857746bfe80693a73"
+  },
+  "cases": [
+    {
+      "id": "SDQ01",
+      "reference_test": "dynamic_stream_uses_native_cursor_and_keeps_value_null_missing_and_tail",
+      "reference_line": 131,
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "reviewed_obligation_groups": [
+        "2+1 chunk indices and terminal flags",
+        "active native lease and release after EOF",
+        "decoded native identities and names",
+        "shared Value/NULL snapshot",
+        "Value/NULL/NotLoaded and unselected private field",
+        "clean retained rows after cursor close"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ02",
+      "reference_test": "dynamic_stream_drop_releases_native_cursor_and_allows_audited_save",
+      "reference_line": 212,
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "reviewed_obligation_groups": [
+        "held decoded row from first chunk",
+        "early cursor release",
+        "public audited Save after close",
+        "typed dynamic readback"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ03",
+      "reference_test": "dynamic_stream_invalid_stored_type_fails_the_batch_and_releases_locks",
+      "reference_line": 253,
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "reviewed_obligation_groups": [
+        "malformed persisted type on second row",
+        "entire first batch rejects",
+        "exact definition mismatch without private payload",
+        "terminal stream and immediate connection reuse"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ04",
+      "reference_test": "dynamic_stream_covers_empty_exact_full_and_large_batch_limits",
+      "reference_line": 291,
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "reviewed_obligation_groups": [
+        "chunk sizes 1,2,3,73,8192",
+        "three decoded owners and batch bound",
+        "empty result",
+        "zero chunk exact error",
+        "native lease available"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ05",
+      "reference_test": "dynamic_stream_plan_cannot_cross_executor_instances_even_on_the_same_connection",
+      "reference_line": 351,
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "reviewed_obligation_groups": [
+        "second executor over same connection",
+        "plan bound to original store",
+        "exact provenance mismatch before acquisition"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ06",
+      "reference_test": "dynamic_stream_plan_validates_complete_batches_before_exposing_any_sidecar",
+      "reference_line": 393,
+      "cpp_source": "teaql_runtime/tests/dynamic_query_tests.cpp",
+      "cpp_caller": "database_stream_and_cleanup",
+      "reviewed_obligation_groups": [
+        "owner mismatch precedence",
+        "omitted owner",
+        "unrequested owner",
+        "unselected value before type validation",
+        "wrong type",
+        "no partial sidecars",
+        "duplicate owner payload/definition/selection sharing"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ07",
+      "reference_test": "held_dynamic_view_cannot_follow_a_changed_storage_profile",
+      "reference_line": 484,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "held_view_storage_provenance(false)",
+      "reviewed_obligation_groups": [
+        "profile replacement rejects held view",
+        "exact provenance mismatch",
+        "unchanged native name and no audit",
+        "restored profile permits retained intent retry"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ08",
+      "reference_test": "held_dynamic_view_cannot_follow_a_different_executor_instance",
+      "reference_line": 568,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "held_view_storage_provenance(true)",
+      "reviewed_obligation_groups": [
+        "distinct physical executor rejects held view",
+        "identical schema does not confer authority",
+        "both databases unchanged",
+        "original Context retry only changes original"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ09",
+      "reference_test": "sqlite_child_enhancement_preserves_dynamic_union_through_native_save_and_readback",
+      "reference_line": 628,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "child_dynamic_union_save",
+      "reviewed_obligation_groups": [
+        "audited extension seed",
+        "root/child selection union",
+        "three availability states and no pending mutations",
+        "shared actual selection snapshots",
+        "native-only Save retains both JSON extension values",
+        "second owner unchanged"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ10",
+      "reference_test": "fluent_save_uses_the_same_atomic_ledger_path_and_retains_selected_extensions",
+      "reference_line": 729,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "selected_dynamic_fluent_save",
+      "reviewed_obligation_groups": [
+        "fluent public Save updates both fields",
+        "selected-only view does not load sibling",
+        "selected Save increments version",
+        "unchanged Save preserves view",
+        "bounded typed All read proves sibling durability",
+        "copied field container mutation is independent"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ11",
+      "reference_test": "configured_provider_on_separate_executor_cannot_borrow_native_transaction",
+      "reference_line": 839,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "separate_provider_transaction_binding",
+      "reviewed_obligation_groups": [
+        "alternate provider resource versus native executor",
+        "transaction binding rejection",
+        "native name/version unchanged",
+        "intent retained and no audit"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ12",
+      "reference_test": "invalid_dynamic_readback_rolls_back_both_sides_and_retry_retains_original_intent",
+      "reference_line": 875,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "invalid_readback_rollback_retry",
+      "reviewed_obligation_groups": [
+        "actual trigger corrupts authoritative readback",
+        "exact invalid storage error",
+        "native and extension rollback",
+        "no audit and retained intent",
+        "retry after trigger removal"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ13",
+      "reference_test": "changed_definitions_and_nonfinite_values_reject_before_native_dml",
+      "reference_line": 922,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "invalid_dynamic_preflight",
+      "reviewed_obligation_groups": [
+        "NaN rejects before native DML",
+        "new definition revision rejects same pending intent",
+        "definition mismatch precedence",
+        "native state and audit unchanged"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ14",
+      "reference_test": "explicitly_composed_dynamic_graph_rolls_back_together_without_adopting_unrelated_rows",
+      "reference_line": 965,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "composed_dynamic_graph_rollback",
+      "reviewed_obligation_groups": [
+        "explicit child composition",
+        "second owner trigger failure rolls back both owners",
+        "no audit on rollback",
+        "retained parent and unrelated intent",
+        "retry persists only parent/child",
+        "two version increments and two audit deliveries"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ15",
+      "reference_test": "incomplete_native_projection_cannot_bypass_full_checker_via_dynamic_only_save",
+      "reference_line": 1083,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "incomplete_projection_dynamic_save",
+      "reviewed_obligation_groups": [
+        "incomplete native projection",
+        "typed RequireLoadedName checker",
+        "Check error despite dynamic-only mutation",
+        "intent retained and version/audit unchanged"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ16",
+      "reference_test": "incompatible_dynamic_definition_composition_rejects_without_partial_import",
+      "reference_line": 1124,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "incompatible_dynamic_composition",
+      "reviewed_obligation_groups": [
+        "individually valid conflicting source definitions",
+        "source native and dynamic operands",
+        "public composition conflict",
+        "entire receiving change set unchanged"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ17",
+      "reference_test": "ordinary_ledger_save_persists_dynamic_null_delete_and_version_with_masked_audit",
+      "reference_line": 1167,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "dynamic_null_delete_safe_audit",
+      "reviewed_obligation_groups": [
+        "public ledger Value Save",
+        "cleared committed change set",
+        "safe dynamic field masked",
+        "no private canary in safe events including reason",
+        "NULL preserves snapshot identity",
+        "NULL and Delete differ",
+        "three version increments",
+        "fresh typed read after Delete"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ18",
+      "reference_test": "failed_dynamic_dml_rolls_back_native_and_preserves_intent_for_retry",
+      "reference_line": 1262,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "dynamic_dml_failure_retry",
+      "reviewed_obligation_groups": [
+        "actual failing SQLite DML",
+        "exact safe storage error",
+        "driver canary absent",
+        "nonempty pending change set",
+        "both-store rollback and no audit",
+        "unchanged intent retries after trigger removal"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ19",
+      "reference_test": "dynamic_only_update_rejects_stale_version_and_preserves_unrelated_context_rows",
+      "reference_line": 1333,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "dynamic_stale_version_isolation",
+      "reviewed_obligation_groups": [
+        "independently loaded current/stale views",
+        "dynamic-only Save advances native version",
+        "stale Save rejected",
+        "current value retained",
+        "unrelated owner unchanged",
+        "both failed/unrelated intents remain pending"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ20",
+      "reference_test": "unbound_new_entity_definitions_cannot_be_silently_assigned_to_current_storage",
+      "reference_line": 1387,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "new_dynamic_entity_provenance(false)",
+      "reviewed_obligation_groups": [
+        "new id0 entity with unbound definitions",
+        "exact storage provenance rejection",
+        "empty native table",
+        "pending dynamic intent and no audit"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ21",
+      "reference_test": "new_entity_dynamic_intent_survives_id_allocation_and_readback_is_authoritative",
+      "reference_line": 1422,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "new_dynamic_entity_provenance(true)",
+      "reviewed_obligation_groups": [
+        "new id0 entity with Context-bound definitions",
+        "native ID allocation",
+        "version1",
+        "actual normalization trigger",
+        "returned authoritative extension"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ22",
+      "reference_test": "durable_extensions_survive_reopening_and_decode_into_shared_typed_views",
+      "reference_line": 1466,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "durable_dynamic_reopen",
+      "reviewed_obligation_groups": [
+        "repeatable schema",
+        "audited native seed",
+        "transaction-owned SPI extension seed",
+        "destroy first Context and reopen actual file",
+        "durable Value/NULL/missing",
+        "shared mask and definition identities",
+        "native names/version1",
+        "explicit destination copy before reopened Context destruction"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    },
+    {
+      "id": "SDQ23",
+      "reference_test": "sqlite_audited_roots_load_row_owned_extensions_with_shared_masks",
+      "reference_line": 1637,
+      "cpp_source": "teaql_runtime/tests/dynamic_graph_save_tests.cpp",
+      "cpp_caller": "audited_roots_shared_dynamic_masks",
+      "reviewed_obligation_groups": [
+        "schema provider and audited three-root seed",
+        "each root version1",
+        "install in-memory extensions after native seed",
+        "bounded ordered typed SQLite query",
+        "shared Value/NULL masks and distinct missing mask",
+        "row-owned values and native name",
+        "no dirty fields"
+      ],
+      "status": "qualified",
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+    }
+  ],
+  "remaining_exit_requirements": [
+    {
+      "id": "DQ_CLOSE_1",
+      "requirement": "Reconcile the shared atomic_fixture for every graph caller: original three audited version1 owners, note/untouched/amount definitions, empty initial extension rows and safe-audit baseline versus one-owner version3/raw-sink/prepopulated extensions in Fixture. Either install the source-shaped setup for these cases or provide explicit per-case justification and executed controls for every material difference. Separate SDQ23 bootstrap success is not blanket substitution.",
+      "status": "qualified",
+      "progress_evidence": [
+        "docs/parity/sqlite_dynamic_atomic_fixture_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_atomic_provenance_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_atomic_remaining_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_source_descriptor_5_0_6.json.gz"
+      ],
+      "migrated_cases": [
+        "SDQ07",
+        "SDQ08",
+        "SDQ09",
+        "SDQ10",
+        "SDQ11",
+        "SDQ12",
+        "SDQ13",
+        "SDQ14",
+        "SDQ15",
+        "SDQ16",
+        "SDQ17",
+        "SDQ18",
+        "SDQ19",
+        "SDQ20",
+        "SDQ21"
+      ],
+      "progress": "All SDQ07-SDQ21 atomic callers use modeled source metadata and schema with either three audited version1 owners, empty extensions and safe-audit baseline3, or explicitly unseeded schema and baseline0. Field/profile/owner/name spelling adaptations and explicit Context copies are documented in helper_review; Text/Text/F64 definitions and all material seed/audit/version semantics are preserved. Native7/module3 and differential436 pass at source_descriptor checkpoint. This qualifies the shared atomic fixture requirement only, not whole-source acceptance."
+    },
+    {
+      "id": "DQ_CLOSE_2",
+      "requirement": "Reconcile original three-field indexed derive carrier and helper behavior against the handwritten eleven-field School layout, including checker projection restoration, new-entity construction, runtime state/loaded mask and JSON adaptation. Preserve prior checker fixture failure as evidence.",
+      "status": "qualified",
+      "progress_evidence": [
+        "docs/parity/sqlite_dynamic_source_layout_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_scalar_carrier_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_native_helper_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_install_guard_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_source_descriptor_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_source_mutator_5_0_6.json.gz",
+        "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz"
+      ],
+      "progress": "Exercised source helper responsibilities reconciled: exact three-slot layout and metadata, actual audited schema setup, scalar projection/version/copies, checker restoration, dynamic install and mutation guards, decoder prevalidation, safe audits and explicit Context retention. Final native7/module3/imported436 pass.",
+      "resolved_helper_gap": {
+        "reference": ".reference/teaql-rs/teaql-macros/src/derive_impl.rs:822",
+        "candidate": "tests/support/dynamic_hydration_fixture.hpp:install_loaded_dynamic_fields",
+        "requirement": "Reject mismatched snapshot layout identity or dynamic definition owner before installing either state or values. The current handwritten carrier lacks the derive guard; add source-layout rejection controls preserving existing state. Existing generated-carrier evidence is not proof for this handwritten fixture.",
+        "status": "repaired_and_verified",
+        "resolution": "SourceLayout delegates to existing GeneratedDynamicFields::install; direct owner/layout rejection tests preserve snapshot, visible pending payload and entire ledger. Native7/module3 and imported differential436 pass.",
+        "evidence": "docs/parity/sqlite_dynamic_install_guard_5_0_6.json.gz"
+      },
+      "resolved_descriptor_gap": {
+        "reference": ".reference/teaql-rs/teaql-macros/src/derive_impl.rs:312-329,373-380",
+        "candidate": "SchoolCarrier::entity_descriptor and dynamic_hydration_fixture::setup",
+        "finding": "Original non-Option id/version/name fields receive not_null metadata. The handwritten descriptor marks only id not_null, and setup always registers the frozen School descriptor. Source-mode schema therefore still uses nullable name/version metadata.",
+        "required_follow_up": "Separate source descriptor selection from frozen metadata, preserve original field order/nullability, use it for source-mode callers and verify modeled schema plus existing source scenarios.",
+        "status": "repaired_and_verified",
+        "evidence": "docs/parity/sqlite_dynamic_source_descriptor_5_0_6.json.gz",
+        "resolution": "Source descriptor id/version/name order with all non-null and explicit source setup routing; descriptor and actual provider-created schema controls pass with all source callers."
+      },
+      "resolved_dynamic_mutator_gap": {
+        "reference": ".reference/teaql-rs/teaql-macros/src/derive_impl.rs:784-811",
+        "candidate": "SourceSchool source callers use root.update_dynamic_field / root.delete_dynamic_field",
+        "finding": "Original indexed entity mutation entry validates indexed state/layout identity and refreshes the loaded snapshot when selected-code availability changes. Direct ledger calls do not perform those carrier operations.",
+        "required_follow_up": "Add source carrier application-style updateDynamicField/deleteDynamicField adapters to existing GeneratedDynamicFields::update/erase; route original source counterparts through them and verify first-selection refresh, same-selection identity, missing/indexed-layout errors and no partial mutation.",
+        "status": "repaired_and_verified",
+        "evidence": "docs/parity/sqlite_dynamic_source_mutator_5_0_6.json.gz",
+        "resolution": "Source carrier delegates updateDynamicField/deleteDynamicField to shared runtime; all28 source-range ledger calls migrated. Snapshot selection/NULL/delete controls and both invalid-state update/delete paths pass without partial modifications."
+      },
+      "resolved_decode_validation_gap": {
+        "reference": ".reference/teaql-rs/teaql-macros/src/derive_impl.rs:from_compact_body",
+        "candidate": "SchoolCarrier<true>::from_compact_row",
+        "finding": "Original derive validates dynamic property metadata before extracting scalars; the handwritten source decoder currently starts scalar extraction directly. The generic read-hydration path delegates to that decoder and does not supply this validation.",
+        "required_follow_up": "Use the existing CompactRow::validate_dynamic_properties before source scalar extraction and verify malformed metadata rejects without becoming a typed source entity. Preserve the frozen carrier behavior.",
+        "status": "repaired_and_verified",
+        "evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz",
+        "resolution": "Source-only validation precedes carrier construction/scalar extraction; five direct and read-hydration controls pass, including exact diagnostic and error precedence."
+      }
+    },
+    {
+      "id": "DQ_CLOSE_3",
+      "requirement": "Run the joined native/imported provider integration gates at the reconciled final checkpoint, bind the exact reference replay and candidate input hashes, inspect every assertion/helper disposition, and only then decide the source ledger verdict.",
+      "status": "qualified",
+      "assertion_audit_findings": [
+        {
+          "case": "SDQ10",
+          "reference": "fluent_save_uses_the_same_atomic_ledger_path_and_retains_selected_extensions asserts saved.version after both Saves",
+          "candidate": "selected_dynamic_fluent_save currently checks fixture.version() after each Save",
+          "required_follow_up": "Add returned typed version assertions (2 then 3), retaining durable version checks. Durable database version alone does not prove the returned carrier version contract.",
+          "status": "repaired_and_verified",
+          "evidence": "docs/parity/sqlite_dynamic_returned_version_5_0_6.json.gz"
+        },
+        {
+          "case": "SDQ09 and returned-version assertions in SDQ14/SDQ17-SDQ19/SDQ21",
+          "reference": "Original assertions read the returned DynamicSchool.version scalar",
+          "candidate": "Some callers check fixture.version() or root.get_original_version instead",
+          "required_follow_up": "Audit every original returned version assertion and assert SourceSchool::version() directly, preserving database/runtime-version checks as additional controls.",
+          "status": "repaired_and_verified",
+          "evidence": "docs/parity/sqlite_dynamic_returned_version_5_0_6.json.gz"
+        }
+      ],
+      "typed_postcondition_review": {
+        "cases": [
+          "SDQ01",
+          "SDQ20"
+        ],
+        "status": "repaired_and_verified",
+        "evidence": "docs/parity/sqlite_dynamic_typed_postconditions_5_0_6.json.gz",
+        "scope": "Both original postconditions now exercise typed enhanced service queries, alongside native storage/lease controls."
+      },
+      "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz",
+      "progress": "Final joined gates bind current source inputs, original unchanged23/23 replay,163 original assertion sites and23 actual candidate main calls. Each SDQ case and source helper reviewed with documented identifier/Context adaptations; all identified gaps resolved."
+    }
+  ],
+  "helper_review": [
+    {
+      "source": "DynamicSchool / indexed derive",
+      "candidate": "SchoolCarrier<true>",
+      "disposition": "Source layout, scalar mapping/projection, native update, dynamic installation/mutation, ordered non-null metadata and decode prevalidation qualified for the responsibilities exercised by this test source. This is not blanket acceptance of every derive-macro feature."
+    },
+    {
+      "source": "DynamicSchool::update_native_name",
+      "candidate": "SourceSchool::updateNativeName",
+      "disposition": "Repaired both typed member and ledger mutation; native7/module3 and 436 module differential observations pass at the native_helper checkpoint."
+    },
+    {
+      "source": "DynamicSchool::fixture",
+      "candidate": "Fixture source-mode seed / new_dynamic_entity_provenance",
+      "disposition": "id, version0, typed name, new marker, staged name and fully loaded indexed state precede audited Save. IDs7-9 and names original/second/third rename original IDs1-3 and school-N consistently; id0 remains the allocation sentinel."
+    },
+    {
+      "source": "Schema / Executor / AlternateSchema",
+      "candidate": "InMemoryMetadataStore / Executor / AlternateExecutor",
+      "disposition": "Actual metadata lookup and distinct registered executor resource retain service/transport/provider separation; SDQ11 uses another concrete executor type over the same native connection."
+    },
+    {
+      "source": "AuditProbe / AtomicFixture",
+      "candidate": "SafeDynamicAuditSink / Fixture(true, seed)",
+      "disposition": "Context-owned safe-event collection replaces Arc/Mutex for owner-thread fixture execution. Three successful seed audits or zero for unseeded schema; seed events cleared only where the original observation explicitly does so."
+    },
+    {
+      "source": "dynamic_stream_request / seed_stream_extensions",
+      "candidate": "database_stream_and_cleanup",
+      "disposition": "Bounded ordered three-owner native cursor, configured chunk size, selected Text extension, actual audited Value/NULL and unselected Text seed. amount/F64 restored; count/I64 remains an extra invalid-unselected-value control."
+    },
+    {
+      "source": "atomic_fixture / atomic_rows",
+      "candidate": "Fixture(true, seed) / read_school / per-case typed queries",
+      "disposition": "Schema provider, actual audited roots, empty initial extensions, bound definitions and bounded typed loads. Helper/table/field/profile spelling is adapted consistently, not asserted as byte-identical SQL."
+    },
+    {
+      "source": "RequireLoadedName",
+      "candidate": "RequireLoadedName with TypedEntityChecker",
+      "disposition": "Requires loaded native name via checker projection; SDQ15 must reject dynamic-only edits of incomplete native projections."
+    },
+    {
+      "source": "DynamicSchool indexed update/delete derive methods",
+      "candidate": "SourceSchool::updateDynamicField/deleteDynamicField",
+      "disposition": "Shared GeneratedDynamicFields validation and snapshot refresh; native7/module3/imported436 qualified at source_mutator checkpoint."
+    },
+    {
+      "source": "DynamicSchool derive from_compact_body validation",
+      "candidate": "SourceSchool::from_compact_row",
+      "disposition": "Calls existing dynamic-property validation before construction/extraction; direct and hydration controls preserve exact error priority and privacy."
+    }
+  ],
+  "returned_version_assertion_review": {
+    "reference_occurrences": 24,
+    "note": "All24 original version-check occurrences now map to direct decoded typed version assertions. Ledger/database checks are retained. Native and imported graph-save programs each pass1/1.",
+    "mappings": [
+      {
+        "case": "SDQ09",
+        "reference_lines": [
+          720
+        ],
+        "cpp_caller": "child_dynamic_union_save"
+      },
+      {
+        "case": "SDQ10",
+        "reference_lines": [
+          741,
+          767
+        ],
+        "cpp_caller": "selected_dynamic_fluent_save"
+      },
+      {
+        "case": "SDQ11",
+        "reference_lines": [
+          868
+        ],
+        "cpp_caller": "separate_provider_transaction_binding"
+      },
+      {
+        "case": "SDQ12",
+        "reference_lines": [
+          891,
+          915
+        ],
+        "cpp_caller": "invalid_readback_rollback_retry"
+      },
+      {
+        "case": "SDQ13",
+        "reference_lines": [
+          959
+        ],
+        "cpp_caller": "invalid_dynamic_preflight"
+      },
+      {
+        "case": "SDQ14",
+        "reference_lines": [
+          1003,
+          1028,
+          1030,
+          1031,
+          1032
+        ],
+        "cpp_caller": "composed_dynamic_graph_rollback"
+      },
+      {
+        "case": "SDQ15",
+        "reference_lines": [
+          1118
+        ],
+        "cpp_caller": "incomplete_projection_dynamic_save"
+      },
+      {
+        "case": "SDQ17",
+        "reference_lines": [
+          1180,
+          1220,
+          1239
+        ],
+        "cpp_caller": "dynamic_null_delete_safe_audit"
+      },
+      {
+        "case": "SDQ18",
+        "reference_lines": [
+          1294,
+          1318
+        ],
+        "cpp_caller": "dynamic_dml_failure_retry"
+      },
+      {
+        "case": "SDQ19",
+        "reference_lines": [
+          1351,
+          1371
+        ],
+        "cpp_caller": "dynamic_stale_version_isolation"
+      },
+      {
+        "case": "SDQ21",
+        "reference_lines": [
+          1452
+        ],
+        "cpp_caller": "new_dynamic_entity_provenance(true)"
+      },
+      {
+        "case": "SDQ22",
+        "reference_lines": [
+          1621
+        ],
+        "cpp_caller": "durable_dynamic_reopen"
+      },
+      {
+        "case": "SDQ23",
+        "reference_lines": [
+          1658,
+          1737
+        ],
+        "cpp_caller": "audited_roots_shared_dynamic_masks"
+      }
+    ],
+    "evidence": "docs/parity/sqlite_dynamic_returned_version_5_0_6.json.gz"
+  },
+  "original_assertion_inventory": "docs/parity/sqlite_dynamic_query_assertions_5_0_6.json",
+  "acceptance_evidence": "docs/parity/sqlite_dynamic_query_source_acceptance_5_0_6.json.gz",
+  "acceptance_checkpoint_inputs": {
+    "tests/support/dynamic_hydration_fixture.hpp": "7e86ce3233c9770effdd530d33f4068d4a2eb7e1871c2816b837fdcadac280d4",
+    "teaql_runtime/tests/dynamic_graph_save_tests.cpp": "209e90ebc39fdc0e2d509981bc6d1b782491266cdb449384d387301b75afeac1",
+    "teaql_runtime/tests/dynamic_query_tests.cpp": "eeb9d2ffe426af886444617253fe580e30c81917ff733f1fae5c7914fdd2978d",
+    ".reference/teaql-rs/teaql-provider-sqlite/tests/dynamic_field_query.rs": "c9c4f49da606d40c42062617f7eea6f91e8a6dae8ead0786092e9ede4e613d69",
+    ".reference/teaql-rs/teaql-macros/src/derive_impl.rs": "070322b967c628f7498557599b80fa7d3b18099bd97d89d7b3fbb261b76f34fd"
+  },
+  "final_review_note": "All23 source tests and exercised helpers accepted.163 assertion macro sites and120 obligation groups are different bookkeeping units, not independent execution counts. Initial failures and historical checkpoint hashes remain unchanged. Source acceptance does not promote any complete capability or P0-P7 phase."
+}

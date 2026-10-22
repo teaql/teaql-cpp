@@ -24,7 +24,10 @@ public:
           aggregates_(aggregates.begin(), aggregates.end(), a.resource()), rows_(a.resource()),
           fetch_(std::allocator_arg,
                  a,
-                 [](const EntityDataService<E>& child, SelectQuery query) -> auto& {
+                 [this](const EntityDataService<E>& child, SelectQuery query) -> auto& {
+                     if (compact_) {
+                         return EntityDataServiceAccess::fetch_compact_all(child, query);
+                     }
                      return EntityDataServiceAccess::fetch_all(child, query);
                  }) {}
 
@@ -132,11 +135,13 @@ public:
                 if (plans_) {
                     root_ = &context().template make<EntityRuntimeState>();
                     graph_ = &context().template make<EntityGraphBuilder>();
-                    if (!compact_) {
-                        auto embedded = attach_flat_relation_graph(
-                            context(), query_.entity, rows_, *root_, *graph_);
-                        if (!embedded) {
-                            return entity(std::move(embedded).error());
+                    if constexpr (requires { requires T::requires_flat_graph_hydration(); }) {
+                        if (!compact_) {
+                            auto embedded = attach_flat_relation_graph(
+                                context(), query_.entity, rows_, *root_, *graph_);
+                            if (!embedded) {
+                                return entity(std::move(embedded).error());
+                            }
                         }
                     }
                     phase_ = Phase::QueryPlans;

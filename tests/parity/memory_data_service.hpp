@@ -6,10 +6,57 @@
 #include <teaql/runtime/inmemory_engine.hpp>
 #include <teaql/runtime/relation.hpp>
 #include <teaql/core/detail/debug.hpp>
+#include <teaql/core/query_debug.hpp>
+#include <teaql/core/debug.hpp>
+#include <atomic>
 #include <cmath>
+#include <bit>
+#include <mutex>
+#include <exception>
 
 namespace original_memory {
 using namespace teaql;
+
+// Stable bottom-up merge sort. Scratch storage uses the input Context; choosing
+// the left item on equality preserves input order. Each pass moves O(n) items
+// and performs at most n comparisons, with at most ceil(log2(n)) passes.
+template <class T, class Less>
+void stable_sort_in_context(Vector<T>& values, Less less) {
+    const auto count = values.size();
+    if (count < 2) {
+        return;
+    }
+    Vector<T> scratch(values.get_allocator().resource());
+    scratch.reserve(count);
+    for (std::size_t width = 1; width < count;) {
+        scratch.clear();
+        for (std::size_t begin = 0; begin < count;) {
+            const auto middle = begin + std::min(width, count - begin);
+            const auto end = middle + std::min(width, count - middle);
+            auto left = begin;
+            auto right = middle;
+            while (left < middle && right < end) {
+                if (less(values[right], values[left])) {
+                    scratch.emplace_back(std::move(values[right++]));
+                } else {
+                    scratch.emplace_back(std::move(values[left++]));
+                }
+            }
+            while (left < middle) {
+                scratch.emplace_back(std::move(values[left++]));
+            }
+            while (right < end) {
+                scratch.emplace_back(std::move(values[right++]));
+            }
+            begin = end;
+        }
+        values.swap(scratch);
+        if (width >= count - width) {
+            break;
+        }
+        width *= 2;
+    }
+}
 
 struct MemoryDataServiceError {
     using allocator_type = Allocator;
@@ -42,12 +89,65 @@ struct MemoryDataServiceError {
     }
 };
 
+// Explicit test adaptation of a caught Rust arithmetic panic; never a runtime API.
+inline void write_debug(DebugWriter& writer, const MemoryDataServiceError& error) {
+    if (error.kind == MemoryDataServiceError::Kind::Poisoned) {
+        writer.raw("Poisoned");
+        return;
+    }
+    writer.tuple(error.kind == MemoryDataServiceError::Kind::UnsupportedExpression
+                     ? "UnsupportedExpression"
+                     : "UnsupportedAggregate",
+                 [&](auto& out) {
+                     out.text(error.message);
+                 });
+}
+
+class MemoryArithmeticPanic : public std::exception {
+public:
+    explicit MemoryArithmeticPanic(const char* message) : message_(message) {}
+
+    const char* what() const noexcept override {
+        return message_;
+    }
+
+private:
+    const char* message_;
+};
+
 class MemoryDataService {
+    friend struct MemoryDebugAccess;
+
+    class Locked {
+    public:
+        explicit Locked(const MemoryDataService& service)
+            : service_(service), lock_(service.mutex_), exceptions_(std::uncaught_exceptions()) {}
+
+        Locked(const MemoryDataService& service, std::try_to_lock_t)
+            : service_(service), lock_(service.mutex_, std::try_to_lock),
+              exceptions_(std::uncaught_exceptions()) {}
+
+        bool owns_lock() const noexcept {
+            return lock_.owns_lock();
+        }
+
+        ~Locked() {
+            if (lock_.owns_lock() && std::uncaught_exceptions() > exceptions_) {
+                service_.poisoned_ = true;
+            }
+        }
+
+    private:
+        const MemoryDataService& service_;
+        std::unique_lock<std::mutex> lock_;
+        int exceptions_;
+    };
+
 public:
     using allocator_type = Allocator;
     using Error = DataServiceError<MemoryDataServiceError>;
 
-    MemoryDataService(std::allocator_arg_t, Allocator a, const InMemoryMetadataStore& metadata)
+    MemoryDataService(std::allocator_arg_t, Allocator a, const MetadataStore& metadata)
         : metadata_(
               std::allocator_arg, a, metadata, detail::resource_arena(metadata.memory_resource())),
           data_(a.resource()) {}
@@ -58,10 +158,65 @@ public:
         return data_.get_allocator().resource();
     }
 
+    // Rust's derived Debug exists only when M: Debug. The explicit typed
+    // metadata argument preserves that condition after the C++ service erases M.
+    template <class M>
+        requires std::derived_from<M, MetadataStore> &&
+                 requires(DebugWriter& writer, const M& metadata) { write_debug(writer, metadata); }
+    void write_debug_to(DebugWriter& writer, const M& metadata) const {
+        if (&metadata_.get() != static_cast<const MetadataStore*>(&metadata)) {
+            throw std::invalid_argument("Debug metadata does not belong to this service");
+        }
+        writer.structure("MemoryDataService", [&](auto& fields) {
+            fields.field("metadata", [&](auto& out) {
+                write_debug(out, metadata);
+            });
+            fields.field("data", [&](auto& out) {
+                out.structure(
+                    "Mutex",
+                    [&](auto& mutex_fields) {
+                        {
+                            Locked guard(*this, std::try_to_lock);
+                            mutex_fields.field("data", [&](auto& data_writer) {
+                                if (!guard.owns_lock()) {
+                                    data_writer.text("<locked>");
+                                    return;
+                                }
+                                data_writer.sequence(
+                                    data_,
+                                    [](auto& map_writer, const auto& entry) {
+                                        map_writer.text(entry.first);
+                                        map_writer.raw(": ");
+                                        map_writer.sequence(entry.second,
+                                                            [](auto& row_writer, const auto& row) {
+                                                                write_debug(row_writer, row);
+                                                            });
+                                    },
+                                    "{",
+                                    "}");
+                            });
+                        }
+                        mutex_fields.field("poisoned", [&](auto& flag) {
+                            flag.boolean(poisoned_.load());
+                        });
+                    },
+                    true);
+            });
+        });
+    }
+
     MemoryDataService& with_rows(std::string_view entity, std::span<const CompactRow> rows) {
+        seed(entity, rows);
+        return *this;
+    }
+
+    void seed(std::string_view entity, std::span<const CompactRow> rows) {
+        Locked guard(*this);
+        if (poisoned_) {
+            return;
+        }
         Vector<CompactRow> copy(rows.begin(), rows.end(), memory_resource());
         data_.insert_or_assign(String(entity, memory_resource()), std::move(copy));
-        return *this;
     }
 
     Result<Vector<CompactRow>, Error> fetch_all(const SelectQuery& query) const {
@@ -73,26 +228,44 @@ public:
         }
         try {
             Vector<CompactRow> rows(owner);
-            auto stored = data_.find(query.entity);
-            if (stored != data_.end()) {
-                rows.reserve(stored->second.size());
-                for (const auto& row : stored->second) {
-                    rows.emplace_back(row);
+            {
+                Locked guard(*this);
+                if (poisoned_) {
+                    return Output::err(owner, poisoned_error());
+                }
+                auto stored = data_.find(query.entity);
+                if (stored != data_.end()) {
+                    rows.reserve(stored->second.size());
+                    for (const auto& row : stored->second) {
+                        rows.emplace_back(row);
+                    }
                 }
             }
             Vector<CompactRow> filtered(owner);
             for (const auto& row : rows) {
-                if (!query.predicate ||
-                    ExprEvaluator::eval(owner, resolve_functions(*query.predicate, row), row)) {
+                if (!query.predicate || eval_filter(*query.predicate, row)) {
                     filtered.emplace_back(row);
                 }
             }
             if (query.aggregates.empty()) {
-                auto filtered_query = detail::clone_in(owner, query);
-                filtered_query.predicate.reset();
-                return Output::ok(
-                    owner,
-                    InMemoryQueryEngine::execute(owner, filtered_query, std::move(filtered)).rows);
+                apply_ordering(filtered, query);
+                apply_slice(filtered, query);
+                if (!query.projection.empty() || !query.expr_projection.empty()) {
+                    for (auto& row : filtered) {
+                        Record output(owner);
+                        for (const auto& field : query.projection) {
+                            if (auto value = row.get(field)) {
+                                output.insert_or_assign(String(field, owner), Value(owner, *value));
+                            }
+                        }
+                        for (const auto& projection : query.expr_projection) {
+                            output.insert_or_assign(String(projection.alias, owner),
+                                                    eval_value(projection.expr, row));
+                        }
+                        row = CompactRow(std::allocator_arg, Allocator(owner), std::move(output));
+                    }
+                }
+                return Output::ok(owner, std::move(filtered));
             }
             return Output::ok(owner, aggregate_rows(query, filtered));
         } catch (const MemoryDataServiceError& error) {
@@ -106,24 +279,26 @@ public:
         }
     }
 
+    Result<SmartList<CompactRow>, Error> fetch_smart_list(const SelectQuery& query) const {
+        return map_smart_list(fetch_all(query));
+    }
+
     template <Entity T>
     Result<SmartList<T>, Error> fetch_entities(const SelectQuery& query) const {
-        auto owner = memory_resource();
-        using Output = Result<SmartList<T>, Error>;
-        auto rows = fetch_all(query);
-        if (!rows) {
-            return Output::err(owner, std::move(rows).error());
-        }
-        SmartList<T> result(std::allocator_arg, Allocator(owner));
-        for (auto& row : rows.value()) {
-            auto entity = T::from_compact_row(owner, std::move(row));
-            if (!entity) {
-                return Output::err(owner, Error::entity(owner, std::move(entity).error()));
-            }
-            result.push(std::move(entity).value());
-        }
-        result.loaded();
-        return Output::ok(owner, std::move(result));
+        return map_entities<T>(fetch_all(query));
+    }
+
+    Result<SmartList<CompactRow>, Error>
+    fetch_smart_list_with_relation_aggregates(const SelectQuery& query,
+                                              std::span<const RelationAggregate> aggregates) const {
+        return map_smart_list(fetch_all_with_relation_aggregates(query, aggregates));
+    }
+
+    template <Entity T>
+    Result<SmartList<T>, Error>
+    fetch_entities_with_relation_aggregates(const SelectQuery& query,
+                                            std::span<const RelationAggregate> aggregates) const {
+        return map_entities<T>(fetch_all_with_relation_aggregates(query, aggregates));
     }
 
     Result<Vector<CompactRow>, Error>
@@ -135,17 +310,48 @@ public:
         if (!parents) {
             return parents;
         }
-        const auto* descriptor = metadata_.get().entity(query.entity);
+        auto enhanced = enhance_relation_aggregates(query.entity, parents.value(), aggregates);
+        if (!enhanced) {
+            return Output::err(owner, std::move(enhanced).error());
+        }
+        return parents;
+    }
+
+    Result<std::monostate, Error>
+    enhance_relation_aggregates(std::string_view parent_entity,
+                                std::span<CompactRow> parents,
+                                std::span<const RelationAggregate> aggregates) const {
+        auto owner = memory_resource();
+        using Output = Result<std::monostate, Error>;
         for (const auto& aggregate : aggregates) {
+            const auto* descriptor = metadata_.get().entity(parent_entity);
+            if (!descriptor) {
+                return Output::err(
+                    owner,
+                    Error::runtime(owner, RuntimeError::missing_entity(owner, parent_entity)));
+            }
             auto* relation = descriptor->relation_by_name(aggregate.relation_name);
             if (!relation) {
                 return Output::err(
                     owner,
                     Error::runtime(owner,
                                    RuntimeError::missing_relation(
-                                       owner, query.entity, aggregate.relation_name)));
+                                       owner, parent_entity, aggregate.relation_name)));
             }
-            auto ids = detail::unique_relation_values(owner, parents.value(), relation->local_key);
+            Vector<Value> ids(owner);
+            for (const auto& parent : parents) {
+                if (auto value = parent.get(relation->local_key)) {
+                    ids.emplace_back(*value);
+                }
+            }
+            if (ids.empty()) {
+                for (auto& parent : parents) {
+                    parent.insert(aggregate.alias,
+                                  aggregate.single_result ? Value(owner, std::uint64_t(0))
+                                                          : Value(owner, Value::List(owner)));
+                }
+                continue;
+            }
             auto child = detail::clone_in(owner, aggregate.query);
             child.entity = relation->target_entity;
             child.projection.clear();
@@ -165,25 +371,29 @@ public:
             if (!rows) {
                 return Output::err(owner, std::move(rows).error());
             }
-            for (auto& parent : parents.value()) {
+            std::pmr::map<String, Vector<CompactRow>, std::less<>> buckets(owner);
+            for (auto& row : rows.value()) {
+                if (const auto* foreign = row.get(relation->foreign_key)) {
+                    auto key = detail::graph_identity_key(owner, *foreign);
+                    row.remove(relation->foreign_key);
+                    buckets.try_emplace(std::move(key)).first->second.emplace_back(std::move(row));
+                }
+            }
+            for (auto& parent : parents) {
                 Value result(owner, std::uint64_t(0));
                 Value::List list(owner);
-                for (const auto& row : rows.value()) {
-                    const auto* foreign = row.get(relation->foreign_key);
-                    const auto* local = parent.get(relation->local_key);
-                    if (!foreign || !local ||
-                        detail::graph_identity_key(owner, *foreign) !=
-                            detail::graph_identity_key(owner, *local)) {
-                        continue;
+                if (const auto* local = parent.get(relation->local_key)) {
+                    auto bucket = buckets.find(detail::graph_identity_key(owner, *local));
+                    if (bucket != buckets.end()) {
+                        for (const auto& row : bucket->second) {
+                            if (aggregate.single_result) {
+                                result = row.len() == 1 ? Value(owner, *row.values().begin())
+                                                        : Value(owner, row.into_map(owner));
+                                break;
+                            }
+                            list.emplace_back(row.into_map(owner));
+                        }
                     }
-                    auto copy = detail::clone_in(owner, row);
-                    copy.remove(relation->foreign_key);
-                    if (aggregate.single_result) {
-                        result = copy.len() == 1 ? Value(owner, *copy.values().begin())
-                                                 : Value(owner, copy.into_map(owner));
-                        break;
-                    }
-                    list.emplace_back(copy.into_map(owner));
                 }
                 if (!aggregate.single_result) {
                     result = Value(owner, std::move(list));
@@ -191,13 +401,17 @@ public:
                 parent.insert(aggregate.alias, result);
             }
         }
-        return parents;
+        return Output::ok(owner, std::monostate{});
     }
 
     Result<std::uint64_t, Error> insert(const InsertCommand& command) {
         auto owner = memory_resource();
         if (!metadata_.get().entity(command.entity)) {
             return failure(command.entity);
+        }
+        Locked guard(*this);
+        if (poisoned_) {
+            return Result<std::uint64_t, Error>::err(owner, poisoned_error());
         }
         data_.try_emplace(String(command.entity, owner))
             .first->second.emplace_back(command.values.fields);
@@ -210,6 +424,10 @@ public:
         if (!descriptor) {
             return failure(command.entity);
         }
+        Locked guard(*this);
+        if (poisoned_) {
+            return Result<std::uint64_t, Error>::err(owner, poisoned_error());
+        }
         auto* row = find(command.entity, *descriptor, command.id);
         if (!row) {
             return command.expected_version_value ? conflict(command.entity, command.id)
@@ -221,7 +439,7 @@ public:
             if (!actual || *actual != Value(owner, *command.expected_version_value)) {
                 return conflict(command.entity, command.id);
             }
-            row->insert(version, Value(owner, *command.expected_version_value + 1));
+            row->insert(version, Value(owner, increment_version(*command.expected_version_value)));
         }
         for (const auto& [name, value] : command.values.fields) {
             row->insert(name, value);
@@ -234,6 +452,10 @@ public:
         auto* descriptor = metadata_.get().entity(command.entity);
         if (!descriptor) {
             return failure(command.entity);
+        }
+        Locked guard(*this);
+        if (poisoned_) {
+            return Result<std::uint64_t, Error>::err(owner, poisoned_error());
         }
         auto* row = find(command.entity, *descriptor, command.id);
         if (!row) {
@@ -251,7 +473,7 @@ public:
             if (!old && actual && std::holds_alternative<std::int64_t>(actual->data)) {
                 old = std::get<std::int64_t>(actual->data);
             }
-            row->insert(version, Value(owner, old ? -(std::abs(*old) + 1) : -1));
+            row->insert(version, Value(owner, old ? -positive_next_version(*old) : -1));
         } else {
             auto& rows = data_.find(command.entity)->second;
             rows.erase(rows.begin() + (row - rows.data()));
@@ -265,31 +487,283 @@ public:
         if (!descriptor) {
             return failure(command.entity);
         }
+        Locked guard(*this);
+        if (poisoned_) {
+            return Result<std::uint64_t, Error>::err(owner, poisoned_error());
+        }
         auto* row = find(command.entity, *descriptor, command.id);
         auto version = version_name(*descriptor);
         auto* actual = row ? row->get(version) : nullptr;
         if (!actual || *actual != Value(owner, command.expected_version)) {
             return conflict(command.entity, command.id);
         }
-        row->insert(version, Value(owner, std::abs(command.expected_version) + 1));
+        row->insert(version, Value(owner, positive_next_version(command.expected_version)));
         return Result<std::uint64_t, Error>::ok(owner, 1);
     }
 
 private:
-    // The pinned cfg(test) helper supports Soundex; the published engine does not.
-    Expr resolve_functions(const Expr& expression, const CompactRow& row) const {
+    Result<SmartList<CompactRow>, Error>
+    map_smart_list(Result<Vector<CompactRow>, Error> rows) const {
         auto owner = memory_resource();
-        auto result = expression.clone(owner);
-        for (auto& argument : result.args) {
-            argument = resolve_functions(argument, row);
+        using Output = Result<SmartList<CompactRow>, Error>;
+        if (!rows) {
+            return Output::err(owner, std::move(rows).error());
         }
-        if (result.kind != Expr::Kind::Function || result.function_kind != ExprFunction::Soundex) {
-            return result;
+        return Output::ok(
+            owner,
+            SmartList<CompactRow>(std::allocator_arg, Allocator(owner), std::move(rows).value()));
+    }
+
+    template <Entity T>
+    Result<SmartList<T>, Error> map_entities(Result<Vector<CompactRow>, Error> rows) const {
+        auto owner = memory_resource();
+        using Output = Result<SmartList<T>, Error>;
+        if (!rows) {
+            return Output::err(owner, std::move(rows).error());
         }
-        auto value = ExprEvaluator::resolve(owner, result.args.at(0), row);
+        SmartList<T> result(std::allocator_arg, Allocator(owner));
+        for (auto& row : rows.value()) {
+            auto entity = T::from_compact_row(owner, std::move(row));
+            if (!entity) {
+                return Output::err(owner, Error::entity(owner, std::move(entity).error()));
+            }
+            result.push(std::move(entity).value());
+        }
+        result.loaded();
+        return Output::ok(owner, std::move(result));
+    }
+
+    static std::int64_t increment_version(std::int64_t version) {
+        if (version == INT64_MAX) {
+            throw MemoryArithmeticPanic("attempt to add with overflow");
+        }
+        return version + 1;
+    }
+
+    static std::int64_t positive_next_version(std::int64_t version) {
+        if (version == INT64_MIN) {
+            throw MemoryArithmeticPanic("attempt to negate with overflow");
+        }
+        return increment_version(version < 0 ? -version : version);
+    }
+
+    Error poisoned_error() const {
+        auto owner = memory_resource();
+        MemoryDataServiceError error(
+            std::allocator_arg, Allocator(owner), MemoryDataServiceError::Kind::Poisoned, "");
+        return Error::executor(owner, std::move(error));
+    }
+
+    // This evaluator follows private memory.rs, not the public in-memory engine.
+    [[noreturn]] void unsupported(std::string_view message) const {
+        throw MemoryDataServiceError(std::allocator_arg,
+                                     Allocator(memory_resource()),
+                                     MemoryDataServiceError::Kind::UnsupportedExpression,
+                                     message);
+    }
+
+    static bool equal_values(const Value& left, const Value& right) {
+        auto l = std::get_if<std::int64_t>(&left.data);
+        auto r = std::get_if<std::uint64_t>(&right.data);
+        if (l && r && *l >= 0) {
+            return static_cast<std::uint64_t>(*l) == *r;
+        }
+        auto lu = std::get_if<std::uint64_t>(&left.data);
+        auto ri = std::get_if<std::int64_t>(&right.data);
+        if (lu && ri && *ri >= 0) {
+            return *lu == static_cast<std::uint64_t>(*ri);
+        }
+        return left == right;
+    }
+
+    static std::optional<int> compare_values(const Value& left, const Value& right) {
+        auto order = [](const auto& a, const auto& b) -> std::optional<int> {
+            if (a < b) {
+                return -1;
+            }
+            if (a > b) {
+                return 1;
+            }
+            if (a == b) {
+                return 0;
+            }
+            return std::nullopt;
+        };
+        if (auto l = std::get_if<std::int64_t>(&left.data)) {
+            if (auto r = std::get_if<std::uint64_t>(&right.data); r && *l >= 0) {
+                return order(static_cast<std::uint64_t>(*l), *r);
+            }
+        }
+        if (auto l = std::get_if<std::uint64_t>(&left.data)) {
+            if (auto r = std::get_if<std::int64_t>(&right.data); r && *r >= 0) {
+                return order(*l, static_cast<std::uint64_t>(*r));
+            }
+        }
+        return std::visit(
+            [&](const auto& l) -> std::optional<int> {
+                using T = std::decay_t<decltype(l)>;
+                if constexpr (std::same_as<T, std::int64_t> || std::same_as<T, std::uint64_t> ||
+                              std::same_as<T, double> || std::same_as<T, Decimal> ||
+                              std::same_as<T, String> || std::same_as<T, Date> ||
+                              std::same_as<T, Timestamp>) {
+                    if (auto r = std::get_if<T>(&right.data)) {
+                        if constexpr (std::same_as<T, Date>) {
+                            return order(l.epoch_days(), r->epoch_days());
+                        } else {
+                            return order(l, *r);
+                        }
+                    }
+                }
+                return std::nullopt;
+            },
+            left.data);
+    }
+
+    static bool like_matches(std::string_view value, std::string_view pattern) {
+        if (pattern == "%") {
+            return true;
+        }
+        if (pattern.starts_with('%') && pattern.ends_with('%') && pattern.size() >= 2) {
+            return value.find(pattern.substr(1, pattern.size() - 2)) != std::string_view::npos;
+        }
+        if (pattern.starts_with('%')) {
+            return value.ends_with(pattern.substr(1));
+        }
+        if (pattern.ends_with('%')) {
+            return value.starts_with(pattern.substr(0, pattern.size() - 1));
+        }
+        return value == pattern;
+    }
+
+    bool eval_binary(const Value& left, BinaryOp op, const Value& right) const {
+        switch (op) {
+        case BinaryOp::Eq:
+            return equal_values(left, right);
+        case BinaryOp::Ne:
+            return !equal_values(left, right);
+        case BinaryOp::Gt:
+            return compare_values(left, right) == 1;
+        case BinaryOp::Gte: {
+            auto c = compare_values(left, right);
+            return c == 1 || c == 0;
+        }
+        case BinaryOp::Lt:
+            return compare_values(left, right) == -1;
+        case BinaryOp::Lte: {
+            auto c = compare_values(left, right);
+            return c == -1 || c == 0;
+        }
+        case BinaryOp::Like:
+        case BinaryOp::NotLike: {
+            auto l = left.try_text();
+            auto r = right.try_text();
+            bool match = l && r && like_matches(*l, *r);
+            return op == BinaryOp::Like ? match : !match;
+        }
+        case BinaryOp::In:
+        case BinaryOp::InLarge:
+        case BinaryOp::NotIn:
+        case BinaryOp::NotInLarge: {
+            bool negate = op == BinaryOp::NotIn || op == BinaryOp::NotInLarge;
+            auto values = right.as_list();
+            if (!values) {
+                unsupported(negate ? "NOT IN expects a list value" : "IN expects a list value");
+            }
+            bool match = std::ranges::any_of(*values, [&](const Value& v) {
+                return equal_values(left, v);
+            });
+            return negate ? !match : match;
+        }
+        }
+        unsupported("unknown binary operation");
+    }
+
+    bool eval_filter(const Expr& expr, const CompactRow& row) const {
+        auto owner = memory_resource();
+        switch (expr.kind) {
+        case Expr::Kind::Column:
+        case Expr::Kind::Value:
+        case Expr::Kind::LikePattern:
+        case Expr::Kind::Function: {
+            auto value = eval_value(expr, row);
+            if (auto boolean = value.try_bool()) {
+                return *boolean;
+            }
+            if (std::holds_alternative<std::monostate>(value.data)) {
+                return false;
+            }
+            unsupported(String("non-boolean expression result: ", owner) +
+                        detail::debug_value(owner, value));
+        }
+        case Expr::Kind::Binary: {
+            auto left = eval_value(expr.args.at(0), row);
+            auto right = eval_value(expr.args.at(1), row);
+            return eval_binary(left, expr.op, right);
+        }
+        case Expr::Kind::SubQuery:
+            unsupported("subquery filters require a SQL executor");
+        case Expr::Kind::Between: {
+            auto value = eval_value(expr.args.at(0), row);
+            auto lower = eval_value(expr.args.at(1), row);
+            auto upper = eval_value(expr.args.at(2), row);
+            return compare_values(value, lower) != -1 && compare_values(value, upper) != 1;
+        }
+        case Expr::Kind::IsNull:
+        case Expr::Kind::IsNotNull: {
+            auto value = eval_value(expr.args.at(0), row);
+            bool null = std::holds_alternative<std::monostate>(value.data);
+            return expr.kind == Expr::Kind::IsNull ? null : !null;
+        }
+        case Expr::Kind::And:
+            return std::ranges::all_of(expr.args, [&](const Expr& p) {
+                return eval_filter(p, row);
+            });
+        case Expr::Kind::Or:
+            return std::ranges::any_of(expr.args, [&](const Expr& p) {
+                return eval_filter(p, row);
+            });
+        case Expr::Kind::Not:
+            return !eval_filter(expr.args.at(0), row);
+        }
+        unsupported("unknown filter expression");
+    }
+
+    Value eval_value(const Expr& expr, const CompactRow& row) const {
+        auto owner = memory_resource();
+        switch (expr.kind) {
+        case Expr::Kind::Column: {
+            auto value = row.get(expr.name);
+            return value ? Value(owner, *value) : Value(owner);
+        }
+        case Expr::Kind::Value:
+        case Expr::Kind::LikePattern:
+            return Value(owner, expr.literal);
+        case Expr::Kind::Function:
+            break;
+        default:
+            unsupported(String("cannot evaluate ", owner) + debug_string(owner, expr) +
+                        " as a scalar value");
+        }
+        auto function = expr.function_kind;
+        if (function != ExprFunction::Soundex && function != ExprFunction::Gbk) {
+            unsupported(String("function ", owner) + debug_string(owner, function) +
+                        " is only supported by SQL execution");
+        }
+        if (expr.args.size() != 1) {
+            unsupported(function == ExprFunction::Soundex ? "SOUNDEX expects exactly one argument"
+                                                          : "GBK expects exactly one argument");
+        }
+        auto value = eval_value(expr.args.front(), row);
+        if (function == ExprFunction::Gbk) {
+            return value;
+        }
+        if (std::holds_alternative<std::monostate>(value.data)) {
+            return Value(owner);
+        }
         auto text = value.try_text();
         if (!text) {
-            return Expr::value(owner, Value(owner));
+            unsupported(String("SOUNDEX expects text, got ", owner) +
+                        detail::debug_value(owner, value));
         }
         auto code = [](char ch) {
             switch (ch) {
@@ -342,10 +816,52 @@ private:
             previous = current;
         }
         output.resize(4, '0');
-        return Expr::value(owner, std::move(output));
+        return Value(owner, std::move(output));
     }
 
-    ResourceBorrow<const InMemoryMetadataStore> metadata_;
+    void apply_ordering(Vector<CompactRow>& rows, const SelectQuery& query) const {
+        for (auto order = query.order_by.rbegin(); order != query.order_by.rend(); ++order) {
+            auto resolve = [&](const CompactRow& row) -> std::optional<Value> {
+                if (order->expr) {
+                    try {
+                        return eval_value(*order->expr, row);
+                    } catch (const MemoryDataServiceError&) {
+                        return std::nullopt;
+                    }
+                }
+                if (auto value = row.get(order->field)) {
+                    return Value(memory_resource(), *value);
+                }
+                return std::nullopt;
+            };
+            auto less = [&](const CompactRow& left, const CompactRow& right) {
+                auto l = resolve(left);
+                auto r = resolve(right);
+                int comparison = l && r ? compare_values(*l, *r).value_or(0) : l ? 1 : r ? -1 : 0;
+                return order->direction == SortDirection::Asc ? comparison < 0 : comparison > 0;
+            };
+            stable_sort_in_context(rows, less);
+        }
+    }
+
+    static void apply_slice(Vector<CompactRow>& rows, const SelectQuery& query) {
+        if (!query.slice) {
+            return;
+        }
+        const auto& slice = *query.slice;
+        if (slice.offset >= rows.size()) {
+            rows.clear();
+            return;
+        }
+        rows.erase(rows.begin(), rows.begin() + static_cast<std::size_t>(slice.offset));
+        if (slice.limit && *slice.limit < rows.size()) {
+            rows.erase(rows.begin() + static_cast<std::size_t>(*slice.limit), rows.end());
+        }
+    }
+
+    mutable std::mutex mutex_;
+    mutable std::atomic_bool poisoned_ = false;
+    ResourceBorrow<const MetadataStore> metadata_;
     std::pmr::map<String, Vector<CompactRow>, std::less<>> data_;
 
     Result<std::uint64_t, Error> failure(std::string_view entity) const {
@@ -427,8 +943,14 @@ private:
         if (aggregate.function == AggregateFunction::Sum ||
             aggregate.function == AggregateFunction::Avg) {
             Decimal sum = Decimal::ZERO;
+            std::uint64_t integer_bits = 0;
             bool saw_decimal = false;
             for (auto* value : input) {
+                if (auto integer = std::get_if<std::int64_t>(&value->data)) {
+                    integer_bits += static_cast<std::uint64_t>(*integer);
+                } else if (auto integer = std::get_if<std::uint64_t>(&value->data)) {
+                    integer_bits += *integer;
+                }
                 sum += number(*value, aggregate.function == AggregateFunction::Sum ? "SUM" : "AVG");
                 saw_decimal |= std::holds_alternative<double>(value->data) ||
                                std::holds_alternative<Decimal>(value->data);
@@ -441,9 +963,11 @@ private:
                 return Value(owner, sum);
             }
             if (sum >= Decimal::ZERO) {
-                return Value(owner, sum.to_u64().value());
+                return Value(owner, integer_bits);
             }
-            return Value(owner, sum.to_i64().value());
+            // Rust narrows the signed i128 sum with `as i64`; preserve its bits
+            // without signed overflow or an implementation-defined conversion.
+            return Value(owner, std::bit_cast<std::int64_t>(integer_bits));
         }
         if (aggregate.function == AggregateFunction::Min ||
             aggregate.function == AggregateFunction::Max) {
@@ -451,10 +975,13 @@ private:
                 return Value(owner);
             }
             auto* selected = input[0];
-            for (auto* value : input) {
-                auto left = number(*value, "MIN/MAX");
-                auto right = number(*selected, "MIN/MAX");
-                if (aggregate.function == AggregateFunction::Max ? left > right : left < right) {
+            for (std::size_t i = 1; i < input.size(); ++i) {
+                auto* value = input[i];
+                auto ordering = compare_values(*value, *selected);
+                if (!ordering) {
+                    unsupported("MIN/MAX", *value);
+                }
+                if (aggregate.function == AggregateFunction::Max ? *ordering > 0 : *ordering < 0) {
                     selected = value;
                 }
             }
@@ -471,7 +998,13 @@ private:
                 }
                 auto converted = value->try_i64();
                 if (!converted) {
-                    unsupported("BIT aggregate", *value);
+                    auto message = String("BIT aggregate u64 ", owner) +
+                                   debug_string(owner, std::get<std::uint64_t>(value->data)) +
+                                   " exceeds i64 range";
+                    throw MemoryDataServiceError(std::allocator_arg,
+                                                 Allocator(owner),
+                                                 MemoryDataServiceError::Kind::UnsupportedAggregate,
+                                                 message);
                 }
                 selected =
                     !selected                                         ? *converted
@@ -483,9 +1016,6 @@ private:
         }
         const bool sample = aggregate.function == AggregateFunction::Stddev ||
                             aggregate.function == AggregateFunction::VarSamp;
-        if (input.empty() || (sample && input.size() < 2)) {
-            return Value(owner);
-        }
         double sum = 0;
         Vector<double> numbers(owner);
         for (auto* value : input) {
@@ -495,6 +1025,9 @@ private:
             }
             numbers.push_back(*converted);
             sum += *converted;
+        }
+        if (numbers.empty() || (sample && numbers.size() < 2)) {
+            return Value(owner);
         }
         const auto mean = sum / numbers.size();
         double variance = 0;
@@ -511,6 +1044,22 @@ private:
         return Value(owner, result);
     }
 
+    String grouping_key(const Value& value) const {
+        auto owner = memory_resource();
+        if (auto integer = std::get_if<std::int64_t>(&value.data)) {
+            return String("i:", owner) + debug_string(owner, *integer);
+        }
+        if (std::holds_alternative<Value::Object>(value.data)) {
+            return String("object", owner);
+        }
+        if (std::holds_alternative<Value::List>(value.data)) {
+            return String("list", owner);
+        }
+        // All remaining variants have the same spelling as the source's
+        // graph identity key; grouping deliberately keeps signed IDs distinct.
+        return detail::graph_identity_key(owner, value);
+    }
+
     Vector<CompactRow> aggregate_rows(const SelectQuery& query,
                                       const Vector<CompactRow>& rows) const {
         auto owner = memory_resource();
@@ -522,7 +1071,7 @@ private:
             Vector<String> key(owner);
             for (const auto& name : query.group_by_fields) {
                 auto* value = row.get(name);
-                key.emplace_back(value ? detail::debug_value(owner, *value) : String(owner));
+                key.emplace_back(value ? grouping_key(*value) : String(owner));
             }
             groups.try_emplace(std::move(key)).first->second.push_back(&row);
         }
@@ -542,12 +1091,18 @@ private:
             }
             CompactRow row(std::allocator_arg, Allocator(owner), output);
             for (const auto& expression : query.expr_projection) {
-                row.insert(expression.alias, ExprEvaluator::resolve(owner, expression.expr, row));
+                row.insert(expression.alias, eval_value(expression.expr, row));
             }
-            if (!query.having_predicate ||
-                ExprEvaluator::eval(owner, *query.having_predicate, row)) {
-                result.emplace_back(std::move(row));
+            result.emplace_back(std::move(row));
+        }
+        if (query.having_predicate) {
+            Vector<CompactRow> filtered(owner);
+            for (auto& row : result) {
+                if (eval_filter(*query.having_predicate, row)) {
+                    filtered.emplace_back(std::move(row));
+                }
             }
+            return filtered;
         }
         return result;
     }

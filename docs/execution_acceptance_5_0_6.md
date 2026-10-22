@@ -1,5 +1,7 @@
 # G09 execution and pagination acceptance review
 
+Current status: **qualified** after [resolved-service requalification](resolved_g09_requalification_5_0_6.md). The original EX01-EX14 contract below remains unchanged. Earlier gate counts retain their original checkpoint scope; the current requalification records the new regression, compiler and producer gates.
+
 G09 is qualified for the complete locked execution responsibilities EX01-EX14,
 with the explicit ownership, startup-timing and source-failure dispositions below.
 Every requirement has complete source/body review and executed evidence. References remain

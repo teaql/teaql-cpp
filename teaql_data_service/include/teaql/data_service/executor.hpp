@@ -90,6 +90,35 @@ public:
     }
 };
 
+// Stack-scoped authorization for synchronous services called by transaction work.
+// This is a borrow: never retain it across a poll return or Context close.
+class [[nodiscard]] TransactionResourceScope final {
+public:
+    TransactionResourceScope() noexcept = default;
+
+    TransactionResourceScope(void* state, void (*release)(void*) noexcept) noexcept
+        : state_(state), release_(release) {}
+
+    TransactionResourceScope(const TransactionResourceScope&) = delete;
+    TransactionResourceScope& operator=(const TransactionResourceScope&) = delete;
+
+    TransactionResourceScope(TransactionResourceScope&& other) noexcept
+        : state_(std::exchange(other.state_, nullptr)),
+          release_(std::exchange(other.release_, nullptr)) {}
+
+    TransactionResourceScope& operator=(TransactionResourceScope&&) = delete;
+
+    ~TransactionResourceScope() {
+        if (release_) {
+            release_(state_);
+        }
+    }
+
+private:
+    void* state_ = nullptr;
+    void (*release_)(void*) noexcept = nullptr;
+};
+
 template <class E>
 class Transaction {
 public:
@@ -111,6 +140,12 @@ public:
         require_domain(r);
         consume();
         return pending_.track(rollback_transaction(r));
+    }
+
+    TransactionResourceScope bind_transaction_resources(Memory r) {
+        require_domain(r);
+        require_active();
+        return do_bind_transaction_resources(r);
     }
 
     bool consumed() const noexcept {
@@ -156,6 +191,10 @@ protected:
         if (r != resource_) {
             throw std::invalid_argument("Transaction work must remain in its owning Context");
         }
+    }
+
+    virtual TransactionResourceScope do_bind_transaction_resources(Memory) {
+        return {};
     }
 
     virtual DataServiceOperationResult<std::monostate, E>& commit_transaction(Memory) = 0;

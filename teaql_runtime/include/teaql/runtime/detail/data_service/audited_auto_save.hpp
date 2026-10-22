@@ -14,31 +14,61 @@ public:
                          Allocator a,
                          const UserContext& context,
                          Audited<T> audited)
-        : context_(context), audited_(std::allocator_arg, a, std::move(audited)) {
+        : context_(context), audited_(std::in_place, std::allocator_arg, a, std::move(audited)) {
         if constexpr (Ledger) {
             static_assert(LedgerEntity<T>);
         }
     }
 
+    // The generic entry has already applied audit and resolved its carrier.
+    // Resume the same body under the existing Graph Fix operation wrapper.
+    AuditedAutomaticSave(std::allocator_arg_t,
+                         Allocator,
+                         const UserContext& context,
+                         T entity,
+                         std::optional<EntityRuntimeState> root)
+        : context_(context), prepared_entity_(std::move(entity)), root_(std::move(root)),
+          use_ledger_(true) {}
+
     std::optional<R> poll(WakeSignal& wake) {
+        if (scoped_) {
+            return poll_scoped(wake);
+        }
         auto r = context_.memory_resource();
         if (!save_) {
-            // Preserve the source's descriptor sampling before applying audit.
-            (void)T::entity_descriptor(r);
-            auto entity = std::move(audited_).into_entity();
-            use_ledger_ =
-                Ledger || entity.has_pending_dynamic_mutations() || entity.dynamic_field_values();
+            auto entity = [&]() -> T {
+                if (prepared_entity_) {
+                    return std::move(*prepared_entity_);
+                }
+                // Only the generic source entry samples metadata before applying audit.
+                if constexpr (!Ledger) {
+                    (void)T::entity_descriptor(r);
+                }
+                return std::move(*audited_).into_entity();
+            }();
+            if (!prepared_entity_) {
+                use_ledger_ = Ledger || entity.has_pending_dynamic_mutations() ||
+                              entity.dynamic_field_values();
+                if (use_ledger_) {
+                    if constexpr (Ledger) {
+                        root_ = entity.entity_runtime_state();
+                    } else {
+                        root_ = borrow_entity_runtime_state(entity);
+                    }
+                    if (!root_ && !Ledger) {
+                        return fail(RuntimeError::graph(
+                            r, "dynamic save requires the runtime mutation ledger carrier"));
+                    }
+                    if constexpr (!Ledger) {
+                        auto& child = make_operation<R, AuditedAutomaticSave>(
+                            r, context_, std::move(entity), std::move(root_));
+                        scoped_ = &with_graph_fix_scope(context_, child);
+                        return poll_scoped(wake);
+                    }
+                }
+            }
+            prepared_entity_.reset();
             if (use_ledger_) {
-                if constexpr (Ledger) {
-                    root_ = entity.entity_runtime_state();
-                } else {
-                    root_ = borrow_entity_runtime_state(entity);
-                }
-                if (!root_ && (!Ledger || entity.has_pending_dynamic_mutations() ||
-                               entity.dynamic_field_values())) {
-                    return fail(RuntimeError::graph(
-                        r, "dynamic save requires the runtime mutation ledger carrier"));
-                }
                 if (root_) {
                     if (auto error = EntityRuntimeAccess::first_composition_error(*root_)) {
                         String message("generated entity graph attachment failed before save: ", r);
@@ -164,10 +194,12 @@ public:
         if (!entity) {
             return fail(RuntimeError::graph(r, entity.error().to_string(r)));
         }
-        auto installed =
-            install_saved_dynamic_fields(r, entity.value(), result->value().dynamic_fields.get());
-        if (!installed) {
-            return fail(std::move(installed).error());
+        if (use_ledger_) {
+            auto installed = install_saved_dynamic_fields(
+                r, entity.value(), result->value().dynamic_fields.get());
+            if (!installed) {
+                return fail(std::move(installed).error());
+            }
         }
         return R::ok(r, std::move(entity).value());
     }
@@ -175,10 +207,15 @@ public:
     void finish_and_wait() noexcept {
         forwarding_.reset();
         save_ = nullptr;
+        scoped_ = nullptr;
     }
 
     void cancel_and_wait() noexcept {
         forwarding_.reset();
+        if (scoped_) {
+            scoped_->cancel();
+            scoped_ = nullptr;
+        }
         if (save_) {
             save_->cancel();
             save_ = nullptr;
@@ -186,13 +223,24 @@ public:
     }
 
 private:
+    std::optional<R> poll_scoped(WakeSignal& wake) {
+        forwarding_.attach(scoped_->wake_signal(), wake);
+        const auto* result = scoped_->poll();
+        if (!result) {
+            return {};
+        }
+        return copy_or_take_completed(*scoped_, *result);
+    }
+
     R fail(RuntimeError error) {
         return R::err(context_.memory_resource(), std::move(error));
     }
 
     const UserContext& context_;
-    Audited<T> audited_;
+    std::optional<Audited<T>> audited_;
+    std::optional<T> prepared_entity_;
     std::optional<EntityRuntimeState> root_;
+    AsyncOperation<R>* scoped_ = nullptr;
     bool use_ledger_ = Ledger;
     std::optional<ResourceBorrow<const DynGraphSaver>> saver_;
     AsyncOperation<GraphSaveResult>* save_ = nullptr;

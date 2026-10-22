@@ -1187,6 +1187,11 @@ if(BUILD_TESTING)
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_recursive_graph_write_5_0_6.py
         --cpp $<TARGET_FILE:teaql_graph_execution_probe>
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    add_executable(teaql_graph_outcome_models_probe tests/parity/graph_outcome_models_probe.cpp)
+    target_link_libraries(teaql_graph_outcome_models_probe PRIVATE teaql::runtime)
+    add_test(NAME graph_outcome_models_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_graph_outcome_models_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_graph_outcome_models_probe>)
     add_executable(teaql_graph_node_command_tests teaql_runtime/tests/graph_node_command_tests.cpp)
     target_link_libraries(teaql_graph_node_command_tests PRIVATE teaql::runtime)
     add_test(NAME graph_node_command_context_contracts COMMAND teaql_graph_node_command_tests)
@@ -1202,6 +1207,15 @@ if(BUILD_TESTING)
         --cpp $<TARGET_FILE:teaql_graph_execution_probe>
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     target_link_libraries(teaql_graph_execution_probe PRIVATE teaql::runtime)
+    add_test(NAME legacy_graph_intent_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_legacy_graph_intent_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_graph_execution_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    add_test(NAME legacy_graph_intent_extended_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_legacy_graph_intent_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_graph_execution_probe>
+        --original ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/legacy_graph_intent_extended_original_5_0_6.json.gz
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     add_executable(teaql_ledger_plan_tests teaql_runtime/tests/ledger_plan_tests.cpp)
     target_link_libraries(teaql_ledger_plan_tests PRIVATE teaql::runtime)
     add_test(NAME ledger_plan_context_contracts COMMAND teaql_ledger_plan_tests)
@@ -1240,6 +1254,13 @@ if(BUILD_TESTING)
         --cpp $<TARGET_FILE:teaql_entity_graph_plan_probe>
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     target_link_libraries(teaql_entity_graph_plan_probe PRIVATE teaql::runtime)
+    foreach(planner_scope IN ITEMS graph_planner_scopes graph_planner_upsert_scopes graph_planner_complete_rows)
+        add_test(NAME ${planner_scope}_rust_parity COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_graph_planner_scopes_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_entity_graph_plan_probe>
+            --original ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/${planner_scope}_original_5_0_6.json.gz
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endforeach()
     if(Python3_Interpreter_FOUND)
         add_test(NAME entity_graph_plan_rust_parity COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_entity_graph_plan_5_0_6.py --cpp $<TARGET_FILE:teaql_entity_graph_plan_probe>
@@ -1456,6 +1477,108 @@ if(BUILD_TESTING)
     add_executable(teaql_original_runtime_pagination_tests tests/parity/teaql_runtime/pagination.cpp)
     target_link_libraries(teaql_original_runtime_pagination_tests PRIVATE teaql::runtime teaql::provider_sqlite)
     add_test(NAME original_runtime_pagination_contracts COMMAND teaql_original_runtime_pagination_tests)
+    add_executable(teaql_memory_metadata_tests tests/parity/memory_metadata_tests.cpp)
+    target_link_libraries(teaql_memory_metadata_tests PRIVATE teaql::runtime)
+    add_test(NAME private_memory_metadata_contract COMMAND teaql_memory_metadata_tests)
+    add_executable(teaql_memory_debug_failure_probe tests/parity/memory_debug_failure_probe.cpp)
+    target_link_libraries(teaql_memory_debug_failure_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_debug_failure_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_debug_failure_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_debug_failure_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_executable(teaql_memory_debug_probe tests/parity/memory_debug_probe.cpp)
+    target_link_libraries(teaql_memory_debug_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_debug_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_debug_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_debug_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_test(NAME private_memory_debug_binding COMMAND teaql_memory_debug_probe --binding-test)
+    add_executable(teaql_memory_decimal_failure_probe tests/parity/memory_decimal_failure_probe.cpp)
+    target_link_libraries(teaql_memory_decimal_failure_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_decimal_failure_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_decimal_failure_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_decimal_failure_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_executable(teaql_memory_recursive_probe tests/parity/memory_recursive_probe.cpp)
+    target_link_libraries(teaql_memory_recursive_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_recursive_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_recursive_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_recursive_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_executable(teaql_memory_sort_probe tests/parity/memory_sort_probe.cpp)
+    target_link_libraries(teaql_memory_sort_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_sort_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_sort_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_sort_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_test(NAME private_memory_sort_complexity COMMAND teaql_memory_sort_probe --complexity-test)
+    add_executable(teaql_memory_entries_probe tests/parity/memory_entries_probe.cpp)
+    target_link_libraries(teaql_memory_entries_probe PRIVATE teaql::runtime teaql::provider_sqlite)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_entries_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_entries_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_entries_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_test(NAME private_memory_entries_lifetime COMMAND teaql_memory_entries_probe --lifetime-test)
+    add_executable(teaql_memory_relation_probe tests/parity/memory_relation_probe.cpp)
+    target_link_libraries(teaql_memory_relation_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_relation_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_relation_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_relation_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_executable(teaql_memory_mutation_probe tests/parity/memory_mutation_probe.cpp)
+    target_link_libraries(teaql_memory_mutation_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_mutation_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_mutation_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_mutation_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_executable(teaql_memory_grouping_probe tests/parity/memory_grouping_probe.cpp)
+    target_link_libraries(teaql_memory_grouping_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_grouping_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_grouping_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_grouping_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_executable(teaql_memory_aggregate_probe tests/parity/memory_aggregate_probe.cpp)
+    target_link_libraries(teaql_memory_aggregate_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_aggregate_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_aggregate_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_aggregate_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_executable(teaql_memory_pipeline_probe tests/parity/memory_pipeline_probe.cpp)
+    target_link_libraries(teaql_memory_pipeline_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_pipeline_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_pipeline_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_pipeline_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
+    add_executable(teaql_memory_filter_probe tests/parity/memory_filter_probe.cpp)
+    target_link_libraries(teaql_memory_filter_probe PRIVATE teaql::runtime)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME private_memory_filter_rust_parity
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/diagnose_memory_filter_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_memory_filter_probe>
+            "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    endif()
     add_executable(teaql_original_runtime_memory_service_tests tests/parity/teaql_runtime/memory_service.cpp)
     target_link_libraries(teaql_original_runtime_memory_service_tests PRIVATE teaql::runtime teaql::provider_sqlite)
     add_test(NAME original_runtime_memory_service_contracts COMMAND teaql_original_runtime_memory_service_tests)
@@ -1508,8 +1631,66 @@ if(BUILD_TESTING)
     target_link_libraries(teaql_runtime_base_probe PRIVATE teaql::runtime)
     add_executable(teaql_context_query_probe tests/parity/context_query_probe.cpp)
     target_link_libraries(teaql_context_query_probe PRIVATE teaql::runtime)
+    add_executable(teaql_resolved_public_aggregate_scope_probe tests/parity/resolved_public_aggregate_scope_probe.cpp)
+    target_link_libraries(teaql_resolved_public_aggregate_scope_probe PRIVATE teaql::runtime)
+    add_test(NAME resolved_public_aggregate_scope_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_public_aggregate_scope_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_resolved_public_aggregate_scope_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+
+    add_executable(teaql_resolved_private_aggregate_scope_probe tests/parity/resolved_private_aggregate_scope_probe.cpp)
+    target_link_libraries(teaql_resolved_private_aggregate_scope_probe PRIVATE teaql::runtime)
+    add_test(NAME resolved_private_aggregate_scope_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_private_aggregate_scope_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_resolved_private_aggregate_scope_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+
+    add_executable(teaql_resolved_cache_execution_probe tests/parity/resolved_cache_execution_probe.cpp)
+    target_link_libraries(teaql_resolved_cache_execution_probe PRIVATE teaql::runtime)
+    add_test(NAME resolved_cache_execution_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_cache_execution_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_resolved_cache_execution_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+
+    add_executable(teaql_resolved_flat_predecode_probe tests/parity/resolved_flat_predecode_probe.cpp)
+    target_link_libraries(teaql_resolved_flat_predecode_probe PRIVATE teaql::runtime)
+    add_test(NAME resolved_flat_predecode_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_flat_predecode_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_resolved_flat_predecode_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+
+    add_executable(teaql_resolved_scope_tree_probe tests/parity/resolved_scope_tree_probe.cpp)
+    target_link_libraries(teaql_resolved_scope_tree_probe PRIVATE teaql::runtime)
+    add_test(NAME resolved_scope_tree_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_scope_tree_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_resolved_scope_tree_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+
+    add_executable(teaql_resolved_scope_privacy_probe tests/parity/resolved_scope_privacy_probe.cpp)
+    target_link_libraries(teaql_resolved_scope_privacy_probe PRIVATE teaql::runtime)
+    add_test(NAME resolved_scope_privacy_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_scope_privacy_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_resolved_scope_privacy_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+
+    add_executable(teaql_resolved_cache_intent_probe tests/parity/resolved_cache_intent_probe.cpp)
+    target_link_libraries(teaql_resolved_cache_intent_probe PRIVATE teaql::runtime)
+    add_test(NAME resolved_cache_intent_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_cache_intent_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_resolved_cache_intent_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    add_executable(teaql_relation_enhancement_complete_probe tests/parity/relation_enhancement_complete_probe.cpp)
+    target_link_libraries(teaql_relation_enhancement_complete_probe PRIVATE teaql::runtime)
+    add_test(NAME relation_enhancement_complete_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_relation_enhancement_complete_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_relation_enhancement_complete_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     add_executable(teaql_relation_execution_probe tests/parity/relation_execution_probe.cpp)
     target_link_libraries(teaql_relation_execution_probe PRIVATE teaql::runtime)
+    add_test(NAME relation_probe_source_boundaries COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/check_relation_probe_boundaries_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_relation_execution_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     add_executable(teaql_query_keys_probe tests/parity/query_keys_probe.cpp)
     target_link_libraries(teaql_query_keys_probe PRIVATE teaql::runtime)
     add_executable(teaql_query_keys_tests teaql_runtime/tests/query_keys_tests.cpp)
@@ -1584,6 +1765,10 @@ if(BUILD_TESTING)
     add_test(NAME id_set_page_contracts COMMAND teaql_id_set_page_tests)
     add_executable(teaql_id_set_page_probe tests/parity/id_set_page_probe.cpp)
     target_link_libraries(teaql_id_set_page_probe PRIVATE teaql::runtime)
+    add_test(NAME resolved_id_set_intent_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_id_set_intent_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_id_set_page_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     set_tests_properties(id_set_page_contracts PROPERTIES TIMEOUT 30)
     set_tests_properties(entity_stream_contracts PROPERTIES TIMEOUT 30)
     add_executable(teaql_generated_json_graph_views_probe tests/parity/generated_json_graph_views_probe.cpp)
@@ -1599,6 +1784,30 @@ if(BUILD_TESTING)
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_json_graph_views_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_json_graph_views_probe>
         --cpp-emulator "${TEAQL_PARITY_EMULATOR}")
+    add_executable(teaql_generated_json_owned_nullable_probe tests/parity/generated_json_owned_nullable_probe.cpp)
+    target_link_libraries(teaql_generated_json_owned_nullable_probe PRIVATE teaql::provider_sqlite)
+    add_test(NAME generated_json_owned_nullable_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_json_owned_nullable_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_generated_json_owned_nullable_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    add_test(NAME generated_json_shape_cache_lifetime COMMAND teaql_generated_json_owned_nullable_probe --cache-test)
+    add_executable(teaql_generated_json_nullable_graph_probe tests/parity/generated_json_nullable_graph_probe.cpp)
+    target_link_libraries(teaql_generated_json_nullable_graph_probe PRIVATE teaql::provider_sqlite)
+    add_test(NAME generated_json_nullable_graph_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_json_nullable_graph_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_generated_json_nullable_graph_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    # The combined payload has a separate approved compatibility-exception test.
+    add_executable(teaql_generated_json_inputs_probe tests/parity/generated_json_inputs_probe.cpp)
+    target_link_libraries(teaql_generated_json_inputs_probe PRIVATE teaql::provider_sqlite)
+    add_test(NAME generated_json_payload_exception_contract COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/check_generated_json_payload_exception_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_generated_json_inputs_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    add_test(NAME generated_json_boundaries_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_json_boundaries_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_generated_json_inputs_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     add_executable(teaql_generated_json_ambiguous_probe tests/parity/generated_json_ambiguous_probe.cpp)
     target_link_libraries(teaql_generated_json_ambiguous_probe PRIVATE teaql::provider_sqlite)
     add_test(NAME generated_json_ambiguous_rust_parity COMMAND ${Python3_EXECUTABLE}
@@ -2347,6 +2556,10 @@ if(BUILD_TESTING)
     add_executable(teaql_dynamic_relation_tests teaql_runtime/tests/dynamic_relation_tests.cpp)
     target_link_libraries(teaql_dynamic_relation_tests PRIVATE teaql::runtime teaql::provider_sqlite SQLite3::SQLite3)
     add_test(NAME dynamic_relation_contracts COMMAND teaql_dynamic_relation_tests)
+    add_test(NAME relation_loaded_state_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_relation_loaded_state_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_dynamic_relation_tests>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     add_test(NAME dynamic_relation_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_dynamic_relation.py
         --cpp $<TARGET_FILE:teaql_dynamic_query_probe>)
@@ -3799,3 +4012,31 @@ add_executable(teaql_runtime_query_future_probe tests/parity/runtime_query_futur
 target_link_libraries(teaql_runtime_query_future_probe PRIVATE teaql::runtime)
 add_test(NAME runtime_query_future_contracts COMMAND teaql_runtime_query_future_probe)
 set_tests_properties(runtime_query_future_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+
+add_executable(teaql_sqlite_facet_source_tests teaql_runtime/tests/sqlite_facet_source_tests.cpp)
+target_link_libraries(teaql_sqlite_facet_source_tests PRIVATE teaql::provider_sqlite)
+add_test(NAME sqlite_facet_source_contracts COMMAND teaql_sqlite_facet_source_tests)
+set_tests_properties(sqlite_facet_source_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+
+add_executable(teaql_sqlite_ledger_allocated_trace_tests teaql_runtime/tests/sqlite_ledger_allocated_trace_tests.cpp)
+target_link_libraries(teaql_sqlite_ledger_allocated_trace_tests PRIVATE teaql::provider_sqlite SQLite3::SQLite3)
+add_test(NAME sqlite_ledger_allocated_trace_contracts COMMAND teaql_sqlite_ledger_allocated_trace_tests)
+set_tests_properties(sqlite_ledger_allocated_trace_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+
+if(TARGET teaql_audited_save_probe)
+    add_test(NAME explicit_save_scope_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_explicit_save_scope_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_audited_save_probe>)
+    set_tests_properties(explicit_save_scope_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+add_executable(teaql_sqlite_driver_query_benchmark teaql_provider_sqlite/tests/driver_query_benchmark.cpp)
+target_link_libraries(teaql_sqlite_driver_query_benchmark PRIVATE teaql::provider_sqlite SQLite3::SQLite3)
+add_test(NAME sqlite_driver_query_correctness COMMAND teaql_sqlite_driver_query_benchmark)
+set_tests_properties(sqlite_driver_query_correctness PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    target_link_options(teaql_sqlite_driver_query_benchmark PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEmm")
+else()
+    target_link_options(teaql_sqlite_driver_query_benchmark PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEjj")
+endif()

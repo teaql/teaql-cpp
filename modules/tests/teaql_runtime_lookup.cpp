@@ -337,6 +337,9 @@ using ::teaql::write_debug;
 }
 
 namespace isolated_teaql_runtime_teaql_detail {
+using ::teaql::detail::DynamicReadbacks;
+using ::teaql::detail::LedgerExecutionOutcome;
+using ::teaql::detail::write_debug;
 using ::teaql::detail::AuditActivation;
 using ::teaql::detail::ContextAuditAccess;
 using ::teaql::detail::PendingAuditBatch;
@@ -369,6 +372,7 @@ using ::teaql::detail::ContextArena;
 using ::teaql::detail::ContextDataService;
 using ::teaql::detail::ContextDirectory;
 using ::teaql::detail::ContextEntityAccess;
+using ::teaql::detail::JsonReadSession;
 using ::teaql::detail::ContextFixAccess;
 using ::teaql::detail::ContextLockAccess;
 using ::teaql::detail::ContextMutationOperation;
@@ -522,6 +526,7 @@ using ::teaql::detail::graph_identity_key;
 using ::teaql::detail::graph_plan_privacy;
 using ::teaql::detail::graph_node_from_values;
 using ::teaql::detail::graph_policy_plan;
+using ::teaql::detail::graph_legacy_trace_id;
 using ::teaql::detail::graph_trace_id;
 using ::teaql::detail::graph_unassigned;
 using ::teaql::detail::hydrate_compact_flat_plans;

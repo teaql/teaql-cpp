@@ -1,5 +1,24 @@
 # Rust 5.0.6 baseline upgrade
 
+Current source status: **118 accepted / 4 pending_review / 2 excluded_external**.
+The latest [complete graph-service acceptance](service_graph_source_acceptance_5_0_6.md)
+qualifies SG01-SG26 with fresh original1+14 observers/9694 outputs and joined
+native30/module30.
+Capabilities remain **11 qualified / 6 partial**, and P0-P7 remain incomplete.
+The earlier full-native877 checkpoint is separate and is not relabeled as the
+current source-closure gate. Earlier counts below retain their historical scope.
+
+Current SQLite facet source closure: [complete source review](sqlite_facet_source_review_5_0_6.md)
+qualifies all SF01-SF10 responsibilities with original ten tests, complete native
+and imported callers, and canonical1,135. Active source totals are **113 accepted
+/ 9 pending / 2 excluded_external**; capabilities stay **11 qualified / 6 partial**
+and P0-P7 remain incomplete. Source counts in preceding-work checkpoints below
+retain their historical scope.
+
+Current G09 status: **qualified** after [resolved-service requalification](resolved_g09_requalification_5_0_6.md): native37/module10, service31/31, compiler1+24, Java79 and strict25-workspace/1650-file reproduction. Active capabilities are **11 qualified / 6 partial**; source totals remain **112 accepted / 10 pending / 2 excluded_external**. Reopening notes below are retained historical checkpoints; whole resolved.rs and P0-P7 remain incomplete.
+
+Current capability override: G09 is reopened after the [joined resolved-service regression](resolved_joined_regression_5_0_6.md); active capabilities are 10 qualified / 7 partial pending requalification. Source totals remain 112 accepted / 10 pending / 2 excluded_external. Earlier checkpoint counts retain their historical scope.
+
 Status: references locked; behavioral migration and qualification are active.
 Current G15/G16 acceptance is recorded separately in the capability ledger and
 their final audits. Checkpoint notes below preserve their original narrower
@@ -7,6 +26,16 @@ scope and pending statements; they are not the current capability summary.
 Authorized by the user on 2026-10-11 while generator parity work was active.
 This steering supersedes the initial goal's 5.0.5 runtime and earlier generator
 reference without replacing its alignment objective or discarding ongoing edits.
+
+Current relation source closure: [final acceptance](relation_source_acceptance_5_0_6.md)
+qualifies the complete named relation source with original3 and native26/module26.
+Active source totals are **112 accepted / 10 pending / 2 excluded_external**.
+Capability and generator phase status remain unchanged.
+
+Historical private memory source closure: [final acceptance](memory_source_acceptance_5_0_6.md)
+qualifies the complete test-oracle responsibility with fresh source/candidate
+replay. Source totals at that checkpoint were **111 accepted / 11 pending / 2 excluded_external**.
+This does not promote unrelated capabilities or complete the generator phases.
 
 ## Exact references
 

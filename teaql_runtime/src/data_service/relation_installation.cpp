@@ -216,6 +216,7 @@ void attach_relation_rows(const UserContext& context,
             } else if (!related.empty()) {
                 list.data.emplace_back(related.front());
             }
+            list.loaded();
             parent.set_loaded_relation(plan.relation_name, list);
         }
         if (plan.many) {

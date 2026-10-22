@@ -1,5 +1,6 @@
 #include <teaql/runtime/detail/graph_fix_scope.hpp>
 #include "../../tests/support/checker_fixture.hpp"
+#include "../../tests/support/nested_save_scope_fixture.hpp"
 #include <iostream>
 using namespace teaql;
 
@@ -261,6 +262,7 @@ int main() {
         operations_and_close();
         payload_does_not_repeat_checker();
         failed_handoff();
+        check(nested_save_scope_fixture::verify(), "nested public saves isolate Fix evidence");
         std::pmr::set_default_resource(old);
         std::cout << "Graph Fix scope/evidence/CREATE contracts passed\n";
     } catch (const std::exception& error) {

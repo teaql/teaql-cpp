@@ -1,0 +1,223 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source": "teaql-runtime/src/graph.rs",
+  "source_sha256": "2c0a3e061871b5dee9fef0d3f15987477c3e8051d66e5dbfbd2df1030fbaa93f",
+  "source_lines": 563,
+  "status": "reviewed_scoped_model_gates_passed_pending_full_integration",
+  "notice": "Complete responsibility inventory is not itself semantic or full integration acceptance. Test fixture paths identify inspected witnesses, not automatic proof of every possible input. Historical receipts retain their actual scope.",
+  "responsibilities": [
+    {
+      "id": "GM01",
+      "source_lines": [
+        1,
+        82
+      ],
+      "contract": "EntityValues: default, mutable ordered map, conversions and owned/borrowed iteration",
+      "candidate": [
+        "teaql_runtime/include/teaql/runtime/graph.hpp"
+      ],
+      "evidence": [
+        "tests/parity/runtime_graph_probe.cpp",
+        "tests/parity/runtime_graph_model_probe.cpp",
+        "teaql_runtime/tests/runtime_graph_tests.cpp"
+      ],
+      "review": "C++ names the underlying map fields; explicit destination copies replace consuming owned conversions. Constructors/into_map/into_mutation_values delegate to allocator-propagating map operations. Borrowed iteration remains ordered."
+    },
+    {
+      "id": "GM02",
+      "source_lines": [
+        83,
+        108
+      ],
+      "contract": "GraphOperation and GraphMutationKind alternatives, equality, ordering and for_update",
+      "candidate": [
+        "teaql_runtime/include/teaql/runtime/graph.hpp",
+        "teaql_runtime/include/teaql/runtime/graph_debug.hpp"
+      ],
+      "evidence": [
+        "tests/parity/runtime_graph_model_probe.cpp",
+        "tests/parity/runtime_graph_probe.cpp"
+      ],
+      "review": "All four discriminants preserve source order. Only mutation kind requires source ordering. Boolean helper retains Create/Update mapping."
+    },
+    {
+      "id": "GM03",
+      "source_lines": [
+        109,
+        139
+      ],
+      "contract": "TraceScopeToken parent, typed frame, node index, clone/equality/Debug and recovery",
+      "candidate": [
+        "teaql_runtime/include/teaql/runtime/graph.hpp",
+        "teaql_runtime/src/graph.cpp",
+        "teaql_runtime/include/teaql/runtime/graph_debug.hpp"
+      ],
+      "evidence": [
+        "tests/parity/teaql_runtime/policy_graph.cpp",
+        "tests/parity/runtime_graph_model_probe.cpp",
+        "teaql_runtime/tests/runtime_graph_tests.cpp"
+      ],
+      "review": "Context-borrowed parents replace Arc. Same-domain copies retain borrowing; explicit destination copies recursively retain parents. Recovery filters Rust whitespace and restores root-first order."
+    },
+    {
+      "id": "GM04",
+      "source_lines": [
+        140,
+        171
+      ],
+      "contract": "Plan item/batch/plan fields, defaults and derived comparisons/Debug",
+      "candidate": [
+        "teaql_runtime/include/teaql/runtime/graph.hpp",
+        "teaql_runtime/src/graph.cpp",
+        "teaql_runtime/include/teaql/runtime/graph_debug.hpp"
+      ],
+      "evidence": [
+        "tests/parity/runtime_graph_model_probe.cpp",
+        "teaql_runtime/tests/runtime_graph_model_tests.cpp"
+      ],
+      "review": "All source fields, old snapshots, optional roots, tokens, counters and visited identities remain distinct. Hash-set diagnostics have unspecified iteration order; singleton exact comparison and multi-member content checks have separate scopes."
+    },
+    {
+      "id": "GM05",
+      "source_lines": [
+        172,
+        240
+      ],
+      "contract": "push, adjacent batching, grouped counts and size accessors",
+      "candidate": [
+        "teaql_runtime/src/graph.cpp",
+        "teaql_runtime/include/teaql/runtime/graph.hpp"
+      ],
+      "evidence": [
+        "tests/parity/runtime_graph_probe.cpp",
+        "tests/parity/teaql_runtime/policy_graph.cpp",
+        "teaql_runtime/tests/runtime_graph_tests.cpp"
+      ],
+      "review": "push increments before append; checked Debug overflow becomes a C++ overflow_error. Non-Update fields do not affect batching. Counts read batches, not items. Clearing either collection remains independent."
+    },
+    {
+      "id": "GM06",
+      "source_lines": [
+        242,
+        252
+      ],
+      "contract": "sorted_update_fields",
+      "candidate": [
+        "teaql_runtime/src/graph.cpp"
+      ],
+      "evidence": [
+        "tests/parity/runtime_graph_probe.cpp",
+        "teaql_runtime/tests/runtime_graph_tests.cpp"
+      ],
+      "review": "Ordered present keys only; exact exclusions, including missing exclusions and present NULL. Linear exclusion search preserves semantics without an extra set allocation."
+    },
+    {
+      "id": "GM07",
+      "source_lines": [
+        254,
+        288
+      ],
+      "contract": "GraphNode fields, construction, clone/equality/Debug including dynamic state",
+      "candidate": [
+        "teaql_runtime/include/teaql/runtime/graph.hpp",
+        "teaql_runtime/include/teaql/runtime/graph_debug.hpp"
+      ],
+      "evidence": [
+        "tests/parity/runtime_graph_model_probe.cpp",
+        "tests/parity/dynamic_graph_debug_probe.cpp",
+        "tests/parity/runtime_graph_components_source_5_0_6.rs",
+        "teaql_runtime/tests/runtime_graph_tests.cpp"
+      ],
+      "review": "Absent/empty comments, dirty sets, snapshots and dynamic carriers remain distinguishable. Explicit destination clone propagates recursively into relations and dynamic definitions/selection/values."
+    },
+    {
+      "id": "GM08",
+      "source_lines": [
+        289,
+        337
+      ],
+      "contract": "GraphNode builders, relation append/extend, literal ID and comment setters",
+      "candidate": [
+        "teaql_runtime/include/teaql/runtime/graph.hpp"
+      ],
+      "evidence": [
+        "tests/parity/runtime_graph_probe.cpp",
+        "teaql_runtime/tests/runtime_graph_tests.cpp",
+        "tests/parity/entity_graph_plan_probe.cpp"
+      ],
+      "review": "with_operation/with_relations/with_comment avoid member-name collisions. C++ builders mutate and return a reference, rather than moving owned self. Repeated values replace; relation and relations append; empty relation extension retains its map entry. id looks up literal id, not metadata."
+    },
+    {
+      "id": "GM09",
+      "source_lines": [
+        339,
+        374
+      ],
+      "contract": "audit_trace_node and trace_scope",
+      "candidate": [
+        "teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_plan.hpp"
+      ],
+      "evidence": [
+        "docs/parity/graph_planner_scopes_gate_5_0_6.json.gz",
+        "docs/parity/graph_planner_complete_rows_gate_5_0_6.json.gz",
+        "docs/parity/sqlite_ledger_allocated_trace_acceptance_5_0_6.json.gz"
+      ],
+      "review": "Private source helpers are lowered into planner call sites through graph_has_comment/graph_trace_id and conditional token allocation. Preserve positive try_u64 identity and source node_index; Reference inherits parent unchanged. Separate legacy signed-cast callers must not reuse this identity rule."
+    },
+    {
+      "id": "GM10",
+      "source_lines": [
+        376,
+        403
+      ],
+      "contract": "ScopedCommentNode borrowed hierarchy, Debug and trace materialization",
+      "candidate": [
+        "teaql_runtime/include/teaql/runtime/graph.hpp",
+        "teaql_runtime/src/graph.cpp",
+        "teaql_runtime/include/teaql/runtime/graph_debug.hpp"
+      ],
+      "evidence": [
+        "tests/parity/teaql_runtime/policy_graph.cpp",
+        "tests/parity/runtime_graph_model_probe.cpp",
+        "docs/parity/legacy_graph_intent_module_closure_5_0_6.json.gz"
+      ],
+      "review": "Synchronous stack borrow remains distinct from persistent Context token. Root-first traversal and Rust whitespace classification match source."
+    },
+    {
+      "id": "GM11",
+      "source_lines": [
+        404,
+        471
+      ],
+      "contract": "Original hierarchical recovery test",
+      "candidate": [
+        "tests/parity/teaql_runtime/policy_graph.cpp"
+      ],
+      "evidence": [
+        "docs/parity/runtime_graph_components_original_5_0_6.json.gz",
+        "docs/parity/runtime_graph_components_current_native_modules_5_0_6.json"
+      ],
+      "review": "Exact original assertions are ported; unchanged Rust test executed. C++ additionally tests explicit retained allocation after source destruction."
+    },
+    {
+      "id": "GM12",
+      "source_lines": [
+        472,
+        563
+      ],
+      "contract": "Original batching/counts test",
+      "candidate": [
+        "tests/parity/teaql_runtime/policy_graph.cpp"
+      ],
+      "evidence": [
+        "docs/parity/runtime_graph_components_original_5_0_6.json.gz",
+        "docs/parity/runtime_graph_components_current_native_modules_5_0_6.json"
+      ],
+      "review": "Six pushes, four adjacent batch groups and three grouped counts retain all original assertion sites."
+    }
+  ],
+  "current_gates": [
+    "docs/parity/runtime_graph_model_native_closure_5_0_6.json.gz",
+    "docs/parity/runtime_graph_model_modules_closure_5_0_6.json.gz"
+  ]
+}

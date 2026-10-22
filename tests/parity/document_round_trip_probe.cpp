@@ -498,4 +498,5 @@ int main() {
         std::cerr << error.what() << '\n';
         return 1;
     }
+    return 0;
 }

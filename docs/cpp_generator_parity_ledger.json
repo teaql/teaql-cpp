@@ -3742,7 +3742,14 @@
         "docs/parity/checker_constructor_initial_gap_5_0_6.json.gz",
         "docs/parity/checker_constructor_execution_5_0_6.json.gz",
         "docs/parity/checker_constructor_preservation_5_0_6.json.gz",
-        "docs/parity/checker_source_qualification_5_0_6.json.gz"
+        "docs/parity/checker_source_qualification_5_0_6.json.gz",
+        "docs/nested_save_scope_5_0_6.md",
+        "docs/parity/nested_public_save_scope_installed_final_5_0_6.json.gz",
+        "docs/parity/nested_public_save_scope_previous_compiler_final_5_0_6.json.gz",
+        "docs/parity/nested_public_save_scope_previous_final_5_0_6.json.gz",
+        "docs/parity/nested_public_save_scope_native_final_5_0_6.json.gz",
+        "docs/parity/nested_public_save_scope_modules_final_5_0_6.json.gz",
+        "docs/parity/nested_public_save_scope_sanitize_final_5_0_6.json.gz"
       ],
       "open_questions": [],
       "runtime_sources": [
@@ -4457,7 +4464,12 @@
           "scope": "All twelve original requirements have complete source/guard dispositions and semantic evidence; 26 current native checks, scoped module/lifetime/compiler/Java and strict SDK regeneration gates. Cross-capability and phase obligations remain active."
         },
         "docs/parity/general_query_acceptance_5_0_6.json.gz",
-        "docs/parity/general_query_pre_acceptance_5_0_6.json.gz"
+        "docs/parity/general_query_pre_acceptance_5_0_6.json.gz",
+        {
+          "kind": "generated_stream_boundary_correction",
+          "path": "docs/container_identity_execution_5_0_6.md",
+          "scope": "Runtime-first canonical Q routing and deferred stream repository/provider lookup preserve full original error and EOF boundaries. Five full SDK configurations match35 execution entries; five additional real SQLite success/empty/shape/transport/decode streams match exactly. Permanent current native1/module1/ASan-UBSan1 plus1155 canonical consumers, pinned formatting, checked late access, actual Context deletion and real pending lease wake/cancel pass. Underlying service/transport contracts remain separate; this does not qualify all executor interleavings or broaden supported stream enhancements."
+        }
       ],
       "open_questions": [],
       "qualification_contract": "docs/general_query_acceptance_review_5_0_6.md",
@@ -5277,7 +5289,14 @@
           "sanitizer": "docs/parity/resolved_stream_schema_sanitize_5_0_6.json.gz",
           "previous_question": "RQS01: restore readonly query-result schema attachment and logging-disabled cache-hit classification before requalifying G09. The complete Rust 5.0.6 runtime and both C++ frontends reproduce 288 differing inputs out of 2304 per frontend. Preserve the earlier EX01-EX14 and cursor acceptance as historical checkpoints; repair and supplemental regression/lifetime evidence remain pending. Nonstream continuation now passes source/native/imported2304+192, native45/module18 and scoped SAN4; source review identifies missing readonly-schema propagation in EntityStreamItems. Preserve RQS01 until stream counterexample/repair/lifetime and supplemental acceptance are complete.",
           "disposition": "RQS01 resolved within existing EX01-EX14: retain prior nonstream2304+192/native45/module18 and unchanged compiler/Java checkpoints; current readonly stream769/native10/module8, canonical/no-work and scoped SAN4 pass. Query schema uses an existing registered Context object through ArenaBorrow, preserving lazy success/error/empty chunks and exact-once close across actual deletion, checked stale handles and explicit Global row copies. Production delta since the nonstream checkpoint is exactly entity_stream.hpp; all generator inputs remain unchanged. Earlier fixture-order and inline-unregistered-schema failures remain separate. G09 restores its preceding qualified scope; complete resolved.rs, model/storage/governance integration, all other capability verdicts and P0-P7 remain independent."
-        }
+        },
+        "docs/resolved_joined_regression_5_0_6.md",
+        {
+          "kind": "resolved_service_requalification",
+          "path": "docs/resolved_g09_requalification_5_0_6.md",
+          "scope": "Unchanged EX01-EX14 contract and37 generator methods/four facade files; current native37/module10 plus joined service31/31, compiler1+24, Java79 and strict25-workspace/1650-file reproduction. Hash-identical JSON/cache lifecycle evidence retains its own scope. Failure/reopening receipts are preserved. Whole resolved.rs, private typed-aggregate scope and P0-P7 remain separate."
+        },
+        "docs/parity/resolved_g09_requalified_5_0_6.json.gz"
       ],
       "open_questions": [],
       "qualification_contract": "docs/execution_acceptance_5_0_6.md",
@@ -7727,6 +7746,25 @@
           "terminal": "docs/parity/state_cache_cost_installed_5_0_6.json.gz",
           "acceptance": "docs/parity/state_cache_cost_acceptance_5_0_6.json.gz",
           "scope": "Complete retained-cache source accepted: original1/native2/module2, exact21 samples per frontend, real copy-and-intern, zero arena/heap allocation with positive controls, geometry/lifetime regressions and canonical/no-work/input guards. No timing equivalence; helper/hydration/phase exits remain pending. Source94/28/2, capabilities11/6 unchanged."
+        },
+        {
+          "kind": "nested_public_save_fix_scope",
+          "document": "docs/nested_save_scope_5_0_6.md",
+          "source_comparison": "docs/parity/nested_public_save_scope_installed_final_5_0_6.json.gz",
+          "counterfactual": "docs/parity/nested_public_save_scope_previous_compiler_final_5_0_6.json.gz",
+          "scope": "Fresh byte-preserved original4 and clean sanitizer old-header counterfactual3 differences; installed native6/module2/sanitizer2, canonical1156 and format1805. Controlled pre-I/O failures only; final fixture Context ownership qualified. Complete entity-save source, nested transactions, capabilities and P0-P7 remain pending."
+        },
+        {
+          "kind": "complete_entity_save_source",
+          "document": "docs/entity_save_source_acceptance_5_0_6.md",
+          "acceptance": "docs/parity/entity_save_source_acceptance_5_0_6.json.gz",
+          "scope": "Complete ES01-ES18 source accepted after fresh original17+5576 and native25/module25,9277 observations per frontend, canonical1159/format1805; current target-map adapter failures retained. Source117/5/2; delegated files, capabilities11/6 and P0-P7 remain open."
+        },
+        {
+          "kind": "complete_data_service_graph_source",
+          "document": "docs/service_graph_source_acceptance_5_0_6.md",
+          "acceptance": "docs/parity/service_graph_source_acceptance_5_0_6.json.gz",
+          "scope": "Complete SG01-SG26 source accepted after fresh original1+14 observers/9694 outputs, native30/module30/12007 each, canonical1163/format1805. Actual dynamic, callback, recursive/private and generated consumers are joined; the observer compile failure is retained. Source118/4/2; capability11/6 and all P0-P7 exits remain independent."
         }
       ],
       "open_questions": [
@@ -8050,7 +8088,17 @@
         "docs/parity/core_query_source_final_5_0_6.json.gz",
         "docs/character_lexing_5_0_6.md",
         "docs/parity/character_parser_installed_comparison_5_0_6.json.gz",
-        "tests/parity/audit_expression_characters_5_0_6_inputs.json"
+        "tests/parity/audit_expression_characters_5_0_6_inputs.json",
+        {
+          "kind": "canonical_identity_execution_continuation",
+          "path": "docs/container_identity_execution_5_0_6.md",
+          "scope": "Separates canonical generated Q/provider/standalone registry keys from trait/runtime registration and new-entity ID identity. Installed thin conditional producer preserves default/table/service SDK bytes. Actual original/current native35 entry outcomes and provider5 match, Java new2+existing75 passes with old-producer rejection control, normal25 examples/50 contract destinations plus5 independent active SDKs reproduce without implementation changes; all80 provenance records refresh only after byte verification. Installed actual producer also regenerates all5 previously compiled identity SDKs byte-identically. Runtime native/module/sanitizer/canonical gates pass; source and capability statuses remain unchanged. Full AP02 grammar/protected consumers and G14/G17/G13/P0-P7 remain open; only the documented JSON payload exception is approved."
+        },
+        {
+          "kind": "installed_audit_parser_source_regression",
+          "path": "docs/audit_lexical_boundaries_5_0_6.md",
+          "scope": "Installs the previously isolated expression/type/pattern/body/doc/numeric parser correction after the old source and permanent regression both reproduce407 discrepancies. Fresh unchanged locked attr.rs reproduces all2665 retained outputs; current Java matches2575 complete accepted metadata effects plus90 checked refusals, and all112 Java tests pass. Nine fresh generated caller cases compile all261 original Java sources, unchanged complete original entity files and nine current C++ facades: all27 descriptor/field-privacy observations match with actual UserContext deletion. These are eight source-error recovery branches plus an ordinary control, all retaining limit17; successful continuation effects remain in the complete direct corpus. Normal25-example/50-contract/five-independent SDK reproduction preserves all implementation bytes and refreshes80 provenance records; the five independent records now include the actual field-layout/literal/XID helper hashes. No C++ runtime/ownership, module export, sanitizer, MIPS, source/capability or full AP02/P0-P7 acceptance is claimed."
+        }
       ],
       "open_questions": [
         "AP02 remains partial. The container-identity correction matches all 1,452 retained audit inputs (1,424 exact valid outputs/all 28 source rejections) and 1,519 full parsed-effect inputs (1,474 valid/all 45 source rejections), with four archived/current improvements and zero regressions. Ten original-entity/C++-facade descriptor pairs match; one additional embedded-NUL pair preserves UTF-8 length, runtime keys/layouts, relation strings and actual field policy. Nine typed reverse-JSON pairs match 54 graph views; the unqualified foreign-type compiler rejection is preserved on both sides. All 41 earlier compiled SDK pairs and ten new descriptor pairs reproduce complete original/C++ trees unchanged. Full Rust expression/type/pattern/body/lexical grammar, external type binding and complete identity-override/service/query/Save/protected-log integration remain required. Preserve all prior failures/source/width evidence and the unanswered AP03/R08 decision.",
@@ -9693,7 +9741,54 @@
         "docs/resolved_mutation_privacy_5_0_6.md",
         "docs/parity/resolved_mutation_privacy_source_5_0_6.json.gz",
         "docs/parity/resolved_mutation_privacy_installed_5_0_6.json.gz",
-        "docs/parity/resolved_mutation_privacy_assertions_5_0_6.json.gz"
+        "docs/parity/resolved_mutation_privacy_assertions_5_0_6.json.gz",
+        "docs/runtime_graph_source_review_5_0_6.md",
+        "docs/parity/legacy_graph_intent_module_closure_5_0_6.json.gz",
+        "docs/parity/runtime_graph_components_original_5_0_6.json.gz",
+        "docs/parity/graph_planner_scopes_gate_5_0_6.json.gz",
+        "docs/parity/graph_planner_complete_rows_original_5_0_6.json.gz",
+        "docs/parity/graph_planner_complete_rows_native_5_0_6.json.gz",
+        "docs/parity/graph_planner_complete_rows_modules_5_0_6.json.gz",
+        "docs/parity/graph_planner_complete_rows_gate_5_0_6.json.gz",
+        "docs/runtime_graph_responsibilities_5_0_6.json",
+        "docs/parity/runtime_graph_model_native_closure_5_0_6.json.gz",
+        "docs/parity/runtime_graph_model_modules_closure_5_0_6.json.gz",
+        "docs/runtime_entity_save_source_review_5_0_6.md",
+        "docs/parity/entity_save_scope_closure_5_0_6.json.gz",
+        "docs/parity/explicit_save_scope_closure_5_0_6.json.gz",
+        "docs/parity/entity_save_seventeen_contracts_5_0_6.json.gz",
+        "docs/parity/entity_save_preparation_fix_modules_5_0_6.json.gz",
+        "docs/parity/entity_save_adjacent_native_5_0_6.json.gz",
+        "docs/parity/saved_dynamic_snapshot_closure_5_0_6.json.gz",
+        "docs/sqlite_driver_benchmark_source_review_5_0_6.md",
+        "docs/parity/sqlite_driver_source_acceptance_5_0_6.json.gz",
+        "docs/parity/saved_dynamic_installation_original_5_0_6.json.gz",
+        "docs/parity/saved_dynamic_installation_closure_5_0_6.json.gz",
+        "docs/parity/generic_dynamic_fix_scope_followup_5_0_6.json.gz",
+        "docs/parity/plain_saved_dynamic_original_5_0_6.json.gz",
+        "docs/parity/plain_saved_dynamic_candidate_before_5_0_6.json.gz",
+        "docs/parity/explicit_saved_dynamic_original_5_0_6.json.gz",
+        "docs/parity/explicit_saved_dynamic_candidate_5_0_6.json.gz",
+        "docs/parity/plain_saved_dynamic_followup_5_0_6.json.gz",
+        "docs/parity/explicit_saved_dynamic_closure_5_0_6.json.gz",
+        "docs/parity/save_entry_order_original_5_0_6.json.gz",
+        "docs/parity/save_entry_order_differences_5_0_6.json.gz",
+        "docs/entity_save_responsibility_matrix_5_0_6.md",
+        "docs/parity/save_entry_order_followup_5_0_6.json.gz",
+        "docs/parity/pending_dynamic_recheck_original_5_0_6.json.gz",
+        "docs/parity/pending_dynamic_recheck_differences_5_0_6.json.gz",
+        "docs/parity/pending_dynamic_recheck_followup_5_0_6.json.gz",
+        "docs/parity/saver_intent_precedence_original_5_0_6.json.gz",
+        "docs/parity/saver_intent_precedence_differences_5_0_6.json.gz",
+        "docs/parity/saver_intent_precedence_module_closure_5_0_6.json.gz",
+        "docs/service_graph_source_review_5_0_6.md",
+        "docs/parity/reference_node_dynamic_followup_5_0_6.json.gz",
+        "docs/parity/graph_outcome_models_original_5_0_6.json.gz",
+        "docs/parity/graph_outcome_models_followup_5_0_6.json.gz",
+        "docs/parity/ledger_snapshot_original_v2_5_0_6.json.gz",
+        "docs/parity/ledger_snapshot_native_followup_5_0_6.json.gz",
+        "docs/parity/ledger_snapshot_module_followup_5_0_6.json.gz",
+        "docs/parity/runtime_root_registration_refresh_5_0_6.json.gz"
       ],
       "open_questions": [
         "Complete source-based governed runtime configuration and protected-I/O qualification plus dynamic ledger provenance; mapped plan/ledger privacy now collects before execution, with durable dynamic operands/originals now collected; complete typed storage/protected-I/O qualification remains a G16 dependency.",
@@ -9716,7 +9811,8 @@
         "Resolved select preparation now has1036 actual complete-source/native/imported observations: query-entity behavior selection, owned/borrowed equality, intent precedence, real ensure_schema bootstrap suppression, behavior/policy rewrite and denial order, final-entity local-key projection, duplicate/missing relations and unchanged source query. Native4/module3, canonical consumers and no-work pass; original fixture-construction differences and disk-full linker failure are preserved. Production and generator bodies are unchanged. This reconciles query preparation, not typed identity projection, mutation orchestration or whole resolved.rs; source84/38/2 and capability11/6 statuses are unchanged.",
         "Resolved insert/update preparation has1690 actual complete-source/native/imported observations, native5/module4, canonical consumers and no-work: repository-entity behavior, policy retarget/denial, final metadata ID/version initialization, allocator failure, Create-marked Checker/Fix, optional update versions and independent old snapshots. The thin command factories delegate to accepted core MU05/MU06/MU09/MU10 constructors. Timestamp preparation is not invented. Production and generator bodies are unchanged; complete resolved.rs and source84/38/2/capability11/6 verdicts stay separate.",
         "Resolved mutation execution closes the earlier1502-input early-exit provenance gap using complete actual source plus2016 trusted-intent controls:3518 matching results per frontend, native6/module5 and canonical/no-work. New cases make1648 provider calls and982 attempted events across direct/prepared/batch writes, callback/preparation order, absent/partial/complete old snapshots, trace and write/event failure. The100 source panics are invalid short batch-ID controls with matching native checked exceptions and preceding effects. Reuses unchanged original driver/SPI bodies and access-only forwarding; the initial fixture import failure is preserved. No production/generator body changes, live-SQL commit, privacy/governance or whole-source acceptance is claimed. Source84/38/2 and capability11-qualified/6-partial verdicts remain unchanged.",
-        "Resolved mutation privacy forwards absent/empty/masked/credential/unknown/target-ID provenance through actual provider requests and events: source/native/imported5486, native7/module6, canonical/no-work and explicit safe-field/trace canary assertions pass. The3518 prior cases are immutable;1968 new inputs produce1968 provider calls and990 attempted events. Sixty Debug maximum-version failures occur after provider return, including first-event delivery before a second batch-event overflow. An assertion epoch reuses hash-checked unchanged original source/ELFs/corpus and reruns current native7/module6; it does not invent another Rust execution. No production/generator implementation or source/capability verdict changes. Raw sinks, real SQLite transaction/commit, Release overflow, generated metadata and full protected-I/O/governance remain separate."
+        "Resolved mutation privacy forwards absent/empty/masked/credential/unknown/target-ID provenance through actual provider requests and events: source/native/imported5486, native7/module6, canonical/no-work and explicit safe-field/trace canary assertions pass. The3518 prior cases are immutable;1968 new inputs produce1968 provider calls and990 attempted events. Sixty Debug maximum-version failures occur after provider return, including first-event delivery before a second batch-event overflow. An assertion epoch reuses hash-checked unchanged original source/ELFs/corpus and reruns current native7/module6; it does not invent another Rust execution. No production/generator implementation or source/capability verdict changes. Raw sinks, real SQLite transaction/commit, Release overflow, generated metadata and full protected-I/O/governance remain separate.",
+        "Graph source continuation separates legacy signed-cast scope IDs from positive-only planner IDs. Native/module legacy 72+284 observations and public planner 896 Create-root, 896 sparse Upsert-root and 896 complete-row Upsert-root observations match; complete rows execute 1056 provider queries and all 896 plans succeed. Historical sparse-row failures remain intact. These scoped results and original dynamic-component evidence do not complete graph.rs, data_service/graph.rs, entity_save.rs or whole G17/P0-P7 acceptance."
       ],
       "runtime_source_hashes": {
         "teaql-core/src/request_intent.rs": "d72b4864ac9a44ee1adfccbc2fadadbf0100ea93acfc19cd1061db7c48d2748b",
