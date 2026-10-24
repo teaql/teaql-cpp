@@ -5,6 +5,42 @@ Producer reference: `45e1572c4956ca963410d8ea436ead3c8857087a`.
 This checkpoint addresses G09 EX10/EX12 and protected execution integration.
 Complete G09, G13-G17 and P0-P7 acceptance retain their independent requirements.
 
+## Current strict-source readback
+
+The earlier startup disposition below is historical. The installed deferred
+generated-stream runtime now produces **13,104/13,104 raw original results**.
+The [current strict-source replay](parity/stream_shapes_strict_source_current_native_5_0_6.json.gz)
+also passes every existing connection-release, reuse, Policy, logging and
+constructor-failure boundary assertion. No expected source observation or
+boundary assertion is changed, and no runtime implementation changes here.
+
+The completed full native epoch exposes an obsolete comparator requirement:
+`startup_disposition` rewrote 6,012 original results to require the former
+eager C++ behavior. Thus its registered stream check fails while reporting all
+13,104 raw equalities. This is not a newly observed runtime scheduling gap. The
+[historical negative control](parity/stream_shapes_strict_source_historical_control_5_0_6.json.gz)
+confirms that raw source expectations reject exactly the 6,012 retained old C++
+outputs, while preserving all original inputs. It does not claim a fresh run of
+the old runtime.
+
+The [frozen full-native attempt](parity/runtime_graph_model_full_native_terminal_5_0_6.json.gz)
+finished with **876/877** tests passing, one failure, zero errors and zero skips.
+Its only failure is `stream_shapes_rust_parity`; builds and frozen-input checks
+passed. The comparator now compares the raw original observations directly,
+without startup rewrites. The original corpus, all existing boundary assertions
+and historical paired records stay unchanged. Focused registered verification
+is recorded separately; it does not turn that failed full epoch into a passing
+result. The owned strict replay controller (2,249 bytes) was removed after its
+process exited.
+
+The [focused registered receipt](parity/stream_shapes_strict_registered_commit_5_0_6.json.gz)
+passes both `stream_shapes_rust_parity` and
+`module_stream_shapes_rust_parity` after successful target builds. Each checks
+**13,104/13,104 raw equalities** with no startup adaptations and all existing
+boundary assertions enabled. The owned JUnit directory (927 bytes) was removed
+after both test processes exited. This is two focused tests, not a new full
+native integration epoch.
+
 ## Actual source and declared observations
 
 The new observers call the unchanged generated inheritance-graph library and
@@ -57,7 +93,7 @@ original contract. The [complete pre-repair sources](parity/stream_shapes_before
 preserve both layers. The marker-source verifier proves the complete later header
 delta is this guard before replaying its unchanged historical constraint review.
 
-## Exact startup and diagnostic disposition
+## Historical startup and diagnostic disposition
 
 Original generated `request_support.rs::fetch_entity_stream` wraps repository
 resolution in a lazy `async_stream`. Its public request returns a stream before

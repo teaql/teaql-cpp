@@ -142,3 +142,28 @@ unchanged reference. This focused refresh does not relabel those historical
 consumer gates or accept all implementing leaves. Final current native
 integration remains required before the root source's pending disposition can
 change.
+
+## Whole-root current consumer reconciliation
+
+The [complete current root review](runtime_root_source_review_5_0_6.md) separates
+both production export regions from the supporting fixtures and all 75 root
+assertions. It includes the fifth published `dynamic_fields` namespace, the
+generated-support wildcard, private exports and late Checker reexports. It does
+not accept implementing leaves by counting export names.
+
+The [current imported gate](parity/runtime_root_source_current_module_built_closure_5_0_6.json.gz)
+passes all ten root selections plus the namespace contract: **11/11**, without
+skips. Current source/fixture registration verifies all 75 root contracts, and
+three deliberately stale/incomplete records are rejected. Canonical 1,163 and
+export-catalog 1,524 checks pass, with no-work builds before/after execution and
+unchanged frozen execution inputs. The initial unbuilt-command controller
+failure is preserved separately; neither the source tests nor their C++
+assertions were weakened to repair discovery.
+
+The locked original 75-root receipt has the same source hash as the current
+4,513-line file and remains valid at its stated scope. Current full native
+integration ended at **876/877**, with only the obsolete stream comparator
+failing. Its [repair and focused evidence](protected_stream_shapes_5_0_6.md)
+remain separate from a successful full integration result, so the source
+disposition stays pending.
+The broader migration phases and six partial capability decisions remain open.

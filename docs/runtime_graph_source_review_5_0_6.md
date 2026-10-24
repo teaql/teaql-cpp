@@ -513,3 +513,56 @@ A complete frozen native integration epoch is now the next gate before changing
 this source's pending disposition. Separate graph-service/entity-save/provider
 reviews and the six partial capability decisions are not discharged by this
 model-level reconciliation.
+
+### Fresh complete-model replay after the committed checkpoint
+
+The new development controller
+`scripts/verify_runtime_graph_source_closure_5_0_6.py` binds the complete source
+review to fresh original execution and canonical imported consumers. It prepares
+an owned, byte-checked runtime view, preserves all 67 original source/test files,
+and appends only the already reviewed dynamic-component observer. The three
+existing executable drivers retain their evaluator bodies; only the model
+driver's fixture module path is made absolute in the disposable copy. No Rust
+implementation, C++ function, generated SDK or producer source is changed.
+
+The [fresh original receipt](parity/runtime_graph_source_original_closure_5_0_6.json.gz)
+passes all **606** complete observations: 464 graph operations/plans/module-graph
+cases, 128 model formatting/comparison cases, and 14 nonempty dynamic Debug
+cases. The unchanged original hierarchical-recovery and batching/counts tests
+also pass, as does the supplemental recursive dynamic-component test. The
+`graph::` selection additionally runs the unchanged service ledger-fallback
+test; its fourth result is reported separately, rather than counted as another
+graph-model root test. Original/corpus/driver hashes, commands, complete outputs
+and dependency provenance are retained.
+
+The [fresh imported receipt](parity/runtime_graph_source_module_closure_5_0_6.json.gz)
+passes **14/14** CTests. These replay the 606 model observations, the original
+policy/graph fixture and both model ownership fixtures, plus the four planner
+scope corpora, two valid-intent legacy corpora and recursive/command corpora.
+The eleven differential entries compare **6,398** complete outputs; the three
+fixture entries keep their actual assertion scope. This does not claim that all
+6,398 original outcomes were regenerated in this continuation: the helper-route
+corpora retain their independently recorded locked-source observations. Current
+model and helper implementation hashes are frozen together by the new receipt.
+Exact CTest selection, zero skips/failures, successful terminal builds and
+no-work checks before/after execution are retained. Canonical verification still
+covers 1,163 consumer/fixture bodies.
+
+The original view, source/binary targets and module JUnit directory were removed
+after their child processes exited: **273,207,403** and **3,861** bytes respectively.
+Stable native and module preset directories are reused. No sanitizer or MIPS
+rerun is claimed for this controller/documentation-only change.
+
+The committed pre-commit native attempt remains explicitly interrupted. A fresh
+full native epoch uses
+`parity/runtime_graph_model_full_native_inputs_5_0_6.json.gz` and
+`parity/runtime_graph_model_full_native_terminal_5_0_6.json.gz`. It finished with
+**876/877** tests passing, one failure, zero errors and zero skips. Builds and
+all 11,412 frozen-input checks passed. The only failure was the obsolete stream
+startup expectation rewrite described in the
+[strict-source readback](protected_stream_shapes_5_0_6.md).
+This remains a failed integration result. The source disposition stays
+**pending_review** until a successful complete integration result and the
+source-specific acceptance reconciliation are recorded.
+Current source totals remain **118 accepted / 4 pending_review /
+2 excluded_external**; capabilities remain **11 qualified / 6 partial**.

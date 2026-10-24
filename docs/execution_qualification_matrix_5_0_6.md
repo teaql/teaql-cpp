@@ -34,7 +34,7 @@ statements as new gaps. G08/G10/G12-G17 and final phase exits remain independent
 | EX07 | Ordinary page | Execute count before the offset/limit typed list; publish the count only with a successful list. Propagate either stage's failure. Native `GeneratedPageQueryOperation` owns the staged snapshot. | [Deferred ordinary pages](deferred_plain_page_5_0_6.md), [execution shapes](generated_execution_shapes_5_0_6.md). | Qualified: count-before-list/facet ordering, every named pending/failure/cancel/retry boundary, successful total publication and actual Context deletion. |
 | EX08 | ID-set page | Fetch the offset/limit list first; retain a supplied total, including zero, otherwise count. Preserve cache-key, bounded-ID and fallback protocols through runtime services. | [Deferred ID-set pages](deferred_id_set_page_5_0_6.md), [pagination conveniences](pagination_convenience_5_0_6.md). | Qualified: list-first/present-zero/absent-total branches, bounded real stores/keys/build coordination, fallback, hot/deferred/replacement and protected execution. |
 | EX09 | Continuous pages | Expose the source configuration without merging it with the ID-set protocol. Runtime services own cursor lookup, validation, seek/fallback and publication. | [Deferred continuous pages](deferred_continuous_page_5_0_6.md). | Qualified: complete separate cursor protocol, validation/expiry/seek/fallback/publication, immutable-Context interleavings and protected hot-store execution. |
-| EX10 | Stream | Materialize metadata and obtain a typed stream; do not substitute typed-list relation/facet enhancement. Preserve chunk-size validation, supported scalar decoding, item errors, early close and connection reuse. Native start-time error delivery differs from Rust's lazy polling under the documented async adaptation. | [Dynamic JSON streams](dynamic_json_execution_5_0_6.md), [inherited streams](generated_inherited_streams_5_0_6.md), [return type](generated_return_type_5_0_6.md). | Qualified: complete supported/rejected shape and positive chunk contracts, typed decode/errors/cleanup/reuse and explicit source-lazy/native-startup diagnostics. |
+| EX10 | Stream | Materialize metadata and obtain a typed stream; do not substitute typed-list relation/facet enhancement. Preserve chunk-size validation, supported scalar decoding, item errors, early close and connection reuse. Generated native streams defer service lookup and execution until polling, matching the original lazy boundary. | [Dynamic JSON streams](dynamic_json_execution_5_0_6.md), [inherited streams](generated_inherited_streams_5_0_6.md), [return type](generated_return_type_5_0_6.md), [strict stream comparison](protected_stream_shapes_5_0_6.md). | Qualified: complete supported/rejected shape and positive chunk contracts, typed decode/errors/cleanup/reuse and exact original startup/item observations in the protected matrix. |
 | EX11 | Slice conveniences | `skip`/`offset_only` replace offset; `offset`/`offset_size` use page_offset; `top` uses limit; unlimited clears slice. Numbered pages saturate subtraction and multiplication; default size is ten. | [Pagination conveniences](pagination_convenience_5_0_6.md). | Qualified: all twelve complete delegate/arithmetic bodies and 8,448 original boundary/composition outcomes; current runtime input preservation and integration pass. |
 | EX12 | Optimization configuration | Default/configured continuous and ID-set methods delegate to core query configuration. Top-N parent threshold delegates separately; zero selects the provider window plan. | [Execution shapes](generated_execution_shapes_5_0_6.md), [relation planning extensions](relation_planning_extensions_5_0_6.md). | Qualified: complete core constructors/five delegates, 152 original/native/module scenarios, exact defaults/guard precedence/replacement and separate physical-path evidence. |
 | EX13 | Source/result model separation | Repository lookup remains the source entity; typed list/first/one/page/stream decode the result entity. Compact rows/count/exists do not decode that result type. | [Complete source/result review](execution_source_result_models_5_0_6.md), [return type](generated_return_type_5_0_6.md), [execution shapes](generated_execution_shapes_5_0_6.md). | Qualified: complete source/result bodies, all-eight typed/compact/scalar observations, full JSON/NULL/load state and current binding/retention controls. |
@@ -49,12 +49,14 @@ pagination configurations, no/partial/full consumption, Policy, safe diagnostics
 and actual subsequent connection reuse. It repairs the missing application-level
 zero-chunk guard. The core SelectQuery zero value remains permitted.
 
-There are 7,092 raw equalities and 6,012 explicit native-start/Rust-poll
-dispositions. Rejected startup errors retain exact source item errors; an already
-created native cursor emits the original DiagnosticStream zero-row Cancelled
-record even when the lazy generated Rust wrapper never constructs that cursor.
-The comparator validates complete Policy and diagnostic payloads rather than
-dropping those fields. Raw observations remain retained independently.
+The earlier checkpoint had 7,092 raw equalities and 6,012 explicit
+native-start/Rust-poll dispositions. Those observations remain historical.
+The installed deferred runtime now matches **13,104/13,104 raw original
+observations**, including unpolled requests, Policy and complete diagnostics.
+The comparator removes the obsolete startup rewrite and retains all boundary
+assertions and immutable inputs. The preceding full native epoch failed only
+because it still required that old rewrite; focused verification and complete
+integration retain their separate scopes.
 
 The [current source review](parity/execution_responsibility_after_stream_shapes_5_0_6.json)
 preserves all 37 complete original methods and earlier scope bodies, refreshes

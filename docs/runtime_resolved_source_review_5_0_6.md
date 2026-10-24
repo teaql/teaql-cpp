@@ -241,3 +241,62 @@ including144 provider calls and144 attempted events. C++ mutation templates are
 compiled in the probe with a support-archive symbol audit. This is an isolated
 policy qualification, not a complete Release build or live SQLite commit gate.
 Whole-source acceptance remains pending.
+
+## Current complete-method and composed-consumer readback
+
+The current readback retains the 75-definition/26-group inventory and verifies
+it again against the unchanged locked source. The two top-level helpers, the
+continuous-page state carrier, all thin wrappers and the private mutation/event
+methods remain in scope. The separately included future-test source keeps its
+independent acceptance; it is not counted as another function in this file.
+
+Several distinctions must survive the complete-method reconciliation:
+
+- Ordinary and compact list entry points have different relation-aggregate fast
+  paths. Prepared owned/borrowed reads, raw SmartList reads and enhanced typed
+  reads also retain their distinct normalization, cache and hydration routes.
+- Query preparation selects behavior from the incoming query entity, applies
+  behavior before Policy and adds relation local keys using the final metadata.
+  Typed entity paths restore identity/version fields without changing DTO or
+  aggregate projection semantics. Dynamic selection capture and empty-row
+  guards remain specific to each caller rather than one universal entry guard.
+- Cached data contains rows rather than a retained request intent. A cache hit
+  reconstructs diagnostic classification from the current compiler without a
+  provider call or fabricated SQL-success record. Readonly schema attachment and
+  fresh typed roots remain separate from the shared cached payload.
+- Stream observation owns its scoped service through delayed consumption.
+  Dynamic stream storage/selection admission precedes opening the provider;
+  unsupported relation/group enhancement retains its explicit failure boundary.
+  Continuous cursors publish only after the relevant successful execution path.
+- Mutation preparation, provider calls and event emission retain source order.
+  The private `fetch_current_event_row` intentionally performs no database read;
+  complete original snapshots avoid replacement, while missing/partial snapshots
+  retain the source's empty fallback. Insert/update/delete/recover and batch
+  events retain their different trace handling, earlier effects before failures,
+  and checked-Debug versus Release version arithmetic.
+- A repository scope preserves its receiver entity and takes an independent
+  snapshot of diagnostic ancestry. Explicit aggregate arguments participate in
+  privacy traversal without adding fabricated execution relation frames. The
+  complete request tree is classified before the first protected SQL record.
+
+These are source/caller dispositions, not additional features inferred from
+delegate acceptance. Their original observations remain in the responsibility
+table and its linked reviews, including the retained initial mismatches and
+rejected alternatives.
+
+The [current imported union](parity/resolved_source_current_module_union_5_0_6.json.gz)
+passes **37/37 equivalent native command bodies**, with only each executable path
+replaced by its canonical module consumer. It does not claim 37 newly registered
+module CTests. Exact native selection, argument/environment preservation,
+individual terminal commands, compiler outputs, no-work builds before/after,
+1,163 canonical consumer/fixture checks and immutable input/reference guards are
+retained. All 11,412 execution inputs agree with the full native epoch. The owned
+controller directory (3,814 bytes) was removed after its children exited.
+
+No source function, generated SDK or original corpus changes in this readback.
+The current full native build and compiler contracts passed. Its terminal CTest
+result is **876/877**, with the obsolete stream comparator as the only failure;
+the [strict-source readback](protected_stream_shapes_5_0_6.md) records that issue
+and the comparator repair separately. No source disposition or capability is
+promoted by this checkpoint; complete integration, source acceptance and all
+remaining P0–P7 exits remain separate decisions.

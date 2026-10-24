@@ -274,3 +274,33 @@ were reused, with no copied binaries or disposable build directories created.
 This closes the focused repair gates, not the whole provider/resolved source or
 P0-P7 acceptance. The original full-suite 866/869 result remains historical
 failed evidence until a later complete integration checkpoint supersedes it.
+
+## Current complete imported-provider replay
+
+The [current imported receipt](parity/sqlite_provider_source_current_module_closure_5_0_6.json.gz)
+rebuilds the canonical provider consumers and matches **15,676/15,676** complete
+outputs across the eleven original matrices and 64 checked timestamp controls.
+It also passes the exact **27/27** CTest selections: all 22 unit/ownership
+selections and five chunk/binding/lease controls, with no failures/errors/skips.
+The source root's four C++ ports retain the 15/17/7/3 mapping to the original
+42 test bodies. This is a current candidate replay against retained actual
+reference outcomes, not a claim that Rust was recompiled in this continuation.
+
+The earlier complete source gate's original source hashes still match the locked
+reference, as do every retained corpus and declared original driver. The
+controller records those bindings before compiling the current C++ consumers.
+It retains the checked decoding-profile assertion, full outputs, exact command
+paths, binary/corpus hashes, current registry and JUnit, and successful no-work
+builds before/after execution. Canonical verification passes 1,163
+consumer/fixture bodies. All 11,412 execution inputs and both locked references
+remain identical to the concurrent full native epoch.
+
+The owned controller/JUnit directory (13,623 bytes) was removed after all child
+processes exited. Stable module and native build directories are reused. No
+production function, C++ test assertion, generated artifact or original source
+changes in this replay; no new sanitizer, MIPS or physical-device execution is
+claimed. The complete native build succeeded and its CTest phase finished at
+**876/877**, with only the obsolete stream comparator failing. The
+[strict-source readback](protected_stream_shapes_5_0_6.md) records that failure
+and its repair. This source remains pending until complete integration has a
+passing terminal result and the complete SP01–SP30 acceptance is recorded.
