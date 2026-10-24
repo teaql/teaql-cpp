@@ -1,5 +1,10 @@
 # Audit lexical boundaries (Rust 5.0.6)
 
+The later [expression and nested-attribute continuation](audit_expression_grammar_5_0_6.md)
+adds 2,016 unchanged source observations, corrects 138 further discrepancies and
+passes the combined 4,681-case source gate plus 113 permanent Java tests. The
+counts and receipts below retain this earlier checkpoint's scope.
+
 Status: the source-backed Java parser correction is installed. The earlier
 full native integration and runtime/identity correction remain separate
 checkpoints. Complete AP02/G14/G17/G13 and P0-P7 acceptance is not claimed.

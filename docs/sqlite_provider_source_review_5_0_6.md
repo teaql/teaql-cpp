@@ -1,8 +1,11 @@
 # SQLite provider root source review: Rust 5.0.6
 
-Status: pre-acceptance responsibility review. The whole source remains
-`pending_review`. Passing the focused lease repair or the root tests does not
-establish complete provider acceptance.
+Current status: qualified for the complete source responsibility by the
+[final source-cohort closure](runtime_core_source_closure_5_0_6.md), following
+877/877 native tests, the current 15,676-outcome/27-test imported gate and explicit
+unchanged-decoder Release reuse. Earlier pre-acceptance and pending checkpoints
+below retain their historical scope. Passing a focused lease repair or only the
+root tests would not establish this complete source decision.
 
 The reference is `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 `teaql-provider-sqlite/src/lib.rs` has 3,970 lines: definitions and production
@@ -304,3 +307,13 @@ claimed. The complete native build succeeded and its CTest phase finished at
 [strict-source readback](protected_stream_shapes_5_0_6.md) records that failure
 and its repair. This source remains pending until complete integration has a
 passing terminal result and the complete SP01–SP30 acceptance is recorded.
+
+The [final-checkpoint module receipt](parity/sqlite_provider_source_final_module_closure_5_0_6.json.gz)
+again matches **15,676/15,676** complete retained source outcomes and passes the
+same **27/27** registered CTests. Checked decoding, native 64-bit raw Debug,
+timestamp controls, exact commands/registry/JUnit, no-work builds and 1,163
+canonical checks retain their stated scope. The
+[four-source wrapper](parity/core_sources_current_module_checkpoint_5_0_6.json.gz)
+binds this replay to the same **11,413** inputs/references as the new native epoch
+and the three adjacent module gates. No new Rust execution, sanitizer or whole
+provider acceptance is inferred from this candidate replay.

@@ -5,6 +5,14 @@ and generator remain pinned to the commits in `upstream.lock.json`. Source
 dispositions remain **118 accepted / 4 pending_review / 2 excluded_external**;
 capabilities remain **11 qualified / 6 partial**.
 
+The later [complete core source cohort](runtime_core_source_closure_5_0_6.md)
+records **877/877** native tests and closes the four pending source decisions:
+**122 accepted / 0 pending / 2 excluded_external**. The
+[installed syntax continuation](audit_postfix_grammar_5_0_6.md) then qualifies
+8,252 source observations, 114 Java tests and 24 generated caller pairs without
+changing C++ implementations. The earlier counts and failed epoch below retain
+their original scope; capabilities and P0–P7 still remain incomplete.
+
 ## Current source reviews
 
 The following reviews retain complete responsibility boundaries and fresh
@@ -41,12 +49,23 @@ means that the probe finished; it does not mean parity passed.
 
 The differences cover nested attributes on struct fields, match arms and struct
 patterns, plus chained comparison/range expressions. Each of six expressions is
-tested directly, parenthesized and inside a block. Rust continues to the later
-`audit_value_max_len=29` setting; Java retains the earlier value 17. These are
-unresolved producer discrepancies. This checkpoint changes no Java parser or
+tested directly, parenthesized and inside a block. Nested attributes let Rust
+continue to the later `audit_value_max_len=29` setting while Java retains 17.
+Chained comparisons/ranges have the opposite result: Rust retains 17 while Java
+continues to 29. These are unresolved producer discrepancies at this checkpoint.
+This checkpoint changes no Java parser or
 generated artifact and grants no compatibility exception for these cases.
 
 Disposable probe/controller outputs were removed after their processes exited;
 compact receipts retain commands, hashes, complete observations and cleanup
 accounting. Stable preset build directories are retained. This checkpoint does
 not add sanitizer, MIPS/QEMU or physical-device qualification.
+
+## Subsequent expression-parser continuation
+
+The [source-backed correction](audit_expression_grammar_5_0_6.md) resolves the
+18 initial differences and 120 additional operator/attribute/context cases.
+The combined immutable corpora match 4,681/4,681 observations, with 113 Java
+tests passing and an actual historical-parser rejection control. This later
+producer continuation does not promote the four pending runtime sources or
+relabel the preceding full-native failure.

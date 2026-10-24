@@ -1,6 +1,9 @@
 # Runtime graph model source review (Rust 5.0.6)
 
-Status: pending_review. This review concerns the complete 563-line
+Status: qualified for the complete source responsibility by the
+[final source-cohort closure](runtime_core_source_closure_5_0_6.md), following
+877/877 native tests and the current imported gate. Earlier pending checkpoints
+below retain their historical scope. This review concerns the complete 563-line
 `teaql-runtime/src/graph.rs`, SHA-256
 `2c0a3e061871b5dee9fef0d3f15987477c3e8051d66e5dbfbd2df1030fbaa93f`, at
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`. Historical acceptance of the four-file
@@ -566,3 +569,14 @@ This remains a failed integration result. The source disposition stays
 source-specific acceptance reconciliation are recorded.
 Current source totals remain **118 accepted / 4 pending_review /
 2 excluded_external**; capabilities remain **11 qualified / 6 partial**.
+
+### Imported replay on the final parser/provenance checkpoint
+
+The [current module receipt](parity/runtime_graph_source_final_module_closure_5_0_6.json.gz)
+again passes all **14/14** CTests on the same **11,413** frozen inputs and
+references as the new full native epoch. All unchanged model/helper corpora and
+fixture assertions retain their prior scope; no new Rust execution is claimed
+by this candidate replay. Canonical 1,163 checks and no-work builds before/after
+pass. The [four-source wrapper](parity/core_sources_current_module_checkpoint_5_0_6.json.gz)
+joins this gate with current root, provider and resolved-service consumers.
+Complete native integration and the source acceptance decision remain pending.

@@ -34,6 +34,16 @@ CASES = [
     "fn_missing_type_audit_value_max_len",
     "call_bad_qualified",
 ]
+EXPRESSION_CASES = [
+    "grammar_26_bare", "grammar_36_bare", "grammar_49_bare",
+    "grammar_56_bare", "grammar_57_bare", "grammar_58_bare",
+]
+SYNTAX_CASES = [
+    "cast_00_00_bare_expression", "cast_00_00_grouped_expression",
+    "member_01_02_bare", "tuple_member_03_02_bare", "tuple_member_11_00_bare",
+    "member_supplement_00_bare", "outer_attr_08_00_continued",
+    "outer_attr_20_00_continued", "outer_attr_25_00_continued",
+]
 
 
 def digest(path):
@@ -50,6 +60,18 @@ def main():
     corpus = json.loads(gzip.decompress(corpus_path.read_bytes()))
     selected = [next(case for case in corpus["cases"] if case["name"] == name)
                 for name in CASES]
+    expression_path = PRODUCER / "generator/src/test/resources/cpp_expression_metadata_5_0_6.json.gz"
+    expressions = json.loads(gzip.decompress(expression_path.read_bytes()))
+    assert expressions["runtime_commit"] == corpus["runtime_commit"]
+    assert expressions["generator_commit"] == corpus["generator_commit"]
+    selected.extend(next(case for case in expressions["cases"] if case["name"] == name)
+                    for name in EXPRESSION_CASES)
+    syntax_path = PRODUCER / "generator/src/test/resources/cpp_expression_syntax_metadata_5_0_6.json.gz"
+    syntax = json.loads(gzip.decompress(syntax_path.read_bytes()))
+    assert syntax["runtime_commit"] == corpus["runtime_commit"]
+    assert syntax["generator_commit"] == corpus["generator_commit"]
+    selected.extend(next(case for case in syntax["cases"] if case["name"] == name)
+                    for name in SYNTAX_CASES)
     assert all(case["expected"]["parsed"] for case in selected)
     runtime = ROOT / ".reference/teaql-rs"
     libraries = [ROOT / "build_native_current" / package / ("lib" + package + ".a")
@@ -59,13 +81,14 @@ def main():
                               for path in (ORIGINAL / package / "src/main/java").rglob("*.java"))
     cpp_sources = sorted((PRODUCER / "generator/src/main/java/com/skynet/codegenerator/cpp")
                          .glob("*.java"))
-    inputs = [Path(__file__).resolve(), corpus_path, *original_sources, *cpp_sources,
+    inputs = [Path(__file__).resolve(), corpus_path, expression_path, syntax_path,
+              *original_sources, *cpp_sources,
               ROOT / "scripts/audit_generated_privacy_contracts_5_0_6.py",
               ROOT / "scripts/verify_generated_privacy_metadata.py", *libraries]
     before = {str(path): digest(path) for path in inputs}
     record = {
         "scope": "Fresh complete original generated entities and native SDK "
-                 "descriptor/field-privacy callers for nine audit-expression cases; "
+                 "descriptor/field-privacy callers for twenty-four audit-expression cases; "
                  "no runtime assembly, SQL, full AP02 or complete generator acceptance",
         "complete": False,
         "runtime_commit": corpus["runtime_commit"],

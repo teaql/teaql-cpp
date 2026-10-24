@@ -1,5 +1,17 @@
 # G14 audit/privacy and identity requirements
 
+The current [installed syntax continuation](audit_postfix_grammar_5_0_6.md)
+matches **8,252/8,252** unchanged source observations and **114/114** Java tests;
+24 fresh original/C++ model pairs match 72 descriptors and 336 field-policy
+tuples. The exact preceding parser reproduces 1,694 differences and fails the
+new permanent regression. All 80 ordinary SDK destinations reproduce identical
+implementation bytes with provenance-only refresh. The preceding frozen C++
+epoch passes **877/877**; its subsequent [source cohort](runtime_core_source_closure_5_0_6.md)
+records 122 accepted/0 pending/2 external exclusions. These current scopes
+supersede stale counts below without relabeling historical receipts. AP02's
+full grammar/identity/caller reconciliation, AP03's unanswered naming decision
+and complete AP01–AP12/G14/G17/P0–P7 obligations remain open.
+
 Status: partial. This finite review preserves the complete G14 responsibility.
 It replaces neither source-based qualification nor the remaining G17 execution
 contracts. The active references are Rust 5.0.6

@@ -1,4 +1,10 @@
-# Resolved entity service: Rust 5.0.6 reconciliation draft
+# Resolved entity service: Rust 5.0.6 source review
+
+Current status: qualified for the complete source responsibility by the
+[final source-cohort closure](runtime_core_source_closure_5_0_6.md), following
+877/877 native tests and the current 37-command imported union. Earlier draft
+and pending statements below retain their checkpoint scope; they do not waive
+the source-specific responsibilities or remaining capability/phase exits.
 
 Reference: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 Scope: all 2,261 lines of `teaql-runtime/src/data_service/resolved.rs`, SHA256
@@ -300,3 +306,13 @@ the [strict-source readback](protected_stream_shapes_5_0_6.md) records that issu
 and the comparator repair separately. No source disposition or capability is
 promoted by this checkpoint; complete integration, source acceptance and all
 remaining P0–P7 exits remain separate decisions.
+
+The [final-checkpoint imported union](parity/resolved_source_final_module_union_5_0_6.json.gz)
+repeats all **37/37 equivalent command bodies** on the current **11,413** frozen
+inputs, with only the canonical module executable paths substituted. Exact
+arguments, environments, timeouts, the current native registry, no-work builds
+and 1,163 canonical checks remain intact. The
+[four-source wrapper](parity/core_sources_current_module_checkpoint_5_0_6.json.gz)
+confirms its input/reference identity with the current root/provider/model gates
+and removes the owned controller afterward. These remain 37 command executions,
+not 37 newly registered module CTests or a full-native verdict.

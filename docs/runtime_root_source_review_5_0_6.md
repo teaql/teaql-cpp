@@ -1,6 +1,9 @@
 # Complete runtime-root review (Rust 5.0.6)
 
-Status: **pending current integration qualification**. This review concerns
+Status: **qualified for the complete source responsibility** by the
+[final source-cohort closure](runtime_core_source_closure_5_0_6.md), following
+877/877 native tests and the current imported gate. Earlier pending checkpoints
+below retain their historical scope. This review concerns
 `teaql-runtime/src/lib.rs` at `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`,
 SHA-256 `8afefa70e4dfc9b2564038f00b4f2f66aad91f59c32ef27a6fcb9f25fc6242e8`.
 The file has 4,513 lines. Historical 5.0.5 acceptance is retained separately;
@@ -107,3 +110,15 @@ successful full native result, current imported execution, exact input
 and source hashes, and source-specific acceptance reconciliation remain required.
 Source totals remain **118 accepted / 4 pending_review / 2 excluded_external**;
 the six partial capabilities and P0–P7 remain open.
+
+## Replay on the final parser/provenance checkpoint
+
+The [current module receipt](parity/runtime_root_source_final_module_closure_5_0_6.json.gz)
+repeats all 11 registered tests, all 75 root mappings and the three rejection
+controls on the same **11,413** frozen inputs as the new complete native epoch.
+Canonical 1,163 and export-catalog 1,524 checks pass with successful no-work
+builds before/after. The [four-source wrapper](parity/core_sources_current_module_checkpoint_5_0_6.json.gz)
+checks identical reference/input snapshots across all four current module gates
+and removes each owned controller directory after its child exits. This closes
+the current imported-consumer refresh; full native integration and the formal
+source acceptance decision remain pending.

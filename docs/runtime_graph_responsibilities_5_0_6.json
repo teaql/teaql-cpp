@@ -3,7 +3,7 @@
   "source": "teaql-runtime/src/graph.rs",
   "source_sha256": "2c0a3e061871b5dee9fef0d3f15987477c3e8051d66e5dbfbd2df1030fbaa93f",
   "source_lines": 563,
-  "status": "reviewed_scoped_model_gates_passed_pending_full_integration",
+  "status": "complete_source_responsibility_qualified",
   "notice": "Complete responsibility inventory is not itself semantic or full integration acceptance. Test fixture paths identify inspected witnesses, not automatic proof of every possible input. Historical receipts retain their actual scope.",
   "responsibilities": [
     {
@@ -219,5 +219,7 @@
   "current_gates": [
     "docs/parity/runtime_graph_model_native_closure_5_0_6.json.gz",
     "docs/parity/runtime_graph_model_modules_closure_5_0_6.json.gz"
-  ]
+  ],
+  "status_before_complete_source_acceptance": "reviewed_scoped_model_gates_passed_pending_full_integration",
+  "complete_source_acceptance": "docs/runtime_core_source_closure_5_0_6.md"
 }

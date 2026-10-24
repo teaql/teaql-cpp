@@ -21,7 +21,11 @@ PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
 REFERENCE = ROOT / ".reference/teaql-rs"
 PROJECT = ROOT / "tests/parity/rust_container_metadata_reference_5_0_6"
 PACKAGE = "com/skynet/codegenerator/cpp"
-CORPUS = PRODUCER / "generator/src/test/resources/cpp_audit_metadata_5_0_6.json.gz"
+CORPORA = (
+    (PRODUCER / "generator/src/test/resources/cpp_audit_metadata_5_0_6.json.gz", 2665),
+    (PRODUCER / "generator/src/test/resources/cpp_expression_metadata_5_0_6.json.gz", 2016),
+    (PRODUCER / "generator/src/test/resources/cpp_expression_syntax_metadata_5_0_6.json.gz", 3571),
+)
 TESTS = [
     "cpp/CppRustLiteralMetadataTest.java",
     "cpp/CppAuditMetadataSequenceTest.java",
@@ -66,18 +70,24 @@ def main():
     args = parser.parse_args()
     if args.record.exists() or args.record.suffix != ".gz":
         parser.error("Use a fresh .gz evidence path")
-    corpus = read(CORPUS)
     runtime = json.loads((ROOT / "upstream.lock.json").read_text())
     generator = json.loads((PRODUCER / "cpp_generator.lock.json").read_text())
-    assert corpus["schema"] == 1 and len(corpus["cases"]) == 2665
-    assert corpus["runtime_commit"] == runtime["commit"]
-    assert corpus["generator_commit"] == generator["generator_baseline_commit"]
-    original_receipt = ROOT / corpus["source_receipt"]
-    assert digest(original_receipt) == corpus["source_receipt_sha256"]
+    cases, corpus_inputs, corpus_records = [], [], []
+    for path, count in CORPORA:
+        corpus = read(path)
+        assert corpus["schema"] == 1 and len(corpus["cases"]) == count
+        assert corpus["runtime_commit"] == runtime["commit"]
+        assert corpus["generator_commit"] == generator["generator_baseline_commit"]
+        original_receipt = ROOT / corpus["source_receipt"]
+        assert digest(original_receipt) == corpus["source_receipt_sha256"]
+        cases.extend(corpus["cases"])
+        corpus_inputs.extend([path, original_receipt])
+        corpus_records.append(dict(path=str(path), sha256=digest(path), cases=count,
+                                   source_receipt=corpus["source_receipt"]))
     sources = sorted((PRODUCER / "generator/src/main/java" / PACKAGE).glob("*.java"))
     test_root = PRODUCER / "generator/src/test/java/com/skynet/codegenerator"
     tests = [test_root / name for name in TESTS]
-    inputs = [*sources, *tests, CORPUS, Path(__file__).resolve(),
+    inputs = [*sources, *tests, *corpus_inputs, Path(__file__).resolve(),
               ROOT / "tests/generator/ContainerMetadataProbe.java",
               PROJECT / "Cargo.toml", PROJECT / "Cargo.lock", PROJECT / "main.rs",
               REFERENCE / "Cargo.lock", REFERENCE / "teaql-macros/src/attr.rs"]
@@ -91,7 +101,8 @@ def main():
         "complete": False,
         "full_goal_complete": False,
         "runtime_commit": runtime["commit"],
-        "generator_commit": corpus["generator_commit"],
+        "generator_commit": generator["generator_baseline_commit"],
+        "corpora": corpus_records,
         "parser_overlay": str(args.candidate_parser) if args.candidate_parser else None,
         "input_hashes_before": before,
         "free_bytes_before": shutil.disk_usage(ROOT).free,
@@ -140,16 +151,16 @@ def main():
                         "--manifest-path", str(PROJECT / "Cargo.toml"), "-j", "2"], env=env)
             built.check_returncode()
             encoded = "".join(json.dumps(case["input"], ensure_ascii=True) + "\n"
-                              for case in corpus["cases"])
+                              for case in cases)
             observed = run("original", [str(owned / "target/debug/teaql_container_metadata_reference_506")],
                            input_text=encoded)
             observed.check_returncode()
             original = [json.loads(line) for line in observed.stdout.splitlines()]
-            assert len(original) == len(corpus["cases"])
+            assert len(original) == len(cases)
             record["original_corpus_differences"] = [
                 {"name": case["name"], "input": case["input"],
                  "retained": case["expected"], "current": value}
-                for case, value in zip(corpus["cases"], original)
+                for case, value in zip(cases, original)
                 if case["expected"] != value
             ]
             assert not record["original_corpus_differences"], "Original source outcomes changed"
@@ -188,7 +199,7 @@ def main():
                 {"name": case["name"], "input": case["input"],
                  "original": expected, "java": value,
                  "match": same_contract(expected, value)}
-                for case, expected, value in zip(corpus["cases"], original, actual)
+                for case, expected, value in zip(cases, original, actual)
             ]
             record["differences"] = [case for case in record["cases"] if not case["match"]]
             temporary = owned / "java_tmp"

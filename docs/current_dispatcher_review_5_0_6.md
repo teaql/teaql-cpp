@@ -1,5 +1,66 @@
 # Current query comparator and registration review
 
+## Current frozen 877-test locator checkpoint
+
+The [current locator receipt](parity/parity_dispatcher_current_checkpoint_5_0_6.json.gz)
+reads the complete native registry after its successful build and no-work check.
+It retains exact commands/properties, 439 distinct comparator source bodies and
+hashes, the shared comparison helper and the unchanged inventory implementation.
+The inventory resolves **304 active-baseline bindings**, finds no missing or
+historical direct corpus, and leaves **169 custom registrations** for semantic
+and provenance review. These are locator classifications, not 169 absent runtime
+implementations or a claim of complete SQ02 acceptance.
+
+All **160** current commands whose local parser explicitly declares `--cpp`
+supply that option. Inherited parsers, alternative flags, invariant-only checks,
+normalization and actual source/corpus provenance still require their own
+reviews. The shared observation boundary still checks terminal process success,
+LF framing, exact record count and complete typed JSON equality.
+
+The stream comparator now checks all 13,104 raw source observations without the
+obsolete startup rewrite. Its focused registered native/module tests pass; the
+earlier full epoch's failed expectation remains historical. All 11,413 current
+execution inputs and both references stayed unchanged during this readback.
+The owned registry/report directory (620,147 bytes) was removed after execution.
+The corresponding full native epoch subsequently passed **877/877** with all
+frozen input checks intact. The
+[source-cohort closure](runtime_core_source_closure_5_0_6.md) records that result
+separately; this locator review does not change a capability verdict.
+
+### Executed empty-result rejection controls
+
+The [single-binary controls](parity/custom_dispatcher_empty_result_controls_5_0_6.json.gz)
+replace each custom registration's `--cpp` executable with an owned executable
+that consumes its input, exits successfully and emits no results. There are 162
+attempts: 161 actually invoke that executable and reject its missing output.
+The formatter's `--cpp` parameter instead names a directory; the initial file
+substitution fails path discovery and is retained as setup evidence, not counted
+as a result-count control.
+
+The [alternative-command controls](parity/custom_dispatcher_alternative_empty_controls_5_0_6.json.gz)
+complete that formatter case with its actual directory layout, valid native
+pointer-width response and valid count-admission responses, then withhold the
+formatting results. It rejects the missing rows after those prerequisites.
+The five inherited Checker/model selections likewise invoke an empty executable
+under their existing fixed-clock driver and reject its missing observations.
+The runnable-example comparator rejects the absent required result prefix. Its
+empty-input rejection does not claim separate execution of every example branch.
+
+Thus **168** current custom comparator registrations actually reject the
+controlled empty result. The remaining registration is the existing comparator
+invariant test itself; its **13/13** resource/deferred saved, missing, extra,
+partial and corrupt-result controls pass. All **169** custom registrations have
+this stated negative-control scope. There are zero accepted empty-result
+controls and zero timeouts; the initial formatter path error remains separate.
+
+These controls test the exact current CLI selections. They do not establish
+every original dependency, normalization rule, nonempty partial-result branch
+or capability requirement. Complete SQ02 remains open. Original comparators,
+corpora and C++ functions are unchanged, the same 11,413 input/reference guards
+pass, and both owned control directories are removed after execution.
+
+## Historical 736-test locator checkpoint
+
 Status: finite source/registration review, not complete SQ02 acceptance. The
 current native registry contains 736 tests. The unchanged simple inventory
 resolves 236 direct active-baseline bindings and leaves 136 custom registrations
