@@ -37,9 +37,9 @@
   "diagnostics_source_review_sha256": "35a88eb197b0b64c3a91ba9f04d6638b8fa2a50d8a715567f602b841c33b4c67",
   "support_files": {
     "scripts/derived_query_cli_source_binding_5_0_6.py": "bee9aa9fca42ffcb8b123a8cc44937c196704a8a0f09deee74fa5b0820ea07ae",
-    "tests/parity/verify_derived_query_cli_controls_5_0_6.py": "39101a8cd04b97de462c58dec143b408bfab5c3b24953bae43760dd80597ec60",
-    "tests/parity/compare_derived_query_composition_5_0_6.py": "b2d5ddbc213830622b6cb7de43a77fa09d1898880b5b43ed9d12c7f22620bdf8",
-    "tests/parity/compare_derived_query_diagnostics_5_0_6.py": "7684d6e4d2be2f019be3d67a75d6b8948015f326a74da37f692cf33eef372292",
+    "tests/parity/verify_derived_query_cli_controls_5_0_6.py": "eccfc680d1b912becf44bab870a2a34413775dff6f9ae57e4d56e25f8ecc79a5",
+    "tests/parity/compare_derived_query_composition_5_0_6.py": "34df29758b071a0a0e714c389b7ab855a1ccc7848faa6684ce1809adae28e072",
+    "tests/parity/compare_derived_query_diagnostics_5_0_6.py": "b12871108f108950b48fe5d0b1f762c5041cc5a7e1e5da14914dc2275b9c998d",
     "tests/parity/generate_derived_query_composition_source_5_0_6.py": "5e1cad6910ae3b88b555a9875105ebd97deb58a956fea13f9f876f57497ce6c9",
     "tests/parity/generate_derived_query_diagnostics_5_0_6.py": "da42a917eb5c32218d998a13b257c57306b1d5cd5c1040ebaa122e154ac79b98",
     "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",

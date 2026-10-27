@@ -73,7 +73,9 @@ def main():
         for key,value in current.items():assert corpus[key]==value,key
         assert same(cases,[row['input'] for row in corpus['cases']])
         expected=[row['expected'] for row in corpus['cases']]
-        if args.rust:assert same(expected,observe(args.rust,cases)),'Original composed observations changed'
+        if args.rust:
+            if not same(expected,observe(args.rust,cases)):
+                raise RuntimeError('Original composed observations changed')
     if not args.cpp:
         print('Recorded actual original composed query outcomes:',len(cases));return 0
     actual=observe(args.cpp,cases)

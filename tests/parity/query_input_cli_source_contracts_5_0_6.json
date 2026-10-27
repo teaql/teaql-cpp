@@ -122,14 +122,14 @@
     "tests/generator/parity/relations_rust/lib/src/school/request.rs": "709533107dda78523a53857f2ed972458e5e0ec5eeaa8040a77ff245fdda6cc3",
     "tests/generator/query_field_branches.xml": "f4da2f61c081a0ba6ef4407ab5584b11e5f8227a5a14b759040bceaf237b4e72",
     "tests/generator/relations.xml": "685f031888af4c1b6263774f8e667ed796baca25829e40103d9f29d444c69b42",
-    "tests/parity/compare_enhancement_inputs_5_0_6.py": "19b85f51eb772fd2bcfe38e1dbe2027eda750c2eb46d599502757b5c62d92274",
-    "tests/parity/compare_generated_execution_shapes_5_0_6.py": "15d977e96a871c2be295efc063f0b46d77352e3d090e0c8ff929919c99ac2e5d",
-    "tests/parity/compare_generated_query_field_sql_5_0_6.py": "9813276a9b3a0064c7a73b53b2297edee557970c874813b885051c5db776e174",
-    "tests/parity/compare_generated_selection_scope_5_0_6.py": "748b917afeb069c3d5bb662705b755450cde95ea76a0de8d01c321a7bb4aa8c9",
-    "tests/parity/compare_generated_type_match_ranges_5_0_6.py": "38eee8981bc7ec39e4977888ddbab9d98f5b4ef589e3965c20b66e51f93d05d5",
-    "tests/parity/compare_matching_statistics_inputs_5_0_6.py": "d3ffbea75aaa5069e8733257ea4f8514e6e9a7c7b0daa38951945887b922f8ee",
-    "tests/parity/compare_relation_analysis_inputs_5_0_6.py": "cc1ee8c1a7d26a87e4cf6b68c69d7af86163b0866ac0cf4f8ef1cf77ee14030e",
-    "tests/parity/compare_relation_selection_inputs_5_0_6.py": "0a05881b4af397a05a6f27ba2f87e20bc3598032ad9869f4c40691f5828a06ca",
+    "tests/parity/compare_enhancement_inputs_5_0_6.py": "2a4a0313af6251fa41db01c0b1a15fcdd80db00beef75c8a1804d78098f11bd0",
+    "tests/parity/compare_generated_execution_shapes_5_0_6.py": "aecdb86046f75424f36b71e24f5bcf8790f5eba17c7d6ff104ffcad1d96a61bb",
+    "tests/parity/compare_generated_query_field_sql_5_0_6.py": "998f40debaa44a902056d3d495ea79fb520be98ec6c1f1150d494621f7dadc59",
+    "tests/parity/compare_generated_selection_scope_5_0_6.py": "3c8e844fe29eba8dc17e626c28b3aed045609ce8bc6e9ab1b8ae7a7e84358fcb",
+    "tests/parity/compare_generated_type_match_ranges_5_0_6.py": "94ae9a23b8ecdac008cb93aaef84afb097e7256af27b5523468e7460ab54cc02",
+    "tests/parity/compare_matching_statistics_inputs_5_0_6.py": "1169b1898e29c62155d7b8e8196ccac7011813eb53b87889c51263e5d8456092",
+    "tests/parity/compare_relation_analysis_inputs_5_0_6.py": "b6430ea7ce97166b332d5c8fa3b06b0dbef33b102968dbb6e4392d736cc67453",
+    "tests/parity/compare_relation_selection_inputs_5_0_6.py": "1ceb6d15972ea59dbd8fe1f4e3d3aa37369f7dfc9110e34d2ede68d7c1161392",
     "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
     "tests/parity/enhancement_inputs_5_0_6_cases.json.gz": "9e464407b984c526cd57f1c5a5c9d638af19e1c3f1f5b7c579503a6bdca4fc18",
     "tests/parity/expression_cli_cases.py": "b538589e11091253eda7ecba686ccd9214ea64d108f4e019b9a19419386cf9d1",
@@ -173,9 +173,9 @@
     "upstream.lock.json": "289895ccb9ebbada5dc05ca2e3b2d286895f40eb91d7b0935f6864a08214d246"
   },
   "support_files": {
-    "scripts/query_input_cli_source_provenance_5_0_6.py": "d5dc6ff01544e94fd581b2fef19a7508d294ee605595735cded678d36f23347c",
+    "scripts/query_input_cli_source_provenance_5_0_6.py": "02f8202c46fd633cdf0273de150580cabd7771f8137a18af56b950c1210679ad",
     "scripts/expression_cli_source_provenance_5_0_6.py": "bcfc2e7d8d7eac976cf858d91601936694306fa4d0310a42e75f4a6e99d57881",
-    "scripts/custom_public_cli_source_provenance_5_0_6.py": "ab6ff9eb1008c7ab182e3a87fc8036a30e951c9624b6dd511557915f6a30f31b",
+    "scripts/custom_public_cli_source_provenance_5_0_6.py": "70a4aaf84f54d4c0ee8ce0d312c3b80f45ed3609deacf213a860d43da4ef1d92",
     "tests/parity/verify_query_input_admission_5_0_6.py": "0d8244be8291e7be97c960cdc453947667eac50726a1ac175a731deb7fc98b4b",
     "tests/parity/verify_query_input_cli_source_controls_5_0_6.py": "b3e3baeef0eeb2521a0356399bc329c3c8bedac3899e98faf8f2593359a76b87"
   },
@@ -331,5 +331,30 @@
       "comparator": "tests/parity/compare_relation_analysis_inputs_5_0_6.py",
       "binary": "teaql_generated_analysis_adapter_inputs_probe"
     }
-  ]
+  ],
+  "source_guard_transition": {
+    "helper_sha256": "bf85d15a59992b535e0ed4e016d5fd5aa2ef0523bfe2f8cd1e423c1fee07f60b",
+    "paths": [
+      "tests/parity/compare_enhancement_inputs_5_0_6.py",
+      "tests/parity/compare_generated_execution_shapes_5_0_6.py",
+      "tests/parity/compare_generated_query_field_sql_5_0_6.py",
+      "tests/parity/compare_generated_selection_scope_5_0_6.py",
+      "tests/parity/compare_generated_type_match_ranges_5_0_6.py",
+      "tests/parity/compare_matching_statistics_inputs_5_0_6.py",
+      "tests/parity/compare_relation_analysis_inputs_5_0_6.py",
+      "tests/parity/compare_relation_selection_inputs_5_0_6.py"
+    ],
+    "rewrite": {
+      "path": "docs/parity/optional_source_guard_rewrite_5_0_6.json.gz",
+      "sha256": "3573c7e0f6c01626f7ef70987bb5dce8a2a46356dced60cef190ab9d51ff64f6"
+    },
+    "preedit": {
+      "path": "docs/parity/optional_source_optimized_preedit_5_0_6.json.gz",
+      "sha256": "a4ef8d71e5f30f2de2c42ddeee5f1c528edd8749928f73b60916c36fb41e2bb5"
+    },
+    "postedit": {
+      "path": "docs/parity/optional_source_optimized_postedit_5_0_6.json.gz",
+      "sha256": "8f5425477da1e5acfb298fc4a65995cd07043c945d9f62a6ae2c1ffeffd98359"
+    }
+  }
 }

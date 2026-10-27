@@ -83,7 +83,8 @@ def main():
         assert same(cases, [c['input'] for c in corpus['cases']])
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Original queries changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original queries changed')
     actual = observe(args.cpp, cases)
     failures = [n for n, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     if args.record:

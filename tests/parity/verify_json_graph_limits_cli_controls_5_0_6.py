@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -20,6 +21,26 @@ def rejected(name, action):
     except (RuntimeError, KeyError, AssertionError, ValueError, FileNotFoundError):
         return dict(name=name, rejected=True)
     raise AssertionError('Accepted corrupted graph-limit evidence: ' + name)
+
+
+def write_observer(path, corpus_path, corrupt):
+    path.write_text(f'''#!{sys.executable}
+import gzip
+import json
+import sys
+
+with gzip.open({str(corpus_path)!r}, 'rt') as stream:
+    cases = json.load(stream)['cases']
+inputs = [json.loads(line) for line in sys.stdin if line.strip()]
+if len(inputs) != len(cases):
+    raise SystemExit(2)
+results = [case['expected'] for case in cases]
+if {corrupt!r}:
+    results[0] = {{'invalid_result': True}}
+for result in results:
+    print(json.dumps(result, ensure_ascii=True))
+''')
+    path.chmod(0o755)
 
 
 def main():
@@ -88,12 +109,69 @@ def main():
     changed_tests('duplicate_comparison', lambda x: x.append(copy.deepcopy(comparison(x))))
     changed_tests('missing_comparison', lambda x: x.remove(comparison(x)))
 
-    assert len(controls) == 15 and all(row['rejected'] for row in controls)
+    if len(controls) != 15 or not all(row['rejected'] for row in controls):
+        raise RuntimeError('Incomplete graph-limit source/CTest controls')
+
+    execution_controls = []
+    provenance_controls = []
+    with tempfile.TemporaryDirectory(prefix='teaql_json_graph_limit_control_') as directory:
+        fixture = Path(directory)
+        complete = fixture / 'complete_observer.py'
+        corrupt = fixture / 'corrupt_observer.py'
+        for path, changed in ((complete, False), (corrupt, True)):
+            write_observer(path, ROOT / registry['corpus'], changed)
+            for optimized in (False, True):
+                command = [sys.executable]
+                if optimized:
+                    command.append('-O')
+                command.extend([str(ROOT / registry['comparator']),
+                                '--cpp', str(path)])
+                result = subprocess.run(command, cwd=ROOT, text=True,
+                                        capture_output=True)
+                if changed:
+                    valid = (result.returncode != 0 and
+                             'JSON graph-limit outcomes differ' in result.stderr)
+                else:
+                    valid = (result.returncode == 0 and
+                             'Matched 11 JSON graph boundary/view cases' in result.stdout)
+                if not valid:
+                    raise RuntimeError('Graph-limit comparator control failed: '
+                                       + path.name + ' optimized=' + str(optimized)
+                                       + '\n' + result.stdout + result.stderr)
+                execution_controls.append(dict(observer=path.name,
+                                               optimized=optimized,
+                                               accepted=not changed))
+        shadow = fixture / 'shadow'
+        parity = shadow / 'tests/parity'
+        parity.mkdir(parents=True)
+        for name in ('compare_json_graph_limits_5_0_6.py', 'compare_values.py',
+                     'json_graph_limits_5_0_6_cases.json.gz'):
+            (parity / name).write_bytes((ROOT / 'tests/parity' / name).read_bytes())
+        changed_lock = read(ROOT / 'upstream.lock.json')
+        changed_lock['commit'] = '0' * 40
+        (shadow / 'upstream.lock.json').write_text(json.dumps(changed_lock))
+        for optimized in (False, True):
+            command = [sys.executable]
+            if optimized:
+                command.append('-O')
+            command.extend([str(parity / 'compare_json_graph_limits_5_0_6.py'),
+                            '--cpp', str(complete)])
+            result = subprocess.run(command, cwd=shadow, text=True,
+                                    capture_output=True)
+            if result.returncode == 0 or 'JSON graph-limit corpus baseline differs' not in result.stderr:
+                raise RuntimeError('Graph-limit provenance control failed: optimized='
+                                   + str(optimized) + '\n' + result.stdout + result.stderr)
+            provenance_controls.append(dict(optimized=optimized, rejected=True))
+    if len(execution_controls) != 4 or len(provenance_controls) != 2:
+        raise RuntimeError('Incomplete graph-limit execution/provenance controls')
     if args.record:
         args.record.write_bytes(gzip.compress((json.dumps(dict(
-            complete=True, whole_goal_complete=False, controls=controls),
+            complete=True, whole_goal_complete=False, controls=controls,
+            execution_controls=execution_controls,
+            provenance_controls=provenance_controls),
             indent=2) + '\n').encode(), mtime=0))
-    print('Rejected 15 JSON graph-limit source/CTest substitutions')
+    print('Rejected 15 JSON graph-limit source/CTest substitutions; '
+          '4 execution and 2 provenance controls passed in both Python modes')
 
 
 if __name__ == '__main__':

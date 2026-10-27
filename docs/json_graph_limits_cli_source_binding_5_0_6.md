@@ -34,6 +34,16 @@ self-test. The temporary JUnit file was removed. The
 [milestone receipt](parity/json_graph_limits_cli_milestone_5_0_6.json.gz)
 records the bounded result and artifact hashes.
 
+After the repaired full native epoch, the result comparator's final equality
+check was made explicit so `python -O` cannot skip it. The
+[permanent control receipt](parity/json_graph_limit_optimized_permanent_controls_v2_5_0_6.json.gz)
+retains the 15 source/CTest substitutions and four complete/corrupted
+11-record executions plus two changed-baseline refusals under ordinary and
+optimized Python. The current source
+contract pins both changed Python files; seven selected CTests across this and
+the derived-query comparator pass. The earlier complete native epoch predates
+these two comparator edits.
+
 The [incremental dispatcher lookup](parity/json_graph_limits_cli_remaining_dispatchers_5_0_6.json.gz)
 retains 222 rows: 155 of 160 comparison locators have source contracts, with
 five remaining. The 1,046 CTest registrations are enumeration. The
@@ -44,5 +54,6 @@ This change binds JSON graph boundary evidence and test admission. It does
 not establish full generated JSON or graph Save acceptance, and changes no
 runtime, generator, generated SDK, original Rust method, C++ graph algorithm,
 or Context ownership. Complete G13/G14/G17, GP13/GP16, AP02, and P0–P7
-remain open. No new sanitizer, MIPS, module, GPU, physical-router, or
-full-suite gate was run for this source-binding change.
+remain open. The original source-binding checkpoint did not run sanitizer,
+MIPS, module, GPU, physical-router or full-suite gates. The later complete
+native epoch and post-epoch selected comparator gates are recorded above.

@@ -69,7 +69,9 @@ def main():
         for key,value in current.items():assert corpus[key]==value,key
         assert same(cases,[row['input'] for row in corpus['cases']])
         expected=[row['expected'] for row in corpus['cases']]
-        if args.rust:assert same(expected,observe(args.rust,cases)),'Original expression-root outcomes changed'
+        if args.rust:
+            if not same(expected,observe(args.rust,cases)):
+                raise RuntimeError('Original expression-root outcomes changed')
     if not args.cpp:
         print('Recorded actual original expression-root observations:',len(cases));return 0
     actual=observe(args.cpp,cases)

@@ -105,7 +105,8 @@ def main():
         expected = [row['expected'] for row in corpus['cases']]
         check_source(cases, expected)
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Actual original hot-cache outcomes changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Actual original hot-cache outcomes changed')
     if not args.cpp:
         print('Recorded actual original hot-cache scenarios: 1056 / 6480 generated executions')
         return 0

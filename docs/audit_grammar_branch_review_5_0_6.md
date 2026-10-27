@@ -160,8 +160,11 @@ retain their separate limited scopes; the other 159 cross-branch inputs have
 no generated caller execution. The first full native epoch after this resource
 change and the later comparator edits executes all 1,063 tests with one
 [isolated admission-fixture failure](custom_case_admission_fixture_5_0_6.md).
-The repaired fixture passes its selected gate; a new complete native epoch is
-running. AP02/G14, G13/G17 and P0-P7 remain incomplete.
+The repaired fixture passes its selected gate. The
+[repaired complete native epoch](parity/ap02_cross_composition_full_native_repaired_terminal_5_0_6.json.gz)
+passes **1,063/1,063** on **11,811** unchanged inputs, with zero failures,
+errors or skips. Later Python comparator hardening has selected gates only;
+AP02/G14, G13/G17 and P0-P7 remain incomplete.
 
 ## Expression continuation regression
 

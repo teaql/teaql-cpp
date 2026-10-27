@@ -13,6 +13,7 @@ import sys
 import lifecycle_cli_protocol_5_0_6 as protocol
 from expression_cli_source_provenance_5_0_6 import Validator as SourceValidator, read
 from custom_public_cli_source_provenance_5_0_6 import digest, require
+from optional_source_guard_transition_5_0_6 import reconcile_source_files
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tests/parity'))
@@ -50,7 +51,10 @@ class Validator(SourceValidator):
     def validate_source(self, source):
         require(source['derived_observer']['manifest'] == protocol.manifest(self.root),
                 'exact reference-seeded lifecycle observer')
-        super().validate_source(source)
+        current_files = reconcile_source_files(self.root, source['source_files'],
+                                               self.registry['source_files'],
+                                               self.registry['source_guard_transition'])
+        super().validate_source(dict(source, source_files=current_files))
         metadata = json.loads(source['derived_observer']['metadata'])
         libraries = {p['id']: p for p in metadata['packages']
                      if p['source'] is None and p['name'] != protocol.PACKAGE}

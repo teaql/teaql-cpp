@@ -55,7 +55,8 @@ def main():
         assert same(cases, [c['input'] for c in corpus['cases']])
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Original request observations changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original request observations changed')
     actual = observe(args.cpp, cases)
     if len(actual) != len(cases):
         raise RuntimeError('Native observations must cover the complete input matrix')

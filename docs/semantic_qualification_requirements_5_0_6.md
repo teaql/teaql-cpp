@@ -28,9 +28,14 @@ also passes **1,063/1,063** on **11,809** unchanged inputs. Later scoped
 comparator edits and the cross-branch AP02 corpus enter a newer complete
 1,063-test epoch on **11,811** unchanged inputs; it ends with one
 [isolated admission-fixture failure](custom_case_admission_fixture_5_0_6.md).
-The repaired fixture passes 60/60 controls and its selected CTest; a new full
-epoch is running. The [current review](current_dispatcher_review_5_0_6.md)
-records the bounded evidence. SQ02, full G13, G14/G17 and P0-P7 remain open.
+The repaired fixture passes 60/60 controls and its selected CTest. Its
+[complete rerun](parity/ap02_cross_composition_full_native_repaired_terminal_5_0_6.json.gz)
+passes **1,063/1,063** with zero failures, errors or skips; all **11,811**
+frozen inputs and both references remain unchanged, the JUnit names equal the
+registry and the post-build has no work. Two subsequent Python comparator
+guards have selected gates only. The
+[current review](current_dispatcher_review_5_0_6.md) records the bounded
+evidence. SQ02, full G13, G14/G17 and P0-P7 remain open.
 
 Current in-memory CLI source binding:
 [The historical comparator](inmemory_cli_source_binding_5_0_6.md) is rebound

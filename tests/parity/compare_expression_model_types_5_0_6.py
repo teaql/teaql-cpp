@@ -122,7 +122,8 @@ def main():
         assert same(cases, [c['input'] for c in corpus['cases']]), 'Declared matrix changed'
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Original source observations changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original source observations changed')
     actual = observe(args.cpp, cases)
     failures = [i for i, (e, a) in enumerate(zip(expected, actual)) if not same(e, adapted(a))]
     if args.record:

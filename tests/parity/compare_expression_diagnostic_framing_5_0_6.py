@@ -14,7 +14,9 @@ def main():
     assert corpus['producer']==json.loads((ROOT/'tests/generator/parity/dynamic_json_rust/PROVENANCE.json').read_text())
     rows=require_cases(corpus,1200)
     cases=[x['input'] for x in rows];expected=[x['expected'] for x in rows]
-    if a.rust:assert same(expected,observe(a.rust,cases)),'Raw original panic observations changed'
+    if a.rust:
+        if not same(expected,observe(a.rust,cases)):
+            raise RuntimeError('Raw original panic observations changed')
     native=observe(a.cpp,cases)
     control=cases.index(dict(root='Person(id=7)',node='name',path='parent.name'))
     assert verify_negative_controls(native[control],expected[control]['raw'])==7

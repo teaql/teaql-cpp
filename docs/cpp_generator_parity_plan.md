@@ -17,9 +17,14 @@ executes all 1,063 registered tests against 11,811 unchanged inputs and ends
 with **1,062 passes / one isolated admission-fixture failure**. The
 [fixture repair](custom_case_admission_fixture_5_0_6.md) copies a newly
 required comparator helper into the temporary test repository; its 60/60
-controls and selected CTest pass. A fresh complete epoch is running on the
-repaired input set. The failed epoch is not relabeled green; complete
-G13/G14/G17 and P0-P7 exits remain open.
+controls and selected CTest pass. The
+[repaired complete epoch](parity/ap02_cross_composition_full_native_repaired_terminal_5_0_6.json.gz)
+passes **1,063/1,063** on the same **11,811** unchanged inputs with zero
+failure, error or skip; its JUnit names equal the registry, the post-build has
+no work and its owned directory was removed. Two later Python comparator
+guards pass seven selected CTests and have separate permanent normal/optimized
+controls. The repaired full epoch precedes those guards. The failed epoch is
+not relabeled green; complete G13/G14/G17 and P0-P7 exits remain open.
 
 Current AP02 type/pattern/nested-item continuation:
 [The installed 162-case corpus](audit_grammar_branch_review_5_0_6.md#installed-type-and-pattern-continuation)
@@ -2219,7 +2224,7 @@ and selection evidence, not semantic composition acceptance. See
 | P4 | Capability gates qualified; final phase audit open | G06/G07 general Q/predicates/projections and G09 execution/pagination are qualified in their acceptance matrices. Preserve purpose/comment, trusted Context/Policy, provider failures and cancellation. Complete cross-capability G13/G14/G17 and the explicit phase exit audit remain separate. |
 | P5 | Capability gates qualified; final phase audit open | G08 aggregation, G10 dynamic JSON and G16 storage/readonly capabilities are qualified, including the approved quoted-FK exception. Earlier failed native and source epochs remain historical. Complete protected metadata/governance/provenance and the full phase exit audit stay open. |
 | P6 | G11/G12 qualified; final phase audit open | Complete E and R01-R18 assembly/sample-data/Assist capability gates are qualified in expression_acceptance_5_0_6.md and g12_acceptance_5_0_6.md. Preserve approved JSON and invalid naming-profile exceptions, truthful guidance and source/ownership evidence. Final cross-capability and P0-P7 signoff remain separate. |
-| P7 | Active; all 305 direct-corpus locators / 323,568 primary observations have scoped source records, and the installed custom lookup maps 160/160 locators. The frozen 1,063-test registry has 512 Rust comparisons and 545 explicit fixture/setup dependencies. The newer full epoch completes with 1,062 passes and one isolated admission-fixture failure on unchanged inputs; the repair passes 60/60 selected controls and a new complete epoch is running. Latest inherited-business proof retains explicit adaptation, a reference-locked 20-error original compiler guard, native 5 / prior-key 2 and 35 controls. Complete source semantics, protected consumers, AP02/G14/G17 and all capability/phase exits remain. Capability status stays 14 qualified / 3 partial. |
+| P7 | Active; all 305 direct-corpus locators / 323,568 primary observations have scoped source records, and the installed custom lookup maps 160/160 locators. The frozen 1,063-test registry has 512 Rust comparisons and 545 explicit fixture/setup dependencies. The newer full epoch completes with 1,062 passes and one isolated admission-fixture failure on unchanged inputs; the repair passes 60/60 selected controls and its rerun passes 1,063/1,063 on 11,811 unchanged inputs. Two later comparator guards pass seven selected CTests; their full current-source epoch remains open. Latest inherited-business proof retains explicit adaptation, a reference-locked 20-error original compiler guard, native 5 / prior-key 2 and 35 controls. Complete source semantics, protected consumers, AP02/G14/G17 and all capability/phase exits remain. Capability status stays 14 qualified / 3 partial. |
 
 
 ## Related contracts
@@ -5132,3 +5137,37 @@ in that mode before the unconditional checks. Five selected explicit/eval/source
 CTests and four selected state/entity/source CTests pass. Updated source
 contracts pin the changed comparator bytes. This is a bounded SQ02/G13
 verification step, not a current full native epoch or P0-P7 acceptance.
+
+The [repaired full native epoch](parity/ap02_cross_composition_full_native_repaired_terminal_5_0_6.json.gz)
+subsequently passes **1,063/1,063** on **11,811** unchanged inputs, before two
+additional comparator guards. The JSON graph-limit result/baseline checks and
+the derived-query live Rust/source-metadata checks now execute under ordinary
+Python and `python -O`. Their
+[graph controls](parity/json_graph_limit_optimized_permanent_controls_v2_5_0_6.json.gz)
+and [derived controls](parity/derived_query_source_optimized_permanent_controls_v2_5_0_6.json.gz)
+retain fifteen source/CTest substitutions each and four complete/corrupt
+normal/optimized executions plus two altered-provenance executions each. Seven
+affected native CTests pass. These
+post-epoch edits need a later complete current-source integration run; the
+other assertion review locations and full SQ02/G13/P0-P7 remain open.
+The [pre-rewrite AST review](parity/optimized_assert_review_current_5_0_6.json.gz)
+found 54 scripts with assertions, 48 with optional source calls inside them,
+and zero with a final result-value assertion. Its
+[registry join](parity/optimized_assert_registry_current_5_0_6.json.gz)
+showed that the 48 serve 50 CTests; none passes `--rust` and all retain a
+separate source setup. This historical snapshot identified the optimized-mode
+review surface; it does not describe the current comparator source.
+
+The [pre-edit optimized witness](parity/optional_source_optimized_preedit_5_0_6.json.gz)
+records 49 false acceptances and one timeout among those 50 optional Rust
+observer controls. The [bounded rewrite](parity/optional_source_guard_rewrite_5_0_6.json.gz)
+replaces all 48 source-call assertions with unconditional checks. The
+[post-edit controls](parity/optional_source_optimized_postedit_v2_5_0_6.json.gz)
+reject all 50 failing observers under both normal and optimized Python and all
+24 source-transition corruptions. Original Rust execution receipts remain
+unchanged; four source verifiers accept only the recorded comparator-hash
+transitions. Thirteen affected source-contract CTests and the new registered
+optimized-control CTest pass. The [selected native run](parity/optional_source_guard_selected_native_5_0_6.json.gz)
+passes 63/63, including the 50 affected comparator commands. A complete
+current-source 1,064-test native epoch and full SQ02/G13/P0-P7 acceptance
+remain open.

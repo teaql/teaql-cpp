@@ -58,7 +58,9 @@ def main():
     assert corpus["producer"]==json.loads((ROOT/"tests/generator/parity/dynamic_json_rust/PROVENANCE.json").read_text())
     rows=require_cases(corpus,936)
     cases=[x["input"] for x in rows];raw=[x["expected"] for x in rows]
-    if a.rust:assert same(raw,observe(a.rust,cases)),"Original raw diagnostics changed"
+    if a.rust:
+        if not same(raw,observe(a.rust,cases)):
+            raise RuntimeError("Original raw diagnostics changed")
     cpp=observe(a.cpp,cases)
     for i,(x,r,c) in enumerate(zip(cases,raw,cpp)):
         if not same(adapt(r["raw"],x),native_fields(c)):raise SystemExit(f"Diagnostic case {i} differs: {x}\nSource: {adapt(r['raw'],x)}\nC++: {native_fields(c)}")

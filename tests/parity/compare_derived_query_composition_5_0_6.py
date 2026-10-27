@@ -26,7 +26,8 @@ def main():
     inputs = [case['input'] for case in corpus['cases']]
     expected = [case['expected'] for case in corpus['cases']]
     if args.rust:
-        assert same(expected, observe(args.rust, inputs)), 'Live original changed'
+        if not same(expected, observe(args.rust, inputs)):
+            raise RuntimeError('Live original changed')
     native = observe(args.cpp, inputs)
     gaps = [dict(index=i, input=x, rust=o, cpp=c)
             for i, (x, o, c) in enumerate(zip(inputs, expected, native)) if not same(o, c)]

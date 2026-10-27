@@ -10,6 +10,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from optional_source_guard_transition_5_0_6 import reconcile_source_files
 
 
 class QualificationError(RuntimeError):
@@ -74,7 +75,9 @@ class Validator:
         require(source['runtime_commit'] == r['runtime_commit']
                 and source['generator_commit'] == r['generator_commit'], 'source baseline')
         require(self.same(source['contracts'], r['contracts']), 'source contracts')
-        require(self.same(source['source_files'], r['evidence_source_files']), 'source input identities')
+        reconcile_source_files(self.root, source['source_files'],
+                               r['evidence_source_files'],
+                               r['source_guard_transition'])
         require(source['input_hashes_before'] == source['input_hashes_after'],
                 'original execution input epoch')
         require(source['references_before'] == source['references_after'], 'original reference epoch')

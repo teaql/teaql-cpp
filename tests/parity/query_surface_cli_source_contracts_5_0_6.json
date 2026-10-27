@@ -89,9 +89,9 @@
     "tests/generator/parity/relation_identity_contracts/rust/lib/src/runtime.rs": "df9f8ca6cf8b05e8724af4c727d041cf0a737d326618b945e39841deee587a67",
     "tests/generator/parity/relation_identity_contracts/rust/lib/src/sample_data.rs": "2a7152ff059ceaea9f9d851657839c0578067398a1a46c73d13da2357dde96c5",
     "tests/generator/query_field_branches.xml": "f4da2f61c081a0ba6ef4407ab5584b11e5f8227a5a14b759040bceaf237b4e72",
-    "tests/parity/compare_query_alias_5_0_6.py": "a1a98f5888b7907fd6f99e807b5c98da90236e357fa683fe380d1839c3218dc5",
-    "tests/parity/compare_query_predicate_execution_5_0_6.py": "685cc2ff746e4268e30fe8b13e987d04ce6d201bc3b580f69b10656cd9d2ec28",
-    "tests/parity/compare_relation_identity_5_0_6.py": "051b9dec5f806abf41d6745d42d27363529ed4325558b138ca1af5d902c4b577",
+    "tests/parity/compare_query_alias_5_0_6.py": "0185c3047aa1e6cb5f063fbf9cb329b4d1524190d23a56ae354f7bda36e2c267",
+    "tests/parity/compare_query_predicate_execution_5_0_6.py": "a55a953d6cc9c36d6e7a01385d6ffd2450449eb81931a2adaf24623dfdfff284",
+    "tests/parity/compare_relation_identity_5_0_6.py": "78d800bfd54eb9a2b111d763843e381411cf3f86fb7feb97843ce33b1c16f3fe",
     "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
     "tests/parity/expression_cli_cases.py": "b538589e11091253eda7ecba686ccd9214ea64d108f4e019b9a19419386cf9d1",
     "tests/parity/query_alias_5_0_6_cases.json.gz": "2a1d3ce6ab8932f40eb707004bb547e02adb5a9f795cb3bca63dc272d5fc4385",
@@ -114,9 +114,9 @@
     "upstream.lock.json": "289895ccb9ebbada5dc05ca2e3b2d286895f40eb91d7b0935f6864a08214d246"
   },
   "support_files": {
-    "scripts/query_surface_cli_source_provenance_5_0_6.py": "487f755077a6edb8a14913269abadab0960579b53c767ad850be3f17e69b85c8",
+    "scripts/query_surface_cli_source_provenance_5_0_6.py": "24ddd83931230a2d964fd7018e72f5b752bb57129dc45f0fc20c3a8dfd5dd9d5",
     "scripts/expression_cli_source_provenance_5_0_6.py": "bcfc2e7d8d7eac976cf858d91601936694306fa4d0310a42e75f4a6e99d57881",
-    "scripts/custom_public_cli_source_provenance_5_0_6.py": "ab6ff9eb1008c7ab182e3a87fc8036a30e951c9624b6dd511557915f6a30f31b",
+    "scripts/custom_public_cli_source_provenance_5_0_6.py": "70a4aaf84f54d4c0ee8ce0d312c3b80f45ed3609deacf213a860d43da4ef1d92",
     "tests/parity/verify_query_surface_cli_admission_5_0_6.py": "40c9ee61da32a75289c3b3d173acad4f6ffdf12cd6bc946b122c897db57f8d48",
     "tests/parity/verify_query_surface_cli_source_controls_5_0_6.py": "59ee3a30485da5d8dcd1123d746bd9068cb7d51d208bdda793a80f52001c58c3"
   },
@@ -188,5 +188,25 @@
       "selection": null,
       "binary_sha256": "100fba12a0c18592c8c4e7048e4213a8d0add9c691677b372e30c012afdfdb7b"
     }
-  ]
+  ],
+  "source_guard_transition": {
+    "helper_sha256": "bf85d15a59992b535e0ed4e016d5fd5aa2ef0523bfe2f8cd1e423c1fee07f60b",
+    "paths": [
+      "tests/parity/compare_query_alias_5_0_6.py",
+      "tests/parity/compare_query_predicate_execution_5_0_6.py",
+      "tests/parity/compare_relation_identity_5_0_6.py"
+    ],
+    "rewrite": {
+      "path": "docs/parity/optional_source_guard_rewrite_5_0_6.json.gz",
+      "sha256": "3573c7e0f6c01626f7ef70987bb5dce8a2a46356dced60cef190ab9d51ff64f6"
+    },
+    "preedit": {
+      "path": "docs/parity/optional_source_optimized_preedit_5_0_6.json.gz",
+      "sha256": "a4ef8d71e5f30f2de2c42ddeee5f1c528edd8749928f73b60916c36fb41e2bb5"
+    },
+    "postedit": {
+      "path": "docs/parity/optional_source_optimized_postedit_5_0_6.json.gz",
+      "sha256": "8f5425477da1e5acfb298fc4a65995cd07043c945d9f62a6ae2c1ffeffd98359"
+    }
+  }
 }

@@ -79,7 +79,8 @@ def main():
             cases = [cases[i] for i in args.cases]
             expected = [expected[i] for i in args.cases]
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Original logger/execution outcomes changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original logger/execution outcomes changed')
     actual = observe(args.cpp, cases)
     failures = [i for i, (e, a) in enumerate(zip(expected, actual)) if not same(projected(e), a)]
     if args.record:

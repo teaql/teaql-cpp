@@ -110,7 +110,9 @@ def main():
         for key,value in current.items():assert corpus[key]==value,key
         assert same(cases,[row['input'] for row in corpus['cases']])
         expected=[row['expected'] for row in corpus['cases']]
-        if args.rust_regular or args.rust_inherited:assert same(expected,original(args,cases))
+        if args.rust_regular or args.rust_inherited:
+            if not same(expected,original(args,cases)):
+                raise RuntimeError('Original source observations changed')
     if not args.cpp:
         assert args.record_source
         print('Recorded original typed lookup outcomes:',len(cases));return 0

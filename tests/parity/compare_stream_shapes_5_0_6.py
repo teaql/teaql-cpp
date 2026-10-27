@@ -103,7 +103,8 @@ def main():
         assert same(cases, [row['input'] for row in corpus['cases']])
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Original stream observations changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original stream observations changed')
     if not args.cpp:
         print('Actual original stream observations:', len(cases))
         return 0

@@ -13,6 +13,7 @@ import sys
 import query_surface_cli_protocol_5_0_6 as protocol
 from custom_public_cli_source_provenance_5_0_6 import digest, require
 from expression_cli_source_provenance_5_0_6 import Validator as SourceValidator, read
+from optional_source_guard_transition_5_0_6 import reconcile_source_files
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / 'tests/parity/query_surface_cli_source_contracts_5_0_6.json'
@@ -53,7 +54,10 @@ class Validator(SourceValidator):
     def validate_source(self, source):
         require(source['derived_observer']['manifest'] == protocol.manifest(self.root),
                 'exact reference-seeded query-surface observer')
-        super().validate_source(source)
+        current_files = reconcile_source_files(self.root, source['source_files'],
+                                               self.registry['source_files'],
+                                               self.registry['source_guard_transition'])
+        super().validate_source(dict(source, source_files=current_files))
         metadata = json.loads(source['derived_observer']['metadata'])
         libraries = {package['id']: package for package in metadata['packages']
                      if package['source'] is None and package['name'] != protocol.PACKAGE}

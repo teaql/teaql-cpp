@@ -105,7 +105,8 @@ def main():
         assert same(cases, [row['input'] for row in corpus['cases']])
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust:
-            assert same(expected, observe(args.rust, cases))
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original source observations changed')
     counts = check_source(cases, expected)
     if not args.cpp:
         print('Actual original optimization options:', counts)

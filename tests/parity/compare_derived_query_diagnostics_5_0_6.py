@@ -17,11 +17,13 @@ def main():
     with gzip.open(CORPUS, 'rt') as source:
         corpus = json.load(source)
     for key, value in metadata().items():
-        assert same(corpus[key], value), f'Changed source provenance: {key}'
+        if not same(corpus[key], value):
+            raise RuntimeError(f'Changed source provenance: {key}')
     inputs = [case['input'] for case in corpus['cases']]
     expected = [case['expected'] for case in corpus['cases']]
     if args.rust:
-        assert same(expected, observe(args.rust, inputs)), 'Live original changed'
+        if not same(expected, observe(args.rust, inputs)):
+            raise RuntimeError('Live original changed')
     actual = observe(args.cpp, inputs)
     gaps = [i for i, (o, c) in enumerate(zip(expected, actual)) if not same(o, c)]
     if gaps:

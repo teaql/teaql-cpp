@@ -55,7 +55,8 @@ def main():
         expected = [row['expected'] for row in corpus['cases']]
         check_source(cases, expected)
         if args.rust:
-            assert same(expected, observe(args.rust, cases))
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original source observations changed')
     if not args.cpp:
         print('Actual original result-model load-state observations:64')
         return 0

@@ -26,7 +26,8 @@ def main():
     cases = require_cases(corpus, 2240, source_inputs())
     inputs = [x['input'] for x in cases]; expected = [x['expected'] for x in cases]
     if args.rust:
-        assert same(expected, observe(args.rust, inputs)), 'Live original observations differ'
+        if not same(expected, observe(args.rust, inputs)):
+            raise RuntimeError('Live original observations differ')
     actual = observe(args.cpp, inputs)
     differences = [i for i, (x, y) in enumerate(zip(expected, actual)) if not same(cpp_observation(x), y)]
     if differences:

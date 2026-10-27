@@ -23,7 +23,8 @@ def main():
     inputs = [case['input'] for case in cases]
     expected = [case['expected'] for case in cases]
     if args.rust:
-        assert same(expected, observe(args.rust, inputs)), 'Live original changed'
+        if not same(expected, observe(args.rust, inputs)):
+            raise RuntimeError('Live original changed')
     actual = observe(args.cpp, inputs)
     gaps = [i for i, (o, c) in enumerate(zip(expected, actual)) if not same(adapted(o), c)]
     if gaps:

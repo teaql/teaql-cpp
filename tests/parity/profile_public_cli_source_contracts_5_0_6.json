@@ -10,7 +10,7 @@
   "scope": "Five custom comparators / six complete corpora and exact Debug/Release source profiles; native gate is native64 Debug/checked only. Existing formatter include/access bridges and checked SQLite panic wrapper remain explicit. Not complete custom CLI or P0-P7 acceptance.",
   "support_files": {
     "scripts/archive_driver_provenance_5_0_6.py": "720bd4c6f154c0b13eaa5d6fe6aa6742bd8adc9e20f9765321991557c3dba509",
-    "scripts/custom_public_cli_source_provenance_5_0_6.py": "ab6ff9eb1008c7ab182e3a87fc8036a30e951c9624b6dd511557915f6a30f31b",
+    "scripts/custom_public_cli_source_provenance_5_0_6.py": "70a4aaf84f54d4c0ee8ce0d312c3b80f45ed3609deacf213a860d43da4ef1d92",
     "tests/parity/audit_event_probe.cpp": "0ae83850729e3d9ecdc4b8247b3019d3f4e163be1ccb394ecf37043529b9c824",
     "tests/parity/compare_decimal_pointer_scope.py": "01cf6059aa531ab9cbd6307084eb1c97bf473a9293966f44afe246a1c0dc5d66",
     "tests/parity/compare_entity_query_boundaries.py": "a90c26aa271ebb2f4d475b01f569e59d2a85e00440f19fdd6392619b9108a8ee",

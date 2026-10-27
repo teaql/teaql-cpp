@@ -95,7 +95,8 @@ def main():
         assert same(cases, [row['input'] for row in corpus['cases']])
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust_dynamic or args.rust_inherited:
-            assert same(expected, original(args, cases)), 'Original guard observations changed'
+            if not same(expected, original(args, cases)):
+                raise RuntimeError('Original guard observations changed')
     if not args.cpp:
         assert args.record_source
         print(f'Recorded {len(cases)} original constructor/selection guard outcomes')

@@ -13,8 +13,13 @@ includes those comparator edits and the installed cross-branch corpus. Its
 1,063 registered tests complete with one
 [isolated admission-fixture failure](custom_case_admission_fixture_5_0_6.md)
 on 11,811 unchanged inputs. The fixture repair passes 60/60 controls and one
-selected native CTest. A new complete native epoch is running; the failed
-epoch remains failed evidence and G13/SQ02/P7 retain their full requirements.
+selected native CTest. The
+[repaired complete native epoch](parity/ap02_cross_composition_full_native_repaired_terminal_5_0_6.json.gz)
+passes **1,063/1,063**, with zero failures, errors or skips. Its **11,811**
+input hashes and both references remain unchanged; JUnit names equal the
+registry and the post-build has no work. Later comparator edits have selected
+gates only. The first failed epoch remains failed evidence and G13/SQ02/P7
+retain their full requirements.
 
 Current logging-normalization counterexample:
 [The pre-edit control](parity/log_manager_header_normalization_candidate_5_0_6.json.gz)
@@ -110,15 +115,30 @@ optional direct live-source CLI path, not an already requested Rust observer
 inside those registered custom comparison commands. Their separate source
 setups retain their own provenance requirements.
 
+The [current AST snapshot](parity/optimized_assert_review_current_5_0_6.json.gz)
+rehashes all **126** active scripts after the two comparator guards. **54**
+still contain assertions, **48** contain optional source calls in assertions,
+and **none** retain a final result-value assertion. The
+[current registry join](parity/optimized_assert_registry_current_5_0_6.json.gz)
+checks those 48 scripts against **50** unchanged CTest commands: none passes
+`--rust`, and all 50 retain separate source setup dependencies. These are
+static and wiring results, not proof that the remaining optional direct CLI
+paths reject source drift under `python -O`.
+
 A [derived-query source replay](parity/derived_query_source_optimized_candidate_5_0_6.json.gz)
 demonstrates the distinct source-call risk: a deliberately failing Rust
 observer is rejected by ordinary Python, but `python -O` skips the observer
 inside `assert` and reports **576/576** matches against a retained-output
 stub. An [isolated candidate](parity/derived_query_source_optimized_candidate_validation_5_0_6.json.gz)
 uses an explicit conditional and passes four good/failing-original ×
-normal/optimized controls. These temporary stubs were removed. The installed
-comparator remains frozen; the other static source-call locations require
-their own review before broad SQ02 claims.
+normal/optimized controls. These temporary stubs were removed. The comparator
+now makes the optional live-source check unconditional under `python -O`; its
+[permanent controls](parity/derived_query_source_optimized_permanent_controls_v2_5_0_6.json.gz)
+retain 15 source/CTest substitutions and accept/reject complete/corrupted
+live-source output in both Python modes. Two additional controls reject altered
+source metadata in both modes. The registered CTest command itself
+still omits `--rust` and depends on the separate source fixture. The other
+static source-call locations require their own review before broad SQ02 claims.
 
 A separate [JSON graph-limit candidate](parity/json_graph_limit_optimized_candidate_5_0_6.json.gz)
 demonstrates a remaining optimized-interpreter false acceptance: with all
@@ -129,9 +149,16 @@ the value comparison guarded by `assert`. Its temporary observer was removed.
 An [isolated candidate](parity/json_graph_limit_optimized_candidate_validation_5_0_6.json.gz)
 replaces only that assertion with an explicit error and passes all four
 complete/corrupt × normal/optimized controls. Its copied files and observer
-were removed. The installed comparator and current frozen native inputs are
-unchanged; installation, source-contract hashes and a permanent control remain
-SQ02 work after that epoch.
+were removed. The installed comparator and native inputs were unchanged during
+that epoch. The comparator now uses an explicit result check that also runs
+under `python -O`; the
+[permanent controls](parity/json_graph_limit_optimized_permanent_controls_v2_5_0_6.json.gz)
+retain 15 source/CTest substitutions and accept/reject complete/corrupted
+11-record output in both Python modes. Two additional controls reject a
+different baseline in both modes. The changed source-contract hashes are
+pinned, and seven selected native CTests across both comparator edits pass.
+These post-epoch changes retain their own later full integration requirement;
+the remaining SQ02 review surface stays open.
 
 A focused [nonempty partial-result control](parity/runtime_examples_nonempty_partial_control_5_0_6.json.gz)
 passes one valid schema example result and withholds the relation example
@@ -759,3 +786,18 @@ remain independent concrete defect evidence. The
 [new native integration epoch](native_integration_5_0_6.md) is running with all
 execution inputs frozen; its outcome and complete SQ02/G13/P0-P7 acceptance
 remain pending.
+
+## Subsequent optional source guard checkpoint
+
+The preceding review is a historical snapshot. A later
+[optimized-mode witness](parity/optional_source_optimized_preedit_5_0_6.json.gz)
+found 49 false acceptances and one timeout across 50 registered optional Rust
+observer commands. The [rewrite receipt](parity/optional_source_guard_rewrite_5_0_6.json.gz)
+records unconditional source checks in all 48 affected scripts. The
+[post-edit controls](parity/optional_source_optimized_postedit_v2_5_0_6.json.gz)
+reject all 50 failing observers in normal and optimized Python and all 24
+source-transition corruptions. The [selected native run](parity/optional_source_guard_selected_native_5_0_6.json.gz)
+passes 63/63 with unchanged source hashes; 13 affected source-contract CTests
+and the registered optimized-control CTest also pass. The historical full
+1,063-test epoch predates this rewrite. A complete current-source 1,064-test
+native epoch and SQ02/G13/P0-P7 acceptance remain open.

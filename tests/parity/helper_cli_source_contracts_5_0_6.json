@@ -243,7 +243,7 @@
   "support_files": {
     "scripts/helper_cli_source_provenance_5_0_6.py": "1182bf74c96ddbabd1501042261a9201b9310579410f7316937ef5f308c797e9",
     "scripts/expression_cli_source_provenance_5_0_6.py": "bcfc2e7d8d7eac976cf858d91601936694306fa4d0310a42e75f4a6e99d57881",
-    "scripts/custom_public_cli_source_provenance_5_0_6.py": "ab6ff9eb1008c7ab182e3a87fc8036a30e951c9624b6dd511557915f6a30f31b",
+    "scripts/custom_public_cli_source_provenance_5_0_6.py": "70a4aaf84f54d4c0ee8ce0d312c3b80f45ed3609deacf213a860d43da4ef1d92",
     "tests/parity/verify_helper_cli_admission_5_0_6.py": "eb8141d576d517d0a92c9ad298d93e121e0dd48cbe955d4e6ec98bc6c2d317ae",
     "tests/parity/verify_helper_cli_source_controls_5_0_6.py": "ed9f865fe6da6b0ebba7b0f7d7c9941b5ced7e4dd0b7e24a2bbb5f2e2c066faf"
   },

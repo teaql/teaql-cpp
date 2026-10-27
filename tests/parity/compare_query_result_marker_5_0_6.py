@@ -67,7 +67,8 @@ def main():
         assert same(cases, [row['input'] for row in corpus['cases']])
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Original marker observations changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original marker observations changed')
     if not args.cpp:
         assert args.record_source
         print(f'Recorded {len(cases)} original marker observations')

@@ -76,7 +76,8 @@ def main():
         assert same(cases, [c['input'] for c in corpus['cases']])
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Original graph-save behavior changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original graph-save behavior changed')
     if not args.cpp:
         print('Recorded original graph-save observations:', len(cases))
         return 0

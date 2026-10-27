@@ -57,7 +57,9 @@ def main():
         for name,item in current.items():assert corpus[name]==item,name
         assert same(cases,[c['input'] for c in corpus['cases']])
         expected=[c['expected'] for c in corpus['cases']]
-        if args.rust:assert same(expected,observe(args.rust,cases)),'Original alias observations changed'
+        if args.rust:
+            if not same(expected,observe(args.rust,cases)):
+                raise RuntimeError('Original alias observations changed')
     actual=observe(args.cpp,cases)
     if len(actual) != len(cases):
         raise RuntimeError('Native observations must cover the complete input matrix')

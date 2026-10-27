@@ -57,7 +57,9 @@ def main():
         require_cases(corpus, len(cases), cases)
         for name,item in current.items():assert corpus[name]==item,name
         assert same(cases,[c['input'] for c in corpus['cases']]);expected=[c['expected'] for c in corpus['cases']]
-        if args.rust:assert same(expected,observe(args.rust,cases)),'Original relationship behavior changed'
+        if args.rust:
+            if not same(expected,observe(args.rust,cases)):
+                raise RuntimeError('Original relationship behavior changed')
     actual=observe(args.cpp,cases)
     if len(actual) != len(cases):
         raise RuntimeError('Native observations must cover the complete input matrix')

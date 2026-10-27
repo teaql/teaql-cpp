@@ -21,7 +21,11 @@ that its 33,754,860-byte temporary fixture directory was removed. The
 registered native CTest selection passes **1/1**. No production runtime,
 producer, generated SDK or reference source changed in this repair.
 
-A new complete native epoch is running on the repaired input set. The failed
-epoch remains failed evidence; the selected passing test does not turn it into
-a complete green run. G13/SQ02, G14/AP02, G17 and P0-P7 retain their separate
-exit requirements.
+The [repaired complete native epoch](parity/ap02_cross_composition_full_native_repaired_terminal_5_0_6.json.gz)
+passes **1,063/1,063** registered tests with zero failures, errors or skips.
+Its 1,063 unique JUnit names equal the registry; all **11,811** frozen inputs
+and both reference commits remain unchanged. The post-test build has no work,
+and the task-owned directory was removed. This result precedes the later
+optimized-interpreter comparator hardening. The first failed epoch remains
+failed evidence; G13/SQ02, G14/AP02, G17 and P0-P7 retain their separate exit
+requirements.

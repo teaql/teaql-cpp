@@ -89,7 +89,8 @@ def main():
         expected = [row['expected'] for row in corpus['cases']]
         check_source(cases, expected)
         if args.rust:
-            assert same(expected, observe(args.rust, cases)), 'Original adapted-model outcomes changed'
+            if not same(expected, observe(args.rust, cases)):
+                raise RuntimeError('Original adapted-model outcomes changed')
     if not args.cpp:
         print('Actual original source/result observations:', len(cases))
         return 0
