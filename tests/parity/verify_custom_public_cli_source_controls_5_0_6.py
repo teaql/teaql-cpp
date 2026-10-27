@@ -73,7 +73,8 @@ def main():
         assert not args.record.exists()
     spec = importlib.util.spec_from_file_location('custom_source_validator', verifier)
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    with patch.object(sys, 'path', [str(root / 'scripts'), *sys.path]):
+        spec.loader.exec_module(module)
     validator = module.Validator(root, registry).load().validate()
     record = dict(complete=False, passed=False, native_execution=False, fresh_rust_execution=False,
                   whole_goal_complete=False,
@@ -85,7 +86,9 @@ def main():
         try:
             action()
             accepted = True
-        except (module.QualificationError, json.JSONDecodeError) as exception:
+        except (module.QualificationError, json.JSONDecodeError, RuntimeError) as exception:
+            if type(exception) is RuntimeError and not str(exception).startswith('Optional-source transition: '):
+                raise
             accepted = False
             observed = type(exception).__name__ + ': ' + str(exception)
         passed = accepted if error is None else not accepted and error in observed
@@ -107,7 +110,8 @@ def main():
     changed('source_wrong_baseline', 'source', ['runtime_commit'], '0' * 40, 'source baseline')
     changed('source_wrong_contract', 'source', ['contracts', 0, 'count'], 1, 'source contracts')
     driver = registry['contracts'][0]['driver']
-    changed('source_wrong_driver_hash', 'source', ['source_files', driver], '0' * 64, 'source input identities')
+    changed('source_wrong_driver_hash', 'source', ['source_files', driver], '0' * 64,
+            'unexpected source file difference')
     epoch_key = next(iter(validator.source['input_hashes_before']))
     changed('source_changed_epoch', 'source', ['input_hashes_after', epoch_key], '0' * 64,
             'original execution input epoch')

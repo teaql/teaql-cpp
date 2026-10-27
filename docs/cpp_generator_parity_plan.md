@@ -1,5 +1,17 @@
 # C++ generator parity plan
 
+Current full-native and source-check continuation:
+[the 1,065-test attempt](registered_python_optimized_checks_5_0_6.md)
+finishes CTest with **1,064 passes / one custom-source-control import failure**.
+The controller loses its output pipe before JUnit ingestion and post-build, so
+the attempt is not a complete green epoch. The isolated import/transition
+control now passes its focused native test. A reproduced optimized-Python
+false acceptance in a declared-driver source validator is repaired with 44
+AST-equivalent unconditional checks; its source/control tests pass **2/2**
+and five normal/optimized CLI controls pass. The post-repair full native epoch,
+remaining registered Python optimization review, SQ02, G13/G14/G17 and P0-P7
+exits remain open.
+
 Current comparator source-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)
 replaces 425 removable assertions across 51 registered comparator scripts

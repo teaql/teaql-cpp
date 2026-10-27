@@ -57,6 +57,14 @@ the two retained early workspace locks. Untouched bindings pass first. The
 the registry and execution record explicitly, preserving the previous core
 cohort's exact producer and verifier bytes.
 
+A later [optimized-Python repair](registered_python_optimized_checks_5_0_6.md)
+reproduces an actual false acceptance of an incomplete receipt under `python -O`.
+It replaces 39 validator and five control-runner assertions with AST-equivalent
+unconditional checks. Five normal/optimized CLI controls and focused native
+source/control checks pass; the original Rust execution receipt remains
+unchanged. This advances the declared-driver source gate only. Other registered
+Python verifiers and complete SQ02 remain open.
+
 Permanent checks `parity_runtime_foundation_driver_contracts` and
 `parity_runtime_foundation_driver_controls` are registered for the native host.
 Each of the eight comparisons requires its source fixture. The

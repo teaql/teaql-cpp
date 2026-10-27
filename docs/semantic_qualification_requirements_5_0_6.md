@@ -1,5 +1,18 @@
 # G13 semantic qualification requirements
 
+Current source-verifier continuation:
+[the declared-driver optimized-Python repair](registered_python_optimized_checks_5_0_6.md)
+reproduces a false acceptance of an incomplete eight-contract execution
+receipt, then replaces 44 validator/control assertions with AST-equivalent
+unconditional checks. Five normal/optimized CLI controls and focused native
+source/control tests pass. The current 1,065-test full CTest attempt ends with
+1,064 passes and one isolated custom-source-control import failure; its
+controller encounters a broken output pipe before JUnit ingestion. The import
+control now passes focused verification, but no complete post-repair native
+epoch exists. A current registry inventory still finds 111 Python entry
+scripts with 1,579 removable assertions. SQ02, G13/G14/G17 and P0-P7 remain
+open at **14 qualified / 3 partial**.
+
 Current SQ02 comparator-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)
 replaces 425 removable assertions in 51 registered comparator scripts with

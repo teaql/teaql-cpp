@@ -59,5 +59,14 @@ errors or skips; all selected names are present, frozen source hashes are
 unchanged, and the task-owned temporary directory was removed. This is a
 bounded gate, not a complete 1,065-test current-source epoch.
 
+The later [full native attempt](parity/current_full_native_terminal_1065_5_0_6.json.gz)
+executes all 1,065 registrations and reports 1,064 passes plus one failure in
+an unrelated custom-source control import path. The controller loses its output
+pipe before JUnit ingestion, so that attempt is not a green full-suite receipt.
+The import path is repaired and its focused control passes; a complete epoch
+on the resulting source set remains open. A separate
+[registered Python inventory](registered_python_optimized_checks_5_0_6.md)
+identifies further source-verifier assertions outside this comparator cohort.
+
 These changes advance comparator execution and source provenance for the named
 cohort. Complete SQ02, G13/G14/G17 and P0-P7 qualification remains open.
