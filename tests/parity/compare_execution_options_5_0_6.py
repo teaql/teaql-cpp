@@ -60,7 +60,8 @@ def check_source(cases, results):
     errors = 0
     steps = 0
     for case, result in zip(cases, results):
-        assert len(case['actions']) == len(result)
+        if not (len(case['actions']) == len(result)):
+            raise AssertionError()
         for action, step in zip(case['actions'], result):
             expected = None
             if action['op'] in {'continuous_config', 'id_set_config'}:
@@ -72,14 +73,18 @@ def check_source(cases, results):
                     expected = prefix + ' ttl_seconds must be positive'
                 elif action.get('max') == '0':
                     expected = prefix + ' max_ids must be positive'
-            assert step['error'] == expected, (case, action, step)
+            if not (step['error'] == expected):
+                raise AssertionError((case, action, step))
             if expected:
-                assert step['before'] == step['after'], (case, action)
+                if not (step['before'] == step['after']):
+                    raise AssertionError((case, action))
                 errors += 1
             steps += 1
         if len(case['actions']) == 11:
-            assert result[0]['after'] == result[1]['after']
-            assert result[2]['after'] == result[3]['after']
+            if not (result[0]['after'] == result[1]['after']):
+                raise AssertionError()
+            if not (result[2]['after'] == result[3]['after']):
+                raise AssertionError()
     return dict(cases=len(cases), steps=steps, rejected=errors)
 
 
@@ -92,7 +97,8 @@ def main():
     args = parser.parse_args()
     current, cases = identity(), inputs()
     if args.record_source:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         check_source(cases, expected)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current, cases=[
@@ -101,8 +107,10 @@ def main():
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         for key, value in current.items():
-            assert same(corpus[key], value), key
-        assert same(cases, [row['input'] for row in corpus['cases']])
+            if not (same(corpus[key], value)):
+                raise AssertionError(key)
+        if not (same(cases, [row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -114,7 +122,8 @@ def main():
     actual = observe(args.cpp, cases)
     failures = [i for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     if args.record_comparison:
-        assert not args.record_comparison.exists()
+        if not (not args.record_comparison.exists()):
+            raise AssertionError()
         args.record_comparison.write_bytes(gzip.compress(json.dumps(
             dict(inputs=cases, original=expected, cpp=actual, failures=failures),
             ensure_ascii=False).encode(), mtime=0))

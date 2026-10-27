@@ -37,26 +37,33 @@ def main():
     reference_versions = versions(reference_lock)
     for name, resolved in versions(lock).items():
         if name not in {'teaql_dynamic_json_persistent_506', 'cpp-dynamic-json-core'}:
-            assert resolved <= reference_versions.get(name, set()), name
-    assert registry_identities(lock) <= registry_identities(reference_lock)
+            if not (resolved <= reference_versions.get(name, set())):
+                raise AssertionError(name)
+    if not (registry_identities(lock) <= registry_identities(reference_lock)):
+        raise AssertionError()
     directory=ROOT/'tests/generator/parity/dynamic_json_rust'
     provenance=json.loads((directory/'PROVENANCE.json').read_text())
     for name,digest in provenance['files'].items():
-        assert hashlib.sha256((directory/name).read_bytes()).hexdigest()==digest,name
+        if not (hashlib.sha256((directory/name).read_bytes()).hexdigest()==digest):
+            raise AssertionError(name)
     os.environ['TEAQL_LOG_ENDPOINT']='off'
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
     schema_hash = {name:hashlib.sha256((ROOT/'tests/support'/name).read_bytes()).hexdigest() for name in ['dynamic_json_schema.sql','dynamic_json_dataset.sql']}
     cases = inputs()
     if args.record:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(baseline=baseline, producer=provenance, schema_sha256=schema_hash,
             cases=[dict(input=i, expected=e) for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
-        assert corpus['baseline'] == baseline and corpus['producer'] == provenance
-        assert corpus['schema_sha256'] == schema_hash
-        assert same(cases, [c['input'] for c in corpus['cases']])
+        if not (corpus['baseline'] == baseline and corpus['producer'] == provenance):
+            raise AssertionError()
+        if not (corpus['schema_sha256'] == schema_hash):
+            raise AssertionError()
+        if not (same(cases, [c['input'] for c in corpus['cases']])):
+            raise AssertionError()
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -65,7 +72,8 @@ def main():
     failures = [i for i,(a,b) in enumerate(zip(expected,actual)) if not same(adapted(a),b)]
     if args.record:
         path=ROOT / 'docs/parity/dynamic_json_persistent_initial_5_0_6.json.gz'
-        assert not path.exists()
+        if not (not path.exists()):
+            raise AssertionError()
         path.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,original=expected,cpp=actual,failures=failures),ensure_ascii=False).encode(),mtime=0))
     for i in failures[:3]:
         print('Case',i,cases[i])

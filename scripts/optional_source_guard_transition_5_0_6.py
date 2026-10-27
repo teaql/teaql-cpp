@@ -35,6 +35,19 @@ def reconcile_source_files(root, recorded, current, contract):
     rewrite = records['rewrite']
     preedit = records['preedit']
     postedit = records['postedit']
+    followup = None
+    if 'followup' in contract:
+        item = contract['followup']
+        path = root / item['path']
+        require(digest(path) == item['sha256'], 'follow-up receipt changed')
+        followup = read(path)
+        require(followup['complete'] is True and followup['installed'] is True
+                and followup['source_hashes_verified'] is True
+                and followup['scripts'] == 51 and followup['assertions'] == 425
+                and followup['ast_structural_equivalence'] is True,
+                'complete second-stage comparator rewrite')
+        followup_rows = {row['path']: row for row in followup['rows']}
+        require(len(followup_rows) == 51, 'unique second-stage comparator paths')
     require(rewrite['complete'] is True and rewrite['scripts'] == 48
             and rewrite['source_call_assertions_after'] == 0,
             'complete bounded rewrite')
@@ -61,9 +74,16 @@ def reconcile_source_files(root, recorded, current, contract):
     before_rows = preedit['rows']
     for name in paths:
         row = rows[name]
+        expected_current = row['after_sha256']
+        if followup is not None:
+            require(name in followup_rows, 'missing second-stage comparator: ' + name)
+            second = followup_rows[name]
+            require(second['before_sha256'] == expected_current,
+                    'second-stage predecessor changed: ' + name)
+            expected_current = second['after_sha256']
         require(recorded[name] == row['before_sha256']
-                and current[name] == row['after_sha256']
-                and digest(root / name) == row['after_sha256'],
+                and current[name] == expected_current
+                and digest(root / name) == expected_current,
                 'exact comparator transition: ' + name)
         require(any(item['script'] == name
                     and item['source_sha256'] == row['before_sha256']
@@ -72,6 +92,38 @@ def reconcile_source_files(root, recorded, current, contract):
     require(all(recorded[name] == current[name]
                 for name in recorded if name not in paths),
             'unchanged original execution inputs')
+    overlaid = dict(recorded)
+    overlaid.update({name: current[name] for name in paths})
+    return overlaid
+
+
+def reconcile_assert_rewrite_source_files(root, recorded, current, contract):
+    """Validate a direct comparator rewrite without editing the Rust receipt."""
+    root = Path(root)
+    require(digest(__file__) == contract['helper_sha256'], 'helper source changed')
+    item = contract['rewrite']
+    path = root / item['path']
+    require(digest(path) == item['sha256'], 'assertion rewrite receipt changed')
+    rewrite = read(path)
+    require(rewrite['complete'] is True and rewrite['installed'] is True
+            and rewrite['source_hashes_verified'] is True
+            and rewrite['ast_structural_equivalence'] is True
+            and rewrite['scripts'] == 51 and rewrite['assertions'] == 425,
+            'complete assertion rewrite')
+    rows = {row['path']: row for row in rewrite['rows']}
+    require(len(rows) == 51, 'unique assertion rewrite paths')
+    paths = contract['paths']
+    require(paths == sorted(set(paths)) and paths, 'exact changed-path selection')
+    require(set(recorded) == set(current), 'source file set changed')
+    require(sorted(name for name in recorded if recorded[name] != current[name]) == paths,
+            'unexpected source file difference')
+    for name in paths:
+        require(name in rows, 'missing assertion rewrite path: ' + name)
+        row = rows[name]
+        require(recorded[name] == row['before_sha256']
+                and current[name] == row['after_sha256']
+                and digest(root / name) == row['after_sha256'],
+                'exact assertion rewrite: ' + name)
     overlaid = dict(recorded)
     overlaid.update({name: current[name] for name in paths})
     return overlaid

@@ -60,18 +60,22 @@ def main():
     args = parser.parse_args()
     lock = ROOT / 'tests/parity/rust_dynamic_json_inheritance_5_0_6/Cargo.lock'
     reference = ROOT / '.reference/teaql-rs/Cargo.lock'
-    assert registry_identities(lock) <= registry_identities(reference)
+    if not (registry_identities(lock) <= registry_identities(reference)):
+        raise AssertionError()
     for name, resolved in versions(lock).items():
         if name not in {'teaql_dynamic_json_inheritance_506', 'cpp-inheritance-graph-core'}:
-            assert resolved <= versions(reference).get(name, set()), name
+            if not (resolved <= versions(reference).get(name, set())):
+                raise AssertionError(name)
     directory = ROOT / 'tests/generator/parity/inheritance_graph_rust'
     producer = json.loads((directory / 'PROVENANCE.json').read_text())
     for name, digest in producer['files'].items():
-        assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest
+        if not (hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest):
+            raise AssertionError()
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
     cases = inputs()
     if args.record:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(
             dict(baseline=baseline, producer=producer,
@@ -79,8 +83,10 @@ def main():
             ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
-        assert corpus['baseline'] == baseline and corpus['producer'] == producer
-        assert same(cases, [c['input'] for c in corpus['cases']])
+        if not (corpus['baseline'] == baseline and corpus['producer'] == producer):
+            raise AssertionError()
+        if not (same(cases, [c['input'] for c in corpus['cases']])):
+            raise AssertionError()
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -89,7 +95,8 @@ def main():
     failures = [n for n, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     if args.record:
         archive = ROOT / 'docs/parity/dynamic_json_inheritance_initial_5_0_6.json.gz'
-        assert not archive.exists()
+        if not (not archive.exists()):
+            raise AssertionError()
         archive.write_bytes(gzip.compress(json.dumps(
             dict(inputs=cases, original=expected, cpp=actual, failures=failures),
             ensure_ascii=False).encode(), mtime=0))

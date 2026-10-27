@@ -38,32 +38,42 @@ def main():
     reference_versions = versions(reference_lock)
     for name, resolved in versions(lock).items():
         if name not in {'teaql_relation_selection_inputs_506', 'cpp-dynamic-json-core'}:
-            assert resolved <= reference_versions.get(name, set()), name
-    assert registry_identities(lock) <= registry_identities(reference_lock)
+            if not (resolved <= reference_versions.get(name, set())):
+                raise AssertionError(name)
+    if not (registry_identities(lock) <= registry_identities(reference_lock)):
+        raise AssertionError()
     directory = ROOT / 'tests/generator/parity/dynamic_json_rust'
     provenance = json.loads((directory / 'PROVENANCE.json').read_text())
-    assert hashlib.sha256((ROOT / provenance['model']).read_bytes()).hexdigest() == provenance['model_sha256']
+    if not (hashlib.sha256((ROOT / provenance['model']).read_bytes()).hexdigest() == provenance['model_sha256']):
+        raise AssertionError()
     for name, digest in provenance['files'].items():
-        assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest, name
+        if not (hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest):
+            raise AssertionError(name)
     source_review = json.loads((ROOT / 'docs/parity/relation_selection_inputs_source_review_5_0_6.json').read_text())
     for method in source_review['methods']:
-        assert method['body'] in (ROOT / method['source']).read_text(), method['name']
-        assert hashlib.sha256(method['body'].encode()).hexdigest() == method['sha256']
+        if not (method['body'] in (ROOT / method['source']).read_text()):
+            raise AssertionError(method['name'])
+        if not (hashlib.sha256(method['body'].encode()).hexdigest() == method['sha256']):
+            raise AssertionError()
     for name, digest in source_review['fixture_sha256'].items():
-        assert hashlib.sha256((ROOT / 'tests/support' / name).read_bytes()).hexdigest() == digest, name
+        if not (hashlib.sha256((ROOT / 'tests/support' / name).read_bytes()).hexdigest() == digest):
+            raise AssertionError(name)
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
     __import__('os').environ['TEAQL_LOG_ENDPOINT']='off'
     cases = inputs()
     if args.record:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(baseline=baseline, producer=provenance,
             cases=[dict(input=i, expected=e) for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         require_cases(corpus, len(cases), cases)
-        assert corpus['baseline'] == baseline and corpus['producer'] == provenance
-        assert same(cases, [c['input'] for c in corpus['cases']])
+        if not (corpus['baseline'] == baseline and corpus['producer'] == provenance):
+            raise AssertionError()
+        if not (same(cases, [c['input'] for c in corpus['cases']])):
+            raise AssertionError()
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -74,7 +84,8 @@ def main():
     failures = [i for i,(a,b) in enumerate(zip(expected,actual)) if not same(a,b)]
     if args.record:
         path=ROOT / 'docs/parity/relation_selection_inputs_initial_5_0_6.json.gz'
-        assert not path.exists()
+        if not (not path.exists()):
+            raise AssertionError()
         path.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,original=expected,cpp=actual,failures=failures),ensure_ascii=False).encode(),mtime=0))
     for i in failures[:3]:
         print('Case',i,cases[i])

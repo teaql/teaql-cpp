@@ -31,7 +31,8 @@ def inputs():
         cases.append(dict(entity=entity, target=target, minimal=False, mode=mode,
                           shape='readonly', optimization='none', policy=policy,
                           intent='valid', logging=True))
-    assert len(cases) == 3328
+    if not (len(cases) == 3328):
+        raise AssertionError()
     return cases
 
 
@@ -45,24 +46,31 @@ def identity():
 def check_source(cases, results):
     groups = {}
     for case, result in zip(cases, results):
-        assert result['panic'] is None and result['released'], (case, result)
+        if not (result['panic'] is None and result['released']):
+            raise AssertionError((case, result))
         if case['policy'] != 'allow':
-            assert result['error'] == 'graph write error: request policy error: COMPOSED_QUERY_DENIED'
-            assert result['selects'] == 0 and not result['logs'] and not result['rows']
+            if not (result['error'] == 'graph write error: request policy error: COMPOSED_QUERY_DENIED'):
+                raise AssertionError()
+            if not (result['selects'] == 0 and not result['logs'] and not result['rows']):
+                raise AssertionError()
         key = json.dumps({name: value for name, value in case.items() if name != 'target'},
                          sort_keys=True)
         previous = groups.setdefault(key, result)
-        assert same(previous['query'], result['query']), case
+        if not (same(previous['query'], result['query'])):
+            raise AssertionError(case)
         if previous['policy'] and result['policy']:
-            assert same(previous['policy'][0], result['policy'][0]), case
+            if not (same(previous['policy'][0], result['policy'][0])):
+                raise AssertionError(case)
         # These entries never decode R. Require all results, errors, Policy and
         # diagnostics to stay identical across target choices, not just row IDs.
         if case['mode'] in {'rows', 'count', 'exists'}:
-            assert same(previous, result), case
+            if not (same(previous, result)):
+                raise AssertionError(case)
 
 
 def write_record(path, value):
-    assert not path.exists(), path
+    if not (not path.exists()):
+        raise AssertionError(path)
     path.write_bytes(gzip.compress(json.dumps(value, ensure_ascii=False).encode(), mtime=0))
 
 
@@ -76,7 +84,8 @@ def main():
     os.environ['TEAQL_LOG_ENDPOINT'] = 'off'
     current, cases = identity(), inputs()
     if args.record_source:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         check_source(cases, expected)
         write_record(CORPUS, dict(**current, cases=[dict(input=i, expected=e)
@@ -84,8 +93,10 @@ def main():
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         for key, value in current.items():
-            assert same(corpus[key], value), key
-        assert same(cases, [row['input'] for row in corpus['cases']])
+            if not (same(corpus[key], value)):
+                raise AssertionError(key)
+        if not (same(cases, [row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected = [row['expected'] for row in corpus['cases']]
         check_source(cases, expected)
         if args.rust:

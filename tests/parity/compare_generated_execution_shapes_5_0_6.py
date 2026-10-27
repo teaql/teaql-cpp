@@ -47,21 +47,25 @@ def main():
     args = parser.parse_args()
     lock = ROOT / 'tests/parity/rust_execution_shapes_5_0_6/Cargo.lock'
     reference_lock = ROOT / '.reference/teaql-rs/Cargo.lock'
-    assert registry_identities(lock) <= registry_identities(reference_lock)
+    if not (registry_identities(lock) <= registry_identities(reference_lock)):
+        raise AssertionError()
     reference_versions = versions(reference_lock)
     for name, resolved in versions(lock).items():
         if name not in {'teaql_execution_shapes_506', 'cpp-dynamic-json-core'}:
-            assert resolved <= reference_versions.get(name, set()), name
+            if not (resolved <= reference_versions.get(name, set())):
+                raise AssertionError(name)
     producer_path = ROOT / 'tests/generator/parity/dynamic_json_rust'
     producer = json.loads((producer_path / 'PROVENANCE.json').read_text())
     for name, expected_hash in producer['files'].items():
-        assert hashlib.sha256((producer_path / name).read_bytes()).hexdigest() == expected_hash
+        if not (hashlib.sha256((producer_path / name).read_bytes()).hexdigest() == expected_hash):
+            raise AssertionError()
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
     fixtures = {name: hashlib.sha256((ROOT / 'tests/support' / name).read_bytes()).hexdigest()
                 for name in ['dynamic_json_schema.sql', 'dynamic_json_dataset.sql']}
     cases = inputs()
     if args.record:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(
             dict(baseline=baseline, producer=producer, fixtures=fixtures,
@@ -70,9 +74,12 @@ def main():
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         require_cases(corpus, len(cases), cases)
-        assert corpus['baseline'] == baseline and corpus['producer'] == producer
-        assert corpus['fixtures'] == fixtures
-        assert same(cases, [x['input'] for x in corpus['cases']])
+        if not (corpus['baseline'] == baseline and corpus['producer'] == producer):
+            raise AssertionError()
+        if not (corpus['fixtures'] == fixtures):
+            raise AssertionError()
+        if not (same(cases, [x['input'] for x in corpus['cases']])):
+            raise AssertionError()
         expected = [x['expected'] for x in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -83,7 +90,8 @@ def main():
     failures = [n for n, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     if args.record:
         archive = ROOT / 'docs/parity/generated_execution_shapes_initial_5_0_6.json.gz'
-        assert not archive.exists()
+        if not (not archive.exists()):
+            raise AssertionError()
         archive.write_bytes(gzip.compress(json.dumps(
             dict(inputs=cases, original=expected, cpp=actual, failures=failures),
             ensure_ascii=False).encode(), mtime=0))

@@ -86,14 +86,17 @@ def producer_integrity():
     for fixture in ['types_rust', 'optional_types_rust']:
         directory = ROOT / 'tests/generator/parity' / fixture
         manifest = json.loads((directory / 'PROVENANCE.json').read_text())
-        assert hashlib.sha256((ROOT / manifest['model']).read_bytes()).hexdigest() == manifest['model_sha256']
+        if not (hashlib.sha256((ROOT / manifest['model']).read_bytes()).hexdigest() == manifest['model_sha256']):
+            raise AssertionError()
         for name, digest in manifest['files'].items():
-            assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest, name
+            if not (hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest):
+                raise AssertionError(name)
         result[fixture] = manifest
     ordinary = (ROOT / 'tests/generator/parity/types_rust/lib/src/e.rs').read_text()
     optional = (ROOT / 'tests/generator/parity/optional_types_rust/lib/src/e.rs').read_text()
     helper = ordinary[ordinary.index('pub fn trigger_logic_bug_panic'):]
-    assert helper == optional[optional.index('pub fn trigger_logic_bug_panic'):]
+    if not (helper == optional[optional.index('pub fn trigger_logic_bug_panic'):]):
+        raise AssertionError()
     return result, hashlib.sha256(helper.encode()).hexdigest()
 
 
@@ -107,19 +110,25 @@ def main():
     cases = inputs()
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
     if args.record:
-        assert args.rust and not CORPUS.exists(), 'Capture requires actual Rust and a fresh corpus'
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError('Capture requires actual Rust and a fresh corpus')
         expected = observe(args.rust, cases)
         prefix = json.loads(gzip.decompress(PREFIX.read_bytes()))
-        assert same(cases[:len(prefix['cases'])], [c['input'] for c in prefix['cases']])
-        assert same(expected[:len(prefix['cases'])], [c['expected'] for c in prefix['cases']])
+        if not (same(cases[:len(prefix['cases'])], [c['input'] for c in prefix['cases']])):
+            raise AssertionError()
+        if not (same(expected[:len(prefix['cases'])], [c['expected'] for c in prefix['cases']])):
+            raise AssertionError()
         corpus = dict(baseline=baseline, producers=producers, original_shared_helper_sha256=helper,
                       cases=[dict(input=i, expected=o) for i, o in zip(cases, expected)])
         CORPUS.write_bytes(gzip.compress(json.dumps(corpus, ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
-        assert corpus['baseline'] == baseline and corpus['producers'] == producers
-        assert corpus['original_shared_helper_sha256'] == helper
-        assert same(cases, [c['input'] for c in corpus['cases']]), 'Declared matrix changed'
+        if not (corpus['baseline'] == baseline and corpus['producers'] == producers):
+            raise AssertionError()
+        if not (corpus['original_shared_helper_sha256'] == helper):
+            raise AssertionError()
+        if not (same(cases, [c['input'] for c in corpus['cases']])):
+            raise AssertionError('Declared matrix changed')
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -128,7 +137,8 @@ def main():
     failures = [i for i, (e, a) in enumerate(zip(expected, actual)) if not same(e, adapted(a))]
     if args.record:
         path = ROOT / 'docs/parity/expression_model_types_expanded_initial_5_0_6.json.gz'
-        assert not path.exists()
+        if not (not path.exists()):
+            raise AssertionError()
         path.write_bytes(gzip.compress(json.dumps(dict(
             baseline=baseline, matching=len(cases)-len(failures), total=len(cases),
             failures=failures, cpp_actual=actual, original=expected,

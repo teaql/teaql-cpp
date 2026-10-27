@@ -19,6 +19,7 @@ from optional_source_guard_transition_5_0_6 import reconcile_source_files
 
 SELECTION = ROOT / 'docs/parity/optimized_assert_registry_current_5_0_6.json.gz'
 REWRITE = ROOT / 'docs/parity/optional_source_guard_rewrite_5_0_6.json.gz'
+FOLLOWUP = ROOT / 'docs/parity/remaining_comparator_assert_rewrite_installed_5_0_6.json.gz'
 
 
 def read(path):
@@ -73,6 +74,9 @@ def transition_controls():
         altered = copy.deepcopy(transition)
         altered['postedit']['sha256'] = '0' * 64
         candidates.append(('changed_execution_receipt', recorded, current, altered))
+        altered = copy.deepcopy(transition)
+        altered['followup']['sha256'] = '0' * 64
+        candidates.append(('changed_followup_receipt', recorded, current, altered))
 
         for label, old, new, scope in candidates:
             try:
@@ -82,7 +86,7 @@ def transition_controls():
             else:
                 raise RuntimeError('Accepted corrupted optional-source transition: '
                                    + cohort + '/' + label)
-    if len(controls) != 24:
+    if len(controls) != 28:
         raise RuntimeError('Incomplete optional-source transition controls')
     return controls
 
@@ -97,11 +101,25 @@ def main():
 
     selected = read(SELECTION)
     rewrite = read(REWRITE)
+    followup = read(FOLLOWUP)
     if selected['registrations'] != 50 or selected['scripts'] != 48:
         raise RuntimeError('Optional Rust source selection changed')
     if rewrite['scripts'] != 48 or rewrite['source_call_assertions_after'] != 0:
         raise RuntimeError('Optional Rust observer rewrite is incomplete')
-    hashes = {row['path']: row['after_sha256'] for row in rewrite['rows']}
+    prior_hashes = {row['path']: row['after_sha256'] for row in rewrite['rows']}
+    if followup['complete'] is not True or followup['installed'] is not True or \
+            followup['source_hashes_verified'] is not True or \
+            followup['scripts'] != 51 or followup['assertions'] != 425 or \
+            followup['ast_structural_equivalence'] is not True:
+        raise RuntimeError('Second-stage comparator rewrite is incomplete')
+    second = {row['path']: row for row in followup['rows']}
+    if len(second) != 51:
+        raise RuntimeError('Second-stage comparator source identities are incomplete')
+    hashes = {}
+    for name, wanted in prior_hashes.items():
+        if name not in second or second[name]['before_sha256'] != wanted:
+            raise RuntimeError('Optional Rust source predecessor changed: ' + name)
+        hashes[name] = second[name]['after_sha256']
     if len(hashes) != 48 or {row['script'] for row in selected['rows']} != set(hashes):
         raise RuntimeError('Optional Rust source scripts differ from the rewrite')
     for name, wanted in hashes.items():
@@ -158,6 +176,7 @@ def main():
     if args.record is not None:
         receipt = dict(scope=__doc__, complete=True, whole_goal_complete=False,
                        selection_sha256=digest(SELECTION), rewrite_sha256=digest(REWRITE),
+                       followup_sha256=digest(FOLLOWUP),
                        registered=len(selected['rows']), scripts=len(hashes),
                        normal_controls=50, optimized_controls=50,
                        transition_controls=transition_checks,
@@ -166,7 +185,7 @@ def main():
             (json.dumps(receipt, indent=2) + '\n').encode(), mtime=0))
     print('Optional Rust observers executed and rejected /bin/false: '
           '50 normal + 50 optimized controls; '
-          '24 source-transition corruptions rejected')
+          '28 source-transition corruptions rejected')
 
 
 if __name__ == '__main__':

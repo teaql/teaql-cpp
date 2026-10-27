@@ -18,7 +18,8 @@ def main():
     with gzip.open(CORPUS, 'rt') as source:
         corpus = json.load(source)
     for key, value in metadata().items():
-        assert same(corpus[key], value), f'Changed provenance: {key}'
+        if not (same(corpus[key], value)):
+            raise AssertionError(f'Changed provenance: {key}')
     cases = require_cases(corpus, 3072, source_inputs())
     inputs = [case['input'] for case in cases]
     expected = [case['expected'] for case in cases]

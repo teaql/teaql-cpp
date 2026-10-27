@@ -181,7 +181,7 @@
     "tests/parity/compare_graph_outcome_models_5_0_6.py": "976ccf6c73bf53c5de4a6ac4bda51c552973379bbc886406949a832d5de87b8a",
     "tests/parity/compare_graph_planner_scopes_5_0_6.py": "b384c68406e0e04c0f50dd8cc98a370196fc82b1405e969a9cd06ccec7fb5871",
     "tests/parity/compare_legacy_graph_intent_5_0_6.py": "798546fca97c7b50276fd7d9f9265e3a1914581f45388230ab412fc8d972f82c",
-    "tests/parity/compare_relation_enhancement_complete_5_0_6.py": "4aa03dd8d2315bdee9ac6c6c42e4307e62052ee343b39b10f81a8331642a6746",
+    "tests/parity/compare_relation_enhancement_complete_5_0_6.py": "1508fd964006d88139b41e8e97adf8e0acf4e8fa77afb018ae4a85c48b3d613f",
     "tests/parity/compare_relation_loaded_state_5_0_6.py": "20b6251aad0fc9bad4a336090653ff98573f0269fabd52142f0ec3b0abfaff01",
     "tests/parity/compare_resolved_cache_execution_5_0_6.py": "8ae768d4fbc9fa900301f7bb2ef947e1e22492bdda290d3f65e2d71f87bc6452",
     "tests/parity/compare_resolved_cache_intent_5_0_6.py": "d6e64ad135c3831c5aca81608600eb444ddc45af84ea6a2f3b35e4812afa6193",

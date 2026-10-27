@@ -8,7 +8,7 @@
     "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
     "tests/parity/compare_runtime_state_bridge_5_0_6.py": "e9a15f442875239682d24f69790066eeff25a98ffddef411ceb3a7f29475955c",
     "tests/parity/compare_generated_runtime_state_bridge_5_0_6.py": "5bda8a547f02f2a2d726a729742d2dfe803f9a9c9f1f3acf827aa61cc55ff88b",
-    "tests/parity/compare_generated_load_state_bulk_5_0_6.py": "26fe6d4dc2055e913611109505ae3529523ff65b44f4639b5534f1cfe0c3058e",
+    "tests/parity/compare_generated_load_state_bulk_5_0_6.py": "bc582a976ceca5b73a4f5145dbe12874ad54b3a8f4e62b30973e09e5241c95c6",
     "tests/parity/compare_entity_source_5_0_6.py": "c932c7331735cbf338f2b829529f2b42a884b9a383c86f0ec0d4081ccce038f3"
   },
   "contracts": [

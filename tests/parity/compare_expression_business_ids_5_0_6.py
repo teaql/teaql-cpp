@@ -40,13 +40,16 @@ def main():
     args = parser.parse_args()
     directory = ROOT / 'tests/generator/parity/business_ids_rust'
     producer = json.loads((directory / 'PROVENANCE.json').read_text())
-    assert hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']
+    if not (hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']):
+        raise AssertionError()
     for name, digest in producer['files'].items():
-        assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest, name
+        if not (hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest):
+            raise AssertionError(name)
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
     cases = inputs()
     if args.record:
-        assert args.rust and not CORPUS.exists(), 'Capture requires a fresh corpus and actual Rust'
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError('Capture requires a fresh corpus and actual Rust')
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(
             baseline=baseline, producer=producer,
@@ -54,8 +57,10 @@ def main():
         ), ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
-        assert corpus['baseline'] == baseline and corpus['producer'] == producer
-        assert same(cases, [c['input'] for c in corpus['cases']])
+        if not (corpus['baseline'] == baseline and corpus['producer'] == producer):
+            raise AssertionError()
+        if not (same(cases, [c['input'] for c in corpus['cases']])):
+            raise AssertionError()
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -64,7 +69,8 @@ def main():
     failures = [i for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, adapted(b))]
     if args.record:
         path = ROOT / 'docs/parity/expression_business_ids_source_5_0_6.json.gz'
-        assert not path.exists()
+        if not (not path.exists()):
+            raise AssertionError()
         path.write_bytes(gzip.compress(json.dumps(dict(
             baseline=baseline, original=expected, cpp=actual, failures=failures,
             adaptation='Complete native diagnostic frames map only documented naming/English presentation.'

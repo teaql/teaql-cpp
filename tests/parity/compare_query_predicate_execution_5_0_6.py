@@ -69,35 +69,45 @@ def source_identity():
                  'tests/parity/rust_query_predicate_execution_5_0_6/src/main.rs'):
         record = checkpoint['sources'][name]
         original = gzip.decompress((ROOT / record['snapshot']).read_bytes())
-        assert hashlib.sha256(original).hexdigest() == record['sha256']
+        if not (hashlib.sha256(original).hexdigest() == record['sha256']):
+            raise AssertionError()
         expected = original.replace(b'query_field_branches_sql.sql', b'query_predicate_typed_sql.sql')
         if name.endswith('.cpp'):
             statement = b'    serviceRuntimeFromConnection(user_context, connection);'
-            assert expected.count(statement) == 1
+            if not (expected.count(statement) == 1):
+                raise AssertionError()
             expected = expected.replace(
                 statement, b'    require_value(serviceRuntimeFromConnection(user_context, connection));', 1)
-        assert (ROOT / name).read_bytes() == expected, (
-            'Typed-schema observer changed beyond fixture path and exact startup Result check')
+        if not ((ROOT / name).read_bytes() == expected):
+            raise AssertionError('Typed-schema observer changed beyond fixture path and exact startup Result check')
     project = ROOT / 'tests/parity/rust_query_predicate_execution_5_0_6'
     lock = project / 'Cargo.lock'
     reference_lock = ROOT / '.reference/teaql-rs/Cargo.lock'
     reference_versions = versions(reference_lock)
     for name, resolved in versions(lock).items():
         if name not in {'teaql_query_predicate_execution_506', 'cpp-query-branches-core'}:
-            assert resolved <= reference_versions.get(name, set()), name
-    assert registry_identities(lock) <= registry_identities(reference_lock)
+            if not (resolved <= reference_versions.get(name, set())):
+                raise AssertionError(name)
+    if not (registry_identities(lock) <= registry_identities(reference_lock)):
+        raise AssertionError()
     directory = ROOT / 'tests/generator/parity/query_field_branches_rust'
     provenance = json.loads((directory / 'PROVENANCE.json').read_text())
-    assert digest(ROOT / provenance['model']) == provenance['model_sha256']
+    if not (digest(ROOT / provenance['model']) == provenance['model_sha256']):
+        raise AssertionError()
     for name, expected in provenance['files'].items():
-        assert digest(directory / name) == expected, name
+        if not (digest(directory / name) == expected):
+            raise AssertionError(name)
     cpp_directory = ROOT / 'tests/generated_query_field_branches'
     cpp_manifest = json.loads((cpp_directory / 'manifest.json').read_text())
-    assert cpp_manifest['runtime_rust_baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
-    assert cpp_manifest['generator_reference_commit'] == provenance['generator_commit']
-    assert cpp_manifest['model_sha256'] == provenance['model_sha256']
+    if not (cpp_manifest['runtime_rust_baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']):
+        raise AssertionError()
+    if not (cpp_manifest['generator_reference_commit'] == provenance['generator_commit']):
+        raise AssertionError()
+    if not (cpp_manifest['model_sha256'] == provenance['model_sha256']):
+        raise AssertionError()
     for name, expected in cpp_manifest['files'].items():
-        assert digest(cpp_directory / name) == expected, name
+        if not (digest(cpp_directory / name) == expected):
+            raise AssertionError(name)
     paths = [project / 'Cargo.toml', lock, project / 'src/main.rs',
              ROOT / 'tests/parity/rust_values/src/fixture_value.rs',
              ROOT / 'tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs',
@@ -116,7 +126,8 @@ def main():
     identity = source_identity()
     cases = inputs()
     if args.record:
-        assert args.rust and not CORPUS.exists(), 'Preserve original observations'
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError('Preserve original observations')
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**identity,
             cases=[dict(input=i, expected=e) for i, e in zip(cases, expected)]),
@@ -125,8 +136,10 @@ def main():
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         require_cases(corpus, len(cases), cases)
         for name, item in identity.items():
-            assert corpus[name] == item, name
-        assert same(cases, [c['input'] for c in corpus['cases']])
+            if not (corpus[name] == item):
+                raise AssertionError(name)
+        if not (same(cases, [c['input'] for c in corpus['cases']])):
+            raise AssertionError()
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -137,7 +150,8 @@ def main():
     failures = [i for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     if args.record:
         report = ROOT / 'docs/parity/query_predicate_typed_execution_initial_5_0_6.json.gz'
-        assert not report.exists()
+        if not (not report.exists()):
+            raise AssertionError()
         report.write_bytes(gzip.compress(json.dumps(dict(inputs=cases, original=expected,
             cpp=actual, failures=failures), ensure_ascii=False).encode(), mtime=0))
     for index in failures[:3]:

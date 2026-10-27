@@ -1,5 +1,18 @@
 # G13 semantic qualification requirements
 
+Current SQ02 comparator-check checkpoint:
+[the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)
+replaces 425 removable assertions in 51 registered comparator scripts with
+unconditional, AST-equivalent checks. Sixteen source contracts pin current
+hashes, four retain a second-stage optional-observer transition, and Clock
+validates an exact current overlay without changing its original Rust receipt.
+The permanent normal/optimized control rejects the reproduced altered-baseline
+case; selected native tests pass **69/69** across all 53 affected comparator
+registrations and their source fixtures, with no source-hash changes. The
+preceding 1,064-test attempt stopped after 786 passes and has no terminal
+verdict. The current 1,065-test registry still needs a complete current-source
+epoch; SQ02, G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+
 Current dispatcher/source-fixture inventory: the
 [latest installed custom lookup](runtime_examples_cli_source_binding_5_0_6.md)
 maps **160/160** comparison locators; the earlier 127/160 through 159/160

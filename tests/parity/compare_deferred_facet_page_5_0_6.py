@@ -26,25 +26,31 @@ def inputs():
                  ['list', 'one', 'page'], ['plain', 'id_set', 'continuous'],
                  ['none', 'count', 'rows', 'facet'], ['resume', 'cancel', 'fail'],
                  [0, 1, 99], [0, 1, 2], [False, True])]
-    assert len(cases) == 1944
+    if not (len(cases) == 1944):
+        raise AssertionError()
     return cases
 
 
 def identity():
     project = ROOT / 'tests/parity/rust_execution_shapes_5_0_6'
     reference = ROOT / '.reference/teaql-rs/Cargo.lock'
-    assert registry_identities(project / 'Cargo.lock') <= registry_identities(reference)
+    if not (registry_identities(project / 'Cargo.lock') <= registry_identities(reference)):
+        raise AssertionError()
     wanted = versions(reference)
     for name, resolved in versions(project / 'Cargo.lock').items():
         if name not in {'teaql_execution_shapes_506', 'cpp-dynamic-json-core'}:
-            assert resolved <= wanted.get(name, set()), name
+            if not (resolved <= wanted.get(name, set())):
+                raise AssertionError(name)
     sdk = ROOT / 'tests/generator/parity/dynamic_json_rust'
     provenance = json.loads((sdk / 'PROVENANCE.json').read_text())
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
-    assert provenance['runtime_commit'] == baseline and not provenance['hand_edited']
-    assert hashlib.sha256((ROOT / provenance['model']).read_bytes()).hexdigest() == provenance['model_sha256']
+    if not (provenance['runtime_commit'] == baseline and not provenance['hand_edited']):
+        raise AssertionError()
+    if not (hashlib.sha256((ROOT / provenance['model']).read_bytes()).hexdigest() == provenance['model_sha256']):
+        raise AssertionError()
     for name, digest in provenance['files'].items():
-        assert hashlib.sha256((sdk / name).read_bytes()).hexdigest() == digest, name
+        if not (hashlib.sha256((sdk / name).read_bytes()).hexdigest() == digest):
+            raise AssertionError(name)
     paths = ['tests/parity/rust_execution_shapes_5_0_6/Cargo.toml',
              'tests/parity/rust_execution_shapes_5_0_6/Cargo.lock',
              'tests/parity/rust_execution_shapes_5_0_6/src/bin/deferred_facet_page_5_0_6.rs',
@@ -68,27 +74,32 @@ def main():
     os.environ['TEAQL_LOG_ENDPOINT'] = 'off'
     current, cases = identity(), inputs()
     if args.record_source:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current, cases=[
             dict(input=i, expected=e) for i, e in zip(cases, expected)
         ]), ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
-        assert all(corpus[key] == value for key, value in current.items())
-        assert same(cases, [row['input'] for row in corpus['cases']])
+        if not (all(corpus[key] == value for key, value in current.items())):
+            raise AssertionError()
+        if not (same(cases, [row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
                 raise RuntimeError('Original observations changed')
     if not args.cpp:
-        assert args.record_source
+        if not (args.record_source):
+            raise AssertionError()
         print(f'Recorded {len(cases)} original deferred facet/page observations')
         return 0
     actual = observe(args.cpp, cases)
     failures = [i for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     if args.record_comparison:
-        assert not args.record_comparison.exists()
+        if not (not args.record_comparison.exists()):
+            raise AssertionError()
         args.record_comparison.write_bytes(gzip.compress(json.dumps(dict(
             inputs=cases, original=expected, cpp=actual, failures=failures),
             ensure_ascii=False).encode(), mtime=0))

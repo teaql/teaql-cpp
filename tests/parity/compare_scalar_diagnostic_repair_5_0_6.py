@@ -44,19 +44,23 @@ def main():
     parser.add_argument('--record-source', action='store_true')
     parser.add_argument('--record-comparison', type=Path)
     args = parser.parse_args()
-    assert args.cpp or args.record_source
+    if not (args.cpp or args.record_source):
+        raise AssertionError()
     os.environ['TEAQL_LOG_ENDPOINT'] = 'off'
     current, cases = identity(), inputs()
     if args.record_source:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current, cases=[dict(input=i, expected=e)
             for i,e in zip(cases,expected)]), ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         for key, value in current.items():
-            assert corpus[key] == value, key
-        assert same(cases, [row['input'] for row in corpus['cases']])
+            if not (corpus[key] == value):
+                raise AssertionError(key)
+        if not (same(cases, [row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -67,7 +71,8 @@ def main():
     actual = observe(args.cpp, cases)
     failures = [index for index,(a,b) in enumerate(zip(expected,actual)) if not same(adapted(a),b)]
     if args.record_comparison:
-        assert not args.record_comparison.exists()
+        if not (not args.record_comparison.exists()):
+            raise AssertionError()
         args.record_comparison.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,original=expected,
             cpp=actual,failures=failures),ensure_ascii=False).encode(),mtime=0))
     for index in failures[:3]:

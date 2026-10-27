@@ -27,24 +27,32 @@ def main():
     subprocess.run(['python3', 'scripts/verify_upstream.py'], cwd=ROOT, check=True)
     original_path = ROOT/'docs/parity/relation_enhancement_complete_combined_original_5_0_6.json.gz'
     original = json.loads(gzip.decompress(original_path.read_bytes()))
-    assert original['complete'] and original['provenance']['all_original_bodies_preserved']
-    assert original['observer_sha256'] == digest(ROOT/'tests/parity/relation_enhancement_complete_source_5_0_6.rs')
+    if not (original['complete'] and original['provenance']['all_original_bodies_preserved']):
+        raise AssertionError()
+    if not (original['observer_sha256'] == digest(ROOT/'tests/parity/relation_enhancement_complete_source_5_0_6.rs')):
+        raise AssertionError()
     for name, expected in original['input_corpora'].items():
-        assert digest(ROOT/'tests/parity'/name) == expected
+        if not (digest(ROOT/'tests/parity'/name) == expected):
+            raise AssertionError()
     for name, expected in original['fixture_sha256'].items():
-        assert digest(ROOT/'tests/parity/rust_values/src'/name) == expected
-    assert original['provenance']['source_files_sha256']['src/data_service/relation.rs'] == digest(ROOT/'.reference/teaql-rs/teaql-runtime/src/data_service/relation.rs')
+        if not (digest(ROOT/'tests/parity/rust_values/src'/name) == expected):
+            raise AssertionError()
+    if not (original['provenance']['source_files_sha256']['src/data_service/relation.rs'] == digest(ROOT/'.reference/teaql-rs/teaql-runtime/src/data_service/relation.rs')):
+        raise AssertionError()
     inputs = original['inputs']
     expected = [row['result'] for row in original['observations']]
-    assert len(inputs) == len(expected) == 754
-    assert [row['case'] for row in original['observations']] == list(range(754))
+    if not (len(inputs) == len(expected) == 754):
+        raise AssertionError()
+    if not ([row['case'] for row in original['observations']] == list(range(754))):
+        raise AssertionError()
     binary = args.cpp.resolve()
     before = digest(binary)
     result = subprocess.run([*filter(None, args.cpp_emulator.split(';')), str(binary)],
                             input=''.join(json.dumps(row)+'\n' for row in inputs),
                             text=True, capture_output=True, env=dict(os.environ, TEAQL_LOG_ENDPOINT='off'))
     actual = [json.loads(line) for line in result.stdout.splitlines()] if result.returncode == 0 else []
-    assert digest(binary) == before
+    if not (digest(binary) == before):
+        raise AssertionError()
     differences = [dict(case=index, input=inputs[index], rust=left, cpp=right)
                    for index, (left, right) in enumerate(zip(expected, actual)) if not same(left,right)]
     complete = result.returncode == 0 and len(actual) == len(expected)

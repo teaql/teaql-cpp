@@ -28,23 +28,31 @@ def inputs():
     for entity,mode,shape,policy,logging,intent in itertools.product(entities,modes,['plain','raw_outer','facet'],
             ['allow','deny'],[False,True],['blank_comment','blank_purpose']):
         cases.append(dict(entity=entity,mode=mode,shape=shape,policy=policy,logging=logging,optimization='none',intent=intent))
-    assert len(cases)==4864
+    if not (len(cases)==4864):
+        raise AssertionError()
     return cases
 
 
 def identity():
     project=ROOT/'tests/parity/rust_dynamic_json_privacy_5_0_6'
     reference=ROOT/'.reference/teaql-rs/Cargo.lock'
-    assert registry_identities(project/'Cargo.lock')<=registry_identities(reference)
+    if not (registry_identities(project/'Cargo.lock')<=registry_identities(reference)):
+        raise AssertionError()
     wanted=versions(reference)
     for name,values in versions(project/'Cargo.lock').items():
-        if name not in {'teaql_dynamic_json_privacy_506','cpp-inheritance-graph-core'}:assert values<=wanted.get(name,set()),name
+        if name not in {'teaql_dynamic_json_privacy_506','cpp-inheritance-graph-core'}:
+            if not (values<=wanted.get(name,set())):
+                raise AssertionError(name)
     generated=ROOT/'tests/generator/parity/inheritance_graph_rust'
     producer=json.loads((generated/'PROVENANCE.json').read_text())
     baseline=json.loads((ROOT/'upstream.lock.json').read_text())['commit']
-    assert producer['runtime_commit']==baseline
-    for name,digest in producer['files'].items():assert hashlib.sha256((generated/name).read_bytes()).hexdigest()==digest,name
-    assert hashlib.sha256((ROOT/producer['model']).read_bytes()).hexdigest()==producer['model_sha256']
+    if not (producer['runtime_commit']==baseline):
+        raise AssertionError()
+    for name,digest in producer['files'].items():
+        if not (hashlib.sha256((generated/name).read_bytes()).hexdigest()==digest):
+            raise AssertionError(name)
+    if not (hashlib.sha256((ROOT/producer['model']).read_bytes()).hexdigest()==producer['model_sha256']):
+        raise AssertionError()
     paths=[project/'Cargo.toml',project/'Cargo.lock',project/'src/bin/composed_general.rs',
            ROOT/'tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs',
            ROOT/'tests/support/dynamic_json_inherited_rows.sql',ROOT/'tests/support/dynamic_json_privacy_values.sql']
@@ -58,20 +66,30 @@ def main():
     args=parser.parse_args();os.environ['TEAQL_LOG_ENDPOINT']='off'
     current,cases=identity(),inputs()
     if args.record_source:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected=observe(args.rust,cases)
-        assert all(row['panic'] is None for case,row in zip(cases,expected) if case['intent']=='valid'),'Inspect source preparation failures before recording'
+        if not (all(row['panic'] is None for case,row in zip(cases,expected) if case['intent']=='valid')):
+            raise AssertionError('Inspect source preparation failures before recording')
         for case,row in zip(cases,expected):
             if case['intent']!='valid':
-                assert row['panic']==('query comment must not be empty' if case['intent']=='blank_comment' else 'query purpose must not be empty')
-                assert row['selects']==0 and row['policy']==[] and row['logs']==[]
-            assert row['released']
-            if not case['logging']:assert row['logs']==[]
+                if not (row['panic']==('query comment must not be empty' if case['intent']=='blank_comment' else 'query purpose must not be empty')):
+                    raise AssertionError()
+                if not (row['selects']==0 and row['policy']==[] and row['logs']==[]):
+                    raise AssertionError()
+            if not (row['released']):
+                raise AssertionError()
+            if not case['logging']:
+                if not (row['logs']==[]):
+                    raise AssertionError()
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current,cases=[dict(input=i,expected=e) for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus=json.loads(gzip.decompress(CORPUS.read_bytes()))
-        for key,value in current.items():assert corpus[key]==value,key
-        assert same(cases,[row['input'] for row in corpus['cases']])
+        for key,value in current.items():
+            if not (corpus[key]==value):
+                raise AssertionError(key)
+        if not (same(cases,[row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected=[row['expected'] for row in corpus['cases']]
         if args.rust:
             if not same(expected,observe(args.rust,cases)):
@@ -81,7 +99,8 @@ def main():
     actual=observe(args.cpp,cases)
     failures=[i for i,(a,b) in enumerate(zip(expected,actual)) if not same(a,b)]
     if args.record_comparison:
-        assert not args.record_comparison.exists()
+        if not (not args.record_comparison.exists()):
+            raise AssertionError()
         args.record_comparison.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,original=expected,cpp=actual,failures=failures),ensure_ascii=False).encode(),mtime=0))
     for index in failures[:3]:
         print('Case',index,cases[index]);print('Different fields:',[key for key in expected[index] if key not in actual[index] or not same(expected[index][key],actual[index][key])])

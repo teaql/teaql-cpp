@@ -32,7 +32,8 @@ def inputs():
                                  ('construct', 'custom'), ('rows', 'model'), ('list', 'model')]:
                 cases.append(dict(domain=domain, entity=entity, entry=entry,
                                   selection=selection, mode=mode, marker=marker))
-    assert len(cases) == 1400
+    if not (len(cases) == 1400):
+        raise AssertionError()
     return cases
 
 
@@ -45,17 +46,22 @@ def identity():
              ROOT / 'tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs']
     for domain, (crate, generated, _) in DOMAINS.items():
         project = ROOT / 'tests/parity' / crate
-        assert registry_identities(project / 'Cargo.lock') <= registry_identities(reference)
+        if not (registry_identities(project / 'Cargo.lock') <= registry_identities(reference)):
+            raise AssertionError()
         for name, values in versions(project / 'Cargo.lock').items():
             if name not in {'teaql_request_state_506', 'teaql_dynamic_json_privacy_506',
                             'cpp-dynamic-json-core', 'cpp-inheritance-graph-core'}:
-                assert values <= wanted.get(name, set()), name
+                if not (values <= wanted.get(name, set())):
+                    raise AssertionError(name)
         sdk = ROOT / 'tests/generator/parity' / generated
         provenance = json.loads((sdk / 'PROVENANCE.json').read_text())
-        assert provenance['runtime_commit'] == baseline
-        assert hashlib.sha256((ROOT / provenance['model']).read_bytes()).hexdigest() == provenance['model_sha256']
+        if not (provenance['runtime_commit'] == baseline):
+            raise AssertionError()
+        if not (hashlib.sha256((ROOT / provenance['model']).read_bytes()).hexdigest() == provenance['model_sha256']):
+            raise AssertionError()
         for name, digest in provenance['files'].items():
-            assert hashlib.sha256((sdk / name).read_bytes()).hexdigest() == digest, name
+            if not (hashlib.sha256((sdk / name).read_bytes()).hexdigest() == digest):
+                raise AssertionError(name)
         domains[domain] = provenance
         paths.extend([project / 'Cargo.toml', project / 'Cargo.lock', project / 'src/bin/general_query_guards.rs'])
     paths.extend(ROOT / 'tests/support' / name for name in
@@ -68,7 +74,8 @@ def original(args, cases):
     outputs = []
     for domain in DOMAINS:
         exe = getattr(args, 'rust_' + domain)
-        assert exe, domain
+        if not (exe):
+            raise AssertionError(domain)
         outputs.extend(observe(exe, [case for case in cases if case['domain'] == domain]))
     return outputs
 
@@ -84,27 +91,32 @@ def main():
     os.environ['TEAQL_LOG_ENDPOINT'] = 'off'
     current, cases = identity(), inputs()
     if args.record_source:
-        assert not CORPUS.exists()
+        if not (not CORPUS.exists()):
+            raise AssertionError()
         expected = original(args, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current, cases=[
             dict(input=i, expected=e) for i, e in zip(cases, expected)]), ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         for key, value in current.items():
-            assert corpus[key] == value, key
-        assert same(cases, [row['input'] for row in corpus['cases']])
+            if not (corpus[key] == value):
+                raise AssertionError(key)
+        if not (same(cases, [row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust_dynamic or args.rust_inherited:
             if not same(expected, original(args, cases)):
                 raise RuntimeError('Original guard observations changed')
     if not args.cpp:
-        assert args.record_source
+        if not (args.record_source):
+            raise AssertionError()
         print(f'Recorded {len(cases)} original constructor/selection guard outcomes')
         return 0
     actual = observe(args.cpp, cases)
     failures = [i for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     if args.record_comparison:
-        assert not args.record_comparison.exists()
+        if not (not args.record_comparison.exists()):
+            raise AssertionError()
         args.record_comparison.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,
             original=expected, cpp=actual, failures=failures), ensure_ascii=False).encode(), mtime=0))
     for index in failures[:3]:

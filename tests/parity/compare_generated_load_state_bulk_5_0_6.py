@@ -26,14 +26,18 @@ def main():
     if args.record and args.record.exists():
         parser.error('Use a fresh evidence path')
     corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
-    assert corpus['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
+    if not (corpus['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']):
+        raise AssertionError()
     for relative, expected in corpus['source_hashes'].items():
-        assert digest(ROOT / relative) == expected, relative
+        if not (digest(ROOT / relative) == expected):
+            raise AssertionError(relative)
     expected_inputs = [dict(model=model,count=count,independent=independent)
                        for model in ['record','child'] for count in [1,100,10000]
                        for independent in [False,True]]
-    assert corpus['inputs']==expected_inputs and len(corpus['expected'])==12
-    assert sum(len(out['rows']) for out in corpus['expected'])==40404
+    if not (corpus['inputs']==expected_inputs and len(corpus['expected'])==12):
+        raise AssertionError()
+    if not (sum(len(out['rows']) for out in corpus['expected'])==40404):
+        raise AssertionError()
     record = dict(scope='Full typed bulk/shared-state observations; whole-source verdict remains separate',
                   complete=False, steps=[], corpus_sha256=digest(CORPUS), source_hashes=corpus['source_hashes'])
 

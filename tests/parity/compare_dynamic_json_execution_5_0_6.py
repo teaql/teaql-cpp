@@ -18,10 +18,13 @@ def main():
     args = parser.parse_args()
     with gzip.open(Path(__file__).with_name('dynamic_json_execution_5_0_6_cases.json.gz'), 'rt') as f:
         corpus = json.load(f)
-    assert corpus['baseline'] == json.load(open(ROOT / 'upstream.lock.json'))['commit']
-    assert corpus['producer'] == json.load(open(ROOT / 'tests/generator/parity/dynamic_json_rust/PROVENANCE.json'))
+    if not (corpus['baseline'] == json.load(open(ROOT / 'upstream.lock.json'))['commit']):
+        raise AssertionError()
+    if not (corpus['producer'] == json.load(open(ROOT / 'tests/generator/parity/dynamic_json_rust/PROVENANCE.json'))):
+        raise AssertionError()
     for name, digest in corpus['fixtures'].items():
-        assert hashlib.sha256((ROOT / 'tests/support' / name).read_bytes()).hexdigest() == digest
+        if not (hashlib.sha256((ROOT / 'tests/support' / name).read_bytes()).hexdigest() == digest):
+            raise AssertionError()
     from generate_dynamic_json_execution_5_0_6 import inputs as source_inputs
     cases = require_cases(corpus, 2240, source_inputs())
     inputs = [x['input'] for x in cases]; expected = [x['expected'] for x in cases]

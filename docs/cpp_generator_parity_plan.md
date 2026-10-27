@@ -1,5 +1,18 @@
 # C++ generator parity plan
 
+Current comparator source-check checkpoint:
+[the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)
+replaces 425 removable assertions across 51 registered comparator scripts
+with unconditional checks while preserving their complete AST structure.
+Current source contracts retain exact comparator hashes and bounded original
+receipt transitions. The permanent normal/optimized negative control, Clock
+source controls and optional-observer controls pass. The selected native
+run passes **69/69**, including all 53 affected comparator registrations and
+their source fixtures, with unchanged input hashes. A preceding 1,064-test
+attempt was deliberately interrupted after 786 passes; it is not a terminal
+suite result. The current registry has 1,065 tests, so complete current-source
+integration and G13/G14/G17/P0-P7 exits remain open.
+
 Current AP02 cross-branch regression continuation:
 [The installed 162-case corpus](audit_grammar_branch_review_5_0_6.md#installed-cross-branch-composition-regression)
 pins the previous exploratory source results as a permanent Java test resource

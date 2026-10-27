@@ -41,8 +41,10 @@ def inputs():
         cases.append(dict(entity=entity, shape=shape, optimization=optimization,
                           chunk='1', stop=stop, policy=policy, logging=logging,
                           slice='none', intent=intent))
-    assert len(cases) == 13104
-    assert len({json.dumps(case, sort_keys=True) for case in cases}) == len(cases)
+    if not (len(cases) == 13104):
+        raise AssertionError()
+    if not (len({json.dumps(case, sort_keys=True) for case in cases}) == len(cases)):
+        raise AssertionError()
     return cases
 
 
@@ -54,32 +56,44 @@ def identity():
 
 
 def write_record(path, value):
-    assert not path.exists(), path
+    if not (not path.exists()):
+        raise AssertionError(path)
     path.write_bytes(gzip.compress(json.dumps(value, ensure_ascii=False).encode(), mtime=0))
 
 
 def verify_boundaries(cases, original, actual):
     for case, source, native in zip(cases, original, actual):
         for output in (source, native):
-            assert output['released'], case
+            if not (output['released']):
+                raise AssertionError(case)
             if case['policy'] == 'deny':
-                assert output['reuse']['value'] is None
-                assert output['reuse']['error'] == 'graph write error: request policy error: COMPOSED_QUERY_DENIED'
-                assert output['reuse']['selects'] == 0
+                if not (output['reuse']['value'] is None):
+                    raise AssertionError()
+                if not (output['reuse']['error'] == 'graph write error: request policy error: COMPOSED_QUERY_DENIED'):
+                    raise AssertionError()
+                if not (output['reuse']['selects'] == 0):
+                    raise AssertionError()
             else:
-                assert output['reuse']['value'] is True and output['reuse']['error'] is None
-                assert output['reuse']['selects'] > 0
-            assert len(output['reuse']['policy']) == 1
+                if not (output['reuse']['value'] is True and output['reuse']['error'] is None):
+                    raise AssertionError()
+                if not (output['reuse']['selects'] > 0):
+                    raise AssertionError()
+            if not (len(output['reuse']['policy']) == 1):
+                raise AssertionError()
             if not case['logging']:
-                assert output['logs'] == []
+                if not (output['logs'] == []):
+                    raise AssertionError()
         if case['chunk'] == '0' or case['intent'] != 'valid':
             for output in (source, native):
-                assert not output['policy'] and not output['logs'] and output['selects'] == 0
-                assert output['opened'] is None and output['error'] is None and not output['rows']
+                if not (not output['policy'] and not output['logs'] and output['selects'] == 0):
+                    raise AssertionError()
+                if not (output['opened'] is None and output['error'] is None and not output['rows']):
+                    raise AssertionError()
                 message = ('stream chunk size must be positive' if case['chunk'] == '0'
                            else 'query comment must not be empty' if case['intent'] == 'blank_comment'
                            else 'query purpose must not be empty')
-                assert output['panic'] == message
+                if not (output['panic'] == message):
+                    raise AssertionError()
 
 
 def main():
@@ -92,15 +106,18 @@ def main():
     os.environ['TEAQL_LOG_ENDPOINT'] = 'off'
     current, cases = identity(), inputs()
     if args.record_source:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         write_record(CORPUS, dict(**current, cases=[dict(input=i, expected=e)
                                                    for i, e in zip(cases, expected)]))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         for key, value in current.items():
-            assert same(corpus[key], value), key
-        assert same(cases, [row['input'] for row in corpus['cases']])
+            if not (same(corpus[key], value)):
+                raise AssertionError(key)
+        if not (same(cases, [row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected = [row['expected'] for row in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):

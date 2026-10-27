@@ -36,11 +36,16 @@ def identity():
     base=ROOT/'tests/generator/parity/relation_identity_contracts/rust'
     provenance=json.loads((base/'PROVENANCE.json').read_text())
     baseline=json.loads((ROOT/'upstream.lock.json').read_text())['commit']
-    assert provenance['runtime_commit']==baseline
-    for path,expected in provenance['files'].items():assert digest(base/path)==expected,path
-    assert digest(ROOT/provenance['model'])==provenance['model_sha256']
+    if not (provenance['runtime_commit']==baseline):
+        raise AssertionError()
+    for path,expected in provenance['files'].items():
+        if not (digest(base/path)==expected):
+            raise AssertionError(path)
+    if not (digest(ROOT/provenance['model'])==provenance['model_sha256']):
+        raise AssertionError()
     project=ROOT/'tests/parity/rust_relation_identity_5_0_6'
-    assert registry_identities(project/'Cargo.lock')<=registry_identities(ROOT/'.reference/teaql-rs/Cargo.lock')
+    if not (registry_identities(project/'Cargo.lock')<=registry_identities(ROOT/'.reference/teaql-rs/Cargo.lock')):
+        raise AssertionError()
     paths=[project/'Cargo.toml',project/'Cargo.lock',project/'src/main.rs',ROOT/'tests/support/relation_identity_sql.sql',ROOT/'tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs']
     return dict(baseline=baseline,producer=provenance,sources={str(p.relative_to(ROOT)):digest(p) for p in paths})
 
@@ -49,14 +54,19 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--cpp',required=True);parser.add_argument('--rust');parser.add_argument('--record',action='store_true');args=parser.parse_args()
     os.environ['TEAQL_LOG_ENDPOINT']='off';current=identity();cases=inputs()
     if args.record:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected=observe(args.rust,cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current,cases=[dict(input=i,expected=e) for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus=json.loads(gzip.decompress(CORPUS.read_bytes()))
         require_cases(corpus, len(cases), cases)
-        for name,item in current.items():assert corpus[name]==item,name
-        assert same(cases,[c['input'] for c in corpus['cases']]);expected=[c['expected'] for c in corpus['cases']]
+        for name,item in current.items():
+            if not (corpus[name]==item):
+                raise AssertionError(name)
+        if not (same(cases,[c['input'] for c in corpus['cases']])):
+            raise AssertionError()
+        expected=[c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected,observe(args.rust,cases)):
                 raise RuntimeError('Original relationship behavior changed')
@@ -65,7 +75,9 @@ def main():
         raise RuntimeError('Native observations must cover the complete input matrix')
     failures=[i for i,(a,b) in enumerate(zip(expected,actual)) if not same(a,b)]
     if args.record:
-        p=ROOT/'docs/parity/relation_identity_initial_5_0_6.json.gz';assert not p.exists()
+        p=ROOT/'docs/parity/relation_identity_initial_5_0_6.json.gz';
+        if not (not p.exists()):
+            raise AssertionError()
         p.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,original=expected,cpp=actual,failures=failures),ensure_ascii=False).encode(),mtime=0))
     for i in failures[:2]:
         print('Case',i,cases[i]);print('Different fields:',[k for k in expected[i] if not same(expected[i][k],actual[i][k])])

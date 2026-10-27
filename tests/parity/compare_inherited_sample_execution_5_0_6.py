@@ -36,13 +36,16 @@ def main():
     args = parser.parse_args()
     directory = ROOT / 'tests/generator/parity/inheritance_rust'
     producer = json.loads((directory / 'PROVENANCE.json').read_text())
-    assert hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']
+    if not (hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']):
+        raise AssertionError()
     for name, digest in producer['files'].items():
-        assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest, name
+        if not (hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest):
+            raise AssertionError(name)
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
     cases = inputs()
     if args.smoke:
-        assert args.rust and not args.record
+        if not (args.rust and not args.record):
+            raise AssertionError()
         cases = [dict(module=m, root='normal', scale='Tiny', seed=7, rounds=1)
                  for m in ['plain', 'checker', 'behavior', 'combined']]
         cases += [dict(module='combined', root='normal', scale='Tiny', seed=7, rounds=2, fault=f)
@@ -50,7 +53,8 @@ def main():
         cases += [dict(module='combined', root='missing', scale='Tiny', seed=7, rounds=1)]
         expected = observe(args.rust, cases)
     elif args.record:
-        assert args.rust and not CORPUS.exists(), 'Capture needs a fresh corpus and real Rust'
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError('Capture needs a fresh corpus and real Rust')
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(
             baseline=baseline, producer=producer,
@@ -60,8 +64,10 @@ def main():
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         require_cases(corpus, len(cases), cases)
-        assert corpus['baseline'] == baseline and corpus['producer'] == producer
-        assert same(cases, [c['input'] for c in corpus['cases']])
+        if not (corpus['baseline'] == baseline and corpus['producer'] == producer):
+            raise AssertionError()
+        if not (same(cases, [c['input'] for c in corpus['cases']])):
+            raise AssertionError()
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected, observe(args.rust, cases)):
@@ -71,7 +77,8 @@ def main():
     if args.smoke or args.record:
         name = 'inherited_sample_smoke_5_0_6.json.gz' if args.smoke else 'inherited_sample_source_5_0_6.json.gz'
         path = ROOT / 'docs/parity' / name
-        assert not path.exists(), 'Retained observations are immutable'
+        if not (not path.exists()):
+            raise AssertionError('Retained observations are immutable')
         path.write_bytes(gzip.compress(json.dumps(dict(
             schema=1, baseline=baseline, inputs=cases, original=expected, cpp=actual,
             matching=len(cases)-len(failures), total=len(cases), failures=failures

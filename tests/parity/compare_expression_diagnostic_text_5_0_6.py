@@ -53,9 +53,12 @@ def native_fields(value):
 def main():
     p=argparse.ArgumentParser();p.add_argument("--cpp",required=True);p.add_argument("--rust");a=p.parse_args()
     with gzip.open(Path(__file__).with_name("expression_diagnostic_text_5_0_6_cases.json.gz"),"rt") as f: corpus=json.load(f)
-    assert corpus["baseline"]==json.loads((ROOT/"upstream.lock.json").read_text())["commit"]
-    assert corpus["source_sha256"]==hashlib.sha256((ROOT/"tests/generator/parity/dynamic_json_rust/lib/src/e.rs").read_bytes()).hexdigest()
-    assert corpus["producer"]==json.loads((ROOT/"tests/generator/parity/dynamic_json_rust/PROVENANCE.json").read_text())
+    if not (corpus["baseline"]==json.loads((ROOT/"upstream.lock.json").read_text())["commit"]):
+        raise AssertionError()
+    if not (corpus["source_sha256"]==hashlib.sha256((ROOT/"tests/generator/parity/dynamic_json_rust/lib/src/e.rs").read_bytes()).hexdigest()):
+        raise AssertionError()
+    if not (corpus["producer"]==json.loads((ROOT/"tests/generator/parity/dynamic_json_rust/PROVENANCE.json").read_text())):
+        raise AssertionError()
     rows=require_cases(corpus,936)
     cases=[x["input"] for x in rows];raw=[x["expected"] for x in rows]
     if a.rust:

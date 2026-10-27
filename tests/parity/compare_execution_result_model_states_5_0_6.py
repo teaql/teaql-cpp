@@ -40,9 +40,11 @@ def main():
     args = parser.parse_args()
     os.environ['TEAQL_LOG_ENDPOINT'] = 'off'
     current, cases = identity(), inputs()
-    assert len(cases) == 64
+    if not (len(cases) == 64):
+        raise AssertionError()
     if args.record_source:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         check_source(cases, expected)
         write_record(CORPUS, dict(**current, cases=[dict(input=i, expected=e)
@@ -50,8 +52,10 @@ def main():
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         for key, value in current.items():
-            assert same(corpus[key], value), key
-        assert same(cases, [row['input'] for row in corpus['cases']])
+            if not (same(corpus[key], value)):
+                raise AssertionError(key)
+        if not (same(cases, [row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected = [row['expected'] for row in corpus['cases']]
         check_source(cases, expected)
         if args.rust:

@@ -10,6 +10,9 @@ if(BUILD_TESTING)
             --build-dir ${CMAKE_BINARY_DIR})
         set_tests_properties(parity_optional_source_optimized_controls PROPERTIES
             TIMEOUT 180 RUN_SERIAL TRUE)
+        add_test(NAME parity_remaining_comparator_assert_controls COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_remaining_comparator_assert_controls_5_0_6.py)
+        set_tests_properties(parity_remaining_comparator_assert_controls PROPERTIES TIMEOUT 180)
         add_test(NAME parity_corpus_admission_contracts COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_corpus_admission_5_0_6.py
             --cpp $<TARGET_FILE:teaql_value_probe>)

@@ -5,11 +5,11 @@
   "support_files": {
     "scripts/composed_graph_cli_source_binding_5_0_6.py": "a2811813e0985029a45654ff3a24ee6e4f73f181ca98ef299bf3ac3cb04730f4",
     "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
-    "tests/parity/compare_relation_identity_5_0_6.py": "78d800bfd54eb9a2b111d763843e381411cf3f86fb7feb97843ce33b1c16f3fe",
+    "tests/parity/compare_relation_identity_5_0_6.py": "04a8bad09233f5746f11661c075bdf153f747191e56c9fa6dd5f134e23a1e37b",
     "scripts/verify_constant_closure_5_0_6.py": "fa6529d41bc2bcbce48c26831cd68cf58178b13d9e1dd19a5c1b9ff4a66b582c",
     "scripts/verify_state_baselines_5_0_6.py": "328c14187c6672ab692642b3d0051ae97757970d3b71424ae8cb10ed84875a04",
-    "tests/parity/compare_composed_general_5_0_6.py": "ff1200f5381a862ea83f88b3e6b3d8c452cc6338833f6fa288888ddd608b1edc",
-    "tests/parity/compare_relation_graph_save_5_0_6.py": "9e2b9e4f4ec5f5844add10a03c8d2e8f3c4661056de057c57216fd6393487d28",
+    "tests/parity/compare_composed_general_5_0_6.py": "1f0690db3d54ad8c1f50c62d7c86881defbbf70d60c6aaf3f868ca373dc85d9b",
+    "tests/parity/compare_relation_graph_save_5_0_6.py": "66fd41e0dac543af26c54d83f23a859a191528f326241450d93d8a32b8f8683c",
     "tests/parity/verify_composed_graph_cli_controls_5_0_6.py": "05d67529cee13dbb9b45026436ad2e828fed2e36978741f25847e7c337ed9b39"
   },
   "contracts": [

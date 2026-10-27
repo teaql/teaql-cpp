@@ -31,8 +31,8 @@ def inherited_bridge_identity():
         with redirect_stdout(io.StringIO()):
             module.main()
         original = ROOT / 'tests/generator/parity/inheritance_business_ids_rust/lib'
-        assert (module.DESTINATION / 'src/q.rs').read_bytes() == (original / 'src/q.rs').read_bytes(), \
-            'Lookup source must remain original'
+        if not ((module.DESTINATION / 'src/q.rs').read_bytes() == (original / 'src/q.rs').read_bytes()):
+            raise AssertionError('Lookup source must remain original')
         return json.loads((Path(directory) / 'provenance.json').read_text())
 
 
@@ -43,7 +43,8 @@ def inputs():
         for text,operation,mode in itertools.product(values,['none','larger','offset','deleted'],
                 ['construct'] if entity=='document' else ['construct','rows','list','count','one']):
             cases.append(dict(entity=entity,text=text,operation=operation,mode=mode))
-    assert len(cases)==528
+    if not (len(cases)==528):
+        raise AssertionError()
     return cases
 
 
@@ -55,21 +56,26 @@ def identity():
     sources={}
     for name in projects:
         project=ROOT/'tests/parity'/name
-        assert registry_identities(project/'Cargo.lock')<=registry_identities(reference)
+        if not (registry_identities(project/'Cargo.lock')<=registry_identities(reference)):
+            raise AssertionError()
         for package,values in versions(project/'Cargo.lock').items():
             if package not in {'teaql_expression_business_ids_506','teaql_cpp_inherited_business_binding_bridge',
                                'cpp-business-ids-core','cpp-inheritance-business-ids-core'}:
-                assert values<=wanted.get(package,set()),package
+                if not (values<=wanted.get(package,set())):
+                    raise AssertionError(package)
         for p in [project/'Cargo.toml',project/'Cargo.lock',project/'src/bin/business_id_lookups.rs']:
             sources[str(p.relative_to(ROOT))]=hashlib.sha256(p.read_bytes()).hexdigest()
     provenance={}
     for name in ['business_ids_rust','inheritance_business_ids_rust']:
         sdk=ROOT/'tests/generator/parity'/name
         record=json.loads((sdk/'PROVENANCE.json').read_text())
-        assert record['runtime_commit']==baseline
+        if not (record['runtime_commit']==baseline):
+            raise AssertionError()
         for p,digest in record['files'].items():
-            assert hashlib.sha256((sdk/p).read_bytes()).hexdigest()==digest,p
-        assert hashlib.sha256((ROOT/record['model']).read_bytes()).hexdigest()==record['model_sha256']
+            if not (hashlib.sha256((sdk/p).read_bytes()).hexdigest()==digest):
+                raise AssertionError(p)
+        if not (hashlib.sha256((ROOT/record['model']).read_bytes()).hexdigest()==record['model_sha256']):
+            raise AssertionError()
         provenance[name]=record
     bridge_record=inherited_bridge_identity()
     for name in ['tests/support/business_id_lookup_rows.sql',
@@ -82,7 +88,8 @@ def identity():
 
 
 def original(args,cases):
-    assert args.rust_regular and args.rust_inherited
+    if not (args.rust_regular and args.rust_inherited):
+        raise AssertionError()
     regular=[case for case in cases if case['entity']!='document']
     inherited=[case for case in cases if case['entity']=='document']
     return observe(args.rust_regular,regular)+observe(args.rust_inherited,inherited)
@@ -99,27 +106,35 @@ def main():
     os.environ['TEAQL_BUSINESS_ID_KEY_V1_HEX']=bytes(range(32)).hex()
     current,cases=identity(),inputs()
     if args.record_source:
-        assert not CORPUS.exists()
+        if not (not CORPUS.exists()):
+            raise AssertionError()
         expected=original(args,cases)
         for row in expected:
-            if 'lookup' in row:assert row['lookup']==row['manual']
+            if 'lookup' in row:
+                if not (row['lookup']==row['manual']):
+                    raise AssertionError()
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current,cases=[dict(input=i,expected=e)
             for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus=json.loads(gzip.decompress(CORPUS.read_bytes()))
-        for key,value in current.items():assert corpus[key]==value,key
-        assert same(cases,[row['input'] for row in corpus['cases']])
+        for key,value in current.items():
+            if not (corpus[key]==value):
+                raise AssertionError(key)
+        if not (same(cases,[row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected=[row['expected'] for row in corpus['cases']]
         if args.rust_regular or args.rust_inherited:
             if not same(expected,original(args,cases)):
                 raise RuntimeError('Original source observations changed')
     if not args.cpp:
-        assert args.record_source
+        if not (args.record_source):
+            raise AssertionError()
         print('Recorded original typed lookup outcomes:',len(cases));return 0
     actual=observe(args.cpp,cases,arguments=['--runtime-composition'] if args.runtime_composition else [])
     failures=[i for i,(a,b) in enumerate(zip(expected,actual)) if not same(a,b)]
     if args.record_comparison:
-        assert not args.record_comparison.exists()
+        if not (not args.record_comparison.exists()):
+            raise AssertionError()
         args.record_comparison.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,original=expected,
             cpp=actual,failures=failures,runtime_composition=args.runtime_composition),ensure_ascii=False).encode(),mtime=0))
     for i in failures[:3]:

@@ -66,7 +66,7 @@
     "tests/generator/parity/dynamic_json_rust/lib/src/request_support.rs": "d7a0d7966bbabb3ff234c5aee596f1dc1098d6060e7611acbb651aa2b1255d1e",
     "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs": "2ec8634bffd0ba33046fec865feebb8796c9df087c93c40b3e3b1abc0ad361d5",
     "tests/generator/parity/dynamic_json_rust/lib/src/sample_data.rs": "9f9e5277af33c7e146b45c42c08ada052be8432edc88ef2abeb5458fa74accbb",
-    "tests/parity/compare_deferred_facet_page_5_0_6.py": "4084d45a0a19665c9cf6c8b386bbee2506e6f1b453ed052cabff74fa83e903f8",
+    "tests/parity/compare_deferred_facet_page_5_0_6.py": "2808cce385dcf73487c662a7b5ba15851723e134e6ea00f9857df218ab6b4b7f",
     "tests/parity/compare_initialized_snapshot_cache_5_0_6.py": "b24b240d6855fa58798d1363eb5e02257f0a416597be575e0ce1a17ef6321fa9",
     "tests/parity/compare_transaction_scope_intent_5_0_6.py": "569b621b35258e28645adecf1f98eb9ed03f797daaf022b50d4774731adfb924",
     "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
@@ -181,7 +181,7 @@
   "scope": "Four custom source corpora, complete original observations and declared ownership/log projections. Not all custom/protected execution or P0-P7.",
   "bookkeeping_metadata_scope": "The original collector reads only generator_commit from the capability ledger; current runtime/generator keys must remain locked. Other ledger status fields are not Rust compiler inputs.",
   "source_guard_transition": {
-    "helper_sha256": "bf85d15a59992b535e0ed4e016d5fd5aa2ef0523bfe2f8cd1e423c1fee07f60b",
+    "helper_sha256": "20837c87e176b363e88b9be4b843a1f0e8bfc40e80a7caff19bd641a193052b2",
     "paths": [
       "tests/parity/compare_deferred_facet_page_5_0_6.py"
     ],
@@ -196,6 +196,10 @@
     "postedit": {
       "path": "docs/parity/optional_source_optimized_postedit_5_0_6.json.gz",
       "sha256": "8f5425477da1e5acfb298fc4a65995cd07043c945d9f62a6ae2c1ffeffd98359"
+    },
+    "followup": {
+      "path": "docs/parity/remaining_comparator_assert_rewrite_installed_5_0_6.json.gz",
+      "sha256": "8afd6bd0b9ee681e65966e4da06abf4da26df7d1c4177fd72b54d0465a686c42"
     }
   }
 }

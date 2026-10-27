@@ -32,11 +32,16 @@ def identity():
     directory=ROOT/'tests/generator/parity/query_alias_contracts/rust'
     provenance=json.loads((directory/'PROVENANCE.json').read_text())
     baseline=json.loads((ROOT/'upstream.lock.json').read_text())['commit']
-    assert provenance['runtime_commit']==baseline
-    for name,value in provenance['files'].items(): assert digest(directory/name)==value,name
-    assert digest(ROOT/provenance['model'])==provenance['model_sha256']
+    if not (provenance['runtime_commit']==baseline):
+        raise AssertionError()
+    for name,value in provenance['files'].items():
+        if not (digest(directory/name)==value):
+            raise AssertionError(name)
+    if not (digest(ROOT/provenance['model'])==provenance['model_sha256']):
+        raise AssertionError()
     project=ROOT/'tests/parity/rust_query_alias_5_0_6'
-    assert registry_identities(project/'Cargo.lock')<=registry_identities(ROOT/'.reference/teaql-rs/Cargo.lock')
+    if not (registry_identities(project/'Cargo.lock')<=registry_identities(ROOT/'.reference/teaql-rs/Cargo.lock')):
+        raise AssertionError()
     paths=[project/'Cargo.toml',project/'Cargo.lock',project/'src/main.rs',ROOT/'tests/support/query_alias_sql.sql',
            ROOT/'tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs']
     return dict(baseline=baseline,producer=provenance,sources={str(p.relative_to(ROOT)):digest(p) for p in paths})
@@ -48,14 +53,18 @@ def main():
     args=parser.parse_args();os.environ['TEAQL_LOG_ENDPOINT']='off'
     current=identity();cases=inputs()
     if args.record:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected=observe(args.rust,cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current,cases=[dict(input=i,expected=e) for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus=json.loads(gzip.decompress(CORPUS.read_bytes()))
         require_cases(corpus, len(cases), cases)
-        for name,item in current.items():assert corpus[name]==item,name
-        assert same(cases,[c['input'] for c in corpus['cases']])
+        for name,item in current.items():
+            if not (corpus[name]==item):
+                raise AssertionError(name)
+        if not (same(cases,[c['input'] for c in corpus['cases']])):
+            raise AssertionError()
         expected=[c['expected'] for c in corpus['cases']]
         if args.rust:
             if not same(expected,observe(args.rust,cases)):
@@ -65,7 +74,9 @@ def main():
         raise RuntimeError('Native observations must cover the complete input matrix')
     failures=[i for i,(a,b) in enumerate(zip(expected,actual)) if not same(a,b)]
     if args.record:
-        path=ROOT/'docs/parity/query_alias_initial_5_0_6.json.gz';assert not path.exists()
+        path=ROOT/'docs/parity/query_alias_initial_5_0_6.json.gz';
+        if not (not path.exists()):
+            raise AssertionError()
         path.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,original=expected,cpp=actual,failures=failures),ensure_ascii=False).encode(),mtime=0))
     for i in failures[:2]:print('Case',i,cases[i],'\nRust:',expected[i],'\nC++:',actual[i])
     print(f'Generated result aliases: {len(cases)-len(failures)}/{len(cases)} exact original observations')

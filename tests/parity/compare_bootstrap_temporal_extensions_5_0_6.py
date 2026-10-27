@@ -40,8 +40,10 @@ def main():
         expected = observe_fixed(args.rust, inputs, args.clock)
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
-        assert corpus['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
-        assert same(inputs, [case['input'] for case in corpus['cases']])
+        if not (corpus['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']):
+            raise AssertionError()
+        if not (same(inputs, [case['input'] for case in corpus['cases']])):
+            raise AssertionError()
         expected = [case['expected'] for case in corpus['cases']]
         if args.rust and not same(expected, observe_fixed(args.rust, inputs, args.clock)):
             raise RuntimeError('Temporal extension corpus differs from fresh original execution')

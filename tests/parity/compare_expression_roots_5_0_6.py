@@ -29,16 +29,21 @@ def inputs():
 def identity():
     provenance=json.loads((BASE/'rust/PROVENANCE.json').read_text())
     for name,digest in provenance['files'].items():
-        assert hashlib.sha256((BASE/'rust'/name).read_bytes()).hexdigest()==digest,name
-    assert provenance['runtime_commit']==json.loads((ROOT/'upstream.lock.json').read_text())['commit']
-    assert hashlib.sha256((ROOT/provenance['model']).read_bytes()).hexdigest()==provenance['model_sha256']
+        if not (hashlib.sha256((BASE/'rust'/name).read_bytes()).hexdigest()==digest):
+            raise AssertionError(name)
+    if not (provenance['runtime_commit']==json.loads((ROOT/'upstream.lock.json').read_text())['commit']):
+        raise AssertionError()
+    if not (hashlib.sha256((ROOT/provenance['model']).read_bytes()).hexdigest()==provenance['model_sha256']):
+        raise AssertionError()
     project=ROOT/'tests/parity/rust_expression_roots_5_0_6'
-    assert registry_identities(project/'Cargo.lock')<=registry_identities(ROOT/'.reference/teaql-rs/Cargo.lock')
+    if not (registry_identities(project/'Cargo.lock')<=registry_identities(ROOT/'.reference/teaql-rs/Cargo.lock')):
+        raise AssertionError()
     paths=[project/name for name in ['Cargo.toml','Cargo.lock','src/main.rs']]
     paths += [ROOT/'tests/support/expression_root_sql.sql',ROOT/'tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs']
     generated=(BASE/'cpp/include/cpp_expression_roots/expressions.hpp').read_text()
     entries=dict(re.findall(r'static\s+(\w+)Expression\s+(\w+)\(const\s+\1&\s+value\)',generated))
-    assert len(entries)==6,entries
+    if not (len(entries)==6):
+        raise AssertionError(entries)
     return dict(producer=provenance,native_entries=entries,sources={str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in paths})
 
 
@@ -47,7 +52,8 @@ def adapted(output,entries):
     result=output.copy()
     diagnostic=adapt(output['diagnostic'])
     root=diagnostic['root'].split('(')[0]
-    assert root in entries,root
+    if not (root in entries):
+        raise AssertionError(root)
     expression=diagnostic['original_expr_with_broken_point']
     diagnostic['original_expr_with_broken_point']=re.sub(r'^E::\w+(?=\()',lambda _: 'E::'+entries[root],expression,count=1)
     result['diagnostic']=diagnostic
@@ -61,13 +67,17 @@ def main():
     args=parser.parse_args();os.environ['TEAQL_LOG_ENDPOINT']='off'
     current,cases=identity(),inputs()
     if args.record_source:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected=observe(args.rust,cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current,cases=[dict(input=i,expected=e) for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus=json.loads(gzip.decompress(CORPUS.read_bytes()))
-        for key,value in current.items():assert corpus[key]==value,key
-        assert same(cases,[row['input'] for row in corpus['cases']])
+        for key,value in current.items():
+            if not (corpus[key]==value):
+                raise AssertionError(key)
+        if not (same(cases,[row['input'] for row in corpus['cases']])):
+            raise AssertionError()
         expected=[row['expected'] for row in corpus['cases']]
         if args.rust:
             if not same(expected,observe(args.rust,cases)):
@@ -77,7 +87,8 @@ def main():
     actual=observe(args.cpp,cases)
     failures=[i for i,(a,b) in enumerate(zip(expected,actual)) if not same(adapted(a,current['native_entries']),b)]
     if args.record_comparison:
-        assert not args.record_comparison.exists()
+        if not (not args.record_comparison.exists()):
+            raise AssertionError()
         args.record_comparison.write_bytes(gzip.compress(json.dumps(dict(inputs=cases,original=expected,cpp=actual,failures=failures),ensure_ascii=False).encode(),mtime=0))
     for index in failures[:2]:
         print('Case',index,cases[index]);print('Different fields:',[key for key in expected[index] if not same(adapted(expected[index],current['native_entries'])[key],actual[index][key])])

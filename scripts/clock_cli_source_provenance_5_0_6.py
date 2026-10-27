@@ -20,6 +20,7 @@ import sys
 import clock_cli_protocol_5_0_6 as protocol
 from custom_public_cli_source_provenance_5_0_6 import digest, require
 from expression_cli_source_provenance_5_0_6 import Validator as ProcessValidator, read
+from optional_source_guard_transition_5_0_6 import reconcile_assert_rewrite_source_files
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tests/parity'))
@@ -50,12 +51,16 @@ class Validator:
         entry = self.registry['source_execution']
         require(digest(self.root / entry['path']) == entry['sha256'], 'complete clock source identity')
         self.source = read(self.root / entry['path'])
+        self.current_source_files = reconcile_assert_rewrite_source_files(
+            self.root, self.source['source_files'], self.registry['source_files'],
+            self.registry['assert_rewrite_transition'])
         return self
 
     def view(self, source, contract, result, run, rows):
         original = source['steps'][run['step']]
         selected = [rows[i] for i in run['indices']]
         bounded = copy.copy(source)
+        bounded['source_files'] = self.current_source_files
         bounded['input_hashes_before'] = source['source_input_hashes_before']
         bounded['input_hashes_after'] = source['source_input_hashes_after']
         bounded['steps'] = source['steps'][:3] + [original]
@@ -110,7 +115,9 @@ class Validator:
                     corpus=c['corpus'], selection=None) for c in r['contracts']],
                 'complete original clock dataset declarations')
         require(source['source_input_hashes_before'] == source['source_input_hashes_after']
-                == source['source_files'] == r['source_files'], 'complete frozen source/recipe input scope')
+                == source['source_files'], 'complete frozen original source/recipe input scope')
+        require(self.current_source_files == r['source_files'],
+                'bounded current comparator source transition')
         require(source['references_before'] == source['references_after']
                 == {'teaql-rs': r['runtime_commit'], 'teaql_code_gen': r['generator_commit']}, 'clock references')
         require(source['drivers'] == protocol.DRIVERS and same(source['core_dump_limit'], [0, 0]),

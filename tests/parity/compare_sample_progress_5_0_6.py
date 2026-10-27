@@ -35,8 +35,10 @@ def projected(original):
     for record in original['records']:
         if type(record) is not dict or set(record) != {'level', 'target', 'message'}:
             raise RuntimeError('Sample progress source log shape changed')
-        assert record['level'] == 'INFO'
-        assert record['target'] == 'cpp_inheritance_core::sample_data'
+        if not (record['level'] == 'INFO'):
+            raise AssertionError()
+        if not (record['target'] == 'cpp_inheritance_core::sample_data'):
+            raise AssertionError()
     # Rust module_path targets remain in the raw archive. C++ dispatch uses a
     # Context-owned sample-specific sink, whose info() method fixes the level.
     return dict(outcome=original['outcome'], messages=[r['message'] for r in original['records']])
@@ -54,13 +56,16 @@ def main():
         p.error('Initial capture must retain the complete source matrix')
     directory = ROOT / 'tests/generator/parity/inheritance_rust'
     producer = json.loads((directory / 'PROVENANCE.json').read_text())
-    assert hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']
+    if not (hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']):
+        raise AssertionError()
     for name, digest in producer['files'].items():
-        assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest, name
+        if not (hashlib.sha256((directory / name).read_bytes()).hexdigest() == digest):
+            raise AssertionError(name)
     cases = inputs()
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
     if args.record:
-        assert args.rust and not CORPUS.exists()
+        if not (args.rust and not CORPUS.exists()):
+            raise AssertionError()
         expected = observe(args.rust, cases)
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(
             baseline=baseline, producer=producer,
@@ -70,12 +75,16 @@ def main():
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
         require_cases(corpus, len(cases), cases)
-        assert corpus['baseline'] == baseline and corpus['producer'] == producer
-        assert same(cases, [c['input'] for c in corpus['cases']])
+        if not (corpus['baseline'] == baseline and corpus['producer'] == producer):
+            raise AssertionError()
+        if not (same(cases, [c['input'] for c in corpus['cases']])):
+            raise AssertionError()
         expected = [c['expected'] for c in corpus['cases']]
         if args.cases:
-            assert len(set(args.cases)) == len(args.cases)
-            assert all(0 <= i < len(cases) for i in args.cases)
+            if not (len(set(args.cases)) == len(args.cases)):
+                raise AssertionError()
+            if not (all(0 <= i < len(cases) for i in args.cases)):
+                raise AssertionError()
             cases = [cases[i] for i in args.cases]
             expected = [expected[i] for i in args.cases]
         if args.rust:
@@ -85,7 +94,8 @@ def main():
     failures = [i for i, (e, a) in enumerate(zip(expected, actual)) if not same(projected(e), a)]
     if args.record:
         path = ROOT / 'docs/parity/sample_progress_initial_5_0_6.json.gz'
-        assert not path.exists()
+        if not (not path.exists()):
+            raise AssertionError()
         path.write_bytes(gzip.compress(json.dumps(dict(
             schema=1, inputs=cases, original=expected, cpp=actual, failures=failures
         ), ensure_ascii=False).encode(), mtime=0))
