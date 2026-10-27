@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """Reject actual legacy locks and corrupted source/driver/raw-output bindings."""
 import argparse
+import ast
 import copy
 import gzip
+import hashlib
 import json
+import os
 from pathlib import Path
+import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -13,22 +18,68 @@ from verify_declared_core_drivers_5_0_6 import (
     EXECUTION, REGISTRY, check_dependency_lock, digest, read, validate)
 from compare_values import json_lines
 
+REWRITE = ROOT / 'docs/parity/declared_core_assert_rewrite_5_0_6.json.gz'
+
+
+class ReplaceAssert(ast.NodeTransformer):
+    def visit_Assert(self, node):
+        self.generic_visit(node)
+        failure = ast.Raise(
+            exc=ast.Call(func=ast.Name(id='AssertionError', ctx=ast.Load()),
+                         args=[node.msg] if node.msg else [], keywords=[]), cause=None)
+        return ast.If(test=ast.UnaryOp(op=ast.Not(), operand=node.test),
+                      body=[failure], orelse=[])
+
+
+def verify_assert_rewrite():
+    manifest = read(REWRITE)
+    if (manifest['complete'] is not True or manifest['ast_equivalent'] is not True
+            or manifest['scripts'] != 2 or manifest['assertions'] != 42):
+        raise RuntimeError('Declared-core assertion rewrite is incomplete')
+    if len(manifest['rows']) != 2:
+        raise RuntimeError('Declared-core rewrite paths are incomplete')
+    count = 0
+    for row in manifest['rows']:
+        original = row['before_source']
+        current = (ROOT / row['path']).read_text()
+        if (hashlib.sha256(original.encode()).hexdigest() != row['before_sha256']
+                or hashlib.sha256(current.encode()).hexdigest() != row['after_sha256']):
+            raise RuntimeError('Declared-core rewrite source changed: ' + row['path'])
+        old_tree = ast.parse(original)
+        new_tree = ast.parse(current)
+        nodes = [node for node in ast.walk(old_tree) if isinstance(node, ast.Assert)]
+        if len(nodes) != row['assertions'] or any(
+                isinstance(node, ast.Assert) for node in ast.walk(new_tree)):
+            raise RuntimeError('Declared-core assertion coverage changed: ' + row['path'])
+        if ast.dump(ReplaceAssert().visit(old_tree), include_attributes=False) != ast.dump(
+                new_tree, include_attributes=False):
+            raise RuntimeError('Declared-core rewrite changed other behavior: ' + row['path'])
+        count += len(nodes)
+    if count != 42:
+        raise RuntimeError('Declared-core assertion count changed')
+    return count
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--record', type=Path)
     args = parser.parse_args()
-    assert args.record is None or not args.record.exists()
+    if not (args.record is None or not args.record.exists()):
+        raise AssertionError()
     execution, registry = read(EXECUTION), read(REGISTRY)
+    rewrites = verify_assert_rewrite()
     paths = [Path(__file__), EXECUTION, REGISTRY, ROOT / 'scripts/verify_declared_core_drivers_5_0_6.py']
     hashes = lambda: {str(p): digest(p) for p in paths}
-    record = dict(complete=False, scope=__doc__, controls=[], input_hashes_before=hashes())
+    record = dict(complete=False, scope=__doc__, controls=[], optimized_controls=[],
+                  assert_rewrite_count=rewrites, rewrite_manifest_sha256=digest(REWRITE),
+                  input_hashes_before=hashes())
     validate(execution, registry)
 
     def reject(name, mutate):
         changed = copy.deepcopy(execution)
         mutate(changed)
-        assert changed != execution
+        if not (changed != execution):
+            raise AssertionError()
         try:
             validate(changed, registry)
         except (AssertionError, KeyError, StopIteration, ValueError):
@@ -99,7 +150,8 @@ def main():
                         return True
             return False
 
-        assert visit(values), 'Positive boolean field required'
+        if not (visit(values)):
+            raise AssertionError('Positive boolean field required')
 
     def has_bool(value):
         if type(value) is bool:
@@ -121,13 +173,53 @@ def main():
             record['controls'].append(dict(name='actual_legacy_lock_' + name, rejected=True, lock_sha256=digest(lock)))
         else:
             raise AssertionError('Actual legacy lock unexpectedly qualifies: ' + name)
-    assert len(record['controls']) == 20
+    if not (len(record['controls']) == 20):
+        raise AssertionError()
+
+    with tempfile.TemporaryDirectory(prefix='teaql_declared_core_optimized_') as owned:
+        directory = Path(owned)
+        incomplete = copy.deepcopy(execution)
+        incomplete['complete'] = False
+        missing_output = copy.deepcopy(execution)
+        first = missing_output['contracts'][0]
+        missing_output['steps'][first['native_step']]['stdout'] = ''
+        variants = {}
+        for name, data in [('incomplete', incomplete), ('missing_native_output', missing_output)]:
+            path = directory / (name + '.json.gz')
+            path.write_bytes(gzip.compress((json.dumps(data) + '\n').encode(), mtime=0))
+            variants[name] = path
+        code = ('import sys; sys.path.insert(0, "scripts"); '
+                'import verify_declared_core_drivers_5_0_6 as v; '
+                'v.validate(v.read(v.Path(sys.argv[1])), v.read(v.REGISTRY))')
+        controls = [('valid', EXECUTION, False, True),
+                    ('valid_optimized', EXECUTION, True, True),
+                    ('incomplete', variants['incomplete'], False, False),
+                    ('incomplete_optimized', variants['incomplete'], True, False),
+                    ('missing_native_output_optimized', variants['missing_native_output'], True, False)]
+        environment = dict(os.environ, PYTHONDONTWRITEBYTECODE='1')
+        environment.pop('PYTHONOPTIMIZE', None)
+        for name, path, optimized, should_pass in controls:
+            command = [sys.executable] + (['-O'] if optimized else []) + ['-c', code, str(path)]
+            result = subprocess.run(command, cwd=ROOT, env=environment, text=True,
+                                    capture_output=True, timeout=120)
+            passed = ((result.returncode == 0) == should_pass
+                      and (not result.stderr if should_pass else 'AssertionError' in result.stderr))
+            record['optimized_controls'].append(dict(name=name, optimized=optimized,
+                                                      exit_code=result.returncode, passed=passed))
+            if not passed:
+                raise RuntimeError('Declared-core optimized control failed: ' + name)
+    record['temporary_directory_removed'] = not directory.exists()
+    if not record['temporary_directory_removed'] or len(record['optimized_controls']) != 5:
+        raise RuntimeError('Declared-core optimized controls or cleanup incomplete')
+
     record['input_hashes_after'] = hashes()
-    assert record['input_hashes_before'] == record['input_hashes_after']
+    if not (record['input_hashes_before'] == record['input_hashes_after']):
+        raise AssertionError()
     record['complete'] = True
     if args.record:
         args.record.write_bytes(gzip.compress(json.dumps(record).encode(), mtime=0))
-    print('Fourteen untouched bindings pass; 18 effective corruptions and two actual legacy locks reject')
+    print('Fourteen untouched bindings pass; 18 effective corruptions and '
+          'two actual legacy locks reject; five normal/optimized CLI controls pass')
 
 
 if __name__ == '__main__':

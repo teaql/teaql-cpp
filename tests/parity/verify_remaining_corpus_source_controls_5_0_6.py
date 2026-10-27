@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Reject effective dependency and raw-output corruptions of the fresh seven-corpus record."""
 import argparse
+import ast
 import copy
 import gzip
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
+import subprocess
 import sys
 import tempfile
 
@@ -16,21 +19,66 @@ from verify_remaining_corpus_source_contracts_5_0_6 import (
     EXECUTION, REGISTRY, digest, read, validate_common, validate_contract)
 from compare_values import json_lines
 
+REWRITE = ROOT / 'docs/parity/remaining_corpus_assert_rewrite_5_0_6.json.gz'
+
+
+class ReplaceAssert(ast.NodeTransformer):
+    def visit_Assert(self, node):
+        self.generic_visit(node)
+        failure = ast.Raise(
+            exc=ast.Call(func=ast.Name(id='AssertionError', ctx=ast.Load()),
+                         args=[node.msg] if node.msg else [], keywords=[]), cause=None)
+        return ast.If(test=ast.UnaryOp(op=ast.Not(), operand=node.test),
+                      body=[failure], orelse=[])
+
+
+def verify_assert_rewrite():
+    manifest = read(REWRITE)
+    if (manifest['complete'] is not True or manifest['ast_equivalent'] is not True
+            or manifest['scripts'] != 2 or manifest['assertions'] != 70):
+        raise RuntimeError('Remaining-corpus assertion rewrite is incomplete')
+    if len(manifest['rows']) != 2:
+        raise RuntimeError('Remaining-corpus rewrite paths are incomplete')
+    count = 0
+    for row in manifest['rows']:
+        original = row['before_source']
+        current = (ROOT / row['path']).read_text()
+        if (hashlib.sha256(original.encode()).hexdigest() != row['before_sha256']
+                or hashlib.sha256(current.encode()).hexdigest() != row['after_sha256']):
+            raise RuntimeError('Remaining-corpus rewrite source changed: ' + row['path'])
+        old_tree = ast.parse(original)
+        new_tree = ast.parse(current)
+        nodes = [node for node in ast.walk(old_tree) if isinstance(node, ast.Assert)]
+        if len(nodes) != row['assertions'] or any(
+                isinstance(node, ast.Assert) for node in ast.walk(new_tree)):
+            raise RuntimeError('Remaining-corpus assertion coverage changed: ' + row['path'])
+        if ast.dump(ReplaceAssert().visit(old_tree), include_attributes=False) != ast.dump(
+                new_tree, include_attributes=False):
+            raise RuntimeError('Remaining-corpus rewrite changed other behavior: ' + row['path'])
+        count += len(nodes)
+    if count != 70:
+        raise RuntimeError('Remaining-corpus assertion count changed')
+    return count
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--record', type=Path)
     args = parser.parse_args()
-    assert args.record is None or not args.record.exists()
+    if not (args.record is None or not args.record.exists()):
+        raise AssertionError()
     execution = read(EXECUTION)
     registry = json.loads(REGISTRY.read_text())
+    rewrites = verify_assert_rewrite()
     contracts = {c['name']: c for c in registry['contracts']}
     results = {c['name']: c for c in execution['contracts']}
     paths = [Path(__file__), REGISTRY, EXECUTION,
              ROOT / 'scripts/verify_remaining_corpus_source_contracts_5_0_6.py',
              ROOT / 'scripts/corpus_input_contracts_5_0_6.py']
     hashes = lambda: {str(p): digest(p) for p in paths}
-    record = dict(complete=False, scope=__doc__, controls=[], input_hashes_before=hashes())
+    record = dict(complete=False, scope=__doc__, controls=[], optimized_controls=[],
+                  assert_rewrite_count=rewrites, rewrite_manifest_sha256=digest(REWRITE),
+                  input_hashes_before=hashes())
     try:
         with tempfile.TemporaryDirectory(prefix='teaql_remaining_corpus_controls_506_') as temporary:
             owned = Path(temporary)
@@ -42,7 +90,8 @@ def main():
             def reject(name, mutate, selected=None):
                 changed = copy.deepcopy(execution)
                 mutate(changed)
-                assert changed != execution
+                if not (changed != execution):
+                    raise AssertionError()
                 try:
                     if selected is None:
                         validate_common(changed, registry, owned)
@@ -143,16 +192,57 @@ def main():
                 original['output_sha256'] = hashlib.sha256(original['raw_output'].encode()).hexdigest()
 
             reject('rehashed_file_output_still_needs_observations', change_source_file, support)
-            assert len(record['controls']) == 24
+            if not (len(record['controls']) == 24):
+                raise AssertionError()
             record['owned_bytes_removed'] = sum(p.stat().st_size for p in owned.rglob('*') if p.is_file())
+
+        with tempfile.TemporaryDirectory(prefix='teaql_remaining_optimized_') as optimized_owned:
+            directory = Path(optimized_owned)
+            incomplete = copy.deepcopy(execution)
+            incomplete['complete'] = False
+            missing_output = copy.deepcopy(execution)
+            first = missing_output['contracts'][0]
+            missing_output['steps'][first['native_step']]['stdout'] = ''
+            variants = {}
+            for name, data in [('incomplete', incomplete), ('missing_native_output', missing_output)]:
+                path = directory / (name + '.json.gz')
+                path.write_bytes(gzip.compress((json.dumps(data) + '\n').encode(), mtime=0))
+                variants[name] = path
+            code = ('import pathlib, sys; sys.path.insert(0, "scripts"); '
+                    'import verify_remaining_corpus_source_contracts_5_0_6 as v; '
+                    'v.EXECUTION = pathlib.Path(sys.argv[1]); sys.argv = [sys.argv[0]]; v.main()')
+            controls = [('valid', EXECUTION, False, True),
+                        ('valid_optimized', EXECUTION, True, True),
+                        ('incomplete', variants['incomplete'], False, False),
+                        ('incomplete_optimized', variants['incomplete'], True, False),
+                        ('missing_native_output_optimized', variants['missing_native_output'], True, False)]
+            environment = dict(os.environ, PYTHONDONTWRITEBYTECODE='1')
+            environment.pop('PYTHONOPTIMIZE', None)
+            for name, path, optimized, should_pass in controls:
+                command = [sys.executable] + (['-O'] if optimized else []) + ['-c', code, str(path)]
+                result = subprocess.run(command, cwd=ROOT, env=environment, text=True,
+                                        capture_output=True, timeout=180)
+                passed = ((result.returncode == 0) == should_pass
+                          and ('Seven complete fresh source/corpus/native bindings verified' in result.stdout
+                               if should_pass else 'AssertionError' in result.stderr))
+                record['optimized_controls'].append(dict(name=name, optimized=optimized,
+                                                          exit_code=result.returncode, passed=passed))
+                if not passed:
+                    raise RuntimeError('Remaining-corpus optimized control failed: ' + name)
+        record['optimized_directory_removed'] = not directory.exists()
+        if not record['optimized_directory_removed'] or len(record['optimized_controls']) != 5:
+            raise RuntimeError('Remaining-corpus optimized controls or cleanup incomplete')
+
         record['input_hashes_after'] = hashes()
-        assert record['input_hashes_before'] == record['input_hashes_after']
+        if not (record['input_hashes_before'] == record['input_hashes_after']):
+            raise AssertionError()
         record['complete'] = True
     finally:
         record['owned_directory_removed'] = not Path(record.get('owned_directory', '/')).exists()
         if args.record:
             args.record.write_bytes(gzip.compress(json.dumps(record).encode(), mtime=0))
-    print('Seven untouched source bindings pass; 24 effective compile/dependency/raw-output corruptions reject')
+    print('Seven untouched source bindings pass; 24 effective compile/dependency/raw-output '
+          'corruptions reject; five normal/optimized CLI controls pass')
 
 
 if __name__ == '__main__':

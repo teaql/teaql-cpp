@@ -10,7 +10,20 @@ false acceptance in a declared-driver source validator is repaired with 44
 AST-equivalent unconditional checks; its source/control tests pass **2/2**
 and five normal/optimized CLI controls pass. The post-repair full native epoch,
 remaining registered Python optimization review, SQ02, G13/G14/G17 and P0-P7
-exits remain open.
+exits remain open. The later
+[declared-core source repair](registered_python_optimized_checks_5_0_6.md#declared-core-source-validator)
+reproduces a second `python -O` false acceptance and replaces 42 more removable
+assertions without changing the validator's AST logic. Its current source and
+control tests pass 2/2. The unchanged 1,065-test registry now has 109 Python
+entry scripts with 1,537 removable assertions; the full post-repair native
+epoch and all capability/phase decisions remain open. The subsequent
+[seven-corpus source repair](registered_python_optimized_checks_5_0_6.md#seven-corpus-source-validator)
+reproduces a third optimized-Python false acceptance and replaces another 70
+removable assertions with AST-equivalent unconditional checks. Its current
+source/control tests pass 2/2, including 24 retained corruptions and five
+normal/optimized CLI controls. The unchanged registry now has 107 Python entry
+scripts with 1,467 removable assertions. Full SQ02/G13/G14/G17 and P0-P7
+acceptance remain open.
 
 Current comparator source-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)

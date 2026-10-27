@@ -11,7 +11,19 @@ controller encounters a broken output pipe before JUnit ingestion. The import
 control now passes focused verification, but no complete post-repair native
 epoch exists. A current registry inventory still finds 111 Python entry
 scripts with 1,579 removable assertions. SQ02, G13/G14/G17 and P0-P7 remain
-open at **14 qualified / 3 partial**.
+open at **14 qualified / 3 partial**. A later
+[declared-core verifier repair](registered_python_optimized_checks_5_0_6.md#declared-core-source-validator)
+reproduces another optimized-Python false acceptance and replaces 42 more
+assertions. Its two focused native checks and five normal/optimized subprocess
+controls pass. The current unchanged 1,065-test registry has 109 Python entry
+scripts with 1,537 remaining assertions; complete SQ02 and the full current
+native epoch remain open. The subsequent
+[seven-corpus source repair](registered_python_optimized_checks_5_0_6.md#seven-corpus-source-validator)
+replaces another 70 assertions after reproducing a saved-record false
+acceptance under `python -O`. Its 24 previous negative controls, five new
+normal/optimized CLI controls and focused source/control tests pass. The
+current 1,065-test registry has 107 Python entry scripts with 1,467 remaining
+assertions. SQ02, G13/G14/G17 and P0-P7 remain open.
 
 Current SQ02 comparator-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)

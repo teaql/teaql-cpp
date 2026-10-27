@@ -93,6 +93,14 @@ source/negative checks. Exact JUnit names show no failures, errors or skips.
 Selecting generated support, row construction and dynamic schema automatically
 adds and runs their source fixture first (**4/4**).
 
+The later [optimized-Python source repair](registered_python_optimized_checks_5_0_6.md#seven-corpus-source-validator)
+reproduces an invalid saved execution record accepted by the old seven-corpus
+validator under `python -O`. It changes only the current source verifier and
+negative controls, with exact pre-rewrite source and current-source evidence;
+the original Rust execution and this historical 35-test gate remain unchanged.
+The repaired focused source/control checks pass 2/2. A complete native epoch
+on the repaired source set remains open.
+
 The [current inventory](parity/remaining_corpus_source_inventory_5_0_6.json.gz)
 records 887 native registrations, 305 direct active-baseline bindings and 174
 custom registrations requiring review. The
