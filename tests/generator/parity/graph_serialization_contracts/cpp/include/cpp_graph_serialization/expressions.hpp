@@ -445,30 +445,32 @@ inline SerializationParentExpression SerializationMemberExpression::getBoxedPare
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static JsonGraphRowExpression jsonGraphRow(const JsonGraphRow& value) {
-        return JsonGraphRowExpression(entity_expression(value, StaticString{"jsonGraphRow"}));
+        return JsonGraphRowExpression(
+            entity_expression(value, StaticString{"jsonGraphRow"}, StaticString{"JsonGraphRow"}));
     }
 
     static JsonGraphRowExpression jsonGraphRow(JsonGraphRow&&) = delete;
     static JsonGraphRowExpression jsonGraphRow(const JsonGraphRow&&) = delete;
 
     static SerializationParentExpression serializationParent(const SerializationParent& value) {
-        return SerializationParentExpression(
-            entity_expression(value, StaticString{"serializationParent"}));
+        return SerializationParentExpression(entity_expression(
+            value, StaticString{"serializationParent"}, StaticString{"SerializationParent"}));
     }
 
     static SerializationParentExpression serializationParent(SerializationParent&&) = delete;
     static SerializationParentExpression serializationParent(const SerializationParent&&) = delete;
 
     static SerializationMemberExpression serializationMember(const SerializationMember& value) {
-        return SerializationMemberExpression(
-            entity_expression(value, StaticString{"serializationMember"}));
+        return SerializationMemberExpression(entity_expression(
+            value, StaticString{"serializationMember"}, StaticString{"SerializationMember"}));
     }
 
     static SerializationMemberExpression serializationMember(SerializationMember&&) = delete;

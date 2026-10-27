@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare native diagnostic composition with untouched original observations."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import json
@@ -30,7 +31,7 @@ def main():
     gaps = [dict(index=i, input=x, rust=o, cpp=c)
             for i, (x, o, c) in enumerate(zip(inputs, expected, native)) if not same(o, c)]
     if gaps:
-        target = ROOT / 'docs/parity/derived_query_composition_5_0_6_initial_gaps.json'
+        target = diagnostic_path(ROOT / 'docs/parity/derived_query_composition_5_0_6_initial_gaps.json')
         if not target.exists():
             target.write_text(json.dumps(dict(count=len(gaps), differences=gaps), indent=2) + '\n')
         print(json.dumps(gaps[:1], indent=2))

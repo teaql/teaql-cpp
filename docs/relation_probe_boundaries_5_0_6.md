@@ -52,3 +52,31 @@ original/module comparisons pass. Native CTest passes 2/2; canonical validation
 checks 1,123 consumer bodies and module paths pass. Stable preset directories are reused; no
 new disposable checkout/build tree is retained. Complete relation-source review
 and P0-P7 acceptance remain open.
+
+## Current original-receipt admission repair
+
+The boundary checker previously required three expected original test names
+but did not pin the complete original-test receipt. A
+[process-local negative control](parity/relation_source_receipt_false_acceptance_5_0_6.json.gz)
+replaced one name with `fabricated::test::not_in_original_source` while keeping
+the three-entry count; the installed checker still passed the actual 32-case
+C++ probe. Neither the original receipt nor source worktree was changed.
+
+The checker now requires the complete original receipt SHA-256
+`c105efaa134ea2eaa49a597594e2cf4cae60aacd1c52a30af0e08742238937c1`
+before reading its claims. A permanent CTest control executes the unchanged
+receipt successfully and rejects the same altered test identity through the
+installed checker. Native configure and stable no-work build pass; the source
+boundary and rejection control pass **2/2**. The registry has **1,063** tests.
+The existing imported-module relation probe also passes all **32** boundary
+cases and the same altered-receipt rejection control without a module rebuild.
+
+The preceding 1,062-test epoch was deliberately interrupted after **785 passed
+tests**, before `generated_api_type_errors` finished. Its
+[terminal record](parity/current_full_native_1062_bound_terminal_5_0_6.json.gz)
+has CTest exit `-2` and no JUnit; its [frozen input snapshot](parity/current_full_native_1062_bound_inputs_5_0_6.json.gz)
+remains separate. The controller and compiler children exited, the owned
+wrapper directory was removed, and 1,326,475,088 bytes of its remaining
+compiler scratch were removed only after confirming no child held them. This
+checkpoint is not a full native verdict. Complete relation-source, G13 and
+P0-P7 acceptance remain open.

@@ -8,6 +8,7 @@ import json
 import sys
 from pathlib import Path
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -48,6 +49,7 @@ def main():
             cases=[dict(input=i, expected=e) for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
+        require_cases(corpus, len(cases), cases)
         assert corpus['baseline'] == baseline and corpus['producer'] == provenance
         assert corpus['schema_sha256'] == schema_hash
         assert same(cases, [c['input'] for c in corpus['cases']])
@@ -55,6 +57,8 @@ def main():
         if args.rust:
             assert same(expected, observe(args.rust, cases)), 'Original request observations changed'
     actual = observe(args.cpp, cases)
+    if len(actual) != len(cases):
+        raise RuntimeError('Native observations must cover the complete input matrix')
     failures = [i for i,(a,b) in enumerate(zip(expected,actual)) if not same(a,b)]
     if args.record:
         path=ROOT / 'docs/parity/generated_query_field_sql_initial_5_0_6.json.gz'

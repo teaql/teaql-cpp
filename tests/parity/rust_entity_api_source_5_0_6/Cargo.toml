@@ -1,0 +1,139 @@
+[package]
+name = "teaql_entity_api_original_source_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+autobins = false
+
+[workspace]
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+# Direct import in the unchanged private-scope log_privacy source module.
+sha2 = "=0.10.9"
+cpp_inheritance_graph_core = { package = "cpp-inheritance-graph-core", path = "../../generator/parity/inheritance_graph_rust/lib" }
+cpp_dynamic_json_core = { package = "cpp-dynamic-json-core", path = "../../generator/parity/dynamic_json_rust/lib" }
+cpp_member_aliases_core = { package = "cpp-member-aliases-core", path = "../../generator/parity/typed_member_aliases_rust/lib" }
+cpp_sample_runtime_core = { package = "cpp-sample-runtime-core", path = "../../generator/parity/sample_fields_runtime_rust/lib" }
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+[[bin]]
+name = "ledger_move_only_5_0_6"
+path = "../rust_field_layout/src/bin/ledger_move_only_5_0_6.rs"
+
+[[bin]]
+name = "relation_model_5_0_6"
+path = "../rust_field_layout/src/bin/relation_model_5_0_6.rs"
+
+[[bin]]
+name = "log_model_5_0_6"
+path = "../rust_field_layout/src/bin/log_model_5_0_6.rs"
+
+[[bin]]
+name = "audited_save_5_0_6"
+path = "../rust_field_layout/src/bin/audited_save_5_0_6.rs"
+
+[[bin]]
+name = "entity_graph_plan_5_0_6"
+path = "../rust_field_layout/src/bin/entity_graph_plan_5_0_6.rs"
+
+[[bin]]
+name = "generated_inherited_json_5_0_6"
+path = "../rust_field_layout/src/bin/generated_inherited_json_5_0_6.rs"
+
+[[bin]]
+name = "generated_json_graph_views_5_0_6"
+path = "../rust_field_layout/src/bin/generated_json_graph_views_5_0_6.rs"
+
+[[bin]]
+name = "generated_json_owned_nullable_5_0_6"
+path = "../rust_field_layout/src/bin/generated_json_owned_nullable_5_0_6.rs"
+
+[[bin]]
+name = "generated_json_nullable_graph_5_0_6"
+path = "../rust_field_layout/src/bin/generated_json_nullable_graph_5_0_6.rs"
+
+[[bin]]
+name = "generated_json_inputs_5_0_6"
+path = "../rust_field_layout/src/bin/generated_json_inputs_5_0_6.rs"
+
+[[bin]]
+name = "generated_json_ambiguous_5_0_6"
+path = "../rust_field_layout/src/bin/generated_json_ambiguous_5_0_6.rs"
+
+[[bin]]
+name = "generated_json_isolation_5_0_6"
+path = "../rust_field_layout/src/bin/generated_json_isolation_5_0_6.rs"
+
+[[bin]]
+name = "generated_json_hydration_5_0_6"
+path = "../rust_field_layout/src/bin/generated_json_hydration_5_0_6.rs"
+
+[[bin]]
+name = "graph_relation_facets_5_0_6"
+path = "../rust_field_layout/src/bin/graph_relation_facets_5_0_6.rs"
+
+[[bin]]
+name = "graph_repository_5_0_6"
+path = "../rust_field_layout/src/bin/graph_repository_5_0_6.rs"
+
+[[bin]]
+name = "runtime_graph_model_5_0_6"
+path = "../rust_field_layout/src/bin/runtime_graph_model_5_0_6.rs"
+
+[[bin]]
+name = "entity_registration_api_5_0_6"
+path = "../rust_field_layout/src/bin/entity_registration_api_5_0_6.rs"
+
+[[bin]]
+name = "base_entity_api_5_0_6"
+path = "../rust_field_layout/src/bin/base_entity_api_5_0_6.rs"
+
+[[bin]]
+name = "entity_debug_5_0_6"
+path = "../rust_field_layout/src/bin/entity_debug_5_0_6.rs"
+
+[[bin]]
+name = "entity_defaults_api_5_0_6"
+path = "../rust_field_layout/src/bin/entity_defaults_api_5_0_6.rs"
+
+[[bin]]
+name = "internal_id_5_0_6"
+path = "../rust_field_layout/src/bin/internal_id_5_0_6.rs"
+
+[[bin]]
+name = "sql_types_5_0_6"
+path = "../rust_field_layout/src/bin/sql_types_5_0_6.rs"
+
+[[bin]]
+name = "sql_log_5_0_6"
+path = "../rust_field_layout/src/bin/sql_log_5_0_6.rs"
+
+[[bin]]
+name = "sql_model_api_5_0_6"
+path = "../rust_field_layout/src/bin/sql_model_api_5_0_6.rs"
+
+[[bin]]
+name = "business_id_5_0_6"
+path = "../rust_field_layout/src/bin/business_id_5_0_6.rs"
+
+[[bin]]
+name = "eval_5_0_6"
+path = "../rust_field_layout/src/bin/eval_5_0_6.rs"
+
+[[bin]]
+name = "core_api_5_0_6"
+path = "../rust_field_layout/src/bin/core_api_5_0_6.rs"

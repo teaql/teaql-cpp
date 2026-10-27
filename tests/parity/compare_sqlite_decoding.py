@@ -27,10 +27,14 @@ def main():
         corpus = json.load(source)
     root = Path(__file__).resolve().parents[2]
     lock = json.loads((root / 'upstream.lock.json').read_text())
-    if corpus['baseline'] != lock['commit'] or corpus['checked_arithmetic'] != (profile == 'checked'):
+    if (corpus['baseline'] != lock['commit'] or type(corpus.get('checked_arithmetic')) is not bool
+            or corpus['checked_arithmetic'] != (profile == 'checked')):
         raise RuntimeError('Decoding corpus baseline/profile differs from the compiled probe')
-    inputs = [case['input'] for case in corpus['cases']]
-    expected = [case['expected'] for case in corpus['cases']]
+    cases = corpus['cases']
+    if type(cases) is not list or not cases:
+        raise RuntimeError('Comparison corpus cases must be a nonempty list')
+    inputs = [case['input'] for case in cases]
+    expected = [case['expected'] for case in cases]
     if args.rust:
         subprocess.run([sys.executable, str(root / 'scripts/verify_upstream.py')], check=True)
         if not same(expected, observe(args.rust, inputs)):

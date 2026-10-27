@@ -295,28 +295,32 @@ inline PlatformExpression DeviceExpression::getPlatform() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static SchoolExpression school(const School& value) {
-        return SchoolExpression(entity_expression(value, StaticString{"school"}));
+        return SchoolExpression(
+            entity_expression(value, StaticString{"school"}, StaticString{"School"}));
     }
 
     static SchoolExpression school(School&&) = delete;
     static SchoolExpression school(const School&&) = delete;
 
     static ProfileExpression profile(const Profile& value) {
-        return ProfileExpression(entity_expression(value, StaticString{"profile"}));
+        return ProfileExpression(
+            entity_expression(value, StaticString{"profile"}, StaticString{"Profile"}));
     }
 
     static ProfileExpression profile(Profile&&) = delete;
     static ProfileExpression profile(const Profile&&) = delete;
 
     static DeviceExpression device(const Device& value) {
-        return DeviceExpression(entity_expression(value, StaticString{"device"}));
+        return DeviceExpression(
+            entity_expression(value, StaticString{"device"}, StaticString{"Device"}));
     }
 
     static DeviceExpression device(Device&&) = delete;

@@ -1,0 +1,286 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-data-service",
+    "teaql-macros",
+    "teaql-runtime",
+    "teaql-sql"
+  ],
+  "support_files": [
+    "scripts/runtime_protocol_driver_provenance_5_0_6.py",
+    "scripts/reference_runtime_view_5_0_6.py",
+    "scripts/archive_driver_provenance_5_0_6.py",
+    "scripts/verify_constant_closure_5_0_6.py",
+    "scripts/verify_state_baselines_5_0_6.py",
+    "scripts/run_native_integration_epoch_5_0_6.py",
+    "tests/parity/compare_values.py",
+    "tests/parity/rust_values/src/fixture_value.rs",
+    "tests/parity/verify_runtime_protocol_driver_controls_5_0_6.py"
+  ],
+  "observers": [
+    {
+      "runtime_file": "src/commit_audit.rs",
+      "path": "tests/parity/commit_audit_source_observer_5_0_6.rs",
+      "replacements": {}
+    },
+    {
+      "runtime_file": "src/data_service/helpers.rs",
+      "path": "tests/parity/relation_key_snapshot_source_5_0_6.rs",
+      "replacements": {
+        "__TEAQL_KEY_SNAPSHOT_INPUTS__": {
+          "kind": "inputs",
+          "contract": "relation_key_snapshot"
+        }
+      }
+    },
+    {
+      "runtime_file": "src/data_service/types.rs",
+      "path": "tests/parity/runtime_service_types_source_5_0_6.rs",
+      "replacements": {
+        "__TEAQL_TYPES_INPUTS__": {
+          "kind": "inputs",
+          "contract": "runtime_service_types"
+        }
+      }
+    },
+    {
+      "runtime_file": "src/data_service/base.rs",
+      "path": "tests/parity/runtime_statement_trace_source_5_0_6.rs",
+      "replacements": {
+        "__TEAQL_TRACE_INPUTS__": {
+          "kind": "inputs",
+          "contract": "runtime_statement_trace"
+        },
+        "__TEAQL_FIXTURE_VALUE__": {
+          "kind": "source",
+          "path": "tests/parity/rust_values/src/fixture_value.rs"
+        }
+      }
+    },
+    {
+      "runtime_file": "src/data_service/base.rs",
+      "path": "tests/parity/runtime_query_protocol_source_5_0_6.rs",
+      "replacements": {
+        "__TEAQL_QUERY_PROTOCOL_INPUTS__": {
+          "kind": "inputs",
+          "contract": "runtime_query_protocol"
+        }
+      }
+    },
+    {
+      "runtime_file": "src/data_service/base.rs",
+      "path": "tests/parity/runtime_mutation_protocol_source_5_0_6.rs",
+      "replacements": {
+        "__TEAQL_MUTATION_PROTOCOL_INPUTS__": {
+          "kind": "inputs",
+          "contract": "runtime_mutation_protocol"
+        },
+        "__TEAQL_FIXTURE_VALUE__": {
+          "kind": "source",
+          "path": "tests/parity/rust_values/src/fixture_value.rs"
+        }
+      }
+    }
+  ],
+  "contracts": [
+    {
+      "name": "commit_audit_source",
+      "native_test": "commit_audit_source_rust_parity",
+      "corpus": "tests/parity/commit_audit_source_5_0_6_cases.json.gz",
+      "count": 99,
+      "extra_corpora": [],
+      "observer_test": "commit_audit::continuation_source_observer::complete_source_observations",
+      "test_filter": "commit_audit::",
+      "test_count": 6,
+      "output_kind": "file",
+      "marker": null,
+      "profile": "debug",
+      "native_target": "teaql_commit_audit_source_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_commit_audit_source_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_commit_audit_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_commit_audit_source_probe"
+      ]
+    },
+    {
+      "name": "relation_key_snapshot",
+      "native_test": "relation_key_snapshot_rust_parity",
+      "corpus": "tests/parity/relation_key_snapshot_5_0_6_cases.json.gz",
+      "count": 64,
+      "extra_corpora": [],
+      "observer_test": "data_service::helpers::cpp_relation_key_snapshot_observer::replay_key_snapshot_lengths",
+      "test_filter": "data_service::helpers::cpp_relation_key_snapshot_observer::",
+      "test_count": 1,
+      "output_kind": "lines",
+      "marker": "TEAQL_KEY_SNAPSHOT_JSON ",
+      "profile": "debug",
+      "native_target": "teaql_relation_key_snapshot_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_relation_key_snapshot_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_relation_key_snapshot_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_relation_key_snapshot_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "runtime_service_types",
+      "native_test": "runtime_service_types_rust_parity",
+      "corpus": "tests/parity/runtime_service_types_5_0_6_cases.json.gz",
+      "count": 96,
+      "extra_corpora": [],
+      "observer_test": "data_service::types::cpp_service_types_observer::replay_complete_types_calls",
+      "test_filter": "data_service::types::cpp_service_types_observer::",
+      "test_count": 1,
+      "output_kind": "echo",
+      "marker": "TEAQL_SERVICE_TYPES_JSON ",
+      "profile": "debug",
+      "native_target": "teaql_runtime_service_types_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_service_types_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_service_types_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_service_types_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "runtime_statement_trace",
+      "native_test": "runtime_statement_trace_rust_parity",
+      "corpus": "tests/parity/runtime_statement_trace_5_0_6_cases.json.gz",
+      "count": 1638,
+      "extra_corpora": [],
+      "observer_test": "data_service::base::cpp_runtime_statement_trace_observer::replay_physical_statement_identities",
+      "test_filter": "data_service::base::cpp_runtime_statement_trace_observer::",
+      "test_count": 1,
+      "output_kind": "lines",
+      "marker": "TEAQL_STATEMENT_TRACE_JSON ",
+      "profile": "debug",
+      "native_target": "teaql_runtime_statement_trace_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_statement_trace_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_statement_trace_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_statement_trace_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "runtime_query_protocol",
+      "native_test": "runtime_query_protocol_rust_parity",
+      "corpus": "tests/parity/runtime_query_protocol_5_0_6_cases.json.gz",
+      "count": 4096,
+      "extra_corpora": [
+        "tests/parity/runtime_base_5_0_6_cases.json.gz",
+        "tests/parity/runtime_base_intent_5_0_6_cases.json.gz"
+      ],
+      "observer_test": "data_service::base::cpp_runtime_query_protocol_observer::replay_real_query_methods_and_metadata_order",
+      "test_filter": "data_service::base::cpp_runtime_query_protocol_observer::",
+      "test_count": 1,
+      "output_kind": "lines",
+      "marker": "TEAQL_QUERY_PROTOCOL_JSON ",
+      "profile": "debug",
+      "native_target": "teaql_runtime_base_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_base_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_query_protocol_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_base_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "runtime_mutation_protocol",
+      "native_test": "runtime_mutation_protocol_rust_parity",
+      "corpus": "tests/parity/runtime_mutation_protocol_5_0_6_cases.json.gz",
+      "count": 8832,
+      "extra_corpora": [],
+      "observer_test": "data_service::base::cpp_runtime_mutation_protocol_observer::replay_mutation_errors_batches_and_counters",
+      "test_filter": "data_service::base::cpp_runtime_mutation_protocol_observer::",
+      "test_count": 1,
+      "output_kind": "lines",
+      "marker": "TEAQL_MUTATION_PROTOCOL_JSON ",
+      "profile": "debug",
+      "native_target": "teaql_runtime_mutation_protocol_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_mutation_protocol_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_mutation_protocol_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_mutation_protocol_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "runtime_mutation_protocol_release",
+      "native_test": "runtime_mutation_protocol_release_rust_parity",
+      "corpus": "tests/parity/runtime_mutation_protocol_release_5_0_6_cases.json.gz",
+      "count": 8832,
+      "extra_corpora": [],
+      "observer_test": "data_service::base::cpp_runtime_mutation_protocol_observer::replay_mutation_errors_batches_and_counters",
+      "test_filter": "data_service::base::cpp_runtime_mutation_protocol_observer::",
+      "test_count": 1,
+      "output_kind": "lines",
+      "marker": "TEAQL_MUTATION_PROTOCOL_JSON ",
+      "profile": "release",
+      "native_target": "teaql_runtime_mutation_protocol_release_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_mutation_protocol_release_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_mutation_protocol_release_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_runtime_mutation_protocol_release_probe",
+        "--cpp-emulator="
+      ]
+    }
+  ],
+  "source_hashes": {
+    "scripts/archive_driver_provenance_5_0_6.py": "720bd4c6f154c0b13eaa5d6fe6aa6742bd8adc9e20f9765321991557c3dba509",
+    "scripts/reference_runtime_view_5_0_6.py": "5ef7af9e23bcdb61023d12c66daea70653493fbfe96b1b0a0e21c8cad40bfc5d",
+    "scripts/run_native_integration_epoch_5_0_6.py": "a5915aa1c49b066701ae0517a2122da2cd3a98a8c9d53d156e9ad9c2404ec6cc",
+    "scripts/runtime_protocol_driver_provenance_5_0_6.py": "28c6ecb5620027055a4033a94f98d5c6679402441ea786df85c263bee0ae43ef",
+    "scripts/verify_constant_closure_5_0_6.py": "fa6529d41bc2bcbce48c26831cd68cf58178b13d9e1dd19a5c1b9ff4a66b582c",
+    "scripts/verify_state_baselines_5_0_6.py": "328c14187c6672ab692642b3d0051ae97757970d3b71424ae8cb10ed84875a04",
+    "tests/parity/commit_audit_source_5_0_6_cases.json.gz": "60df8db7e30f808818413217dff32864326109f8a6135be60dd34c1684bbd880",
+    "tests/parity/commit_audit_source_observer_5_0_6.rs": "43b14acc501ab8e60941dbcbc98198f6e803747d669da8d372233f1be1ff451d",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/relation_key_snapshot_5_0_6_cases.json.gz": "5fd4648e2ba0e79e91e8cfc90309ca75f0a948580b2493b880215590bd2264f6",
+    "tests/parity/relation_key_snapshot_source_5_0_6.rs": "2497892c3e3b8450e511ca8b63d1f096502ae1893487b14b350991b6eba6784e",
+    "tests/parity/runtime_base_5_0_6_cases.json.gz": "bfc643d19c24aba81b26a73eb5d642f733251fb897a886b67f26db989d5c9af8",
+    "tests/parity/runtime_base_intent_5_0_6_cases.json.gz": "f4cb2a3e1afb38b35af29302f96147ff085fc6c098d8d34ae60d113cafd5572d",
+    "tests/parity/runtime_mutation_protocol_5_0_6_cases.json.gz": "c35681c27d93acff39c49a2db67bc7fb466a98e2edc5649ca6c08d3f6d8135a7",
+    "tests/parity/runtime_mutation_protocol_release_5_0_6_cases.json.gz": "0e9343f1ca25fc4c8d17bb7510b5ccc056084f363ea46186b74666e7b9aed025",
+    "tests/parity/runtime_mutation_protocol_source_5_0_6.rs": "92d5aa93fdbd06996402e1fb17f3ef22f789a8d7b6d79b68902a449ebdfdbd1a",
+    "tests/parity/runtime_query_protocol_5_0_6_cases.json.gz": "7e3dc30837ec8b396cc7e2eb19b7a27c2b2c2d1cb40e775237f05f30fb21befb",
+    "tests/parity/runtime_query_protocol_source_5_0_6.rs": "0c0057f07cc29b5623f229b3dcdc4ebfa22cf7eea09fb9cb546067ba005b5e74",
+    "tests/parity/runtime_service_types_5_0_6_cases.json.gz": "27b1ee4d11369d5162a3d78ceacd668fcbe46cb79fdc4109658ea5c14664cbc6",
+    "tests/parity/runtime_service_types_source_5_0_6.rs": "dd3f10e22ad0807b269a5c6140e62149c95673b9d426e21d532a3f83a393ec92",
+    "tests/parity/runtime_statement_trace_5_0_6_cases.json.gz": "a484ff1faa35dbf234db48b135062b2d42f7c7d8e4c22e6d730c6617aa4e4641",
+    "tests/parity/runtime_statement_trace_source_5_0_6.rs": "dd758dbd27d86168fe2c7cca3ec49e5f1fe516a9a92ca312df1fbdaee4cf4ad6",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/verify_runtime_protocol_driver_controls_5_0_6.py": "6f9723c1b47cb8f808771aeef1e31f22f18829b357434cb51ee38ae78a926c4f"
+  }
+}

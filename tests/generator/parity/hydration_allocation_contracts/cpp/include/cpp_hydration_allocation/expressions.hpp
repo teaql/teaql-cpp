@@ -66,7 +66,8 @@ public:
 
 struct E {
     static HydrationProbeExpression hydrationProbe(const HydrationProbe& value) {
-        return HydrationProbeExpression(entity_expression(value, StaticString{"hydrationProbe"}));
+        return HydrationProbeExpression(entity_expression(
+            value, StaticString{"hydrationProbe"}, StaticString{"HydrationProbe"}));
     }
 
     static HydrationProbeExpression hydrationProbe(HydrationProbe&&) = delete;

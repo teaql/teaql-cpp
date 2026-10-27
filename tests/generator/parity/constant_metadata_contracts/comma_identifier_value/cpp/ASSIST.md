@@ -66,6 +66,10 @@ Dynamic JSON: `filterWithJson(text)` applies model-aware self/foreign-key filter
 
 Result adaptation: `returnType<Model>()` changes decoding and keeps the source query identity, projections and Context. `newEntity(user_context)` still creates Status. Result fields require appropriate projections/enhancements; adaptation does not load fields or issue SQL.
 
+Creation state: `newEntity(user_context)` uses the source model's declared ID namespace, binds fresh mutation state to the Context's read-only graph, and marks the entity new. A returned ID-allocation error leaves ID zero and unloaded; a successful zero loads the ID field. Creation does not save or authorize persistence.
+
+Fix provenance: where a model declares Context-root, Business-ID or clock fixes, Fix evidence identifies the canonical model independently of descriptor overrides. The generated Checker passes that same model identity to Business-ID allocation. Context-root assignments remain owned by trusted Context/Checker setup.
+
 Request result markers: `returnType<T>()` accepts a non-Entity marker for request construction, inspection and composition without allocating a T. All execution methods, including compact rows/count/exists, and `newEntity(user_context)` require an Entity result. Restore an Entity marker before purpose/execution; source identity, Context binding and explicit destination-copy rules remain unchanged.
 
 - Model: `id()` / `updateId(const std::uint64_t&)`; changed `changedId()`; evaluation `evalId()`; expression `getId()`.
@@ -150,6 +154,10 @@ Typed JSON presentation: after `module(user_context).apply_to(user_context)`, de
 Dynamic JSON: `filterWithJson(text)` applies model-aware self/foreign-key filters, dotted forward/reverse relation membership, `_orderBy`, `_start`, `_size`, `_pageSize` and `_page`. Read the [value and control rules](#dynamic-json-value-and-control-rules) before composing filters: array shape and first-element type select the operator, and unknown fields add no restriction.
 
 Result adaptation: `returnType<Model>()` changes decoding and keeps the source query identity, projections and Context. `newEntity(user_context)` still creates Platform. Result fields require appropriate projections/enhancements; adaptation does not load fields or issue SQL.
+
+Creation state: `newEntity(user_context)` uses the source model's declared ID namespace, binds fresh mutation state to the Context's read-only graph, and marks the entity new. A returned ID-allocation error leaves ID zero and unloaded; a successful zero loads the ID field. Creation does not save or authorize persistence.
+
+Fix provenance: where a model declares Context-root, Business-ID or clock fixes, Fix evidence identifies the canonical model independently of descriptor overrides. The generated Checker passes that same model identity to Business-ID allocation. Context-root assignments remain owned by trusted Context/Checker setup.
 
 Request result markers: `returnType<T>()` accepts a non-Entity marker for request construction, inspection and composition without allocating a T. All execution methods, including compact rows/count/exists, and `newEntity(user_context)` require an Entity result. Restore an Entity marker before purpose/execution; source identity, Context binding and explicit destination-copy rules remain unchanged.
 

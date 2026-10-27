@@ -1,11 +1,16 @@
 # G12 acceptance audit
 
+G12 is qualified after [complete R01-R18 post-approval acceptance](approved_exception_capability_acceptance_5_0_6.md). The following sections preserve their earlier source/integration scopes; the invalid-profile decision and final signoff are now complete.
+
 Recorded combined integration passes native 51/51 and modules 40/40 at its
 frozen checkpoint. The later
 [Context dynamic schema repair](context_dynamic_schema_lifecycle_5_0_6.md) changes
 shared runtime orchestration and has its own current selected execution gates;
 the earlier 51/40 outcome is not relabeled as a post-repair full combined run.
-G12/P6 and P0-P7 remain partial pending semantic signoff and R08 disposition.
+That earlier checkpoint preceded the final G12 signoff. Complete P0-P7
+acceptance remains open.
+The user approved R08 explicit rejection on2026-10-24; see the
+[bounded contract](invalid_wire_naming_compatibility_exception_5_0_6.md).
 Rust remains `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and the generator remains
 `45e1572c4956ca963410d8ea436ead3c8857087a`. Earlier 5.0.5 evidence is historical.
 
@@ -31,7 +36,7 @@ outcomes, ownership and current combined execution evidence. Historical broad
 questions are reconciled against later concrete checkpoints rather than treated
 as an indefinite request for more models.
 
-## Explicit unresolved behavior
+## Approved invalid-profile behavior
 
 R08 retains an actual invalid-profile difference. The frozen Rust generator
 returns success and empty wire strings for an invalid `json_field_naming`;
@@ -39,11 +44,12 @@ current C++ rejects it. The [original inspection](parity/generated_wire_mappings
 contains both real generation outcomes. Three valid profiles and their mapping
 functions have separate source comparisons.
 
-A user clarification is pending between retaining explicit rejection as an
-approved compatibility exception and reproducing the source's empty mappings.
-No answer is inferred from elapsed time or a preselected option. Do not normalize
-the outcomes, silently exclude the case or promote G12/G14 while its disposition
-remains undecided. Other capabilities and independent work continue.
+On2026-10-24 the user explicitly approved retaining C++ rejection as a bounded
+compatibility exception. The original successful empty-wire artifacts remain
+unchanged. The new permanent test checks three unsupported profiles; the fresh
+[source/Java gate](parity/invalid_wire_profile_java_source_gate_5_0_6.json.gz)
+passes8252 source comparisons and115 Java tests. Formal G12/G14 acceptance
+still requires its complete responsibility/current-gate review.
 
 ## Current integration selection
 

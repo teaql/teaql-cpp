@@ -112,7 +112,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Entry::ENTITY_NAME,
+            "Entry",
             "tenant",
             "Tenant",
             entity.tenantId(),

@@ -260,21 +260,24 @@ inline CategoryListExpression PlatformExpression::getCategoryList() const {
 
 struct E {
     static StatusExpression status(const Status& value) {
-        return StatusExpression(entity_expression(value, StaticString{"status"}));
+        return StatusExpression(
+            entity_expression(value, StaticString{"status"}, StaticString{"Status"}));
     }
 
     static StatusExpression status(Status&&) = delete;
     static StatusExpression status(const Status&&) = delete;
 
     static CategoryExpression category(const Category& value) {
-        return CategoryExpression(entity_expression(value, StaticString{"category"}));
+        return CategoryExpression(
+            entity_expression(value, StaticString{"category"}, StaticString{"Category"}));
     }
 
     static CategoryExpression category(Category&&) = delete;
     static CategoryExpression category(const Category&&) = delete;
 
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;

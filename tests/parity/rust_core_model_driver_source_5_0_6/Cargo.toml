@@ -1,0 +1,147 @@
+[package]
+name = "teaql_core_model_driver_source_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+autobins = false
+
+[workspace]
+
+[dependencies]
+school_management_service_core = { package = "school-management-service-core", path = "../../../.reference/teaql-rs/examples/shared-load-state/fixtures/narrow/lib" }
+cpp_business_ids_core = { package = "cpp-business-ids-core", path = "../../generator/parity/business_ids_rust/lib" }
+num-traits = "=0.2.19"
+sha2 = "=0.10.9"
+libsqlite3-sys = "=0.38.1"
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+futures-core = "=0.3.32"
+futures-util = "=0.3.32"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype", "functions"] }
+
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+
+
+
+[[bin]]
+name = "core_model_graph_plan_scopes"
+path = "../rust_field_layout/src/bin/entity_graph_plan_5_0_6.rs"
+
+[[bin]]
+name = "core_model_scoped_comments"
+path = "../rust_field_layout/src/bin/scoped_comments_5_0_6.rs"
+
+[[bin]]
+name = "core_model_data_service_request_source"
+path = "../data_service_request_source_5_0_6.rs"
+
+[[bin]]
+name = "core_model_data_service_model_scope"
+path = "../rust_field_layout/src/bin/data_service_model_5_0_6.rs"
+
+[[bin]]
+name = "core_model_field_layout"
+path = "../rust_field_layout/src/main.rs"
+
+[[bin]]
+name = "core_model_dynamic_carrier"
+path = "../rust_field_layout/src/bin/dynamic_carrier_5_0_6.rs"
+
+[[bin]]
+name = "core_model_presentation"
+path = "../rust_values/src/bin/presentation_oracle.rs"
+
+[[bin]]
+name = "core_model_search"
+path = "../rust_values/src/bin/search_oracle.rs"
+
+[[bin]]
+name = "core_model_value"
+path = "../rust_values/src/main.rs"
+
+[[bin]]
+name = "core_model_presentation_api"
+path = "../rust_values/src/bin/presentation_api_oracle.rs"
+
+[[bin]]
+name = "core_model_core_graph_api"
+path = "../rust_values/src/bin/core_graph_api_oracle.rs"
+
+[[bin]]
+name = "core_model_core_metadata_source"
+path = "../rust_field_layout/src/bin/meta_api_5_0_6.rs"
+
+[[bin]]
+name = "core_model_core_primitives"
+path = "../rust_core_primitives_reference_5_0_6/src/main.rs"
+
+[[bin]]
+name = "core_model_readonly_schema_hash_5_0_6"
+path = "../rust_field_layout/src/bin/readonly_schema_hash_5_0_6.rs"
+
+[[bin]]
+name = "core_model_smart_list_api"
+path = "../rust_field_layout/src/bin/smart_list_api_5_0_6.rs"
+
+[[bin]]
+name = "core_model_core_shape_presentation"
+path = "../rust_field_layout/src/bin/core_shape_presentation_5_0_6.rs"
+
+[[bin]]
+name = "core_model_compact_row_api"
+path = "../rust_field_layout/src/bin/compact_row_api_5_0_6.rs"
+
+[[bin]]
+name = "core_model_core_like_expression_source"
+path = "../core_like_expression_source_5_0_6.rs"
+
+[[bin]]
+name = "core_model_core_expression_boundaries"
+path = "../rust_field_layout/src/bin/query_api_5_0_6.rs"
+
+[[bin]]
+name = "core_model_safe_expression_empty_source"
+path = "../safe_expression_empty_source_5_0_6.rs"
+
+[[bin]]
+name = "core_model_core_mutation_boundaries"
+path = "../rust_field_layout/src/bin/mutation_model_api_5_0_6.rs"
+
+[[bin]]
+name = "core_model_core_query_intent_source"
+path = "../core_query_intent_source_5_0_6.rs"
+
+[[bin]]
+name = "core_model_query_schema_builder"
+path = "../query_schema_builder_5_0_6.rs"
+
+[[bin]]
+name = "core_model_query_full_state"
+path = "../query_full_state_5_0_6.rs"
+
+[[bin]]
+name = "core_model_row_extend_error"
+path = "../rust_query_full_state_5_0_6/examples/row_extend_error.rs"
+
+[[bin]]
+name = "core_model_dynamic_search_clone"
+path = "../dynamic_search_clone_source_5_0_6.rs"
+
+[[bin]]
+name = "core_model_dynamic_provider"
+path = "../rust_field_layout/src/bin/dynamic_provider_5_0_6.rs"

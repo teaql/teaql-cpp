@@ -5,6 +5,7 @@ import gzip
 import json
 from pathlib import Path
 import subprocess
+from compare_values import json_lines, same
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -16,17 +17,19 @@ def main():
     args = parser.parse_args()
     source = ROOT / 'docs/parity/explicit_save_scope_valid_original_5_0_6.json.gz'
     original = json.loads(gzip.decompress(source.read_bytes()))
-    assert original['complete']
+    if not original['complete']:
+        raise RuntimeError('Original explicit-save observation is incomplete')
     if args.record and args.record.exists():
         parser.error('Preserve existing candidate receipt')
     result = subprocess.run([str(args.cpp.resolve())], input=''.join(json.dumps(i) + '\n' for i in original['inputs']),
                             text=True, capture_output=True)
     result.check_returncode()
-    actual = [json.loads(line) for line in result.stdout.split('\n') if line.strip()]
+    actual = json_lines(result.stdout)
     expected = original['observations']
-    assert len(actual) == len(expected) == len(original['inputs'])
+    if len(actual) != len(expected) or len(expected) != len(original['inputs']):
+        raise RuntimeError('Explicit-save observation count differs from the complete input matrix')
     mismatches = [dict(index=i, input=original['inputs'][i], expected=e, actual=a)
-                  for i, (e, a) in enumerate(zip(expected, actual)) if e != a]
+                  for i, (e, a) in enumerate(zip(expected, actual)) if not same(e, a)]
     receipt = dict(complete=not mismatches, cases=len(actual), mismatches=mismatches,
                    actual=actual, original=str(source.relative_to(ROOT)), command=[str(args.cpp)],
                    stderr=result.stderr)

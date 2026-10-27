@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare inherited alias/JSON and relation/Context-root clock composition."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -45,7 +46,7 @@ def main():
     gaps = [dict(input=value, rust=source, cpp=native)
             for value, source, native in zip(inputs, expected, actual) if not same(source, native)]
     if gaps:
-        path = ROOT / 'docs/parity/checker_clock_composition_initial_gaps_5_0_6.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/checker_clock_composition_initial_gaps_5_0_6.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress(json.dumps(dict(gaps=gaps), indent=2).encode(), mtime=0))
         print(json.dumps(gaps[0], ensure_ascii=True, indent=2))

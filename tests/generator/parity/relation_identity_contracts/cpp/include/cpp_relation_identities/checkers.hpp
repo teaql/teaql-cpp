@@ -112,7 +112,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Owner::ENTITY_NAME,
+            "Owner",
             "platform",
             "Platform",
             entity.platformId(),
@@ -188,7 +188,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Entry::ENTITY_NAME,
+            "Entry",
             "platform",
             "Platform",
             entity.platformId(),
@@ -270,7 +270,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Profile::ENTITY_NAME,
+            "Profile",
             "platform",
             "Platform",
             entity.platformId(),

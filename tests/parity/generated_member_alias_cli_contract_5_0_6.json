@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "count": 260,
+  "corpus": "tests/parity/generated_member_alias_5_0_6_cases.json.gz",
+  "corpus_sha256": "88c00463a7b32f7a5b02920a4cdb3a330bb945c90c130aab8d6263d6ab583b9e",
+  "source_receipt": "docs/parity/generated_member_alias_native_retry_5_0_6_source.json.gz",
+  "source_receipt_sha256": "b464149ceb78088d2c1246a19435dc79895e0f4a28994ee265172885144d37d2",
+  "provenance": "tests/generator/parity/typed_member_aliases_rust/PROVENANCE.json",
+  "generated_files": 31,
+  "comparison": "generated_member_alias_rust_parity",
+  "comparator": "tests/parity/compare_generated_member_aliases_5_0_6.py",
+  "probe": "teaql_generated_member_alias_probe",
+  "support_files": {
+    "scripts/generated_member_alias_cli_source_binding_5_0_6.py": "fa40a12f63bd28913814bdcf8ca02256751e5518a342043f1641265dd614e4e4",
+    "tests/parity/verify_generated_member_alias_cli_controls_5_0_6.py": "4f9f69fbe6010d75818cd6de0f05df1f31e5e01347083e090745ad80a80a3f4a",
+    "tests/parity/compare_generated_member_aliases_5_0_6.py": "3b2040f00835b76252f91c0695c19e282779902ac466842d212716bde83048f8",
+    "tests/parity/generated_member_alias_probe.cpp": "b892b1cd825199998d764b8a3a48b17d6dcfb0b230ac54e86dee9552be6abfde"
+  }
+}

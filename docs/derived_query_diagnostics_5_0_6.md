@@ -1,5 +1,12 @@
 # Invocation-local diagnostic sources for derived queries
 
+Later installed source binding:
+[The current composition and diagnostics comparison](derived_query_cli_source_binding_5_0_6.md)
+checks 936 complete original outcomes against fresh exact native results,
+with 15 substitution controls and six selected CTest checks. Historical
+production hashes and full-integration failures below keep their original
+checkpoint scope.
+
 The [exact-reference replay](generated_support_reference_5_0_6.md) subsequently
 rechecks all 576 observations and the 360 composition observations with reference
 registry versions/checksums. Earlier observer locks and the temporary facet

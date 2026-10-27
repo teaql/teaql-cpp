@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "count": 512,
+  "corpus": "tests/parity/entity_constructor_helpers_5_0_6_cases.json.gz",
+  "corpus_sha256": "5c573f16aefda719d08f619060a9768caedd379cbc5f7095b430b0a816e87d47",
+  "original_receipt": "docs/parity/entity_constructor_cli_original_execution_5_0_6.json.gz",
+  "original_receipt_sha256": "0d904fdff58a65e7d9c1ad752007c4981b0865785b4813c341e0e0190de88ddc",
+  "historical_terminal": "docs/parity/entity_constructor_helpers_5_0_6.json",
+  "historical_terminal_sha256": "8062116c73fb59c0c440bdd796cf1bd50b8a6694ef20ebb9fe7aef18a826d56b",
+  "historical_comparator_path": "tests/parity/compare_entity_constructor_helpers_5_0_6.py",
+  "provenance": "tests/generator/parity/inheritance_variants_rust/PROVENANCE.json",
+  "generated_files": 43,
+  "comparison": "entity_constructor_helpers_rust_parity",
+  "comparator": "tests/parity/compare_entity_constructor_helpers_5_0_6.py",
+  "probe": "teaql_entity_constructor_helpers_probe",
+  "clock_binary": "libteaql_sample_fixed_clock.so",
+  "support_files": {
+    "scripts/entity_constructor_cli_source_binding_5_0_6.py": "f44b0cd0e234975244e7772ca5274a04f0547d10c3068c91d91bcf8880149527",
+    "tests/parity/verify_entity_constructor_cli_controls_5_0_6.py": "499bca38657f4d55e43926efb88708725541ac7ff10065262e069ff3af1ee1c0",
+    "tests/parity/compare_entity_constructor_helpers_5_0_6.py": "8289c1345cf63ae715bf54d3ccaad1543e56f437ead157bc27f6fbeb5f5e0b0a",
+    "tests/parity/entity_constructor_helpers_probe.cpp": "2ffecca6ccca115525be77cbf1396acbd5aee0d9bbdc78a9b776aa0bbd74adbf",
+    "tests/support/fixed_sample_clock.cpp": "a107a5664077004c4bc403c56c4df3f43b090d3ebe7c216106f720ff23089a91",
+    "tests/parity/rust_entity_constructor_helpers_5_0_6/lib.rs": "35488d6aa58612238219c4c49e7faa0342adfc2d77cd574d07ec9a3925b8579c",
+    "tests/parity/rust_entity_constructor_helpers_5_0_6/Cargo.toml": "cf205e181993ff20cf774236fcd3c7d15482603231f244eddda977f091eb6427",
+    "tests/parity/rust_entity_constructor_helpers_5_0_6/Cargo.lock": "047a468e9a480327bb3c7472571f17d46489c6f5e769c8ec6615762f7b7bd2db",
+    "tests/parity/entity_constructor_helpers_5_0_6.rs": "0d75037180a26fc1aa9fe42e49b41c05ee0aab1878d10055dd6e841487342fb4"
+  }
+}

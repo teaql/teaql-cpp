@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "count": 1296,
+  "corpus": "tests/parity/protected_behavior_5_0_6_cases.json.gz",
+  "corpus_sha256": "83f158e5283e3948e6d686aab6a2ad7cfcba027fff5070bb1f3f6a3107103d3f",
+  "original_receipt": "docs/parity/protected_behavior_cli_original_execution_5_0_6.json.gz",
+  "original_receipt_sha256": "f3de08092ee56b0d8f4b94ccb74f3d93be445a8278b0f7ae5d304980173f4cb3",
+  "historical_source": "docs/parity/protected_behavior_source_5_0_6.json",
+  "historical_source_sha256": "8d4293c384a8625e99e3b15dbf61aaecf17f54c0279d4fa012402ed3e108d7d5",
+  "historical_terminal": "docs/parity/protected_behavior_5_0_6.json",
+  "historical_terminal_sha256": "2fccb36884e535284a37e9ea3eacc88f8b893e9d19e8af50ff44e858c18d89d8",
+  "historical_comparator_path": "tests/parity/compare_protected_behavior_5_0_6.py",
+  "generated_provenance": "tests/generator/parity/checkers_rust/PROVENANCE.json",
+  "generated_files": 19,
+  "original_source_files": 610,
+  "comparison": "protected_behavior_rust_parity",
+  "comparator": "tests/parity/compare_protected_behavior_5_0_6.py",
+  "probe": "teaql_protected_behavior_probe",
+  "support_files": {
+    "scripts/protected_behavior_cli_source_binding_5_0_6.py": "93ee233f7a4360e70b6f3124c5b7622ea4bff864b6efba4b90439c5037def11d",
+    "tests/parity/verify_protected_behavior_cli_controls_5_0_6.py": "2c0dd49e6d3b54f4858ddfcad7745a5f0d79708db77b27772f5b85e10d4d3d6a",
+    "tests/parity/compare_protected_behavior_5_0_6.py": "081a01a80a4e52fcd8c4d3773577f8c100537b04ae674b79f9402edb7765dcb0",
+    "tests/parity/protected_behavior_probe.cpp": "b2f029935165258befa28d5826076a87bdf88b5836bf9fba2a2026d1f6a63372",
+    "tests/parity/build_protected_behavior_oracle_5_0_6.py": "7369349566e6a913c7e6be5f15af2e98c3c1d62e4808bd96e4c02a1b3bdf8abd",
+    "tests/parity/rust_protected_behavior_5_0_6/Cargo.toml": "7a5de0ce708835c13a2e95fda32a98897383b53a39db4dfab77310854d2cb509",
+    "tests/parity/rust_protected_behavior_5_0_6/Cargo.lock": "bf79a641d1a50f2da0bae08ba372bec4b2ace0f50cdebe201414043e04d6b62c",
+    "tests/parity/protected_behavior_5_0_6.rs": "b4fd8b4a028e44cb46cf2e317d4d5e193568b497c64a7919b54b5532b537e103"
+  }
+}

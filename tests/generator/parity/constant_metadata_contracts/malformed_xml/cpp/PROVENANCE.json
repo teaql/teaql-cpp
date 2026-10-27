@@ -9,16 +9,16 @@
     "OBSERVATION.json": "d1f8233e038e1f263c3fc67b5bc72d0de850a5d6a7d91085b3759014f7df7be4"
   },
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "8de867a18ca398525d982e81422ebfba377ebc19dd0d27832b4108833e1aa74f",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "eacbf2fc53f99c648e27d4506a2ed6ceae9b0be2a625ec0a47cc07449d37c257",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "60c3b1e413af48d5acf02fff12318f083feb3a41508da7c585d87678fbed9fc0",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "8541f4ccb89011cbd5f4ce4f9646577ea535de7cbefc9f1721e802218a6c0ac3",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "0a84df2e8f3c8f4aad0ca44634ae7d7fa6162ab16212f03abc250261f10071ef",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "8f03fb9b40e6499f3ca412f65b3573b0d753658eabe1cafb4d241ce49b54f418",
     "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
     "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "0c83fc780340b6a228d7d9f94f50e40b015477e399d9446d34de389901bc90c8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "d1d6cf3e17ea515ccc7d482a775a5abfa4f770fe1fd5d3d264ac6591ba8849a1",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "a3f16897f7fcfce33c863dc959e392850268621762ac2f957011cca4c6bee0ce",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java": "9d66eea7ed5d83d2cbff9376c462faf4ff056581bdaa53605f00a16f3b0f605c"
   }
 }

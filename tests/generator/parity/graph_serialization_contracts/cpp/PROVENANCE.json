@@ -6,7 +6,7 @@
   "model_sha256": "9d49eb2bee24150078b55dbd564ddf9f7b8e86d671a60584a22fe975e4179e4c",
   "files": {
     "AGENTS.md": "2fd23f634896a0f334d7aed29d2f5f28fed3455f7d8705151bfb1df90a0393ae",
-    "ASSIST.md": "49d978c42c9d4eabae73b76d9de3fd0cc8a1ebbfa2df4b58a99219745e797bb7",
+    "ASSIST.md": "375eb62a572d56daf6978dbfb9ecceaeb895c62ea0ac59b42ddde53acd63f19d",
     "CMakeLists.txt": "330e58a8e3d40e719db631dfd35dc2872ecc2766d72181ddfebc7d33c5f65467",
     "OBSERVATION.json": "2595abf9b3862f30d6f7a7dc94f18ec3b48b47543e1b69f6fe45057ebbcffb39",
     "assist/json_graph_row/create.md": "4858a4879047093c0ff30f042a0ec85aeff2e65a0f05870ab911ab9b279663d8",
@@ -71,9 +71,9 @@
     "assist/serialization_parent/query.md": "c00754be99aecb7bdcb7e67e30f92ec3d1b7940fa0a63c826040e02aa360df67",
     "assist/serialization_parent/stream.md": "ef085852e67384494d875d82dcdb2d78bfd34fd82e56d99d0df0eb8764a7d3d1",
     "assist/serialization_parent/update.md": "885bced649dd2cea67b4b94b8fe4c9176d33f37b063087164b66c710f9a0b18c",
-    "include/cpp_graph_serialization/checkers.hpp": "ca1f407505311bfc4bbe1158a92ea3b9c895a2dc399bece6e5edf6bd352cbae8",
-    "include/cpp_graph_serialization/expressions.hpp": "d440af154bd934134b79370dea52df0e8c31327c56b9be790b9248cf005e1d38",
-    "include/cpp_graph_serialization/models.hpp": "daaf8cc9d5067cdc959d124f335eab8e6327ea68d90da476008a6817e0c11d7f",
+    "include/cpp_graph_serialization/checkers.hpp": "540c32953a38ead922a747cf26617849fbf69d6726d5ac651e2ec4ed6a26c4b6",
+    "include/cpp_graph_serialization/expressions.hpp": "6a622e5788af32a7b042cda09652b2ac1dad7fddd7895b04c5905822f18c5aad",
+    "include/cpp_graph_serialization/models.hpp": "44a0313dbb717e5d36a0727240987202110ed722cf917386c81c5f4787ff1f4a",
     "include/cpp_graph_serialization/queries.hpp": "070d94e5de14562dca8ac1ada0d96894f6542c5a58ac0c105dcab9b480978d5b",
     "include/cpp_graph_serialization/runtime.hpp": "7ad9d79663968d9dde877242301150339d36b484416c6e13e2fd95490eaca64f",
     "include/cpp_graph_serialization/sample_data.hpp": "0ad3ee082f6787e3be1de5d8db00dcdf45d38f8884b474576ed65e0ecd40986e",
@@ -83,13 +83,14 @@
   },
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "8de867a18ca398525d982e81422ebfba377ebc19dd0d27832b4108833e1aa74f",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "60c3b1e413af48d5acf02fff12318f083feb3a41508da7c585d87678fbed9fc0",
     "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "0c83fc780340b6a228d7d9f94f50e40b015477e399d9446d34de389901bc90c8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "eacbf2fc53f99c648e27d4506a2ed6ceae9b0be2a625ec0a47cc07449d37c257",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "d1d6cf3e17ea515ccc7d482a775a5abfa4f770fe1fd5d3d264ac6591ba8849a1",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java": "9d66eea7ed5d83d2cbff9376c462faf4ff056581bdaa53605f00a16f3b0f605c"
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "8541f4ccb89011cbd5f4ce4f9646577ea535de7cbefc9f1721e802218a6c0ac3",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "a3f16897f7fcfce33c863dc959e392850268621762ac2f957011cca4c6bee0ce",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java": "9d66eea7ed5d83d2cbff9376c462faf4ff056581bdaa53605f00a16f3b0f605c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "8f03fb9b40e6499f3ca412f65b3573b0d753658eabe1cafb4d241ce49b54f418"
   }
 }

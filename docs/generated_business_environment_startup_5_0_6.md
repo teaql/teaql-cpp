@@ -170,3 +170,19 @@ Pinned formatting/checking covers 1,649 handwritten files. The baseline,
 mechanical evidence separate from these executions. Wider G12 assembly/sample
 integration, the other partial capabilities and P7 remain active. Closing R04
 does not establish complete runtime/generator parity.
+
+## Fresh locked-source boundary replay
+
+The [current original replay](parity/business_environment_original_replay_current_5_0_6.json.gz)
+rebuilds the unchanged generated Rust Business-ID observer at runtime commit
+`fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and generator commit
+`45e1572c4956ca963410d8ea436ead3c8857087a`. Both retained boundary
+records pass their independent byte-hash admission and current model/source
+checks. All **21** environment outcomes and both filesystem outcomes match
+fresh original execution. The three panic diagnostics match after projecting
+only the process-specific thread identifier; their exit code and remaining
+diagnostic text are preserved. The one-off Cargo target contained 254,886,821
+bytes and was removed after execution.
+
+This is a fresh original replay of the retained source records, not a new C++
+comparison or a complete G13/P0-P7 qualification.

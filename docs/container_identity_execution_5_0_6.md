@@ -21,7 +21,7 @@ strings happen to agree:
 | Identity | Source responsibilities |
 | --- | --- |
 | Canonical generated model identity | Q request target and explicit repository lookup arguments; generated LocalSchemaProvider and standalone repository/behavior registry keys. |
-| Entity trait/runtime identity | `TeaqlEntity::ENTITY_NAME`, descriptor/key/layout identity, typed RuntimeModule registration and new-entity ID scope. |
+| Entity trait/runtime identity | `TeaqlEntity::ENTITY_NAME`, descriptor/key/layout identity, typed RuntimeModule registration. |
 | Storage/service metadata | Independently overridden descriptor table and data-service values. |
 
 For a model named Item with `entity="Other"`, the actual source Q request and
@@ -62,7 +62,9 @@ an optional generated `QUERY_ENTITY_NAME` only when the descriptor identity
 override differs from the canonical model name. The shared EntityQuery runtime
 uses that canonical identity for construction and its seven execution lookups,
 with the established `ENTITY_NAME` fallback for handwritten/unaffected types.
-New-entity ID allocation continues to use the trait identity. The generated
+This checkpoint left new-entity ID allocation using the trait identity; the
+[later creation comparison](generated_creation_identity_5_0_6.md) proves that
+this differs from the raw declared model identity used by the original source. The generated
 provider and standalone registry adapters use the original canonical keys;
 typed RuntimeModule registration remains unchanged.
 

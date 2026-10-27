@@ -21,13 +21,15 @@ def main():
         corpus = json.load(source)
     if corpus['baseline'] != json.loads((root / 'upstream.lock.json').read_text())['commit']:
         raise RuntimeError('Decimal pointer observations belong to a different source baseline')
+    cases = corpus['cases']
+    if type(cases) is not list or not cases:
+        raise RuntimeError('Comparison corpus cases must be a nonempty list')
     emulator = args.cpp_emulator.split(';') if args.cpp_emulator else []
     bits = subprocess.check_output(emulator + [args.cpp, '--pointer-bits'], text=True).strip()
     if bits not in ('32', '64'):
         raise RuntimeError('Unsupported native pointer width')
-    if int(bits) != corpus.get('pointer_bits', int(bits)):
+    if type(corpus.get('pointer_bits')) is not int or int(bits) != corpus['pointer_bits']:
         raise RuntimeError('Current pointer corpus is native64-only; historical 32-bit evidence remains separate')
-    cases = corpus['cases']
     inputs = [case['input'] for case in cases]
     expected = [case['expected'][bits] for case in cases]
     if args.rust:

@@ -114,7 +114,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Receipt::ENTITY_NAME,
+            "Receipt",
             "tenant",
             "Tenant",
             entity.tenantId(),
@@ -128,7 +128,7 @@ public:
             status,
             ReceiptNumber::definition(user_context.memory_resource()),
             "Tenant",
-            Receipt::ENTITY_NAME,
+            "Receipt",
             entity.receipt_number_,
             entity.receiptNumber().asStr().empty(),
             [&](std::string_view value) {
@@ -216,7 +216,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Ticket::ENTITY_NAME,
+            "Ticket",
             "tenant",
             "Tenant",
             entity.tenantId(),
@@ -230,7 +230,7 @@ public:
             status,
             TicketNumber::definition(user_context.memory_resource()),
             "Tenant",
-            Ticket::ENTITY_NAME,
+            "Ticket",
             entity.ticket_number_,
             entity.ticketNumber().asStr().empty(),
             [&](std::string_view value) {

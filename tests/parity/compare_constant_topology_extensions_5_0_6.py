@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare actual constant relationship bootstrap with registered extensions."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -7,6 +8,7 @@ import json
 import os
 from pathlib import Path
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -34,16 +36,18 @@ def main():
     if args.record:expected=observe(args.rust,inputs)
     else:
         corpus=json.loads(gzip.decompress(path.read_bytes()))
-        assert corpus['baseline']==json.loads((ROOT/'upstream.lock.json').read_text())['commit']
-        assert same(inputs,[case['input'] for case in corpus['cases']])
-        expected=[case['expected'] for case in corpus['cases']]
+        if (corpus['baseline']!=json.loads((ROOT/'upstream.lock.json').read_text())['commit']
+                or corpus['case']!=args.case):
+            raise RuntimeError('Topology extension corpus belongs to another source/model variant')
+        rows=require_cases(corpus,len(inputs),inputs)
+        expected=[case['expected'] for case in rows]
         if args.rust and not same(expected,observe(args.rust,inputs)):
             raise RuntimeError('Topology extension corpus differs from fresh original')
     actual=observe(args.cpp,inputs)
     gaps=[dict(index=i,input=value,rust=source,cpp=native)
           for i,(value,source,native) in enumerate(zip(inputs,expected,actual)) if not same(source,native)]
     if gaps:
-        out=ROOT/'docs/parity'/f'constant_topology_extensions_{args.case}_5_0_6_initial_gaps.json.gz'
+        out=diagnostic_path(ROOT/'docs/parity'/f'constant_topology_extensions_{args.case}_5_0_6_initial_gaps.json.gz')
         if not out.exists():out.write_bytes(gzip.compress(json.dumps(gaps,indent=2).encode(),mtime=0))
         print(json.dumps(gaps[0],indent=2));raise SystemExit(f'{len(gaps)} topology extension differences; see {out}')
     if args.record:

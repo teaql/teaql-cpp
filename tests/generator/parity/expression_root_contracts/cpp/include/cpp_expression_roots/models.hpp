@@ -37,6 +37,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -207,6 +208,7 @@ struct Class : generated_detail::Model<Class> {
     using Base = generated_detail::Model<Class>;
     friend class ClassChecker;
     static constexpr std::string_view ENTITY_NAME = "Class";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "class";
     friend struct generated_detail::ClassSampleRecipe;
     friend struct generated_detail::ClassBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -420,6 +422,7 @@ struct Operator : generated_detail::Model<Operator> {
     using Base = generated_detail::Model<Operator>;
     friend class OperatorChecker;
     static constexpr std::string_view ENTITY_NAME = "Operator";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "operator";
     friend struct generated_detail::OperatorSampleRecipe;
     friend struct generated_detail::OperatorBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -602,6 +605,7 @@ struct Template : generated_detail::Model<Template> {
     using Base = generated_detail::Model<Template>;
     friend class TemplateChecker;
     static constexpr std::string_view ENTITY_NAME = "Template";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "template";
     friend struct generated_detail::TemplateSampleRecipe;
     friend struct generated_detail::TemplateBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -784,6 +788,7 @@ struct Namespace : generated_detail::Model<Namespace> {
     using Base = generated_detail::Model<Namespace>;
     friend class NamespaceChecker;
     static constexpr std::string_view ENTITY_NAME = "Namespace";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "namespace";
     friend struct generated_detail::NamespaceSampleRecipe;
     friend struct generated_detail::NamespaceBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -966,6 +971,7 @@ struct PlainRecord : generated_detail::Model<PlainRecord> {
     using Base = generated_detail::Model<PlainRecord>;
     friend class PlainRecordChecker;
     static constexpr std::string_view ENTITY_NAME = "PlainRecord";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "plain_record";
     friend struct generated_detail::PlainRecordSampleRecipe;
     friend struct generated_detail::PlainRecordBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -1469,7 +1475,7 @@ inline const Platform* Class::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("class", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1703,7 +1709,7 @@ inline const Platform* Operator::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("operator", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1911,7 +1917,7 @@ inline const Platform* Template::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("template", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2119,7 +2125,7 @@ inline const Platform* Namespace::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("namespace", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2328,7 +2334,7 @@ inline const Platform* PlainRecord::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("plain_record", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }

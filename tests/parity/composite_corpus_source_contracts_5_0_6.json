@@ -1,0 +1,461 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "notice": "Exact versioned assembly and both archived/current input generation; original Rust execution reused explicitly",
+  "contracts": [
+    {
+      "name": "resolved_query_schema",
+      "corpus": "tests/parity/resolved_query_schema_5_0_6_cases.json.gz",
+      "count": 2304,
+      "receipt": "docs/parity/resolved_query_schema_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_query_schema_5_0_6.py",
+      "observer": "tests/parity/resolved_query_schema_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_query_schema_inputs_5_0_6.py",
+      "input_function": "inputs",
+      "marker": "__TEAQL_QUERY_SCHEMA_INPUTS__",
+      "output_prefix": "TEAQL_QUERY_SCHEMA_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_query_schema_observer::replay_result_schema_and_cache_paths",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b",
+      "native_target": "teaql_entity_query_probe",
+      "native_test": "resolved_query_schema_rust_parity",
+      "renderer": "inline",
+      "suite": "schema",
+      "render_inputs": [
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs",
+        "tests/parity/resolved_query_schema_source_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_query_schema_5_0_6.py": {
+          "version": "archived",
+          "sha256": "50f4331e901b0b2ffb59533090741f2932cc2c363cc40d521bab2388d588b562"
+        },
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs": {
+          "version": "archived",
+          "sha256": "a5269aa07200f99367d53859c7f2f1c34d8a74f0c0dabaa32a73972ab986aeaf"
+        },
+        "tests/parity/resolved_query_schema_inputs_5_0_6.py": {
+          "version": "archived",
+          "sha256": "785a75ec9c6834fbce495597849047ae80ac68dd9fb772a51fbec477e630e55c"
+        },
+        "tests/parity/resolved_query_schema_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs": {
+          "version": "current",
+          "sha256": "e744dc05562c02b7dee81469b8d5d1c3fb9984aa8821ea7039d51f3b82008153"
+        }
+      },
+      "input_files": {
+        "tests/parity/entity_query_capture_5_0_6_cases.json.gz": "017044b07f80af983427f79297469e9973e628828722825fd5dffefe76c33cb7"
+      },
+      "compile_inputs": {}
+    },
+    {
+      "name": "resolved_query_typed_schema",
+      "corpus": "tests/parity/resolved_query_typed_schema_5_0_6_cases.json.gz",
+      "count": 192,
+      "receipt": "docs/parity/resolved_query_typed_schema_source_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_query_schema_5_0_6.py",
+      "observer": "tests/parity/resolved_query_schema_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_query_schema_inputs_5_0_6.py",
+      "input_function": "typed_inputs",
+      "marker": "__TEAQL_QUERY_SCHEMA_INPUTS__",
+      "output_prefix": "TEAQL_QUERY_SCHEMA_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_query_schema_observer::replay_result_schema_and_cache_paths",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b",
+      "native_target": "teaql_entity_query_probe",
+      "native_test": "resolved_query_typed_schema_rust_parity",
+      "renderer": "inline",
+      "suite": "typed",
+      "render_inputs": [
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs",
+        "tests/parity/resolved_query_schema_source_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_query_schema_5_0_6.py": {
+          "version": "archived",
+          "sha256": "6145125e2aa4c7ff129db311a64289596d8417bb4ea20ac361f30ad0738d4c5f"
+        },
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs": {
+          "version": "archived",
+          "sha256": "a5269aa07200f99367d53859c7f2f1c34d8a74f0c0dabaa32a73972ab986aeaf"
+        },
+        "tests/parity/resolved_query_schema_inputs_5_0_6.py": {
+          "version": "archived",
+          "sha256": "785a75ec9c6834fbce495597849047ae80ac68dd9fb772a51fbec477e630e55c"
+        },
+        "tests/parity/resolved_query_schema_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs": {
+          "version": "current",
+          "sha256": "e744dc05562c02b7dee81469b8d5d1c3fb9984aa8821ea7039d51f3b82008153"
+        }
+      },
+      "input_files": {},
+      "compile_inputs": {}
+    },
+    {
+      "name": "resolved_dynamic_typed",
+      "corpus": "tests/parity/resolved_dynamic_typed_5_0_6_cases.json.gz",
+      "count": 288,
+      "receipt": "docs/parity/resolved_dynamic_typed_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_query_schema_5_0_6.py",
+      "observer": "tests/parity/resolved_query_schema_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_query_schema_inputs_5_0_6.py",
+      "input_function": "dynamic_inputs",
+      "marker": "__TEAQL_QUERY_SCHEMA_INPUTS__",
+      "output_prefix": "TEAQL_QUERY_SCHEMA_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_query_schema_observer::replay_result_schema_and_cache_paths",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b",
+      "native_target": "teaql_entity_query_probe",
+      "native_test": "resolved_dynamic_typed_rust_parity",
+      "renderer": "inline",
+      "suite": "dynamic",
+      "render_inputs": [
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs",
+        "tests/parity/resolved_query_schema_source_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_query_schema_5_0_6.py": {
+          "version": "archived",
+          "sha256": "2341e62026d54c7090c86db28a7b0869aeb27016d88c8cccc96767bc9290d245"
+        },
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs": {
+          "version": "archived",
+          "sha256": "0704fe34f41d60290edc56c9b2b29d3bf90f3b1213be4a1420d0067dcb452476"
+        },
+        "tests/parity/resolved_query_schema_inputs_5_0_6.py": {
+          "version": "archived",
+          "sha256": "8bea6f32b5f82420d671d725d6b639d53b024e5bcbd6ce69fb2340fb3e348179"
+        },
+        "tests/parity/resolved_query_schema_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs": {
+          "version": "current",
+          "sha256": "e744dc05562c02b7dee81469b8d5d1c3fb9984aa8821ea7039d51f3b82008153"
+        }
+      },
+      "input_files": {},
+      "compile_inputs": {}
+    },
+    {
+      "name": "resolved_dynamic_guard",
+      "corpus": "tests/parity/resolved_dynamic_guard_5_0_6_cases.json.gz",
+      "count": 72,
+      "receipt": "docs/parity/resolved_dynamic_guard_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_query_schema_5_0_6.py",
+      "observer": "tests/parity/resolved_query_schema_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_query_schema_inputs_5_0_6.py",
+      "input_function": "dynamic_guard_inputs",
+      "marker": "__TEAQL_QUERY_SCHEMA_INPUTS__",
+      "output_prefix": "TEAQL_QUERY_SCHEMA_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_query_schema_observer::replay_result_schema_and_cache_paths",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b",
+      "native_target": "teaql_entity_query_probe",
+      "native_test": "resolved_dynamic_guard_rust_parity",
+      "renderer": "inline",
+      "suite": "dynamic_guard",
+      "render_inputs": [
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs",
+        "tests/parity/resolved_query_schema_source_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_query_schema_5_0_6.py": {
+          "version": "archived",
+          "sha256": "8f636b218a2e86dd3d65da74a9ab70d11f79dde3799a4f0fffe63e139b67173d"
+        },
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs": {
+          "version": "archived",
+          "sha256": "b8c0d04dcad9e49f1cc8001efd47c7bbd13c67985827ea945c75414d428d948c"
+        },
+        "tests/parity/resolved_query_schema_inputs_5_0_6.py": {
+          "version": "archived",
+          "sha256": "54a3cac9255ad2bbf852481f870d2af833ac931c1ed0478fb35f4a741782f962"
+        },
+        "tests/parity/resolved_query_schema_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs": {
+          "version": "current",
+          "sha256": "e744dc05562c02b7dee81469b8d5d1c3fb9984aa8821ea7039d51f3b82008153"
+        }
+      },
+      "input_files": {},
+      "compile_inputs": {}
+    },
+    {
+      "name": "resolved_dynamic_loaded",
+      "corpus": "tests/parity/resolved_dynamic_loaded_5_0_6_cases.json.gz",
+      "count": 288,
+      "receipt": "docs/parity/resolved_dynamic_loaded_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_query_schema_5_0_6.py",
+      "observer": "tests/parity/resolved_query_schema_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_query_schema_inputs_5_0_6.py",
+      "input_function": "dynamic_loaded_inputs",
+      "marker": "__TEAQL_QUERY_SCHEMA_INPUTS__",
+      "output_prefix": "TEAQL_QUERY_SCHEMA_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_query_schema_observer::replay_result_schema_and_cache_paths",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b",
+      "native_target": "teaql_entity_query_probe",
+      "native_test": "resolved_dynamic_loaded_rust_parity",
+      "renderer": "inline",
+      "suite": "dynamic_loaded",
+      "render_inputs": [
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs",
+        "tests/parity/resolved_query_schema_source_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_query_schema_5_0_6.py": {
+          "version": "archived",
+          "sha256": "419248111d4c0e2ed2646b5828491454e83931d8356111053cdd733aeeb3122c"
+        },
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs": {
+          "version": "archived",
+          "sha256": "1675b1f93f8ebcd9f0c8efb759fd7d298d15f12f1576c4d2d836faedf31112e5"
+        },
+        "tests/parity/resolved_query_schema_inputs_5_0_6.py": {
+          "version": "archived",
+          "sha256": "e0e1c96f1618340228d70c499fc8ccf4ec2770406fdc8b76df1ee60a46978b32"
+        },
+        "tests/parity/resolved_query_schema_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs": {
+          "version": "current",
+          "sha256": "e744dc05562c02b7dee81469b8d5d1c3fb9984aa8821ea7039d51f3b82008153"
+        }
+      },
+      "input_files": {},
+      "compile_inputs": {}
+    },
+    {
+      "name": "resolved_enhanced_typed",
+      "corpus": "tests/parity/resolved_enhanced_typed_5_0_6_cases.json.gz",
+      "count": 3456,
+      "receipt": "docs/parity/resolved_enhanced_typed_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_query_schema_5_0_6.py",
+      "observer": "tests/parity/resolved_query_schema_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_query_schema_inputs_5_0_6.py",
+      "input_function": "enhanced_inputs",
+      "marker": "__TEAQL_QUERY_SCHEMA_INPUTS__",
+      "output_prefix": "TEAQL_QUERY_SCHEMA_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_query_schema_observer::replay_result_schema_and_cache_paths",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b",
+      "native_target": "teaql_entity_query_probe",
+      "native_test": "resolved_enhanced_typed_rust_parity",
+      "renderer": "inline",
+      "suite": "enhanced",
+      "render_inputs": [
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs",
+        "tests/parity/resolved_query_schema_source_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_query_schema_5_0_6.py": {
+          "version": "current",
+          "sha256": "2094be7142fbb6fe1f85cca36e9d2463a713cf6ed959184160ecc0162819ad66"
+        },
+        "tests/parity/resolved_query_schema_helpers_5_0_6.rs": {
+          "version": "current",
+          "sha256": "08a745db2c7f1090098db178ef135268532e00e29d19fe0059b288d285655422"
+        },
+        "tests/parity/resolved_query_schema_inputs_5_0_6.py": {
+          "version": "current",
+          "sha256": "a2021a78eaf7ebb0df4ebcc3dae52487d0eeb98e6052ae533384b73002938849"
+        },
+        "tests/parity/resolved_query_schema_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "1b2d4888cd20ad31b26a43d9c8b0c9ba610ef142f2ae991bf5e72da2b528d86b"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs": {
+          "version": "current",
+          "sha256": "e744dc05562c02b7dee81469b8d5d1c3fb9984aa8821ea7039d51f3b82008153"
+        }
+      },
+      "input_files": {},
+      "compile_inputs": {}
+    },
+    {
+      "name": "resolved_stream_schema",
+      "corpus": "tests/parity/resolved_stream_schema_5_0_6_cases.json.gz",
+      "count": 769,
+      "receipt": "docs/parity/resolved_stream_schema_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_stream_schema_5_0_6.py",
+      "observer": "tests/parity/resolved_stream_schema_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_stream_schema_inputs_5_0_6.py",
+      "input_function": "inputs",
+      "marker": "__TEAQL_STREAM_INPUTS__",
+      "output_prefix": "TEAQL_STREAM_SCHEMA_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_stream_schema_observer::replay_readonly_cursor_boundaries",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "7ad1d73f5bc1e1121115ee121abd7d9c94be8ce426e72be03972bf132dc76e00",
+      "native_target": "teaql_entity_stream_probe",
+      "native_test": "resolved_stream_schema_rust_parity",
+      "renderer": "function",
+      "suite": null,
+      "render_inputs": [
+        "tests/parity/resolved_stream_schema_source_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_stream_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_stream_schema_5_0_6.py": {
+          "version": "current",
+          "sha256": "5a459fb8d46777561f931bb14b4e200d99d05d217a77a4c4ecbd3d94a34507bb"
+        },
+        "tests/parity/resolved_stream_schema_inputs_5_0_6.py": {
+          "version": "current",
+          "sha256": "49e4c60670e8dfd8182cd6be8aa43671b412c3d373161b9eb1d0ab8494a1386d"
+        },
+        "tests/parity/resolved_stream_schema_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "7ad1d73f5bc1e1121115ee121abd7d9c94be8ce426e72be03972bf132dc76e00"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/entity_stream_5_0_6.rs": {
+          "version": "current",
+          "sha256": "d122a77a1e0b6ab185448a15d60261a367dbede641fa87160d3d7b7ee74a100d"
+        }
+      },
+      "input_files": {
+        "tests/parity/entity_stream_5_0_6_cases.json.gz": "b51ada3573a57c8e02520ee352ad17e20bb18ae575c3688002a6b2004f49c5ca"
+      },
+      "compile_inputs": {}
+    },
+    {
+      "name": "resolved_mutation_execution",
+      "corpus": "tests/parity/resolved_mutation_execution_5_0_6_cases.json.gz",
+      "count": 3518,
+      "receipt": "docs/parity/resolved_mutation_execution_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_mutation_execution_5_0_6.py",
+      "observer": "tests/parity/resolved_mutation_execution_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_mutation_execution_inputs_5_0_6.py",
+      "input_function": "inputs",
+      "marker": "__TEAQL_RESOLVED_EXECUTION_INPUTS__",
+      "output_prefix": "TEAQL_RESOLVED_EXECUTION_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_mutation_execution_observer::replay_bound_mutations_and_events",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "32e8c274fb76cb652da68d845bf808138f29ba07f97e1b023d1ab15082585a58",
+      "native_target": "teaql_runtime_mutation_probe",
+      "native_test": "resolved_mutation_execution_rust_parity",
+      "renderer": "inline",
+      "suite": "execution",
+      "render_inputs": [
+        "tests/parity/build_runtime_mutation_oracle.py",
+        "tests/parity/resolved_mutation_execution_source_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/runtime_mutation_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_mutation_execution_5_0_6.py": {
+          "version": "archived",
+          "sha256": "0f306f03ee5890a742248fa89c67a09aff00d2f0312c96b9146f4dd14fa766a5"
+        },
+        "tests/parity/build_runtime_mutation_oracle.py": {
+          "version": "current",
+          "sha256": "71345603459de464d4570ab9a554667ef9f9a7203afa7f84b4dd9a15e5a8a030"
+        },
+        "tests/parity/resolved_mutation_execution_inputs_5_0_6.py": {
+          "version": "current",
+          "sha256": "867d67c29825227cf82e87c673a896f6a2f9c1ed652ff145d92b0812baabd3bd"
+        },
+        "tests/parity/resolved_mutation_execution_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "32e8c274fb76cb652da68d845bf808138f29ba07f97e1b023d1ab15082585a58"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/runtime_mutation_5_0_6.rs": {
+          "version": "current",
+          "sha256": "8c83a7f957c545b07f48b0e2fe148e4cc9a92552e06e79083b4ea5ff229bd379"
+        }
+      },
+      "input_files": {
+        "tests/parity/runtime_mutation_5_0_6_cases.json.gz": "1feda8a93af0c9e2ac2a72b089c57c28023f05e66c71176f632df5a36153c5ad"
+      },
+      "compile_inputs": {
+        "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f"
+      }
+    },
+    {
+      "name": "resolved_mutation_privacy",
+      "corpus": "tests/parity/resolved_mutation_privacy_5_0_6_cases.json.gz",
+      "count": 5486,
+      "receipt": "docs/parity/resolved_mutation_privacy_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_resolved_mutation_execution_5_0_6.py",
+      "observer": "tests/parity/resolved_mutation_execution_source_5_0_6.rs",
+      "input_generator": "tests/parity/resolved_mutation_privacy_inputs_5_0_6.py",
+      "input_function": "inputs",
+      "marker": "__TEAQL_RESOLVED_EXECUTION_INPUTS__",
+      "output_prefix": "TEAQL_RESOLVED_EXECUTION_JSON ",
+      "test_name": "data_service::resolved::cpp_resolved_mutation_execution_observer::replay_bound_mutations_and_events",
+      "observer_target": "src/data_service/resolved.rs",
+      "observer_version": "current",
+      "observer_snapshot_sha256": "32e8c274fb76cb652da68d845bf808138f29ba07f97e1b023d1ab15082585a58",
+      "native_target": "teaql_runtime_mutation_probe",
+      "native_test": "resolved_mutation_privacy_rust_parity",
+      "renderer": "inline",
+      "suite": "privacy",
+      "render_inputs": [
+        "tests/parity/build_runtime_mutation_oracle.py",
+        "tests/parity/resolved_mutation_execution_source_5_0_6.rs",
+        "tests/parity/resolved_mutation_privacy_observer_5_0_6.rs",
+        "tests/parity/rust_private_save_5_0_6/src/bin/runtime_mutation_5_0_6.rs"
+      ],
+      "asset_versions": {
+        "scripts/verify_resolved_mutation_execution_5_0_6.py": {
+          "version": "current",
+          "sha256": "bb8e5ceab21687c229e79d33e6d1e356c0ac7be4efdd2966e639573fbc74c078"
+        },
+        "tests/parity/build_runtime_mutation_oracle.py": {
+          "version": "current",
+          "sha256": "71345603459de464d4570ab9a554667ef9f9a7203afa7f84b4dd9a15e5a8a030"
+        },
+        "tests/parity/resolved_mutation_execution_source_5_0_6.rs": {
+          "version": "current",
+          "sha256": "32e8c274fb76cb652da68d845bf808138f29ba07f97e1b023d1ab15082585a58"
+        },
+        "tests/parity/resolved_mutation_privacy_inputs_5_0_6.py": {
+          "version": "archived",
+          "sha256": "713c9bdd849f8fd4e349dbe6b1a5e44adce5c59d7110235b0de41d74e78a99ad"
+        },
+        "tests/parity/resolved_mutation_privacy_observer_5_0_6.rs": {
+          "version": "current",
+          "sha256": "15ec5564d4577ee3d11263a7f9448f60533c57bfedc1444a1396991fa447aedb"
+        },
+        "tests/parity/rust_private_save_5_0_6/src/bin/runtime_mutation_5_0_6.rs": {
+          "version": "current",
+          "sha256": "8c83a7f957c545b07f48b0e2fe148e4cc9a92552e06e79083b4ea5ff229bd379"
+        }
+      },
+      "input_files": {
+        "tests/parity/resolved_mutation_execution_5_0_6_cases.json.gz": "dc1172d15f38b699c8c396a09c5359dd53049eb1b59f90eb00d30ff133b8c2db"
+      },
+      "compile_inputs": {
+        "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f"
+      }
+    }
+  ]
+}

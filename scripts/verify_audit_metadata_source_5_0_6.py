@@ -15,24 +15,48 @@ import re
 import shutil
 import subprocess
 import tempfile
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tests/parity'))
+from compare_values import json_lines, same
 PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
 REFERENCE = ROOT / ".reference/teaql-rs"
 PROJECT = ROOT / "tests/parity/rust_container_metadata_reference_5_0_6"
 PACKAGE = "com/skynet/codegenerator/cpp"
 CORPORA = (
+    (PRODUCER / "generator/src/test/resources/cpp_delegated_grammar_metadata_5_0_6.json.gz", 1043),
+    (PRODUCER / "generator/src/test/resources/cpp_nested_signature_metadata_5_0_6.json.gz", 4973),
+    (PRODUCER / "generator/src/test/resources/cpp_visibility_type_metadata_5_0_6.json.gz", 6920),
+    (PRODUCER / "generator/src/test/resources/cpp_nested_metadata_path_5_0_6.json.gz", 349),
     (PRODUCER / "generator/src/test/resources/cpp_audit_metadata_5_0_6.json.gz", 2665),
     (PRODUCER / "generator/src/test/resources/cpp_expression_metadata_5_0_6.json.gz", 2016),
     (PRODUCER / "generator/src/test/resources/cpp_expression_syntax_metadata_5_0_6.json.gz", 3571),
+    (PRODUCER / "generator/src/test/resources/cpp_expression_continuation_metadata_5_0_6.json.gz", 160),
+    (PRODUCER / "generator/src/test/resources/cpp_expression_children_metadata_5_0_6.json.gz", 330),
+    (PRODUCER / "generator/src/test/resources/cpp_type_pattern_combined_metadata_5_0_6.json.gz", 162),
+    (PRODUCER / "generator/src/test/resources/cpp_cross_composition_metadata_5_0_6.json.gz", 162),
+    (PRODUCER / "generator/src/test/resources/cpp_grammar_branch_metadata_5_0_6.json.gz", 342),
+    (PRODUCER / "generator/src/test/resources/cpp_type_child_metadata_5_0_6.json.gz", 900),
+    (PRODUCER / "generator/src/test/resources/cpp_path_generic_metadata_5_0_6.json.gz", 1338),
+    (PRODUCER / "generator/src/test/resources/cpp_pattern_child_metadata_5_0_6.json.gz", 4640),
+    (PRODUCER / "generator/src/test/resources/cpp_operator_metadata_5_0_6.json.gz", 11522),
+    (PRODUCER / "generator/src/test/resources/cpp_block_child_metadata_5_0_6.json.gz", 6544),
+    (PRODUCER / "generator/src/test/resources/cpp_statement_metadata_5_0_6.json.gz", 8120),
+    (PRODUCER / "generator/src/test/resources/cpp_item_metadata_5_0_6.json.gz", 8776),
+    (PRODUCER / "generator/src/test/resources/cpp_nested_item_checkpoint_metadata_5_0_6.json.gz", 2143),
+    (PRODUCER / "generator/src/test/resources/cpp_generic_child_metadata_5_0_6.json.gz", 7607),
+    (PRODUCER / "generator/src/test/resources/cpp_lexical_child_metadata_5_0_6.json.gz", 5877),
 )
 TESTS = [
     "cpp/CppRustLiteralMetadataTest.java",
     "cpp/CppAuditMetadataSequenceTest.java",
     "cpp/CppContainerMetadataTest.java",
     "cpp/CppFieldLayoutMetadataTest.java",
+    "cpp/CppPropertyShapeMetadataTest.java",
     "cpp/CppJsonInputMetadataTest.java",
     "cpp/CppAuditMetadataCorpusTest.java",
+    "cpp/CppModelMetadataSourceTest.java",
     "CppGenerationTest.java",
     "CppIdentityGenerationTest.java",
 ]
@@ -55,10 +79,24 @@ def identities(path):
     }
 
 
+def candidate_overlays(sources, parser=None, additional=()):
+    names = {path.name for path in sources}
+    overlays = {}
+    for path in [parser, *additional]:
+        if path is None:
+            continue
+        if path.name not in names or not path.is_file():
+            raise ValueError(f"Candidate must replace an existing Java source: {path}")
+        if path.name in overlays:
+            raise ValueError(f"Duplicate candidate source: {path.name}")
+        overlays[path.name] = path.resolve()
+    return overlays
+
+
 def same_contract(expected, actual):
-    if expected.get("parsed"):
-        return expected == actual
-    return actual.get("parsed") is False
+    if expected.get("parsed") is True:
+        return same(expected, actual)
+    return expected.get("parsed") is False and actual.get("parsed") is False
 
 
 def main():
@@ -67,6 +105,8 @@ def main():
                         help="Fresh compressed receipt; never replace a historical run")
     parser.add_argument("--candidate-parser", type=Path,
                         help="Compile an owned parser overlay instead of the installed source")
+    parser.add_argument("--candidate-source", type=Path, action="append", default=[],
+                        help="Additional owned Java source overlay; repeat for shared helpers")
     args = parser.parse_args()
     if args.record.exists() or args.record.suffix != ".gz":
         parser.error("Use a fresh .gz evidence path")
@@ -85,14 +125,21 @@ def main():
         corpus_records.append(dict(path=str(path), sha256=digest(path), cases=count,
                                    source_receipt=corpus["source_receipt"]))
     sources = sorted((PRODUCER / "generator/src/main/java" / PACKAGE).glob("*.java"))
+    try:
+        overlays = candidate_overlays(sources, args.candidate_parser, args.candidate_source)
+    except ValueError as error:
+        parser.error(str(error))
     test_root = PRODUCER / "generator/src/test/java/com/skynet/codegenerator"
     tests = [test_root / name for name in TESTS]
     inputs = [*sources, *tests, *corpus_inputs, Path(__file__).resolve(),
+              ROOT / "tests/parity/compare_values.py",
               ROOT / "tests/generator/ContainerMetadataProbe.java",
               PROJECT / "Cargo.toml", PROJECT / "Cargo.lock", PROJECT / "main.rs",
               REFERENCE / "Cargo.lock", REFERENCE / "teaql-macros/src/attr.rs"]
-    if args.candidate_parser:
-        inputs.append(args.candidate_parser.resolve())
+    inputs.append(PRODUCER / "generator/src/test/resources/cpp_model_metadata_source_5_0_6.json.gz")
+    inputs.append(PRODUCER / "generator/src/test/resources/cpp_column_model_source_5_0_6.json.gz")
+    inputs.append(PRODUCER / "generator/src/test/resources/cpp_property_shape_source_5_0_6.json.gz")
+    inputs.extend(overlays.values())
     before = {str(path): digest(path) for path in inputs}
     record = {
         "scope": "Fresh complete original container parser and current Java sources, "
@@ -104,6 +151,7 @@ def main():
         "generator_commit": generator["generator_baseline_commit"],
         "corpora": corpus_records,
         "parser_overlay": str(args.candidate_parser) if args.candidate_parser else None,
+        "candidate_overlays": {name: str(path) for name, path in overlays.items()},
         "input_hashes_before": before,
         "free_bytes_before": shutil.disk_usage(ROOT).free,
         "steps": [],
@@ -155,13 +203,13 @@ def main():
             observed = run("original", [str(owned / "target/debug/teaql_container_metadata_reference_506")],
                            input_text=encoded)
             observed.check_returncode()
-            original = [json.loads(line) for line in observed.stdout.splitlines()]
+            original = json_lines(observed.stdout)
             assert len(original) == len(cases)
             record["original_corpus_differences"] = [
                 {"name": case["name"], "input": case["input"],
                  "retained": case["expected"], "current": value}
                 for case, value in zip(cases, original)
-                if case["expected"] != value
+                if not same(case["expected"], value)
             ]
             assert not record["original_corpus_differences"], "Original source outcomes changed"
 
@@ -180,8 +228,7 @@ def main():
             compiled_sources = []
             for source in sources:
                 target = copied / source.name
-                selected = (args.candidate_parser if args.candidate_parser
-                            and source.name == "CppRustLiteralMetadata.java" else source)
+                selected = overlays.get(source.name, source)
                 target.write_bytes(selected.read_bytes())
                 compiled_sources.append(str(target))
             compiled = run("java_compile", ["javac", "-cp", cp, "-d", str(classes),
@@ -193,7 +240,7 @@ def main():
             java = run("java_metadata", ["java", "-cp", cp,
                        "com.skynet.codegenerator.cpp.ContainerMetadataProbe"], input_text=encoded)
             java.check_returncode()
-            actual = [json.loads(line) for line in java.stdout.splitlines()]
+            actual = json_lines(java.stdout)
             assert len(actual) == len(original)
             record["cases"] = [
                 {"name": case["name"], "input": case["input"],

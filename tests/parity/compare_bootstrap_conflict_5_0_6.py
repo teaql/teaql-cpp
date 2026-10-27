@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Compare actual second-connection writes between bootstrap planning and persistence."""
+from compare_values import diagnostic_path
+from expression_cli_cases import require_cases
 import argparse
 import gzip
 import hashlib
@@ -53,6 +55,7 @@ def main():
     else:
         with gzip.open(CORPUS, 'rt') as file:
             corpus = json.load(file)
+        require_cases(corpus, len(inputs), inputs)
         if corpus['baseline'] != lock['commit'] or not same(producer, corpus['original_provenance']):
             raise RuntimeError('Bootstrap conflict corpus source changed')
         if not same(inputs, [c['input'] for c in corpus['cases']]):
@@ -63,7 +66,7 @@ def main():
     actual = observe(args.cpp, inputs)
     differences = [dict(index=i,input=c,rust=a,cpp=b) for i,(c,a,b) in enumerate(zip(inputs,expected,actual)) if not same(a,b)]
     if differences:
-        path = ROOT / 'docs/parity/bootstrap_conflict_5_0_6_initial_gaps.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/bootstrap_conflict_5_0_6_initial_gaps.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress((json.dumps(dict(count=len(differences),differences=differences),indent=2)+'\n').encode(),mtime=0))
         print(json.dumps(differences[0],indent=2))

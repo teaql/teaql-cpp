@@ -4,9 +4,20 @@ import argparse
 import json
 import math
 import gzip
+import os
 import subprocess
 import shutil
 from pathlib import Path
+
+
+def diagnostic_path(path):
+    """Keep intentional comparator-control diagnostics in their owned directory."""
+    directory = os.environ.get('TEAQL_PARITY_DIAGNOSTIC_DIR')
+    if directory is None:
+        return Path(path)
+    destination = Path(directory)
+    destination.mkdir(parents=True, exist_ok=True)
+    return destination / Path(path).name
 
 
 def same(expected, actual):
@@ -22,6 +33,14 @@ def same(expected, actual):
     return expected == actual
 
 
+def json_lines(output):
+    """Decode LF-framed records; an interior blank is not a missing record."""
+    lines = output.split('\n')
+    if lines and lines[-1] == '':
+        lines.pop()
+    return [json.loads(line) for line in lines]
+
+
 def observe(executable, inputs, emulator=(), arguments=()):
     if not Path(executable).is_file() and not shutil.which(executable):
         raise FileNotFoundError(f'Probe executable is missing; build its target first: {executable}')
@@ -29,10 +48,7 @@ def observe(executable, inputs, emulator=(), arguments=()):
                             text=True, capture_output=True, check=True)
     # JSON Lines uses LF framing. Python splitlines() also splits literal U+0085,
     # U+2028 and U+2029 inside valid JSON strings emitted by the Rust serializer.
-    lines = result.stdout.split("\n")
-    if lines and lines[-1] == "":
-        lines.pop()
-    outputs = [json.loads(line) for line in lines]
+    outputs = json_lines(result.stdout)
     if len(outputs) != len(inputs):
         raise RuntimeError(f"{executable}: incomplete output: {len(outputs)} / {len(inputs)}")
     return outputs
@@ -56,6 +72,8 @@ def main(corpus_name="value_5_0_6_cases.json.gz", label="Value"):
     if corpus["baseline"] != lock["commit"]:
         raise RuntimeError(f"{label} observations belong to a different upstream baseline")
     cases = corpus["cases"]
+    if type(cases) is not list or not cases:
+        raise RuntimeError(f"{label} corpus cases must be a nonempty list")
     inputs = [c["input"] for c in cases]
     expected = [c["expected"] for c in cases]
     if args.rust:

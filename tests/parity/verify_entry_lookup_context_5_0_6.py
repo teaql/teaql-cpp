@@ -2,7 +2,7 @@
 """Verify every unpolled generated lookup-error operation cancels or closes with its Context."""
 import argparse
 import itertools
-from compare_values import observe
+from compare_values import observe, same
 
 
 def main():
@@ -13,7 +13,8 @@ def main():
              for mode, cancel in itertools.product(
                  ['list', 'rows', 'first', 'one', 'count', 'exists', 'page', 'stream'],
                  [False, True])]
-    assert observe(args.cpp, cases) == [True] * 16
+    if not same(observe(args.cpp, cases), [True] * 16):
+        raise RuntimeError('Generated lookup failures did not release every Context')
     print('Verified 16 actual Context deletions for all eight unpolled/cancelled lookup failures')
 
 

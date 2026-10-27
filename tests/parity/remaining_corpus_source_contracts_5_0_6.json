@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "notice": "Fresh source replay for separately compiled crates and file observers; source inputs and expected values remain unchanged",
+  "contracts": [
+    {
+      "name": "generated_support_source",
+      "count": 822,
+      "corpus": "tests/parity/generated_support_source_5_0_6_cases.json.gz",
+      "input_builder": {
+        "path": "tests/parity/generated_support_source_inputs_5_0_6.py",
+        "kind": "function",
+        "name": "cases",
+        "sha256": "d0c88fccbbf3ce9a2b315721ba528c67e8f9cf2e2e662f09bc0decd4f07a78d7"
+      },
+      "source_kind": "view_support",
+      "source": "tests/parity/generated_support_source_5_0_6.rs",
+      "source_sha256": "572ed81aeb671cee568ffbd04ad97bdd6d60a4b337ad957751ea9118e62e4a02",
+      "project": null,
+      "reference_target": null,
+      "native_target": "teaql_generated_support_source_probe",
+      "native_test": "generated_support_source_rust_parity"
+    },
+    {
+      "name": "inmemory_source",
+      "count": 2200,
+      "corpus": "tests/parity/inmemory_source_5_0_6_cases.json.gz",
+      "input_builder": {
+        "path": "tests/parity/inmemory_source_inputs_5_0_6.py",
+        "kind": "function",
+        "name": "cases",
+        "sha256": "0f268c0ca24c412062bcb4e2df1e2ddf08280c96ebae1e0d01c6dec7a7097e07"
+      },
+      "source_kind": "crate",
+      "source": "tests/parity/inmemory_source_5_0_6.rs",
+      "source_sha256": "ab7b5ebb49d7493f8cf59396aefe23b9414da594408ff5abb86d0cbcf3f17550",
+      "project": "tests/parity/rust_inmemory_source_5_0_6/Cargo.toml",
+      "reference_target": "inmemory_source_506",
+      "native_target": "teaql_inmemory_source_probe",
+      "native_test": "inmemory_source_rust_parity"
+    },
+    {
+      "name": "mutation_intent_privacy",
+      "count": 18,
+      "corpus": "tests/parity/mutation_intent_privacy_5_0_6_cases.json.gz",
+      "input_builder": {
+        "path": "scripts/verify_mutation_intent_privacy_5_0_6.py",
+        "kind": "expression",
+        "name": "rows",
+        "sha256": "bf0d8ba275b6d50bea5163e31cb4afd95fdfec91755def7a3fb1ca816b2ed7f1"
+      },
+      "source_kind": "view_privacy",
+      "source": "tests/parity/mutation_intent_privacy_source_5_0_6.rs",
+      "source_sha256": "067baad4f68b497f4fb419ce68db3592d6a830e77e427f8e1997f21cd52f42a7",
+      "project": null,
+      "reference_target": null,
+      "native_target": "teaql_mutation_intent_privacy_probe",
+      "native_test": "mutation_intent_privacy_rust_parity"
+    },
+    {
+      "name": "row_constructor",
+      "count": 32,
+      "corpus": "tests/parity/row_constructor_5_0_6_cases.json.gz",
+      "input_builder": {
+        "path": "scripts/verify_row_enhancement_5_0_6.py",
+        "kind": "expression",
+        "name": "constructor_inputs",
+        "sha256": "5177d67ddf229d63f7173f183835f25c46cbdcb3dd2c660cd0394fe285ccbade"
+      },
+      "source_kind": "example",
+      "source": "tests/parity/rust_query_full_state_5_0_6/examples/row_constructor.rs",
+      "source_sha256": "4f1f66ee56aabcb2fa063139abe17bef5237d5de98f61a3952adab56d5d95bc4",
+      "project": "tests/parity/rust_query_full_state_5_0_6/Cargo.toml",
+      "reference_target": "row_constructor",
+      "native_target": "teaql_row_enhancement_probe",
+      "native_test": "row_constructor_rust_parity"
+    },
+    {
+      "name": "row_enhancement",
+      "count": 1373,
+      "corpus": "tests/parity/row_enhancement_5_0_6_cases.json.gz",
+      "input_builder": {
+        "path": "tests/parity/row_enhancement_inputs_5_0_6.py",
+        "kind": "function",
+        "name": "cases",
+        "sha256": "9840597e88dd81cc0e9ed9c91eeec6d9c89ddc9eb8831bc1ac1d1c8d5e616b25"
+      },
+      "source_kind": "example",
+      "source": "tests/parity/rust_query_full_state_5_0_6/examples/row_enhancement.rs",
+      "source_sha256": "0c91af05f2ca416b5a15adbcc911ec72c699753ae8ae2ad318ba5d5b1c3d1cda",
+      "project": "tests/parity/rust_query_full_state_5_0_6/Cargo.toml",
+      "reference_target": "row_enhancement",
+      "native_target": "teaql_row_enhancement_probe",
+      "native_test": "row_enhancement_rust_parity"
+    },
+    {
+      "name": "row_read_sidecar",
+      "count": 972,
+      "corpus": "tests/parity/row_read_sidecar_5_0_6_cases.json.gz",
+      "input_builder": {
+        "path": "scripts/verify_row_read_sidecar_5_0_6.py",
+        "kind": "expression",
+        "name": "inputs",
+        "sha256": "3eed99cdef8e3fb40b48a00efdd8a1946bf2f2470956806d4a2fda2084668ba0"
+      },
+      "source_kind": "example",
+      "source": "tests/parity/rust_query_full_state_5_0_6/examples/row_read_sidecar.rs",
+      "source_sha256": "92e40ef0ce1a2851af87c6ed5a4981c57a0797539f17628341a19c77cf711784",
+      "project": "tests/parity/rust_query_full_state_5_0_6/Cargo.toml",
+      "reference_target": "row_read_sidecar",
+      "native_target": "teaql_row_read_sidecar_probe",
+      "native_test": "row_read_sidecar_rust_parity"
+    },
+    {
+      "name": "schema_dynamic_source",
+      "count": 864,
+      "corpus": "tests/parity/schema_dynamic_source_5_0_6_cases.json.gz",
+      "input_builder": {
+        "path": "tests/parity/schema_dynamic_source_inputs_5_0_6.py",
+        "kind": "function",
+        "name": "cases",
+        "sha256": "5c15f3e820a9f805fbbd02aeb164bb7564d5cfb67d8049e1ba71aa74c8be05bc"
+      },
+      "source_kind": "crate",
+      "source": "tests/parity/schema_dynamic_source_5_0_6.rs",
+      "source_sha256": "419ceb9df90b79d4c860b43faa402e063daff44a0aab6793e72598fc7b6f8d4a",
+      "project": "tests/parity/rust_schema_dynamic_source_5_0_6/Cargo.toml",
+      "reference_target": "schema_dynamic_source_506",
+      "native_target": "teaql_schema_dynamic_source_probe",
+      "native_test": "schema_dynamic_source_rust_parity"
+    }
+  ]
+}

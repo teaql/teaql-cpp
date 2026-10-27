@@ -1,5 +1,13 @@
 # G02/G03 Checker and Behavior acceptance: Rust 5.0.6
 
+Current requalification: [generated Fix identity](generated_identity_save_5_0_6.md)
+reopened G02 after48 provenance differences in360 actual generated Save calls.
+The four canonical model arguments are now corrected, with temporary and
+installed360/360 comparisons, source-body review, current Java87/native9/module2,
+strict output controls and bounded80-SDK reproduction. G02 returns to qualified;
+the acceptance below retains its original checkpoint scope. G13/G14/G17 and
+P0-P7 remain open.
+
 Status: G02/G03 qualified with the documented C++ language/ownership adaptations.
 This review follows all ten obligations in
 [checker_behavior_requirements_5_0_6.md](checker_behavior_requirements_5_0_6.md).

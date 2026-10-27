@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "notice": "Exact archived original-execution bindings and current native comparisons; no new Rust execution is implied by reuse",
+  "contracts": [
+    {
+      "name": "context_helpers",
+      "corpus": "tests/parity/context_helpers_5_0_6_cases.json.gz",
+      "count": 1128,
+      "receipt": "docs/parity/context_helpers_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_context_helpers_5_0_6.py",
+      "observer": "tests/parity/context_helpers_source_5_0_6.rs",
+      "input_generator": "tests/parity/context_helpers_inputs_5_0_6.py",
+      "marker": "__TEAQL_CONTEXT_HELPERS_INPUTS__",
+      "output_prefix": "TEAQL_CONTEXT_HELPERS_JSON ",
+      "test_name": "data_service::context::cpp_context_helpers_observer::replay_comment_folding_and_fn_once_names",
+      "native_target": "teaql_context_helpers_probe",
+      "native_test": "context_helpers_rust_parity"
+    },
+    {
+      "name": "context_factory",
+      "corpus": "tests/parity/context_factory_5_0_6_cases.json.gz",
+      "count": 96,
+      "receipt": "docs/parity/context_factory_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_context_factory_5_0_6.py",
+      "observer": "tests/parity/context_factory_source_5_0_6.rs",
+      "input_generator": "tests/parity/context_factory_inputs_5_0_6.py",
+      "marker": "__TEAQL_CONTEXT_FACTORY_INPUTS__",
+      "output_prefix": "TEAQL_CONTEXT_FACTORY_JSON ",
+      "test_name": "data_service::context::cpp_context_factory_observer::replay_factory_error_priority_defaults_and_registration",
+      "native_target": "teaql_context_factory_probe",
+      "native_test": "context_factory_rust_parity"
+    },
+    {
+      "name": "context_mutation_cache",
+      "corpus": "tests/parity/context_mutation_cache_5_0_6_cases.json.gz",
+      "count": 4608,
+      "receipt": "docs/parity/context_mutation_cache_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_context_mutation_cache_5_0_6.py",
+      "observer": "tests/parity/context_mutation_cache_source_5_0_6.rs",
+      "input_generator": "tests/parity/context_mutation_cache_inputs_5_0_6.py",
+      "marker": "__TEAQL_CONTEXT_CACHE_INPUTS__",
+      "output_prefix": "TEAQL_CONTEXT_CACHE_JSON ",
+      "test_name": "data_service::context::cpp_context_mutation_cache_observer::replay_success_error_and_cache_boundaries",
+      "native_target": "teaql_context_mutation_cache_probe",
+      "native_test": "context_mutation_cache_rust_parity"
+    },
+    {
+      "name": "context_privacy_preparation",
+      "corpus": "tests/parity/context_privacy_preparation_5_0_6_cases.json.gz",
+      "count": 24,
+      "receipt": "docs/parity/context_privacy_preparation_installed_5_0_6.json.gz",
+      "producer": "scripts/verify_context_privacy_preparation_5_0_6.py",
+      "observer": "tests/parity/context_privacy_preparation_source_5_0_6.rs",
+      "input_generator": "tests/parity/context_privacy_preparation_inputs_5_0_6.py",
+      "marker": "__TEAQL_PRIVACY_PREPARATION_INPUTS__",
+      "output_prefix": "TEAQL_PRIVACY_PREPARATION_JSON ",
+      "test_name": "data_service::context::cpp_context_privacy_preparation_observer::prepare_forward_clear_and_execute_without_inventing_intent",
+      "native_target": "teaql_context_privacy_preparation_probe",
+      "native_test": "context_privacy_preparation_rust_parity"
+    }
+  ]
+}

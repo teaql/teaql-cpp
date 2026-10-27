@@ -114,7 +114,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            School::ENTITY_NAME,
+            "School",
             "platform",
             "Platform",
             entity.platformId(),
@@ -194,7 +194,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Academy::ENTITY_NAME,
+            "Academy",
             "platform",
             "Platform",
             entity.platformId(),
@@ -277,7 +277,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            ResearchAcademy::ENTITY_NAME,
+            "ResearchAcademy",
             "platform",
             "Platform",
             entity.platformId(),

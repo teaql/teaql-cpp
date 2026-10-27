@@ -115,7 +115,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            JsonGraphRow::ENTITY_NAME,
+            "JsonGraphRow",
             "platform",
             "Platform",
             entity.platformId(),
@@ -200,7 +200,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            SerializationParent::ENTITY_NAME,
+            "SerializationParent",
             "platform",
             "Platform",
             entity.platformId(),
@@ -285,7 +285,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            SerializationMember::ENTITY_NAME,
+            "SerializationMember",
             "platform",
             "Platform",
             entity.platformId(),

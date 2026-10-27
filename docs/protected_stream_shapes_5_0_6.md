@@ -9,6 +9,9 @@ Complete G09, G13-G17 and P0-P7 acceptance retain their independent requirements
 
 The earlier startup disposition below is historical. The installed deferred
 generated-stream runtime now produces **13,104/13,104 raw original results**.
+The [current CLI source binding](stream_shapes_cli_source_binding_5_0_6.md)
+attaches the complete original corpus and strict native readback to the actual
+registered test, with 15 negative controls and four selected checks passing.
 The [current strict-source replay](parity/stream_shapes_strict_source_current_native_5_0_6.json.gz)
 also passes every existing connection-release, reuse, Policy, logging and
 constructor-failure boundary assertion. No expected source observation or

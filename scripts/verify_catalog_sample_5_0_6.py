@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tests/parity'))
 from compare_values import same
 from verify_constant_closure_5_0_6 import registry_identities
+from verify_legacy_observation_identity_5_0_6 import verify_record
 
 OUTPUT = ROOT / 'tests/parity/catalog_sample_5_0_6_cases.json.gz'
 FOCUSED_OUTPUT = ROOT / 'tests/parity/catalog_sample_5_0_6_focused_cases.json.gz'
@@ -114,6 +115,7 @@ def main():
             stderr=stderr), ensure_ascii=False).encode(), mtime=0))
         print(f'Recorded {len(cases)} complete original constant/candidate sample scenarios')
         return
+    verify_record(OUTPUT)
     record = json.loads(gzip.decompress(OUTPUT.read_bytes()))
     assert record['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())
     assert record['source_inputs'] == source_inputs
@@ -123,6 +125,7 @@ def main():
     selected = [cases[index] for index in indexes]
     expected = [record['cases'][index]['expected'] for index in indexes]
     if args.cases:
+        verify_record(FOCUSED_OUTPUT)
         focused = json.loads(gzip.decompress(FOCUSED_OUTPUT.read_bytes()))
         assert focused['source_inputs'] == source_inputs
         assert focused['selection_sha256'] == digest(SELECTION)

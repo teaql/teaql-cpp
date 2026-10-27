@@ -1,0 +1,73 @@
+{
+  "schema": 3,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "project": "tests/parity/rust_sqlite_schema_driver_source_5_0_6/Cargo.toml",
+  "package": "teaql_sqlite_schema_driver_source_506",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-data-service",
+    "teaql-macros",
+    "teaql-provider-sqlite",
+    "teaql-runtime",
+    "teaql-sql"
+  ],
+  "archive_manifests": [
+    "teaql-core/Cargo.toml",
+    "teaql-data-service/Cargo.toml",
+    "teaql-macros/Cargo.toml",
+    "teaql-provider-sqlite/Cargo.toml",
+    "teaql-runtime/Cargo.toml",
+    "teaql-sql/Cargo.toml"
+  ],
+  "generated_fixtures": [],
+  "support_files": [
+    "scripts/sqlite_schema_driver_inputs_5_0_6.py",
+    "tests/parity/observe_sqlite_schema.py",
+    "tests/parity/compare_values.py",
+    "tests/parity/rust_values/src/fixture_value.rs",
+    "tests/parity/rust_values/src/fixture_sql.rs",
+    "tests/parity/sqlite_schema_cases.json",
+    "tests/parity/sqlite_schema_5_0_6_cases.json.gz"
+  ],
+  "support_file_hashes": {
+    "scripts/sqlite_schema_driver_inputs_5_0_6.py": "759419273e82fd713e4b14262851c9a5588e955310e95a37e7b7968624dd0b46",
+    "tests/parity/observe_sqlite_schema.py": "9ca499917f04311e409cc8b20a9e8c9cd37c99feb6e73c52d53138904c02ecf4",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_values/src/fixture_sql.rs": "3f9b4a0b35cee94de9ccb283f0cf35d64e6196b112791a9017ea42f836215abf",
+    "tests/parity/sqlite_schema_cases.json": "9b335843440c23ced7a018a99b5ba2317f0204b89f18a3dbbb43fcebced519ab",
+    "tests/parity/sqlite_schema_5_0_6_cases.json.gz": "58a2f0f42b55d828ab519b2d4abc9da56a8c91f22b111ae8f63aee4e806e6b0f"
+  },
+  "input_helpers": {},
+  "contracts": [
+    {
+      "name": "sqlite_schema",
+      "native_test": "provider_sqlite_schema_rust_parity",
+      "count": 735,
+      "corpus": "tests/parity/sqlite_schema_5_0_6_cases.json.gz",
+      "corpus_sha256": "58a2f0f42b55d828ab519b2d4abc9da56a8c91f22b111ae8f63aee4e806e6b0f",
+      "driver": "tests/parity/rust_values/src/bin/sqlite_schema_oracle.rs",
+      "driver_sha256": "e1968887167fb60ba51cd5192d9f4d59b50fc1cb76885c51ded3a42f14469074",
+      "target": "sqlite_schema_oracle",
+      "native_target": "teaql_sqlite_schema_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_schema_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_schema.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_schema_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_schema_driver_inputs_5_0_6.py",
+        "sha256": "759419273e82fd713e4b14262851c9a5588e955310e95a37e7b7968624dd0b46",
+        "kind": "function",
+        "name": "schema_inputs"
+      },
+      "input_recipe_sha256": "759419273e82fd713e4b14262851c9a5588e955310e95a37e7b7968624dd0b46"
+    }
+  ]
+}

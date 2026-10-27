@@ -29,6 +29,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -186,6 +187,7 @@ struct JsonGraphRow : generated_detail::Model<JsonGraphRow> {
     using Base = generated_detail::Model<JsonGraphRow>;
     friend class JsonGraphRowChecker;
     static constexpr std::string_view ENTITY_NAME = "JsonGraphRow";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "json_graph_row";
     friend struct generated_detail::JsonGraphRowSampleRecipe;
     friend struct generated_detail::JsonGraphRowBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -461,6 +463,7 @@ struct SerializationParent : generated_detail::Model<SerializationParent> {
     using Base = generated_detail::Model<SerializationParent>;
     friend class SerializationParentChecker;
     static constexpr std::string_view ENTITY_NAME = "SerializationParent";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "serialization_parent";
     friend struct generated_detail::SerializationParentSampleRecipe;
     friend struct generated_detail::SerializationParentBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -722,6 +725,7 @@ struct SerializationMember : generated_detail::Model<SerializationMember> {
     using Base = generated_detail::Model<SerializationMember>;
     friend class SerializationMemberChecker;
     static constexpr std::string_view ENTITY_NAME = "SerializationMember";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "serialization_member";
     friend struct generated_detail::SerializationMemberSampleRecipe;
     friend struct generated_detail::SerializationMemberBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -1231,7 +1235,7 @@ inline const Platform* JsonGraphRow::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("json_graph_row", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1245,7 +1249,7 @@ inline const JsonGraphRow* JsonGraphRow::peer() const {
     if (!is_loaded("peer")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<JsonGraphRow>(ENTITY_NAME, id(), "peer");
+    auto* view = root.resolve_relation_option<JsonGraphRow>("json_graph_row", id(), "peer");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1260,7 +1264,7 @@ inline const JsonGraphRow* JsonGraphRow::singlePeer() const {
     if (!is_loaded("single_peer")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<JsonGraphRow>(ENTITY_NAME, id(), "single_peer");
+    auto* view = root.resolve_relation_option<JsonGraphRow>("json_graph_row", id(), "single_peer");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1760,7 +1764,7 @@ inline const Platform* SerializationParent::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("serialization_parent", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1774,7 +1778,7 @@ inline const JsonGraphRow* SerializationParent::child() const {
     if (!is_loaded("child")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<JsonGraphRow>(ENTITY_NAME, id(), "child");
+    auto* view = root.resolve_relation_option<JsonGraphRow>("serialization_parent", id(), "child");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1789,7 +1793,8 @@ inline const JsonGraphRow* SerializationParent::boxedChild() const {
     if (!is_loaded("boxed_child")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<JsonGraphRow>(ENTITY_NAME, id(), "boxed_child");
+    auto* view =
+        root.resolve_relation_option<JsonGraphRow>("serialization_parent", id(), "boxed_child");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2225,7 +2230,7 @@ inline const Platform* SerializationMember::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("serialization_member", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2239,7 +2244,8 @@ inline const SerializationParent* SerializationMember::parent() const {
     if (!is_loaded("parent")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<SerializationParent>(ENTITY_NAME, id(), "parent");
+    auto* view =
+        root.resolve_relation_option<SerializationParent>("serialization_member", id(), "parent");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2254,8 +2260,8 @@ inline const SerializationParent* SerializationMember::boxedParent() const {
     if (!is_loaded("boxed_parent")) {
         return nullptr;
     }
-    auto* view =
-        root.resolve_relation_option<SerializationParent>(ENTITY_NAME, id(), "boxed_parent");
+    auto* view = root.resolve_relation_option<SerializationParent>(
+        "serialization_member", id(), "boxed_parent");
     if (view) {
         return *view ? &**view : nullptr;
     }

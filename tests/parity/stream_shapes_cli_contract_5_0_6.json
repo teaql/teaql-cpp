@@ -1,0 +1,27 @@
+{
+  "kind": "retained_strict_stream_shape_original_source",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "test": "stream_shapes_rust_parity",
+  "comparator": "tests/parity/compare_stream_shapes_5_0_6.py",
+  "binary": "teaql_stream_shapes_probe",
+  "corpus": "tests/parity/stream_shapes_5_0_6_cases.json.gz",
+  "historical_pair": "docs/parity/stream_shapes_repaired_5_0_6.json.gz",
+  "strict_receipt": "docs/parity/stream_shapes_strict_source_current_native_5_0_6.json.gz",
+  "terminal": "docs/parity/stream_shapes_terminal_5_0_6.json.gz",
+  "count": 13104,
+  "historical_adaptations": 6012,
+  "support_files": {
+    "scripts/stream_shapes_cli_source_binding_5_0_6.py": "3b5914f752a73688c56430b2d1e330d921185128d62c209478ac19f712615e43",
+    "tests/parity/compare_stream_shapes_5_0_6.py": "abac44a2574e3197c52eb2b20df2f551570a9fa4b0aee54d9c8fd519834c857c",
+    "tests/parity/compare_composed_general_5_0_6.py": "73175eac52737dd6cdbcc79e1c2e0da3d8011f0d4a3f21072941fb045312bb0d",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "scripts/verify_constant_closure_5_0_6.py": "fa6529d41bc2bcbce48c26831cd68cf58178b13d9e1dd19a5c1b9ff4a66b582c",
+    "scripts/verify_state_baselines_5_0_6.py": "328c14187c6672ab692642b3d0051ae97757970d3b71424ae8cb10ed84875a04",
+    "tests/parity/verify_stream_shapes_cli_controls_5_0_6.py": "0e8894a6142ffb2e6a06f027a108ba8c80cd696f074623ebdcb12e671c5f4596"
+  },
+  "corpus_sha256": "aaf7acad79812b0d86fcd9fb3b82fd9c2e22a837e351c3f9b1c08a7ed2f17c10",
+  "historical_pair_sha256": "534e66af5d7966bb4f5f2268c5a34089387842fcc181b51d915a2591b692dd4b",
+  "strict_receipt_sha256": "d50bbd9f81c00082134fe749f648a6621d73b99c0e6e063c0a35861eed3d303e",
+  "terminal_sha256": "8f2ff4766a453ca1c285cf99aa8c8ec40302e6c8b9acabf3d918c144ac94978d"
+}

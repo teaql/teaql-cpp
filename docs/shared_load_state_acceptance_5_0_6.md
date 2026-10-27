@@ -1,6 +1,15 @@
 # G15 source and model acceptance review
 
-Current status: G15 partial. The later complete-source audit reopens LS10 for
+G15 is qualified after [complete LS01-LS14 post-approval acceptance](approved_exception_capability_acceptance_5_0_6.md). The later scalar-alias/typed-batch work and the bounded quoted-FK approval close the historical reopening below.
+
+Current decision: on2026-10-24 the user approved preserving the five direct
+quoted-FK differences under the [explicit column-identity exception](quoted_fk_compatibility_exception_5_0_6.md).
+The behavior question is settled. Current verification of all twelve inputs and LS01-LS14 signoff are recorded
+in the acceptance above. The historical
+checkpoint below retains its earlier reopening/count scope.
+
+Historical status before final signoff: G15 was partial. The complete-source
+audit reopened LS10 for
 three-name typed-row decoding: a loaded native member alias originally yielded
 no value. The [actual witness](parity/shared_state_three_name_alias_gap_final_5_0_6.json.gz)
 preserves that failure. The later

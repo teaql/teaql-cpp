@@ -50,7 +50,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Priority::ENTITY_NAME,
+            "Priority",
             "platform",
             "Platform",
             entity.platformId(),
@@ -60,15 +60,15 @@ public:
             location,
             results);
         GeneratedFieldChecks::clock(
-            user_context, status, false, Priority::ENTITY_NAME, "created_at", [&](Timestamp time) {
+            user_context, status, false, "Priority", "created_at", [&](Timestamp time) {
                 entity.updateCreatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, false, Priority::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, false, "Priority", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, true, Priority::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, true, "Priority", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::require_loaded(
@@ -152,15 +152,15 @@ public:
         detail::CheckerCallScope active(detail::checker_call_arena(user_context));
         const auto& logic = logic_.get();
         GeneratedFieldChecks::clock(
-            user_context, status, false, Platform::ENTITY_NAME, "created_at", [&](Timestamp time) {
+            user_context, status, false, "Platform", "created_at", [&](Timestamp time) {
                 entity.updateCreatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, false, Platform::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, false, "Platform", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, true, Platform::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, true, "Platform", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::require_loaded(
@@ -232,7 +232,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Label::ENTITY_NAME,
+            "Label",
             "platform",
             "Platform",
             entity.platformId(),

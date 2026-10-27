@@ -1,0 +1,49 @@
+{
+  "kind": "retained_original_inherited_checker_source",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "models": [
+    "document",
+    "intermediate_record",
+    "invoice",
+    "receipt",
+    "special_invoice"
+  ],
+  "count": 7200,
+  "per_model": 1440,
+  "generated_files": 43,
+  "statistics": {
+    "callbacks": 7200,
+    "policy_reviews": 594,
+    "errors": 2880,
+    "findings": 12072,
+    "evidence": 6400
+  },
+  "comparator": "tests/parity/compare_inherited_checker_helpers_5_0_6.py",
+  "clock": "libteaql_sample_fixed_clock.so",
+  "historical_comparator_path": "tests/parity/compare_inherited_checker_helpers_5_0_6.py",
+  "corpus": "tests/parity/inherited_checker_helpers_5_0_6_cases.json.gz",
+  "terminal": "docs/parity/inherited_checker_helpers_5_0_6.json",
+  "corpus_sha256": "927f9a1ee247b5dd316f61782009a83c07feba3bbd4a8382debb86d17788f8e4",
+  "terminal_sha256": "d61b548a3ca7c9460d0705279b26ff70533f5086315a4e42a56de2edf90269ce",
+  "support_files": {
+    "scripts/inherited_checker_cli_source_binding_5_0_6.py": "9ebce4e8b83e1e244aa5f85073680401d442ffc8837efeb365b54e6e7102739d",
+    "tests/parity/verify_inherited_checker_cli_controls_5_0_6.py": "fc1cc786ac7b2579492fbda72122afb704449fce1252d0749b73ebe23990996d",
+    "tests/parity/compare_inherited_checker_helpers_5_0_6.py": "a30cd817001d64904eed13cf4ef583066206d910853c1df353d8970b0ead345a",
+    "tests/parity/inherited_checker_helpers_5_0_6.rs": "9515723934e8b4bcd0494a103391f6ac0149dcc055c5ad57286a0cee4540b318",
+    "tests/parity/sample_clock_driver.py": "5e41ed5db1b5dcd9acbbd0ba41371eddae772b87dba54933019550ee866be0ec",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "scripts/verify_inherited_checker_helpers_5_0_6.py": "80b0890c40ad42ee54a50e77ba384590d5471939b36b276166c4618c4b5d854e",
+    "scripts/verify_constant_closure_5_0_6.py": "fa6529d41bc2bcbce48c26831cd68cf58178b13d9e1dd19a5c1b9ff4a66b582c",
+    "scripts/verify_state_baselines_5_0_6.py": "328c14187c6672ab692642b3d0051ae97757970d3b71424ae8cb10ed84875a04",
+    "tests/parity/rust_inherited_checker_helpers_5_0_6/Cargo.toml": "d2740b3e19b03fe5e7e5de8cf17bac661c47971c4b02b6810a4e102e477a08e5",
+    "tests/parity/rust_inherited_checker_helpers_5_0_6/Cargo.lock": "fef3bdf9692930d385435ddc61edf8b6251c48c525c06ccb87f584a45780e8ea",
+    "tests/parity/inherited_checker_helpers_probe.cpp": "b5aa1543577cd64e89fd0751f272859ce16c742043746c4733b0405c252a55ea",
+    "tests/support/fixed_sample_clock.cpp": "a107a5664077004c4bc403c56c4df3f43b090d3ebe7c216106f720ff23089a91",
+    "tests/parity/inherited_checker_helpers_document_probe.cpp": "5451f2389c268eac58f23ae93de2618d62df1ebac60b7ed1fb47bd8dac763f0c",
+    "tests/parity/inherited_checker_helpers_intermediate_record_probe.cpp": "88a422810862a01db9e9ab676e7bf36ddf1ee8d56221f108e875e141863c8b57",
+    "tests/parity/inherited_checker_helpers_invoice_probe.cpp": "8c93f180794169a46c1e28bc07d1b4645c72c1b6aaefd5fb0856eaedb5b4bb20",
+    "tests/parity/inherited_checker_helpers_receipt_probe.cpp": "f7a0547bac8e92aee24c28c8e5d0b4121d5f7467bea07ddc7ab4c2f288258b65",
+    "tests/parity/inherited_checker_helpers_special_invoice_probe.cpp": "df8aa7c98c7a9e01cbb9692fa0b8ddc79da18db7dc8ec12decd5dbc3ecab73e8"
+  }
+}

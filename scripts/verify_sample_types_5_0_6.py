@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tests/parity'))
 from compare_values import same
 from verify_constant_closure_5_0_6 import registry_identities
+from verify_legacy_observation_identity_5_0_6 import verify_record
 
 BASE = ROOT / 'tests/generator/parity/sample_type_configuration_contracts'
 CASES = json.loads((BASE / 'cases.json').read_text())
@@ -109,6 +110,7 @@ def main():
         path.write_bytes(gzip.compress(json.dumps(record, ensure_ascii=False).encode(), mtime=0))
         print(f'Recorded {len(selected)} original configured-type sample scenarios')
         return
+    verify_record(path)
     record = json.loads(gzip.decompress(path.read_bytes()))
     assert record['source_inputs'] == source_inputs and record['indices'] == indexes
     assert record['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())

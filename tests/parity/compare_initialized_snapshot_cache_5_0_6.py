@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare original initialized cache geometry and explicit ownership adaptations."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -28,7 +29,7 @@ def cases():
 def validate_ownership(source, native):
     expected_source = dict(model='weak_arc', within_row=[True, False], after_row=[False, False])
     expected_native = dict(model='context_arena', within_row=[True, True], after_row=[True, True])
-    if source['ownership'] != expected_source or native['ownership'] != expected_native:
+    if not same(source['ownership'], expected_source) or not same(native['ownership'], expected_native):
         raise RuntimeError(f'Unexpected lifetime adaptation: {source} / {native}')
 
 
@@ -54,7 +55,7 @@ def main():
             for saved, live in zip(expected, source):
                 # Raw initialized Debug includes randomized maps and allocation keys.
                 # Retain it as original output; it is outside the stable comparison contract.
-                if not same(saved.get('common'), live.get('common')) or saved.get('ownership') != live.get('ownership'):
+                if not same(saved.get('common'), live.get('common')) or not same(saved.get('ownership'), live.get('ownership')):
                     raise RuntimeError('Live original cache semantics differ')
         else:
             source = expected
@@ -67,7 +68,7 @@ def main():
         if entry['kind'] != 'ownership' and not actual.get('diagnostics'):
             raise RuntimeError('Native initialized diagnostics were omitted')
     if gaps:
-        path = ROOT / 'docs/parity/initialized_snapshot_cache_initial_gaps_5_0_6.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/initialized_snapshot_cache_initial_gaps_5_0_6.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress(json.dumps(dict(gaps=gaps), indent=2).encode(), mtime=0))
         print(json.dumps(gaps[0], ensure_ascii=True, indent=2))

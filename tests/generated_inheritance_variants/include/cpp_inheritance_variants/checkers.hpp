@@ -114,7 +114,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Document::ENTITY_NAME,
+            "Document",
             "tenant",
             "Tenant",
             entity.tenantId(),
@@ -124,15 +124,15 @@ public:
             location,
             results);
         GeneratedFieldChecks::clock(
-            user_context, status, false, Document::ENTITY_NAME, "created_at", [&](Timestamp time) {
+            user_context, status, false, "Document", "created_at", [&](Timestamp time) {
                 entity.updateCreatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, false, Document::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, false, "Document", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, true, Document::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, true, "Document", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::require_loaded(
@@ -215,7 +215,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            IntermediateRecord::ENTITY_NAME,
+            "IntermediateRecord",
             "tenant",
             "Tenant",
             entity.tenantId(),
@@ -224,30 +224,18 @@ public:
             },
             location,
             results);
-        GeneratedFieldChecks::clock(user_context,
-                                    status,
-                                    false,
-                                    IntermediateRecord::ENTITY_NAME,
-                                    "created_at",
-                                    [&](Timestamp time) {
-                                        entity.updateCreatedAt(time);
-                                    });
-        GeneratedFieldChecks::clock(user_context,
-                                    status,
-                                    false,
-                                    IntermediateRecord::ENTITY_NAME,
-                                    "updated_at",
-                                    [&](Timestamp time) {
-                                        entity.updateUpdatedAt(time);
-                                    });
-        GeneratedFieldChecks::clock(user_context,
-                                    status,
-                                    true,
-                                    IntermediateRecord::ENTITY_NAME,
-                                    "updated_at",
-                                    [&](Timestamp time) {
-                                        entity.updateUpdatedAt(time);
-                                    });
+        GeneratedFieldChecks::clock(
+            user_context, status, false, "IntermediateRecord", "created_at", [&](Timestamp time) {
+                entity.updateCreatedAt(time);
+            });
+        GeneratedFieldChecks::clock(
+            user_context, status, false, "IntermediateRecord", "updated_at", [&](Timestamp time) {
+                entity.updateUpdatedAt(time);
+            });
+        GeneratedFieldChecks::clock(
+            user_context, status, true, "IntermediateRecord", "updated_at", [&](Timestamp time) {
+                entity.updateUpdatedAt(time);
+            });
         GeneratedFieldChecks::require_loaded(
             entity.is_loaded("id"), status, "id", location, results);
         GeneratedFieldChecks::require_loaded(
@@ -325,7 +313,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Invoice::ENTITY_NAME,
+            "Invoice",
             "tenant",
             "Tenant",
             entity.tenantId(),
@@ -335,15 +323,15 @@ public:
             location,
             results);
         GeneratedFieldChecks::clock(
-            user_context, status, false, Invoice::ENTITY_NAME, "created_at", [&](Timestamp time) {
+            user_context, status, false, "Invoice", "created_at", [&](Timestamp time) {
                 entity.updateCreatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, false, Invoice::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, false, "Invoice", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, true, Invoice::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, true, "Invoice", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::require_loaded(
@@ -425,7 +413,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Receipt::ENTITY_NAME,
+            "Receipt",
             "tenant",
             "Tenant",
             entity.tenantId(),
@@ -435,15 +423,15 @@ public:
             location,
             results);
         GeneratedFieldChecks::clock(
-            user_context, status, false, Receipt::ENTITY_NAME, "created_at", [&](Timestamp time) {
+            user_context, status, false, "Receipt", "created_at", [&](Timestamp time) {
                 entity.updateCreatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, false, Receipt::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, false, "Receipt", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, true, Receipt::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, true, "Receipt", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::require_loaded(
@@ -526,7 +514,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            SpecialInvoice::ENTITY_NAME,
+            "SpecialInvoice",
             "tenant",
             "Tenant",
             entity.tenantId(),
@@ -535,30 +523,18 @@ public:
             },
             location,
             results);
-        GeneratedFieldChecks::clock(user_context,
-                                    status,
-                                    false,
-                                    SpecialInvoice::ENTITY_NAME,
-                                    "created_at",
-                                    [&](Timestamp time) {
-                                        entity.updateCreatedAt(time);
-                                    });
-        GeneratedFieldChecks::clock(user_context,
-                                    status,
-                                    false,
-                                    SpecialInvoice::ENTITY_NAME,
-                                    "updated_at",
-                                    [&](Timestamp time) {
-                                        entity.updateUpdatedAt(time);
-                                    });
-        GeneratedFieldChecks::clock(user_context,
-                                    status,
-                                    true,
-                                    SpecialInvoice::ENTITY_NAME,
-                                    "updated_at",
-                                    [&](Timestamp time) {
-                                        entity.updateUpdatedAt(time);
-                                    });
+        GeneratedFieldChecks::clock(
+            user_context, status, false, "SpecialInvoice", "created_at", [&](Timestamp time) {
+                entity.updateCreatedAt(time);
+            });
+        GeneratedFieldChecks::clock(
+            user_context, status, false, "SpecialInvoice", "updated_at", [&](Timestamp time) {
+                entity.updateUpdatedAt(time);
+            });
+        GeneratedFieldChecks::clock(
+            user_context, status, true, "SpecialInvoice", "updated_at", [&](Timestamp time) {
+                entity.updateUpdatedAt(time);
+            });
         GeneratedFieldChecks::require_loaded(
             entity.is_loaded("id"), status, "id", location, results);
         GeneratedFieldChecks::require_loaded(

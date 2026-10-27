@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Compare current resource bindings and generated Checker results with ownership adaptations."""
+from compare_values import diagnostic_path
+from expression_cli_cases import require_cases
+from lifecycle_cli_observations_5_0_6 import resource_shapes
 import argparse
 import gzip
 import hashlib
@@ -9,7 +12,7 @@ import os
 from pathlib import Path
 import subprocess
 
-from compare_values import observe, same
+from compare_values import json_lines, observe, same
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = Path(__file__).with_name('resource_bindings_5_0_6_cases.json.gz')
@@ -66,7 +69,7 @@ def main():
         captured[language] = result.stderr
         if result.returncode:
             raise RuntimeError(f'{language} resource observer failed ({result.returncode}): {result.stderr}')
-        values = [json.loads(line) for line in result.stdout.split('\n') if line]
+        values = json_lines(result.stdout)
         if len(values) != len(inputs):
             raise RuntimeError('Resource binding output is incomplete')
         return values
@@ -75,6 +78,7 @@ def main():
     else:
         with gzip.open(CORPUS, 'rt') as file:
             corpus = json.load(file)
+        require_cases(corpus, len(inputs), inputs)
         if corpus['baseline'] != baseline or not same(corpus['original_provenance'], producer):
             raise RuntimeError('Resource binding corpus source differs')
         if not same(inputs, [case['input'] for case in corpus['cases']]):
@@ -83,6 +87,7 @@ def main():
         if args.rust and not same(observed(args.rust, 'rust'), expected):
             raise RuntimeError('Resource binding corpus differs from live original')
     actual = observed(args.cpp, 'cpp')
+    resource_shapes(inputs, expected, actual)
     gaps = [dict(index=i,input=c,rust=a,cpp=b) for i,(c,a,b) in enumerate(zip(inputs,expected,actual)) if not same(a['semantic'],b['semantic'])]
     for value, source, input in zip(actual, expected, inputs):
         round_groups = (source['semantic']['rounds'], value['semantic']['rounds'],
@@ -102,18 +107,21 @@ def main():
                     if action == 'typed': typed_live = True
                     else: named_live = True
                 source_drops.append(total - int(typed_live) - int(named_live))
-            if (original_ownership['during'] != source_drops
-                    or native_ownership['during'] != [previous] * len(input['actions'])
-                    or original_round['created'] != total or native_round['created'] != total
-                    or original_round['destroyed_after_close'] != total
-                    or native_round['destroyed_after_close'] != total):
+            if (not same(original_ownership['during'], source_drops)
+                    or not same(native_ownership['during'], [previous] * len(input['actions']))
+                    or not same(original_round['created'], total) or not same(native_round['created'], total)
+                    or not same(original_round['destroyed_after_close'], total)
+                    or not same(native_round['destroyed_after_close'], total)):
                 raise RuntimeError('Declared resource ownership/destruction contract failed')
+        expected_captured = 'typed' in input['actions']
         for round in value['ownership']:
-            if (not round['expired_rejected'] or not round['expired_copy_rejected']
-                    or round['captured'] != round['old_borrow_live_before_close']):
+            if (not same(round['expired_rejected'], True)
+                    or not same(round['expired_copy_rejected'], True)
+                    or not same(round['captured'], expected_captured)
+                    or not same(round['old_borrow_live_before_close'], expected_captured)):
                 raise RuntimeError('Native resource borrow lifecycle failed')
     if gaps:
-        path = ROOT / 'docs/parity/resource_bindings_5_0_6_initial_gaps.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/resource_bindings_5_0_6_initial_gaps.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress((json.dumps(dict(count=len(gaps),differences=gaps),indent=2)+'\n').encode(),mtime=0))
         print(json.dumps(gaps[0],indent=2))

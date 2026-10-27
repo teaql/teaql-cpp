@@ -28,6 +28,7 @@ struct Person : generated_detail::Model<Person> {
     using Base = generated_detail::Model<Person>;
     friend class PersonChecker;
     static constexpr std::string_view ENTITY_NAME = "Person";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "person";
     friend struct generated_detail::PersonSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -436,6 +437,7 @@ struct Device : generated_detail::Model<Device> {
     using Base = generated_detail::Model<Device>;
     friend class DeviceChecker;
     static constexpr std::string_view ENTITY_NAME = "Device";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "device";
     friend struct generated_detail::DeviceSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -639,6 +641,7 @@ struct OrderStatus : generated_detail::Model<OrderStatus> {
     using Base = generated_detail::Model<OrderStatus>;
     friend class OrderStatusChecker;
     static constexpr std::string_view ENTITY_NAME = "OrderStatus";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "order_status";
     friend struct generated_detail::OrderStatusSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -778,6 +781,7 @@ struct Category : generated_detail::Model<Category> {
     using Base = generated_detail::Model<Category>;
     friend class CategoryChecker;
     static constexpr std::string_view ENTITY_NAME = "Category";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "category";
     friend struct generated_detail::CategorySampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -917,6 +921,7 @@ struct Child : generated_detail::Model<Child> {
     using Base = generated_detail::Model<Child>;
     friend class ChildChecker;
     static constexpr std::string_view ENTITY_NAME = "Child";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "child";
     friend struct generated_detail::ChildSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -1056,6 +1061,7 @@ struct Inventory : generated_detail::Model<Inventory> {
     using Base = generated_detail::Model<Inventory>;
     friend class InventoryChecker;
     static constexpr std::string_view ENTITY_NAME = "Inventory";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "inventory";
     friend struct generated_detail::InventorySampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -1589,7 +1595,7 @@ inline const Person* Device::owner() const {
     if (!is_loaded("owner")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Person>(ENTITY_NAME, id(), "owner");
+    auto* view = root.resolve_relation_option<Person>("device", id(), "owner");
     if (view) {
         return *view ? &**view : nullptr;
     }

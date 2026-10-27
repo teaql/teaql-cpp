@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import sys
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'scripts'))
 from verify_constant_closure_5_0_6 import registry_identities
@@ -52,11 +53,14 @@ def main():
         CORPUS.write_bytes(gzip.compress(json.dumps(dict(**current,cases=[dict(input=i,expected=e) for i,e in zip(cases,expected)]),ensure_ascii=False).encode(),mtime=0))
     else:
         corpus=json.loads(gzip.decompress(CORPUS.read_bytes()))
+        require_cases(corpus, len(cases), cases)
         for name,item in current.items():assert corpus[name]==item,name
         assert same(cases,[c['input'] for c in corpus['cases']])
         expected=[c['expected'] for c in corpus['cases']]
         if args.rust:assert same(expected,observe(args.rust,cases)),'Original alias observations changed'
     actual=observe(args.cpp,cases)
+    if len(actual) != len(cases):
+        raise RuntimeError('Native observations must cover the complete input matrix')
     failures=[i for i,(a,b) in enumerate(zip(expected,actual)) if not same(a,b)]
     if args.record:
         path=ROOT/'docs/parity/query_alias_initial_5_0_6.json.gz';assert not path.exists()

@@ -3,6 +3,7 @@
 import argparse,gzip,hashlib,json,re,subprocess
 from pathlib import Path
 from compare_values import observe,same
+from expression_cli_cases import require_cases
 ROOT=Path(__file__).resolve().parents[2]
 LABELS=["original_expr_with_broken_point","root","access_path","break_point","missing_preload","suggested_fix","nested_fix","severity","human_message"]
 def fields(raw):
@@ -45,6 +46,8 @@ def adapt(raw,input):
     result["human_message"]='"'+message+' to the query."'
     return result
 def native_fields(value):
+    if type(value) is not dict or set(value)!=set(LABELS):
+        raise ValueError('Native diagnostic fields must match the complete source surface')
     def array(items):return "["+", ".join('"'+x+'"' for x in items)+"]"
     return {k:value[k] if k=="root" else array(value[k]) if k in ("access_path","missing_preload") else "null" if value[k] is None else '"'+value[k]+'"' for k in LABELS}
 def main():
@@ -53,7 +56,8 @@ def main():
     assert corpus["baseline"]==json.loads((ROOT/"upstream.lock.json").read_text())["commit"]
     assert corpus["source_sha256"]==hashlib.sha256((ROOT/"tests/generator/parity/dynamic_json_rust/lib/src/e.rs").read_bytes()).hexdigest()
     assert corpus["producer"]==json.loads((ROOT/"tests/generator/parity/dynamic_json_rust/PROVENANCE.json").read_text())
-    cases=[x["input"] for x in corpus["cases"]];raw=[x["expected"] for x in corpus["cases"]]
+    rows=require_cases(corpus,936)
+    cases=[x["input"] for x in rows];raw=[x["expected"] for x in rows]
     if a.rust:assert same(raw,observe(a.rust,cases)),"Original raw diagnostics changed"
     cpp=observe(a.cpp,cases)
     for i,(x,r,c) in enumerate(zip(cases,raw,cpp)):

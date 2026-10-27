@@ -1,5 +1,10 @@
 # Inherited entity helpers and Checker flow: Rust 5.0.6
 
+The later [CLI source-binding checkpoint](inherited_checker_cli_source_binding_5_0_6.md)
+pins all five installed model comparisons to the original 7,200-case Rust
+corpus and checks 7,200 fresh C++ observations. It extends evidence only;
+the qualification scope below remains unchanged.
+
 This checkpoint adds P1/G01-G03 and G13 evidence. It does not complete those
 capabilities or the full generator goal. G04 inheritance and G05 constants retain
 their separate accepted status.

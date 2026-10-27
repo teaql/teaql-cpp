@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tests/parity'))
 from compare_values import same
 from verify_constant_closure_5_0_6 import registry_identities
+from verify_legacy_observation_identity_5_0_6 import verify_record
 
 OUTPUT = ROOT / 'tests/parity/business_sample_5_0_6_cases.json.gz'
 
@@ -88,6 +89,7 @@ def main():
             stderr=stderr), ensure_ascii=False).encode(), mtime=0))
         print(f'Recorded {len(cases)} complete original Business-ID sample scenarios')
         return
+    verify_record(OUTPUT)
     record = json.loads(gzip.decompress(OUTPUT.read_bytes()))
     assert record['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())
     assert record['source_inputs'] == source_inputs

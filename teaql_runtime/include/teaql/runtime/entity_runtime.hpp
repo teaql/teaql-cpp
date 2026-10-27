@@ -832,6 +832,87 @@ namespace detail {
 struct EntityRuntimeAccess {
     using TraceScopes = EntityRuntimeState::TraceScopes;
 
+private:
+    template <class Scalar>
+    static void validate_operand_storage(Memory resource, const Scalar& stored) {
+        if constexpr (requires { stored.has_value(); }) {
+            if (stored) {
+                validate_operand_storage(resource, *stored);
+            }
+        } else if constexpr (requires { stored.memory_resource(); }) {
+            if (stored.memory_resource() != resource) {
+                throw std::invalid_argument("Scalar storage requires an explicit destination copy");
+            }
+        } else if constexpr (requires { stored.get_allocator().resource(); }) {
+            if (stored.get_allocator().resource() != resource) {
+                throw std::invalid_argument("Scalar storage requires an explicit destination copy");
+            }
+        }
+    }
+
+    template <class Scalar>
+    static std::optional<Scalar> scalar_operand(Memory resource, const Value& operand) {
+        if constexpr (std::same_as<Scalar, Json>) {
+            return operand.to_json_value(resource);
+        } else if constexpr (std::same_as<Scalar, String>) {
+            if (auto text = operand.try_text()) {
+                detail::trim(*text);
+                return String(*text, resource);
+            }
+        } else if constexpr (std::same_as<Scalar, bool>) {
+            return operand.try_bool();
+        } else if constexpr (std::signed_integral<Scalar>) {
+            if (auto value = operand.try_i64()) {
+                return static_cast<Scalar>(*value);
+            }
+        } else if constexpr (std::unsigned_integral<Scalar>) {
+            if (auto value = operand.try_u64()) {
+                return static_cast<Scalar>(*value);
+            }
+        } else if constexpr (std::floating_point<Scalar>) {
+            if (auto value = operand.try_f64()) {
+                return static_cast<Scalar>(*value);
+            }
+        } else if constexpr (std::same_as<Scalar, Decimal>) {
+            return operand.try_decimal();
+        } else if constexpr (std::same_as<Scalar, Date>) {
+            return operand.try_date();
+        } else if constexpr (std::same_as<Scalar, Timestamp>) {
+            return operand.try_timestamp();
+        } else {
+            static_assert(std::same_as<Scalar, void>, "Unsupported generated scalar storage");
+        }
+        return std::nullopt;
+    }
+
+public:
+    // Source setters convert native storage independently from the original
+    // mutation operand. Failed conversion retains storage; only untyped NULL
+    // clears optional storage. JSON converts every Value, including typed NULL.
+    template <class Scalar>
+    static void update_scalar_value(const EntityRuntimeState& state,
+                                    const EntityKey& key,
+                                    std::string_view field,
+                                    Scalar& stored,
+                                    const Value& operand) {
+        auto resource = state.memory_resource();
+        if (operand.memory_resource() != resource || key.memory_resource() != resource) {
+            throw std::invalid_argument("Scalar operand requires an explicit destination copy");
+        }
+        validate_operand_storage(resource, stored);
+        if constexpr (requires { stored.has_value(); }) {
+            if (std::holds_alternative<std::monostate>(operand.data)) {
+                stored.reset();
+            } else if (auto value =
+                           scalar_operand<typename Scalar::value_type>(resource, operand)) {
+                stored.emplace(std::move(*value));
+            }
+        } else if (auto value = scalar_operand<Scalar>(resource, operand)) {
+            stored = std::move(*value);
+        }
+        state.set(key, field, operand);
+    }
+
     // Rust's generated dynamic map retains columns outside the concrete model,
     // including descendant values merged into an ancestor query result. These
     // are native/readonly extras, separate from durable dynamic-field metadata.

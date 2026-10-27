@@ -392,28 +392,32 @@ inline OwnerExpression ProfileExpression::getOwner() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static OwnerExpression owner(const Owner& value) {
-        return OwnerExpression(entity_expression(value, StaticString{"owner"}));
+        return OwnerExpression(
+            entity_expression(value, StaticString{"owner"}, StaticString{"Owner"}));
     }
 
     static OwnerExpression owner(Owner&&) = delete;
     static OwnerExpression owner(const Owner&&) = delete;
 
     static EntryExpression entry(const Entry& value) {
-        return EntryExpression(entity_expression(value, StaticString{"entry"}));
+        return EntryExpression(
+            entity_expression(value, StaticString{"entry"}, StaticString{"Entry"}));
     }
 
     static EntryExpression entry(Entry&&) = delete;
     static EntryExpression entry(const Entry&&) = delete;
 
     static ProfileExpression profile(const Profile& value) {
-        return ProfileExpression(entity_expression(value, StaticString{"profile"}));
+        return ProfileExpression(
+            entity_expression(value, StaticString{"profile"}, StaticString{"Profile"}));
     }
 
     static ProfileExpression profile(Profile&&) = delete;

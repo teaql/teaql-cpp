@@ -112,7 +112,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Class::ENTITY_NAME,
+            "Class",
             "platform",
             "Platform",
             entity.platformId(),
@@ -192,7 +192,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Operator::ENTITY_NAME,
+            "Operator",
             "platform",
             "Platform",
             entity.platformId(),
@@ -270,7 +270,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Template::ENTITY_NAME,
+            "Template",
             "platform",
             "Platform",
             entity.platformId(),
@@ -348,7 +348,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Namespace::ENTITY_NAME,
+            "Namespace",
             "platform",
             "Platform",
             entity.platformId(),
@@ -426,7 +426,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            PlainRecord::ENTITY_NAME,
+            "PlainRecord",
             "platform",
             "Platform",
             entity.platformId(),

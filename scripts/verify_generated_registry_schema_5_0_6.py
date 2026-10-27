@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 import subprocess
 
-from verify_runtime_configuration_kernel_5_0_6 import same, verify_inputs
+from verify_runtime_configuration_kernel_5_0_6 import load_original_record, same
 from verify_business_runtime_configuration_5_0_6 import source_inputs
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,8 +27,7 @@ def main():
     parser.add_argument('--cpp', type=Path, required=True)
     parser.add_argument('--rust', type=Path)
     args = parser.parse_args()
-    record = json.loads((ROOT / 'docs/parity/generated_registry_schema_original_5_0_6.json').read_text())
-    verify_inputs(record)
+    record = load_original_record('generated_registry_schema_original_5_0_6.json')
     source_inputs()  # Verify the complete original model/SDK and reference registry identities.
     assert len(record['cases']) == 13
     expected = [case['source_expected'] for case in record['cases']]

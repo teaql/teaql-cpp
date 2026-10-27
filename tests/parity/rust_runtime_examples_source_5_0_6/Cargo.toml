@@ -1,0 +1,29 @@
+[package]
+name = "teaql_cpp_runtime_examples_source_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype", "functions"] }
+serde_json = "=1.0.150"
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+
+[[bin]]
+name = "runtime_examples_source_506"
+path = "../rust_field_layout/src/bin/runtime_examples_5_0_6.rs"

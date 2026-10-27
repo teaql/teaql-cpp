@@ -485,6 +485,7 @@
         "teaql_module_sqlite_transport_probe",
         "teaql_module_commit_audit_tests",
         "teaql_module_commit_audit_source_probe",
+        "teaql_module_commit_audit_error_probe",
         "teaql_module_query_store_tests",
         "teaql_module_query_store_model_tests",
         "teaql_module_id_set_build_tests",

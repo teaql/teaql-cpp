@@ -31,11 +31,83 @@ concept TemporaryBinding = requires {
     entity_expression(T(std::allocator_arg, Allocator(std::pmr::new_delete_resource())));
 };
 static_assert(!TemporaryBinding<Product>);
+template <class T>
+concept TemporaryNamedBinding = requires {
+    entity_expression(T(std::allocator_arg, Allocator(std::pmr::new_delete_resource())),
+                      StaticString{"product"},
+                      StaticString{"ModelProduct"});
+};
+static_assert(!TemporaryNamedBinding<Product>);
 static_assert(std::is_trivially_destructible_v<RuntimeExpression<String>>);
 static_assert(std::is_nothrow_move_constructible_v<EntityRuntimeState>);
 
 static auto name_in_helper(const Product& product) {
     return E::product(product).getName();
+}
+
+static void explicit_model_identity() {
+    GlobalContext global;
+    auto source = global.make_user_context();
+    auto destination = global.make_user_context();
+    std::optional<RuntimeExpression<String>> expired;
+    std::optional<RuntimeExpression<String>> retained;
+    std::optional<Ref<ExpressionNotLoadedError>> retained_error;
+    {
+        auto r = source->memory_resource();
+        auto& product = source->make<Product>();
+        product.updateId(77);
+        using OriginalFactory = RuntimeExpression<EntityBorrow<Product>> (*)(const Product&);
+        using EntryFactory =
+            RuntimeExpression<EntityBorrow<Product>> (*)(const Product&, StaticString);
+        OriginalFactory original_factory = &entity_expression<Product>;
+        EntryFactory entry_factory = &entity_expression<Product>;
+        check(original_factory(product).rootDescription() == "Product(id=77)" &&
+                  entry_factory(product, StaticString{"product"}).rootDescription() ==
+                      "Product(id=77)",
+              "Both exact legacy entity factory signatures retain their root contract");
+        auto root =
+            entity_expression(product, StaticString{"nativeProduct"}, StaticString{"ModelProduct"});
+        product.updateId(88);
+        check(root.rootDescription() == "ModelProduct(id=77)" &&
+                  std::string_view(Product::ENTITY_NAME) == "Product",
+              "Explicit canonical identity captures the ID without changing the descriptor");
+        auto missing = root.andThen("related", [r](EntityBorrow<Product>) {
+            return RuntimeExpression<String>::not_loaded(r, "name", "name");
+        });
+        expired = missing;
+        retained = missing.copyTo(*destination);
+        try {
+            (void)missing.unwrap();
+        } catch (const ExpressionNotLoadedError& error) {
+            retained_error = source->make_global<ExpressionNotLoadedError>(error);
+        }
+    }
+    source.reset();
+    rejects(
+        [&] {
+            (void)expired->unwrap();
+        },
+        "Explicit model metadata must not keep its source Context alive");
+    check(bool(retained_error), "A missing field must retain a diagnostic");
+    auto inspect = [](const ExpressionDiagnostic& diagnostic) {
+        check(diagnostic.root == "ModelProduct(id=77)" &&
+                  diagnostic.original_expr_with_broken_point ==
+                      "E::nativeProduct(id=77).getRelated().getName()<broken>" &&
+                  diagnostic.attempted_path == "related.name",
+              "Canonical root and native entry survive traversal and explicit destination copies");
+    };
+    bool copied_missing = false;
+    try {
+        (void)retained->unwrap();
+    } catch (const ExpressionNotLoadedError& error) {
+        inspect(error.diagnostic());
+        copied_missing = true;
+    }
+    check(copied_missing, "The explicit scalar copy must retain its NotLoaded state");
+    inspect(destination->get(destination->rebind_global(*retained_error)).diagnostic());
+    retained.reset();
+    destination.reset();
+    check(global.live_user_bytes() == 0, "Explicit root names do not retain UserContext blocks");
 }
 
 static void snapshots_and_lifetimes() {
@@ -561,6 +633,7 @@ int main(int argc, char** argv) {
         typed_alias_forward_object_rules();
         installed_list_view_lifetimes();
         structured_diagnostics();
+        explicit_model_identity();
         snapshots_and_lifetimes();
         lists_and_composition();
         global_copy();

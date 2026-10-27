@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 import subprocess
 
-from verify_runtime_configuration_kernel_5_0_6 import verify_inputs, same
+from verify_runtime_configuration_kernel_5_0_6 import load_original_record, same
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -23,8 +23,7 @@ def main():
     parser.add_argument('--cpp', type=Path, required=True)
     parser.add_argument('--rust', type=Path)
     args = parser.parse_args()
-    record = json.loads((ROOT / 'docs/parity/runtime_service_errors_original_observations_5_0_6.json').read_text())
-    verify_inputs(record)
+    record = load_original_record('runtime_service_errors_original_observations_5_0_6.json')
     assert len(record['cases']) == 5
     if args.rust:
         assert same(observe(args.rust), record['cases']), 'Original service-error observations changed'

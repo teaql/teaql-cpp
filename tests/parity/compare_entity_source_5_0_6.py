@@ -23,10 +23,13 @@ def main():
     if args.record and args.record.exists():
         parser.error('Use a fresh receipt path')
     data = json.loads(gzip.decompress(CORPUS.read_bytes()))
-    assert data['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
+    if data['runtime_commit'] != json.loads((ROOT / 'upstream.lock.json').read_text())['commit']:
+        raise RuntimeError('Entity corpus belongs to a different runtime')
     for path, expected in data['source_hashes'].items():
-        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected, path
-    assert len(data['inputs']) == len(data['expected']) == 230
+        if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
+            raise RuntimeError(f'Entity source changed: {path}')
+    if len(data['inputs']) != 230 or len(data['expected']) != 230:
+        raise RuntimeError('Entity corpus is incomplete')
     record = dict(complete=False, scope=data['scope'], steps=[])
     payload = ''.join(json.dumps(item) + '\n' for item in data['inputs'])
 
@@ -45,9 +48,11 @@ def main():
                                     exit_code=result.returncode, stdout=result.stdout, stderr=result.stderr))
         save()
         result.check_returncode()
-        assert result.stdout.endswith('\n'), label
+        if not result.stdout.endswith('\n'):
+            raise RuntimeError(f'{label}: entity output is not LF-terminated')
         actual = [json.loads(line) for line in result.stdout.split('\n')[:-1]]
-        assert same(actual, data['expected']), label
+        if not same(actual, data['expected']):
+            raise RuntimeError(f'{label}: complete entity results differ')
     record.update(complete=True, observations=230, actual_original_replayed=args.rust is not None,
                   corpus_sha256=hashlib.sha256(CORPUS.read_bytes()).hexdigest())
     save()

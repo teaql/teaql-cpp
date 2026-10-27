@@ -1,5 +1,7 @@
 # Generated relation evaluation for Rust 5.0.6
 
+Current forward-owner follow-up: [FRI01 requalification](generated_forward_relation_identity_5_0_6.md) preserves the original declared model key for forward getters independently of descriptor-based reverse/JSON views. Source/current4800, exact preceding-producer76 differences, native10/imported4/Java89, twelve result/three strict-prefix controls and80-SDK restricted reproduction pass. G01 is restored; complete G13/G14/G17/P0-P7 remain open. Earlier counts below retain their own input epochs.
+
 Status: supported relation mechanics and focused qualification passed. This is a P1/G01/G15
 subset; inheritance, constants, Business-ID helpers and complete generator parity
 remain open.

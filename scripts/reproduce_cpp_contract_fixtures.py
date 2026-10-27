@@ -22,6 +22,23 @@ FAMILIES = {'scalar_candidate_contracts': 'CandidateMetadataProbe',
             'constant_metadata_contracts': 'ConstantMetadataProbe',
             'constant_topology_contracts': 'ConstantMetadataProbe',
             'opaque_type_configuration_contracts': 'TypeConfigurationProbe'}
+METADATA_HELPER_INPUTS = tuple(
+    f'generator/src/main/java/com/skynet/codegenerator/cpp/{name}.java'
+    for name in ('CppFieldLayoutMetadata', 'CppRustLiteralMetadata',
+                 'CppRustXidMetadata', 'CppJsonInputMetadata'))
+
+
+def metadata_manifest_paths(root):
+    paths = [root / 'examples/generated/manifest.json']
+    paths.extend(sorted((root / 'tests').glob('generated_*/manifest.json')))
+    for family in FAMILIES:
+        paths.extend(sorted((root / 'tests/generator/parity' / family)
+                            .glob('*/cpp/PROVENANCE.json')))
+    paths.extend(root / 'tests/generator/parity' / family / 'cpp/PROVENANCE.json'
+                 for family in ('query_alias_contracts', 'relation_identity_contracts',
+                                'expression_root_contracts', 'hydration_allocation_contracts',
+                                'graph_serialization_contracts'))
+    return paths
 
 
 def digest(path):
@@ -196,6 +213,8 @@ inline InMemoryCheckerRegistry& checkerRegistry(UserContext& user_context) { aut
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true')
+    parser.add_argument('--allow-sample-operand-change', action='store_true',
+                        help='Record only source-qualified JSON sample delegates to the shared runtime')
     parser.add_argument('--allow-business-id-lookup-change', action='store_true',
                         help='Permit only model-derived typed Q lookup delegates and exact guidance')
     parser.add_argument('--allow-result-marker-change', action='store_true',
@@ -253,7 +272,7 @@ def main():
     parser.add_argument('--report', type=Path,
                         help='Write a new reproduction report without replacing historical evidence')
     args = parser.parse_args()
-    if args.check and (args.allow_business_id_lookup_change or args.allow_result_marker_change or args.allow_expression_entry_change or args.allow_scalar_diagnostic_change or args.allow_ledger_composition_change or args.allow_relation_identity_change or args.allow_default_alias_change or args.allow_assist_change or args.allow_support_change or args.allow_runtime_configuration_change or args.allow_runtime_binding_change or args.allow_registry_schema_change or args.allow_business_allocator_alias_change
+    if args.check and (args.allow_sample_operand_change or args.allow_business_id_lookup_change or args.allow_result_marker_change or args.allow_expression_entry_change or args.allow_scalar_diagnostic_change or args.allow_ledger_composition_change or args.allow_relation_identity_change or args.allow_default_alias_change or args.allow_assist_change or args.allow_support_change or args.allow_runtime_configuration_change or args.allow_runtime_binding_change or args.allow_registry_schema_change or args.allow_business_allocator_alias_change
                        or args.allow_timestamp_default_change or args.allow_wire_mapping_change
                        or args.allow_request_state_change or args.allow_core_query_view_change
                        or args.allow_membership_range_change or args.allow_matching_statistics_input_change or args.allow_relation_analysis_input_change or args.allow_relation_selection_input_change or args.allow_relation_selection_delegate_change or args.allow_enhancement_input_change or args.allow_type_match_range_change or args.allow_scalar_comparison_change
@@ -300,6 +319,15 @@ def main():
                                  {p for p in files.keys() & provenance['files'].keys()
                                   if files[p] != provenance['files'][p]})
                 allowed = {'ASSIST.md'} if args.allow_assist_change or args.allow_support_change else set()
+                sample_operand_delegates = 0
+                if args.allow_sample_operand_change and changed:
+                    from sample_operand_qualification import verify_file
+                    for name in changed:
+                        models_path = name.replace('/sample_data.hpp', '/models.hpp')
+                        sample_operand_delegates += verify_file(ROOT, name,
+                            (destination / name).read_text(), (output / name).read_text(),
+                            (destination / models_path).read_text())
+                        allowed.add(name)
                 business_id_lookup_changes = 0
                 if args.allow_business_id_lookup_change and changed:
                     from business_id_lookup_qualification import metadata as lookup_metadata, verify_file as verify_lookup
@@ -941,14 +969,14 @@ def main():
                 # Audit limits are interpreted through these shared helpers even
                 # when a fixture omits the attribute. Retain their actual producer
                 # identity without permitting changes to generated SDK bodies.
-                for helper in ('CppFieldLayoutMetadata', 'CppRustLiteralMetadata', 'CppRustXidMetadata'):
-                    path = f'generator/src/main/java/com/skynet/codegenerator/cpp/{helper}.java'
+                for path in METADATA_HELPER_INPUTS:
                     provenance['generator_implementation_sha256'][path] = digest(PRODUCER / path)
                 generated = json.dumps(provenance, indent=2) + '\n'
                 if args.check and (destination / 'PROVENANCE.json').read_text() != generated:
                     raise RuntimeError(f'Stale producer provenance: {family}/{case.name}')
                 staged.append((destination / 'PROVENANCE.json', generated.encode()))
                 records.append(dict(family=family, case=case.name, files=len(files),
+                                    sample_operand_delegates=sample_operand_delegates,
                                     source_alias_identity_edits=alias_changes,
                                     expression_entry_metadata_additions=expression_entry_changes,
                                     result_marker_changed_files=result_marker_changes,

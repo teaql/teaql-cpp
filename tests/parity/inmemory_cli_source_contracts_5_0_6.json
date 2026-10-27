@@ -1,0 +1,49 @@
+{
+  "kind": "retained_inmemory_source",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "source_execution": {
+    "path": "docs/parity/inmemory_source_final_5_0_6.json.gz",
+    "sha256": "ab17b8434aec1627eb2949dfdee42e59ca67496d3bd3b88214fab11f7b4da585"
+  },
+  "source_acceptance": {
+    "path": "docs/parity/inmemory_source_qualification_5_0_6.json.gz",
+    "sha256": "f7bec0eeb1e66998cb1aa38c85ad500019b45fa0f77626c7ff7bb2f0e2c9a186"
+  },
+  "admission": {
+    "path": "docs/parity/inmemory_cli_admission_installed_5_0_6.json.gz",
+    "sha256": "5c4610f51df64f5b50b0ee1c269d4172e5020eb8b39b0592a75e70742573286d"
+  },
+  "original_files": {
+    ".reference/teaql-rs/teaql-runtime/src/inmemory_engine.rs": "23f6083be6bfc04c6e9ac45b271040b1ade0b07013b5f364472503f8abd3db81",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "teaql_runtime/src/inmemory_engine.cpp": "6bea34354af4b8ef5b8b35cf98d598478fd3ee28d5941086051a88b768611005",
+    "teaql_runtime/include/teaql/runtime/inmemory_engine.hpp": "10a1f220f6cbf2b8ef7a8a480b3b0e21062da423c802e6793adee031a7542f9f",
+    "teaql_runtime/tests/inmemory_tests.cpp": "b495266fb83e538fc98823f522b5d5d1cc7839100e183d7f09edb6c2b44dd5cd",
+    "tests/parity/teaql_runtime/inmemory_engine.cpp": "8105626a76f1543a78fd04089d13a70f6d460d8eb22561b4e9c629323ffd7365",
+    "tests/parity/inmemory_probe.cpp": "55edf28528a44b186d7bd4deccd47fc40654a9562c1966f8c3d05c7b46c22a39",
+    "tests/parity/inmemory_source_probe.cpp": "20f4bf83728e8fddbc9f73289489ba668f15268e55a1ea7afdcf6ea6d31b3f31",
+    "tests/parity/inmemory_source_5_0_6.rs": "ab7b5ebb49d7493f8cf59396aefe23b9414da594408ff5abb86d0cbcf3f17550",
+    "tests/parity/inmemory_source_inputs_5_0_6.py": "0f268c0ca24c412062bcb4e2df1e2ddf08280c96ebae1e0d01c6dec7a7097e07",
+    "tests/parity/debug_modes.hpp": "1d72d708461860117b4f7e36505c2a262923cbc77cbf3316c5f99781e8c7c38d",
+    "tests/parity/fixture_value.hpp": "b5c6ae54108d72a2e8373763fc18f3b3107129256a8a91fc0c7a1cac326865c0",
+    "tests/parity/rust_values/src/bin/inmemory_oracle.rs": "31e037cc2409930afb606d31b0fddf3b268b9e2c5bdb2f9825039085bf03f2a3",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_inmemory_source_5_0_6/Cargo.toml": "e536abf1762f69187a30db7e6263c3f05ab1ed31674f947adccb254c85890063",
+    "tests/parity/rust_inmemory_source_5_0_6/Cargo.lock": "c5c37015cb4204318589085591113e382f6538489fcadbceb8c9d270c0eb2ba6",
+    "scripts/verify_inmemory_source_5_0_6.py": "4909a77c3ef0e625c3796db8403e222ebec3608f599988c9129c6200b51f77fd"
+  },
+  "support_files": {
+    "scripts/inmemory_cli_source_binding_5_0_6.py": "663f6f0aebe34372313a44480353686d0baf4f53f63bc198def3ba35a83d094f",
+    "tests/parity/verify_inmemory_cli_admission_5_0_6.py": "89e592982b0feca160492a274fe4e263554281940cb2583324678408e291c8cd",
+    "tests/parity/verify_inmemory_cli_source_controls_5_0_6.py": "b691b3185bf4bd74b461ae4d01c90723cfdb87a4c11232cabe9e2d3f45d297d7",
+    "tests/parity/compare_inmemory.py": "3653f49a5622eaaead13073d789833e6448edc258cce8a276694a13b544d481f",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/expression_cli_cases.py": "b538589e11091253eda7ecba686ccd9214ea64d108f4e019b9a19419386cf9d1"
+  },
+  "corpus": "tests/parity/inmemory_baseline_5_0_6_cases.json.gz",
+  "additional_corpus": "tests/parity/inmemory_source_5_0_6_cases.json.gz",
+  "test": "inmemory_rust_parity",
+  "comparator": "tests/parity/compare_inmemory.py",
+  "binary": "teaql_inmemory_probe"
+}

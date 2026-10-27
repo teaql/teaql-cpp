@@ -1,5 +1,12 @@
 # G06 general-query acceptance review
 
+Current correction: the [creation boundary](generated_creation_identity_5_0_6.md)
+was reopened after90 source/native differences and is now requalified:90/90
+complete results, runtime first gates,80 SDK byte preservation, current Java86,
+native10/module1/ASan-UBSan1 and196 compiler contracts. G06 returns to qualified;
+G13/G14/G17 and P0-P7 remain open. The remaining acceptance text preserves its
+original checkpoint scope.
+
 G06 is qualified for the complete locked source-selected general-query interface,
 with the explicit C++ ownership, naming and native-extension dispositions below.
 All twelve requirements have body/guard review and semantic evidence. The complete

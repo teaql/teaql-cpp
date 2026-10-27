@@ -21,6 +21,8 @@ def main():
     baseline = json.loads((root / 'upstream.lock.json').read_text())['commit']
     if corpus['baseline'] != baseline:
         raise RuntimeError('Audit observations belong to a different source baseline')
+    if type(corpus.get('cases')) is not list or not corpus['cases']:
+        raise RuntimeError('Comparison corpus cases must be a nonempty list')
     inputs = [case['input'] for case in corpus['cases']]
     expected = [case['expected'] for case in corpus['cases']]
     emulator = args.cpp_emulator.split(';') if args.cpp_emulator else []

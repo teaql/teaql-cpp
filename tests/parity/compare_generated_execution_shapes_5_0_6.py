@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import sys
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -68,6 +69,7 @@ def main():
             ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
+        require_cases(corpus, len(cases), cases)
         assert corpus['baseline'] == baseline and corpus['producer'] == producer
         assert corpus['fixtures'] == fixtures
         assert same(cases, [x['input'] for x in corpus['cases']])
@@ -75,6 +77,8 @@ def main():
         if args.rust:
             assert same(expected, observe(args.rust, cases)), 'Original execution changed'
     actual = observe(args.cpp, cases)
+    if len(actual) != len(cases):
+        raise RuntimeError('Native observations must cover the complete input matrix')
     failures = [n for n, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     if args.record:
         archive = ROOT / 'docs/parity/generated_execution_shapes_initial_5_0_6.json.gz'

@@ -425,28 +425,32 @@ inline OrderStatusExpression PersonExpression::getStatus() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static OrderStatusExpression orderStatus(const OrderStatus& value) {
-        return OrderStatusExpression(entity_expression(value, StaticString{"orderStatus"}));
+        return OrderStatusExpression(
+            entity_expression(value, StaticString{"orderStatus"}, StaticString{"OrderStatus"}));
     }
 
     static OrderStatusExpression orderStatus(OrderStatus&&) = delete;
     static OrderStatusExpression orderStatus(const OrderStatus&&) = delete;
 
     static RecordExpression record(const Record& value) {
-        return RecordExpression(entity_expression(value, StaticString{"record"}));
+        return RecordExpression(
+            entity_expression(value, StaticString{"record"}, StaticString{"Record"}));
     }
 
     static RecordExpression record(Record&&) = delete;
     static RecordExpression record(const Record&&) = delete;
 
     static PersonExpression person(const Person& value) {
-        return PersonExpression(entity_expression(value, StaticString{"person"}));
+        return PersonExpression(
+            entity_expression(value, StaticString{"person"}, StaticString{"Person"}));
     }
 
     static PersonExpression person(Person&&) = delete;

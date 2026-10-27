@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare complete generated temporal bootstrap under the existing test wall clock."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import hashlib
@@ -71,7 +72,7 @@ def main():
                    for i, (value, source, native) in enumerate(zip(inputs, expected, actual))
                    if not same(source, native)]
     if differences:
-        path = ROOT / 'docs/parity/constant_temporal_5_0_6_initial_gaps.json'
+        path = diagnostic_path(ROOT / 'docs/parity/constant_temporal_5_0_6_initial_gaps.json')
         if not path.exists():
             path.write_text(json.dumps(dict(count=len(differences), differences=differences), indent=2) + '\n')
         print(json.dumps(differences[0], indent=2))

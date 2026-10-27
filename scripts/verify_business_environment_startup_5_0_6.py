@@ -11,6 +11,7 @@ import sqlite3
 import tempfile
 from contextlib import closing
 from verify_business_runtime_configuration_5_0_6 import source_inputs
+from verify_legacy_observation_identity_5_0_6 import verify_record
 
 ROOT = Path(__file__).resolve().parents[1]
 BOUNDARIES = ROOT / 'docs/parity/business_environment_source_boundaries_5_0_6.json.gz'
@@ -60,7 +61,9 @@ def main():
     assert bool(args.cpp) != bool(args.observe_original)
     if args.record and args.record.exists():
         parser.error('Preserve prior evidence; select a new record path')
-    original = json.loads((ROOT / 'docs/parity/business_runtime_configuration_original_5_0_6.json').read_text())
+    original_path = ROOT / 'docs/parity/business_runtime_configuration_original_5_0_6.json'
+    verify_record(original_path)
+    original = json.loads(original_path.read_text())
     inputs = source_inputs()
     assert original['source_inputs'] == inputs
     assert original['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
@@ -113,6 +116,7 @@ def main():
                 if result['exit_code']:
                     assert result['exit_code'] == 101 and 'not a char boundary' in result['stderr']
     else:
+        verify_record(BOUNDARIES)
         boundaries = json.loads(gzip.decompress(BOUNDARIES.read_bytes()))
         assert boundaries['complete'] and boundaries['source_inputs'] == inputs
         assert len(original['cases']) == 27 and len(original['source_environment_errors']) == 18
@@ -140,6 +144,7 @@ def main():
                     assert result['exit_code'] == 0 and result['actual'] == expected, row
                     row['disposition'] = 'Complete original JSON outcome matches.'
                 save()
+        verify_record(FILESYSTEM)
         filesystem = json.loads(gzip.decompress(FILESYSTEM.read_bytes()))
         assert filesystem['complete'] and filesystem['source_inputs'] == inputs
         assert len(filesystem['cases']) == 2

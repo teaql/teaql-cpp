@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "count": 36,
+  "dependency_packages": 39,
+  "source_manifest": "tests/parity/rust_sqlite_raw_debug_source_5_0_6/Cargo.toml",
+  "source_lock": "tests/parity/rust_sqlite_raw_debug_source_5_0_6/Cargo.lock",
+  "corpus": "tests/parity/sqlite_from_sql_raw_debug_5_0_6_cases.json.gz",
+  "historical_corpus": "sqlite_from_sql_raw_debug_cases.json.gz",
+  "original_receipt": "docs/parity/sqlite_raw_debug_cli_original_execution_5_0_6.json.gz",
+  "driver": "tests/parity/rust_values/src/bin/sqlite_from_sql_error_oracle.rs",
+  "comparison": "sqlite_from_sql_raw_debug_rust_parity",
+  "comparator": "tests/parity/compare_sqlite_from_sql_raw_debug.py",
+  "probe": "teaql_sqlite_from_sql_error_probe",
+  "support_files": {
+    "scripts/sqlite_raw_debug_cli_source_binding_5_0_6.py": "232e700850065b8198cc37b50b65e39d758ad945ffbbf8db8ba4234a5b349784",
+    "tests/parity/verify_sqlite_raw_debug_cli_controls_5_0_6.py": "9d5b9e7471f465244a463ffcdeffc08015a82129d23828f1630c2020de48bdcd",
+    "tests/parity/rust_sqlite_raw_debug_source_5_0_6/Cargo.toml": "68207b84030a5ba465012f0ca4ab9a186be6a8844ac175075f1fb5b510d0758c",
+    "tests/parity/rust_sqlite_raw_debug_source_5_0_6/Cargo.lock": "39243a042cd6b72e1939c1061b01c818271aeb608001aad0919e69d97ad9132b",
+    "tests/parity/rust_values/src/bin/sqlite_from_sql_error_oracle.rs": "3efafbf783e7d696f2570d156a084b2469095cafb3ad9450a1c141e36229a4a5",
+    "tests/parity/compare_sqlite_from_sql_raw_debug.py": "38cac95ee1dc71d49181185a831f3b8f0b2db7802f97f2fba3f205e0baca6f81",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/sqlite_from_sql_error_probe.cpp": "8488245096886bbc5c57e3a3813f38eb991a681e7c469b556039010f38bc9af4",
+    "scripts/verify_constant_closure_5_0_6.py": "fa6529d41bc2bcbce48c26831cd68cf58178b13d9e1dd19a5c1b9ff4a66b582c",
+    "scripts/verify_state_baselines_5_0_6.py": "328c14187c6672ab692642b3d0051ae97757970d3b71424ae8cb10ed84875a04"
+  },
+  "evidence_files": {
+    "tests/parity/sqlite_from_sql_raw_debug_5_0_6_cases.json.gz": "65fb640f0e725f768e9da3773c259374a4da968adbabfd41d31fea9e4dc51766",
+    "tests/parity/sqlite_from_sql_raw_debug_cases.json.gz": "52d3d732cfffec3d59deedf1130b39723efff7c49c739d1262341d0603ca55bd",
+    "docs/parity/sqlite_raw_debug_cli_original_execution_5_0_6.json.gz": "df8164afdbdf969b1fafdd933c73947ca5007c42dea3cceb23d8cee825b7fbef"
+  }
+}

@@ -50,7 +50,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Priority::ENTITY_NAME,
+            "Priority",
             "platform",
             "Platform",
             entity.platformId(),
@@ -196,7 +196,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            SampleItem::ENTITY_NAME,
+            "SampleItem",
             "platform",
             "Platform",
             entity.platformId(),

@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "project": "tests/parity/rust_sql_mutation_source_5_0_6/Cargo.toml",
+  "package": "teaql_sql_mutation_original_source_506",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-runtime",
+    "teaql-data-service",
+    "teaql-sql",
+    "teaql-macros",
+    "teaql-provider-sqlite"
+  ],
+  "support_files": [
+    "tests/parity/rust_values/src/fixture_value.rs",
+    "tests/parity/rust_values/src/fixture_sql.rs",
+    "tests/parity/rust_field_layout/src/bin/sql_execution_5_0_6.rs"
+  ],
+  "input_helpers": {
+    "tests/parity/mutation_execution_inputs_5_0_6.py": "feba10da1ed075cafd426455e1c5864bb33f6367e8fede8b97cdfbeddde09374",
+    "scripts/verify_sql_protocol_5_0_6.py": "a38dc33171e5567704fab5bdfaf691a26ca8ad6348795462424499b25d93ace8"
+  },
+  "historical_partition": {
+    "path": "tests/parity/sql_grouped_partition_inputs_5_0_6.json",
+    "sha256": "8014513e20bf7c9173edeab3c62832ab887953c778cfe28437a3ed02844726c7"
+  },
+  "contracts": [
+    {
+      "name": "mutation_descriptor_cache",
+      "native_test": "mutation_descriptor_cache_rust_parity",
+      "count": 24,
+      "corpus": "tests/parity/mutation_descriptor_cache_5_0_6_cases.json.gz",
+      "corpus_sha256": "8e72ec9b1b78bb01b69db960bcf941124242cbf92290611a06aea729bb6d9e8e",
+      "driver": "tests/parity/mutation_descriptor_cache_source_5_0_6.rs",
+      "driver_sha256": "b2c3aad19235f143ff686c0a564b73f22b2f5c0d4c1b719458c1ef1282c1c9ac",
+      "target": "mutation_descriptor_cache_source_506",
+      "native_target": "teaql_mutation_descriptor_cache_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_mutation_descriptor_cache_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_mutation_descriptor_cache_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_mutation_descriptor_cache_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "mutation_execution_source",
+      "native_test": "mutation_execution_source_rust_parity",
+      "count": 2016,
+      "corpus": "tests/parity/mutation_execution_source_5_0_6_cases.json.gz",
+      "corpus_sha256": "39e0409c372528c51f53c64c600bf08a0139fed9010e7faad0d5c14a0cc6908c",
+      "driver": "tests/parity/rust_sql_protocol_5_0_6/sql_execution_protocol.rs",
+      "driver_sha256": "71cc6764f49c3e078c6f4c3fad4a02ccc3518b5983c0916fa500e092534b1136",
+      "target": "mutation_execution_source_506",
+      "native_target": "teaql_sql_execution_protocol_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_execution_protocol_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_mutation_execution_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_execution_protocol_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "sql_cached_partition",
+      "native_test": "sql_cached_partition_rust_parity",
+      "count": 8,
+      "corpus": "tests/parity/sql_cached_partition_protocol_5_0_6_cases.json.gz",
+      "corpus_sha256": "0e9ed5e435fba74709a9e689f6850e891d6a1d3d44983275e0e08fdbc241ae4d",
+      "driver": "tests/parity/rust_sql_protocol_5_0_6/sql_cached_partition.rs",
+      "driver_sha256": "6ac9d8d89e3aa3f2aa769ad777ed8099dfc5409cfa56e0648e08c0a6100138a8",
+      "target": "sql_cached_partition",
+      "native_target": "teaql_sql_cached_partition_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_cached_partition_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_cached_partition_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_cached_partition_probe"
+      ]
+    }
+  ]
+}

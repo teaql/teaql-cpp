@@ -5,6 +5,7 @@ import gzip
 import json
 from pathlib import Path
 import subprocess
+from compare_values import json_lines, same
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -21,10 +22,10 @@ def main():
     if not provenance['all_original_bodies_preserved'] or provenance['source_files_sha256'].get('src/data_service/graph.rs') != '552c99766ae688454029c212dfa01f4e6ee27e836e955fa00fe34a8b3b8ca952':
         raise SystemExit('Graph-outcome evidence has a different source baseline')
     result = subprocess.run([args.cpp], capture_output=True, text=True, check=True)
-    observed = [json.loads(line) for line in result.stdout.splitlines()]
-    if observed != original['observations']:
+    observed = json_lines(result.stdout)
+    if not same(observed, original['observations']):
         for index, (expected, actual) in enumerate(zip(original['observations'], observed)):
-            if expected != actual:
+            if not same(expected, actual):
                 print(json.dumps({'index': index, 'expected': expected, 'actual': actual}, indent=2))
                 break
         raise SystemExit(f'Graph-outcome observations differ: expected 15, observed {len(observed)}')

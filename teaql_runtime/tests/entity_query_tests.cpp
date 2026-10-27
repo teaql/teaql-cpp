@@ -98,6 +98,102 @@ static void seed(UserContext& user_context, std::string_view name) {
     cpp_examples::require_value(result.wait());
 }
 
+struct CreationProduct : Product {
+    using Product::Product;
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "raw_product";
+
+    static Result<CreationProduct, EntityError> from_compact_row(Memory, CompactRow) {
+        throw std::logic_error("Creation fixture must not decode a database row");
+    }
+
+    static Result<CreationProduct, EntityError>
+    from_compact_row_with_context(Memory, CompactRow, AnyRef) {
+        throw std::logic_error("Creation fixture must not decode a database row");
+    }
+};
+
+class CreationIds final : public InternalIdGenerator {
+public:
+    using allocator_type = Allocator;
+    unsigned mode;
+    mutable Vector<String> calls;
+
+    CreationIds(std::allocator_arg_t, Allocator allocator, unsigned value)
+        : mode(value), calls(allocator.resource()) {}
+
+    Result<std::uint64_t, RuntimeError> generate_id(Memory r,
+                                                    std::string_view entity) const override {
+        calls.emplace_back(entity);
+        if (mode == 2) {
+            return Result<std::uint64_t, RuntimeError>::err(
+                r, RuntimeError::id_generation(r, "creation allocator failure"));
+        }
+        return Result<std::uint64_t, RuntimeError>::ok(r, mode == 1 ? 0 : 1000 + calls.size());
+    }
+};
+
+static void creation_id_and_graph_binding() {
+    GlobalContext global;
+    for (unsigned mode = 0; mode != 3; ++mode) {
+        for (unsigned graph = 0; graph != 3; ++graph) {
+            auto user_context = global.make_user_context();
+            {
+                auto r = user_context->memory_resource();
+                auto& ids = user_context->make<CreationIds>(mode);
+                user_context->set_internal_id_generator(*user_context, ids);
+                auto freeze = [&] {
+                    EntityGraphBuilder builder(std::allocator_arg, Allocator(r));
+                    builder.install(700, std::uint64_t{909});
+                    check(static_cast<bool>(user_context->entity_runtime_state().freeze_graph(
+                              std::move(builder))),
+                          "creation graph installs exactly once");
+                };
+                if (graph == 1) {
+                    freeze();
+                }
+                auto request = EntityQuery<CreationProduct, ExampleExecutor>(*user_context)
+                                   .comment("Prepare new products")
+                                   .purpose("Qualify creation allocation and graph binding");
+                auto& first = request.newEntity(*user_context);
+                if (graph == 2) {
+                    freeze();
+                }
+                auto& second = request.newEntity(*user_context);
+                first.updateName("first");
+                check(first.id() == (mode == 0 ? 1001 : 0) &&
+                          second.id() == (mode == 0 ? 1002 : 0) && first.is_new() &&
+                          second.is_new(),
+                      "ID failure still returns new entities; a successful zero remains loaded");
+                check(first.is_field_loaded("id") == (mode != 2) &&
+                          second.is_field_loaded("id") == (mode != 2) &&
+                          first.is_field_loaded("name") && !second.is_field_loaded("name") &&
+                          second.name().empty() &&
+                          first.dirty_fields()->size() == (mode == 2 ? 1 : 2) &&
+                          (mode == 2 ? !second.dirty_fields() : second.dirty_fields()->size() == 1),
+                      "each new entity retains independent load and mutation state");
+                for (const auto* entity : {&first, &second}) {
+                    const auto* value =
+                        entity->entity_runtime_state()->resolve_entity<std::uint64_t>(700);
+                    check(graph == 0 ? value == nullptr : value && *value == 909,
+                          "new entities observe the Context graph before and after creation");
+                }
+                check(ids.calls.size() == 2 && ids.calls[0] == "raw_product" &&
+                          ids.calls[1] == "raw_product",
+                      "ID allocation uses the explicitly generated raw model identity");
+                auto foreign_user_context = global.make_user_context();
+                rejects(
+                    [&] {
+                        request.newEntity(*foreign_user_context);
+                    },
+                    "creation refuses an execution Context different from its binding");
+            }
+            user_context.reset();
+            check(global.live_user_bytes() == 0,
+                  "creation state and allocator calls are reclaimed with the UserContext");
+        }
+    }
+}
+
 static Purposed product_request(UserContext& user_context) {
     return Query(user_context).orderAsc("id").comment("Read products").purpose("Inspect products");
 }
@@ -531,6 +627,7 @@ int main() {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
         compact_list_trace_and_intent();
+        creation_id_and_graph_binding();
         construction_and_execution();
         sqlite_stream_lifecycle();
         deferred_stream_lookup();

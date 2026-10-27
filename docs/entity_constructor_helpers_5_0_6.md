@@ -1,5 +1,10 @@
 # Entity construction and inherited scalar helpers: Rust 5.0.6
 
+The later [installed CLI source-binding checkpoint](entity_constructor_cli_source_binding_5_0_6.md)
+rebuilds the original Rust observer and verifies all 512 outcomes against
+fresh C++ execution. The bounded evidence does not change the wider
+qualification status below.
+
 This checkpoint repairs a generated constructor discrepancy and adds G01/G13
 evidence. It does not complete G01/P1 or the wider generator goal.
 

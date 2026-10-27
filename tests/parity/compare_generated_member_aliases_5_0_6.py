@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+from compare_values import json_lines, same
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = ROOT / 'tests/parity/generated_member_alias_5_0_6_cases.json.gz'
@@ -50,8 +51,8 @@ def main():
                                     exit_code=process.returncode, stdout=process.stdout, stderr=process.stderr))
         save()
         process.check_returncode()
-        actual = [json.loads(line) for line in process.stdout.splitlines()]
-        if len(actual) != len(corpus['expected']) or actual != corpus['expected']:
+        actual = json_lines(process.stdout)
+        if not same(actual, corpus['expected']):
             record['actual'] = actual
             save()
             raise RuntimeError(f'{label}: complete generated decoder observations differ')

@@ -1,5 +1,10 @@
 # Generated indexed model integration for Rust 5.0.6
 
+The later [installed LoadState CLI source-binding checkpoint](eval_indexed_cli_source_binding_5_0_6.md)
+matches 18/18 common semantic outcomes and retains the whole-output raw
+diagnostic difference. Its evidence scope does not change the qualification
+boundaries below.
+
 This is the original scoped checkpoint. Later
 [G01 acceptance](entity_helper_acceptance_5_0_6.md) and the
 [current G15 responsibility review](shared_load_state_requirements_5_0_6.md)

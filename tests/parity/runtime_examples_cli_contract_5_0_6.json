@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "count": 2,
+  "sql_entries": 34,
+  "dependency_packages": 132,
+  "source_manifest": "tests/parity/rust_runtime_examples_source_5_0_6/Cargo.toml",
+  "source_lock": "tests/parity/rust_runtime_examples_source_5_0_6/Cargo.lock",
+  "corpus": "tests/parity/runtime_examples_5_0_6_cases.json",
+  "provenance": "tests/parity/runtime_examples_provenance_5_0_6.json",
+  "original_receipt": "docs/parity/runtime_examples_cli_original_execution_5_0_6.json.gz",
+  "driver": "tests/parity/rust_field_layout/src/bin/runtime_examples_5_0_6.rs",
+  "original_sources": [
+    ".reference/teaql-rs/examples/src/lib.rs",
+    ".reference/teaql-rs/examples/src/bin/sqlite_schema_crud.rs",
+    ".reference/teaql-rs/examples/src/bin/sqlite_relations_graph.rs",
+    "tests/parity/rust_field_layout/src/bin/runtime_examples_5_0_6.rs"
+  ],
+  "comparison": "runtime_examples_rust_parity",
+  "comparator": "tests/parity/compare_runtime_examples_5_0_6.py",
+  "support_files": {
+    "scripts/runtime_examples_cli_source_binding_5_0_6.py": "d8eccdc2f179ecee6deb16ebaab230f6640f6fe5ef6515b6ed4b1039596d704e",
+    "tests/parity/verify_runtime_examples_cli_controls_5_0_6.py": "173bf193bc05c878fb166e52bcfb6e2c12a8e7b9b85304782f1ce597fd9a3f76",
+    "tests/parity/rust_runtime_examples_source_5_0_6/Cargo.toml": "7a3a68ee8c637fdc6daa171d4e89f7060312cf4dae8838c78836b5ce0b07b794",
+    "tests/parity/rust_runtime_examples_source_5_0_6/Cargo.lock": "a66da9f4a7da612391e6e5dd70ee93b540fb9f716c34329333d8763a941e9091",
+    "tests/parity/rust_field_layout/src/bin/runtime_examples_5_0_6.rs": "f347fb7216263524f92c11ea5dbda1fbb13156043b65cc7cfc40ac7395eaaca4",
+    "tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs": "b293ead8f720c253047747af509a2923c7d325224677639aff40b306ecde139d",
+    "tests/parity/compare_runtime_examples.py": "4d1d18ce662b6c1269ad81c80d662a21a8ddfe081be648c5f8e45171df6d5084",
+    "tests/parity/compare_runtime_examples_5_0_6.py": "0d84392599e9074617cc6c455f79e43fa378e3dcadba03b0893747e7bec64f27",
+    "tests/parity/generate_runtime_examples_5_0_6.py": "9e8951fdf3672b990ca853e4874e2c3dbe8306f70a5f971f0927e03f4c89811a",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "examples/sqlite_schema_crud.cpp": "ec3c2c5ab15fab94efca8c9ac420b074e2b6a60ce30e0255dd60929f1422ec8e",
+    "examples/sqlite_relations_graph.cpp": "b219f68d12af27dbe075de5e9d84bd4c66748c769265629be5632ce24a167421",
+    ".reference/teaql-rs/examples/src/lib.rs": "f299e3f045a6bf38c7be2fcb22ac89f9c33af4c9204cc38c780cefafb9f9c9cd",
+    ".reference/teaql-rs/examples/src/bin/sqlite_schema_crud.rs": "0a7a0d3f82c69649ba4389229f0ee17106a21fcb853cca319d4a617dfdbdd23e",
+    ".reference/teaql-rs/examples/src/bin/sqlite_relations_graph.rs": "cbf7b1005fb578e28554e7b48824aedbf510a08d1b64db389311ee654c6408df"
+  },
+  "evidence_files": {
+    "tests/parity/runtime_examples_5_0_6_cases.json": "eea3c6313408a0854d0c00a5f429eac3ecc478318c7048dd2f709674e1fd9d07",
+    "tests/parity/runtime_examples_provenance_5_0_6.json": "42b398bccfbc0da40ca9688dfee77255b4bc9654e8c41195eaa3e099028ccdf6",
+    "docs/parity/runtime_examples_cli_original_execution_5_0_6.json.gz": "b708cb01baca8ed79e2becb5c2fca634815b036485506937cd153671241ee9f7"
+  }
+}

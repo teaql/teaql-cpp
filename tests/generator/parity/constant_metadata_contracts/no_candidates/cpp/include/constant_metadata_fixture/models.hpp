@@ -21,6 +21,7 @@ struct Status : generated_detail::Model<Status> {
     using Base = generated_detail::Model<Status>;
     friend class StatusChecker;
     static constexpr std::string_view ENTITY_NAME = "Status";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "status";
     friend struct generated_detail::StatusSampleRecipe;
     friend struct generated_detail::StatusBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -189,6 +190,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};

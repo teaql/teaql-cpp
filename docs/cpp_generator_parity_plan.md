@@ -1,5 +1,1133 @@
 # C++ generator parity plan
 
+Current AP02 cross-branch regression continuation:
+[The installed 162-case corpus](audit_grammar_branch_review_5_0_6.md#installed-cross-branch-composition-regression)
+pins the previous exploratory source results as a permanent Java test resource
+and source-verifier input. Fresh locked Rust/current Java execution matches
+**80,160/80,160** complete metadata outcomes with zero differences and passes
+**154/154** Java tests. The added 102 later-setting and 60 earlier-setting
+cases change no production generator or C++ runtime code. Three compiled model
+pairs and one School SQLite consumer retain their earlier bounded scopes; the
+other 159 inputs remain metadata-only. The task-owned build directory is
+removed. Complete AP02/G14, G13/G17 and P0-P7 stay open.
+
+Current native continuation: the
+[first post-install full epoch](parity/ap02_cross_composition_full_native_terminal_5_0_6.json.gz)
+executes all 1,063 registered tests against 11,811 unchanged inputs and ends
+with **1,062 passes / one isolated admission-fixture failure**. The
+[fixture repair](custom_case_admission_fixture_5_0_6.md) copies a newly
+required comparator helper into the temporary test repository; its 60/60
+controls and selected CTest pass. A fresh complete epoch is running on the
+repaired input set. The failed epoch is not relabeled green; complete
+G13/G14/G17 and P0-P7 exits remain open.
+
+Current AP02 type/pattern/nested-item continuation:
+[The installed 162-case corpus](audit_grammar_branch_review_5_0_6.md#installed-type-and-pattern-continuation)
+preserves 77 later-attribute continuations, 79 source parse boundaries and
+six complete refusals against locked Rust 5.0.6. Installed source replay matches
+**79,998/79,998** metadata outcomes with zero differences and passes
+**153/153** Java tests. Five SDKs reproduce unchanged, and the existing
+compiled caller matrix matches **24/24** original/C++ descriptor and privacy
+results. The preceding frozen native epoch passes **1,063/1,063** on its old
+producer input set. The [post-install frozen native epoch](parity/ap02_type_pattern_full_native_terminal_5_0_6.json.gz)
+also passes **1,063/1,063** with no failure, error or skip across **11,809**
+unchanged inputs. It precedes the subsequent comparator-scope corrections;
+their selected current-source gates pass, but a complete current-source epoch
+remains required. These finite results do not close AP02/G14/P0-P7.
+An independent [162-input cross-composition probe](audit_grammar_branch_review_5_0_6.md#installed-type-and-pattern-continuation)
+also matches locked Rust metadata (102 later effects, 60 earlier parse
+boundaries). Three selected generated models additionally match nine
+descriptors and 42 field-privacy tuples. The set is exploratory and has no
+permanent producer regression or capability promotion.
+A related [source-derived School case](audit_grammar_branch_review_5_0_6.md#installed-type-and-pattern-continuation)
+also matches three generated descriptors, 12 audited SQLite Save outcomes,
+one query and twelve safe/ordinary/debug sink observations. Its audited value
+is exactly the generated 21-character limit, so this selected case does not
+exercise truncation. This is bounded consumer evidence for one configuration,
+not complete AP02/G14/G17/P0-P7.
+
+Current relation original-receipt admission:
+[The source-receipt repair](relation_probe_boundaries_5_0_6.md#current-original-receipt-admission-repair)
+rejects a demonstrated altered original Rust test identity before the C++
+boundary comparison. Selected native checks pass 2/2. The prior 1,062-test
+epoch was deliberately interrupted after 785 passes and has no terminal JUnit;
+the corrected registry has 1,063 tests. Complete G13/P0-P7 remain open.
+
+Current configured-type original replay:
+[The six-model run](legacy_observation_identity_5_0_6.md#fresh-original-sample-replay)
+matches 360 complete and 42 focused retained Rust sample outcomes. Combined
+with the custom, catalog, Business-ID and environment replays below, all ten
+byte-pinned sample/business-configuration artifacts now have fresh locked-Rust
+execution evidence on this host. Broader G13 and P0-P7 requirements remain.
+
+Current original sample replay:
+[The locked-source sample run](legacy_observation_identity_5_0_6.md#fresh-original-sample-replay)
+matches 140/23 custom, 240/30 catalog and 128 Business-ID complete/focused
+retained observations. Three isolated Rust builds pass and their task-owned
+target was removed. This is scoped original-source evidence; G13/P0-P7 remain
+open.
+
+Current Business-ID environment source replay:
+[The locked-source boundary run](generated_business_environment_startup_5_0_6.md#fresh-locked-source-boundary-replay)
+matches 21 retained original environment outcomes and two filesystem outcomes.
+Only the process-specific thread identifier is projected in three panic
+diagnostics. Its task-owned Cargo target was removed; this does not add a new
+C++ comparison or close G13/P0-P7.
+
+Current Business-ID configuration replay:
+[The locked-source run](business_runtime_configuration_5_0_6.md#fresh-original-configuration-replay)
+rebuilds the generated Rust observer and matches the original/C++ outcomes for
+27 runtime/persistence scenarios and 18 source-only environment failures. Its
+task-owned Cargo target was removed. This is scoped source evidence; G13 and
+P0-P7 remain open.
+
+Current additional source fixture:
+[The resource-replacement comparison binding](custom_public_cli_permanent_gate_5_0_6.md#resource-replacement-comparison-fixture)
+requires the existing custom source gate before the retained deferred-result
+comparison. Its selected checks pass 3/3 and isolated auto-fixture selection
+passes 2/2. A preceding 1,062-test epoch was deliberately interrupted after
+786 passed tests; it has no terminal full-suite verdict. A new full native
+epoch is required, and G13/G14/G17/P0-P7 remain open.
+
+Current runtime-configuration original replay:
+[The locked-source re-execution](runtime_configuration_provenance_gap_5_0_6.md#fresh-locked-source-replay)
+passes the source gate, two isolated Rust builds, 20 retained configuration
+observations, 9 configuration/NUL outcomes, 5 service-error branches and 13
+registry/schema outcomes. Its task-owned Cargo target was removed. This
+qualifies the four retained records on the current host; complete generated
+assembly and G13/G17/P0-P7 remain open.
+
+Current configuration-record provenance finding:
+[The installed source admission repair](runtime_configuration_provenance_gap_5_0_6.md)
+pins four complete original records and their required source/dependency
+inputs; the preceding shared verifier accepted empty maps. Twenty corruptions
+now reject, and affected native checks pass 9/9 plus a single-comparison fixture
+check 2/2. The older 1,059-test epoch was deliberately interrupted after 37
+completed tests. The scoped original Rust replay is recorded above; complete
+GP13/SQ02 remain open.
+
+Current custom source CTest binding:
+[The installed fixture correction](custom_public_cli_permanent_gate_5_0_6.md#current-installed-ctest-fixture-binding)
+requires the current source gate before three direct custom comparisons and
+their combined comparison. The earlier 1,059-test registry contained all five
+fixture links; focused native checks pass 6/6, and selecting a single comparison
+automatically runs its source gate (2/2). The preceding full 1,059-test run was
+deliberately interrupted after 59 completed tests when the wiring gap was found;
+it supplies no terminal full-suite verdict. Current full integration and
+G13/G14/G17/P0-P7 acceptance remain open.
+
+The preceding 1,062-test registry had 512 `*_rust_parity` comparisons. All
+512 declare a source fixture. All 65 configured fixture names have exactly one
+setup test and at least one dependent test; none is orphaned. Ten retained
+sample/business-configuration observation artifacts are now byte-pinned and
+their changed-record controls reject 10/10. Their affected native comparisons
+pass 7/7, and selecting one comparison automatically runs its source gate
+(2/2). The [retained-observation qualification](legacy_observation_identity_5_0_6.md)
+records its exact scope. This is a wiring and retained-record qualification,
+not complete semantic acceptance.
+
+Current generated Credential receipt admission:
+[The independent current-source control](audit_generated_credential_execution_5_0_6.md#current-receipt-admission)
+binds 533 inputs and 59 Java dependencies to the retained 45-step generated
+SQLite execution, 12 Save pairs, 12 query files and four mutation files.
+Fourteen corruptions reject and its selected CTest passes 1/1. This strengthens
+G14/G17 provenance and protected-publication evidence without claiming a new
+SQL run or complete G14/G17/P0-P7 acceptance.
+
+Current column-attribute compatibility candidate:
+[Fresh current-source execution](field_attribute_boundary_5_0_6.md#current-source-requalification)
+reconfirms two locked Rust descriptor outcomes, exact C++ rejection, one
+24-property valid-model equality and 13/13 negative controls after the old
+candidate input hash became stale. This is a diagnostic candidate; the
+compatibility decision and complete G14/AP02/P0-P7 acceptance remain open.
+
+Current expression child-rule checkpoint:
+[The 330-case source-derived matrix](audit_grammar_branch_review_5_0_6.md#expression-child-rule-matrix)
+is a permanent producer regression. Fresh locked Rust/current Java execution
+matches **79,836/79,836** retained metadata results, and **152/152** Java
+tests pass. AP02/G14 and P0-P7 remain incomplete; this matrix has no new
+generated-caller or SQL execution claim.
+
+Current audit expression continuation checkpoint:
+[The 160-case source-derived continuation corpus](audit_grammar_branch_review_5_0_6.md#expression-continuation-regression)
+is now a permanent Java regression. Fresh locked Rust/current Java execution
+matches **79,506/79,506** retained metadata results, and **151/151** Java
+tests pass. Complete AP02/G14 and P0-P7 remain open.
+
+Current generated Credential execution checkpoint:
+[A complete generated School password model](audit_generated_credential_execution_5_0_6.md)
+joins a descriptor-derived `Credential` policy to an actual SQLite
+`password LIKE` binding and ordinary/debug file sinks. The password test
+value differs from the masked `name` value. Both implementations return the
+same query row, match twelve audited Save outcomes and pass twelve
+fresh-process sink cases; even the authorized debug file keeps the password
+binding redacted. This is a fifth independent model configuration alongside
+the four mask-state witnesses below. Complete AP02/G14/G17 and P0-P7 remain
+open.
+
+Current audited Credential mutation continuation:
+[The same generated model updates password](audit_generated_credential_execution_5_0_6.md#audited-password-mutation)
+through twelve exact original/C++ SQLite Save outcomes, including rollback,
+whole-plan Policy, optimistic conflict and post-commit sink error. Every
+delivered password safe field is `[REDACTED]` with Rust's forced credential
+mask flag and reason, while successful database readback retains the new
+business value. This is a separate receipt from the query-only Credential
+checkpoint; complete G14/G17 and P0-P7 remain open.
+
+Current Credential mutation SQL publication:
+[The generated password UPDATE file-sink gate](audit_generated_credential_execution_5_0_6.md#mutation-sql-file-publication)
+passes four fresh-process Rust/C++ ordinary/debug file cases. Both languages
+emit the same masked UPDATE SQL line, with neither initial nor updated
+password in the files. An unset acknowledgement produces no debug file.
+The 45-step receipt retains the twelve Save pairs and twelve query-sink
+cases; full G14/G17/P0-P7 acceptance remains open.
+
+Current generated binding-policy execution checkpoint:
+[Four complete inheritance model configurations](audit_generated_binding_policy_execution_5_0_6.md)
+distinguish `Masked`, `Plain` and `Unknown` from generated School descriptors
+through SQLite queries, audited Save events and actual ordinary/debug log
+files. A missing mask model attribute becomes a declared empty list and
+`Plain`; an earlier container parse stop leaves the mask undeclared and
+`Unknown`. The direct safe-audit projection and governed Save event differ for
+`Unknown`: only the latter receives binding-derived redactions in this route.
+Each configuration retains twelve original/C++ Save pairs and twelve
+fresh-process sink cases. Complete AP02/G14/G17 and P0-P7 remain open.
+
+Current generated audit-to-SQL/sink checkpoint:
+[Three source-derived inheritance model configurations](audit_generated_sql_sink_expression_5_0_6.md)
+join compiled School audit metadata to audited SQLite Save and actual
+query execution. Each configuration matches twelve original/C++ Save results:
+five single-entity outcomes,
+explicit single-entity approval, two-entity pending-mutation graph success and
+denial, explicit two-entity approval, a later School write failure and child/root
+optimistic conflicts. Direct projection, safe SQL records and 12/12 ordinary/
+debug file-sink cases also match per model: **36 Save pairs and 36 file-sink
+cases** overall. The three separate 44/95-file generations, 532 unchanged
+input hashes and 41 successful steps per receipt are recorded. Complete AP02, other graph/
+approval variants, arbitrary sinks and G14/G17/P0-P7 remain open.
+
+Current generated binding-redaction checkpoint:
+[Three original/C++ generated domains](audit_generated_binding_redactions_5_0_6.md)
+join 42 descriptor-derived field policies to actual `from_bindings` capture.
+All safe and plaintext-enabled lists match, including masked and credential
+fields; nine descriptors and 526 input hashes are checked. SQL execution,
+sink publication and complete G14/G17/P0-P7 remain open.
+
+Current generated audit-metadata callers:
+[Three original/C++ generated domains](audit_delegated_nested_callers_5_0_6.md)
+join selected nested/delegated syntax to **9 matching descriptors and 42
+matching field-privacy policies**, with actual `UserContext` destruction.
+This does not execute SQL or complete AP02/G14/P0-P7.
+
+Current delegated/nested grammar checkpoint:
+[The 6,016-case diagnostic continuation](audit_delegated_nested_checkpoint_5_0_6.md)
+adds both historical grammar diagnostics to the permanent source-derived
+corpus. Fresh locked Rust/current Java execution matches **79,346/79,346**
+complete metadata outcomes and checked refusals, with **150/150** Java tests.
+Complete AP02/G14, protected consumers and P0-P7 remain open.
+
+Current nested-item source checkpoint:
+[The 2,143-case nested declaration corpus](audit_nested_item_checkpoint_5_0_6.md)
+is now a permanent original-source/installed-parser gate. Fresh execution
+matches 73,330/73,330 complete metadata effects and checked refusals across
+the full expanded corpus, with 148/148 Java regressions. This closes the old
+uninstalled candidate's finite cases, not complete AP02/G14 or P0-P7.
+
+Current quoted-column candidate:
+[The field-attribute boundary](field_attribute_boundary_5_0_6.md#current-candidate-verification)
+has fresh original entity execution for two quoted-column inputs, exact C++
+refusal, a 24-property valid-model comparison, 13 negative controls and eight
+focused Java tests. The compatibility decision remains pending; G14/AP02 and
+P0-P7 are not promoted by this candidate.
+
+Current native integration recovery:
+[The 1,058-test epoch and focused repair](native_integration_5_0_6.md#current-1058-test-native-epoch-and-focused-recovery)
+retain the full run's 1,048 passes, three failures and seven fixture-blocked
+tests. The two qualification wiring defects are repaired; a separate 14/14
+focused run covers all failed and blocked tests plus their relevant comparisons
+and fixtures. A subsequent complete native run passes **1,058/1,058**, with
+zero failures or skips, under the same test registry. Complete G13/G14/G17,
+GP13/GP16, AP02 and P0-P7 remain open.
+
+Current runtime examples CLI source checkpoint:
+[The two installed SQLite business examples](runtime_examples_cli_source_binding_5_0_6.md)
+bind two fresh original Rust outcomes and 34 ordered SQL entries to current
+C++ example execution. Fifteen negative controls and four selected CTests
+pass. The incremental lookup maps **160/160** installed comparison locators;
+the **1,058** CTest registry is enumeration. Complete G13/G14/G17,
+GP13/GP16, AP02 and P0–P7 remain open.
+
+Current SQLite transaction CLI source checkpoint:
+[The installed historical transaction comparison](sqlite_transaction_cli_source_binding_5_0_6.md)
+binds 510 fresh original Rust outcomes to 510 fresh exact C++ results across
+synchronous, asynchronous and lease routes. Fifteen negative controls and
+four selected CTests pass. The incremental lookup maps **159/160** comparison
+locators, with **1** remaining; the **1,055** CTest registry is enumeration.
+Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7 remain open.
+
+Current SQLite raw Debug CLI source checkpoint:
+[The installed native-width raw Debug comparison](sqlite_raw_debug_cli_source_binding_5_0_6.md)
+binds 36 fresh original Rust outcomes to 36 fresh exact C++ results without
+normalization. Fifteen negative controls and four selected CTests pass. The
+incremental lookup maps **158/160** comparison locators, with **2** remaining;
+the **1,052** CTest registry is enumeration. Complete G13/G14/G17, GP13/GP16,
+AP02 and P0–P7 remain open.
+
+Current logging CLI source checkpoint:
+[The installed log-manager and audit-event comparisons](logging_cli_source_binding_5_0_6.md)
+bind 94 normalized log outputs and 1,427 audit outputs to fresh original Rust
+and C++ execution. Fifteen negative controls and five selected CTests pass.
+The incremental lookup maps **157/160** comparison locators, with **3**
+remaining; the **1,049** CTest registry is enumeration. Complete G13/G14/G17,
+GP13/GP16, AP02 and P0–P7 remain open.
+
+Current JSON graph-limit CLI source checkpoint:
+[The installed large graph comparison](json_graph_limits_cli_source_binding_5_0_6.md)
+binds 11 fresh Rust outcomes to 11 fresh exact C++ results. Fifteen negative
+controls and five selected CTests pass. The incremental lookup maps
+**155/160** comparison locators, with **5** remaining; the **1,046** CTest
+registry is enumeration. Complete G13/G14/G17, GP13/GP16, AP02, and P0–P7
+remain open.
+
+Current protected Behavior CLI source checkpoint:
+[The installed original SQLite deletion/recovery comparison](protected_behavior_cli_source_binding_5_0_6.md)
+binds 1,296 fresh Rust outputs to 1,296 fresh exact C++ results. Fifteen
+negative controls and four selected CTests pass. The incremental lookup maps
+**154/160** comparison locators, with **6** remaining; the **1,043** CTest
+registry is enumeration. Raw autocommit is the checked scope; complete
+G13/G14/G17, GP13/GP16, AP02, and P0–P7 remain open.
+
+Current inherited Business-ID CLI source checkpoint:
+[The installed adapted original-method comparison](inherited_business_cli_source_binding_5_0_6.md)
+binds 450 fresh adapted Rust outcomes to 450 fresh exact C++ results;
+untouched producer acceptance remains false. Fifteen negative controls and
+five selected CTests pass. The incremental lookup maps **153/160** comparison
+locators, with **7** remaining; the **1,040** CTest registry is enumeration.
+Complete G13/G14/G17, GP13/GP16, AP02, and P0–P7 remain open.
+
+Current entity constructor CLI source checkpoint:
+[The installed original generated entity comparison](entity_constructor_cli_source_binding_5_0_6.md)
+binds 512 freshly rebuilt Rust outputs to 512 fresh exact C++ results.
+Fifteen negative controls and five selected CTests pass. The incremental
+lookup maps **152/160** comparison locators, with **8** remaining; the
+**1,037** CTest registry is enumeration. Complete G13/G14/G17, GP13/GP16,
+AP02, and P0–P7 remain open.
+
+Current Indexed LoadState CLI source checkpoint:
+[The installed six-variant comparison](eval_indexed_cli_source_binding_5_0_6.md)
+binds 18 retained Rust outcomes and matches 18 fresh C++ common semantic
+results across 180 operations. Whole raw diagnostics remain unequal. Fifteen
+negative controls and five selected CTests pass. The incremental lookup maps
+**151/160** comparison locators, with **9** remaining; the **1,034** CTest
+registry is enumeration. Complete G13/G14/G17, GP13/GP16, AP02, and P0–P7
+remain open.
+
+Current generated member-alias CLI source checkpoint:
+[The installed generated decoder comparison](generated_member_alias_cli_source_binding_5_0_6.md)
+binds 260 retained original Rust observations and matches 260 fresh C++
+results. Fifteen negative controls and five selected CTests pass. The
+incremental lookup maps **150/160** comparison locators, with **10** remaining;
+the **1,031** CTest registry is enumeration. Complete G13/G14/G17,
+GP13/GP16, AP02, and P0–P7 remain open.
+
+Current inherited Checker CLI source checkpoint:
+[Five installed model comparisons](inherited_checker_cli_source_binding_5_0_6.md)
+are bound to the original 7,200-case Rust corpus and match 7,200 fresh C++
+observations. Fifteen negative controls and eight selected CTests pass. The
+incremental lookup maps **149/160** comparison locators, with **11** remaining;
+the **1,028** CTest registry is enumeration. Complete G13/G14/G17,
+GP13/GP16, AP02, and P0–P7 remain open.
+
+Current derived-query source CLI checkpoint:
+[The installed composition and diagnostics comparisons](derived_query_cli_source_binding_5_0_6.md)
+bind **936 complete original outcomes** to **936 exact fresh native results**.
+Source/CTest controls pass **15/15** and selected installed checks pass
+**6/6**. Incremental source lookup **144/160** leaves **16** for review;
+registry **1,025** is enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and
+P0–P7 remain open.
+
+Current query-key pointer-width source CLI checkpoint:
+[The installed key comparison](query_keys_cli_source_binding_5_0_6.md)
+binds **451 original inputs** at both widths to **451/451** fresh native 64-bit
+and **451/451** fresh C++ MIPS/QEMU 32-bit results. The source corpora differ in
+46 outputs. Source/CTest controls pass **15/15** and selected installed checks
+pass **6/6**. Incremental source lookup **142/160** leaves **18** for review;
+registry **1,022** is enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and
+P0–P7 remain open.
+
+Current generated Business-ID source CLI checkpoint:
+[The installed wrapper and Checker comparison](generated_business_ids_cli_source_binding_5_0_6.md)
+binds **1,044 original outcomes** to fresh native results: **916** raw exact
+and **128** under the declared resource type-name adapter. Source/CTest
+controls pass **15/15** and selected installed checks pass **4/4**. Incremental
+source lookup **141/160** leaves **19** for review; registry **1,019** is
+enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7 remain open.
+
+Current typed Business-ID E source CLI checkpoint:
+[The installed E comparison](expression_business_ids_cli_source_binding_5_0_6.md)
+binds **96 original outcomes** to fresh native results: **48** raw exact and
+**48** under the declared diagnostic presentation adapter. Source/CTest
+controls pass **15/15** and selected installed checks pass **5/5**. Incremental
+source lookup **140/160** leaves **20** for review; registry **1,016** is
+enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7 remain open.
+
+Current typed Business-ID Q source CLI checkpoint:
+[The installed generated-factory comparison](business_id_lookup_cli_source_binding_5_0_6.md)
+binds **528 original outcomes** to **528 exact fresh native results**.
+Source/CTest controls pass **15/15** and selected installed checks pass **4/4**.
+Incremental source lookup **139/160** leaves **21** for review; registry
+**1,013** is enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7
+remain open.
+
+Current strict stream-shape CLI source binding:
+[The installed stream comparison](stream_shapes_cli_source_binding_5_0_6.md)
+matches **13,104/13,104 raw original results** with no current startup
+adaptation. The earlier **6,012** adapted indices remain historical evidence.
+Source/CTest controls pass **15/15** and selected installed checks pass **4/4**.
+Static source lookup **138/160** leaves **22** requiring review; registry
+**1,010** is enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7
+remain open.
+
+Current generated relationship-analysis CLI source binding:
+[The approved quoted-FK contract](relation_analysis_cli_source_binding_5_0_6.md)
+binds **7,122 frozen original observations** to current native execution:
+**6,576** source comparisons under the declared Debug adapter and **546**
+separate approved C++ expectations. Source/CTest controls pass **15/15** and
+selected installed checks pass **4/4**. Static source lookup **137/160** leaves
+**23** requiring review; registry **1,007** is enumeration. Complete
+G13/G14/G17, GP13/GP16, AP02 and P0–P7 remain open.
+
+Current composed-query and graph-save CLI source binding:
+[Two retained original streams](composed_graph_cli_source_binding_5_0_6.md)
+bind **5,472 complete outcomes** to current native composition and graph-save
+commands. Source/CTest controls pass **15/15** and selected installed checks
+pass **5/5**. Static source lookup **136/160** leaves **24** requiring review;
+registry **1,004** is enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and
+P0–P7 remain open.
+
+Current execution-model CLI source binding:
+[Three retained original streams](execution_model_cli_source_binding_5_0_6.md)
+bind **4,448 complete scenarios** to current native result-model and hot-cache
+comparison commands, including **6,480 hot execution steps**. Source/CTest
+controls pass **16/16** and selected installed checks pass **6/6**. Static
+source lookup **134/160** leaves **26** requiring review; registry **1,001** is
+enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7 remain open.
+
+Current state/entity source CLI binding:
+[Four retained source replays](state_source_cli_binding_5_0_6.md) bind **272
+original observations** to four current native comparison commands. Twelve
+load-state batches cover **40,404 typed rows**. A verified historical-corpus
+metadata transition preserves the 230-case entity-source replay. Source/CTest
+controls pass **18/18** and selected installed checks pass **7/7**. Static
+source lookup **131/160** leaves **29** requiring review; registry **998** is
+enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7 remain open.
+
+Current in-memory CLI source binding:
+[The historical comparator](inmemory_cli_source_binding_5_0_6.md) is rebound
+to the already accepted complete in-memory source execution: **8,732 original
+observations**, 19 original tests, and **6,532 fresh current native results**
+for its retained matrix. Three false acceptances are repaired; source/CTest
+controls pass **18/18** and selected installed checks pass **5/5**. Static
+source lookup **127/160** leaves **33** requiring review; registry **995** is
+enumeration. Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7 remain open.
+
+Current generated query-surface CLI source checkpoint:
+[Three complete Q/relationship matrices](query_surface_cli_source_qualification_5_0_6.md)
+bind **6,764 fresh original Rust outcomes** to unchanged drivers, three
+complete generated domains, 104 copied inputs and the pristine 610-file
+archive. Three C++ consumers match **6,764 exact native observations**. Three
+comparators repair **9 reproduced false acceptances**; source/CTest controls
+pass **35/35** and selected installed checks pass **7/7**. The registered
+**991** tests are an inventory. Static source lookup **126/160** leaves **34**
+requiring review. Complete G13/G14/G17, GP13/GP16, AP02 and P0–P7 exits
+remain open: **14 qualified / 3 partial**.
+
+Current runtime-error CLI source binding:
+[Three actual comparisons](runtime_error_cli_source_binding_5_0_6.md) rebind
+the already accepted complete `error.rs` source execution to **2,362 retained
+original Rust outputs** and **2,362 fresh current native observations**. Two
+preceding comparator implementations and the CMake registration recover byte
+for byte. Seven reproduced false acceptances are repaired; source/CTest
+controls pass **21/21** and selected installed checks pass **7/7**. Static
+source lookup **123/160** leaves **37** requiring review. Registry **987** is
+enumeration; complete G13/G14/G17, GP13/GP16, AP02 and P0–P7 remain open.
+
+Current generated-helper CLI source checkpoint:
+[Four actual helper matrices](helper_cli_source_qualification_5_0_6.md)
+bind **2,928 exact original Rust outcomes** to four unchanged drivers and six
+complete generated domains. Four C++ consumers match **2,928 exact native
+observations**. Four comparators repair **12 reproduced false acceptances**;
+source/CTest controls pass **35/35** and selected installed checks pass **8/8**.
+The registered **983** tests are an inventory. Static source lookup **120/160**
+leaves **40** requiring review. Complete G13/G14/G17, GP13/GP16, AP02 and
+P0–P7 exits remain open: **14 qualified / 3 partial**.
+
+Current query-input CLI source checkpoint:
+[Eight actual query-input matrices](query_input_cli_source_qualification_5_0_6.md)
+bind **13,656 fresh original outcomes** to eight unchanged Rust drivers, three
+complete generated domains, **163 copied inputs** and the **610-file archive**.
+Ten C++ consumers match **18,408 exact native observations**; two generated
+adapters reuse existing original datasets. Eight comparators repair **24
+reproduced false acceptances**; source/CTest controls pass **37/37** and
+selected installed native checks pass **14/14**. C++/producer/SDK/corpus bodies
+retain their identities. Registry **979** is enumeration. Static custom lookup
+**116/160** leaves **44** requiring review. Remaining custom/protected execution,
+G14/AP02 and P0-P7 stay open: **14 qualified / 3 partial**.
+
+Current lifecycle CLI source checkpoint:
+[Five actual lifecycle entries](lifecycle_cli_source_qualification_5_0_6.md)
+bind **3,588 fresh original/native outcomes** to two complete generated domains,
+five unchanged drivers, one unchanged included observer, **81 copied inputs**
+and the pristine **610-file archive**. All eight source commands use the locked
+reference dependency closure and ordinary Debug profiles. The established
+resource ownership and Info adapters keep their explicit comparison rules.
+Five comparators repair **10 false acceptances**; admission **60/60**, source
+and adapter **42/42** and selected installed native **7/7** pass. C++/producer/
+SDK/corpus bodies retain their identities. Registry **975** is enumeration;
+static custom lookup **106/160** leaves **54** requiring review. Remaining
+custom/protected execution, G14/AP02 and P0-P7 stay open:
+**14 qualified / 3 partial**.
+
+Current clock CLI source checkpoint:
+[Seven actual clock entries](clock_cli_source_qualification_5_0_6.md) bind **2,593
+original/native JSONL outcomes** and **36 explicit epoch outcomes** to seven
+unchanged drivers, **four complete domains** and **two Entity/Checker component
+harnesses**. Historical full-crate failures keep their separate scopes. The
+**610-file archive**, independent clock, reference dependency closure and all
+**55 actual commands / 15 JSONL wall partitions** are retained. Two Python
+entry points repair **15 false acceptances**; admission **27/27**, source
+**53/53** and installed native **16/16** pass, including all six other clock
+helper consumers. C++/producer/SDK/corpus bodies and old source protocols remain
+unchanged. Registry **971** is enumeration. Static custom lookup **101/160**
+leaves **59** requiring review. Complete remaining custom/protected execution,
+G14/AP02 and P0-P7 stay open: **14 qualified / 3 partial**.
+
+Current configuration CLI source checkpoint:
+[Thirty actual configuration selections](configuration_cli_source_qualification_5_0_6.md)
+bind **5,080 fresh original/native outcomes** to **27 complete generated libraries**,
+**five driver bodies**, **22 call helpers**, **643 copied inputs** and the pristine
+**610-file archive**. All **111 source commands**, **63 source/CTest controls** and
+**33 selected installed checks** pass. Reference-seeded dependency closure and
+ordinary Debug compilation bind; all original/generated bodies and result
+comparison retain their identities. Registry **967** is enumeration. The static
+custom lookup now has **94 named source mappings / 160 locators**, with **66**
+requiring further review. C++/producer/SDK/corpus implementations remain unchanged.
+Remaining custom/protected execution, full G14/AP02 and P0-P7 remain open:
+**14 qualified / 3 partial**. Earlier checkpoints retain their actual scopes.
+
+Current configuration CLI admission checkpoint:
+[Thirty configuration comparisons](configuration_cli_admission_5_0_6.md) retain
+**5,080 native outcomes / 27 distinct generated models** and repair **249 false
+acceptances**. All **780 controls** and **32 selected installed checks** pass;
+the same successful CTest execution is reconciled from its full log after JUnit
+stdout truncation. Exact original input recipes and actual case/binary/fixture
+selections bind. Registry **964** is enumeration. Original dependency/driver
+qualification remains open: four historical collectors request rusqlite 0.40.2
+versus reference 0.40.1. C++/producer/SDK/corpus implementations remain unchanged.
+This is admission evidence, not a new source acceptance; G13/G14/G17 and P0-P7
+remain open: **14 qualified / 3 partial**. Earlier checkpoints retain their scopes.
+
+Current dynamic JSON CLI checkpoint:
+[Eleven dynamic JSON comparisons](dynamic_json_cli_source_qualification_5_0_6.md)
+bind **50,879 fresh original/native outcomes** to nine unchanged drivers,
+**193 copied inputs**, five complete generated libraries and the **610-file
+archive**. Three CLIs repair **16 false acceptances** with complete canonical
+input recipes. Admission **54/54**, adapter boundaries **16/16**, source controls
+**46/46** and installed native **24/24** pass. Existing E/Q protocols and adapter
+bodies retain their responsibilities; the nested corruption-helper preparation
+failure remains separate. Registry **962** is enumeration. C++/producer/SDK/corpus
+bytes remain unchanged. Remaining custom/protected, full G14/AP02 and P0-P7 exits
+stay open: **14 qualified / 3 partial**. Earlier epochs retain their actual scope.
+
+Current generated query CLI checkpoint:
+[Ten actual query comparisons](query_cli_source_qualification_5_0_6.md) bind
+**11 complete datasets / 19,272 original/native outcomes** to eleven unchanged
+drivers, **134 copied inputs**, three complete generated libraries and the
+**610-file archive**. Admission **162/162**, query source controls **49/49**,
+retained expression controls **41/41** and installed native **17/17** pass.
+The shared verifier keeps separate query/expression protocols, complete domain
+partitions and actual CTest prerequisites. Query comparisons use no normalization.
+Registry **957** is enumeration. C++/producer/SDK bodies and all ten comparator
+corpora remain unchanged; complete remaining custom/protected, G14/AP02 and P0-P7
+exits stay open: **14 qualified / 3 partial**. Earlier epochs retain their scope.
+
+Current expression CLI source checkpoint:
+[Six expression comparisons](expression_cli_source_qualification_5_0_6.md)
+bind **4,188 fresh original/native outcomes** to five unchanged drivers,
+seven generated-model records, **255 copied inputs** and the **610-file archive**.
+Three comparators repair **nine false acceptances**; admission **89/89**,
+source controls **41/41** and installed native **12/12** pass. Current source
+and native checks retain explicit presentation adapters and the bounded
+entity/E-only type harness. All six CTest entries require source validation.
+Registry **953** is enumeration. All C++/producer/SDK bytes remain unchanged;
+remaining custom/protected, complete metadata and P0-P7 exits stay open:
+**14 qualified / 3 partial**. Earlier evidence retains its actual input epoch.
+
+Current visibility/type-child checkpoint:
+[VT01-VT05](audit_visibility_type_children_5_0_6.md) repair visibility lookahead,
+bare-`try` type dispatch and parenthesized child-buffer boundaries. The preceding
+helper reproduces **2,259 differences / 6,920 cases**. Installed source
+**71,187/71,187**, Java **147/147**, **270 retained AST witnesses** and **8
+original/native caller pairs** pass. The preceding helper fails exactly five
+new regression tests. All **80 SDKs / 3,560 generated files**, **2,467 protected
+artifacts** and **1,814 C++ inputs** retain their bytes; parser fingerprints
+refresh. Two affected native checks and source guards pass; registration remains
+**949**, without a full-suite claim. Full AP02, remaining custom/protected
+execution and P0-P7 remain open: **14 qualified / 3 partial**. Earlier evidence
+retains its actual inputs and scope.
+
+Current custom source-program checkpoint:
+[Actual registered dataset bindings](custom_program_source_qualification_5_0_6.md)
+qualify **29 complete original/native datasets / 8,098 observations** across
+**26 comparison scripts**, including three explicit `--original` variants.
+Two graph entry points repair **39 false acceptances** under **60 controls**;
+source controls pass **42/42**, and installed native checks pass **33/33**.
+All 29 comparisons require source validation of their actual dataset and probe
+mode. The current registry contains **949 tests**, with no full 949-test run
+claimed. C++/producer/SDK implementations retain the preceding profile-checkpoint
+identities. Remaining custom/protected, full metadata and P0-P7 requirements
+stay open: **14 qualified / 3 partial**. Earlier epochs retain their scopes.
+
+Current profile/custom CLI source checkpoint:
+[Five profile-aware comparison entries](profile_custom_cli_qualification_5_0_6.md)
+repair **41 false acceptances** and pass **113 admission controls**. Six complete
+corpora match **13,451 fresh original profile observations** under a reference-
+lock-derived observer and **7,308 actual current native outputs**. The historical
+SQLite observer lock has **44 non-reference registry identities** and remains
+unchanged. Permanent provenance checks pass **36 controls**, and all five CTest
+entries require their source fixture. Installed **10/10 native checks** pass;
+registration is **945**, with no full 945-test run claimed. All C++ and producer/
+SDK implementation bytes retain the preceding NM01-NM04 identities. Remaining
+custom/protected obligations, full metadata and P0-P7 exits stay open:
+**14 qualified / 3 partial**. Earlier checkpoints retain their actual epochs.
+
+Current nested metadata identity checkpoint:
+[NM01-NM04](audit_nested_metadata_paths_5_0_6.md) correct rooted/raw nested
+metadata dispatch while retaining type-path normalization. The preceding helper
+reproduces **106 differences / 349 cases**. Installed source **64,267/64,267**,
+Java **142/142**, **270 AST witnesses** and **8 original/native caller pairs**
+pass, with **24 descriptors / 112 field policies** and actual Context cleanup.
+All **80 SDKs / 3,560 generated files** and **2,467 protected artifacts** remain
+byte-identical; only producer fingerprints refresh. Two native checks and the
+reference/path/generator/custom-source guards pass. The failed cached-class
+caller attempt remains immutable; the corrected verifier compiles complete
+producer model/generator sources together. The bounded owner inventory is a
+review aid. Full AP02, G13/G14/G17 and P0-P7 remain open: **14 qualified /
+3 partial**. Earlier checkpoints retain their input and execution scopes.
+
+Installed custom CLI/source checkpoint:
+[Admission repairs and permanent source gates](custom_cli_admission_milestone_5_0_6.md)
+records full pre-repair native **934/934** with zero failures/errors/skips,
+then installed **17/17 native checks** and **451/451 MIPS query-key outcomes**.
+Seven new tests bring registration to **941**, without claiming a full 941-test
+run. Four custom source contracts retain **2,093 outcomes / 66 controls** with
+explicit Rust-execution reuse; four admission gates cover **118 controls**.
+All **1,814 C++ inputs**, producer inputs and SDK bytes remain unchanged.
+Complete custom/protected execution, metadata/caller joins and all P0-P7 exits
+remain open: **14 qualified / 3 partial**. Earlier checkpoints retain their
+original input and execution scopes.
+
+Current adapted inherited-business source-provenance checkpoint:
+[Inherited identifiers, governed saves and updates](inherited_business_driver_provenance_5_0_6.md)
+binds **2 complete corpora / 80 observations**, all matching adapted
+source/corpus/native results. A fresh reference-locked original-source project
+reproduces **20 expected compiler errors**; the legacy lock's **46 differing
+registry identities** remain historical. The unchanged adapter creates **43
+derived files**, with exactly **5 changed entity files**; untouched producer
+acceptance stays false. The **610-file** archive and **75 copied inputs** are
+verified. Five-model helpers, native **5/5**, prior key/classifier checks **2/2**
+and negative controls **35/35** pass. Source records cover all **305 disjoint
+direct-corpus locators / 323,568 primary observations** under their declared
+private-function, adaptation and profile scopes. Registry **934/305/197** is
+enumeration. All **1,814 C++ inputs**, producer implementations and **80 SDKs /
+3,560 files** remain unchanged. Complete custom/protected execution, metadata
+and current integration remain open: **14 qualified / 3 partial**.
+The column-attribute compatibility decision remains pending.
+
+Previous private key/classifier source-provenance checkpoint:
+[Query metadata keys and bootstrap retry classification](private_key_classifier_driver_provenance_5_0_6.md)
+binds **2 complete corpora / 2 unchanged drivers / 757 observations**, all matching
+source/corpus/native results. The **610-file** archive, **55 copied inputs** and
+reference-locked dependencies are verified. Native **5/5**, retained SQLite schema
+checks **2/2** and negative controls **31/31** pass. Cumulative bindings cover
+**303 disjoint corpora / 323,488 observations**; **2 adapted inherited-business
+direct entries** remain. Registry **932/305/196** is enumeration. Original key
+identity shells, native 64-bit scope and private classifier extraction remain
+explicit; the complete 31-file generated SDK is an artifact, not a compiled
+package in this checkpoint. All **1,814 C++ inputs**, producer implementations
+and **80 SDKs / 3,560 files** remain unchanged. Complete metadata, custom/protected
+execution and G13/G14/G17/P0-P7 remain open: **14 qualified / 3 partial**.
+The column-attribute compatibility decision remains pending.
+
+Previous public SQLite schema source-provenance checkpoint:
+[Public schema creation and reconciliation](sqlite_schema_driver_provenance_5_0_6.md)
+binds **1 complete corpus / 1 unchanged driver / 735 observations**, all matching
+source/corpus/native results. The **610-file** archive, **10 copied inputs** and
+reference-locked dependencies are verified. Native **4/4**, retained runtime-bridge
+checks **2/2** and negative controls **19/19** pass. Cumulative bindings cover
+**301 disjoint corpora / 322,731 observations**; **4 other direct entries** remain.
+Registry **930/305/195** is enumeration. All **1,814 C++ inputs**, producer
+implementations and **80 SDKs / 3,560 files** remain unchanged. Complete metadata,
+custom/protected execution and G13/G14/G17/P0-P7 remain open:
+**14 qualified / 3 partial**. The column-attribute decision remains pending.
+
+Previous runtime-bridge source-provenance checkpoint:
+[Context events, typed aggregates and loaded graphs](runtime_bridge_driver_provenance_5_0_6.md)
+binds **3 complete corpora / 3 complete driver bodies / 4,802 observations**,
+all matching source/corpus/native results. The full **610-file** archive and
+**19 copied inputs** remain unchanged. Native **5/5**, previous private-protocol
+checks **2/2**, current controls **23/23** and retained private-protocol controls
+**26/26** pass. Source bindings cover **300 disjoint corpora / 321,996
+observations**; **5 other direct entries** remain. The **928/305/194**
+registry/direct/custom counts are locators, not a full-suite run.
+All **1,814 C++ inputs**, producer implementations and **80 SDKs / 3,560 files**
+remain unchanged. Original runtime bodies and test bodies retain their exact prefixes;
+declared bridge constants and wrapped complete driver bodies are appended.
+Existing observation projections and fixture-path adaptation remain explicit. Complete
+metadata, custom provenance, protected execution and G13/G14/G17/P0-P7 remain
+open: **14 qualified / 3 partial**. The separate column-attribute compatibility
+decision remains pending.
+
+Previous private-protocol source-provenance checkpoint:
+[Private runtime protocols and Debug/Release behavior](runtime_protocol_driver_provenance_5_0_6.md)
+binds **7 complete corpora / 6 observer modules / 23,657 observations**,
+all matching source/corpus/native results. The full **610-file** archive and
+**24 copied inputs** remain unchanged. Native **9/9**, previous generated-model
+checks **2/2**, current controls **26/26** and retained generated-model controls
+**27/27** pass. Source bindings cover **297 disjoint corpora / 317,194
+observations**; **8 other direct entries** remain. The **926/305/193**
+registry/direct/custom counts are locators, not a full-suite run.
+All **1,814 C++ inputs**, producer implementations and **80 SDKs / 3,560 files**
+remain unchanged. Original runtime bodies and test bodies retain their exact prefixes;
+only declared observer modules are appended. Rust Debug/Release and the C++
+probe's header-counter mode keep separate scopes. Complete
+metadata, custom provenance, protected execution and G13/G14/G17/P0-P7 remain
+open: **14 qualified / 3 partial**. The separate column-attribute compatibility
+decision remains pending.
+
+Previous generated-model source-provenance checkpoint:
+[Generated entities, inheritance, constants and runtime assembly](generated_model_driver_provenance_5_0_6.md)
+binds **26 complete corpora / 20 original targets / 16,674 observations**,
+all matching source/corpus/native results. The full **610-file** archive and
+**490 copied inputs** remain unchanged. Native **28/28**, previous Context
+checks **2/2**, current controls **27/27** and retained Context controls
+**20/20** pass. Source bindings cover **290 disjoint corpora / 293,537
+observations**; **15 other direct entries** remain. The **924/305/192**
+registry/direct/custom counts are locators, not a full-suite run.
+All **1,814 C++ inputs**, producer implementations and **80 SDKs / 3,560 files**
+remain unchanged. Nine generated packages compile completely; two source-only
+models retain their unchanged entity/Checker library scope and original full-crate
+failures. Historical observer projections remain explicit. Complete
+metadata, custom provenance, protected execution and G13/G14/G17/P0-P7 remain
+open: **14 qualified / 3 partial**. The separate column-attribute compatibility
+decision remains pending.
+
+Previous Context capability source-provenance checkpoint:
+[Context, logs, I18n, telemetry and business IDs](context_public_driver_provenance_5_0_6.md)
+binds **17 complete corpora / 16 original targets / 16,376 observations**,
+all matching source/corpus/native results. The full **610-file** archive and
+**41 copied inputs** remain unchanged. Native **19/19**, previous core-model
+checks **2/2**, current controls **20/20** and retained core-model controls
+**19/19** pass. Source bindings cover **264 disjoint corpora / 276,863
+observations**; **41 other direct entries** remain. The **922/305/191**
+registry/direct/custom counts are locators, not a full-suite run.
+All **1,814 C++ inputs**, producer implementations and **80 SDKs / 3,560 files**
+remain unchanged. The original logging shell and human-time observer adapter
+retain their documented limits; complete Context-event bridges remain separate. Complete
+metadata, custom provenance, protected execution and G13/G14/G17/P0-P7 remain
+open: **14 qualified / 3 partial**. The separate column-attribute compatibility
+decision remains pending.
+
+Previous core-model source-provenance checkpoint:
+[Core values, query state and graph/request models](core_model_driver_provenance_5_0_6.md)
+binds **34 complete corpora / 27 original targets / 10,625 observations**,
+all matching source/corpus/native results. The full **610-file** archive and
+**93 copied inputs** remain unchanged. Native **36/36**, previous numeric/time
+checks **2/2**, current controls **19/19** and retained numeric controls
+**19/19** pass. Source bindings cover **247 disjoint corpora / 260,487
+observations**; **58 other direct entries** remain. The **920/305/190**
+registry/direct/custom counts are locators, not a full-suite run.
+All **1,814 C++ inputs**, producer implementations and **80 SDKs / 3,560 files**
+remain unchanged. Each corpus retains its existing semantic scope. Complete
+metadata, custom provenance, protected execution and G13/G14/G17/P0-P7 remain
+open: **14 qualified / 3 partial**. The separate column-attribute compatibility
+decision remains pending.
+
+Previous numeric/time source-provenance checkpoint:
+[Numeric, time and auxiliary values](numeric_time_driver_provenance_5_0_6.md) binds
+fifteen complete corpora to **nine original targets / 41,382 observations**,
+all matching source/corpus/native results. The complete 610-file archive,
+30 copied inputs, exact local packages and reference checksums are verified.
+Native **17/17**, prior SQLite-provider tool checks **2/2**, current controls **19/19**
+and retained SQL controls **19/19** pass. Source bindings cover
+**213 disjoint corpora / 249,862 observations**; **92 other direct entries**
+remain. The **918/305/189** registry/direct/custom counts are locators, not a
+full 918-test run. All **1,814 C++ inputs**, producer implementations and
+**80 SDKs / 3,560 files** remain unchanged. Complete metadata, custom provenance,
+protected execution and G13/G14/G17/P0-P7 stay open: **14 qualified / 3 partial**.
+The separate column-attribute compatibility decision remains pending.
+
+Previous SQLite provider source-provenance checkpoint:
+[SQLite provider and diagnostics](sqlite_provider_protocol_provenance_5_0_6.md) binds
+eleven complete corpora to **seven original targets / 9,152 observations**,
+all matching source/corpus/native results. The complete 610-file archive,
+27 copied inputs, exact local packages and reference checksums are verified.
+Native **13/13**, prior SQL-tool checks **2/2**, current controls **19/19**
+and retained SQL controls **19/19** pass. Source bindings cover
+**198 disjoint corpora / 208,480 observations**; **107 other direct entries**
+remain. The **916/305/188** registry/direct/custom counts are locators, not a
+full 916-test run. All **1,814 C++ inputs**, producer implementations and
+**80 SDKs / 3,560 files** remain unchanged. Complete metadata, custom provenance,
+protected execution and G13/G14/G17/P0-P7 stay open: **14 qualified / 3 partial**.
+The separate column-attribute compatibility decision remains pending.
+
+Previous SQL/SQLite pipeline source-provenance checkpoint:
+[SQL and SQLite pipeline](sqlite_pipeline_driver_provenance_5_0_6.md) binds
+eighteen complete corpora to **fifteen original targets / 12,064 observations**,
+all matching source/corpus/native results. The complete 610-file archive,
+42 copied inputs, exact local packages and reference checksums are verified.
+Native **20/20**, prior document-tool checks **2/2**, current controls **19/19**
+and retained document controls **20/20** pass. Source bindings cover
+**187 disjoint corpora / 199,328 observations**; **118 other direct entries**
+remain. The **914/305/187** registry/direct/custom counts are locators, not a
+full 914-test run. All **1,814 C++ inputs**, producer implementations and
+**80 SDKs / 3,560 files** remain unchanged. Complete metadata, custom provenance,
+protected execution and G13/G14/G17/P0-P7 stay open: **14 qualified / 3 partial**.
+The separate column-attribute compatibility decision remains pending.
+
+Previous document/reference source-provenance checkpoint:
+[Document and secure-reference protocols](document_protocol_driver_provenance_5_0_6.md)
+bind seven complete corpora to **six original targets / 2,941 observations**,
+all matching source/corpus/native results. The complete 610-file archive,
+twenty copied inputs, exact local packages and reference registry checksums
+are verified. Native **9/9**, prior query-tool checks **2/2**, document controls
+**20/20** and retained query controls **24/24** pass. Source bindings cover
+**169 disjoint corpora / 187,264 observations**; **136 other direct entries**
+remain. The **912/305/186** registry/direct/custom counts are locators, not a
+full 912-test run. All **1,814 C++ inputs**, producer implementations and
+**80 SDKs / 3,560 files** remain unchanged. Complete metadata, custom provenance,
+protected execution and G13/G14/G17/P0-P7 stay open: **14 qualified / 3 partial**.
+The separate column-attribute compatibility decision remains pending.
+
+Previous generated-query source-provenance checkpoint:
+[Generated queries and governance](query_governance_driver_provenance_5_0_6.md)
+bind fifteen retained corpora to **13 original targets / 18,055 complete observations**,
+all matching source/corpus/native results. The full 610-file runtime archive,
+136 copied inputs, original School fixture, generated provenance and actual
+locked dependencies are verified. Native **17/17**, previous pagination-tool
+checks **2/2** and **24** effective controls pass. Source bindings cover
+**162 disjoint corpora / 184,323 observations**; **143 other direct entries**
+remain. The **910/305/185** registry/direct/custom counts are locators, not a
+full 910-test run. All **1,814 C++ inputs**, producer implementations and
+**80 SDKs / 3,560 files** remain unchanged. Complete metadata, custom provenance,
+protected execution and G13/G14/G17/P0-P7 stay open: **14 qualified / 3 partial**.
+The separate column-attribute compatibility decision remains pending.
+
+Previous dynamic-governance source-provenance checkpoint:
+[Dynamic-field governance and audit](dynamic_governance_driver_provenance_5_0_6.md)
+bind nine retained corpora to **7 original targets / 5,915 complete observations**,
+all matching source/corpus/native results. The full 610-file runtime archive,
+73 copied inputs, original School fixture, generated provenance and actual
+locked dependencies are verified. Native **11/11**, previous pagination-tool
+checks **2/2** and **19** effective controls pass. Source bindings cover
+**156 disjoint corpora / 172,183 observations**; **149 other direct entries**
+remain. The **910/305/185** registry/direct/custom counts are locators, not a
+full 910-test run. All **1,814 C++ inputs**, producer implementations and
+**80 SDKs / 3,560 files** remain unchanged. Complete metadata, custom provenance,
+protected execution and G13/G14/G17/P0-P7 stay open: **14 qualified / 3 partial**.
+The separate column-attribute compatibility decision remains pending.
+
+Previous pagination source-provenance checkpoint:
+[Generated execution and pagination](pagination_driver_provenance_5_0_6.md)
+bind five retained corpora to fresh original Rust/C++ execution: **4 targets /
+10,888 observations**, all matching. The complete 610-file runtime archive,
+65 copied source/project/model files, generated provenance, input recipes and
+reference-compatible dependency graph are verified. Native **7/7**, previous
+archive checks **2/2** and **19** effective controls pass. Source bindings now
+cover **147 unique corpora / 166,268 observations**; **158 other direct entries**
+remain. The **908/305/184** registry/direct/custom counts are locators, not a full
+908-test run. All **1,814 C++ inputs**, producer implementations and SDKs remain
+unchanged during this cohort. The [column-attribute diagnostic](field_attribute_boundary_5_0_6.md)
+confirms a separate reference escaping defect; its compatibility decision is
+pending and is not semantic acceptance. Complete metadata, custom provenance,
+protected execution and G13/G14/G17/P0-P7 stay open: **14 qualified / 3 partial**.
+
+Previous scalar-operand assignment checkpoint:
+[Source-shaped sample assignment](sample_operand_assignment_5_0_6.md) fixes
+24 actual Boolean getter differences and mixed-type SDK compilation failures.
+Shared runtime conversion retains original mutation operands, source NULL
+distinctions and Context ownership. Existing runtime function bodies are
+byte-identical after removing the newly inserted helpers. Actual original/C++
+sample comparisons pass **432 field outcomes**; four JSON descriptor callers
+retain eight explicit approved type differences. Java **141/141**, scoped native
+**6/6**, imported kernel **1/1** and ASan/UBSan kernel **1/1** pass. All **80 SDKs /
+3,560 files** reproduce: only two reviewed JSON sample delegates change.
+Ten body-scope controls and an input-epoch exit control pass. Four old C++ files
+change and one new kernel test is added; frozen native893 identities are not
+reused as current whole integration. Core corpus totals remain **142 / 155,380**,
+with **163** other direct entries open. Complete metadata/provenance/protected
+execution and G13/G14/G17/P0-P7 stay open: **14 qualified / 3 partial**.
+
+Previous large-text and sample-branch checkpoint:
+[Large-text descriptor and sample precedence](large_text_metadata_5_0_6.md)
+fixes 24 descriptor type differences and a public-SDK sample compilation
+failure. Fresh Rust/C++ comparisons pass **2 models / 6 descriptors / 52
+properties** and **144 deterministic scalar field outcomes**. Java **139/139**
+includes replay of the **63,918 retained metadata contracts**; their original
+Rust parser results reuse unchanged source/corpus identities. Scoped native
+**10/10**, thirteen strict controls and pinned format/check pass. All **80 SDKs /
+3,560 bodies** reproduce unchanged, with refreshed source fingerprints.
+Only CppCoreGenerator production source changes; all **1,813 frozen C++ inputs**
+remain unchanged. The approved JSON exception is preserved. The core source
+corpus totals remain **142 / 155,380**, with **163** other direct entries open.
+Complete metadata/provenance/protected execution and G13/G14/G17/P0-P7 stay open:
+**14 qualified / 3 partial**. There is no new full native, module or sanitizer run.
+
+Previous property-shape normalization checkpoint:
+[Generated length and numeric shape metadata](property_shape_metadata_5_0_6.md)
+now reuse the locked producer's normalization. Two complete model callers,
+six descriptors and 44 property rows match fresh Rust/C++ execution; the old
+emitter differed in 16 rows / 22 values. Current metadata regression is
+**63,918/63,918**, Java **137/137** and scoped native **4/4**. A separate scoped
+ASan/UBSan replay verifies the compiler observer's Context-close correction.
+All **80 SDKs / 3,560 files** reproduce unchanged bodies; producer provenance
+is refreshed. All **1,813 frozen C++ inputs** remain unchanged. This is a new
+generator/test-harness epoch, not a new full native893 run. The existing
+142 source corpora / 155,380 observations and remaining 163 direct entries
+are unchanged; these model callers are a separate metadata gate.
+G13/G14/G17 and P0-P7 stay open: **14 qualified / 3 partial**.
+
+Previous declared-driver completion checkpoint:
+[the final three SQL/mutation drivers](sql_mutation_driver_provenance_5_0_6.md)
+match **2,048** fresh original/corpus/native observations. All 610 archive files,
+eight copied source/project files, actual dependency metadata and complete input
+recipes are retained. **25** controls, native **5/5**, focused **2/2** and source
+guards **29/29** pass. Native/modules configurations pass without fresh imported
+execution. Source bindings now cover **142 unique corpora / 155,380 observations**.
+All **107 declared-driver project/view responsibilities** are covered across
+their distinct source epochs. **163 other direct registrations** and remaining
+custom CLI, dependency and normalization duties stay open. The **905/305/183**
+registry/direct/custom counts are locators, not a full 905 run. All 1,813 C++ inputs,
+producer implementations and SDKs remain unchanged. Frozen native893 keeps its
+original identities. Complete metadata, provenance, protected execution and
+G13/G14/G17/P0-P7 remain open; capability status stays **14 qualified / 3 partial**.
+
+The preceding [entity API](entity_api_driver_provenance_5_0_6.md),
+[private-runtime](private_runtime_driver_provenance_5_0_6.md) and
+[query-store](query_store_driver_provenance_5_0_6.md) checkpoints retain their
+original scopes, failures and sealed input identities.
+
+Previous Registry provenance checkpoint:
+[all seven source-project targets](registry_driver_provenance_5_0_6.md) match
+**27,257** fresh original/native observations. Both exact runtime appendices,
+prepared targets, manifests, dependency locks and complete output are retained.
+**31** controls, native **13/13**, focused **2/2** and source guards **21/21** pass;
+native/modules configurations pass. The runtime's 273 test names are enumerated;
+Registry has zero embedded tests, and enumeration is not a test execution claim.
+Cumulative source bindings cover **72 corpora / 106,987 observations**;
+**233 direct entries** and **68 declared-driver project/view responsibilities**
+remain. The **897/305/179** registry/direct/custom counts are locators.
+Frozen native893 keeps its original inputs; this is no full897 run. All 1,813
+C++ inputs, producer implementations and SDKs remain unchanged. Complete metadata,
+provenance, protected execution and G13/G14/G17/P0-P7 stay open.
+Capability status remains **14 qualified / 3 partial**.
+
+Previous entity-runtime provenance checkpoint:
+[all seven source-project targets](entity_runtime_driver_provenance_5_0_6.md)
+match **4,226** fresh original/native observations and pass all **21** original
+unit tests. Exact runtime source/view, observer, project and dependency identities
+are retained; **29** controls, native **19/19**, focused **2/2** and current
+source guards **19/19** pass. Cumulative source bindings cover **65 corpora /
+79,730 observations**; **240 direct entries** and **72 declared-driver project/view
+responsibilities** remain. The **895/305/178** registry/direct/custom counts are
+locators. Frozen native893 retains its original inputs; this is no full895 run.
+All 1,813 C++ inputs, producer implementations and SDKs remain unchanged.
+Complete metadata, provenance, protected execution and G13/G14/G17/P0-P7 exits
+stay open. Capability status remains **14 qualified / 3 partial**.
+
+Previous field-column input checkpoint: [FC01-FC04](field_column_model_metadata_5_0_6.md)
+qualifies eight actual model inputs, 24 ordinary/inherited columns and 72 typed
+JSON hydration outcomes, with 29 strict controls and actual Context deletion.
+The proposed production change was unnecessary and was never installed.
+Current source **63,918/63,918**, Java **134/134**, source guards 17 and scoped
+native/imported tests two each pass. Producer implementation, all 80 SDKs,
+3,560 generated files, 2,467 protected artifacts and 1,813 C++ inputs retain
+their preceding identities. SDK generation and the full native893 run are
+explicitly reused with byte/hash checks. Complete grammar, other model
+consumers, protected execution, SQ02 and G13/G14/G17/P0-P7 remain open.
+Status stays **14 qualified / 3 partial**.
+
+Previous default-model checkpoint: [DM01-DM08 reconciliation](default_model_literal_metadata_5_0_6.md)
+repairs eleven of thirteen complete generated-model comparisons, including
+undeclared versus empty masks and the resulting Unknown versus Plain
+privacy policies. Actual StringTemplate CR removal is qualified separately
+from direct Rust source parsing. Current source **63,918/63,918**, Java
+**133/133**, 270 retained AST witnesses, thirteen model pairs, 39 descriptors,
+182 privacy classifications and seventeen strict comparison controls pass.
+Source guards pass 17 tests; scoped native and imported-module gates pass two
+each. All 80 SDKs, 3,560 files and 2,467 protected artifacts reproduce unchanged;
+manifests refresh only three helper fingerprints and retain all four shared
+metadata helpers. All 1,813 C++ inputs retain the
+[full native 893-test identities](native_provenance_integration_5_0_6.md), with
+separate current source/caller proofs. This closes the named default container
+consumer responsibilities. Complete delegated grammar, other model consumers,
+protected execution, SQ02 and G13/G14/G17/P0-P7 signoff remain open. Status stays
+**14 qualified / 3 partial**. Earlier checkpoints retain their original inputs.
+
+Previous literal/source-line checkpoint: [LC01-LC08 reconciliation](audit_lexical_child_rules_5_0_6.md)
+repairs 502 source-parser differences and two actual generated raw-string
+metadata differences. Direct raw parsing and compiler source normalization
+retain distinct contracts. Current source **63,918/63,918**, Java **132/132**,
+270 retained AST witnesses, twelve generated caller pairs and sixteen comparison
+controls pass. Source guards pass 17 tests; native and imported-module gates
+pass two each. Two JSONL boundaries preserve Unicode content through twelve
+controls; direct verification dependencies are fingerprinted. All 80 SDKs,
+3,560 files and 2,467 protected artifacts reproduce unchanged. Twenty-three
+legacy manifests gain the missing decoder identity; all record four shared
+metadata helpers, and 31 provenance controls reject. All 1,813 C++ inputs retain
+their [full native 893-test identities](native_provenance_integration_5_0_6.md),
+with separate current source/caller proofs. Complete delegated grammar,
+default model string consumers, SQ02 provenance and G13/G14/G17/P0-P7 signoff
+remain open. Status stays **14 qualified / 3 partial**. Earlier checkpoints
+retain their original evidence and scope.
+
+Previous generic/bound checkpoint: [GB01-GB08 source reconciliation](audit_generic_child_rules_5_0_6.md)
+qualifies declaration/binder ownership, const-number trivia, ordinary versus
+strict nested-bound completion and preserved capture/path rules. The preceding
+parser reproduces 2,371 differences in 7,607 new contracts across 903 shapes,
+eight ordinary contexts and 383 additional encoded Type cases. Current source
+**58,041/58,041**, Java **128/128**, 270 retained AST witnesses, twelve fresh
+generated caller pairs and sixteen comparison controls pass. Source guards
+pass 17 tests; scoped native and imported-module gates pass two each. All 80
+SDKs, 3,560 generated files and 2,467 protected artifacts remain byte-identical;
+manifests update only parser hashes. All 1,813 C++ inputs retain their
+[full native 893-test identities](native_provenance_integration_5_0_6.md), joined
+to explicit current source/caller proofs. Complete delegated AP02 grammar,
+configurations/callers, SQ02 provenance and G13/G14/G17/P0-P7 exits remain open.
+Status stays **14 qualified / 3 partial**. Earlier checkpoints retain their own
+inputs, outcomes and scope.
+
+Previous nested item checkpoint: [IT01-IT08 source reconciliation](audit_item_child_rules_5_0_6.md)
+qualifies the named direct signature/modifier/field/where/container rules. The
+preceding parser reproduces 2,200 differences in 8,776 new contracts across
+1,097 shapes and eight metadata contexts. Current source **50,434/50,434**,
+Java **127/127**, 270 AST witnesses, twelve fresh generated caller pairs and
+sixteen comparison controls pass. Source guards pass 17 tests; scoped native and
+imported-module gates pass two each. All 80 SDKs, 3,560 generated files and 2,467
+protected artifacts remain byte-identical; manifests update only parser hashes.
+All 1,813 C++ inputs retain their [full native 893-test identities](native_provenance_integration_5_0_6.md),
+joined to explicit current source/caller proofs. Remaining delegated AP02
+grammar/configurations, G13/SQ02 provenance and complete G17/P0-P7 exits remain
+open. Status stays **14 qualified / 3 partial**. Earlier checkpoints below retain
+their historical scope.
+
+Previous statement checkpoint: [ST01-ST06 source reconciliation](audit_statement_child_rules_5_0_6.md)
+fixes compound != macro lookahead and reconciles the named direct statement
+rules. The preceding parser reproduces 216 differences in 8,120 new contracts
+across 1,015 shapes and eight metadata contexts. Current source **41,658/41,658**,
+Java **126/126**, 270 AST witnesses, twelve fresh generated caller pairs and
+sixteen comparison controls pass. Source guards pass 17 tests; scoped native and
+imported-module gates pass two each. All 80 SDKs, 3,560 generated files and 2,467
+protected artifacts remain byte-identical; manifests update only parser hashes.
+All 1,813 C++ inputs retain their [full native 893-test identities](native_provenance_integration_5_0_6.md),
+with separate current metadata/caller proofs. Delegated AP02 grammar/configurations,
+G13/SQ02 provenance and complete G17/P0-P7 exits remain open. Status stays
+**14 qualified / 3 partial**. Earlier checkpoint statements below retain their
+historical scope.
+
+Previous block/array checkpoint: [BC01-BC04 source correction](audit_block_child_rules_5_0_6.md)
+repairs 1,944 actual metadata differences in 6,544 new contracts across 818
+expression shapes and eight metadata contexts. Current source **33,538/33,538**,
+Java **125/125**, 270 AST witnesses, twelve fresh generated caller pairs and
+sixteen comparison controls pass. Source guards pass 17 tests; scoped native and
+imported-module gates pass two each. All 80 SDKs, 3,560 generated files and 2,467
+protected artifacts remain byte-identical; manifests update only parser hashes.
+All 1,813 C++ inputs retain their [full native 893-test identities](native_provenance_integration_5_0_6.md),
+with separate current metadata/caller proofs. Full G14/AP02 grammar, G13/SQ02
+provenance and complete G17/P0-P7 exits remain open. Status stays **14 qualified /
+3 partial**. Earlier checkpoint statements below retain their historical scope.
+
+Previous operator/trailer checkpoint: [OP01-OP08 source correction](audit_operator_child_rules_5_0_6.md)
+repairs 2,368 actual metadata differences in 11,522 new contracts, including all
+32-by-32 operator pairs in five contexts. Current source **26,994/26,994**,
+Java **124/124**, 270 AST witnesses, twelve fresh generated caller pairs and
+sixteen comparison controls pass. Source guards pass 17 tests; scoped native and
+imported-module gates pass two each. All 80 SDKs, 3,560 generated files and 2,467
+protected artifacts remain byte-identical; manifests update only parser hashes.
+All 1,813 C++ inputs retain their [full native 893-test identities](native_provenance_integration_5_0_6.md),
+with separate current metadata/caller proofs. Full G14/AP02 grammar, G13/SQ02
+provenance and complete G17/P0-P7 exits remain open. Status stays **14 qualified /
+3 partial**. Earlier checkpoint statements below retain their historical scope.
+
+Previous pattern-child checkpoint: [PT01-PT08 source correction](audit_pattern_child_rules_5_0_6.md)
+repairs 1,731 actual metadata differences across 580 pattern shapes / 4,640 new
+contracts. Current source15,472/Java123/270 AST witnesses, twelve fresh generated
+caller pairs, sixteen controls, native source17/native2/imported2 and all80 SDKs
+pass. All3,560 generated files and2,467 protected artifacts remain byte-identical;
+each manifest updates exactly one parser hash. All1,813 C++ inputs retain their
+[full native893 identities](native_provenance_integration_5_0_6.md), with explicit
+separate current metadata proofs. G13/SQ02, full G14/AP02 grammar and complete
+G17/P0-P7 exits remain open. Status stays14 qualified /3 partial. Earlier
+checkpoint statements below retain their historical scope.
+
+Current integrated checkpoint: [complete native893 and associated generic continuation](native_provenance_integration_5_0_6.md)
+qualifies the frozen native execution and explicitly joins the installed
+metadata-only change on 1,813 unchanged C++ inputs. The
+[AG01-AG02 correction](audit_path_generic_discovery_5_0_6.md) repairs 216 actual
+differences. Current source10,832/Java122/270 AST witnesses, twelve generated
+caller pairs, sixteen controls, native source17/native2/imported2 and all80 SDKs
+pass. Generated code/guidance/data and2,467 protected artifacts are unchanged;
+only80 parser hash literals refresh. The full execution retains its original
+parser identities. G13/SQ02 (247 other direct entries/177 custom registrations),
+remaining G14/AP02 grammar and G17/P0-P7 signoff stay open. Status remains
+14 qualified /3 partial. Earlier checkpoint statements below retain their
+historical scope.
+
+Current SQL-executor source checkpoint: [nine complete source matrices](sql_executor_driver_provenance_5_0_6.md)
+pass fresh original/native8,243, original tests50, native21/focused3 and24 controls.
+Preserved source bodies, exact prepared project/include layout and complete raw
+observations cover this cohort. Cumulative58 direct corpora/75,504 observations
+are bound; other247 direct entries,177 custom registrations, complete metadata/
+normalization and whole integration retain independent exits. Capabilities stay
+14 qualified/3 partial and P0-P7 is incomplete.
+
+Current public-runtime provenance checkpoint: [Context/Checker/Policy/Event/reference-model bindings](runtime_foundation_driver_provenance_5_0_6.md)
+add eight complete corpora and fresh original/native2,685 observations.
+Native10/focused2 and20 controls pass. Cumulative source bindings cover49 direct
+corpora/67,261 observations; the other256 direct entries and176 custom
+registrations, full G14 metadata and whole integration remain independent exits.
+Capabilities stay14 qualified/3 partial; P0-P7 is incomplete.
+
+Current source-provenance checkpoint: [all27 baseline-only bindings](baseline_corpus_source_bindings_5_0_6.md)
+and [14 declared core/data-service bindings](declared_core_driver_provenance_5_0_6.md)
+cover41 direct corpora/64,576 complete observations. The new group passes fresh
+original/native5,656, native16/focused2 and20 controls. Current locator889 resolves
+305 direct bindings and175 custom registrations; the other264 direct entries,
+complete custom provenance/normalization, G14 metadata and whole integration
+remain open. Capabilities stay14 qualified/3 partial and P0-P7 incomplete.
+
+Context source-provenance checkpoint: [four original-execution contracts](context_corpus_source_provenance_5_0_6.md) bind5,856 current native outputs to actual archived Rust stdout,67 reference source/test/vector hashes per view, exact observer/input/producer/helper bytes, metadata-derived manifests and registry checksums. Twelve corruption controls and six registered checks pass; a focused factory comparison automatically runs its source fixture. Original Rust execution is explicitly reused and no expected values are rewritten. The other23 baseline-only corpora, remaining direct/custom provenance and complete SQ02/GP13/P0-P7 remain open; capability status stays14 qualified/3 partial.
+
+Corpus-admission checkpoint: [shared entry and default locator](corpus_admission_and_inventory_5_0_6.md) repairs three actual zero-observation false passes and resolves the default corpus from its source declaration. Admission11/binding8/inventory-shape4 controls, native7/imported1 and five effective result mutations pass. Current registry879 contains305 nonempty direct active-baseline bindings and170 custom registrations requiring review. These are admission/locator facts; complete source/dependency/cardinality/normalization provenance remains SQ02/GP13 work. Runtime C++, generated SDKs and module exports are unchanged; capabilities remain14 qualified/3 partial and P0-P7 incomplete.
+
+Current governed-runtime reconciliation: [GP01-GP16](governance_qualification_requirements_5_0_6.md) preserves all22 historical G17 questions, reconciles13 runtime contracts against35 accepted source owners and retains3 full exits. Fresh original/current generated Save360, ten strict result controls and native40/imported40 pass. Four missing permanent imported comparator registrations and one existing canonical probe/preset entry are added; runtime functions, generated SDKs and module exports remain unchanged. Pinned format/check1,808, canonical1,164,75 root locators and reference/path guards pass. GP11/G14 metadata completeness, GP13/SQ02 provenance and GP16/SQ05 whole integration remain open; capabilities stay14 qualified/3 partial and P0-P7 incomplete. Earlier scopes below retain their original evidence.
+
+Current type child-rule follow-up: [TC01-TC06 requalification](audit_type_child_rules_5_0_6.md) repairs156 source-proven metadata differences across900 type contracts. Installed9,494 complete source outcomes, 121 Java tests and twelve fresh original/native model pairs (36 descriptors/168 privacy tuples) pass. Fourteen strict descriptor controls reject, including twelve actual previous false acceptances. All80 SDKs/3,560 generated files and2,467 protected artifacts remain unchanged; only80 parser fingerprints refresh. Native2/imported2, pinned format/check1,808 and reference/path guards pass. Remaining AP02 child-rule/lexical/caller, complete SQ02 provenance, G13/G14/G17 and P0-P7 requirements stay open. Older scopes below retain their own inputs and outcomes.
+
+Current audit-grammar follow-up: [witnessed branch review](audit_grammar_branch_review_5_0_6.md) repairs45 source-proven builtin-expression differences. Installed8,594 complete metadata outcomes, 270 actual AST witnesses and120 Java tests pass; nine fresh original/C++ model pairs match27 descriptors/126 privacy tuples. Eight strict metadata controls reject, including five actual previous false acceptances. All80 SDKs/3,560 generated files and2,467 protected artifacts remain unchanged; only80 parser fingerprints refresh. Scoped native2/imported2 pass. AP02 child-rule/lexical/caller reconciliation, complete SQ02 provenance, G13/G14/G17 and P0-P7 remain open. Prior counts below retain their own epochs.
+
+Current forward-owner follow-up: [FRI01 requalification](generated_forward_relation_identity_5_0_6.md) preserves the original declared model key for forward getters independently of descriptor-based reverse/JSON views. Source/current4800, exact preceding-producer76 differences, native10/imported4/Java89, twelve result/three strict-prefix controls and80-SDK restricted reproduction pass. G01 is restored; complete G13/G14/G17/P0-P7 remain open. Earlier counts below retain their own input epochs.
+
+Current canonical-root follow-up: [EID01 requalification](generated_expression_identity_5_0_6.md) separates model identity from descriptor overrides and native entry spelling. Runtime-first capture and thin metadata now match960/960 original/native outcomes; native5/module3/scoped SAN1/compiler4-positive6-negative/Java88 and80-SDK restricted reproduction pass. G11 is qualified again; G13/G14/G17 and P0-P7 remain open. Earlier checkpoint APIs and evidence below retain their original scope.
+
+Current Fix provenance requalification: [generated identity Save](generated_identity_save_5_0_6.md) restores G02 after48 differences in360 complete calls. Four thin identity arguments now use the canonical Rust model name; existing runtime mechanics and ABI are unchanged. Temporary and installed360/360, ten strict controls, current Java87/native9/module2 and80-SDK reproduction pass. All179 active identity arguments are value-equivalent to their prior constants; every other body and2467 protected artifacts remain unchanged. Classpath/rebuild and module dependency controller failures are preserved and corrected. Status returns to **14 qualified / 3 partial**: G13/G14/G17 and P0-P7 remain open. Older summaries below retain their checkpoint scopes.
+
+Current creation correction: [creation identity and Context state](generated_creation_identity_5_0_6.md) requalifies G06 after90 original/current differences. Runtime first native1/module1/ASan-UBSan1 pass; the installed thin metadata matches90/90 complete observations. Current Java86, native10/module1/ASan-UBSan1 and196 compiler contracts pass. Complete80-SDK generation adds188 ID constants/188 exact guidance paragraphs while preserving every prior function body and2467 protected artifacts; all3560 installed file hashes match. Status returns to **14 qualified / 3 partial**: G13/G14/G17 and P0-P7 remain open. The earlier877 full native result predates the runtime header change; all following counts retain their earlier checkpoint scopes.
+
+Current post-approval acceptance: [G08/G12/G15 signoff](approved_exception_capability_acceptance_5_0_6.md) closes all AG01-AG18, R01-R18 and LS01-LS14 obligations with bounded user-approved exceptions. Current strict relationship6576+546, direct decoder7+5, source8252/Java115 and comparator32/native9 gates pass. Explicit unchanged-evidence reuse reconciles G08 native33/G12 native51/G15 native44 to the completed877 checkpoint with1809 unchanged C++ inputs. Status is **14 qualified / 3 partial**: G13/G14/G17 and whole P0-P7 remain open. Subsequent paragraphs retain their prior checkpoint scopes.
+
+Current comparison-boundary correction: [strict JSON controls](comparator_json_types_5_0_6.md) repairs eight comparison boundaries after nine reproduced false passes. Permanent controls32/32 and final affected native9/9 pass; twelve actual-native recording/replay registrations reject37 effective mutations. No runtime/generated C++ implementation changes. The user approved [correct quoted-FK loading](quoted_fk_compatibility_exception_5_0_6.md) and [invalid-profile rejection](invalid_wire_naming_compatibility_exception_5_0_6.md) on2026-10-24; their behavior decisions are settled, with bounded strict gates and G08/G12/G15 signoff in progress. The new permanent invalid-profile test passes with8252 source observations/115 Java tests. Capability statuses remain11 qualified/6 partial until their complete exits are signed off; older pending-decision statements below retain historical scope.
+
 Current completed core/source checkpoint: [final four-source acceptance](runtime_core_source_closure_5_0_6.md) closes GM01-GM12, all75 resolved definitions/RQ01-RQ26, the complete runtime root/five namespaces/75 assertions and SQLite SP01-SP30/42 original tests. Current imported graph14/provider27/root11/resolved37 equivalent commands share the successful **877/877 native** checkpoint, with196 compiler contracts, zero failures/errors/skips, 11,413 frozen inputs, canonical1,163 and explicit unchanged Release-decoder reuse. All1,809 C++ source/header/module input hashes remain unchanged after later Java-only work. Source counts are **122 accepted / 0 pending / 2 excluded_external**; historical source summaries/target paths and failed epochs are preserved. Current [dispatcher review](current_dispatcher_review_5_0_6.md) records304 direct active baselines/169 custom registrations, 168 actual empty-result rejections and13 invariant controls without claiming whole SQ02 acceptance. The installed [postfix/member/attribute correction](audit_postfix_grammar_5_0_6.md) matches **8,252 original/current observations / 114 Java tests**, rejects the preceding parser with1,694 source discrepancies, and matches **72 descriptors / 336 privacy tuples** through24 fresh generated model pairs. Strict25-example/50-contract/five-independent SDK reproduction preserves implementation bytes and refreshes only80 literal-helper hashes. Capabilities remain **11 qualified / 6 partial**, and P0-P7 remain incomplete; source counts do not waive the outstanding generated behavior decisions, full grammar/identity, provenance or governed-caller requirements.
 
 Current expression-parser continuation: [source-based grammar correction](audit_expression_grammar_5_0_6.md) resolves 138 reproduced differences across 2,016 unchanged original expression/attribute observations. Both permanent corpora now match **4,681/4,681** (4,591 complete accepted metadata effects and 90 checked refusals), and **113/113** Java tests pass. The actually compiled historical parser fails precisely the new 138-case regression. Fresh generated callers compile all 261 original Java sources and 15 model pairs, matching **45 entity observations / 210 property-policy tuples** with actual UserContext deletion. All 25 example/50 contract/five-independent SDKs reproduce byte-identical implementations; exactly 80 provenance hashes refresh, followed by strict checks. Formatting checks cover 1,805 files. The preceding full native epoch is **876/877**, with its sole obsolete stream comparator failure and separate repaired native/module raw13,104 checks retained in the [source checkpoint](source_qualification_checkpoint_5_0_6.md). Current complete integration remains required. Source totals stay **118 accepted / 4 pending / 2 excluded_external**; capabilities remain **11 qualified / 6 partial**, P0-P7 incomplete. Earlier checkpoint counts below keep their original scope.
@@ -603,19 +1731,14 @@ corpora and acceptance labels are preserved until original calls are replayed.
 
 ## Execution phases
 
-Current capability acceptance: G01 (entity helpers), G02/G03 (Checker, Behavior
-and fixes), G04 (inheritance), G05 (constants/candidates), G06 (general queries),
-G07 (predicate/projection interfaces), G09 (execution/pagination), G10 (dynamic
-JSON), G11 (complete E) and G16 (dynamic storage and readonly properties) are
-qualified with documented C++ adaptations: eleven of seventeen capabilities.
-G08, G12, G13, G14, G15 and G17 retain their requirements. G15's scalar/member
-alias and complete nineteen-test shared-state responsibilities are qualified;
-the wider direct quoted-FK inputs retain five unresolved source/native results.
-P1 stays active for request intent, complete assembly and that remaining
-indexed-state behavior disposition. See
-[entity helper acceptance](entity_helper_acceptance_5_0_6.md),
-[Checker/Behavior acceptance](checker_behavior_acceptance_5_0_6.md) and the
-capability ledger for current evidence.
+Current capability acceptance is **fourteen of seventeen**: G01-G12 and
+G15/G16 are qualified with their recorded C++ ownership/language adaptations and
+the explicitly approved compatibility exceptions. G13, G14 and G17 remain
+partial. The [capability ledger](cpp_generator_parity_ledger.json) and the phase
+summary below describe current status. Earlier checkpoint narratives retain
+their historical counts and pending decisions; they do not reopen a requirement
+that a later documented acceptance already closes. Complete phase exits still
+require their own final reconciliation, and P7 cannot waive P1's G14/G17 scope.
 
 The [finite G13 requirements](semantic_qualification_requirements_5_0_6.md)
 retain whole-model/source/provenance/artifact/integration/ownership/governance
@@ -1089,14 +2212,14 @@ and selection evidence, not semantic composition acceptance. See
 
 | Phase | Status | Evidence |
 | --- | --- | --- |
-| P0 | Active | 5.0.6/producer locks verified; 36 generator sources and 17 capabilities indexed; 124 runtime sources have pending dependency/semantic dispositions. |
-| P1 | Active; G01-G03 accepted | Entity helper and all ten generated Checker/Behavior requirements are qualified with documented ownership/language adaptations. The final Checker/Behavior review includes original branch/body inspection, current dependency-locked direct and governed source replays, custom registration and actual SQLite examples, failure dispositions, compiler/native/module/lifetime/Java and strict artifact reproduction gates. Metadata privacy (G14), complete shared snapshot/cache (G15), intent/provenance (G17), general assembly (G12) and full model/integration qualification (G13) retain their requirements. See checker_behavior_acceptance_5_0_6.md; P1 is not complete. |
+| P0 | Inventory mapped; final exit audit open | Both 5.0.6 locks, 36 generator sources, 17 capabilities and 124 runtime dispositions are recorded. Runtime source status is 122 accepted / 0 pending / 2 external. Inventory mapping is not semantic acceptance; retain the complete P0/P7 exit audit. |
+| P1 | Active; G14/G17 remain partial | G01-G03 entity/Checker/Behavior, G12 assembly and G15 shared-state capability gates are qualified. Preserve actual Save/Fix, intent, policy, privacy and ownership evidence. Complete G14 metadata/configuration and G17 provenance/governance joins remain required; earlier pending G12/G15 labels are historical. |
 | P2 | Accepted with documented language/ownership adaptations | Normal inheritance generation and accurate Assist are enabled. All nine requirement rows are covered; fresh reference-locked replay matches 7736 observations, the inherited Business-ID adapter matches 80, native18/module10/Java40 and 20-workspace/41-contract-SDK reproduction pass. The untouched broken Rust Business-ID artifact is preserved. See inheritance_acceptance_5_0_6.md. Other capabilities and P0-P7 remain open. |
 | P3 | Accepted with documented language/ownership adaptations | Normal constants and model-aware guidance are enabled with all metadata validation retained. Eight requirement rows compose source/runtime/configuration/cleanup evidence; fresh reference-locked replay matches 4939 observations and preserves 21 authentic compiler errors. Native13/module9/Java42, twenty-workspace generation and 44 byte-identical-code contract SDKs pass. See constants_acceptance_5_0_6.md. Other capabilities and P0-P7 remain open. |
-| P4 | Active qualification | The original 1,440 execution observations remain unchanged; 8,448 pagination convenience and 8,160 field-criterion observations add actual source/runtime/SQLite boundaries. Deferred protocols have 252 ID-set, 108 ordinary-page and 640 continuous-page source comparisons plus native replacement/delete/cancel controls. Four-model RequestPolicy/JSON execution has 3,072 observations across list/one/stream/count/exists/page. These scoped matrices do not complete all general Q, grouped/facet/cache/privacy or model configurations. |
-| P5 | Active qualification | Scalar, relation, facet, graph hydration and dynamic-field checkpoints are recorded separately below. Dynamic JSON retains 1,181 translation observations and adds 2,240 one/stream plus 3,072 policy/execution observations; original bootstrap failure stays separate. Durable typed dynamic save/audit and JSON hydration/readback/alias matrices have actual source comparisons. The new 576-observation runtime diagnostic-source checkpoint fixes stream and typed-read privacy propagation; focused native/SAN/module gates pass; complete native integration is terminal at 472/549 passing with 77 recorded failures, followed by scoped scalar/Context corrections. Full model, aggregate/facet/cache, privacy/sink and generated configuration acceptance remains open. |
-| P6 | Active; G11 accepted, G12 open | The complete E source/diagnostic/typed-scalar/default-constraint review is qualified: 2416 current-reference source observations, native14/module6/SAN5, full compiler20-positive/47-negative and strict artifact/guidance reproduction. G12 retains dependency-aware sample data, runtime registration, application extensions, complete progressive Assist/model/configuration/log workflows and final integration; P6 is not complete. See expression_acceptance_5_0_6.md. |
-| P7 | Pending | Full generator semantic matrix is not closed. |
+| P4 | Capability gates qualified; final phase audit open | G06/G07 general Q/predicates/projections and G09 execution/pagination are qualified in their acceptance matrices. Preserve purpose/comment, trusted Context/Policy, provider failures and cancellation. Complete cross-capability G13/G14/G17 and the explicit phase exit audit remain separate. |
+| P5 | Capability gates qualified; final phase audit open | G08 aggregation, G10 dynamic JSON and G16 storage/readonly capabilities are qualified, including the approved quoted-FK exception. Earlier failed native and source epochs remain historical. Complete protected metadata/governance/provenance and the full phase exit audit stay open. |
+| P6 | G11/G12 qualified; final phase audit open | Complete E and R01-R18 assembly/sample-data/Assist capability gates are qualified in expression_acceptance_5_0_6.md and g12_acceptance_5_0_6.md. Preserve approved JSON and invalid naming-profile exceptions, truthful guidance and source/ownership evidence. Final cross-capability and P0-P7 signoff remain separate. |
+| P7 | Active; all 305 direct-corpus locators / 323,568 primary observations have scoped source records, and the installed custom lookup maps 160/160 locators. The frozen 1,063-test registry has 512 Rust comparisons and 545 explicit fixture/setup dependencies. The newer full epoch completes with 1,062 passes and one isolated admission-fixture failure on unchanged inputs; the repair passes 60/60 selected controls and a new complete epoch is running. Latest inherited-business proof retains explicit adaptation, a reference-locked 20-error original compiler guard, native 5 / prior-key 2 and 35 controls. Complete source semantics, protected consumers, AP02/G14/G17 and all capability/phase exits remain. Capability status stays 14 qualified / 3 partial. |
 
 
 ## Related contracts
@@ -3998,3 +5121,14 @@ independent-SDK verifier remain available for maintenance. No C++ runtime,
 ownership, module export, sanitizer/MIPS/full-suite or source/capability verdict
 is changed. Complete AP02, remaining G08/G12/G13/G14/G15/G17 and all P0-P7 exit
 criteria stay open; the user-approved JSON payload exception remains limited.
+
+## Current partial-result comparator hardening
+
+The [62-control saved-output replay](parity/comparator_optimized_partial_state_controls_5_0_6.json.gz)
+rejects nonempty one-record prefixes in nine typed/delegated comparator
+families. Six targeted paths also pass complete/prefix controls with
+`python -O`; explicit Save and indexed LoadState had reproducible false passes
+in that mode before the unconditional checks. Five selected explicit/eval/source
+CTests and four selected state/entity/source CTests pass. Updated source
+contracts pin the changed comparator bytes. This is a bounded SQ02/G13
+verification step, not a current full native epoch or P0-P7 acceptance.

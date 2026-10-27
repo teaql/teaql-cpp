@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare temporal bootstrap, clock replacement and registered Checker overrides."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -49,7 +50,7 @@ def main():
             for index, (value, source, native) in enumerate(zip(inputs, expected, actual))
             if not same(source, native)]
     if gaps:
-        path = ROOT / 'docs/parity/bootstrap_temporal_extensions_5_0_6_initial_gaps.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/bootstrap_temporal_extensions_5_0_6_initial_gaps.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress(json.dumps(gaps, indent=2).encode(), mtime=0))
         print(json.dumps(gaps[0], indent=2))

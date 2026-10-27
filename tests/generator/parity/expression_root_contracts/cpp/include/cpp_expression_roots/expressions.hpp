@@ -461,42 +461,48 @@ inline PlatformExpression PlainRecordExpression::getPlatform() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static ClassExpression modelClass(const Class& value) {
-        return ClassExpression(entity_expression(value, StaticString{"modelClass"}));
+        return ClassExpression(
+            entity_expression(value, StaticString{"modelClass"}, StaticString{"Class"}));
     }
 
     static ClassExpression modelClass(Class&&) = delete;
     static ClassExpression modelClass(const Class&&) = delete;
 
     static OperatorExpression modelOperator(const Operator& value) {
-        return OperatorExpression(entity_expression(value, StaticString{"modelOperator"}));
+        return OperatorExpression(
+            entity_expression(value, StaticString{"modelOperator"}, StaticString{"Operator"}));
     }
 
     static OperatorExpression modelOperator(Operator&&) = delete;
     static OperatorExpression modelOperator(const Operator&&) = delete;
 
     static TemplateExpression modelTemplate(const Template& value) {
-        return TemplateExpression(entity_expression(value, StaticString{"modelTemplate"}));
+        return TemplateExpression(
+            entity_expression(value, StaticString{"modelTemplate"}, StaticString{"Template"}));
     }
 
     static TemplateExpression modelTemplate(Template&&) = delete;
     static TemplateExpression modelTemplate(const Template&&) = delete;
 
     static NamespaceExpression modelNamespace(const Namespace& value) {
-        return NamespaceExpression(entity_expression(value, StaticString{"modelNamespace"}));
+        return NamespaceExpression(
+            entity_expression(value, StaticString{"modelNamespace"}, StaticString{"Namespace"}));
     }
 
     static NamespaceExpression modelNamespace(Namespace&&) = delete;
     static NamespaceExpression modelNamespace(const Namespace&&) = delete;
 
     static PlainRecordExpression plainRecord(const PlainRecord& value) {
-        return PlainRecordExpression(entity_expression(value, StaticString{"plainRecord"}));
+        return PlainRecordExpression(
+            entity_expression(value, StaticString{"plainRecord"}, StaticString{"PlainRecord"}));
     }
 
     static PlainRecordExpression plainRecord(PlainRecord&&) = delete;

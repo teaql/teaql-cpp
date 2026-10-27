@@ -61,6 +61,7 @@ struct Tenant : generated_detail::Model<Tenant> {
     using Base = generated_detail::Model<Tenant>;
     friend class TenantChecker;
     static constexpr std::string_view ENTITY_NAME = "Tenant";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "tenant";
     friend struct generated_detail::TenantSampleRecipe;
     friend struct generated_detail::TenantBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -212,6 +213,7 @@ struct Receipt : generated_detail::Model<Receipt> {
     using Base = generated_detail::Model<Receipt>;
     friend class ReceiptChecker;
     static constexpr std::string_view ENTITY_NAME = "Receipt";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "receipt";
     friend struct generated_detail::ReceiptSampleRecipe;
     friend struct generated_detail::ReceiptBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -428,6 +430,7 @@ struct Ticket : generated_detail::Model<Ticket> {
     using Base = generated_detail::Model<Ticket>;
     friend class TicketChecker;
     static constexpr std::string_view ENTITY_NAME = "Ticket";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "ticket";
     friend struct generated_detail::TicketSampleRecipe;
     friend struct generated_detail::TicketBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -850,7 +853,7 @@ inline const Tenant* Receipt::tenant() const {
     if (!is_loaded("tenant")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "tenant");
+    auto* view = root.resolve_relation_option<Tenant>("receipt", id(), "tenant");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1085,7 +1088,7 @@ inline const Tenant* Ticket::tenant() const {
     if (!is_loaded("tenant")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "tenant");
+    auto* view = root.resolve_relation_option<Tenant>("ticket", id(), "tenant");
     if (view) {
         return *view ? &**view : nullptr;
     }

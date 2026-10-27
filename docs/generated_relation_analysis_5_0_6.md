@@ -1,8 +1,13 @@
 # Generated relationship analysis: Rust 5.0.6 checkpoint
 
-Status: relationship construction/execution checkpoint recorded; validation is active. G08/P5 remain partial.
-The quoted-Line foreign-key result difference is pending a user decision and is
-not parity acceptance. Facet execution and cache execution remain open.
+Historical checkpoint: this records the original relationship construction and
+execution evidence before the quoted-FK decision. The user subsequently approved
+[the bounded C++ compatibility exception](quoted_fk_compatibility_exception_5_0_6.md).
+The [current source binding](relation_analysis_cli_source_binding_5_0_6.md)
+checks all 7,122 observations with strict source comparisons and approved C++
+expectations reported separately; the source comparisons retain the declared
+Line descriptor Debug spelling adapter. G08 has later qualified evidence; this
+historical checkpoint alone does not complete P5 or P0–P7.
 
 ## Fixed references and runtime responsibilities
 
@@ -69,7 +74,9 @@ empty parents, repeated/recombined requests, generic statistics and source backe
 errors. Database fixtures are existing foreign-key-enabled tables; no schema
 bootstrap claim is made.
 
-Of these records, 6,576 source comparisons pass, including 3,498 SQLite executions. Another 546 real executions have a pending quoted-FK result disposition and remain unqualified.
+At this checkpoint, 6,576 source comparisons passed, including 3,498 SQLite
+executions. Another 546 real executions awaited the quoted-FK decision. Their
+later approved C++ expectations are kept separate from strict source matches.
 
 Only the previously documented Line descriptor spelling adaptation is allowed:
 `column_name: "\\\"order\\\""` becomes the C++ raw identifier spelling in Debug.
@@ -79,27 +86,29 @@ Original observations remain verbatim. Result values are never normalized.
 shows identical SQL logs but different attachment results. Rust queries the correct
 Line counts, then cannot find the raw result key using its quoted column metadata.
 It attaches default zero/empty results. Existing C++ raw-identifier metadata
-attaches actual counts. Whether to retain the correct C++ result or reproduce the
-source defect is pending the user decision. Such cases are explicitly unqualified;
-review snapshots protect the evidence without claiming semantic parity.
+attaches actual counts. The later user decision retains the correct C++ results
+under an explicit compatibility exception. Review snapshots protect both sets of
+values without claiming strict semantic equality for those 546 cases.
 
-The corpus verifier reports matched and pending records separately.
-`--require-complete` rejects any pending source-failure disposition. This is a
-partial capability gate, not full G08 qualification. Validation passes native CTest 14/14, targeted ASan/UBSan 4/4 with leak scanning
+The historical corpus verifier reports matched and formerly pending records
+separately. `--require-complete` rejects those labelled source-failure cases;
+the later exception-aware binding validates their approved C++ expectations.
+At this checkpoint, validation passed native CTest 14/14, targeted ASan/UBSan 4/4 with leak scanning
 disabled, module actual grouping/counting/relationship attachment 1/1, compiler
 2 positive and 2 negative contracts, selected Java generator/layout tests 27/27,
 and exact reproduction of all 15 C++ generated sets (165 files). Formatting checks
 pass for 922 handwritten C++ files. Export/path/reference integrity checks pass;
-all 17 capabilities remain unqualified. The partial relationship test includes
+all 17 capabilities remained unqualified. The partial relationship test includes
 review-snapshot stability checks; those are not semantic acceptance. The pinned
 SQLite archive is not sanitizer-instrumented. No MIPS or physical-device execution
 is claimed.
 
-## Remaining contracts
+## Work remaining at this checkpoint
 
-Resolve the quoted-FK result disposition. Implement and qualify generated facets,
-outer-filter merging, restriction semantics, nested facet/aggregate execution and
-result attachment. Qualify actual aggregation cache expiry/propagation, trace and
-privacy behavior, additional numeric/temporal/inherited/guarded models, async
-suspension and cancellation boundaries. The complete G08 and P5 exit criteria
-remain open.
+The quoted-FK disposition was resolved later as documented above. At this
+checkpoint, remaining work included generated facets, outer-filter merging,
+restriction semantics, nested facet/aggregate execution and result attachment;
+aggregation-cache expiry/propagation, trace and privacy; additional
+numeric/temporal/inherited/guarded models; and async suspension and cancellation.
+The complete G08 and P5 exit criteria were open at this checkpoint. Consult the
+current capability ledger for their later disposition.

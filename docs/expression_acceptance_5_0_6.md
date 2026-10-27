@@ -1,5 +1,7 @@
 # G11 generated E acceptance review: Rust 5.0.6
 
+Current canonical-root follow-up: [EID01 requalification](generated_expression_identity_5_0_6.md) separates model identity from descriptor overrides and native entry spelling. Runtime-first capture and thin metadata now match960/960 original/native outcomes; native5/module3/scoped SAN1/compiler4-positive6-negative/Java88 and80-SDK restricted reproduction pass. G11 is qualified again; G13/G14/G17 and P0-P7 remain open. Earlier checkpoint APIs and evidence below retain their original scope.
+
 Status: G11 qualified with the documented C++ ownership and presentation adaptations. All eleven requirements and their final gates are met. The eleven requirements
 in [the matrix](expression_requirements_5_0_6.md) retain the full E responsibility.
 The [pre-acceptance archive](parity/expression_pre_acceptance_5_0_6.json) preserves

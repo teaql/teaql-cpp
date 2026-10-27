@@ -7,6 +7,8 @@ import json
 from pathlib import Path
 
 from compare_values import observe, same
+from configuration_cli_cases_5_0_6 import scalar_candidate_inputs
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 CASES = ('text', 'integer', 'nullable_integer', 'number', 'double', 'date', 'timestamp', 'boolean')
@@ -44,7 +46,10 @@ def main():
         corpus = json.load(file)
     if corpus['baseline'] != baseline or corpus['case'] != args.case or not same(corpus['original_provenance'], original):
         raise RuntimeError('Scalar candidate corpus belongs to another source/model')
-    rows = corpus['cases']
+    metadata = json.loads((case / 'rust/OBSERVATION.json').read_text())
+    field = next(f for f in metadata['fields'] if f['field'] == 'choice')
+    source_inputs = scalar_candidate_inputs(len(field['candidates']))
+    rows = require_cases(corpus, len(source_inputs), source_inputs)
     inputs = [row['input'] for row in rows]
     expected = [row['expected'] for row in rows]
     if args.rust and not same(observe(args.rust, inputs), expected):

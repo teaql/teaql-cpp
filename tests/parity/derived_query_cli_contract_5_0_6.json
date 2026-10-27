@@ -1,0 +1,59 @@
+{
+  "kind": "retained_original_derived_query_diagnostics_source",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "cohorts": {
+    "composition": {
+      "test": "derived_query_composition_rust_parity",
+      "comparator": "tests/parity/compare_derived_query_composition_5_0_6.py",
+      "binary": "teaql_derived_query_composition_probe",
+      "count": 360,
+      "successes": 90,
+      "errors": 270,
+      "sql_logs": 90
+    },
+    "diagnostics": {
+      "test": "derived_query_diagnostics_rust_parity",
+      "comparator": "tests/parity/compare_derived_query_diagnostics_5_0_6.py",
+      "binary": "teaql_derived_query_diagnostics_probe",
+      "count": 576,
+      "successes": 144,
+      "errors": 432,
+      "sql_logs": 144
+    }
+  },
+  "historical_production_hashes_stale": 7,
+  "composition_corpus": "tests/parity/derived_query_composition_source_5_0_6_cases.json.gz",
+  "diagnostics_corpus": "tests/parity/derived_query_diagnostics_5_0_6_cases.json.gz",
+  "composition_source_receipt": "docs/parity/derived_query_composition_source_5_0_6.json",
+  "composition_final_receipt": "docs/parity/derived_query_composition_5_0_6.json",
+  "diagnostics_final_receipt": "docs/parity/derived_query_diagnostics_5_0_6.json",
+  "diagnostics_source_review": "docs/parity/derived_query_diagnostics_5_0_6_source_review.json",
+  "composition_corpus_sha256": "11275b608bcd5169328e477f5005c934eb72bd33a4d59b0a95d127223f4cd48c",
+  "diagnostics_corpus_sha256": "9ef13e94d7054e4e83da1e9fb3ceefc36b742587a1b0e1fd1fbee45026735a63",
+  "composition_source_receipt_sha256": "5c9e7e62b7e1c434ca0eae40dd736da9108744abc5b90c8d35a45001cbccb334",
+  "composition_final_receipt_sha256": "dfe9056978e523e9e8de76be0ad942d80b9e3e47cee66ed76b2feb51166b45e8",
+  "diagnostics_final_receipt_sha256": "61aa5722fefda93710507fa0fd28245623b64cb5c89016c3730d0f6a3e9efcf9",
+  "diagnostics_source_review_sha256": "35a88eb197b0b64c3a91ba9f04d6638b8fa2a50d8a715567f602b841c33b4c67",
+  "support_files": {
+    "scripts/derived_query_cli_source_binding_5_0_6.py": "bee9aa9fca42ffcb8b123a8cc44937c196704a8a0f09deee74fa5b0820ea07ae",
+    "tests/parity/verify_derived_query_cli_controls_5_0_6.py": "39101a8cd04b97de462c58dec143b408bfab5c3b24953bae43760dd80597ec60",
+    "tests/parity/compare_derived_query_composition_5_0_6.py": "b2d5ddbc213830622b6cb7de43a77fa09d1898880b5b43ed9d12c7f22620bdf8",
+    "tests/parity/compare_derived_query_diagnostics_5_0_6.py": "7684d6e4d2be2f019be3d67a75d6b8948015f326a74da37f692cf33eef372292",
+    "tests/parity/generate_derived_query_composition_source_5_0_6.py": "5e1cad6910ae3b88b555a9875105ebd97deb58a956fea13f9f876f57497ce6c9",
+    "tests/parity/generate_derived_query_diagnostics_5_0_6.py": "da42a917eb5c32218d998a13b257c57306b1d5cd5c1040ebaa122e154ac79b98",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/derived_query_composition_probe.cpp": "24181e2ae3e80b7088e02a68de7552007c7b012aa656b409ab7b2cb8d822a075",
+    "tests/parity/derived_query_diagnostics_probe.cpp": "1e2a0fab9e43b5d9d8605e883f1da037ec726bac001c5cce713e7daa2c757da4",
+    "tests/parity/rust_field_layout/src/bin/derived_query_diagnostics_5_0_6.rs": "1f14998689a7864e6bb9c169db286e63ca0deeb9442bf3088ac77cc741c68f8b",
+    "teaql_runtime/include/teaql/runtime/purposed_query.hpp": "c4d6acf1bc93732e5350b97755486c66363a09083114cf8504f59cb2e0273e8a",
+    "teaql_runtime/include/teaql/runtime/purposed_query_debug.hpp": "9cf9067bf56f6fdbb58e76bcb597e1b395226b559c2c6bfdae438f1687367633",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/diagnostic_query.hpp": "04a2dfc809e35abe774bab69fed7ca948f77707830707c94c39cd1913d962e22",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp": "a473b7ec4ae6ddc0bace6b4331573f732607b41ff93d472303f33239f188e8f9",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp": "b6ec2e3f06d88fbdbb9e5895115a2a1ea603364e43778f3926d9c16883ff22e9",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp": "ae6a29e5c493281f6f5cc9324f2f63eea0a97ae60d891f2e189b96106eaffe54",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp": "d400fe5168709d03a7b84a0246aedf3d0cf9f3c81a3f9f08f07bc18229f04665",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp": "912f83ace987e287ea48557269e5ef07187978580e2ce306698d7386ca10d4bb",
+    "teaql_runtime/src/data_service/mod.cpp": "46ef5a64766a3704c729826b4b8efe9788111fc620edae4eaece0d9017e98323"
+  }
+}

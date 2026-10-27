@@ -1,0 +1,103 @@
+[package]
+name = "teaql_context_public_driver_source_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+autobins = false
+
+[workspace]
+
+[dependencies]
+async-trait = "=0.1.89"
+tokio = { version = "=1.52.3", features = ["rt", "macros", "time"] }
+num-traits = "=0.2.19"
+sha2 = "=0.10.9"
+libsqlite3-sys = "=0.38.1"
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+futures-core = "=0.3.32"
+futures-util = "=0.3.32"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype", "functions"] }
+
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+
+
+
+[[bin]]
+name = "context_public_context_locking"
+path = "../rust_values/src/bin/locking_oracle.rs"
+
+[[bin]]
+name = "context_public_audit_event_projection_5_0_6"
+path = "../rust_field_layout/src/bin/audit_event_projection_5_0_6.rs"
+
+[[bin]]
+name = "context_public_i18n_debug_scope"
+path = "../rust_values/src/bin/i18n_debug_scope_oracle.rs"
+
+[[bin]]
+name = "context_public_i18n"
+path = "../rust_values/src/bin/i18n_oracle.rs"
+
+[[bin]]
+name = "context_public_telemetry_model_scope"
+path = "../rust_values/src/bin/telemetry_model_scope_oracle.rs"
+
+[[bin]]
+name = "context_public_commit_audit_error"
+path = "../rust_field_layout/src/bin/commit_audit_error_5_0_6.rs"
+
+[[bin]]
+name = "context_public_intent_trace"
+path = "../rust_document_services_reference_5_0_6/src/bin/request_intent_reference_5_0_6.rs"
+
+[[bin]]
+name = "context_public_telemetry"
+path = "../rust_values/src/bin/telemetry_oracle.rs"
+
+[[bin]]
+name = "context_public_context_logging"
+path = "../rust_values/src/bin/context_logging_oracle.rs"
+
+[[bin]]
+name = "context_public_runtime_log"
+path = "../rust_values/src/bin/runtime_log_oracle.rs"
+
+[[bin]]
+name = "context_public_business_service"
+path = "../rust_values/src/bin/business_service_oracle.rs"
+
+[[bin]]
+name = "context_public_runtime_business_id"
+path = "../rust_values/src/bin/runtime_business_id_oracle.rs"
+
+[[bin]]
+name = "context_public_runtime_context"
+path = "../rust_values/src/bin/runtime_context_oracle.rs"
+
+[[bin]]
+name = "context_public_generated_support"
+path = "../rust_generated_support_5_0_6/src/main.rs"
+
+[[bin]]
+name = "context_public_purposed_query_debug"
+path = "../rust_values/src/bin/generated_support_oracle.rs"
+
+[[bin]]
+name = "context_public_data_store"
+path = "../rust_values/src/bin/data_store_oracle.rs"

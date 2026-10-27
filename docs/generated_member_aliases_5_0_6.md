@@ -1,5 +1,9 @@
 # Generated decoder member aliases: Rust 5.0.6
 
+The later [installed CLI source-binding checkpoint](generated_member_alias_cli_source_binding_5_0_6.md)
+pins the complete 260-case original Rust execution and verifies 260 fresh C++
+results. Its evidence scope does not change the qualification boundaries below.
+
 Status: the thin generator adapter is qualified through native 44, imported 32,
 targeted sanitizer 3, all 193 generated compiler contracts, Java 80 and complete
 78-SDK reproduction. The initial temporary-disk failure is preserved separately

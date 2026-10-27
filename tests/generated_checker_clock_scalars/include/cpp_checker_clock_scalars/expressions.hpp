@@ -215,7 +215,7 @@ public:
 
 struct E {
     static NoteExpression note(const Note& value) {
-        return NoteExpression(entity_expression(value, StaticString{"note"}));
+        return NoteExpression(entity_expression(value, StaticString{"note"}, StaticString{"Note"}));
     }
 
     static NoteExpression note(Note&&) = delete;

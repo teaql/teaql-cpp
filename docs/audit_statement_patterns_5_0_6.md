@@ -232,8 +232,19 @@ original checkpoint. The retained complete flag applies to this finite matrix
 only; full syntax/identity obligations and permanent/current producer qualification
 remain open.
 
-The [current read-only freeze audit](parity/native_service_graph_freeze_audit_followup_5_0_6.json.gz)
+The [read-only freeze audit at that checkpoint](parity/native_service_graph_freeze_audit_followup_5_0_6.json.gz)
 checks all 11,399 native execution inputs and exact reference commits after the
-probes. No frozen input changed. Its controller and build child are still live;
-this audit is not a successful full native build or CTest result. All owned probe
-source/class/target directories from the successful follow-ups were removed.
+probes. No frozen input changed. Its controller and build child were still live
+at that checkpoint; this audit is not a successful full native build or CTest
+result. All owned probe source/class/target directories from the successful
+follow-ups were removed.
+
+## Current installed-parser continuation
+
+The [nested item checkpoint](audit_nested_item_checkpoint_5_0_6.md) now binds
+all 2,143 cases above to fresh original Rust and current installed Java parser
+execution. The expanded source gate matches 73,330/73,330 metadata outcomes and
+passes 148/148 focused Java tests. The historical candidate remains an
+uninstalled source copy; this continuation establishes matching behavior for
+its finite cases without replacing the historical receipts or claiming complete
+AP02 grammar acceptance.

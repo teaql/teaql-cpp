@@ -23,10 +23,13 @@ def main():
     if args.record and args.record.exists():
         parser.error('Use a fresh receipt path')
     corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
-    assert corpus['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
+    if corpus['runtime_commit'] != json.loads((ROOT / 'upstream.lock.json').read_text())['commit']:
+        raise RuntimeError('Generated state bridge corpus belongs to a different runtime')
     for path, expected in corpus['source_hashes'].items():
-        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected, path
-    assert len(corpus['inputs']) == len(corpus['expected']) == 6
+        if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
+            raise RuntimeError(f'Generated state bridge source changed: {path}')
+    if len(corpus['inputs']) != 6 or len(corpus['expected']) != 6:
+        raise RuntimeError('Generated state bridge corpus is incomplete')
     record = dict(complete=False, scope=corpus['scope'], steps=[])
     payload = ''.join(json.dumps(item) + '\n' for item in corpus['inputs'])
 
@@ -45,9 +48,11 @@ def main():
                                     sha256=hashlib.sha256(binary.read_bytes()).hexdigest()))
         save()
         result.check_returncode()
-        assert result.stdout.endswith('\n')
+        if not result.stdout.endswith('\n'):
+            raise RuntimeError(f'{label}: generated state bridge output is not LF-terminated')
         actual = [json.loads(line) for line in result.stdout.split('\n')[:-1]]
-        assert same(actual, corpus['expected']), label
+        if not same(actual, corpus['expected']):
+            raise RuntimeError(f'{label}: complete generated state bridge results differ')
     record.update(complete=True, observations=6, actual_original_replayed=args.rust is not None,
                   corpus_sha256=hashlib.sha256(CORPUS.read_bytes()).hexdigest())
     save()

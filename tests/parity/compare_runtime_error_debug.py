@@ -6,6 +6,7 @@ import json
 import subprocess
 from pathlib import Path
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 
 def target_inputs(inputs, bits):
@@ -42,6 +43,9 @@ def main(corpus_name='runtime_error_debug_baseline_5_0_6_cases.json.gz', label='
         raise RuntimeError('Runtime diagnostic observations use a different source baseline')
     if data.get('pointer_bits', bits) != bits:
         raise RuntimeError('Current diagnostic corpus is native64-only; requalify actual 32-bit source before use')
+    counts = {'runtime_check_baseline_5_0_6_cases.json.gz': 1134,
+              'runtime_error_debug_baseline_5_0_6_cases.json.gz': 1174}
+    require_cases(data, counts[corpus_name])
     inputs = [case['input'] for case in data['cases']]
     key = 'expected_32' if bits == 32 else 'expected'
     expected = [case.get(key, case['expected']) for case in data['cases']]
@@ -50,6 +54,8 @@ def main(corpus_name='runtime_error_debug_baseline_5_0_6_cases.json.gz', label='
         if not same(expected, observe(args.rust, target_inputs(inputs, bits))):
             raise RuntimeError('Committed target-width observations differ from live Rust methods')
     actual = observe(args.cpp, inputs, prefix)
+    if len(actual) != len(inputs):
+        raise RuntimeError('Native observations must cover the complete input matrix')
     failures = [(index, inp, exp, act) for index, (inp, exp, act) in
                 enumerate(zip(inputs, expected, actual)) if not same(exp, act)]
     for index, inp, exp, act in failures[:5]:

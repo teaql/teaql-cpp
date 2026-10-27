@@ -114,7 +114,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Record::ENTITY_NAME,
+            "Record",
             "platform",
             "Platform",
             entity.platformId(),

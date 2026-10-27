@@ -78,6 +78,24 @@ configurations. The running native build predates that registration; after
 reconfiguration the expected native registry is **720**, not its original 719.
 The initial registry and build-input snapshot are preserved.
 
+## Current optimized-interpreter continuation
+
+The current [62-control replay](parity/comparator_optimized_partial_state_controls_5_0_6.json.gz)
+adds nonempty partial-output checks to nine typed/delegated comparator families.
+It also runs complete and one-record-prefix outputs under both ordinary Python
+and `python -O` for explicit Save, indexed LoadState, generated lookup Context
+cleanup, runtime state bridge, generated state bridge and Entity source. Before
+the fix, the explicit Save and indexed LoadState comparators returned success
+for the one-record prefix under `python -O`, because `assert` was removed and
+`zip` compared only the first pair. Explicit checks now preserve cardinality,
+source identity and result comparison in optimized mode. The three state/entity
+comparators and the lookup check also use unconditional result checks. The
+selected five explicit/eval/source and four state/entity/source CTests pass.
+No frozen input, expected business result, C++ runtime or generator source is
+changed by this continuation. The 160 custom comparator locators still require
+their separate complete SQ02/G13 review; this replay qualifies only its named
+families and mutation modes.
+
 ## Integration boundary
 
 The [exact-delta receipt](parity/comparator_result_contracts_exact_test_deltas_5_0_6.json.gz)

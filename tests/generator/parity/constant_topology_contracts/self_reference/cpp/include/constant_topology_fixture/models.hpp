@@ -25,6 +25,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -176,6 +177,7 @@ struct Category : generated_detail::Model<Category> {
     using Base = generated_detail::Model<Category>;
     friend class CategoryChecker;
     static constexpr std::string_view ENTITY_NAME = "Category";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "category";
     friend struct generated_detail::CategorySampleRecipe;
     friend struct generated_detail::CategoryBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -425,6 +427,7 @@ struct Status : generated_detail::Model<Status> {
     using Base = generated_detail::Model<Status>;
     friend class StatusChecker;
     static constexpr std::string_view ENTITY_NAME = "Status";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "status";
     friend struct generated_detail::StatusSampleRecipe;
     friend struct generated_detail::StatusBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -870,7 +873,7 @@ inline const Platform* Category::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("category", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -884,7 +887,7 @@ inline const Category* Category::parent() const {
     if (!is_loaded("parent")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Category>(ENTITY_NAME, id(), "parent");
+    auto* view = root.resolve_relation_option<Category>("category", id(), "parent");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1239,7 +1242,7 @@ inline const Platform* Status::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("status", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1253,7 +1256,7 @@ inline const Category* Status::category() const {
     if (!is_loaded("category")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Category>(ENTITY_NAME, id(), "category");
+    auto* view = root.resolve_relation_option<Category>("status", id(), "category");
     if (view) {
         return *view ? &**view : nullptr;
     }

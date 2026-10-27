@@ -12,7 +12,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 
-from verify_runtime_configuration_kernel_5_0_6 import verify_inputs, same
+from verify_runtime_configuration_kernel_5_0_6 import load_original_record, same
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -35,8 +35,7 @@ def main():
     parser.add_argument('--assembly', action='store_true',
                         help='Require the full original generated post-startup query outcome too')
     args = parser.parse_args()
-    source = json.loads((ROOT / 'docs/parity/runtime_configuration_original_observations_5_0_6.json').read_text())
-    verify_inputs(source)
+    source = load_original_record('runtime_configuration_original_observations_5_0_6.json')
     total = 0
     for case in source['cases']:
         if case['mode'] != 'connect':

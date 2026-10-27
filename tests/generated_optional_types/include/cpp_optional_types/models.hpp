@@ -17,6 +17,7 @@ struct Reading : generated_detail::Model<Reading> {
     using Base = generated_detail::Model<Reading>;
     friend class ReadingChecker;
     static constexpr std::string_view ENTITY_NAME = "Reading";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "reading";
     friend struct generated_detail::ReadingSampleRecipe;
     friend struct generated_detail::ReadingBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};

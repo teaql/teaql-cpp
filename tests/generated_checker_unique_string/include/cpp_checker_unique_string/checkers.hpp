@@ -47,7 +47,7 @@ public:
         GeneratedFieldChecks::clock_value(user_context,
                                           status,
                                           false,
-                                          Note::ENTITY_NAME,
+                                          "Note",
                                           "code",
                                           "code",
                                           entity.root,

@@ -7,6 +7,8 @@ import json
 from pathlib import Path
 
 from compare_values import observe, same
+from configuration_cli_cases_5_0_6 import bootstrap_inputs
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 CASES = ('ordered', 'reversed', 'missing_target_one', 'foreign_value_one', 'self_reference_required')
@@ -39,8 +41,9 @@ def main():
     if (corpus['baseline'] != baseline or corpus['case'] != args.case
             or not same(original, corpus['original_provenance'])):
         raise RuntimeError('Topology execution corpus belongs to another source/model')
-    inputs = [row['input'] for row in corpus['cases']]
-    expected = [row['expected'] for row in corpus['cases']]
+    rows = require_cases(corpus, 96, bootstrap_inputs())
+    inputs = [row['input'] for row in rows]
+    expected = [row['expected'] for row in rows]
     if args.rust and not same(observe(args.rust, inputs), expected):
         raise RuntimeError('Topology execution corpus differs from live original')
     actual = observe(args.cpp, inputs)

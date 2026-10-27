@@ -151,14 +151,16 @@ inline PriorityListExpression PlatformExpression::getPriorityList() const {
 
 struct E {
     static PriorityExpression priority(const Priority& value) {
-        return PriorityExpression(entity_expression(value, StaticString{"priority"}));
+        return PriorityExpression(
+            entity_expression(value, StaticString{"priority"}, StaticString{"Priority"}));
     }
 
     static PriorityExpression priority(Priority&&) = delete;
     static PriorityExpression priority(const Priority&&) = delete;
 
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;

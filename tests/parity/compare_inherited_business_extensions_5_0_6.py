@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare inherited Business-ID custom Checker and governed SQLite saves."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -48,7 +49,7 @@ def main():
     gaps = [dict(input=value, rust=source, cpp=native)
             for value, source, native in zip(inputs, expected, actual) if not same(source, native)]
     if gaps:
-        path = ROOT / 'docs/parity/inherited_business_extensions_5_0_6_initial_gaps.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/inherited_business_extensions_5_0_6_initial_gaps.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress(json.dumps(gaps, indent=2).encode(), mtime=0))
         print(json.dumps(gaps[0], indent=2))

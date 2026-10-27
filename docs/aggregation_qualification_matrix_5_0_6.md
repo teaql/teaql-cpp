@@ -1,9 +1,13 @@
 # G08 aggregation, relationship analysis and facets
 
-G08 remains partial. The current source-result blocker is AG07's quoted-column
-metadata behavior; a user clarification is pending. The strict relationship gate
-still rejects all 546 affected results. Neither a passing partial comparator nor
-the controlled metadata experiment below establishes unchanged-source parity.
+G08 is qualified after the [complete post-approval acceptance](approved_exception_capability_acceptance_5_0_6.md). The following review retains its complete responsibility matrix and earlier gate scope; AG07 has the bounded approved exception and current strict acceptance.
+
+At the pre-signoff checkpoint G08 remained partial pending current gates and
+AG01-AG18 signoff. On
+2026-10-24 the user approved retaining correct C++ quoted-FK relationship loading
+as an [explicit exception](quoted_fk_compatibility_exception_5_0_6.md). The strict
+relationship gate now checks 6,576 ordinary matches and all 546 approved native
+expectations separately. Historical refusal and source observations stay intact.
 
 References remain Rust `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and generator
 `45e1572c4956ca963410d8ea436ead3c8857087a`. The
@@ -25,7 +29,7 @@ remains applicable wherever a quoted-column aggregate result is attached.
 | AG04 | Object grouping, details and roll-up | [Relationship execution](generated_relation_analysis_5_0_6.md), [analysis inputs](relation_analysis_inputs_5_0_6.md) and [generated adapters](relation_analysis_adapters_5_0_6.md) retain grouping metadata, matching-plus-grouping roll-up, NULL/NotLoaded and scoped detail views. They use existing graph/query services rather than local example implementations. |
 | AG05 | Reverse counts, statistics, numeric/comparable field aggregates and default aliases | Complete `relationAggregateMethods`/`relationFieldAggregateMethod` and `RustRelationAggregateMethod` preserve scalar/list roles, unlimited full children, alias vocabulary and the core-conversion boundary. [Matching/statistics](matching_statistics_inputs_5_0_6.md) retains 2,808 actual outcomes. Quoted-column attachment results remain subject to AG07. |
 | AG06 | Bare versus materialized query inputs and metadata conversion | [Bare query inspection](generated_core_query_view_5_0_6.md), [analysis adapters](relation_analysis_adapters_5_0_6.md) and [matching/statistics](matching_statistics_inputs_5_0_6.md) preserve the actual different source conversions. Membership consumes bare core state; grouping/statistics materialize options; field conveniences rewrap the converted core in an empty selection. Context/source identities and explicit destination copies remain enforced. |
-| AG07 | Aggregate result key normalization and attachment | **Pending behavior decision:** 6,576 original relationship results match and 546 quoted-Line cases differ. Current SQL logs are identical; original Rust attaches zero/empty results while native raw identifiers attach actual data. The strict gate rejects completion. A raw-metadata source control matches all 7,122 native outcomes but remains candidate evidence, not accepted parity. |
+| AG07 | Aggregate result key normalization and attachment | **Approved compatibility exception:** 6,576 original results match and 546 quoted-Line inputs retain explicit correct C++ expectations. The user approved this on2026-10-24; the manifest binds exact indices/evidence hashes. The strict gate requires every full result. The 7,122-case raw-metadata control remains an identified metadata experiment, not unchanged-source execution. |
 | AG08 | Generated facet sequence, restrictions, metadata, errors and attachment | [Generated facets](generated_facets_5_0_6.md), [async facets](generated_facets_async_5_0_6.md), [analysis adapters](relation_analysis_adapters_5_0_6.md) and [deferred facet/page](deferred_facet_page_5_0_6.md) cover materialization, outer-filter merging, include-all/restriction, duplicate names, actual errors, totals and compact attachment. The frozen generated helper retains its nonrecursive results and separate repository trace prefix. |
 | AG09 | Public runtime recursive facets and protected diagnostics | [Public facets](public_facets_5_0_6.md) qualify 1,178 complete public outcomes and 36 actual private-binding SQL cases. Public root-intent validation, recursive options, query-owned trace and replacement of nested facet maps remain distinct from AG08's generated helper. No common name is used to merge their different source semantics. |
 | AG10 | Graph storage and embedded/flat/compact/loaded-row facet views | [Graph facet storage](graph_relation_facets_5_0_6.md), [flat/compact dispatch](hydration_flat_facets_5_0_6.md), [owner dispatch](hydration_owner_facets_5_0_6.md), [owner async](hydration_owner_facets_async_5_0_6.md) and the [later flat-boundary repair](parity/flat_graph_boundary_repair_5_0_6.json) cover canonical owners, NULL/cardinality independence, query-only metadata, isolated views and actual deletion. Historical statements that those exact paths remain unimplemented are superseded by their later evidence. General graph/model qualification remains G13. |

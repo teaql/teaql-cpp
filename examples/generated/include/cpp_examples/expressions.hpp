@@ -217,21 +217,24 @@ inline ProductExpression OrderLineExpression::getProduct() const {
 
 struct E {
     static ProductExpression product(const Product& value) {
-        return ProductExpression(entity_expression(value, StaticString{"product"}));
+        return ProductExpression(
+            entity_expression(value, StaticString{"product"}, StaticString{"Product"}));
     }
 
     static ProductExpression product(Product&&) = delete;
     static ProductExpression product(const Product&&) = delete;
 
     static OrderExpression order(const Order& value) {
-        return OrderExpression(entity_expression(value, StaticString{"order"}));
+        return OrderExpression(
+            entity_expression(value, StaticString{"order"}, StaticString{"Order"}));
     }
 
     static OrderExpression order(Order&&) = delete;
     static OrderExpression order(const Order&&) = delete;
 
     static OrderLineExpression orderLine(const OrderLine& value) {
-        return OrderLineExpression(entity_expression(value, StaticString{"orderLine"}));
+        return OrderLineExpression(
+            entity_expression(value, StaticString{"orderLine"}, StaticString{"OrderLine"}));
     }
 
     static OrderLineExpression orderLine(OrderLine&&) = delete;

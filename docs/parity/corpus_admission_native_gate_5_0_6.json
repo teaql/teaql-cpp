@@ -1,0 +1,28 @@
+{
+  "complete": true,
+  "scope": "Seven current native comparator/admission/inventory regression checks; not whole native acceptance",
+  "tests": [
+    "parity_comparator_result_contracts",
+    "parity_corpus_admission_contracts",
+    "parity_corpus_inventory_contracts",
+    "value_rust_parity",
+    "format_rust_parity",
+    "commit_audit_error_rust_parity",
+    "mutation_intent_privacy_rust_parity"
+  ],
+  "command": [
+    "ctest",
+    "--preset",
+    "native",
+    "--no-tests=error",
+    "-R",
+    "^(parity_corpus_admission_contracts|parity_corpus_inventory_contracts|parity_comparator_result_contracts|value_rust_parity|format_rust_parity|mutation_intent_privacy_rust_parity|commit_audit_error_rust_parity)$"
+  ],
+  "terminal": {
+    "chunk_id": "cbed9d",
+    "wall_time_seconds": 0.000007993,
+    "exit_code": 0,
+    "original_token_count": 55,
+    "output": "6/7 Test   #2: parity_corpus_admission_contracts .....   Passed    1.33 sec\n7/7 Test   #1: parity_comparator_result_contracts ....   Passed    7.84 sec\n\n100% tests passed out of 7\n\nTotal Test time (real) =   7.86 sec\n"
+  }
+}

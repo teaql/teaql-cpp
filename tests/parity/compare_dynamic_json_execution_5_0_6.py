@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from compare_values import observe, same
 from compare_generated_dynamic_json import cpp_observation
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -21,7 +22,9 @@ def main():
     assert corpus['producer'] == json.load(open(ROOT / 'tests/generator/parity/dynamic_json_rust/PROVENANCE.json'))
     for name, digest in corpus['fixtures'].items():
         assert hashlib.sha256((ROOT / 'tests/support' / name).read_bytes()).hexdigest() == digest
-    inputs = [x['input'] for x in corpus['cases']]; expected = [x['expected'] for x in corpus['cases']]
+    from generate_dynamic_json_execution_5_0_6 import inputs as source_inputs
+    cases = require_cases(corpus, 2240, source_inputs())
+    inputs = [x['input'] for x in cases]; expected = [x['expected'] for x in cases]
     if args.rust:
         assert same(expected, observe(args.rust, inputs)), 'Live original observations differ'
     actual = observe(args.cpp, inputs)

@@ -265,21 +265,23 @@ inline TenantExpression NoteExpression::getOptionalLinked() const {
 
 struct E {
     static TenantExpression tenant(const Tenant& value) {
-        return TenantExpression(entity_expression(value, StaticString{"tenant"}));
+        return TenantExpression(
+            entity_expression(value, StaticString{"tenant"}, StaticString{"Tenant"}));
     }
 
     static TenantExpression tenant(Tenant&&) = delete;
     static TenantExpression tenant(const Tenant&&) = delete;
 
     static RecordExpression record(const Record& value) {
-        return RecordExpression(entity_expression(value, StaticString{"record"}));
+        return RecordExpression(
+            entity_expression(value, StaticString{"record"}, StaticString{"Record"}));
     }
 
     static RecordExpression record(Record&&) = delete;
     static RecordExpression record(const Record&&) = delete;
 
     static NoteExpression note(const Note& value) {
-        return NoteExpression(entity_expression(value, StaticString{"note"}));
+        return NoteExpression(entity_expression(value, StaticString{"note"}, StaticString{"Note"}));
     }
 
     static NoteExpression note(Note&&) = delete;

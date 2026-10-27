@@ -1,0 +1,31 @@
+{
+  "kind": "retained_original_typed_business_id_q_source",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "test": "business_id_lookups_rust_parity",
+  "comparator": "tests/parity/compare_business_id_lookups_5_0_6.py",
+  "binary": "teaql_business_id_lookups_probe",
+  "count": 528,
+  "safe_sql_cases": 288,
+  "corpus": "tests/parity/business_id_lookups_5_0_6_cases.json.gz",
+  "runtime_pair": "docs/parity/business_id_lookups_runtime_5_0_6.json.gz",
+  "generated_pair": "docs/parity/business_id_lookups_generated_final_5_0_6.json.gz",
+  "terminal": "docs/parity/business_id_lookups_terminal_5_0_6.json.gz",
+  "corpus_sha256": "108218375dc40adc9fd0c82dcb7a72975e5b489199cfdb1cb6387a7c9fc466a0",
+  "runtime_pair_sha256": "c9ce25782fb9bfb7fbdb93f145714773384286d6d8b40eb6a3f1fb56c675279d",
+  "generated_pair_sha256": "26cc99e8ace59cde112479cb1b6c3f0cf75d5acac04b60a866c49f73a6971888",
+  "terminal_sha256": "68bc65650bf9a291247a13e79ffed2a7cc9b4ca2a8a7dc70d8720e42468d5933",
+  "support_files": {
+    "scripts/business_id_lookup_cli_source_binding_5_0_6.py": "880b59f42fff80a4f89b6a4584f42d06a14832b6cad8947137a4d5b6516c9a02",
+    "tests/parity/verify_business_id_lookup_cli_controls_5_0_6.py": "87fbd98d1681c0da5551e0b86a926a7e682991717cd434d0a185477ced7f74e3",
+    "tests/parity/compare_business_id_lookups_5_0_6.py": "6707c8a9f57c96037ef0cd3de3a9946f1fc97abd80a56d5561b8f90f15e70db1",
+    "tests/parity/business_id_lookups_probe.cpp": "5920e2f77af7a83b4cfa70e7607c994cf117ea7f1d17b49f3f96a730efe43e85",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "scripts/verify_constant_closure_5_0_6.py": "fa6529d41bc2bcbce48c26831cd68cf58178b13d9e1dd19a5c1b9ff4a66b582c",
+    "scripts/verify_state_baselines_5_0_6.py": "328c14187c6672ab692642b3d0051ae97757970d3b71424ae8cb10ed84875a04",
+    "tests/parity/build_inherited_business_binding_bridge_5_0_6.py": "6b30252b3e51bca8e68696fe80a6d7ced9b1aaabb761a203c2b16cd38f56ce70",
+    "tests/parity/rust_expression_business_ids_5_0_6/src/bin/business_id_lookups.rs": "45e70c30ad7dd2b89b05e815608eb96f96ad1d79dc6a67a2b3292aa341385511",
+    "tests/parity/rust_inherited_business_binding_bridge_5_0_6/src/bin/business_id_lookups.rs": "f3f16b039c04e3b6917e2d1705ce4bc01e34b9edfdc5cb448ae04cb91883919c",
+    "tests/support/business_id_lookup_rows.sql": "cf7ada15a8674bb6b6076cd9b716f8a38f38021dcda2bce1047eee69869cbd49"
+  }
+}

@@ -643,14 +643,16 @@ private:
 };
 
 template <class T>
-RuntimeExpression<EntityBorrow<T>> entity_expression(const T& value, StaticString entry_name) {
+RuntimeExpression<EntityBorrow<T>>
+entity_expression(const T& value, StaticString entry_name, StaticString canonical_root_name) {
     auto r = value.memory_resource();
     String root("Unknown()", r);
     if constexpr (requires {
                       T::ENTITY_NAME;
                       value.id();
                   }) {
-        root = T::ENTITY_NAME;
+        root = canonical_root_name.view().empty() ? std::string_view(T::ENTITY_NAME)
+                                                  : canonical_root_name.view();
         root += "(id=";
         char digits[20];
         auto converted = std::to_chars(std::begin(digits), std::end(digits), value.id());
@@ -659,6 +661,11 @@ RuntimeExpression<EntityBorrow<T>> entity_expression(const T& value, StaticStrin
     }
     return RuntimeExpression<EntityBorrow<T>>::from_result(
         eval::EvalResult<EntityBorrow<T>>::value(r, EntityBorrow<T>(value)), root, entry_name);
+}
+
+template <class T>
+RuntimeExpression<EntityBorrow<T>> entity_expression(const T& value, StaticString entry_name) {
+    return entity_expression(value, entry_name, StaticString{""});
 }
 
 template <class T>
@@ -673,4 +680,8 @@ auto entity_expression(T&&) = delete;
 template <class T>
     requires(!std::is_lvalue_reference_v<T>)
 auto entity_expression(T&&, StaticString) = delete;
+
+template <class T>
+    requires(!std::is_lvalue_reference_v<T>)
+auto entity_expression(T&&, StaticString, StaticString) = delete;
 }

@@ -26,16 +26,21 @@ def main():
     corpus = json.loads(gzip.decompress(Path(__file__).with_name('log_formatter_baseline_5_0_6_cases.json.gz').read_bytes()))
     if corpus['baseline'] != json.loads((root / 'upstream.lock.json').read_text())['commit']:
         raise RuntimeError('Formatter observations belong to a different baseline')
-    if args.rust:
-        subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True, cwd=root)
+    all_cases = corpus['cases']
+    if type(all_cases) is not list or not all_cases:
+        raise RuntimeError('Comparison corpus cases must be a nonempty list')
     probes = {'audit': ('teaql_audit_event_probe', 'audit_event_oracle'),
               'sql': ('teaql_runtime_log_probe', 'runtime_log_oracle'),
               'config': ('teaql_log_formatter_probe', 'log_formatter_oracle')}
+    if {case['probe'] for case in all_cases} != set(probes):
+        raise RuntimeError('Formatter corpus groups must be exactly audit, sql and config')
+    if args.rust:
+        subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True, cwd=root)
     failed = 0
     rejected = 0
     emulator = args.cpp_emulator.split(';') if args.cpp_emulator else []
     for group, (cpp, rust) in probes.items():
-        cases = [c for c in corpus['cases'] if c['probe'] == group]
+        cases = [c for c in all_cases if c['probe'] == group]
         inputs = [c['input'] for c in cases]
         expected = [c['expected'] for c in cases]
         if args.rust and not same(expected, observe(str(Path(args.rust) / rust), inputs)):
@@ -64,7 +69,7 @@ def main():
         for n, a, b in differences[:5]:
             print(f'{group} case {n}: {inputs[n]}\nRust: {a}\nC++: {b}')
         failed += len(differences)
-    total = len(corpus['cases'])
+    total = len(all_cases)
     print(f'Log formatter parity: {total - rejected - failed}/{total - rejected} outputs match; '
           f'{rejected} target-width inputs reject before formatting')
     return bool(failed)

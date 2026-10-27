@@ -973,6 +973,22 @@ if(Python3_Interpreter_FOUND)
         --cpp $<TARGET_FILE:teaql_module_loaded_snapshot_probe>)
     set_tests_properties(module_intent_trace_rust_parity PROPERTIES
         ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_test(NAME module_commit_audit_source_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_commit_audit_source_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_commit_audit_source_probe>)
+    add_test(NAME module_commit_audit_error_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_commit_audit_error.py
+        --cpp $<TARGET_FILE:teaql_module_commit_audit_error_probe>)
+    add_test(NAME module_resolved_scope_privacy_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_scope_privacy_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_resolved_scope_privacy_probe>)
+    add_test(NAME module_resolved_cache_intent_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_cache_intent_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_resolved_cache_intent_probe>)
+    set_tests_properties(module_commit_audit_source_rust_parity
+        module_commit_audit_error_rust_parity module_resolved_scope_privacy_rust_parity
+        module_resolved_cache_intent_rust_parity
+        PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     add_test(NAME module_dynamic_carrier_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/tests/parity/compare_dynamic_carrier.py
         --cpp $<TARGET_FILE:teaql_module_dynamic_carrier_probe>)

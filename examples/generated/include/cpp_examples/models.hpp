@@ -19,6 +19,7 @@ struct Product : generated_detail::Model<Product> {
     using Base = generated_detail::Model<Product>;
     friend class ProductChecker;
     static constexpr std::string_view ENTITY_NAME = "Product";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "product";
     friend struct generated_detail::ProductSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -164,6 +165,7 @@ struct Order : generated_detail::Model<Order> {
     using Base = generated_detail::Model<Order>;
     friend class OrderChecker;
     static constexpr std::string_view ENTITY_NAME = "Order";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "order";
     friend struct generated_detail::OrderSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -309,6 +311,7 @@ struct OrderLine : generated_detail::Model<OrderLine> {
     using Base = generated_detail::Model<OrderLine>;
     friend class OrderLineChecker;
     static constexpr std::string_view ENTITY_NAME = "OrderLine";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "order_line";
     friend struct generated_detail::OrderLineSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -850,7 +853,7 @@ inline const Order* OrderLine::order() const {
     if (!is_loaded("order")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Order>(ENTITY_NAME, id(), "order");
+    auto* view = root.resolve_relation_option<Order>("order_line", id(), "order");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -864,7 +867,7 @@ inline const Product* OrderLine::product() const {
     if (!is_loaded("product")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Product>(ENTITY_NAME, id(), "product");
+    auto* view = root.resolve_relation_option<Product>("order_line", id(), "product");
     if (view) {
         return *view ? &**view : nullptr;
     }

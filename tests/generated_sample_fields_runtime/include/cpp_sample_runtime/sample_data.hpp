@@ -114,12 +114,11 @@ struct SampleRecordSampleRecipe {
             entity.updateRatio(std::optional<float>(std::in_place, static_cast<float>(original)));
             entity.root.set(entity.entity_key(), "ratio", Value(r, original));
         }
-        {
-            auto original = GeneratedSampleValues::text(r, "jsonMe()", index);
-            entity.root.set(entity.entity_key(), "payload", Value(r, original));
-            auto& pool = detail::ContextArena::from_memory(r).loaded_snapshots();
-            entity.load_state.mark_loaded("payload", &pool).value();
-        }
+        GeneratedSampleValues::assign_operand(
+            entity,
+            "payload",
+            entity.payload_,
+            Value(r, GeneratedSampleValues::text(r, "jsonMe()", index)));
     }
 };
 

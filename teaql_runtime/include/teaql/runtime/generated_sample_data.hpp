@@ -507,6 +507,16 @@ private:
 
 namespace teaql {
 struct GeneratedSampleValues {
+    template <class Model, class Scalar>
+    static void
+    assign_operand(Model& entity, std::string_view field, Scalar& stored, Value original) {
+        auto resource = entity.memory_resource();
+        detail::EntityRuntimeAccess::update_scalar_value(
+            entity.root, entity.entity_key(), field, stored, original);
+        auto& pool = detail::ContextArena::from_memory(resource).loaded_snapshots();
+        entity.load_state.mark_loaded(field, &pool).value();
+    }
+
     template <class Model>
     static void unconverted_value(Model& entity, std::string_view field, Value original) {
         auto resource = entity.memory_resource();

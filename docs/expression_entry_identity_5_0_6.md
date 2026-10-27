@@ -1,5 +1,7 @@
 # Generated expression entry identity
 
+Current canonical-root follow-up: [EID01 requalification](generated_expression_identity_5_0_6.md) separates model identity from descriptor overrides and native entry spelling. Runtime-first capture and thin metadata now match960/960 original/native outcomes; native5/module3/scoped SAN1/compiler4-positive6-negative/Java88 and80-SDK restricted reproduction pass. G11 is qualified again; G13/G14/G17 and P0-P7 remain open. Earlier checkpoint APIs and evidence below retain their original scope.
+
 Runtime: Rust 5.0.6 at `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 Generator: `45e1572c4956ca963410d8ea436ead3c8857087a`.
 This checkpoint extends G11/G14 identity evidence. Complete G14 and P0–P7

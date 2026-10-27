@@ -1720,16 +1720,26 @@ public:
         requires Purposed && Entity<R>
     {
         (void)authorize(user_context);
-        auto id = user_context.next_id(T::ENTITY_NAME);
-        if (!id) {
-            throw std::runtime_error(
-                std::string(id.error().to_string(user_context.memory_resource())));
-        }
         auto& value = user_context.template make<T>();
-        if constexpr (requires { value.updateId(id.value()); }) {
-            value.updateId(id.value());
-        } else {
-            value.update_id(id.value());
+        if constexpr (requires {
+                          value.attachRuntimeStateRecursive(user_context.entity_runtime_state());
+                      }) {
+            value.attachRuntimeStateRecursive(user_context.entity_runtime_state());
+        }
+        constexpr auto id_entity_name = [] {
+            if constexpr (requires { T::ID_SPACE_ENTITY_NAME; }) {
+                return T::ID_SPACE_ENTITY_NAME;
+            } else {
+                return T::ENTITY_NAME;
+            }
+        }();
+        auto id = user_context.next_id(id_entity_name);
+        if (id) {
+            if constexpr (requires { value.updateId(id.value()); }) {
+                value.updateId(id.value());
+            } else {
+                value.update_id(id.value());
+            }
         }
         value.mark_as_new();
         return value;

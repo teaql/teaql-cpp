@@ -2521,6 +2521,20 @@
       ]
     },
     {
+      "stem": "sample_operand_tests",
+      "package": "teaql_runtime",
+      "source": "teaql_runtime/tests/sample_operand_tests.cpp",
+      "cases": [
+        {
+          "name": "sample_operand_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
       "stem": "sample_type_probe",
       "package": "teaql_provider_sqlite",
       "source": "tests/parity/sample_type_probe.cpp",
@@ -3549,6 +3563,12 @@
       "package": "teaql_runtime",
       "stem": "commit_audit_source_probe",
       "source": "tests/parity/commit_audit_source_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "commit_audit_error_probe",
+      "source": "tests/parity/commit_audit_error_probe.cpp",
       "cases": []
     },
     {

@@ -17,6 +17,7 @@ struct Note : generated_detail::Model<Note> {
     using Base = generated_detail::Model<Note>;
     friend class NoteChecker;
     static constexpr std::string_view ENTITY_NAME = "Note";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "note";
     friend struct generated_detail::NoteSampleRecipe;
     friend struct generated_detail::NoteBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};

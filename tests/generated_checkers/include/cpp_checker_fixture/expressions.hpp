@@ -150,14 +150,15 @@ inline TenantExpression NoteExpression::getTenant() const {
 
 struct E {
     static TenantExpression tenant(const Tenant& value) {
-        return TenantExpression(entity_expression(value, StaticString{"tenant"}));
+        return TenantExpression(
+            entity_expression(value, StaticString{"tenant"}, StaticString{"Tenant"}));
     }
 
     static TenantExpression tenant(Tenant&&) = delete;
     static TenantExpression tenant(const Tenant&&) = delete;
 
     static NoteExpression note(const Note& value) {
-        return NoteExpression(entity_expression(value, StaticString{"note"}));
+        return NoteExpression(entity_expression(value, StaticString{"note"}, StaticString{"Note"}));
     }
 
     static NoteExpression note(Note&&) = delete;

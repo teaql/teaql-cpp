@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_manifest": "tests/parity/rust_logging_source_5_0_6/Cargo.toml",
+  "source_lock": "tests/parity/rust_logging_source_5_0_6/Cargo.lock",
+  "comparisons": {
+    "log_manager": {
+      "count": 94,
+      "corpus": "tests/parity/log_manager_baseline_5_0_6_cases.json.gz",
+      "historical_corpus": "log_manager_cases.json",
+      "original_receipt": "docs/parity/log_manager_cli_original_execution_5_0_6.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/log_manager_oracle.rs",
+      "comparison": "log_manager_rust_parity",
+      "comparator": "tests/parity/compare_log_manager.py",
+      "probe": "teaql_log_manager_probe"
+    },
+    "audit_event": {
+      "count": 1427,
+      "corpus": "tests/parity/audit_event_baseline_5_0_6_cases.json.gz",
+      "historical_corpus": "audit_event_cases.json",
+      "original_receipt": "docs/parity/audit_event_cli_original_execution_5_0_6.json.gz",
+      "original_driver": "tests/parity/rust_values/src/bin/audit_event_oracle.rs",
+      "comparison": "audit_event_rust_parity",
+      "comparator": "tests/parity/compare_audit_event.py",
+      "probe": "teaql_audit_event_probe"
+    }
+  },
+  "support_files": {
+    "scripts/logging_cli_source_binding_5_0_6.py": "7d1e40a67516f272a45ca7167f4fa69da95d8cfb12b6e2b19b45557ff5346abb",
+    "tests/parity/verify_logging_cli_controls_5_0_6.py": "e17037aca92b63eba3be771e33b723b30236833a96d8f562c90a45a094e8c25b",
+    "tests/parity/compare_log_manager.py": "e6277fe537f4ca94ad866529f7b370afde278d9571640bb9fcba42c02fec6b89",
+    "tests/parity/compare_audit_event.py": "bab494a3bf0133490ac36b851f2d134e11a16fad0f69a1785007da9cc68a9de4",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/compare_log_formatter.py": "cf7e9ea7ccec02e056137517bc40be659b9cf5ab14fe4dc14096b816466a0d2c",
+    "tests/parity/log_manager_probe.cpp": "b7a8a1c9c6076857a2709c0a3c0616804d23c56ad8ce671038354ed86a948f18",
+    "tests/parity/audit_event_probe.cpp": "0ae83850729e3d9ecdc4b8247b3019d3f4e163be1ccb394ecf37043529b9c824",
+    "tests/parity/rust_logging_source_5_0_6/Cargo.toml": "dbce73bcb9efe819222e15e2b0efd301ac0b9d1823e5d861fecb288b24937af0",
+    "tests/parity/rust_logging_source_5_0_6/Cargo.lock": "cad241fc9c53e936fea46de2abb1a0f02f5721bbd28978e456e76f7cab743748",
+    "tests/parity/rust_values/src/bin/log_manager_oracle.rs": "ca3119d49382a33ff2f46fa149edccd30afa5902fa1000742f3381080e26ee05",
+    "tests/parity/rust_values/src/bin/audit_event_oracle.rs": "48dd645355bc26edd47be2a1120e73b288a36286141a440a510d32c083c1d388"
+  },
+  "evidence_files": {
+    "tests/parity/log_manager_baseline_5_0_6_cases.json.gz": "9e88a5c937604b9ff93450211535a80c025db651ece244577a53ad76860bb18f",
+    "tests/parity/audit_event_baseline_5_0_6_cases.json.gz": "e6b017d192d0fff49f4f607791e394fd35bb4916898e93d03d02760966807179",
+    "docs/parity/log_manager_cli_original_execution_5_0_6.json.gz": "3cde7264d40e80bf442be7e46db02554e733dda776e6cf70052491b1e0b0fff0",
+    "docs/parity/audit_event_cli_original_execution_5_0_6.json.gz": "f8a51d2d1f8a793dc6494d1d2e0ba3e459cd6bca81abd846d49d36161b3c15f8",
+    "tests/parity/log_manager_cases.json": "ad71f58a6b297a0088c02d74ddfca7fb80ac137e097ce47590ea2f4d3dcfbde0",
+    "tests/parity/audit_event_cases.json": "bbb7f3700e268b95fdb21e495821774565a2d57b18762e0302d9b195dacfacb5",
+    "docs/parity/logging_source_cli_initial_manifest_failure_5_0_6.json.gz": "ac8bdf13a32d7083f604ca3f50cbbf13ed93c9843dcdfee2e4fc80fae9a4b09e"
+  }
+}

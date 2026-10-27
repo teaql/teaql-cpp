@@ -1,0 +1,3811 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Finite source-enum branch inventory with actual AST witnesses; not alone complete grammar or generated SDK acceptance",
+  "syn_sources": {
+    "expr.rs": "d85b5d84155891147c2e4b11faac6cee76498510df6d6bb3de376788bb94cf27",
+    "ty.rs": "ca9f2155a0a39fc78af46fcbbb5189f0c4751642fcd53331a3a38d83dc22db2f",
+    "pat.rs": "861e3d8f86da16acf7440f9c0ed477a7c80bb0109b93aff0e3cd941198595b3e",
+    "stmt.rs": "46a6f36ec8780e69de73eb396021fd6faf609016cf204d7fea46d6aeccc2a42e",
+    "item.rs": "9c2b66c81039a4d5f35e4b94861856334174a1e00328894a00fb9e1dfd150f2a"
+  },
+  "branches": [
+    {
+      "kind": "Expr",
+      "variant": "Array",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_array_direct",
+        "expr_array_nested",
+        "expr_array_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Assign",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_assign_direct",
+        "expr_assign_nested",
+        "expr_assign_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Async",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_async_direct",
+        "expr_async_nested",
+        "expr_async_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Await",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_await_direct",
+        "expr_await_nested",
+        "expr_await_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Binary",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_binary_direct",
+        "expr_binary_nested",
+        "expr_binary_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Block",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_block_direct",
+        "expr_block_nested",
+        "expr_block_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Break",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_break_direct",
+        "expr_break_nested",
+        "expr_break_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Call",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_call_direct",
+        "expr_call_nested",
+        "expr_call_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Cast",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_cast_direct",
+        "expr_cast_nested",
+        "expr_cast_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Closure",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_closure_direct",
+        "expr_closure_nested",
+        "expr_closure_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Const",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_const_direct",
+        "expr_const_nested",
+        "expr_const_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Continue",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_continue_direct",
+        "expr_continue_nested",
+        "expr_continue_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Field",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_field_direct",
+        "expr_field_nested",
+        "expr_field_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "ForLoop",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_forloop_direct",
+        "expr_forloop_nested",
+        "expr_forloop_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Group",
+      "classification": "non_text_group",
+      "source": "expr.rs",
+      "reason": "None-delimited token groups have no string-source spelling; the generator emits a textual attribute."
+    },
+    {
+      "kind": "Expr",
+      "variant": "If",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_if_direct",
+        "expr_if_nested",
+        "expr_if_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Index",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_index_direct",
+        "expr_index_nested",
+        "expr_index_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Infer",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_infer_direct",
+        "expr_infer_nested",
+        "expr_infer_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Let",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_let_direct",
+        "expr_let_nested",
+        "expr_let_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Lit",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_lit_direct",
+        "expr_lit_nested",
+        "expr_lit_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Loop",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_loop_direct",
+        "expr_loop_nested",
+        "expr_loop_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Macro",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_macro_direct",
+        "expr_macro_nested",
+        "expr_macro_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Match",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_match_direct",
+        "expr_match_nested",
+        "expr_match_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "MethodCall",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_methodcall_direct",
+        "expr_methodcall_nested",
+        "expr_methodcall_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Paren",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_paren_direct",
+        "expr_paren_nested",
+        "expr_paren_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Path",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_path_direct",
+        "expr_path_nested",
+        "expr_path_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Range",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_range_direct",
+        "expr_range_nested",
+        "expr_range_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "RawAddr",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_rawaddr_direct",
+        "expr_rawaddr_nested",
+        "expr_rawaddr_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Reference",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_reference_direct",
+        "expr_reference_nested",
+        "expr_reference_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Repeat",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_repeat_direct",
+        "expr_repeat_nested",
+        "expr_repeat_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Return",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_return_direct",
+        "expr_return_nested",
+        "expr_return_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Struct",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_struct_direct",
+        "expr_struct_nested",
+        "expr_struct_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Try",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_try_direct",
+        "expr_try_nested",
+        "expr_try_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "TryBlock",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_tryblock_direct",
+        "expr_tryblock_nested",
+        "expr_tryblock_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Tuple",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_tuple_direct",
+        "expr_tuple_nested",
+        "expr_tuple_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Unary",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_unary_direct",
+        "expr_unary_nested",
+        "expr_unary_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Unsafe",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_unsafe_direct",
+        "expr_unsafe_nested",
+        "expr_unsafe_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Verbatim",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_verbatim_direct",
+        "expr_verbatim_nested",
+        "expr_verbatim_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "While",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_while_direct",
+        "expr_while_nested",
+        "expr_while_block"
+      ]
+    },
+    {
+      "kind": "Expr",
+      "variant": "Yield",
+      "classification": "text_source",
+      "source": "expr.rs",
+      "cases": [
+        "expr_yield_direct",
+        "expr_yield_nested",
+        "expr_yield_block"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Array",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_array_direct",
+        "type_array_nested",
+        "type_array_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "BareFn",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_barefn_direct",
+        "type_barefn_nested",
+        "type_barefn_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Group",
+      "classification": "non_text_group",
+      "source": "ty.rs",
+      "reason": "None-delimited token groups have no string-source spelling; the generator emits a textual attribute."
+    },
+    {
+      "kind": "Type",
+      "variant": "ImplTrait",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_impltrait_direct",
+        "type_impltrait_nested",
+        "type_impltrait_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Infer",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_infer_direct",
+        "type_infer_nested",
+        "type_infer_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Macro",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_macro_direct",
+        "type_macro_nested",
+        "type_macro_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Never",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_never_direct",
+        "type_never_nested",
+        "type_never_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Paren",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_paren_direct",
+        "type_paren_nested",
+        "type_paren_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Path",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_path_direct",
+        "type_path_nested",
+        "type_path_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Ptr",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_ptr_direct",
+        "type_ptr_nested",
+        "type_ptr_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Reference",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_reference_direct",
+        "type_reference_nested",
+        "type_reference_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Slice",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_slice_direct",
+        "type_slice_nested",
+        "type_slice_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "TraitObject",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_traitobject_direct",
+        "type_traitobject_nested",
+        "type_traitobject_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Tuple",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_tuple_direct",
+        "type_tuple_nested",
+        "type_tuple_json_type"
+      ]
+    },
+    {
+      "kind": "Type",
+      "variant": "Verbatim",
+      "classification": "text_source",
+      "source": "ty.rs",
+      "cases": [
+        "type_verbatim_direct",
+        "type_verbatim_nested",
+        "type_verbatim_json_type"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Const",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_const_direct",
+        "pat_const_nested",
+        "pat_const_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Ident",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_ident_direct",
+        "pat_ident_nested",
+        "pat_ident_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Lit",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_lit_direct",
+        "pat_lit_nested",
+        "pat_lit_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Macro",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_macro_direct",
+        "pat_macro_nested",
+        "pat_macro_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Or",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_or_direct",
+        "pat_or_nested",
+        "pat_or_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Paren",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_paren_direct",
+        "pat_paren_nested",
+        "pat_paren_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Path",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_path_direct",
+        "pat_path_nested",
+        "pat_path_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Range",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_range_direct",
+        "pat_range_nested",
+        "pat_range_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Reference",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_reference_direct",
+        "pat_reference_nested",
+        "pat_reference_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Rest",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_rest_direct",
+        "pat_rest_nested",
+        "pat_rest_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Slice",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_slice_direct",
+        "pat_slice_nested",
+        "pat_slice_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Struct",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_struct_direct",
+        "pat_struct_nested",
+        "pat_struct_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Tuple",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_tuple_direct",
+        "pat_tuple_nested",
+        "pat_tuple_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "TupleStruct",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_tuplestruct_direct",
+        "pat_tuplestruct_nested",
+        "pat_tuplestruct_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Type",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_type_direct",
+        "pat_type_nested",
+        "pat_type_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Verbatim",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_verbatim_direct",
+        "pat_verbatim_nested",
+        "pat_verbatim_block"
+      ]
+    },
+    {
+      "kind": "Pat",
+      "variant": "Wild",
+      "classification": "text_source",
+      "source": "pat.rs",
+      "cases": [
+        "pat_wild_direct",
+        "pat_wild_nested",
+        "pat_wild_block"
+      ]
+    },
+    {
+      "kind": "Stmt",
+      "variant": "Local",
+      "classification": "text_source",
+      "source": "stmt.rs",
+      "cases": [
+        "stmt_local_direct",
+        "stmt_local_nested",
+        "stmt_local_block"
+      ]
+    },
+    {
+      "kind": "Stmt",
+      "variant": "Item",
+      "classification": "text_source",
+      "source": "stmt.rs",
+      "cases": [
+        "stmt_item_direct",
+        "stmt_item_nested",
+        "stmt_item_block"
+      ]
+    },
+    {
+      "kind": "Stmt",
+      "variant": "Expr",
+      "classification": "text_source",
+      "source": "stmt.rs",
+      "cases": [
+        "stmt_expr_direct",
+        "stmt_expr_nested",
+        "stmt_expr_block"
+      ]
+    },
+    {
+      "kind": "Stmt",
+      "variant": "Macro",
+      "classification": "text_source",
+      "source": "stmt.rs",
+      "cases": [
+        "stmt_macro_direct",
+        "stmt_macro_nested",
+        "stmt_macro_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Const",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_const_direct",
+        "item_const_nested",
+        "item_const_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Enum",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_enum_direct",
+        "item_enum_nested",
+        "item_enum_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "ExternCrate",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_externcrate_direct",
+        "item_externcrate_nested",
+        "item_externcrate_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Fn",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_fn_direct",
+        "item_fn_nested",
+        "item_fn_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "ForeignMod",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_foreignmod_direct",
+        "item_foreignmod_nested",
+        "item_foreignmod_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Impl",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_impl_direct",
+        "item_impl_nested",
+        "item_impl_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Macro",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_macro_direct",
+        "item_macro_nested",
+        "item_macro_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Mod",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_mod_direct",
+        "item_mod_nested",
+        "item_mod_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Static",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_static_direct",
+        "item_static_nested",
+        "item_static_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Struct",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_struct_direct",
+        "item_struct_nested",
+        "item_struct_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Trait",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_trait_direct",
+        "item_trait_nested",
+        "item_trait_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "TraitAlias",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_traitalias_direct",
+        "item_traitalias_nested",
+        "item_traitalias_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Type",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_type_direct",
+        "item_type_nested",
+        "item_type_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Union",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_union_direct",
+        "item_union_nested",
+        "item_union_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Use",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_use_direct",
+        "item_use_nested",
+        "item_use_block"
+      ]
+    },
+    {
+      "kind": "Item",
+      "variant": "Verbatim",
+      "classification": "text_source",
+      "source": "item.rs",
+      "cases": [
+        "item_verbatim_direct",
+        "item_verbatim_nested",
+        "item_verbatim_block"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "name": "expr_array_direct",
+      "input": "17, audit_value_max_len=[1,2], entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "[1,2]",
+        "variant": "Array"
+      }
+    },
+    {
+      "name": "expr_array_nested",
+      "input": "17, audit_value_max_len=([1,2]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "[1,2]",
+        "variant": "Array"
+      }
+    },
+    {
+      "name": "expr_array_block",
+      "input": "17, audit_value_max_len={ [1,2] }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "[1,2]",
+        "variant": "Array"
+      }
+    },
+    {
+      "name": "expr_assign_direct",
+      "input": "17, audit_value_max_len=x = value, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "x = value",
+        "variant": "Assign"
+      }
+    },
+    {
+      "name": "expr_assign_nested",
+      "input": "17, audit_value_max_len=(x = value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "x = value",
+        "variant": "Assign"
+      }
+    },
+    {
+      "name": "expr_assign_block",
+      "input": "17, audit_value_max_len={ x = value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "x = value",
+        "variant": "Assign"
+      }
+    },
+    {
+      "name": "expr_async_direct",
+      "input": "17, audit_value_max_len=async move { value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "async move { value }",
+        "variant": "Async"
+      }
+    },
+    {
+      "name": "expr_async_nested",
+      "input": "17, audit_value_max_len=(async move { value }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "async move { value }",
+        "variant": "Async"
+      }
+    },
+    {
+      "name": "expr_async_block",
+      "input": "17, audit_value_max_len={ async move { value } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "async move { value }",
+        "variant": "Async"
+      }
+    },
+    {
+      "name": "expr_await_direct",
+      "input": "17, audit_value_max_len=value.await, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.await",
+        "variant": "Await"
+      }
+    },
+    {
+      "name": "expr_await_nested",
+      "input": "17, audit_value_max_len=(value.await), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.await",
+        "variant": "Await"
+      }
+    },
+    {
+      "name": "expr_await_block",
+      "input": "17, audit_value_max_len={ value.await }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.await",
+        "variant": "Await"
+      }
+    },
+    {
+      "name": "expr_binary_direct",
+      "input": "17, audit_value_max_len=a + b * c, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "a + b * c",
+        "variant": "Binary"
+      }
+    },
+    {
+      "name": "expr_binary_nested",
+      "input": "17, audit_value_max_len=(a + b * c), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "a + b * c",
+        "variant": "Binary"
+      }
+    },
+    {
+      "name": "expr_binary_block",
+      "input": "17, audit_value_max_len={ a + b * c }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "a + b * c",
+        "variant": "Binary"
+      }
+    },
+    {
+      "name": "expr_block_direct",
+      "input": "17, audit_value_max_len={ let x=1; x }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "{ let x=1; x }",
+        "variant": "Block"
+      }
+    },
+    {
+      "name": "expr_block_nested",
+      "input": "17, audit_value_max_len=({ let x=1; x }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "{ let x=1; x }",
+        "variant": "Block"
+      }
+    },
+    {
+      "name": "expr_block_block",
+      "input": "17, audit_value_max_len={ { let x=1; x } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "{ let x=1; x }",
+        "variant": "Block"
+      }
+    },
+    {
+      "name": "expr_break_direct",
+      "input": "17, audit_value_max_len=break 'outer value, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "break 'outer value",
+        "variant": "Break"
+      }
+    },
+    {
+      "name": "expr_break_nested",
+      "input": "17, audit_value_max_len=(break 'outer value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "break 'outer value",
+        "variant": "Break"
+      }
+    },
+    {
+      "name": "expr_break_block",
+      "input": "17, audit_value_max_len={ break 'outer value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "break 'outer value",
+        "variant": "Break"
+      }
+    },
+    {
+      "name": "expr_call_direct",
+      "input": "17, audit_value_max_len=f(a,b), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "f(a,b)",
+        "variant": "Call"
+      }
+    },
+    {
+      "name": "expr_call_nested",
+      "input": "17, audit_value_max_len=(f(a,b)), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "f(a,b)",
+        "variant": "Call"
+      }
+    },
+    {
+      "name": "expr_call_block",
+      "input": "17, audit_value_max_len={ f(a,b) }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "f(a,b)",
+        "variant": "Call"
+      }
+    },
+    {
+      "name": "expr_cast_direct",
+      "input": "17, audit_value_max_len=value as *const u8, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value as *const u8",
+        "variant": "Cast"
+      }
+    },
+    {
+      "name": "expr_cast_nested",
+      "input": "17, audit_value_max_len=(value as *const u8), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value as *const u8",
+        "variant": "Cast"
+      }
+    },
+    {
+      "name": "expr_cast_block",
+      "input": "17, audit_value_max_len={ value as *const u8 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value as *const u8",
+        "variant": "Cast"
+      }
+    },
+    {
+      "name": "expr_closure_direct",
+      "input": "17, audit_value_max_len=for<'a> move |x: &'a u8| x, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "for<'a> move |x: &'a u8| x",
+        "variant": "Closure"
+      }
+    },
+    {
+      "name": "expr_closure_nested",
+      "input": "17, audit_value_max_len=(for<'a> move |x: &'a u8| x), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "for<'a> move |x: &'a u8| x",
+        "variant": "Closure"
+      }
+    },
+    {
+      "name": "expr_closure_block",
+      "input": "17, audit_value_max_len={ for<'a> move |x: &'a u8| x }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "for<'a> move |x: &'a u8| x",
+        "variant": "Closure"
+      }
+    },
+    {
+      "name": "expr_const_direct",
+      "input": "17, audit_value_max_len=const { 1 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "const { 1 }",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "expr_const_nested",
+      "input": "17, audit_value_max_len=(const { 1 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "const { 1 }",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "expr_const_block",
+      "input": "17, audit_value_max_len={ const { 1 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "const { 1 }",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "expr_continue_direct",
+      "input": "17, audit_value_max_len=continue 'outer, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "continue 'outer",
+        "variant": "Continue"
+      }
+    },
+    {
+      "name": "expr_continue_nested",
+      "input": "17, audit_value_max_len=(continue 'outer), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "continue 'outer",
+        "variant": "Continue"
+      }
+    },
+    {
+      "name": "expr_continue_block",
+      "input": "17, audit_value_max_len={ continue 'outer }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "continue 'outer",
+        "variant": "Continue"
+      }
+    },
+    {
+      "name": "expr_field_direct",
+      "input": "17, audit_value_max_len=value.field, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.field",
+        "variant": "Field"
+      }
+    },
+    {
+      "name": "expr_field_nested",
+      "input": "17, audit_value_max_len=(value.field), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.field",
+        "variant": "Field"
+      }
+    },
+    {
+      "name": "expr_field_block",
+      "input": "17, audit_value_max_len={ value.field }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.field",
+        "variant": "Field"
+      }
+    },
+    {
+      "name": "expr_forloop_direct",
+      "input": "17, audit_value_max_len=for x in values { f(x); }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "for x in values { f(x); }",
+        "variant": "ForLoop"
+      }
+    },
+    {
+      "name": "expr_forloop_nested",
+      "input": "17, audit_value_max_len=(for x in values { f(x); }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "for x in values { f(x); }",
+        "variant": "ForLoop"
+      }
+    },
+    {
+      "name": "expr_forloop_block",
+      "input": "17, audit_value_max_len={ for x in values { f(x); } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "for x in values { f(x); }",
+        "variant": "ForLoop"
+      }
+    },
+    {
+      "name": "expr_if_direct",
+      "input": "17, audit_value_max_len=if ready { a } else { b }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "if ready { a } else { b }",
+        "variant": "If"
+      }
+    },
+    {
+      "name": "expr_if_nested",
+      "input": "17, audit_value_max_len=(if ready { a } else { b }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "if ready { a } else { b }",
+        "variant": "If"
+      }
+    },
+    {
+      "name": "expr_if_block",
+      "input": "17, audit_value_max_len={ if ready { a } else { b } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "if ready { a } else { b }",
+        "variant": "If"
+      }
+    },
+    {
+      "name": "expr_index_direct",
+      "input": "17, audit_value_max_len=values[index], entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "values[index]",
+        "variant": "Index"
+      }
+    },
+    {
+      "name": "expr_index_nested",
+      "input": "17, audit_value_max_len=(values[index]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "values[index]",
+        "variant": "Index"
+      }
+    },
+    {
+      "name": "expr_index_block",
+      "input": "17, audit_value_max_len={ values[index] }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "values[index]",
+        "variant": "Index"
+      }
+    },
+    {
+      "name": "expr_infer_direct",
+      "input": "17, audit_value_max_len=_, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "_",
+        "variant": "Infer"
+      }
+    },
+    {
+      "name": "expr_infer_nested",
+      "input": "17, audit_value_max_len=(_), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "_",
+        "variant": "Infer"
+      }
+    },
+    {
+      "name": "expr_infer_block",
+      "input": "17, audit_value_max_len={ _ }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "_",
+        "variant": "Infer"
+      }
+    },
+    {
+      "name": "expr_let_direct",
+      "input": "17, audit_value_max_len=let Some(x) = value, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "let Some(x) = value",
+        "variant": "Let"
+      }
+    },
+    {
+      "name": "expr_let_nested",
+      "input": "17, audit_value_max_len=(let Some(x) = value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "let Some(x) = value",
+        "variant": "Let"
+      }
+    },
+    {
+      "name": "expr_let_block",
+      "input": "17, audit_value_max_len={ let Some(x) = value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "let Some(x) = value",
+        "variant": "Let"
+      }
+    },
+    {
+      "name": "expr_lit_direct",
+      "input": "17, audit_value_max_len=42, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "42",
+        "variant": "Lit"
+      }
+    },
+    {
+      "name": "expr_lit_nested",
+      "input": "17, audit_value_max_len=(42), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "42",
+        "variant": "Lit"
+      }
+    },
+    {
+      "name": "expr_lit_block",
+      "input": "17, audit_value_max_len={ 42 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "42",
+        "variant": "Lit"
+      }
+    },
+    {
+      "name": "expr_loop_direct",
+      "input": "17, audit_value_max_len=loop { break 1; }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "loop { break 1; }",
+        "variant": "Loop"
+      }
+    },
+    {
+      "name": "expr_loop_nested",
+      "input": "17, audit_value_max_len=(loop { break 1; }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "loop { break 1; }",
+        "variant": "Loop"
+      }
+    },
+    {
+      "name": "expr_loop_block",
+      "input": "17, audit_value_max_len={ loop { break 1; } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "loop { break 1; }",
+        "variant": "Loop"
+      }
+    },
+    {
+      "name": "expr_macro_direct",
+      "input": "17, audit_value_max_len=mac!(a, [b]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "mac!(a, [b])",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "expr_macro_nested",
+      "input": "17, audit_value_max_len=(mac!(a, [b])), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "mac!(a, [b])",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "expr_macro_block",
+      "input": "17, audit_value_max_len={ mac!(a, [b]) }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "mac!(a, [b])",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "expr_match_direct",
+      "input": "17, audit_value_max_len=match x { Some(y) if ready => y, _ => 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "match x { Some(y) if ready => y, _ => 0 }",
+        "variant": "Match"
+      }
+    },
+    {
+      "name": "expr_match_nested",
+      "input": "17, audit_value_max_len=(match x { Some(y) if ready => y, _ => 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "match x { Some(y) if ready => y, _ => 0 }",
+        "variant": "Match"
+      }
+    },
+    {
+      "name": "expr_match_block",
+      "input": "17, audit_value_max_len={ match x { Some(y) if ready => y, _ => 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "match x { Some(y) if ready => y, _ => 0 }",
+        "variant": "Match"
+      }
+    },
+    {
+      "name": "expr_methodcall_direct",
+      "input": "17, audit_value_max_len=value.method::<T>(arg), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.method::<T>(arg)",
+        "variant": "MethodCall"
+      }
+    },
+    {
+      "name": "expr_methodcall_nested",
+      "input": "17, audit_value_max_len=(value.method::<T>(arg)), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.method::<T>(arg)",
+        "variant": "MethodCall"
+      }
+    },
+    {
+      "name": "expr_methodcall_block",
+      "input": "17, audit_value_max_len={ value.method::<T>(arg) }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value.method::<T>(arg)",
+        "variant": "MethodCall"
+      }
+    },
+    {
+      "name": "expr_paren_direct",
+      "input": "17, audit_value_max_len=(value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "(value)",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "expr_paren_nested",
+      "input": "17, audit_value_max_len=((value)), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "(value)",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "expr_paren_block",
+      "input": "17, audit_value_max_len={ (value) }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "(value)",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "expr_path_direct",
+      "input": "17, audit_value_max_len=<T as Trait>::VALUE, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "<T as Trait>::VALUE",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "expr_path_nested",
+      "input": "17, audit_value_max_len=(<T as Trait>::VALUE), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "<T as Trait>::VALUE",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "expr_path_block",
+      "input": "17, audit_value_max_len={ <T as Trait>::VALUE }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "<T as Trait>::VALUE",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "expr_range_direct",
+      "input": "17, audit_value_max_len=start..=end, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "start..=end",
+        "variant": "Range"
+      }
+    },
+    {
+      "name": "expr_range_nested",
+      "input": "17, audit_value_max_len=(start..=end), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "start..=end",
+        "variant": "Range"
+      }
+    },
+    {
+      "name": "expr_range_block",
+      "input": "17, audit_value_max_len={ start..=end }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "start..=end",
+        "variant": "Range"
+      }
+    },
+    {
+      "name": "expr_rawaddr_direct",
+      "input": "17, audit_value_max_len=&raw const value, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "&raw const value",
+        "variant": "RawAddr"
+      }
+    },
+    {
+      "name": "expr_rawaddr_nested",
+      "input": "17, audit_value_max_len=(&raw const value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "&raw const value",
+        "variant": "RawAddr"
+      }
+    },
+    {
+      "name": "expr_rawaddr_block",
+      "input": "17, audit_value_max_len={ &raw const value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "&raw const value",
+        "variant": "RawAddr"
+      }
+    },
+    {
+      "name": "expr_reference_direct",
+      "input": "17, audit_value_max_len=&mut value, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "&mut value",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "expr_reference_nested",
+      "input": "17, audit_value_max_len=(&mut value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "&mut value",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "expr_reference_block",
+      "input": "17, audit_value_max_len={ &mut value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "&mut value",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "expr_repeat_direct",
+      "input": "17, audit_value_max_len=[value; COUNT], entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "[value; COUNT]",
+        "variant": "Repeat"
+      }
+    },
+    {
+      "name": "expr_repeat_nested",
+      "input": "17, audit_value_max_len=([value; COUNT]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "[value; COUNT]",
+        "variant": "Repeat"
+      }
+    },
+    {
+      "name": "expr_repeat_block",
+      "input": "17, audit_value_max_len={ [value; COUNT] }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "[value; COUNT]",
+        "variant": "Repeat"
+      }
+    },
+    {
+      "name": "expr_return_direct",
+      "input": "17, audit_value_max_len=return value, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "return value",
+        "variant": "Return"
+      }
+    },
+    {
+      "name": "expr_return_nested",
+      "input": "17, audit_value_max_len=(return value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "return value",
+        "variant": "Return"
+      }
+    },
+    {
+      "name": "expr_return_block",
+      "input": "17, audit_value_max_len={ return value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "return value",
+        "variant": "Return"
+      }
+    },
+    {
+      "name": "expr_struct_direct",
+      "input": "17, audit_value_max_len=Thing { value, ..base }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "Thing { value, ..base }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "expr_struct_nested",
+      "input": "17, audit_value_max_len=(Thing { value, ..base }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "Thing { value, ..base }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "expr_struct_block",
+      "input": "17, audit_value_max_len={ Thing { value, ..base } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "Thing { value, ..base }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "expr_try_direct",
+      "input": "17, audit_value_max_len=value?, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value?",
+        "variant": "Try"
+      }
+    },
+    {
+      "name": "expr_try_nested",
+      "input": "17, audit_value_max_len=(value?), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value?",
+        "variant": "Try"
+      }
+    },
+    {
+      "name": "expr_try_block",
+      "input": "17, audit_value_max_len={ value? }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "value?",
+        "variant": "Try"
+      }
+    },
+    {
+      "name": "expr_tryblock_direct",
+      "input": "17, audit_value_max_len=try { value? }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "try { value? }",
+        "variant": "TryBlock"
+      }
+    },
+    {
+      "name": "expr_tryblock_nested",
+      "input": "17, audit_value_max_len=(try { value? }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "try { value? }",
+        "variant": "TryBlock"
+      }
+    },
+    {
+      "name": "expr_tryblock_block",
+      "input": "17, audit_value_max_len={ try { value? } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "try { value? }",
+        "variant": "TryBlock"
+      }
+    },
+    {
+      "name": "expr_tuple_direct",
+      "input": "17, audit_value_max_len=(a,b), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "(a,b)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "expr_tuple_nested",
+      "input": "17, audit_value_max_len=((a,b)), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "(a,b)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "expr_tuple_block",
+      "input": "17, audit_value_max_len={ (a,b) }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "(a,b)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "expr_unary_direct",
+      "input": "17, audit_value_max_len=!value, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "!value",
+        "variant": "Unary"
+      }
+    },
+    {
+      "name": "expr_unary_nested",
+      "input": "17, audit_value_max_len=(!value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "!value",
+        "variant": "Unary"
+      }
+    },
+    {
+      "name": "expr_unary_block",
+      "input": "17, audit_value_max_len={ !value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "!value",
+        "variant": "Unary"
+      }
+    },
+    {
+      "name": "expr_unsafe_direct",
+      "input": "17, audit_value_max_len=unsafe { value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "unsafe { value }",
+        "variant": "Unsafe"
+      }
+    },
+    {
+      "name": "expr_unsafe_nested",
+      "input": "17, audit_value_max_len=(unsafe { value }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "unsafe { value }",
+        "variant": "Unsafe"
+      }
+    },
+    {
+      "name": "expr_unsafe_block",
+      "input": "17, audit_value_max_len={ unsafe { value } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "unsafe { value }",
+        "variant": "Unsafe"
+      }
+    },
+    {
+      "name": "expr_verbatim_direct",
+      "input": "17, audit_value_max_len=builtin # intrinsic($ token => [opaque]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "builtin # intrinsic($ token => [opaque])",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "expr_verbatim_nested",
+      "input": "17, audit_value_max_len=(builtin # intrinsic($ token => [opaque])), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "builtin # intrinsic($ token => [opaque])",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "expr_verbatim_block",
+      "input": "17, audit_value_max_len={ builtin # intrinsic($ token => [opaque]) }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "builtin # intrinsic($ token => [opaque])",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "expr_while_direct",
+      "input": "17, audit_value_max_len=while let Some(x) = values { f(x); }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "while let Some(x) = values { f(x); }",
+        "variant": "While"
+      }
+    },
+    {
+      "name": "expr_while_nested",
+      "input": "17, audit_value_max_len=(while let Some(x) = values { f(x); }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "while let Some(x) = values { f(x); }",
+        "variant": "While"
+      }
+    },
+    {
+      "name": "expr_while_block",
+      "input": "17, audit_value_max_len={ while let Some(x) = values { f(x); } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "while let Some(x) = values { f(x); }",
+        "variant": "While"
+      }
+    },
+    {
+      "name": "expr_yield_direct",
+      "input": "17, audit_value_max_len=yield value, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "yield value",
+        "variant": "Yield"
+      }
+    },
+    {
+      "name": "expr_yield_nested",
+      "input": "17, audit_value_max_len=(yield value), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "yield value",
+        "variant": "Yield"
+      }
+    },
+    {
+      "name": "expr_yield_block",
+      "input": "17, audit_value_max_len={ yield value }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Expr",
+        "code": "yield value",
+        "variant": "Yield"
+      }
+    },
+    {
+      "name": "type_array_direct",
+      "input": "17, audit_value_max_len=value as [u8; 4], entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "[u8; 4]",
+        "variant": "Array"
+      }
+    },
+    {
+      "name": "type_array_nested",
+      "input": "17, audit_value_max_len=(value as [u8; 4]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "[u8; 4]",
+        "variant": "Array"
+      }
+    },
+    {
+      "name": "type_array_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"[u8; 4]\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "[u8; 4]",
+        "variant": "Array"
+      }
+    },
+    {
+      "name": "type_barefn_direct",
+      "input": "17, audit_value_max_len=value as for<'a> unsafe extern \"C\" fn(&'a u8, ...) -> !, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "for<'a> unsafe extern \"C\" fn(&'a u8, ...) -> !",
+        "variant": "BareFn"
+      }
+    },
+    {
+      "name": "type_barefn_nested",
+      "input": "17, audit_value_max_len=(value as for<'a> unsafe extern \"C\" fn(&'a u8, ...) -> !), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "for<'a> unsafe extern \"C\" fn(&'a u8, ...) -> !",
+        "variant": "BareFn"
+      }
+    },
+    {
+      "name": "type_barefn_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"for<'a> unsafe extern \\\"C\\\" fn(&'a u8, ...) -> !\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "for<'a> unsafe extern \"C\" fn(&'a u8, ...) -> !",
+        "variant": "BareFn"
+      }
+    },
+    {
+      "name": "type_impltrait_direct",
+      "input": "17, audit_value_max_len=value as impl Iterator<Item = u8> + Send, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "impl Iterator<Item = u8> + Send",
+        "variant": "ImplTrait"
+      }
+    },
+    {
+      "name": "type_impltrait_nested",
+      "input": "17, audit_value_max_len=(value as impl Iterator<Item = u8> + Send), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "impl Iterator<Item = u8> + Send",
+        "variant": "ImplTrait"
+      }
+    },
+    {
+      "name": "type_impltrait_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"impl Iterator<Item = u8> + Send\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "impl Iterator<Item = u8> + Send",
+        "variant": "ImplTrait"
+      }
+    },
+    {
+      "name": "type_infer_direct",
+      "input": "17, audit_value_max_len=value as _, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "_",
+        "variant": "Infer"
+      }
+    },
+    {
+      "name": "type_infer_nested",
+      "input": "17, audit_value_max_len=(value as _), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "_",
+        "variant": "Infer"
+      }
+    },
+    {
+      "name": "type_infer_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"_\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "_",
+        "variant": "Infer"
+      }
+    },
+    {
+      "name": "type_macro_direct",
+      "input": "17, audit_value_max_len=value as type_macro!(T), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "type_macro!(T)",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "type_macro_nested",
+      "input": "17, audit_value_max_len=(value as type_macro!(T)), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "type_macro!(T)",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "type_macro_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"type_macro!(T)\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "type_macro!(T)",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "type_never_direct",
+      "input": "17, audit_value_max_len=value as !, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "!",
+        "variant": "Never"
+      }
+    },
+    {
+      "name": "type_never_nested",
+      "input": "17, audit_value_max_len=(value as !), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "!",
+        "variant": "Never"
+      }
+    },
+    {
+      "name": "type_never_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"!\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "!",
+        "variant": "Never"
+      }
+    },
+    {
+      "name": "type_paren_direct",
+      "input": "17, audit_value_max_len=value as (u8), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "(u8)",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "type_paren_nested",
+      "input": "17, audit_value_max_len=(value as (u8)), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "(u8)",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "type_paren_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"(u8)\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "(u8)",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "type_path_direct",
+      "input": "17, audit_value_max_len=value as <T as Trait>::Output, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "<T as Trait>::Output",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "type_path_nested",
+      "input": "17, audit_value_max_len=(value as <T as Trait>::Output), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "<T as Trait>::Output",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "type_path_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"<T as Trait>::Output\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "<T as Trait>::Output",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "type_ptr_direct",
+      "input": "17, audit_value_max_len=value as *const u8, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "*const u8",
+        "variant": "Ptr"
+      }
+    },
+    {
+      "name": "type_ptr_nested",
+      "input": "17, audit_value_max_len=(value as *const u8), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "*const u8",
+        "variant": "Ptr"
+      }
+    },
+    {
+      "name": "type_ptr_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"*const u8\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "*const u8",
+        "variant": "Ptr"
+      }
+    },
+    {
+      "name": "type_reference_direct",
+      "input": "17, audit_value_max_len=value as &'a mut T, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "&'a mut T",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "type_reference_nested",
+      "input": "17, audit_value_max_len=(value as &'a mut T), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "&'a mut T",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "type_reference_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"&'a mut T\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "&'a mut T",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "type_slice_direct",
+      "input": "17, audit_value_max_len=value as [u8], entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "[u8]",
+        "variant": "Slice"
+      }
+    },
+    {
+      "name": "type_slice_nested",
+      "input": "17, audit_value_max_len=(value as [u8]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "[u8]",
+        "variant": "Slice"
+      }
+    },
+    {
+      "name": "type_slice_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"[u8]\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "[u8]",
+        "variant": "Slice"
+      }
+    },
+    {
+      "name": "type_traitobject_direct",
+      "input": "17, audit_value_max_len=value as dyn Trait + Send + 'a, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "dyn Trait + Send + 'a",
+        "variant": "TraitObject"
+      }
+    },
+    {
+      "name": "type_traitobject_nested",
+      "input": "17, audit_value_max_len=(value as dyn Trait + Send + 'a), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "dyn Trait + Send + 'a",
+        "variant": "TraitObject"
+      }
+    },
+    {
+      "name": "type_traitobject_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"dyn Trait + Send + 'a\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "dyn Trait + Send + 'a",
+        "variant": "TraitObject"
+      }
+    },
+    {
+      "name": "type_tuple_direct",
+      "input": "17, audit_value_max_len=value as (u8, bool), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "(u8, bool)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "type_tuple_nested",
+      "input": "17, audit_value_max_len=(value as (u8, bool)), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "(u8, bool)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "type_tuple_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"(u8, bool)\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "(u8, bool)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "type_verbatim_direct",
+      "input": "17, audit_value_max_len=value as dyn* Trait, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "dyn* Trait",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "type_verbatim_nested",
+      "input": "17, audit_value_max_len=(value as dyn* Trait), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "dyn* Trait",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "type_verbatim_json_type",
+      "input": "17, reverse_relation(name=\"x\", target=\"Child\", json_type=\"dyn* Trait\"), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Type",
+        "code": "dyn* Trait",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "pat_const_direct",
+      "input": "17, audit_value_max_len=match x { const { 1 } => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "const { 1 }",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "pat_const_nested",
+      "input": "17, audit_value_max_len=(match x { const { 1 } => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "const { 1 }",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "pat_const_block",
+      "input": "17, audit_value_max_len={ match x { const { 1 } => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "const { 1 }",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "pat_ident_direct",
+      "input": "17, audit_value_max_len=match x { ref mut x @ Some(y) => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "ref mut x @ Some(y)",
+        "variant": "Ident"
+      }
+    },
+    {
+      "name": "pat_ident_nested",
+      "input": "17, audit_value_max_len=(match x { ref mut x @ Some(y) => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "ref mut x @ Some(y)",
+        "variant": "Ident"
+      }
+    },
+    {
+      "name": "pat_ident_block",
+      "input": "17, audit_value_max_len={ match x { ref mut x @ Some(y) => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "ref mut x @ Some(y)",
+        "variant": "Ident"
+      }
+    },
+    {
+      "name": "pat_lit_direct",
+      "input": "17, audit_value_max_len=match x { 42 => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "42",
+        "variant": "Lit"
+      }
+    },
+    {
+      "name": "pat_lit_nested",
+      "input": "17, audit_value_max_len=(match x { 42 => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "42",
+        "variant": "Lit"
+      }
+    },
+    {
+      "name": "pat_lit_block",
+      "input": "17, audit_value_max_len={ match x { 42 => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "42",
+        "variant": "Lit"
+      }
+    },
+    {
+      "name": "pat_macro_direct",
+      "input": "17, audit_value_max_len=match x { pat!(x) => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "pat!(x)",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "pat_macro_nested",
+      "input": "17, audit_value_max_len=(match x { pat!(x) => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "pat!(x)",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "pat_macro_block",
+      "input": "17, audit_value_max_len={ match x { pat!(x) => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "pat!(x)",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "pat_or_direct",
+      "input": "17, audit_value_max_len=match x { Some(x) | None => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Some(x) | None",
+        "variant": "Or"
+      }
+    },
+    {
+      "name": "pat_or_nested",
+      "input": "17, audit_value_max_len=(match x { Some(x) | None => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Some(x) | None",
+        "variant": "Or"
+      }
+    },
+    {
+      "name": "pat_or_block",
+      "input": "17, audit_value_max_len={ match x { Some(x) | None => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Some(x) | None",
+        "variant": "Or"
+      }
+    },
+    {
+      "name": "pat_paren_direct",
+      "input": "17, audit_value_max_len=match x { (Some(x)) => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "(Some(x))",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "pat_paren_nested",
+      "input": "17, audit_value_max_len=(match x { (Some(x)) => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "(Some(x))",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "pat_paren_block",
+      "input": "17, audit_value_max_len={ match x { (Some(x)) => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "(Some(x))",
+        "variant": "Paren"
+      }
+    },
+    {
+      "name": "pat_path_direct",
+      "input": "17, audit_value_max_len=match x { <T as Trait>::VALUE => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "<T as Trait>::VALUE",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "pat_path_nested",
+      "input": "17, audit_value_max_len=(match x { <T as Trait>::VALUE => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "<T as Trait>::VALUE",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "pat_path_block",
+      "input": "17, audit_value_max_len={ match x { <T as Trait>::VALUE => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "<T as Trait>::VALUE",
+        "variant": "Path"
+      }
+    },
+    {
+      "name": "pat_range_direct",
+      "input": "17, audit_value_max_len=match x { 1..=3 => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "1..=3",
+        "variant": "Range"
+      }
+    },
+    {
+      "name": "pat_range_nested",
+      "input": "17, audit_value_max_len=(match x { 1..=3 => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "1..=3",
+        "variant": "Range"
+      }
+    },
+    {
+      "name": "pat_range_block",
+      "input": "17, audit_value_max_len={ match x { 1..=3 => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "1..=3",
+        "variant": "Range"
+      }
+    },
+    {
+      "name": "pat_reference_direct",
+      "input": "17, audit_value_max_len=match x { &mut x => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "&mut x",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "pat_reference_nested",
+      "input": "17, audit_value_max_len=(match x { &mut x => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "&mut x",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "pat_reference_block",
+      "input": "17, audit_value_max_len={ match x { &mut x => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "&mut x",
+        "variant": "Reference"
+      }
+    },
+    {
+      "name": "pat_rest_direct",
+      "input": "17, audit_value_max_len=match x { [..] => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "..",
+        "variant": "Rest"
+      }
+    },
+    {
+      "name": "pat_rest_nested",
+      "input": "17, audit_value_max_len=(match x { [..] => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "..",
+        "variant": "Rest"
+      }
+    },
+    {
+      "name": "pat_rest_block",
+      "input": "17, audit_value_max_len={ match x { [..] => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "..",
+        "variant": "Rest"
+      }
+    },
+    {
+      "name": "pat_slice_direct",
+      "input": "17, audit_value_max_len=match x { [head, rest @ ..] => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "[head, rest @ ..]",
+        "variant": "Slice"
+      }
+    },
+    {
+      "name": "pat_slice_nested",
+      "input": "17, audit_value_max_len=(match x { [head, rest @ ..] => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "[head, rest @ ..]",
+        "variant": "Slice"
+      }
+    },
+    {
+      "name": "pat_slice_block",
+      "input": "17, audit_value_max_len={ match x { [head, rest @ ..] => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "[head, rest @ ..]",
+        "variant": "Slice"
+      }
+    },
+    {
+      "name": "pat_struct_direct",
+      "input": "17, audit_value_max_len=match x { Thing { field, .. } => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Thing { field, .. }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "pat_struct_nested",
+      "input": "17, audit_value_max_len=(match x { Thing { field, .. } => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Thing { field, .. }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "pat_struct_block",
+      "input": "17, audit_value_max_len={ match x { Thing { field, .. } => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Thing { field, .. }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "pat_tuple_direct",
+      "input": "17, audit_value_max_len=match x { (a,b) => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "(a,b)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "pat_tuple_nested",
+      "input": "17, audit_value_max_len=(match x { (a,b) => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "(a,b)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "pat_tuple_block",
+      "input": "17, audit_value_max_len={ match x { (a,b) => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "(a,b)",
+        "variant": "Tuple"
+      }
+    },
+    {
+      "name": "pat_tuplestruct_direct",
+      "input": "17, audit_value_max_len=match x { Some(x) => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Some(x)",
+        "variant": "TupleStruct"
+      }
+    },
+    {
+      "name": "pat_tuplestruct_nested",
+      "input": "17, audit_value_max_len=(match x { Some(x) => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Some(x)",
+        "variant": "TupleStruct"
+      }
+    },
+    {
+      "name": "pat_tuplestruct_block",
+      "input": "17, audit_value_max_len={ match x { Some(x) => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "Some(x)",
+        "variant": "TupleStruct"
+      }
+    },
+    {
+      "name": "pat_type_direct",
+      "input": "17, audit_value_max_len=|x: u8| x, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "x: u8",
+        "variant": "Type"
+      }
+    },
+    {
+      "name": "pat_type_nested",
+      "input": "17, audit_value_max_len=(|x: u8| x), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "x: u8",
+        "variant": "Type"
+      }
+    },
+    {
+      "name": "pat_type_block",
+      "input": "17, audit_value_max_len={ |x: u8| x }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "x: u8",
+        "variant": "Type"
+      }
+    },
+    {
+      "name": "pat_verbatim_direct",
+      "input": "17, audit_value_max_len=match x { box x => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "box x",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "pat_verbatim_nested",
+      "input": "17, audit_value_max_len=(match x { box x => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "box x",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "pat_verbatim_block",
+      "input": "17, audit_value_max_len={ match x { box x => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "box x",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "pat_wild_direct",
+      "input": "17, audit_value_max_len=match x { _ => (), _ => () }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "_",
+        "variant": "Wild"
+      }
+    },
+    {
+      "name": "pat_wild_nested",
+      "input": "17, audit_value_max_len=(match x { _ => (), _ => () }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "_",
+        "variant": "Wild"
+      }
+    },
+    {
+      "name": "pat_wild_block",
+      "input": "17, audit_value_max_len={ match x { _ => (), _ => () } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Pat",
+        "code": "_",
+        "variant": "Wild"
+      }
+    },
+    {
+      "name": "stmt_local_direct",
+      "input": "17, audit_value_max_len={ let x: u8 = 1; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "let x: u8 = 1;",
+        "variant": "Local"
+      }
+    },
+    {
+      "name": "stmt_local_nested",
+      "input": "17, audit_value_max_len=({ let x: u8 = 1; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "let x: u8 = 1;",
+        "variant": "Local"
+      }
+    },
+    {
+      "name": "stmt_local_block",
+      "input": "17, audit_value_max_len={ { let x: u8 = 1; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "let x: u8 = 1;",
+        "variant": "Local"
+      }
+    },
+    {
+      "name": "stmt_item_direct",
+      "input": "17, audit_value_max_len={ fn helper() {} 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "fn helper() {}",
+        "variant": "Item"
+      }
+    },
+    {
+      "name": "stmt_item_nested",
+      "input": "17, audit_value_max_len=({ fn helper() {} 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "fn helper() {}",
+        "variant": "Item"
+      }
+    },
+    {
+      "name": "stmt_item_block",
+      "input": "17, audit_value_max_len={ { fn helper() {} 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "fn helper() {}",
+        "variant": "Item"
+      }
+    },
+    {
+      "name": "stmt_expr_direct",
+      "input": "17, audit_value_max_len={ value; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "value;",
+        "variant": "Expr"
+      }
+    },
+    {
+      "name": "stmt_expr_nested",
+      "input": "17, audit_value_max_len=({ value; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "value;",
+        "variant": "Expr"
+      }
+    },
+    {
+      "name": "stmt_expr_block",
+      "input": "17, audit_value_max_len={ { value; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "value;",
+        "variant": "Expr"
+      }
+    },
+    {
+      "name": "stmt_macro_direct",
+      "input": "17, audit_value_max_len={ mac!{}; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "mac!{};",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "stmt_macro_nested",
+      "input": "17, audit_value_max_len=({ mac!{}; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "mac!{};",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "stmt_macro_block",
+      "input": "17, audit_value_max_len={ { mac!{}; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Stmt",
+        "code": "mac!{};",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "item_const_direct",
+      "input": "17, audit_value_max_len={ const VALUE: u8 = 1; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "const VALUE: u8 = 1;",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "item_const_nested",
+      "input": "17, audit_value_max_len=({ const VALUE: u8 = 1; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "const VALUE: u8 = 1;",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "item_const_block",
+      "input": "17, audit_value_max_len={ { const VALUE: u8 = 1; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "const VALUE: u8 = 1;",
+        "variant": "Const"
+      }
+    },
+    {
+      "name": "item_enum_direct",
+      "input": "17, audit_value_max_len={ enum Choice { A, B(u8) } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "enum Choice { A, B(u8) }",
+        "variant": "Enum"
+      }
+    },
+    {
+      "name": "item_enum_nested",
+      "input": "17, audit_value_max_len=({ enum Choice { A, B(u8) } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "enum Choice { A, B(u8) }",
+        "variant": "Enum"
+      }
+    },
+    {
+      "name": "item_enum_block",
+      "input": "17, audit_value_max_len={ { enum Choice { A, B(u8) } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "enum Choice { A, B(u8) }",
+        "variant": "Enum"
+      }
+    },
+    {
+      "name": "item_externcrate_direct",
+      "input": "17, audit_value_max_len={ extern crate dep as other; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "extern crate dep as other;",
+        "variant": "ExternCrate"
+      }
+    },
+    {
+      "name": "item_externcrate_nested",
+      "input": "17, audit_value_max_len=({ extern crate dep as other; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "extern crate dep as other;",
+        "variant": "ExternCrate"
+      }
+    },
+    {
+      "name": "item_externcrate_block",
+      "input": "17, audit_value_max_len={ { extern crate dep as other; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "extern crate dep as other;",
+        "variant": "ExternCrate"
+      }
+    },
+    {
+      "name": "item_fn_direct",
+      "input": "17, audit_value_max_len={ fn helper<T>(x:T) -> T { x } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "fn helper<T>(x:T) -> T { x }",
+        "variant": "Fn"
+      }
+    },
+    {
+      "name": "item_fn_nested",
+      "input": "17, audit_value_max_len=({ fn helper<T>(x:T) -> T { x } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "fn helper<T>(x:T) -> T { x }",
+        "variant": "Fn"
+      }
+    },
+    {
+      "name": "item_fn_block",
+      "input": "17, audit_value_max_len={ { fn helper<T>(x:T) -> T { x } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "fn helper<T>(x:T) -> T { x }",
+        "variant": "Fn"
+      }
+    },
+    {
+      "name": "item_foreignmod_direct",
+      "input": "17, audit_value_max_len={ unsafe extern \"C\" { fn imported(); } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "unsafe extern \"C\" { fn imported(); }",
+        "variant": "ForeignMod"
+      }
+    },
+    {
+      "name": "item_foreignmod_nested",
+      "input": "17, audit_value_max_len=({ unsafe extern \"C\" { fn imported(); } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "unsafe extern \"C\" { fn imported(); }",
+        "variant": "ForeignMod"
+      }
+    },
+    {
+      "name": "item_foreignmod_block",
+      "input": "17, audit_value_max_len={ { unsafe extern \"C\" { fn imported(); } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "unsafe extern \"C\" { fn imported(); }",
+        "variant": "ForeignMod"
+      }
+    },
+    {
+      "name": "item_impl_direct",
+      "input": "17, audit_value_max_len={ impl Thing { fn helper() {} } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "impl Thing { fn helper() {} }",
+        "variant": "Impl"
+      }
+    },
+    {
+      "name": "item_impl_nested",
+      "input": "17, audit_value_max_len=({ impl Thing { fn helper() {} } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "impl Thing { fn helper() {} }",
+        "variant": "Impl"
+      }
+    },
+    {
+      "name": "item_impl_block",
+      "input": "17, audit_value_max_len={ { impl Thing { fn helper() {} } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "impl Thing { fn helper() {} }",
+        "variant": "Impl"
+      }
+    },
+    {
+      "name": "item_macro_direct",
+      "input": "17, audit_value_max_len={ macro_rules! mac { () => {} } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "macro_rules! mac { () => {} }",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "item_macro_nested",
+      "input": "17, audit_value_max_len=({ macro_rules! mac { () => {} } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "macro_rules! mac { () => {} }",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "item_macro_block",
+      "input": "17, audit_value_max_len={ { macro_rules! mac { () => {} } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "macro_rules! mac { () => {} }",
+        "variant": "Macro"
+      }
+    },
+    {
+      "name": "item_mod_direct",
+      "input": "17, audit_value_max_len={ mod child { const VALUE:u8=1; } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "mod child { const VALUE:u8=1; }",
+        "variant": "Mod"
+      }
+    },
+    {
+      "name": "item_mod_nested",
+      "input": "17, audit_value_max_len=({ mod child { const VALUE:u8=1; } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "mod child { const VALUE:u8=1; }",
+        "variant": "Mod"
+      }
+    },
+    {
+      "name": "item_mod_block",
+      "input": "17, audit_value_max_len={ { mod child { const VALUE:u8=1; } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "mod child { const VALUE:u8=1; }",
+        "variant": "Mod"
+      }
+    },
+    {
+      "name": "item_static_direct",
+      "input": "17, audit_value_max_len={ static VALUE:u8=1; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "static VALUE:u8=1;",
+        "variant": "Static"
+      }
+    },
+    {
+      "name": "item_static_nested",
+      "input": "17, audit_value_max_len=({ static VALUE:u8=1; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "static VALUE:u8=1;",
+        "variant": "Static"
+      }
+    },
+    {
+      "name": "item_static_block",
+      "input": "17, audit_value_max_len={ { static VALUE:u8=1; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "static VALUE:u8=1;",
+        "variant": "Static"
+      }
+    },
+    {
+      "name": "item_struct_direct",
+      "input": "17, audit_value_max_len={ struct Thing { field: u8 } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "struct Thing { field: u8 }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "item_struct_nested",
+      "input": "17, audit_value_max_len=({ struct Thing { field: u8 } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "struct Thing { field: u8 }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "item_struct_block",
+      "input": "17, audit_value_max_len={ { struct Thing { field: u8 } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "struct Thing { field: u8 }",
+        "variant": "Struct"
+      }
+    },
+    {
+      "name": "item_trait_direct",
+      "input": "17, audit_value_max_len={ trait Trait { fn helper(); } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "trait Trait { fn helper(); }",
+        "variant": "Trait"
+      }
+    },
+    {
+      "name": "item_trait_nested",
+      "input": "17, audit_value_max_len=({ trait Trait { fn helper(); } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "trait Trait { fn helper(); }",
+        "variant": "Trait"
+      }
+    },
+    {
+      "name": "item_trait_block",
+      "input": "17, audit_value_max_len={ { trait Trait { fn helper(); } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "trait Trait { fn helper(); }",
+        "variant": "Trait"
+      }
+    },
+    {
+      "name": "item_traitalias_direct",
+      "input": "17, audit_value_max_len={ trait Alias = Trait + Send; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "trait Alias = Trait + Send;",
+        "variant": "TraitAlias"
+      }
+    },
+    {
+      "name": "item_traitalias_nested",
+      "input": "17, audit_value_max_len=({ trait Alias = Trait + Send; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "trait Alias = Trait + Send;",
+        "variant": "TraitAlias"
+      }
+    },
+    {
+      "name": "item_traitalias_block",
+      "input": "17, audit_value_max_len={ { trait Alias = Trait + Send; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "trait Alias = Trait + Send;",
+        "variant": "TraitAlias"
+      }
+    },
+    {
+      "name": "item_type_direct",
+      "input": "17, audit_value_max_len={ type Alias<T> = Option<T>; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "type Alias<T> = Option<T>;",
+        "variant": "Type"
+      }
+    },
+    {
+      "name": "item_type_nested",
+      "input": "17, audit_value_max_len=({ type Alias<T> = Option<T>; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "type Alias<T> = Option<T>;",
+        "variant": "Type"
+      }
+    },
+    {
+      "name": "item_type_block",
+      "input": "17, audit_value_max_len={ { type Alias<T> = Option<T>; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "type Alias<T> = Option<T>;",
+        "variant": "Type"
+      }
+    },
+    {
+      "name": "item_union_direct",
+      "input": "17, audit_value_max_len={ union Bits { bytes:[u8;4], value:u32 } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "union Bits { bytes:[u8;4], value:u32 }",
+        "variant": "Union"
+      }
+    },
+    {
+      "name": "item_union_nested",
+      "input": "17, audit_value_max_len=({ union Bits { bytes:[u8;4], value:u32 } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "union Bits { bytes:[u8;4], value:u32 }",
+        "variant": "Union"
+      }
+    },
+    {
+      "name": "item_union_block",
+      "input": "17, audit_value_max_len={ { union Bits { bytes:[u8;4], value:u32 } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "union Bits { bytes:[u8;4], value:u32 }",
+        "variant": "Union"
+      }
+    },
+    {
+      "name": "item_use_direct",
+      "input": "17, audit_value_max_len={ use crate::{a as b, c::*}; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "use crate::{a as b, c::*};",
+        "variant": "Use"
+      }
+    },
+    {
+      "name": "item_use_nested",
+      "input": "17, audit_value_max_len=({ use crate::{a as b, c::*}; 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "use crate::{a as b, c::*};",
+        "variant": "Use"
+      }
+    },
+    {
+      "name": "item_use_block",
+      "input": "17, audit_value_max_len={ { use crate::{a as b, c::*}; 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "use crate::{a as b, c::*};",
+        "variant": "Use"
+      }
+    },
+    {
+      "name": "item_verbatim_direct",
+      "input": "17, audit_value_max_len={ macro mac($x:expr) { $x } 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "macro mac($x:expr) { $x }",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "item_verbatim_nested",
+      "input": "17, audit_value_max_len=({ macro mac($x:expr) { $x } 0 }), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "macro mac($x:expr) { $x }",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "item_verbatim_block",
+      "input": "17, audit_value_max_len={ { macro mac($x:expr) { $x } 0 } }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": {
+        "kind": "Item",
+        "code": "macro mac($x:expr) { $x }",
+        "variant": "Verbatim"
+      }
+    },
+    {
+      "name": "builtin_empty_direct",
+      "input": "17, audit_value_max_len=builtin # foo(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_empty_nested",
+      "input": "17, audit_value_max_len=(builtin # foo()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_empty_body",
+      "input": "17, audit_value_max_len={ builtin # foo(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_raw_name_direct",
+      "input": "17, audit_value_max_len=builtin # r#type(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_raw_name_nested",
+      "input": "17, audit_value_max_len=(builtin # r#type()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_raw_name_body",
+      "input": "17, audit_value_max_len={ builtin # r#type(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_payload_direct",
+      "input": "17, audit_value_max_len=builtin # foo($ + invalid => [tokens] {struct}), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_payload_nested",
+      "input": "17, audit_value_max_len=(builtin # foo($ + invalid => [tokens] {struct})), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_payload_body",
+      "input": "17, audit_value_max_len={ builtin # foo($ + invalid => [tokens] {struct}); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_trivia_direct",
+      "input": "17, audit_value_max_len=builtin /*outer*/ # /*inner*/ foo /*last*/ (), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_trivia_nested",
+      "input": "17, audit_value_max_len=(builtin /*outer*/ # /*inner*/ foo /*last*/ ()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_trivia_body",
+      "input": "17, audit_value_max_len={ builtin /*outer*/ # /*inner*/ foo /*last*/ (); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_call_direct",
+      "input": "17, audit_value_max_len=builtin # foo()(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_call_nested",
+      "input": "17, audit_value_max_len=(builtin # foo()()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_call_body",
+      "input": "17, audit_value_max_len={ builtin # foo()(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_method_direct",
+      "input": "17, audit_value_max_len=builtin # foo().method::<T>(arg), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_method_nested",
+      "input": "17, audit_value_max_len=(builtin # foo().method::<T>(arg)), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_method_body",
+      "input": "17, audit_value_max_len={ builtin # foo().method::<T>(arg); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_field_direct",
+      "input": "17, audit_value_max_len=builtin # foo().field, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_field_nested",
+      "input": "17, audit_value_max_len=(builtin # foo().field), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_field_body",
+      "input": "17, audit_value_max_len={ builtin # foo().field; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_index_direct",
+      "input": "17, audit_value_max_len=builtin # foo()[index], entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_index_nested",
+      "input": "17, audit_value_max_len=(builtin # foo()[index]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_index_body",
+      "input": "17, audit_value_max_len={ builtin # foo()[index]; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_try_direct",
+      "input": "17, audit_value_max_len=builtin # foo()?, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_try_nested",
+      "input": "17, audit_value_max_len=(builtin # foo()?), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_try_body",
+      "input": "17, audit_value_max_len={ builtin # foo()?; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_await_direct",
+      "input": "17, audit_value_max_len=builtin # foo().await, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_await_nested",
+      "input": "17, audit_value_max_len=(builtin # foo().await), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_await_body",
+      "input": "17, audit_value_max_len={ builtin # foo().await; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_binary_direct",
+      "input": "17, audit_value_max_len=builtin # foo() + 1, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_binary_nested",
+      "input": "17, audit_value_max_len=(builtin # foo() + 1), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_binary_body",
+      "input": "17, audit_value_max_len={ builtin # foo() + 1; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_range_direct",
+      "input": "17, audit_value_max_len=builtin # foo()..end, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_range_nested",
+      "input": "17, audit_value_max_len=(builtin # foo()..end), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_range_body",
+      "input": "17, audit_value_max_len={ builtin # foo()..end; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_attribute_direct",
+      "input": "17, audit_value_max_len=#[allow(unused)] builtin # foo(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_attribute_nested",
+      "input": "17, audit_value_max_len=(#[allow(unused)] builtin # foo()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_attribute_body",
+      "input": "17, audit_value_max_len={ #[allow(unused)] builtin # foo(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_doc_direct",
+      "input": "17, audit_value_max_len=/// metadata fixture\nbuiltin # foo(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_doc_nested",
+      "input": "17, audit_value_max_len=(/// metadata fixture\nbuiltin # foo()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_doc_body",
+      "input": "17, audit_value_max_len={ /// metadata fixture\nbuiltin # foo(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_qualified_control_direct",
+      "input": "17, audit_value_max_len=module::builtin(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_qualified_control_nested",
+      "input": "17, audit_value_max_len=(module::builtin()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_qualified_control_body",
+      "input": "17, audit_value_max_len={ module::builtin(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_plain_control_direct",
+      "input": "17, audit_value_max_len=builtin(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_plain_control_nested",
+      "input": "17, audit_value_max_len=(builtin()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_plain_control_body",
+      "input": "17, audit_value_max_len={ builtin(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_raw_builtin_control_direct",
+      "input": "17, audit_value_max_len=r#builtin # foo(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_raw_builtin_control_nested",
+      "input": "17, audit_value_max_len=(r#builtin # foo()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_raw_builtin_control_body",
+      "input": "17, audit_value_max_len={ r#builtin # foo(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_name_direct",
+      "input": "17, audit_value_max_len=builtin # self(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_name_nested",
+      "input": "17, audit_value_max_len=(builtin # self()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_name_body",
+      "input": "17, audit_value_max_len={ builtin # self(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_missing_name_direct",
+      "input": "17, audit_value_max_len=builtin # (), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_missing_name_nested",
+      "input": "17, audit_value_max_len=(builtin # ()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_missing_name_body",
+      "input": "17, audit_value_max_len={ builtin # (); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_braces_direct",
+      "input": "17, audit_value_max_len=builtin # foo{}, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_braces_nested",
+      "input": "17, audit_value_max_len=(builtin # foo{}), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_braces_body",
+      "input": "17, audit_value_max_len={ builtin # foo{}; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_brackets_direct",
+      "input": "17, audit_value_max_len=builtin # foo[], entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_brackets_nested",
+      "input": "17, audit_value_max_len=(builtin # foo[]), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_brackets_body",
+      "input": "17, audit_value_max_len={ builtin # foo[]; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_missing_args_direct",
+      "input": "17, audit_value_max_len=builtin # foo, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_missing_args_nested",
+      "input": "17, audit_value_max_len=(builtin # foo), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_missing_args_body",
+      "input": "17, audit_value_max_len={ builtin # foo; 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_qualified_name_direct",
+      "input": "17, audit_value_max_len=builtin # foo::bar(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_qualified_name_nested",
+      "input": "17, audit_value_max_len=(builtin # foo::bar()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_qualified_name_body",
+      "input": "17, audit_value_max_len={ builtin # foo::bar(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_literal_name_direct",
+      "input": "17, audit_value_max_len=builtin # 1(), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_literal_name_nested",
+      "input": "17, audit_value_max_len=(builtin # 1()), entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    },
+    {
+      "name": "builtin_invalid_literal_name_body",
+      "input": "17, audit_value_max_len={ builtin # 1(); 0 }, entity=\"After\", table=\"after_table\", data_service=\"after\", audit_mask_fields=\"name\", indexed_layout, audit_value_max_len=29",
+      "witness": null
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "kind": "retained_execution_model_source_bindings",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "support_files": {
+    "scripts/execution_model_cli_source_binding_5_0_6.py": "673bc433d620fcbee0b443152ad96cb09c1b6de7a45475de3c7de59da3b4a936",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/compare_composed_general_5_0_6.py": "73175eac52737dd6cdbcc79e1c2e0da3d8011f0d4a3f21072941fb045312bb0d",
+    "tests/parity/compare_execution_result_models_5_0_6.py": "0c0c9805bf1e6880809c1369c91d37e5ea278e42c3f65b61f1af9e546b8a781e",
+    "tests/parity/compare_execution_result_model_states_5_0_6.py": "2b8e19cc82bf30c91833224c7fb5e9cc04446e1ae44327648705ba725b9a0a33",
+    "tests/parity/compare_hot_execution_5_0_6.py": "64ae76cf2666c49c80031f3659e3b14f6a176455b8300e957e2a4fc1676609fb",
+    "tests/parity/verify_execution_model_cli_controls_5_0_6.py": "9acac327b71c9b3e2c967ddfc674a7af9144e35d9d594a57ce237dd865fc97c7"
+  },
+  "contracts": [
+    {
+      "name": "execution_result_models",
+      "test": "execution_result_models_rust_parity",
+      "comparator": "tests/parity/compare_execution_result_models_5_0_6.py",
+      "binary": "teaql_execution_result_models_probe",
+      "corpus": "tests/parity/execution_result_models_5_0_6_cases.json.gz",
+      "paired": "docs/parity/execution_result_models_final_5_0_6.json.gz",
+      "terminal": "docs/parity/execution_source_result_models_terminal_5_0_6.json.gz",
+      "count": 3328,
+      "corpus_sha256": "a875afc791e37ef4e8983d68546d289e96c4925eee0c5b7bad7e475aca885551",
+      "paired_sha256": "63e438df443ccf47ce37807dd39a72560e767fdc36058a91c3e4743d1cf1bf54",
+      "terminal_sha256": "27da4af5331ec00fbcd89663c100dfedeb143233038733c183fdf137500f98a9"
+    },
+    {
+      "name": "execution_result_model_states",
+      "test": "execution_result_model_states_rust_parity",
+      "comparator": "tests/parity/compare_execution_result_model_states_5_0_6.py",
+      "binary": "teaql_execution_result_models_probe",
+      "corpus": "tests/parity/execution_result_model_states_5_0_6_cases.json.gz",
+      "paired": "docs/parity/execution_result_model_states_initial_5_0_6.json.gz",
+      "terminal": "docs/parity/execution_source_result_models_terminal_5_0_6.json.gz",
+      "count": 64,
+      "corpus_sha256": "78d1d1ddeb1a9433e31063981980f2e75fbb988adbb4bc040ee10d5b1e439a15",
+      "paired_sha256": "32ada6eebb1c42c886516841a1ac745eca5e867821e64eef9ecd0c75bf469bc4",
+      "terminal_sha256": "27da4af5331ec00fbcd89663c100dfedeb143233038733c183fdf137500f98a9"
+    },
+    {
+      "name": "hot_execution",
+      "test": "hot_execution_rust_parity",
+      "comparator": "tests/parity/compare_hot_execution_5_0_6.py",
+      "binary": "teaql_hot_execution_probe",
+      "corpus": "tests/parity/hot_execution_5_0_6_cases.json.gz",
+      "paired": "docs/parity/hot_execution_final_5_0_6.json.gz",
+      "terminal": "docs/parity/execution_hot_cache_lookup_terminal_5_0_6.json.gz",
+      "count": 1056,
+      "corpus_sha256": "943c56ee965d7949056517ac560ddbb4b48502f77855de002f7c6c12e4c0bda4",
+      "paired_sha256": "a2fa5cd73d4e9dd6ba3ca52a35b18479300f3f109a261b3b7570d5ae11d753ca",
+      "terminal_sha256": "e9a075c5e0d52984b35ed3f57c78289295d71959d17e43fc2aa588b1416e659f",
+      "source_raw": "docs/parity/hot_execution_source_ready_5_0_6.json.gz",
+      "source_raw_sha256": "cdd844aee354f6c43bafc097d125d998551bf8bcd0378e7a98bac3b0803a32bb"
+    }
+  ]
+}

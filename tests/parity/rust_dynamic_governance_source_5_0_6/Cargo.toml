@@ -1,0 +1,87 @@
+[package]
+name = "teaql_dynamic_governance_source_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+autobins = false
+
+[dependencies]
+sha2 = "=0.10.9"
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+serde_json = "=1.0.150"
+serde = "=1.0.228"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype"] }
+
+cpp_dynamic_json_core = { package = "cpp-dynamic-json-core", path = "../../generator/parity/dynamic_json_rust/lib" }
+
+school_management_service_core = { package = "school-management-service-core", path = "../../../.reference/teaql-rs/examples/shared-load-state/fixtures/narrow/lib" }
+
+cpp_inheritance_graph_core = { package = "cpp-inheritance-graph-core", path = "../../generator/parity/inheritance_graph_rust/lib" }
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+
+[[bin]]
+name = "dynamic_fields_5_0_6"
+path = "../rust_field_layout/src/bin/dynamic_fields_5_0_6.rs"
+
+[[bin]]
+name = "dynamic_storage_5_0_6"
+path = "../rust_field_layout/src/bin/dynamic_storage_5_0_6.rs"
+
+[[bin]]
+name = "dynamic_graph_debug_5_0_6"
+path = "../rust_field_layout/src/bin/dynamic_graph_debug_5_0_6.rs"
+
+[[bin]]
+name = "dynamic_governance_5_0_6"
+path = "../rust_field_layout/src/bin/dynamic_governance_5_0_6.rs"
+
+[[bin]]
+name = "dynamic_query_5_0_6"
+path = "../rust_field_layout/src/bin/dynamic_query_5_0_6.rs"
+
+[[bin]]
+name = "dynamic_save_audit_5_0_6"
+path = "../rust_field_layout/src/bin/dynamic_save_audit_5_0_6.rs"
+
+[[bin]]
+name = "dynamic_audit_projection_5_0_6"
+path = "../rust_field_layout/src/bin/dynamic_audit_projection_5_0_6.rs"
+
+[[bin]]
+name = "generated_aggregation_cache_5_0_6"
+path = "../rust_field_layout/src/bin/generated_aggregation_cache_5_0_6.rs"
+
+[[bin]]
+name = "generated_facets_5_0_6"
+path = "../rust_field_layout/src/bin/generated_facets_5_0_6.rs"
+
+[[bin]]
+name = "generated_aggregation_5_0_6"
+path = "../rust_field_layout/src/bin/generated_aggregation_5_0_6.rs"
+
+[[bin]]
+name = "generated_field_criteria_5_0_6"
+path = "../rust_field_layout/src/bin/generated_field_criteria_5_0_6.rs"
+
+[[bin]]
+name = "general_query_5_0_6"
+path = "../rust_field_layout/src/bin/general_query_5_0_6.rs"
+
+[[bin]]
+name = "entry_lookup"
+path = "../rust_dynamic_json_privacy_5_0_6/src/bin/entry_lookup.rs"

@@ -328,28 +328,32 @@ inline RecordExpression HolderExpression::getRecord() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static RecordExpression record(const Record& value) {
-        return RecordExpression(entity_expression(value, StaticString{"record"}));
+        return RecordExpression(
+            entity_expression(value, StaticString{"record"}, StaticString{"Record"}));
     }
 
     static RecordExpression record(Record&&) = delete;
     static RecordExpression record(const Record&&) = delete;
 
     static ChildRecordExpression childRecord(const ChildRecord& value) {
-        return ChildRecordExpression(entity_expression(value, StaticString{"childRecord"}));
+        return ChildRecordExpression(
+            entity_expression(value, StaticString{"childRecord"}, StaticString{"ChildRecord"}));
     }
 
     static ChildRecordExpression childRecord(ChildRecord&&) = delete;
     static ChildRecordExpression childRecord(const ChildRecord&&) = delete;
 
     static HolderExpression holder(const Holder& value) {
-        return HolderExpression(entity_expression(value, StaticString{"holder"}));
+        return HolderExpression(
+            entity_expression(value, StaticString{"holder"}, StaticString{"Holder"}));
     }
 
     static HolderExpression holder(Holder&&) = delete;

@@ -1,0 +1,26 @@
+{
+  "kind": "approved_quoted_fk_relation_source_binding",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "test": "generated_relation_analysis_rust_parity",
+  "comparator": "tests/parity/compare_generated_relation_analysis.py",
+  "binary": "teaql_generated_relation_analysis_probe",
+  "corpus": "tests/parity/generated_relation_analysis_5_0_6_cases.json.gz",
+  "exception_manifest": "docs/compatibility_exceptions_5_0_6.json",
+  "source_failure": "docs/parity/relation_aggregate_quoted_fk_source_failure_5_0_6.json",
+  "total_count": 7122,
+  "exact_count": 6576,
+  "exception_count": 546,
+  "support_files": {
+    "scripts/relation_analysis_cli_source_binding_5_0_6.py": "c7f4961e7ef916503b9f29ecef8d37d0c2934a76b22681640f885d19f141217c",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/compare_generated_relation_analysis.py": "506c74be95725441f40bc0c7b7a672ce3bcc30b864ca062f9839115b79536767",
+    "tests/parity/compatibility_exceptions_5_0_6.py": "09bad0187c315277b781ddc350374b8d3ff45f6be82e0dbc8008a62e8aea402b",
+    "tests/parity/rust_field_layout/src/bin/generated_relation_analysis_5_0_6.rs": "55a91534e077da6ffc2dc8cdf703a89f654cb8b2d05425b79f44d16685d38bda",
+    "tests/parity/verify_relation_analysis_cli_controls_5_0_6.py": "855e61a084e31b730588f7415482742e8718394a99a1ff94bd75e70e6c00304d",
+    "tests/parity/quoted_fk_debug_adapter_5_0_6.py": "5fb9fc4d38ced67881fc09ee7996b7eae50dbcb4979a2c8c095f61efe1574dda"
+  },
+  "corpus_sha256": "c85b871ae29dc13f5708d8eaf618932f751e4cf8165ddd2a5bf8928d58a06737",
+  "exception_manifest_sha256": "53664f622cd8b7369354f586a5de289b2248fa826cd0c082c97f3b3dd37e37f6",
+  "source_failure_sha256": "3bb324c2b4f0b382de548637541c51ee14b1aa2e848a5355821359ba4d05faf9"
+}

@@ -1,0 +1,82 @@
+{
+  "kind": "retained_runtime_error_source",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "original_execution": {
+    "path": "docs/parity/runtime_error_durable_execution_retry_5_0_6.json.gz",
+    "sha256": "c3d61676f211d8af76f8a48b14166cb33a14908a1b70de21a5e4ff012bff34b1"
+  },
+  "source_acceptance": {
+    "path": "docs/parity/runtime_error_source_acceptance_5_0_6.json.gz",
+    "sha256": "a1187951ae22236e00e3e7f13371bd783612cd9dcfe32ec716d864c855f2130c"
+  },
+  "admission": {
+    "path": "docs/parity/runtime_error_cli_admission_5_0_6.json.gz",
+    "sha256": "5ff7784ba08d63266891cab2dbd85a705115d0e9fb5b1d50eacf6fdb0be77429"
+  },
+  "original_files": {
+    ".reference/teaql-rs/teaql-runtime/src/error.rs": "9f5210820329c00094aa69d144040d0f59aa3ba87ea785f8adf813f7160bc23c",
+    ".reference/teaql-rs/Cargo.lock": "074ae8aaa64091626d980be57b4d221c654e23313a7a37de76885336770d36f1",
+    "tests/parity/rust_runtime_error_reference_5_0_6/Cargo.toml": "3c1938d77149843c6e8a98a9203656192414bd944f076e430ea2e4143e1cebe5",
+    "tests/parity/rust_runtime_error_reference_5_0_6/Cargo.lock": "9367b7d0b786ba177582f458b941b0da9e1214e7c39c4c5aa68628d59d37d31e",
+    "tests/parity/rust_runtime_error_reference_5_0_6/main.rs": "21307768bc09bae19a5c0e6a762bade141e13fdae0fe85838183e8b8ca4a5f28",
+    "tests/parity/rust_runtime_error_reference_5_0_6/lib.rs": "4bed006fb6ea45ad9a2b449c49b30cec2f98e2b130264d612a57d6c2cec8cdaa",
+    "tests/parity/rust_values/src/bin/runtime_check_oracle.rs": "d6ee02396f3fb587b93524340ee29904df7c0851a354b40646fed2982bf90fe3",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "scripts/verify_runtime_error_source_5_0_6.py": "c4c76ed9799124ada815f13a6fcb13ef8bf9d7241783364bc88a85b964337942",
+    "tests/parity/runtime_error_extended_5_0_6_cases.json.gz": "4503083efa193f25f1f146bd801ce1353e54f04ba0db5f29468c11b9800616aa",
+    "tests/parity/runtime_check_baseline_5_0_6_cases.json.gz": "0d5552cc804b285a8286be4e609d8ecae8f863562e3792637eb142ffe0b04e8f",
+    "tests/parity/runtime_error_debug_baseline_5_0_6_cases.json.gz": "ef42470a67652eeac51a0800172bef2dd3942c8cdfe732858a90c7ff309bc970",
+    "teaql_runtime/include/teaql/runtime/error.hpp": "14db51cd52046258f12bd47fdb2e03aee351f6598025b36a44e09328c74d2673",
+    "teaql_runtime/include/teaql/runtime/error_debug.hpp": "61c010702b870c60ad1883aca588a520d994d3aebadb58c05ca24093976bfe7e",
+    "teaql_runtime/include/teaql/runtime/context_error.hpp": "b85ba6a924c18281fe6842bcb5c39d9d04d440b4d15b589a0b270c0a3880f010",
+    "teaql_runtime/src/error.cpp": "ece87692c51279af0aec80fdd527141a08ccdbd2e2b2f1e50ee92af5b6ae2884",
+    "teaql_runtime/tests/runtime_check_tests.cpp": "115d6e29fcce29a8f98927b02d557ade28fad67b0f7eb8604880c449597724ff",
+    "teaql_runtime/tests/error_generic_tests.cpp": "6ba444e2b1b8dd48fe6d4f3fc029d4f7a6c473e9461ade66dd9f5380d92c50e8",
+    "teaql_runtime/tests/commit_audit_tests.cpp": "aba1e7755ca08954497d699ac17d37700f3b5f657cdc820c5114ecac8f2c0be3",
+    "teaql_runtime/tests/runtime_completion_tests.cpp": "b1a4b44c174d4b38a1bff1b2672c04b51d4e5cfa5470d666cc32bd34c1776bd3",
+    "tests/parity/runtime_check_probe.cpp": "f5b9bdcea3a09a52b0c5b3d5a3e1111fb255235b8201ae98f4df1ec49f7992bc",
+    "tests/parity/runtime_error_source_probe.cpp": "7e59f16048f2d980787f26fac12cbfd68f37fd2003ee850217ca14ab6a722f5b",
+    "tests/parity/debug_modes.hpp": "1d72d708461860117b4f7e36505c2a262923cbc77cbf3316c5f99781e8c7c38d",
+    "tests/support/move_only_error_fixture.hpp": "93f02e087e8b1a8cdae32c870b2bb1bcb1040fbe13fabf575f8792855f592707"
+  },
+  "support_files": {
+    "scripts/runtime_error_cli_source_binding_5_0_6.py": "3676a3d75191b29336a6bc88336e858797e46d200b2b05577048e7498e847304",
+    "tests/parity/verify_runtime_error_cli_admission_5_0_6.py": "2a0d20ba1575506e09b154602c21a148819287ffcaa368778eee41f6db5b2982",
+    "tests/parity/verify_runtime_error_cli_source_controls_5_0_6.py": "747e4c90b5c33bdf188d0694c86963f51460c5b6e0b61331a0e7ff964d9924ae",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/expression_cli_cases.py": "b538589e11091253eda7ecba686ccd9214ea64d108f4e019b9a19419386cf9d1",
+    "tests/parity/compare_runtime_error_source_5_0_6.py": "c7783e291b3a7b2e6ce10e7db08069b4074cb0defd4c0b871e2817b697b888b6",
+    "tests/parity/compare_runtime_error_debug.py": "d8a1dc6f0cdc0ea9ebb940f78a7c83e9d0a5d28dae04f9f739630ec396a24df5",
+    "tests/parity/compare_runtime_check.py": "c4c4de792ffd4d539c51c3fec19df5cfe027be43597d2f3211043345c4caa2ec"
+  },
+  "contracts": [
+    {
+      "name": "runtime_error_source",
+      "test": "runtime_error_source_rust_parity",
+      "corpus": "tests/parity/runtime_error_extended_5_0_6_cases.json.gz",
+      "corpus_sha256": "4503083efa193f25f1f146bd801ce1353e54f04ba0db5f29468c11b9800616aa",
+      "count": 54,
+      "comparator": "tests/parity/compare_runtime_error_source_5_0_6.py",
+      "binary": "teaql_runtime_error_source_probe"
+    },
+    {
+      "name": "runtime_check",
+      "test": "runtime_check_rust_parity",
+      "corpus": "tests/parity/runtime_check_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "0d5552cc804b285a8286be4e609d8ecae8f863562e3792637eb142ffe0b04e8f",
+      "count": 1134,
+      "comparator": "tests/parity/compare_runtime_check.py",
+      "binary": "teaql_runtime_check_probe"
+    },
+    {
+      "name": "runtime_error_debug",
+      "test": "runtime_error_debug_rust_parity",
+      "corpus": "tests/parity/runtime_error_debug_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "ef42470a67652eeac51a0800172bef2dd3942c8cdfe732858a90c7ff309bc970",
+      "count": 1174,
+      "comparator": "tests/parity/compare_runtime_error_debug.py",
+      "binary": "teaql_runtime_check_probe"
+    }
+  ]
+}

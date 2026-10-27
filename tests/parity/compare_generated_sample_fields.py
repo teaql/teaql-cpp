@@ -7,6 +7,8 @@ import json
 from pathlib import Path
 from compare_values import same
 from sample_clock_driver import observe_fixed
+from clock_cli_cases_5_0_6 import sample_field_inputs
+from expression_cli_cases import require_cases
 ROOT = Path(__file__).resolve().parents[2]
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -24,8 +26,9 @@ if __name__ == '__main__':
         assert hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']
         for file, digest in producer['files'].items():
             assert hashlib.sha256((directory / file).read_bytes()).hexdigest() == digest, file
-    inputs = [case['input'] for case in corpus['cases']]
-    expected = [case['expected'] for case in corpus['cases']]
+    rows = require_cases(corpus, 85, sample_field_inputs())
+    inputs = [case['input'] for case in rows]
+    expected = [case['expected'] for case in rows]
     if args.rust and not same(expected, observe_fixed(args.rust, inputs, args.clock)):
         raise RuntimeError('Committed sample fields differ from live original outcomes')
     actual = observe_fixed(args.cpp, inputs, args.clock)

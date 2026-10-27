@@ -17,6 +17,7 @@ struct HydrationProbe : generated_detail::Model<HydrationProbe> {
     using Base = generated_detail::Model<HydrationProbe>;
     friend class HydrationProbeChecker;
     static constexpr std::string_view ENTITY_NAME = "HydrationProbe";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "hydration_probe";
     friend struct generated_detail::HydrationProbeSampleRecipe;
     friend struct generated_detail::HydrationProbeBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};

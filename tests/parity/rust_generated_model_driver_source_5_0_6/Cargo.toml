@@ -1,0 +1,135 @@
+[package]
+name = "teaql_generated_model_driver_source_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+autobins = false
+
+[workspace]
+
+[lib]
+name = "cpp_types_core"
+path = "../rust_types_entities/src/lib.rs"
+
+[dependencies]
+serde = { version = "=1.0.228", features = ["derive"] }
+school_management_service_core = { package = "school-management-service-core", path = "../../../.reference/teaql-rs/examples/shared-load-state/fixtures/narrow/lib" }
+cpp_candidates_core = { package = "cpp-candidates-core", path = "../../generator/parity/candidates_rust/lib" }
+cpp_checker_fixture_core = { package = "cpp-checker-fixture-core", path = "../../generator/parity/checkers_rust/lib" }
+cpp_constants_catalog_core = { package = "cpp-constants-catalog-core", path = "../../generator/parity/constants_catalog_rust/lib" }
+cpp_constants_numeric_core = { package = "cpp-constants-numeric-core", path = "../../generator/parity/constants_numeric_rust/lib" }
+cpp_dynamic_json_core = { package = "cpp-dynamic-json-core", path = "../../generator/parity/dynamic_json_rust/lib" }
+cpp_inheritance_graph_core = { package = "cpp-inheritance-graph-core", path = "../../generator/parity/inheritance_graph_rust/lib" }
+cpp_inheritance_core = { package = "cpp-inheritance-core", path = "../../generator/parity/inheritance_rust/lib" }
+cpp_inheritance_variants_core = { package = "cpp-inheritance-variants-core", path = "../../generator/parity/inheritance_variants_rust/lib" }
+cpp_relations_core = { package = "cpp-relations-core", path = "../../generator/parity/relations_rust/lib" }
+async-trait = "=0.1.89"
+tokio = { version = "=1.52.3", features = ["rt", "macros", "time"] }
+num-traits = "=0.2.19"
+sha2 = "=0.10.9"
+libsqlite3-sys = "=0.38.1"
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+futures-core = "=0.3.32"
+futures-util = "=0.3.32"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype", "functions"] }
+
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+
+
+
+
+[[bin]]
+name = "generated_model_generated_entity_helpers"
+path = "../rust_field_layout/src/bin/generated_entity_helpers_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_constant_governance"
+path = "../rust_constant_variants/src/main.rs"
+
+[[bin]]
+name = "generated_model_generated_bootstrap"
+path = "../rust_field_layout/src/bin/generated_bootstrap_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_candidates"
+path = "../rust_field_layout/src/bin/generated_candidates_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_inheritance"
+path = "../rust_field_layout/src/bin/generated_inheritance_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_inheritance_query"
+path = "../rust_field_layout/src/bin/generated_inheritance_query_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_inheritance_sqlite"
+path = "../rust_field_layout/src/bin/generated_inheritance_sqlite_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_inheritance_save"
+path = "../rust_field_layout/src/bin/generated_inheritance_save_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_inheritance_graph"
+path = "../rust_field_layout/src/bin/generated_inheritance_graph_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_inheritance_variants"
+path = "../rust_field_layout/src/bin/generated_inheritance_variants_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_inherited_stream"
+path = "../rust_field_layout/src/bin/generated_inherited_stream_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_checker_flow"
+path = "../rust_field_layout/src/bin/generated_checker_flow_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_matching_any"
+path = "../rust_field_layout/src/bin/generated_matching_any_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_readonly_properties"
+path = "../rust_field_layout/src/bin/generated_readonly_properties_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_dynamic_carrier"
+path = "../rust_field_layout/src/bin/generated_dynamic_carrier_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_i18n"
+path = "../rust_values/src/bin/i18n_oracle.rs"
+
+[[bin]]
+name = "generated_model_generated_runtime_assembly"
+path = "../rust_field_layout/src/bin/generated_runtime_assembly_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_sample_execution"
+path = "../rust_field_layout/src/bin/generated_sample_execution_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_sample_state"
+path = "../rust_field_layout/src/bin/generated_sample_state_5_0_6.rs"
+
+[[bin]]
+name = "generated_model_generated_expression_values"
+path = "../rust_field_layout/src/bin/generated_expression_values_5_0_6.rs"

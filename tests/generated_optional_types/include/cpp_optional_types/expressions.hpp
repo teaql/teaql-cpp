@@ -111,7 +111,8 @@ public:
 
 struct E {
     static ReadingExpression reading(const Reading& value) {
-        return ReadingExpression(entity_expression(value, StaticString{"reading"}));
+        return ReadingExpression(
+            entity_expression(value, StaticString{"reading"}, StaticString{"Reading"}));
     }
 
     static ReadingExpression reading(Reading&&) = delete;

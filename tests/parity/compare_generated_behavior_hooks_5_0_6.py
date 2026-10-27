@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare generated default/custom Behavior hooks through actual registration."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -7,6 +8,7 @@ import json
 import os
 from pathlib import Path
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = Path(__file__).with_name('generated_behavior_hooks_5_0_6_cases.json.gz')
@@ -36,16 +38,19 @@ def main():
         expected = observe(args.rust, inputs)
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
+        require_cases(corpus, len(inputs), inputs)
         if corpus['baseline'] != baseline or not same(inputs, [c['input'] for c in corpus['cases']]):
             raise RuntimeError('Behavior corpus baseline/matrix differs')
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust and not same(expected, observe(args.rust, inputs)):
             raise RuntimeError('Behavior corpus differs from actual original')
     actual = observe(args.cpp, inputs)
+    if len(actual) != len(inputs):
+        raise RuntimeError('Native observations must cover the complete input matrix')
     gaps = [dict(input=value, rust=source, cpp=native)
             for value, source, native in zip(inputs, expected, actual) if not same(source, native)]
     if gaps:
-        path = ROOT / 'docs/parity/generated_behavior_hooks_5_0_6_initial_gaps.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/generated_behavior_hooks_5_0_6_initial_gaps.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress(json.dumps(gaps, indent=2).encode(), mtime=0))
         print(json.dumps(gaps[0], indent=2))

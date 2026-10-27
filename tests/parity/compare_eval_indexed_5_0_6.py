@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+from compare_values import json_lines, same
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = ROOT / 'tests/parity/eval_indexed_5_0_6_cases.json.gz'
@@ -22,10 +23,13 @@ def main():
     if args.record and args.record.exists():
         parser.error('Use a fresh receipt path')
     data = json.loads(gzip.decompress(CORPUS.read_bytes()))
-    assert data['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
+    if data['runtime_commit'] != json.loads((ROOT / 'upstream.lock.json').read_text())['commit']:
+        raise RuntimeError('Indexed LoadState corpus belongs to a different runtime')
     for path, expected in data['source_hashes'].items():
-        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected, path
-    assert len(data['inputs']) == len(data['expected']) == 18
+        if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
+            raise RuntimeError(f'Indexed LoadState source changed: {path}')
+    if len(data['inputs']) != 18 or len(data['expected']) != 18:
+        raise RuntimeError('Indexed LoadState corpus is incomplete')
     expected = [entry['common'] for entry in data['expected']]
     record = dict(complete=False, scope='18 complete six-variant state scenarios/180 mutations; raw initialized diagnostics retain existing source/Context representation differences', steps=[])
     payload = ''.join(json.dumps(item) + '\n' for item in data['inputs'])
@@ -45,15 +49,21 @@ def main():
                                     exit_code=result.returncode, stdout=result.stdout, stderr=result.stderr))
         save()
         result.check_returncode()
-        actual = [json.loads(line) for line in result.stdout.splitlines()]
-        assert [entry['common'] for entry in actual] == expected, label
+        actual = json_lines(result.stdout)
+        if len(actual) != len(data['inputs']):
+            raise RuntimeError(f'{label}: indexed LoadState output count differs')
+        if not same([entry['common'] for entry in actual], expected):
+            raise RuntimeError(f'{label}: indexed LoadState results differ')
         for entry in actual:
             for key in ['initial_diagnostics', 'final_diagnostics']:
                 diagnostics = entry[key]
-                assert len(diagnostics['actual']) == 4 and all(diagnostics['actual'])
-                assert diagnostics['complete']
+                if len(diagnostics['actual']) != 4 or not all(diagnostics['actual']):
+                    raise RuntimeError(f'{label}: indexed LoadState diagnostics are incomplete')
+                if diagnostics['complete'] is not True:
+                    raise RuntimeError(f'{label}: indexed LoadState diagnostics did not complete')
                 if diagnostics['expected_snapshot_wrapper']:
-                    assert diagnostics['actual'] == diagnostics['expected_snapshot_wrapper']
+                    if not same(diagnostics['actual'], diagnostics['expected_snapshot_wrapper']):
+                        raise RuntimeError(f'{label}: indexed LoadState snapshot wrapper differs')
     record.update(complete=True, scenarios=18, mutations=180,
                   actual_original_replayed=args.rust is not None,
                   corpus_sha256=hashlib.sha256(CORPUS.read_bytes()).hexdigest())

@@ -1,0 +1,31 @@
+{
+  "complete": true,
+  "scope": "Existing imported value parity after shared corpus admission repair; one selected module test",
+  "commands": [
+    [
+      "cmake",
+      "--build",
+      "--preset",
+      "modules_native",
+      "--target",
+      "teaql_module_value_probe",
+      "-j",
+      "2"
+    ],
+    [
+      "ctest",
+      "--preset",
+      "modules_native",
+      "--no-tests=error",
+      "-R",
+      "^module_value_rust_parity$"
+    ]
+  ],
+  "terminal": {
+    "chunk_id": "560c57",
+    "wall_time_seconds": 0.000009988,
+    "exit_code": 0,
+    "original_token_count": 328,
+    "output": "-- Configuring done (16.6s)\n-- Generating done (1.9s)\n-- Build files have been written to: /home/philip/githome/teaql-cpp/build_modules_native\n[0/4] Re-checking globbed directories...\n[1/25] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd\n[2/23] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd\n[3/21] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd\n[4/19] Generating CXX dyndep file modules/CMakeFiles/teaql_data_service_module.dir/CXX.dd\n[5/17] Generating CXX dyndep file modules/CMakeFiles/teaql_sql_module.dir/CXX.dd\n[6/15] Generating CXX dyndep file modules/CMakeFiles/teaql_runtime_module.dir/CXX.dd\n[7/13] Scanning /home/philip/githome/teaql-cpp/build_modules_native/modules/consumers/value_probe.cpp for CXX dependencies\n[8/13] Generating CXX dyndep file modules/CMakeFiles/teaql_module_value_probe.dir/CXX.dd\n[9/13] Building CXX object modules/CMakeFiles/teaql_module_value_probe.dir/consumers/value_probe.cpp.o\n[10/13] Linking CXX executable modules/teaql_module_value_probe\nTest project /home/philip/githome/teaql-cpp/build_modules_native\n    Start 1524: module_value_rust_parity\n1/1 Test #1524: module_value_rust_parity .........   Passed    0.08 sec\n\n100% tests passed out of 1\n\nTotal Test time (real) =   0.11 sec\n"
+  }
+}

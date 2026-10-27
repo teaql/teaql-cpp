@@ -11,7 +11,9 @@ CURRENT = (r'static\s+(?P<type>\w+)Expression\s+(?P<entry>\w+)\(const\s+(?P=type
 
 
 def strip_current(name, text):
+    from expression_root_identity_qualification import strip_current as strip_roots
     from query_result_marker_qualification import strip_current as strip_markers
+    text = strip_roots(name, text)
     text = strip_markers(name, text)
     if not name.endswith('/expressions.hpp'):
         return text
@@ -28,7 +30,12 @@ def without_current(root, name, text):
 
 
 def verify_file(root, name, previous, generated):
+    from expression_root_identity_qualification import strip_current as strip_roots
     from query_result_marker_qualification import without_current as without_markers
+    from relation_identity_qualification import format_cpp
+    stripped = strip_roots(name, generated)
+    if stripped != generated:
+        generated = format_cpp(root, name, stripped)
     previous = without_markers(root, name, previous)
     generated = without_markers(root, name, generated)
     if not name.endswith('/expressions.hpp'):

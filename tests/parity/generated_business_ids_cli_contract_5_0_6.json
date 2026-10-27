@@ -1,0 +1,27 @@
+{
+  "kind": "retained_original_generated_business_id_source",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "test": "generated_business_ids_rust_parity",
+  "comparator": "tests/parity/compare_business_ids.py",
+  "binary": "teaql_loaded_snapshot_probe",
+  "count": 1044,
+  "generated_files": 25,
+  "raw_equalities": 916,
+  "adapted_diagnostics": 384,
+  "corpus": "tests/parity/business_ids_5_0_6_cases.json.gz",
+  "source_closure": "docs/parity/checker_helpers_dependency_closure_5_0_6.json",
+  "corpus_sha256": "95196b2b288739230a0ee4d1b55aeac2b3c83b833a96f4a44538af76d884c93e",
+  "source_closure_sha256": "16988769a553f602d1cc50a7449a5caf1276f96d6f2513f11f157235e873d1fa",
+  "support_files": {
+    "scripts/generated_business_ids_cli_source_binding_5_0_6.py": "452a1bcf3067e778fbda3e4ff9a4779f6923099d6dca75efe45707da67099100",
+    "tests/parity/verify_generated_business_ids_cli_controls_5_0_6.py": "2fecdf91a9a8d196aeefd12e106f69e6bb32ec4ab696ca1c1d95420919ba4c28",
+    "tests/parity/compare_business_ids.py": "43c1d8108cafcbef35706fcd8d393fa414f68873cdf885ec3590d19de9b3e5d7",
+    "tests/parity/generate_business_ids.py": "513a0d9cb34e42127323c56b1ce8dab50ffdbb6bbd0c85e04cbddc066b72d529",
+    "tests/parity/generate_field_layout.py": "64de95062d99919d4734b3018736084dac33814e564c1369880388a6f5046302",
+    "tests/parity/loaded_snapshot_probe.cpp": "c9b93f4b8fca41671342e3ffd1431ce65a399f88834e24966851d5ba5fac7e2b",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "scripts/verify_checker_helpers_source_closure_5_0_6.py": "a22cf07e21980094ef16b13929766c54daf4d567bd74daf6b812d8871487914c",
+    "tests/parity/rust_field_layout/src/main.rs": "4c29db7de75f7e7c805f3059b9d7f266dc967475dc946ef6872a2ad76f5f5502"
+  }
+}

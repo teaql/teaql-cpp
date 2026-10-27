@@ -1,0 +1,1755 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Complete G17 responsibility reconciliation; existing source decisions are reused explicitly, not promoted by inventory",
+  "requirements": [
+    {
+      "id": "GP01",
+      "responsibility": "Owned query intent and validation independent of logging",
+      "sources": [
+        "teaql-core/src/request_intent.rs",
+        "teaql-core/src/query.rs",
+        "teaql-data-service/src/lib.rs",
+        "teaql-runtime/src/data_service/base.rs",
+        "teaql-runtime/src/context.rs"
+      ],
+      "evidence": [
+        "docs/request_intent_acceptance_5_0_6.md",
+        "docs/core_query_acceptance_5_0_6.md",
+        "docs/runtime_base_source_review_5_0_6.md",
+        "docs/context_source_review_5_0_6.md"
+      ],
+      "tests": [
+        "intent_trace_rust_parity",
+        "runtime_base_intent_rust_parity",
+        "context_query_intent_rust_parity"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP02",
+      "responsibility": "Mutation envelopes, direct/prepared command order and protected provider dispatch",
+      "sources": [
+        "teaql-core/src/mutation.rs",
+        "teaql-runtime/src/data_service/resolved.rs",
+        "teaql-sql/src/mutation_execution.rs"
+      ],
+      "evidence": [
+        "docs/core_mutation_source_review_5_0_6.md",
+        "docs/runtime_resolved_source_review_5_0_6.md",
+        "docs/sql_mutation_execution_source_review_5_0_6.md"
+      ],
+      "tests": [
+        "mutation_intent_privacy_rust_parity",
+        "resolved_mutation_privacy_rust_parity",
+        "transaction_scope_intent_rust_parity"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP03",
+      "responsibility": "Canonical graph/ledger trace, first-route capture and late allocated identities",
+      "sources": [
+        "teaql-core/src/trace.rs",
+        "teaql-runtime/src/graph.rs",
+        "teaql-runtime/src/entity_runtime.rs",
+        "teaql-runtime/src/entity_save.rs",
+        "teaql-runtime/src/data_service/graph.rs"
+      ],
+      "evidence": [
+        "docs/request_intent_trace_5_0_6.md",
+        "docs/runtime_graph_source_review_5_0_6.md",
+        "docs/entity_save_source_acceptance_5_0_6.md",
+        "docs/service_graph_source_acceptance_5_0_6.md"
+      ],
+      "tests": [
+        "request_trace_scope_contracts",
+        "legacy_graph_intent_extended_rust_parity",
+        "generated_ledger_composition_contracts"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP04",
+      "responsibility": "Nested, derived, cached and readonly query diagnostic provenance",
+      "sources": [
+        "teaql-runtime/src/data_service/base.rs",
+        "teaql-runtime/src/data_service/resolved.rs",
+        "teaql-runtime/src/context/pagination.rs",
+        "teaql-runtime/src/context/logging.rs"
+      ],
+      "evidence": [
+        "docs/dynamic_json_privacy_5_0_6.md",
+        "docs/runtime_resolved_source_review_5_0_6.md",
+        "docs/context_logging_source_review_5_0_6.md"
+      ],
+      "tests": [
+        "resolved_scope_privacy_rust_parity",
+        "resolved_cache_intent_rust_parity",
+        "relation_hydration_intent_rust_parity",
+        "generated_dynamic_json_privacy_rust_parity"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP05",
+      "responsibility": "Binding classification, credential priority, forced IDs and safe publication",
+      "sources": [
+        "teaql-data-service/src/sql_log.rs",
+        "teaql-runtime/src/log_privacy.rs",
+        "teaql-runtime/src/log_formatter.rs",
+        "teaql-sql/src/bindings.rs",
+        "teaql-sql/src/executor.rs"
+      ],
+      "evidence": [
+        "docs/sql_log_source_review_5_0_6.md",
+        "docs/runtime_privacy_source_review_5_0_6.md",
+        "docs/log_publication_source_review_5_0_6.md",
+        "docs/sql_executor_source_review_5_0_6.md"
+      ],
+      "tests": [
+        "original_runtime_log_privacy_contracts",
+        "original_runtime_file_log_privacy_contracts",
+        "provider_like_privacy_contracts",
+        "generated_dynamic_json_privacy_sink_contracts"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP06",
+      "responsibility": "Raw versus safe events, immutable redaction snapshots and bootstrap attribution",
+      "sources": [
+        "teaql-runtime/src/event.rs",
+        "teaql-runtime/src/log_privacy.rs",
+        "teaql-runtime/src/context.rs",
+        "teaql-runtime/src/data_service/resolved.rs"
+      ],
+      "evidence": [
+        "docs/event_source_review_5_0_6.md",
+        "docs/audit_event_provenance_5_0_6.md",
+        "docs/resolved_mutation_privacy_5_0_6.md"
+      ],
+      "tests": [
+        "audit_event_contracts",
+        "audit_event_projection_5_0_6_rust_parity",
+        "event_model_rust_parity",
+        "context_privacy_preparation_rust_parity"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz",
+        "docs/parity/g17_generated_save_current_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP07",
+      "responsibility": "Generated and automatic Save, Checker/Fix, whole-plan Policy and aggregate composition",
+      "sources": [
+        "teaql-runtime/src/checker.rs",
+        "teaql-runtime/src/mutation_policy.rs",
+        "teaql-runtime/src/generated_support.rs",
+        "teaql-runtime/src/entity_save.rs",
+        "teaql-runtime/src/data_service/graph.rs"
+      ],
+      "evidence": [
+        "docs/checker_source_review_5_0_6.md",
+        "docs/generated_identity_save_5_0_6.md",
+        "docs/entity_save_source_acceptance_5_0_6.md",
+        "docs/service_graph_source_acceptance_5_0_6.md"
+      ],
+      "tests": [
+        "audited_auto_save_context_contracts",
+        "audited_save_context_contracts",
+        "graph_saver_context_contracts",
+        "graph_save_adapter_context_contracts",
+        "generated_ledger_composition_contracts"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz",
+        "docs/parity/g17_generated_save_current_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP08",
+      "responsibility": "Transaction-local audit queue, rollback/cancel and committed delivery failure",
+      "sources": [
+        "teaql-runtime/src/commit_audit.rs",
+        "teaql-runtime/src/context/transaction.rs",
+        "teaql-provider-sqlite/src/transaction.rs",
+        "teaql-runtime/src/error.rs"
+      ],
+      "evidence": [
+        "docs/commit_audit_source_review_5_0_6.md",
+        "docs/dynamic_storage_acceptance_5_0_6.md",
+        "docs/sqlite_transaction_streaming_5_0_6.md",
+        "docs/runtime_error_source_review_5_0_6.md"
+      ],
+      "tests": [
+        "commit_audit_contracts",
+        "commit_audit_source_rust_parity",
+        "commit_audit_transaction_contracts",
+        "commit_audit_error_rust_parity",
+        "transaction_scope_context_contracts"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz",
+        "docs/parity/g17_generated_save_current_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP09",
+      "responsibility": "Durable dynamic changes/originals, readback, audit enrichment and readonly authority",
+      "sources": [
+        "teaql-runtime/src/dynamic_fields.rs",
+        "teaql-runtime/src/entity_runtime.rs",
+        "teaql-runtime/src/entity_save.rs",
+        "teaql-runtime/src/data_service/graph.rs",
+        "teaql-runtime/src/data_service/resolved.rs"
+      ],
+      "evidence": [
+        "docs/dynamic_storage_acceptance_5_0_6.md",
+        "docs/dynamic_typed_save_audit_5_0_6.md",
+        "docs/service_graph_source_acceptance_5_0_6.md"
+      ],
+      "tests": [
+        "dynamic_graph_save_contracts",
+        "dynamic_governance_rust_parity",
+        "dynamic_typed_save_audit_rust_parity",
+        "sqlite_dynamic_storage_boundaries_rust_parity"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP10",
+      "responsibility": "Trusted runtime assembly, replaceable capabilities and independent diagnostic controls",
+      "sources": [
+        "teaql-runtime/src/context.rs",
+        "teaql-runtime/src/registry.rs",
+        "teaql-runtime/src/context/logging.rs",
+        "teaql-runtime/src/telemetry.rs"
+      ],
+      "evidence": [
+        "docs/context_source_review_5_0_6.md",
+        "docs/registry_source_review_5_0_6.md",
+        "docs/context_logging_source_review_5_0_6.md",
+        "docs/telemetry_source_acceptance_5_0_6.md"
+      ],
+      "tests": [
+        "context_logging_contracts",
+        "context_logging_vectors_contracts",
+        "context_logging_rust_parity"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP11",
+      "responsibility": "Generated metadata/model configurations and authentic canonical/storage/descriptor identities",
+      "sources": [
+        "teaql-runtime/src/generated_support.rs",
+        "teaql-runtime/src/registry.rs",
+        "teaql-runtime/src/checker.rs",
+        "teaql-runtime/src/entity_save.rs"
+      ],
+      "evidence": [
+        "docs/generated_identity_save_5_0_6.md",
+        "docs/generated_creation_identity_5_0_6.md",
+        "docs/generated_expression_identity_5_0_6.md",
+        "docs/generated_forward_relation_identity_5_0_6.md",
+        "docs/audit_privacy_requirements_5_0_6.md"
+      ],
+      "tests": [
+        "generated_dynamic_json_privacy_rust_parity"
+      ],
+      "status": "open",
+      "remaining": "Join complete G14/AP02 metadata/configuration signoff and approved exceptions with all qualified G01-G12/G15/G16 branches. Current five-configuration Save/Policy/Fix/audit/SQL/storage calls are bounded evidence, not complete generator grammar acceptance.",
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz",
+        "docs/parity/g17_generated_save_current_5_0_6.json.gz",
+        "docs/parity/native_provenance_58_terminal_5_0_6.json.gz",
+        "docs/parity/audit_path_generic_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_path_generic_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_pattern_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_pattern_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_metadata_current_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_callers_current_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_metadata_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_callers_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_delta_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_gates_5_0_6.json.gz",
+        "docs/parity/column_model_current_native_5_0_6.json.gz",
+        "docs/parity/column_model_native_controls_5_0_6.json.gz",
+        "docs/parity/column_model_installed_metadata_5_0_6.json.gz",
+        "docs/parity/column_model_installed_delta_5_0_6.json.gz",
+        "docs/parity/column_model_gates_5_0_6.json.gz",
+        "docs/parity/field_attribute_diagnostic_5_0_6.json.gz",
+        "docs/parity/field_attribute_default_control_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP12",
+      "responsibility": "Actual SQLite protected read/write, authoritative readback and ordered failure effects",
+      "sources": [
+        "teaql-runtime/src/data_service/base.rs",
+        "teaql-runtime/src/data_service/resolved.rs",
+        "teaql-runtime/src/data_service/graph.rs",
+        "teaql-sql/src/executor.rs",
+        "teaql-sql/src/diagnostic_execution.rs",
+        "teaql-provider-sqlite/src/lib.rs",
+        "teaql-provider-sqlite/src/transaction.rs"
+      ],
+      "evidence": [
+        "docs/protected_behavior_5_0_6.md",
+        "docs/generated_identity_save_5_0_6.md",
+        "docs/service_graph_source_acceptance_5_0_6.md",
+        "docs/runtime_core_source_closure_5_0_6.md"
+      ],
+      "tests": [
+        "protected_behavior_rust_parity",
+        "original_provider_transaction_contracts",
+        "provider_sqlite_transaction_stream_contracts"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz",
+        "docs/parity/g17_generated_save_current_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP13",
+      "responsibility": "Historical 5.0.5 probes requalified on actual locked 5.0.6 sources and honest comparator provenance",
+      "sources": [
+        "teaql-core/src/request_intent.rs",
+        "teaql-runtime/src/context.rs",
+        "teaql-runtime/src/entity_save.rs",
+        "teaql-runtime/src/data_service/resolved.rs"
+      ],
+      "evidence": [
+        "docs/runtime_intent_entry_5_0_6.md",
+        "docs/graph_governance_replay_5_0_6.md",
+        "docs/semantic_qualification_requirements_5_0_6.md",
+        "docs/property_shape_metadata_5_0_6.md",
+        "docs/large_text_metadata_5_0_6.md",
+        "docs/sample_operand_assignment_5_0_6.md",
+        "docs/custom_cli_admission_milestone_5_0_6.md",
+        "docs/expression_cli_source_qualification_5_0_6.md",
+        "docs/query_cli_source_qualification_5_0_6.md",
+        "docs/dynamic_json_cli_source_qualification_5_0_6.md",
+        {
+          "kind": "logging_cli_source_binding",
+          "path": "docs/logging_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/logging_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Two installed logging comparisons bind 94 freshly rebuilt original Rust log-manager outcomes and 1,427 original Rust audit-event outcomes to fresh matching C++ results. Log outputs use only the declared UTC/header normalization; native audit count parsing checks target width. A narrow reference-seeded lock replaces the stale shared Rust 5.0.5 closure as source evidence. Fifteen substitutions and five selected CTests pass. Incremental lookup 157/160 leaves 3 for review; registry 1,049 is enumeration. The one-off Rust target was removed. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "sqlite_raw_debug_cli_source_binding",
+          "path": "docs/sqlite_raw_debug_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/sqlite_raw_debug_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed native64 SQLite FromSql raw Debug comparison binds 36 freshly rebuilt unchanged original Rust outcomes to 36 fresh exact C++ results with no normalization. A new narrow 39-package observer lock has reference-seeded registry identities and versions; the old shared SQLite lock is historical. Fifteen substitutions and four selected CTests pass. Incremental lookup 158/160 leaves 2 for review; registry 1,052 is enumeration. The one-off Rust target was removed. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "sqlite_transaction_cli_source_binding",
+          "path": "docs/sqlite_transaction_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/sqlite_transaction_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed SQLite transaction wrapper binds all 366 historical sync/async inputs to freshly rebuilt unchanged original Rust and native C++ outcomes; source fixture additionally verifies 144 lease inputs, 510/510 exact complete results. It checks observer manifest, 131-package reference-seeded closure, full source/native replay and exact installed commands. Fifteen substitutions and four selected CTests pass. Incremental lookup 159/160 leaves 1; registry 1,055 is enumeration. The one-off Rust target was removed. Stream lifecycle remains a separate gate. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "runtime_examples_cli_source_binding",
+          "path": "docs/runtime_examples_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/runtime_examples_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed SQLite runtime examples comparison binds two freshly rebuilt Rust business outputs and 34 ordered SQL provenance entries from the unchanged example models and original business operations, with caller-supplied request comments, to fresh exact C++ example outcomes. A narrow 132-package reference-seeded lock proves observer closure; the older shared lock is historical. Fifteen substitutions and four selected CTests pass. Incremental lookup 160/160 covers installed comparison locators only; registry 1,058 is enumeration. The one-off Rust target was removed. Stock Rust binaries without required intent are not claimed. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        }
+      ],
+      "tests": [
+        "intent_trace_rust_parity",
+        "context_query_intent_rust_parity",
+        "resolved_mutation_privacy_rust_parity",
+        "parity_custom_public_cli_source_contracts",
+        "parity_custom_public_cli_source_controls",
+        "custom_public_cli_source_rust_parity",
+        "parity_profile_case_admission",
+        "parity_profile_public_cli_source_contracts",
+        "parity_profile_public_cli_source_controls",
+        "profile_public_cli_source_rust_parity",
+        "parity_graph_observation_admission",
+        "parity_custom_program_source_contracts",
+        "parity_custom_program_source_controls",
+        "custom_program_source_rust_parity",
+        "parity_configuration_cli_recipes",
+        "parity_configuration_cli_admission",
+        "parity_configuration_cli_source_contracts",
+        "parity_configuration_cli_source_controls",
+        "configuration_cli_source_rust_parity",
+        "parity_sample_clock_admission",
+        "parity_clock_cli_source_contracts",
+        "parity_clock_cli_source_controls",
+        "clock_cli_source_rust_parity",
+        "parity_lifecycle_cli_admission",
+        "parity_lifecycle_cli_source_contracts",
+        "parity_lifecycle_cli_source_controls",
+        "lifecycle_cli_source_rust_parity",
+        "parity_query_input_admission",
+        "parity_query_input_cli_source_contracts",
+        "parity_query_input_cli_source_controls",
+        "query_input_cli_source_rust_parity",
+        "parity_helper_cli_admission",
+        "parity_helper_cli_source_contracts",
+        "parity_helper_cli_source_controls",
+        "helper_cli_source_rust_parity",
+        "parity_runtime_error_cli_admission",
+        "parity_runtime_error_cli_source_contracts",
+        "parity_runtime_error_cli_source_controls",
+        "runtime_error_cli_source_rust_parity",
+        "parity_query_surface_cli_admission",
+        "parity_query_surface_cli_source_contracts",
+        "parity_query_surface_cli_source_controls",
+        "query_surface_cli_source_rust_parity",
+        "parity_inmemory_cli_admission",
+        "parity_inmemory_cli_source_contracts",
+        "parity_inmemory_cli_source_controls",
+        "inmemory_cli_source_rust_parity",
+        "parity_state_source_cli_source_contracts",
+        "parity_state_source_cli_source_controls",
+        "state_source_cli_source_rust_parity",
+        "runtime_state_bridge_rust_parity",
+        "generated_runtime_state_bridge_rust_parity",
+        "generated_load_state_bulk_rust_parity",
+        "entity_source_rust_parity",
+        "parity_execution_model_cli_source_contracts",
+        "parity_execution_model_cli_source_controls",
+        "execution_model_cli_source_rust_parity",
+        "execution_result_models_rust_parity",
+        "execution_result_model_states_rust_parity",
+        "hot_execution_rust_parity",
+        "parity_composed_graph_cli_source_contracts",
+        "parity_composed_graph_cli_source_controls",
+        "composed_graph_cli_source_rust_parity",
+        "composed_general_rust_parity",
+        "relation_graph_save_rust_parity",
+        "parity_relation_analysis_cli_source_contracts",
+        "parity_relation_analysis_cli_source_controls",
+        "relation_analysis_cli_source_rust_parity",
+        "generated_relation_analysis_rust_parity",
+        "parity_stream_shapes_cli_source_contracts",
+        "parity_stream_shapes_cli_source_controls",
+        "stream_shapes_cli_source_rust_parity",
+        "stream_shapes_rust_parity",
+        "parity_business_id_lookup_cli_source_contracts",
+        "parity_business_id_lookup_cli_source_controls",
+        "business_id_lookup_cli_source_rust_parity",
+        "business_id_lookups_rust_parity",
+        "parity_expression_business_ids_cli_source_contracts",
+        "parity_expression_business_ids_cli_source_controls",
+        "expression_business_ids_cli_source_rust_parity",
+        "expression_business_ids_rust_parity",
+        "expression_business_ids_context_contracts",
+        "parity_generated_business_ids_cli_source_contracts",
+        "parity_generated_business_ids_cli_source_controls",
+        "generated_business_ids_cli_source_rust_parity",
+        "generated_business_ids_rust_parity",
+        "parity_query_keys_cli_source_contracts",
+        "parity_query_keys_cli_source_controls",
+        "query_keys_cli_source_rust_parity",
+        "query_keys_rust_parity",
+        "parity_query_key_width_cli",
+        "query_keys_contracts",
+        "parity_derived_query_cli_source_contracts",
+        "parity_derived_query_cli_source_controls",
+        "derived_query_cli_source_rust_parity",
+        "derived_query_composition_rust_parity",
+        "derived_query_diagnostics_rust_parity",
+        "derived_query_diagnostics_context_contracts",
+        "parity_inherited_checker_cli_source_contracts",
+        "parity_inherited_checker_cli_source_controls",
+        "inherited_checker_cli_source_rust_parity",
+        "inherited_checker_helpers_document_rust_parity",
+        "inherited_checker_helpers_intermediate_record_rust_parity",
+        "inherited_checker_helpers_invoice_rust_parity",
+        "inherited_checker_helpers_receipt_rust_parity",
+        "inherited_checker_helpers_special_invoice_rust_parity",
+        "parity_generated_member_alias_cli_source_contracts",
+        "parity_generated_member_alias_cli_source_controls",
+        "generated_member_alias_cli_source_rust_parity",
+        "generated_member_alias_rust_parity",
+        "generated_member_alias_contracts",
+        "parity_eval_indexed_cli_source_contracts",
+        "parity_eval_indexed_cli_source_controls",
+        "eval_indexed_cli_source_rust_parity",
+        "eval_indexed_rust_parity",
+        "eval_indexed_context_contracts",
+        "parity_entity_constructor_cli_source_contracts",
+        "parity_entity_constructor_cli_source_controls",
+        "entity_constructor_cli_source_rust_parity",
+        "entity_constructor_helpers_rust_parity",
+        "generated_inheritance_variants_contracts",
+        "parity_inherited_business_cli_source_contracts",
+        "parity_inherited_business_cli_source_controls",
+        "inherited_business_cli_source_rust_parity",
+        "inherited_business_extensions_rust_parity",
+        "generated_inherited_business_lifetime_contracts",
+        "parity_protected_behavior_cli_source_contracts",
+        "parity_protected_behavior_cli_source_controls",
+        "protected_behavior_cli_source_rust_parity",
+        "protected_behavior_rust_parity",
+        "parity_json_graph_limits_cli_source_contracts",
+        "parity_json_graph_limits_cli_source_controls",
+        "json_graph_limits_cli_source_rust_parity",
+        "json_graph_limits_rust_parity",
+        "json_hydration_context_contracts"
+      ],
+      "status": "open",
+      "remaining": "SQ02/GP13 retain all 305 direct-corpus bindings/323568 primary outcomes and the separately qualified public/profile/private-program, expression, query, dynamic-JSON, configuration, clock and lifecycle cohorts. docs/query_input_cli_source_qualification_5_0_6.md adds eight actual query-input entries: 13,656 fresh original outcomes through three complete generated domains, eight unchanged Rust drivers, 163 copied inputs, eleven source commands and a pristine 610-file archive. Ten native consumers match 18,408 exact observations; two adapters reuse existing original datasets. Eight comparators repair 24 reproduced false acceptances; 37 source/CTest controls and 14 selected installed checks pass. Static custom lookup has 116 named source mappings/160 locators; 44 require mapping/review, separately from generic direct-corpus selectors and other invariants. Registry 979 is enumeration. Complete remaining custom/protected execution, full G14/AP02 and all P0-P7 exits stay open.",
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_jsonl_framing_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_verifier_closure_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_provenance_controls_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_execution_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_bindings_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_controls_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_gates_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_inventory_5_0_6.json.gz",
+        "docs/parity/registry_driver_execution_5_0_6.json.gz",
+        "docs/parity/registry_driver_bindings_5_0_6.json.gz",
+        "docs/parity/registry_driver_controls_5_0_6.json.gz",
+        "docs/parity/registry_driver_gates_5_0_6.json.gz",
+        "docs/parity/registry_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/registry_driver_inventory_5_0_6.json.gz",
+        "docs/parity/query_store_driver_execution_final_5_0_6.json.gz",
+        "docs/parity/query_store_driver_bindings_5_0_6.json.gz",
+        "docs/parity/query_store_driver_controls_5_0_6.json.gz",
+        "docs/parity/query_store_driver_gates_5_0_6.json.gz",
+        "docs/parity/query_store_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/query_store_driver_inventory_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_execution_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_bindings_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_controls_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_gates_final_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_inventory_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_historical_input_diagnosis_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_execution_final_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_bindings_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_controls_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_gates_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_inventory_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_setup_diagnosis_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_execution_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_bindings_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_controls_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_gates_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_inventory_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_preparation_5_0_6.json.gz",
+        "docs/parity/property_shape_acceptance_5_0_6.json.gz",
+        "docs/parity/property_shape_source_regression_5_0_6.json.gz",
+        "docs/parity/property_shape_sdk_reproduction_5_0_6.json.gz",
+        "docs/parity/property_shape_independent_sdks_5_0_6.json.gz",
+        "docs/parity/property_shape_native_acceptance_5_0_6.json.gz",
+        "docs/parity/property_shape_sanitizer_acceptance_5_0_6.json.gz",
+        "docs/parity/large_text_fixed_5_0_6.json.gz",
+        "docs/parity/large_text_samples_final_5_0_6.json.gz",
+        "docs/parity/large_text_sample_controls_final_5_0_6.json.gz",
+        "docs/parity/large_text_java_final_5_0_6.json.gz",
+        "docs/parity/large_text_native_5_0_6.json.gz",
+        "docs/parity/large_text_sdk_reproduction_5_0_6.json.gz",
+        "docs/parity/large_text_independent_sdks_5_0_6.json.gz",
+        "docs/parity/large_text_format_5_0_6.json.gz",
+        "docs/parity/large_text_identity_guards_5_0_6.json.gz",
+        "docs/parity/sample_operand_cross_fixed_5_0_6.json.gz",
+        "docs/parity/sample_operand_cross_samples_final_5_0_6.json.gz",
+        "docs/parity/sample_operand_json_fixed_5_0_6.json.gz",
+        "docs/parity/sample_operand_json_samples_5_0_6.json.gz",
+        "docs/parity/sample_operand_java_5_0_6.json.gz",
+        "docs/parity/sample_operand_native_5_0_6.json.gz",
+        "docs/parity/sample_operand_kernel_sanitize_5_0_6.json.gz",
+        "docs/parity/sample_operand_kernel_modules_final_5_0_6.json.gz",
+        "docs/parity/sample_operand_sdk_reproduction_5_0_6.json.gz",
+        "docs/parity/sample_operand_format_5_0_6.json.gz",
+        "docs/parity/sample_operand_reproduction_controls_5_0_6.json.gz",
+        "docs/parity/sample_operand_input_guard_control_5_0_6.json.gz",
+        "docs/parity/pagination_driver_preparation_5_0_6.json.gz",
+        "docs/parity/pagination_driver_execution_5_0_6.json.gz",
+        "docs/parity/pagination_driver_bindings_5_0_6.json.gz",
+        "docs/parity/pagination_driver_controls_5_0_6.json.gz",
+        "docs/parity/pagination_driver_gates_final_5_0_6.json.gz",
+        "docs/parity/pagination_driver_inventory_final_5_0_6.json.gz",
+        "docs/parity/pagination_driver_guards_5_0_6.json.gz",
+        "docs/parity/pagination_driver_gates_5_0_6.json.gz",
+        "docs/parity/pagination_driver_timeout_control_5_0_6.json.gz",
+        "docs/parity/pagination_driver_partition_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_preparation_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_execution_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_bindings_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_controls_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_gates_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_inventory_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_guards_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_partition_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_preparation_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_execution_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_bindings_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_controls_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_gates_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_inventory_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_guards_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_partition_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_preparation_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_execution_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_bindings_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_controls_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_gates_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_inventory_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_guards_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_partition_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_preparation_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_execution_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_bindings_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_controls_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_gates_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_inventory_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_guards_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_partition_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_preparation_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_execution_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_bindings_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_controls_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_gates_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_inventory_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_guards_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_partition_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_preparation_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_execution_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_bindings_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_controls_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_gates_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_inventory_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_guards_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_partition_5_0_6.json.gz",
+        "docs/parity/core_model_driver_preparation_5_0_6.json.gz",
+        "docs/parity/core_model_driver_execution_5_0_6.json.gz",
+        "docs/parity/core_model_driver_bindings_5_0_6.json.gz",
+        "docs/parity/core_model_driver_controls_5_0_6.json.gz",
+        "docs/parity/core_model_driver_gates_5_0_6.json.gz",
+        "docs/parity/core_model_driver_inventory_5_0_6.json.gz",
+        "docs/parity/core_model_driver_guards_5_0_6.json.gz",
+        "docs/parity/core_model_driver_partition_5_0_6.json.gz",
+        "docs/parity/core_model_driver_control_fix_5_0_6.json.gz",
+        "docs/parity/core_model_driver_initial_control_failure_5_0_6.json.gz",
+        "docs/parity/context_public_driver_preparation_5_0_6.json.gz",
+        "docs/parity/context_public_driver_execution_5_0_6.json.gz",
+        "docs/parity/context_public_driver_bindings_5_0_6.json.gz",
+        "docs/parity/context_public_driver_controls_5_0_6.json.gz",
+        "docs/parity/context_public_driver_gates_5_0_6.json.gz",
+        "docs/parity/context_public_driver_inventory_5_0_6.json.gz",
+        "docs/parity/context_public_driver_guards_5_0_6.json.gz",
+        "docs/parity/context_public_driver_partition_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_tooling_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_preparation_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_execution_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_bindings_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_controls_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_gates_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_inventory_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_guards_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_partition_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_preparation_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_execution_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_bindings_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_controls_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_gates_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_inventory_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_guards_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_partition_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_preparation_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_execution_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_bindings_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_controls_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_gates_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_inventory_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_guards_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_partition_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_preparation_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_execution_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_bindings_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_controls_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_gates_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_inventory_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_guards_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_partition_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_preparation_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_bindings_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_controls_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_gates_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_inventory_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_guards_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_partition_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_preparation_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_execution_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_bindings_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_controls_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_gates_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_inventory_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_guards_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_partition_5_0_6.json.gz",
+        "docs/parity/native_direct_bindings_current_execution_5_0_6.json.gz",
+        "docs/parity/queued_repairs_installed_5_0_6.json.gz",
+        "docs/parity/installed_admission_source_gates_execution_5_0_6.json.gz",
+        "docs/parity/installed_custom_cli_inventory_5_0_6.json.gz",
+        "docs/parity/custom_public_cli_native_binding_5_0_6.json.gz",
+        "docs/parity/custom_public_cli_permanent_cmake_ready_5_0_6.json.gz",
+        "docs/parity/profile_case_admission_installed_5_0_6.json.gz",
+        "docs/parity/profile_custom_cli_locked_original_execution_5_0_6.json.gz",
+        "docs/parity/profile_public_cli_source_controls_current_5_0_6.json.gz",
+        "docs/parity/profile_public_cli_native_binding_current_5_0_6.json.gz",
+        "docs/parity/profile_public_cli_installed_gates_5_0_6.json.gz",
+        "docs/parity/custom_receipt_programs_original_execution_5_0_6.json.gz",
+        "docs/parity/custom_receipt_program_variants_original_execution_5_0_6.json.gz",
+        "docs/parity/graph_observation_admission_installed_5_0_6.json.gz",
+        "docs/parity/custom_program_source_controls_5_0_6.json.gz",
+        "docs/parity/custom_program_native_binding_current_5_0_6.json.gz",
+        "docs/parity/custom_program_installed_gates_5_0_6.json.gz",
+        {
+          "kind": "expression_cli_source_qualification",
+          "path": "docs/expression_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/expression_cli_current_native_binding_5_0_6.json.gz",
+          "scope": "Six complete actual expression comparator datasets match4188 fresh original/native outcomes. The source epoch preserves610 archived files,255 unchanged copied inputs,seven generated-model records,five complete compiled generated libraries and the original bounded entity/E type library. Reference-aware dependency resolution rejects the first newer-cache attempt; actual locked metadata/profiles/raw streams verify. Three CLIs repair9 false acceptances under89 controls. Current41 source controls and12 installed checks pass; six actual CTest commands require the source fixture. Registration953 is enumeration. All1814 C++ and831 producer inputs plus80 SDKs/3560 files and2467 protected artifacts remain unchanged. Complete remaining custom/protected, G14/AP02 and P0-P7 exits stay open."
+        },
+        {
+          "kind": "query_cli_source_qualification",
+          "path": "docs/query_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/query_cli_current_native_binding_5_0_6.json.gz",
+          "scope": "Ten actual query comparator invocations bind11 complete original datasets/19,272 exact native outcomes. Fresh reference-locked compilation preserves610 archive files,134 copied inputs,three complete generated libraries and11 unchanged drivers. Dynamic/inherited guards retain560/840 observations and complete domain/step binding. Query comparison uses identity semantics with no normalization. All162 admission,49 source/partition,41 retained expression controls and17 installed checks pass. The reused verifier keeps separate exact query/expression protocols and the required original bounded expression library. Registry957 is enumeration. All1814 C++ inputs,831 producer inputs,80 SDKs/3560 files and2467 protected artifacts remain unchanged. Complete remaining custom/protected, full G14/AP02 and P0-P7 requirements remain open."
+        },
+        {
+          "kind": "dynamic_json_cli_source_qualification",
+          "path": "docs/dynamic_json_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/dynamic_json_cli_current_native_binding_5_0_6.json.gz",
+          "scope": "Eleven actual dynamic JSON comparisons match50,879 fresh original/native outcomes. Reference-locked execution preserves610 archive files,193 copied inputs,five complete generated libraries and9 unchanged drivers. Three CLIs repair16 actual false passes by binding full source recipes;54 admission,16 adapter-boundary,46 source controls and24 installed checks pass. Existing column adapter/projection/recipe bodies and prior E/Q registries have exact preservation proofs. A nested source-control construction failure is retained and repaired; it is not an accepted gate. Registry962 and static remaining-dispatcher lookups are inventory. All1814 C++ inputs,831 producer inputs,80 SDKs/3560 files and2467 protected artifacts retain their bytes. Complete remaining custom/protected, full G14/AP02 and P0-P7 exits remain open."
+        },
+        {
+          "kind": "configuration_cli_admission_repair",
+          "path": "docs/configuration_cli_admission_5_0_6.md",
+          "terminal": "docs/parity/configuration_cli_installed_native_reconciled_5_0_6.json.gz",
+          "scope": "Thirty actual configuration comparisons retain 5080 native outcomes and 27 distinct generated models. Five scripts repair 249 actual false acceptances under 780 controls; 32 installed CTest checks pass. Canonical collector recipes, exact case/row shapes and actual CTest --case/binary/fixture bindings verify. Strict output comparison, four collector sources, all corpora, 1814 C++ inputs, 831 producer inputs, 80 SDKs/3560 files and 2467 protected artifacts remain unchanged. This is admission/native evidence, not fresh Rust-source qualification. Four historical collectors pin rusqlite 0.40.2 while the reference lock contains 0.40.1; the complete variant dependency/driver gate remains open. The original successful CTest report stopped on 1024-byte JUnit truncation; retained complete CTest log reconciles all 780 controls without a rerun. Registry 964 is enumeration. Complete G13/G14/G17 and P0-P7 remain open."
+        },
+        {
+          "kind": "configuration_cli_source_qualification",
+          "path": "docs/configuration_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/configuration_cli_source_installed_native_5_0_6.json.gz",
+          "scope": "Thirty actual configuration selections match 5080 fresh original/native outcomes through 27 complete generated libraries, five unchanged driver bodies, 22 authentic call helpers, 643 copied inputs and a pristine 610-file archive. All 111 source commands succeed in isolated observer workspaces with one task-owned target. Reference-seeded locks reject non-reference dependencies; ordinary Debug modes are checked for runtime, macros, generated libraries and observers. Two forged library-test profiles accepted by the initial verifier are now rejected; all 63 source/CTest substitutions and 33 selected installed checks pass. No output normalization is used. Prior raw native vectors are explicitly reused under unchanged binary identities and fresh current execution independently passes. All 1814 C++ inputs, 831 producer inputs, 80 SDKs/3560 generated files and 2467 protected artifacts remain unchanged. Static custom lookup advances to 94 named mappings/160 locators, with 66 requiring further review; registry 967 is enumeration. Complete remaining custom/protected, G14/AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "clock_cli_source_qualification",
+          "path": "docs/clock_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/clock_cli_installed_native_5_0_6.json.gz",
+          "scope": "Seven actual clock entries bind 2593 exact JSONL outcomes and 36 explicit epoch value/failure outcomes to seven unchanged drivers, four complete generated domains and two bounded original Entity/Checker harnesses. Historical full-crate compilation failures for those two remain hash-pinned and explicitly reused; full assembly is not accepted by component evidence. The pristine 610-file archive, reference-seeded metadata/locks, independent test clock and all 55 actual commands are retained, including eight expected source panic exits. Fifteen physical JSONL wall partitions are validated through actual-process views of the unchanged source validator, with complete outer trace coverage. Two Python entry points repair 15 false acceptances under 27 controls; source 53 and installed 16 checks pass, including six other shared-clock consumers. Expected boundary failures run with task-owned zero core limits. All 1814 C++/831 producer/80 SDK/3560 generated/2467 protected identities and existing source protocols are unchanged. Registry 971 is enumeration; static custom lookup 101/160 leaves 59 requiring review. Complete remaining custom/protected, full G14/AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "lifecycle_cli_source_qualification",
+          "path": "docs/lifecycle_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/lifecycle_cli_installed_native_5_0_6.json.gz",
+          "scope": "Five actual bootstrap/resource/inherited-sample CLI entries bind 3588 fresh original/native outcomes to two complete generated domains, five unchanged driver bodies, one unchanged included observer, 81 copied inputs and the pristine 610-file archive. Eight source commands succeed with reference-seeded dependency closure and ordinary Debug runtime/domain profiles. Existing resource ownership comparison preserves immediate Rust Box drop versus C++ Context-close arena destruction; the Info adapter validates authentic level/target and exact message order. Five CLIs repair ten reproduced false acceptances: 60 admission, 42 source/adapter/CTest and seven selected installed checks pass. C++ 1814, producer 831, SDK 80/3560 and protected 2467 identities stay unchanged. Registration 975 is enumeration; static source lookup 106/160 leaves 54 requiring review. Complete remaining custom/protected execution, full G14/AP02 and P0-P7 exits remain open."
+        },
+        {
+          "kind": "query_input_cli_source_qualification",
+          "path": "docs/query_input_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/query_input_cli_installed_native_5_0_6.json.gz",
+          "scope": "Eight actual query-input matrices bind 13,656 fresh original Rust outcomes to three complete generated domains, eight unchanged drivers, 163 copied inputs and the pristine 610-file archive. Eleven locked source commands succeed in ordinary Debug mode with assertions and overflow checks. Ten current native consumers, including two generated adapter probes, match 18,408 exact observations against those eight original datasets. Eight comparators repair 24 reproduced false acceptances (extra case fields and short/long native streams); 37 source/CTest controls and 14 selected installed checks pass. Existing comparison algorithms, all 1814 C++ inputs, 831 producer inputs, 80 SDKs/3560 generated files and 2467 protected artifacts retain their preceding identities. Registration 979 is enumeration; static source lookup 116/160 leaves 44 requiring review. Remaining custom/protected, full G14/AP02 and P0-P7 exits stay open."
+        },
+        {
+          "kind": "helper_cli_source_qualification",
+          "path": "docs/helper_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/helper_cli_installed_native_5_0_6.json.gz",
+          "scope": "Four complete helper matrices bind 2,928 exact original Rust outcomes to four unchanged drivers, six complete generated domains, 231 copied inputs and the pristine 610-file runtime archive. Seven locked commands use ordinary Debug profiles. Four current C++ consumers match 2,928 exact observations. Four comparators reject 12 reproduced false acceptances; 35 source/CTest controls and 8 selected installed checks pass. The previous four comparators and CMake registration recover byte for byte after removing only this cohort. Registered tests 983 are an inventory; static source lookup 120/160 leaves 40 for review. All 1,814 C++ inputs, 831 producer inputs, 80 SDKs/3,560 generated files and 2,467 protected artifacts retain prior identities. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "runtime_error_cli_source_binding",
+          "path": "docs/runtime_error_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/runtime_error_cli_installed_native_5_0_6.json.gz",
+          "scope": "Three actual error comparison CLIs rebind the previously accepted complete Rust error.rs execution to 2,362 retained exact original outputs, unchanged source files and 2,362 fresh current native observations. Two preceding comparator implementations and the previous CMake registration recover byte for byte. Seven actual false acceptances are repaired; 21 source/corpus/CTest controls and 7 selected installed tests pass. Static custom source lookup 123/160 leaves 37 for review; registry 987 is enumeration. No new Cargo, imported modules, sanitizer or MIPS run is claimed. Full G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "query_surface_cli_source_qualification",
+          "path": "docs/query_surface_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/query_surface_cli_installed_native_5_0_6.json.gz",
+          "scope": "Three complete generated Q/relationship SQLite matrices bind 6,764 fresh exact original Rust outcomes to three unchanged drivers, three complete generated domains, 104 copied inputs and the pristine 610-file runtime archive. Six locked source commands use ordinary Debug profiles. Three current C++ probes match 6,764 exact observations. Three comparators reject 9 reproduced false acceptances; 35 source/CTest controls and 7 selected installed checks pass. Preceding comparator bodies and CMake registration recover byte for byte. Registry 991 is inventory; static source lookup 126/160 leaves 34 for review. All 1,814 C++ inputs, 831 producer inputs, 80 SDKs/3,560 generated files and 2,467 protected artifacts retain preceding identities. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "inmemory_cli_source_binding",
+          "path": "docs/inmemory_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/inmemory_cli_installed_native_5_0_6.json.gz",
+          "scope": "Historical in-memory CLI is rebound to previously accepted complete Rust source execution: 8,732 retained original outcomes and 19 original tests. Its 6,532-case matrix matches 6,532 fresh current native64 observations. Three reproduced false acceptances are repaired; 18 source/corpus/CTest controls and 5 selected installed checks pass. Previous comparator and CMake registry recover byte for byte. Registry 995 is enumeration; static source lookup 127/160 leaves 33 for review. No new Cargo, imported module, sanitizer or MIPS run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "state_source_cli_binding",
+          "path": "docs/state_source_cli_binding_5_0_6.md",
+          "terminal": "docs/parity/state_source_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Four accepted state/entity original executions provide 272 retained observations, including 12 typed load-state batches and 40,404 rows. An explicit Git-blob check qualifies the sole historical entity-corpus metadata transition; 272 fresh current native results, 18 negative controls and 7 selected tests pass. Static source lookup 131/160 leaves 29 for review; registry 998 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "execution_model_cli_source_binding",
+          "path": "docs/execution_model_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/execution_model_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Three accepted original execution-result and hot-cache streams provide 4,448 retained scenarios, including 6,480 hot execution steps. Terminal receipts pin complete corpora and paired original/native outputs; the hot source also has an independent raw stream. Current native results match every scenario, 16 substitution controls and 6 selected checks pass. Static source lookup 134/160 leaves 26 for review; registry 1,001 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "composed_graph_cli_source_binding",
+          "path": "docs/composed_graph_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/composed_graph_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Two accepted original composed-query and graph-save streams provide 5,472 exact retained outcomes, including governed mixed graph work, safe SQL and audit observations within existing observer boundaries. Terminal records pin both complete corpora and paired raw original/native outputs; current native results match all cases. Fifteen substitutions and five selected checks pass. Static source lookup 136/160 leaves 24 for review; registry 1,004 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "relation_analysis_cli_source_binding",
+          "path": "docs/relation_analysis_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/relation_analysis_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The frozen 7,122-case generated relationship corpus is bound to the current native CTest command with 6,576 source comparisons under its declared Debug adapter and 546 separately approved quoted-FK C++ expectations. The original Rust results and exact approved case indices remain immutable; 15 substitutions and 4 selected tests pass. Static source lookup 137/160 leaves 23 for review; registry 1,007 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "stream_shapes_cli_source_binding",
+          "path": "docs/stream_shapes_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/stream_shapes_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed strict stream comparison now binds 13,104 unchanged original outcomes to 13,104 fresh native raw equalities and complete boundary assertions. The historical 6,012 startup-adaptation indices remain separate and equal the later obsolete-expectation list; the old source_promoted flag is preserved as pre-installation evidence. Fifteen substitutions and four selected checks pass. Static source lookup 138/160 leaves 22 for review; registry 1,010 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "business_id_lookup_cli_source_binding",
+          "path": "docs/business_id_lookup_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/business_id_lookup_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed generated-factory Business-ID Q comparison binds 528 complete original outcomes to 528 exact fresh native results, including 288 existing-SQLite operations with safe SQL records. The runtime-composition preliminary pair remains separate. Fifteen substitutions and four selected checks pass. Incremental source lookup 139/160 leaves 21 for review; registry 1,013 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "expression_business_ids_cli_source_binding",
+          "path": "docs/expression_business_ids_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/expression_business_ids_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed typed Business-ID E comparison binds 96 complete original outcomes to fresh native results: 48 raw equalities and 48 matches under the unchanged diagnostic presentation adapter. The observer retains 18 decoder rejections and 936 before/captured/current resolutions. Fifteen source/CTest substitutions and five selected checks, including Context lifecycle, pass. Incremental lookup 140/160 leaves 20 for review; registry 1,016 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "generated_business_ids_cli_source_binding",
+          "path": "docs/generated_business_ids_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/generated_business_ids_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed generated Business-ID wrapper/Checker comparison binds 1,044 complete original outcomes to fresh native results: 916 raw equalities and 128 cases under the one declared resource type-name adapter, covering 384 diagnostics. The retained source closure pins the unchanged original observer body and 25 generated Rust files. Fifteen substitutions and four selected checks pass. Incremental lookup 141/160 leaves 19 for review; registry 1,019 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "query_keys_cli_source_binding",
+          "path": "docs/query_keys_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/query_keys_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed query-key comparison binds 451 original inputs at each pointer width to fresh C++ 451/451 native 64-bit and 451/451 MIPS/QEMU 32-bit results. Forty-six current source outputs differ by width. The 32-bit Rust source remains host execution with explicit usize preparation; the matching C++ MIPS binary hash is retained. Fifteen substitutions and six selected checks, including ten CLI width routes, pass. Incremental lookup 142/160 leaves 18 for review; registry 1,022 is enumeration. No new Rust, cross-compile, sanitizer, module, physical-router or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "derived_query_cli_source_binding",
+          "path": "docs/derived_query_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/derived_query_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Two installed derived-query comparison commands bind 360 composition and 576 diagnostic original outcomes to 936 fresh exact native results, including 234 successes, 702 errors, SQL privacy and independent query-intent boundaries. Fifteen substitutions and six selected checks pass. The earlier diagnostic receipt has seven production hashes stale against current source; current files are separately pinned. Incremental lookup 144/160 leaves 16 for review; registry 1,025 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        "docs/inherited_checker_cli_source_binding_5_0_6.md",
+        "docs/parity/inherited_checker_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/inherited_checker_cli_controls_5_0_6.json.gz",
+        "docs/generated_member_alias_cli_source_binding_5_0_6.md",
+        "docs/parity/generated_member_alias_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/generated_member_alias_cli_controls_5_0_6.json.gz",
+        "docs/eval_indexed_cli_source_binding_5_0_6.md",
+        "docs/parity/eval_indexed_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/eval_indexed_cli_controls_5_0_6.json.gz",
+        "docs/entity_constructor_cli_source_binding_5_0_6.md",
+        "docs/parity/entity_constructor_cli_original_execution_5_0_6.json.gz",
+        "docs/parity/entity_constructor_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/entity_constructor_cli_controls_5_0_6.json.gz",
+        "docs/inherited_business_cli_source_binding_5_0_6.md",
+        "docs/parity/inherited_business_cli_original_execution_5_0_6.json.gz",
+        "docs/parity/inherited_business_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/inherited_business_cli_controls_5_0_6.json.gz",
+        "docs/protected_behavior_cli_source_binding_5_0_6.md",
+        "docs/parity/protected_behavior_cli_original_execution_5_0_6.json.gz",
+        "docs/parity/protected_behavior_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/protected_behavior_cli_controls_5_0_6.json.gz",
+        "docs/json_graph_limits_cli_source_binding_5_0_6.md",
+        "docs/parity/json_graph_limits_cli_original_execution_5_0_6.json.gz",
+        "docs/parity/json_graph_limits_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/json_graph_limits_cli_controls_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP14",
+      "responsibility": "Two Context lifetimes, explicit destination retention and pending native cleanup",
+      "sources": [
+        "teaql-runtime/src/entity_runtime.rs",
+        "teaql-runtime/src/context.rs",
+        "teaql-runtime/src/commit_audit.rs",
+        "teaql-runtime/src/data_service/base.rs",
+        "teaql-provider-sqlite/src/transaction.rs"
+      ],
+      "evidence": [
+        "docs/commit_audit_source_review_5_0_6.md",
+        "docs/dynamic_storage_acceptance_5_0_6.md",
+        "docs/sqlite_transaction_streaming_5_0_6.md",
+        "docs/telemetry_source_acceptance_5_0_6.md"
+      ],
+      "tests": [
+        "audit_event_contracts",
+        "request_trace_scope_contracts",
+        "audited_save_context_contracts",
+        "graph_saver_context_contracts",
+        "commit_audit_transaction_contracts",
+        "provider_sqlite_transaction_stream_contracts"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP15",
+      "responsibility": "Independent runtime/service/executor/transport/provider responsibilities and edge scope",
+      "sources": [
+        "teaql-data-service/src/lib.rs",
+        "teaql-runtime/src/data_service/base.rs",
+        "teaql-runtime/src/data_service/types.rs",
+        "teaql-runtime/src/data_service/resolved.rs",
+        "teaql-sql/src/executor.rs",
+        "teaql-provider-sqlite/src/lib.rs"
+      ],
+      "evidence": [
+        "docs/data_service_source_review_5_0_6.md",
+        "docs/runtime_base_source_review_5_0_6.md",
+        "docs/runtime_service_types_source_review_5_0_6.md",
+        "docs/sql_executor_source_review_5_0_6.md",
+        "docs/runtime_core_source_closure_5_0_6.md"
+      ],
+      "tests": [
+        "original_provider_transaction_contracts",
+        "dynamic_typed_save_audit_rust_parity"
+      ],
+      "status": "reconciled_runtime_contract",
+      "remaining": null,
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz"
+      ]
+    },
+    {
+      "id": "GP16",
+      "responsibility": "Whole current integration and complete capability/phase signoff",
+      "sources": [
+        "teaql-runtime/src/lib.rs"
+      ],
+      "evidence": [
+        "docs/semantic_qualification_requirements_5_0_6.md",
+        "docs/cpp_generator_parity_plan.md",
+        "docs/custom_cli_admission_milestone_5_0_6.md",
+        "docs/expression_cli_source_qualification_5_0_6.md",
+        "docs/query_cli_source_qualification_5_0_6.md",
+        "docs/dynamic_json_cli_source_qualification_5_0_6.md",
+        {
+          "kind": "logging_cli_source_binding",
+          "path": "docs/logging_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/logging_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Two installed logging comparisons bind 94 freshly rebuilt original Rust log-manager outcomes and 1,427 original Rust audit-event outcomes to fresh matching C++ results. Log outputs use only the declared UTC/header normalization; native audit count parsing checks target width. A narrow reference-seeded lock replaces the stale shared Rust 5.0.5 closure as source evidence. Fifteen substitutions and five selected CTests pass. Incremental lookup 157/160 leaves 3 for review; registry 1,049 is enumeration. The one-off Rust target was removed. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "sqlite_raw_debug_cli_source_binding",
+          "path": "docs/sqlite_raw_debug_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/sqlite_raw_debug_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed native64 SQLite FromSql raw Debug comparison binds 36 freshly rebuilt unchanged original Rust outcomes to 36 fresh exact C++ results with no normalization. A new narrow 39-package observer lock has reference-seeded registry identities and versions; the old shared SQLite lock is historical. Fifteen substitutions and four selected CTests pass. Incremental lookup 158/160 leaves 2 for review; registry 1,052 is enumeration. The one-off Rust target was removed. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "sqlite_transaction_cli_source_binding",
+          "path": "docs/sqlite_transaction_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/sqlite_transaction_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed SQLite transaction wrapper binds all 366 historical sync/async inputs to freshly rebuilt unchanged original Rust and native C++ outcomes; source fixture additionally verifies 144 lease inputs, 510/510 exact complete results. It checks observer manifest, 131-package reference-seeded closure, full source/native replay and exact installed commands. Fifteen substitutions and four selected CTests pass. Incremental lookup 159/160 leaves 1; registry 1,055 is enumeration. The one-off Rust target was removed. Stream lifecycle remains a separate gate. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "runtime_examples_cli_source_binding",
+          "path": "docs/runtime_examples_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/runtime_examples_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed SQLite runtime examples comparison binds two freshly rebuilt Rust business outputs and 34 ordered SQL provenance entries from the unchanged example models and original business operations, with caller-supplied request comments, to fresh exact C++ example outcomes. A narrow 132-package reference-seeded lock proves observer closure; the older shared lock is historical. Fifteen substitutions and four selected CTests pass. Incremental lookup 160/160 covers installed comparison locators only; registry 1,058 is enumeration. The one-off Rust target was removed. Stock Rust binaries without required intent are not claimed. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        }
+      ],
+      "tests": [
+        "parity_custom_public_cli_source_contracts",
+        "parity_custom_public_cli_source_controls",
+        "custom_public_cli_source_rust_parity",
+        "parity_profile_case_admission",
+        "parity_profile_public_cli_source_contracts",
+        "parity_profile_public_cli_source_controls",
+        "profile_public_cli_source_rust_parity",
+        "parity_graph_observation_admission",
+        "parity_custom_program_source_contracts",
+        "parity_custom_program_source_controls",
+        "custom_program_source_rust_parity",
+        "parity_configuration_cli_recipes",
+        "parity_configuration_cli_admission",
+        "parity_configuration_cli_source_contracts",
+        "parity_configuration_cli_source_controls",
+        "configuration_cli_source_rust_parity",
+        "parity_sample_clock_admission",
+        "parity_clock_cli_source_contracts",
+        "parity_clock_cli_source_controls",
+        "clock_cli_source_rust_parity",
+        "parity_lifecycle_cli_admission",
+        "parity_lifecycle_cli_source_contracts",
+        "parity_lifecycle_cli_source_controls",
+        "lifecycle_cli_source_rust_parity",
+        "parity_query_input_admission",
+        "parity_query_input_cli_source_contracts",
+        "parity_query_input_cli_source_controls",
+        "query_input_cli_source_rust_parity",
+        "parity_helper_cli_admission",
+        "parity_helper_cli_source_contracts",
+        "parity_helper_cli_source_controls",
+        "helper_cli_source_rust_parity",
+        "parity_runtime_error_cli_admission",
+        "parity_runtime_error_cli_source_contracts",
+        "parity_runtime_error_cli_source_controls",
+        "runtime_error_cli_source_rust_parity",
+        "parity_query_surface_cli_admission",
+        "parity_query_surface_cli_source_contracts",
+        "parity_query_surface_cli_source_controls",
+        "query_surface_cli_source_rust_parity",
+        "parity_inmemory_cli_admission",
+        "parity_inmemory_cli_source_contracts",
+        "parity_inmemory_cli_source_controls",
+        "inmemory_cli_source_rust_parity",
+        "parity_state_source_cli_source_contracts",
+        "parity_state_source_cli_source_controls",
+        "state_source_cli_source_rust_parity",
+        "runtime_state_bridge_rust_parity",
+        "generated_runtime_state_bridge_rust_parity",
+        "generated_load_state_bulk_rust_parity",
+        "entity_source_rust_parity",
+        "parity_execution_model_cli_source_contracts",
+        "parity_execution_model_cli_source_controls",
+        "execution_model_cli_source_rust_parity",
+        "execution_result_models_rust_parity",
+        "execution_result_model_states_rust_parity",
+        "hot_execution_rust_parity",
+        "parity_composed_graph_cli_source_contracts",
+        "parity_composed_graph_cli_source_controls",
+        "composed_graph_cli_source_rust_parity",
+        "composed_general_rust_parity",
+        "relation_graph_save_rust_parity",
+        "parity_relation_analysis_cli_source_contracts",
+        "parity_relation_analysis_cli_source_controls",
+        "relation_analysis_cli_source_rust_parity",
+        "generated_relation_analysis_rust_parity",
+        "parity_stream_shapes_cli_source_contracts",
+        "parity_stream_shapes_cli_source_controls",
+        "stream_shapes_cli_source_rust_parity",
+        "stream_shapes_rust_parity",
+        "parity_business_id_lookup_cli_source_contracts",
+        "parity_business_id_lookup_cli_source_controls",
+        "business_id_lookup_cli_source_rust_parity",
+        "business_id_lookups_rust_parity",
+        "parity_expression_business_ids_cli_source_contracts",
+        "parity_expression_business_ids_cli_source_controls",
+        "expression_business_ids_cli_source_rust_parity",
+        "expression_business_ids_rust_parity",
+        "expression_business_ids_context_contracts",
+        "parity_generated_business_ids_cli_source_contracts",
+        "parity_generated_business_ids_cli_source_controls",
+        "generated_business_ids_cli_source_rust_parity",
+        "generated_business_ids_rust_parity",
+        "parity_query_keys_cli_source_contracts",
+        "parity_query_keys_cli_source_controls",
+        "query_keys_cli_source_rust_parity",
+        "query_keys_rust_parity",
+        "parity_query_key_width_cli",
+        "query_keys_contracts",
+        "parity_derived_query_cli_source_contracts",
+        "parity_derived_query_cli_source_controls",
+        "derived_query_cli_source_rust_parity",
+        "derived_query_composition_rust_parity",
+        "derived_query_diagnostics_rust_parity",
+        "derived_query_diagnostics_context_contracts",
+        "parity_inherited_checker_cli_source_contracts",
+        "parity_inherited_checker_cli_source_controls",
+        "inherited_checker_cli_source_rust_parity",
+        "inherited_checker_helpers_document_rust_parity",
+        "inherited_checker_helpers_intermediate_record_rust_parity",
+        "inherited_checker_helpers_invoice_rust_parity",
+        "inherited_checker_helpers_receipt_rust_parity",
+        "inherited_checker_helpers_special_invoice_rust_parity",
+        "parity_generated_member_alias_cli_source_contracts",
+        "parity_generated_member_alias_cli_source_controls",
+        "generated_member_alias_cli_source_rust_parity",
+        "generated_member_alias_rust_parity",
+        "generated_member_alias_contracts",
+        "parity_eval_indexed_cli_source_contracts",
+        "parity_eval_indexed_cli_source_controls",
+        "eval_indexed_cli_source_rust_parity",
+        "eval_indexed_rust_parity",
+        "eval_indexed_context_contracts",
+        "parity_entity_constructor_cli_source_contracts",
+        "parity_entity_constructor_cli_source_controls",
+        "entity_constructor_cli_source_rust_parity",
+        "entity_constructor_helpers_rust_parity",
+        "generated_inheritance_variants_contracts",
+        "parity_inherited_business_cli_source_contracts",
+        "parity_inherited_business_cli_source_controls",
+        "inherited_business_cli_source_rust_parity",
+        "inherited_business_extensions_rust_parity",
+        "generated_inherited_business_lifetime_contracts",
+        "parity_protected_behavior_cli_source_contracts",
+        "parity_protected_behavior_cli_source_controls",
+        "protected_behavior_cli_source_rust_parity",
+        "protected_behavior_rust_parity",
+        "parity_json_graph_limits_cli_source_contracts",
+        "parity_json_graph_limits_cli_source_controls",
+        "json_graph_limits_cli_source_rust_parity",
+        "json_graph_limits_rust_parity",
+        "json_hydration_context_contracts"
+      ],
+      "status": "open",
+      "remaining": "Complete current integration and every P7 exit remain open. Historical full native 934/934 and later selected epochs retain their actual scopes. The query-input checkpoint passes 14 selected installed checks and 37 source/CTest controls after 24 reproduced false acceptances. Fresh original binding covers 13,656 outcomes, while ten native consumers cover 18,408 observations through three complete domains and eight unchanged drivers. Registration 979 is not full 979-test execution. All 1814 C++ inputs, 831 producer inputs, 80 SDKs/3560 generated files and 2467 protected artifacts retain preceding identities. Existing Java/module/lifetime/MIPS and metadata proofs remain independent. No fresh sanitizer, MIPS, GPU or physical-router acceptance is claimed. G13/G14/G17 stay partial.",
+      "current_evidence": [
+        "docs/parity/governance_join_native_verified_5_0_6.json.gz",
+        "docs/parity/governance_join_modules_final_5_0_6.json.gz",
+        "docs/parity/native_provenance_58_terminal_5_0_6.json.gz",
+        "docs/parity/audit_path_generic_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_path_generic_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_pattern_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_pattern_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_operator_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_block_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_statement_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_item_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_metadata_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_callers_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_generic_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_metadata_current_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_callers_current_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_delta_5_0_6.json.gz",
+        "docs/parity/audit_lexical_complete_installed_gates_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_metadata_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_callers_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_caller_controls_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_delta_5_0_6.json.gz",
+        "docs/parity/default_model_literal_installed_gates_5_0_6.json.gz",
+        "docs/parity/column_model_current_native_5_0_6.json.gz",
+        "docs/parity/column_model_native_controls_5_0_6.json.gz",
+        "docs/parity/column_model_installed_metadata_5_0_6.json.gz",
+        "docs/parity/column_model_installed_delta_5_0_6.json.gz",
+        "docs/parity/column_model_gates_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_execution_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_bindings_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_controls_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_gates_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/entity_runtime_driver_inventory_5_0_6.json.gz",
+        "docs/parity/registry_driver_execution_5_0_6.json.gz",
+        "docs/parity/registry_driver_bindings_5_0_6.json.gz",
+        "docs/parity/registry_driver_controls_5_0_6.json.gz",
+        "docs/parity/registry_driver_gates_5_0_6.json.gz",
+        "docs/parity/registry_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/registry_driver_inventory_5_0_6.json.gz",
+        "docs/parity/query_store_driver_execution_final_5_0_6.json.gz",
+        "docs/parity/query_store_driver_bindings_5_0_6.json.gz",
+        "docs/parity/query_store_driver_controls_5_0_6.json.gz",
+        "docs/parity/query_store_driver_gates_5_0_6.json.gz",
+        "docs/parity/query_store_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/query_store_driver_inventory_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_execution_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_bindings_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_controls_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_gates_final_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_inventory_5_0_6.json.gz",
+        "docs/parity/private_runtime_driver_historical_input_diagnosis_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_execution_final_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_bindings_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_controls_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_gates_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_inventory_5_0_6.json.gz",
+        "docs/parity/entity_api_driver_setup_diagnosis_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_execution_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_bindings_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_controls_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_gates_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_dispatcher_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_inventory_5_0_6.json.gz",
+        "docs/parity/sql_mutation_driver_preparation_5_0_6.json.gz",
+        "docs/parity/pagination_driver_preparation_5_0_6.json.gz",
+        "docs/parity/pagination_driver_execution_5_0_6.json.gz",
+        "docs/parity/pagination_driver_bindings_5_0_6.json.gz",
+        "docs/parity/pagination_driver_controls_5_0_6.json.gz",
+        "docs/parity/pagination_driver_gates_final_5_0_6.json.gz",
+        "docs/parity/pagination_driver_inventory_final_5_0_6.json.gz",
+        "docs/parity/pagination_driver_guards_5_0_6.json.gz",
+        "docs/parity/pagination_driver_gates_5_0_6.json.gz",
+        "docs/parity/pagination_driver_timeout_control_5_0_6.json.gz",
+        "docs/parity/pagination_driver_partition_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_preparation_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_execution_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_bindings_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_controls_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_gates_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_inventory_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_guards_5_0_6.json.gz",
+        "docs/parity/dynamic_governance_driver_partition_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_preparation_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_execution_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_bindings_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_controls_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_gates_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_inventory_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_guards_5_0_6.json.gz",
+        "docs/parity/query_governance_driver_partition_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_preparation_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_execution_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_bindings_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_controls_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_gates_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_inventory_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_guards_5_0_6.json.gz",
+        "docs/parity/document_protocol_driver_partition_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_preparation_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_execution_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_bindings_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_controls_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_gates_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_inventory_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_guards_5_0_6.json.gz",
+        "docs/parity/sqlite_pipeline_driver_partition_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_preparation_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_execution_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_bindings_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_controls_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_gates_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_inventory_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_guards_5_0_6.json.gz",
+        "docs/parity/sqlite_provider_protocol_partition_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_preparation_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_execution_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_bindings_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_controls_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_gates_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_inventory_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_guards_5_0_6.json.gz",
+        "docs/parity/numeric_time_driver_partition_5_0_6.json.gz",
+        "docs/parity/core_model_driver_preparation_5_0_6.json.gz",
+        "docs/parity/core_model_driver_execution_5_0_6.json.gz",
+        "docs/parity/core_model_driver_bindings_5_0_6.json.gz",
+        "docs/parity/core_model_driver_controls_5_0_6.json.gz",
+        "docs/parity/core_model_driver_gates_5_0_6.json.gz",
+        "docs/parity/core_model_driver_inventory_5_0_6.json.gz",
+        "docs/parity/core_model_driver_guards_5_0_6.json.gz",
+        "docs/parity/core_model_driver_partition_5_0_6.json.gz",
+        "docs/parity/core_model_driver_control_fix_5_0_6.json.gz",
+        "docs/parity/core_model_driver_initial_control_failure_5_0_6.json.gz",
+        "docs/parity/context_public_driver_preparation_5_0_6.json.gz",
+        "docs/parity/context_public_driver_execution_5_0_6.json.gz",
+        "docs/parity/context_public_driver_bindings_5_0_6.json.gz",
+        "docs/parity/context_public_driver_controls_5_0_6.json.gz",
+        "docs/parity/context_public_driver_gates_5_0_6.json.gz",
+        "docs/parity/context_public_driver_inventory_5_0_6.json.gz",
+        "docs/parity/context_public_driver_guards_5_0_6.json.gz",
+        "docs/parity/context_public_driver_partition_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_tooling_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_preparation_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_execution_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_bindings_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_controls_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_gates_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_inventory_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_guards_5_0_6.json.gz",
+        "docs/parity/generated_model_driver_partition_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_preparation_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_execution_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_bindings_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_controls_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_gates_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_inventory_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_guards_5_0_6.json.gz",
+        "docs/parity/runtime_protocol_driver_partition_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_preparation_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_execution_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_bindings_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_controls_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_gates_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_inventory_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_guards_5_0_6.json.gz",
+        "docs/parity/runtime_bridge_driver_partition_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_preparation_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_execution_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_bindings_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_controls_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_gates_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_inventory_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_guards_5_0_6.json.gz",
+        "docs/parity/sqlite_schema_driver_partition_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_preparation_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_bindings_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_controls_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_gates_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_inventory_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_guards_5_0_6.json.gz",
+        "docs/parity/private_key_classifier_driver_partition_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_preparation_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_execution_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_bindings_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_controls_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_gates_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_inventory_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_guards_5_0_6.json.gz",
+        "docs/parity/inherited_business_driver_partition_5_0_6.json.gz",
+        "docs/parity/native_direct_bindings_current_execution_5_0_6.json.gz",
+        "docs/parity/queued_repairs_installed_5_0_6.json.gz",
+        "docs/parity/installed_admission_source_gates_execution_5_0_6.json.gz",
+        "docs/parity/installed_custom_cli_inventory_5_0_6.json.gz",
+        "docs/parity/custom_public_cli_native_binding_5_0_6.json.gz",
+        "docs/parity/custom_public_cli_permanent_cmake_ready_5_0_6.json.gz",
+        "docs/parity/profile_case_admission_installed_5_0_6.json.gz",
+        "docs/parity/profile_custom_cli_locked_original_execution_5_0_6.json.gz",
+        "docs/parity/profile_public_cli_source_controls_current_5_0_6.json.gz",
+        "docs/parity/profile_public_cli_native_binding_current_5_0_6.json.gz",
+        "docs/parity/profile_public_cli_installed_gates_5_0_6.json.gz",
+        "docs/parity/custom_receipt_programs_original_execution_5_0_6.json.gz",
+        "docs/parity/custom_receipt_program_variants_original_execution_5_0_6.json.gz",
+        "docs/parity/graph_observation_admission_installed_5_0_6.json.gz",
+        "docs/parity/custom_program_source_controls_5_0_6.json.gz",
+        "docs/parity/custom_program_native_binding_current_5_0_6.json.gz",
+        "docs/parity/custom_program_installed_gates_5_0_6.json.gz",
+        {
+          "kind": "expression_cli_source_qualification",
+          "path": "docs/expression_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/expression_cli_current_native_binding_5_0_6.json.gz",
+          "scope": "Six complete actual expression comparator datasets match4188 fresh original/native outcomes. The source epoch preserves610 archived files,255 unchanged copied inputs,seven generated-model records,five complete compiled generated libraries and the original bounded entity/E type library. Reference-aware dependency resolution rejects the first newer-cache attempt; actual locked metadata/profiles/raw streams verify. Three CLIs repair9 false acceptances under89 controls. Current41 source controls and12 installed checks pass; six actual CTest commands require the source fixture. Registration953 is enumeration. All1814 C++ and831 producer inputs plus80 SDKs/3560 files and2467 protected artifacts remain unchanged. Complete remaining custom/protected, G14/AP02 and P0-P7 exits stay open."
+        },
+        {
+          "kind": "query_cli_source_qualification",
+          "path": "docs/query_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/query_cli_current_native_binding_5_0_6.json.gz",
+          "scope": "Ten actual query comparator invocations bind11 complete original datasets/19,272 exact native outcomes. Fresh reference-locked compilation preserves610 archive files,134 copied inputs,three complete generated libraries and11 unchanged drivers. Dynamic/inherited guards retain560/840 observations and complete domain/step binding. Query comparison uses identity semantics with no normalization. All162 admission,49 source/partition,41 retained expression controls and17 installed checks pass. The reused verifier keeps separate exact query/expression protocols and the required original bounded expression library. Registry957 is enumeration. All1814 C++ inputs,831 producer inputs,80 SDKs/3560 files and2467 protected artifacts remain unchanged. Complete remaining custom/protected, full G14/AP02 and P0-P7 requirements remain open."
+        },
+        {
+          "kind": "dynamic_json_cli_source_qualification",
+          "path": "docs/dynamic_json_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/dynamic_json_cli_current_native_binding_5_0_6.json.gz",
+          "scope": "Eleven actual dynamic JSON comparisons match50,879 fresh original/native outcomes. Reference-locked execution preserves610 archive files,193 copied inputs,five complete generated libraries and9 unchanged drivers. Three CLIs repair16 actual false passes by binding full source recipes;54 admission,16 adapter-boundary,46 source controls and24 installed checks pass. Existing column adapter/projection/recipe bodies and prior E/Q registries have exact preservation proofs. A nested source-control construction failure is retained and repaired; it is not an accepted gate. Registry962 and static remaining-dispatcher lookups are inventory. All1814 C++ inputs,831 producer inputs,80 SDKs/3560 files and2467 protected artifacts retain their bytes. Complete remaining custom/protected, full G14/AP02 and P0-P7 exits remain open."
+        },
+        {
+          "kind": "configuration_cli_admission_repair",
+          "path": "docs/configuration_cli_admission_5_0_6.md",
+          "terminal": "docs/parity/configuration_cli_installed_native_reconciled_5_0_6.json.gz",
+          "scope": "Thirty actual configuration comparisons retain 5080 native outcomes and 27 distinct generated models. Five scripts repair 249 actual false acceptances under 780 controls; 32 installed CTest checks pass. Canonical collector recipes, exact case/row shapes and actual CTest --case/binary/fixture bindings verify. Strict output comparison, four collector sources, all corpora, 1814 C++ inputs, 831 producer inputs, 80 SDKs/3560 files and 2467 protected artifacts remain unchanged. This is admission/native evidence, not fresh Rust-source qualification. Four historical collectors pin rusqlite 0.40.2 while the reference lock contains 0.40.1; the complete variant dependency/driver gate remains open. The original successful CTest report stopped on 1024-byte JUnit truncation; retained complete CTest log reconciles all 780 controls without a rerun. Registry 964 is enumeration. Complete G13/G14/G17 and P0-P7 remain open."
+        },
+        {
+          "kind": "configuration_cli_source_qualification",
+          "path": "docs/configuration_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/configuration_cli_source_installed_native_5_0_6.json.gz",
+          "scope": "Thirty actual configuration selections match 5080 fresh original/native outcomes through 27 complete generated libraries, five unchanged driver bodies, 22 authentic call helpers, 643 copied inputs and a pristine 610-file archive. All 111 source commands succeed in isolated observer workspaces with one task-owned target. Reference-seeded locks reject non-reference dependencies; ordinary Debug modes are checked for runtime, macros, generated libraries and observers. Two forged library-test profiles accepted by the initial verifier are now rejected; all 63 source/CTest substitutions and 33 selected installed checks pass. No output normalization is used. Prior raw native vectors are explicitly reused under unchanged binary identities and fresh current execution independently passes. All 1814 C++ inputs, 831 producer inputs, 80 SDKs/3560 generated files and 2467 protected artifacts remain unchanged. Static custom lookup advances to 94 named mappings/160 locators, with 66 requiring further review; registry 967 is enumeration. Complete remaining custom/protected, G14/AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "clock_cli_source_qualification",
+          "path": "docs/clock_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/clock_cli_installed_native_5_0_6.json.gz",
+          "scope": "Seven actual clock entries bind 2593 exact JSONL outcomes and 36 explicit epoch value/failure outcomes to seven unchanged drivers, four complete generated domains and two bounded original Entity/Checker harnesses. Historical full-crate compilation failures for those two remain hash-pinned and explicitly reused; full assembly is not accepted by component evidence. The pristine 610-file archive, reference-seeded metadata/locks, independent test clock and all 55 actual commands are retained, including eight expected source panic exits. Fifteen physical JSONL wall partitions are validated through actual-process views of the unchanged source validator, with complete outer trace coverage. Two Python entry points repair 15 false acceptances under 27 controls; source 53 and installed 16 checks pass, including six other shared-clock consumers. Expected boundary failures run with task-owned zero core limits. All 1814 C++/831 producer/80 SDK/3560 generated/2467 protected identities and existing source protocols are unchanged. Registry 971 is enumeration; static custom lookup 101/160 leaves 59 requiring review. Complete remaining custom/protected, full G14/AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "lifecycle_cli_source_qualification",
+          "path": "docs/lifecycle_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/lifecycle_cli_installed_native_5_0_6.json.gz",
+          "scope": "Five actual bootstrap/resource/inherited-sample CLI entries bind 3588 fresh original/native outcomes to two complete generated domains, five unchanged driver bodies, one unchanged included observer, 81 copied inputs and the pristine 610-file archive. Eight source commands succeed with reference-seeded dependency closure and ordinary Debug runtime/domain profiles. Existing resource ownership comparison preserves immediate Rust Box drop versus C++ Context-close arena destruction; the Info adapter validates authentic level/target and exact message order. Five CLIs repair ten reproduced false acceptances: 60 admission, 42 source/adapter/CTest and seven selected installed checks pass. C++ 1814, producer 831, SDK 80/3560 and protected 2467 identities stay unchanged. Registration 975 is enumeration; static source lookup 106/160 leaves 54 requiring review. Complete remaining custom/protected execution, full G14/AP02 and P0-P7 exits remain open."
+        },
+        {
+          "kind": "query_input_cli_source_qualification",
+          "path": "docs/query_input_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/query_input_cli_installed_native_5_0_6.json.gz",
+          "scope": "Eight actual query-input matrices bind 13,656 fresh original Rust outcomes to three complete generated domains, eight unchanged drivers, 163 copied inputs and the pristine 610-file archive. Eleven locked source commands succeed in ordinary Debug mode with assertions and overflow checks. Ten current native consumers, including two generated adapter probes, match 18,408 exact observations against those eight original datasets. Eight comparators repair 24 reproduced false acceptances (extra case fields and short/long native streams); 37 source/CTest controls and 14 selected installed checks pass. Existing comparison algorithms, all 1814 C++ inputs, 831 producer inputs, 80 SDKs/3560 generated files and 2467 protected artifacts retain their preceding identities. Registration 979 is enumeration; static source lookup 116/160 leaves 44 requiring review. Remaining custom/protected, full G14/AP02 and P0-P7 exits stay open."
+        },
+        {
+          "kind": "helper_cli_source_qualification",
+          "path": "docs/helper_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/helper_cli_installed_native_5_0_6.json.gz",
+          "scope": "Four complete helper matrices bind 2,928 exact original Rust outcomes to four unchanged drivers, six complete generated domains, 231 copied inputs and the pristine 610-file runtime archive. Seven locked commands use ordinary Debug profiles. Four current C++ consumers match 2,928 exact observations. Four comparators reject 12 reproduced false acceptances; 35 source/CTest controls and 8 selected installed checks pass. The previous four comparators and CMake registration recover byte for byte after removing only this cohort. Registered tests 983 are an inventory; static source lookup 120/160 leaves 40 for review. All 1,814 C++ inputs, 831 producer inputs, 80 SDKs/3,560 generated files and 2,467 protected artifacts retain prior identities. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "runtime_error_cli_source_binding",
+          "path": "docs/runtime_error_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/runtime_error_cli_installed_native_5_0_6.json.gz",
+          "scope": "Three actual error comparison CLIs rebind the previously accepted complete Rust error.rs execution to 2,362 retained exact original outputs, unchanged source files and 2,362 fresh current native observations. Two preceding comparator implementations and the previous CMake registration recover byte for byte. Seven actual false acceptances are repaired; 21 source/corpus/CTest controls and 7 selected installed tests pass. Static custom source lookup 123/160 leaves 37 for review; registry 987 is enumeration. No new Cargo, imported modules, sanitizer or MIPS run is claimed. Full G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "query_surface_cli_source_qualification",
+          "path": "docs/query_surface_cli_source_qualification_5_0_6.md",
+          "terminal": "docs/parity/query_surface_cli_installed_native_5_0_6.json.gz",
+          "scope": "Three complete generated Q/relationship SQLite matrices bind 6,764 fresh exact original Rust outcomes to three unchanged drivers, three complete generated domains, 104 copied inputs and the pristine 610-file runtime archive. Six locked source commands use ordinary Debug profiles. Three current C++ probes match 6,764 exact observations. Three comparators reject 9 reproduced false acceptances; 35 source/CTest controls and 7 selected installed checks pass. Preceding comparator bodies and CMake registration recover byte for byte. Registry 991 is inventory; static source lookup 126/160 leaves 34 for review. All 1,814 C++ inputs, 831 producer inputs, 80 SDKs/3,560 generated files and 2,467 protected artifacts retain preceding identities. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "inmemory_cli_source_binding",
+          "path": "docs/inmemory_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/inmemory_cli_installed_native_5_0_6.json.gz",
+          "scope": "Historical in-memory CLI is rebound to previously accepted complete Rust source execution: 8,732 retained original outcomes and 19 original tests. Its 6,532-case matrix matches 6,532 fresh current native64 observations. Three reproduced false acceptances are repaired; 18 source/corpus/CTest controls and 5 selected installed checks pass. Previous comparator and CMake registry recover byte for byte. Registry 995 is enumeration; static source lookup 127/160 leaves 33 for review. No new Cargo, imported module, sanitizer or MIPS run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "state_source_cli_binding",
+          "path": "docs/state_source_cli_binding_5_0_6.md",
+          "terminal": "docs/parity/state_source_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Four accepted state/entity original executions provide 272 retained observations, including 12 typed load-state batches and 40,404 rows. An explicit Git-blob check qualifies the sole historical entity-corpus metadata transition; 272 fresh current native results, 18 negative controls and 7 selected tests pass. Static source lookup 131/160 leaves 29 for review; registry 998 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "execution_model_cli_source_binding",
+          "path": "docs/execution_model_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/execution_model_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Three accepted original execution-result and hot-cache streams provide 4,448 retained scenarios, including 6,480 hot execution steps. Terminal receipts pin complete corpora and paired original/native outputs; the hot source also has an independent raw stream. Current native results match every scenario, 16 substitution controls and 6 selected checks pass. Static source lookup 134/160 leaves 26 for review; registry 1,001 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "composed_graph_cli_source_binding",
+          "path": "docs/composed_graph_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/composed_graph_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Two accepted original composed-query and graph-save streams provide 5,472 exact retained outcomes, including governed mixed graph work, safe SQL and audit observations within existing observer boundaries. Terminal records pin both complete corpora and paired raw original/native outputs; current native results match all cases. Fifteen substitutions and five selected checks pass. Static source lookup 136/160 leaves 24 for review; registry 1,004 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "relation_analysis_cli_source_binding",
+          "path": "docs/relation_analysis_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/relation_analysis_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The frozen 7,122-case generated relationship corpus is bound to the current native CTest command with 6,576 source comparisons under its declared Debug adapter and 546 separately approved quoted-FK C++ expectations. The original Rust results and exact approved case indices remain immutable; 15 substitutions and 4 selected tests pass. Static source lookup 137/160 leaves 23 for review; registry 1,007 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "stream_shapes_cli_source_binding",
+          "path": "docs/stream_shapes_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/stream_shapes_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed strict stream comparison now binds 13,104 unchanged original outcomes to 13,104 fresh native raw equalities and complete boundary assertions. The historical 6,012 startup-adaptation indices remain separate and equal the later obsolete-expectation list; the old source_promoted flag is preserved as pre-installation evidence. Fifteen substitutions and four selected checks pass. Static source lookup 138/160 leaves 22 for review; registry 1,010 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "business_id_lookup_cli_source_binding",
+          "path": "docs/business_id_lookup_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/business_id_lookup_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed generated-factory Business-ID Q comparison binds 528 complete original outcomes to 528 exact fresh native results, including 288 existing-SQLite operations with safe SQL records. The runtime-composition preliminary pair remains separate. Fifteen substitutions and four selected checks pass. Incremental source lookup 139/160 leaves 21 for review; registry 1,013 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "expression_business_ids_cli_source_binding",
+          "path": "docs/expression_business_ids_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/expression_business_ids_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed typed Business-ID E comparison binds 96 complete original outcomes to fresh native results: 48 raw equalities and 48 matches under the unchanged diagnostic presentation adapter. The observer retains 18 decoder rejections and 936 before/captured/current resolutions. Fifteen source/CTest substitutions and five selected checks, including Context lifecycle, pass. Incremental lookup 140/160 leaves 20 for review; registry 1,016 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "generated_business_ids_cli_source_binding",
+          "path": "docs/generated_business_ids_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/generated_business_ids_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed generated Business-ID wrapper/Checker comparison binds 1,044 complete original outcomes to fresh native results: 916 raw equalities and 128 cases under the one declared resource type-name adapter, covering 384 diagnostics. The retained source closure pins the unchanged original observer body and 25 generated Rust files. Fifteen substitutions and four selected checks pass. Incremental lookup 141/160 leaves 19 for review; registry 1,019 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "query_keys_cli_source_binding",
+          "path": "docs/query_keys_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/query_keys_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "The installed query-key comparison binds 451 original inputs at each pointer width to fresh C++ 451/451 native 64-bit and 451/451 MIPS/QEMU 32-bit results. Forty-six current source outputs differ by width. The 32-bit Rust source remains host execution with explicit usize preparation; the matching C++ MIPS binary hash is retained. Fifteen substitutions and six selected checks, including ten CLI width routes, pass. Incremental lookup 142/160 leaves 18 for review; registry 1,022 is enumeration. No new Rust, cross-compile, sanitizer, module, physical-router or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "derived_query_cli_source_binding",
+          "path": "docs/derived_query_cli_source_binding_5_0_6.md",
+          "terminal": "docs/parity/derived_query_cli_selected_ctest_5_0_6.json.gz",
+          "scope": "Two installed derived-query comparison commands bind 360 composition and 576 diagnostic original outcomes to 936 fresh exact native results, including 234 successes, 702 errors, SQL privacy and independent query-intent boundaries. Fifteen substitutions and six selected checks pass. The earlier diagnostic receipt has seven production hashes stale against current source; current files are separately pinned. Incremental lookup 144/160 leaves 16 for review; registry 1,025 is enumeration. No new Rust, module, sanitizer, MIPS or full-suite run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        "docs/inherited_checker_cli_source_binding_5_0_6.md",
+        "docs/parity/inherited_checker_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/inherited_checker_cli_controls_5_0_6.json.gz",
+        "docs/generated_member_alias_cli_source_binding_5_0_6.md",
+        "docs/parity/generated_member_alias_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/generated_member_alias_cli_controls_5_0_6.json.gz",
+        "docs/eval_indexed_cli_source_binding_5_0_6.md",
+        "docs/parity/eval_indexed_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/eval_indexed_cli_controls_5_0_6.json.gz",
+        "docs/entity_constructor_cli_source_binding_5_0_6.md",
+        "docs/parity/entity_constructor_cli_original_execution_5_0_6.json.gz",
+        "docs/parity/entity_constructor_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/entity_constructor_cli_controls_5_0_6.json.gz",
+        "docs/inherited_business_cli_source_binding_5_0_6.md",
+        "docs/parity/inherited_business_cli_original_execution_5_0_6.json.gz",
+        "docs/parity/inherited_business_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/inherited_business_cli_controls_5_0_6.json.gz",
+        "docs/protected_behavior_cli_source_binding_5_0_6.md",
+        "docs/parity/protected_behavior_cli_original_execution_5_0_6.json.gz",
+        "docs/parity/protected_behavior_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/protected_behavior_cli_controls_5_0_6.json.gz",
+        "docs/json_graph_limits_cli_source_binding_5_0_6.md",
+        "docs/parity/json_graph_limits_cli_original_execution_5_0_6.json.gz",
+        "docs/parity/json_graph_limits_cli_selected_ctest_5_0_6.json.gz",
+        "docs/parity/json_graph_limits_cli_controls_5_0_6.json.gz"
+      ]
+    }
+  ],
+  "historical_question_mapping": [
+    {
+      "index": 0,
+      "question": "Complete source-based governed runtime configuration and protected-I/O qualification plus dynamic ledger provenance; mapped plan/ledger privacy now collects before execution, with durable dynamic operands/originals now collected; complete typed storage/protected-I/O qualification remains a G16 dependency.",
+      "requirements": [
+        "GP07",
+        "GP09",
+        "GP10",
+        "GP11",
+        "GP16"
+      ]
+    },
+    {
+      "index": 1,
+      "question": "Qualify complete canonical SQL trace, protected-I/O rejection, privacy/redaction, dynamic mutation provenance and source-based governed save across all model configurations.",
+      "requirements": [
+        "GP03",
+        "GP04",
+        "GP05",
+        "GP12",
+        "GP16"
+      ]
+    },
+    {
+      "index": 2,
+      "question": "Requalify historical 5.0.5 query execution/Context/stream probes and fixtures against actual 5.0.6 calls; existing baseline rejection is not new semantic acceptance. Nine maintained native SQL/provider/entity-service contracts now pass after explicit-intent migration, structured target-ID checks and source-verified purpose cache/cursor identity. This is C++ maintenance evidence; actual 5.0.6 historical-probe oracle refresh remains open. Two handwritten business scenarios and 34 SQL provenance entries now have separately replayed 5.0.6 source evidence with explicit caller comments; Base/Context/Entity callback, foreign-domain and native-error cleanup fixture gates pass. Other historical query/Context/stream source replay and runtime scope remain open.",
+      "requirements": [
+        "GP13"
+      ]
+    },
+    {
+      "index": 3,
+      "question": "Qualify complete 5.0.6 request/command configurations and protected-I/O adapters, historical probe migration and governed/dynamic provenance; command routing and C++ moved-state safeguards have focused source/native evidence but do not complete G17.",
+      "requirements": [
+        "GP02",
+        "GP10",
+        "GP11",
+        "GP12"
+      ]
+    },
+    {
+      "index": 4,
+      "question": "Dynamic ledger operands/originals now join governed privacy collection; complete protected SQLite dynamic storage/audit and typed carrier configurations remain unqualified.",
+      "requirements": [
+        "GP09"
+      ]
+    },
+    {
+      "index": 5,
+      "question": "Embedded child state is qualified within eight operation families: 32 source/compiler calls, 32 C++ declaration constraints, native/source/module/generator/reproduction/build gates. C++ parent modifiers retain the agreed before/after-purpose adaptation; Rust uses public inner and restores purpose. Broader model/result/configuration and source conversion surfaces remain open.",
+      "requirements": [
+        "GP04",
+        "GP11"
+      ]
+    },
+    {
+      "index": 6,
+      "question": "Ten layered source families add 4,398 original observations; seven complete native families match 3,374/3,374. Request facets share 15 old row-format mismatches; data-service fixture must handle 27 typed intent errors instead of aborting. Audit model inspection confirms SafeAuditEvent entity_id/bootstrap_audit and RawAuditEvent diagnostic_redactions are missing; implement actual scoped copy/projection/provenance responsibilities and lifetime/privacy gates after the current full CTest terminal state, not placeholder formatting.",
+      "requirements": [
+        "GP06",
+        "GP13"
+      ]
+    },
+    {
+      "index": 7,
+      "question": "Audit event identity/bootstrap/provenance correction now has 112 actual historical model and 104 original private-module projection matches, native 12/12 plus dispatch 5/5, targeted sanitizer 4/4 plus dispatch 1/1, module ownership 1/1. Preserve these explicit scoped-copy/Context-destruction and credential/plaintext gates while qualifying remaining generated/governance/async/extended protected-I/O configurations. Row/request diagnostics remain separate pending work; no full capability/P7 acceptance.",
+      "requirements": [
+        "GP06",
+        "GP14"
+      ]
+    },
+    {
+      "index": 8,
+      "question": "Shared row/layout/snapshot/read-sidecar diagnostics and data-service invalid-intent observation are implemented. The 169/872/40 original families match 1,081/1,081, native 8/8, targeted sanitizer 2/2, canonical module consumer 1/1 and explicit Global metadata retention checks pass. Complete nonempty source schema/private-hash/cache diagnostics remain unqualified: C++ snapshot hints are Context-owned, secondary keys use scoped identities and the current readonly fingerprint is a std-hash value, not a qualified Rust numeric SipHash value. Preserve those distinctions before full G15/G16 acceptance.",
+      "requirements": [
+        "GP04",
+        "GP13"
+      ]
+    },
+    {
+      "index": 9,
+      "question": "Runtime-model replay qualifies 1,213 historical observations and lazy Context-owned mutation bindings; complete generated/configuration, initialized-cache and final integration matrices remain required.",
+      "requirements": [
+        "GP11",
+        "GP13"
+      ]
+    },
+    {
+      "index": 10,
+      "question": "Public graph/governance replay qualifies 3,659 historical source observations and shared complete mapped-field readback with scoped target provenance. Remaining private helper, generated/configuration and final integration matrices remain required.",
+      "requirements": [
+        "GP07",
+        "GP12"
+      ]
+    },
+    {
+      "index": 11,
+      "question": "Private save replay qualifies 11,040 historical observations through original byte-preserved methods and original registry versions. Complete runtime mutation/saver orchestration, generated/configuration and durable dynamic payload matrices remain required.",
+      "requirements": [
+        "GP07"
+      ]
+    },
+    {
+      "index": 12,
+      "question": "Layered mutation/transaction saver replay retains 4,710 historical observations and missing-intent rejection. The explicit TransactionScope checkpoint adds 64 exact actual SQLite comparisons for positive raw query/mutation intent, rollback, readback, stale affected-row results and independent logging controls; completed header/imported checks pass 2/2 in the separate module tree. Complete model/configuration, protected-boundary and full native integration matrices remain required.",
+      "requirements": [
+        "GP02",
+        "GP08"
+      ]
+    },
+    {
+      "index": 13,
+      "question": "Derived COUNT/future-facet diagnostic source storage and public read propagation now match 576 exact source observations. Native explicit Global retention, pending cancellation and real SQLite cursor/User teardown pass eight controls. Scoped ASan/UBSan 4/4 and modules 4/4 now pass. Full native rebuilding and its 548-test integration remain pending; generated facade and nested/private facet/sensitive sink matrices are not fully qualified.",
+      "requirements": [
+        "GP04",
+        "GP14"
+      ]
+    },
+    {
+      "index": 14,
+      "question": "Complete core telemetry.rs is now accepted under TS01-TS12 with current source/native/imported and actual Context/native-work cleanup evidence. This does not accept whole Context query/save observation, protected-I/O or external exporters; preserve all remaining G17 source/model/configuration and final integration obligations.",
+      "requirements": [
+        "GP10",
+        "GP14"
+      ]
+    },
+    {
+      "index": 15,
+      "question": "Readonly query schema storage and closing diagnostics now have the qualified 480-input source and native/imported/lifetime continuation. The source constructor adds no trace or execution/persistence authority. Complete protected query/save orchestration, request provenance, generated configurations and current whole integration remain open.",
+      "requirements": [
+        "GP04"
+      ]
+    },
+    {
+      "index": 16,
+      "question": "The exact SQL diagnostic continuation closes direct current query/stream/mutation/transaction/backend-kind observer provenance: 7035 original outcomes, native11/imported11 and targeted sanitizer2, with unchanged production bodies and retained historical locks. This accepts only terminal diagnostic files. Whole SQL executor/mutation orchestration, runtime Context/graph/governance/privacy and complete current integration remain pending.",
+      "requirements": [
+        "GP05",
+        "GP12"
+      ]
+    },
+    {
+      "index": 17,
+      "question": "Resolved select preparation now has1036 actual complete-source/native/imported observations: query-entity behavior selection, owned/borrowed equality, intent precedence, real ensure_schema bootstrap suppression, behavior/policy rewrite and denial order, final-entity local-key projection, duplicate/missing relations and unchanged source query. Native4/module3, canonical consumers and no-work pass; original fixture-construction differences and disk-full linker failure are preserved. Production and generator bodies are unchanged. This reconciles query preparation, not typed identity projection, mutation orchestration or whole resolved.rs; source84/38/2 and capability11/6 statuses are unchanged.",
+      "requirements": [
+        "GP04"
+      ]
+    },
+    {
+      "index": 18,
+      "question": "Resolved insert/update preparation has1690 actual complete-source/native/imported observations, native5/module4, canonical consumers and no-work: repository-entity behavior, policy retarget/denial, final metadata ID/version initialization, allocator failure, Create-marked Checker/Fix, optional update versions and independent old snapshots. The thin command factories delegate to accepted core MU05/MU06/MU09/MU10 constructors. Timestamp preparation is not invented. Production and generator bodies are unchanged; complete resolved.rs and source84/38/2/capability11/6 verdicts stay separate.",
+      "requirements": [
+        "GP02",
+        "GP07"
+      ]
+    },
+    {
+      "index": 19,
+      "question": "Resolved mutation execution closes the earlier1502-input early-exit provenance gap using complete actual source plus2016 trusted-intent controls:3518 matching results per frontend, native6/module5 and canonical/no-work. New cases make1648 provider calls and982 attempted events across direct/prepared/batch writes, callback/preparation order, absent/partial/complete old snapshots, trace and write/event failure. The100 source panics are invalid short batch-ID controls with matching native checked exceptions and preceding effects. Reuses unchanged original driver/SPI bodies and access-only forwarding; the initial fixture import failure is preserved. No production/generator body changes, live-SQL commit, privacy/governance or whole-source acceptance is claimed. Source84/38/2 and capability11-qualified/6-partial verdicts remain unchanged.",
+      "requirements": [
+        "GP02",
+        "GP06"
+      ]
+    },
+    {
+      "index": 20,
+      "question": "Resolved mutation privacy forwards absent/empty/masked/credential/unknown/target-ID provenance through actual provider requests and events: source/native/imported5486, native7/module6, canonical/no-work and explicit safe-field/trace canary assertions pass. The3518 prior cases are immutable;1968 new inputs produce1968 provider calls and990 attempted events. Sixty Debug maximum-version failures occur after provider return, including first-event delivery before a second batch-event overflow. An assertion epoch reuses hash-checked unchanged original source/ELFs/corpus and reruns current native7/module6; it does not invent another Rust execution. No production/generator implementation or source/capability verdict changes. Raw sinks, real SQLite transaction/commit, Release overflow, generated metadata and full protected-I/O/governance remain separate.",
+      "requirements": [
+        "GP05",
+        "GP06"
+      ]
+    },
+    {
+      "index": 21,
+      "question": "Graph source continuation separates legacy signed-cast scope IDs from positive-only planner IDs. Native/module legacy 72+284 observations and public planner 896 Create-root, 896 sparse Upsert-root and 896 complete-row Upsert-root observations match; complete rows execute 1056 provider queries and all 896 plans succeed. Historical sparse-row failures remain intact. These scoped results and original dynamic-component evidence do not complete graph.rs, data_service/graph.rs, entity_save.rs or whole G17/P0-P7 acceptance.",
+      "requirements": [
+        "GP03",
+        "GP07",
+        "GP12"
+      ]
+    }
+  ]
+}

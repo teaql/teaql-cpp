@@ -21,6 +21,7 @@ struct Tenant : generated_detail::Model<Tenant> {
     using Base = generated_detail::Model<Tenant>;
     friend class TenantChecker;
     static constexpr std::string_view ENTITY_NAME = "Tenant";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "tenant";
     friend struct generated_detail::TenantSampleRecipe;
     friend struct generated_detail::TenantBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -167,6 +168,7 @@ struct Note : generated_detail::Model<Note> {
     using Base = generated_detail::Model<Note>;
     friend class NoteChecker;
     static constexpr std::string_view ENTITY_NAME = "Note";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "note";
     friend struct generated_detail::NoteSampleRecipe;
     friend struct generated_detail::NoteBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -578,7 +580,7 @@ inline const Tenant* Note::tenant() const {
     if (!is_loaded("tenant")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "tenant");
+    auto* view = root.resolve_relation_option<Tenant>("note", id(), "tenant");
     if (view) {
         return *view ? &**view : nullptr;
     }

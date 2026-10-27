@@ -1,0 +1,195 @@
+{
+  "schema": 2,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "project": "tests/parity/rust_pagination_source_5_0_6/Cargo.toml",
+  "package": "teaql_pagination_original_source_506",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-data-service",
+    "teaql-macros",
+    "teaql-provider-sqlite",
+    "teaql-runtime",
+    "teaql-sql"
+  ],
+  "generated_fixture": "tests/generator/parity/dynamic_json_rust",
+  "support_files": [
+    "tests/generator/dynamic_json.xml",
+    "tests/generator/parity/dynamic_json_rust/PROVENANCE.json",
+    "tests/generator/parity/dynamic_json_rust/lib/Cargo.toml",
+    "tests/generator/parity/dynamic_json_rust/lib/src/company/behavior.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/company/checker.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/company/entity.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/company/expression.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/company/mod.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/company/request.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/e.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/lib.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/line/behavior.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/line/checker.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/line/entity.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/line/expression.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/line/mod.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/line/request.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/order/behavior.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/order/checker.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/order/entity.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/order/expression.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/order/mod.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/order/request.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/person/behavior.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/person/checker.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/person/entity.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/person/expression.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/person/mod.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/person/request.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/platform/behavior.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/platform/checker.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/platform/entity.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/platform/expression.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/platform/mod.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/platform/request.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/product/behavior.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/product/checker.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/product/entity.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/product/expression.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/product/mod.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/product/request.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/profile/behavior.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/profile/checker.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/profile/entity.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/profile/expression.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/profile/mod.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/profile/request.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/q.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/request_support.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/runtime.rs",
+    "tests/generator/parity/dynamic_json_rust/lib/src/sample_data.rs",
+    "tests/parity/generate_deferred_continuous_page_5_0_6.py",
+    "tests/parity/generate_deferred_id_set_page_5_0_6.py",
+    "tests/parity/generate_deferred_plain_page_5_0_6.py",
+    "tests/parity/generate_generated_execution.py",
+    "tests/parity/generate_pagination_convenience_5_0_6.py",
+    "tests/parity/rust_field_layout/src/bin/original_like_privacy_5_0_6.rs",
+    "tests/support/dynamic_json_dataset.sql",
+    "tests/support/dynamic_json_schema.sql"
+  ],
+  "input_helpers": {},
+  "contracts": [
+    {
+      "name": "deferred_continuous_page",
+      "native_test": "deferred_continuous_page_rust_parity",
+      "count": 640,
+      "corpus": "tests/parity/deferred_continuous_page_5_0_6_cases.json.gz",
+      "corpus_sha256": "f22ab7246a25250d17635c874096f9b6a37d2380ca2883c47293e050641b585d",
+      "driver": "tests/parity/rust_field_layout/src/bin/deferred_continuous_page_5_0_6.rs",
+      "driver_sha256": "80791d5a3268eb4925571c0618378b2d3877a9cc01213d8a6baee201d8866248",
+      "target": "deferred_continuous_page_5_0_6",
+      "native_target": "teaql_deferred_continuous_page_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_deferred_continuous_page_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_deferred_continuous_page_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_deferred_continuous_page_probe"
+      ],
+      "input_recipe": "tests/parity/generate_deferred_continuous_page_5_0_6.py",
+      "input_function": "inputs",
+      "input_recipe_sha256": "82e88d0ff8dc6184569c2e771c7cb30c0f545d58265a42b777f076dbe8b20ff1"
+    },
+    {
+      "name": "deferred_plain_page",
+      "native_test": "deferred_plain_page_rust_parity",
+      "count": 108,
+      "corpus": "tests/parity/deferred_plain_page_5_0_6_cases.json.gz",
+      "corpus_sha256": "74e464e19368de6477c3d09086c60f512a7276569e2532d45517d9d32ec1d036",
+      "driver": "tests/parity/rust_field_layout/src/bin/deferred_plain_page_5_0_6.rs",
+      "driver_sha256": "f28abde836e172cbc141b1893a5bb86fc0b98ded01d46f95f68f94e84d3e3188",
+      "target": "deferred_plain_page_5_0_6",
+      "native_target": "teaql_deferred_plain_page_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_deferred_plain_page_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_deferred_plain_page_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_deferred_plain_page_probe"
+      ],
+      "input_recipe": "tests/parity/generate_deferred_plain_page_5_0_6.py",
+      "input_function": "inputs",
+      "input_recipe_sha256": "022e3ae550e9a731c676008dbfc9facfd922082dd1003817689804527a7dfc22"
+    },
+    {
+      "name": "deferred_id_set_page",
+      "native_test": "deferred_id_set_page_rust_parity",
+      "count": 252,
+      "corpus": "tests/parity/deferred_id_set_page_5_0_6_cases.json.gz",
+      "corpus_sha256": "d3877c40f9a775e3d51083728eaef001012245c18ddd82a5697f787ea9ff4ca0",
+      "driver": "tests/parity/rust_field_layout/src/bin/deferred_id_set_page_5_0_6.rs",
+      "driver_sha256": "35a930ac697de1aae4df9871b0e9e8b02631b819955fb6272d82fcd2d67b574d",
+      "target": "deferred_id_set_page_5_0_6",
+      "native_target": "teaql_deferred_id_set_page_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_deferred_id_set_page_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_deferred_id_set_page_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_deferred_id_set_page_probe"
+      ],
+      "input_recipe": "tests/parity/generate_deferred_id_set_page_5_0_6.py",
+      "input_function": "inputs",
+      "input_recipe_sha256": "ab734cbf72cb187417c67601c22593e67db841b40a1840cb46e3dc755728db05"
+    },
+    {
+      "name": "pagination_convenience",
+      "native_test": "pagination_convenience_rust_parity",
+      "count": 8448,
+      "corpus": "tests/parity/pagination_convenience_5_0_6_cases.json.gz",
+      "corpus_sha256": "0ade170b8a0e49719ed142dcc9f28023adc124b604b05ecce43219970d5ef0c2",
+      "driver": "tests/parity/rust_field_layout/src/bin/generated_execution_5_0_6.rs",
+      "driver_sha256": "6043c3a14be463fed47fa46b073e031ca3bd95ce1bf86aa96b4e123765f0167e",
+      "target": "generated_execution_5_0_6",
+      "native_target": "teaql_generated_execution_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_generated_execution_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_pagination_convenience_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_generated_execution_probe"
+      ],
+      "input_recipe": "tests/parity/generate_pagination_convenience_5_0_6.py",
+      "input_function": "inputs",
+      "input_recipe_sha256": "3bd55ad1563e552cea51a05e58c91346ebebd7581ce0852f84721912d15d7097"
+    },
+    {
+      "name": "generated_execution",
+      "native_test": "generated_execution_rust_parity",
+      "count": 1440,
+      "corpus": "tests/parity/generated_execution_5_0_6_cases.json.gz",
+      "corpus_sha256": "7538eff212453fd51e7ac27139cee80d7059f26a09712df301d252d363e4cb1a",
+      "driver": "tests/parity/rust_field_layout/src/bin/generated_execution_5_0_6.rs",
+      "driver_sha256": "6043c3a14be463fed47fa46b073e031ca3bd95ce1bf86aa96b4e123765f0167e",
+      "target": "generated_execution_5_0_6",
+      "native_target": "teaql_generated_execution_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_generated_execution_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_generated_execution.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_generated_execution_probe"
+      ],
+      "input_recipe": "tests/parity/generate_generated_execution.py",
+      "input_function": "cases",
+      "input_recipe_sha256": "016f6e7272670f8b5fcf88409a819d7407b72d0e6a7af461216f491f11b6d230"
+    }
+  ]
+}

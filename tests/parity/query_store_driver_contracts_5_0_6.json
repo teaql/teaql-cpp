@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "project": "tests/parity/rust_query_stores_source_5_0_6/Cargo.toml",
+  "source_manifest": "tests/parity/rust_query_stores_source_5_0_6/observers.json",
+  "extractor": "tests/parity/rust_query_optimization_5_0_6/build.rs",
+  "context_observer": "tests/parity/query_stores_context_source_5_0_6.rs",
+  "contracts": [
+    {
+      "name": "query_store",
+      "target": "query_store_oracle",
+      "count": 259,
+      "corpus": "tests/parity/query_store_5_0_6_cases.json.gz",
+      "corpus_sha256": "9ce9ac3e0d5e4f0d2f421860377f447be882252a75dc7e8d2165ae5d0f833e5a",
+      "driver": "tests/parity/rust_values/src/bin/query_store_oracle.rs",
+      "driver_sha256": "4e90ceadb769fb8382bea9a87e3d533c125c77d404985b92835ca07b73463138",
+      "native_target": "teaql_query_store_probe",
+      "native_test": "query_store_rust_parity"
+    },
+    {
+      "name": "id_set_build",
+      "target": "id_set_build_oracle",
+      "count": 144,
+      "corpus": "tests/parity/id_set_build_5_0_6_cases.json.gz",
+      "corpus_sha256": "0658858ccc5b09fede03cee7d6d8fdde8f55a2d01c27c0d56874281c56e6335e",
+      "driver": "tests/parity/rust_values/src/bin/id_set_build_oracle.rs",
+      "driver_sha256": "3dca8bb4e87f7d6b755c74a6523951949769a48b381404601ab87cf34fadd175",
+      "native_target": "teaql_id_set_build_probe",
+      "native_test": "id_set_build_rust_parity"
+    },
+    {
+      "name": "query_store_model",
+      "target": "query_store_model_5_0_6",
+      "count": 74,
+      "corpus": "tests/parity/query_store_model_5_0_6_cases.json.gz",
+      "corpus_sha256": "8f99dd9d68321100c1537f5fb7fc5c8d378c2d3fb0c2488d44f442154a7cf45a",
+      "driver": "tests/parity/rust_field_layout/src/bin/query_store_model_5_0_6.rs",
+      "driver_sha256": "e81c585f3b979644feeb6235ede814c78574e6d17243f0d383aaeae382f0e05f",
+      "native_target": "teaql_query_store_model_probe",
+      "native_test": "query_store_model_rust_parity"
+    }
+  ]
+}

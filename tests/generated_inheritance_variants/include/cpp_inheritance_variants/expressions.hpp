@@ -560,43 +560,48 @@ inline TenantExpression SpecialInvoiceExpression::getTenant() const {
 
 struct E {
     static TenantExpression tenant(const Tenant& value) {
-        return TenantExpression(entity_expression(value, StaticString{"tenant"}));
+        return TenantExpression(
+            entity_expression(value, StaticString{"tenant"}, StaticString{"Tenant"}));
     }
 
     static TenantExpression tenant(Tenant&&) = delete;
     static TenantExpression tenant(const Tenant&&) = delete;
 
     static DocumentExpression document(const Document& value) {
-        return DocumentExpression(entity_expression(value, StaticString{"document"}));
+        return DocumentExpression(
+            entity_expression(value, StaticString{"document"}, StaticString{"Document"}));
     }
 
     static DocumentExpression document(Document&&) = delete;
     static DocumentExpression document(const Document&&) = delete;
 
     static IntermediateRecordExpression intermediateRecord(const IntermediateRecord& value) {
-        return IntermediateRecordExpression(
-            entity_expression(value, StaticString{"intermediateRecord"}));
+        return IntermediateRecordExpression(entity_expression(
+            value, StaticString{"intermediateRecord"}, StaticString{"IntermediateRecord"}));
     }
 
     static IntermediateRecordExpression intermediateRecord(IntermediateRecord&&) = delete;
     static IntermediateRecordExpression intermediateRecord(const IntermediateRecord&&) = delete;
 
     static InvoiceExpression invoice(const Invoice& value) {
-        return InvoiceExpression(entity_expression(value, StaticString{"invoice"}));
+        return InvoiceExpression(
+            entity_expression(value, StaticString{"invoice"}, StaticString{"Invoice"}));
     }
 
     static InvoiceExpression invoice(Invoice&&) = delete;
     static InvoiceExpression invoice(const Invoice&&) = delete;
 
     static ReceiptExpression receipt(const Receipt& value) {
-        return ReceiptExpression(entity_expression(value, StaticString{"receipt"}));
+        return ReceiptExpression(
+            entity_expression(value, StaticString{"receipt"}, StaticString{"Receipt"}));
     }
 
     static ReceiptExpression receipt(Receipt&&) = delete;
     static ReceiptExpression receipt(const Receipt&&) = delete;
 
     static SpecialInvoiceExpression specialInvoice(const SpecialInvoice& value) {
-        return SpecialInvoiceExpression(entity_expression(value, StaticString{"specialInvoice"}));
+        return SpecialInvoiceExpression(entity_expression(
+            value, StaticString{"specialInvoice"}, StaticString{"SpecialInvoice"}));
     }
 
     static SpecialInvoiceExpression specialInvoice(SpecialInvoice&&) = delete;

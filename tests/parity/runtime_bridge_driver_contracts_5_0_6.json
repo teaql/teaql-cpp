@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "base_verifier_sha256": "28c6ecb5620027055a4033a94f98d5c6679402441ea786df85c263bee0ae43ef",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-data-service",
+    "teaql-macros",
+    "teaql-runtime",
+    "teaql-sql"
+  ],
+  "support_files": [
+    "scripts/runtime_bridge_driver_provenance_5_0_6.py",
+    "scripts/runtime_protocol_driver_provenance_5_0_6.py",
+    "scripts/reference_runtime_view_5_0_6.py",
+    "scripts/archive_driver_provenance_5_0_6.py",
+    "scripts/verify_constant_closure_5_0_6.py",
+    "scripts/verify_state_baselines_5_0_6.py",
+    "scripts/run_native_integration_epoch_5_0_6.py",
+    "tests/parity/compare_values.py",
+    "tests/parity/rust_values/src/fixture_value.rs",
+    "tests/parity/verify_runtime_bridge_driver_controls_5_0_6.py"
+  ],
+  "observers": [
+    {
+      "kind": "constant",
+      "runtime_file": "src/context.rs",
+      "path": "tests/parity/build_context_event_oracle_5_0_6.py",
+      "constant": "APPENDS",
+      "key": "teaql-runtime/src/context.rs"
+    },
+    {
+      "kind": "constant",
+      "runtime_file": "src/lib.rs",
+      "path": "tests/parity/build_context_event_oracle_5_0_6.py",
+      "constant": "APPENDS",
+      "key": "teaql-runtime/src/lib.rs"
+    },
+    {
+      "kind": "constant",
+      "runtime_file": "src/data_service/resolved.rs",
+      "path": "tests/parity/build_typed_aggregate_oracle_5_0_6.py",
+      "constant": "BRIDGE"
+    },
+    {
+      "kind": "bridge",
+      "runtime_file": "src/data_service/resolved.rs",
+      "path": "tests/parity/runtime_loaded_graph_access_bridge_5_0_6.rs"
+    },
+    {
+      "kind": "driver",
+      "runtime_file": "src/lib.rs",
+      "path": "tests/parity/rust_context_event_5_0_6/src/main.rs",
+      "module": "cpp_context_event_bridge_observer",
+      "marker": "TEAQL_CONTEXT_BRIDGE_JSON ",
+      "contract": "context_event",
+      "borrow_input": false,
+      "replacements": {}
+    },
+    {
+      "kind": "driver",
+      "runtime_file": "src/lib.rs",
+      "path": "tests/parity/rust_typed_aggregate_5_0_6/src/main.rs",
+      "module": "cpp_typed_aggregate_bridge_observer",
+      "marker": "TEAQL_TYPED_BRIDGE_JSON ",
+      "contract": "typed_aggregate_scope",
+      "borrow_input": false,
+      "replacements": {}
+    },
+    {
+      "kind": "driver",
+      "runtime_file": "src/lib.rs",
+      "path": "tests/parity/rust_private_save_5_0_6/src/bin/loaded_row_graph_5_0_6.rs",
+      "module": "cpp_loaded_graph_bridge_observer",
+      "marker": "TEAQL_LOADED_BRIDGE_JSON ",
+      "contract": "loaded_graph_protocol",
+      "borrow_input": true,
+      "replacements": {
+        "#[path=\"../../../rust_values/src/fixture_value.rs\"]": "tests/parity/rust_values/src/fixture_value.rs"
+      }
+    }
+  ],
+  "contracts": [
+    {
+      "name": "context_event",
+      "native_test": "context_event_rust_parity",
+      "corpus": "tests/parity/context_event_baseline_5_0_6_cases.json.gz",
+      "count": 1088,
+      "extra_corpora": [],
+      "observer_test": "cpp_context_event_bridge_observer::replay_original_driver",
+      "test_filter": "cpp_context_event_bridge_observer::",
+      "test_count": 1,
+      "output_kind": "lines",
+      "marker": "TEAQL_CONTEXT_BRIDGE_JSON ",
+      "profile": "debug",
+      "native_target": "teaql_context_event_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_context_event_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_context_event.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_context_event_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "typed_aggregate_scope",
+      "native_test": "typed_aggregate_scope_rust_parity",
+      "corpus": "tests/parity/typed_aggregate_scope_5_0_6_cases.json.gz",
+      "count": 146,
+      "extra_corpora": [],
+      "observer_test": "cpp_typed_aggregate_bridge_observer::replay_original_driver",
+      "test_filter": "cpp_typed_aggregate_bridge_observer::",
+      "test_count": 1,
+      "output_kind": "lines",
+      "marker": "TEAQL_TYPED_BRIDGE_JSON ",
+      "profile": "debug",
+      "native_target": "teaql_typed_aggregate_scope_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_typed_aggregate_scope_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_typed_aggregate_scope.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_typed_aggregate_scope_probe",
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "loaded_graph_protocol",
+      "native_test": "loaded_graph_protocol_rust_parity",
+      "corpus": "tests/parity/loaded_graph_protocol_5_0_6_cases.json.gz",
+      "count": 3568,
+      "extra_corpora": [],
+      "observer_test": "cpp_loaded_graph_bridge_observer::replay_original_driver",
+      "test_filter": "cpp_loaded_graph_bridge_observer::",
+      "test_count": 1,
+      "output_kind": "lines",
+      "marker": "TEAQL_LOADED_BRIDGE_JSON ",
+      "profile": "debug",
+      "native_target": "teaql_loaded_row_graph_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_row_graph_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_loaded_graph_protocol_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_row_graph_probe",
+        "--cpp-emulator="
+      ]
+    }
+  ],
+  "source_hashes": {
+    "scripts/archive_driver_provenance_5_0_6.py": "720bd4c6f154c0b13eaa5d6fe6aa6742bd8adc9e20f9765321991557c3dba509",
+    "scripts/reference_runtime_view_5_0_6.py": "5ef7af9e23bcdb61023d12c66daea70653493fbfe96b1b0a0e21c8cad40bfc5d",
+    "scripts/run_native_integration_epoch_5_0_6.py": "a5915aa1c49b066701ae0517a2122da2cd3a98a8c9d53d156e9ad9c2404ec6cc",
+    "scripts/runtime_bridge_driver_provenance_5_0_6.py": "42b708601c99cd8ee3c9d7ccd23b5335050fc56fd526bb97893dfa67e2518b8e",
+    "scripts/runtime_protocol_driver_provenance_5_0_6.py": "28c6ecb5620027055a4033a94f98d5c6679402441ea786df85c263bee0ae43ef",
+    "scripts/verify_constant_closure_5_0_6.py": "fa6529d41bc2bcbce48c26831cd68cf58178b13d9e1dd19a5c1b9ff4a66b582c",
+    "scripts/verify_state_baselines_5_0_6.py": "328c14187c6672ab692642b3d0051ae97757970d3b71424ae8cb10ed84875a04",
+    "tests/parity/build_context_event_oracle_5_0_6.py": "5f7586797f788545d057628ca0d75b9592363f3d612579853328a65e88d4ba22",
+    "tests/parity/build_typed_aggregate_oracle_5_0_6.py": "6d3c75d75336bf2623ec987af0cff976dbc23ef30f8236885110599d93cef132",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/context_event_baseline_5_0_6_cases.json.gz": "3dfe6ccfc88078877205a9e14495392fe3f2674ac9a58f96f05d34ec12d6db5d",
+    "tests/parity/loaded_graph_protocol_5_0_6_cases.json.gz": "d16b58bccbb29777000a6606c980debb37ff0bb447ca9b3314d31a197ecbbb4c",
+    "tests/parity/runtime_loaded_graph_access_bridge_5_0_6.rs": "2b6db1f29a394a2d4aad66c0939e92e35129b01d1e44b74db6ecf1701c174a7e",
+    "tests/parity/rust_context_event_5_0_6/src/main.rs": "089cd8a12a4793ba4ef1b68fc226a8fbaeb2398ffa2cecd87fb9643a9bfae1ac",
+    "tests/parity/rust_private_save_5_0_6/src/bin/loaded_row_graph_5_0_6.rs": "6cdefb1c30a6eb9a7acff5f110a293df9ecc150475eb65fd40837da188d528cd",
+    "tests/parity/rust_typed_aggregate_5_0_6/src/main.rs": "d4b412392e7e3829c8539f6b92d04a5013ef9aea363b129d24a7615eff2ff937",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/typed_aggregate_scope_5_0_6_cases.json.gz": "08804d508b232463c8403711f539b0930cccbddf812eada18e5df3816953b642",
+    "tests/parity/verify_runtime_bridge_driver_controls_5_0_6.py": "60adcf7726ac114fb2b0299962a0bef72fe294cebfcfe1937100d04058be8f4c"
+  }
+}

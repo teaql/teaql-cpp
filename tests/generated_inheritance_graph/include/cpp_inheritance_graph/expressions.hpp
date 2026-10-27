@@ -529,42 +529,48 @@ inline SchoolExpression EnrollmentExpression::getSchool() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static SpecialistExpression specialist(const Specialist& value) {
-        return SpecialistExpression(entity_expression(value, StaticString{"specialist"}));
+        return SpecialistExpression(
+            entity_expression(value, StaticString{"specialist"}, StaticString{"Specialist"}));
     }
 
     static SpecialistExpression specialist(Specialist&&) = delete;
     static SpecialistExpression specialist(const Specialist&&) = delete;
 
     static SchoolExpression school(const School& value) {
-        return SchoolExpression(entity_expression(value, StaticString{"school"}));
+        return SchoolExpression(
+            entity_expression(value, StaticString{"school"}, StaticString{"School"}));
     }
 
     static SchoolExpression school(School&&) = delete;
     static SchoolExpression school(const School&&) = delete;
 
     static AcademyExpression academy(const Academy& value) {
-        return AcademyExpression(entity_expression(value, StaticString{"academy"}));
+        return AcademyExpression(
+            entity_expression(value, StaticString{"academy"}, StaticString{"Academy"}));
     }
 
     static AcademyExpression academy(Academy&&) = delete;
     static AcademyExpression academy(const Academy&&) = delete;
 
     static ResearchAcademyExpression researchAcademy(const ResearchAcademy& value) {
-        return ResearchAcademyExpression(entity_expression(value, StaticString{"researchAcademy"}));
+        return ResearchAcademyExpression(entity_expression(
+            value, StaticString{"researchAcademy"}, StaticString{"ResearchAcademy"}));
     }
 
     static ResearchAcademyExpression researchAcademy(ResearchAcademy&&) = delete;
     static ResearchAcademyExpression researchAcademy(const ResearchAcademy&&) = delete;
 
     static EnrollmentExpression enrollment(const Enrollment& value) {
-        return EnrollmentExpression(entity_expression(value, StaticString{"enrollment"}));
+        return EnrollmentExpression(
+            entity_expression(value, StaticString{"enrollment"}, StaticString{"Enrollment"}));
     }
 
     static EnrollmentExpression enrollment(Enrollment&&) = delete;

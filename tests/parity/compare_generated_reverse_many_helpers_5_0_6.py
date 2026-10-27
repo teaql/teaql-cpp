@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare actual generated reverse-many handles, evaluation and sparse members."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -8,6 +9,7 @@ import os
 from pathlib import Path
 
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = Path(__file__).with_name('generated_reverse_many_helpers_5_0_6_cases.json.gz')
@@ -37,16 +39,19 @@ def main():
         expected = observe(args.rust, inputs)
     else:
         data = json.loads(gzip.decompress(CORPUS.read_bytes()))
+        require_cases(data, len(inputs), inputs)
         if data['baseline'] != baseline or not same(inputs, [v['input'] for v in data['cases']]):
             raise RuntimeError('Reverse-many corpus baseline/matrix differs')
         expected = [v['expected'] for v in data['cases']]
         if args.rust and not same(expected, observe(args.rust, inputs)):
             raise RuntimeError('Reverse-many corpus differs from actual original')
     native = observe(args.cpp, inputs)
+    if len(native) != len(inputs):
+        raise RuntimeError('Native observations must cover the complete input matrix')
     gaps = [dict(input=value, rust=source, cpp=actual)
             for value, source, actual in zip(inputs, expected, native) if not same(source, actual)]
     if gaps:
-        path = ROOT / 'docs/parity/generated_reverse_many_helpers_5_0_6_initial_gaps.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/generated_reverse_many_helpers_5_0_6_initial_gaps.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress(json.dumps(gaps, indent=2).encode(), mtime=0))
         print(json.dumps(gaps[0], indent=2))

@@ -29,6 +29,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -186,6 +187,7 @@ struct Owner : generated_detail::Model<Owner> {
     using Base = generated_detail::Model<Owner>;
     friend class OwnerChecker;
     static constexpr std::string_view ENTITY_NAME = "Owner";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "owner";
     friend struct generated_detail::OwnerSampleRecipe;
     friend struct generated_detail::OwnerBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -383,6 +385,7 @@ struct Entry : generated_detail::Model<Entry> {
     using Base = generated_detail::Model<Entry>;
     friend class EntryChecker;
     static constexpr std::string_view ENTITY_NAME = "Entry";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "entry";
     friend struct generated_detail::EntrySampleRecipe;
     friend struct generated_detail::EntryBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -635,6 +638,7 @@ struct Profile : generated_detail::Model<Profile> {
     using Base = generated_detail::Model<Profile>;
     friend class ProfileChecker;
     static constexpr std::string_view ENTITY_NAME = "Profile";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "profile";
     friend struct generated_detail::ProfileSampleRecipe;
     friend struct generated_detail::ProfileBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -1094,7 +1098,7 @@ inline const Platform* Owner::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("owner", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1408,7 +1412,7 @@ inline const Platform* Entry::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("entry", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1422,7 +1426,7 @@ inline const Owner* Entry::modelNamespace() const {
     if (!is_loaded("namespace")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Owner>(ENTITY_NAME, id(), "namespace");
+    auto* view = root.resolve_relation_option<Owner>("entry", id(), "namespace");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1436,7 +1440,7 @@ inline const Owner* Entry::modelOperator() const {
     if (!is_loaded("operator")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Owner>(ENTITY_NAME, id(), "operator");
+    auto* view = root.resolve_relation_option<Owner>("entry", id(), "operator");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1786,7 +1790,7 @@ inline const Platform* Profile::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("profile", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1800,7 +1804,7 @@ inline const Owner* Profile::owner() const {
     if (!is_loaded("owner")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Owner>(ENTITY_NAME, id(), "owner");
+    auto* view = root.resolve_relation_option<Owner>("profile", id(), "owner");
     if (view) {
         return *view ? &**view : nullptr;
     }

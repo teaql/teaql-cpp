@@ -372,6 +372,46 @@ static void composition() {
           "pristine source does not materialize target ledger");
 }
 
+static void relation_owner_identity_and_retention() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& root = user_context->make<EntityRuntimeState>();
+    {
+        EntityGraphBuilder builder(std::allocator_arg, Allocator(r));
+        builder.install_relation_option<std::uint64_t>("order_line", 101, "owner", 200);
+        builder.install_relation_option<std::uint64_t>("Other", 101, "owner", 300);
+        builder.install_relation_option<std::uint64_t>("order_line", 101, "empty", std::nullopt);
+        check(bool(root.freeze_graph(std::move(builder))), "Publish independent owner identities");
+    }
+    auto inspect = [](const EntityRuntimeState& state) {
+        auto* raw = state.resolve_relation_option<std::uint64_t>("order_line", 101, "owner");
+        auto* canonical = state.resolve_relation_option<std::uint64_t>("OrderLine", 101, "owner");
+        auto* descriptor = state.resolve_relation_option<std::uint64_t>("Other", 101, "owner");
+        auto* empty = state.resolve_relation_option<std::uint64_t>("OrderLine", 101, "empty");
+        check(
+            raw && raw == canonical && **raw == 200 && descriptor && **descriptor == 300,
+            "Declared and canonical aliases share a key; an overridden descriptor stays separate");
+        check(empty && !*empty &&
+                  !state.resolve_relation_option<std::uint64_t>("Other", 101, "empty") &&
+                  !state.resolve_relation_option<std::int64_t>("OrderLine", 101, "owner"),
+              "Owner isolation preserves selected NULL, missing and wrong-type lookup states");
+    };
+    inspect(root);
+    auto expired = root.relation_option<std::uint64_t>("OrderLine", 101, "owner");
+    auto& retained = global.make<EntityRuntimeState>(root);
+    user_context.reset();
+    bool rejected = false;
+    try {
+        (void)expired.value();
+    } catch (const ReferenceError&) {
+        rejected = true;
+    }
+    check(rejected, "A copied relation handle must reject actual source Context deletion");
+    inspect(retained);
+    check(global.live_user_bytes() == 0, "An explicit graph copy must release source arena blocks");
+}
+
 static void graph_and_copy() {
     GlobalContext global;
     auto source = global.make_user_context();
@@ -625,6 +665,7 @@ int main() {
         public_composition();
         runtime_attachment_preserves_views();
         graph_and_copy();
+        relation_owner_identity_and_retention();
         eager_payload_cleanup();
         teaql::test::source_entity_runtime::run_original_contracts();
         std::pmr::set_default_resource(previous);

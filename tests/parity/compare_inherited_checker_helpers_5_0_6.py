@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare inherited changed/eval snapshots and direct/governed Checker flow."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -63,7 +64,7 @@ def main():
         gaps = [dict(input=inputs[index], rust=expected[index], cpp=value)
                 for index, value in zip(indexes, native) if not same(expected[index], value)]
         if gaps:
-            path = ROOT / 'docs/parity/inherited_checker_helpers_5_0_6_initial_gaps.json.gz'
+            path = diagnostic_path(ROOT / 'docs/parity/inherited_checker_helpers_5_0_6_initial_gaps.json.gz')
             if not path.exists():
                 path.write_bytes(gzip.compress(json.dumps(dict(model=model, gaps=gaps), indent=2)
                                                .encode(), mtime=0))

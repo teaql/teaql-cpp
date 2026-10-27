@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tests/parity'))
 from compare_values import same
 from verify_constant_closure_5_0_6 import registry_identities
+from verify_legacy_observation_identity_5_0_6 import verify_record
 
 OUTPUT = ROOT / 'docs/parity/business_runtime_configuration_original_5_0_6.json'
 
@@ -94,6 +95,8 @@ def main():
                        'observations; they are never normalized into successful C++ startup.'), indent=2) + '\n')
         print(f'Recorded {len(cases)} original runtime/persistence scenarios and {len(errors)} original environment failures')
         return
+    if args.output == OUTPUT:
+        verify_record(OUTPUT)
     record = json.loads(args.output.read_text())
     assert record['runtime_commit'] == runtime['commit']
     assert record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'

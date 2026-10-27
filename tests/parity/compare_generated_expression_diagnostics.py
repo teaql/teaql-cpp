@@ -2,6 +2,8 @@
 """Compare source fields with explicitly documented C++ syntax/English adaptations."""
 import argparse,hashlib,json,re,subprocess
 from pathlib import Path
+from compare_values import observe,same
+from expression_cli_cases import require_cases
 ROOT=Path(__file__).resolve().parents[2]
 def camel(name):
     parts=name.split('_')
@@ -35,11 +37,11 @@ if __name__=='__main__':
         assert hashlib.sha256((ROOT/provenance['model']).read_bytes()).hexdigest()==provenance['model_sha256']
         for path,digest in provenance['files'].items():
             assert hashlib.sha256((ROOT/directory/path).read_bytes()).hexdigest()==digest,(directory,path)
-    inputs=''.join(json.dumps(c['input'])+'\n' for c in corpus['cases'])
+    cases=require_cases(corpus,196)
+    inputs=[c['input'] for c in cases]
     for binary,adapter in [(args.cpp,adapt)]+([(args.rust,lambda x:x)] if args.rust else []):
-        outputs=subprocess.run([binary],input=inputs,text=True,capture_output=True,check=True).stdout.splitlines()
-        assert len(outputs)==len(corpus['cases'])
-        for index,(line,case) in enumerate(zip(outputs,corpus['cases'])):
-            observed=json.loads(line);expected=adapter(case['expected'])
-            if observed!=expected:raise SystemExit(f'Case {index}: {case["input"]}\nExpected {expected}\nObserved {observed}')
+        outputs=observe(binary,inputs)
+        for index,(observed,case) in enumerate(zip(outputs,cases)):
+            expected=adapter(case['expected'])
+            if not same(observed,expected):raise SystemExit(f'Case {index}: {case["input"]}\nExpected {expected}\nObserved {observed}')
     print(f'{len(corpus["cases"])} source diagnostic observations match (explicit C++ spelling and English text adaptations)')

@@ -1,5 +1,12 @@
 # Complete G06 general-query requirements
 
+Current correction: the [creation boundary](generated_creation_identity_5_0_6.md)
+was reopened after90 source/native differences and is now requalified:90/90
+complete results, runtime first gates,80 SDK byte preservation, current Java86,
+native10/module1/ASan-UBSan1 and196 compiler contracts. G06 returns to qualified;
+G13/G14/G17 and P0-P7 remain open. The remaining acceptance text preserves its
+original checkpoint scope.
+
 Status: G06 qualified through the [complete acceptance review](general_query_acceptance_review_5_0_6.md).
 The original capability scope and P4/P7 exits remain intact. The runtime is Rust 5.0.6 at
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`; the generator is

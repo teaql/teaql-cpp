@@ -6,7 +6,7 @@
   "model_sha256": "c69c71eda45df00e397d15b46d9f8c6c0394bbd81d612232914aff9b91ffa053",
   "files": {
     "AGENTS.md": "2fd23f634896a0f334d7aed29d2f5f28fed3455f7d8705151bfb1df90a0393ae",
-    "ASSIST.md": "be43d749ce1dd871726caa29915c40ed5d492dcbabbea72c031356033bac8147",
+    "ASSIST.md": "e059700ca66683853e04986d8341b3bcc6a140a54fee3c2ff0d52273baca662f",
     "CMakeLists.txt": "475d88e25ace2ce7b6edbd8b79e311b7a481e4ce0801019cfa4720c39c6c13be",
     "OBSERVATION.json": "fec736d6b0a357703f02712088b6c09d71c385e1cf07f96f1860061c496639c2",
     "assist/platform/create.md": "69233140a0bf6d62a8bc52f9d66e1f26f8aadd8d33933f8b236a41467d741f9d",
@@ -42,9 +42,9 @@
     "assist/runtime/runtime_custom.md": "8cdc595c11a9890dc27cac88d53351e6768d900f7a06238dd7e92b4f03fdc79b",
     "assist/runtime/schema.md": "0715b2f603d412358c6da158fca3a295142fe2ba59aefaa7ff2b621fa5804a49",
     "assist/runtime/tool_api.md": "7db1f1dd08a99a939082df4e52f1c05f9cad80f02abd9468d49b1d49ed52719c",
-    "include/cpp_query_aliases/checkers.hpp": "3e1c18c621961ca92253b63fa57e578fceb25a9597114da18baf780e8d224a04",
-    "include/cpp_query_aliases/expressions.hpp": "08d95c144ddc3a70cd4329fe1658cdb2c326045997e02dc38297ddae8f439a19",
-    "include/cpp_query_aliases/models.hpp": "f2b677f62fc851e1746374242bc406c123d05d0992d1efa25d619d5efc2224fb",
+    "include/cpp_query_aliases/checkers.hpp": "690a00981cafb04a35312ccc6769a3bc118c8eba7bc6e9cd964fcec637581fc5",
+    "include/cpp_query_aliases/expressions.hpp": "797a95e30309c537f36085003090b80799e00bbd3e59299bd56b38599b64b771",
+    "include/cpp_query_aliases/models.hpp": "edc4a39d55fc098ec0252684c7b421a4c1e64757f61fd850400cd973b449f2c9",
     "include/cpp_query_aliases/queries.hpp": "8f631a822e902789a3473835484ad1f9c3b51f0829f389363a8a834efbf3459f",
     "include/cpp_query_aliases/runtime.hpp": "04ab7b730c746a21eda769a980973b6e03dc04b245c4a11f49cd3b93af41e4af",
     "include/cpp_query_aliases/sample_data.hpp": "cbc327b34c3ade28d447322e6dfc6dd9e5157c5ed2cc11bd6ea1e97097c5616e",
@@ -54,13 +54,14 @@
   },
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "8de867a18ca398525d982e81422ebfba377ebc19dd0d27832b4108833e1aa74f",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "60c3b1e413af48d5acf02fff12318f083feb3a41508da7c585d87678fbed9fc0",
     "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "0c83fc780340b6a228d7d9f94f50e40b015477e399d9446d34de389901bc90c8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "eacbf2fc53f99c648e27d4506a2ed6ceae9b0be2a625ec0a47cc07449d37c257",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "d1d6cf3e17ea515ccc7d482a775a5abfa4f770fe1fd5d3d264ac6591ba8849a1",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java": "9d66eea7ed5d83d2cbff9376c462faf4ff056581bdaa53605f00a16f3b0f605c"
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "8541f4ccb89011cbd5f4ce4f9646577ea535de7cbefc9f1721e802218a6c0ac3",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "a3f16897f7fcfce33c863dc959e392850268621762ac2f957011cca4c6bee0ce",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java": "9d66eea7ed5d83d2cbff9376c462faf4ff056581bdaa53605f00a16f3b0f605c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "8f03fb9b40e6499f3ca412f65b3573b0d753658eabe1cafb4d241ce49b54f418"
   }
 }

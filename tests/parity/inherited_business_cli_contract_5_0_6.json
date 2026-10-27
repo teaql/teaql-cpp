@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "count": 450,
+  "corpus": "tests/parity/inherited_business_extensions_5_0_6_cases.json.gz",
+  "corpus_sha256": "c7cecebcadd4f430cdfee275108b327b6acb2525b6dfa816996044f5734b98ab",
+  "original_receipt": "docs/parity/inherited_business_cli_original_execution_5_0_6.json.gz",
+  "original_receipt_sha256": "f02e6e731ba8fdd27884b33d91fe31206c7327728c6a9c8483d543394a9dcc85",
+  "historical_source": "docs/parity/inherited_business_extensions_source_5_0_6.json",
+  "historical_source_sha256": "b4f243aaeb56687edc3563ea386f59dd4cf65b278ec1d165e6b9952a88521e27",
+  "historical_terminal": "docs/parity/inherited_business_extensions_5_0_6.json",
+  "historical_terminal_sha256": "48e340c4a9b271e8b1290d33dcca082ac010e6c167d0503c50dbf6203f6e2b04",
+  "historical_comparator_path": "tests/parity/compare_inherited_business_extensions_5_0_6.py",
+  "provenance": "tests/generator/parity/inheritance_business_ids_rust/PROVENANCE.json",
+  "generated_files": 43,
+  "comparison": "inherited_business_extensions_rust_parity",
+  "comparator": "tests/parity/compare_inherited_business_extensions_5_0_6.py",
+  "probe": "teaql_inherited_business_extensions_probe",
+  "support_files": {
+    "scripts/inherited_business_cli_source_binding_5_0_6.py": "ef909c34570ff1c8f8bf84dec593fbbe4048e5dfe0bea4cd773d7e480ae57983",
+    "tests/parity/verify_inherited_business_cli_controls_5_0_6.py": "de77f47cc1a9b5e0235bcd1050a2e96a96dbf283e5d4f3dd864fbef4a68774f5",
+    "tests/parity/compare_inherited_business_extensions_5_0_6.py": "18143fd706f7e0975ac7c12dc2bce682af33713f9e400b6732d4b61cbd14b93a",
+    "tests/parity/inherited_business_extensions_probe.cpp": "834e729d4163ab9e6f4823f679e3cdda09e4ac326bb0fecb4987a0c3fe2e3ef5",
+    "tests/parity/build_inherited_business_binding_bridge_5_0_6.py": "6b30252b3e51bca8e68696fe80a6d7ced9b1aaabb761a203c2b16cd38f56ce70",
+    "tests/parity/rust_inherited_business_extensions_5_0_6/Cargo.toml": "e9c51a7a33049d2981f0978fb0e366cf765426c6d13d8da464a7e4b26ad6cbdf",
+    "tests/parity/rust_inherited_business_extensions_5_0_6/Cargo.lock": "63c3a7f96836d483e3f2670d879aff34c913e920093378c1499bd458f471585f",
+    "tests/parity/inherited_business_extensions_5_0_6.rs": "293951149b0c9354d7cedcba773a0a5155132af37454c4f67f7f43a841f2efd9"
+  }
+}

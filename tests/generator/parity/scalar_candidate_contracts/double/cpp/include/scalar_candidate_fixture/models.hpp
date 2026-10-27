@@ -21,6 +21,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -167,6 +168,7 @@ struct Record : generated_detail::Model<Record> {
     using Base = generated_detail::Model<Record>;
     friend class RecordChecker;
     static constexpr std::string_view ENTITY_NAME = "Record";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "record";
     friend struct generated_detail::RecordSampleRecipe;
     friend struct generated_detail::RecordBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -546,7 +548,7 @@ inline const Platform* Record::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("record", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }

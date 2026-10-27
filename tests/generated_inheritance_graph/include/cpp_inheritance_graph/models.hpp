@@ -37,6 +37,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -188,6 +189,7 @@ struct Specialist : generated_detail::Model<Specialist> {
     using Base = generated_detail::Model<Specialist>;
     friend class SpecialistChecker;
     static constexpr std::string_view ENTITY_NAME = "Specialist";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "specialist";
     friend struct generated_detail::SpecialistSampleRecipe;
     friend struct generated_detail::SpecialistBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -404,6 +406,7 @@ struct School : generated_detail::Model<School> {
     using Base = generated_detail::Model<School>;
     friend class SchoolChecker;
     static constexpr std::string_view ENTITY_NAME = "School";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "school";
     friend struct generated_detail::SchoolSampleRecipe;
     friend struct generated_detail::SchoolBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -654,6 +657,7 @@ struct Academy : generated_detail::Model<Academy> {
     using Base = generated_detail::Model<Academy>;
     friend class AcademyChecker;
     static constexpr std::string_view ENTITY_NAME = "Academy";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "academy";
     friend struct generated_detail::AcademySampleRecipe;
     friend struct generated_detail::AcademyBootstrapRecipe;
     static constexpr std::array<std::string_view, 1> QUERY_IDENTITY_FIELDS{"id"};
@@ -929,6 +933,7 @@ struct ResearchAcademy : generated_detail::Model<ResearchAcademy> {
     using Base = generated_detail::Model<ResearchAcademy>;
     friend class ResearchAcademyChecker;
     static constexpr std::string_view ENTITY_NAME = "ResearchAcademy";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "research_academy";
     friend struct generated_detail::ResearchAcademySampleRecipe;
     friend struct generated_detail::ResearchAcademyBootstrapRecipe;
     static constexpr std::array<std::string_view, 1> QUERY_IDENTITY_FIELDS{"id"};
@@ -1233,6 +1238,7 @@ struct Enrollment : generated_detail::Model<Enrollment> {
     using Base = generated_detail::Model<Enrollment>;
     friend class EnrollmentChecker;
     static constexpr std::string_view ENTITY_NAME = "Enrollment";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "enrollment";
     friend struct generated_detail::EnrollmentSampleRecipe;
     friend struct generated_detail::EnrollmentBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -1615,7 +1621,7 @@ inline const Platform* Specialist::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("specialist", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1888,7 +1894,7 @@ inline const Platform* School::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("school", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1902,7 +1908,7 @@ inline const Specialist* School::advisor() const {
     if (!is_loaded("advisor")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Specialist>(ENTITY_NAME, id(), "advisor");
+    auto* view = root.resolve_relation_option<Specialist>("school", id(), "advisor");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2244,7 +2250,7 @@ inline const Platform* Academy::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("academy", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2258,7 +2264,7 @@ inline const Specialist* Academy::advisor() const {
     if (!is_loaded("advisor")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Specialist>(ENTITY_NAME, id(), "advisor");
+    auto* view = root.resolve_relation_option<Specialist>("academy", id(), "advisor");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2587,7 +2593,7 @@ inline const Platform* ResearchAcademy::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("research_academy", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2601,7 +2607,7 @@ inline const Specialist* ResearchAcademy::advisor() const {
     if (!is_loaded("advisor")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Specialist>(ENTITY_NAME, id(), "advisor");
+    auto* view = root.resolve_relation_option<Specialist>("research_academy", id(), "advisor");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2960,7 +2966,7 @@ inline const School* Enrollment::school() const {
     if (!is_loaded("school")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<School>(ENTITY_NAME, id(), "school");
+    auto* view = root.resolve_relation_option<School>("enrollment", id(), "school");
     if (view) {
         return *view ? &**view : nullptr;
     }

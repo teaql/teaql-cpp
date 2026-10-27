@@ -228,14 +228,16 @@ inline TenantExpression EntryExpression::getTenant() const {
 
 struct E {
     static TenantExpression tenant(const Tenant& value) {
-        return TenantExpression(entity_expression(value, StaticString{"tenant"}));
+        return TenantExpression(
+            entity_expression(value, StaticString{"tenant"}, StaticString{"Tenant"}));
     }
 
     static TenantExpression tenant(Tenant&&) = delete;
     static TenantExpression tenant(const Tenant&&) = delete;
 
     static EntryExpression entry(const Entry& value) {
-        return EntryExpression(entity_expression(value, StaticString{"entry"}));
+        return EntryExpression(
+            entity_expression(value, StaticString{"entry"}, StaticString{"Entry"}));
     }
 
     static EntryExpression entry(Entry&&) = delete;

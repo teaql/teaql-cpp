@@ -1,0 +1,489 @@
+{
+  "schema": 3,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "project": "tests/parity/rust_numeric_time_driver_source_5_0_6/Cargo.toml",
+  "package": "teaql_numeric_time_driver_source_506",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-data-service",
+    "teaql-macros",
+    "teaql-provider-sqlite",
+    "teaql-runtime",
+    "teaql-sql"
+  ],
+  "archive_manifests": [
+    "teaql-core/Cargo.toml",
+    "teaql-data-service/Cargo.toml",
+    "teaql-macros/Cargo.toml",
+    "teaql-provider-sqlite/Cargo.toml",
+    "teaql-runtime/Cargo.toml",
+    "teaql-sql/Cargo.toml"
+  ],
+  "generated_fixtures": [],
+  "support_files": [
+    "scripts/numeric_time_driver_inputs_5_0_6.py",
+    "tests/parity/chrono_value_baseline_5_0_6_cases.json.gz",
+    "tests/parity/compare_values.py",
+    "tests/parity/core_aux_debug_5_0_6_cases.json.gz",
+    "tests/parity/decimal_5_0_6_cases.json.gz",
+    "tests/parity/decimal_extended_5_0_6_cases.json.gz",
+    "tests/parity/decimal_foundation_5_0_6_cases.json.gz",
+    "tests/parity/decimal_inline_5_0_6_cases.json.gz",
+    "tests/parity/decimal_numeric_5_0_6_cases.json.gz",
+    "tests/parity/decimal_parsing_5_0_6_cases.json.gz",
+    "tests/parity/decimal_scale_5_0_6_cases.json.gz",
+    "tests/parity/decimal_wire_format_5_0_6_cases.json.gz",
+    "tests/parity/rust_values/src/fixture_value.rs",
+    "tests/parity/rust_values/src/formatter_fixture.rs",
+    "tests/parity/system_time_arithmetic_scope_baseline_5_0_6_cases.json.gz",
+    "tests/parity/system_time_baseline_5_0_6_cases.json.gz",
+    "tests/parity/system_time_error_scope_5_0_6_cases.json.gz",
+    "tests/parity/timestamp_api_baseline_5_0_6_cases.json.gz",
+    "tests/parity/unified_buffer_clone_baseline_5_0_6_cases.json.gz"
+  ],
+  "support_file_hashes": {
+    "scripts/numeric_time_driver_inputs_5_0_6.py": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+    "tests/parity/chrono_value_baseline_5_0_6_cases.json.gz": "2e4df03a6d60add3504fe273a7271c7bd8d4bedc9b9cb700dc0329f8d1f1230e",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/core_aux_debug_5_0_6_cases.json.gz": "25654dd2cf61715dffa9c0a4283dbf9029b8098154d96903aaf526e266e1140f",
+    "tests/parity/decimal_5_0_6_cases.json.gz": "e6f0a0d35d728cff05d446600fdd4787d66106c040f9a3929a59b01b88bbe15a",
+    "tests/parity/decimal_extended_5_0_6_cases.json.gz": "365bb76297d3399fbd6dd1fd08ed93edfe21ff88ee9d6dea75896e5eb3f40c3c",
+    "tests/parity/decimal_foundation_5_0_6_cases.json.gz": "92a8b0fb1a9ef964b1a01772bc7e4e1e37512cebd308731a7d3342a498bdd487",
+    "tests/parity/decimal_inline_5_0_6_cases.json.gz": "7dfc1852881dbb052dd3b350045d726eb2a2a98dcad938966a3695dc643bf08e",
+    "tests/parity/decimal_numeric_5_0_6_cases.json.gz": "4964863d1dfc2e84160b6f89be8e2798459cfb6737a9ca5478e171a8b4a4e347",
+    "tests/parity/decimal_parsing_5_0_6_cases.json.gz": "944db79fec0533af4b5bc108a9535409d39af77c72c4045d81cd57ab2bfb82be",
+    "tests/parity/decimal_scale_5_0_6_cases.json.gz": "6b9052e7c91ce30e7d8e07d0c7e479cad651b7e655a00a4dfb54e6afd668daf5",
+    "tests/parity/decimal_wire_format_5_0_6_cases.json.gz": "05f2041d9b377a4d5b4c30fb84bf1313747a8f7a71322271f83fe5cd33bedabf",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_values/src/formatter_fixture.rs": "7af9ba6fb78d56461665dd66a0fa44c5aa374ecf9ad433eb7ba3c58aaed32773",
+    "tests/parity/system_time_arithmetic_scope_baseline_5_0_6_cases.json.gz": "997d431f446fffca9fd2cfe62d9192df4efa749578109452b571dd6e12299fc3",
+    "tests/parity/system_time_baseline_5_0_6_cases.json.gz": "82c4bec26cdb1da4451b19f0c2683bb000cb9c607cec25162a3589433b7231b8",
+    "tests/parity/system_time_error_scope_5_0_6_cases.json.gz": "718939229fa89c5f12cac582d38d732a409402bc6c0554dd4011b327a0ea4f61",
+    "tests/parity/timestamp_api_baseline_5_0_6_cases.json.gz": "0c1b9c35931c6382b39697601d5859d0826287f64d369050fd2bbe63e8dbf051",
+    "tests/parity/unified_buffer_clone_baseline_5_0_6_cases.json.gz": "803a631889e7e7c170396ddddea921eb104c1864163ec4126bdd40e44c47907b"
+  },
+  "input_helpers": {},
+  "contracts": [
+    {
+      "name": "unified_buffer_clone",
+      "native_test": "unified_buffer_clone_rust_parity",
+      "count": 1,
+      "corpus": "tests/parity/unified_buffer_clone_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "803a631889e7e7c170396ddddea921eb104c1864163ec4126bdd40e44c47907b",
+      "driver": "tests/parity/rust_values/src/bin/log_model_oracle.rs",
+      "driver_sha256": "6f940f688ad81d29b46de80aac8f6e0bd4d1f08e26539d5df45323207b990d91",
+      "target": "log_model_oracle",
+      "native_target": "teaql_unified_buffer_clone_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_unified_buffer_clone_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_unified_buffer_clone.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_unified_buffer_clone_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "unified_buffer_clone_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "system_time_arithmetic_scope",
+      "native_test": "system_time_arithmetic_scope_rust_parity",
+      "count": 1232,
+      "corpus": "tests/parity/system_time_arithmetic_scope_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "997d431f446fffca9fd2cfe62d9192df4efa749578109452b571dd6e12299fc3",
+      "driver": "tests/parity/rust_values/src/bin/system_time_arithmetic_scope_oracle.rs",
+      "driver_sha256": "f99a7d7ad6d7bea4fab90e9fa3c7041af13e782d84ebd8e196b0f1535b34a044",
+      "target": "system_time_arithmetic_scope_oracle",
+      "native_target": "teaql_system_time_arithmetic_scope_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_system_time_arithmetic_scope_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_system_time_arithmetic_scope.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_system_time_arithmetic_scope_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "system_time_arithmetic_scope_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "system_time_error_scope",
+      "native_test": "system_time_error_scope_rust_parity",
+      "count": 7056,
+      "corpus": "tests/parity/system_time_error_scope_5_0_6_cases.json.gz",
+      "corpus_sha256": "718939229fa89c5f12cac582d38d732a409402bc6c0554dd4011b327a0ea4f61",
+      "driver": "tests/parity/rust_values/src/bin/system_time_error_scope_oracle.rs",
+      "driver_sha256": "09507ab088bed898dd134a6ff6dc2bb845f5957e6ed4f59dc7181025e4f347a8",
+      "target": "system_time_error_scope_oracle",
+      "native_target": "teaql_system_time_error_scope_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_system_time_error_scope_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_system_time_error_scope_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_system_time_error_scope_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "system_time_error_scope_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "chrono_value",
+      "native_test": "chrono_value_rust_parity",
+      "count": 64,
+      "corpus": "tests/parity/chrono_value_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "2e4df03a6d60add3504fe273a7271c7bd8d4bedc9b9cb700dc0329f8d1f1230e",
+      "driver": "tests/parity/rust_values/src/bin/chrono_value_oracle.rs",
+      "driver_sha256": "6f64ce0520882cd4e8274794f3ab9f0701baa588d3f6a18ea42bdc0789e4f566",
+      "target": "chrono_value_oracle",
+      "native_target": "teaql_chrono_value_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_chrono_value_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_chrono_value.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_chrono_value_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "chrono_value_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "system_time",
+      "native_test": "system_time_rust_parity",
+      "count": 254,
+      "corpus": "tests/parity/system_time_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "82c4bec26cdb1da4451b19f0c2683bb000cb9c607cec25162a3589433b7231b8",
+      "driver": "tests/parity/rust_values/src/bin/system_time_oracle.rs",
+      "driver_sha256": "33b5115e985993ce83e3b33d342cc0a9f35bb67eb701ff07b2c9bc8a8fefbf6d",
+      "target": "system_time_oracle",
+      "native_target": "teaql_system_time_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_system_time_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_system_time.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_system_time_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "system_time_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "decimal",
+      "native_test": "decimal_rust_parity",
+      "count": 963,
+      "corpus": "tests/parity/decimal_5_0_6_cases.json.gz",
+      "corpus_sha256": "e6f0a0d35d728cff05d446600fdd4787d66106c040f9a3929a59b01b88bbe15a",
+      "driver": "tests/parity/rust_values/src/bin/decimal_oracle.rs",
+      "driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "target": "decimal_oracle",
+      "native_target": "teaql_decimal_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_decimal.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "decimal_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "decimal_extended",
+      "native_test": "decimal_extended_rust_parity",
+      "count": 8056,
+      "corpus": "tests/parity/decimal_extended_5_0_6_cases.json.gz",
+      "corpus_sha256": "365bb76297d3399fbd6dd1fd08ed93edfe21ff88ee9d6dea75896e5eb3f40c3c",
+      "driver": "tests/parity/rust_values/src/bin/decimal_oracle.rs",
+      "driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "target": "decimal_oracle",
+      "native_target": "teaql_decimal_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_extended.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "decimal_extended_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "decimal_inline",
+      "native_test": "decimal_inline_rust_parity",
+      "count": 484,
+      "corpus": "tests/parity/decimal_inline_5_0_6_cases.json.gz",
+      "corpus_sha256": "7dfc1852881dbb052dd3b350045d726eb2a2a98dcad938966a3695dc643bf08e",
+      "driver": "tests/parity/rust_values/src/bin/decimal_inline_oracle.rs",
+      "driver_sha256": "86e5e310a5ef316f87b18d58f35844ef8cece72fdd47c1d5264a669e1ab0f6ca",
+      "target": "decimal_inline_oracle",
+      "native_target": "teaql_decimal_inline_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_inline_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_inline.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_inline_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "decimal_inline_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "core_aux_debug",
+      "native_test": "core_aux_debug_rust_parity",
+      "count": 94,
+      "corpus": "tests/parity/core_aux_debug_5_0_6_cases.json.gz",
+      "corpus_sha256": "25654dd2cf61715dffa9c0a4283dbf9029b8098154d96903aaf526e266e1140f",
+      "driver": "tests/parity/rust_values/src/bin/core_aux_debug_oracle.rs",
+      "driver_sha256": "21aa393295495bc90ee81a12b4e3fb3ec20d9d77404e1fb3de370f3d679c2703",
+      "target": "core_aux_debug_oracle",
+      "native_target": "teaql_core_aux_debug_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_aux_debug_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_aux_debug.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_aux_debug_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "core_aux_debug_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "decimal_scale",
+      "native_test": "decimal_scale_rust_parity",
+      "count": 1148,
+      "corpus": "tests/parity/decimal_scale_5_0_6_cases.json.gz",
+      "corpus_sha256": "6b9052e7c91ce30e7d8e07d0c7e479cad651b7e655a00a4dfb54e6afd668daf5",
+      "driver": "tests/parity/rust_values/src/bin/decimal_oracle.rs",
+      "driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "target": "decimal_oracle",
+      "native_target": "teaql_decimal_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_scale.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "decimal_scale_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "decimal_parsing",
+      "native_test": "decimal_parsing_rust_parity",
+      "count": 8576,
+      "corpus": "tests/parity/decimal_parsing_5_0_6_cases.json.gz",
+      "corpus_sha256": "944db79fec0533af4b5bc108a9535409d39af77c72c4045d81cd57ab2bfb82be",
+      "driver": "tests/parity/rust_values/src/bin/decimal_oracle.rs",
+      "driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "target": "decimal_oracle",
+      "native_target": "teaql_decimal_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_parsing.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "decimal_parsing_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "decimal_numeric",
+      "native_test": "decimal_numeric_rust_parity",
+      "count": 6058,
+      "corpus": "tests/parity/decimal_numeric_5_0_6_cases.json.gz",
+      "corpus_sha256": "4964863d1dfc2e84160b6f89be8e2798459cfb6737a9ca5478e171a8b4a4e347",
+      "driver": "tests/parity/rust_values/src/bin/decimal_oracle.rs",
+      "driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "target": "decimal_oracle",
+      "native_target": "teaql_decimal_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_numeric.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "decimal_numeric_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "decimal_foundation",
+      "native_test": "decimal_foundation_rust_parity",
+      "count": 4280,
+      "corpus": "tests/parity/decimal_foundation_5_0_6_cases.json.gz",
+      "corpus_sha256": "92a8b0fb1a9ef964b1a01772bc7e4e1e37512cebd308731a7d3342a498bdd487",
+      "driver": "tests/parity/rust_values/src/bin/decimal_oracle.rs",
+      "driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "target": "decimal_oracle",
+      "native_target": "teaql_decimal_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_foundations.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "decimal_foundation_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "decimal_wire_format",
+      "native_test": "decimal_wire_format_rust_parity",
+      "count": 3008,
+      "corpus": "tests/parity/decimal_wire_format_5_0_6_cases.json.gz",
+      "corpus_sha256": "05f2041d9b377a4d5b4c30fb84bf1313747a8f7a71322271f83fe5cd33bedabf",
+      "driver": "tests/parity/rust_values/src/bin/decimal_oracle.rs",
+      "driver_sha256": "4d900a95405afbbabe91ea26be9cc3d7f481f640e20cdb8b85869511e0337cd4",
+      "target": "decimal_oracle",
+      "native_target": "teaql_decimal_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_wire_format.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_decimal_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "decimal_wire_format_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    },
+    {
+      "name": "timestamp_api",
+      "native_test": "timestamp_api_rust_parity",
+      "count": 108,
+      "corpus": "tests/parity/timestamp_api_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "0c1b9c35931c6382b39697601d5859d0826287f64d369050fd2bbe63e8dbf051",
+      "driver": "tests/parity/rust_values/src/bin/timestamp_api_oracle.rs",
+      "driver_sha256": "9200537e398e77ddbd9d502d4e0ab2d8e4bf493ad9e528f1d94770bd5c9c5790",
+      "target": "timestamp_api_oracle",
+      "native_target": "teaql_timestamp_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_timestamp_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_timestamp_api.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_timestamp_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/numeric_time_driver_inputs_5_0_6.py",
+        "sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1",
+        "kind": "function",
+        "name": "timestamp_api_inputs"
+      },
+      "input_recipe_sha256": "952e239e25f27f88358bc1b28942393e234fae4a56e2bf935c0fca5b03dacec1"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare original private construction and inherited child scalar helpers."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -61,7 +62,7 @@ def main():
     gaps = [dict(input=value, rust=source, cpp=actual)
             for value, source, actual in zip(inputs, expected, native) if not same(source, actual)]
     if gaps:
-        path = ROOT / 'docs/parity/entity_constructor_helpers_5_0_6_initial_gaps.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/entity_constructor_helpers_5_0_6_initial_gaps.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress(json.dumps(gaps, indent=2).encode(), mtime=0))
         print(json.dumps(gaps[0], indent=2))

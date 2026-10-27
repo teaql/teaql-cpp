@@ -1,0 +1,373 @@
+{
+  "schema": 3,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "project": "tests/parity/rust_sqlite_provider_protocol_source_5_0_6/Cargo.toml",
+  "package": "teaql_sqlite_provider_protocol_source_506",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-data-service",
+    "teaql-macros",
+    "teaql-provider-sqlite",
+    "teaql-runtime",
+    "teaql-sql"
+  ],
+  "archive_manifests": [
+    "teaql-core/Cargo.toml",
+    "teaql-data-service/Cargo.toml",
+    "teaql-macros/Cargo.toml",
+    "teaql-provider-sqlite/Cargo.toml",
+    "teaql-runtime/Cargo.toml",
+    "teaql-sql/Cargo.toml"
+  ],
+  "generated_fixtures": [],
+  "support_files": [
+    "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+    "tests/parity/compare_values.py",
+    "tests/parity/rust_values/src/fixture_query_keys.rs",
+    "tests/parity/rust_values/src/fixture_sql.rs",
+    "tests/parity/rust_values/src/fixture_value.rs",
+    "tests/parity/rust_values/src/formatter_fixture.rs",
+    "tests/parity/rust_values/src/main.rs",
+    "tests/parity/sqlite_bindings_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_business_id_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_dynamic_storage_5_0_6_cases.json",
+    "tests/parity/sqlite_dynamic_storage_boundaries_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_error_model_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_from_sql_error_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_id_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_native_diagnostics_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_simple_error_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_sync_transaction_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_transport_5_0_6_cases.json.gz"
+  ],
+  "support_file_hashes": {
+    "scripts/sqlite_provider_protocol_inputs_5_0_6.py": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/rust_values/src/fixture_query_keys.rs": "d55434c6c84ff848c07c22f28c5f562597e9bb3f4c952abc8dbffa4f8977f4c3",
+    "tests/parity/rust_values/src/fixture_sql.rs": "3f9b4a0b35cee94de9ccb283f0cf35d64e6196b112791a9017ea42f836215abf",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_values/src/formatter_fixture.rs": "7af9ba6fb78d56461665dd66a0fa44c5aa374ecf9ad433eb7ba3c58aaed32773",
+    "tests/parity/rust_values/src/main.rs": "cbb2ea4581cd09db2074aec34552553e63efc6728fcf6f80b018201d2943e860",
+    "tests/parity/sqlite_bindings_5_0_6_cases.json.gz": "6a0b4dfef8c18b63e0555ff86e0e187b01044ddb9e161c69a1788edb44afe0fc",
+    "tests/parity/sqlite_business_id_5_0_6_cases.json.gz": "639e12ef89a85de5db5d11b6c278576f7bd411c620d8269636d9ab267a36544f",
+    "tests/parity/sqlite_dynamic_storage_5_0_6_cases.json": "210860b33333e878658d9f50d905d17922b01ad2a86e444d68d364f6d3b4c1e5",
+    "tests/parity/sqlite_dynamic_storage_boundaries_5_0_6_cases.json.gz": "4f3e82d734b56a7ccf614f9f20762ed0b90b3871de92e3a982b7005b95bb107f",
+    "tests/parity/sqlite_error_model_5_0_6_cases.json.gz": "308a54e1382733becb5d8fb8495cd701b45c705b5abc3b5067396fa175108091",
+    "tests/parity/sqlite_from_sql_error_5_0_6_cases.json.gz": "196276a97a14d54645ce212878f22f3fd392aab85e46e6a41fb97768842ea849",
+    "tests/parity/sqlite_id_5_0_6_cases.json.gz": "1c92235233abaa247d9a4526ac7f6ddd575ab1fe9f690aa062b69b66233dfc83",
+    "tests/parity/sqlite_native_diagnostics_5_0_6_cases.json.gz": "65fe1f5c2876f4dbb62f6ce925ddbd662c3666bbc88e6583ddcebc09d5e63db6",
+    "tests/parity/sqlite_simple_error_5_0_6_cases.json.gz": "bfdb27048c2a6a7fd5e3b3abe62f6957d20d5550c824e8e1b5e4aaf4dc05e909",
+    "tests/parity/sqlite_sync_transaction_5_0_6_cases.json.gz": "d4a2840382959a5a7b674fd508b36dfe5db6e9cf726fa371b334ff4a0e880496",
+    "tests/parity/sqlite_transport_5_0_6_cases.json.gz": "33fc95044fa7e2ce75a9c309c12b5a7744d78ed18eb22474f5564becf9cbe95c"
+  },
+  "input_helpers": {},
+  "contracts": [
+    {
+      "name": "sqlite_dynamic_storage",
+      "native_test": "sqlite_dynamic_storage_rust_parity",
+      "count": 123,
+      "corpus": "tests/parity/sqlite_dynamic_storage_5_0_6_cases.json",
+      "corpus_sha256": "210860b33333e878658d9f50d905d17922b01ad2a86e444d68d364f6d3b4c1e5",
+      "driver": "tests/parity/rust_field_layout/src/bin/sqlite_dynamic_storage_5_0_6.rs",
+      "driver_sha256": "5b6cdebd37e66d0d5c2d19b034f825c8f9f515651be417ae8510059021a33bcd",
+      "target": "sqlite_dynamic_storage",
+      "native_target": "teaql_sqlite_dynamic_storage_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_dynamic_storage_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_dynamic_storage.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_dynamic_storage_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_dynamic_storage_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_dynamic_storage_boundaries",
+      "native_test": "sqlite_dynamic_storage_boundaries_rust_parity",
+      "count": 34,
+      "corpus": "tests/parity/sqlite_dynamic_storage_boundaries_5_0_6_cases.json.gz",
+      "corpus_sha256": "4f3e82d734b56a7ccf614f9f20762ed0b90b3871de92e3a982b7005b95bb107f",
+      "driver": "tests/parity/rust_field_layout/src/bin/sqlite_dynamic_storage_5_0_6.rs",
+      "driver_sha256": "5b6cdebd37e66d0d5c2d19b034f825c8f9f515651be417ae8510059021a33bcd",
+      "target": "sqlite_dynamic_storage",
+      "native_target": "teaql_sqlite_dynamic_storage_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_dynamic_storage_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_dynamic_storage_boundaries_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_dynamic_storage_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_dynamic_storage_boundaries_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_provider_business_id",
+      "native_test": "sqlite_provider_business_id_rust_parity",
+      "count": 198,
+      "corpus": "tests/parity/sqlite_business_id_5_0_6_cases.json.gz",
+      "corpus_sha256": "639e12ef89a85de5db5d11b6c278576f7bd411c620d8269636d9ab267a36544f",
+      "driver": "tests/parity/rust_field_layout/src/bin/sqlite_transport_5_0_6.rs",
+      "driver_sha256": "d2aa6acb5d3afbeb10e6b41ac1c0858a74cb0cd470c9e1a25f36e9ae7dc6fc45",
+      "target": "sqlite_transport",
+      "native_target": "teaql_sqlite_transport_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_transport_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_business_id_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_transport_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_provider_business_id_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_provider_id",
+      "native_test": "sqlite_provider_id_rust_parity",
+      "count": 261,
+      "corpus": "tests/parity/sqlite_id_5_0_6_cases.json.gz",
+      "corpus_sha256": "1c92235233abaa247d9a4526ac7f6ddd575ab1fe9f690aa062b69b66233dfc83",
+      "driver": "tests/parity/rust_field_layout/src/bin/sqlite_transport_5_0_6.rs",
+      "driver_sha256": "d2aa6acb5d3afbeb10e6b41ac1c0858a74cb0cd470c9e1a25f36e9ae7dc6fc45",
+      "target": "sqlite_transport",
+      "native_target": "teaql_sqlite_transport_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_transport_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_id_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_transport_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_provider_id_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_sync_transaction",
+      "native_test": "sqlite_sync_transaction_rust_parity",
+      "count": 183,
+      "corpus": "tests/parity/sqlite_sync_transaction_5_0_6_cases.json.gz",
+      "corpus_sha256": "d4a2840382959a5a7b674fd508b36dfe5db6e9cf726fa371b334ff4a0e880496",
+      "driver": "tests/parity/rust_field_layout/src/bin/sqlite_transport_5_0_6.rs",
+      "driver_sha256": "d2aa6acb5d3afbeb10e6b41ac1c0858a74cb0cd470c9e1a25f36e9ae7dc6fc45",
+      "target": "sqlite_transport",
+      "native_target": "teaql_sqlite_transport_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_transport_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_sync_transaction_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_transport_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_sync_transaction_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_provider_transport",
+      "native_test": "sqlite_provider_transport_rust_parity",
+      "count": 798,
+      "corpus": "tests/parity/sqlite_transport_5_0_6_cases.json.gz",
+      "corpus_sha256": "33fc95044fa7e2ce75a9c309c12b5a7744d78ed18eb22474f5564becf9cbe95c",
+      "driver": "tests/parity/rust_field_layout/src/bin/sqlite_transport_5_0_6.rs",
+      "driver_sha256": "d2aa6acb5d3afbeb10e6b41ac1c0858a74cb0cd470c9e1a25f36e9ae7dc6fc45",
+      "target": "sqlite_transport",
+      "native_target": "teaql_sqlite_transport_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_transport_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_transport_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_transport_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_provider_transport_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_bindings",
+      "native_test": "sqlite_bindings_rust_parity",
+      "count": 1084,
+      "corpus": "tests/parity/sqlite_bindings_5_0_6_cases.json.gz",
+      "corpus_sha256": "6a0b4dfef8c18b63e0555ff86e0e187b01044ddb9e161c69a1788edb44afe0fc",
+      "driver": "tests/parity/rust_values/src/bin/sqlite_bindings_oracle.rs",
+      "driver_sha256": "fee41ae1df733988a17a56451c5e3ecd52b9178e0d5af4341da9b3ac185f64f8",
+      "target": "sqlite_bindings_oracle",
+      "native_target": "teaql_sqlite_bindings_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_bindings_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_bindings.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_bindings_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_bindings_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_error_model",
+      "native_test": "sqlite_error_model_rust_parity",
+      "count": 563,
+      "corpus": "tests/parity/sqlite_error_model_5_0_6_cases.json.gz",
+      "corpus_sha256": "308a54e1382733becb5d8fb8495cd701b45c705b5abc3b5067396fa175108091",
+      "driver": "tests/parity/rust_values/src/bin/sqlite_error_model_oracle.rs",
+      "driver_sha256": "254a2123d36323c0663efc62c7b87990afa8f596aefcc10185766de4311a75eb",
+      "target": "sqlite_error_model_oracle",
+      "native_target": "teaql_sqlite_error_model_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_error_model_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_error_model.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_error_model_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_error_model_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_native_diagnostics",
+      "native_test": "sqlite_native_diagnostics_rust_parity",
+      "count": 5810,
+      "corpus": "tests/parity/sqlite_native_diagnostics_5_0_6_cases.json.gz",
+      "corpus_sha256": "65fe1f5c2876f4dbb62f6ce925ddbd662c3666bbc88e6583ddcebc09d5e63db6",
+      "driver": "tests/parity/rust_values/src/bin/sqlite_native_diagnostics_oracle.rs",
+      "driver_sha256": "b15a03357dc37e496fdd6a12f059a42b5bf6ac4cded4e3e2b8efbaec04dc313c",
+      "target": "sqlite_native_diagnostics_oracle",
+      "native_target": "teaql_sqlite_native_diagnostics_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_native_diagnostics_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_native_diagnostics.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_native_diagnostics_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_native_diagnostics_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_simple_error",
+      "native_test": "sqlite_simple_error_rust_parity",
+      "count": 62,
+      "corpus": "tests/parity/sqlite_simple_error_5_0_6_cases.json.gz",
+      "corpus_sha256": "bfdb27048c2a6a7fd5e3b3abe62f6957d20d5550c824e8e1b5e4aaf4dc05e909",
+      "driver": "tests/parity/rust_values/src/bin/sqlite_simple_error_oracle.rs",
+      "driver_sha256": "2871f6a534891d40edd999137d8078ccb870519ab8f10a940f83223f6c591b6e",
+      "target": "sqlite_simple_error_oracle",
+      "native_target": "teaql_sqlite_simple_error_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_simple_error_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_simple_error.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_simple_error_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_simple_error_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    },
+    {
+      "name": "sqlite_from_sql_error",
+      "native_test": "sqlite_from_sql_error_rust_parity",
+      "count": 36,
+      "corpus": "tests/parity/sqlite_from_sql_error_5_0_6_cases.json.gz",
+      "corpus_sha256": "196276a97a14d54645ce212878f22f3fd392aab85e46e6a41fb97768842ea849",
+      "driver": "tests/parity/rust_values/src/bin/sqlite_from_sql_error_oracle.rs",
+      "driver_sha256": "3efafbf783e7d696f2570d156a084b2469095cafb3ad9450a1c141e36229a4a5",
+      "target": "sqlite_from_sql_error_oracle",
+      "native_target": "teaql_sqlite_from_sql_error_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_from_sql_error_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_from_sql_error.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_from_sql_error_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_provider_protocol_inputs_5_0_6.py",
+        "sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a",
+        "kind": "function",
+        "name": "sqlite_from_sql_error_inputs"
+      },
+      "input_recipe_sha256": "75b029afad2de45ab1902449928cadfc9ad0f3cd8db0fa58cd135294dc75440a"
+    }
+  ]
+}

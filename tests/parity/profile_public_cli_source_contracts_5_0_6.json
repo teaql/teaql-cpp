@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "verifier_sha256": "ef734c3619f0287a01a64e256dd9f505ceafd02ca94c29348346daadc114590d",
+  "source_execution": {
+    "path": "docs/parity/profile_custom_cli_locked_original_execution_5_0_6.json.gz",
+    "sha256": "05ed35ab49f1ac71f9b78561c0bec1208e5eeadd4a9472b8994703fd2110c812"
+  },
+  "scope": "Five custom comparators / six complete corpora and exact Debug/Release source profiles; native gate is native64 Debug/checked only. Existing formatter include/access bridges and checked SQLite panic wrapper remain explicit. Not complete custom CLI or P0-P7 acceptance.",
+  "support_files": {
+    "scripts/archive_driver_provenance_5_0_6.py": "720bd4c6f154c0b13eaa5d6fe6aa6742bd8adc9e20f9765321991557c3dba509",
+    "scripts/custom_public_cli_source_provenance_5_0_6.py": "ab6ff9eb1008c7ab182e3a87fc8036a30e951c9624b6dd511557915f6a30f31b",
+    "tests/parity/audit_event_probe.cpp": "0ae83850729e3d9ecdc4b8247b3019d3f4e163be1ccb394ecf37043529b9c824",
+    "tests/parity/compare_decimal_pointer_scope.py": "01cf6059aa531ab9cbd6307084eb1c97bf473a9293966f44afe246a1c0dc5d66",
+    "tests/parity/compare_entity_query_boundaries.py": "a90c26aa271ebb2f4d475b01f569e59d2a85e00440f19fdd6392619b9108a8ee",
+    "tests/parity/compare_log_formatter.py": "cf7e9ea7ccec02e056137517bc40be659b9cf5ab14fe4dc14096b816466a0d2c",
+    "tests/parity/compare_runtime_id_models.py": "57e72bc1fa5848dce4893ee6eca9988f5fd084fa4445df86b1c53f9a955d93a4",
+    "tests/parity/compare_sqlite_decoding.py": "89d98051223986a244a4eee28f4cfc42b348905f5413d591cd29e9053cd8faaf",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/debug_modes.hpp": "1d72d708461860117b4f7e36505c2a262923cbc77cbf3316c5f99781e8c7c38d",
+    "tests/parity/decimal_probe.cpp": "a64da4b88fa06d291d27863cdfda29126264b921acd846766cffaaccbc8b1d4f",
+    "tests/parity/entity_query_probe.cpp": "afd2182b3ce179a7f7eff1b5faf8dc7acea058de09fb4f2a093ce9121f5d09d9",
+    "tests/parity/fixture_value.hpp": "b5c6ae54108d72a2e8373763fc18f3b3107129256a8a91fc0c7a1cac326865c0",
+    "tests/parity/log_formatter_probe.cpp": "f857bd7b85945f975cfe69c2489631d3259f291b583e807f6fe13ea5b7aea7e6",
+    "tests/parity/runtime_id_model_probe.cpp": "3a2a005c27dd42f843c89cde4a82779a69ff3b0ae665f67240377c7656e134da",
+    "tests/parity/runtime_log_probe.cpp": "83763e909f68048cf17b5f38c5ec1c3533d6acfe511fa1ba470bb0cc6721bcab",
+    "tests/parity/sqlite_decoding_checked_probe.cpp": "43a7a1c528595fa43f524e0112a501b6245bb379215a9d4f7db98b51cde08c58",
+    "tests/parity/sqlite_decoding_probe.cpp": "c0a84e8472dc2145b327d3cae4433f0478b2840e136f2ea6919122599717348d",
+    "tests/support/entity_decoder_fixture.hpp": "0d8fd79424ce3107857c3820a0b3aff544d92d02551eb5f8e247bb04f5fcd8f0",
+    "tests/support/indexed_query_fixture.hpp": "2b0151c259548aa6ea13ee3172f2933fd1c93cfac9848f0c8bbe1bffadfd6a49",
+    "tests/support/provider_sqlite_fixture.hpp": "b987979797dc57d560525b6fbb6090f58f562782daa710c941c74de86b38f1ba"
+  },
+  "manifest_sha256": "d27d6fa646dd7c4edd401f7be2ec7a0fc6ee561a8aec119d587a719cdbcc6992",
+  "compiled_lock_sha256": "fabe33717c61ea26f20bae1ddc3b5d4be6c687e3b7d904de36175748ef109be7",
+  "local_packages": {
+    "teaql-core": ".reference/teaql-rs/teaql-core/Cargo.toml",
+    "teaql-data-service": ".reference/teaql-rs/teaql-data-service/Cargo.toml",
+    "teaql-provider-sqlite": ".reference/teaql-rs/teaql-provider-sqlite/Cargo.toml",
+    "teaql-runtime": ".reference/teaql-rs/teaql-runtime/Cargo.toml",
+    "teaql-sql": ".reference/teaql-rs/teaql-sql/Cargo.toml",
+    "teaql_profile_cli_source_506": "tests/parity/rust_profile_cli_source_5_0_6/Cargo.toml"
+  },
+  "profile_targets": {
+    "debug": [
+      "log_formatter_oracle",
+      "entity_query_current",
+      "runtime_log_oracle",
+      "sqlite_decoding_oracle",
+      "decimal_pointer_oracle",
+      "runtime_id_model_oracle",
+      "audit_event_oracle"
+    ],
+    "release": [
+      "sqlite_decoding_oracle",
+      "runtime_id_model_oracle",
+      "entity_query_current"
+    ]
+  },
+  "drivers": {
+    "log_formatter_oracle": "tests/parity/rust_values/src/bin/log_formatter_oracle.rs",
+    "entity_query_current": "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_5_0_6.rs",
+    "runtime_log_oracle": "tests/parity/rust_values/src/bin/runtime_log_oracle.rs",
+    "sqlite_decoding_oracle": "tests/parity/rust_sqlite_baselines_5_0_6/sqlite_decoding_checked.rs",
+    "decimal_pointer_oracle": "tests/parity/rust_decimal_pointer/src/main.rs",
+    "runtime_id_model_oracle": "tests/parity/rust_values/src/bin/runtime_id_model_oracle.rs",
+    "audit_event_oracle": "tests/parity/rust_values/src/bin/audit_event_oracle.rs"
+  },
+  "contracts": [
+    {
+      "corpus": "tests/parity/runtime_id_model_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "77e4f7b62c21cc2bf118b942858b6f9ecfd5fc12b678d7d16dd5f0bdf0d400fa",
+      "group": "all",
+      "profile": "debug",
+      "binary": "runtime_id_model_oracle",
+      "expected_key": "expected"
+    },
+    {
+      "corpus": "tests/parity/runtime_id_model_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "77e4f7b62c21cc2bf118b942858b6f9ecfd5fc12b678d7d16dd5f0bdf0d400fa",
+      "group": "all",
+      "profile": "release",
+      "binary": "runtime_id_model_oracle",
+      "expected_key": "expected_release"
+    },
+    {
+      "corpus": "tests/parity/entity_query_boundary_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "277230e4982ba67e9d22a4dbbd3df27dbb5c3643d8cdd565b405a1c515dc54a6",
+      "group": "all",
+      "profile": "debug",
+      "binary": "entity_query_current",
+      "expected_key": "expected"
+    },
+    {
+      "corpus": "tests/parity/entity_query_boundary_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "277230e4982ba67e9d22a4dbbd3df27dbb5c3643d8cdd565b405a1c515dc54a6",
+      "group": "all",
+      "profile": "release",
+      "binary": "entity_query_current",
+      "expected_key": "expected_release"
+    },
+    {
+      "corpus": "tests/parity/decimal_pointer_scope_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "be9575f6b1f745cf3b377f1ab6f9dd50518349f781a1859ed75bcfaaf924f41a",
+      "group": "all",
+      "profile": "debug",
+      "binary": "decimal_pointer_oracle",
+      "expected_key": "expected"
+    },
+    {
+      "corpus": "tests/parity/sqlite_decoding_5_0_6_cases.json.gz",
+      "corpus_sha256": "4d72a2fe2acf46bd0bbaa7f448791727d2a9135a1b4eb609b1991239c57d683c",
+      "group": "all",
+      "profile": "debug",
+      "binary": "sqlite_decoding_oracle",
+      "expected_key": "expected"
+    },
+    {
+      "corpus": "tests/parity/sqlite_decoding_unchecked_5_0_6_cases.json.gz",
+      "corpus_sha256": "b56bf46cab5ea40be42a28a8db7ad26fdfa9d4b0118cdfad40b23c7e4683437a",
+      "group": "all",
+      "profile": "release",
+      "binary": "sqlite_decoding_oracle",
+      "expected_key": "expected"
+    },
+    {
+      "corpus": "tests/parity/log_formatter_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "4ef6be155521f395341b3f9172d4e32763960c024a3babfbb68cd97b5c6443bc",
+      "group": "audit",
+      "profile": "debug",
+      "binary": "audit_event_oracle",
+      "expected_key": "expected"
+    },
+    {
+      "corpus": "tests/parity/log_formatter_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "4ef6be155521f395341b3f9172d4e32763960c024a3babfbb68cd97b5c6443bc",
+      "group": "sql",
+      "profile": "debug",
+      "binary": "runtime_log_oracle",
+      "expected_key": "expected"
+    },
+    {
+      "corpus": "tests/parity/log_formatter_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "4ef6be155521f395341b3f9172d4e32763960c024a3babfbb68cd97b5c6443bc",
+      "group": "config",
+      "profile": "debug",
+      "binary": "log_formatter_oracle",
+      "expected_key": "expected"
+    }
+  ],
+  "native_roles": {
+    "runtime_id_model_oracle": "teaql_runtime_id_model_probe",
+    "entity_query_current": "teaql_entity_query_probe",
+    "decimal_pointer_oracle": "teaql_decimal_probe",
+    "sqlite_decoding_oracle": "teaql_sqlite_decoding_checked_probe",
+    "audit_event_oracle": "teaql_audit_event_probe",
+    "runtime_log_oracle": "teaql_runtime_log_probe",
+    "log_formatter_oracle": "teaql_log_formatter_probe"
+  }
+}

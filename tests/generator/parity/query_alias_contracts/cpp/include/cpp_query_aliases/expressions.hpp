@@ -211,14 +211,16 @@ inline PlatformExpression RecordExpression::getNamespace() const {
 
 struct E {
     static PlatformExpression platform(const Platform& value) {
-        return PlatformExpression(entity_expression(value, StaticString{"platform"}));
+        return PlatformExpression(
+            entity_expression(value, StaticString{"platform"}, StaticString{"Platform"}));
     }
 
     static PlatformExpression platform(Platform&&) = delete;
     static PlatformExpression platform(const Platform&&) = delete;
 
     static RecordExpression record(const Record& value) {
-        return RecordExpression(entity_expression(value, StaticString{"record"}));
+        return RecordExpression(
+            entity_expression(value, StaticString{"record"}, StaticString{"Record"}));
     }
 
     static RecordExpression record(Record&&) = delete;

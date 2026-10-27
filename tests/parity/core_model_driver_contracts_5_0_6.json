@@ -1,0 +1,1104 @@
+{
+  "schema": 3,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "project": "tests/parity/rust_core_model_driver_source_5_0_6/Cargo.toml",
+  "package": "teaql_core_model_driver_source_506",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-data-service",
+    "teaql-macros",
+    "teaql-provider-sqlite",
+    "teaql-runtime",
+    "teaql-sql"
+  ],
+  "archive_manifests": [
+    "teaql-core/Cargo.toml",
+    "teaql-data-service/Cargo.toml",
+    "teaql-macros/Cargo.toml",
+    "teaql-provider-sqlite/Cargo.toml",
+    "teaql-runtime/Cargo.toml",
+    "teaql-sql/Cargo.toml",
+    "examples/shared-load-state/fixtures/narrow/lib/Cargo.toml"
+  ],
+  "generated_fixtures": [
+    "tests/generator/parity/business_ids_rust"
+  ],
+  "support_files": [
+    "scripts/core_model_driver_inputs_5_0_6.py",
+    "tests/generator/business_ids.xml",
+    "tests/generator/parity/business_ids_rust/PROVENANCE.json",
+    "tests/generator/parity/business_ids_rust/lib/Cargo.toml",
+    "tests/generator/parity/business_ids_rust/lib/src/e.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/lib.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/q.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/behavior.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/checker.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/entity.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/expression.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/mod.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/request.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/request_support.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/runtime.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/sample_data.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/behavior.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/checker.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/entity.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/expression.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/mod.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/request.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/behavior.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/checker.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/entity.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/expression.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/mod.rs",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/request.rs",
+    "tests/parity/checker_provenance_5_0_6_cases.json",
+    "tests/parity/compact_row_api_5_0_6_cases.json.gz",
+    "tests/parity/compare_values.py",
+    "tests/parity/core_expression_boundaries_5_0_6_cases.json.gz",
+    "tests/parity/core_graph_api_baseline_5_0_6_cases.json.gz",
+    "tests/parity/core_like_expression_source_5_0_6_cases.json.gz",
+    "tests/parity/core_metadata_source_boundaries_5_0_6_cases.json.gz",
+    "tests/parity/core_mutation_boundaries_5_0_6_cases.json.gz",
+    "tests/parity/core_primitives_5_0_6_cases.json.gz",
+    "tests/parity/core_query_boundaries_5_0_6_cases.json.gz",
+    "tests/parity/core_query_intent_source_5_0_6_cases.json.gz",
+    "tests/parity/core_shape_presentation_5_0_6_cases.json",
+    "tests/parity/data_service_model_scope_baseline_5_0_6_cases.json.gz",
+    "tests/parity/data_service_request_source_5_0_6_cases.json.gz",
+    "tests/parity/dynamic_carrier_5_0_6_cases.json",
+    "tests/parity/dynamic_field_error_debug_5_0_6_cases.json.gz",
+    "tests/parity/dynamic_provider_5_0_6_cases.json",
+    "tests/parity/dynamic_search_clone_5_0_6_cases.json.gz",
+    "tests/parity/field_layout_5_0_6_cases.json",
+    "tests/parity/format_5_0_6_cases.json.gz",
+    "tests/parity/generated_relations_5_0_6_cases.json",
+    "tests/parity/graph_plan_scopes_5_0_6_cases.json.gz",
+    "tests/parity/loaded_snapshot_5_0_6_cases.json",
+    "tests/parity/original_snapshot_5_0_6_cases.json",
+    "tests/parity/presentation_api_baseline_5_0_6_cases.json.gz",
+    "tests/parity/presentation_baseline_5_0_6_cases.json.gz",
+    "tests/parity/query_full_state_5_0_6_cases.json.gz",
+    "tests/parity/query_schema_builder_5_0_6_cases.json.gz",
+    "tests/parity/readonly_schema_hash_5_0_6_cases.json.gz",
+    "tests/parity/row_extend_error_5_0_6_cases.json.gz",
+    "tests/parity/rust_values/src/fixture_value.rs",
+    "tests/parity/safe_expression_empty_source_5_0_6_cases.json.gz",
+    "tests/parity/scoped_comments_5_0_6_cases.json",
+    "tests/parity/search_baseline_5_0_6_cases.json.gz",
+    "tests/parity/smart_list_api_5_0_6_cases.json.gz",
+    "tests/parity/value_5_0_6_cases.json.gz"
+  ],
+  "support_file_hashes": {
+    "scripts/core_model_driver_inputs_5_0_6.py": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+    "tests/generator/business_ids.xml": "32e9016e771838835abdac84d1a526ad6549f3f772082cbfa3663d898e95e9e3",
+    "tests/generator/parity/business_ids_rust/PROVENANCE.json": "e5f8aec219847029c280f4b4a2eac1fb1bb2db6b3d992b78d2c024f4b01dad9c",
+    "tests/generator/parity/business_ids_rust/lib/Cargo.toml": "003b10163e185f1c8a398084d05cdb44469c2d66021c3c210b51acf53b4de280",
+    "tests/generator/parity/business_ids_rust/lib/src/e.rs": "8c87da4bdd28c6e7643e068135536308755b8cc6a13815c6a55743790cdccc4c",
+    "tests/generator/parity/business_ids_rust/lib/src/lib.rs": "a99309148cf63199539e51a2a602d1b944283a4ea896e4907fa470ad8ff70a4c",
+    "tests/generator/parity/business_ids_rust/lib/src/q.rs": "dd3da18948eb1ee0649b23b724980a2da1ba429f613c8d85272a83b541226a67",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/behavior.rs": "ee7adf29add9657fc2049f9c040f8729ebb2563b2031eddd1232390ec2fa9b60",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/checker.rs": "6c047d459f2b7ede74e37b41ba74b1709fcb31cffbff56a941e24f9d55c8af3b",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/entity.rs": "a9f68e881781f0b013dc47f9b244c3aa339f08eef6cc2fa18853b6cb029d4f5f",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/expression.rs": "c43a1428e027d35c0e6b3aa1a95fbaf9a7facf9a5e46945d72d75f39c2bccdb4",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "tests/generator/parity/business_ids_rust/lib/src/receipt/request.rs": "a7f1cd4a52480f7bf89ff32e79276754cf53351168ea644ebca53df94720efa5",
+    "tests/generator/parity/business_ids_rust/lib/src/request_support.rs": "1c666061bb2c4a5bac661c60923c7cbb748bfbda75f0ce8fd129bbc41ac6923e",
+    "tests/generator/parity/business_ids_rust/lib/src/runtime.rs": "fb5673825e4d57f2e3e11c7421aaad8e8ccfad6c310cd3ea6c2ebd7541e1a12c",
+    "tests/generator/parity/business_ids_rust/lib/src/sample_data.rs": "17c81b61f143f2429f3341b3ba7348814cb0d788e7aad194e71bf227a2ea35bc",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/behavior.rs": "adce6aacbb905b10543b94863a14be531feb88b7e78109d5d7b73e5f87932229",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/checker.rs": "0236ac44b822bf853270333bb85b521e48483a4184c1d65ef72af038760966a1",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/entity.rs": "2d2ede85bb407b671e327b08fc0f1d538edaee89c0bdb931844f6d04efea3cfc",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/expression.rs": "b4a006a7dc73cdbc78b765f9f18b5454ad260fd4e6fde1c492d5aba71a57300b",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "tests/generator/parity/business_ids_rust/lib/src/tenant/request.rs": "20a64064d781cd5d6bda2ced0ef53cdfa5d28256ee7343b633cd5a21013244ea",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/behavior.rs": "fe3d7131348d1ff1ce6398edaeff861304acf32094fa23864357145c384fecc3",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/checker.rs": "37081ccde231c397ef4c23f034b243fc394caf67f8dfa08197fb156b8d5c2018",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/entity.rs": "e5a0becf4cf98f57a6be6a2f6da7c1aeae49b8b29275b74ab70a642edb9f9900",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/expression.rs": "c63fbbc6a2305675c6453186dc9cc4ca6f2da181bc87eeaf48ebb4a06878b674",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "tests/generator/parity/business_ids_rust/lib/src/ticket/request.rs": "95ac8693b2696c1f568ee3747df7f7bde665a8a56ffa2bd88fb86ee63f055fc7",
+    "tests/parity/checker_provenance_5_0_6_cases.json": "071965e3378ca6581f511ea6ba5f9cb19dacdda602b4d67cd13b9fb0af68eb58",
+    "tests/parity/compact_row_api_5_0_6_cases.json.gz": "119ed4a2d4fb06af90162820a6d678b1977ff36fbf0a2e45b2adb8e19d2a3e03",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/core_expression_boundaries_5_0_6_cases.json.gz": "e5319d9a489304adeaa0bd741d1e592a89c06d6ec10ca5205a2dfab00035a890",
+    "tests/parity/core_graph_api_baseline_5_0_6_cases.json.gz": "dc97ac4945fa1d054cc871a0ea00354438b1adea7ee788af480b5057a0edeaaa",
+    "tests/parity/core_like_expression_source_5_0_6_cases.json.gz": "130c8982ac4915b414b2c1d21be83b165dd7c86c754e26aa88ffc4a7b6026b84",
+    "tests/parity/core_metadata_source_boundaries_5_0_6_cases.json.gz": "ad282f6ce3b6f5351ebf7b3c04b7041b76af1f8b52355d7350a3026d7e0ef4aa",
+    "tests/parity/core_mutation_boundaries_5_0_6_cases.json.gz": "96277051b04356751c0c1d3c78808ed521ac9849c7d9caba1f4c68642aa7a29a",
+    "tests/parity/core_primitives_5_0_6_cases.json.gz": "007557e0c8e1f8f25cd6ae64511a5513da538e574ade55da707b88e03ff98d7e",
+    "tests/parity/core_query_boundaries_5_0_6_cases.json.gz": "01084ae1a950b094a497d5618f5a5986623c94c08a02aea66e3a840e6490089b",
+    "tests/parity/core_query_intent_source_5_0_6_cases.json.gz": "30958e5e1d3bdc2ca3a40f661fecdc3965e3b545d23f8add5237f35c64febf2a",
+    "tests/parity/core_shape_presentation_5_0_6_cases.json": "5b2d2501b455408c8be76b6563a0fbd58c20f4d87e5522ada9f36da2ec6a5c5a",
+    "tests/parity/data_service_model_scope_baseline_5_0_6_cases.json.gz": "a201496e5eda2ccad0aceb7e18ffae5245c4bf91445c819260a35fcef207ec8e",
+    "tests/parity/data_service_request_source_5_0_6_cases.json.gz": "94a1a3bb34dd46e4627a36ae2e632ac65372f048b929f027460c17c8a3fa859e",
+    "tests/parity/dynamic_carrier_5_0_6_cases.json": "1e3e12723933b2b733680231001216e284efd92529f09a981413d2773cc3ee75",
+    "tests/parity/dynamic_field_error_debug_5_0_6_cases.json.gz": "1e8de8bb213a2c285c13e68bc4fe0c7ad8d3f1c4de098af168961ea064a37a2a",
+    "tests/parity/dynamic_provider_5_0_6_cases.json": "86126dc0cf161fea8f90dbf938426231ff3f3dba0d030bf1d9972c6824c312ac",
+    "tests/parity/dynamic_search_clone_5_0_6_cases.json.gz": "1b70b6939c9bbf22b4cd064af5026a5a5bc78b71d1888c5d6431926dcb4e1afb",
+    "tests/parity/field_layout_5_0_6_cases.json": "0e942bb6f3d931137d51652164c4899023788c398554b1b851a4855c7c96d78b",
+    "tests/parity/format_5_0_6_cases.json.gz": "543e0e8eed89ab19cc9c53bcc0dff2e4e70945cd3766953ee9548e0b5fff65e9",
+    "tests/parity/generated_relations_5_0_6_cases.json": "99c6f8efdf261681975094036df00a4bc8bcac967a8a1a3cc1fdc862a2748db1",
+    "tests/parity/graph_plan_scopes_5_0_6_cases.json.gz": "bfcaa39cb5ee34b99c0e5b6ae661ec6cfd407c9d3babd4bfe5700b4439f071ab",
+    "tests/parity/loaded_snapshot_5_0_6_cases.json": "28cc6cff90076bb1ccd5b0652469fc964b1e0daeb4fa7248ad05e7c1bf9e0868",
+    "tests/parity/original_snapshot_5_0_6_cases.json": "1b3184515243022bde7dadcd6f3ddad1cf0bc468a7524ad4f6f4ae926052ab5a",
+    "tests/parity/presentation_api_baseline_5_0_6_cases.json.gz": "3fde1ce4d8c342a45e8cb397dcbf0eba003d56568370afa47dd1bc707abb8420",
+    "tests/parity/presentation_baseline_5_0_6_cases.json.gz": "81b04b2bc944b371534cdb8fae20eab79bc1b7cfa1d9007f7e687b8ca725ec45",
+    "tests/parity/query_full_state_5_0_6_cases.json.gz": "0847b404cafb6e4af17d51bd0dc826b946106dceb912e2fe68bad4290b9ed329",
+    "tests/parity/query_schema_builder_5_0_6_cases.json.gz": "3fc66150475bbcc8e0766ff68d81ae124f12806fc709b6c72d8f67b73991cc37",
+    "tests/parity/readonly_schema_hash_5_0_6_cases.json.gz": "e029c9633adb56230421e0f345c5d786cc6049aae2c14bec427fef8ac955ede3",
+    "tests/parity/row_extend_error_5_0_6_cases.json.gz": "e928df100600676fae181e0894498817e113d22488749a6ae0fc7eb9ab9b6c0c",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/safe_expression_empty_source_5_0_6_cases.json.gz": "44bdfc27dcd163cf8531a5148c6fba6fb9f221833557deb2bbed3d399fa82509",
+    "tests/parity/scoped_comments_5_0_6_cases.json": "42d60a45b193558aab626c12cfa7c213189823cde93d85554d2d1f849b67a7a1",
+    "tests/parity/search_baseline_5_0_6_cases.json.gz": "23bfcc8578e1a8d0a44189a54860c39a705234ae8a08728710584a5c78594c8b",
+    "tests/parity/smart_list_api_5_0_6_cases.json.gz": "dca45afb8d9101be4beb8d0f98dc4d01055d0ba70111eb399bfab0a63ff607cc",
+    "tests/parity/value_5_0_6_cases.json.gz": "a206b16f4b12c852b90f4fec5b81d02a05b2c5dfdf35e254b144a824105b969b"
+  },
+  "input_helpers": {},
+  "contracts": [
+    {
+      "name": "graph_plan_scopes",
+      "native_test": "graph_plan_scopes_rust_parity",
+      "count": 336,
+      "corpus": "tests/parity/graph_plan_scopes_5_0_6_cases.json.gz",
+      "corpus_sha256": "bfcaa39cb5ee34b99c0e5b6ae661ec6cfd407c9d3babd4bfe5700b4439f071ab",
+      "driver": "tests/parity/rust_field_layout/src/bin/entity_graph_plan_5_0_6.rs",
+      "driver_sha256": "0da8c9f889b11bf8655c029909c5894ba4239d7617b615513e1f605dc730dd0e",
+      "target": "core_model_graph_plan_scopes",
+      "native_target": "teaql_entity_graph_plan_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_entity_graph_plan_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_graph_plan_scopes_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_entity_graph_plan_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "graph_plan_scopes_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "scoped_comments",
+      "native_test": "scoped_comments_rust_parity",
+      "count": 242,
+      "corpus": "tests/parity/scoped_comments_5_0_6_cases.json",
+      "corpus_sha256": "42d60a45b193558aab626c12cfa7c213189823cde93d85554d2d1f849b67a7a1",
+      "driver": "tests/parity/rust_field_layout/src/bin/scoped_comments_5_0_6.rs",
+      "driver_sha256": "81e5d38cf946b1624a077ecc545ac4dffe41467045f4a61932310edaa9754ccb",
+      "target": "core_model_scoped_comments",
+      "native_target": "teaql_scoped_comments_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_scoped_comments_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_scoped_comments_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_scoped_comments_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "scoped_comments_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "data_service_request_source",
+      "native_test": "data_service_request_source_rust_parity",
+      "count": 932,
+      "corpus": "tests/parity/data_service_request_source_5_0_6_cases.json.gz",
+      "corpus_sha256": "94a1a3bb34dd46e4627a36ae2e632ac65372f048b929f027460c17c8a3fa859e",
+      "driver": "tests/parity/data_service_request_source_5_0_6.rs",
+      "driver_sha256": "8c5c37b9f8563acdac3354ebff5b365973e289981b534be941d37bc393f4ace6",
+      "target": "core_model_data_service_request_source",
+      "native_target": "teaql_data_service_request_source_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_data_service_request_source_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_data_service_request_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_data_service_request_source_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "data_service_request_source_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "data_service_model_scope",
+      "native_test": "data_service_model_scope_rust_parity",
+      "count": 40,
+      "corpus": "tests/parity/data_service_model_scope_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "a201496e5eda2ccad0aceb7e18ffae5245c4bf91445c819260a35fcef207ec8e",
+      "driver": "tests/parity/rust_field_layout/src/bin/data_service_model_5_0_6.rs",
+      "driver_sha256": "c3a1be59904aada538198cb1e91ae6497bd5c4e3800df8e2ddc6532938cfda88",
+      "target": "core_model_data_service_model_scope",
+      "native_target": "teaql_data_service_model_scope_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_data_service_model_scope_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_data_service_model_scope.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_data_service_model_scope_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "data_service_model_scope_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "field_layout",
+      "native_test": "field_layout_rust_parity",
+      "count": 44,
+      "corpus": "tests/parity/field_layout_5_0_6_cases.json",
+      "corpus_sha256": "0e942bb6f3d931137d51652164c4899023788c398554b1b851a4855c7c96d78b",
+      "driver": "tests/parity/rust_field_layout/src/main.rs",
+      "driver_sha256": "4c29db7de75f7e7c805f3059b9d7f266dc967475dc946ef6872a2ad76f5f5502",
+      "target": "core_model_field_layout",
+      "native_target": "teaql_field_layout_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_field_layout_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_field_layout.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_field_layout_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "field_layout_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "loaded_snapshot",
+      "native_test": "loaded_snapshot_rust_parity",
+      "count": 427,
+      "corpus": "tests/parity/loaded_snapshot_5_0_6_cases.json",
+      "corpus_sha256": "28cc6cff90076bb1ccd5b0652469fc964b1e0daeb4fa7248ad05e7c1bf9e0868",
+      "driver": "tests/parity/rust_field_layout/src/main.rs",
+      "driver_sha256": "4c29db7de75f7e7c805f3059b9d7f266dc967475dc946ef6872a2ad76f5f5502",
+      "target": "core_model_field_layout",
+      "native_target": "teaql_loaded_snapshot_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_snapshot_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_loaded_snapshot.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_snapshot_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "loaded_snapshot_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "dynamic_provider",
+      "native_test": "dynamic_provider_rust_parity",
+      "count": 72,
+      "corpus": "tests/parity/dynamic_provider_5_0_6_cases.json",
+      "corpus_sha256": "86126dc0cf161fea8f90dbf938426231ff3f3dba0d030bf1d9972c6824c312ac",
+      "driver": "tests/parity/rust_field_layout/src/bin/dynamic_provider_5_0_6.rs",
+      "driver_sha256": "67e1da045a73c3b2f0037a08ba60e00ce1bae3840701e650b2b937f89246671f",
+      "target": "core_model_dynamic_provider",
+      "native_target": "teaql_dynamic_provider_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_dynamic_provider_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_dynamic_provider.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_dynamic_provider_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "dynamic_provider_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "dynamic_carrier",
+      "native_test": "dynamic_carrier_rust_parity",
+      "count": 176,
+      "corpus": "tests/parity/dynamic_carrier_5_0_6_cases.json",
+      "corpus_sha256": "1e3e12723933b2b733680231001216e284efd92529f09a981413d2773cc3ee75",
+      "driver": "tests/parity/rust_field_layout/src/bin/dynamic_carrier_5_0_6.rs",
+      "driver_sha256": "e72c736ac6d325e27b7e37834edaa3b47905cc0db99d3fdef745e3b0c51576af",
+      "target": "core_model_dynamic_carrier",
+      "native_target": "teaql_dynamic_carrier_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_dynamic_carrier_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_dynamic_carrier.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_dynamic_carrier_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "dynamic_carrier_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "original_snapshot",
+      "native_test": "original_snapshot_rust_parity",
+      "count": 56,
+      "corpus": "tests/parity/original_snapshot_5_0_6_cases.json",
+      "corpus_sha256": "1b3184515243022bde7dadcd6f3ddad1cf0bc468a7524ad4f6f4ae926052ab5a",
+      "driver": "tests/parity/rust_field_layout/src/main.rs",
+      "driver_sha256": "4c29db7de75f7e7c805f3059b9d7f266dc967475dc946ef6872a2ad76f5f5502",
+      "target": "core_model_field_layout",
+      "native_target": "teaql_loaded_snapshot_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_snapshot_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_original_snapshot.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_snapshot_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "original_snapshot_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "checker_provenance",
+      "native_test": "checker_provenance_rust_parity",
+      "count": 274,
+      "corpus": "tests/parity/checker_provenance_5_0_6_cases.json",
+      "corpus_sha256": "071965e3378ca6581f511ea6ba5f9cb19dacdda602b4d67cd13b9fb0af68eb58",
+      "driver": "tests/parity/rust_field_layout/src/main.rs",
+      "driver_sha256": "4c29db7de75f7e7c805f3059b9d7f266dc967475dc946ef6872a2ad76f5f5502",
+      "target": "core_model_field_layout",
+      "native_target": "teaql_loaded_snapshot_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_snapshot_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_checker_helpers.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_snapshot_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "checker_provenance_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "generated_relations",
+      "native_test": "generated_relations_rust_parity",
+      "count": 128,
+      "corpus": "tests/parity/generated_relations_5_0_6_cases.json",
+      "corpus_sha256": "99c6f8efdf261681975094036df00a4bc8bcac967a8a1a3cc1fdc862a2748db1",
+      "driver": "tests/parity/rust_field_layout/src/main.rs",
+      "driver_sha256": "4c29db7de75f7e7c805f3059b9d7f266dc967475dc946ef6872a2ad76f5f5502",
+      "target": "core_model_field_layout",
+      "native_target": "teaql_loaded_snapshot_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_snapshot_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_generated_relations.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_loaded_snapshot_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "generated_relations_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "presentation",
+      "native_test": "presentation_rust_parity",
+      "count": 785,
+      "corpus": "tests/parity/presentation_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "81b04b2bc944b371534cdb8fae20eab79bc1b7cfa1d9007f7e687b8ca725ec45",
+      "driver": "tests/parity/rust_values/src/bin/presentation_oracle.rs",
+      "driver_sha256": "f747e5f65401f50fd41fadbbe115c9b5aa8babb730306beed28d22cdf758f845",
+      "target": "core_model_presentation",
+      "native_target": "teaql_presentation_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_presentation_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_presentation.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_presentation_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "presentation_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "search",
+      "native_test": "search_rust_parity",
+      "count": 509,
+      "corpus": "tests/parity/search_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "23bfcc8578e1a8d0a44189a54860c39a705234ae8a08728710584a5c78594c8b",
+      "driver": "tests/parity/rust_values/src/bin/search_oracle.rs",
+      "driver_sha256": "99a8ca7f9c7c759041479d47ff4f4fe6a13c4f4b59498191386419065805f204",
+      "target": "core_model_search",
+      "native_target": "teaql_search_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_search_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_search.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_search_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "search_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "value",
+      "native_test": "value_rust_parity",
+      "count": 722,
+      "corpus": "tests/parity/value_5_0_6_cases.json.gz",
+      "corpus_sha256": "a206b16f4b12c852b90f4fec5b81d02a05b2c5dfdf35e254b144a824105b969b",
+      "driver": "tests/parity/rust_values/src/main.rs",
+      "driver_sha256": "cbb2ea4581cd09db2074aec34552553e63efc6728fcf6f80b018201d2943e860",
+      "target": "core_model_value",
+      "native_target": "teaql_value_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_value_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_values.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_value_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "value_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "format",
+      "native_test": "format_rust_parity",
+      "count": 848,
+      "corpus": "tests/parity/format_5_0_6_cases.json.gz",
+      "corpus_sha256": "543e0e8eed89ab19cc9c53bcc0dff2e4e70945cd3766953ee9548e0b5fff65e9",
+      "driver": "tests/parity/rust_values/src/main.rs",
+      "driver_sha256": "cbb2ea4581cd09db2074aec34552553e63efc6728fcf6f80b018201d2943e860",
+      "target": "core_model_value",
+      "native_target": "teaql_value_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_value_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_formats.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_value_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "format_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "presentation_api",
+      "native_test": "presentation_api_rust_parity",
+      "count": 675,
+      "corpus": "tests/parity/presentation_api_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "3fde1ce4d8c342a45e8cb397dcbf0eba003d56568370afa47dd1bc707abb8420",
+      "driver": "tests/parity/rust_values/src/bin/presentation_api_oracle.rs",
+      "driver_sha256": "b74a65af72a29f635c2613b89bf4cfc6ab25e2759c465d0a75a4b8f57472d724",
+      "target": "core_model_presentation_api",
+      "native_target": "teaql_presentation_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_presentation_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_presentation_api.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_presentation_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "presentation_api_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_graph_api",
+      "native_test": "core_graph_api_rust_parity",
+      "count": 240,
+      "corpus": "tests/parity/core_graph_api_baseline_5_0_6_cases.json.gz",
+      "corpus_sha256": "dc97ac4945fa1d054cc871a0ea00354438b1adea7ee788af480b5057a0edeaaa",
+      "driver": "tests/parity/rust_values/src/bin/core_graph_api_oracle.rs",
+      "driver_sha256": "f8aef2726ea23eeed7b31ad9853dfd5f3ad0a1c45ad1e9b5adb0515395562457",
+      "target": "core_model_core_graph_api",
+      "native_target": "teaql_core_graph_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_graph_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_graph_api.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_graph_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_graph_api_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_metadata_source",
+      "native_test": "core_metadata_source_rust_parity",
+      "count": 80,
+      "corpus": "tests/parity/core_metadata_source_boundaries_5_0_6_cases.json.gz",
+      "corpus_sha256": "ad282f6ce3b6f5351ebf7b3c04b7041b76af1f8b52355d7350a3026d7e0ef4aa",
+      "driver": "tests/parity/rust_field_layout/src/bin/meta_api_5_0_6.rs",
+      "driver_sha256": "6aacd1d22700ebe3fdc52dfecbd75a1712b5508969027cf1ce64755c63c78bc3",
+      "target": "core_model_core_metadata_source",
+      "native_target": "teaql_meta_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_meta_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_metadata_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_meta_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_metadata_source_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_primitives",
+      "native_test": "core_primitives_rust_parity",
+      "count": 162,
+      "corpus": "tests/parity/core_primitives_5_0_6_cases.json.gz",
+      "corpus_sha256": "007557e0c8e1f8f25cd6ae64511a5513da538e574ade55da707b88e03ff98d7e",
+      "driver": "tests/parity/rust_core_primitives_reference_5_0_6/src/main.rs",
+      "driver_sha256": "1d22be575d24790110a4fcb02dcdb8536fd6a26b16f6e084adaae656d020200b",
+      "target": "core_model_core_primitives",
+      "native_target": "teaql_core_primitives_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_primitives_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_primitives_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_primitives_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_primitives_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "readonly_schema_hash_5_0_6",
+      "native_test": "readonly_schema_hash_5_0_6_rust_parity",
+      "count": 69,
+      "corpus": "tests/parity/readonly_schema_hash_5_0_6_cases.json.gz",
+      "corpus_sha256": "e029c9633adb56230421e0f345c5d786cc6049aae2c14bec427fef8ac955ede3",
+      "driver": "tests/parity/rust_field_layout/src/bin/readonly_schema_hash_5_0_6.rs",
+      "driver_sha256": "05e6396ed2658cdb9109f8dac7705169ea15ca4629c011265a8eb33f73c9c532",
+      "target": "core_model_readonly_schema_hash_5_0_6",
+      "native_target": "teaql_readonly_schema_hash_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_readonly_schema_hash_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_readonly_schema_hash_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_readonly_schema_hash_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "readonly_schema_hash_5_0_6_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "smart_list_api",
+      "native_test": "smart_list_api_rust_parity",
+      "count": 1291,
+      "corpus": "tests/parity/smart_list_api_5_0_6_cases.json.gz",
+      "corpus_sha256": "dca45afb8d9101be4beb8d0f98dc4d01055d0ba70111eb399bfab0a63ff607cc",
+      "driver": "tests/parity/rust_field_layout/src/bin/smart_list_api_5_0_6.rs",
+      "driver_sha256": "0e861c04440a560cc3e48957bb508b907a914b7433bf6daea4bf922a366594ec",
+      "target": "core_model_smart_list_api",
+      "native_target": "teaql_smart_list_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_smart_list_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_smart_list_api_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_smart_list_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "smart_list_api_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_shape_presentation",
+      "native_test": "core_shape_presentation_rust_parity",
+      "count": 200,
+      "corpus": "tests/parity/core_shape_presentation_5_0_6_cases.json",
+      "corpus_sha256": "5b2d2501b455408c8be76b6563a0fbd58c20f4d87e5522ada9f36da2ec6a5c5a",
+      "driver": "tests/parity/rust_field_layout/src/bin/core_shape_presentation_5_0_6.rs",
+      "driver_sha256": "87ba17a36ec296484a68519d2c2de81e7939d0e3b24e24c0c5edd55625f8eb27",
+      "target": "core_model_core_shape_presentation",
+      "native_target": "teaql_core_shape_presentation_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_shape_presentation_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_shape_presentation.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_shape_presentation_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_shape_presentation_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "compact_row_api",
+      "native_test": "compact_row_api_rust_parity",
+      "count": 401,
+      "corpus": "tests/parity/compact_row_api_5_0_6_cases.json.gz",
+      "corpus_sha256": "119ed4a2d4fb06af90162820a6d678b1977ff36fbf0a2e45b2adb8e19d2a3e03",
+      "driver": "tests/parity/rust_field_layout/src/bin/compact_row_api_5_0_6.rs",
+      "driver_sha256": "64dc5216a431a6cf1bbc0a3c6bf69df6347cea9015e16c7d2493228d0ea8ff09",
+      "target": "core_model_compact_row_api",
+      "native_target": "teaql_compact_row_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_compact_row_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_compact_row_api_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_compact_row_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "compact_row_api_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_like_expression_source",
+      "native_test": "core_like_expression_source_rust_parity",
+      "count": 32,
+      "corpus": "tests/parity/core_like_expression_source_5_0_6_cases.json.gz",
+      "corpus_sha256": "130c8982ac4915b414b2c1d21be83b165dd7c86c754e26aa88ffc4a7b6026b84",
+      "driver": "tests/parity/core_like_expression_source_5_0_6.rs",
+      "driver_sha256": "090bf158094d8a8014a8c873a964f94ccab79f951636fbfdacdd4669e7d6f740",
+      "target": "core_model_core_like_expression_source",
+      "native_target": "teaql_core_like_expression_source_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_like_expression_source_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_like_expression_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_like_expression_source_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_like_expression_source_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_expression_boundaries",
+      "native_test": "core_expression_boundaries_rust_parity",
+      "count": 162,
+      "corpus": "tests/parity/core_expression_boundaries_5_0_6_cases.json.gz",
+      "corpus_sha256": "e5319d9a489304adeaa0bd741d1e592a89c06d6ec10ca5205a2dfab00035a890",
+      "driver": "tests/parity/rust_field_layout/src/bin/query_api_5_0_6.rs",
+      "driver_sha256": "ea7b52b4cb9d228c6cce4bdc9fdfe79a0c5c0f28342b627af573ab39912c274e",
+      "target": "core_model_core_expression_boundaries",
+      "native_target": "teaql_query_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_query_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_expression_boundaries_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_query_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_expression_boundaries_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "safe_expression_empty_source",
+      "native_test": "safe_expression_empty_source_rust_parity",
+      "count": 132,
+      "corpus": "tests/parity/safe_expression_empty_source_5_0_6_cases.json.gz",
+      "corpus_sha256": "44bdfc27dcd163cf8531a5148c6fba6fb9f221833557deb2bbed3d399fa82509",
+      "driver": "tests/parity/safe_expression_empty_source_5_0_6.rs",
+      "driver_sha256": "ec17322bff49478d3720fde9aeda4d236b0864ea73ccf0793000b1091ca05358",
+      "target": "core_model_safe_expression_empty_source",
+      "native_target": "teaql_safe_expression_empty_source_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_safe_expression_empty_source_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_safe_expression_empty_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_safe_expression_empty_source_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "safe_expression_empty_source_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_mutation_boundaries",
+      "native_test": "core_mutation_boundaries_rust_parity",
+      "count": 240,
+      "corpus": "tests/parity/core_mutation_boundaries_5_0_6_cases.json.gz",
+      "corpus_sha256": "96277051b04356751c0c1d3c78808ed521ac9849c7d9caba1f4c68642aa7a29a",
+      "driver": "tests/parity/rust_field_layout/src/bin/mutation_model_api_5_0_6.rs",
+      "driver_sha256": "c7a707e93a658a0ee2052ca541ac79be838c825c8dee0db1de17a24a51f7e17a",
+      "target": "core_model_core_mutation_boundaries",
+      "native_target": "teaql_mutation_model_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_mutation_model_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_mutation_boundaries_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_mutation_model_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_mutation_boundaries_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_query_boundaries",
+      "native_test": "core_query_boundaries_rust_parity",
+      "count": 318,
+      "corpus": "tests/parity/core_query_boundaries_5_0_6_cases.json.gz",
+      "corpus_sha256": "01084ae1a950b094a497d5618f5a5986623c94c08a02aea66e3a840e6490089b",
+      "driver": "tests/parity/rust_field_layout/src/bin/query_api_5_0_6.rs",
+      "driver_sha256": "ea7b52b4cb9d228c6cce4bdc9fdfe79a0c5c0f28342b627af573ab39912c274e",
+      "target": "core_model_core_expression_boundaries",
+      "native_target": "teaql_query_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_query_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_query_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_query_api_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_query_boundaries_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "core_query_intent_source",
+      "native_test": "core_query_intent_source_rust_parity",
+      "count": 48,
+      "corpus": "tests/parity/core_query_intent_source_5_0_6_cases.json.gz",
+      "corpus_sha256": "30958e5e1d3bdc2ca3a40f661fecdc3965e3b545d23f8add5237f35c64febf2a",
+      "driver": "tests/parity/core_query_intent_source_5_0_6.rs",
+      "driver_sha256": "61d13bb4ae2c65753c82fe2717f8517814a9618d4f5c51f7dee26b6fdf6dd916",
+      "target": "core_model_core_query_intent_source",
+      "native_target": "teaql_core_query_intent_source_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_query_intent_source_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_core_query_intent_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_core_query_intent_source_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "core_query_intent_source_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "query_schema_builder",
+      "native_test": "query_schema_builder_rust_parity",
+      "count": 480,
+      "corpus": "tests/parity/query_schema_builder_5_0_6_cases.json.gz",
+      "corpus_sha256": "3fc66150475bbcc8e0766ff68d81ae124f12806fc709b6c72d8f67b73991cc37",
+      "driver": "tests/parity/query_schema_builder_5_0_6.rs",
+      "driver_sha256": "b2eada979828426db96c061ecb9179c9644663922c383797b4a98ec06345567b",
+      "target": "core_model_query_schema_builder",
+      "native_target": "teaql_query_schema_builder_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_query_schema_builder_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_query_schema_builder_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_query_schema_builder_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "query_schema_builder_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "query_full_state",
+      "native_test": "query_full_state_rust_parity",
+      "count": 124,
+      "corpus": "tests/parity/query_full_state_5_0_6_cases.json.gz",
+      "corpus_sha256": "0847b404cafb6e4af17d51bd0dc826b946106dceb912e2fe68bad4290b9ed329",
+      "driver": "tests/parity/query_full_state_5_0_6.rs",
+      "driver_sha256": "1eb2e0981a56012cadc525dd501a8b4f047d540eb3521a8af7d2404ed007271d",
+      "target": "core_model_query_full_state",
+      "native_target": "teaql_query_full_state_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_query_full_state_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_query_full_state_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_query_full_state_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "query_full_state_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "row_extend_error",
+      "native_test": "row_extend_error_rust_parity",
+      "count": 300,
+      "corpus": "tests/parity/row_extend_error_5_0_6_cases.json.gz",
+      "corpus_sha256": "e928df100600676fae181e0894498817e113d22488749a6ae0fc7eb9ab9b6c0c",
+      "driver": "tests/parity/rust_query_full_state_5_0_6/examples/row_extend_error.rs",
+      "driver_sha256": "e12aa5705c9e0e044709dbe076a5a3bc2d8965775fda0e55d1d4ae4b74927411",
+      "target": "core_model_row_extend_error",
+      "native_target": "teaql_row_extend_error_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_row_extend_error_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_row_extend_error_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_row_extend_error_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "row_extend_error_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "dynamic_field_error_debug",
+      "native_test": "dynamic_field_error_debug_rust_parity",
+      "count": 48,
+      "corpus": "tests/parity/dynamic_field_error_debug_5_0_6_cases.json.gz",
+      "corpus_sha256": "1e8de8bb213a2c285c13e68bc4fe0c7ad8d3f1c4de098af168961ea064a37a2a",
+      "driver": "tests/parity/rust_query_full_state_5_0_6/examples/row_extend_error.rs",
+      "driver_sha256": "e12aa5705c9e0e044709dbe076a5a3bc2d8965775fda0e55d1d4ae4b74927411",
+      "target": "core_model_row_extend_error",
+      "native_target": "teaql_row_extend_error_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_row_extend_error_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_dynamic_field_error_debug_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_row_extend_error_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "dynamic_field_error_debug_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    },
+    {
+      "name": "dynamic_search_clone",
+      "native_test": "dynamic_search_clone_rust_parity",
+      "count": 32,
+      "corpus": "tests/parity/dynamic_search_clone_5_0_6_cases.json.gz",
+      "corpus_sha256": "1b70b6939c9bbf22b4cd064af5026a5a5bc78b71d1888c5d6431926dcb4e1afb",
+      "driver": "tests/parity/dynamic_search_clone_source_5_0_6.rs",
+      "driver_sha256": "5256ff467184bd95b2b50ab557dcaba233b1416bc03db1e06627490e422bd26f",
+      "target": "core_model_dynamic_search_clone",
+      "native_target": "teaql_dynamic_search_clone_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_dynamic_search_clone_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_dynamic_search_clone_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_dynamic_search_clone_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/core_model_driver_inputs_5_0_6.py",
+        "sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480",
+        "kind": "function",
+        "name": "dynamic_search_clone_inputs"
+      },
+      "input_recipe_sha256": "10528b7df1089a0b1f64320640e7d14dbcfb475d9bf6415dfde0234c6fee2480"
+    }
+  ]
+}

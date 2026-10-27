@@ -18,11 +18,14 @@ from xml.sax.saxutils import escape
 
 from audit_generated_privacy_contracts_5_0_6 import RUST_MAIN, CPP_MAIN
 from verify_generated_privacy_metadata import LAUNCHER
-from verify_audit_metadata_source_5_0_6 import identities
+from verify_audit_metadata_source_5_0_6 import candidate_overlays, identities
+from compare_values import same
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGINAL = ROOT / ".reference/teaql_code_gen"
 PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
+BINDING_RUST_MAIN = ROOT / "tests/parity/audit_binding_rust_main_5_0_6.rs"
+BINDING_CPP_OBSERVER = ROOT / "tests/parity/audit_binding_cpp_observer_5_0_6.hpp"
 CASES = [
     "decimal",
     "plus_pattern_audit_value_max_len",
@@ -53,9 +56,20 @@ def digest(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--record", type=Path, required=True)
+    parser.add_argument("--expected-cpp-refusal",
+                        help="Diagnostic only: compile original entities after this exact C++ generation refusal; never qualifies parity")
+    parser.add_argument("--corpus", type=Path, help="Use a separately retained actual-source caller corpus")
+    parser.add_argument("--cases", nargs='+', help="Explicit named callers from --corpus")
+    parser.add_argument("--candidate-parser", type=Path, help="Compile an owned parser overlay")
+    parser.add_argument("--candidate-source", type=Path, action="append", default=[],
+                        help="Additional owned Java source overlay; repeat for shared helpers")
+    parser.add_argument("--binding-redactions", action="store_true",
+                        help="Also compare protected binding capture from generated descriptors")
     args = parser.parse_args()
     if args.record.exists() or args.record.suffix != ".gz":
         parser.error("Use a fresh compressed evidence path")
+    if args.binding_redactions and args.expected_cpp_refusal:
+        parser.error("Binding redactions require a successful C++ generation")
     corpus_path = PRODUCER / "generator/src/test/resources/cpp_audit_metadata_5_0_6.json.gz"
     corpus = json.loads(gzip.decompress(corpus_path.read_bytes()))
     selected = [next(case for case in corpus["cases"] if case["name"] == name)
@@ -72,6 +86,15 @@ def main():
     assert syntax["generator_commit"] == corpus["generator_commit"]
     selected.extend(next(case for case in syntax["cases"] if case["name"] == name)
                     for name in SYNTAX_CASES)
+    if args.corpus:
+        if not args.cases:
+            parser.error("--corpus requires --cases")
+        corpus = json.loads(gzip.decompress(args.corpus.read_bytes()))
+        assert corpus['runtime_commit'] == syntax['runtime_commit']
+        assert corpus['generator_commit'] == syntax['generator_commit']
+        selected = [next(c for c in corpus['cases'] if c['name'] == name) for name in args.cases]
+    elif args.cases:
+        parser.error("--cases requires --corpus")
     assert all(case["expected"]["parsed"] for case in selected)
     runtime = ROOT / ".reference/teaql-rs"
     libraries = [ROOT / "build_native_current" / package / ("lib" + package + ".a")
@@ -79,31 +102,49 @@ def main():
                                  "teaql_core", "teaql_memory", "teaql_provider_sqlite")]
     original_sources = sorted(path for package in ("model", "generator")
                               for path in (ORIGINAL / package / "src/main/java").rglob("*.java"))
-    cpp_sources = sorted((PRODUCER / "generator/src/main/java/com/skynet/codegenerator/cpp")
-                         .glob("*.java"))
+    # Compile the producer's model and naming classes together with its
+    # generators. Cached classes from another source epoch can otherwise mix
+    # incompatible ObjectDescriptor and Rust naming implementations.
+    cpp_sources = sorted(path for package in ("model", "generator")
+                         for path in (PRODUCER / package / "src/main/java").rglob("*.java"))
+    try:
+        overlays = candidate_overlays(cpp_sources, args.candidate_parser, args.candidate_source)
+    except ValueError as error:
+        parser.error(str(error))
     inputs = [Path(__file__).resolve(), corpus_path, expression_path, syntax_path,
+              ROOT / "scripts/verify_audit_metadata_source_5_0_6.py",
+              ROOT / "tests/parity/compare_values.py",
               *original_sources, *cpp_sources,
               ROOT / "scripts/audit_generated_privacy_contracts_5_0_6.py",
               ROOT / "scripts/verify_generated_privacy_metadata.py", *libraries]
+    inputs += [p.resolve() for p in [args.corpus, *overlays.values()] if p]
+    if args.binding_redactions:
+        inputs.extend([BINDING_RUST_MAIN, BINDING_CPP_OBSERVER])
     before = {str(path): digest(path) for path in inputs}
     record = {
         "scope": "Fresh complete original generated entities and native SDK "
-                 "descriptor/field-privacy callers for twenty-four audit-expression cases; "
+                 "descriptor/field-privacy callers for explicitly selected audit-expression cases; "
                  "no runtime assembly, SQL, full AP02 or complete generator acceptance",
         "complete": False,
         "runtime_commit": corpus["runtime_commit"],
         "generator_commit": corpus["generator_commit"],
         "input_hashes_before": before,
+        "candidate_overlays": {name: str(path) for name, path in overlays.items()},
+        "binding_redactions": args.binding_redactions,
         "free_bytes_before": shutil.disk_usage(ROOT).free,
         "steps": [],
         "cases": [],
     }
+    if args.expected_cpp_refusal:
+        record.update(diagnostic_cpp_refusal=True, semantic_accepted=False,
+                      expected_cpp_refusal=args.expected_cpp_refusal,
+                      scope="Original generated entity compilation plus explicit C++ generation refusal; diagnostic execution only, no semantic parity acceptance")
 
     def save():
         args.record.write_bytes(gzip.compress(
             (json.dumps(record, indent=2) + "\n").encode(), mtime=0))
 
-    def run(label, command, *, cwd=ROOT, env=None):
+    def run(label, command, *, cwd=ROOT, env=None, require=True):
         print(label, "running", flush=True)
         result = subprocess.run(command, cwd=cwd, env=env, text=True,
                                 capture_output=True, timeout=900)
@@ -112,7 +153,8 @@ def main():
                                 "stdout": result.stdout, "stderr": result.stderr})
         save()
         print(label, "exit", result.returncode, flush=True)
-        result.check_returncode()
+        if require:
+            result.check_returncode()
         return result
 
     owned = None
@@ -143,8 +185,10 @@ def main():
                     launcher = owned / "FrozenPrivacy.java"
                     launcher.write_text(LAUNCHER)
                     extra.append(str(launcher))
+                selected_sources = [overlays.get(source.name, source) if label == "cpp"
+                                    else source for source in sources]
                 run(label + "_java_compile", ["javac", "--release", "17", "-cp", cp,
-                    "-d", str(classes), *map(str, sources), *extra])
+                    "-d", str(classes), *map(str, selected_sources), *extra])
                 classpaths[label] = ":".join(map(str, [classes,
                     repository / "generator/src/main/resources",
                     repository / "model/src/main/resources"])) + ":" + cp
@@ -164,24 +208,35 @@ def main():
                 value = escape(sample["input"], {'"': "&quot;", "\n": "&#10;",
                                                  "\r": "&#13;", "\t": "&#9;"})
                 model = directory / "model.xml"
-                model.write_text(
+                model_source = (
                     '<root name="' + namespace + '" data_service="sqlite">'
                     '<platform name="string()"/><item platform="platform(contextRoot=true)" '
                     'name="string(column=display_name)" note="string()?" _table="business_items" '
                     '_audit_mask_fields="name,platform" _audit_value_max_len="' + value + '"/>'
                     '<child _parent="item" secret="string(column=password)" '
                     '_table="business_children" _audit_mask_fields="secret"/></root>')
+                if "model" in sample:
+                    template = sample["model"]
+                    if not isinstance(template, str) or template.count("{namespace}") != 1:
+                        raise ValueError("Complete caller model requires exactly one namespace placeholder")
+                    model_source = template.replace("{namespace}", namespace)
+                model.write_text(model_source)
                 original = directory / "original"
                 cpp = directory / "cpp"
                 run(sample["name"] + "_original_generate", ["java", "-cp", classpaths["original"],
                     "FrozenPrivacy", str(model), str(original)])
                 metadata = json.loads((original / "metadata.json").read_text())
                 assert next(row for row in metadata if row["entity"] == "Item")["audit_limit"] == sample["input"]
-                run(sample["name"] + "_cpp_generate", ["java", "-cp", classpaths["cpp"],
-                    "com.skynet.codegenerator.cpp.CppCoreGenerator", str(model), str(cpp)])
-                run(sample["name"] + "_cpp_format", [str(ROOT / ".tools/clang-format/bin/clang-format"),
-                    "--style=file:" + str(ROOT / ".clang-format"), "--Werror", "-i",
-                    *map(str, cpp.rglob("*.hpp"))])
+                generated = run(sample["name"] + "_cpp_generate", ["java", "-cp", classpaths["cpp"],
+                    "com.skynet.codegenerator.cpp.CppCoreGenerator", str(model), str(cpp)],
+                    require=not args.expected_cpp_refusal)
+                if args.expected_cpp_refusal:
+                    assert generated.returncode != 0
+                    assert ("java.lang.IllegalArgumentException: " + args.expected_cpp_refusal) in generated.stderr
+                else:
+                    run(sample["name"] + "_cpp_format", [str(ROOT / ".tools/clang-format/bin/clang-format"),
+                        "--style=file:" + str(ROOT / ".clang-format"), "--Werror", "-i",
+                        *map(str, cpp.rglob("*.hpp"))])
                 harness = directory / "harness"
                 harness.mkdir()
                 original_hashes = {str(path.relative_to(original)): digest(path)
@@ -189,7 +244,8 @@ def main():
                 imports = "".join('#[path="' + str(original / "lib/src" / entity / "entity.rs")
                                   + '"] mod ' + entity + '_entity; pub use ' + entity + '_entity::*;\n'
                                   for entity in ("platform", "item", "child"))
-                (harness / "main.rs").write_text(imports + RUST_MAIN)
+                rust_main = BINDING_RUST_MAIN.read_text() if args.binding_redactions else RUST_MAIN
+                (harness / "main.rs").write_text(imports + rust_main)
                 (harness / "Cargo.toml").write_text(
                     '[package]\nname="teaql_audit_compiler_506"\nversion="0.1.0"\nedition="2024"\n'
                     '[workspace]\n[[bin]]\nname="teaql_audit_compiler_506"\npath="main.rs"\n'
@@ -209,63 +265,91 @@ def main():
                          for tree in (original, cpp, harness) for path in tree.rglob("*") if path.is_file()}
                 record["cases"].append({"name": sample["name"], "input": sample["input"],
                     "model": model.read_text(), "original": source_result, "files": files})
+                if args.expected_cpp_refusal:
+                    record['cases'][-1]['cpp_refusal'] = dict(exit_code=generated.returncode,
+                        stdout=generated.stdout, stderr=generated.stderr)
                 includes.append('#include "' + str(cpp / "include" / (namespace + ".hpp")) + '"')
                 invocations.append("emit_case<" + namespace + "::Platform, " + namespace + "::Item, "
                                    + namespace + "::Child>(global, first);")
                 save()
 
-            observer = CPP_MAIN[CPP_MAIN.index("static Json observe"):CPP_MAIN.index("int main()")]
-            source = owned / "observer.cpp"
-            source.write_text("\n".join(includes) + "\n#include <iostream>\nusing namespace teaql;\n"
-                + observer + '''
-template <class Platform, class Item, class Child>
-void emit_case(GlobalContext& global, bool& first) {
-    auto user_context = global.make_user_context();
-    auto r = user_context->memory_resource();
-    Json::Array rows(r);
-    rows.emplace_back(observe(r, Platform::entity_descriptor(r)));
-    rows.emplace_back(observe(r, Item::entity_descriptor(r)));
-    rows.emplace_back(observe(r, Child::entity_descriptor(r)));
-    if (!first) { std::cout << ','; }
-    first = false;
-    std::cout << Json(r, std::move(rows)).dump(r);
-    user_context.reset();
-    if (global.live_user_bytes() != 0) { throw std::runtime_error("Context bytes remain"); }
-}
-int main() {
-    std::pmr::set_default_resource(std::pmr::null_memory_resource());
-    GlobalContext global;
-    bool first = true;
-    std::cout << '[';
-''' + "\n".join(invocations) + r'''
-    std::cout << "]\n";
-}
-''')
-            run("observer_format", [str(ROOT / ".tools/clang-format/bin/clang-format"), "-i",
-                "--style=file:" + str(ROOT / ".clang-format"), str(source)])
-            record["cpp_main"] = source.read_text()
-            entries = json.loads((ROOT / "build_native_current/compile_commands.json").read_text())
-            entry = next(row for row in entries if row["file"].endswith("/tests/generator/generated_api_tests.cpp"))
-            command = list(entry.get("arguments") or shlex.split(entry["command"]))
-            for flag in ("-MD", "-MT", "-MF", "-o"):
-                while flag in command:
-                    position = command.index(flag)
-                    del command[position:position + (1 if flag == "-MD" else 2)]
-            command.remove("-c")
-            command.remove(entry["file"])
-            binary = owned / "observer"
-            run("native_build", [*command, str(source), "-Wl,--start-group", *map(str, libraries),
-                "-Wl,--end-group", str(ROOT / ".tools/toolchains/sqlite-3.53.2/lib_native/libsqlite3.a"),
-                "-pthread", "-ldl", "-lm", "-o", str(binary)])
-            observed = json.loads(run("native_run", [str(binary)], env=env).stdout)
-            assert len(observed) == len(record["cases"])
-            for case, actual in zip(record["cases"], observed):
-                case["cpp"] = actual
-                case["match"] = case["original"] == actual
-            record["differences"] = [case["name"] for case in record["cases"] if not case["match"]]
-            record["complete"] = not record["differences"]
-            record["owned_bytes_removed"] = sum(path.stat().st_size for path in owned.rglob("*")
-                                                if path.is_file())
+            if args.expected_cpp_refusal:
+                assert len(record['cases']) == len(selected)
+                record['complete'] = True
+                record['owned_bytes_removed'] = sum(path.stat().st_size for path in owned.rglob('*') if path.is_file())
+            else:
+                observer = ('#include "' + str(BINDING_CPP_OBSERVER) + '"\n'
+                            if args.binding_redactions else
+                            CPP_MAIN[CPP_MAIN.index("static Json observe"):CPP_MAIN.index("int main()")])
+                source = owned / "observer.cpp"
+                source.write_text("\n".join(includes) + "\n#include <iostream>\nusing namespace teaql;\n"
+                    + observer + '''
+    template <class Platform, class Item, class Child>
+    void emit_case(GlobalContext& global, bool& first) {
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
+        {
+        Json::Array rows(r);
+        rows.emplace_back(observe(r, Platform::entity_descriptor(r)));
+        rows.emplace_back(observe(r, Item::entity_descriptor(r)));
+        rows.emplace_back(observe(r, Child::entity_descriptor(r)));
+        if (!first) { std::cout << ','; }
+        first = false;
+        std::cout << Json(r, std::move(rows)).dump(r);
+        }
+        user_context.reset();
+        if (global.live_user_bytes() != 0) { throw std::runtime_error("Context bytes remain"); }
+    }
+    int main() {
+        std::pmr::set_default_resource(std::pmr::null_memory_resource());
+        GlobalContext global;
+        bool first = true;
+        std::cout << '[';
+    ''' + "\n".join(invocations) + r'''
+        std::cout << "]\n";
+    }
+    ''')
+                run("observer_format", [str(ROOT / ".tools/clang-format/bin/clang-format"), "-i",
+                    "--style=file:" + str(ROOT / ".clang-format"), str(source)])
+                record["cpp_main"] = source.read_text()
+                entries = json.loads((ROOT / "build_native_current/compile_commands.json").read_text())
+                entry = next(row for row in entries if row["file"].endswith("/tests/generator/generated_api_tests.cpp"))
+                command = list(entry.get("arguments") or shlex.split(entry["command"]))
+                for flag in ("-MD", "-MT", "-MF", "-o"):
+                    while flag in command:
+                        position = command.index(flag)
+                        del command[position:position + (1 if flag == "-MD" else 2)]
+                command.remove("-c")
+                command.remove(entry["file"])
+                binary = owned / "observer"
+                run("native_build", [*command, str(source), "-Wl,--start-group", *map(str, libraries),
+                    "-Wl,--end-group", str(ROOT / ".tools/toolchains/sqlite-3.53.2/lib_native/libsqlite3.a"),
+                    "-pthread", "-ldl", "-lm", "-o", str(binary)])
+                observed = json.loads(run("native_run", [str(binary)], env=env).stdout)
+                assert len(observed) == len(record["cases"])
+                for case, actual in zip(record["cases"], observed):
+                    case["cpp"] = actual
+                    case["match"] = same(case["original"], actual)
+                if args.binding_redactions:
+                    binding_rows = 0
+                    for case in record["cases"]:
+                        for descriptor in case["original"]:
+                            policies = descriptor["policies"]
+                            bindings = descriptor["binding_redactions"]
+                            assert len(policies) == len(bindings)
+                            for policy, binding in zip(policies, bindings):
+                                field, _, classification = policy
+                                assert binding[0] == field
+                                canary = "TEAQL-PROBE-" + field
+                                assert binding[1] == ([] if classification == "Plain" else [canary])
+                                assert binding[2] == ([canary] if classification in
+                                                      ("Credential", "Unknown") else [])
+                                binding_rows += 1
+                    record["binding_rows"] = binding_rows
+                record["differences"] = [case["name"] for case in record["cases"] if not case["match"]]
+                record["complete"] = not record["differences"]
+                record["owned_bytes_removed"] = sum(path.stat().st_size for path in owned.rglob("*")
+                                                    if path.is_file())
     except Exception as error:
         record["controller_error"] = {"type": type(error).__name__, "message": str(error)}
         save()

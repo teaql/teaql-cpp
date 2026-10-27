@@ -20,6 +20,8 @@ def main():
     if corpus["baseline"] != json.loads((root / "upstream.lock.json").read_text())["commit"]:
         raise RuntimeError("Runtime ID observations belong to a different baseline")
     cases = corpus["cases"]
+    if type(cases) is not list or not cases:
+        raise RuntimeError("Comparison corpus cases must be a nonempty list")
     inputs = [case["input"] for case in cases]
     key = "expected_release" if args.profile == "release" else "expected"
     expected = [case[key] for case in cases]

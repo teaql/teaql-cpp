@@ -111,7 +111,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Note::ENTITY_NAME,
+            "Note",
             "tenant",
             "Tenant",
             entity.tenantId(),
@@ -121,15 +121,15 @@ public:
             location,
             results);
         GeneratedFieldChecks::clock(
-            user_context, status, false, Note::ENTITY_NAME, "created_at", [&](Timestamp time) {
+            user_context, status, false, "Note", "created_at", [&](Timestamp time) {
                 entity.updateCreatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, false, Note::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, false, "Note", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::clock(
-            user_context, status, true, Note::ENTITY_NAME, "updated_at", [&](Timestamp time) {
+            user_context, status, true, "Note", "updated_at", [&](Timestamp time) {
                 entity.updateUpdatedAt(time);
             });
         GeneratedFieldChecks::require_loaded(

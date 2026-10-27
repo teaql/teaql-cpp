@@ -29,6 +29,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -186,6 +187,7 @@ struct OrderStatus : generated_detail::Model<OrderStatus> {
     using Base = generated_detail::Model<OrderStatus>;
     friend class OrderStatusChecker;
     static constexpr std::string_view ENTITY_NAME = "OrderStatus";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "order_status";
     friend struct generated_detail::OrderStatusSampleRecipe;
     friend struct generated_detail::OrderStatusBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -406,6 +408,7 @@ struct Record : generated_detail::Model<Record> {
     using Base = generated_detail::Model<Record>;
     friend class RecordChecker;
     static constexpr std::string_view ENTITY_NAME = "Record";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "record";
     friend struct generated_detail::RecordSampleRecipe;
     friend struct generated_detail::RecordBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -709,6 +712,7 @@ struct Person : generated_detail::Model<Person> {
     using Base = generated_detail::Model<Person>;
     friend class PersonChecker;
     static constexpr std::string_view ENTITY_NAME = "Person";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "person";
     friend struct generated_detail::PersonSampleRecipe;
     friend struct generated_detail::PersonBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -1229,7 +1233,7 @@ inline const Platform* OrderStatus::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("order_status", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1541,7 +1545,7 @@ inline const Platform* Record::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("record", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1555,7 +1559,7 @@ inline const OrderStatus* Record::status() const {
     if (!is_loaded("status")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<OrderStatus>(ENTITY_NAME, id(), "status");
+    auto* view = root.resolve_relation_option<OrderStatus>("record", id(), "status");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1883,7 +1887,7 @@ inline const Platform* Person::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("person", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1897,7 +1901,7 @@ inline const OrderStatus* Person::status() const {
     if (!is_loaded("status")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<OrderStatus>(ENTITY_NAME, id(), "status");
+    auto* view = root.resolve_relation_option<OrderStatus>("person", id(), "status");
     if (view) {
         return *view ? &**view : nullptr;
     }

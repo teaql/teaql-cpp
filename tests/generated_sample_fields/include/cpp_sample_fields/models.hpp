@@ -25,6 +25,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -171,6 +172,7 @@ struct SampleRecord : generated_detail::Model<SampleRecord> {
     using Base = generated_detail::Model<SampleRecord>;
     friend class SampleRecordChecker;
     static constexpr std::string_view ENTITY_NAME = "SampleRecord";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "sample_record";
     friend struct generated_detail::SampleRecordSampleRecipe;
     friend struct generated_detail::SampleRecordBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -959,6 +961,7 @@ struct SampleLink : generated_detail::Model<SampleLink> {
     using Base = generated_detail::Model<SampleLink>;
     friend class SampleLinkChecker;
     static constexpr std::string_view ENTITY_NAME = "SampleLink";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "sample_link";
     friend struct generated_detail::SampleLinkSampleRecipe;
     friend struct generated_detail::SampleLinkBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -1340,7 +1343,7 @@ inline const Platform* SampleRecord::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("sample_record", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2146,7 +2149,7 @@ inline const SampleRecord* SampleLink::firstRecord() const {
     if (!is_loaded("first_record")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<SampleRecord>(ENTITY_NAME, id(), "first_record");
+    auto* view = root.resolve_relation_option<SampleRecord>("sample_link", id(), "first_record");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2160,7 +2163,7 @@ inline const SampleRecord* SampleLink::secondRecord() const {
     if (!is_loaded("second_record")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<SampleRecord>(ENTITY_NAME, id(), "second_record");
+    auto* view = root.resolve_relation_option<SampleRecord>("sample_link", id(), "second_record");
     if (view) {
         return *view ? &**view : nullptr;
     }

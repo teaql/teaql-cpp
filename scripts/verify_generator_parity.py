@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+from reproduce_cpp_contract_fixtures import METADATA_HELPER_INPUTS, metadata_manifest_paths
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATED_FIXTURES = ['business_ids', 'types', 'relations', 'optional_types', 'query_field_branches',
@@ -19,6 +20,16 @@ GENERATED_FIXTURES = ['business_ids', 'types', 'relations', 'optional_types', 'q
 
 def git(reference, *arguments):
     return subprocess.check_output(['git', '-C', str(reference), *arguments])
+
+
+def verify_metadata_helper_inputs(manifest, source_directory, label):
+    inputs = manifest.get('generator_implementation_sha256', {})
+    missing = set(METADATA_HELPER_INPUTS) - inputs.keys()
+    if missing:
+        raise SystemExit(f'Missing shared metadata producer inputs in {label}: {sorted(missing)}')
+    for path in METADATA_HELPER_INPUTS:
+        if inputs[path] != hashlib.sha256((source_directory / path).read_bytes()).hexdigest():
+            raise SystemExit(f'Stale shared metadata producer input in {label}: {path}')
 
 
 def main():
@@ -337,6 +348,10 @@ def main():
                 for path, sha in provenance.get('generator_implementation_sha256', {}).items():
                     if hashlib.sha256((args.generator_dir / path).read_bytes()).hexdigest() != sha:
                         raise SystemExit(f'Opaque type producer differs: {case}/{language}')
+    manifests = metadata_manifest_paths(ROOT)
+    assert len(manifests) == 80 and len(set(manifests)) == 80
+    for manifest in manifests:
+        verify_metadata_helper_inputs(json.loads(manifest.read_text()), args.generator_dir, manifest)
     if args.require_complete and pending:
         raise SystemExit('Unqualified generator capabilities: ' + ', '.join(pending))
     print(f'Verified {len(ledger["sources"])} locked generator sources and '

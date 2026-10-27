@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare generated recursive runtime attachment and local forward views."""
+from compare_values import diagnostic_path
 import argparse
 import gzip
 import itertools
@@ -7,6 +8,7 @@ import json
 import os
 from pathlib import Path
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = Path(__file__).with_name('recursive_attachment_helpers_5_0_6_cases.json.gz')
@@ -35,16 +37,19 @@ def main():
         expected = observe(args.rust, inputs)
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
+        require_cases(corpus, len(inputs), inputs)
         if corpus['baseline'] != baseline or not same(inputs, [c['input'] for c in corpus['cases']]):
             raise RuntimeError('Attachment corpus baseline/matrix differs')
         expected = [c['expected'] for c in corpus['cases']]
         if args.rust and not same(expected, observe(args.rust, inputs)):
             raise RuntimeError('Attachment corpus differs from actual original')
     native = observe(args.cpp, inputs)
+    if len(native) != len(inputs):
+        raise RuntimeError('Native observations must cover the complete input matrix')
     gaps = [dict(input=value, rust=source, cpp=actual)
             for value, source, actual in zip(inputs, expected, native) if not same(source, actual)]
     if gaps:
-        path = ROOT / 'docs/parity/recursive_attachment_helpers_5_0_6_initial_gaps.json.gz'
+        path = diagnostic_path(ROOT / 'docs/parity/recursive_attachment_helpers_5_0_6_initial_gaps.json.gz')
         if not path.exists():
             path.write_bytes(gzip.compress(json.dumps(gaps, indent=2).encode(), mtime=0))
         print(json.dumps(gaps[0], indent=2))

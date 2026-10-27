@@ -13,8 +13,19 @@ ROOT = Path(__file__).resolve().parents[1]
 PARITY = ROOT / "tests/parity"
 
 
+def shared_default_corpus():
+    tree = ast.parse((PARITY / "compare_values.py").read_text())
+    main = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "main")
+    default = main.args.defaults[0]
+    if not isinstance(default, ast.Constant) or not isinstance(default.value, str):
+        raise RuntimeError("Shared corpus default must be an explicit source string")
+    return default.value
+
+
 def direct_corpus(script):
     """Resolve only explicit calls to the imported compare_values.main adapter."""
+    if script.resolve() == (PARITY / "compare_values.py").resolve():
+        return shared_default_corpus()
     tree = ast.parse(script.read_text())
     imported_names = {
         alias.asname or alias.name
@@ -32,7 +43,7 @@ def direct_corpus(script):
         if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
             if node.func.id in imported_names:
                 if not node.args:
-                    matches.append("value_cases.json")
+                    matches.append(shared_default_corpus())
                 elif isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
                     matches.append(node.args[0].value)
     return matches[0] if len(matches) == 1 else None
@@ -73,14 +84,17 @@ def main():
                     opener = gzip.open if corpus.suffix == ".gz" else open
                     with opener(corpus, "rt", encoding="utf-8") as source:
                         data = json.load(source)
+                    cases = data.get("cases")
                     cache[corpus] = dict(
                         baseline=data.get("baseline"),
-                        observations=len(data.get("cases", [])),
+                        observations=len(cases) if type(cases) is list else None,
+                        valid_cases=type(cases) is list and bool(cases),
                         sha256=hashlib.sha256(corpus.read_bytes()).hexdigest(),
                     )
                 row.update(cache[corpus])
-                row["status"] = ("active_baseline" if row["baseline"] == lock["commit"]
-                                 else "historical_baseline_requires_replay")
+                row["status"] = ("invalid_corpus_shape" if not row["valid_cases"] else
+                                 "active_baseline" if row["baseline"] == lock["commit"] else
+                                 "historical_baseline_requires_replay")
         tests.append(row)
     counts = {}
     for row in tests:

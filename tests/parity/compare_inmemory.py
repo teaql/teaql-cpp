@@ -6,6 +6,7 @@ import gzip
 from pathlib import Path
 import subprocess
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 
 def target_input(case, bits):
@@ -31,6 +32,9 @@ def main():
     lock = json.loads((root / "upstream.lock.json").read_text())
     if corpus["baseline"] != lock["commit"]:
         raise RuntimeError("In-memory observations belong to another baseline")
+    if type(corpus.get('cases')) is not list or not corpus['cases']:
+        raise RuntimeError('Comparison corpus cases must be a nonempty list')
+    require_cases(corpus, 6532)
     bits = int(subprocess.run([*emulator, args.cpp, "--pointer-bits"], check=True, text=True,
                               capture_output=True).stdout)
     if bits not in [32, 64]:
@@ -48,6 +52,8 @@ def main():
         if not same(expected, live):
             raise RuntimeError("Recorded observations differ from live Rust")
     actual = observe(args.cpp, inputs, emulator)
+    if len(actual) != len(inputs):
+        raise RuntimeError('Native observations must cover the complete input matrix')
     failures = [(i, inputs[i], a, b) for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     for i, value, a, b in failures[:20]:
         print(f"Case {i}: {value}\n Rust: {a}\n C++: {b}")

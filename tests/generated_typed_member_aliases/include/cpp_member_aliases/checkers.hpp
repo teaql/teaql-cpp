@@ -114,7 +114,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Record::ENTITY_NAME,
+            "Record",
             "platform",
             "Platform",
             entity.platformId(),
@@ -194,7 +194,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            ChildRecord::ENTITY_NAME,
+            "ChildRecord",
             "platform",
             "Platform",
             entity.platformId(),
@@ -276,7 +276,7 @@ public:
         GeneratedFieldChecks::context_root(
             user_context,
             status,
-            Holder::ENTITY_NAME,
+            "Holder",
             "platform",
             "Platform",
             entity.platformId(),

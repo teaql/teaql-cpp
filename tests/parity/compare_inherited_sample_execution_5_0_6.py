@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = Path(__file__).with_name('inherited_sample_execution_5_0_6_cases.json.gz')
@@ -58,6 +59,7 @@ def main():
         ), ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
+        require_cases(corpus, len(cases), cases)
         assert corpus['baseline'] == baseline and corpus['producer'] == producer
         assert same(cases, [c['input'] for c in corpus['cases']])
         expected = [c['expected'] for c in corpus['cases']]

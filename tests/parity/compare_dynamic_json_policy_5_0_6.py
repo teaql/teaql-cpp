@@ -5,7 +5,8 @@ import gzip
 import json
 import os
 from compare_values import observe, same
-from generate_dynamic_json_policy_5_0_6 import CORPUS, adapted, metadata
+from generate_dynamic_json_policy_5_0_6 import CORPUS, adapted, metadata, inputs as source_inputs
+from expression_cli_cases import require_cases
 
 
 def main():
@@ -18,8 +19,9 @@ def main():
         corpus = json.load(source)
     for key, value in metadata().items():
         assert same(corpus[key], value), f'Changed provenance: {key}'
-    inputs = [case['input'] for case in corpus['cases']]
-    expected = [case['expected'] for case in corpus['cases']]
+    cases = require_cases(corpus, 3072, source_inputs())
+    inputs = [case['input'] for case in cases]
+    expected = [case['expected'] for case in cases]
     if args.rust:
         assert same(expected, observe(args.rust, inputs)), 'Live original changed'
     actual = observe(args.cpp, inputs)

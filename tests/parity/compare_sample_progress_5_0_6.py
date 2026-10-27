@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 from compare_values import observe, same
+from expression_cli_cases import require_cases
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = Path(__file__).with_name('sample_progress_5_0_6_cases.json.gz')
@@ -27,7 +28,13 @@ def inputs():
 
 
 def projected(original):
+    if type(original) is not dict or set(original) != {'outcome', 'records'}:
+        raise RuntimeError('Sample progress source root shape changed')
+    if type(original['records']) is not list:
+        raise RuntimeError('Sample progress source records must be a list')
     for record in original['records']:
+        if type(record) is not dict or set(record) != {'level', 'target', 'message'}:
+            raise RuntimeError('Sample progress source log shape changed')
         assert record['level'] == 'INFO'
         assert record['target'] == 'cpp_inheritance_core::sample_data'
     # Rust module_path targets remain in the raw archive. C++ dispatch uses a
@@ -62,6 +69,7 @@ def main():
         ), ensure_ascii=False).encode(), mtime=0))
     else:
         corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))
+        require_cases(corpus, len(cases), cases)
         assert corpus['baseline'] == baseline and corpus['producer'] == producer
         assert same(cases, [c['input'] for c in corpus['cases']])
         expected = [c['expected'] for c in corpus['cases']]

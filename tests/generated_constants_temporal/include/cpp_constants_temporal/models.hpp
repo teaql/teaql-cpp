@@ -25,6 +25,7 @@ struct Priority : generated_detail::Model<Priority> {
     using Base = generated_detail::Model<Priority>;
     friend class PriorityChecker;
     static constexpr std::string_view ENTITY_NAME = "Priority";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "priority";
     friend struct generated_detail::PrioritySampleRecipe;
     friend struct generated_detail::PriorityBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -419,6 +420,7 @@ struct Platform : generated_detail::Model<Platform> {
     using Base = generated_detail::Model<Platform>;
     friend class PlatformChecker;
     static constexpr std::string_view ENTITY_NAME = "Platform";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "platform";
     friend struct generated_detail::PlatformSampleRecipe;
     friend struct generated_detail::PlatformBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -632,6 +634,7 @@ struct Label : generated_detail::Model<Label> {
     using Base = generated_detail::Model<Label>;
     friend class LabelChecker;
     static constexpr std::string_view ENTITY_NAME = "Label";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "label";
     friend struct generated_detail::LabelSampleRecipe;
     friend struct generated_detail::LabelBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -874,7 +877,7 @@ inline const Platform* Priority::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("priority", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1547,7 +1550,7 @@ inline const Platform* Label::platform() const {
     if (!is_loaded("platform")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Platform>(ENTITY_NAME, id(), "platform");
+    auto* view = root.resolve_relation_option<Platform>("label", id(), "platform");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1561,7 +1564,7 @@ inline const Priority* Label::priority() const {
     if (!is_loaded("priority")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Priority>(ENTITY_NAME, id(), "priority");
+    auto* view = root.resolve_relation_option<Priority>("label", id(), "priority");
     if (view) {
         return *view ? &**view : nullptr;
     }

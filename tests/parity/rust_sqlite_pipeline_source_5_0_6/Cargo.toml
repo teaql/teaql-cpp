@@ -1,0 +1,91 @@
+[package]
+name = "teaql_sqlite_pipeline_source_506"
+version = "0.1.0"
+edition = "2024"
+publish = false
+autobins = false
+
+[workspace]
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+serde_json = "=1.0.150"
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+futures-core = "=0.3.32"
+futures-util = "=0.3.32"
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype", "functions"] }
+
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+
+[[bin]]
+name = "sql_log_query_source"
+path = "../rust_log_privacy_reference_5_0_6/query.rs"
+
+[[bin]]
+name = "sqlite_chunk_capacity"
+path = "../sqlite_chunk_capacity_5_0_6.rs"
+
+[[bin]]
+name = "sqlite_lease_binding"
+path = "../sqlite_lease_binding_5_0_6.rs"
+
+[[bin]]
+name = "sqlite_lease_binding_guard"
+path = "../sqlite_lease_binding_guard_5_0_6.rs"
+
+[[bin]]
+name = "sqlite_async_schedule"
+path = "../rust_field_layout/src/bin/sqlite_async_schedule_5_0_6.rs"
+
+[[bin]]
+name = "sqlite_async_lease"
+path = "../rust_field_layout/src/bin/sqlite_async_lease_5_0_6.rs"
+
+[[bin]]
+name = "sql_execution_506"
+path = "../rust_field_layout/src/bin/sql_execution_5_0_6.rs"
+
+[[bin]]
+name = "sql_schema_oracle"
+path = "../rust_values/src/bin/sql_schema_oracle.rs"
+
+[[bin]]
+name = "sql_mutation_oracle"
+path = "../rust_values/src/bin/sql_mutation_oracle.rs"
+
+[[bin]]
+name = "sql_dialect_oracle"
+path = "../rust_values/src/bin/sql_dialect_oracle.rs"
+
+[[bin]]
+name = "sql_grouped_partition"
+path = "../rust_sql_baselines_5_0_6/sql_grouped_partition.rs"
+
+[[bin]]
+name = "sql_log_oracle"
+path = "../rust_values/src/bin/sql_log_oracle.rs"
+
+[[bin]]
+name = "sql_bindings_source"
+path = "../sql_bindings_source_5_0_6.rs"
+
+[[bin]]
+name = "sql_types_source"
+path = "../rust_field_layout/src/bin/sql_types_5_0_6.rs"
+
+[[bin]]
+name = "sql_model_types_source"
+path = "../rust_field_layout/src/bin/sql_model_api_5_0_6.rs"

@@ -19,6 +19,7 @@ struct Tenant : generated_detail::Model<Tenant> {
     using Base = generated_detail::Model<Tenant>;
     friend class TenantChecker;
     static constexpr std::string_view ENTITY_NAME = "Tenant";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "tenant";
     friend struct generated_detail::TenantSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -175,6 +176,7 @@ struct Record : generated_detail::Model<Record> {
     using Base = generated_detail::Model<Record>;
     friend class RecordChecker;
     static constexpr std::string_view ENTITY_NAME = "Record";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "record";
     friend struct generated_detail::RecordSampleRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
@@ -372,6 +374,7 @@ struct Note : generated_detail::Model<Note> {
     using Base = generated_detail::Model<Note>;
     friend class NoteChecker;
     static constexpr std::string_view ENTITY_NAME = "Note";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "note";
     friend struct generated_detail::NoteSampleRecipe;
     static constexpr std::array<std::string_view, 1> QUERY_IDENTITY_FIELDS{"id"};
 
@@ -1097,7 +1100,7 @@ inline const Tenant* Note::owner() const {
     if (!is_loaded("owner")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "owner");
+    auto* view = root.resolve_relation_option<Tenant>("note", id(), "owner");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1111,7 +1114,7 @@ inline const Tenant* Note::linked() const {
     if (!is_loaded("linked")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "linked");
+    auto* view = root.resolve_relation_option<Tenant>("note", id(), "linked");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -1125,7 +1128,7 @@ inline const Tenant* Note::optionalLinked() const {
     if (!is_loaded("optional_linked")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "optional_linked");
+    auto* view = root.resolve_relation_option<Tenant>("note", id(), "optional_linked");
     if (view) {
         return *view ? &**view : nullptr;
     }

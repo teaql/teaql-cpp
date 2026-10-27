@@ -33,14 +33,20 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--refresh-provenance", action="store_true",
                         help="Record current producer hashes only after every SDK byte matches")
+    parser.add_argument("--allow-sample-operand-change", action="store_true",
+                        help="Permit only reviewed JSON sample delegation; requires provenance refresh")
     parser.add_argument("--record", type=Path, required=True)
     args = parser.parse_args()
+    if args.allow_sample_operand_change and not args.refresh_provenance:
+        parser.error("Sample delegation changes require --refresh-provenance")
     if args.record.exists() or args.record.suffix != ".gz":
         parser.error("Use a fresh compressed evidence filename")
     sources = sorted((PRODUCER / "generator/src/main/java/com/skynet/codegenerator/cpp").glob("*.java"))
     runtime = json.loads((ROOT / "upstream.lock.json").read_text())
     generator = json.loads((PRODUCER / "cpp_generator.lock.json").read_text())
     inputs = [Path(__file__).resolve(), ROOT / "tests/generator/TypeConfigurationProbe.java", *sources]
+    if args.allow_sample_operand_change:
+        inputs.append(ROOT / 'scripts/sample_operand_qualification.py')
     before = {str(path): digest(path) for path in inputs}
     record = {"complete": False, "scope": "Five active full C++ SDKs reproduce unchanged "
               "implementation bytes; explicit provenance-only recording, not semantic acceptance",
@@ -97,9 +103,19 @@ def main():
                     "--style=file:" + str(ROOT / ".clang-format"), "--Werror", "-i",
                     *map(str, output.rglob("*.hpp"))])
                 actual = files(output)
-                assert actual == previous["files"], (family, [path for path in set(actual) | set(previous["files"])
-                    if actual.get(path) != previous["files"].get(path)])
+                assert actual.keys() == previous['files'].keys()
+                changed = [path for path in actual if actual[path] != previous['files'][path]]
+                delegates = 0
+                if changed:
+                    assert args.allow_sample_operand_change, (family, changed)
+                    from sample_operand_qualification import verify_file
+                    for path in changed:
+                        delegates += verify_file(ROOT, path, (target / path).read_text(),
+                            (output / path).read_text(),
+                            (target / path.replace('/sample_data.hpp', '/models.hpp')).read_text())
+                        staged.append((target / path, (output / path).read_text()))
                 updated = json.loads(json.dumps(previous))
+                updated['files'] = actual
                 for path in updated["generator_implementation_sha256"]:
                     updated["generator_implementation_sha256"][path] = digest(PRODUCER / path)
                 for helper in HELPERS:
@@ -110,7 +126,8 @@ def main():
                 else:
                     assert previous == updated, family + " producer provenance differs"
                 record["cases"].append({"family": family, "files": len(actual),
-                    "generated_bytes_identical": True, "previous_provenance": previous,
+                    "generated_bytes_identical": not changed, "changed_files": changed,
+                    "sample_operand_delegates": delegates, "previous_provenance": previous,
                     "current_provenance": updated})
                 save()
             for path, text in staged:

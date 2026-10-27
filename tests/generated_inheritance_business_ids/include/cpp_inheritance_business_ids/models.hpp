@@ -56,6 +56,7 @@ struct Tenant : generated_detail::Model<Tenant> {
     using Base = generated_detail::Model<Tenant>;
     friend class TenantChecker;
     static constexpr std::string_view ENTITY_NAME = "Tenant";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "tenant";
     friend struct generated_detail::TenantSampleRecipe;
     friend struct generated_detail::TenantBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -202,6 +203,7 @@ struct Document : generated_detail::Model<Document> {
     using Base = generated_detail::Model<Document>;
     friend class DocumentChecker;
     static constexpr std::string_view ENTITY_NAME = "Document";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "document";
     friend struct generated_detail::DocumentSampleRecipe;
     friend struct generated_detail::DocumentBootstrapRecipe;
     static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
@@ -537,6 +539,7 @@ struct IntermediateRecord : generated_detail::Model<IntermediateRecord> {
     using Base = generated_detail::Model<IntermediateRecord>;
     friend class IntermediateRecordChecker;
     static constexpr std::string_view ENTITY_NAME = "IntermediateRecord";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "intermediate_record";
     friend struct generated_detail::IntermediateRecordSampleRecipe;
     friend struct generated_detail::IntermediateRecordBootstrapRecipe;
     static constexpr std::array<std::string_view, 1> QUERY_IDENTITY_FIELDS{"id"};
@@ -872,6 +875,7 @@ struct Invoice : generated_detail::Model<Invoice> {
     using Base = generated_detail::Model<Invoice>;
     friend class InvoiceChecker;
     static constexpr std::string_view ENTITY_NAME = "Invoice";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "invoice";
     friend struct generated_detail::InvoiceSampleRecipe;
     friend struct generated_detail::InvoiceBootstrapRecipe;
     static constexpr std::array<std::string_view, 1> QUERY_IDENTITY_FIELDS{"id"};
@@ -1236,6 +1240,7 @@ struct Receipt : generated_detail::Model<Receipt> {
     using Base = generated_detail::Model<Receipt>;
     friend class ReceiptChecker;
     static constexpr std::string_view ENTITY_NAME = "Receipt";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "receipt";
     friend struct generated_detail::ReceiptSampleRecipe;
     friend struct generated_detail::ReceiptBootstrapRecipe;
     static constexpr std::array<std::string_view, 1> QUERY_IDENTITY_FIELDS{"id"};
@@ -1599,6 +1604,7 @@ struct SpecialInvoice : generated_detail::Model<SpecialInvoice> {
     using Base = generated_detail::Model<SpecialInvoice>;
     friend class SpecialInvoiceChecker;
     static constexpr std::string_view ENTITY_NAME = "SpecialInvoice";
+    static constexpr std::string_view ID_SPACE_ENTITY_NAME = "special_invoice";
     friend struct generated_detail::SpecialInvoiceSampleRecipe;
     friend struct generated_detail::SpecialInvoiceBootstrapRecipe;
     static constexpr std::array<std::string_view, 1> QUERY_IDENTITY_FIELDS{"id"};
@@ -2161,7 +2167,7 @@ inline const Tenant* Document::tenant() const {
     if (!is_loaded("tenant")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "tenant");
+    auto* view = root.resolve_relation_option<Tenant>("document", id(), "tenant");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2497,7 +2503,7 @@ inline const Tenant* IntermediateRecord::tenant() const {
     if (!is_loaded("tenant")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "tenant");
+    auto* view = root.resolve_relation_option<Tenant>("intermediate_record", id(), "tenant");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -2837,7 +2843,7 @@ inline const Tenant* Invoice::tenant() const {
     if (!is_loaded("tenant")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "tenant");
+    auto* view = root.resolve_relation_option<Tenant>("invoice", id(), "tenant");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -3199,7 +3205,7 @@ inline const Tenant* Receipt::tenant() const {
     if (!is_loaded("tenant")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "tenant");
+    auto* view = root.resolve_relation_option<Tenant>("receipt", id(), "tenant");
     if (view) {
         return *view ? &**view : nullptr;
     }
@@ -3561,7 +3567,7 @@ inline const Tenant* SpecialInvoice::tenant() const {
     if (!is_loaded("tenant")) {
         return nullptr;
     }
-    auto* view = root.resolve_relation_option<Tenant>(ENTITY_NAME, id(), "tenant");
+    auto* view = root.resolve_relation_option<Tenant>("special_invoice", id(), "tenant");
     if (view) {
         return *view ? &**view : nullptr;
     }

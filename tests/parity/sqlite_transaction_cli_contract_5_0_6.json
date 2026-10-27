@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "total_count": 510,
+  "dependency_packages": 131,
+  "observer_manifest": "tests/parity/rust_sqlite_transaction_reference_5_0_6/observers.json",
+  "observer_lock": "tests/parity/rust_sqlite_transaction_reference_5_0_6/Cargo.lock",
+  "replay_script": "scripts/verify_sqlite_transaction_streaming_5_0_6.py",
+  "original_receipt": "docs/parity/sqlite_transaction_cli_original_execution_5_0_6.json.gz",
+  "historical_corpus": "tests/parity/sqlite_transaction_cases.json",
+  "comparison": "sqlite_provider_transaction_rust_parity",
+  "comparator": "tests/parity/compare_sqlite_transaction_5_0_6.py",
+  "matrices": {
+    "sqlite_async_lease": {
+      "count": 144,
+      "corpus": "tests/parity/sqlite_async_lease_5_0_6_cases.json",
+      "probe": "teaql_sqlite_async_lease_probe"
+    },
+    "sqlite_async_schedule": {
+      "count": 183,
+      "corpus": "tests/parity/sqlite_async_schedule_5_0_6_cases.json.gz",
+      "probe": "teaql_sqlite_async_schedule_probe"
+    },
+    "sqlite_transport": {
+      "count": 183,
+      "corpus": "tests/parity/sqlite_sync_transaction_5_0_6_cases.json.gz",
+      "probe": "teaql_sqlite_transport_probe"
+    }
+  },
+  "support_files": {
+    "scripts/sqlite_transaction_cli_source_binding_5_0_6.py": "056ef7f50a9ef68e28235c61d178cede7ea52aa0464abf9b5ea85419b20239f4",
+    "tests/parity/verify_sqlite_transaction_cli_controls_5_0_6.py": "113e4cbe47a72e02284daf56cbefee9a6b1ccf0ac9bdf74808f4fb04a3114298",
+    "scripts/verify_sqlite_transaction_streaming_5_0_6.py": "5876cccee97d98f32db13473c03896dd05f3668869dbc010bd5e5304261ed38e",
+    "tests/parity/rust_sqlite_transaction_reference_5_0_6/Cargo.toml": "586eab3b7b4d05798ac9c4909ca92dd86812845f9b998a21d57030003337e73f",
+    "tests/parity/rust_sqlite_transaction_reference_5_0_6/Cargo.lock": "1d394dbaf07b38406f2577b3437d0a066b5bcee9d63ab2c49dec0f442186d059",
+    "tests/parity/rust_sqlite_transaction_reference_5_0_6/observers.json": "bd1a7afaa7d1e2a5851449844d453dca14fb6de21ff7d861b7184468760f5e98",
+    "tests/parity/rust_field_layout/src/bin/sqlite_async_lease_5_0_6.rs": "2536142cbf8be8bb12b01cd4282411f2c1e311a513b3d6a9f1bc07906f998746",
+    "tests/parity/rust_field_layout/src/bin/sqlite_async_schedule_5_0_6.rs": "96bfb4ec45efee905c72b0fe1798aebcce5f92fa06192795f5812df0025e8718",
+    "tests/parity/rust_field_layout/src/bin/sqlite_transport_5_0_6.rs": "d2aa6acb5d3afbeb10e6b41ac1c0858a74cb0cd470c9e1a25f36e9ae7dc6fc45",
+    "tests/parity/compare_sqlite_transaction_5_0_6.py": "a7ee5603dd5639214e69b366b1a091713e1f0014d5b13b5d2d8b79a70cd77ee6",
+    "tests/parity/compare_sqlite_sync_transaction_5_0_6.py": "8f0e9b37451dbf4ecc71f9ecd03f1810733e9d487ce8f2b0a0ff151344837118",
+    "tests/parity/compare_sqlite_async_schedule_5_0_6.py": "f48be4ccd80a3c58e1d9e0054c4499ef0a7e85fc8576eb8d6b184392085249b1",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/sqlite_async_lease_probe.cpp": "7202a16c190cc2a54360d5b39762b2967f28c277f06f5bcd46c58df0ae2e08a0",
+    "tests/parity/sqlite_async_schedule_probe.cpp": "3bd4c777222184c34c894f50ad318273ffb25295ae0ce50e4c1f2f87d260c180",
+    "tests/parity/sqlite_transport_probe.cpp": "8c39212f58c6d62cd13ba4968c673ec21d0da3ca1fe91b3e0ae63ca0adbc18d8"
+  },
+  "evidence_files": {
+    "docs/parity/sqlite_transaction_cli_original_execution_5_0_6.json.gz": "eee256439d917290512e6a182ed29967fa9c4e0d2af2ebb987a84fab09851b1f",
+    "tests/parity/sqlite_transaction_cases.json": "0c02aba516aceff7f29e309b4178438d9724037bf69ef5d04c5b71c6bed669d3",
+    "tests/parity/sqlite_async_lease_5_0_6_cases.json": "e0d969a91210a6be64ac1971e47720b3c9298c5901ffc11fd7636553d789f6ac",
+    "tests/parity/sqlite_async_schedule_5_0_6_cases.json.gz": "2b6ef7b9494256458befa9dd82c8eacf53f7f002f3fcebdab398440b10935859",
+    "tests/parity/sqlite_sync_transaction_5_0_6_cases.json.gz": "d4a2840382959a5a7b674fd508b36dfe5db6e9cf726fa371b334ff4a0e880496"
+  }
+}

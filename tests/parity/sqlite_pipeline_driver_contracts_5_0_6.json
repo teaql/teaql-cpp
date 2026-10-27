@@ -1,0 +1,582 @@
+{
+  "schema": 3,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "project": "tests/parity/rust_sqlite_pipeline_source_5_0_6/Cargo.toml",
+  "package": "teaql_sqlite_pipeline_source_506",
+  "runtime_packages": [
+    "teaql-core",
+    "teaql-data-service",
+    "teaql-macros",
+    "teaql-provider-sqlite",
+    "teaql-runtime",
+    "teaql-sql"
+  ],
+  "archive_manifests": [
+    "teaql-core/Cargo.toml",
+    "teaql-data-service/Cargo.toml",
+    "teaql-macros/Cargo.toml",
+    "teaql-provider-sqlite/Cargo.toml",
+    "teaql-runtime/Cargo.toml",
+    "teaql-sql/Cargo.toml"
+  ],
+  "generated_fixtures": [],
+  "support_files": [
+    "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+    "tests/parity/compare_values.py",
+    "tests/parity/rust_values/src/fixture_query_keys.rs",
+    "tests/parity/rust_values/src/fixture_sql.rs",
+    "tests/parity/rust_values/src/fixture_value.rs",
+    "tests/parity/rust_values/src/formatter_fixture.rs",
+    "tests/parity/rust_values/src/main.rs",
+    "tests/parity/sql_bindings_source_5_0_6_cases.json.gz",
+    "tests/parity/sql_dialect_5_0_6_cases.json.gz",
+    "tests/parity/sql_dialect_helper_5_0_6_cases.json.gz",
+    "tests/parity/sql_dialect_hook_5_0_6_cases.json.gz",
+    "tests/parity/sql_dialect_in_5_0_6_cases.json.gz",
+    "tests/parity/sql_execution_5_0_6_cases.json.gz",
+    "tests/parity/sql_grouped_partition_5_0_6_cases.json.gz",
+    "tests/parity/sql_log_query_source_5_0_6_cases.json.gz",
+    "tests/parity/sql_mutation_5_0_6_cases.json.gz",
+    "tests/parity/sql_projection_scope_5_0_6_cases.json.gz",
+    "tests/parity/sql_schema_5_0_6_cases.json.gz",
+    "tests/parity/sql_type_models_boundaries_5_0_6_cases.json.gz",
+    "tests/parity/sql_types_boundaries_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_async_lease_5_0_6_cases.json",
+    "tests/parity/sqlite_async_schedule_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_chunk_capacity_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_lease_binding_5_0_6_cases.json.gz",
+    "tests/parity/sqlite_lease_binding_guard_5_0_6_cases.json.gz"
+  ],
+  "support_file_hashes": {
+    "scripts/sqlite_pipeline_driver_inputs_5_0_6.py": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/rust_values/src/fixture_query_keys.rs": "d55434c6c84ff848c07c22f28c5f562597e9bb3f4c952abc8dbffa4f8977f4c3",
+    "tests/parity/rust_values/src/fixture_sql.rs": "3f9b4a0b35cee94de9ccb283f0cf35d64e6196b112791a9017ea42f836215abf",
+    "tests/parity/rust_values/src/fixture_value.rs": "4db04bd67b7735e5ce916398559b10e10cfa69da89698fa6e6fdfdef11a0ca1f",
+    "tests/parity/rust_values/src/formatter_fixture.rs": "7af9ba6fb78d56461665dd66a0fa44c5aa374ecf9ad433eb7ba3c58aaed32773",
+    "tests/parity/rust_values/src/main.rs": "cbb2ea4581cd09db2074aec34552553e63efc6728fcf6f80b018201d2943e860",
+    "tests/parity/sql_bindings_source_5_0_6_cases.json.gz": "5aeeb70a2e5ee23e2a176d117312f14c1b0292be19ad7ce85658b871eb8eec15",
+    "tests/parity/sql_dialect_5_0_6_cases.json.gz": "388a6620c577a41bab6f140465314aedd9a50f899d505c86e417de2eb1e04dd7",
+    "tests/parity/sql_dialect_helper_5_0_6_cases.json.gz": "12c83f48810dd0d75c07944327488261def11d48a9b4b13986c6f3ce12f1f832",
+    "tests/parity/sql_dialect_hook_5_0_6_cases.json.gz": "a1ee7a9586eb7728f3a2fa66867a44288ecdd4bc293c809e3b1dbc257babecde",
+    "tests/parity/sql_dialect_in_5_0_6_cases.json.gz": "16c1be704baf2b97f18151bd4f58ab1a54f94410dde38e3e35102975746091d1",
+    "tests/parity/sql_execution_5_0_6_cases.json.gz": "4f85b5f051ad683884fe4597adbcb3d01108dfffbee0ea0dce2b7fb25dd8e9bb",
+    "tests/parity/sql_grouped_partition_5_0_6_cases.json.gz": "61cf9733af10c83548a855ebc8ef8444bed0cb83d7402e29aa68c1fa2c6183e6",
+    "tests/parity/sql_log_query_source_5_0_6_cases.json.gz": "5e1d2abfd6cb98c000bc706581e557160f9f107d3c9c2d9b37b15fc94b3bce31",
+    "tests/parity/sql_mutation_5_0_6_cases.json.gz": "b0c10a437844a18ad0faf76ced80f8b7605363735a0cf307296cefe68939c616",
+    "tests/parity/sql_projection_scope_5_0_6_cases.json.gz": "963a21d064a271eba7e63b5d4f56114041b835dcfa617797989195a6fc88e836",
+    "tests/parity/sql_schema_5_0_6_cases.json.gz": "e7fc84266e70cd0f8a4e07de01fbb7536d3f068d22ccda13896bc71fcee42bd9",
+    "tests/parity/sql_type_models_boundaries_5_0_6_cases.json.gz": "69518743ded92ebc94803d324350504550907abc753a3ed67bb452012b4b62fc",
+    "tests/parity/sql_types_boundaries_5_0_6_cases.json.gz": "cc816a6502967c46003545066a22fa6d6e1d435d9e8db755438b32932999a2e1",
+    "tests/parity/sqlite_async_lease_5_0_6_cases.json": "e0d969a91210a6be64ac1971e47720b3c9298c5901ffc11fd7636553d789f6ac",
+    "tests/parity/sqlite_async_schedule_5_0_6_cases.json.gz": "2b6ef7b9494256458befa9dd82c8eacf53f7f002f3fcebdab398440b10935859",
+    "tests/parity/sqlite_chunk_capacity_5_0_6_cases.json.gz": "5d1226738688e6492b9fdfaf119bf5d179b3840077694951acab60ba3c9a3089",
+    "tests/parity/sqlite_lease_binding_5_0_6_cases.json.gz": "09d962c5396b746e7d0b51fcf8b90245f5e230d82ee192a9af4a61bdc8c79a83",
+    "tests/parity/sqlite_lease_binding_guard_5_0_6_cases.json.gz": "68019373109a248f0dd3212e7ee309ffb88714f057d3cf3b4039e33ae3fe9b0b"
+  },
+  "input_helpers": {},
+  "contracts": [
+    {
+      "name": "sql_log_query_source",
+      "native_test": "sql_log_query_source_rust_parity",
+      "count": 79,
+      "corpus": "tests/parity/sql_log_query_source_5_0_6_cases.json.gz",
+      "corpus_sha256": "5e1d2abfd6cb98c000bc706581e557160f9f107d3c9c2d9b37b15fc94b3bce31",
+      "driver": "tests/parity/rust_log_privacy_reference_5_0_6/query.rs",
+      "driver_sha256": "19dadb2c80271540bcc84618a014fa7fe06795dea6b73aae6ab5974b67836e6a",
+      "target": "sql_log_query_source",
+      "native_target": "teaql_sql_log_query_source_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_log_query_source_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_log_query_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_log_query_source_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_log_query_source_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sqlite_chunk_capacity",
+      "native_test": "sqlite_chunk_capacity_rust_parity",
+      "count": 858,
+      "corpus": "tests/parity/sqlite_chunk_capacity_5_0_6_cases.json.gz",
+      "corpus_sha256": "5d1226738688e6492b9fdfaf119bf5d179b3840077694951acab60ba3c9a3089",
+      "driver": "tests/parity/sqlite_chunk_capacity_5_0_6.rs",
+      "driver_sha256": "f9e0f93d2d7154b44007a922823645182e63f34d4790f7a92c63739d730ae42a",
+      "target": "sqlite_chunk_capacity",
+      "native_target": "teaql_sqlite_chunk_capacity_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_chunk_capacity_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_chunk_capacity_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_chunk_capacity_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sqlite_chunk_capacity_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sqlite_lease_binding",
+      "native_test": "sqlite_lease_binding_rust_parity",
+      "count": 15,
+      "corpus": "tests/parity/sqlite_lease_binding_5_0_6_cases.json.gz",
+      "corpus_sha256": "09d962c5396b746e7d0b51fcf8b90245f5e230d82ee192a9af4a61bdc8c79a83",
+      "driver": "tests/parity/sqlite_lease_binding_5_0_6.rs",
+      "driver_sha256": "dcf476bf82c9655df459d2e612a8d85292e9c2d4b3b31359893218b5d32bcfd1",
+      "target": "sqlite_lease_binding",
+      "native_target": "teaql_sqlite_lease_binding_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_lease_binding_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_lease_binding_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_lease_binding_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sqlite_lease_binding_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sqlite_lease_binding_guard",
+      "native_test": "sqlite_lease_binding_guard_rust_parity",
+      "count": 72,
+      "corpus": "tests/parity/sqlite_lease_binding_guard_5_0_6_cases.json.gz",
+      "corpus_sha256": "68019373109a248f0dd3212e7ee309ffb88714f057d3cf3b4039e33ae3fe9b0b",
+      "driver": "tests/parity/sqlite_lease_binding_guard_5_0_6.rs",
+      "driver_sha256": "1267ef1644ad4486c079adedc96c27f082b68012ab71be0003a0a750d8d73154",
+      "target": "sqlite_lease_binding_guard",
+      "native_target": "teaql_sqlite_lease_binding_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_lease_binding_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_lease_binding_guard_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_lease_binding_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sqlite_lease_binding_guard_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sqlite_async_schedule",
+      "native_test": "sqlite_async_schedule_rust_parity",
+      "count": 183,
+      "corpus": "tests/parity/sqlite_async_schedule_5_0_6_cases.json.gz",
+      "corpus_sha256": "2b6ef7b9494256458befa9dd82c8eacf53f7f002f3fcebdab398440b10935859",
+      "driver": "tests/parity/rust_field_layout/src/bin/sqlite_async_schedule_5_0_6.rs",
+      "driver_sha256": "96bfb4ec45efee905c72b0fe1798aebcce5f92fa06192795f5812df0025e8718",
+      "target": "sqlite_async_schedule",
+      "native_target": "teaql_sqlite_async_schedule_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_async_schedule_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_async_schedule_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_async_schedule_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sqlite_async_schedule_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sqlite_async_lease",
+      "native_test": "sqlite_async_lease_rust_parity",
+      "count": 144,
+      "corpus": "tests/parity/sqlite_async_lease_5_0_6_cases.json",
+      "corpus_sha256": "e0d969a91210a6be64ac1971e47720b3c9298c5901ffc11fd7636553d789f6ac",
+      "driver": "tests/parity/rust_field_layout/src/bin/sqlite_async_lease_5_0_6.rs",
+      "driver_sha256": "2536142cbf8be8bb12b01cd4282411f2c1e311a513b3d6a9f1bc07906f998746",
+      "target": "sqlite_async_lease",
+      "native_target": "teaql_sqlite_async_lease_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_async_lease_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_async_lease_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sqlite_async_lease_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sqlite_async_lease_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_execution_5_0_6",
+      "native_test": "sql_execution_5_0_6_rust_parity",
+      "count": 2216,
+      "corpus": "tests/parity/sql_execution_5_0_6_cases.json.gz",
+      "corpus_sha256": "4f85b5f051ad683884fe4597adbcb3d01108dfffbee0ea0dce2b7fb25dd8e9bb",
+      "driver": "tests/parity/rust_field_layout/src/bin/sql_execution_5_0_6.rs",
+      "driver_sha256": "49a01ff8758abb5103fa31723a218d3ac0d10b37540bd4862706152489cafcc6",
+      "target": "sql_execution_506",
+      "native_target": "teaql_sql_execution_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_execution_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_execution_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_execution_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_execution_5_0_6_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_dialect_helpers",
+      "native_test": "sql_dialect_helpers_rust_parity",
+      "count": 262,
+      "corpus": "tests/parity/sql_dialect_helper_5_0_6_cases.json.gz",
+      "corpus_sha256": "12c83f48810dd0d75c07944327488261def11d48a9b4b13986c6f3ce12f1f832",
+      "driver": "tests/parity/rust_values/src/bin/sql_schema_oracle.rs",
+      "driver_sha256": "08376dbf2ab6644a392f790b0fa4412fc062d88370b55afddc1f7151ab8527f3",
+      "target": "sql_schema_oracle",
+      "native_target": "teaql_sql_dialect_helper_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_dialect_helper_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_helpers.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_dialect_helper_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_dialect_helpers_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_dialect_in",
+      "native_test": "sql_dialect_in_rust_parity",
+      "count": 216,
+      "corpus": "tests/parity/sql_dialect_in_5_0_6_cases.json.gz",
+      "corpus_sha256": "16c1be704baf2b97f18151bd4f58ab1a54f94410dde38e3e35102975746091d1",
+      "driver": "tests/parity/rust_values/src/bin/sql_schema_oracle.rs",
+      "driver_sha256": "08376dbf2ab6644a392f790b0fa4412fc062d88370b55afddc1f7151ab8527f3",
+      "target": "sql_schema_oracle",
+      "native_target": "teaql_sql_dialect_helper_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_dialect_helper_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_in.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_dialect_helper_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_dialect_in_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_grouped_partition",
+      "native_test": "sql_grouped_partition_rust_parity",
+      "count": 146,
+      "corpus": "tests/parity/sql_grouped_partition_5_0_6_cases.json.gz",
+      "corpus_sha256": "61cf9733af10c83548a855ebc8ef8444bed0cb83d7402e29aa68c1fa2c6183e6",
+      "driver": "tests/parity/rust_sql_baselines_5_0_6/sql_grouped_partition.rs",
+      "driver_sha256": "cb9ba8f6e3aff6494b4f5a111b107cfc575b83234a0ff792e953eea60fb900de",
+      "target": "sql_grouped_partition",
+      "native_target": "teaql_sql_grouped_partition_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_grouped_partition_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_grouped_partition_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_grouped_partition_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_grouped_partition_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_projection_scope",
+      "native_test": "sql_projection_scope_rust_parity",
+      "count": 8,
+      "corpus": "tests/parity/sql_projection_scope_5_0_6_cases.json.gz",
+      "corpus_sha256": "963a21d064a271eba7e63b5d4f56114041b835dcfa617797989195a6fc88e836",
+      "driver": "tests/parity/rust_values/src/bin/sql_log_oracle.rs",
+      "driver_sha256": "9b4bbd896f44a6a18f591113b099288e2db12c27823183b6f95ed5ad40f6dd4d",
+      "target": "sql_log_oracle",
+      "native_target": "teaql_sql_projection_scope_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_projection_scope_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_projection_scope.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_projection_scope_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_projection_scope_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_schema",
+      "native_test": "sql_schema_rust_parity",
+      "count": 1305,
+      "corpus": "tests/parity/sql_schema_5_0_6_cases.json.gz",
+      "corpus_sha256": "e7fc84266e70cd0f8a4e07de01fbb7536d3f068d22ccda13896bc71fcee42bd9",
+      "driver": "tests/parity/rust_values/src/bin/sql_schema_oracle.rs",
+      "driver_sha256": "08376dbf2ab6644a392f790b0fa4412fc062d88370b55afddc1f7151ab8527f3",
+      "target": "sql_schema_oracle",
+      "native_target": "teaql_sql_schema_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_schema_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_schema.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_schema_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_schema_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_mutation",
+      "native_test": "sql_mutation_rust_parity",
+      "count": 2505,
+      "corpus": "tests/parity/sql_mutation_5_0_6_cases.json.gz",
+      "corpus_sha256": "b0c10a437844a18ad0faf76ced80f8b7605363735a0cf307296cefe68939c616",
+      "driver": "tests/parity/rust_values/src/bin/sql_mutation_oracle.rs",
+      "driver_sha256": "4cad2b28d867c62b09a49edcf78545526611ca198166cc7086dff2492bca8f3c",
+      "target": "sql_mutation_oracle",
+      "native_target": "teaql_sql_mutation_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_mutation_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_mutation.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_mutation_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_mutation_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_dialect_hooks",
+      "native_test": "sql_dialect_hooks_rust_parity",
+      "count": 48,
+      "corpus": "tests/parity/sql_dialect_hook_5_0_6_cases.json.gz",
+      "corpus_sha256": "a1ee7a9586eb7728f3a2fa66867a44288ecdd4bc293c809e3b1dbc257babecde",
+      "driver": "tests/parity/rust_values/src/bin/sql_mutation_oracle.rs",
+      "driver_sha256": "4cad2b28d867c62b09a49edcf78545526611ca198166cc7086dff2492bca8f3c",
+      "target": "sql_mutation_oracle",
+      "native_target": "teaql_sql_mutation_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_mutation_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_hooks.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_mutation_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_dialect_hooks_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_dialect",
+      "native_test": "sql_dialect_rust_parity",
+      "count": 2206,
+      "corpus": "tests/parity/sql_dialect_5_0_6_cases.json.gz",
+      "corpus_sha256": "388a6620c577a41bab6f140465314aedd9a50f899d505c86e417de2eb1e04dd7",
+      "driver": "tests/parity/rust_values/src/bin/sql_dialect_oracle.rs",
+      "driver_sha256": "26870a5d74a230cac8c88414d2ce0b994ebc767e84db7c49b436860ff742671c",
+      "target": "sql_dialect_oracle",
+      "native_target": "teaql_sql_dialect_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_dialect_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_dialect_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_dialect_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_bindings_source",
+      "native_test": "sql_bindings_source_rust_parity",
+      "count": 1169,
+      "corpus": "tests/parity/sql_bindings_source_5_0_6_cases.json.gz",
+      "corpus_sha256": "5aeeb70a2e5ee23e2a176d117312f14c1b0292be19ad7ce85658b871eb8eec15",
+      "driver": "tests/parity/sql_bindings_source_5_0_6.rs",
+      "driver_sha256": "45200cd4fff53f44600277564f0d60ddf1055ad259f353111674810e7ca866b3",
+      "target": "sql_bindings_source",
+      "native_target": "teaql_sql_bindings_source_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_bindings_source_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_bindings_source_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_bindings_source_probe",
+        "--cpp-emulator="
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_bindings_source_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_types_boundaries",
+      "native_test": "sql_types_boundaries_rust_parity",
+      "count": 552,
+      "corpus": "tests/parity/sql_types_boundaries_5_0_6_cases.json.gz",
+      "corpus_sha256": "cc816a6502967c46003545066a22fa6d6e1d435d9e8db755438b32932999a2e1",
+      "driver": "tests/parity/rust_field_layout/src/bin/sql_types_5_0_6.rs",
+      "driver_sha256": "6a5604bbc665d3edb8ab8de14d9bc99ad054302e5b593bfff597c43c84c44cb6",
+      "target": "sql_types_source",
+      "native_target": "teaql_sql_types_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_types_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_types_boundaries_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_types_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_types_boundaries_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    },
+    {
+      "name": "sql_type_models_boundaries",
+      "native_test": "sql_type_models_boundaries_rust_parity",
+      "count": 80,
+      "corpus": "tests/parity/sql_type_models_boundaries_5_0_6_cases.json.gz",
+      "corpus_sha256": "69518743ded92ebc94803d324350504550907abc753a3ed67bb452012b4b62fc",
+      "driver": "tests/parity/rust_field_layout/src/bin/sql_model_api_5_0_6.rs",
+      "driver_sha256": "eb8eda1ad1767627e1759408a2f9948b50af964e3a1d4cf20b8ca7cc5fbadd1e",
+      "target": "sql_model_types_source",
+      "native_target": "teaql_sql_model_api_probe",
+      "native_command": [
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_model_api_probe"
+      ],
+      "registered_command": [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_sql_type_models_boundaries_5_0_6.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_native_current/teaql_sql_model_api_probe"
+      ],
+      "input_builder": {
+        "path": "scripts/sqlite_pipeline_driver_inputs_5_0_6.py",
+        "sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7",
+        "kind": "function",
+        "name": "sql_type_models_boundaries_inputs"
+      },
+      "input_recipe_sha256": "52106d0eb2f765e67279705219e90cb6e044f23d1716d04b0b47004dbbec15b7"
+    }
+  ]
+}

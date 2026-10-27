@@ -134,3 +134,17 @@ every other generated function remains unchanged. This is a qualified binding
 responsibility, not complete G12. The [assembly qualification matrix](runtime_assembly_qualification_matrix_5_0_6.md)
 identifies missing standalone registries, LocalSchemaProvider and type aliases,
 with broader model/customization/sample/Assist and P7 requirements still active.
+
+## Fresh original configuration replay
+
+The [current locked-source replay](parity/business_runtime_configuration_original_replay_current_5_0_6.json.gz)
+rebuilds the unchanged generated Rust Business-ID observer at runtime commit
+`fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and generator commit
+`45e1572c4956ca963410d8ea436ead3c8857087a`. It executes all **27**
+retained runtime/persistence scenarios (**54** Context rounds) against the
+original and C++ probes, and replays the **18** original environment failures
+without treating C++ explicit-key setup as the same API. Both receipt steps
+exit zero. The one-off Cargo target used 254,885,349 bytes and was removed.
+
+This verifies the retained observations on the current host; broader runtime
+configuration, model customization, G13 and P0-P7 acceptance remain open.

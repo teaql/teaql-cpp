@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+from compare_values import json_lines, same
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = ROOT / 'tests/parity/generated_load_state_bulk_5_0_6_cases.json.gz'
@@ -50,8 +51,8 @@ def main():
                                     exit_code=result.returncode,stdout=result.stdout,stderr=result.stderr))
         save()
         result.check_returncode()
-        actual = [json.loads(line) for line in result.stdout.splitlines()]
-        if actual!=corpus['expected']:
+        actual = json_lines(result.stdout)
+        if not same(actual,corpus['expected']):
             record['actual']=actual
             save()
             raise RuntimeError(f'{label}: complete typed batch results differ')

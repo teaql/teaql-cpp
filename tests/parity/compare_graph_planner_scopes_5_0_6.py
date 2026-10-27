@@ -22,11 +22,15 @@ def main():
     source = args.original or root / 'docs/parity/graph_planner_scopes_original_5_0_6.json.gz'
     with gzip.open(source, 'rt') as stream:
         original = json.load(stream)
-    if not original['complete'] or not original['provenance']['all_original_bodies_preserved']:
+    if (original['complete'] is not True
+            or original['provenance']['all_original_bodies_preserved'] is not True):
         raise RuntimeError('Incomplete original runtime evidence')
     inputs = original['inputs']
-    actual = observe(args.cpp, inputs, args.cpp_emulator.split(';') if args.cpp_emulator else ())
     expected = original['observations']
+    if (type(inputs) is not list or type(expected) is not list
+            or len(inputs) != 896 or len(expected) != len(inputs)):
+        raise RuntimeError('Incomplete graph observation matrix')
+    actual = observe(args.cpp, inputs, args.cpp_emulator.split(';') if args.cpp_emulator else ())
     mismatches = [i for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     receipt = dict(complete=not mismatches, count=len(inputs), mismatches=mismatches,
                    original_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),

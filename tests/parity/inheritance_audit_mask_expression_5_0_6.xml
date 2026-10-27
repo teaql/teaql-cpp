@@ -1,0 +1,11 @@
+<root name="cpp_inheritance_graph" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <specialist _cat="human" platform="platform(contextRoot=true)" name="string()"
+                active="true" />
+    <school platform="platform(contextRoot=true)" name="string()" rank="integer()"
+            advisor="specialist(optional=true)" _audit_mask_fields="name"
+            _audit_value_max_len="17, audit_value_max_len=17 as usize, audit_mask_fields=&quot;name&quot;" />
+    <academy _parent="school" campus_code="string()" />
+    <research_academy _parent="academy" budget="number()" />
+    <enrollment school="school()" note="string()" />
+</root>

@@ -1,0 +1,200 @@
+{
+  "kind": "retained_state_entity_sources",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "support_files": {
+    "scripts/state_source_cli_binding_5_0_6.py": "6be1baddf168ce25019391b4c226c22940ec910ddaa1253c3ba701845fe0774c",
+    "tests/parity/verify_state_source_cli_controls_5_0_6.py": "f12f33d0c076192fa7bdd4774b0418d95af1a5cd9a5f5ae88633547482ec6df8",
+    "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
+    "tests/parity/compare_runtime_state_bridge_5_0_6.py": "e9a15f442875239682d24f69790066eeff25a98ffddef411ceb3a7f29475955c",
+    "tests/parity/compare_generated_runtime_state_bridge_5_0_6.py": "5bda8a547f02f2a2d726a729742d2dfe803f9a9c9f1f3acf827aa61cc55ff88b",
+    "tests/parity/compare_generated_load_state_bulk_5_0_6.py": "26fe6d4dc2055e913611109505ae3529523ff65b44f4639b5534f1cfe0c3058e",
+    "tests/parity/compare_entity_source_5_0_6.py": "c932c7331735cbf338f2b829529f2b42a884b9a383c86f0ec0d4081ccce038f3"
+  },
+  "contracts": [
+    {
+      "name": "runtime_state_bridge",
+      "test": "runtime_state_bridge_rust_parity",
+      "comparator": "tests/parity/compare_runtime_state_bridge_5_0_6.py",
+      "binary": "teaql_runtime_state_bridge_probe",
+      "corpus": "tests/parity/runtime_state_bridge_5_0_6_cases.json.gz",
+      "corpus_sha256": "fa5f0ca07ae370b0fffde1797b9cf306a5836c635e823a1dd7be7539510df5d4",
+      "count": 24,
+      "source_expected": "source_expected",
+      "cpp_expected": "cpp_expected",
+      "source_label": "source",
+      "source_hashes": {
+        ".reference/teaql-rs/teaql-runtime/src/entity_save.rs": "ff04761be7223d57174a3ce3ed315f87a86ec728e48117e2a3ffb229a6427e5b",
+        ".reference/teaql-rs/teaql-core/src/entity.rs": "d719e01d2e0f0aa054372a17727fc63a7119cae9562fbf120fe0eea04d542801",
+        "tests/parity/rust_document_services_reference_5_0_6/src/bin/runtime_state_bridge_5_0_6.rs": "62f0ac28951c5f2290da355266094f509405d30134832387a027c78725a1f39e",
+        "tests/parity/rust_document_services_reference_5_0_6/Cargo.toml": "754f7900ff8638738fb6e9d7397a93a87ff7c791eaeaaddd9a829580f656f6ee",
+        "tests/parity/rust_document_services_reference_5_0_6/Cargo.lock": "aa2ba9f4420024ac0061136137c6dcb674e9c6c25cf2add60188b86104ff5776"
+      },
+      "source_receipt": {
+        "path": "docs/parity/runtime_state_bridge_native_retry_5_0_6_source.json.gz",
+        "sha256": "1a5f990b7d22557c8e9b542fb9aaf63eaf63535a6df192b8745c7d41153e820b"
+      },
+      "acceptance": {
+        "path": "docs/parity/runtime_state_bridge_acceptance_5_0_6.json.gz",
+        "sha256": "0c2189ad0b84182f0b46f902b059b3e1740c3f73cd9bf3b39c325cd95676d5f5"
+      },
+      "extra_args": [
+        "--cpp-emulator="
+      ]
+    },
+    {
+      "name": "generated_runtime_state_bridge",
+      "test": "generated_runtime_state_bridge_rust_parity",
+      "comparator": "tests/parity/compare_generated_runtime_state_bridge_5_0_6.py",
+      "binary": "teaql_generated_runtime_state_bridge_probe",
+      "corpus": "tests/parity/generated_runtime_state_bridge_5_0_6_cases.json.gz",
+      "corpus_sha256": "283fab5537611efe4308e085219df25bf3896ddaa4aa7388f0c6721e2a2a9dc5",
+      "count": 6,
+      "source_expected": "expected",
+      "cpp_expected": "expected",
+      "source_label": "source",
+      "source_hashes": {
+        "tests/parity/rust_generated_state_bridge_reference_5_0_6/Cargo.toml": "387951131c95145f1854e50fa538fea0445b8e3e0f08511a62095d6d4d62eedd",
+        "tests/parity/rust_generated_state_bridge_reference_5_0_6/Cargo.lock": "c66d41e7f922029e2873acb8051c0e1f3b4142d9135d5e2a319c7345d73ef23c",
+        "tests/parity/rust_generated_state_bridge_reference_5_0_6/src/main.rs": "36f869e640d79fbbcb52cb7db509cf2ccc62af072afdbfa95757e8397e0a3fdc",
+        ".reference/teaql-rs/teaql-macros/src/derive_impl.rs": "070322b967c628f7498557599b80fa7d3b18099bd97d89d7b3fbb261b76f34fd",
+        "tests/generator/parity/typed_member_aliases_rust/lib/Cargo.toml": "087f48e23d84b84d622941e7f15b7b2dbb5568ad2d0baf120ee4792766d37941",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/behavior.rs": "decfd3ca20339a1cbd1a4fe06b20ea1b16faed672f1b57f8b306a7449e25131f",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/checker.rs": "543e9dab5a82111bbec68cc29624bb39a98f3ffc00b164896a8fbfd5d493d47f",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/entity.rs": "374c9870b41017c27e690adecc077a345ecfa00450b1aff7e6f18625fc4a69af",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/expression.rs": "8214dfac1315b42f7acc8666b3ce7af8429cfc01fe316f77ed178c499677e486",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/request.rs": "215a87b6fba3786f441ea6f0226e1cc4792950c449d6f6759bd89063dbd1ba8f",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/e.rs": "73ff94fae124f7ccef86b893539261726108c6667af03d78873222d626b56d8d",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/behavior.rs": "2d69f3a99ee6fb6fa8c4e7aa1978c9c299c742964034775278e0c06bec3504d4",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/checker.rs": "ad5f8066b30f12a909ac543dbf207aceabdb4b705816392d26eea628bdaaff72",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/entity.rs": "586acc336c69f140b801083f83a4ade4fe79b7f5128a17367a2564395a80f581",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/expression.rs": "fb16e62ea11558dee960540ad9c3187c8dabf5478377e03e2f357d6a50d6a6de",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/request.rs": "7c722e4bc097c65409f121cec3bfec2b1a52f4a80a16d9888013029e6e03950d",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/lib.rs": "01af6c9d3e07a8ff759c206f4ec0e07a1364df24e3c956e462425c58e487f7c6",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/entity.rs": "926504e20bc7c7038e88230d66ace42ba590fed802834110b2f7ff4d7b667735",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/expression.rs": "207b578c80d6bc9b1780aebbfd3a0967bbf40857470dee53e43043d641eaa250",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/request.rs": "ce6f002c09e894e0e98690b4fbed7e669390341f83813f6fa517a00da30fe34d",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/q.rs": "ec2d6468994e18a4d0e82a9a219a93ca5d5bc5d932d18b37cfa9b6dbeaea5231",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/behavior.rs": "c9166039397b9230ea683620f32d6bf3f8fa54197ec722b5242fff315fcfbf21",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/checker.rs": "dfc2ab7d4604a3f51d7b179a10de9657c7d368d3da86d380d44856551e5b65c8",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/entity.rs": "f28f2b809ec1e78e43de9e207d934a9c517d0504ee1030d8e2b9429df7083dcd",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/expression.rs": "707022745df6c5a9bc33ba89c2f5c4746327bccce736af370debebe77582c98b",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/request.rs": "f423c801192ac90bc4259f0ef12e39f1ed31bc2c758b11bde88ee05529763183",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/request_support.rs": "40192401e3d8a5c4c70d02eb2493047223e0ecf79cc5f55283622f022f7bdd0f",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/runtime.rs": "7074c114acc257c31e0c0409c3ee9787f90fc10f93ef3eb658bd296cf3cb74b2",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/sample_data.rs": "44b5a17a3decc0e0ea6d8db5419d6f55744ddf310a80ac8732c543161934443b",
+        "tests/generator/parity/typed_member_aliases_rust/PROVENANCE.json": "0ea90337a05b5248be76b0fa6d0c8685bdbc49eb484432a6e318afa071a2d013"
+      },
+      "source_receipt": {
+        "path": "docs/parity/generated_runtime_state_bridge_native_5_0_6_source.json.gz",
+        "sha256": "91be826b78be217b4b89fde507827a789c4b184c3c8c5f6a6d157b7f1addd027"
+      },
+      "acceptance": {
+        "path": "docs/parity/generated_runtime_state_bridge_acceptance_5_0_6.json.gz",
+        "sha256": "1430f9885fc56c5fb096d5353aa9d274dcc5eb58b4648a9b35accae9156b6a1e"
+      },
+      "extra_args": []
+    },
+    {
+      "name": "generated_load_state_bulk",
+      "test": "generated_load_state_bulk_rust_parity",
+      "comparator": "tests/parity/compare_generated_load_state_bulk_5_0_6.py",
+      "binary": "teaql_generated_load_state_bulk_probe",
+      "corpus": "tests/parity/generated_load_state_bulk_5_0_6_cases.json.gz",
+      "corpus_sha256": "7845192119d99183e40b652aafd3d03a74ff883580c0532037ab3e4624abe907",
+      "count": 12,
+      "source_expected": "expected",
+      "cpp_expected": "expected",
+      "source_label": null,
+      "source_hashes": {
+        "tests/parity/rust_field_layout/src/bin/generated_load_state_bulk_5_0_6.rs": "8cda82050877d97a1298b44d049ebf72bc3a58709b990041dedfa3cb4ac2bf81",
+        ".reference/teaql-rs/teaql-core/tests/shared_load_state.rs": "059009e2d7e099269fb76f2fdf71fca4fb8434f57c7a5f35b248430215a47183",
+        ".reference/teaql-rs/teaql-macros/src/derive_impl.rs": "070322b967c628f7498557599b80fa7d3b18099bd97d89d7b3fbb261b76f34fd",
+        "tests/generator/parity/typed_member_aliases_rust/PROVENANCE.json": "0ea90337a05b5248be76b0fa6d0c8685bdbc49eb484432a6e318afa071a2d013",
+        "tests/generator/parity/typed_member_aliases_rust/lib/Cargo.toml": "087f48e23d84b84d622941e7f15b7b2dbb5568ad2d0baf120ee4792766d37941",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/sample_data.rs": "44b5a17a3decc0e0ea6d8db5419d6f55744ddf310a80ac8732c543161934443b",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/request_support.rs": "40192401e3d8a5c4c70d02eb2493047223e0ecf79cc5f55283622f022f7bdd0f",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/q.rs": "ec2d6468994e18a4d0e82a9a219a93ca5d5bc5d932d18b37cfa9b6dbeaea5231",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/e.rs": "73ff94fae124f7ccef86b893539261726108c6667af03d78873222d626b56d8d",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/lib.rs": "01af6c9d3e07a8ff759c206f4ec0e07a1364df24e3c956e462425c58e487f7c6",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/runtime.rs": "7074c114acc257c31e0c0409c3ee9787f90fc10f93ef3eb658bd296cf3cb74b2",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/entity.rs": "374c9870b41017c27e690adecc077a345ecfa00450b1aff7e6f18625fc4a69af",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/behavior.rs": "decfd3ca20339a1cbd1a4fe06b20ea1b16faed672f1b57f8b306a7449e25131f",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/checker.rs": "543e9dab5a82111bbec68cc29624bb39a98f3ffc00b164896a8fbfd5d493d47f",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/expression.rs": "8214dfac1315b42f7acc8666b3ce7af8429cfc01fe316f77ed178c499677e486",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/child_record/request.rs": "215a87b6fba3786f441ea6f0226e1cc4792950c449d6f6759bd89063dbd1ba8f",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/entity.rs": "f28f2b809ec1e78e43de9e207d934a9c517d0504ee1030d8e2b9429df7083dcd",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/behavior.rs": "c9166039397b9230ea683620f32d6bf3f8fa54197ec722b5242fff315fcfbf21",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/checker.rs": "dfc2ab7d4604a3f51d7b179a10de9657c7d368d3da86d380d44856551e5b65c8",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/expression.rs": "707022745df6c5a9bc33ba89c2f5c4746327bccce736af370debebe77582c98b",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/record/request.rs": "f423c801192ac90bc4259f0ef12e39f1ed31bc2c758b11bde88ee05529763183",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/entity.rs": "586acc336c69f140b801083f83a4ade4fe79b7f5128a17367a2564395a80f581",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/behavior.rs": "2d69f3a99ee6fb6fa8c4e7aa1978c9c299c742964034775278e0c06bec3504d4",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/checker.rs": "ad5f8066b30f12a909ac543dbf207aceabdb4b705816392d26eea628bdaaff72",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/expression.rs": "fb16e62ea11558dee960540ad9c3187c8dabf5478377e03e2f357d6a50d6a6de",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/holder/request.rs": "7c722e4bc097c65409f121cec3bfec2b1a52f4a80a16d9888013029e6e03950d",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/entity.rs": "926504e20bc7c7038e88230d66ace42ba590fed802834110b2f7ff4d7b667735",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/expression.rs": "207b578c80d6bc9b1780aebbfd3a0967bbf40857470dee53e43043d641eaa250",
+        "tests/generator/parity/typed_member_aliases_rust/lib/src/platform/request.rs": "ce6f002c09e894e0e98690b4fbed7e669390341f83813f6fa517a00da30fe34d"
+      },
+      "source_receipt": {
+        "path": "docs/parity/generated_load_state_bulk_original_5_0_6.json.gz",
+        "sha256": "fd56d0e0eb7b0fe4cb7109b63d81b6f041e82206a0b83c2c3ea0d9b66cbc70ca"
+      },
+      "acceptance": {
+        "path": "docs/parity/generated_load_state_bulk_acceptance_5_0_6.json.gz",
+        "sha256": "8f646d3c199f2233344ee6a6209dc8f0643b6c22672c177ae82bb2db5064c215"
+      },
+      "extra_args": []
+    },
+    {
+      "name": "entity_source",
+      "test": "entity_source_rust_parity",
+      "comparator": "tests/parity/compare_entity_source_5_0_6.py",
+      "binary": "teaql_entity_source_probe",
+      "corpus": "tests/parity/entity_source_5_0_6_cases.json.gz",
+      "corpus_sha256": "1bc58a35caaccad88a4594c567edb2379c16ada5b79a1037a3ef956a4a967777",
+      "count": 230,
+      "source_expected": "expected",
+      "cpp_expected": "expected",
+      "source_label": "original",
+      "source_hashes": {
+        ".reference/teaql-rs/teaql-core/src/entity.rs": "d719e01d2e0f0aa054372a17727fc63a7119cae9562fbf120fe0eea04d542801",
+        ".reference/teaql-rs/teaql-core/src/request_intent.rs": "d72b4864ac9a44ee1adfccbc2fadadbf0100ea93acfc19cd1061db7c48d2748b",
+        "tests/parity/rust_core_primitives_reference_5_0_6/Cargo.toml": "f52320bbdc6a46dcd7e8dedf0c4930ce9153dc5dc8f69406b8ccc2be7ac9a9d6",
+        "tests/parity/rust_core_primitives_reference_5_0_6/Cargo.lock": "e7456d1c408aa716cc377db815849f3fcbc7e02a96e85d41d504ac72ff2d6c40",
+        "tests/parity/rust_core_primitives_reference_5_0_6/src/bin/entity_source_reference_5_0_6.rs": "8516eaa1b76727e7f31cf6459e3b40bba2c5945d7ce0e893e411cf5646dad0a0"
+      },
+      "source_receipt": {
+        "path": "docs/parity/entity_source_native_retry_5_0_6_source.json.gz",
+        "sha256": "d1f1c29bccd9b4445868cc01e940eebf7106cf17296052bd829dd81dbaef93f8"
+      },
+      "acceptance": {
+        "path": "docs/parity/entity_source_acceptance_5_0_6.json.gz",
+        "sha256": "52cfe35550d18d16ebbc72e00812f97c635dcc02847f9ebbb6c7f45199337074"
+      },
+      "extra_args": [
+        "--cpp-emulator="
+      ],
+      "historical_corpus": {
+        "commit": "ee22b0e3b9b625ff4236c3388486a8767e066798",
+        "sha256": "d2c93a202cedd7fcf9d7eeba28826c6ecba9e78aabe403b26515739d932e6bcd",
+        "changed_source": "tests/parity/rust_core_primitives_reference_5_0_6/Cargo.toml",
+        "previous_source_sha256": "3bbddd629ee449e2084c56919dc540626fb56bc29452212508a2d5271eb796e0",
+        "current_source_sha256": "f52320bbdc6a46dcd7e8dedf0c4930ce9153dc5dc8f69406b8ccc2be7ac9a9d6"
+      }
+    }
+  ]
+}

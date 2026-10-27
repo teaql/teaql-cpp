@@ -12,12 +12,17 @@ from compare_values import same
 
 RUST_HEADER = '👉 Output as structured JSON:   Set TEAQL_LOG_FORMAT=json (for ELK/Datadog)'
 CPP_HEADER = '👉 Debug text output:           Set TEAQL_LOG_FORMAT=debug or json (both select DebugReaderFormatter)'
+AUDIT_HELP_LINE = ('👉 Raw audit values only with dual opt-in: Set TEAQL_AUDIT_LOG=_full_with_payload '
+                   'and TEAQL_AUDIT_DEBUG_ENDPOINT=/protected/path/audit-debug.log')
+BANNER_HEADER = re.compile(r'(?m)(^' + re.escape(AUDIT_HELP_LINE) + r'\n)'
+                           + re.escape(RUST_HEADER)
+                           + r'(?=\n\n\[Extreme Performance Testing: Disable Logs\](?:\n|$))')
 
 
 def normalize(text):
     # Only the volatile Human UTC prefix and the documented header correction.
     text = re.sub(r'^\[[0-9+-]+ [0-9:]+\.[0-9]{3}\](?=-\[)', '[TIME]', text, flags=re.M)
-    return text.replace(RUST_HEADER, CPP_HEADER)
+    return BANNER_HEADER.sub(lambda match: match.group(1) + CPP_HEADER, text)
 
 
 def observe(executable, inputs, emulator=()):
@@ -52,6 +57,8 @@ def main():
     corpus = json.loads(gzip.decompress(Path(__file__).with_name('log_manager_baseline_5_0_6_cases.json.gz').read_bytes()))
     if corpus['baseline'] != json.loads((root / 'upstream.lock.json').read_text())['commit']:
         raise RuntimeError('Log manager observations belong to a different baseline')
+    if type(corpus.get('cases')) is not list or not corpus['cases']:
+        raise RuntimeError('Comparison corpus cases must be a nonempty list')
     inputs = [c['input'] for c in corpus['cases']]
     expected = [c['expected'] for c in corpus['cases']]
     if args.rust:

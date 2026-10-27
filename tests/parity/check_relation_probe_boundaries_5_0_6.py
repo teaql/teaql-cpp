@@ -6,8 +6,10 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+from compare_values import json_lines, same
 
 ROOT = Path(__file__).resolve().parents[2]
+ORIGINAL_RECEIPT_SHA256 = 'c105efaa134ea2eaa49a597594e2cf4cae60aacd1c52a30af0e08742238937c1'
 
 
 def digest(path):
@@ -24,6 +26,7 @@ def main():
         raise RuntimeError('Preserve earlier receipts')
     subprocess.run(['python3', 'scripts/verify_upstream.py'], cwd=ROOT, check=True)
     original = ROOT/'docs/parity/relation_source_original_tests_5_0_6.json.gz'
+    assert digest(original) == ORIGINAL_RECEIPT_SHA256, 'original relation test receipt byte identity changed'
     receipt = json.loads(gzip.decompress(original.read_bytes()))
     source = ROOT/'.reference/teaql-rs/teaql-runtime/src/data_service/relation.rs'
     assert receipt['complete'] and receipt['provenance']['all_original_bodies_preserved']
@@ -52,15 +55,15 @@ def main():
     result = subprocess.run([*filter(None, args.cpp_emulator.split(';')), str(binary)],
                             input=''.join(json.dumps(row)+'\n' for row in inputs),
                             text=True, capture_output=True, check=True)
-    actual = [json.loads(line) for line in result.stdout.splitlines()]
+    actual = json_lines(result.stdout)
     assert digest(binary) == before and len(actual) == len(inputs) == 32
     for index, (stimulus, row, (plan, count)) in enumerate(zip(inputs, actual, expected)):
         assert 'error' not in row and 'cancelled' not in row, index
-        assert len(row['queries']) == count and row['drops'] == count, index
-        assert row['rows'] == list(range(1, count+1)), index
-        assert row['capabilities_calls'] == (0 if stimulus['parents'] == 0 else 1), index
+        assert len(row['queries']) == count and same(row['drops'], count), index
+        assert same(row['rows'], list(range(1, count+1))), index
+        assert same(row['capabilities_calls'], 0 if stimulus['parents'] == 0 else 1), index
         assert row['telemetry']['teaql.relation.selected_plan'] == plan, index
-        assert row['telemetry']['teaql.relation.parent_count'] == stimulus['parents'], index
+        assert same(row['telemetry']['teaql.relation.parent_count'], stimulus['parents']), index
         scalar = plan == 'BOUNDED_PROBES' and count == stimulus['parents']
         for query in row['queries']:
             assert query['partition'] == (None if scalar else 'owner_id'), index
