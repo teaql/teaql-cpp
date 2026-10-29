@@ -1,8 +1,10 @@
 # Registered Python checks under optimization
 
-The current 1,065-test native registry invokes 587 distinct Python entry
-scripts. The [latest source inventory](parity/registered_python_assert_inventory_after_remaining_1065_5_0_6.json.gz)
-finds 107 registered scripts with 1,467 `ast.Assert` nodes. The preceding
+The current 1,066-test native registry invokes 588 distinct Python entry
+scripts. A current AST scan finds 103 registered scripts with 1,344
+`ast.Assert` nodes after the three installed repairs below. The preceding
+[1,065-test source inventory](parity/registered_python_assert_inventory_after_remaining_1065_5_0_6.json.gz)
+found 107 registered scripts with 1,467 nodes. The earlier
 [declared-core inventory](parity/registered_python_assert_inventory_after_core_1065_5_0_6.json.gz)
 found 109 scripts and 1,537 assertions; the earlier
 [inventory](parity/registered_python_assert_inventory_1065_5_0_6.json.gz)
@@ -81,12 +83,69 @@ retains all five outcomes, the 24 prior corruption outcomes and cleanup of
 both owned temporary directories. Current focused source/control CTests pass
 2/2, and the control runner itself passes under `python -O`. The latest
 inventory recomputes every registered Python entry script and verifies that
-all other assertion rows equal the preceding inventory. Complete SQ02 and
-the post-repair native epoch remain open.
+all other assertion rows equal the preceding inventory. The later 1,065-test
+native epoch completed; complete SQ02 remains open.
+
+## Entity-runtime source validator repair
+
+The [pre-edit witness](parity/entity_runtime_optimized_preedit_witness_5_0_6.json.gz)
+changes only `complete` from `true` to `false` in the retained entity-runtime
+execution. The former validator rejects it under ordinary Python but accepts
+it under `python -O`; the untouched record passes in both modes. The
+[rewrite manifest](parity/entity_runtime_assert_rewrite_candidate_5_0_6.json.gz)
+retains both original sources and installed replacements for 68 verifier
+assertions and seven control-runner assertions. Their whole ASTs match the
+unconditional-check transformation, and no direct assertion remains in either
+file. Source and negative-control CTests pass. The permanent
+[optimized source guard](../tests/parity/verify_optimized_source_guards_5_0_6.py)
+accepts the valid record and rejects the incomplete record in both modes.
+
+## Expression diagnostic framing repair
+
+The [fresh native-output witness](parity/expression_framing_optimized_preedit_witness_5_0_6.json.gz)
+uses a generated C++ diagnostic for `Person(id=7).parent.name`. An extra native
+field was rejected by the former presentation adapter under ordinary Python
+but produced the unchanged original text under `python -O`. Its source fixture
+also imports the adapter's negative controls, so the removable assertions
+weakened the fixture's own checks. The
+[nine-assertion rewrite](parity/expression_framing_assert_rewrite_candidate_5_0_6.json.gz)
+preserves the adapter's whole AST after unconditional-check replacement.
+The permanent guard accepts valid native output and rejects an extra field in
+both modes. The current source fixture and 1,200-frame comparison CTests pass;
+current source-contract hashes were updated without rewriting the historical
+execution receipt.
+
+## Four-corpus source validator repair
+
+The [context-helper witness](parity/corpus_source_optimized_preedit_witness_5_0_6.json.gz)
+changes only `complete` from `true` to `false` in one retained source receipt.
+The former four-corpus validator rejects that receipt under ordinary Python
+but accepts it under `python -O`; the untouched receipt passes in both modes.
+The [48-assertion rewrite](parity/corpus_source_assert_rewrite_candidate_5_0_6.json.gz)
+replaces 43 source-verifier and five control-runner assertions with
+AST-equivalent unconditional checks. The permanent guard accepts the valid
+receipt and rejects the incomplete receipt in both modes. All three registered
+source-only variants and their negative controls pass focused CTests.
+
+## Native epoch controller candidate
+
+The [frozen-input witness](parity/native_epoch_controller_optimized_preedit_witness_5_0_6.json.gz)
+extracts the controller's actual `check_inputs` function. A changed
+input hash is rejected under ordinary Python but accepted under `python -O`
+while locked references remain identical. The live controller for the current
+completed full native epoch had `PYTHONOPTIMIZE` unset, so this finding does not
+change that epoch's interpretation. The
+[ten-assertion candidate](parity/native_epoch_controller_assert_rewrite_candidate_5_0_6.json.gz)
+preserves the controller's whole AST after unconditional-check replacement.
+The permanent guard accepts unchanged inputs and rejects changed inputs under
+ordinary Python for the current source, and checks both modes against the
+exact candidate source. The candidate is uninstalled because eight historical
+source contracts lock the controller's original hash. A separate bounded
+transition is needed before installing it without rewriting those records.
 
 ## Full native epoch boundary
 
-The [1,065-test attempt](parity/current_full_native_terminal_1065_5_0_6.json.gz)
+The earlier [1,065-test attempt](parity/current_full_native_terminal_1065_5_0_6.json.gz)
 ran all registered CTests and ended with 1,064 passes and one failure:
 `parity_custom_public_cli_source_controls`. That control dynamically loaded
 its validator before adding `scripts/` to the import path, so the newly used
@@ -97,7 +156,27 @@ its focused CTest passes 1/1.
 The controller encountered a broken output pipe after CTest returned, before
 it could ingest the terminal JUnit or run its post-build check. The compressed
 record retains the full CTest terminal log, registry, input snapshot identity
-and the controller error. It is a failed, incomplete integration epoch. The
-post-repair source set has no complete native epoch yet. The other 107
-optimization-sensitive registered scripts require separate review and
-qualification; no capability verdict changes here.
+and the controller error. It is a failed, incomplete integration epoch.
+
+The [subsequent full native epoch](parity/current_full_native_optimized_terminal_1065_5_0_6.json.gz)
+completed on 11,814 unchanged inputs, with all **1,065/1,065** CTests passing,
+zero failures, errors or skips, matching JUnit/registry names and successful
+post-build stability. Its [frozen input record](parity/current_full_native_optimized_inputs_1065_5_0_6.json.gz)
+belongs to the source state before the three repairs and the 1,066th CTest were
+installed. A [newer 1,066-test attempt](parity/current_full_native_optimized_terminal_1066_5_0_6.json.gz)
+encountered three controller-hash contract failures and was stopped before a
+terminal JUnit; its source snapshot includes the temporarily installed
+controller candidate. The locked controller source was restored afterward.
+The restored-controller [1,066-test snapshot](parity/current_full_native_optimized_inputs_1066_restored_5_0_6.json.gz)
+contains 11,815 frozen source and producer inputs. Its first
+[CTest fragment](parity/current_native_interrupted_fragment_1066_5_0_6.json.gz)
+passed 789 distinct tests before the user requested a pause during
+`parity_lifecycle_cli_admission`; that fragment has no terminal JUnit. After
+resumption, the [remaining-test receipt](parity/current_native_remaining_1066_5_0_6.json.gz)
+ran all 277 missing names plus 38 required fixture tests. It passes **315/315**
+with zero failures, errors or skips; the union covers **1,066/1,066** unique
+registered names. Both fragments used the same input and locked-reference
+hashes, and the later native build had no work. This is complete split coverage
+of the current registry, not one uninterrupted full-controller epoch. The
+other 103 optimization-sensitive registered scripts require separate review;
+no capability verdict changes here.

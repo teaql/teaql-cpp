@@ -1,29 +1,24 @@
 # G13 semantic qualification requirements
 
-Current source-verifier continuation:
-[the declared-driver optimized-Python repair](registered_python_optimized_checks_5_0_6.md)
-reproduces a false acceptance of an incomplete eight-contract execution
-receipt, then replaces 44 validator/control assertions with AST-equivalent
-unconditional checks. Five normal/optimized CLI controls and focused native
-source/control tests pass. The current 1,065-test full CTest attempt ends with
-1,064 passes and one isolated custom-source-control import failure; its
-controller encounters a broken output pipe before JUnit ingestion. The import
-control now passes focused verification, but no complete post-repair native
-epoch exists. A current registry inventory still finds 111 Python entry
-scripts with 1,579 removable assertions. SQ02, G13/G14/G17 and P0-P7 remain
-open at **14 qualified / 3 partial**. A later
-[declared-core verifier repair](registered_python_optimized_checks_5_0_6.md#declared-core-source-validator)
-reproduces another optimized-Python false acceptance and replaces 42 more
-assertions. Its two focused native checks and five normal/optimized subprocess
-controls pass. The current unchanged 1,065-test registry has 109 Python entry
-scripts with 1,537 remaining assertions; complete SQ02 and the full current
-native epoch remain open. The subsequent
-[seven-corpus source repair](registered_python_optimized_checks_5_0_6.md#seven-corpus-source-validator)
-replaces another 70 assertions after reproducing a saved-record false
-acceptance under `python -O`. Its 24 previous negative controls, five new
-normal/optimized CLI controls and focused source/control tests pass. The
-current 1,065-test registry has 107 Python entry scripts with 1,467 remaining
-assertions. SQ02, G13/G14/G17 and P0-P7 remain open.
+Current source-verifier continuation: the
+[completed full native epoch](parity/current_full_native_optimized_terminal_1065_5_0_6.json.gz)
+passes **1,065/1,065** CTests on 11,814 unchanged inputs, with zero failures,
+errors or skips. That frozen source state includes the earlier declared-driver,
+declared-core and seven-corpus optimized-Python repairs. The later
+[three source repairs and one controller candidate](registered_python_optimized_checks_5_0_6.md)
+replace another 132 removable assertions after four reproduced false
+acceptances. The controller's ten-assertion candidate remains uninstalled
+because historical source contracts lock its original hash. The permanent
+guard checks eighteen source/candidate controls;
+focused native source, negative-control and expression comparison CTests pass.
+The current 1,066-test registry has 588 Python entry scripts, 103 of them with
+1,344 remaining `ast.Assert` nodes. The
+[interrupted first fragment](parity/current_native_interrupted_fragment_1066_5_0_6.json.gz)
+and [terminal remaining-test fragment](parity/current_native_remaining_1066_5_0_6.json.gz)
+cover all **1,066/1,066** unique registered names against 11,815 unchanged
+inputs, with no recorded failure, error or skip. This is split coverage; the
+newer source state has no single complete native epoch. SQ02, G13/G14/G17 and
+P0-P7 remain open at **14 qualified / 3 partial**.
 
 Current SQ02 comparator-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)
@@ -35,8 +30,17 @@ The permanent normal/optimized control rejects the reproduced altered-baseline
 case; selected native tests pass **69/69** across all 53 affected comparator
 registrations and their source fixtures, with no source-hash changes. The
 preceding 1,064-test attempt stopped after 786 passes and has no terminal
-verdict. The current 1,065-test registry still needs a complete current-source
-epoch; SQ02, G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+verdict. The later 1,065-test epoch completed as linked above; SQ02,
+G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+
+The [current 1,065-test wiring receipt](parity/current_44_source_fixture_wiring_1065_5_0_6.json.gz)
+revisits the 44 comparison locators that an older dispatcher lookup left
+unmapped. All 44 now require and explicitly depend on a source fixture, served
+by 25 distinct setup tests. Their setup entry scripts have no direct
+`ast.Assert` nodes. This establishes current CTest wiring only; the source
+gates' imported helpers, original observations and complete SQ02 semantics
+still require their own qualification. The 1,065-test frozen native epoch
+subsequently completed; the newer 1,066-test source state has focused checks.
 
 Current dispatcher/source-fixture inventory: the
 [latest installed custom lookup](runtime_examples_cli_source_binding_5_0_6.md)

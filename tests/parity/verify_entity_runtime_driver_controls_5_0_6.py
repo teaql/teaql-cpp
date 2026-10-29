@@ -19,7 +19,8 @@ def main():
     parser.add_argument('--contracts', type=Path, required=True)
     parser.add_argument('--execution', type=Path, required=True)
     args = parser.parse_args()
-    assert args.record is None or not args.record.exists()
+    if not (args.record is None or not args.record.exists()):
+        raise AssertionError()
     execution_path, registry_path = args.execution.resolve(), args.contracts.resolve()
     execution, registry = read(execution_path), read(registry_path)
     paths = [Path(__file__), execution_path, registry_path, ROOT / 'scripts/verify_entity_runtime_driver_contracts_5_0_6.py']
@@ -30,7 +31,8 @@ def main():
     def reject(name, mutate):
         changed = copy.deepcopy(execution)
         mutate(changed)
-        assert changed != execution
+        if not changed != execution:
+            raise AssertionError()
         try:
             validate(changed, registry)
         except (AssertionError, KeyError, StopIteration, ValueError):
@@ -90,7 +92,8 @@ def main():
         return False
 
     def missing_member(values):
-        assert remove_member(values)
+        if not remove_member(values):
+            raise AssertionError()
 
     reject('missing_original_member', lambda r: output(r, 'original', missing_member))
     reject('missing_native_record', lambda r: output(r, 'native', lambda v: v.pop()))
@@ -114,7 +117,8 @@ def main():
                         return True
             return False
 
-        assert visit(values), 'Positive boolean field required'
+        if not visit(values):
+            raise AssertionError('Positive boolean field required')
 
     def has_bool(value):
         if type(value) is bool:
@@ -162,16 +166,19 @@ def main():
             changed['source_sha256'].pop(next(iter(changed['source_sha256'])))
         else:
             changed['source_sha256'][next(iter(changed['source_sha256']))] = '0' * 64
-        assert changed != corpus
+        if not changed != corpus:
+            raise AssertionError()
         try:
             check_corpus_binding(changed, dynamic)
         except (AssertionError, KeyError, ValueError):
             record['controls'].append(dict(name=name, rejected=True))
         else:
             raise AssertionError('Invalid dynamic-source binding accepted')
-    assert len(record['controls']) == 29
+    if not len(record['controls']) == 29:
+        raise AssertionError()
     record['input_hashes_after'] = hashes()
-    assert record['input_hashes_before'] == record['input_hashes_after']
+    if not record['input_hashes_before'] == record['input_hashes_after']:
+        raise AssertionError()
     record['complete'] = True
     if args.record:
         args.record.write_bytes(gzip.compress(json.dumps(record).encode(), mtime=0))

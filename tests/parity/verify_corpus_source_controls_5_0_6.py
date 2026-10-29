@@ -21,7 +21,8 @@ def main():
     parser.add_argument('--contracts', type=Path,
                         default=ROOT / 'tests/parity/corpus_source_contracts_5_0_6.json')
     args = parser.parse_args()
-    assert args.record is None or not args.record.exists()
+    if not (args.record is None or not args.record.exists()):
+        raise AssertionError()
     contracts = json.loads(args.contracts.read_text())['contracts']
     contract = contracts[0]
     receipt = read(ROOT / contract['receipt'])
@@ -36,7 +37,8 @@ def main():
             def reject(name, mutate):
                 changed_receipt, changed_corpus = copy.deepcopy(receipt), copy.deepcopy(corpus)
                 mutate(changed_receipt, changed_corpus)
-                assert changed_receipt != receipt or changed_corpus != corpus
+                if not (changed_receipt != receipt or changed_corpus != corpus):
+                    raise AssertionError()
                 try:
                     validate_source(contract, changed_receipt, changed_corpus, owned)
                 except (AssertionError, KeyError, StopIteration, ValueError):
@@ -91,7 +93,8 @@ def main():
                 step['stdout'] = '\n'.join(lines)
 
             reject('partial_actual_rust_output', missing_stdout)
-            assert len(record['controls']) == 12
+            if not len(record['controls']) == 12:
+                raise AssertionError()
             archived = [c for c in contracts if c.get('observer_version') == 'archived']
             record['positive_archived_contracts'] = []
             for selected in archived:
@@ -106,7 +109,8 @@ def main():
                     changed_contract = copy.deepcopy(selected)
                     changed_receipt = copy.deepcopy(archived_receipt)
                     mutate(changed_contract, changed_receipt)
-                    assert changed_contract != selected or changed_receipt != archived_receipt
+                    if not (changed_contract != selected or changed_receipt != archived_receipt):
+                        raise AssertionError()
                     try:
                         validate_source(changed_contract, changed_receipt, archived_corpus, owned)
                     except (AssertionError, KeyError, StopIteration, ValueError):
@@ -144,7 +148,8 @@ def main():
                     c['observer_snapshot_sha256'] = current_hash
 
                 reject_archive('current_observer_cannot_be_relabelled_as_archive', relabel_current)
-                assert len(record['controls']) == 20
+                if not len(record['controls']) == 20:
+                    raise AssertionError()
             record['owned_bytes_removed'] = sum(p.stat().st_size for p in owned.rglob('*') if p.is_file())
         record['complete'] = True
     finally:

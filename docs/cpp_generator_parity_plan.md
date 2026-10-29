@@ -1,29 +1,22 @@
 # C++ generator parity plan
 
 Current full-native and source-check continuation:
-[the 1,065-test attempt](registered_python_optimized_checks_5_0_6.md)
-finishes CTest with **1,064 passes / one custom-source-control import failure**.
-The controller loses its output pipe before JUnit ingestion and post-build, so
-the attempt is not a complete green epoch. The isolated import/transition
-control now passes its focused native test. A reproduced optimized-Python
-false acceptance in a declared-driver source validator is repaired with 44
-AST-equivalent unconditional checks; its source/control tests pass **2/2**
-and five normal/optimized CLI controls pass. The post-repair full native epoch,
-remaining registered Python optimization review, SQ02, G13/G14/G17 and P0-P7
-exits remain open. The later
-[declared-core source repair](registered_python_optimized_checks_5_0_6.md#declared-core-source-validator)
-reproduces a second `python -O` false acceptance and replaces 42 more removable
-assertions without changing the validator's AST logic. Its current source and
-control tests pass 2/2. The unchanged 1,065-test registry now has 109 Python
-entry scripts with 1,537 removable assertions; the full post-repair native
-epoch and all capability/phase decisions remain open. The subsequent
-[seven-corpus source repair](registered_python_optimized_checks_5_0_6.md#seven-corpus-source-validator)
-reproduces a third optimized-Python false acceptance and replaces another 70
-removable assertions with AST-equivalent unconditional checks. Its current
-source/control tests pass 2/2, including 24 retained corruptions and five
-normal/optimized CLI controls. The unchanged registry now has 107 Python entry
-scripts with 1,467 removable assertions. Full SQ02/G13/G14/G17 and P0-P7
-acceptance remain open.
+[the completed 1,065-test epoch](parity/current_full_native_optimized_terminal_1065_5_0_6.json.gz)
+passes all registered CTests with zero failures, errors or skips on 11,814
+unchanged inputs. This is the frozen source state after the declared-driver,
+declared-core and seven-corpus optimized-Python repairs. The later
+[three source repairs and one controller candidate](registered_python_optimized_checks_5_0_6.md)
+replace 132 more removable assertions after four reproduced false acceptances.
+The controller's ten-assertion candidate awaits a historical source-contract
+transition. The permanent guard passes eighteen source/candidate controls;
+affected source, negative-control and expression comparison CTests pass. The
+current 1,066-test registry has 588 Python entry scripts, 103 of them with
+1,344 remaining `ast.Assert` nodes. The
+[interrupted first fragment](parity/current_native_interrupted_fragment_1066_5_0_6.json.gz)
+and [remaining-test fragment](parity/current_native_remaining_1066_5_0_6.json.gz)
+cover all **1,066/1,066** unique names on 11,815 unchanged inputs. This is
+split coverage, not one uninterrupted full epoch. Remaining Python
+optimization review, SQ02, G13/G14/G17 and P0-P7 exits remain open.
 
 Current comparator source-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)
@@ -35,8 +28,8 @@ source controls and optional-observer controls pass. The selected native
 run passes **69/69**, including all 53 affected comparator registrations and
 their source fixtures, with unchanged input hashes. A preceding 1,064-test
 attempt was deliberately interrupted after 786 passes; it is not a terminal
-suite result. The current registry has 1,065 tests, so complete current-source
-integration and G13/G14/G17/P0-P7 exits remain open.
+suite result. The later 1,065-test epoch completed as linked above; the
+current registry has 1,066 tests. G13/G14/G17/P0-P7 exits remain open.
 
 Current AP02 cross-branch regression continuation:
 [The installed 162-case corpus](audit_grammar_branch_review_5_0_6.md#installed-cross-branch-composition-regression)
@@ -2262,7 +2255,7 @@ and selection evidence, not semantic composition acceptance. See
 | P4 | Capability gates qualified; final phase audit open | G06/G07 general Q/predicates/projections and G09 execution/pagination are qualified in their acceptance matrices. Preserve purpose/comment, trusted Context/Policy, provider failures and cancellation. Complete cross-capability G13/G14/G17 and the explicit phase exit audit remain separate. |
 | P5 | Capability gates qualified; final phase audit open | G08 aggregation, G10 dynamic JSON and G16 storage/readonly capabilities are qualified, including the approved quoted-FK exception. Earlier failed native and source epochs remain historical. Complete protected metadata/governance/provenance and the full phase exit audit stay open. |
 | P6 | G11/G12 qualified; final phase audit open | Complete E and R01-R18 assembly/sample-data/Assist capability gates are qualified in expression_acceptance_5_0_6.md and g12_acceptance_5_0_6.md. Preserve approved JSON and invalid naming-profile exceptions, truthful guidance and source/ownership evidence. Final cross-capability and P0-P7 signoff remain separate. |
-| P7 | Active; all 305 direct-corpus locators / 323,568 primary observations have scoped source records, and the installed custom lookup maps 160/160 locators. The frozen 1,063-test registry has 512 Rust comparisons and 545 explicit fixture/setup dependencies. The newer full epoch completes with 1,062 passes and one isolated admission-fixture failure on unchanged inputs; the repair passes 60/60 selected controls and its rerun passes 1,063/1,063 on 11,811 unchanged inputs. Two later comparator guards pass seven selected CTests; their full current-source epoch remains open. Latest inherited-business proof retains explicit adaptation, a reference-locked 20-error original compiler guard, native 5 / prior-key 2 and 35 controls. Complete source semantics, protected consumers, AP02/G14/G17 and all capability/phase exits remain. Capability status stays 14 qualified / 3 partial. |
+| P7 | Active; exit audit open | All 305 direct-corpus locators and 323,568 primary observations have scoped source records; the custom lookup maps 160/160 locators. An earlier frozen 1,063-test epoch passed after its admission-fixture repair, and the later 1,065-test epoch passed on 11,814 unchanged inputs. The current 1,066-test registry has [split 1,066/1,066 name coverage](parity/current_native_remaining_1066_5_0_6.json.gz) on 11,815 unchanged inputs, with no single uninterrupted full-controller epoch. Complete SQ02/source semantics, protected consumers, AP02/G14/G17 and all phase exits remain. Capability status stays 14 qualified / 3 partial. |
 
 
 ## Related contracts
@@ -4020,7 +4013,7 @@ body, generated artifact, runtime dependency or public declaration changes.
 Current source status is **25 accepted / 97 pending / 2 excluded_external**;
 whole Context/query/save/protected-I/O and G13/G17/P0-P7 remain open.
 
-While the current full native epoch runs with frozen inputs, the
+During an earlier frozen full native epoch, the
 [Language/I18n source review](i18n_language_source_review_5_0_6.md) maps all
 557 source lines to LI01-LI12. Four actual original unit tests and 4,635 complete
 original/imported observations pass. A temporary canonical imported consumer

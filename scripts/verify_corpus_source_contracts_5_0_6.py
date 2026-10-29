@@ -29,8 +29,10 @@ def read(path):
 
 
 def expected_manifest(package):
-    assert package['version'] == '5.0.6' and package['edition'] == '2024'
-    assert package['features'] == {'opentelemetry': ['dep:opentelemetry']}
+    if not (package['version'] == '5.0.6' and package['edition'] == '2024'):
+        raise AssertionError()
+    if not package['features'] == {'opentelemetry': ['dep:opentelemetry']}:
+        raise AssertionError()
     result = '[package]\nname="teaql-runtime"\nversion="5.0.6"\nedition="2024"\n[workspace]\n'
     omitted = []
     for kind, heading in [(None, 'dependencies'), ('dev', 'dev-dependencies')]:
@@ -41,7 +43,8 @@ def expected_manifest(package):
             if kind == 'dev' and dependency['name'] != 'teaql-macros':
                 omitted.append(dependency['name'])
                 continue
-            assert dependency['target'] is None
+            if not dependency['target'] is None:
+                raise AssertionError()
             fields = ['version=' + json.dumps(dependency['req'])]
             for key in ('path', 'features', 'optional'):
                 if dependency.get(key):
@@ -49,16 +52,19 @@ def expected_manifest(package):
             if not dependency.get('uses_default_features', True):
                 fields.append('default-features=false')
             result += dependency['name'] + '={' + ','.join(fields) + '}\n'
-    assert set(omitted) == {'opentelemetry_sdk', 'opentelemetry-otlp'}
+    if not set(omitted) == {'opentelemetry_sdk', 'opentelemetry-otlp'}:
+        raise AssertionError()
     return result + '\n[features]\nopentelemetry=["dep:opentelemetry"]\n'
 
 
 def validate_source(contract, receipt, corpus, directory):
     baseline = json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
-    assert receipt['complete'] is True and receipt['unchanged_inputs'] is True
-    assert receipt['references']['teaql-rs'] == corpus['baseline'] == baseline
-    assert receipt['references']['teaql_code_gen'] == json.loads(
-        (ROOT / 'docs/cpp_generator_parity_ledger.json').read_text())['generator_commit']
+    if not (receipt['complete'] is True and receipt['unchanged_inputs'] is True):
+        raise AssertionError()
+    if not receipt['references']['teaql-rs'] == corpus['baseline'] == baseline:
+        raise AssertionError()
+    if not receipt['references']['teaql_code_gen'] == json.loads((ROOT / 'docs/cpp_generator_parity_ledger.json').read_text())['generator_commit']:
+        raise AssertionError()
     assets = receipt['reproduction_sources']
     composite = 'asset_versions' in contract
     if composite:
@@ -67,19 +73,25 @@ def validate_source(contract, receipt, corpus, directory):
         for key in ('producer', 'observer', 'input_generator'):
             name = contract[key]
             snapshot_hash = hashlib.sha256(assets[name].encode()).hexdigest()
-            assert receipt['inputs']['runtime:' + name] == snapshot_hash, name
+            if not receipt['inputs']['runtime:' + name] == snapshot_hash:
+                raise AssertionError(name)
             if key != 'observer' or contract.get('observer_version', 'current') == 'current':
-                assert assets[name] == (ROOT / name).read_text(), name
+                if not assets[name] == (ROOT / name).read_text():
+                    raise AssertionError(name)
     observer_version = contract.get('observer_version', 'current')
-    assert observer_version in ('current', 'archived')
+    if not observer_version in ('current', 'archived'):
+        raise AssertionError()
     template = assets[contract['observer']]
     template_hash = hashlib.sha256(template.encode()).hexdigest()
     if observer_version == 'archived':
-        assert template != (ROOT / contract['observer']).read_text()
+        if not template != (ROOT / contract['observer']).read_text():
+            raise AssertionError()
     if 'observer_snapshot_sha256' in contract or observer_version == 'archived':
-        assert template_hash == contract['observer_snapshot_sha256']
+        if not template_hash == contract['observer_snapshot_sha256']:
+            raise AssertionError()
     helper = ROOT / 'scripts/reference_runtime_view_5_0_6.py'
-    assert receipt['inputs']['runtime:scripts/reference_runtime_view_5_0_6.py'] == digest(helper)
+    if not receipt['inputs']['runtime:scripts/reference_runtime_view_5_0_6.py'] == digest(helper):
+        raise AssertionError()
     if composite:
         generated = generate_inputs(contract, receipt)
     else:
@@ -88,55 +100,78 @@ def validate_source(contract, receipt, corpus, directory):
         spec.loader.exec_module(module)
         generated = [module.inputs()]
     for inputs in generated:
-        assert type(corpus['cases']) is list and len(corpus['cases']) == len(inputs) == contract['count']
-        assert same(inputs, [c['input'] for c in corpus['cases']])
+        if not (type(corpus['cases']) is list and len(corpus['cases']) == len(inputs) == contract['count']):
+            raise AssertionError()
+        if not same(inputs, [c['input'] for c in corpus['cases']]):
+            raise AssertionError()
     view = receipt['original']['runtime_view']
-    assert view['all_original_bodies_preserved'] is True
-    assert set(view['omitted_dev_dependencies']) == {'opentelemetry_sdk', 'opentelemetry-otlp'}
+    if not view['all_original_bodies_preserved'] is True:
+        raise AssertionError()
+    if not set(view['omitted_dev_dependencies']) == {'opentelemetry_sdk', 'opentelemetry-otlp'}:
+        raise AssertionError()
     source_root = ROOT / '.reference/teaql-rs/teaql-runtime'
     actual_files = {str(p.relative_to(source_root)): digest(p)
                     for folder in ('src', 'tests', 'test-vectors')
                     for p in (source_root / folder).rglob('*') if p.is_file()}
-    assert actual_files == view['source_files_sha256']
+    if not actual_files == view['source_files_sha256']:
+        raise AssertionError()
     observer_target = contract.get('observer_target', 'src/data_service/context.rs')
-    assert set(view['observers']) == {observer_target}
+    if not set(view['observers']) == {observer_target}:
+        raise AssertionError()
     observer = view['observers'][observer_target]
-    assert hashlib.sha256(observer['text'].encode()).hexdigest() == observer['sha256']
-    assert template.count(contract['marker']) == 1
+    if not hashlib.sha256(observer['text'].encode()).hexdigest() == observer['sha256']:
+        raise AssertionError()
+    if not template.count(contract['marker']) == 1:
+        raise AssertionError()
     assembly = None
     if composite:
         embedded_path, assembly = render_observer(contract, receipt, observer)
     else:
         before, after = template.split(contract['marker'])
-        assert observer['text'].startswith(before) and observer['text'].endswith(after)
+        if not (observer['text'].startswith(before) and observer['text'].endswith(after)):
+            raise AssertionError()
         embedded_path = observer['text'][len(before):len(observer['text']) - len(after)]
-    assert Path(embedded_path).is_absolute() and Path(embedded_path).name == 'inputs.json'
+    if not (Path(embedded_path).is_absolute() and Path(embedded_path).name == 'inputs.json'):
+        raise AssertionError()
     lock = directory / 'Cargo.lock'
     lock.write_text(view['lock'])
     reference_lock = ROOT / '.reference/teaql-rs/Cargo.lock'
-    assert registry_identities(lock) <= registry_identities(reference_lock)
+    if not registry_identities(lock) <= registry_identities(reference_lock):
+        raise AssertionError()
     known_versions = versions(reference_lock)
-    assert all(resolved <= known_versions.get(name, set()) for name, resolved in versions(lock).items())
+    if not all((resolved <= known_versions.get(name, set()) for (name, resolved) in versions(lock).items())):
+        raise AssertionError()
     manifest = view['manifest']
     metadata = [s for s in receipt['steps'] if s['command'][:2] == ['cargo', 'metadata']]
-    assert metadata and all(s['exit_code'] == 0 for s in metadata)
+    if not (metadata and all((s['exit_code'] == 0 for s in metadata))):
+        raise AssertionError()
     package = next(p for p in json.loads(metadata[0]['stdout'])['packages']
                    if p['manifest_path'] == str(source_root / 'Cargo.toml'))
-    assert manifest == expected_manifest(package)
+    if not manifest == expected_manifest(package):
+        raise AssertionError()
     expected_test = contract['test_name']
-    assert receipt['original']['tests'] == [expected_test]
+    if not receipt['original']['tests'] == [expected_test]:
+        raise AssertionError()
     tests = [s for s in receipt['steps'] if s['command'][:2] == ['cargo', 'test']]
-    assert len(tests) == 1
+    if not len(tests) == 1:
+        raise AssertionError()
     step = tests[0]
-    assert step['exit_code'] == 0 and '--offline' in step['command'] and '--locked' in step['command']
-    assert '--nocapture' in step['command'] and '--test-threads=1' in step['command']
-    assert 'Compiling teaql-runtime v5.0.6' in step['stderr']
-    assert expected_test in step['stdout'] and '1 passed; 0 failed' in step['stdout']
+    if not (step['exit_code'] == 0 and '--offline' in step['command'] and ('--locked' in step['command'])):
+        raise AssertionError()
+    if not ('--nocapture' in step['command'] and '--test-threads=1' in step['command']):
+        raise AssertionError()
+    if not 'Compiling teaql-runtime v5.0.6' in step['stderr']:
+        raise AssertionError()
+    if not (expected_test in step['stdout'] and '1 passed; 0 failed' in step['stdout']):
+        raise AssertionError()
     outputs = [json.loads(line.split(contract['output_prefix'], 1)[1])
                for line in step['stdout'].split('\n') if contract['output_prefix'] in line]
-    assert len(outputs) == contract['count']
-    assert same(outputs, receipt['original']['observations'])
-    assert same(outputs, [c['expected'] for c in corpus['cases']])
+    if not len(outputs) == contract['count']:
+        raise AssertionError()
+    if not same(outputs, receipt['original']['observations']):
+        raise AssertionError()
+    if not same(outputs, [c['expected'] for c in corpus['cases']]):
+        raise AssertionError()
     return dict(observations=contract['count'], original_test=expected_test,
                 original_source_files=len(actual_files), embedded_input_path=embedded_path,
                 original_stdout_sha256=hashlib.sha256(step['stdout'].encode()).hexdigest(),
@@ -156,15 +191,19 @@ def main():
     parser.add_argument('--source-only', action='store_true',
                         help='Check archived source bindings without building or invoking native probes')
     args = parser.parse_args()
-    assert args.record is None or not args.record.exists()
+    if not (args.record is None or not args.record.exists()):
+        raise AssertionError()
     registry_path = args.contracts.resolve()
     registry = json.loads(registry_path.read_text())
     contracts = registry['contracts']
-    assert type(contracts) is list and contracts
-    assert len({c['name'] for c in contracts}) == len(contracts)
-    assert registry['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
-    assert registry['generator_commit'] == json.loads(
-        (ROOT / 'docs/cpp_generator_parity_ledger.json').read_text())['generator_commit']
+    if not (type(contracts) is list and contracts):
+        raise AssertionError()
+    if not len({c['name'] for c in contracts}) == len(contracts):
+        raise AssertionError()
+    if not registry['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']:
+        raise AssertionError()
+    if not registry['generator_commit'] == json.loads((ROOT / 'docs/cpp_generator_parity_ledger.json').read_text())['generator_commit']:
+        raise AssertionError()
     record = dict(complete=False, whole_provenance_complete=False, steps=[], contracts=[],
                   scope=__doc__, input_hashes_before={str(registry_path): digest(registry_path)})
     inputs = [Path(__file__), registry_path, ROOT / 'scripts/reference_runtime_view_5_0_6.py',
@@ -201,7 +240,8 @@ def main():
                 actual = None
                 if not args.source_only:
                     actual = observe(str(binary), [c['input'] for c in corpus['cases']])
-                    assert same(actual, [c['expected'] for c in corpus['cases']]), contract['name']
+                    if not same(actual, [c['expected'] for c in corpus['cases']]):
+                        raise AssertionError(contract['name'])
                 record['contracts'].append(dict(name=contract['name'], corpus=contract['corpus'],
                     corpus_sha256=digest(ROOT / contract['corpus']), receipt=contract['receipt'],
                     receipt_sha256=digest(ROOT / contract['receipt']), validation=result,
@@ -210,7 +250,8 @@ def main():
                       'archived source verified' if args.source_only else 'source-bound and current-native matches', flush=True)
             record['owned_bytes_removed'] = sum(p.stat().st_size for p in owned.rglob('*') if p.is_file())
         record['input_hashes_after'] = {str(p): digest(p) for p in inputs}
-        assert record['input_hashes_before'] == record['input_hashes_after']
+        if not record['input_hashes_before'] == record['input_hashes_after']:
+            raise AssertionError()
         record['complete'] = True
     finally:
         record['owned_directory_removed'] = not Path(record.get('owned_directory', '/')).exists()

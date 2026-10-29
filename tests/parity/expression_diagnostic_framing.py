@@ -29,14 +29,16 @@ def original_expression(value):
         broken=text.endswith('<broken>')
         if broken:text=text[:-len('<broken>')]
         token='.'+method('get',part)+'()'
-        assert text.endswith(token),('native getter framing differs',token,text)
+        if not text.endswith(token):
+            raise AssertionError(('native getter framing differs', token, text))
         text=text[:-len(token)]
         suffix.append('.get_'+part+'()'+('<broken>' if broken else ''))
     root_name=value['root'].split('(')[0]
     entry=method('',root_name)
     if entry and 'A'<=entry[0]<='Z':entry=entry[0].lower()+entry[1:]
     prefix='E::'+entry+'('
-    assert text.startswith(prefix),('native root entry differs',prefix,text)
+    if not text.startswith(prefix):
+        raise AssertionError(('native root entry differs', prefix, text))
     return 'E::'+source_entry(root_name)+'('+text[len(prefix):]+''.join(reversed(suffix))
 def nested_selection(value):
     text=value['nested_fix']
@@ -47,7 +49,8 @@ def nested_selection(value):
     position=0
     def consume(token):
         nonlocal position
-        assert text.startswith(token,position),('native selection framing differs',token,text[position:])
+        if not text.startswith(token, position):
+            raise AssertionError(('native selection framing differs', token, text[position:]))
         position+=len(token)
     consume(method('select',node)+'With(')
     source='select_'+node+'('
@@ -58,12 +61,15 @@ def nested_selection(value):
         consume(method('select',parts[i])+('()' if leaf else 'With('))
         source+='select_'+parts[i]+('()' if leaf else '(')
     remainder=text[position:]
-    assert remainder and set(remainder)=={')'},('native closing delimiters differ',remainder)
+    if not (remainder and set(remainder) == {')'}):
+        raise AssertionError(('native closing delimiters differ', remainder))
     return quoted(source+remainder)
 def to_source(value):
-    assert set(value)=={'original_expr_with_broken_point','root','access_path','break_point','missing_preload','suggested_fix','nested_fix','severity','human_message'},'native diagnostic fields differ'
+    if not set(value) == {'original_expr_with_broken_point', 'root', 'access_path', 'break_point', 'missing_preload', 'suggested_fix', 'nested_fix', 'severity', 'human_message'}:
+        raise AssertionError('native diagnostic fields differ')
     node=value['break_point']
-    assert value['suggested_fix']==method('select',node)+'()','native leaf selection differs'
+    if not value['suggested_fix'] == method('select', node) + '()':
+        raise AssertionError('native leaf selection differs')
     original=quoted(original_expression(value))
     suggested=quoted('select_'+node+'()')
     nested=nested_selection(value)
@@ -71,7 +77,8 @@ def to_source(value):
     attempted='.'.join(value['access_path'])
     english='Access to '+root_name+'.'+attempted+' requires preloading. Add '+value['suggested_fix']
     if value['nested_fix'] is not None:english+=' or the complete nested selection '+value['nested_fix']
-    assert value['human_message']==english+' to the query.','native English message differs'
+    if not value['human_message'] == english + ' to the query.':
+        raise AssertionError('native English message differs')
     human=quoted('访问 '+root_name+'.'+attempted+' 时缺少预加载。请在查询中加入 '+suggested+(' 或完整嵌套加载 '+nested if nested!='null' else ''))
     fields=[('original_expr_with_broken_point',original),('root',value['root']),
         ('access_path',array(value['access_path'])),('break_point',quoted(node)),
@@ -81,7 +88,8 @@ def to_source(value):
 
 def verify_negative_controls(value,original):
     import copy
-    assert to_source(value)==original,'positive frame control differs'
+    if not to_source(value) == original:
+        raise AssertionError('positive frame control differs')
     mutations={
         'missing_broken_point':lambda x:x.update(original_expr_with_broken_point=x['original_expr_with_broken_point'].replace('<broken>','')),
         'wrong_root_arguments':lambda x:x.update(original_expr_with_broken_point=x['original_expr_with_broken_point'].replace('id=7','id=8')),
@@ -94,5 +102,6 @@ def verify_negative_controls(value,original):
         corrupted=copy.deepcopy(value);mutate(corrupted)
         try:rejected=to_source(corrupted)!=original
         except (AssertionError,KeyError):rejected=True
-        assert rejected,'presentation adapter repaired '+name
+        if not rejected:
+            raise AssertionError('presentation adapter repaired ' + name)
     return len(mutations)

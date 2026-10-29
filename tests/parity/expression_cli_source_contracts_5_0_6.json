@@ -288,7 +288,7 @@
     "tests/parity/compare_scalar_diagnostic_repair_5_0_6.py": "82f05c1f4601ea5957668a745f7ec0d3def8a3abbbfc5a69ff04e54036c8d702",
     "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
     "tests/parity/expression_cli_cases.py": "b538589e11091253eda7ecba686ccd9214ea64d108f4e019b9a19419386cf9d1",
-    "tests/parity/expression_diagnostic_framing.py": "2686e06602e9fc27470b087bbd702156a6929bc5fd468e87a72fa8cf28e25f35",
+    "tests/parity/expression_diagnostic_framing.py": "e2a453c7304c44ac9521f99e19cca76baaf5241a683118b073837fbeb5903491",
     "tests/parity/expression_diagnostic_text_probe.cpp": "cfd324153dbe4f54ff840f697e3f05aaadac0712905cfd0d16e91b0b66f60b95",
     "tests/parity/expression_model_types_probe.cpp": "fe994978d012c0ac3699713b828ad5966971ed2860bb4abb9beeb0676dd27cd5",
     "tests/parity/expression_root_probe.cpp": "60fad41f9d08059aa825bb5f69069524891c6e5845ae7b95cc9450facb5a9ab2",
