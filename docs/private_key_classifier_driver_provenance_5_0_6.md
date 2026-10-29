@@ -1,5 +1,14 @@
 # Private query keys and bootstrap classifier source provenance
 
+Optimization boundary: a
+[saved-record counterexample](parity/private_key_classifier_optimized_preedit_witness_5_0_6.json.gz)
+changes only the retained execution's `complete` field to `false`. The current
+verifier rejects it under ordinary Python but accepts it under `python -O`.
+The historical registry and execution pin the verifier's original source hash.
+This finding leaves the ordinary source/corpus/native observations below
+intact; an exact source transition and optimized negative controls are still
+required for SQ02.
+
 Two existing Rust 5.0.6 observers now have isolated source/corpus/native bindings:
 **672 query-metadata key inputs** and **85 bootstrap retry-classifier inputs**.
 All **757 observations** agree. Their original private-function and fixture

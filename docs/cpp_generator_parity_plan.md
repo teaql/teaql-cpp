@@ -10,7 +10,7 @@ replace 132 more removable assertions after four reproduced false acceptances.
 The controller rewrite uses a new active path while eight historical source
 contracts retain the original. The permanent guard passes eighteen controls;
 affected source, negative-control and expression comparison CTests pass. The
-current 1,066-test registry has 588 Python entry scripts, 103 of them with
+preceding 1,066-test registry has 588 Python entry scripts, 103 of them with
 1,344 remaining `ast.Assert` nodes. The
 [interrupted first fragment](parity/current_native_interrupted_fragment_1066_5_0_6.json.gz)
 and [remaining-test fragment](parity/current_native_remaining_1066_5_0_6.json.gz)
@@ -18,8 +18,12 @@ cover all **1,066/1,066** unique names on 11,815 unchanged inputs. This is
 historical split coverage. The later
 [hardened-controller full epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
 passes all **1,066/1,066** tests on 11,816 unchanged inputs with exact
-JUnit/registry names and a no-work post-build. Remaining Python optimization
-review, SQ02, G13/G14/G17 and P0-P7 exits remain open.
+JUnit/registry names and a no-work post-build. The current 1,068-test registry
+adds [optimized relation-source rejection](registered_python_optimized_checks_5_0_6.md#relation-source-boundary-under-optimization);
+its focused native checks pass **4/4**, while a new full epoch remains open.
+An independent private-key/classifier false acceptance remains under
+`python -O`. Python optimization review, SQ02, G13/G14/G17 and P0-P7 exits
+remain open.
 
 Current comparator source-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)
@@ -2258,7 +2262,7 @@ and selection evidence, not semantic composition acceptance. See
 | P4 | Capability gates qualified; final phase audit open | G06/G07 general Q/predicates/projections and G09 execution/pagination are qualified in their acceptance matrices. Preserve purpose/comment, trusted Context/Policy, provider failures and cancellation. Complete cross-capability G13/G14/G17 and the explicit phase exit audit remain separate. |
 | P5 | Capability gates qualified; final phase audit open | G08 aggregation, G10 dynamic JSON and G16 storage/readonly capabilities are qualified, including the approved quoted-FK exception. Earlier failed native and source epochs remain historical. Complete protected metadata/governance/provenance and the full phase exit audit stay open. |
 | P6 | G11/G12 qualified; final phase audit open | Complete E and R01-R18 assembly/sample-data/Assist capability gates are qualified in expression_acceptance_5_0_6.md and g12_acceptance_5_0_6.md. Preserve approved JSON and invalid naming-profile exceptions, truthful guidance and source/ownership evidence. Final cross-capability and P0-P7 signoff remain separate. |
-| P7 | Active; exit audit open | All 305 direct-corpus locators and 323,568 primary observations have scoped source records; the custom lookup maps 160/160 locators. The current 1,066-test registry has [one complete hardened-controller epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz) on 11,816 unchanged inputs, with zero failures/errors/skips, exact JUnit/registry names and a no-work post-build. Earlier split and failed epochs retain their recorded scopes. Complete SQ02/source semantics, protected consumers, AP02/G14/G17 and all phase exits remain. Capability status stays 14 qualified / 3 partial. |
+| P7 | Active; exit audit open | All 305 direct-corpus locators and 323,568 primary observations have scoped source records; the custom lookup maps 160/160 locators. The last complete [hardened-controller epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz) passes 1,066/1,066 on 11,816 unchanged inputs, with exact JUnit names and a no-work post-build. The current 1,068-test registry has selected relation-source controls passing 4/4; its full epoch is open. Earlier split and failed epochs retain their scopes. Complete SQ02/source semantics, protected consumers, AP02/G14/G17 and all phase exits remain. Capability status stays 14 qualified / 3 partial. |
 
 
 ## Related contracts

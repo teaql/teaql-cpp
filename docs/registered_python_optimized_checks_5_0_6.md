@@ -1,8 +1,8 @@
 # Registered Python checks under optimization
 
-The current 1,066-test native registry invokes 588 distinct Python entry
-scripts. A current AST scan finds 103 registered scripts with 1,344
-`ast.Assert` nodes after the three installed repairs below. The preceding
+The current 1,068-test native registry invokes 589 distinct Python entry
+scripts. A current AST scan finds 101 registered scripts with 1,327
+`ast.Assert` nodes after the relation-source repair below. The preceding
 [1,065-test source inventory](parity/registered_python_assert_inventory_after_remaining_1065_5_0_6.json.gz)
 found 107 registered scripts with 1,467 nodes. The earlier
 [declared-core inventory](parity/registered_python_assert_inventory_after_core_1065_5_0_6.json.gz)
@@ -146,6 +146,32 @@ ordinary and optimized Python for the hardened controller, and checks the
 historical controller under ordinary Python. Use the hardened controller for
 new full native epochs; historical receipts remain bound to the old path.
 
+## Relation source boundary under optimization
+
+The [pre-edit witness](parity/relation_source_optimized_preedit_witness_5_0_6.json.gz)
+replaces one original Rust test name in memory while preserving the three-name
+count. The old relation boundary checker accepts the altered receipt under
+`python -O` but rejects it under ordinary Python; the unchanged receipt passes
+both modes. The [exact rewrite](parity/relation_source_assert_rewrite_5_0_6.json.gz)
+replaces thirteen checker assertions and four control-runner assertions with
+unconditional checks. The whole ASTs match that transformation and neither
+current script retains an `ast.Assert` node. The permanent
+[rewrite provenance guard](../tests/parity/verify_relation_source_rewrite_5_0_6.py)
+checks source hashes, the witness and whole AST equivalence. Native boundary,
+ordinary receipt control, optimized receipt control and rewrite provenance
+CTests pass **4/4**. The original Rust receipt and prior source-bound evidence
+are unchanged.
+
+## Private key/classifier source validator finding
+
+The [pre-edit witness](parity/private_key_classifier_optimized_preedit_witness_5_0_6.json.gz)
+changes only `complete` to `false` in the retained execution record. The
+current verifier rejects it under ordinary Python but accepts it under
+`python -O`; the unchanged record passes both modes. This verifier and its
+historical registry pin their own source hash, so an exact transition must
+preserve the prior receipt before installing unconditional checks. The finding
+is not a qualified repair, and complete SQ02 remains open.
+
 ## Full native epoch boundary
 
 The earlier [1,065-test attempt](parity/current_full_native_terminal_1065_5_0_6.json.gz)
@@ -192,3 +218,6 @@ both locked references remain fixed and the post-test build has no work. This
 is one uninterrupted native execution on the source state containing the new
 hardened controller, distinct from the earlier split fragments. It does not
 qualify the remaining optimized-Python scripts or complete SQ02/G13/G14/G17.
+The later relation-source repair adds two CTests and changes three Python inputs;
+its selected **4/4** controls pass, while a complete 1,068-test epoch remains
+open for that newer source state.

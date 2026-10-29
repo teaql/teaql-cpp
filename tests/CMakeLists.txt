@@ -1863,6 +1863,13 @@ if(BUILD_TESTING)
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_relation_source_receipt_controls_5_0_6.py
             --cpp $<TARGET_FILE:teaql_relation_execution_probe>)
         set_tests_properties(relation_source_receipt_controls PROPERTIES TIMEOUT 120)
+        add_test(NAME relation_source_receipt_optimized_controls COMMAND ${Python3_EXECUTABLE} -O
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_relation_source_receipt_controls_5_0_6.py
+            --cpp $<TARGET_FILE:teaql_relation_execution_probe>)
+        set_tests_properties(relation_source_receipt_optimized_controls PROPERTIES TIMEOUT 120)
+        add_test(NAME relation_source_rewrite_provenance COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_relation_source_rewrite_5_0_6.py)
+        set_tests_properties(relation_source_rewrite_provenance PROPERTIES TIMEOUT 30)
     endif()
     add_executable(teaql_query_keys_probe tests/parity/query_keys_probe.cpp)
     target_link_libraries(teaql_query_keys_probe PRIVATE teaql::runtime)

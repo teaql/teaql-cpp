@@ -25,17 +25,20 @@ def main():
     spec = importlib.util.spec_from_file_location('relation_source_boundary_checker', CHECKER)
     checker = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(checker)
-    assert checker.digest(ORIGINAL) == checker.ORIGINAL_RECEIPT_SHA256
+    if not (checker.digest(ORIGINAL) == checker.ORIGINAL_RECEIPT_SHA256):
+        raise AssertionError()
 
     command = [str(CHECKER), '--cpp', str(args.cpp.resolve())]
     with patch.object(sys, 'argv', command), contextlib.redirect_stdout(io.StringIO()):
         checker.main()
 
     altered = json.loads(gzip.decompress(ORIGINAL.read_bytes()))
-    assert len(altered['expected_tests']) == 3
+    if not (len(altered['expected_tests']) == 3):
+        raise AssertionError()
     altered['expected_tests'][0] = 'fabricated::test::not_in_original_source'
     corrupted = gzip.compress((json.dumps(altered) + '\n').encode(), mtime=0)
-    assert corrupted != ORIGINAL.read_bytes()
+    if not (corrupted != ORIGINAL.read_bytes()):
+        raise AssertionError()
     ordinary_read = Path.read_bytes
 
     def substitute(path):
@@ -47,7 +50,8 @@ def main():
         try:
             checker.main()
         except AssertionError as error:
-            assert str(error) == 'original relation test receipt byte identity changed'
+            if not (str(error) == 'original relation test receipt byte identity changed'):
+                raise AssertionError()
         else:
             raise AssertionError('altered original relation test receipt was accepted')
 

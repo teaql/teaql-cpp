@@ -11,7 +11,7 @@ acceptances. The controller's ten-assertion rewrite is installed at a new path
 while eight historical contracts retain the original source. The permanent
 guard checks eighteen controls;
 focused native source, negative-control and expression comparison CTests pass.
-The current 1,066-test registry has 588 Python entry scripts, 103 of them with
+The preceding 1,066-test registry has 588 Python entry scripts, 103 of them with
 1,344 remaining `ast.Assert` nodes. The
 [interrupted first fragment](parity/current_native_interrupted_fragment_1066_5_0_6.json.gz)
 and [terminal remaining-test fragment](parity/current_native_remaining_1066_5_0_6.json.gz)
@@ -20,8 +20,12 @@ inputs, with no recorded failure, error or skip. This is historical split
 coverage. The [later uninterrupted hardened-controller epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
 passes **1,066/1,066** tests on 11,816 unchanged inputs with exact JUnit/registry
 names, both fixed references, zero failures/errors/skips and a no-work post-build.
-It closes current SQ05 native execution for that source state. SQ02,
-G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+It closes SQ05 native execution for that source state. The current 1,068-test
+registry adds one optimized relation-source control; its focused checks pass
+**4/4**, while a complete current-source epoch remains open. A separate
+[private-key/classifier false acceptance](parity/private_key_classifier_optimized_preedit_witness_5_0_6.json.gz)
+remains under `python -O`. SQ02, G13/G14/G17 and P0-P7 remain open at
+**14 qualified / 3 partial**.
 
 Current SQ02 comparator-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)

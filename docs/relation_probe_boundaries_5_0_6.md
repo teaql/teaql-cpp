@@ -80,3 +80,19 @@ wrapper directory was removed, and 1,326,475,088 bytes of its remaining
 compiler scratch were removed only after confirming no child held them. This
 checkpoint is not a full native verdict. Complete relation-source, G13 and
 P0-P7 acceptance remain open.
+
+## Optimized-Python source boundary
+
+The [pre-edit counterexample](parity/relation_source_optimized_preedit_witness_5_0_6.json.gz)
+retains a process-local altered original-test name. The checker accepted it
+under `python -O` while ordinary Python rejected it. The
+[seventeen-assertion rewrite](parity/relation_source_assert_rewrite_5_0_6.json.gz)
+changes only the checker and its receipt control to unconditional checks; their
+whole ASTs match the transformation. The new optimized receipt control runs
+the same valid and altered original receipt through the actual 32-case C++
+probe. A separate provenance guard verifies the exact before/after sources and
+whole AST transformation. Current native CTests pass **4/4** for the boundary,
+ordinary control, optimized control and rewrite provenance. The 1,068-test
+registry has no full native epoch on
+this newer source state; the preceding 1,066-test hardened-controller epoch
+retains its own frozen inputs. Complete G13/SQ02 and P0-P7 remain open.

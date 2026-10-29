@@ -26,12 +26,16 @@ def main():
         raise RuntimeError('Preserve earlier receipts')
     subprocess.run(['python3', 'scripts/verify_upstream.py'], cwd=ROOT, check=True)
     original = ROOT/'docs/parity/relation_source_original_tests_5_0_6.json.gz'
-    assert digest(original) == ORIGINAL_RECEIPT_SHA256, 'original relation test receipt byte identity changed'
+    if not (digest(original) == ORIGINAL_RECEIPT_SHA256):
+        raise AssertionError('original relation test receipt byte identity changed')
     receipt = json.loads(gzip.decompress(original.read_bytes()))
     source = ROOT/'.reference/teaql-rs/teaql-runtime/src/data_service/relation.rs'
-    assert receipt['complete'] and receipt['provenance']['all_original_bodies_preserved']
-    assert receipt['provenance']['source_files_sha256']['src/data_service/relation.rs'] == digest(source)
-    assert len(receipt['expected_tests']) == 3
+    if not (receipt['complete'] and receipt['provenance']['all_original_bodies_preserved']):
+        raise AssertionError()
+    if not (receipt['provenance']['source_files_sha256']['src/data_service/relation.rs'] == digest(source)):
+        raise AssertionError()
+    if not (len(receipt['expected_tests']) == 3):
+        raise AssertionError()
     # (parent identities, provider capability, explicit threshold, selected plan,
     #  callback count with capture disabled, callback count with capture enabled)
     boundaries = [(0, True, None, 'BOUNDED_PROBES', 0, 0),
@@ -56,18 +60,27 @@ def main():
                             input=''.join(json.dumps(row)+'\n' for row in inputs),
                             text=True, capture_output=True, check=True)
     actual = json_lines(result.stdout)
-    assert digest(binary) == before and len(actual) == len(inputs) == 32
+    if not (digest(binary) == before and len(actual) == len(inputs) == 32):
+        raise AssertionError()
     for index, (stimulus, row, (plan, count)) in enumerate(zip(inputs, actual, expected)):
-        assert 'error' not in row and 'cancelled' not in row, index
-        assert len(row['queries']) == count and same(row['drops'], count), index
-        assert same(row['rows'], list(range(1, count+1))), index
-        assert same(row['capabilities_calls'], 0 if stimulus['parents'] == 0 else 1), index
-        assert row['telemetry']['teaql.relation.selected_plan'] == plan, index
-        assert same(row['telemetry']['teaql.relation.parent_count'], stimulus['parents']), index
+        if not ('error' not in row and 'cancelled' not in row):
+            raise AssertionError(index)
+        if not (len(row['queries']) == count and same(row['drops'], count)):
+            raise AssertionError(index)
+        if not (same(row['rows'], list(range(1, count+1)))):
+            raise AssertionError(index)
+        if not (same(row['capabilities_calls'], 0 if stimulus['parents'] == 0 else 1)):
+            raise AssertionError(index)
+        if not (row['telemetry']['teaql.relation.selected_plan'] == plan):
+            raise AssertionError(index)
+        if not (same(row['telemetry']['teaql.relation.parent_count'], stimulus['parents'])):
+            raise AssertionError(index)
         scalar = plan == 'BOUNDED_PROBES' and count == stimulus['parents']
         for query in row['queries']:
-            assert query['partition'] == (None if scalar else 'owner_id'), index
-            assert query['entity'] == 'Child' and query['relations'] == [], index
+            if not (query['partition'] == (None if scalar else 'owner_id')):
+                raise AssertionError(index)
+            if not (query['entity'] == 'Child' and query['relations'] == []):
+                raise AssertionError(index)
     record = dict(complete=True, cpp_contract_passed=True, cases=32,
                   scope='C++ dispatch assertions derived from original planner tests; not a new Rust output differential corpus',
                   original_receipt_sha256=digest(original), executable_sha256=before,

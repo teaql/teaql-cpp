@@ -8,8 +8,10 @@ registry names. All 11,816 source and producer inputs and both locked
 references remain unchanged; all eight controller steps exit zero, and the
 post-test build has no work. The consumed task-owned log directory was removed
 after its complete output was retained in the compressed receipt. This closes
-the current SQ05 native execution gate for this frozen source state. It does
-not complete SQ02, G13/G14/G17 or P0-P7.
+SQ05 native execution for that frozen source state. The later relation-source
+repair adds two CTests and changes three Python inputs: selected native checks
+pass **4/4**, and the current 1,068-test state has no full epoch yet. Neither
+epoch completes SQ02, G13/G14/G17 or P0-P7.
 
 Future full native epochs should use
 [`scripts/run_native_integration_epoch_hardened_5_0_6.py`](../scripts/run_native_integration_epoch_hardened_5_0_6.py).
