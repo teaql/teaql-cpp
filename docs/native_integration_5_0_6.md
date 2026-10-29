@@ -1,5 +1,14 @@
 # Current full native integration
 
+New full native epochs should use
+[`scripts/run_native_integration_epoch_hardened_5_0_6.py`](../scripts/run_native_integration_epoch_hardened_5_0_6.py).
+Its ten former assertions are unconditional checks, including frozen-input and
+locked-reference validation under `python -O`. The original controller path is
+retained for source-bound historical receipts. The current 1,066-test registry
+has split 1,066/1,066 name coverage on unchanged inputs, as documented in
+[the source-check continuation](registered_python_optimized_checks_5_0_6.md#full-native-epoch-boundary);
+no uninterrupted full epoch has run with the hardened controller yet.
+
 ## Terminal 1,063-test epoch and installed AP02 continuation
 
 The [frozen input snapshot](parity/current_full_native_1063_inputs_5_0_6.json.gz)

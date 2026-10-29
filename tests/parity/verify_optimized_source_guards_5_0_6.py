@@ -84,6 +84,10 @@ def verify_rewrites():
                     and ast.dump(ReplaceAssert().visit(original), include_attributes=False)
                     == ast.dump(installed, include_attributes=False),
                     'Unconditional-check rewrite changed behavior: ' + row['path'])
+            if candidate_only:
+                hardened = ROOT / 'scripts/run_native_integration_epoch_hardened_5_0_6.py'
+                require(digest(hardened) == row['after_sha256'],
+                        'Active native epoch controller differs from bounded rewrite')
             total += original_asserts
     require(len(paths) == 6 and total == 142, 'Incomplete installed rewrite scope')
 
@@ -174,8 +178,7 @@ def check_expression_framing():
 
 
 def check_native_epoch_controller():
-    manifest = read(PARITY / 'native_epoch_controller_assert_rewrite_candidate_5_0_6.json.gz')
-    source = manifest.get('rows', [manifest])[0]['after_source']
+    source = (ROOT / 'scripts/run_native_integration_epoch_hardened_5_0_6.py').read_text()
     node = next(node for node in ast.walk(ast.parse(source))
                 if isinstance(node, ast.FunctionDef) and node.name == 'check_inputs')
     function = textwrap.dedent(ast.get_source_segment(source, node))
@@ -191,7 +194,7 @@ def check_native_epoch_controller():
         scope['check_inputs']()
         print('ACCEPTED')
     ''')
-    four_modes('native-epoch-candidate', code, 'unchanged', 'changed', input_text=function)
+    four_modes('native-epoch-hardened', code, 'unchanged', 'changed', input_text=function)
     live_source = (ROOT / 'scripts/run_native_integration_epoch_5_0_6.py').read_text()
     live_node = next(node for node in ast.walk(ast.parse(live_source))
                      if isinstance(node, ast.FunctionDef) and node.name == 'check_inputs')
@@ -207,7 +210,7 @@ def main():
     check_corpus_source()
     check_expression_framing()
     check_native_epoch_controller()
-    print('Three installed repairs, one locked controller candidate, and eighteen controls pass')
+    print('Three source repairs, one hardened controller, and eighteen controls pass')
 
 
 if __name__ == '__main__':

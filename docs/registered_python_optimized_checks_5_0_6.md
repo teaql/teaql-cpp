@@ -127,7 +127,7 @@ AST-equivalent unconditional checks. The permanent guard accepts the valid
 receipt and rejects the incomplete receipt in both modes. All three registered
 source-only variants and their negative controls pass focused CTests.
 
-## Native epoch controller candidate
+## Hardened native epoch controller
 
 The [frozen-input witness](parity/native_epoch_controller_optimized_preedit_witness_5_0_6.json.gz)
 extracts the controller's actual `check_inputs` function. A changed
@@ -135,13 +135,16 @@ input hash is rejected under ordinary Python but accepted under `python -O`
 while locked references remain identical. The live controller for the current
 completed full native epoch had `PYTHONOPTIMIZE` unset, so this finding does not
 change that epoch's interpretation. The
-[ten-assertion candidate](parity/native_epoch_controller_assert_rewrite_candidate_5_0_6.json.gz)
+[ten-assertion rewrite](parity/native_epoch_controller_assert_rewrite_candidate_5_0_6.json.gz)
 preserves the controller's whole AST after unconditional-check replacement.
-The permanent guard accepts unchanged inputs and rejects changed inputs under
-ordinary Python for the current source, and checks both modes against the
-exact candidate source. The candidate is uninstalled because eight historical
-source contracts lock the controller's original hash. A separate bounded
-transition is needed before installing it without rewriting those records.
+It is installed at
+[`scripts/run_native_integration_epoch_hardened_5_0_6.py`](../scripts/run_native_integration_epoch_hardened_5_0_6.py).
+The original controller remains unchanged at its historical path because eight
+retained source contracts pin its hash. The permanent guard verifies both exact
+source hashes, accepts unchanged inputs and rejects changed inputs under both
+ordinary and optimized Python for the hardened controller, and checks the
+historical controller under ordinary Python. Use the hardened controller for
+new full native epochs; historical receipts remain bound to the old path.
 
 ## Full native epoch boundary
 

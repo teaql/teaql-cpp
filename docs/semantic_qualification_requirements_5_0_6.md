@@ -5,11 +5,11 @@ Current source-verifier continuation: the
 passes **1,065/1,065** CTests on 11,814 unchanged inputs, with zero failures,
 errors or skips. That frozen source state includes the earlier declared-driver,
 declared-core and seven-corpus optimized-Python repairs. The later
-[three source repairs and one controller candidate](registered_python_optimized_checks_5_0_6.md)
+[three source repairs and the hardened controller](registered_python_optimized_checks_5_0_6.md)
 replace another 132 removable assertions after four reproduced false
-acceptances. The controller's ten-assertion candidate remains uninstalled
-because historical source contracts lock its original hash. The permanent
-guard checks eighteen source/candidate controls;
+acceptances. The controller's ten-assertion rewrite is installed at a new path
+while eight historical contracts retain the original source. The permanent
+guard checks eighteen controls;
 focused native source, negative-control and expression comparison CTests pass.
 The current 1,066-test registry has 588 Python entry scripts, 103 of them with
 1,344 remaining `ast.Assert` nodes. The
