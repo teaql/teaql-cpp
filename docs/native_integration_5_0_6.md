@@ -1,13 +1,23 @@
 # Current full native integration
 
-New full native epochs should use
+The [hardened-controller input snapshot](parity/current_full_native_hardened_inputs_1066_5_0_6.json.gz)
+and [terminal receipt](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
+record one uninterrupted full native epoch: **1,066/1,066** CTests pass with
+zero failures, errors or skips. JUnit contains exactly the 1,066 unique
+registry names. All 11,816 source and producer inputs and both locked
+references remain unchanged; all eight controller steps exit zero, and the
+post-test build has no work. The consumed task-owned log directory was removed
+after its complete output was retained in the compressed receipt. This closes
+the current SQ05 native execution gate for this frozen source state. It does
+not complete SQ02, G13/G14/G17 or P0-P7.
+
+Future full native epochs should use
 [`scripts/run_native_integration_epoch_hardened_5_0_6.py`](../scripts/run_native_integration_epoch_hardened_5_0_6.py).
 Its ten former assertions are unconditional checks, including frozen-input and
 locked-reference validation under `python -O`. The original controller path is
-retained for source-bound historical receipts. The current 1,066-test registry
-has split 1,066/1,066 name coverage on unchanged inputs, as documented in
-[the source-check continuation](registered_python_optimized_checks_5_0_6.md#full-native-epoch-boundary);
-no uninterrupted full epoch has run with the hardened controller yet.
+retained for source-bound historical receipts. The earlier
+[split coverage](registered_python_optimized_checks_5_0_6.md#full-native-epoch-boundary)
+belongs to a separate 11,815-input source state.
 
 ## Terminal 1,063-test epoch and installed AP02 continuation
 

@@ -16,9 +16,12 @@ The current 1,066-test registry has 588 Python entry scripts, 103 of them with
 [interrupted first fragment](parity/current_native_interrupted_fragment_1066_5_0_6.json.gz)
 and [terminal remaining-test fragment](parity/current_native_remaining_1066_5_0_6.json.gz)
 cover all **1,066/1,066** unique registered names against 11,815 unchanged
-inputs, with no recorded failure, error or skip. This is split coverage; the
-newer source state has no single complete native epoch. SQ02, G13/G14/G17 and
-P0-P7 remain open at **14 qualified / 3 partial**.
+inputs, with no recorded failure, error or skip. This is historical split
+coverage. The [later uninterrupted hardened-controller epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
+passes **1,066/1,066** tests on 11,816 unchanged inputs with exact JUnit/registry
+names, both fixed references, zero failures/errors/skips and a no-work post-build.
+It closes current SQ05 native execution for that source state. SQ02,
+G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
 
 Current SQ02 comparator-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)

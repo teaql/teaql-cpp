@@ -183,3 +183,12 @@ hashes, and the later native build had no work. This is complete split coverage
 of the current registry, not one uninterrupted full-controller epoch. The
 other 103 optimization-sensitive registered scripts require separate review;
 no capability verdict changes here.
+
+The later [hardened-controller full epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
+passes **1,066/1,066** unique registered CTests with zero failures, errors or
+skips on [11,816 unchanged inputs](parity/current_full_native_hardened_inputs_1066_5_0_6.json.gz).
+All eight controller steps succeed, the JUnit names exactly match the registry,
+both locked references remain fixed and the post-test build has no work. This
+is one uninterrupted native execution on the source state containing the new
+hardened controller, distinct from the earlier split fragments. It does not
+qualify the remaining optimized-Python scripts or complete SQ02/G13/G14/G17.

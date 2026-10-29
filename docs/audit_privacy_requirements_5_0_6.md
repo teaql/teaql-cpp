@@ -1,5 +1,13 @@
 # G14 audit/privacy and identity requirements
 
+Current native integration: the
+[hardened-controller full epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
+passes **1,066/1,066** tests with zero failures, errors or skips on 11,816
+unchanged inputs, exact JUnit/registry names, fixed references and a no-work
+post-build. This establishes current SQ05 execution for that source state;
+AP02 metadata completeness, protected consumers, SQ02 provenance and full
+G14/G17/P0-P7 acceptance remain open.
+
 Current AP02 cross-branch regression:
 [The installed 162-case corpus](audit_grammar_branch_review_5_0_6.md#installed-cross-branch-composition-regression)
 matches **80,160/80,160** locked Rust/current Java metadata outcomes and
