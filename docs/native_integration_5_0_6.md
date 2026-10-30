@@ -12,8 +12,9 @@ SQ05 native execution for that frozen source state. The later relation-source
 repair adds two CTests and changes three Python inputs: selected native checks
 pass **4/4**. The subsequent private-key/classifier direct verifier repair
 passes **5/5** selected source checks and leaves the historical receipt intact.
-The current 1,071-test state has no full epoch yet. Neither earlier epoch
-completes SQ02, G13/G14/G17 or P0-P7.
+The separate P0 inventory gate passes **1/1**. The current 1,072-test state
+has no full epoch yet. Neither earlier epoch completes SQ02, G13/G14/G17 or
+the remaining phase exits.
 
 Future full native epochs should use
 [`scripts/run_native_integration_epoch_hardened_5_0_6.py`](../scripts/run_native_integration_epoch_hardened_5_0_6.py).

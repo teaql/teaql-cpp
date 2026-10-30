@@ -6,8 +6,9 @@ passes **1,066/1,066** tests on 11,816 unchanged inputs with exact
 JUnit/registry names, fixed references and a no-work post-build. SQ05 native
 execution is established for that source state. Later relation-source and
 direct private-key/classifier verifier checks pass **4/4** and **5/5** in the
-current 1,071-test registry, without a new full epoch. GP11/G14 metadata, GP13/SQ02
-provenance, protected configurations and full G17/P0-P7 acceptance remain open.
+current 1,072-test registry, without a new full epoch. The separate P0 inventory
+gate passes **1/1**. GP11/G14 metadata, GP13/SQ02 provenance, protected
+configurations, complete G17 and the remaining phase exits remain open.
 
 Installed custom CLI/source checkpoint:
 [Admission repairs and permanent source gates](custom_cli_admission_milestone_5_0_6.md)
@@ -507,7 +508,7 @@ implementation claims with current evidence.
 | GP13 | Historical 5.0.5 probes must have actual 5.0.6 source/dependency/observer evidence. Every active governed comparator needs complete provenance, normalization and nonempty/partial-result reconciliation. | **Open:** complete SQ02 provenance closure. A current label or successful registration is insufficient. |
 | GP14 | Context-owned tokens/results remain borrows. Explicit destination copies retain their own payload; pending work cancels/joins before reclamation. Earlier sanitizer evidence is reused only within its unchanged ownership scope. | Runtime contract reconciled; no new lifetime algorithm or sanitizer run. |
 | GP15 | Runtime, data service, SQL executor, transport and SQLite provider retain their independent responsibilities. Core SPIs stay in scope; excluded external integrations do not re-enter the edge runtime. | Runtime contract reconciled. |
-| GP16 | Complete current native integration, artifact/compiler/module gates and every earlier capability/phase exit remain required. | **Open:** complete G13/G14/G17/P0-P7 signoff. The last complete 1,066-test hardened-controller epoch qualifies SQ05 execution for its frozen inputs. The current 1,071-test registry has selected relation-source and direct private-key/classifier verifier checks; artifact/compiler/module and other phase gates retain their independent scopes. |
+| GP16 | Complete current native integration, artifact/compiler/module gates and every earlier capability/phase exit remain required. | **Open:** complete G13/G14/G17 and remaining phase signoff. The last complete 1,066-test hardened-controller epoch qualifies SQ05 execution for its frozen inputs. The current 1,072-test registry has selected relation-source, direct private-key/classifier verifier and P0 inventory checks; artifact/compiler/module and other phase gates retain their independent scopes. |
 
 The union has 35 source owners with independent complete source acceptances.
 Those source decisions are explicitly reused; their existence or hashes alone

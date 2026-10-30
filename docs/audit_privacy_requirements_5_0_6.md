@@ -6,9 +6,10 @@ passes **1,066/1,066** tests with zero failures, errors or skips on 11,816
 unchanged inputs, exact JUnit/registry names, fixed references and a no-work
 post-build. This establishes SQ05 execution for that source state. Later
 relation-source and direct private-key/classifier verifier checks pass **4/4**
-and **5/5** in the current 1,071-test registry, without a new full epoch. AP02
-metadata completeness, protected consumers, SQ02 provenance and full
-G14/G17/P0-P7 acceptance remain open.
+and **5/5** in the current 1,072-test registry, without a new full epoch. The
+separate P0 inventory gate passes **1/1**. AP02 metadata completeness,
+protected consumers, SQ02 provenance, complete G14/G17 and the remaining
+phase exits remain open.
 
 Current AP02 cross-branch regression:
 [The installed 162-case corpus](audit_grammar_branch_review_5_0_6.md#installed-cross-branch-composition-regression)

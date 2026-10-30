@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "historical_dispositions_sha256": "39542710779aad7ecddc641936ac5bcd5d0b21ded3e1a46de83c2d1ad4c02012",
+  "reason": "The module-directory move renamed the parity test owner; retain the historical source-disposition ledger byte for byte.",
+  "updates": [
+    {
+      "source": "teaql-core/src/lib.rs",
+      "old_cpp_target": "teaql_core/include/teaql/core.hpp; tests/parity/core",
+      "current_cpp_target": "teaql_core/include/teaql/core.hpp; tests/parity/teaql_core"
+    }
+  ]
+}

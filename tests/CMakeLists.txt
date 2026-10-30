@@ -3,6 +3,9 @@
 # so existing executable locations and CTest names remain stable.
 if(BUILD_TESTING)
     if(Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
+        add_test(NAME parity_p0_inventory_5_0_6 COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_p0_inventory_5_0_6.py)
+        set_tests_properties(parity_p0_inventory_5_0_6 PROPERTIES TIMEOUT 180)
         add_test(NAME parity_optimized_source_guards COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_optimized_source_guards_5_0_6.py)
         set_tests_properties(parity_optimized_source_guards PROPERTIES TIMEOUT 180)
