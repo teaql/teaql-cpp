@@ -1,6 +1,6 @@
 # Registered Python checks under optimization
 
-The current 1,068-test native registry invokes 589 distinct Python entry
+The current 1,069-test native registry invokes 590 distinct Python entry
 scripts. A current AST scan finds 101 registered scripts with 1,327
 `ast.Assert` nodes after the relation-source repair below. The preceding
 [1,065-test source inventory](parity/registered_python_assert_inventory_after_remaining_1065_5_0_6.json.gz)
@@ -226,5 +226,6 @@ is one uninterrupted native execution on the source state containing the new
 hardened controller, distinct from the earlier split fragments. It does not
 qualify the remaining optimized-Python scripts or complete SQ02/G13/G14/G17.
 The later relation-source repair adds two CTests and changes three Python inputs;
-its selected **4/4** controls pass, while a complete 1,068-test epoch remains
-open for that newer source state.
+its selected **4/4** controls pass. The later protected private-key/classifier
+lane adds one CTest and passes **3/3** selected checks. A complete 1,069-test
+epoch remains open for this source state.
