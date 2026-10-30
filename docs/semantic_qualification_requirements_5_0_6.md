@@ -20,12 +20,13 @@ inputs, with no recorded failure, error or skip. This is historical split
 coverage. The [later uninterrupted hardened-controller epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
 passes **1,066/1,066** tests on 11,816 unchanged inputs with exact JUnit/registry
 names, both fixed references, zero failures/errors/skips and a no-work post-build.
-It closes SQ05 native execution for that source state. The current 1,069-test
-registry adds two relation-source checks and one protected
-private-key/classifier caller lane; focused checks pass **4/4** and **3/3**.
-A complete current-source epoch remains open. Direct
-[`python -O` invocation of the historical private verifier](private_key_classifier_driver_provenance_5_0_6.md)
-still accepts the incomplete receipt. SQ02, G13/G14/G17 and P0-P7 remain open at
+It closes SQ05 native execution for that source state. The current 1,071-test
+registry adds two relation-source checks and three direct
+private-key/classifier verifier checks, retiring the earlier protected-caller
+test; focused checks pass **4/4** and **5/5**. A complete current-source epoch
+remains open. The [private verifier](private_key_classifier_driver_provenance_5_0_6.md)
+now rejects the reproduced incomplete receipt under direct `python -O`.
+SQ02, G13/G14/G17 and P0-P7 remain open at
 **14 qualified / 3 partial**.
 
 Current SQ02 comparator-check checkpoint:

@@ -10,10 +10,10 @@ post-test build has no work. The consumed task-owned log directory was removed
 after its complete output was retained in the compressed receipt. This closes
 SQ05 native execution for that frozen source state. The later relation-source
 repair adds two CTests and changes three Python inputs: selected native checks
-pass **4/4**. A subsequent protected private-key/classifier optimized-caller
-lane adds one CTest and passes **3/3** selected source checks. The current
-1,069-test state has no full epoch yet. Neither earlier epoch completes SQ02,
-G13/G14/G17 or P0-P7.
+pass **4/4**. The subsequent private-key/classifier direct verifier repair
+passes **5/5** selected source checks and leaves the historical receipt intact.
+The current 1,071-test state has no full epoch yet. Neither earlier epoch
+completes SQ02, G13/G14/G17 or P0-P7.
 
 Future full native epochs should use
 [`scripts/run_native_integration_epoch_hardened_5_0_6.py`](../scripts/run_native_integration_epoch_hardened_5_0_6.py).

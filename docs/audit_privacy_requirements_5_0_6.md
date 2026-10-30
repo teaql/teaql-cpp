@@ -5,8 +5,8 @@ Last complete native integration: the
 passes **1,066/1,066** tests with zero failures, errors or skips on 11,816
 unchanged inputs, exact JUnit/registry names, fixed references and a no-work
 post-build. This establishes SQ05 execution for that source state. Later
-relation-source and protected private-key/classifier checks pass **4/4** and
-**3/3** in the current 1,069-test registry, without a new full epoch. AP02
+relation-source and direct private-key/classifier verifier checks pass **4/4**
+and **5/5** in the current 1,071-test registry, without a new full epoch. AP02
 metadata completeness, protected consumers, SQ02 provenance and full
 G14/G17/P0-P7 acceptance remain open.
 

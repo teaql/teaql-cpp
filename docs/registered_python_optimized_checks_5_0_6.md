@@ -1,8 +1,8 @@
 # Registered Python checks under optimization
 
-The current 1,069-test native registry invokes 590 distinct Python entry
-scripts. A current AST scan finds 101 registered scripts with 1,327
-`ast.Assert` nodes after the relation-source repair below. The preceding
+The current 1,071-test native registry invokes 590 distinct Python entry
+scripts. A current AST scan finds 99 registered scripts with 1,210
+`ast.Assert` nodes after the private-verifier repair below. The preceding
 [1,065-test source inventory](parity/registered_python_assert_inventory_after_remaining_1065_5_0_6.json.gz)
 found 107 registered scripts with 1,467 nodes. The earlier
 [declared-core inventory](parity/registered_python_assert_inventory_after_core_1065_5_0_6.json.gz)
@@ -168,16 +168,21 @@ The [pre-edit witness](parity/private_key_classifier_optimized_preedit_witness_5
 changes only `complete` to `false` in the retained execution record. The
 historical verifier rejects it under ordinary Python but accepts it under
 direct `python -O`; the unchanged record passes both modes. Its registry pins
-the original source hash. The new
-[optimized-caller lane](../tests/parity/verify_private_key_classifier_optimized_lane_5_0_6.py)
-preserves those files and executes the original verifier and its 31 controls
-in isolated child processes that require active assertions. The
-[lane receipt](parity/private_key_classifier_optimized_lane_5_0_6.json.gz)
-records a successful original receipt and controls, plus rejection of the
-incomplete receipt, when the caller itself runs under `python -O`. Three
-selected CTests pass. Direct optimized invocation of the historical verifier
-remains vulnerable; an exact source transition or an equivalent permanent
-replacement is still required to close that direct entry point and SQ02.
+the original source hash. The earlier
+[protected-caller receipt](parity/private_key_classifier_optimized_lane_5_0_6.json.gz)
+is retained as a historical intermediate step. The
+[installed assertion rewrite](parity/private_key_classifier_assert_rewrite_5_0_6.json.gz)
+replaces 117 assertions across the verifier and its control runner. Whole ASTs
+match the unconditional-check conversion before four declared adaptations for
+source-hash reconciliation and replay refusal. The
+[permanent transition guard](../tests/parity/verify_private_key_classifier_assert_rewrite_5_0_6.py)
+checks exact old/current source identities, historical support and execution
+hashes, six corrupt source transitions, and direct normal/optimized acceptance
+and rejection. The [current control receipt](parity/private_key_classifier_assert_rewrite_controls_5_0_6.json.gz)
+retains these results, including 31 evidence controls in both modes and
+explicit refusal of optimized archive replay while its shared runner still
+uses assertions. Selected CTests pass **5/5**. The old Rust execution and
+registry are unchanged; complete SQ02 remains open.
 
 ## Full native epoch boundary
 
@@ -226,6 +231,7 @@ is one uninterrupted native execution on the source state containing the new
 hardened controller, distinct from the earlier split fragments. It does not
 qualify the remaining optimized-Python scripts or complete SQ02/G13/G14/G17.
 The later relation-source repair adds two CTests and changes three Python inputs;
-its selected **4/4** controls pass. The later protected private-key/classifier
-lane adds one CTest and passes **3/3** selected checks. A complete 1,069-test
-epoch remains open for this source state.
+its selected **4/4** controls pass. The later direct private-key/classifier
+repair adds three CTests and retires the one protected-caller CTest; its five
+selected checks pass. A complete 1,071-test epoch remains open for this source
+state.

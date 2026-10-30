@@ -93,7 +93,7 @@ the same valid and altered original receipt through the actual 32-case C++
 probe. A separate provenance guard verifies the exact before/after sources and
 whole AST transformation. Current native CTests pass **4/4** for the boundary,
 ordinary control, optimized control and rewrite provenance. That checkpoint
-had 1,068 registered tests. The current 1,069-test registry adds a separate
-private-key/classifier optimized-caller lane and still has no full native epoch;
+had 1,068 registered tests. The current 1,071-test registry adds separate
+direct private-key/classifier verifier checks and still has no full native epoch;
 the preceding 1,066-test hardened-controller epoch retains its own frozen
 inputs. Complete G13/SQ02 and P0-P7 remain open.

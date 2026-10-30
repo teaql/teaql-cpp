@@ -18,7 +18,8 @@ def main(validator=validate, extra_controls=None):
     parser.add_argument('--execution', type=Path, required=True)
     parser.add_argument('--record', type=Path)
     args = parser.parse_args()
-    assert args.record is None or not args.record.exists()
+    if not (args.record is None or not args.record.exists()):
+        raise AssertionError()
     original, registry = archive.read(args.execution), archive.read(args.contracts)
     validator(original, registry)
     controls = []
@@ -27,7 +28,8 @@ def main(validator=validate, extra_controls=None):
         changed, contract = copy.deepcopy(original), copy.deepcopy(registry)
         edit(changed, contract)
         changed['registry'] = copy.deepcopy(contract)
-        assert changed != original or contract != registry
+        if not (changed != original or contract != registry):
+            raise AssertionError()
         try:
             validator(changed, contract)
         except (AssertionError, KeyError, StopIteration, ValueError, OSError):

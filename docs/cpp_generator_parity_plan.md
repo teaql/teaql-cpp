@@ -18,12 +18,13 @@ cover all **1,066/1,066** unique names on 11,815 unchanged inputs. This is
 historical split coverage. The later
 [hardened-controller full epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
 passes all **1,066/1,066** tests on 11,816 unchanged inputs with exact
-JUnit/registry names and a no-work post-build. The current 1,069-test registry
+JUnit/registry names and a no-work post-build. The current 1,071-test registry
 adds [optimized relation-source rejection](registered_python_optimized_checks_5_0_6.md#relation-source-boundary-under-optimization)
-and a [protected private-key/classifier optimized-caller lane](private_key_classifier_driver_provenance_5_0_6.md).
-Their focused native checks pass **4/4** and **3/3**, respectively; a new full
-epoch remains open. Direct `python -O` invocation of the historical private
-verifier still accepts an incomplete receipt. Python optimization review,
+and an [exact private-key/classifier verifier rewrite](private_key_classifier_driver_provenance_5_0_6.md).
+Their focused native checks pass **4/4** and **5/5**, respectively; a new full
+epoch remains open. The private verifier now rejects its reproduced incomplete
+receipt under direct `python -O`; its optimized archive replay is explicitly
+refused until the shared runner is hardened. Python optimization review,
 SQ02, G13/G14/G17 and P0-P7 exits remain open.
 
 Current comparator source-check checkpoint:
@@ -2263,7 +2264,7 @@ and selection evidence, not semantic composition acceptance. See
 | P4 | Capability gates qualified; final phase audit open | G06/G07 general Q/predicates/projections and G09 execution/pagination are qualified in their acceptance matrices. Preserve purpose/comment, trusted Context/Policy, provider failures and cancellation. Complete cross-capability G13/G14/G17 and the explicit phase exit audit remain separate. |
 | P5 | Capability gates qualified; final phase audit open | G08 aggregation, G10 dynamic JSON and G16 storage/readonly capabilities are qualified, including the approved quoted-FK exception. Earlier failed native and source epochs remain historical. Complete protected metadata/governance/provenance and the full phase exit audit stay open. |
 | P6 | G11/G12 qualified; final phase audit open | Complete E and R01-R18 assembly/sample-data/Assist capability gates are qualified in expression_acceptance_5_0_6.md and g12_acceptance_5_0_6.md. Preserve approved JSON and invalid naming-profile exceptions, truthful guidance and source/ownership evidence. Final cross-capability and P0-P7 signoff remain separate. |
-| P7 | Active; exit audit open | All 305 direct-corpus locators and 323,568 primary observations have scoped source records; the custom lookup maps 160/160 locators. The last complete [hardened-controller epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz) passes 1,066/1,066 on 11,816 unchanged inputs, with exact JUnit names and a no-work post-build. The current 1,069-test registry has selected relation-source checks passing 4/4 and a protected private-key/classifier caller lane passing 3/3; its full epoch is open. Earlier split and failed epochs retain their scopes. Complete SQ02/source semantics, protected consumers, AP02/G14/G17 and all phase exits remain. Capability status stays 14 qualified / 3 partial. |
+| P7 | Active; exit audit open | All 305 direct-corpus locators and 323,568 primary observations have scoped source records; the custom lookup maps 160/160 locators. The last complete [hardened-controller epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz) passes 1,066/1,066 on 11,816 unchanged inputs, with exact JUnit names and a no-work post-build. The current 1,071-test registry has selected relation-source checks passing 4/4 and direct private-key/classifier verifier checks passing 5/5; its full epoch is open. Earlier split and failed epochs retain their scopes. Complete SQ02/source semantics, protected consumers, AP02/G14/G17 and all phase exits remain. Capability status stays 14 qualified / 3 partial. |
 
 
 ## Related contracts

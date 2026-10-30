@@ -2,14 +2,18 @@
 
 Optimization boundary: a
 [saved-record counterexample](parity/private_key_classifier_optimized_preedit_witness_5_0_6.json.gz)
-changes only the retained execution's `complete` field to `false`. The current
-verifier rejects it under ordinary Python but accepts it under `python -O`.
-The historical registry and execution pin the verifier's original source hash.
-The [protected optimized-caller lane](parity/private_key_classifier_optimized_lane_5_0_6.json.gz)
-checks those hashes and launches the original verifier in an isolated Python
-child with active assertions. The original source/corpus/native observations
-remain intact. Direct `python -O` invocation of the historical verifier is
-still unsafe; this lane does not close SQ02 or repair that direct entry point.
+changes only the retained execution's `complete` field to `false`. The old
+verifier rejected it under ordinary Python but accepted it under `python -O`.
+The [exact transition](parity/private_key_classifier_assert_rewrite_5_0_6.json.gz)
+replaces 115 verifier and two control-runner assertions with unconditional
+checks. Its manifest retains both old sources, both current sources and four
+declared adaptations for source-hash reconciliation and replay refusal. The
+historical registry and execution remain unchanged. Direct ordinary and
+optimized verification now accept the original receipt and reject the
+incomplete one; all 31 evidence controls pass in both modes. The
+[earlier protected-caller lane](parity/private_key_classifier_optimized_lane_5_0_6.json.gz)
+is historical. Optimized archive replay is explicitly refused while the shared
+archive replay runner still contains assertions. Complete SQ02 remains open.
 
 Two existing Rust 5.0.6 observers now have isolated source/corpus/native bindings:
 **672 query-metadata key inputs** and **85 bootstrap retry-classifier inputs**.
@@ -67,10 +71,11 @@ normalization is introduced.
 - **5/5** affected native tests pass, including the existing query-key unit test,
   both comparators and both new provenance checks.
 - **2/2** retained SQLite schema checks pass, including their 19 controls.
-- The optimized caller's isolated child accepts the original receipt, runs all
-  31 existing controls and rejects the incomplete receipt. Its focused source
-  CTests pass **3/3**. This is a protected invocation path, not an assertion
-  rewrite of the historical verifier.
+- The [current transition controls](parity/private_key_classifier_assert_rewrite_controls_5_0_6.json.gz)
+  accept the original receipt, run all 31 existing controls and reject the
+  incomplete receipt under both ordinary and optimized Python. Six source
+  transition corruptions and optimized replay refusal are checked. The five
+  selected source CTests pass **5/5**.
 
 The disjoint source registry covers **303 corpora / 323,488 observations**.
 Two direct entries remain: inherited-business governed operations and updates,
@@ -100,9 +105,11 @@ cmake --preset native
 python3 scripts/private_key_classifier_driver_provenance_5_0_6.py verify \
   --contracts tests/parity/private_key_classifier_driver_contracts_5_0_6.json \
   --execution docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz
-python3 -O tests/parity/verify_private_key_classifier_optimized_lane_5_0_6.py
+python3 -O scripts/private_key_classifier_driver_provenance_5_0_6.py verify \
+  --contracts tests/parity/private_key_classifier_driver_contracts_5_0_6.json \
+  --execution docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz
 ctest --preset native --output-on-failure \
-  -R '^parity_private_key_classifier_(driver_contracts|driver_controls|optimized_lane)$'
+  -R '^parity_private_key_classifier_(driver_contracts|driver_controls|driver_contracts_optimized|driver_controls_optimized|assert_rewrite)$'
 ```
 
 Use `replay` with a fresh `--record` path to repeat source execution. Preserve

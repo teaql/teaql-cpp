@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 
 import archive_driver_provenance_5_0_6 as archive
+import private_key_classifier_source_transition_5_0_6 as transition
 
 ROOT = archive.ROOT
 RUNTIME_PACKAGES = {
@@ -20,10 +21,12 @@ RUNTIME_PACKAGES = {
 def inputs(contract):
     builder = contract['input_builder']
     path = ROOT / builder['path']
-    assert archive.digest(path) == builder['sha256'] == contract['input_recipe_sha256']
+    if not (archive.digest(path) == builder['sha256'] == contract['input_recipe_sha256']):
+        raise AssertionError()
     if builder['kind'] == 'fixture':
         result = archive.read(path)[builder['name']]
-        assert type(result) is list and len(result) == contract['count']
+        if not (type(result) is list and len(result) == contract['count']):
+            raise AssertionError()
         return result
     source = path.read_text()
     tree = ast.parse(source)
@@ -39,58 +42,77 @@ def inputs(contract):
             values = [n.value for n in ast.walk(function) if isinstance(n, ast.Assign)
                       and any(isinstance(t, ast.Name) and t.id == builder['name']
                               for t in n.targets)]
-            assert len(values) == 1
+            if not (len(values) == 1):
+                raise AssertionError()
             expression = values[0]
-            assert hashlib.sha256(ast.dump(expression, include_attributes=False).encode()).hexdigest() == builder['ast_sha256']
+            if not (hashlib.sha256(ast.dump(expression, include_attributes=False).encode()).hexdigest() == builder['ast_sha256']):
+                raise AssertionError()
             result = list(eval(compile(ast.Expression(expression), str(path), 'eval'), vars(module)))
     else:
-        assert builder['kind'] == 'statements'
+        if not (builder['kind'] == 'statements'):
+            raise AssertionError()
         function = next(n for n in tree.body if isinstance(n, ast.FunctionDef)
                         and n.name == builder['function'])
         selected = function.body[builder['start']:builder['stop']]
-        assert selected and all(isinstance(n, (ast.Assign, ast.AugAssign, ast.Expr))
-                                for n in selected)
+        if not (selected and all(isinstance(n, (ast.Assign, ast.AugAssign, ast.Expr))
+                                for n in selected)):
+            raise AssertionError()
         selected = ast.Module(body=selected, type_ignores=[])
-        assert hashlib.sha256(ast.dump(selected, include_attributes=False).encode()).hexdigest() == builder['ast_sha256']
+        if not (hashlib.sha256(ast.dump(selected, include_attributes=False).encode()).hexdigest() == builder['ast_sha256']):
+            raise AssertionError()
         namespace = {}
         exec(compile(selected, str(path), 'exec'), namespace)
         result = namespace[builder['name']]
-    assert type(result) is list and len(result) == contract['count']
+    if not (type(result) is list and len(result) == contract['count']):
+        raise AssertionError()
     return result
 
 
 
 def check_source_recipes(registry):
     """Bind private source slices and generated artifacts without broadening their scope."""
-    assert registry['source_recipes'] and len(registry['source_recipes']) == 2
+    if not (registry['source_recipes'] and len(registry['source_recipes']) == 2):
+        raise AssertionError()
     support = set(registry['support_files'])
     artifact_provenances = []
-    assert registry['generated_fixtures'] == []
+    if not (registry['generated_fixtures'] == []):
+        raise AssertionError()
     for fixture in registry['artifact_fixtures']:
         provenance = archive.read(ROOT / fixture / 'PROVENANCE.json')
-        assert provenance['runtime_commit'] == registry['runtime_commit']
-        assert provenance['generator_commit'] == registry['generator_commit']
-        assert provenance['hand_edited'] is False
-        assert archive.digest(ROOT / provenance['model']) == provenance['model_sha256']
+        if not (provenance['runtime_commit'] == registry['runtime_commit']):
+            raise AssertionError()
+        if not (provenance['generator_commit'] == registry['generator_commit']):
+            raise AssertionError()
+        if not (provenance['hand_edited'] is False):
+            raise AssertionError()
+        if not (archive.digest(ROOT / provenance['model']) == provenance['model_sha256']):
+            raise AssertionError()
         required = {fixture + '/' + name for name in provenance['files']}
         required.update([fixture + '/PROVENANCE.json', provenance['model']])
-        assert required <= support
+        if not (required <= support):
+            raise AssertionError()
         for name, digest in provenance['files'].items():
-            assert archive.digest(ROOT / fixture / name) == digest
+            if not (archive.digest(ROOT / fixture / name) == digest):
+                raise AssertionError()
         artifact_provenances.append(provenance)
     provenances = []
     kinds = []
     for recipe in registry['source_recipes']:
         kinds.append(recipe['kind'])
-        assert recipe['driver'] in {c['driver'] for c in registry['contracts']}
-        assert recipe['scope'] == 'private_function_only'
+        if not (recipe['driver'] in {c['driver'] for c in registry['contracts']}):
+            raise AssertionError()
+        if not (recipe['scope'] == 'private_function_only'):
+            raise AssertionError()
         if recipe['kind'] == 'build_script_slices':
-            assert recipe['build_script'] == registry['build_script']['path']
-            assert recipe['build_script'] in support
-            assert archive.digest(ROOT / recipe['build_script']) == registry['build_script']['sha256']
+            if not (recipe['build_script'] == registry['build_script']['path']):
+                raise AssertionError()
+            if not (recipe['build_script'] in support):
+                raise AssertionError()
+            if not (archive.digest(ROOT / recipe['build_script']) == registry['build_script']['sha256']):
+                raise AssertionError()
             boundaries = [(piece['source'], piece['start'], piece['stop'],
                            piece['prefix'], piece['suffix']) for piece in recipe['pieces']]
-            assert boundaries == [
+            if not (boundaries == [
                 ('teaql-runtime/src/data_service/helpers.rs',
                  'pub(super) fn aggregation_cache_namespace(',
                  'pub(super) fn invalidate_aggregation_cache_namespace(', '', ''),
@@ -100,180 +122,271 @@ def check_source_recipes(registry):
                 ('teaql-runtime/src/data_service/resolved.rs',
                  '    fn continuous_page_query_key(',
                  '    async fn prepare_id_set_page(', 'impl KeyRepo {\n', '}\n'),
-            ]
+            ]):
+                raise AssertionError()
             text = ''
             for piece in recipe['pieces']:
                 source = ROOT / '.reference/teaql-rs' / piece['source']
-                assert archive.digest(source) == piece['source_sha256']
+                if not (archive.digest(source) == piece['source_sha256']):
+                    raise AssertionError()
                 value = source.read_text()
                 start = value.index(piece['start'])
                 stop = value.index(piece['stop'], start)
                 text += piece['prefix'] + value[start:stop] + piece['suffix']
-            assert text == recipe['compiled_source']
-            assert hashlib.sha256(text.encode()).hexdigest() == recipe['compiled_source_sha256']
+            if not (text == recipe['compiled_source']):
+                raise AssertionError()
+            if not (hashlib.sha256(text.encode()).hexdigest() == recipe['compiled_source_sha256']):
+                raise AssertionError()
             driver = (ROOT / recipe['driver']).read_text()
-            assert 'include!(concat!(env!("OUT_DIR"),"/query_keys.rs"));' in driver
-            assert recipe['abi_bits'] == 64
-            assert recipe['identity_fixture'] == 'Original Root/Context/Metadata/Service/KeyRepo shells'
+            if not ('include!(concat!(env!("OUT_DIR"),"/query_keys.rs"));' in driver):
+                raise AssertionError()
+            if not (recipe['abi_bits'] == 64):
+                raise AssertionError()
+            if not (recipe['identity_fixture'] == 'Original Root/Context/Metadata/Service/KeyRepo shells'):
+                raise AssertionError()
         else:
-            assert recipe['kind'] == 'retained_generated_function'
-            assert recipe['start'] == 'fn is_generated_bootstrap_retryable_conflict('
-            assert recipe['stop'] == '\n}\n'
+            if not (recipe['kind'] == 'retained_generated_function'):
+                raise AssertionError()
+            if not (recipe['start'] == 'fn is_generated_bootstrap_retryable_conflict('):
+                raise AssertionError()
+            if not (recipe['stop'] == '\n}\n'):
+                raise AssertionError()
             source = recipe['source']
-            assert any(source.startswith(fixture + '/') for fixture in registry['artifact_fixtures'])
-            assert archive.digest(ROOT / source) == recipe['source_sha256']
+            if not (any(source.startswith(fixture + '/') for fixture in registry['artifact_fixtures'])):
+                raise AssertionError()
+            if not (archive.digest(ROOT / source) == recipe['source_sha256']):
+                raise AssertionError()
             text = (ROOT / source).read_text()
             start = text.index(recipe['start'])
             stop = text.index(recipe['stop'], start) + len(recipe['stop'])
             extracted = text[start:stop] + '\n'
-            assert recipe['retained'] in support and recipe['provenance'] in support
-            assert (ROOT / recipe['retained']).read_text() == extracted
-            assert hashlib.sha256(extracted.encode()).hexdigest() == recipe['extracted_sha256']
+            if not (recipe['retained'] in support and recipe['provenance'] in support):
+                raise AssertionError()
+            if not ((ROOT / recipe['retained']).read_text() == extracted):
+                raise AssertionError()
+            if not (hashlib.sha256(extracted.encode()).hexdigest() == recipe['extracted_sha256']):
+                raise AssertionError()
             provenance = archive.read(ROOT / recipe['provenance'])
-            assert provenance['source'] == source
-            assert provenance['source_sha256'] == recipe['source_sha256']
-            assert provenance['extracted_sha256'] == recipe['extracted_sha256']
-            assert provenance['runtime_commit'] == registry['runtime_commit']
-            assert provenance['generator_commit'] == registry['generator_commit']
-            assert 'include!("../bootstrap_classifier_original.rs");' in (ROOT / recipe['driver']).read_text()
+            if not (provenance['source'] == source):
+                raise AssertionError()
+            if not (provenance['source_sha256'] == recipe['source_sha256']):
+                raise AssertionError()
+            if not (provenance['extracted_sha256'] == recipe['extracted_sha256']):
+                raise AssertionError()
+            if not (provenance['runtime_commit'] == registry['runtime_commit']):
+                raise AssertionError()
+            if not (provenance['generator_commit'] == registry['generator_commit']):
+                raise AssertionError()
+            if not ('include!("../bootstrap_classifier_original.rs");' in (ROOT / recipe['driver']).read_text()):
+                raise AssertionError()
             provenances.append(provenance)
-    assert kinds == ['build_script_slices', 'retained_generated_function']
+    if not (kinds == ['build_script_slices', 'retained_generated_function']):
+        raise AssertionError()
     return provenances
 
 
 def check_inputs(registry):
-    assert registry['schema'] == 5
-    assert registry['base_verifier_sha256'] == archive.digest(ROOT / 'scripts/generated_driver_provenance_5_0_6.py')
-    assert set(registry['runtime_packages']) == RUNTIME_PACKAGES
-    assert registry['input_helpers'] == {}  # The shared runner's SQL recipe mode is unused.
+    if not (registry['schema'] == 5):
+        raise AssertionError()
+    if not (registry['base_verifier_sha256'] == archive.digest(ROOT / 'scripts/generated_driver_provenance_5_0_6.py')):
+        raise AssertionError()
+    if not (set(registry['runtime_packages']) == RUNTIME_PACKAGES):
+        raise AssertionError()
+    if not (registry['input_helpers'] == {}):
+        raise AssertionError()
     support = set(registry['support_files'])
-    assert len(support) == len(registry['support_files'])
-    assert registry['support_file_hashes'] == {n: archive.digest(ROOT / n) for n in support}
+    if not (len(support) == len(registry['support_files'])):
+        raise AssertionError()
+    transition.verify_support(registry['support_file_hashes'],
+                              {n: archive.digest(ROOT / n) for n in support})
     for name in [registry['project'], *support, *(c['driver'] for c in registry['contracts'])]:
         path = Path(name)
-        assert not path.is_absolute() and '..' not in path.parts
-        assert (ROOT / path).is_file()
+        if not (not path.is_absolute() and '..' not in path.parts):
+            raise AssertionError()
+        if not ((ROOT / path).is_file()):
+            raise AssertionError()
     provenances = check_source_recipes(registry)
     for fixture in registry['generated_fixtures']:
         path = ROOT / fixture
         provenance = archive.read(path / 'PROVENANCE.json')
-        assert provenance['runtime_commit'] == registry['runtime_commit']
-        assert provenance['generator_commit'] == registry['generator_commit']
-        assert provenance['hand_edited'] is False
-        assert archive.digest(ROOT / provenance['model']) == provenance['model_sha256']
+        if not (provenance['runtime_commit'] == registry['runtime_commit']):
+            raise AssertionError()
+        if not (provenance['generator_commit'] == registry['generator_commit']):
+            raise AssertionError()
+        if not (provenance['hand_edited'] is False):
+            raise AssertionError()
+        if not (archive.digest(ROOT / provenance['model']) == provenance['model_sha256']):
+            raise AssertionError()
         required = {fixture + '/' + n for n in provenance['files']}
         required.update([fixture + '/PROVENANCE.json', provenance['model']])
-        assert required <= support
+        if not (required <= support):
+            raise AssertionError()
         for name, expected in provenance['files'].items():
-            assert archive.digest(path / name) == expected
+            if not (archive.digest(path / name) == expected):
+                raise AssertionError()
         provenances.append(provenance)
     contracts = registry['contracts']
-    assert contracts and len(contracts) == len({c['name'] for c in contracts})
-    assert len({c['native_test'] for c in contracts}) == len(contracts)
-    assert len({c['corpus'] for c in contracts}) == len(contracts)
+    if not (contracts and len(contracts) == len({c['name'] for c in contracts})):
+        raise AssertionError()
+    if not (len({c['native_test'] for c in contracts}) == len(contracts)):
+        raise AssertionError()
+    if not (len({c['corpus'] for c in contracts}) == len(contracts)):
+        raise AssertionError()
     for contract in contracts:
-        assert type(contract['count']) is int and contract['count'] > 0
-        assert contract['input_builder']['path'] in support
+        if not (type(contract['count']) is int and contract['count'] > 0):
+            raise AssertionError()
+        if not (contract['input_builder']['path'] in support):
+            raise AssertionError()
         corpus = archive.read(ROOT / contract['corpus'])
-        assert archive.digest(ROOT / contract['corpus']) == contract['corpus_sha256']
-        assert corpus['baseline'] == registry['runtime_commit']
-        assert archive.digest(ROOT / contract['driver']) == contract['driver_sha256']
-        assert contract['native_command'][0] == str(ROOT / 'build_native_current' / contract['native_target'])
-        assert archive.same(inputs(contract), [r['input'] for r in corpus['cases']])
+        if not (archive.digest(ROOT / contract['corpus']) == contract['corpus_sha256']):
+            raise AssertionError()
+        if not (corpus['baseline'] == registry['runtime_commit']):
+            raise AssertionError()
+        if not (archive.digest(ROOT / contract['driver']) == contract['driver_sha256']):
+            raise AssertionError()
+        if not (contract['native_command'][0] == str(ROOT / 'build_native_current' / contract['native_target'])):
+            raise AssertionError()
+        if not (archive.same(inputs(contract), [r['input'] for r in corpus['cases']])):
+            raise AssertionError()
         if 'producer' in corpus:
-            assert corpus['producer'] in provenances
+            if not (corpus['producer'] in provenances):
+                raise AssertionError()
         source_root = contract.get('corpus_source_root', 'runtime')
-        assert source_root in ['runtime', 'project']
+        if not (source_root in ['runtime', 'project']):
+            raise AssertionError()
         source_root = ROOT / '.reference/teaql-rs' if source_root == 'runtime' else ROOT
         for key in ['sources', 'source_hashes', 'source_sha256']:
             hashes = corpus.get(key)
             if isinstance(hashes, dict):
                 for name, expected in hashes.items():
-                    assert not Path(name).is_absolute() and '..' not in Path(name).parts
-                    assert archive.digest(source_root / name) == expected
+                    if not (not Path(name).is_absolute() and '..' not in Path(name).parts):
+                        raise AssertionError()
+                    if not (archive.digest(source_root / name) == expected):
+                        raise AssertionError()
         if isinstance(corpus.get('source'), str) and isinstance(corpus.get('source_sha256'), str):
-            assert archive.digest(source_root / corpus['source']) == corpus['source_sha256']
+            if not (archive.digest(source_root / corpus['source']) == corpus['source_sha256']):
+                raise AssertionError()
         for key in ['fixtures', 'fixture_hashes']:
             if isinstance(corpus.get(key), dict):
                 fixture_root = ROOT / contract.get('corpus_fixture_root', 'tests/support')
                 for name, expected in corpus[key].items():
-                    assert archive.digest(fixture_root / name) == expected
+                    if not (archive.digest(fixture_root / name) == expected):
+                        raise AssertionError()
 
 def validate(record, registry):
     check_inputs(registry)
-    assert record['complete'] is True and record['whole_goal_complete'] is False
-    assert record['registry'] == registry
-    assert registry['runtime_commit'] == archive.read(ROOT / 'upstream.lock.json')['commit']
-    assert registry['generator_commit'] == archive.read(ROOT / 'docs/cpp_generator_parity_ledger.json')['generator_commit']
-    assert record['references_before'] == record['references_after'] == {
-        'teaql-rs': registry['runtime_commit'], 'teaql_code_gen': registry['generator_commit']}
-    assert record['input_hashes_before'] == record['input_hashes_after']
+    if not (record['complete'] is True and record['whole_goal_complete'] is False):
+        raise AssertionError()
+    if not (record['registry'] == registry):
+        raise AssertionError()
+    if not (registry['runtime_commit'] == archive.read(ROOT / 'upstream.lock.json')['commit']):
+        raise AssertionError()
+    if not (registry['generator_commit'] == archive.read(ROOT / 'docs/cpp_generator_parity_ledger.json')['generator_commit']):
+        raise AssertionError()
+    if not (record['references_before'] == record['references_after'] == {
+        'teaql-rs': registry['runtime_commit'], 'teaql_code_gen': registry['generator_commit']}):
+        raise AssertionError()
+    if not (record['input_hashes_before'] == record['input_hashes_after']):
+        raise AssertionError()
+    receipt_mode = transition.verify_source_files(record['source_files'],
+                                                  archive.source_files(registry))
     for script in [__file__, archive.__file__, ROOT / 'scripts/generated_driver_provenance_5_0_6.py']:
         path = str(Path(script).relative_to(ROOT))
-        assert record['input_hashes_after']['runtime:' + path] == archive.digest(ROOT / path)
-    assert record['source_files'] == archive.source_files(registry)
-    assert record['input_helpers'] == {}
+        transition.verify_runtime_hash(path, record['input_hashes_after']['runtime:' + path],
+                                       archive.digest(ROOT / path), receipt_mode)
+    if not (record['input_helpers'] == {}):
+        raise AssertionError()
     owned = Path(record['owned_directory'])
-    assert owned.parent == Path('/tmp') and owned.name.startswith('teaql_archive_driver_506_')
-    assert record['owned_directory_removed'] is True and not owned.exists()
-    assert record['cargo_environment'] == dict(CARGO_TARGET_DIR=str(owned / 'target'),
+    if not (owned.parent == Path('/tmp') and owned.name.startswith('teaql_archive_driver_506_')):
+        raise AssertionError()
+    if not (record['owned_directory_removed'] is True and not owned.exists()):
+        raise AssertionError()
+    if not (record['cargo_environment'] == dict(CARGO_TARGET_DIR=str(owned / 'target'),
         CARGO_INCREMENTAL='0', CARGO_PROFILE_DEV_DEBUG='0',
-        CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER='/usr/bin/cc', TMPDIR=str(owned / 'children'))
+        CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER='/usr/bin/cc', TMPDIR=str(owned / 'children'))):
+        raise AssertionError()
     steps = record['steps']
-    assert steps and all(s['exit_code'] == 0 for s in steps)
+    if not (steps and all(s['exit_code'] == 0 for s in steps)):
+        raise AssertionError()
     data = archive.archive_bytes(registry)
-    assert record['archive_sha256'] == hashlib.sha256(data).hexdigest()
+    if not (record['archive_sha256'] == hashlib.sha256(data).hexdigest()):
+        raise AssertionError()
     originals = archive.archive_files(data)
-    assert record['archive_files'] == {n: hashlib.sha256(v).hexdigest() for n, v in originals.items()}
-    assert all((ROOT / '.reference/teaql-rs' / n).read_bytes() == v for n, v in originals.items())
+    if not (record['archive_files'] == {n: hashlib.sha256(v).hexdigest() for n, v in originals.items()}):
+        raise AssertionError()
+    if not (all((ROOT / '.reference/teaql-rs' / n).read_bytes() == v for n, v in originals.items())):
+        raise AssertionError()
     project = owned / registry['project']
     metadata = steps[record['metadata_step']]
-    assert metadata['command'] == ['cargo', 'metadata', '--offline', '--locked', '--format-version',
-                                   '1', '--manifest-path', str(project)]
-    assert metadata['stdout'] == record['project_metadata']
+    if not (metadata['command'] == ['cargo', 'metadata', '--offline', '--locked', '--format-version',
+                                   '1', '--manifest-path', str(project)]):
+        raise AssertionError()
+    if not (metadata['stdout'] == record['project_metadata']):
+        raise AssertionError()
     packages = json.loads(metadata['stdout'])['packages']
     package = next(p for p in packages if p['manifest_path'] == str(project))
-    assert package['name'] == registry['package']
+    if not (package['name'] == registry['package']):
+        raise AssertionError()
     contracts = registry['contracts']
     bins = [t for t in package['targets'] if t['kind'] == ['bin']]
     builds = [t for t in package['targets'] if t['kind'] == ['custom-build']]
-    assert {t['name'] for t in bins} == {c['target'] for c in contracts}
-    assert len(package['targets']) == len(bins) + len(builds) and len(builds) == 1
-    assert Path(builds[0]['src_path']).resolve() == (owned / registry['build_script']['path']).resolve()
-    assert record['source_files'][registry['build_script']['path']] == registry['build_script']['sha256']
+    if not ({t['name'] for t in bins} == {c['target'] for c in contracts}):
+        raise AssertionError()
+    if not (len(package['targets']) == len(bins) + len(builds) and len(builds) == 1):
+        raise AssertionError()
+    if not (Path(builds[0]['src_path']).resolve() == (owned / registry['build_script']['path']).resolve()):
+        raise AssertionError()
+    if not (record['source_files'][registry['build_script']['path']] == registry['build_script']['sha256']):
+        raise AssertionError()
     for contract in contracts:
         target = next(t for t in package['targets'] if t['name'] == contract['target'])
-        assert Path(target['src_path']).resolve() == (owned / contract['driver']).resolve()
+        if not (Path(target['src_path']).resolve() == (owned / contract['driver']).resolve()):
+            raise AssertionError()
     allowed = {project} | {owned / fixture / 'lib/Cargo.toml' for fixture in registry['generated_fixtures']}
     allowed |= {owned / '.reference/teaql-rs' / path for path in registry['archive_manifests']}
-    assert {n + '/Cargo.toml' for n in RUNTIME_PACKAGES} <= set(registry['archive_manifests'])
-    assert {Path(p['manifest_path']) for p in packages if p['source'] is None} == allowed
-    assert all(p['version'] == '5.0.6' for p in packages if p['name'] in RUNTIME_PACKAGES)
+    if not ({n + '/Cargo.toml' for n in RUNTIME_PACKAGES} <= set(registry['archive_manifests'])):
+        raise AssertionError()
+    if not ({Path(p['manifest_path']) for p in packages if p['source'] is None} == allowed):
+        raise AssertionError()
+    if not (all(p['version'] == '5.0.6' for p in packages if p['name'] in RUNTIME_PACKAGES)):
+        raise AssertionError()
     lock = (ROOT / registry['project']).with_name('Cargo.lock')
-    assert record['compiled_lock'] == lock.read_text()
+    if not (record['compiled_lock'] == lock.read_text()):
+        raise AssertionError()
     identities = archive.registry_identities(lock)
-    assert identities <= archive.registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')
-    assert {(p['name'], p['version'], p['source']) for p in packages if p['source']} <= {
-        (n, v, s) for n, v, s, checksum in identities}
+    if not (identities <= archive.registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')):
+        raise AssertionError()
+    if not ({(p['name'], p['version'], p['source']) for p in packages if p['source']} <= {
+        (n, v, s) for n, v, s, checksum in identities}):
+        raise AssertionError()
     build = steps[record['build_step']]
-    assert build['command'] == ['cargo', 'build', '--offline', '--locked', '--manifest-path',
-                                str(project), '--bins', '-j2']
-    assert len(record['results']) == len(contracts)
-    assert [r['name'] for r in record['results']] == [c['name'] for c in contracts]
+    if not (build['command'] == ['cargo', 'build', '--offline', '--locked', '--manifest-path',
+                                str(project), '--bins', '-j2']):
+        raise AssertionError()
+    if not (len(record['results']) == len(contracts)):
+        raise AssertionError()
+    if not ([r['name'] for r in record['results']] == [c['name'] for c in contracts]):
+        raise AssertionError()
     for contract, result in zip(contracts, record['results']):
         corpus = archive.read(ROOT / contract['corpus'])
-        assert len(corpus['cases']) == contract['count'] == result['count']
+        if not (len(corpus['cases']) == contract['count'] == result['count']):
+            raise AssertionError()
         payload = ''.join(json.dumps(row['input'], ensure_ascii=True) + '\n' for row in corpus['cases'])
         expected = [row['expected'] for row in corpus['cases']]
         native = str(ROOT / 'build_native_current' / contract['native_target'])
-        assert contract['registered_command'][contract['registered_command'].index('--cpp') + 1] == native
+        if not (contract['registered_command'][contract['registered_command'].index('--cpp') + 1] == native):
+            raise AssertionError()
         for key, command in [('source_step', [str(owned / 'target/debug' / contract['target'])]),
                              ('native_step', contract['native_command'])]:
             step = steps[result[key]]
-            assert step['command'] == command
-            assert step['stdin_sha256'] == hashlib.sha256(payload.encode()).hexdigest()
-            assert step['stdin_bytes'] == len(payload.encode())
-            assert archive.same(archive.json_lines(step['stdout']), expected)
+            if not (step['command'] == command):
+                raise AssertionError()
+            if not (step['stdin_sha256'] == hashlib.sha256(payload.encode()).hexdigest()):
+                raise AssertionError()
+            if not (step['stdin_bytes'] == len(payload.encode())):
+                raise AssertionError()
+            if not (archive.same(archive.json_lines(step['stdout']), expected)):
+                raise AssertionError()
 
 
 def main():
@@ -286,12 +399,16 @@ def main():
     registry = archive.read(args.contracts)
     check_inputs(registry)
     if args.mode == 'replay':
-        assert args.record is not None
+        transition.require_replay_mode()
+        if not (args.record is not None):
+            raise AssertionError()
         archive.replay(registry, args.record)
         validate(archive.read(args.record), registry)
     else:
-        assert args.execution is not None
-        assert args.record is None or not args.record.exists()
+        if not (args.execution is not None):
+            raise AssertionError()
+        if not (args.record is None or not args.record.exists()):
+            raise AssertionError()
         validate(archive.read(args.execution), registry)
         if args.record:
             result = dict(complete=True, whole_goal_complete=False,

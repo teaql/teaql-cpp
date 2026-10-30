@@ -4832,9 +4832,21 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_private_key_classifier_driver_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE)
-    add_test(NAME parity_private_key_classifier_optimized_lane COMMAND ${Python3_EXECUTABLE} -O
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_private_key_classifier_optimized_lane_5_0_6.py)
-    set_tests_properties(parity_private_key_classifier_optimized_lane PROPERTIES
+    add_test(NAME parity_private_key_classifier_driver_contracts_optimized COMMAND ${Python3_EXECUTABLE} -O
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/private_key_classifier_driver_provenance_5_0_6.py verify
+        --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/private_key_classifier_driver_contracts_5_0_6.json
+        --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz)
+    set_tests_properties(parity_private_key_classifier_driver_contracts_optimized PROPERTIES
+        TIMEOUT 300)
+    add_test(NAME parity_private_key_classifier_driver_controls_optimized COMMAND ${Python3_EXECUTABLE} -O
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_private_key_classifier_controls_5_0_6.py
+        --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/private_key_classifier_driver_contracts_5_0_6.json
+        --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz)
+    set_tests_properties(parity_private_key_classifier_driver_controls_optimized PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE)
+    add_test(NAME parity_private_key_classifier_assert_rewrite COMMAND ${Python3_EXECUTABLE} -O
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_private_key_classifier_assert_rewrite_5_0_6.py)
+    set_tests_properties(parity_private_key_classifier_assert_rewrite PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE)
     set_property(TEST query_metadata_keys_5_0_6_rust_parity bootstrap_classifier_rust_parity
         APPEND PROPERTY FIXTURES_REQUIRED private_key_classifier_driver_source)
