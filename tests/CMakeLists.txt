@@ -4832,6 +4832,10 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_private_key_classifier_driver_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE)
+    add_test(NAME parity_private_key_classifier_optimized_lane COMMAND ${Python3_EXECUTABLE} -O
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_private_key_classifier_optimized_lane_5_0_6.py)
+    set_tests_properties(parity_private_key_classifier_optimized_lane PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE)
     set_property(TEST query_metadata_keys_5_0_6_rust_parity bootstrap_classifier_rust_parity
         APPEND PROPERTY FIXTURES_REQUIRED private_key_classifier_driver_source)
 endif()

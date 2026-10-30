@@ -166,11 +166,18 @@ are unchanged.
 
 The [pre-edit witness](parity/private_key_classifier_optimized_preedit_witness_5_0_6.json.gz)
 changes only `complete` to `false` in the retained execution record. The
-current verifier rejects it under ordinary Python but accepts it under
-`python -O`; the unchanged record passes both modes. This verifier and its
-historical registry pin their own source hash, so an exact transition must
-preserve the prior receipt before installing unconditional checks. The finding
-is not a qualified repair, and complete SQ02 remains open.
+historical verifier rejects it under ordinary Python but accepts it under
+direct `python -O`; the unchanged record passes both modes. Its registry pins
+the original source hash. The new
+[optimized-caller lane](../tests/parity/verify_private_key_classifier_optimized_lane_5_0_6.py)
+preserves those files and executes the original verifier and its 31 controls
+in isolated child processes that require active assertions. The
+[lane receipt](parity/private_key_classifier_optimized_lane_5_0_6.json.gz)
+records a successful original receipt and controls, plus rejection of the
+incomplete receipt, when the caller itself runs under `python -O`. Three
+selected CTests pass. Direct optimized invocation of the historical verifier
+remains vulnerable; an exact source transition or an equivalent permanent
+replacement is still required to close that direct entry point and SQ02.
 
 ## Full native epoch boundary
 

@@ -18,12 +18,13 @@ cover all **1,066/1,066** unique names on 11,815 unchanged inputs. This is
 historical split coverage. The later
 [hardened-controller full epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
 passes all **1,066/1,066** tests on 11,816 unchanged inputs with exact
-JUnit/registry names and a no-work post-build. The current 1,068-test registry
-adds [optimized relation-source rejection](registered_python_optimized_checks_5_0_6.md#relation-source-boundary-under-optimization);
-its focused native checks pass **4/4**, while a new full epoch remains open.
-An independent private-key/classifier false acceptance remains under
-`python -O`. Python optimization review, SQ02, G13/G14/G17 and P0-P7 exits
-remain open.
+JUnit/registry names and a no-work post-build. The current 1,069-test registry
+adds [optimized relation-source rejection](registered_python_optimized_checks_5_0_6.md#relation-source-boundary-under-optimization)
+and a [protected private-key/classifier optimized-caller lane](private_key_classifier_driver_provenance_5_0_6.md).
+Their focused native checks pass **4/4** and **3/3**, respectively; a new full
+epoch remains open. Direct `python -O` invocation of the historical private
+verifier still accepts an incomplete receipt. Python optimization review,
+SQ02, G13/G14/G17 and P0-P7 exits remain open.
 
 Current comparator source-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)

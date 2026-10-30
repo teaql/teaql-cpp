@@ -5,9 +5,11 @@ Optimization boundary: a
 changes only the retained execution's `complete` field to `false`. The current
 verifier rejects it under ordinary Python but accepts it under `python -O`.
 The historical registry and execution pin the verifier's original source hash.
-This finding leaves the ordinary source/corpus/native observations below
-intact; an exact source transition and optimized negative controls are still
-required for SQ02.
+The [protected optimized-caller lane](parity/private_key_classifier_optimized_lane_5_0_6.json.gz)
+checks those hashes and launches the original verifier in an isolated Python
+child with active assertions. The original source/corpus/native observations
+remain intact. Direct `python -O` invocation of the historical verifier is
+still unsafe; this lane does not close SQ02 or repair that direct entry point.
 
 Two existing Rust 5.0.6 observers now have isolated source/corpus/native bindings:
 **672 query-metadata key inputs** and **85 bootstrap retry-classifier inputs**.
@@ -65,6 +67,10 @@ normalization is introduced.
 - **5/5** affected native tests pass, including the existing query-key unit test,
   both comparators and both new provenance checks.
 - **2/2** retained SQLite schema checks pass, including their 19 controls.
+- The optimized caller's isolated child accepts the original receipt, runs all
+  31 existing controls and rejects the incomplete receipt. Its focused source
+  CTests pass **3/3**. This is a protected invocation path, not an assertion
+  rewrite of the historical verifier.
 
 The disjoint source registry covers **303 corpora / 323,488 observations**.
 Two direct entries remain: inherited-business governed operations and updates,
@@ -94,8 +100,9 @@ cmake --preset native
 python3 scripts/private_key_classifier_driver_provenance_5_0_6.py verify \
   --contracts tests/parity/private_key_classifier_driver_contracts_5_0_6.json \
   --execution docs/parity/private_key_classifier_driver_execution_5_0_6.json.gz
+python3 -O tests/parity/verify_private_key_classifier_optimized_lane_5_0_6.py
 ctest --preset native --output-on-failure \
-  -R '^(query_keys_contracts|query_metadata_keys_5_0_6_rust_parity|bootstrap_classifier_rust_parity|parity_private_key_classifier_driver_(contracts|controls))$'
+  -R '^parity_private_key_classifier_(driver_contracts|driver_controls|optimized_lane)$'
 ```
 
 Use `replay` with a fresh `--record` path to repeat source execution. Preserve
