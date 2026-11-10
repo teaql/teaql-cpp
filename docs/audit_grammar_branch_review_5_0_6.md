@@ -67,6 +67,20 @@ plan's proposed after-hash and again passes **21/21** corpus tests. Its
 341,346-byte owned directory is removed; the earlier temporary Java result
 remains separate evidence.
 
+## Encoded relation type composition exploration
+
+An independent [4,000-input encoded relation type probe](parity/ap02_reverse_relation_type_composition_exploratory_5_0_6.json.gz)
+combines references, pointers, arrays, tuples, functions, trait objects,
+associated types, generic arguments and malformed suffixes in
+`reverse_relation(json_type=...)`. Fresh locked Rust and current Java source
+execution match every complete container metadata result: **1,649** inputs
+retain a typed reverse relation and later settings, while **2,351** stop at the
+earlier metadata boundary. The receipt retains every input and observation,
+source/dependency hashes and the removed 48,127,349-byte temporary build.
+This is exploratory metadata evidence. It has no installed producer regression,
+generated model caller or SQL execution, and does not close the remaining
+type/path/generic/binder or AP02/G14 obligations.
+
 ## Installed type and pattern continuation
 
 The preceding frozen native epoch is [terminal and successful](parity/current_full_native_1063_terminal_5_0_6.json.gz):

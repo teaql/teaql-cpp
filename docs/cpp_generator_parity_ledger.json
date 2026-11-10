@@ -9179,6 +9179,12 @@
           "valid_terminal": "docs/parity/field_attribute_latest_valid_control_5_0_6.json.gz",
           "control_terminal": "docs/parity/field_attribute_latest_exception_controls_v2_5_0_6.json.gz",
           "scope": "Fresh locked Rust generated Item and inherited Child descriptors confirm quoted-column injection, while C++ explicitly rejects both. The ordinary 24-property generated model matches and 13 verifier corruptions reject. This is a diagnostic candidate with semantic_accepted=false; the separate compatibility choice is pending and G14 remains partial."
+        },
+        {
+          "kind": "encoded_reverse_relation_type_composition_exploratory",
+          "path": "docs/audit_grammar_branch_review_5_0_6.md",
+          "terminal": "docs/parity/ap02_reverse_relation_type_composition_exploratory_5_0_6.json.gz",
+          "scope": "A deterministic 4,000-input source probe composes type/path/generic/binder forms in reverse_relation(json_type). Complete locked Rust/current Java metadata matches 1,649 accepted typed relations and 2,351 earlier boundaries. It is exploratory metadata evidence without installed regression, generated caller or SQL consumer; AP02/G14 remain partial."
         }
       ],
       "open_questions": [

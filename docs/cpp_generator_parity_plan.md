@@ -50,6 +50,13 @@ SQLite query, **12/12** Save/graph Save results and 12 ordinary/debug sink
 observations match, including a 21-character value truncated to 19 characters.
 The single-model consumer does not close AP02/G14/G17 or the phase exits.
 
+Current AP02 encoded-relation type exploration:
+[the 4,000-input source probe](audit_grammar_branch_review_5_0_6.md#encoded-relation-type-composition-exploration)
+matches complete locked Rust/current Java metadata for 1,649 accepted typed
+relations and 2,351 earlier-boundary outcomes. It is exploratory source
+evidence without an installed regression or generated caller; AP02/G14 and
+P0-P7 remain open.
+
 Current comparator source-check checkpoint:
 [the optimized-Python repair](remaining_comparator_asserts_5_0_6.md)
 replaces 425 removable assertions across 51 registered comparator scripts
