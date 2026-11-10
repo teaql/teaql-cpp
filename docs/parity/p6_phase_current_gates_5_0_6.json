@@ -1,0 +1,76 @@
+{
+  "schema": "teaql.cpp.p6.phase-gates.v1",
+  "candidate_commit": "776c4f2e16ed6673a9b3fcdb313d9fcd28192adc",
+  "generator_workspace_commit": "efe43593ee6868d23badf0e4e74a547ae5fcfb4b",
+  "module_cmake_sha256": "39c58456a06987798ef690ec3377fa382e4af1d2709aaee42947eb557f627429",
+  "scope": "Current post-schema-repair G12 full selected integration plus current focused G11; not a full native/module suite",
+  "g12": {
+    "native": {
+      "path": "docs/parity/p6_g12_current_native_5_0_6.json.gz",
+      "sha256": "48675b9b679220c404a62a72940e5280b43272d618a328cba1713cee2c8ed89e",
+      "selected_passed": 51,
+      "actual_ctest_pass_lines": 59,
+      "executable_hashes_checked": 47,
+      "bootstrap_timeout_seconds": 600.0,
+      "bootstrap_seconds": 285.22
+    },
+    "modules_native": {
+      "path": "docs/parity/p6_g12_current_module_retry_5_0_6.json.gz",
+      "sha256": "41cd04a855503242796dc66cb884cc6da9635f3a9e25c3559eb9cb1b5d55a742",
+      "selected_passed": 40,
+      "actual_ctest_pass_lines": 40,
+      "executable_hashes_checked": 37,
+      "bootstrap_timeout_seconds": 600.0,
+      "bootstrap_seconds": 243.29
+    }
+  },
+  "prior_module_timeout": {
+    "path": "docs/parity/p6_g12_current_module_5_0_6.json.gz",
+    "sha256": "ab79e4ae555b1f8ca68d21a5a8414b5cca5e63ad7937212a92a6b149c152a8fc",
+    "timeout_seconds": 180.14,
+    "complete": false
+  },
+  "g11_runs": [
+    {
+      "profile": "native",
+      "ctest_log_sha256": "6ddc7d6c55d266a8453f943d341b1b7d322ebdca6be9b409738df312362b995d",
+      "passed": 14,
+      "test_names": [
+        "expression_entry_contracts",
+        "expression_business_ids_context_contracts",
+        "expression_diagnostic_text_context_contracts",
+        "runtime_entity_expression_contracts",
+        "parity_generated_model_driver_contracts",
+        "parity_expression_cli_source_contracts",
+        "parity_expression_business_ids_cli_source_contracts",
+        "generated_expression_values_rust_parity",
+        "expression_model_types_rust_parity",
+        "expression_diagnostic_framing_rust_parity",
+        "expression_diagnostic_text_rust_parity",
+        "generated_expression_diagnostics_rust_parity",
+        "expression_business_ids_rust_parity",
+        "expression_root_rust_parity"
+      ]
+    },
+    {
+      "profile": "modules_native",
+      "ctest_log_sha256": "a5f9137e6287c8fb3a3746351d8fcc9788006c1214b082b66130b77bf6d7d103",
+      "passed": 5,
+      "test_names": [
+        "module_expression_diagnostic_text_rust_parity",
+        "module_expression_model_types_rust_parity",
+        "module_expression_diagnostic_framing_rust_parity",
+        "module_expression_business_ids_rust_parity",
+        "module_expression_root_rust_parity"
+      ]
+    }
+  ],
+  "module_retry_identity": {
+    "same_selected_tests": true,
+    "same_targets": true,
+    "same_executable_hashes": true,
+    "same_bootstrap_command": true,
+    "old_timeout_seconds": 180,
+    "new_timeout_seconds": 600
+  }
+}

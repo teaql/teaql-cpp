@@ -2,6 +2,14 @@
 
 G12 is qualified after [complete R01-R18 post-approval acceptance](approved_exception_capability_acceptance_5_0_6.md). The following sections preserve their earlier source/integration scopes; the invalid-profile decision and final signoff are now complete.
 
+The later [P6 phase audit](p6_expression_assembly_phase_acceptance_5_0_6.md)
+re-executes the complete 51 native and 40 imported selections after the Context
+dynamic-schema repair. Both current records pass. The first imported attempt
+timed out at the obsolete 180-second bootstrap budget; its failed record is
+preserved, and the unchanged 2,304-case test passes under the native-matched
+600-second budget. The historical acceptance evidence below retains its
+original timing and source scope.
+
 Recorded combined integration passes native 51/51 and modules 40/40 at its
 frozen checkpoint. The later
 [Context dynamic schema repair](context_dynamic_schema_lifecycle_5_0_6.md) changes

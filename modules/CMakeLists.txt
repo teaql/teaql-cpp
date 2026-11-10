@@ -763,7 +763,9 @@ if(TARGET teaql_module_bootstrap_extensions_probe)
         ${PROJECT_SOURCE_DIR}/tests/parity/compare_bootstrap_extensions_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_bootstrap_extensions_probe>)
     set_tests_properties(module_bootstrap_extensions_rust_parity PROPERTIES
-        ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 180)
+        # The complete 2,304-case matrix is shared with the native test. The
+        # imported consumer also needs the native 600-second execution budget.
+        ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 600)
 endif()
 
 foreach(metadata_case IN LISTS TEAQL_CONSTANT_METADATA_CASES)
