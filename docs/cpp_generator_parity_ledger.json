@@ -8445,6 +8445,13 @@
           "path": "docs/runtime_examples_cli_source_binding_5_0_6.md",
           "terminal": "docs/parity/runtime_examples_cli_selected_ctest_5_0_6.json.gz",
           "scope": "The installed SQLite runtime examples comparison binds two freshly rebuilt Rust business outputs and 34 ordered SQL provenance entries from the unchanged example models and original business operations, with caller-supplied request comments, to fresh exact C++ example outcomes. A narrow 132-package reference-seeded lock proves observer closure; the older shared lock is historical. Fifteen substitutions and four selected CTests pass. Incremental lookup 160/160 covers installed comparison locators only; registry 1,058 is enumeration. The one-off Rust target was removed. Stock Rust binaries without required intent are not claimed. No runtime, generator, SDK, sanitizer, MIPS, module, physical-router or full-suite change/run is claimed. Complete G13/G14/G17, GP13/GP16, AP02 and P0-P7 remain open."
+        },
+        {
+          "kind": "audit_index_parsebuffer_source_and_generated_sql",
+          "path": "docs/audit_grammar_branch_review_5_0_6.md",
+          "terminal": "docs/parity/ap02_index_consumer_installed_source_5_0_6.json.gz",
+          "consumer_terminal": "docs/parity/ap02_index_consumer_sql_5_0_6.json.gz",
+          "scope": "One locked Rust 5.0.6 index ParseBuffer expression is retained in a generated School model. Source replay matches 80,185 metadata outcomes and 157 Java tests; original/C++ generated SQLite, 12 Save outcomes and 12 sink observations match. This is bounded source and consumer evidence, not complete SQ02/G13 or P7."
         }
       ],
       "open_questions": [
@@ -9157,6 +9164,13 @@
           "terminal": "docs/parity/generated_credential_mutation_receipt_controls_v4_5_0_6.json.gz",
           "execution_terminal": "docs/parity/generated_audit_credential_mutation_sinks_current_v2_5_0_6.json.gz",
           "scope": "An independent current-source gate checks all 533 retained execution inputs and 59 resolved Java dependencies, 45 terminal steps, twelve exact Save pairs, twelve query sink cases and four mutation sink files. It checks post-commit delivery-failure readback, precommit event absence, safe Credential masking and exact ordinary/authorized-debug SQL. Fourteen controlled corruptions reject and selected native CTest passes 1/1 under the 1,059-test registry. This admits the retained generated execution; it does not execute new SQL or complete G14/G17/P0-P7."
+        },
+        {
+          "kind": "audit_index_parsebuffer_metadata_consumer",
+          "path": "docs/audit_grammar_branch_review_5_0_6.md",
+          "terminal": "docs/parity/ap02_index_consumer_sql_5_0_6.json.gz",
+          "source_terminal": "docs/parity/ap02_index_consumer_installed_source_5_0_6.json.gz",
+          "scope": "The repaired index-expression child rule reaches a generated School descriptor with audit limit 19 and masked name; 21-character source values truncate to the same 19-character safe value in original Rust and C++. One model/configuration does not close AP02 or G14."
         }
       ],
       "open_questions": [
@@ -11487,6 +11501,13 @@
           "terminal": "docs/parity/audit_expression_children_installed_5_0_6.json.gz",
           "companion_terminal": "docs/parity/audit_expression_children_probe_5_0_6.json.gz",
           "scope": "A reproducible 66-form by five-continuation syn expression probe adds 330 new complete metadata observations. Original and Java results both reach later settings in 305 cases and retain earlier settings in 25. Installed source replay passes 79,836/79,836 outcomes and 152/152 Java tests with 69 unchanged input hashes and 48,915,603 owned bytes removed. This finite AP02 evidence does not qualify complete grammar, generated callers, G14 or P0-P7."
+        },
+        {
+          "kind": "audit_index_parsebuffer_governed_publication",
+          "path": "docs/audit_grammar_branch_review_5_0_6.md",
+          "terminal": "docs/parity/ap02_index_consumer_sql_5_0_6.json.gz",
+          "sink_terminal": "docs/parity/ap02_index_consumer_sinks_5_0_6.json.gz",
+          "scope": "A source-derived generated School model matches 12 original/C++ Save and graph Save outcomes across policy, write/sink failure and stale-version paths, plus 12 ordinary/debug publication observations. This is bounded governed SQLite evidence; G17 and P7 remain partial."
         }
       ],
       "open_questions": [

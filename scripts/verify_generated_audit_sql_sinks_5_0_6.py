@@ -55,11 +55,12 @@ SOURCE_CASE_EXPECTATIONS = {
     "cast_audit_value_max_len_mask": ("17", "PR*****...*****RY", True),
     "sequence_boundary_9": ("19", "PR******...******RY", True),
     "audit_value_max_len_0_then_assignment": ("21", "PR*****************RY", False),
+    "index_parsebuffer_truncating_mask": ("19", "PR******...******RY", True),
 }
 
 
-def checked_model(case_name, mask_declaration):
-    with gzip.open(SOURCE_CASES, "rt") as source:
+def checked_model(case_name, mask_declaration, source_cases):
+    with gzip.open(source_cases, "rt") as source:
         corpus = json.load(source)
     case = next(value for value in corpus["cases"]
                 if value["name"] == case_name)
@@ -172,6 +173,7 @@ def main():
     parser.add_argument("--sink-record", type=Path, required=True)
     parser.add_argument("--source-case", choices=SOURCE_CASE_EXPECTATIONS,
                         default="cast_audit_value_max_len_mask")
+    parser.add_argument("--source-corpus", type=Path, default=SOURCE_CASES)
     parser.add_argument("--mask-declaration", choices=("named", "empty", "absent",
                                                        "partial_unknown", "credential_field"),
                         default="named")
@@ -181,7 +183,8 @@ def main():
         parser.error("Password Save requires the generated credential_field model")
     if any(path.exists() or path.suffix != ".gz" for path in (args.record, args.sink_record)):
         parser.error("Use fresh compressed receipt paths")
-    corpus, source_case, model_source = checked_model(args.source_case, args.mask_declaration)
+    corpus, source_case, model_source = checked_model(
+        args.source_case, args.mask_declaration, args.source_corpus)
     runtime = json.loads((ROOT / "upstream.lock.json").read_text())["commit"]
     generator = json.loads((PRODUCER / "cpp_generator.lock.json").read_text())[
         "generator_baseline_commit"]
@@ -196,7 +199,7 @@ def main():
     libraries = [ROOT / "build_native_current" / package / ("lib" + package + ".a")
                  for package in ("teaql_provider_sqlite", "teaql_runtime", "teaql_sql",
                                  "teaql_data_service", "teaql_core", "teaql_memory")]
-    inputs = [Path(__file__).resolve(), MODEL, BASE_MODEL, SOURCE_CASES, DEFAULT_MODEL_CASES,
+    inputs = [Path(__file__).resolve(), MODEL, BASE_MODEL, args.source_corpus, DEFAULT_MODEL_CASES,
               ROOT / "scripts/verify_generated_privacy_metadata.py",
               ROOT / "tests/parity/compare_values.py", RUST_PROBE, RUST_MANIFEST, RUST_LOCK,
               CPP_PROBE, RUST_METADATA_PROBE, CPP_METADATA_PROBE, RUST_SAVE_PROBE,
@@ -219,7 +222,7 @@ def main():
         "source_case": source_case,
         "mask_declaration": args.mask_declaration,
         "save_field": args.save_field,
-        "source_corpus_sha256": digest(SOURCE_CASES),
+        "source_corpus_sha256": digest(args.source_corpus),
         "input_hashes_before": before,
         "free_bytes_before": shutil.disk_usage(ROOT).free,
         "steps": [],

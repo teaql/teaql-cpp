@@ -202,6 +202,31 @@ steps and removes its 53,034,223-byte
 temporary directory. This repairs a concrete child rule; AP02/G14 and the
 phase exits still need the broader composition and consumer signoff below.
 
+## Generated SQLite consumer for the index remainder
+
+The [locked-source consumer input](parity/ap02_index_parsebuffer_consumer_source_5_0_6.json.gz)
+sets `audit_value_max_len` to `19` after the ignored expression
+`x["raw"::<T>]`. The one-case corpus is installed in the generator test
+resources. The [complete source replay](parity/ap02_index_consumer_installed_source_5_0_6.json.gz)
+matches **80,185/80,185** retained Rust/Java metadata outcomes and passes
+**157/157** Java tests; its source inputs are unchanged and its 48,917,370-byte
+temporary build directory is removed.
+
+The [generated SQLite execution](parity/ap02_index_consumer_sql_5_0_6.json.gz)
+uses fresh original Rust and C++ School models. All three generated
+descriptors match, including School's audit limit `19` and masked `name` field.
+The 21-character audit value is truncated to the same 19-character
+`PR******...******RY` value by both runtimes. All **12/12** Save and graph Save
+outcomes match across success, policy denial/approval, write and sink failures,
+and stale versions. The SQLite query and safe diagnostics also match; the
+[ordinary/debug sink matrix](parity/ap02_index_consumer_sinks_5_0_6.json.gz)
+matches all 12 retained publication observations. All 41 source/build/execution
+steps exit successfully, tracked inputs and classpath jars stay unchanged, and
+the 397,165,365-byte main and 24,468-byte sink temporary directories are
+removed. This is one source-derived model and one bounded protected consumer
+matrix. Other model configurations, arbitrary sinks, complete AP02/G14/G17 and
+P0-P7 signoff remain open.
+
 ## Expression continuation regression
 
 A later [160-case source probe](parity/audit_expression_exploratory_current_5_0_6.json.gz)
