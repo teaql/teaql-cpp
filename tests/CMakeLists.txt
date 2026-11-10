@@ -749,6 +749,9 @@ if(BUILD_TESTING)
     add_test(NAME generated_dynamic_json_privacy_sink_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_dynamic_json_privacy_sinks_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_dynamic_json_privacy_probe>)
+    add_test(NAME generated_dynamic_json_privacy_sink_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_dynamic_json_privacy_sink_controls_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_generated_dynamic_json_privacy_probe>)
     add_executable(teaql_generated_dynamic_json_inherited_sql_probe tests/parity/generated_dynamic_json_inherited_sql_probe.cpp)
     add_executable(teaql_generated_dynamic_json_composition_probe tests/parity/generated_dynamic_json_composition_probe.cpp)
     add_executable(teaql_generated_dynamic_json_persistent_probe tests/parity/generated_dynamic_json_persistent_probe.cpp)

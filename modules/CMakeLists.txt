@@ -518,6 +518,9 @@ if(TARGET teaql_module_generated_dynamic_json_privacy_probe)
     add_test(NAME module_generated_dynamic_json_privacy_sink_contracts COMMAND ${Python3_EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/tests/parity/verify_dynamic_json_privacy_sinks_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_generated_dynamic_json_privacy_probe>)
+    add_test(NAME module_generated_dynamic_json_privacy_sink_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/verify_dynamic_json_privacy_sink_controls_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_generated_dynamic_json_privacy_probe>)
 endif()
 
 if(TARGET teaql_module_generated_dynamic_json_inherited_sql_probe)

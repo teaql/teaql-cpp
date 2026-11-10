@@ -48,31 +48,43 @@ def main():
                                       input=json.dumps(dict(fixture,logging=logging))+'\n',
                                       capture_output=True,text=True,check=True)
                 value=json.loads(result.stdout)
-                assert value['error'] is None and same(value['rows'],[[7,3,None]]),(language,label,value)
+                if value['error'] is not None or not same(value['rows'], [[7, 3, None]]):
+                    raise AssertionError((language,label,value))
                 safe=read(normal);debug=read(sensitive)
                 visible=endpoint_on and logging and args.policy=='plain'
-                assert (args.canary in safe)==visible,(language,label,'ordinary sink policy changed')
-                assert (args.canary in json.dumps(value['sql']))==(logging and args.policy=='plain'),(language,label,'Context binding policy changed')
+                if (args.canary in safe) != visible:
+                    raise AssertionError((language,label,'ordinary sink policy changed'))
+                if (args.canary in json.dumps(value['sql'])) != (logging and args.policy=='plain'):
+                    raise AssertionError((language,label,'Context binding policy changed'))
                 if endpoint_on and logging:
-                    assert args.field+' LIKE' in safe,(language,label,'generated SQL missing')
+                    if args.field+' LIKE' not in safe:
+                        raise AssertionError((language,label,'generated SQL missing'))
                     if args.policy!='plain':
-                        assert 'MASKED; NOT REPLAYABLE' in safe,(language,label,'mask annotation missing')
-                        assert '/* masked */' in safe,(language,label,'masked SQL missing')
+                        if 'MASKED; NOT REPLAYABLE' not in safe:
+                            raise AssertionError((language,label,'mask annotation missing'))
+                        if '/* masked */' not in safe:
+                            raise AssertionError((language,label,'masked SQL missing'))
                 else:
-                    assert not safe,(language,label,'disabled ordinary output written')
+                    if safe:
+                        raise AssertionError((language,label,'disabled ordinary output written'))
                 authorized=ack==ACK and debug_endpoint and endpoint_on and logging
-                assert bool(debug)==authorized,(language,label,'debug sink gate changed')
-                assert (args.canary in debug)==(authorized and args.policy not in ('unknown','credential')),(language,label,'authorized debug binding changed')
+                if bool(debug) != authorized:
+                    raise AssertionError((language,label,'debug sink gate changed'))
+                if (args.canary in debug) != (authorized and args.policy not in ('unknown','credential')):
+                    raise AssertionError((language,label,'authorized debug binding changed'))
                 if authorized:
-                    assert 'DEBUG PLAINTEXT; EXPLICIT OPT-IN' in debug,(language,label,'debug annotation missing')
+                    if 'DEBUG PLAINTEXT; EXPLICIT OPT-IN' not in debug:
+                        raise AssertionError((language,label,'debug annotation missing'))
                     if args.policy in ('unknown','credential'):
-                        assert "'[REDACTED]' /* masked */" in debug,(language,label,'forced debug redaction missing')
+                        if "'[REDACTED]' /* masked */" not in debug:
+                            raise AssertionError((language,label,'forced debug redaction missing'))
                 observations.append(dict(language=language,case=label,policy=args.policy,input=dict(fixture,logging=logging),
                                          exit_code=result.returncode,stdout=result.stdout,stderr=result.stderr,
                                          ordinary=safe,debug=debug,authorized_debug=authorized))
         owned_bytes = sum(path.stat().st_size for path in directory.iterdir() if path.is_file())
     if args.output:
-        assert not args.output.exists()
+        if args.output.exists():
+            raise AssertionError('Refusing to replace existing sink evidence')
         args.output.parent.mkdir(parents=True,exist_ok=True)
         args.output.write_bytes(gzip.compress(json.dumps(dict(runtime_commit=json.loads(
             (ROOT/'upstream.lock.json').read_text())['commit'],scope='Actual generated School LIKE query; '

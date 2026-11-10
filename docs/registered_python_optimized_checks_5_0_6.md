@@ -1,8 +1,9 @@
 # Registered Python checks under optimization
 
-The current 1,072-test native registry invokes 591 distinct Python entry
-scripts. A current AST scan finds 99 registered scripts with 1,210
-`ast.Assert` nodes after the private-verifier repair below. The preceding
+The current 1,073-test native registry invokes 592 distinct Python entry
+scripts. A current AST scan finds 98 registered scripts with 1,198
+`ast.Assert` nodes after the private-verifier and generated private SQL sink
+repairs below. The preceding
 [1,065-test source inventory](parity/registered_python_assert_inventory_after_remaining_1065_5_0_6.json.gz)
 found 107 registered scripts with 1,467 nodes. The earlier
 [declared-core inventory](parity/registered_python_assert_inventory_after_core_1065_5_0_6.json.gz)
@@ -12,6 +13,16 @@ found 111 scripts and 1,579 assertions before the declared-core repair below.
 Python removes those nodes under `-O` or a nonzero `PYTHONOPTIMIZE`. This is an optimization
 risk inventory; it does not claim a reproduced false acceptance for every
 remaining assertion. Complete SQ02 and G13/G14/G17 qualification remains open.
+
+## Generated private SQL sink verifier
+
+The [sink check repair](private_sql_sink_optimized_checks_5_0_6.md) removes
+twelve assertions after an actual C++ privacy probe demonstrated normal-mode
+rejection but optimized-mode acceptance of a wrong plaintext policy. A
+permanent six-case normal/optimized control checks that valid output passes,
+wrong policy fails for the expected reason and an existing evidence file is
+never replaced. Native 4/4 and imported-module 3/3 selected checks pass. This
+is a bounded source/test repair; the current full native epoch remains open.
 
 ## Reproduced declared-driver failure
 
