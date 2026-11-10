@@ -36,6 +36,7 @@ CORPORA = (
     (PRODUCER / "generator/src/test/resources/cpp_expression_children_metadata_5_0_6.json.gz", 330),
     (PRODUCER / "generator/src/test/resources/cpp_type_pattern_combined_metadata_5_0_6.json.gz", 162),
     (PRODUCER / "generator/src/test/resources/cpp_cross_composition_metadata_5_0_6.json.gz", 162),
+    (PRODUCER / "generator/src/test/resources/cpp_index_parsebuffer_metadata_5_0_6.json.gz", 24),
     (PRODUCER / "generator/src/test/resources/cpp_grammar_branch_metadata_5_0_6.json.gz", 342),
     (PRODUCER / "generator/src/test/resources/cpp_type_child_metadata_5_0_6.json.gz", 900),
     (PRODUCER / "generator/src/test/resources/cpp_path_generic_metadata_5_0_6.json.gz", 1338),

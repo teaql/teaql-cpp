@@ -166,6 +166,42 @@ passes **1,063/1,063** on **11,811** unchanged inputs, with zero failures,
 errors or skips. Later Python comparator hardening has selected gates only;
 AP02/G14, G13/G17 and P0-P7 remain incomplete.
 
+## Index expression ParseBuffer remainder
+
+A deterministic exploratory combination of expression forms exposed one source
+difference among 3,600 inputs. For `x["raw"::<T>]`, the locked `syn` parser
+parses the first expression inside the bracketed `ParseBuffer` and does not
+require that buffer to be empty. The enclosing metadata parser therefore
+applies the later `entity`, `table`, `indexed_layout` and audit-length settings.
+The C++ producer's Java cursor previously required `]` immediately after the
+index expression and retained only the earlier audit length.
+
+The Java cursor now consumes the rest of the already lexed bracket group after
+the parsed index expression. A [24-case locked-source receipt](parity/ap02_index_parsebuffer_source_5_0_6.json.gz)
+records complete Rust and Java metadata outcomes across three index receivers
+and eight payloads: **18** reach the later settings, **six** retain the earlier
+settings, and all **24/24** match. The matching
+`cpp_index_parsebuffer_metadata_5_0_6.json.gz` corpus is installed in the
+independent generator workspace and included in the source replay inventory.
+The source comparison's temporary Rust and Java build directory was removed.
+
+Freshly compiled parser and test sources pass **34/34** focused JUnit tests,
+including all retained metadata corpus methods. Recompiling the previous parser
+against the current tests fails exactly the new direct and corpus methods; the
+new corpus reports 15 changed outcomes. The [complete installed source replay](parity/ap02_index_parsebuffer_installed_source_5_0_6.json.gz)
+then rebuilds the locked Rust observer and current Java producer, matches
+**80,184/80,184** retained complete metadata outcomes with zero differences,
+and passes **156/156** Java tests. Its recorded inputs remain unchanged and its
+temporary Rust/Java build directory was removed. A new full native epoch remains
+open. The [strict SDK reproduction](parity/ap02_index_parsebuffer_sdk_refresh_5_0_6.json.gz)
+regenerates all **80** active C++ SDKs and compares **3,560** generated files
+byte for byte: no generated file changes. It verifies **2,467** protected
+artifacts, and all 80 active provenance manifests change only the
+`CppRustLiteralMetadata.java` source hash. The run records 150 successful
+steps and removes its 53,034,223-byte
+temporary directory. This repairs a concrete child rule; AP02/G14 and the
+phase exits still need the broader composition and consumer signoff below.
+
 ## Expression continuation regression
 
 A later [160-case source probe](parity/audit_expression_exploratory_current_5_0_6.json.gz)
