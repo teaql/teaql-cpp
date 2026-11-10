@@ -325,6 +325,15 @@ if(BUILD_TESTING)
             endif()
         endforeach()
     endif()
+    if(Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
+        add_test(NAME parity_configuration_optimized_controls COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_configuration_optimized_controls_5_0_6.py
+            --kernel $<TARGET_FILE:teaql_generated_runtime_configuration_probe>
+            --business $<TARGET_FILE:teaql_generated_business_runtime_configuration_probe>
+            --registry $<TARGET_FILE:teaql_generated_registry_schema_probe>)
+        set_tests_properties(parity_configuration_optimized_controls PROPERTIES
+            TIMEOUT 180 FIXTURES_REQUIRED "runtime_configuration_source;legacy_observation_source")
+    endif()
     add_executable(teaql_generated_wire_mapping_lifetime_tests tests/generator/generated_wire_mapping_lifetime_tests.cpp)
     target_link_libraries(teaql_generated_wire_mapping_lifetime_tests PRIVATE teaql::runtime)
     add_test(NAME generated_wire_mapping_context_contracts COMMAND teaql_generated_wire_mapping_lifetime_tests)

@@ -20,17 +20,20 @@ inputs, with no recorded failure, error or skip. This is historical split
 coverage. The [later uninterrupted hardened-controller epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
 passes **1,066/1,066** tests on 11,816 unchanged inputs with exact JUnit/registry
 names, both fixed references, zero failures/errors/skips and a no-work post-build.
-It closes SQ05 native execution for that source state. The current 1,073-test
-registry adds two relation-source checks and three direct
-private-key/classifier verifier checks, retiring the earlier protected-caller
-test; focused checks pass **4/4** and **5/5**. A complete current-source epoch
-remains open. The separate P0 inventory gate passes **1/1**. The
+It closes SQ05 native execution for that source state. In the current
+1,074-test registry, selected relation-source checks pass **4/4** and direct
+private-key/classifier verifier checks pass **5/5**. A complete current-source
+epoch remains open. The separate P0 inventory gate passes **1/1**. The
 [private verifier](private_key_classifier_driver_provenance_5_0_6.md)
 now rejects the reproduced incomplete receipt under direct `python -O`.
 The [private SQL sink repair](private_sql_sink_optimized_checks_5_0_6.md)
 closes one reproduced normal/optimized false acceptance, with native 4/4 and
-module 3/3 selected tests. The 592 registered Python entry scripts retain
-1,198 removable assertions in 98 scripts; the full current epoch is open.
+module 3/3 selected tests.
+The [configuration source repair](configuration_optimized_checks_5_0_6.md)
+closes four further normal/optimized false acceptances through 35 exact
+unconditional checks; native 7/7 and module 5/5 selected tests pass. The 593
+registered Python entry scripts retain 1,163 removable assertions in 94
+scripts; the full current epoch is open.
 SQ02, G13/G14/G17 and the remaining phase exits remain open at
 **14 qualified / 3 partial**.
 

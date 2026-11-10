@@ -25,12 +25,16 @@ def digest(path):
 def source_inputs():
     fixture = ROOT / 'tests/generator/parity/business_ids_rust'
     provenance = json.loads((fixture / 'PROVENANCE.json').read_text())
-    assert provenance['hand_edited'] is False
+    if not (provenance['hand_edited'] is False):
+        raise AssertionError()
     for path, expected in provenance['files'].items():
-        assert digest(fixture / path) == expected, path
-    assert digest(ROOT / provenance['model']) == provenance['model_sha256']
+        if not (digest(fixture / path) == expected):
+            raise AssertionError(path)
+    if not (digest(ROOT / provenance['model']) == provenance['model_sha256']):
+        raise AssertionError()
     lock = ROOT / 'tests/parity/rust_runtime_configuration_models_5_0_6/Cargo.lock'
-    assert registry_identities(lock) <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')
+    if not (registry_identities(lock) <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')):
+        raise AssertionError()
     paths = ['tests/generator/parity/business_ids_rust/PROVENANCE.json',
              'tests/generator/parity/business_ids_rust/lib/src/runtime.rs',
              'tests/generator/business_ids.xml',
@@ -98,20 +102,26 @@ def main():
     if args.output == OUTPUT:
         verify_record(OUTPUT)
     record = json.loads(args.output.read_text())
-    assert record['runtime_commit'] == runtime['commit']
-    assert record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'
-    assert record['source_inputs'] == inputs
-    assert len(record['cases']) == 27 and len(record['source_environment_errors']) == 18
+    if not (record['runtime_commit'] == runtime['commit']):
+        raise AssertionError()
+    if not (record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'):
+        raise AssertionError()
+    if not (record['source_inputs'] == inputs):
+        raise AssertionError()
+    if not (len(record['cases']) == 27 and len(record['source_environment_errors']) == 18):
+        raise AssertionError()
     for case in record['cases']:
         value = case['input']
         for executable, label in [(args.rust, 'original'), (args.cpp, 'C++')]:
             if executable:
                 observed, _ = observe(executable, value, bytes(range(32)).hex(), str(value['key_version']))
-                assert same(observed, case['source_expected']), (label, value, observed, case['source_expected'])
+                if not (same(observed, case['source_expected'])):
+                    raise AssertionError((label, value, observed, case['source_expected']))
     if args.rust:
         for case in record['source_environment_errors']:
             observed, _ = observe(args.rust, case['input'], case['key_hex'], case['key_version'])
-            assert same(observed, case['source_expected']), case['name']
+            if not (same(observed, case['source_expected'])):
+                raise AssertionError(case['name'])
     if not args.rust and not args.cpp:
         parser.error('Execution replay requires --rust or --cpp')
     print('Verified 27 complete runtime/persistence scenarios (54 Context rounds); '

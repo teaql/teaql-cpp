@@ -56,26 +56,37 @@ def digest(path):
 def verify_inputs(record, record_name):
     expected_record_hash, expected_sources = SOURCE_RECORDS[record_name]
     record_path = ROOT / 'docs/parity' / record_name
-    assert digest(record_path) == expected_record_hash, record_name + ': original record changed'
-    assert same(record, json.loads(record_path.read_text())), record_name + ': loaded record changed'
-    assert set(record['source_inputs']) == set(expected_sources), record_name + ': incomplete source inputs'
-    assert record['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
-    assert record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'
+    if not (digest(record_path) == expected_record_hash):
+        raise AssertionError(record_name + ': original record changed')
+    if not (same(record, json.loads(record_path.read_text()))):
+        raise AssertionError(record_name + ': loaded record changed')
+    if not (set(record['source_inputs']) == set(expected_sources)):
+        raise AssertionError(record_name + ': incomplete source inputs')
+    if not (record['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']):
+        raise AssertionError()
+    if not (record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'):
+        raise AssertionError()
     for relative, expected_hash in record['source_inputs'].items():
-        assert digest(ROOT / relative) == expected_hash, relative
+        if not (digest(ROOT / relative) == expected_hash):
+            raise AssertionError(relative)
     project = ('rust_runtime_configuration_models_5_0_6' if record_name.startswith('generated_registry')
                else 'rust_execution_shapes_5_0_6')
     project_root = ROOT / 'tests/parity' / project
-    assert digest(project_root / 'Cargo.toml') == MANIFEST_HASHES[project], project + ': manifest changed'
-    assert registry_identities(project_root / 'Cargo.lock') <= registry_identities(
-        ROOT / '.reference/teaql-rs/Cargo.lock'), project + ': registry dependency changed'
+    if not (digest(project_root / 'Cargo.toml') == MANIFEST_HASHES[project]):
+        raise AssertionError(project + ': manifest changed')
+    if not (registry_identities(project_root / 'Cargo.lock') <= registry_identities(
+        ROOT / '.reference/teaql-rs/Cargo.lock')):
+        raise AssertionError(project + ': registry dependency changed')
     if project == 'rust_execution_shapes_5_0_6':
         domain = ROOT / 'tests/generator/parity/dynamic_json_rust'
         provenance = json.loads((domain / 'PROVENANCE.json').read_text())
-        assert provenance['hand_edited'] is False
-        assert digest(ROOT / provenance['model']) == provenance['model_sha256']
+        if not (provenance['hand_edited'] is False):
+            raise AssertionError()
+        if not (digest(ROOT / provenance['model']) == provenance['model_sha256']):
+            raise AssertionError()
         for relative, expected_hash in provenance['files'].items():
-            assert digest(domain / relative) == expected_hash, relative
+            if not (digest(domain / relative) == expected_hash):
+                raise AssertionError(relative)
 
 
 def load_original_record(record_name):
@@ -103,10 +114,13 @@ def main():
     nul = load_original_record('runtime_configuration_nul_original_observations_5_0_6.json')
     domain = ROOT / 'tests/generator/parity/dynamic_json_rust'
     provenance = json.loads((domain / 'PROVENANCE.json').read_text())
-    assert provenance['hand_edited'] is False
+    if not (provenance['hand_edited'] is False):
+        raise AssertionError()
     for relative, digest in provenance['files'].items():
-        assert hashlib.sha256((domain / relative).read_bytes()).hexdigest() == digest, relative
-    assert hashlib.sha256((ROOT / provenance['model']).read_bytes()).hexdigest() == provenance['model_sha256']
+        if not (hashlib.sha256((domain / relative).read_bytes()).hexdigest() == digest):
+            raise AssertionError(relative)
+    if not (hashlib.sha256((ROOT / provenance['model']).read_bytes()).hexdigest() == provenance['model_sha256']):
+        raise AssertionError()
     count = 0
     for case in config['cases']:
         if case['mode'] != 'config':
@@ -119,20 +133,25 @@ def main():
         expected = case['source_expected']
         if args.rust_config:
             actual, paths = run(args.rust_config, 'config', environment)
-            assert same(expected, actual) and paths == [], case['name'] + ': original changed'
+            if not (same(expected, actual) and paths == []):
+                raise AssertionError(case['name'] + ': original changed')
         actual, paths = run(args.cpp, 'config', environment)
-        assert same(expected, actual) and paths == [], case['name'] + ': C++ mismatch'
+        if not (same(expected, actual) and paths == []):
+            raise AssertionError(case['name'] + ': C++ mismatch')
         count += 1
     environment = dict(os.environb)
     environment[b'TEAQL_LOG_ENDPOINT'] = b'off'
     for case in nul['cases']:
         if args.rust_nul:
             actual, paths = run(args.rust_nul, case['name'], environment)
-            assert same(case['source_expected'], actual) and paths == case['created_paths'], case['name'] + ': original changed'
+            if not (same(case['source_expected'], actual) and paths == case['created_paths']):
+                raise AssertionError(case['name'] + ': original changed')
         actual, paths = run(args.cpp, 'nul_' + case['name'], environment)
-        assert same(case['source_expected'], actual) and paths == case['created_paths'], case['name'] + ': C++ mismatch'
+        if not (same(case['source_expected'], actual) and paths == case['created_paths']):
+            raise AssertionError(case['name'] + ': C++ mismatch')
         count += 1
-    assert count == 9
+    if not (count == 9):
+        raise AssertionError()
     print('Verified9 actual-source configuration/NUL kernel outcomes; full runtime assembly remains separate')
 
 

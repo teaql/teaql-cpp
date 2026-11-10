@@ -1408,6 +1408,17 @@ if(TARGET teaql_module_generated_registry_schema_probe)
         --cpp $<TARGET_FILE:teaql_module_generated_registry_schema_probe>)
 endif()
 
+if(TARGET teaql_module_generated_runtime_configuration_probe
+        AND TARGET teaql_module_generated_business_runtime_configuration_probe
+        AND TARGET teaql_module_generated_registry_schema_probe)
+    add_test(NAME module_parity_configuration_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/verify_configuration_optimized_controls_5_0_6.py
+        --kernel $<TARGET_FILE:teaql_module_generated_runtime_configuration_probe>
+        --business $<TARGET_FILE:teaql_module_generated_business_runtime_configuration_probe>
+        --registry $<TARGET_FILE:teaql_module_generated_registry_schema_probe>)
+    set_tests_properties(module_parity_configuration_optimized_controls PROPERTIES TIMEOUT 180)
+endif()
+
 if(TARGET teaql_module_sample_type_probe)
     add_test(NAME module_sample_types_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/scripts/verify_sample_types_5_0_6.py

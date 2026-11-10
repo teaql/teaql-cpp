@@ -8452,6 +8452,17 @@
           "terminal": "docs/parity/ap02_index_consumer_installed_source_5_0_6.json.gz",
           "consumer_terminal": "docs/parity/ap02_index_consumer_sql_5_0_6.json.gz",
           "scope": "One locked Rust 5.0.6 index ParseBuffer expression is retained in a generated School model. Source replay matches 80,185 metadata outcomes and 157 Java tests; original/C++ generated SQLite, 12 Save outcomes and 12 sink observations match. This is bounded source and consumer evidence, not complete SQ02/G13 or P7."
+        },
+        {
+          "kind": "generated_private_sql_sink_optimized_checks",
+          "path": "docs/private_sql_sink_optimized_checks_5_0_6.md",
+          "scope": "Twelve registered sink-verifier assertions no longer disappear under optimized Python. Actual C++ wrong-plaintext-policy acceptance is repaired; six normal/optimized controls and selected native4/module3 pass. Historical Rust evidence stays unchanged. Complete SQ02/G13/G14/G17 and P7 remain open."
+        },
+        {
+          "kind": "runtime_configuration_optimized_source_checks",
+          "path": "docs/configuration_optimized_checks_5_0_6.md",
+          "transition": "docs/parity/configuration_optimized_assert_rewrite_5_0_6.json.gz",
+          "scope": "Four registered configuration/source validators replace 35 removable assertions with exact unconditional AST-equivalent checks. Four normal/optimized false acceptances are repaired; sixteen controls and selected native7/module5 pass. Original Rust observations, generated SDK and runtime C++ source remain unchanged. Complete SQ02/G13/G14/G17 and P7 remain open."
         }
       ],
       "open_questions": [

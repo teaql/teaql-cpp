@@ -35,9 +35,10 @@ RECORD_SHA256 = {
 def verify_record(path):
     path = Path(path).resolve()
     name = path.relative_to(ROOT).as_posix()
-    assert name in RECORD_SHA256, name + ': unqualified original observation record'
-    assert hashlib.sha256(path.read_bytes()).hexdigest() == RECORD_SHA256[name], (
-        name + ': original observation record changed')
+    if not (name in RECORD_SHA256):
+        raise AssertionError(name + ': unqualified original observation record')
+    if not (hashlib.sha256(path.read_bytes()).hexdigest() == RECORD_SHA256[name]):
+        raise AssertionError(name + ': original observation record changed')
 
 
 def main():
