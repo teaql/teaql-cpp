@@ -91,3 +91,22 @@ after execution (166,418,924 and 169,186,703 bytes). The
 checks those receipts and rejects [13/13 controlled corruptions](parity/field_attribute_current_exception_controls_v2_5_0_6.json.gz).
 The earlier receipts remain historical. User approval of this separate
 compatibility exception is still pending, so G14/AP02 and P0-P7 remain open.
+
+## Latest source requalification
+
+After the index ParseBuffer parser correction and the new source corpora, the
+previous current-source receipts no longer matched every producer input hash.
+The [fresh diagnostic execution](parity/field_attribute_latest_property_exception_5_0_6.json.gz)
+again rebuilds both generators and compiles the two original entity models.
+Item and inherited Child derive column `chosen` with lengths 100 and 7 for
+the two configured values. Current C++ generation refuses both with the same
+unescaped-quote diagnostic. The diagnostic still records
+`semantic_accepted=false`; its 166,421,924-byte temporary build is removed.
+
+The [fresh valid-model execution](parity/field_attribute_latest_valid_control_5_0_6.json.gz)
+matches all **24** original/C++ property descriptors and removes its
+169,189,703-byte temporary build. The default
+[current verifier](../tests/parity/verify_field_attribute_exception_5_0_6.py)
+now points to these receipts and rejects [13/13 controlled corruptions](parity/field_attribute_latest_exception_controls_v2_5_0_6.json.gz).
+All recorded source inputs remain unchanged. The compatibility choice remains
+pending; this requalification does not promote G14/AP02 or any phase exit.

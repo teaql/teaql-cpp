@@ -9171,6 +9171,14 @@
           "terminal": "docs/parity/ap02_index_consumer_sql_5_0_6.json.gz",
           "source_terminal": "docs/parity/ap02_index_consumer_installed_source_5_0_6.json.gz",
           "scope": "The repaired index-expression child rule reaches a generated School descriptor with audit limit 19 and masked name; 21-character source values truncate to the same 19-character safe value in original Rust and C++. One model/configuration does not close AP02 or G14."
+        },
+        {
+          "kind": "column_attribute_latest_source_diagnostic",
+          "path": "docs/field_attribute_boundary_5_0_6.md",
+          "terminal": "docs/parity/field_attribute_latest_property_exception_5_0_6.json.gz",
+          "valid_terminal": "docs/parity/field_attribute_latest_valid_control_5_0_6.json.gz",
+          "control_terminal": "docs/parity/field_attribute_latest_exception_controls_v2_5_0_6.json.gz",
+          "scope": "Fresh locked Rust generated Item and inherited Child descriptors confirm quoted-column injection, while C++ explicitly rejects both. The ordinary 24-property generated model matches and 13 verifier corruptions reject. This is a diagnostic candidate with semantic_accepted=false; the separate compatibility choice is pending and G14 remains partial."
         }
       ],
       "open_questions": [

@@ -21,8 +21,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from compare_values import same
 import verify_property_shape_metadata_5_0_6 as property_observer
 
-DIAGNOSTIC = ROOT / "docs/parity/field_attribute_current_property_exception_5_0_6.json.gz"
-VALID = ROOT / "docs/parity/field_attribute_current_valid_control_5_0_6.json.gz"
+DIAGNOSTIC = ROOT / "docs/parity/field_attribute_latest_property_exception_5_0_6.json.gz"
+VALID = ROOT / "docs/parity/field_attribute_latest_valid_control_5_0_6.json.gz"
 MODELS = ROOT / "tests/parity/field_attribute_models_5_0_6.json.gz"
 VALID_MODELS = ROOT / "tests/parity/property_shape_models_5_0_6.json.gz"
 REFUSAL = "java.lang.IllegalArgumentException: Unescaped quote in original Rust column literal"

@@ -203,10 +203,11 @@ G14/G17 provenance and protected-publication evidence without claiming a new
 SQL run or complete G14/G17/P0-P7 acceptance.
 
 Current column-attribute compatibility candidate:
-[Fresh current-source execution](field_attribute_boundary_5_0_6.md#current-source-requalification)
+[Fresh current-source execution](field_attribute_boundary_5_0_6.md#latest-source-requalification)
 reconfirms two locked Rust descriptor outcomes, exact C++ rejection, one
 24-property valid-model equality and 13/13 negative controls after the old
-candidate input hash became stale. This is a diagnostic candidate; the
+candidate input hash became stale. The default verifier now binds the latest
+source receipts. This is a diagnostic candidate; the
 compatibility decision and complete G14/AP02/P0-P7 acceptance remain open.
 
 Current expression child-rule checkpoint:
