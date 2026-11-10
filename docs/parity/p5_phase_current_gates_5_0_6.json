@@ -1,0 +1,63 @@
+{
+  "schema": "teaql.cpp.p5.phase-gates.v1",
+  "candidate_commit": "00639273a3d0653d9d0639dd7d811ab2d7616c21",
+  "generator_workspace_commit": "efe43593ee6868d23badf0e4e74a547ae5fcfb4b",
+  "scope": "Current P5 native and imported-module integration selections; not a full-suite epoch",
+  "runs": [
+    {
+      "profile": "native",
+      "build_directory": "build_native_current",
+      "ctest_log_sha256": "ff3f830b29b95e33e495b4f81f3b15b233739bfb6263a0b248154f62a112b39f",
+      "passed": 23,
+      "failed": 0,
+      "wall_time_seconds": 148.9,
+      "test_names": [
+        "parity_runtime_bridge_driver_contracts",
+        "parity_sql_executor_driver_contracts",
+        "sql_dynamic_stream_source_rust_parity",
+        "parity_sqlite_provider_protocol_contracts",
+        "parity_dynamic_governance_driver_contracts",
+        "dynamic_graph_save_contracts",
+        "sqlite_dynamic_storage_rust_parity",
+        "generated_aggregation_rust_parity",
+        "typed_aggregate_scope_rust_parity",
+        "dynamic_storage_rust_parity",
+        "generated_dynamic_json_privacy_sink_contracts",
+        "sqlite_dynamic_storage_contracts",
+        "generated_aggregation_cache_rust_parity",
+        "parity_generated_model_driver_contracts",
+        "dynamic_typed_save_audit_rust_parity",
+        "generated_readonly_properties_rust_parity",
+        "parity_dynamic_json_cli_source_contracts",
+        "parity_relation_analysis_cli_source_contracts",
+        "dynamic_json_execution_rust_parity",
+        "generated_dynamic_json_privacy_rust_parity",
+        "generated_relation_analysis_rust_parity",
+        "generated_dynamic_json_facets_rust_parity",
+        "generated_dynamic_json_persistent_rust_parity"
+      ]
+    },
+    {
+      "profile": "modules_native",
+      "build_directory": "build_modules_native",
+      "ctest_log_sha256": "458a1193f1529b1a2e1deec92d49004ce4f56a3f15ddba2d995376d7b2730325",
+      "passed": 12,
+      "failed": 0,
+      "wall_time_seconds": 98.29,
+      "test_names": [
+        "module_sqlite_dynamic_storage_boundaries_rust_parity",
+        "module_generated_dynamic_json_privacy_sink_contracts",
+        "module_generated_dynamic_json_privacy_rust_parity",
+        "module_dynamic_json_execution_rust_parity",
+        "module_typed_aggregate_scope_rust_parity",
+        "module_dynamic_storage_rust_parity",
+        "module_sqlite_dynamic_storage_rust_parity",
+        "module_dynamic_json_policy_rust_parity",
+        "module_sql_dynamic_stream_source_rust_parity",
+        "module_relation_analysis_inputs_rust_parity",
+        "module_generated_dynamic_json_facets_rust_parity",
+        "module_generated_dynamic_json_persistent_rust_parity"
+      ]
+    }
+  ]
+}
