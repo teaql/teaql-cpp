@@ -8463,6 +8463,12 @@
           "path": "docs/configuration_optimized_checks_5_0_6.md",
           "transition": "docs/parity/configuration_optimized_assert_rewrite_5_0_6.json.gz",
           "scope": "Four registered configuration/source validators replace 35 removable assertions with exact unconditional AST-equivalent checks. Four normal/optimized false acceptances are repaired; sixteen controls and selected native7/module5 pass. Original Rust observations, generated SDK and runtime C++ source remain unchanged. Complete SQ02/G13/G14/G17 and P7 remain open."
+        },
+        {
+          "kind": "sql_executor_optimized_source_checks",
+          "path": "docs/sql_executor_optimized_checks_5_0_6.md",
+          "transition": "docs/parity/sql_executor_optimized_assert_rewrite_5_0_6.json.gz",
+          "scope": "Nine SQL executor source contracts retain 8243 historical original/native observations. The verifier and negative-control runner replace 60 removable assertions with exact unconditional AST-equivalent checks; an incomplete-record optimized false acceptance is repaired. Six normal/optimized controls and selected native3 pass. No new Rust/C++ execution or imported-module gate is claimed. Complete SQ02/G13/G14/G17 and P7 remain open."
         }
       ],
       "open_questions": [

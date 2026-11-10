@@ -1,9 +1,9 @@
 # Registered Python checks under optimization
 
-The current 1,074-test native registry invokes 593 distinct Python entry
-scripts. A current AST scan finds 94 registered scripts with 1,163
-`ast.Assert` nodes after the private-verifier, private SQL sink and runtime
-configuration source repairs below. The preceding
+The current 1,075-test native registry invokes 594 distinct Python entry
+scripts. A current AST scan finds 92 registered scripts with 1,103
+`ast.Assert` nodes after the private-verifier, private SQL sink, runtime
+configuration and SQL executor source repairs below. The preceding
 [1,065-test source inventory](parity/registered_python_assert_inventory_after_remaining_1065_5_0_6.json.gz)
 found 107 registered scripts with 1,467 nodes. The earlier
 [declared-core inventory](parity/registered_python_assert_inventory_after_core_1065_5_0_6.json.gz)
@@ -13,6 +13,16 @@ found 111 scripts and 1,579 assertions before the declared-core repair below.
 Python removes those nodes under `-O` or a nonzero `PYTHONOPTIMIZE`. This is an optimization
 risk inventory; it does not claim a reproduced false acceptance for every
 remaining assertion. Complete SQ02 and G13/G14/G17 qualification remains open.
+
+## SQL executor source verifier
+
+The [SQL executor repair](sql_executor_optimized_checks_5_0_6.md) replaces
+60 assertions in the nine-contract source verifier and its negative-control
+runner. A retained execution record with `complete=false` was accepted under
+optimized Python before the repair. The permanent normal/optimized control
+checks the exact source transition, valid and incomplete records and all 24
+existing negative controls. Selected native CTests pass 3/3. No fresh Rust or
+C++ observation is inferred; the current full native epoch remains open.
 
 ## Runtime configuration source validators
 

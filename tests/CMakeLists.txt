@@ -77,6 +77,10 @@ if(BUILD_TESTING)
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_sql_executor_driver_controls_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sql_executor_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sql_executor_driver_execution_final_5_0_6.json.gz)
+        add_test(NAME parity_sql_executor_optimized_controls COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_sql_executor_optimized_controls_5_0_6.py)
+        set_tests_properties(parity_sql_executor_optimized_controls PROPERTIES
+            TIMEOUT 180 FIXTURES_REQUIRED sql_executor_driver_source)
         add_test(NAME parity_entity_runtime_driver_contracts COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_entity_runtime_driver_contracts_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/entity_runtime_driver_contracts_5_0_6.json

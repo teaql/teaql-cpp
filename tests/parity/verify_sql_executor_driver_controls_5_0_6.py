@@ -19,7 +19,8 @@ def main():
     parser.add_argument('--contracts', type=Path, required=True)
     parser.add_argument('--execution', type=Path, required=True)
     args = parser.parse_args()
-    assert args.record is None or not args.record.exists()
+    if not (args.record is None or not args.record.exists()):
+        raise AssertionError()
     execution_path, registry_path = args.execution.resolve(), args.contracts.resolve()
     execution, registry = read(execution_path), read(registry_path)
     paths = [Path(__file__), execution_path, registry_path, ROOT / 'scripts/verify_sql_executor_driver_contracts_5_0_6.py']
@@ -30,7 +31,8 @@ def main():
     def reject(name, mutate):
         changed = copy.deepcopy(execution)
         mutate(changed)
-        assert changed != execution
+        if not (changed != execution):
+            raise AssertionError()
         try:
             validate(changed, registry)
         except (AssertionError, KeyError, StopIteration, ValueError):
@@ -101,7 +103,8 @@ def main():
                         return True
             return False
 
-        assert visit(values), 'Positive boolean field required'
+        if not (visit(values)):
+            raise AssertionError('Positive boolean field required')
 
     def has_bool(value):
         if type(value) is bool:
@@ -133,9 +136,11 @@ def main():
     reject('rehashed_sql_observer_still_requires_exact_appendix', changed_observer)
     reject('missing_copied_include_helper', lambda r: r['copied_helpers'].pop(next(iter(r['copied_helpers']))))
     reject('partial_original_unit_test_family', lambda r: r['original_sql_tests'][0].update(count=15))
-    assert len(record['controls']) == 24
+    if not (len(record['controls']) == 24):
+        raise AssertionError()
     record['input_hashes_after'] = hashes()
-    assert record['input_hashes_before'] == record['input_hashes_after']
+    if not (record['input_hashes_before'] == record['input_hashes_after']):
+        raise AssertionError()
     record['complete'] = True
     if args.record:
         args.record.write_bytes(gzip.compress(json.dumps(record).encode(), mtime=0))
