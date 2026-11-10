@@ -1,0 +1,50 @@
+{
+  "schema": "teaql.cpp.p4.phase-gates.v1",
+  "candidate_commit": "c4bbb65e920731a1c9cf4017391bbf381d97676b",
+  "generator_workspace_commit": "efe43593ee6868d23badf0e4e74a547ae5fcfb4b",
+  "scope": "Selected P4 current native and imported-module checks; not a full-suite epoch",
+  "runs": [
+    {
+      "profile": "native",
+      "build_directory": "build_native_current",
+      "ctest_log_sha256": "30e121ddb4753ea4f57684f601a68ead0f0be6eb253fbd5c02156c768b89038c",
+      "passed": 16,
+      "failed": 0,
+      "wall_time_seconds": 119.79,
+      "test_names": [
+        "generated_execution_binding_contracts",
+        "parity_pagination_driver_contracts",
+        "parity_dynamic_governance_driver_contracts",
+        "general_query_rust_parity",
+        "generated_execution_rust_parity",
+        "parity_stream_shapes_cli_source_contracts",
+        "parity_query_input_cli_source_contracts",
+        "parity_custom_public_cli_source_contracts",
+        "parity_composed_graph_cli_source_contracts",
+        "parity_query_surface_cli_source_contracts",
+        "query_predicate_execution_rust_parity",
+        "deferred_facet_page_rust_parity",
+        "composed_general_rust_parity",
+        "query_alias_rust_parity",
+        "generated_execution_shapes_rust_parity",
+        "stream_shapes_rust_parity"
+      ]
+    },
+    {
+      "profile": "modules_native",
+      "build_directory": "build_modules_native",
+      "ctest_log_sha256": "b6d82b2f0b169084b7958198e26560ca150c774ade686053ae86829c39731d28",
+      "passed": 6,
+      "failed": 0,
+      "wall_time_seconds": 131.15,
+      "test_names": [
+        "module_generated_execution_rust_parity",
+        "module_query_alias_rust_parity",
+        "module_query_predicate_execution_rust_parity",
+        "module_deferred_facet_page_rust_parity",
+        "module_composed_general_rust_parity",
+        "module_stream_shapes_rust_parity"
+      ]
+    }
+  ]
+}
