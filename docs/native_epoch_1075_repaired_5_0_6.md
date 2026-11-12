@@ -18,8 +18,9 @@ CTest output and registry remain in the
 The controller did not mark itself complete: it passed a relative `--output-junit`
 path to CTest, which wrote the report relative to the CTest build directory.
 The controller then searched relative to the repository root and raised
-`CTest produced no terminal JUnit`. The original JUnit exists and contains the
-same 1,075 unique test names as discovery, with zero failures, errors or skips.
+`CTest produced no terminal JUnit`. The original JUnit was produced and is
+preserved in the recovery record. It contains the same 1,075 unique test names
+as discovery, with zero failures, errors or skips.
 An independent [recovery record](parity/current_full_native_hardened_recovery_1075_5_0_6.json.gz)
 checks the original CTest exit/output, JUnit file and registry, all 11,829
 unchanged frozen inputs, unchanged references and a post-CTest no-work build.

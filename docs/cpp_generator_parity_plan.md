@@ -5242,3 +5242,24 @@ optimized-control CTest pass. The [selected native run](parity/optional_source_g
 passes 63/63, including the 50 affected comparator commands. A complete
 current-source 1,064-test native epoch and full SQ02/G13/P0-P7 acceptance
 remain open.
+
+## Current 1,075-test native checkpoint and archive verifier candidate
+
+The [repaired native checkpoint](native_epoch_1075_repaired_5_0_6.md) records
+**1,075/1,075** successful CTests and a complete JUnit with zero failures,
+errors or skips. The controller's relative JUnit path caused its own terminal
+error; independent recovery verifies all 11,829 frozen inputs, both references
+and a no-work post-build. Only two harness scripts changed afterward, with an
+exact transition record and focused 2/2 checks. This is not a second full run
+under the changed harness source. The prior interrupted 794-test checkpoint
+remains historical.
+
+The [Credential source transition](generated_credential_source_transition_5_0_6.md)
+admits exactly three changed inputs with 530 unchanged historical inputs and
+17 rejected corruptions. The [archive verifier candidate](archive_driver_optimized_assert_candidate_5_0_6.md)
+reproduces an optimized-Python false acceptance and demonstrates a 63-check
+assertion-only repair in isolation. It is not installed: fifteen historical
+registries pin the old verifier hash and require explicit source transition
+admission. G13, G14 and G17 remain partial; P1/P7 and all complete phase exits
+remain open. The column-literal compatibility decision remains separate and
+pending.
