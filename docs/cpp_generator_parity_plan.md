@@ -5258,8 +5258,9 @@ The [Credential source transition](generated_credential_source_transition_5_0_6.
 admits exactly three changed inputs with 530 unchanged historical inputs and
 17 rejected corruptions. The [archive verifier candidate](archive_driver_optimized_assert_candidate_5_0_6.md)
 reproduces an optimized-Python false acceptance and demonstrates a 63-check
-assertion-only repair in isolation. It is not installed: fifteen historical
-registries pin the old verifier hash and require explicit source transition
-admission. G13, G14 and G17 remain partial; P1/P7 and all complete phase exits
-remain open. The column-literal compatibility decision remains separate and
-pending.
+assertion-only repair in isolation. It is not installed: the
+[source-impact inventory](archive_driver_source_transition_impact_5_0_6.md)
+finds seventeen old-hash pins in fifteen historical registries and requires
+explicit source transition admission. G13, G14 and G17 remain partial; P1/P7
+and all complete phase exits remain open. The column-literal compatibility
+decision remains separate and pending.
