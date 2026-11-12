@@ -9,8 +9,14 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from archive_driver_provenance_5_0_6 import read, validate, digest, registry_identities
+from strict_archive_driver_provenance_5_0_6 import load_checked_archive_driver
 from compare_values import json_lines
+
+archive = load_checked_archive_driver()
+read = archive.read
+validate = archive.validate
+digest = archive.digest
+registry_identities = archive.registry_identities
 
 
 def main():
@@ -19,7 +25,8 @@ def main():
     parser.add_argument('--execution', type=Path, required=True)
     parser.add_argument('--record', type=Path)
     args = parser.parse_args()
-    assert args.record is None or not args.record.exists()
+    if args.record is not None and args.record.exists():
+        raise AssertionError('Archive control record already exists')
     original, registry = read(args.execution), read(args.contracts)
     validate(original, registry)
     controls = []
@@ -27,7 +34,8 @@ def main():
     def reject(name, edit):
         changed = copy.deepcopy(original)
         edit(changed)
-        assert changed != original
+        if changed == original:
+            raise AssertionError('Archive corruption control made no change: ' + name)
         try:
             validate(changed, registry)
         except (AssertionError, KeyError, StopIteration, ValueError):
@@ -109,7 +117,8 @@ def main():
 
     reject('native_boolean_is_not_number', corrupt_boolean)
     legacy = ROOT / 'tests/parity/rust_sql_protocol_5_0_6/Cargo.toml'
-    assert not registry_identities(legacy.with_name('Cargo.lock')) <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')
+    if registry_identities(legacy.with_name('Cargo.lock')) <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock'):
+        raise AssertionError('Legacy SQL protocol lock unexpectedly matches the reference')
     controls.append(dict(name='actual_legacy_sql_protocol_lock', rejected=True,
                          lock_sha256=digest(legacy.with_name('Cargo.lock'))))
     result = dict(complete=True, whole_goal_complete=False, controls=controls,

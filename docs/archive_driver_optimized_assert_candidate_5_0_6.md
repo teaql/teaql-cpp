@@ -24,6 +24,9 @@ references to the original hash across support, helper, verifier and source
 maps. Their historical receipts must not be rewritten. Installing the
 candidate requires exact old-to-new source transition admission at each
 active reader and negative controls for any extra changed input. Until that
-work is complete, the optimized false acceptance remains an open P7
-provenance issue. This candidate adds no native, module, sanitizer, MIPS or
-full-goal acceptance claim.
+work is complete, direct optimized execution of the historical driver remains
+an open P7 provenance issue. The
+[registered SQL mutation boundary](archive_driver_strict_boundary_5_0_6.md)
+now compiles those pinned source bytes with optimization disabled and rejects
+the incomplete receipt under both Python modes. The candidate itself adds no
+native, module, sanitizer, MIPS or full-goal acceptance claim.

@@ -132,12 +132,18 @@ if(BUILD_TESTING)
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/entity_api_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/entity_api_driver_execution_final_5_0_6.json.gz)
         add_test(NAME parity_sql_mutation_driver_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/archive_driver_provenance_5_0_6.py verify
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/strict_archive_driver_provenance_5_0_6.py verify
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sql_mutation_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sql_mutation_driver_execution_5_0_6.json.gz)
         set_tests_properties(parity_sql_mutation_driver_contracts PROPERTIES
             FIXTURES_SETUP sql_mutation_driver_source)
         add_test(NAME parity_sql_mutation_driver_controls COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_archive_driver_controls_5_0_6.py
+            --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sql_mutation_driver_contracts_5_0_6.json
+            --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sql_mutation_driver_execution_5_0_6.json.gz)
+        add_test(NAME parity_sql_mutation_driver_optimized_boundary COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_strict_archive_driver_optimized_5_0_6.py)
+        add_test(NAME parity_sql_mutation_driver_controls_optimized COMMAND ${Python3_EXECUTABLE} -O
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_archive_driver_controls_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sql_mutation_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sql_mutation_driver_execution_5_0_6.json.gz)

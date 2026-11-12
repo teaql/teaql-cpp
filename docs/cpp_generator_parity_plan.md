@@ -5261,6 +5261,11 @@ reproduces an optimized-Python false acceptance and demonstrates a 63-check
 assertion-only repair in isolation. It is not installed: the
 [source-impact inventory](archive_driver_source_transition_impact_5_0_6.md)
 finds seventeen old-hash pins in fifteen historical registries and requires
-explicit source transition admission. G13, G14 and G17 remain partial; P1/P7
-and all complete phase exits remain open. The column-literal compatibility
-decision remains separate and pending.
+explicit source transition admission. The
+[strict registered SQL mutation boundary](archive_driver_strict_boundary_5_0_6.md)
+checks those frozen bytes with assertions active under ordinary and optimized
+Python: four complete/incomplete boundary outcomes, 25 optimized corruption
+controls and four affected CTests pass. Direct optimized execution of the
+historical driver remains unsafe; full source installation and P7 are open.
+G13, G14 and G17 remain partial; P1/P7 and all complete phase exits remain
+open. The column-literal compatibility decision remains separate and pending.
