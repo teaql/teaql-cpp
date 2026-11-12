@@ -57,6 +57,10 @@ def now():
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
+def output_path(path):
+    return path if path.is_absolute() else ROOT / path
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--prefix', type=Path, required=True,
@@ -66,6 +70,9 @@ def main():
     args = parser.parse_args()
     if not args.inputs.suffix == args.record.suffix == '.gz':
         raise AssertionError()
+    args.prefix = output_path(args.prefix)
+    args.inputs = output_path(args.inputs)
+    args.record = output_path(args.record)
     state_path = Path(str(args.prefix) + '_state.json')
     junit = Path(str(args.prefix) + '_junit.xml')
     for path in [args.inputs, args.record, state_path, junit]:

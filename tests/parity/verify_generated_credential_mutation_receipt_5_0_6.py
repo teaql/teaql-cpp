@@ -6,6 +6,7 @@ import copy
 import gzip
 import hashlib
 import json
+from functools import cache
 from pathlib import Path
 import subprocess
 
@@ -15,6 +16,28 @@ from compare_values import same
 ROOT = Path(__file__).resolve().parents[2]
 MAIN = ROOT / "docs/parity/generated_audit_credential_mutation_sinks_current_v2_5_0_6.json.gz"
 QUERY = ROOT / "docs/parity/generated_audit_credential_mutation_query_matrix_v2_5_0_6.json.gz"
+AP02_SOURCE = ROOT / "docs/parity/ap02_index_consumer_installed_source_5_0_6.json.gz"
+AP02_SQL = ROOT / "docs/parity/ap02_index_consumer_sql_5_0_6.json.gz"
+AP02_SOURCE_SHA256 = "c9277f1238c4ae6676b132b5901b45fdb41a2f2feec5bd2bb7cd8fe67910857e"
+AP02_SQL_SHA256 = "d17e4a2ddf3fc83698ca7e96c51e14086b50d02a1607a3bf966105f586e6fd09"
+AUDIT_SOURCE = str(ROOT / "scripts/verify_generated_audit_sql_sinks_5_0_6.py")
+PRIVACY_SOURCE = str(ROOT / "tests/parity/verify_dynamic_json_privacy_sinks_5_0_6.py")
+PARSER_SOURCE = str(ROOT.parent / "teaql_code_gen_cpp/generator/src/main/java/"
+                    "com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java")
+OLD_CORPUS = str(ROOT.parent / "teaql_code_gen_cpp/generator/src/test/resources/"
+                 "cpp_nested_item_checkpoint_metadata_5_0_6.json.gz")
+NEW_CORPUS = str(ROOT.parent / "teaql_code_gen_cpp/generator/src/test/resources/"
+                 "cpp_index_parsebuffer_consumer_metadata_5_0_6.json.gz")
+PRIVACY_CONTROL = ROOT / "tests/parity/verify_dynamic_json_privacy_sink_controls_5_0_6.py"
+PRIVACY_CONTROL_SHA256 = "a955894861f37bcec3f9ec7b3835e3b024923d36e9b37335ca4dfc02dbbfae60"
+SOURCE_TRANSITIONS = {
+    AUDIT_SOURCE: ("938778c2ea65a053a7bcc41328a1e8ca61c76b7e2eccf079e8ce230969a2dead",
+                   "bdfc09b352dcf7e8b5e066d64753a43959b8670fc2b085218907636e0a3bbf93"),
+    PRIVACY_SOURCE: ("b27a9f34616f12b91d68d89f15c42620450f3d4e631905b9376e93c2d470f119",
+                     "1e2412dd22b0943c894d8a22fbe4db0eca558566df989d9a395a6abced41a88d"),
+    PARSER_SOURCE: ("a3f16897f7fcfce33c863dc959e392850268621762ac2f957011cca4c6bee0ce",
+                    "09c664a667ba1009e73add94adfbf1a1f4f69d7ed4e8f7cc52b380175d03179c"),
+}
 UPDATE = "UPDATE school_data SET password = '[REDACTED]' /* masked */, version = 4 WHERE id = 7 AND version = 3"
 LIKE = "password LIKE '[REDACTED]' /* masked */"
 SECRETS = ("PRIVATE-PASSWORD-CANARY", "UPDATED-PASSWORD-CANARY")
@@ -50,6 +73,64 @@ def protected(log):
     return all(secret not in log for secret in SECRETS)
 
 
+@cache
+def transition_evidence():
+    require(digest(AP02_SOURCE) == AP02_SOURCE_SHA256, "installed parser evidence identity")
+    source = read(AP02_SOURCE)
+    require(source.get("complete") is True and source.get("inputs_unchanged") is True
+            and source.get("input_hashes_before") == source.get("input_hashes_after")
+            and source.get("differences") == [] and source.get("junit_passed") is True
+            and source.get("junit_tests") == 157 and len(source.get("cases", [])) == 80185
+            and all(case["match"] is True for case in source["cases"])
+            and source.get("owned_directory_removed") is True,
+            "installed parser source and Java evidence")
+    require(source["input_hashes_before"].get(PARSER_SOURCE)
+            == SOURCE_TRANSITIONS[PARSER_SOURCE][1], "installed parser source hash")
+
+    require(digest(AP02_SQL) == AP02_SQL_SHA256, "AP02 SQLite evidence identity")
+    sql = read(AP02_SQL)
+    require(sql.get("complete") is True and sql.get("inputs_unchanged") is True
+            and sql.get("input_hashes_before") == sql.get("input_hashes_after")
+            and sql.get("save_match") is True and sql.get("save_cases") == 12
+            and sql.get("query_match") is True and sql.get("sink_cases") == 12
+            and len(sql.get("steps", [])) == 41
+            and all(step["exit_code"] == 0 for step in sql["steps"])
+            and sql.get("owned_directory_removed") is True,
+            "AP02 generated SQLite execution evidence")
+    require(sql["input_hashes_before"].get(AUDIT_SOURCE)
+            == SOURCE_TRANSITIONS[AUDIT_SOURCE][1]
+            and sql["input_hashes_before"].get(PARSER_SOURCE)
+            == SOURCE_TRANSITIONS[PARSER_SOURCE][1], "AP02 changed source hashes")
+    require(digest(PRIVACY_CONTROL) == PRIVACY_CONTROL_SHA256,
+            "private SQL sink optimized control identity")
+    return source, sql
+
+
+def verify_current_sources(main):
+    source, sql = transition_evidence()
+    require(source["runtime_commit"] == sql["runtime_commit"] == main["runtime_commit"]
+            and source["generator_commit"] == sql["generator_commit"]
+            == main["generator_commit"], "source transition reference revisions")
+    recorded = main["input_hashes_before"]
+    current_sql = sql["input_hashes_before"]
+    require(set(SOURCE_TRANSITIONS) <= set(recorded), "historical transition sources")
+    for name, wanted in recorded.items():
+        path = Path(name)
+        require(path.is_file(), "current source missing: " + name)
+        if name in SOURCE_TRANSITIONS:
+            old, current = SOURCE_TRANSITIONS[name]
+            require(wanted == old and digest(path) == current,
+                    "declared source transition changed: " + name)
+        else:
+            require(digest(path) == wanted, "unchanged source identity: " + name)
+    require(set(recorded) - set(current_sql) == {OLD_CORPUS}
+            and set(current_sql) - set(recorded) == {NEW_CORPUS}
+            and {name for name in set(recorded) & set(current_sql)
+                 if recorded[name] != current_sql[name]} == {AUDIT_SOURCE, PARSER_SOURCE}
+            and current_sql[NEW_CORPUS] == digest(Path(NEW_CORPUS)),
+            "exact AP02 source and corpus transition")
+
+
 def verify(main, query, *, current_sources):
     runtime = json.loads((ROOT / "upstream.lock.json").read_text())
     generator = json.loads((ROOT.parent / "teaql_code_gen_cpp/cpp_generator.lock.json").read_text())
@@ -68,9 +149,7 @@ def verify(main, query, *, current_sources):
             ["git", "-C", str(ROOT / ".reference/teaql_code_gen"), "rev-parse", "HEAD"],
             text=True).strip()
         require(reference == main["generator_commit"], "current original checkout revision")
-        require(all(Path(path).is_file() and digest(Path(path)) == wanted
-                    for path, wanted in main["input_hashes_before"].items()),
-                "current source and dependency identities")
+        verify_current_sources(main)
     require(main.get("classpath_unchanged") is True,
             "original and producer Java dependency identities")
     require(len(main.get("classpath_hashes", {})) == 59,
@@ -176,16 +255,23 @@ def verify(main, query, *, current_sources):
 
 
 def controls(main, query):
-    def poison_same_source(receipt, _query):
-        path = next(iter(receipt["input_hashes_before"]))
+    def poison_source(receipt, path):
         receipt["input_hashes_before"][path] = "0" * 64
         receipt["input_hashes_after"][path] = "0" * 64
+
+    def poison_same_source(receipt, _query):
+        path = next(path for path in receipt["input_hashes_before"]
+                    if path not in SOURCE_TRANSITIONS)
+        poison_source(receipt, path)
 
     changes = (
         ("numeric_complete", lambda m, q: m.update(complete=1)),
         ("changed_input", lambda m, q: m["input_hashes_after"].update(
             {next(iter(m["input_hashes_after"])): "0" * 64})),
         ("same_stale_source", poison_same_source),
+        ("stale_audit_transition", lambda m, q: poison_source(m, AUDIT_SOURCE)),
+        ("stale_privacy_transition", lambda m, q: poison_source(m, PRIVACY_SOURCE)),
+        ("stale_parser_transition", lambda m, q: poison_source(m, PARSER_SOURCE)),
         ("stale_classpath", lambda m, q: m["classpath_hashes"].update(
             {next(iter(m["classpath_hashes"])): "0" * 64})),
         ("missing_step", lambda m, q: m["steps"].pop()),
@@ -212,7 +298,9 @@ def controls(main, query):
         change(changed_main, changed_query)
         try:
             verify(changed_main, changed_query,
-                   current_sources=name in ("same_stale_source", "stale_classpath"))
+                   current_sources=name in ("same_stale_source", "stale_audit_transition",
+                                            "stale_privacy_transition", "stale_parser_transition",
+                                            "stale_classpath"))
         except (ValueError, KeyError, TypeError, AssertionError) as error:
             results.append({"name": name, "rejected": True, "reason": str(error)})
         else:
@@ -237,6 +325,14 @@ def main():
         "inputs": {str(path.relative_to(ROOT)): digest(path)
                    for path in (MAIN, QUERY, Path(__file__))},
         "source_inputs_checked": len(receipt["input_hashes_before"]),
+        "source_transitions_checked": len(SOURCE_TRANSITIONS),
+        "unchanged_source_inputs_checked": len(receipt["input_hashes_before"])
+        - len(SOURCE_TRANSITIONS),
+        "source_transition_evidence": {
+            str(AP02_SOURCE.relative_to(ROOT)): AP02_SOURCE_SHA256,
+            str(AP02_SQL.relative_to(ROOT)): AP02_SQL_SHA256,
+            str(PRIVACY_CONTROL.relative_to(ROOT)): PRIVACY_CONTROL_SHA256,
+        },
         "classpath_inputs_checked": len(receipt["classpath_hashes"]),
         "original_cpp_save_pairs": len(SAVE_MODES),
         "query_sink_cases": len(query["observations"]),
@@ -246,7 +342,8 @@ def main():
     if args.record:
         args.record.write_bytes(gzip.compress((json.dumps(record, indent=2) + "\n").encode(),
                                               mtime=0))
-    print("Generated Credential receipt: 533 current inputs, 12 Save pairs, "
+    print("Generated Credential receipt: 530 unchanged inputs, 3 source transitions, "
+          "12 Save pairs, "
           "12 query sinks, 4 mutation sinks, " + str(len(results)) + " controls rejected")
 
 

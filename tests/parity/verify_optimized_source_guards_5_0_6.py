@@ -20,6 +20,18 @@ MANIFESTS = (
     ('expression_framing_assert_rewrite_candidate_5_0_6.json.gz', 1, 9),
     ('native_epoch_controller_assert_rewrite_candidate_5_0_6.json.gz', 1, 10),
 )
+HARDENED_JUNIT_SHA256 = 'e43fc2e56bc36e72ba49ab8d7f5368007233cf8e1cb8eca89354725504081ce6'
+HARDENED_JUNIT_EDITS = (
+    ('def main():\n',
+     'def output_path(path):\n'
+     '    return path if path.is_absolute() else ROOT / path\n\n\n'
+     'def main():\n'),
+    ("    state_path = Path(str(args.prefix) + '_state.json')\n",
+     '    args.prefix = output_path(args.prefix)\n'
+     '    args.inputs = output_path(args.inputs)\n'
+     '    args.record = output_path(args.record)\n'
+     "    state_path = Path(str(args.prefix) + '_state.json')\n"),
+)
 
 
 def require(condition, message):
@@ -86,8 +98,16 @@ def verify_rewrites():
                     'Unconditional-check rewrite changed behavior: ' + row['path'])
             if candidate_only:
                 hardened = ROOT / 'scripts/run_native_integration_epoch_hardened_5_0_6.py'
-                require(digest(hardened) == row['after_sha256'],
-                        'Active native epoch controller differs from bounded rewrite')
+                adapted = after
+                for original, replacement in HARDENED_JUNIT_EDITS:
+                    require(adapted.count(original) == 1,
+                            'Hardened controller JUnit edit has no unique source')
+                    adapted = adapted.replace(original, replacement, 1)
+                require(digest(hardened) == HARDENED_JUNIT_SHA256
+                        and hardened.read_text() == adapted
+                        and not any(isinstance(node, ast.Assert)
+                                    for node in ast.walk(ast.parse(adapted))),
+                        'Active native epoch controller differs from bounded JUnit path repair')
             total += original_asserts
     require(len(paths) == 6 and total == 142, 'Incomplete installed rewrite scope')
 
@@ -179,7 +199,18 @@ def check_expression_framing():
 
 def check_native_epoch_controller():
     source = (ROOT / 'scripts/run_native_integration_epoch_hardened_5_0_6.py').read_text()
-    node = next(node for node in ast.walk(ast.parse(source))
+    tree = ast.parse(source)
+    output_node = next(node for node in ast.walk(tree)
+                       if isinstance(node, ast.FunctionDef) and node.name == 'output_path')
+    scope = {'ROOT': ROOT, 'Path': Path}
+    exec(compile(ast.fix_missing_locations(ast.Module(body=[output_node], type_ignores=[])),
+                 'native_output_path', 'exec'), scope)
+    relative = Path('build_native_current/native_junit_probe.xml')
+    absolute = ROOT / relative
+    require(scope['output_path'](relative) == absolute
+            and scope['output_path'](absolute) == absolute,
+            'Native JUnit path must be absolute before CTest changes directories')
+    node = next(node for node in ast.walk(tree)
                 if isinstance(node, ast.FunctionDef) and node.name == 'check_inputs')
     function = textwrap.dedent(ast.get_source_segment(source, node))
     code = textwrap.dedent('''\
