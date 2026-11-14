@@ -1,6 +1,16 @@
 # G13 semantic qualification requirements
 
-Current SQ02 generated/SQLite CLI checkpoint:
+Current SQ02 deferred-resource checkpoint:
+[Nine direct and five embedded check replacements](deferred_resource_optimized_checks_5_0_6.md)
+retain all 143 suspended-resource scenarios and 163 business payloads.
+The 34 resource and four embedded fixture cases pass; the source-bound
+controller retains all 69 outcomes. Actual CTests pass 5/5 native and 2/2
+module per Python mode, including the unapproved column-attribute source
+candidate on native. The registry has 1,093 tests and 611 Python entries;
+49 retain 139 direct assertions. Other imported/embedded checks, complete
+SQ02/G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+
+Previous SQ02 generated/SQLite CLI checkpoint:
 [The seven-entry source and complete-matrix repair](generated_cli_optimized_checks_5_0_6.md)
 passes 140 ordinary/optimized fixture runs, 151 existing negative substitutions
 per mode, actual native CTests 21/21 and module CTests 6/6 per mode. Eleven

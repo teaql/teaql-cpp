@@ -1,6 +1,16 @@
 # Registered Python checks under optimization
 
-The current [generated/SQLite CLI repair](generated_cli_optimized_checks_5_0_6.md)
+The current [deferred-resource repair](deferred_resource_optimized_checks_5_0_6.md)
+fixes a `verify_*` comparator's nine removable checks and five checks in an
+embedded replay program. Four invalid resource fixtures and one invalid
+embedded request previously passed under optimization. Both Python modes now
+pass 34 resource and four embedded controls; the shared controller records all
+69 outcomes. Actual CTests pass 5/5 native and 2/2 module per mode. The registry
+contains 1,093 tests and 611 Python entries; 49 retain 139 direct assertions.
+This direct inventory excludes assertions in executable strings and imported
+helpers. Complete SQ02 remains open.
+
+The previous [generated/SQLite CLI repair](generated_cli_optimized_checks_5_0_6.md)
 replaces 26 source/control assertions and adds six complete-matrix admissions
 while retaining eleven historical files. All 140 ordinary/optimized fixture
 runs pass; actual CTests pass 21/21 native and 6/6 module per mode, with 151

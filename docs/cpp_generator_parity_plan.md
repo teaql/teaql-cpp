@@ -1,6 +1,17 @@
 # C++ generator parity plan
 
-Current SQ02 generated/SQLite CLI checkpoint:
+Current SQ02 deferred-resource checkpoint:
+[The resource and embedded replay repair](deferred_resource_optimized_checks_5_0_6.md)
+keeps 143 scenarios and 163 business payload checks while replacing nine direct
+and five embedded assertions. All 34 resource and four embedded fixture cases
+pass in both modes; the shared controller retains 69 complete outcomes.
+Actual CTests pass 5/5 native and 2/2 module per mode. The native selection also
+qualifies the fresh column-attribute diagnostic candidate, without approving
+that exception. The registry has 1,093 tests and 611 Python entries; 49 retain
+139 direct assertions. Other imported/embedded checks and full SQ02,
+G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+
+Previous SQ02 generated/SQLite CLI checkpoint:
 [Seven comparison repairs](generated_cli_optimized_checks_5_0_6.md) preserve
 eleven historical files, make 26 source/control checks unconditional and admit
 six complete matrices explicitly. The 140 fixture runs pass in both Python

@@ -147,7 +147,11 @@ model verification. The controller's `--expected-cpp-refusal` takes the message
 without `java.lang.IllegalArgumentException:`, which it prepends itself.
 
 The compatibility choice has been requested separately and remains pending.
-The default registered CTest still points to the preceding receipts. The frozen
-CLI selection has ended; the next registration change can select the fresh
-arguments without altering that execution's inputs. The new records do not
-approve an exception or close G14/AP02/P0-P7.
+The candidate previously had a standalone verifier, not a registered CTest;
+the earlier completion note describing an existing registration was incorrect.
+The new `parity_field_attribute_candidate_source_contracts` uses the explicit
+fresh arguments and passes in both ordinary and optimized Python in the
+[selected execution receipt](parity/deferred_resource_selected_tests_5_0_6.json.gz).
+The standalone verifier's historical defaults remain unchanged. This checks
+the diagnostic candidate and does not approve an exception or close
+G14/AP02/P0-P7.

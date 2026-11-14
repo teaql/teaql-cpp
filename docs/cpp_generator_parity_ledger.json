@@ -8469,6 +8469,22 @@
           "path": "docs/sql_executor_optimized_checks_5_0_6.md",
           "transition": "docs/parity/sql_executor_optimized_assert_rewrite_5_0_6.json.gz",
           "scope": "Nine SQL executor source contracts retain 8243 historical original/native observations. The verifier and negative-control runner replace 60 removable assertions with exact unconditional AST-equivalent checks; an incomplete-record optimized false acceptance is repaired. Six normal/optimized controls and selected native3 pass. No new Rust/C++ execution or imported-module gate is claimed. Complete SQ02/G13/G14/G17 and P7 remain open."
+        },
+        {
+          "kind": "generated_cli_optimized_source_checks",
+          "path": "docs/generated_cli_optimized_checks_5_0_6.md",
+          "transition": "docs/parity/generated_cli_hardened_transition_5_0_6.json.gz",
+          "terminal": "docs/parity/generated_cli_selected_tests_5_0_6.json.gz",
+          "format_admission": "docs/parity/generated_cli_source_format_admission_5_0_6.json.gz",
+          "scope": "Seven generated/SQLite comparison CLIs retain historical sources while 26 checks become unconditional and six complete matrices are admitted explicitly. The 140 normal/optimized fixture runs pass; actual native21 and module6 pass per mode, with 151 source/command substitutions rejected. The later EOF-only transition preserves ordinary/optimized compiled Python code and all 33 executables. Complete SQ02 and G13/G14/G17/P0-P7 remain open."
+        },
+        {
+          "kind": "deferred_resource_optimized_source_checks",
+          "path": "docs/deferred_resource_optimized_checks_5_0_6.md",
+          "transition": "docs/parity/deferred_resource_hardened_transition_5_0_6.json.gz",
+          "terminal": "docs/parity/deferred_resource_selected_tests_5_0_6.json.gz",
+          "controller": "docs/parity/deferred_resource_controller_execution_5_0_6.json.gz",
+          "scope": "Nine direct and five embedded checks become unconditional; 34 resource and four embedded controls pass across both Python modes. The source-bound controller retains 69 outcomes, including seven optimized deferred controls. Actual native5/module2 pass per mode; each resource binary checks all 143 scenarios and 163 unchanged-data business payloads. The 1093-test registry has 611 Python entries, 49 with 139 direct assertions. Other imported/embedded checks and full SQ02/G13/G14/G17/P0-P7 remain open."
         }
       ],
       "open_questions": [
@@ -9202,6 +9218,14 @@
           "path": "docs/audit_grammar_branch_review_5_0_6.md",
           "terminal": "docs/parity/ap02_reverse_relation_type_composition_exploratory_5_0_6.json.gz",
           "scope": "A deterministic 4,000-input source probe composes type/path/generic/binder forms in reverse_relation(json_type). Complete locked Rust/current Java metadata matches 1,649 accepted typed relations and 2,351 earlier boundaries. It is exploratory metadata evidence without installed regression, generated caller or SQL consumer; AP02/G14 remain partial."
+        },
+        {
+          "kind": "field_attribute_source_candidate_after_reverse_types",
+          "path": "docs/field_attribute_boundary_5_0_6.md",
+          "terminal": "docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz",
+          "valid_terminal": "docs/parity/field_attribute_after_reverse_types_valid_control_5_0_6.json.gz",
+          "control_terminal": "docs/parity/field_attribute_after_reverse_types_controls_5_0_6.json.gz",
+          "scope": "Fresh current-source Java and compiled original descriptors confirm two quoted-column injection effects for Item/Child and exact C++ refusal. A separately generated valid model matches 24 descriptors, and 13 strict corruptions reject. The new explicitly named candidate CTest passes in ordinary/optimized native selections. This remains semantic_accepted=false and unapproved; historical standalone defaults are unchanged. Complete AP02/G14 and P0-P7 remain open."
         }
       ],
       "open_questions": [

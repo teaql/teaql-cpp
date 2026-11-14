@@ -10,7 +10,7 @@ if(BUILD_TESTING)
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_optimized_source_guards_5_0_6.py)
         set_tests_properties(parity_optimized_source_guards PROPERTIES TIMEOUT 180)
         add_test(NAME parity_comparator_result_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_comparator_result_contracts_5_0_6.py)
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_comparator_result_contracts_hardened_5_0_6.py)
         add_test(NAME parity_optional_source_optimized_controls COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_optional_source_optimized_controls_5_0_6.py
             --build-dir ${CMAKE_BINARY_DIR})
@@ -475,7 +475,7 @@ if(BUILD_TESTING)
     target_link_libraries(teaql_deferred_resource_replacement_probe PRIVATE teaql::provider_sqlite)
     target_compile_definitions(teaql_deferred_resource_replacement_probe PRIVATE TEAQL_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
     add_test(NAME deferred_resource_replacement_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_deferred_resource_replacement_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_deferred_resource_replacement_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_deferred_resource_replacement_probe>)
     set_tests_properties(deferred_resource_replacement_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 120)
     add_executable(teaql_deferred_facet_page_probe tests/parity/deferred_facet_page_probe.cpp)
@@ -4792,6 +4792,17 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_generated_cli_optimized_controls PROPERTIES
         TIMEOUT 900 RUN_SERIAL TRUE)
+    add_test(NAME parity_deferred_resource_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_deferred_resource_optimized_controls_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_deferred_resource_optimized_controls PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE)
+    add_test(NAME parity_field_attribute_candidate_source_contracts COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_field_attribute_exception_5_0_6.py
+        --diagnostic ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz
+        --valid ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/field_attribute_after_reverse_types_valid_control_5_0_6.json.gz)
+    set_tests_properties(parity_field_attribute_candidate_source_contracts PROPERTIES
+        TIMEOUT 180 RUN_SERIAL TRUE)
     set_property(TEST
         generated_entity_helpers_rust_parity
         generated_optional_fields_rust_parity

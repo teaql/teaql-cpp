@@ -1403,6 +1403,11 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --build-dir ${CMAKE_BINARY_DIR} --profile module)
     set_tests_properties(module_generated_cli_optimized_controls PROPERTIES
         TIMEOUT 900 RUN_SERIAL TRUE)
+    add_test(NAME module_deferred_resource_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/verify_deferred_resource_optimized_controls_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR} --profile module)
+    set_tests_properties(module_deferred_resource_optimized_controls PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE)
 endif()
 
 if(TARGET teaql_module_generated_business_runtime_configuration_probe)
@@ -1628,7 +1633,7 @@ endif()
 if(TARGET teaql_module_deferred_resource_replacement_probe)
     target_compile_definitions(teaql_module_deferred_resource_replacement_probe PRIVATE TEAQL_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
     add_test(NAME module_deferred_resource_replacement_contracts COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/tests/parity/verify_deferred_resource_replacement_5_0_6.py
+        ${PROJECT_SOURCE_DIR}/tests/parity/verify_deferred_resource_replacement_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_deferred_resource_replacement_probe>)
     set_tests_properties(module_deferred_resource_replacement_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 120)
 endif()
