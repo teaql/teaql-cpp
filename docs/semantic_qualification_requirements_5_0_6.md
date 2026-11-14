@@ -1,5 +1,14 @@
 # G13 semantic qualification requirements
 
+Current SQ02 active generated-model checkpoint:
+[the optimized-Python verifier replacement](generated_driver_hardened_optimized_checks_5_0_6.md)
+rejects one reproduced saved-record false pass and routes eight active source
+contracts plus eight controls through 79 unconditional checks. Selected native
+CTest passes 17/17 in each Python mode. The current 1,085-test registry has
+603 Python entries; 78 retain 754 direct `ast.Assert` nodes. Imported helpers,
+complete SQ02/G13/G14/G17 and P0-P7 remain open at **14 qualified / 3
+partial**. The preceding checkpoint retains its own 1,084-test inventory.
+
 Current SQ02 inherited-business checkpoint:
 [the optimized-Python provenance repair](inherited_business_optimized_checks_5_0_6.md)
 rejects one reproduced incomplete-record false pass through 102 unconditional

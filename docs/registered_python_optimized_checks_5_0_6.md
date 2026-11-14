@@ -1,5 +1,14 @@
 # Registered Python checks under optimization
 
+The current [generated-model source repair](generated_driver_hardened_optimized_checks_5_0_6.md)
+preserves the historical scripts and moves eight active source contracts and
+eight controls to a 79-check unconditional rewrite. A saved-record false pass
+is reproduced; both Python modes reject the incomplete record. Selected native
+CTest passes 17/17 normally and 17/17 under `PYTHONOPTIMIZE=1`. The current
+1,085-test registry invokes 603 distinct Python entry scripts; 78 retain 754
+direct `ast.Assert` nodes. Imported helpers require separate review. The
+earlier inventory below describes its own 1,084-test source state.
+
 The current [inherited-business source repair](inherited_business_optimized_checks_5_0_6.md)
 reproduces one incomplete-record false acceptance under optimized Python and
 replaces 102 removable assertions in the driver and its control entry. Six

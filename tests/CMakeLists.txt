@@ -4505,14 +4505,18 @@ endif()
 
 # Dynamic governance plus generated query, aggregation and lookup execution.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
+    add_test(NAME parity_generated_driver_hardened_sources COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_hardened_sources_5_0_6.py)
+    set_tests_properties(parity_generated_driver_hardened_sources PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE)
     add_test(NAME parity_dynamic_governance_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/dynamic_governance_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/query_governance_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_dynamic_governance_driver_contracts PROPERTIES
         FIXTURES_SETUP dynamic_governance_driver_source TIMEOUT 180)
     add_test(NAME parity_dynamic_governance_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/dynamic_governance_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/query_governance_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_dynamic_governance_driver_controls PROPERTIES
@@ -4539,13 +4543,13 @@ endif()
 # Complete document and secure-reference protocol source bindings.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_document_protocol_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/document_protocol_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/document_protocol_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_document_protocol_driver_contracts PROPERTIES
         FIXTURES_SETUP document_protocol_driver_source TIMEOUT 180)
     add_test(NAME parity_document_protocol_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/document_protocol_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/document_protocol_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_document_protocol_driver_controls PROPERTIES
@@ -4564,13 +4568,13 @@ endif()
 # SQL compiler/execution diagnostics and SQLite asynchronous transport source bindings.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_sqlite_pipeline_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sqlite_pipeline_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sqlite_pipeline_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_sqlite_pipeline_driver_contracts PROPERTIES
         FIXTURES_SETUP sqlite_pipeline_driver_source TIMEOUT 180)
     add_test(NAME parity_sqlite_pipeline_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sqlite_pipeline_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sqlite_pipeline_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_sqlite_pipeline_driver_controls PROPERTIES
@@ -4600,13 +4604,13 @@ endif()
 # Remaining SQLite storage, identity, transaction, binding and error observers.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_sqlite_provider_protocol_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sqlite_provider_protocol_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sqlite_provider_protocol_execution_5_0_6.json.gz)
     set_tests_properties(parity_sqlite_provider_protocol_contracts PROPERTIES
         FIXTURES_SETUP sqlite_provider_protocol_source TIMEOUT 180)
     add_test(NAME parity_sqlite_provider_protocol_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sqlite_provider_protocol_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sqlite_provider_protocol_execution_5_0_6.json.gz)
     set_tests_properties(parity_sqlite_provider_protocol_controls PROPERTIES
@@ -4630,13 +4634,13 @@ endif()
 # Numeric, time and auxiliary-value observers retain complete original inputs.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_numeric_time_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/numeric_time_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/numeric_time_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_numeric_time_driver_contracts PROPERTIES
         FIXTURES_SETUP numeric_time_driver_source TIMEOUT 180)
     add_test(NAME parity_numeric_time_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/numeric_time_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/numeric_time_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_numeric_time_driver_controls PROPERTIES
@@ -4664,13 +4668,13 @@ endif()
 # Complete core value, query, load-state and request-model source bindings.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_core_model_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/core_model_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/core_model_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_core_model_driver_contracts PROPERTIES
         FIXTURES_SETUP core_model_driver_source TIMEOUT 180)
     add_test(NAME parity_core_model_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/core_model_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/core_model_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_core_model_driver_controls PROPERTIES
@@ -4717,13 +4721,13 @@ endif()
 # Complete public Context, logging, I18n, telemetry and business-ID source bindings.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_context_public_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/context_public_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/context_public_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_context_public_driver_contracts PROPERTIES
         FIXTURES_SETUP context_public_driver_source TIMEOUT 180)
     add_test(NAME parity_context_public_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/context_public_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/context_public_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_context_public_driver_controls PROPERTIES
@@ -4845,13 +4849,13 @@ endif()
 # Original public SQLite schema driver with isolated archived dependencies.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_sqlite_schema_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/generated_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sqlite_schema_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sqlite_schema_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_sqlite_schema_driver_contracts PROPERTIES
         FIXTURES_SETUP sqlite_schema_driver_source TIMEOUT 180)
     add_test(NAME parity_sqlite_schema_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/sqlite_schema_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/sqlite_schema_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_sqlite_schema_driver_controls PROPERTIES
