@@ -1,5 +1,14 @@
 # C++ generator parity plan
 
+Current SQ02 generated sample checkpoint:
+[four optimized-Python comparator repairs](generated_sample_optimized_controls_5_0_6.md)
+replace 66 removable checks after four actual zero-observation false
+acceptances. Sixteen negative processes pass, and selected native CTests pass
+5/5 normally and 6/6 with `PYTHONOPTIMIZE=1`. The current registry has 1,082
+tests and 600 registered Python entry scripts, 84 with 943 direct assertions.
+This bounded repair does not promote G13/G14/G17 or P0-P7; no full current
+native epoch has run. Earlier counts below describe their original epochs.
+
 The [current completion sequence](current_completion_sequence_5_0_6.md)
 orders the remaining G14, SQ02/G13 and G17 work before final P0-P7 signoff.
 

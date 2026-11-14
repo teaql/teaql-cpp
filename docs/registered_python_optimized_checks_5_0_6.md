@@ -1,5 +1,13 @@
 # Registered Python checks under optimization
 
+The current [generated sample comparator repair](generated_sample_optimized_controls_5_0_6.md)
+reproduces four zero-observation false acceptances under optimized Python and
+replaces 66 direct assertions. The permanent control checks all source changes
+and 16 negative processes; selected native CTests pass 5/5 normally and 6/6
+under `PYTHONOPTIMIZE=1`. The current 1,082-test registry invokes 600 distinct
+Python entry scripts; 84 contain 943 remaining direct `ast.Assert` nodes.
+The earlier inventory below describes its own 1,081-test source state.
+
 The current [business environment comparator repair](business_environment_optimized_controls_5_0_6.md)
 removes 25 more optimized-away assertions after a reproduced 68-case false
 acceptance. The 1,081-test native registry invokes 599 distinct Python entry

@@ -218,6 +218,10 @@ if(BUILD_TESTING)
             --cpp $<TARGET_FILE:teaql_business_sample_probe>)
         set_tests_properties(business_sample_rust_parity PROPERTIES
             ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 240)
+        add_test(NAME parity_generated_sample_optimized_controls COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_sample_optimized_controls_5_0_6.py)
+        set_tests_properties(parity_generated_sample_optimized_controls PROPERTIES
+            TIMEOUT 120 FIXTURES_REQUIRED legacy_observation_source)
     endif()
     add_executable(teaql_generated_registry_schema_probe tests/parity/generated_registry_schema_probe.cpp)
     target_link_libraries(teaql_generated_registry_schema_probe PRIVATE teaql::provider_sqlite)

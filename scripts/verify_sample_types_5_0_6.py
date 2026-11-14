@@ -45,14 +45,19 @@ def provenance():
     for case in CASES:
         directory = BASE / case / 'rust'
         record = json.loads((directory / 'PROVENANCE.json').read_text())
-        assert not record['hand_edited'] and record['runtime_commit'] == baseline['commit']
-        assert record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'
-        assert digest(ROOT / record['model']) == record['model_sha256']
+        if not (not record['hand_edited'] and record['runtime_commit'] == baseline['commit']):
+            raise AssertionError
+        if not (record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'):
+            raise AssertionError
+        if not (digest(ROOT / record['model']) == record['model_sha256']):
+            raise AssertionError
         actual = {str(p.relative_to(directory)): digest(p) for p in directory.rglob('*')
                   if p.is_file() and p.name != 'PROVENANCE.json'}
-        assert actual == record['files']
+        if not (actual == record['files']):
+            raise AssertionError
         project = ROOT / 'tests/parity/rust_sample_type_5_0_6' / case
-        assert registry_identities(project / 'Cargo.lock') <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')
+        if not (registry_identities(project / 'Cargo.lock') <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')):
+            raise AssertionError
         for path in [directory / 'PROVENANCE.json', project / 'Cargo.toml', project / 'Cargo.lock']:
             result[str(path.relative_to(ROOT))] = digest(path)
     for path in [BASE / 'cases.json', ROOT / 'tests/parity/rust_sample_type_5_0_6/main.rs',
@@ -75,11 +80,13 @@ def observe(cases, cpp=None, rust_dir=None):
         if result.returncode:
             raise RuntimeError(f'{case}: observer exited {result.returncode}: {result.stderr[-4000:]}')
         actual = [json.loads(line) for line in result.stdout.splitlines()]
-        assert len(actual) == len(selected), case
+        if not (len(actual) == len(selected)):
+            raise AssertionError(case)
         for (index, _), value in zip(selected, actual):
             outputs[index] = value
         stderr[case] = result.stderr
-    assert all(value is not None for value in outputs)
+    if not (all(value is not None for value in outputs)):
+        raise AssertionError
     return outputs, stderr
 
 
@@ -93,7 +100,8 @@ def main():
     args = parser.parse_args()
     source_inputs = provenance()
     cases = inputs()
-    assert len(cases) == 360
+    if not (len(cases) == 360):
+        raise AssertionError
     indexes = json.loads(SELECTION.read_text())['indices'] if args.focused or args.record_focused else list(range(len(cases)))
     selected = [cases[i] for i in indexes]
     path = FOCUSED if args.focused or args.record_focused else CORPUS
@@ -112,14 +120,19 @@ def main():
         return
     verify_record(path)
     record = json.loads(gzip.decompress(path.read_bytes()))
-    assert record['source_inputs'] == source_inputs and record['indices'] == indexes
-    assert record['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())
-    assert same(selected, [case['input'] for case in record['cases']])
+    if not (record['source_inputs'] == source_inputs and record['indices'] == indexes):
+        raise AssertionError
+    if not (record['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())):
+        raise AssertionError
+    if not (same(selected, [case['input'] for case in record['cases']])):
+        raise AssertionError
     if args.focused:
-        assert record['selection_sha256'] == digest(SELECTION)
+        if not (record['selection_sha256'] == digest(SELECTION)):
+            raise AssertionError
     expected = [case['expected'] for case in record['cases']]
     if args.rust_dir:
-        assert same(observe(selected, rust_dir=args.rust_dir)[0], expected), 'Original outcomes changed'
+        if not (same(observe(selected, rust_dir=args.rust_dir)[0], expected)):
+            raise AssertionError('Original outcomes changed')
     if args.cpp:
         actual = observe(selected, cpp=args.cpp)[0]
         differences = [i for i, a, b in zip(indexes, actual, expected) if not same(a, b)]

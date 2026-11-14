@@ -1,5 +1,15 @@
 # G13 semantic qualification requirements
 
+Current SQ02 generated sample checkpoint:
+[four optimized-Python comparator repairs](generated_sample_optimized_controls_5_0_6.md)
+replace exactly 66 removable checks after four actual zero-observation false
+acceptances. The permanent control passes 16 negative processes. Selected
+native CTests pass 5/5 normally and 6/6 under `PYTHONOPTIMIZE=1`. The current
+1,082-test registry has 600 registered Python entry scripts; 84 retain 943
+direct `ast.Assert` nodes. Complete SQ02/G13/G14/G17 and P0-P7 remain open at
+**14 qualified / 3 partial**. The preceding checkpoint below retains its own
+1,081-test inventory.
+
 Current SQ02 startup comparator checkpoint:
 [The generated business environment optimized-Python repair](business_environment_optimized_controls_5_0_6.md)
 reproduces one false 68-case completion and replaces exactly 25 removable

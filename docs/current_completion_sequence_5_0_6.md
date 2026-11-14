@@ -8,8 +8,8 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,081 tests after focused archive, AP02 and comparator
-checks. Those checks passed, but no full 1,081-test epoch has run.
+the current registry has 1,082 tests after focused archive, AP02 and comparator
+checks. Those checks passed, but no full 1,082-test epoch has run.
 
 ## 1. Finish G14 metadata and generated-caller qualification
 
@@ -51,9 +51,16 @@ not a verdict for the other registered dispatchers.
 The [business environment comparator repair](business_environment_optimized_controls_5_0_6.md)
 reproduces a second false acceptance: 68 altered actual results were reported
 complete under `python3 -O`. Its 25 source checks now run in both modes; the
-real 68-scenario comparison and three negative controls pass. The current
-registered Python entry inventory still has 88 assertion-bearing scripts and
-needs entry-by-entry review.
+real 68-scenario comparison and three negative controls pass. At that
+1,081-test checkpoint, the registered Python entry inventory had 88
+assertion-bearing scripts and needed entry-by-entry review.
+
+The [generated sample comparator repair](generated_sample_optimized_controls_5_0_6.md)
+rejects four reproduced zero-observation false acceptances under optimized
+Python. The exact 66-check transition and 16 negative processes pass; the
+selected real comparisons pass under both Python modes. The current registry
+has 600 Python entry scripts, 84 with 943 remaining direct assertions. These
+entries and imported helpers still require SQ02 review.
 
 **Gate:** every active comparator has a reviewed source or explicit invariant
 contract, including custom registrations and partial-result behavior. SQ03

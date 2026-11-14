@@ -39,17 +39,24 @@ def inputs():
 def provenance():
     support = json.loads((ROOT / 'tests/parity/business_sample_5_0_6_support.json').read_text())
     for path, expected in support['files'].items():
-        assert digest(ROOT / path) == expected, f'Original observer support changed: {path}'
+        if not (digest(ROOT / path) == expected):
+            raise AssertionError(f'Original observer support changed: {path}')
     directory = ROOT / 'tests/generator/parity/business_ids_rust'
     record = json.loads((directory / 'PROVENANCE.json').read_text())
-    assert record['hand_edited'] is False
-    assert record['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
-    assert record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'
+    if not (record['hand_edited'] is False):
+        raise AssertionError
+    if not (record['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']):
+        raise AssertionError
+    if not (record['generator_commit'] == '45e1572c4956ca963410d8ea436ead3c8857087a'):
+        raise AssertionError
     for path, expected in record['files'].items():
-        assert digest(directory / path) == expected, path
-    assert digest(ROOT / record['model']) == record['model_sha256']
+        if not (digest(directory / path) == expected):
+            raise AssertionError(path)
+    if not (digest(ROOT / record['model']) == record['model_sha256']):
+        raise AssertionError
     project = ROOT / 'tests/parity/rust_business_sample_5_0_6'
-    assert registry_identities(project / 'Cargo.lock') <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')
+    if not (registry_identities(project / 'Cargo.lock') <= registry_identities(ROOT / '.reference/teaql-rs/Cargo.lock')):
+        raise AssertionError
     return {str(path.relative_to(ROOT)): digest(path)
             for path in [directory / 'PROVENANCE.json', directory / 'lib/src/sample_data.rs',
                          project / 'Cargo.toml', project / 'Cargo.lock', project / 'src/main.rs']}
@@ -63,7 +70,8 @@ def observe(executable, cases):
     if result.returncode:
         raise RuntimeError(f'Observer failed ({result.returncode}): {result.stdout[-1000:]}\n{result.stderr[-4000:]}')
     outcomes = [json.loads(line) for line in result.stdout.splitlines()]
-    assert len(outcomes) == len(cases), 'Incomplete sample observations'
+    if not (len(outcomes) == len(cases)):
+        raise AssertionError('Incomplete sample observations')
     return outcomes, result.stderr
 
 
@@ -76,7 +84,8 @@ def main():
     args = parser.parse_args()
     source_inputs = provenance()
     cases = inputs()
-    assert len(cases) == 128
+    if not (len(cases) == 128):
+        raise AssertionError
     if args.record:
         if not args.rust or args.cpp or args.cases or OUTPUT.exists():
             parser.error('Record all cases through --rust into new immutable evidence only')
@@ -91,15 +100,20 @@ def main():
         return
     verify_record(OUTPUT)
     record = json.loads(gzip.decompress(OUTPUT.read_bytes()))
-    assert record['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())
-    assert record['source_inputs'] == source_inputs
-    assert same(cases, [case['input'] for case in record['cases']])
+    if not (record['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())):
+        raise AssertionError
+    if not (record['source_inputs'] == source_inputs):
+        raise AssertionError
+    if not (same(cases, [case['input'] for case in record['cases']])):
+        raise AssertionError
     indexes = args.cases or list(range(len(cases)))
-    assert len(set(indexes)) == len(indexes) and all(0 <= index < len(cases) for index in indexes)
+    if not (len(set(indexes)) == len(indexes) and all(0 <= index < len(cases) for index in indexes)):
+        raise AssertionError
     selected = [cases[index] for index in indexes]
     expected = [record['cases'][index]['expected'] for index in indexes]
     if args.rust:
-        assert same(observe(args.rust, selected)[0], expected), 'Original sample outcomes changed'
+        if not (same(observe(args.rust, selected)[0], expected)):
+            raise AssertionError('Original sample outcomes changed')
     if args.cpp:
         actual = observe(args.cpp, selected)[0]
         differences = [index for index, left, right in zip(indexes, actual, expected) if not same(left, right)]
