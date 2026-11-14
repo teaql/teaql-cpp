@@ -295,6 +295,9 @@ if(BUILD_TESTING)
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_runtime_connection_5_0_6.py
             --cpp $<TARGET_FILE:teaql_runtime_connection_probe>)
         set_tests_properties(runtime_connection_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 120)
+        add_test(NAME parity_runtime_connection_optimized_controls COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_connection_optimized_controls_5_0_6.py)
+        set_tests_properties(parity_runtime_connection_optimized_controls PROPERTIES TIMEOUT 60)
         add_test(NAME runtime_assembly_configuration_rust_parity COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_runtime_connection_5_0_6.py
             --cpp $<TARGET_FILE:teaql_runtime_assembly_config_probe> --assembly)

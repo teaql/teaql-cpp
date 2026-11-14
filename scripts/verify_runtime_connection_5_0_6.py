@@ -47,14 +47,17 @@ def main():
             environment[b'CPP_DYNAMIC_JSON_CORE_DATABASE_URL'] = bytes.fromhex(case['environment_hex'])
         if args.rust:
             result, files = observe(args.rust, ['connect'], environment)
-            assert same(result, case['source_expected']) and files == case['created_files'], case['name'] + ': original changed'
+            if not (same(result, case['source_expected']) and files == case['created_files']):
+                raise AssertionError(case['name'] + ': original changed')
         result, files = observe(args.cpp, [], environment)
         connection_outcome = (case['source_expected'] if args.assembly else
                               {key: value for key, value in case['source_expected'].items()
                                if key != 'query_error'})
-        assert same(result, connection_outcome) and files == case['created_files'], (case['name'], result, connection_outcome, files)
+        if not (same(result, connection_outcome) and files == case['created_files']):
+            raise AssertionError((case['name'], result, connection_outcome, files))
         total += 1
-    assert total == 13
+    if total != 13:
+        raise AssertionError('Expected 13 connection observations, got ' + str(total))
     if args.assembly:
         print('Verified13 complete original/native generated runtime startup/query outcomes and files')
     else:

@@ -5281,3 +5281,10 @@ retained-plus-new metadata results; the three original/C++ model pairs match
 selected Java method and focused native CTest pass. No producer/runtime code or
 SDK artifact changed. The 1,078-test registry is enumeration, not a new full
 native epoch; complete AP02/G14/G17/G13/P0-P7 remain open.
+
+The [runtime connection comparator repair](runtime_connection_optimized_controls_5_0_6.md)
+closes one reproduced `python -O` false acceptance in the three registered
+connection/assembly parity comparisons. An exact source transition and seven
+negative subprocesses are retained; all three real native comparisons pass
+under optimized Python. The current registry is 1,079 tests, with no new full
+epoch. Remaining SQ02 provenance, G13/G14/G17 and P0-P7 exits stay open.

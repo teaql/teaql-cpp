@@ -8,8 +8,8 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,077 tests after two focused archive checks. Those
-new checks passed, but no full 1,077-test epoch has run.
+the current registry has 1,079 tests after focused archive, AP02, and connection
+comparator checks. Those checks passed, but no full 1,079-test epoch has run.
 
 ## 1. Finish G14 metadata and generated-caller qualification
 
@@ -41,6 +41,12 @@ remain immutable; current-source transitions need exact admissions and negative
 controls. The strict registered SQL mutation archive boundary is a scoped
 repair. Direct optimized execution of the frozen archive driver and other
 remaining Python assertion sites require separate disposition.
+
+The [runtime connection comparator repair](runtime_connection_optimized_controls_5_0_6.md)
+reproduces one optimized-mode false acceptance and permanently checks its
+exact three-assertion transition and seven negative processes. All three
+affected real comparators pass under optimized Python. This is one SQ02 entry,
+not a verdict for the other registered dispatchers.
 
 **Gate:** every active comparator has a reviewed source or explicit invariant
 contract, including custom registrations and partial-result behavior. SQ03
