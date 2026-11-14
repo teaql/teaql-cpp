@@ -3817,6 +3817,9 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     add_test(NAME generated_credential_mutation_receipt_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_credential_mutation_receipt_5_0_6.py)
     set_tests_properties(generated_credential_mutation_receipt_contracts PROPERTIES TIMEOUT 60)
+    add_test(NAME parity_audit_cross_context_corpus_contracts COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_audit_cross_context_corpus_5_0_6.py)
+    set_tests_properties(parity_audit_cross_context_corpus_contracts PROPERTIES TIMEOUT 120)
 endif()
 
 # Require original generated decoder evidence for the installed alias comparison.

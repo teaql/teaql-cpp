@@ -5272,3 +5272,12 @@ controls and four affected CTests pass. Direct optimized execution of the
 historical driver remains unsafe; full source installation and P7 are open.
 G13, G14 and G17 remain partial; P1/P7 and all complete phase exits remain
 open. The column-literal compatibility decision remains separate and pending.
+
+The [AP02 cross-context composition checkpoint](audit_cross_context_composition_5_0_6.md)
+adds 92 actual locked-source metadata cases and three complete generated
+descriptor/privacy caller pairs. The current Java adapter matches all 80,277
+retained-plus-new metadata results; the three original/C++ model pairs match
+9 descriptors and 42 field policies. The permanent 14-control verifier,
+selected Java method and focused native CTest pass. No producer/runtime code or
+SDK artifact changed. The 1,078-test registry is enumeration, not a new full
+native epoch; complete AP02/G14/G17/G13/P0-P7 remain open.

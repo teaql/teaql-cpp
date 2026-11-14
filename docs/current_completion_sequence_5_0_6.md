@@ -74,6 +74,9 @@ Close each phase only against its own exit criteria; update the capability
 ledger and README to state exactly what passed. Physical-router execution and
 external/cloud integrations are outside this edge-runtime gate.
 
-The next concrete task is the G14 AP02 coverage review: join the installed
-branch/child-rule corpora to the locked parser entry contexts, record uncovered
-composition and partial-effect cases, and select the first reproducible gap.
+The [first bounded AP02 composition checkpoint](audit_cross_context_composition_5_0_6.md)
+joins 92 new source-derived contexts to the retained parser corpus and three
+actual generated callers without changing production code. Continue the G14
+coverage review by locating a still-unqualified expression/type/pattern/
+statement/lexical composition or protected consumer and testing its source
+effect before changing the producer.
