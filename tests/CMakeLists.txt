@@ -313,7 +313,7 @@ if(BUILD_TESTING)
     endif()
     if(Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         add_test(NAME parity_runtime_configuration_source_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_runtime_configuration_source_5_0_6.py)
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_runtime_configuration_source_hardened_5_0_6.py)
         set_tests_properties(parity_runtime_configuration_source_contracts PROPERTIES
             TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP runtime_configuration_source)
         add_test(NAME parity_runtime_configuration_source_controls COMMAND ${Python3_EXECUTABLE}
@@ -334,7 +334,7 @@ if(BUILD_TESTING)
     endif()
     if(Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         add_test(NAME parity_legacy_observation_identity_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_legacy_observation_identity_5_0_6.py)
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_legacy_observation_identity_hardened_5_0_6.py)
         set_tests_properties(parity_legacy_observation_identity_contracts PROPERTIES
             TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP legacy_observation_source)
         foreach(compare_test generated_business_environment_startup_rust_parity
@@ -4824,6 +4824,14 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_direct_corpus_bindings_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_direct_corpus_binding_join PROPERTIES TIMEOUT 180)
+    add_test(NAME parity_generator_child_checks COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generator_child_checks_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_generator_child_checks PROPERTIES
+        TIMEOUT 600 RUN_SERIAL TRUE FIXTURES_SETUP generator_child_checks)
+    set_property(TEST parity_runtime_configuration_source_contracts
+        parity_legacy_observation_identity_contracts
+        APPEND PROPERTY FIXTURES_REQUIRED generator_child_checks)
     add_test(NAME parity_field_attribute_candidate_source_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_field_attribute_exception_5_0_6.py
         --diagnostic ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz

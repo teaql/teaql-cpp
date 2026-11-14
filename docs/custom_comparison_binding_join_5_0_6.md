@@ -84,8 +84,11 @@ already identifies a concrete continuation: source prerequisites invoke the
 historical generator verifier, whose 21 assertions disappear in optimized
 Python. Six actual processes show that a hand-edited Rust provenance marker
 and a wrong model hash are rejected normally but accepted under optimization.
-No repository metadata is edited by that isolated witness. Repair and qualify
-this active child path before complete SQ02 signoff.
+No repository metadata is edited by that isolated witness. The later
+[child/parent repair](generator_child_optimized_checks_5_0_6.md) qualifies the
+21-check replacement and both active source callers, with 18/18 native tests
+per mode and P0 1/1. Remaining paired source/native, dynamic and control
+boundaries still require complete SQ02 signoff.
 
 Reproduce the index and its required source fixtures:
 

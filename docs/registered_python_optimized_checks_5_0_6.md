@@ -1,6 +1,17 @@
 # Registered Python checks under optimization
 
-Current SQ02 named-custom join:
+Current SQ02 generator-child checkpoint:
+[The active child/parent repair](generator_child_optimized_checks_5_0_6.md)
+retains three historical files and qualifies 21 unconditional checks plus two
+child-call adaptations. Eighteen actual valid/invalid child/parent processes
+and five source controls pass. Both source prerequisites and thirteen actual
+outside-directory comparisons pass 18/18 per Python mode; P0 passes 1/1.
+All 11,962 inputs, references and twelve native files remain unchanged.
+Registry 1,100/618 Python entries has zero direct assertions. Remaining paired
+source/native, dynamic/control and complete SQ02/G13/G14/G17/P0-P7 obligations
+remain open at **14 qualified / 3 partial**.
+
+Previous SQ02 named-custom join:
 [The complete named custom-comparison join](custom_comparison_binding_join_5_0_6.md)
 binds 160 current commands to 35 source cohorts and 180 explicit member
 selections. Thirteen structural controls reject in both modes; actual
