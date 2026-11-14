@@ -8,9 +8,13 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,090 tests after focused archive, AP02 and comparator
-checks. The latest execution-comparator repair passes 6/6 native and 5/5 module
-CTests in each Python mode, but no full 1,090-test epoch has run.
+the current registry has 1,091 tests after focused archive, AP02 and comparator
+checks. The [seven generated/SQLite CLI repair](generated_cli_optimized_checks_5_0_6.md)
+has eleven active source copies, 26 unconditional replacements and six added
+complete-matrix admissions. Its 140 ordinary/optimized fixture runs pass.
+Actual native selections pass 21/21 and module selections pass 6/6 in each
+Python mode, but no full 1,091-test epoch has run. The registry has 609 Python
+entries, with 50 retaining 148 direct assertions.
 
 The immediate order is acceptance integrity, generated metadata, governed
 execution, then final integration. Known acceptance failures take precedence
@@ -95,12 +99,13 @@ checks without changing the four historical scripts. Selected native CTests
 pass 6/6 and module CTests pass 5/5 in each Python mode. The 1,090-test registry
 has 608 Python entry scripts; 59 retain 174 direct assertions.
 
-Next, review the seven remaining direct subprocess comparators: generated
-expression diagnostics/values, runtime assembly, sample execution/failures/state
-and SQLite raw error debugging. Preserve the expression and SQLite comparators'
-source-bound dispatch contracts through explicit transitions when changing
-registrations. Then review the other entry points and imported helpers; a
-zero direct-assertion count alone will not establish complete provenance.
+The seven-CLI source-bound transition now passes its actual native/module
+selection. The next confirmed actual result-comparison defect is
+[deferred resource replacement](parity/deferred_resource_optimized_preedit_5_0_6.json.gz):
+optimized Python accepts empty, missing, wrong-pending and wrong-business
+results. Prioritize that path, then review the other entry points, imported
+helpers and executable Python fixture strings. A script's filename or a zero
+direct-assertion count alone will not establish complete provenance.
 
 **Gate:** every active comparator has a reviewed source or explicit invariant
 contract, including custom registrations and partial-result behavior. SQ03
@@ -122,6 +127,10 @@ distinct. Reproduce affected SDKs before marking a producer change accepted.
 The separate quoted-column attribute case remains a pending compatibility
 decision. Existing approved JSON, quoted-foreign-key and invalid wire-naming
 exceptions do not cover it. Other G14 work can continue without that decision.
+Its two current-source model executions and thirteen strict controls have been
+[refreshed after the reverse-type corpus addition](field_attribute_boundary_5_0_6.md#requalification-after-the-reverse-type-corpus-addition).
+The current default CTest registration still selects the historical receipts;
+switch it to the explicit fresh arguments now that the frozen CLI run ended.
 
 The [reverse-relation type composition checkpoint](ap02_reverse_relation_type_composition_5_0_6.md)
 turns 4,000 locked-source observations into 2,495 distinct permanent inputs.

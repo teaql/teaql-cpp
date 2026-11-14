@@ -110,3 +110,44 @@ matches all **24** original/C++ property descriptors and removes its
 now points to these receipts and rejects [13/13 controlled corruptions](parity/field_attribute_latest_exception_controls_v2_5_0_6.json.gz).
 All recorded source inputs remain unchanged. The compatibility choice remains
 pending; this requalification does not promote G14/AP02 or any phase exit.
+
+## Requalification after the reverse-type corpus addition
+
+The latest default candidate verifier correctly rejects the preceding receipts:
+one of their 524 inputs changed when the reverse-relation type-composition
+corpus was added to `verify_audit_metadata_source_5_0_6.py`. The other 523 inputs
+remain identical. The stale receipts have not been relabeled.
+
+The [fresh diagnostic execution](parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz)
+rebuilds both Java generators and compiles/executes the two original Rust entity
+models. Item and inherited Child again derive column `chosen` with maximum
+lengths 100 and 7; current C++ generation refuses both with the exact expected
+message. Its `semantic_accepted` remains false. The
+[fresh valid-model execution](parity/field_attribute_after_reverse_types_valid_control_5_0_6.json.gz)
+compiles and runs both languages and matches all 24 property descriptors.
+Both runs retain all 524 current input identities and remove their disposable
+builds, totaling **335,611,627 bytes**.
+
+The unchanged verifier accepts these explicitly selected receipts and rejects
+[13/13 corruptions](parity/field_attribute_after_reverse_types_controls_5_0_6.json.gz):
+
+```sh
+source scripts/toolchains/activate.sh
+python3 -B tests/parity/verify_field_attribute_exception_5_0_6.py \
+  --diagnostic docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz \
+  --valid docs/parity/field_attribute_after_reverse_types_valid_control_5_0_6.json.gz
+```
+
+The host used its existing Maven 3.9.8 installation on the task PATH and Java
+17.0.21, matching the generator's Java 17 requirement. Two incomplete setup
+attempts retain compact diagnostics: [missing Maven on PATH](parity/field_attribute_missing_maven_5_0_6.json.gz)
+and [a duplicated refusal-class prefix](parity/field_attribute_refusal_argument_prefix_5_0_6.json.gz).
+Their temporary directories were removed. Neither is counted as completed
+model verification. The controller's `--expected-cpp-refusal` takes the message
+without `java.lang.IllegalArgumentException:`, which it prepends itself.
+
+The compatibility choice has been requested separately and remains pending.
+The default registered CTest still points to the preceding receipts. The frozen
+CLI selection has ended; the next registration change can select the fresh
+arguments without altering that execution's inputs. The new records do not
+approve an exception or close G14/AP02/P0-P7.

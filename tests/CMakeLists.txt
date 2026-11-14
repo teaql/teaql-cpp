@@ -3179,7 +3179,7 @@ if(BUILD_TESTING)
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     if(NOT CMAKE_CROSSCOMPILING AND CMAKE_SIZEOF_VOID_P EQUAL 8)
         add_test(NAME sqlite_from_sql_raw_debug_rust_parity COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_sqlite_from_sql_raw_debug.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_sqlite_from_sql_raw_debug_hardened_5_0_6.py
             --cpp $<TARGET_FILE:teaql_sqlite_from_sql_error_probe>)
     endif()
     add_test(NAME sql_stream_rust_parity COMMAND ${Python3_EXECUTABLE}
@@ -3658,7 +3658,7 @@ if(BUILD_TESTING)
     add_executable(teaql_generated_runtime_assembly_probe tests/parity/generated_runtime_assembly_probe.cpp)
     target_link_libraries(teaql_generated_runtime_assembly_probe PRIVATE teaql::provider_sqlite)
     add_test(NAME generated_runtime_assembly_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_runtime_assembly.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_runtime_assembly_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_runtime_assembly_probe>)
     add_executable(teaql_generated_sample_execution_tests tests/generator/generated_sample_execution_tests.cpp)
     target_link_libraries(teaql_generated_sample_execution_tests PRIVATE teaql::provider_sqlite)
@@ -3686,10 +3686,10 @@ if(BUILD_TESTING)
     add_executable(teaql_generated_sample_execution_probe tests/parity/generated_sample_execution_probe.cpp)
     target_link_libraries(teaql_generated_sample_execution_probe PRIVATE teaql::provider_sqlite)
     add_test(NAME generated_sample_execution_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_sample_execution.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_sample_execution_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_sample_execution_probe>)
     add_test(NAME generated_sample_failures_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_sample_failures.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_sample_failures_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_sample_execution_probe>)
     add_executable(teaql_generated_sample_save_async_tests tests/generator/generated_sample_save_async_tests.cpp)
     target_link_libraries(teaql_generated_sample_save_async_tests PRIVATE teaql::provider_sqlite)
@@ -3736,7 +3736,7 @@ if(BUILD_TESTING)
     add_executable(teaql_generated_sample_state_probe tests/parity/generated_sample_state_probe.cpp)
     target_link_libraries(teaql_generated_sample_state_probe PRIVATE teaql::runtime)
     add_test(NAME generated_sample_state_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_sample_state.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_sample_state_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_sample_state_probe>)
     add_executable(teaql_expression_business_ids_probe tests/parity/expression_business_ids_probe.cpp)
     target_link_libraries(teaql_expression_business_ids_probe PRIVATE teaql::provider_sqlite)
@@ -3752,12 +3752,12 @@ if(BUILD_TESTING)
     add_executable(teaql_generated_expression_values_probe tests/parity/generated_expression_values_probe.cpp)
     target_link_libraries(teaql_generated_expression_values_probe PRIVATE teaql::provider_sqlite)
     add_test(NAME generated_expression_values_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_expression_values.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_expression_values_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_expression_values_probe>)
     add_executable(teaql_generated_expression_diagnostics_probe tests/parity/generated_expression_diagnostics_probe.cpp)
     target_link_libraries(teaql_generated_expression_diagnostics_probe PRIVATE teaql::provider_sqlite)
     add_test(NAME generated_expression_diagnostics_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_expression_diagnostics.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_generated_expression_diagnostics_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_generated_expression_diagnostics_probe>)
     add_executable(teaql_expression_diagnostic_text_probe tests/parity/expression_diagnostic_text_probe.cpp)
     target_link_libraries(teaql_expression_diagnostic_text_probe PRIVATE teaql::runtime)
@@ -4787,6 +4787,11 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_execution_output_optimized_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE)
+    add_test(NAME parity_generated_cli_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_cli_optimized_controls_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_generated_cli_optimized_controls PROPERTIES
+        TIMEOUT 900 RUN_SERIAL TRUE)
     set_property(TEST
         generated_entity_helpers_rust_parity
         generated_optional_fields_rust_parity
@@ -5097,12 +5102,12 @@ endif()
 # Original generated expression sources and exact presentation boundaries.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_expression_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_hardened_5_0_6.py
         --verify-only --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_expression_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP expression_cli_source)
     add_test(NAME parity_expression_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_cli_source_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_cli_source_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_expression_cli_source_controls PROPERTIES
         TIMEOUT 240 RUN_SERIAL TRUE)
@@ -5124,7 +5129,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
             AND TARGET teaql_expression_model_types_probe AND TARGET teaql_expression_root_probe
             AND TARGET teaql_scalar_diagnostic_repair_probe)
         add_test(NAME expression_cli_source_rust_parity COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_hardened_5_0_6.py
             --cpp-build-dir ${CMAKE_BINARY_DIR})
         set_tests_properties(expression_cli_source_rust_parity PROPERTIES
             TIMEOUT 240 RUN_SERIAL TRUE FIXTURES_REQUIRED expression_cli_source)
@@ -5135,13 +5140,13 @@ endif()
 # Actual generated query sources, complete matrices and registered invocations.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_query_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/query_cli_source_contracts_5_0_6.json
         --verify-only --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_query_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP query_cli_source)
     add_test(NAME parity_query_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_cli_source_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_cli_source_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/query_cli_source_contracts_5_0_6.json
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_query_cli_source_controls PROPERTIES TIMEOUT 240 RUN_SERIAL TRUE)
@@ -5166,7 +5171,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     endforeach()
     if(query_cli_targets_available)
         add_test(NAME query_cli_source_rust_parity COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/query_cli_source_contracts_5_0_6.json
             --cpp-build-dir ${CMAKE_BINARY_DIR})
         set_tests_properties(query_cli_source_rust_parity PROPERTIES
@@ -5178,13 +5183,13 @@ endif()
 # Original dynamic JSON sources, complete recipes and bounded Debug adapters.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_dynamic_json_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/dynamic_json_cli_source_contracts_5_0_6.json
         --verify-only --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_dynamic_json_cli_source_contracts PROPERTIES
         TIMEOUT 240 RUN_SERIAL TRUE FIXTURES_SETUP dynamic_json_cli_source)
     add_test(NAME parity_dynamic_json_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_cli_source_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_cli_source_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/dynamic_json_cli_source_contracts_5_0_6.json
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_dynamic_json_cli_source_controls PROPERTIES
@@ -5217,7 +5222,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     endforeach()
     if(dynamic_json_cli_targets_available)
         add_test(NAME dynamic_json_cli_source_rust_parity COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/expression_cli_source_provenance_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/dynamic_json_cli_source_contracts_5_0_6.json
             --cpp-build-dir ${CMAKE_BINARY_DIR})
         set_tests_properties(dynamic_json_cli_source_rust_parity PROPERTIES
@@ -5922,17 +5927,17 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SIZEOF_VOID_P EQUAL 8
         AND TARGET teaql_sqlite_from_sql_error_probe)
     add_test(NAME parity_sqlite_raw_debug_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sqlite_raw_debug_cli_source_binding_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sqlite_raw_debug_cli_source_binding_hardened_5_0_6.py
         --verify-only --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_sqlite_raw_debug_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP sqlite_raw_debug_cli)
     add_test(NAME parity_sqlite_raw_debug_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_sqlite_raw_debug_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_sqlite_raw_debug_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_sqlite_raw_debug_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED sqlite_raw_debug_cli)
     add_test(NAME sqlite_raw_debug_cli_source_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sqlite_raw_debug_cli_source_binding_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sqlite_raw_debug_cli_source_binding_hardened_5_0_6.py
         --cpp-build-dir ${CMAKE_BINARY_DIR} --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(sqlite_raw_debug_cli_source_rust_parity PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED sqlite_raw_debug_cli)

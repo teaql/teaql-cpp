@@ -1076,9 +1076,13 @@ foreach(sqlite_stem IN ITEMS schema decoding bindings error_model native_diagnos
     else()
         set(sqlite_probe sqlite_${sqlite_stem}_probe)
     endif()
+    set(sqlite_comparator compare_sqlite_${sqlite_stem}.py)
+    if(sqlite_stem STREQUAL "from_sql_raw_debug")
+        set(sqlite_comparator compare_sqlite_from_sql_raw_debug_hardened_5_0_6.py)
+    endif()
     if(TARGET teaql_module_${sqlite_probe})
         add_test(NAME module_sqlite_${sqlite_stem}_rust_parity
-            COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/tests/parity/compare_sqlite_${sqlite_stem}.py
+            COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/tests/parity/${sqlite_comparator}
                 --cpp $<TARGET_FILE:teaql_module_${sqlite_probe}>)
         set_tests_properties(module_sqlite_${sqlite_stem}_rust_parity PROPERTIES
             ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
@@ -1394,6 +1398,11 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --build-dir ${CMAKE_BINARY_DIR} --profile module)
     set_tests_properties(module_execution_output_optimized_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE)
+    add_test(NAME module_generated_cli_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/verify_generated_cli_optimized_controls_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR} --profile module)
+    set_tests_properties(module_generated_cli_optimized_controls PROPERTIES
+        TIMEOUT 900 RUN_SERIAL TRUE)
 endif()
 
 if(TARGET teaql_module_generated_business_runtime_configuration_probe)
@@ -1695,7 +1704,7 @@ endif()
 foreach(g12_matrix IN ITEMS generated_runtime_assembly generated_sample_state generated_sample_execution)
     if(TARGET teaql_module_${g12_matrix}_probe)
         add_test(NAME module_${g12_matrix}_rust_parity COMMAND ${Python3_EXECUTABLE}
-            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${g12_matrix}.py
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_${g12_matrix}_hardened_5_0_6.py
             --cpp $<TARGET_FILE:teaql_module_${g12_matrix}_probe>)
         set_tests_properties(module_${g12_matrix}_rust_parity PROPERTIES
             ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 120)
@@ -1705,7 +1714,7 @@ endforeach()
 if(TARGET teaql_module_generated_sample_execution_probe)
     set_tests_properties(module_generated_sample_execution_rust_parity PROPERTIES TIMEOUT 1800)
     add_test(NAME module_generated_sample_failures_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/tests/parity/compare_generated_sample_failures.py
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_generated_sample_failures_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_generated_sample_execution_probe>)
     set_tests_properties(module_generated_sample_failures_rust_parity PROPERTIES
         ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 120)

@@ -1,6 +1,16 @@
 # G13 semantic qualification requirements
 
-Current SQ02 execution-comparator checkpoint:
+Current SQ02 generated/SQLite CLI checkpoint:
+[The seven-entry source and complete-matrix repair](generated_cli_optimized_checks_5_0_6.md)
+passes 140 ordinary/optimized fixture runs, 151 existing negative substitutions
+per mode, actual native CTests 21/21 and module CTests 6/6 per mode. Eleven
+historical files and their source-bound contracts remain unchanged. The
+1,091-test registry has 609 Python entries; 50 retain 148 direct assertions.
+Actual `verify_*` comparators, imported helpers and executable fixture strings
+still require review. Complete SQ02/G13/G14/G17 and P0-P7 remain open at
+**14 qualified / 3 partial**; no full current native epoch has run.
+
+Previous SQ02 execution-comparator checkpoint:
 [the execution, termination and privacy repairs](execution_output_optimized_checks_5_0_6.md)
 make eleven source checks unconditional after fifteen reproduced invalid-result
 false acceptances. Five valid and fifteen invalid subprocess fixtures,

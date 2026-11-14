@@ -1,6 +1,17 @@
 # C++ generator parity plan
 
-Current SQ02 execution-comparator checkpoint:
+Current SQ02 generated/SQLite CLI checkpoint:
+[Seven comparison repairs](generated_cli_optimized_checks_5_0_6.md) preserve
+eleven historical files, make 26 source/control checks unconditional and admit
+six complete matrices explicitly. The 140 fixture runs pass in both Python
+modes. Actual selected CTests pass 21/21 native and 6/6 module per mode; existing
+suites reject 151 source/command substitutions. The registry has 1,091 tests
+and 609 Python entries; 50 retain 148 direct assertions. Actual `verify_*`
+comparators, imported helpers and embedded Python still need review. Complete
+SQ02, G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+There is no full current native epoch.
+
+Previous SQ02 execution-comparator checkpoint:
 [four optimized-Python repairs](execution_output_optimized_checks_5_0_6.md)
 reject fifteen reproduced invalid-result false acceptances, including skipped
 program execution. Eleven checks and eight native/module bindings have exact

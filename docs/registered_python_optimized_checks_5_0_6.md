@@ -1,6 +1,16 @@
 # Registered Python checks under optimization
 
-The current [execution-comparator repair](execution_output_optimized_checks_5_0_6.md)
+The current [generated/SQLite CLI repair](generated_cli_optimized_checks_5_0_6.md)
+replaces 26 source/control assertions and adds six complete-matrix admissions
+while retaining eleven historical files. All 140 ordinary/optimized fixture
+runs pass; actual CTests pass 21/21 native and 6/6 module per mode, with 151
+existing substitutions rejected per mode. The registry has 1,091 tests and
+609 Python entry scripts. No directly registered `compare_*` entry retains a
+direct assertion; 50 other entries retain 148. Those entries include actual
+`verify_*` result comparators. Imported helpers and executable fixture strings
+are separate obligations; the inventory does not close SQ02.
+
+The previous [execution-comparator repair](execution_output_optimized_checks_5_0_6.md)
 preserves four historical scripts and routes eight active native/module
 bindings through eleven unconditional checks. Fifteen invalid fixtures that
 previously passed with optimization now reject; all five valid fixtures pass.
