@@ -1,6 +1,17 @@
 # C++ generator parity plan
 
-Current SQ02 executed-helper checkpoint:
+Current SQ02 direct-source join:
+[The complete direct-comparator fixture join](direct_corpus_binding_join_5_0_6.md)
+binds 305 actual registrations / 323,568 observations to unique required
+source contracts, 27 fixture owners and 44 retained execution selections.
+Ten structural corruptions reject in both modes; actual source/index/control
+CTest selections pass 32/32 per mode with 11,957 unchanged inputs and the
+unchanged affected native probe. Registry 1,098/616 Python entries has zero
+direct assertions. The 160 custom comparison joins, other dispatcher/dynamic
+boundaries and complete SQ02/G13/G14/G17/P0-P7 remain open at **14 qualified /
+3 partial**. No full current native epoch is claimed.
+
+Previous SQ02 executed-helper checkpoint:
 [The installed recipe/privacy continuation](executed_helper_validation_candidates_5_0_6.md#installed-continuation)
 qualifies fourteen unconditional checks in two imported helpers and three
 active caller registrations. All 24 valid/invalid helper processes and five

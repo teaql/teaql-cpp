@@ -4820,6 +4820,10 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     set_property(TEST parity_remaining_corpus_source_contracts
         parity_remaining_corpus_source_controls resolved_mutation_privacy_rust_parity
         APPEND PROPERTY FIXTURES_REQUIRED executed_helper_validation)
+    add_test(NAME parity_direct_corpus_binding_join COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_direct_corpus_bindings_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_direct_corpus_binding_join PROPERTIES TIMEOUT 180)
     add_test(NAME parity_field_attribute_candidate_source_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_field_attribute_exception_5_0_6.py
         --diagnostic ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz
