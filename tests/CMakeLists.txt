@@ -4757,17 +4757,21 @@ endif()
 # Complete generated-model bodies, scoped entity library and artifact provenance.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_generated_model_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/model_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/model_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/generated_model_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/generated_model_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_generated_model_driver_contracts PROPERTIES
         FIXTURES_SETUP generated_model_driver_source TIMEOUT 300)
     add_test(NAME parity_generated_model_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_model_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_model_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/generated_model_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/generated_model_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_generated_model_driver_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE)
+    add_test(NAME parity_model_driver_hardened_sources COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_model_driver_hardened_sources_5_0_6.py)
+    set_tests_properties(parity_model_driver_hardened_sources PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED generated_model_driver_source)
     set_property(TEST
         generated_entity_helpers_rust_parity
         generated_optional_fields_rust_parity

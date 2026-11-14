@@ -1,5 +1,10 @@
 # Generated-model source provenance
 
+The current registered compiled-model source verifier uses the
+[hardened entry](../scripts/model_driver_provenance_hardened_5_0_6.py).
+Its [optimized-Python source transition](model_driver_hardened_optimized_checks_5_0_6.md)
+retains the historical verifier and execution evidence described below.
+
 This cohort binds 26 complete retained corpora to runtime
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and generator
 `45e1572c4956ca963410d8ea436ead3c8857087a`, the locked Rust 5.0.6 baseline.

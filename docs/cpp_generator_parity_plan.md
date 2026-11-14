@@ -1,5 +1,16 @@
 # C++ generator parity plan
 
+Current SQ02 compiled-model source checkpoint:
+[the optimized-Python verifier replacement](model_driver_hardened_optimized_checks_5_0_6.md)
+preserves the original source and execution receipts while replacing 74
+removable checks. The incomplete saved-record false pass is reproduced; four
+source/registration corruptions reject and the 27 existing controls pass in
+both Python modes. Selected native CTests pass 4/4 normally and 4/4 under
+`PYTHONOPTIMIZE=1`, including an actual generated C++ comparator. The 1,086-test
+registry has 604 Python entries, 77 with 680 direct assertions. SQ02,
+G13/G14/G17 and P0-P7 remain open; no full current native epoch has run.
+Earlier counts below retain their original source epochs.
+
 Current SQ02 active generated-model checkpoint:
 [the optimized-Python verifier replacement](generated_driver_hardened_optimized_checks_5_0_6.md)
 preserves original source/receipts and routes eight active source contracts and

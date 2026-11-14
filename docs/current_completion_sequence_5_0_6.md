@@ -8,8 +8,8 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,085 tests after focused archive, AP02 and comparator
-checks. Those checks passed, but no full 1,085-test epoch has run.
+the current registry has 1,086 tests after focused archive, AP02 and comparator
+checks. Those checks passed, but no full 1,086-test epoch has run.
 
 ## 1. Finish G14 metadata and generated-caller qualification
 
@@ -81,9 +81,16 @@ The [active generated-model source repair](generated_driver_hardened_optimized_c
 routes eight registered source verifiers and eight control entries through
 79 unconditional checks while preserving their historical source bytes and
 execution receipts. Selected ordinary and optimized CTests pass 17/17 each.
-The current registry has 603 Python entries, 78 with 754 remaining direct
-assertions; imported historical helpers and complete SQ02 provenance remain
-open.
+At that 1,085-test checkpoint the registry had 603 Python entries, 78 with
+754 remaining direct assertions.
+
+The [compiled-model source repair](model_driver_hardened_optimized_checks_5_0_6.md)
+replaces 74 removable checks after a reproduced incomplete-record false pass.
+Four source/registration corruptions and 27 existing evidence controls pass
+under both Python modes; selected native CTests pass 4/4 in each mode,
+including the actual generated entity-helper C++ comparator. The current
+1,086-test registry has 604 Python entries, 77 with 680 direct assertions;
+imported historical helpers and complete SQ02 provenance remain open.
 
 **Gate:** every active comparator has a reviewed source or explicit invariant
 contract, including custom registrations and partial-result behavior. SQ03
