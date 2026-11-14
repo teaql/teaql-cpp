@@ -6058,4 +6058,12 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         entity_constructor_cli inherited_business_cli protected_behavior_cli
         json_graph_limits_cli logging_cli sqlite_raw_debug_cli sqlite_transaction_cli
         generated_member_alias_cli execution_model_cli runtime_examples_cli)
+    add_test(NAME parity_paired_source_binding_join COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_paired_source_bindings_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    get_test_property(parity_custom_comparison_binding_join FIXTURES_REQUIRED
+        teaql_paired_source_fixtures)
+    set_tests_properties(parity_paired_source_binding_join PROPERTIES
+        TIMEOUT 180 FIXTURES_REQUIRED "${teaql_paired_source_fixtures}")
+    unset(teaql_paired_source_fixtures)
 endif()

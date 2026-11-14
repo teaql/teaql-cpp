@@ -1,6 +1,18 @@
 # C++ generator parity plan
 
-Current SQ02 generator-child checkpoint:
+Current SQ02 paired source/native checkpoint:
+[The complete paired command join](paired_source_binding_join_5_0_6.md)
+binds all 35 native execution peers to their source fixtures. Eight structural
+controls reject in both Python modes; actual source/native/index CTests pass
+74/74 per mode, followed by ordinary P0 1/1. All 11,963 inputs, 115 evidence
+files, both references and 707 native ELF files remain unchanged. Registry
+1,101/619 Python entries has zero direct assertions. The finite role inventory
+separates 513 comparisons from 203 source/control/invariant registrations;
+the latter and remaining executed dynamic/string paths still need disposition.
+Complete SQ02/G13/G14/G17/P0-P7 remain open at **14 qualified / 3 partial**.
+No full current native epoch is claimed.
+
+Previous SQ02 generator-child checkpoint:
 [The active child/parent repair](generator_child_optimized_checks_5_0_6.md)
 retains three historical files and qualifies 21 unconditional checks plus two
 child-call adaptations. Eighteen actual valid/invalid child/parent processes
