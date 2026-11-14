@@ -20,18 +20,18 @@ if(BUILD_TESTING)
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_remaining_comparator_assert_controls_5_0_6.py)
         set_tests_properties(parity_remaining_comparator_assert_controls PROPERTIES TIMEOUT 180)
         add_test(NAME parity_corpus_admission_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_corpus_admission_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_corpus_admission_hardened_5_0_6.py
             --cpp $<TARGET_FILE:teaql_value_probe>)
         add_test(NAME parity_corpus_inventory_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_corpus_inventory_5_0_6.py)
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_corpus_inventory_hardened_5_0_6.py)
         add_test(NAME parity_corpus_source_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_corpus_source_contracts_5_0_6.py --source-only)
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_corpus_source_contracts_hardened_5_0_6.py --source-only)
         set_tests_properties(parity_corpus_source_contracts PROPERTIES
             FIXTURES_SETUP context_corpus_source)
         add_test(NAME parity_corpus_source_controls COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_corpus_source_controls_5_0_6.py)
         add_test(NAME parity_resolved_corpus_source_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_corpus_source_contracts_5_0_6.py --source-only
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_corpus_source_contracts_hardened_5_0_6.py --source-only
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/resolved_corpus_source_contracts_5_0_6.json)
         set_tests_properties(parity_resolved_corpus_source_contracts PROPERTIES
             FIXTURES_SETUP resolved_corpus_source)
@@ -39,12 +39,12 @@ if(BUILD_TESTING)
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_corpus_source_controls_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/resolved_corpus_source_contracts_5_0_6.json)
         add_test(NAME parity_composite_corpus_source_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_corpus_source_contracts_5_0_6.py --source-only
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_corpus_source_contracts_hardened_5_0_6.py --source-only
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/composite_corpus_source_contracts_5_0_6.json)
         set_tests_properties(parity_composite_corpus_source_contracts PROPERTIES
             FIXTURES_SETUP composite_corpus_source)
         add_test(NAME parity_composite_corpus_source_controls COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_composite_corpus_source_controls_5_0_6.py)
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_composite_corpus_source_controls_hardened_5_0_6.py)
         add_test(NAME parity_remaining_corpus_source_contracts COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_remaining_corpus_source_contracts_5_0_6.py)
         set_tests_properties(parity_remaining_corpus_source_contracts PROPERTIES
@@ -3851,7 +3851,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_generated_member_alias_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP generated_member_alias_cli)
     add_test(NAME parity_generated_member_alias_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_member_alias_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_member_alias_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_generated_member_alias_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED generated_member_alias_cli)
@@ -3874,7 +3874,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_execution_model_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP execution_model_cli)
     add_test(NAME parity_execution_model_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_execution_model_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_execution_model_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_execution_model_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED execution_model_cli)
@@ -4807,6 +4807,11 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_adapter_logging_configuration_hardened PROPERTIES
         TIMEOUT 600 RUN_SERIAL TRUE)
+    add_test(NAME parity_registered_boundary_hardened COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_registered_boundary_hardened_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_registered_boundary_hardened PROPERTIES
+        TIMEOUT 900 RUN_SERIAL TRUE)
     add_test(NAME parity_field_attribute_candidate_source_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_field_attribute_exception_5_0_6.py
         --diagnostic ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz
@@ -4969,7 +4974,7 @@ endif()
 # Type-preserving ownership checks for the declared snapshot-cache lifetime adaptation.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_snapshot_cache_ownership_types COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_snapshot_cache_ownership_types_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_snapshot_cache_ownership_types_hardened_5_0_6.py)
     set_tests_properties(parity_snapshot_cache_ownership_types PROPERTIES
         TIMEOUT 90 RUN_SERIAL TRUE)
 endif()
@@ -4978,7 +4983,7 @@ endif()
 # Query-key pointer-width selection and emulator argument forwarding through the real CLI.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_query_key_width_cli COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_key_width_cli_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_key_width_cli_hardened_5_0_6.py)
     set_tests_properties(parity_query_key_width_cli PROPERTIES
         TIMEOUT 90 RUN_SERIAL TRUE)
 endif()
@@ -4987,7 +4992,7 @@ endif()
 # Exact resource lifetime flags/counts and LF-framed observer records.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_resource_lifetime_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_resource_lifetime_admission_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_resource_lifetime_admission_hardened_5_0_6.py)
     set_tests_properties(parity_resource_lifetime_admission PROPERTIES
         TIMEOUT 240 RUN_SERIAL TRUE)
 endif()
@@ -4996,7 +5001,7 @@ endif()
 # Nonempty and well-formed corpora in custom comparator entry points.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_custom_case_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_custom_case_admission_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_custom_case_admission_hardened_5_0_6.py)
     set_tests_properties(parity_custom_case_admission PROPERTIES
         TIMEOUT 240 RUN_SERIAL TRUE)
 endif()
@@ -5008,7 +5013,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         ${CMAKE_CURRENT_SOURCE_DIR}/scripts/custom_public_cli_source_provenance_5_0_6.py
         --verify-only)
     add_test(NAME parity_custom_public_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_custom_public_cli_source_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_custom_public_cli_source_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_custom_public_cli_source_contracts
         parity_custom_public_cli_source_controls PROPERTIES TIMEOUT 180 RUN_SERIAL TRUE)
@@ -5038,7 +5043,7 @@ endif()
 # Nonempty profile/width matrices and complete formatter dispatch groups.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_profile_case_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_profile_case_admission_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_profile_case_admission_hardened_5_0_6.py)
     set_tests_properties(parity_profile_case_admission PROPERTIES
         TIMEOUT 240 RUN_SERIAL TRUE)
 endif()
@@ -5052,7 +5057,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     set_tests_properties(parity_profile_public_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP profile_public_cli_source)
     add_test(NAME parity_profile_public_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_profile_public_cli_source_controls_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_profile_public_cli_source_controls_hardened_5_0_6.py)
     set_tests_properties(parity_profile_public_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE)
     foreach(profile_test runtime_id_model_rust_parity entity_query_boundary_rust_parity
@@ -5077,7 +5082,7 @@ endif()
 # Full graph observation matrices, including every retained original variant.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_graph_observation_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_graph_observation_admission_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_graph_observation_admission_hardened_5_0_6.py)
     set_tests_properties(parity_graph_observation_admission PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE)
 endif()
@@ -5133,7 +5138,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     set_tests_properties(parity_expression_cli_source_controls PROPERTIES
         TIMEOUT 240 RUN_SERIAL TRUE)
     add_test(NAME parity_expression_cli_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_cli_admission_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_cli_admission_hardened_5_0_6.py
         --cpp-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_expression_cli_admission PROPERTIES
         TIMEOUT 240 RUN_SERIAL TRUE)
@@ -5172,7 +5177,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_query_cli_source_controls PROPERTIES TIMEOUT 240 RUN_SERIAL TRUE)
     add_test(NAME parity_query_cli_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_cli_admission_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_cli_admission_hardened_5_0_6.py
         --cpp-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_query_cli_admission PROPERTIES TIMEOUT 360 RUN_SERIAL TRUE)
     file(READ ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/query_cli_source_contracts_5_0_6.json
@@ -5216,7 +5221,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     set_tests_properties(parity_dynamic_json_cli_source_controls PROPERTIES
         TIMEOUT 600 RUN_SERIAL TRUE)
     add_test(NAME parity_dynamic_json_cli_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_dynamic_json_cli_admission_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_dynamic_json_cli_admission_hardened_5_0_6.py
         --cpp-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_dynamic_json_cli_admission PROPERTIES
         TIMEOUT 360 RUN_SERIAL TRUE)
@@ -5281,7 +5286,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         set_tests_properties(parity_configuration_cli_recipes PROPERTIES
             TIMEOUT 60 FIXTURES_SETUP configuration_cli_recipes)
         add_test(NAME parity_configuration_cli_admission COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_configuration_cli_admission_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_configuration_cli_admission_hardened_5_0_6.py
             --cpp-build-dir ${CMAKE_BINARY_DIR})
         set_tests_properties(parity_configuration_cli_admission PROPERTIES
             TIMEOUT 1200 RUN_SERIAL TRUE FIXTURES_REQUIRED configuration_cli_recipes)
@@ -5302,7 +5307,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_configuration_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP configuration_cli_source)
     add_test(NAME parity_configuration_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_configuration_cli_source_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_configuration_cli_source_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_configuration_cli_source_controls PROPERTIES
         TIMEOUT 900 RUN_SERIAL TRUE FIXTURES_REQUIRED configuration_cli_source)
@@ -5335,7 +5340,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_clock_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP clock_cli_source)
     add_test(NAME parity_clock_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_clock_cli_source_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_clock_cli_source_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_clock_cli_source_controls PROPERTIES
         TIMEOUT 900 RUN_SERIAL TRUE FIXTURES_REQUIRED clock_cli_source)
@@ -5359,7 +5364,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         AND TARGET teaql_bootstrap_conflict_probe AND TARGET teaql_resource_bindings_probe
         AND TARGET teaql_inherited_sample_execution_probe AND TARGET teaql_sample_progress_probe)
     add_test(NAME parity_lifecycle_cli_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_lifecycle_cli_admission_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_lifecycle_cli_admission_hardened_5_0_6.py
         --cpp-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_lifecycle_cli_admission PROPERTIES TIMEOUT 1800 RUN_SERIAL TRUE)
     add_test(NAME parity_lifecycle_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
@@ -5416,7 +5421,7 @@ endforeach()
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND query_input_cli_targets_available)
     add_test(NAME parity_query_input_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_input_admission_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_input_admission_hardened_5_0_6.py
         --expect-repaired --expect-native-repaired)
     set_tests_properties(parity_query_input_admission PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
     add_test(NAME parity_query_input_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
@@ -5461,7 +5466,7 @@ endforeach()
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND helper_cli_targets_available)
     add_test(NAME parity_helper_cli_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_helper_cli_admission_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_helper_cli_admission_hardened_5_0_6.py
         --expect-repaired)
     set_tests_properties(parity_helper_cli_admission PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
     add_test(NAME parity_helper_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
@@ -5489,7 +5494,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND TARGET teaql_runtime_error_source_probe
         AND TARGET teaql_runtime_check_probe)
     add_test(NAME parity_runtime_error_cli_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_error_cli_admission_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_error_cli_admission_hardened_5_0_6.py)
     set_tests_properties(parity_runtime_error_cli_admission PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
     add_test(NAME parity_runtime_error_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/scripts/runtime_error_cli_source_binding_5_0_6.py
@@ -5497,7 +5502,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_runtime_error_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP runtime_error_cli_source)
     add_test(NAME parity_runtime_error_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_error_cli_source_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_error_cli_source_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_runtime_error_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED runtime_error_cli_source)
@@ -5517,7 +5522,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND TARGET teaql_query_alias_probe
         AND TARGET teaql_relation_identity_probe AND TARGET teaql_query_predicate_execution_probe)
     add_test(NAME parity_query_surface_cli_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_surface_cli_admission_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_surface_cli_admission_hardened_5_0_6.py
         --expect-repaired)
     set_tests_properties(parity_query_surface_cli_admission PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
     add_test(NAME parity_query_surface_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
@@ -5546,7 +5551,7 @@ endif()
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND TARGET teaql_inmemory_probe)
     add_test(NAME parity_inmemory_cli_admission COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inmemory_cli_admission_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inmemory_cli_admission_hardened_5_0_6.py
         --expect-repaired)
     set_tests_properties(parity_inmemory_cli_admission PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
     add_test(NAME parity_inmemory_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
@@ -5555,7 +5560,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_inmemory_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP inmemory_cli_source)
     add_test(NAME parity_inmemory_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inmemory_cli_source_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inmemory_cli_source_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_inmemory_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED inmemory_cli_source)
@@ -5578,7 +5583,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_state_source_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP state_source_cli)
     add_test(NAME parity_state_source_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_state_source_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_state_source_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_state_source_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED state_source_cli)
@@ -5604,7 +5609,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_composed_graph_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP composed_graph_cli)
     add_test(NAME parity_composed_graph_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_composed_graph_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_composed_graph_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_composed_graph_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED composed_graph_cli)
@@ -5629,7 +5634,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_relation_analysis_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP relation_analysis_cli)
     add_test(NAME parity_relation_analysis_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_relation_analysis_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_relation_analysis_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_relation_analysis_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED relation_analysis_cli)
@@ -5651,7 +5656,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_stream_shapes_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP stream_shapes_cli)
     add_test(NAME parity_stream_shapes_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_stream_shapes_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_stream_shapes_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_stream_shapes_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED stream_shapes_cli)
@@ -5673,7 +5678,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_business_id_lookup_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP business_id_lookup_cli)
     add_test(NAME parity_business_id_lookup_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_business_id_lookup_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_business_id_lookup_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_business_id_lookup_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED business_id_lookup_cli)
@@ -5695,7 +5700,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_expression_business_ids_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP expression_business_ids_cli)
     add_test(NAME parity_expression_business_ids_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_business_ids_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_expression_business_ids_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_expression_business_ids_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED expression_business_ids_cli)
@@ -5717,7 +5722,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_generated_business_ids_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP generated_business_ids_cli)
     add_test(NAME parity_generated_business_ids_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_business_ids_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_business_ids_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_generated_business_ids_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED generated_business_ids_cli)
@@ -5734,17 +5739,17 @@ endif()
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND TARGET teaql_query_keys_probe)
     add_test(NAME parity_query_keys_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/query_keys_cli_source_binding_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/query_keys_cli_source_binding_hardened_5_0_6.py
         --verify-only --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_query_keys_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP query_keys_cli)
     add_test(NAME parity_query_keys_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_keys_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_keys_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_query_keys_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED query_keys_cli)
     add_test(NAME query_keys_cli_source_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/query_keys_cli_source_binding_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/query_keys_cli_source_binding_hardened_5_0_6.py
         --cpp-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(query_keys_cli_source_rust_parity PROPERTIES
         TIMEOUT 900 RUN_SERIAL TRUE FIXTURES_REQUIRED query_keys_cli)
@@ -5791,7 +5796,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_inherited_checker_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP inherited_checker_cli)
     add_test(NAME parity_inherited_checker_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inherited_checker_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inherited_checker_cli_controls_hardened_5_0_6.py
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_inherited_checker_cli_source_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED inherited_checker_cli)
@@ -5815,7 +5820,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_eval_indexed_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP eval_indexed_cli)
     add_test(NAME parity_eval_indexed_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_eval_indexed_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_eval_indexed_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_eval_indexed_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED eval_indexed_cli)
@@ -5838,7 +5843,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_entity_constructor_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP entity_constructor_cli)
     add_test(NAME parity_entity_constructor_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_entity_constructor_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_entity_constructor_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_entity_constructor_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED entity_constructor_cli)
@@ -5861,7 +5866,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_inherited_business_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP inherited_business_cli)
     add_test(NAME parity_inherited_business_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inherited_business_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inherited_business_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_inherited_business_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED inherited_business_cli)
@@ -5883,7 +5888,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_protected_behavior_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP protected_behavior_cli)
     add_test(NAME parity_protected_behavior_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_protected_behavior_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_protected_behavior_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_protected_behavior_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED protected_behavior_cli)
@@ -5977,7 +5982,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_sqlite_transaction_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP sqlite_transaction_cli)
     add_test(NAME parity_sqlite_transaction_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_sqlite_transaction_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_sqlite_transaction_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_sqlite_transaction_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED sqlite_transaction_cli)
@@ -6000,7 +6005,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_runtime_examples_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP runtime_examples_cli)
     add_test(NAME parity_runtime_examples_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_examples_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_examples_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_runtime_examples_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED runtime_examples_cli)

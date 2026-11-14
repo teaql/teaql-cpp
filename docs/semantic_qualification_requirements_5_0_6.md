@@ -1,6 +1,18 @@
 # G13 semantic qualification requirements
 
-Current SQ02 adapter/logging/configuration checkpoint:
+Current SQ02 registered-boundary checkpoint:
+[The remaining registered-entry repair](registered_boundary_optimized_checks_5_0_6.md)
+preserves 42 historical scripts and replaces 117 direct, ten embedded and
+21 imported assertions. All 162 process-level cases and six source controls
+pass. The first ordinary selection retains 62 passes, two failures and one
+skip; repairs pass 9/9 and exact source admission joins 69 unique ordinary
+names. The current optimized selection passes 69/69 in one epoch, with 169
+unchanged inputs and 707 unchanged native executables. Registry 1,096/614
+Python entries has zero direct assertions. Two further imported-helper
+candidates and complete SQ02/G13/G14/G17/P0-P7 remain open at **14 qualified /
+3 partial**. No full current native epoch is claimed.
+
+Previous SQ02 adapter/logging/configuration checkpoint:
 [Three corruption-control repairs](adapter_logging_configuration_optimized_checks_5_0_6.md)
 replace exactly sixteen assertions while preserving three historical scripts.
 Twelve actual valid/regression processes show identical imported-call sequences

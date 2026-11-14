@@ -8499,6 +8499,13 @@
           "terminal": "docs/parity/adapter_logging_configuration_selected_native_5_0_6.json.gz",
           "controls": "docs/parity/adapter_logging_configuration_hardened_controls_5_0_6.json.gz",
           "scope": "Three actual optimized-mode false success reports are reproduced using deliberately broken adapter, normalizer and configuration-verifier dependencies. Three active copies replace sixteen assertions with exact AST-equivalent unconditional checks, preserving historical scripts and CTest fixture properties. Twelve valid/regression processes preserve the original ordinary-mode imported-call sequences in both Python modes and four source/registration corruptions reject. Selected native CTests pass 6/6 per mode with eighteen adapter controls, fifteen logging substitutions, three normalization boundaries, twenty configuration corruptions and 25 unchanged frozen inputs. Owned sources, traces and JUnit outputs are removed. Registry 1,095/613 Python entries with 42 assertion-bearing entries/117 nodes is inventory, not full native execution. Generation-only helper main remains historical. Complete SQ02/G13/G14/G17/P0-P7 stay open at 14 qualified/3 partial."
+        },
+        {
+          "kind": "registered_boundary_optimized_source_checks",
+          "path": "docs/registered_boundary_optimized_checks_5_0_6.md",
+          "terminal": "docs/parity/registered_boundary_terminal_join_5_0_6.json.gz",
+          "controls": "docs/parity/registered_boundary_qualified_controls_5_0_6.json.gz",
+          "scope": "Forty-two active copies replace 117 direct assertions and ten assertions in nine embedded programs; a qualified composite helper replaces 21 imported assertions. Historical scripts remain unchanged. The permanent guard passes 162 process-level cases and six source corruptions, including actual OS resource-script launch and exact width-command/source identity. Initial native65 retains62 passes/two failures/one skip; repaired ordinary9 and an exact six-input transition join69 unique ordinary names with151 old inputs unchanged. Current optimized69 passes without failures/errors/skips; all169 current input hashes and707 native executable hashes remain identical and owned JUnit files are removed. Registry1096/614 Python entries/zero direct assertions is inventory, not complete imported-helper or full-native acceptance. Two separate imported-helper candidates remain inactive; complete SQ02/G13/G14/G17/P0-P7 and14-qualified/3-partial verdicts remain open."
         }
       ],
       "open_questions": [
