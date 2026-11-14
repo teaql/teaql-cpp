@@ -7,13 +7,14 @@ to the current source state. It does not change an acceptance verdict.
 At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
-native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,093 tests after focused archive, AP02 and comparator
-checks. The [deferred-resource and embedded-script repair](deferred_resource_optimized_checks_5_0_6.md)
-makes nine direct and five embedded checks unconditional. Actual native
-selections pass 5/5 and module selections pass 2/2 in each Python mode;
-69 saved-observation controls also pass. The registry has 611 Python entries,
-with 49 retaining 139 direct assertions. No full 1,093-test epoch has run.
+native execution covered 1,075/1,075 tests in a recovered controller epoch.
+The current registry has 1,094 tests after focused archive, AP02 and comparator
+checks. The [four imported-helper caller repairs](raw_change_callers_optimized_checks_5_0_6.md)
+keep actual decoded-value corruption and six control checks active in ordinary
+and optimized Python. Both selected native epochs pass 9/9 and reject all 149
+existing substitutions per mode, with 36 frozen input hashes unchanged. The
+registry has 612 Python entries; 45 retain 133 direct assertions. No full
+1,094-test epoch has run.
 
 The immediate order is acceptance integrity, generated metadata, governed
 execution, then final integration. Known acceptance failures take precedence

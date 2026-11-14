@@ -1,5 +1,16 @@
 # C++ generator parity plan
 
+Current SQ02 imported-helper caller checkpoint:
+[Four control caller repairs](raw_change_callers_optimized_checks_5_0_6.md)
+retain their historical scripts and use the qualified unconditional helper.
+Six direct checks and four imports have exact source transitions. Sixteen
+focused actual decoded-value/unmutatable-input processes and four source
+controls pass. Selected native CTests pass 9/9 per Python mode, including all
+149 existing substitutions; 36 input hashes stay unchanged. The registry has
+1,094 tests and 612 Python entries; 45 retain 133 direct assertions. Imported
+and embedded checks, complete SQ02/G13/G14/G17 and P0-P7 remain open at
+**14 qualified / 3 partial**. No full current native epoch has run.
+
 Current SQ02 deferred-resource checkpoint:
 [The resource and embedded replay repair](deferred_resource_optimized_checks_5_0_6.md)
 keeps 143 scenarios and 163 business payload checks while replacing nine direct

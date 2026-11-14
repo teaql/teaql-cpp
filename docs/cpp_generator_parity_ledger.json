@@ -8485,6 +8485,13 @@
           "terminal": "docs/parity/deferred_resource_selected_tests_5_0_6.json.gz",
           "controller": "docs/parity/deferred_resource_controller_execution_5_0_6.json.gz",
           "scope": "Nine direct and five embedded checks become unconditional; 34 resource and four embedded controls pass across both Python modes. The source-bound controller retains 69 outcomes, including seven optimized deferred controls. Actual native5/module2 pass per mode; each resource binary checks all 143 scenarios and 163 unchanged-data business payloads. The 1093-test registry has 611 Python entries, 49 with 139 direct assertions. Other imported/embedded checks and full SQ02/G13/G14/G17/P0-P7 remain open."
+        },
+        {
+          "kind": "raw_change_callers_optimized_source_checks",
+          "path": "docs/raw_change_callers_optimized_checks_5_0_6.md",
+          "terminal": "docs/parity/raw_change_callers_selected_native_5_0_6.json.gz",
+          "controls": "docs/parity/raw_change_callers_hardened_controls_5_0_6.json.gz",
+          "scope": "Four active source-control callers replace six assertions and import the already-qualified unconditional raw_change helper; four historical callers and the original helper remain unchanged. Sixteen ordinary/optimized processes verify actual decoded-value changes are rejected and unmutatable inputs fail without mutation. Four source/registration corruptions reject. Selected saved-record CTests pass 9/9 per mode and retain 149 existing negative controls, 36 unchanged input hashes and owned runner/JUnit cleanup. Registry 1,094/612 Python entries with 45 assertion-bearing entries/133 nodes is inventory, not a full native epoch. Imported/embedded obligations and complete SQ02/G13/G14/G17/P0-P7 remain open at 14 qualified/3 partial."
         }
       ],
       "open_questions": [
