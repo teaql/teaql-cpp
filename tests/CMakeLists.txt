@@ -46,11 +46,11 @@ if(BUILD_TESTING)
         add_test(NAME parity_composite_corpus_source_controls COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_composite_corpus_source_controls_hardened_5_0_6.py)
         add_test(NAME parity_remaining_corpus_source_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_remaining_corpus_source_contracts_5_0_6.py)
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_remaining_corpus_source_contracts_hardened_5_0_6.py)
         set_tests_properties(parity_remaining_corpus_source_contracts PROPERTIES
             FIXTURES_SETUP remaining_corpus_source)
         add_test(NAME parity_remaining_corpus_source_controls COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_remaining_corpus_source_controls_5_0_6.py)
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_remaining_corpus_source_controls_hardened_5_0_6.py)
         add_test(NAME parity_declared_core_driver_contracts COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_declared_core_drivers_5_0_6.py)
         set_tests_properties(parity_declared_core_driver_contracts PROPERTIES
@@ -4235,7 +4235,7 @@ endif()
 
 if(BUILD_TESTING AND Python3_Interpreter_FOUND)
     add_test(NAME resolved_mutation_privacy_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_mutation_privacy_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_resolved_mutation_privacy_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_runtime_mutation_probe>
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     set_tests_properties(resolved_mutation_privacy_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
@@ -4812,6 +4812,14 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_registered_boundary_hardened PROPERTIES
         TIMEOUT 900 RUN_SERIAL TRUE)
+    add_test(NAME parity_executed_helper_validation COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_executed_helper_validation_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_executed_helper_validation PROPERTIES
+        TIMEOUT 600 RUN_SERIAL TRUE FIXTURES_SETUP executed_helper_validation)
+    set_property(TEST parity_remaining_corpus_source_contracts
+        parity_remaining_corpus_source_controls resolved_mutation_privacy_rust_parity
+        APPEND PROPERTY FIXTURES_REQUIRED executed_helper_validation)
     add_test(NAME parity_field_attribute_candidate_source_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_field_attribute_exception_5_0_6.py
         --diagnostic ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz

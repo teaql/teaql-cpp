@@ -8506,6 +8506,13 @@
           "terminal": "docs/parity/registered_boundary_terminal_join_5_0_6.json.gz",
           "controls": "docs/parity/registered_boundary_qualified_controls_5_0_6.json.gz",
           "scope": "Forty-two active copies replace 117 direct assertions and ten assertions in nine embedded programs; a qualified composite helper replaces 21 imported assertions. Historical scripts remain unchanged. The permanent guard passes 162 process-level cases and six source corruptions, including actual OS resource-script launch and exact width-command/source identity. Initial native65 retains62 passes/two failures/one skip; repaired ordinary9 and an exact six-input transition join69 unique ordinary names with151 old inputs unchanged. Current optimized69 passes without failures/errors/skips; all169 current input hashes and707 native executable hashes remain identical and owned JUnit files are removed. Registry1096/614 Python entries/zero direct assertions is inventory, not complete imported-helper or full-native acceptance. Two separate imported-helper candidates remain inactive; complete SQ02/G13/G14/G17/P0-P7 and14-qualified/3-partial verdicts remain open."
+        },
+        {
+          "kind": "executed_helper_validation_registered",
+          "path": "docs/executed_helper_validation_candidates_5_0_6.md",
+          "terminal": "docs/parity/executed_helper_validation_registered_native_5_0_6.json.gz",
+          "controls": "docs/parity/executed_helper_validation_registered_controls_5_0_6.json.gz",
+          "scope": "Two qualified helper copies retain fourteen unconditional recipe/privacy checks. Five exact source transitions and five declared adaptations preserve historical sources and producer receipt input hashes. A permanent CTest fixture guards three active callers; 24 helper processes, both complete valid matrices (6281 recipe inputs and 5486 privacy inputs) and five source/registration corruptions pass. Actual selected native CTests pass 5/5 ordinary and 5/5 optimized with exact membership, no failures/errors/skips, 29 unchanged input hashes and the unchanged affected native executable. Owned observer/JUnit files are removed. Registry1097/615 Python entries/zero direct assertions remains inventory; remaining executed import/string paths, full SQ02/G13/G14/G17/P0-P7 and14-qualified/3-partial verdicts remain open."
         }
       ],
       "open_questions": [

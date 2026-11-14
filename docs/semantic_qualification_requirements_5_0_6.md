@@ -1,6 +1,17 @@
 # G13 semantic qualification requirements
 
-Current SQ02 registered-boundary checkpoint:
+Current SQ02 executed-helper checkpoint:
+[The installed recipe/privacy continuation](executed_helper_validation_candidates_5_0_6.md#installed-continuation)
+qualifies fourteen unconditional checks in two imported helpers and three
+active caller registrations. All 24 valid/invalid helper processes and five
+source controls pass; affected native CTests pass 5/5 in each Python mode,
+including all 5,486 privacy comparisons. The 29 inputs and affected executable
+remain unchanged. Registry 1,097/615 Python entries has zero direct assertions.
+Remaining executed import/string paths and complete SQ02/G13/G14/G17/P0-P7
+remain open at **14 qualified / 3 partial**. No full current native epoch is
+claimed.
+
+Previous SQ02 registered-boundary checkpoint:
 [The remaining registered-entry repair](registered_boundary_optimized_checks_5_0_6.md)
 preserves 42 historical scripts and replaces 117 direct, ten embedded and
 21 imported assertions. All 162 process-level cases and six source controls
