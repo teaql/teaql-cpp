@@ -1,6 +1,16 @@
 # C++ generator parity plan
 
-Current SQ02 direct-source join:
+Current SQ02 named-custom join:
+[The complete named custom-comparison join](custom_comparison_binding_join_5_0_6.md)
+binds 160 current commands to 35 source cohorts and 180 explicit member
+selections. Thirteen structural controls reject in both modes; actual
+comparison/source/index CTests pass 198/198 per mode. All 11,958 inputs,
+150 evidence files and 707 native ELF files remain unchanged. Registry
+1,099/617 Python entries has zero direct assertions. The confirmed generator
+verifier child defect, outside-directory/dynamic/control boundaries and full
+SQ02/G13/G14/G17/P0-P7 remain open at **14 qualified / 3 partial**.
+
+Previous SQ02 direct-source join:
 [The complete direct-comparator fixture join](direct_corpus_binding_join_5_0_6.md)
 binds 305 actual registrations / 323,568 observations to unique required
 source contracts, 27 fixture owners and 44 retained execution selections.

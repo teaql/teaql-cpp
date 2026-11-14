@@ -8,7 +8,7 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch.
-The current registry has 1,098 tests and 616 Python entries, with no direct
+The current registry has 1,099 tests and 617 Python entries, with no direct
 assertions in the registered entry scripts. The
 [registered-boundary repair](registered_boundary_optimized_checks_5_0_6.md)
 qualifies 117 direct, ten embedded and 21 imported checks. Its 162 process-level
@@ -25,7 +25,7 @@ and the unchanged affected executable. The broader static import review
 started from an inventory of 685 Python files,
 including twenty files with 281 assertions in mixed execution roles. These
 counts include historical and uncalled bodies, so each called boundary needs
-its own disposition. No full current 1,098-test native epoch has run.
+its own disposition. No full current 1,099-test native epoch has run.
 
 The [actual import-boundary continuation](executed_import_boundary_review_5_0_6.md)
 then resolves 686 static local files from the 615-entry registry. Eighteen
@@ -41,8 +41,17 @@ now binds all 305 direct registrations / 323,568 observations to their unique
 required source contracts, 27 source fixture owners and 44 retained execution
 selections. Ten structural controls reject in both Python modes. Actual source/
 index/control selections pass 32/32 per mode on 11,957 unchanged inputs and the
-unchanged affected native probe. Continue with the 160 named custom comparison
-registrations and the other SQ02 boundaries; this does not accept whole SQ02.
+unchanged affected native probe. This does not accept whole SQ02.
+
+The [complete named-custom join](custom_comparison_binding_join_5_0_6.md)
+qualifies 160 current commands / 35 source cohorts / 180 explicit metadata
+member selections. Thirteen corruptions reject in both modes. All actual
+custom comparisons, source prerequisites, recipe and indexes pass 198/198 per
+mode on 11,958 unchanged inputs, 150 unchanged evidence files and 707 unchanged
+native ELF files. The next confirmed acceptance defect is the generator
+verifier child path: two altered Rust provenance inputs pass under optimized
+Python. Preserve that six-process witness and repair the child before closing
+the remaining outside-directory/dynamic/control SQ02 obligations.
 
 The immediate order is acceptance integrity, generated metadata, governed
 execution, then final integration. Known acceptance failures take precedence
@@ -56,7 +65,7 @@ and count a capability as qualified only after its complete exit criteria pass.
 
 | Order | Work package | Exit evidence |
 | --- | --- | --- |
-| 1 | Finish SQ02 acceptance integrity | Continue the 160 custom comparison/source joins and comparisons outside the immediate parity directory; disposition remaining dynamic helper/string paths and new control registrations. The 305 direct fixture joins, two helper continuations and preceding 42-script direct-check repair are qualified. Active checks reject invalid input under ordinary and optimized Python. Historical gates have an explicit enforced execution boundary. Every comparator retains exact complete source observations, normalization and result cardinality. |
+| 1 | Finish SQ02 acceptance integrity | Repair the confirmed optimized generator-verifier child path, finish comparisons outside the immediate parity directory and disposition remaining dynamic helper/string paths and source/control registrations. The 305 direct and 160 named-custom joins, two helper continuations and preceding 42-script direct-check repair are qualified. Active checks reject invalid input under ordinary and optimized Python. Historical gates have an explicit enforced execution boundary. Every comparator retains exact complete source observations, normalization and result cardinality. |
 | 2 | Close G14 generated metadata | Reconcile AP01-AP12 against locked 5.0.6 responsibilities within the supported model scope. Generated descriptors, compiler/caller results, artifact reproduction and approved compatibility exceptions agree. The column-literal exception candidate remains pending user choice. |
 | 3 | Close G17 governed execution | Join accepted metadata to generated Q/E, Checker/Fix, whole-plan Policy, graph Save, SQLite commit/rollback and safe audit/log publication. Retain actual source comparisons for denial, stale versions and post-commit delivery failure. |
 | 4 | Sign off the frozen implementation | Reproduce affected SDKs/examples, run the Java/compiler and required module gates, then one complete current native epoch with exact registry/JUnit membership and unchanged inputs. Update each P0-P7 exit and the capability ledger from those results. |

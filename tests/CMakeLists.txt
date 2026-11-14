@@ -6029,3 +6029,25 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_property(TEST runtime_examples_rust_parity APPEND PROPERTY
         FIXTURES_REQUIRED runtime_examples_cli)
 endif()
+
+# Join all named custom comparisons to their qualified source prerequisites.
+if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
+        AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND TARGET teaql_sqlite_schema_crud
+        AND TARGET teaql_sqlite_relations_graph)
+    add_test(NAME parity_custom_comparison_binding_join COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_custom_comparison_bindings_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_custom_comparison_binding_join PROPERTIES TIMEOUT 180)
+    set_property(TEST parity_custom_comparison_binding_join PROPERTY FIXTURES_REQUIRED
+        custom_public_cli_source profile_public_cli_source custom_program_source
+        expression_cli_source query_cli_source dynamic_json_cli_source
+        configuration_cli_source configuration_cli_recipes clock_cli_source
+        lifecycle_cli_source query_input_cli_source helper_cli_source
+        runtime_error_cli_source query_surface_cli_source inmemory_cli_source
+        state_source_cli composed_graph_cli relation_analysis_cli stream_shapes_cli
+        business_id_lookup_cli expression_business_ids_cli generated_business_ids_cli
+        query_keys_cli derived_query_cli inherited_checker_cli eval_indexed_cli
+        entity_constructor_cli inherited_business_cli protected_behavior_cli
+        json_graph_limits_cli logging_cli sqlite_raw_debug_cli sqlite_transaction_cli
+        generated_member_alias_cli execution_model_cli runtime_examples_cli)
+endif()
