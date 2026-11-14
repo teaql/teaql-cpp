@@ -4908,6 +4908,10 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/inherited_business_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_inherited_business_driver_controls PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE)
+    add_test(NAME parity_inherited_business_assert_rewrite COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_inherited_business_assert_rewrite_5_0_6.py)
+    set_tests_properties(parity_inherited_business_assert_rewrite PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED inherited_business_driver_source)
     set_property(TEST inherited_business_governed_rust_parity inherited_business_update_rust_parity
         APPEND PROPERTY FIXTURES_REQUIRED inherited_business_driver_source)
 endif()

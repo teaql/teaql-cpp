@@ -1,5 +1,14 @@
 # Registered Python checks under optimization
 
+The current [inherited-business source repair](inherited_business_optimized_checks_5_0_6.md)
+reproduces one incomplete-record false acceptance under optimized Python and
+replaces 102 removable assertions in the driver and its control entry. Six
+source-transition mutations and all 35 existing evidence controls reject;
+selected native CTests pass 5/5 normally and 5/5 under `PYTHONOPTIMIZE=1`.
+The current 1,084-test registry invokes 602 distinct Python entry scripts;
+80 retain 833 direct `ast.Assert` nodes. The earlier inventory below
+describes its own 1,083-test source state.
+
 The current [sample-field clock comparator repair](generated_sample_fields_optimized_controls_5_0_6.md)
 reproduces one wrong-baseline false acceptance under optimized Python and
 replaces eight removable assertions in the comparator and fixed-clock

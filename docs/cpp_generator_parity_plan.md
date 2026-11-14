@@ -1,5 +1,16 @@
 # C++ generator parity plan
 
+Current SQ02 inherited-business checkpoint:
+[the optimized-Python provenance repair](inherited_business_optimized_checks_5_0_6.md)
+replaces 102 removable driver/control assertions after a reproduced incomplete
+saved-record false pass. The historical adapted-source receipt and original
+compiler-failure evidence remain immutable. Six source mutations and all 35
+existing evidence controls reject; selected native CTests pass 5/5 normally
+and 5/5 under `PYTHONOPTIMIZE=1`. The 1,084-test registry has 602 Python
+entries, 80 with 833 direct assertions. SQ02, G13/G14/G17 and P0-P7 remain
+open; no full current native epoch has run. Earlier counts below retain their
+own source epochs.
+
 Current SQ02 sample-field clock checkpoint:
 [the optimized-Python source repair](generated_sample_fields_optimized_controls_5_0_6.md)
 rejects an actual wrong-baseline false pass, preserves the original Rust clock

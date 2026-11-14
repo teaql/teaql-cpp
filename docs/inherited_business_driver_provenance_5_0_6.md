@@ -1,5 +1,11 @@
 # Adapted inherited-business source provenance, Rust 5.0.6
 
+The later [optimized-Python source repair](inherited_business_optimized_checks_5_0_6.md)
+admits this checkpoint's unchanged execution through an exact historical/
+current source transition. It rejects the reproduced incomplete-record false
+pass and keeps original compiler-failure and adapted-source claims separate.
+The counts below retain their original evidence epoch.
+
 The existing inherited Business ID observers now have isolated, reproducible
 bindings for **60 governed-save inputs** and **20 update/retry inputs**. All
 **80 adapted-source/corpus/native observations** agree. A fresh original-source

@@ -1,5 +1,14 @@
 # G13 semantic qualification requirements
 
+Current SQ02 inherited-business checkpoint:
+[the optimized-Python provenance repair](inherited_business_optimized_checks_5_0_6.md)
+rejects one reproduced incomplete-record false pass through 102 unconditional
+driver/control checks. Six source mutations, 35 existing evidence controls
+and selected native CTests pass 5/5 in each Python mode. The current 1,084-test
+registry has 602 Python entries; 80 retain 833 direct `ast.Assert` nodes.
+Complete SQ02/G13/G14/G17 and P0-P7 remain open at **14 qualified / 3
+partial**. The preceding checkpoint retains its own 1,083-test inventory.
+
 Current SQ02 sample-field clock checkpoint:
 [the optimized-Python source repair](generated_sample_fields_optimized_controls_5_0_6.md)
 rejects one reproduced wrong-baseline false pass through eight unconditional
