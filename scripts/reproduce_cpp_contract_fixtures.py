@@ -972,7 +972,9 @@ def main():
                 for path in METADATA_HELPER_INPUTS:
                     provenance['generator_implementation_sha256'][path] = digest(PRODUCER / path)
                 generated = json.dumps(provenance, indent=2) + '\n'
-                if args.check and (destination / 'PROVENANCE.json').read_text() != generated:
+                # JSON object member order depends on filesystem traversal order;
+                # verify the complete provenance values after checking SDK bytes.
+                if args.check and json.loads((destination / 'PROVENANCE.json').read_text()) != provenance:
                     raise RuntimeError(f'Stale producer provenance: {family}/{case.name}')
                 staged.append((destination / 'PROVENANCE.json', generated.encode()))
                 records.append(dict(family=family, case=case.name, files=len(files),

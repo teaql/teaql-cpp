@@ -1,5 +1,14 @@
 # C++ generator parity plan
 
+Current G14/AP02 reverse-relation type composition checkpoint:
+[the locked-source and generated-caller continuation](ap02_reverse_relation_type_composition_5_0_6.md)
+installs 2,495 distinct type inputs from a 4,000-result source probe. Fresh
+original/Java metadata agrees 82,680/82,680; 159 Java tests and two actual
+generated caller pairs pass. Fifty contract and five independent SDKs reproduce
+unchanged; the example SDK check succeeds. The current registry has 1,087
+tests. Full AP02/G14, G13/G17, SQ02 and P0-P7 remain open; no full current
+native epoch has run. Earlier counts below retain their original source epochs.
+
 Current SQ02 compiled-model source checkpoint:
 [the optimized-Python verifier replacement](model_driver_hardened_optimized_checks_5_0_6.md)
 preserves the original source and execution receipts while replacing 74

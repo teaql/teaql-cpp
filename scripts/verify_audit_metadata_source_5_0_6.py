@@ -25,6 +25,7 @@ REFERENCE = ROOT / ".reference/teaql-rs"
 PROJECT = ROOT / "tests/parity/rust_container_metadata_reference_5_0_6"
 PACKAGE = "com/skynet/codegenerator/cpp"
 CORPORA = (
+    (PRODUCER / "generator/src/test/resources/cpp_reverse_relation_type_composition_metadata_5_0_6.json.gz", 2495),
     (PRODUCER / "generator/src/test/resources/cpp_delegated_grammar_metadata_5_0_6.json.gz", 1043),
     (PRODUCER / "generator/src/test/resources/cpp_nested_signature_metadata_5_0_6.json.gz", 4973),
     (PRODUCER / "generator/src/test/resources/cpp_visibility_type_metadata_5_0_6.json.gz", 6920),

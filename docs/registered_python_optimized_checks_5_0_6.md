@@ -1,5 +1,11 @@
 # Registered Python checks under optimization
 
+The current [AP02 source/caller checkpoint](ap02_reverse_relation_type_composition_5_0_6.md)
+adds one optimized-safe receipt guard. The 1,087-test registry invokes 605
+Python entry scripts; 77 retain 680 direct `ast.Assert` nodes. The previous
+SQ02 checkpoint below retains its own 1,086-test registry count. Imported
+helpers and the other assertion-bearing entries remain open.
+
 The current [compiled-model source repair](model_driver_hardened_optimized_checks_5_0_6.md)
 preserves the historical verifier and redirects its active source/control
 entries through 74 unconditional checks. An incomplete saved-record false pass

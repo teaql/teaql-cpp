@@ -69,6 +69,10 @@ remains separate evidence.
 
 ## Encoded relation type composition exploration
 
+The later [installed continuation](ap02_reverse_relation_type_composition_5_0_6.md)
+turns this probe into a distinct-input regression and runs two generated
+caller pairs. The results below retain the earlier exploratory scope.
+
 An independent [4,000-input encoded relation type probe](parity/ap02_reverse_relation_type_composition_exploratory_5_0_6.json.gz)
 combines references, pointers, arrays, tuples, functions, trait objects,
 associated types, generic arguments and malformed suffixes in
