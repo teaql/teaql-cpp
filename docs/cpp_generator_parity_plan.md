@@ -1,6 +1,15 @@
 # C++ generator parity plan
 
-Current SQ02 seven-validator checkpoint:
+Current SQ02 execution-comparator checkpoint:
+[four optimized-Python repairs](execution_output_optimized_checks_5_0_6.md)
+reject fifteen reproduced invalid-result false acceptances, including skipped
+program execution. Eleven checks and eight native/module bindings have exact
+source transitions. Selected CTests pass 6/6 native and 5/5 module in each
+Python mode. The native registry has 1,090 tests and 608 Python entries; 59
+retain 174 direct assertions. Remaining SQ02, G13/G14/G17 and P0-P7 remain
+open at **14 qualified / 3 partial**; there is no full current native epoch.
+
+Previous SQ02 seven-validator checkpoint:
 [the optimized-Python source repair](source_driver_cohort_optimized_checks_5_0_6.md)
 reproduces seven incomplete-record and two imported-helper false acceptances.
 Sixteen active source copies preserve historical bytes while making 570 checks

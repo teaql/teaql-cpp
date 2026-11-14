@@ -331,7 +331,7 @@ if(BUILD_TESTING)
     set_tests_properties(module_shared_state_source_contracts PROPERTIES TIMEOUT 180)
     add_test(NAME module_original_runtime_optimistic_conflict_output_contracts
         COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/tests/parity/teaql_runtime/optimistic_conflict_output.py
+        ${PROJECT_SOURCE_DIR}/tests/parity/teaql_runtime/optimistic_conflict_output_hardened.py
         --cpp $<TARGET_FILE:teaql_module_original_runtime_memory_service>)
     if(CMAKE_SIZEOF_VOID_P EQUAL 8)
         target_link_options(teaql_module_sqlite_driver_query_benchmark PRIVATE "LINKER:--wrap=_ZN5teaql5Arena11do_allocateEmm")
@@ -1231,7 +1231,7 @@ if(TARGET teaql_module_sample_progress_probe)
 endif()
 if(TARGET teaql_module_sample_data_logging_tests)
     add_test(NAME module_sample_data_logging_callback_close COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/tests/parity/check_sample_log_callback_close.py
+        ${PROJECT_SOURCE_DIR}/tests/parity/check_sample_log_callback_close_hardened.py
         --cpp $<TARGET_FILE:teaql_module_sample_data_logging_tests>)
 endif()
 
@@ -1384,8 +1384,16 @@ endif()
 
 if(TARGET teaql_module_service_runtime_error_tests)
     add_test(NAME module_runtime_service_errors_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/scripts/verify_runtime_service_errors_5_0_6.py
+        ${PROJECT_SOURCE_DIR}/scripts/verify_runtime_service_errors_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_service_runtime_error_tests>)
+endif()
+
+if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
+    add_test(NAME module_execution_output_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/verify_execution_output_optimized_controls_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR} --profile module)
+    set_tests_properties(module_execution_output_optimized_controls PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE)
 endif()
 
 if(TARGET teaql_module_generated_business_runtime_configuration_probe)
@@ -1959,7 +1967,7 @@ endif()
 
 if(TARGET teaql_module_original_core_search_tests)
     add_test(NAME module_original_core_dynamic_search_warning_privacy COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/tests/parity/check_search_warning_canary.py
+        ${PROJECT_SOURCE_DIR}/tests/parity/check_search_warning_canary_hardened.py
         --cpp $<TARGET_FILE:teaql_module_original_core_search_tests>)
 endif()
 

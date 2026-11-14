@@ -1,6 +1,16 @@
 # G13 semantic qualification requirements
 
-Current SQ02 seven-validator checkpoint:
+Current SQ02 execution-comparator checkpoint:
+[the execution, termination and privacy repairs](execution_output_optimized_checks_5_0_6.md)
+make eleven source checks unconditional after fifteen reproduced invalid-result
+false acceptances. Five valid and fifteen invalid subprocess fixtures,
+imported validation and five source controls pass in both Python modes.
+Selected actual CTests pass 6/6 native and 5/5 module per mode. The native
+registry has 1,090 tests and 608 Python entries, 59 with 174 direct assertions.
+Other entries, imported helpers, complete SQ02/G13/G14/G17 and P0-P7 remain
+open at **14 qualified / 3 partial**. No full current native epoch has run.
+
+Previous SQ02 seven-validator checkpoint:
 [the optimized-Python source repair](source_driver_cohort_optimized_checks_5_0_6.md)
 reproduces seven incomplete-record and two imported-helper false acceptances,
 then makes 570 driver/control/helper checks unconditional with exact source

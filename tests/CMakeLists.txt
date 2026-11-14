@@ -263,7 +263,7 @@ if(BUILD_TESTING)
     target_link_libraries(teaql_generated_runtime_configuration_probe PRIVATE teaql::provider_sqlite)
     if(Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         add_test(NAME runtime_service_errors_rust_parity COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_runtime_service_errors_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_runtime_service_errors_hardened_5_0_6.py
             --cpp $<TARGET_FILE:teaql_service_runtime_error_tests>)
         add_test(NAME generated_runtime_configuration_kernel_rust_parity COMMAND ${Python3_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_runtime_configuration_kernel_5_0_6.py
@@ -1793,7 +1793,7 @@ if(BUILD_TESTING)
     add_test(NAME original_runtime_graph_reference_contracts COMMAND teaql_original_runtime_graph_reference_tests)
     if(Python3_Interpreter_FOUND)
         add_test(NAME original_runtime_optimistic_conflict_output_contracts
-            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/teaql_runtime/optimistic_conflict_output.py
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/teaql_runtime/optimistic_conflict_output_hardened.py
             --cpp $<TARGET_FILE:teaql_original_runtime_memory_service_tests>
             "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     endif()
@@ -2633,7 +2633,7 @@ if(BUILD_TESTING)
     target_link_libraries(teaql_original_core_search_tests PRIVATE teaql::core)
     add_test(NAME original_core_dynamic_search_contracts COMMAND teaql_original_core_search_tests)
     add_test(NAME original_core_dynamic_search_warning_privacy COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/check_search_warning_canary.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/check_search_warning_canary_hardened.py
         --cpp $<TARGET_FILE:teaql_original_core_search_tests>
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     add_executable(teaql_entity_registration_api_tests teaql_core/tests/entity_registration_api_tests.cpp)
@@ -3676,7 +3676,7 @@ if(BUILD_TESTING)
     target_link_libraries(teaql_sample_data_logging_formatter_tests PRIVATE teaql::runtime)
     add_test(NAME sample_data_logging_formatter_contracts COMMAND teaql_sample_data_logging_formatter_tests)
     add_test(NAME sample_data_logging_callback_close COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/check_sample_log_callback_close.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/check_sample_log_callback_close_hardened.py
         --cpp $<TARGET_FILE:teaql_sample_data_logging_tests>)
     add_executable(teaql_inherited_sample_execution_probe tests/parity/inherited_sample_execution_probe.cpp)
     target_link_libraries(teaql_inherited_sample_execution_probe PRIVATE teaql::provider_sqlite)
@@ -4782,6 +4782,11 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_source_driver_cohort_hardened_5_0_6.py)
     set_tests_properties(parity_source_driver_cohort_hardened_sources PROPERTIES
         TIMEOUT 900 RUN_SERIAL TRUE)
+    add_test(NAME parity_execution_output_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_execution_output_optimized_controls_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_execution_output_optimized_controls PROPERTIES
+        TIMEOUT 300 RUN_SERIAL TRUE)
     set_property(TEST
         generated_entity_helpers_rust_parity
         generated_optional_fields_rust_parity

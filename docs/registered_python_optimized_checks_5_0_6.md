@@ -1,6 +1,16 @@
 # Registered Python checks under optimization
 
-The current [seven-validator repair](source_driver_cohort_optimized_checks_5_0_6.md)
+The current [execution-comparator repair](execution_output_optimized_checks_5_0_6.md)
+preserves four historical scripts and routes eight active native/module
+bindings through eleven unconditional checks. Fifteen invalid fixtures that
+previously passed with optimization now reject; all five valid fixtures pass.
+Imported validation and five source controls pass in both modes. Selected
+actual CTests pass 6/6 native and 5/5 module in each mode. The native registry
+has 1,090 tests and 608 Python entries; 59 retain 174 direct `ast.Assert` nodes.
+Other entries and imported helpers still require SQ02 review. Earlier counts
+below retain their own source states.
+
+The previous [seven-validator repair](source_driver_cohort_optimized_checks_5_0_6.md)
 replaces 570 removable checks in seven active source validators, seven control
 entries and two imported helpers. Seven actual incomplete-record and two helper
 false acceptances are retained. All 180 existing evidence controls and two

@@ -8,40 +8,15 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,089 tests after focused archive, AP02 and comparator
-checks. Those checks passed, but no full 1,089-test epoch has run.
+the current registry has 1,090 tests after focused archive, AP02 and comparator
+checks. The latest execution-comparator repair passes 6/6 native and 5/5 module
+CTests in each Python mode, but no full 1,090-test epoch has run.
 
-## 1. Finish G14 metadata and generated-caller qualification
+The immediate order is acceptance integrity, generated metadata, governed
+execution, then final integration. Known acceptance failures take precedence
+over adding qualification results that depend on those checks.
 
-Reconcile AP01-AP12 against the *current* producer and SDK source, starting with
-AP02's expression/type/pattern/statement/lexical composition and partial-effect
-boundaries. The 92-variant branch inventory is a locator, not proof of complete
-child-rule composition. Use the already installed corpus and locked `syn` /
-`proc-macro2` sources to identify a specific uncovered entry context or effect;
-add a finite original/current metadata witness, then an actual generated
-descriptor or SQLite consumer where the effect changes behavior. Keep compiler
-refusals, valid metadata, privacy classifications and source parse stages
-distinct. Reproduce affected SDKs before marking a producer change accepted.
-
-The separate quoted-column attribute case remains a pending compatibility
-decision. Existing approved JSON, quoted-foreign-key and invalid wire-naming
-exceptions do not cover it. Other G14 work can continue without that decision.
-
-The [reverse-relation type composition checkpoint](ap02_reverse_relation_type_composition_5_0_6.md)
-turns 4,000 locked-source observations into 2,495 distinct permanent inputs.
-The 82,680-case source replay, 159 Java tests and two actual generated caller
-pairs pass. Its [SQLite continuation](ap02_reverse_relation_sql_5_0_6.md) now
-matches three freshly generated model pairs and fifteen actual relation queries,
-including E/JSON reads, empty states, minimal projections and mismatched typed
-JSON lookup. The 795 unchanged inputs include 261 native runtime headers and
-the actual compiler identity. Other type/path/binder entry contexts and consumer
-configurations remain required before AP02/G14 can close.
-
-**Gate:** no unresolved AP01-AP12 responsibility in the supported model scope;
-source-derived producer, compiler, generated-caller, artifact and relevant
-native/module evidence agree. A sample count alone does not close AP02.
-
-## 2. Close SQ02 provenance for G13 and GP13
+## 1. Close SQ02 provenance for G13 and GP13
 
 Enumerate every active parity comparator from the current CTest registry and
 its exact corpus or invariant, input/observer source, locked dependency set,
@@ -110,14 +85,57 @@ It makes 570 checks unconditional across seven active validators, seven control
 entries and two recipe helpers, preserving their historical sources and saved
 execution evidence. Exact source transitions pass; existing suites reject 180
 corruptions and two legacy locks. Selected native CTests pass 15/15 in each
-Python mode. The current 1,089-test registry has 607 Python entries; 63 retain 185 direct
+Python mode. That 1,089-test registry had 607 Python entries; 63 retained 185 direct
 assertions. Other entry points, imported helpers and complete SQ02 provenance
 remain open.
+
+The [execution-comparator repair](execution_output_optimized_checks_5_0_6.md)
+reproduces fifteen invalid-result false acceptances and replaces eleven source
+checks without changing the four historical scripts. Selected native CTests
+pass 6/6 and module CTests pass 5/5 in each Python mode. The 1,090-test registry
+has 608 Python entry scripts; 59 retain 174 direct assertions.
+
+Next, review the seven remaining direct subprocess comparators: generated
+expression diagnostics/values, runtime assembly, sample execution/failures/state
+and SQLite raw error debugging. Preserve the expression and SQLite comparators'
+source-bound dispatch contracts through explicit transitions when changing
+registrations. Then review the other entry points and imported helpers; a
+zero direct-assertion count alone will not establish complete provenance.
 
 **Gate:** every active comparator has a reviewed source or explicit invariant
 contract, including custom registrations and partial-result behavior. SQ03
 whole-source dispositions and SQ08 document/reference protocol already have
 their separate accepted scopes and must remain intact.
+
+## 2. Finish G14 metadata and generated-caller qualification
+
+Reconcile AP01-AP12 against the *current* producer and SDK source, starting with
+AP02's expression/type/pattern/statement/lexical composition and partial-effect
+boundaries. The 92-variant branch inventory is a locator, not proof of complete
+child-rule composition. Use the already installed corpus and locked `syn` /
+`proc-macro2` sources to identify a specific uncovered entry context or effect;
+add a finite original/current metadata witness, then an actual generated
+descriptor or SQLite consumer where the effect changes behavior. Keep compiler
+refusals, valid metadata, privacy classifications and source parse stages
+distinct. Reproduce affected SDKs before marking a producer change accepted.
+
+The separate quoted-column attribute case remains a pending compatibility
+decision. Existing approved JSON, quoted-foreign-key and invalid wire-naming
+exceptions do not cover it. Other G14 work can continue without that decision.
+
+The [reverse-relation type composition checkpoint](ap02_reverse_relation_type_composition_5_0_6.md)
+turns 4,000 locked-source observations into 2,495 distinct permanent inputs.
+The 82,680-case source replay, 159 Java tests and two actual generated caller
+pairs pass. Its [SQLite continuation](ap02_reverse_relation_sql_5_0_6.md) now
+matches three freshly generated model pairs and fifteen actual relation queries,
+including E/JSON reads, empty states, minimal projections and mismatched typed
+JSON lookup. The 795 unchanged inputs include 261 native runtime headers and
+the actual compiler identity. Other type/path/binder entry contexts and consumer
+configurations remain required before AP02/G14 can close.
+
+**Gate:** no unresolved AP01-AP12 responsibility in the supported model scope;
+source-derived producer, compiler, generated-caller, artifact and relevant
+native/module evidence agree. A sample count alone does not close AP02.
 
 ## 3. Join G17 governed execution across layers
 
