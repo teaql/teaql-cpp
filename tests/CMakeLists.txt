@@ -317,7 +317,7 @@ if(BUILD_TESTING)
         set_tests_properties(parity_runtime_configuration_source_contracts PROPERTIES
             TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP runtime_configuration_source)
         add_test(NAME parity_runtime_configuration_source_controls COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_configuration_source_controls_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_configuration_source_controls_hardened_5_0_6.py
             --ctest-build-dir ${CMAKE_BINARY_DIR})
         set_tests_properties(parity_runtime_configuration_source_controls PROPERTIES
             TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED runtime_configuration_source)
@@ -4802,6 +4802,11 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         --build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_raw_change_callers_hardened PROPERTIES
         TIMEOUT 600 RUN_SERIAL TRUE)
+    add_test(NAME parity_adapter_logging_configuration_hardened COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_adapter_logging_configuration_hardened_5_0_6.py
+        --build-dir ${CMAKE_BINARY_DIR})
+    set_tests_properties(parity_adapter_logging_configuration_hardened PROPERTIES
+        TIMEOUT 600 RUN_SERIAL TRUE)
     add_test(NAME parity_field_attribute_candidate_source_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_field_attribute_exception_5_0_6.py
         --diagnostic ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz
@@ -5216,7 +5221,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     set_tests_properties(parity_dynamic_json_cli_admission PROPERTIES
         TIMEOUT 360 RUN_SERIAL TRUE)
     add_test(NAME parity_dynamic_json_adapter_scope COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_dynamic_json_adapter_scope_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_dynamic_json_adapter_scope_hardened_5_0_6.py)
     set_tests_properties(parity_dynamic_json_adapter_scope PROPERTIES TIMEOUT 60)
     file(READ ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/dynamic_json_cli_source_contracts_5_0_6.json
         dynamic_json_cli_contracts)
@@ -5923,7 +5928,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     set_tests_properties(parity_logging_cli_source_contracts PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP logging_cli)
     add_test(NAME parity_logging_cli_source_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_logging_cli_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_logging_cli_controls_hardened_5_0_6.py
         --ctest-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_logging_cli_source_controls PROPERTIES
         TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_REQUIRED logging_cli)

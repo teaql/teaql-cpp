@@ -8,17 +8,36 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch.
-The current registry has 1,094 tests after focused archive, AP02 and comparator
-checks. The [four imported-helper caller repairs](raw_change_callers_optimized_checks_5_0_6.md)
-keep actual decoded-value corruption and six control checks active in ordinary
-and optimized Python. Both selected native epochs pass 9/9 and reject all 149
-existing substitutions per mode, with 36 frozen input hashes unchanged. The
-registry has 612 Python entries; 45 retain 133 direct assertions. No full
-1,094-test epoch has run.
+The current registry has 1,095 tests. The
+[imported-helper caller repair](raw_change_callers_optimized_checks_5_0_6.md)
+passes 9/9 selected native tests per Python mode. The later
+[adapter/logging/configuration repair](adapter_logging_configuration_optimized_checks_5_0_6.md)
+passes 6/6 per mode with all 25 frozen inputs unchanged. The registry has
+613 Python entries; 42 retain 117 direct assertions. These selected checks
+replay complete saved source observations. No full 1,095-test epoch has run.
 
 The immediate order is acceptance integrity, generated metadata, governed
 execution, then final integration. Known acceptance failures take precedence
 over adding qualification results that depend on those checks.
+
+## Bounded work packages and exit criteria
+
+Use the current registered-entry inventory as the fixed starting list. Record
+one source/evidence checkpoint after each package; preserve historical receipts
+and count a capability as qualified only after its complete exit criteria pass.
+
+| Order | Work package | Exit evidence |
+| --- | --- | --- |
+| 1 | Finish SQ02 acceptance integrity | Disposition all 42 remaining assertion-bearing registered scripts and their executed helper/string paths. Active checks reject invalid input under ordinary and optimized Python. Historical gates have an explicit enforced execution boundary. Join each active comparator to its exact complete source observations, normalization and result cardinality. |
+| 2 | Close G14 generated metadata | Reconcile AP01-AP12 against locked 5.0.6 responsibilities within the supported model scope. Generated descriptors, compiler/caller results, artifact reproduction and approved compatibility exceptions agree. The column-literal exception candidate remains pending user choice. |
+| 3 | Close G17 governed execution | Join accepted metadata to generated Q/E, Checker/Fix, whole-plan Policy, graph Save, SQLite commit/rollback and safe audit/log publication. Retain actual source comparisons for denial, stale versions and post-commit delivery failure. |
+| 4 | Sign off the frozen implementation | Reproduce affected SDKs/examples, run the Java/compiler and required module gates, then one complete current native epoch with exact registry/JUnit membership and unchanged inputs. Update each P0-P7 exit and the capability ledger from those results. |
+
+Routine fixes use affected native tests. Lifetime/async cleanup changes require
+relevant sanitizer checks; architecture/toolchain changes require relevant MIPS
+checks. Each package retains compact evidence and removes only verified,
+completed task-owned disposable outputs. A direct assertion count alone does
+not close SQ02; additional arbitrary parser examples alone do not close G14.
 
 ## 1. Close SQ02 provenance for G13 and GP13
 

@@ -1,6 +1,18 @@
 # C++ generator parity plan
 
-Current SQ02 imported-helper caller checkpoint:
+Current SQ02 adapter/logging/configuration checkpoint:
+[Three corruption-control repairs](adapter_logging_configuration_optimized_checks_5_0_6.md)
+replace exactly sixteen assertions while preserving three historical scripts.
+Twelve actual valid/regression processes show identical imported-call sequences
+under ordinary and optimized Python; four source/registration corruptions reject.
+Selected native CTests pass 6/6 per mode, retaining eighteen adapter controls,
+fifteen logging substitutions and twenty configuration corruptions. All 25 frozen
+inputs stay unchanged. The registry has 1,095 tests and 613 Python entries;
+42 retain 117 direct assertions. Imported/embedded obligations and complete
+SQ02/G13/G14/G17/P0-P7 remain open at **14 qualified / 3 partial**. No full
+current native epoch has run.
+
+Previous SQ02 imported-helper caller checkpoint:
 [Four control caller repairs](raw_change_callers_optimized_checks_5_0_6.md)
 retain their historical scripts and use the qualified unconditional helper.
 Six direct checks and four imports have exact source transitions. Sixteen

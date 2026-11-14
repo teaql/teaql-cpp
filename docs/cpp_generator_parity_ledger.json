@@ -8492,6 +8492,13 @@
           "terminal": "docs/parity/raw_change_callers_selected_native_5_0_6.json.gz",
           "controls": "docs/parity/raw_change_callers_hardened_controls_5_0_6.json.gz",
           "scope": "Four active source-control callers replace six assertions and import the already-qualified unconditional raw_change helper; four historical callers and the original helper remain unchanged. Sixteen ordinary/optimized processes verify actual decoded-value changes are rejected and unmutatable inputs fail without mutation. Four source/registration corruptions reject. Selected saved-record CTests pass 9/9 per mode and retain 149 existing negative controls, 36 unchanged input hashes and owned runner/JUnit cleanup. Registry 1,094/612 Python entries with 45 assertion-bearing entries/133 nodes is inventory, not a full native epoch. Imported/embedded obligations and complete SQ02/G13/G14/G17/P0-P7 remain open at 14 qualified/3 partial."
+        },
+        {
+          "kind": "adapter_logging_configuration_optimized_source_checks",
+          "path": "docs/adapter_logging_configuration_optimized_checks_5_0_6.md",
+          "terminal": "docs/parity/adapter_logging_configuration_selected_native_5_0_6.json.gz",
+          "controls": "docs/parity/adapter_logging_configuration_hardened_controls_5_0_6.json.gz",
+          "scope": "Three actual optimized-mode false success reports are reproduced using deliberately broken adapter, normalizer and configuration-verifier dependencies. Three active copies replace sixteen assertions with exact AST-equivalent unconditional checks, preserving historical scripts and CTest fixture properties. Twelve valid/regression processes preserve the original ordinary-mode imported-call sequences in both Python modes and four source/registration corruptions reject. Selected native CTests pass 6/6 per mode with eighteen adapter controls, fifteen logging substitutions, three normalization boundaries, twenty configuration corruptions and 25 unchanged frozen inputs. Owned sources, traces and JUnit outputs are removed. Registry 1,095/613 Python entries with 42 assertion-bearing entries/117 nodes is inventory, not full native execution. Generation-only helper main remains historical. Complete SQ02/G13/G14/G17/P0-P7 stay open at 14 qualified/3 partial."
         }
       ],
       "open_questions": [
