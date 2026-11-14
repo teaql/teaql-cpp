@@ -27,6 +27,15 @@ including twenty files with 281 assertions in mixed execution roles. These
 counts include historical and uncalled bodies, so each called boundary needs
 its own disposition. No full current 1,097-test native epoch has run.
 
+The [actual import-boundary continuation](executed_import_boundary_review_5_0_6.md)
+then resolves 686 static local files from the 615-entry registry. Eighteen
+imported files retain 267 assertions in mixed roles. Seventeen current source
+commands pass in both modes with identical stdout and 719 unchanged inputs;
+the separately enforced archive command passes twice, and twelve valid/invalid
+controller processes verify its outer checks on 722 unchanged inputs. These
+are bounded direct command observations, not a new full native epoch or full
+SQ02 signoff.
+
 The immediate order is acceptance integrity, generated metadata, governed
 execution, then final integration. Known acceptance failures take precedence
 over adding qualification results that depend on those checks.
