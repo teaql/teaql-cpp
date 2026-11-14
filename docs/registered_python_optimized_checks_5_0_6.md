@@ -1,5 +1,15 @@
 # Registered Python checks under optimization
 
+The current [seven-validator repair](source_driver_cohort_optimized_checks_5_0_6.md)
+replaces 570 removable checks in seven active source validators, seven control
+entries and two imported helpers. Seven actual incomplete-record and two helper
+false acceptances are retained. All 180 existing evidence controls and two
+legacy locks reject in both modes; selected native CTests pass 15/15 normally
+and 15/15 under `PYTHONOPTIMIZE=1`. The 1,089-test registry invokes 607 Python
+entry scripts; 63 retain 185 direct `ast.Assert` nodes. Imported helpers and the
+remaining entries still require review. The earlier inventory below retains
+its own 1,088-test source state.
+
 The current [AP02 SQLite execution receipt](ap02_reverse_relation_sql_5_0_6.md)
 adds an unconditional verifier with ten corruption controls. The two selected
 source/execution CTests pass in both Python modes. The 1,088-test registry

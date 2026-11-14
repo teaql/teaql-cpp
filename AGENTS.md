@@ -106,6 +106,12 @@
 
 ## Command execution reliability
 
+- Python acceptance gates must use unconditional checks for input validation,
+  acceptance decisions and corruption controls. `assert` is removed by `-O`
+  and nonzero `PYTHONOPTIMIZE`; it cannot enforce these contracts. Preserve
+  hash-bound historical scripts and qualify active replacements through exact
+  source transitions. When changing a gate, verify valid and invalid inputs
+  under ordinary and optimized Python, including imported validation helpers.
 - Wait for every compiler or linker process to exit successfully before executing,
   inspecting, copying, or replacing its output. A returned session ID means the
   command is still running: poll it to completion and check its exit code first.

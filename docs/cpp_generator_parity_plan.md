@@ -1,5 +1,15 @@
 # C++ generator parity plan
 
+Current SQ02 seven-validator checkpoint:
+[the optimized-Python source repair](source_driver_cohort_optimized_checks_5_0_6.md)
+reproduces seven incomplete-record and two imported-helper false acceptances.
+Sixteen active source copies preserve historical bytes while making 570 checks
+unconditional. Existing suites reject 180 corruptions and two legacy locks per
+mode; selected native CTests pass 15/15 normally and 15/15 under
+`PYTHONOPTIMIZE=1`. The registry has 1,089 tests and 607 Python entries; 63
+retain 185 direct assertions. Remaining SQ02, G13/G14/G17 and P0-P7 stay open;
+there is no full current native epoch. Earlier counts retain their own epochs.
+
 Current G14/AP02 generated relation-read checkpoint:
 [the source-derived SQLite continuation](ap02_reverse_relation_sql_5_0_6.md)
 matches three generated model pairs and fifteen actual relation queries through

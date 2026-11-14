@@ -92,43 +92,43 @@ if(BUILD_TESTING)
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/entity_runtime_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/entity_runtime_driver_execution_5_0_6.json.gz)
         add_test(NAME parity_registry_driver_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_registry_driver_contracts_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_registry_driver_contracts_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/registry_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/registry_driver_execution_5_0_6.json.gz)
         set_tests_properties(parity_registry_driver_contracts PROPERTIES
             FIXTURES_SETUP registry_driver_source)
         add_test(NAME parity_registry_driver_controls COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_registry_driver_controls_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_registry_driver_controls_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/registry_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/registry_driver_execution_5_0_6.json.gz)
         add_test(NAME parity_query_store_driver_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_query_store_driver_contracts_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_query_store_driver_contracts_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/query_store_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/query_store_driver_execution_final_5_0_6.json.gz)
         set_tests_properties(parity_query_store_driver_contracts PROPERTIES
             FIXTURES_SETUP query_store_driver_source)
         add_test(NAME parity_query_store_driver_controls COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_store_driver_controls_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_query_store_driver_controls_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/query_store_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/query_store_driver_execution_final_5_0_6.json.gz)
         add_test(NAME parity_private_runtime_driver_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_private_runtime_driver_contracts_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_private_runtime_driver_contracts_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/private_runtime_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/private_runtime_driver_execution_5_0_6.json.gz)
         set_tests_properties(parity_private_runtime_driver_contracts PROPERTIES
             FIXTURES_SETUP private_runtime_driver_source)
         add_test(NAME parity_private_runtime_driver_controls COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_private_runtime_driver_controls_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_private_runtime_driver_controls_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/private_runtime_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/private_runtime_driver_execution_5_0_6.json.gz)
         add_test(NAME parity_entity_api_driver_contracts COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_entity_api_driver_contracts_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_entity_api_driver_contracts_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/entity_api_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/entity_api_driver_execution_final_5_0_6.json.gz)
         set_tests_properties(parity_entity_api_driver_contracts PROPERTIES
             FIXTURES_SETUP entity_api_driver_source)
         add_test(NAME parity_entity_api_driver_controls COMMAND ${Python3_EXECUTABLE}
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_entity_api_driver_controls_5_0_6.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_entity_api_driver_controls_hardened_5_0_6.py
             --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/entity_api_driver_contracts_5_0_6.json
             --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/entity_api_driver_execution_final_5_0_6.json.gz)
         add_test(NAME parity_sql_mutation_driver_contracts COMMAND ${Python3_EXECUTABLE}
@@ -4489,13 +4489,13 @@ endif()
 # Fresh source replay for retained generated execution and deferred pagination corpora.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_pagination_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/pagination_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/pagination_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/pagination_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/pagination_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_pagination_driver_contracts PROPERTIES
         FIXTURES_SETUP pagination_driver_source TIMEOUT 180)
     add_test(NAME parity_pagination_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_pagination_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_pagination_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/pagination_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/pagination_driver_execution_5_0_6.json.gz)
     # Full receipt mutation checks must not compete with the timed native probes.
@@ -4778,6 +4778,10 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_model_driver_hardened_sources_5_0_6.py)
     set_tests_properties(parity_model_driver_hardened_sources PROPERTIES
         TIMEOUT 300 RUN_SERIAL TRUE FIXTURES_REQUIRED generated_model_driver_source)
+    add_test(NAME parity_source_driver_cohort_hardened_sources COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_source_driver_cohort_hardened_5_0_6.py)
+    set_tests_properties(parity_source_driver_cohort_hardened_sources PROPERTIES
+        TIMEOUT 900 RUN_SERIAL TRUE)
     set_property(TEST
         generated_entity_helpers_rust_parity
         generated_optional_fields_rust_parity
@@ -4812,13 +4816,13 @@ endif()
 # Append-only private-runtime protocols with actual Rust Debug/Release profiles.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_runtime_protocol_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/runtime_protocol_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/runtime_protocol_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/runtime_protocol_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/runtime_protocol_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_runtime_protocol_driver_contracts PROPERTIES
         FIXTURES_SETUP runtime_protocol_driver_source TIMEOUT 300)
     add_test(NAME parity_runtime_protocol_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_protocol_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_protocol_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/runtime_protocol_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/runtime_protocol_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_runtime_protocol_driver_controls PROPERTIES
@@ -4838,13 +4842,13 @@ endif()
 # Complete original Context, typed-aggregate and loaded-graph driver bodies.
 if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING)
     add_test(NAME parity_runtime_bridge_driver_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/runtime_bridge_driver_provenance_5_0_6.py verify
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/runtime_bridge_driver_provenance_hardened_5_0_6.py verify
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/runtime_bridge_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/runtime_bridge_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_runtime_bridge_driver_contracts PROPERTIES
         FIXTURES_SETUP runtime_bridge_driver_source TIMEOUT 300)
     add_test(NAME parity_runtime_bridge_driver_controls COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_bridge_driver_controls_5_0_6.py
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_runtime_bridge_driver_controls_hardened_5_0_6.py
         --contracts ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/runtime_bridge_driver_contracts_5_0_6.json
         --execution ${CMAKE_CURRENT_SOURCE_DIR}/docs/parity/runtime_bridge_driver_execution_5_0_6.json.gz)
     set_tests_properties(parity_runtime_bridge_driver_controls PROPERTIES

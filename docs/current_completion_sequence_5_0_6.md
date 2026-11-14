@@ -8,8 +8,8 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,088 tests after focused archive, AP02 and comparator
-checks. Those checks passed, but no full 1,088-test epoch has run.
+the current registry has 1,089 tests after focused archive, AP02 and comparator
+checks. Those checks passed, but no full 1,089-test epoch has run.
 
 ## 1. Finish G14 metadata and generated-caller qualification
 
@@ -101,8 +101,17 @@ under both Python modes; selected native CTests pass 4/4 in each mode,
 including the actual generated entity-helper C++ comparator. That 1,086-test
 registry had 604 Python entries, 77 with 680 direct assertions.
 The later 1,087-test registry had 605 Python entries, 77 with 680 direct
-assertions. The current 1,088-test registry has 606 Python entries; 77 retain
-680 direct assertions. Imported historical helpers and complete SQ02 provenance
+assertions. The following 1,088-test registry had 606 Python entries; 77 retained
+680 direct assertions.
+
+The [seven-validator source repair](source_driver_cohort_optimized_checks_5_0_6.md)
+reproduces seven incomplete-record and two imported-helper false acceptances.
+It makes 570 checks unconditional across seven active validators, seven control
+entries and two recipe helpers, preserving their historical sources and saved
+execution evidence. Exact source transitions pass; existing suites reject 180
+corruptions and two legacy locks. Selected native CTests pass 15/15 in each
+Python mode. The current 1,089-test registry has 607 Python entries; 63 retain 185 direct
+assertions. Other entry points, imported helpers and complete SQ02 provenance
 remain open.
 
 **Gate:** every active comparator has a reviewed source or explicit invariant
