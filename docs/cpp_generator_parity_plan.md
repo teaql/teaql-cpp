@@ -1,5 +1,15 @@
 # C++ generator parity plan
 
+Current G14/AP02 generated relation-read checkpoint:
+[the source-derived SQLite continuation](ap02_reverse_relation_sql_5_0_6.md)
+matches three generated model pairs and fifteen actual relation queries through
+runtime assembly, data service, SQL, SQLite, E and JSON. All 32 execution steps
+pass on 795 unchanged inputs, including 261 native headers and the actual
+compiler identity. Ten corruptions reject; selected native CTests pass 2/2 in
+each Python mode. The registry is 1,088 tests; there is no full current native
+epoch. Full AP02/G14, G13/G17, SQ02 and P0-P7 remain open. Earlier counts below
+retain their original source epochs.
+
 Current G14/AP02 reverse-relation type composition checkpoint:
 [the locked-source and generated-caller continuation](ap02_reverse_relation_type_composition_5_0_6.md)
 installs 2,495 distinct type inputs from a 4,000-result source probe. Fresh

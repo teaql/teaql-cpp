@@ -69,3 +69,8 @@ The current native registry contains **1,087** tests and **605** registered
 Python entry scripts; **77** still contain **680** direct `ast.Assert` nodes.
 This is enumeration, not a full 1,087-test epoch. Full AP02 composition and
 consumer signoff, SQ02, G13/G14/G17 and P0-P7 remain open.
+
+The later [generated SQLite continuation](ap02_reverse_relation_sql_5_0_6.md)
+executes three source-derived type/cardinality configurations through actual
+relation loading, E and JSON. Its new execution and source inventory have
+their own scope; the counts above retain this earlier checkpoint.

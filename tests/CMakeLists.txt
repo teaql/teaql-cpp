@@ -3834,6 +3834,9 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
     add_test(NAME parity_ap02_reverse_relation_type_corpus COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_ap02_reverse_relation_type_corpus_5_0_6.py)
     set_tests_properties(parity_ap02_reverse_relation_type_corpus PROPERTIES TIMEOUT 120)
+    add_test(NAME parity_ap02_reverse_relation_sql_receipt COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_ap02_reverse_relation_sql_receipt_5_0_6.py)
+    set_tests_properties(parity_ap02_reverse_relation_sql_receipt PROPERTIES TIMEOUT 120)
     add_test(NAME parity_ap02_cross_context_partial_sql_receipt COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_ap02_cross_context_partial_sql_receipt_5_0_6.py)
     set_tests_properties(parity_ap02_cross_context_partial_sql_receipt PROPERTIES TIMEOUT 120)

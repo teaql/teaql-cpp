@@ -1,5 +1,12 @@
 # Registered Python checks under optimization
 
+The current [AP02 SQLite execution receipt](ap02_reverse_relation_sql_5_0_6.md)
+adds an unconditional verifier with ten corruption controls. The two selected
+source/execution CTests pass in both Python modes. The 1,088-test registry
+invokes 606 Python entry scripts; 77 retain 680 direct `ast.Assert` nodes.
+The previous checkpoint below retains its own 1,087-test source state.
+Imported helpers and the other assertion-bearing entries remain open.
+
 The current [AP02 source/caller checkpoint](ap02_reverse_relation_type_composition_5_0_6.md)
 adds one optimized-safe receipt guard. The 1,087-test registry invokes 605
 Python entry scripts; 77 retain 680 direct `ast.Assert` nodes. The previous

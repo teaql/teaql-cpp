@@ -8,8 +8,8 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,087 tests after focused archive, AP02 and comparator
-checks. Those checks passed, but no full 1,087-test epoch has run.
+the current registry has 1,088 tests after focused archive, AP02 and comparator
+checks. Those checks passed, but no full 1,088-test epoch has run.
 
 ## 1. Finish G14 metadata and generated-caller qualification
 
@@ -30,8 +30,12 @@ exceptions do not cover it. Other G14 work can continue without that decision.
 The [reverse-relation type composition checkpoint](ap02_reverse_relation_type_composition_5_0_6.md)
 turns 4,000 locked-source observations into 2,495 distinct permanent inputs.
 The 82,680-case source replay, 159 Java tests and two actual generated caller
-pairs pass. It still needs other type/path/binder entry contexts and relation
-execution consumers before AP02/G14 can close.
+pairs pass. Its [SQLite continuation](ap02_reverse_relation_sql_5_0_6.md) now
+matches three freshly generated model pairs and fifteen actual relation queries,
+including E/JSON reads, empty states, minimal projections and mismatched typed
+JSON lookup. The 795 unchanged inputs include 261 native runtime headers and
+the actual compiler identity. Other type/path/binder entry contexts and consumer
+configurations remain required before AP02/G14 can close.
 
 **Gate:** no unresolved AP01-AP12 responsibility in the supported model scope;
 source-derived producer, compiler, generated-caller, artifact and relevant
@@ -94,11 +98,12 @@ The [compiled-model source repair](model_driver_hardened_optimized_checks_5_0_6.
 replaces 74 removable checks after a reproduced incomplete-record false pass.
 Four source/registration corruptions and 27 existing evidence controls pass
 under both Python modes; selected native CTests pass 4/4 in each mode,
-including the actual generated entity-helper C++ comparator. The current
-1,086-test registry had 604 Python entries, 77 with 680 direct assertions.
-The current 1,087-test registry has 605 Python entries, 77 with 680 direct
-assertions; imported historical helpers and complete SQ02 provenance remain
-open.
+including the actual generated entity-helper C++ comparator. That 1,086-test
+registry had 604 Python entries, 77 with 680 direct assertions.
+The later 1,087-test registry had 605 Python entries, 77 with 680 direct
+assertions. The current 1,088-test registry has 606 Python entries; 77 retain
+680 direct assertions. Imported historical helpers and complete SQ02 provenance
+remain open.
 
 **Gate:** every active comparator has a reviewed source or explicit invariant
 contract, including custom registrations and partial-result behavior. SQ03
