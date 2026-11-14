@@ -1,5 +1,15 @@
 # G14 audit/privacy and identity requirements
 
+Latest AP02 protected-consumer continuation:
+[The cross-context partial-effect School model](audit_cross_context_partial_sql_5_0_6.md)
+retains the locked parser's early audit length `13` after a malformed middle
+expression and carries it through generated descriptors, twelve governed
+SQLite Save pairs and twelve safe SQL file-sink configurations. A permanent
+source/receipt verifier rejects five corruptions, and three selected native
+CTests pass. The current registry contains 1,080 tests; there is no full epoch
+for that registry. Other AP02 grammar and consumer configurations, SQ02,
+G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+
 Last complete native integration: the
 [hardened-controller full epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
 passes **1,066/1,066** tests with zero failures, errors or skips on 11,816

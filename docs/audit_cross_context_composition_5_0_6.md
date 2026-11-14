@@ -68,3 +68,9 @@ or ownership contract changed. The full AP02 review still needs the remaining
 expression/type/pattern/statement/lexical composition and generated/protected
 consumer signoff. The separate column-literal compatibility choice remains
 pending.
+
+The later [generated SQLite continuation](audit_cross_context_partial_sql_5_0_6.md)
+selects the malformed partial-effect case from this source corpus and verifies
+its retained length through a generated School model, governed Save, query and
+safe file sinks. This is one protected consumer configuration, not complete
+AP02 or G17 acceptance.

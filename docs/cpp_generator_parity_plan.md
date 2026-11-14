@@ -5288,3 +5288,12 @@ connection/assembly parity comparisons. An exact source transition and seven
 negative subprocesses are retained; all three real native comparisons pass
 under optimized Python. The current registry is 1,079 tests, with no new full
 epoch. Remaining SQ02 provenance, G13/G14/G17 and P0-P7 exits stay open.
+
+The [AP02 partial-effect SQLite continuation](audit_cross_context_partial_sql_5_0_6.md)
+uses a locked-source malformed match-arm case from the retained cross-context
+corpus. Actual generated Rust and C++ School models agree on length 13, twelve
+governed Save outcomes and twelve safe file-sink configurations. The permanent
+receipt verifier passes five corruption controls under ordinary and optimized
+Python; three selected native CTests pass. The registry is 1,080 tests with no
+new complete epoch. Other AP02 grammar/configurations, SQ02 provenance and
+G13/G14/G17/P0-P7 exits remain open.

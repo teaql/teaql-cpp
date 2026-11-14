@@ -8,8 +8,8 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,079 tests after focused archive, AP02, and connection
-comparator checks. Those checks passed, but no full 1,079-test epoch has run.
+the current registry has 1,080 tests after focused archive, AP02, and connection
+comparator checks. Those checks passed, but no full 1,080-test epoch has run.
 
 ## 1. Finish G14 metadata and generated-caller qualification
 
@@ -86,3 +86,9 @@ actual generated callers without changing production code. Continue the G14
 coverage review by locating a still-unqualified expression/type/pattern/
 statement/lexical composition or protected consumer and testing its source
 effect before changing the producer.
+
+The [partial-effect SQLite continuation](audit_cross_context_partial_sql_5_0_6.md)
+now carries one of those source cases through generated School descriptors,
+twelve Save modes and twelve SQL file-sink settings. It verifies the earlier
+length and unchanged School route after a malformed middle expression; other
+metadata compositions and protected consumers retain their full gates.
