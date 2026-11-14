@@ -1,5 +1,8 @@
 # C++ generator parity plan
 
+The [current completion sequence](current_completion_sequence_5_0_6.md)
+orders the remaining G14, SQ02/G13 and G17 work before final P0-P7 signoff.
+
 Current full-native and source-check continuation:
 [the completed 1,065-test epoch](parity/current_full_native_optimized_terminal_1065_5_0_6.json.gz)
 passes all registered CTests with zero failures, errors or skips on 11,814

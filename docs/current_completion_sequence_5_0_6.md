@@ -1,0 +1,79 @@
+# Current completion sequence for the locked 5.0.6 goal
+
+This sequence applies the existing [P0-P7 plan](cpp_generator_parity_plan.md)
+and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.md)
+to the current source state. It does not change an acceptance verdict.
+
+At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
+two concrete external integrations remain excluded. Fourteen generator/runtime
+capabilities are qualified. G13, G14 and G17 remain partial. The last broad
+native execution covered 1,075/1,075 tests in a recovered controller epoch;
+the current registry has 1,077 tests after two focused archive checks. Those
+new checks passed, but no full 1,077-test epoch has run.
+
+## 1. Finish G14 metadata and generated-caller qualification
+
+Reconcile AP01-AP12 against the *current* producer and SDK source, starting with
+AP02's expression/type/pattern/statement/lexical composition and partial-effect
+boundaries. The 92-variant branch inventory is a locator, not proof of complete
+child-rule composition. Use the already installed corpus and locked `syn` /
+`proc-macro2` sources to identify a specific uncovered entry context or effect;
+add a finite original/current metadata witness, then an actual generated
+descriptor or SQLite consumer where the effect changes behavior. Keep compiler
+refusals, valid metadata, privacy classifications and source parse stages
+distinct. Reproduce affected SDKs before marking a producer change accepted.
+
+The separate quoted-column attribute case remains a pending compatibility
+decision. Existing approved JSON, quoted-foreign-key and invalid wire-naming
+exceptions do not cover it. Other G14 work can continue without that decision.
+
+**Gate:** no unresolved AP01-AP12 responsibility in the supported model scope;
+source-derived producer, compiler, generated-caller, artifact and relevant
+native/module evidence agree. A sample count alone does not close AP02.
+
+## 2. Close SQ02 provenance for G13 and GP13
+
+Enumerate every active parity comparator from the current CTest registry and
+its exact corpus or invariant, input/observer source, locked dependency set,
+selection, normalization and result cardinality. Retain actual source receipts
+and reject empty, truncated or substituted results. Historical source hashes
+remain immutable; current-source transitions need exact admissions and negative
+controls. The strict registered SQL mutation archive boundary is a scoped
+repair. Direct optimized execution of the frozen archive driver and other
+remaining Python assertion sites require separate disposition.
+
+**Gate:** every active comparator has a reviewed source or explicit invariant
+contract, including custom registrations and partial-result behavior. SQ03
+whole-source dispositions and SQ08 document/reference protocol already have
+their separate accepted scopes and must remain intact.
+
+## 3. Join G17 governed execution across layers
+
+After G14 metadata and SQ02 provenance are bounded, exercise generated model
+configurations through request-owned intent, Context Policy, Q/E, the runtime
+data service, SQL executor, SQLite provider, graph/ledger Save, transaction
+commit/rollback and safe log/audit publication. Compare actual locked-Rust and
+C++ outcomes, including denial, optimistic conflict, cancellation and
+post-commit delivery failure. Preserve distinct raw/safe events and the two
+Context allocation lifetimes. GP11 depends on G14; GP13 depends on SQ02;
+GP16 depends on the final integration gates.
+
+**Gate:** GP01-GP16 and SQ07 have complete supported-configuration evidence;
+ordinary CRUD or fixture-authored metadata is not substituted for governed
+graph Save or authoritative protected I/O.
+
+## 4. Run the final current-source gates and sign off P0-P7
+
+Reproduce the affected generated SDKs and original handwritten examples, run
+the current Java/compiler, native and imported-module gates, then one frozen
+full native epoch after the implementation changes settle. Use targeted
+ASan/UBSan for new lifetime or asynchronous cleanup work and MIPS/QEMU only
+for architecture/toolchain changes or an explicit request. Preserve exact
+input hashes, locked references, JUnit/registry membership and cleanup receipts.
+Close each phase only against its own exit criteria; update the capability
+ledger and README to state exactly what passed. Physical-router execution and
+external/cloud integrations are outside this edge-runtime gate.
+
+The next concrete task is the G14 AP02 coverage review: join the installed
+branch/child-rule corpora to the locked parser entry contexts, record uncovered
+composition and partial-effect cases, and select the first reproducible gap.
