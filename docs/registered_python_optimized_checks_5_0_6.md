@@ -1,5 +1,11 @@
 # Registered Python checks under optimization
 
+The current [business environment comparator repair](business_environment_optimized_controls_5_0_6.md)
+removes 25 more optimized-away assertions after a reproduced 68-case false
+acceptance. The 1,081-test native registry invokes 599 distinct Python entry
+scripts; 88 contain 1,009 direct `ast.Assert` nodes. This is the current direct
+entry inventory; imported helpers and full SQ02 remain separate.
+
 The current 1,075-test native registry invokes 594 distinct Python entry
 scripts. A current AST scan finds 92 registered scripts with 1,103
 `ast.Assert` nodes after the private-verifier, private SQL sink, runtime

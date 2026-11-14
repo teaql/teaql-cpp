@@ -5297,3 +5297,12 @@ receipt verifier passes five corruption controls under ordinary and optimized
 Python; three selected native CTests pass. The registry is 1,080 tests with no
 new complete epoch. Other AP02 grammar/configurations, SQ02 provenance and
 G13/G14/G17/P0-P7 exits remain open.
+
+The [generated business environment comparator repair](business_environment_optimized_controls_5_0_6.md)
+reproduces a second actual optimized-Python false acceptance: an altered result
+was rejected normally but all 68 startup/save/readback cases were reported
+complete under `python3 -O`. The exact 25-check source transition and three
+negative processes are retained. Direct optimized execution of the real
+68-case comparison and selected native 3/3 tests pass. The current registry is
+1,081 tests; 88 Python entries still contain 1,009 removable assertions, and
+no new full epoch is claimed. Full SQ02/G13/G14/G17/P0-P7 remain open.

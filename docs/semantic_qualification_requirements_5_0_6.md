@@ -1,5 +1,14 @@
 # G13 semantic qualification requirements
 
+Current SQ02 startup comparator checkpoint:
+[The generated business environment optimized-Python repair](business_environment_optimized_controls_5_0_6.md)
+reproduces one false 68-case completion and replaces exactly 25 removable
+assertions with unconditional source/output/cardinality checks. Three negative
+processes and the real 68-case optimized comparison pass; selected native
+CTest passes 3/3. The 1,081-test registry has 88 registered Python entry
+scripts with 1,009 remaining `ast.Assert` nodes. Complete SQ02/G13/G14/G17
+and P0-P7 exits remain open at **14 qualified / 3 partial**.
+
 Current source-verifier continuation: the
 [completed full native epoch](parity/current_full_native_optimized_terminal_1065_5_0_6.json.gz)
 passes **1,065/1,065** CTests on 11,814 unchanged inputs, with zero failures,

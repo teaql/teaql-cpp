@@ -29,8 +29,10 @@ def run(executable, value, key, version, database_url=':memory:', cwd=None):
             environment[name] = os.fsencode(content)
     result = subprocess.run([str(executable.resolve())], input=json.dumps(value) + '\n',
                             env=environment, cwd=cwd, text=True, capture_output=True)
-    assert 'ERROR: AddressSanitizer' not in result.stderr, result.stderr
-    assert 'UndefinedBehaviorSanitizer:' not in result.stderr, result.stderr
+    if not ('ERROR: AddressSanitizer' not in result.stderr):
+        raise AssertionError(result.stderr)
+    if not ('UndefinedBehaviorSanitizer:' not in result.stderr):
+        raise AssertionError(result.stderr)
     return dict(exit_code=result.returncode, stdout=result.stdout, stderr=result.stderr,
                 actual=json.loads(result.stdout) if result.returncode == 0 else None)
 
@@ -44,7 +46,8 @@ def filesystem_run(executable, key, version):
         result['filesystem'] = {str(p.relative_to(work)): p.stat().st_size if p.is_file() else 'directory'
                                 for p in sorted(work.rglob('*'))}
         database = work / 'nested/startup.sqlite'
-        assert database.is_file(), result
+        if not (database.is_file()):
+            raise AssertionError(result)
         with closing(sqlite3.connect(f'file:{database}?mode=ro', uri=True)) as connection:
             result['tables'] = connection.execute('SELECT name FROM sqlite_master ORDER BY name').fetchall()
         return result
@@ -58,15 +61,18 @@ def main():
     parser.add_argument('--filesystem-only', action='store_true',
                         help='Record original file creation before key startup failure')
     args = parser.parse_args()
-    assert bool(args.cpp) != bool(args.observe_original)
+    if not (bool(args.cpp) != bool(args.observe_original)):
+        raise AssertionError
     if args.record and args.record.exists():
         parser.error('Preserve prior evidence; select a new record path')
     original_path = ROOT / 'docs/parity/business_runtime_configuration_original_5_0_6.json'
     verify_record(original_path)
     original = json.loads(original_path.read_text())
     inputs = source_inputs()
-    assert original['source_inputs'] == inputs
-    assert original['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
+    if not (original['source_inputs'] == inputs):
+        raise AssertionError
+    if not (original['runtime_commit'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']):
+        raise AssertionError
     executable = args.cpp or args.observe_original
     report = dict(scope='Actual unchanged original factories' if args.observe_original else
                   'Actual generated C++ factories, without manual key injection; full startup/save/readback comparison',
@@ -82,10 +88,13 @@ def main():
     if args.observe_original:
         witnesses = json.loads(gzip.decompress(
             (ROOT / 'docs/parity/business_key_environment_source_witnesses_5_0_6.json.gz').read_bytes()))
-        assert witnesses['complete'] and witnesses['source_inputs'] == inputs
-        assert report['executable_sha256'] == witnesses['binary_sha256']
+        if not (witnesses['complete'] and witnesses['source_inputs'] == inputs):
+            raise AssertionError
+        if not (report['executable_sha256'] == witnesses['binary_sha256']):
+            raise AssertionError
         if args.filesystem_only:
-            assert args.record == FILESYSTEM
+            if not (args.record == FILESYSTEM):
+                raise AssertionError
             for case in original['source_environment_errors']:
                 if case['input']['entry'] != 'env' or case['name'] not in ('missing_key', 'invalid_hex'):
                     continue
@@ -93,14 +102,18 @@ def main():
                 report['cases'].append(dict(name=case['name'], key_hex=case['key_hex'],
                                              key_version=case['key_version'], **result))
                 save()
-                assert result['exit_code'] == 0 and result['actual'] == case['source_expected']
-                assert result['tables'] == []
-            assert len(report['cases']) == 2
+                if not (result['exit_code'] == 0 and result['actual'] == case['source_expected']):
+                    raise AssertionError
+                if not (result['tables'] == []):
+                    raise AssertionError
+            if not (len(report['cases']) == 2):
+                raise AssertionError
             report['complete'] = True
             save()
             print('Recorded two actual original file-creation/key-failure outcomes without schema.')
             return
-        assert args.record == BOUNDARIES
+        if not (args.record == BOUNDARIES):
+            raise AssertionError
         for case in witnesses['fresh']:
             key = bytes.fromhex(case['key_hex_bytes']) if case['key_hex_bytes'] is not None else None
             version = bytes.fromhex(case['version_bytes']) if case['version_bytes'] is not None else None
@@ -111,16 +124,22 @@ def main():
                            version_bytes=case['version_bytes'], **result)
                 report['cases'].append(row)
                 save()
-                assert result['exit_code'] == case['exit_code']
-                assert result['actual'] == case['actual']
+                if not (result['exit_code'] == case['exit_code']):
+                    raise AssertionError
+                if not (result['actual'] == case['actual']):
+                    raise AssertionError
                 if result['exit_code']:
-                    assert result['exit_code'] == 101 and 'not a char boundary' in result['stderr']
+                    if not (result['exit_code'] == 101 and 'not a char boundary' in result['stderr']):
+                        raise AssertionError
     else:
         verify_record(BOUNDARIES)
         boundaries = json.loads(gzip.decompress(BOUNDARIES.read_bytes()))
-        assert boundaries['complete'] and boundaries['source_inputs'] == inputs
-        assert len(original['cases']) == 27 and len(original['source_environment_errors']) == 18
-        assert len(boundaries['cases']) == 21
+        if not (boundaries['complete'] and boundaries['source_inputs'] == inputs):
+            raise AssertionError
+        if not (len(original['cases']) == 27 and len(original['source_environment_errors']) == 18):
+            raise AssertionError
+        if not (len(boundaries['cases']) == 21):
+            raise AssertionError
         for category, cases in [('successful_runtime', original['cases']),
                                 ('startup_errors', original['source_environment_errors']),
                                 ('additional_boundaries', boundaries['cases'])]:
@@ -138,23 +157,29 @@ def main():
                 report['cases'].append(row)
                 save()
                 if category == 'additional_boundaries' and case['exit_code']:
-                    assert result['exit_code'] == 1 and 'UTF-8 character boundary' in result['stderr'], row
+                    if not (result['exit_code'] == 1 and 'UTF-8 character boundary' in result['stderr']):
+                        raise AssertionError(row)
                     row['disposition'] = 'Rust panic/C++ out_of_range interrupt startup; distinct exits and diagnostics retained without normalization.'
                 else:
-                    assert result['exit_code'] == 0 and result['actual'] == expected, row
+                    if not (result['exit_code'] == 0 and result['actual'] == expected):
+                        raise AssertionError(row)
                     row['disposition'] = 'Complete original JSON outcome matches.'
                 save()
         verify_record(FILESYSTEM)
         filesystem = json.loads(gzip.decompress(FILESYSTEM.read_bytes()))
-        assert filesystem['complete'] and filesystem['source_inputs'] == inputs
-        assert len(filesystem['cases']) == 2
+        if not (filesystem['complete'] and filesystem['source_inputs'] == inputs):
+            raise AssertionError
+        if not (len(filesystem['cases']) == 2):
+            raise AssertionError
         for case in filesystem['cases']:
             result = filesystem_run(executable, case['key_hex'], case['key_version'])
             row = dict(category='filesystem_before_key_failure', source=case, cpp=result)
             report['cases'].append(row)
             save()
-            assert result['exit_code'] == 0 and result['actual'] == case['actual'], row
-            assert result['filesystem'] == case['filesystem'] and result['tables'] == case['tables'], row
+            if not (result['exit_code'] == 0 and result['actual'] == case['actual']):
+                raise AssertionError(row)
+            if not (result['filesystem'] == case['filesystem'] and result['tables'] == case['tables']):
+                raise AssertionError(row)
             row['disposition'] = 'Full startup error, created relative paths/file sizes and absent schema match.'
             save()
     report['complete'] = True
