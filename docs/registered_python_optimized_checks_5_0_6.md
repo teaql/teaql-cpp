@@ -1,5 +1,14 @@
 # Registered Python checks under optimization
 
+The current [sample-field clock comparator repair](generated_sample_fields_optimized_controls_5_0_6.md)
+reproduces one wrong-baseline false acceptance under optimized Python and
+replaces eight removable assertions in the comparator and fixed-clock
+admission control. Four negative processes and the existing source-corruption
+gate pass. Selected native CTests pass 4/4 normally and 4/4 under
+`PYTHONOPTIMIZE=1`. The 1,083-test registry invokes 601 distinct Python entry
+scripts; 82 retain 935 direct `ast.Assert` nodes. The earlier inventory below
+describes its own 1,082-test source state.
+
 The current [generated sample comparator repair](generated_sample_optimized_controls_5_0_6.md)
 reproduces four zero-observation false acceptances under optimized Python and
 replaces 66 direct assertions. The permanent control checks all source changes

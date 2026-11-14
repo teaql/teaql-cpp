@@ -169,7 +169,7 @@
     "tests/parity/compare_checker_clock_text_5_0_6.py": "5d342f8a8bbb4e5c927119d6ae5d6e8aa4fab49b8deef1dcdab8fa229032ee3f",
     "tests/parity/compare_clock_epoch_boundary_5_0_6.py": "c5ecdb884cbc919a3d7667f042748d207fdc19b7c389b888f3566ed28e121b58",
     "tests/parity/compare_constant_temporal_5_0_6.py": "cd5ec0b7446a393000b131a073c863ac77e8ab5114215af20a2e60833f562d1a",
-    "tests/parity/compare_generated_sample_fields.py": "7cec6001d3c47b05c7b3e1cb803f4ebcf74aeb2b312b87ae51854fa7a5be80e7",
+    "tests/parity/compare_generated_sample_fields.py": "8cd404b8bd945ce80e52fa5876901971b28d3f699b650d1d309f8bec50ea8392",
     "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
     "tests/parity/constant_temporal_5_0_6_cases.json.gz": "d366c2dbe52102e5a60f67af974355d561176e1b5664be351e13a90d7099e8a3",
     "tests/parity/expression_cli_cases.py": "b538589e11091253eda7ecba686ccd9214ea64d108f4e019b9a19419386cf9d1",
@@ -189,15 +189,16 @@
   },
   "support_files": {
     "scripts/clock_cli_protocol_5_0_6.py": "53cf4dfefd14c28516f962a2950ed683153547c7aceea1cef23b4f0d8c9f471f",
-    "scripts/clock_cli_source_provenance_5_0_6.py": "821d8db2a0738296ecb2027f32e87f52fc4af6c5aad1d757cfa2e74d61ec6018",
+    "scripts/clock_cli_source_provenance_5_0_6.py": "43ebd2358582c80c639ea72c54038ca8ef22b4739439415a190329eb1c8d8ee2",
     "scripts/expression_cli_source_provenance_5_0_6.py": "bcfc2e7d8d7eac976cf858d91601936694306fa4d0310a42e75f4a6e99d57881",
     "scripts/custom_public_cli_source_provenance_5_0_6.py": "70a4aaf84f54d4c0ee8ce0d312c3b80f45ed3609deacf213a860d43da4ef1d92",
     "scripts/profile_public_cli_source_provenance_5_0_6.py": "ef734c3619f0287a01a64e256dd9f505ceafd02ca94c29348346daadc114590d",
     "scripts/archive_driver_provenance_5_0_6.py": "720bd4c6f154c0b13eaa5d6fe6aa6742bd8adc9e20f9765321991557c3dba509",
-    "tests/parity/verify_sample_clock_admission_5_0_6.py": "3719afef88b91472bfa9adeb85b4dc755d883babb0755c35296f0bedfa3b6759",
+    "tests/parity/verify_sample_clock_admission_5_0_6.py": "8170ee0c5e54d0fece9f8defef7caa14704fa035307065eb12dcf6c519f6954a",
     "tests/parity/run_clock_boundary_5_0_6.py": "96118ba476d7277d5758a429e35160681900f32aac889375970d448803afd7f4",
     "tests/parity/verify_clock_cli_source_controls_5_0_6.py": "0d11784307098077b3a935682c4ffca859ba209e1a8ca6152d03de3d584bbb2e",
-    "scripts/optional_source_guard_transition_5_0_6.py": "20837c87e176b363e88b9be4b843a1f0e8bfc40e80a7caff19bd641a193052b2"
+    "scripts/optional_source_guard_transition_5_0_6.py": "20837c87e176b363e88b9be4b843a1f0e8bfc40e80a7caff19bd641a193052b2",
+    "tests/parity/verify_generated_sample_fields_optimized_controls_5_0_6.py": "62f23d99f159e12ce64df6800803b3e4f29cb482b390c863cd2e2032518b47d0"
   },
   "process_contract": {
     "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
@@ -356,7 +357,7 @@
       "tests/parity/compare_checker_clock_text_5_0_6.py": "5d342f8a8bbb4e5c927119d6ae5d6e8aa4fab49b8deef1dcdab8fa229032ee3f",
       "tests/parity/compare_clock_epoch_boundary_5_0_6.py": "c5ecdb884cbc919a3d7667f042748d207fdc19b7c389b888f3566ed28e121b58",
       "tests/parity/compare_constant_temporal_5_0_6.py": "cd5ec0b7446a393000b131a073c863ac77e8ab5114215af20a2e60833f562d1a",
-      "tests/parity/compare_generated_sample_fields.py": "7cec6001d3c47b05c7b3e1cb803f4ebcf74aeb2b312b87ae51854fa7a5be80e7",
+      "tests/parity/compare_generated_sample_fields.py": "8cd404b8bd945ce80e52fa5876901971b28d3f699b650d1d309f8bec50ea8392",
       "tests/parity/compare_values.py": "f5d1cedd61db95d3d0aff17f25452754061c8a0e7043bfb03d0c20a98b76b651",
       "tests/parity/constant_temporal_5_0_6_cases.json.gz": "d366c2dbe52102e5a60f67af974355d561176e1b5664be351e13a90d7099e8a3",
       "tests/parity/expression_cli_cases.py": "b538589e11091253eda7ecba686ccd9214ea64d108f4e019b9a19419386cf9d1",
@@ -376,14 +377,15 @@
     },
     "support_files": {
       "scripts/clock_cli_protocol_5_0_6.py": "53cf4dfefd14c28516f962a2950ed683153547c7aceea1cef23b4f0d8c9f471f",
-      "scripts/clock_cli_source_provenance_5_0_6.py": "821d8db2a0738296ecb2027f32e87f52fc4af6c5aad1d757cfa2e74d61ec6018",
+      "scripts/clock_cli_source_provenance_5_0_6.py": "43ebd2358582c80c639ea72c54038ca8ef22b4739439415a190329eb1c8d8ee2",
       "scripts/expression_cli_source_provenance_5_0_6.py": "bcfc2e7d8d7eac976cf858d91601936694306fa4d0310a42e75f4a6e99d57881",
       "scripts/custom_public_cli_source_provenance_5_0_6.py": "70a4aaf84f54d4c0ee8ce0d312c3b80f45ed3609deacf213a860d43da4ef1d92",
       "scripts/profile_public_cli_source_provenance_5_0_6.py": "ef734c3619f0287a01a64e256dd9f505ceafd02ca94c29348346daadc114590d",
       "scripts/archive_driver_provenance_5_0_6.py": "720bd4c6f154c0b13eaa5d6fe6aa6742bd8adc9e20f9765321991557c3dba509",
-      "tests/parity/verify_sample_clock_admission_5_0_6.py": "3719afef88b91472bfa9adeb85b4dc755d883babb0755c35296f0bedfa3b6759",
+      "tests/parity/verify_sample_clock_admission_5_0_6.py": "8170ee0c5e54d0fece9f8defef7caa14704fa035307065eb12dcf6c519f6954a",
       "tests/parity/run_clock_boundary_5_0_6.py": "96118ba476d7277d5758a429e35160681900f32aac889375970d448803afd7f4",
-      "tests/parity/verify_clock_cli_source_controls_5_0_6.py": "0d11784307098077b3a935682c4ffca859ba209e1a8ca6152d03de3d584bbb2e"
+      "tests/parity/verify_clock_cli_source_controls_5_0_6.py": "0d11784307098077b3a935682c4ffca859ba209e1a8ca6152d03de3d584bbb2e",
+      "tests/parity/verify_generated_sample_fields_optimized_controls_5_0_6.py": "62f23d99f159e12ce64df6800803b3e4f29cb482b390c863cd2e2032518b47d0"
     },
     "project": "tests/parity/rust_clock_cli_source_5_0_6/Cargo.toml",
     "drivers": {
@@ -487,5 +489,9 @@
       "path": "docs/parity/remaining_comparator_assert_rewrite_installed_5_0_6.json.gz",
       "sha256": "8afd6bd0b9ee681e65966e4da06abf4da26df7d1c4177fd72b54d0465a686c42"
     }
+  },
+  "sample_fields_assert_transition": {
+    "path": "docs/parity/generated_sample_fields_optimized_preedit_5_0_6.json.gz",
+    "sha256": "30e5690c1ad8a904583c428ddf8f504ab471010f0aecf32d7c3b44b8d80715a4"
   }
 }

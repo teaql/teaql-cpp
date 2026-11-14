@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tests/parity'))
 from compare_values import json_lines, same
 from expression_cli_cases import require_cases
+from verify_generated_sample_fields_optimized_controls_5_0_6 import check_transition
 
 REGISTRY = ROOT / 'tests/parity/clock_cli_source_contracts_5_0_6.json'
 
@@ -51,9 +52,25 @@ class Validator:
         entry = self.registry['source_execution']
         require(digest(self.root / entry['path']) == entry['sha256'], 'complete clock source identity')
         self.source = read(self.root / entry['path'])
+        sample_path = 'tests/parity/compare_generated_sample_fields.py'
+        prior_overlay = dict(self.registry['source_files'])
+        prior_overlay[sample_path] = self.source['source_files'][sample_path]
         self.current_source_files = reconcile_assert_rewrite_source_files(
-            self.root, self.source['source_files'], self.registry['source_files'],
+            self.root, self.source['source_files'], prior_overlay,
             self.registry['assert_rewrite_transition'])
+        transition = self.registry['sample_fields_assert_transition']
+        witness_path = self.root / transition['path']
+        require(digest(witness_path) == transition['sha256'], 'sample fields transition receipt')
+        witness = read(witness_path)
+        require(witness['complete'] is True and witness['whole_goal_complete'] is False
+                and witness['source_path'] == sample_path
+                and witness['source_sha256'] == self.current_source_files[sample_path],
+                'sample fields original source identity')
+        check_transition(witness['source_before'], (self.root / sample_path).read_text(),
+                         5, sample_path)
+        require(digest(self.root / sample_path) == self.registry['source_files'][sample_path],
+                'sample fields current source identity')
+        self.current_source_files[sample_path] = self.registry['source_files'][sample_path]
         return self
 
     def view(self, source, contract, result, run, rows):

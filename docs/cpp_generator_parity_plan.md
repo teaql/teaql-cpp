@@ -1,5 +1,15 @@
 # C++ generator parity plan
 
+Current SQ02 sample-field clock checkpoint:
+[the optimized-Python source repair](generated_sample_fields_optimized_controls_5_0_6.md)
+rejects an actual wrong-baseline false pass, preserves the original Rust clock
+execution receipt, and validates an eight-check current-source transition.
+Four negative processes pass. Selected ordinary and optimized native CTests
+pass 4/4 each; the existing source-corruption control passes 2/2. The current
+registry has 1,083 tests, 601 Python entry scripts, 82 with 935 direct
+assertions. G13/G14/G17 and P0-P7 remain open; no full current native epoch
+has run. Earlier counts below describe their original checkpoints.
+
 Current SQ02 generated sample checkpoint:
 [four optimized-Python comparator repairs](generated_sample_optimized_controls_5_0_6.md)
 replace 66 removable checks after four actual zero-observation false

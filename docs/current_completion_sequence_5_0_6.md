@@ -8,8 +8,8 @@ At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
 capabilities are qualified. G13, G14 and G17 remain partial. The last broad
 native execution covered 1,075/1,075 tests in a recovered controller epoch;
-the current registry has 1,082 tests after focused archive, AP02 and comparator
-checks. Those checks passed, but no full 1,082-test epoch has run.
+the current registry has 1,083 tests after focused archive, AP02 and comparator
+checks. Those checks passed, but no full 1,083-test epoch has run.
 
 ## 1. Finish G14 metadata and generated-caller qualification
 
@@ -61,6 +61,13 @@ Python. The exact 66-check transition and 16 negative processes pass; the
 selected real comparisons pass under both Python modes. The current registry
 has 600 Python entry scripts, 84 with 943 remaining direct assertions. These
 entries and imported helpers still require SQ02 review.
+
+The [sample-field clock comparator repair](generated_sample_fields_optimized_controls_5_0_6.md)
+rejects a reproduced wrong-baseline false pass under optimized Python. Eight
+source checks and four negative processes now run unconditionally; real
+85-case, clock-admission, source-identity and source-corruption checks pass.
+The current registry has 601 Python entry scripts, 82 with 935 remaining direct
+assertions. Full SQ02 provenance is still open.
 
 **Gate:** every active comparator has a reviewed source or explicit invariant
 contract, including custom registrations and partial-result behavior. SQ03

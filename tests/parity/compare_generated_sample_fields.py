@@ -17,15 +17,20 @@ if __name__ == '__main__':
     parser.add_argument('--clock', required=True)
     args = parser.parse_args()
     corpus = json.loads(gzip.decompress(Path(__file__).with_name('generated_sample_fields_5_0_6_cases.json.gz').read_bytes()))
-    assert corpus['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']
-    assert corpus['clock_fixture_sha256'] == hashlib.sha256((ROOT / 'tests/support/fixed_sample_clock.cpp').read_bytes()).hexdigest()
+    if not (corpus['baseline'] == json.loads((ROOT / 'upstream.lock.json').read_text())['commit']):
+        raise AssertionError
+    if not (corpus['clock_fixture_sha256'] == hashlib.sha256((ROOT / 'tests/support/fixed_sample_clock.cpp').read_bytes()).hexdigest()):
+        raise AssertionError
     for kind, fixture in [('temporal', 'sample_fields_temporal'), ('json_runtime', 'sample_fields_runtime')]:
         directory = ROOT / 'tests/generator/parity' / (fixture + '_rust')
         producer = corpus['producers'][kind]
-        assert producer == json.loads((directory / 'PROVENANCE.json').read_text())
-        assert hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']
+        if not (producer == json.loads((directory / 'PROVENANCE.json').read_text())):
+            raise AssertionError
+        if not (hashlib.sha256((ROOT / producer['model']).read_bytes()).hexdigest() == producer['model_sha256']):
+            raise AssertionError
         for file, digest in producer['files'].items():
-            assert hashlib.sha256((directory / file).read_bytes()).hexdigest() == digest, file
+            if not (hashlib.sha256((directory / file).read_bytes()).hexdigest() == digest):
+                raise AssertionError(file)
     rows = require_cases(corpus, 85, sample_field_inputs())
     inputs = [case['input'] for case in rows]
     expected = [case['expected'] for case in rows]

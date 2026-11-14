@@ -1,5 +1,15 @@
 # G13 semantic qualification requirements
 
+Current SQ02 sample-field clock checkpoint:
+[the optimized-Python source repair](generated_sample_fields_optimized_controls_5_0_6.md)
+rejects one reproduced wrong-baseline false pass through eight unconditional
+checks and four negative processes. The real 85-case comparison, clock
+admission and source contract pass in ordinary and optimized selected native
+CTest runs, 4/4 each; the source-corruption control passes 2/2. The current
+1,083-test registry has 601 Python entry scripts; 82 retain 935 direct
+assertions. Complete SQ02/G13/G14/G17 and P0-P7 remain open at **14 qualified
+/ 3 partial**. The preceding checkpoint retains its own 1,082-test inventory.
+
 Current SQ02 generated sample checkpoint:
 [four optimized-Python comparator repairs](generated_sample_optimized_controls_5_0_6.md)
 replace exactly 66 removable checks after four actual zero-observation false

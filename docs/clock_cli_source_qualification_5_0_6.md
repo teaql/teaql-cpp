@@ -1,5 +1,10 @@
 # Clock CLI source qualification, Rust 5.0.6
 
+The later [optimized-Python sample-field repair](generated_sample_fields_optimized_controls_5_0_6.md)
+adds an exact current-source overlay after this checkpoint's archived original
+execution. Its selected ordinary and optimized tests pass; the historical
+2,593-outcome and 53-control scope below remains tied to its original epoch.
+
 This checkpoint covers seven actual clock comparison entries. Fresh original
 execution matches **2,593 complete JSONL outcomes** and verifies **36 explicit
 epoch-boundary outcomes**. Source controls pass **53/53** and installed native

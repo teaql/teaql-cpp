@@ -136,30 +136,33 @@ def clock_transition_controls():
     historical = read(ROOT / contract['source_execution']['path'])
     recorded = historical['source_files']
     current = contract['source_files']
+    prior_overlay = dict(current)
+    sample_path = 'tests/parity/compare_generated_sample_fields.py'
+    prior_overlay[sample_path] = recorded[sample_path]
     transition = contract['assert_rewrite_transition']
-    if reconcile_assert_rewrite_source_files(ROOT, recorded, current, transition) != current:
+    if reconcile_assert_rewrite_source_files(ROOT, recorded, prior_overlay, transition) != prior_overlay:
         raise RuntimeError('Valid Clock source transition rejected')
     changed = transition['paths'][0]
-    unchanged = next(name for name in current if name not in transition['paths'])
+    unchanged = next(name for name in prior_overlay if name not in transition['paths'])
     candidates = []
-    altered = dict(current)
+    altered = dict(prior_overlay)
     altered[changed] = '0' * 64
     candidates.append(('changed_current_hash', recorded, altered, transition))
     altered = dict(recorded)
     altered[changed] = '0' * 64
-    candidates.append(('changed_original_hash', altered, current, transition))
-    altered = dict(current)
+    candidates.append(('changed_original_hash', altered, prior_overlay, transition))
+    altered = dict(prior_overlay)
     altered[unchanged] = '0' * 64
     candidates.append(('unlisted_source_change', recorded, altered, transition))
     altered = copy.deepcopy(transition)
     altered['paths'] = []
-    candidates.append(('missing_transition_path', recorded, current, altered))
+    candidates.append(('missing_transition_path', recorded, prior_overlay, altered))
     altered = copy.deepcopy(transition)
     altered['rewrite']['sha256'] = '0' * 64
-    candidates.append(('changed_rewrite_receipt', recorded, current, altered))
+    candidates.append(('changed_rewrite_receipt', recorded, prior_overlay, altered))
     altered = copy.deepcopy(transition)
     altered['helper_sha256'] = '0' * 64
-    candidates.append(('changed_helper_identity', recorded, current, altered))
+    candidates.append(('changed_helper_identity', recorded, prior_overlay, altered))
     results = []
     for label, old, new, scope in candidates:
         try:

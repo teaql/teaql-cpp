@@ -107,9 +107,10 @@ def main():
                 else:
                     accepted, reason = True, ''
                     if mode == 'complete':
-                        assert same(output, [dict(sequence=i, wall_millis=v['wall_millis'],
-                                                 text='snow 雪\u0085\u2028\u2029')
-                                             for i, v in enumerate(inputs)])
+                        if not same(output, [dict(sequence=i, wall_millis=v['wall_millis'],
+                                                  text='snow 雪\u0085\u2028\u2029')
+                                             for i, v in enumerate(inputs)]):
+                            raise AssertionError
                 record['results'].append(dict(entry='transport', control=mode,
                                               expected_accepted=mode == 'complete', accepted=accepted,
                                               reason=reason))
@@ -119,7 +120,8 @@ def main():
             inputs = [v['input'] for v in rows]
             actual = observe_fixed(args.cpp_build_dir.resolve() / 'teaql_generated_sample_fields_probe',
                                    inputs, clock)
-            assert same(actual, [v['expected'] for v in rows]), 'Native baseline differs before controls'
+            if not same(actual, [v['expected'] for v in rows]):
+                raise AssertionError('Native baseline differs before controls')
             record['native'] = dict(inputs=inputs, observed=actual,
                                     binary_sha256=digest(args.cpp_build_dir.resolve()
                                                          / 'teaql_generated_sample_fields_probe'))
@@ -170,7 +172,8 @@ def main():
             record['complete'] = True
     finally:
         record['input_hashes_after'] = {n: digest(ROOT / n) for n in sorted(names)}
-        assert record['input_hashes_after'] == before
+        if not (record['input_hashes_after'] == before):
+            raise AssertionError
         record['owned_directory_removed'] = owned is not None and not owned.exists()
         save()
     print('Sample clock admission:', len(record['results']), 'controls;',

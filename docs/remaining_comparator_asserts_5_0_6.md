@@ -1,5 +1,11 @@
 # Comparator checks under Python optimization
 
+The later [sample-field comparator transition](generated_sample_fields_optimized_controls_5_0_6.md)
+adds a separate current-source overlay after the Clock transition described
+below. The permanent control now isolates its six historical Clock mutations
+against their original intermediate overlay; its selected CTest passes 1/1.
+The 51-script, 425-check evidence below remains tied to its original epoch.
+
 The 1,064-test native registry at commit `100242a9` ran 286 distinct
 `compare_*_5_0_6.py` scripts. Fifty-one scripts still contained 425 Python
 `assert` statements after the earlier optional Rust observer repair. Python

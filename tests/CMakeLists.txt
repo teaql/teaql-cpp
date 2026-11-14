@@ -5272,6 +5272,10 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_sample_clock_admission_5_0_6.py
         --cpp-build-dir ${CMAKE_BINARY_DIR})
     set_tests_properties(parity_sample_clock_admission PROPERTIES TIMEOUT 180 RUN_SERIAL TRUE)
+    add_test(NAME parity_generated_sample_fields_optimized_controls COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_sample_fields_optimized_controls_5_0_6.py)
+    set_tests_properties(parity_generated_sample_fields_optimized_controls PROPERTIES
+        TIMEOUT 120 FIXTURES_REQUIRED clock_cli_source)
     add_test(NAME parity_clock_cli_source_contracts COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/scripts/clock_cli_source_provenance_5_0_6.py
         --verify-only --ctest-build-dir ${CMAKE_BINARY_DIR})
