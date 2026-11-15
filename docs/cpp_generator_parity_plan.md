@@ -1,6 +1,18 @@
 # C++ generator parity plan
 
-Current G14 governed-consumer continuation:
+Current complete native execution after the parser and governed-consumer changes:
+[The fresh epoch](current_full_native_after_primitive_5_0_6.md) passes
+**1,101/1,101** with exact JUnit/registry membership, zero failures/errors/skips,
+11,999 unchanged inputs, fixed references and a final no-work build.
+All 707 native consumers retain their hashes. The actual ordinary compiler
+gate verifies 57 positive and 144 negative contracts with complete output;
+unconditional ordinary/optimized receipt admission rejects sixteen corruptions
+per mode. All 1,817 C++ inputs and 80 retained SDKs/3,560 code+Assist files
+remain identical. This closes SQ05 execution for the frozen checkpoint;
+complete G14/AP02 metadata/identity and G13/G17/P0-P7 exits stay open at
+**14 qualified / 3 partial**. Pending design decisions retain their own scope.
+
+Previous G14 governed-consumer continuation:
 [Two composed primitive/tuple configurations](ap02_primitive_const_governed_execution_5_0_6.md)
 carry all eight qualified type expressions into actual generated School domains.
 Both preserve eight typed relation descriptors; complete/partial parsing gives
