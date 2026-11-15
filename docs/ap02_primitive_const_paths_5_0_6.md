@@ -1,10 +1,11 @@
 # AP02 primitive constants and typed tuple values
 
-This copied candidate addresses generation-time reverse-relation type expressions
-against runtime fe82a18982415f1746df9a2cf7c42f5e9abdc6d3 and generator
-45e1572c4956ca963410d8ea436ead3c8857087a. Production remains the separately
-qualified scalar-constant installation on cpp_support commit 2816302e.
-No C++ runtime implementation, ownership domain or application API changes.
+This installed continuation addresses generation-time reverse-relation type
+expressions against runtime fe82a18982415f1746df9a2cf7c42f5e9abdc6d3 and
+generator 45e1572c4956ca963410d8ea436ead3c8857087a. Production is installed
+on cpp_support commit ec8eac64f0b69808b0017cf72d74e4aef1523e1d.
+The prior scalar installation retains its own source epoch. No C++ runtime
+implementation, ownership domain or application API changes.
 
 ## Actual source observations
 
@@ -85,7 +86,7 @@ reject fifteen corrupt candidate, compiler, source, fixture, patch and SQL
 variants under ordinary Python and optimization. Pinned formatting and module
 path/provenance checks pass with unchanged production source inputs.
 
-## Historical controller failure and remaining installation
+## Preserved controller failures
 
 The [first supplemental expression controller](parity/ap02_primitive_const_expression_matrix_v2_5_0_6.json.gz)
 writes a literal escaped newline after 42 Rust programs. Its compile failures
@@ -94,10 +95,45 @@ preserves that distinction. The [repaired run](parity/ap02_primitive_const_expre
 uses exact source newlines and positive controls. The complete expression
 continuation above supersedes only its declared observation scope.
 
-Production installation, preserved/new compiler-contract SDK reproduction,
-eighty retained SDKs and exact source-guard transitions remain pending.
 The [copied checkpoint](parity/ap02_primitive_const_path_candidate_checkpoint_5_0_6.json.gz)
-binds this bounded result and unchanged production inputs. It does not complete
-all supported Rust type/trait/expression/model configurations, AP01-AP12/G14,
-G13/G17 or P0-P7. Status remains **14 qualified / 3 partial**. The pending
-Option-model and quoted-column attribute decisions remain independent.
+retains the pre-installation verdict and its unchanged production inputs.
+
+## Production installation and source admission
+
+The [production receipt](parity/ap02_primitive_const_path_installed_5_0_6.json.gz)
+passes 213 Java tests and freshly reproduces all 319 complete SDKs: 258
+preserved and 61 new contracts. Their 235 accepted and 84 refused compiler
+outcomes are explicitly reused after complete SDK identity. Production performs
+zero new C++ compiler processes. Expected projection counts distinguish the
+fifty successful typed projections from the two ignored malformed nested types.
+
+All [eighty retained SDKs](parity/ap02_primitive_const_path_sdks_5_0_6.json.gz)
+pass refresh and independent reproduction checks. Their 3,560 implementation
+and Assist files remain identical; only one parser fingerprint changes per
+manifest. The [production SQL continuation](parity/ap02_primitive_const_path_production_sql_reuse_5_0_6.json.gz)
+recompiles Java and reproduces all eight complete consumer SDKs. It explicitly
+reuses the forty actual copied-candidate query/E/JSON outcomes and performs
+zero new SQL executions.
+
+The [exact helper transition](parity/ap02_primitive_const_path_helper_transition_5_0_6.json.gz)
+preserves existing validation bodies through seven import/input-predicate
+edits. The [admission controls](parity/ap02_primitive_const_path_admission_controls_5_0_6.json.gz)
+reject 36 new and 128 preserved corruptions per Python mode, including imported
+helpers and production selection recipes. The [six affected CTests](parity/ap02_primitive_const_path_native_5_0_6.json.gz)
+pass under ordinary and optimized Python. Acceptance checks are unconditional.
+
+The [ordinary source join](parity/sq02_primitive_const_path_source_join_5_0_6.json.gz)
+and [optimized join](parity/sq02_primitive_const_path_source_join_optimized_5_0_6.json.gz)
+admit 105 exact source transitions on 11,998 inputs, retaining all 716 registered
+Python commands and 707 native consumer hashes. Each rejects ten transition
+corruptions. These joins extend the retained full 1,101-test native epoch
+through bounded source admissions and affected caller execution; they do not
+claim a fresh full native, sanitizer, MIPS or physical-device run.
+
+The [installation milestone](parity/ap02_primitive_const_path_installation_milestone_5_0_6.json.gz)
+binds the exact post-test metadata update. Only G14 evidence and open questions
+change. All supported Rust type/trait/expression/model configurations,
+AP01-AP12/G14, G13/G17 and P0-P7 remain separate obligations. Capability status
+remains **14 qualified / 3 partial**. The pending Option-model and quoted-column
+attribute decisions remain independent. Owned disposable output directories
+are removed after their receipts are retained; shared caches remain untouched.

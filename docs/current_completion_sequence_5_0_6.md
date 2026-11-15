@@ -5,17 +5,24 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
-Current copied G14 follow-up: [primitive constants and typed tuples](ap02_primitive_const_paths_5_0_6.md)
-pass 213 Java tests and all 61 C++ compiler/projection contracts. All C++
-compiler invocations are fresh; completed original outcomes are explicitly
-reused after fresh full-SDK identity. The seventy-constant catalog, 928 actual
-expression observations and five complete derive-normalized index witnesses
-retain their separate contexts. Eight actual SQLite model pairs match forty
-query/E/JSON outcomes. The exact three-file patch is reviewable; production
-installation, all retained SDKs and source admissions remain next. The installed
-scalar checkpoint below remains authoritative; full G13/G14/G17/P0-P7 stay open.
+Current G14 primitive-constant and typed-tuple repair:
+[Production installation](ap02_primitive_const_paths_5_0_6.md) passes 213 Java
+tests and reproduces all 319 complete SDK contracts. Their 235 accepted and
+84 refused compiler outcomes are explicitly reused through complete artifact
+identity; production performs zero new C++ compiler processes. The copied
+qualification contributes 61 fresh C++ compiler checks with completed original
+outcomes explicitly reused after full-SDK identity. All eighty retained SDKs
+preserve 3,560 code/Assist files and refresh one parser fingerprint per manifest.
+Eight actual SQLite model pairs match forty query/E/JSON outcomes; production
+reproduces their complete SDKs and explicitly reuses those results.
+Ordinary and optimized controls reject 36 new and 128 preserved corruptions
+per mode; affected CTests pass 6/6 per mode. Current source joins admit 105
+exact changes on 11,998 inputs, retain 716 commands/707 native consumers and
+reject ten transition corruptions per mode. Complete AP01-AP12/G14, G17 and
+P0-P7 remain open at **14 qualified / 3 partial**. Both pending compatibility
+decisions remain independent.
 
-Current G14 scalar constant repair:
+Previous G14 scalar constant repair:
 [Production installation](ap02_scalar_const_values_5_0_6.md) passes 203 Java
 tests and reproduces all 258 complete compiler-contract SDKs. Their 183 accepted
 and 75 refused compiler outcomes are explicitly reused through complete artifact
