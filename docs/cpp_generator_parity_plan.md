@@ -1,6 +1,24 @@
 # C++ generator parity plan
 
-Current SQ02 paired source/native checkpoint:
+Current SQ02 source/control continuation:
+[The finite disposition and reuse admission](source_control_dispositions_5_0_6.md)
+covers all 203 exact current ordinary command outcomes across admitted epochs,
+including all 201 actual compiler contracts. Two stale source-receipt bindings
+are repaired and pass 2/2 actual CTests in both Python modes. The optimized
+collections pass 89/89, 72/72 and 80/80 actual tests and root observations:
+201 unique registrations, 241 selections and forty fixture overlaps, retaining
+the original timeouts. P0's optimized refusal and the selected two-case
+optimized compiler result remain separately scoped.
+The optional audit observer passes twenty process fixtures, four inventory
+corruptions and root protocol controls in both controller modes. Full SQ02,
+G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**; the last broad
+native epoch remains historical. The finite 203-registration disposition index
+is complete. A separately retained, copied G14 nominal-type candidate matches
+22 original compiler outcomes and preserves fifteen SQLite query results
+through exact SDK reproduction; installation and permanent regressions remain
+the next implementation step.
+
+Previous SQ02 paired source/native checkpoint:
 [The complete paired command join](paired_source_binding_join_5_0_6.md)
 binds all 35 native execution peers to their source fixtures. Eight structural
 controls reject in both Python modes; actual source/native/index CTests pass

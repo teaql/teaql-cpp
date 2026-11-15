@@ -3829,7 +3829,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_generated_credential_mutation_receipt_5_0_6.py)
     set_tests_properties(generated_credential_mutation_receipt_contracts PROPERTIES TIMEOUT 60)
     add_test(NAME parity_audit_cross_context_corpus_contracts COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_audit_cross_context_corpus_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_audit_cross_context_corpus_current_5_0_6.py)
     set_tests_properties(parity_audit_cross_context_corpus_contracts PROPERTIES TIMEOUT 120)
     add_test(NAME parity_ap02_reverse_relation_type_corpus COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_ap02_reverse_relation_type_corpus_5_0_6.py)
@@ -3838,7 +3838,7 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND AND NOT CMAKE_CROSSCOMPILING
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_ap02_reverse_relation_sql_receipt_5_0_6.py)
     set_tests_properties(parity_ap02_reverse_relation_sql_receipt PROPERTIES TIMEOUT 120)
     add_test(NAME parity_ap02_cross_context_partial_sql_receipt COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_ap02_cross_context_partial_sql_receipt_5_0_6.py)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/verify_ap02_cross_context_partial_sql_receipt_current_5_0_6.py)
     set_tests_properties(parity_ap02_cross_context_partial_sql_receipt PROPERTIES TIMEOUT 120)
 endif()
 

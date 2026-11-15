@@ -70,9 +70,40 @@ not 203 missing features or unexecuted tests. Disposition those registrations
 and remaining executed dynamic/string paths before whole SQ02 signoff, reusing
 qualified unchanged evidence and adding tests only for identified gaps.
 
+The [source/control continuation](source_control_dispositions_5_0_6.md)
+classifies all 203 remaining registrations into explicit responsibilities. Two
+receipt failures share one stale corpus-declaration hash; their qualified entry
+copies pass the actual two CTests in both Python modes. Exact source admission
+now covers all 203 ordinary registrations through the admitted 136 outcomes
+and the final 67-target / 108-test selection, including the full 57-positive /
+144-negative compiler run. The optimized groups pass 89/89, 72/72 and 80/80
+actual tests and root observations. Their 241 selections contain forty fixture
+overlaps and cover exactly 201 unique registrations. P0's enforced refusal and
+the actual one-positive / one-negative optimized compiler selection retain
+their separate scopes.
+Optional audit-only observation avoids the demonstrated function-trace
+timeout; its twenty observer cases, four inventory controls and root protocol
+corruptions pass in both controller modes. The
+[complete finite disposition index](parity/source_control_complete_dispositions_5_0_6.json.gz)
+now joins all 203 responsibilities, current outcomes, source-owner consumers
+and the declared helper/dynamic-source reviews. All four continuation batches
+are terminal; whole SQ02 and capability/phase signoff remain separate.
+
 The immediate order is acceptance integrity, generated metadata, governed
 execution, then final integration. Known acceptance failures take precedence
 over adding qualification results that depend on those checks.
+
+The independent [module-path consumer diagnostic](ap02_reverse_relation_module_paths_5_0_6.md)
+identifies the next concrete G14 fix: original Rust accepts `super::Item` and
+`crate::item::Item`, while current C++ generation emits those Rust paths
+unchanged and fails compilation. The `Self` control passes in both languages.
+The reviewed copied candidate now matches 22 original compiler outcomes:
+sixteen accepted types and six rejected boundaries. Twenty earlier compiler
+results and fifteen SQLite query results are reused through exact reproduction
+of their 23 generated SDKs; two empty-`Self` cases have fresh original and C++
+compiler evidence. The audit is terminal. Commit this checkpoint, install the
+final candidate, add permanent regressions, and qualify production generation
+and source/artifact admissions before broader metadata signoff.
 
 ## Bounded work packages and exit criteria
 

@@ -1,6 +1,19 @@
 # Rust 5.0.6 baseline upgrade
 
-Current source status: **118 accepted / 4 pending_review / 2 excluded_external**.
+Current source status from the [active dispositions](parity/v5_0_6/source_dispositions.json):
+**122 accepted / 0 pending_review / 2 excluded_external**. The
+[capability ledger](cpp_generator_parity_ledger.json) records **14 qualified /
+3 partial**; G13, G14 and G17 remain partial. Follow the
+[current completion sequence](current_completion_sequence_5_0_6.md) for the
+remaining acceptance-integrity, metadata, governed-execution and integration
+requirements. The registry has 1,101 tests; the last broad 1,075/1,075 epoch
+retains its historical scope. Subsequent checkpoint counts describe their
+recorded epochs. The [finite source/control review](source_control_dispositions_5_0_6.md)
+now covers all 203 ordinary registrations and 201 optimized registrations
+through explicit terminal joins. The [nominal-type candidate](ap02_reverse_relation_module_paths_5_0_6.md)
+is validated in copied Java sources and remains uninstalled.
+
+Historical graph-service checkpoint: **118 accepted / 4 pending_review / 2 excluded_external**.
 The latest [complete graph-service acceptance](service_graph_source_acceptance_5_0_6.md)
 qualifies SG01-SG26 with fresh original1+14 observers/9694 outputs and joined
 native30/module30.
