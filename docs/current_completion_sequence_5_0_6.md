@@ -2,7 +2,17 @@
 
 This sequence applies the existing [P0-P7 plan](cpp_generator_parity_plan.md)
 and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.md)
-to the current source state. It does not change an acceptance verdict.
+to the current source state. Acceptance verdicts come from the cited receipts
+and their declared scopes.
+
+Current completion checkpoint: the [registered SQ02 aggregate](sq02_registered_completion_5_0_6.md)
+closes provenance and acceptance-boundary reconciliation for all 513 comparison
+commands and 203 source/control/invariant commands in the exact 1,101-test
+registry. Both Python modes reject twelve aggregate corruptions and pass the
+31 existing binding controls. All 707 retained native consumers match, and the
+six changed guards retain their actual current passes in both modes. G14
+metadata, G17 governance joins and final current integration remain open. The
+earlier checkpoints below retain their own source epochs and bounded verdicts.
 
 At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
@@ -115,7 +125,7 @@ and count a capability as qualified only after its complete exit criteria pass.
 
 | Order | Work package | Exit evidence |
 | --- | --- | --- |
-| 1 | Finish SQ02 acceptance integrity | Disposition the finite 203 source/control/invariant registrations and remaining executed dynamic helper/string paths. The 35 paired source/native commands, generator-child repair and thirteen outside-directory comparisons, 305 direct and 160 named-custom joins, two helper continuations and preceding 42-script direct-check repair are qualified in their declared scopes. Active checks reject invalid input under ordinary and optimized Python. Historical gates have an explicit enforced execution boundary. Every comparator retains exact complete source observations, normalization and result cardinality. |
+| 1 | SQ02 acceptance integrity: qualified current cohort | The registered aggregate reconciles all 513 comparisons, 203 source/control/invariant registrations, 64 primary source owners and ten helper/dynamic-source reviews. Ordinary and optimized controls reject missing/substituted evidence. Preserve exact source admissions, enforced historical execution boundaries and scoped compiler results when changing this cohort. |
 | 2 | Close G14 generated metadata | Reconcile AP01-AP12 against locked 5.0.6 responsibilities within the supported model scope. Generated descriptors, compiler/caller results, artifact reproduction and approved compatibility exceptions agree. The column-literal exception candidate remains pending user choice. |
 | 3 | Close G17 governed execution | Join accepted metadata to generated Q/E, Checker/Fix, whole-plan Policy, graph Save, SQLite commit/rollback and safe audit/log publication. Retain actual source comparisons for denial, stale versions and post-commit delivery failure. |
 | 4 | Sign off the frozen implementation | Reproduce affected SDKs/examples, run the Java/compiler and required module gates, then one complete current native epoch with exact registry/JUnit membership and unchanged inputs. Update each P0-P7 exit and the capability ledger from those results. |
@@ -126,7 +136,11 @@ checks. Each package retains compact evidence and removes only verified,
 completed task-owned disposable outputs. A direct assertion count alone does
 not close SQ02; additional arbitrary parser examples alone do not close G14.
 
-## 1. Close SQ02 provenance for G13 and GP13
+## 1. Preserve qualified SQ02 provenance for G13 and GP13
+
+The exact current registered cohort is qualified by the aggregate above. Apply
+the following requirements to later source, registry or comparator transitions;
+they do not require repeating unchanged historical executions.
 
 Enumerate every active parity comparator from the current CTest registry and
 its exact corpus or invariant, input/observer source, locked dependency set,

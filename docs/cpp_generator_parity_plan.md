@@ -11,7 +11,17 @@ native guards pass 6/6 per mode through bounded source admission. Runtime C++
 functions, ownership and module exports remain unchanged. Complete AP02/G14,
 G13/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
 
-Current SQ02 source/control continuation:
+Current SQ02 completion checkpoint:
+[The complete registered aggregate](sq02_registered_completion_5_0_6.md)
+reconciles all 513 comparison commands and 203 source/control/invariant commands
+with 64 primary source owners. Both Python modes pass twelve aggregate and
+31 binding controls. All 707 retained native consumers match; six changed
+guards retain actual current 6/6 passes per mode. This closes SQ02 for that
+exact registry and source epoch, without a new full native execution. G14,
+G17, current integration and P0-P7 retain their separate exits; capability
+status remains **14 qualified / 3 partial**.
+
+Previous SQ02 source/control continuation:
 [The finite disposition and reuse admission](source_control_dispositions_5_0_6.md)
 covers all 203 exact current ordinary command outcomes across admitted epochs,
 including all 201 actual compiler contracts. Two stale source-receipt bindings
