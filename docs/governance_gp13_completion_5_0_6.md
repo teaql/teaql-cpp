@@ -43,8 +43,10 @@ python3 -B scripts/governance_status_current_5_0_6.py --record /tmp/gp13_ordinar
 python3 -B -O scripts/governance_status_current_5_0_6.py --record /tmp/gp13_optimized.json.gz
 ```
 
-Use fresh report paths. The reader deliberately refuses unqualified later
-source changes. This checkpoint changes no runtime or generator implementation
+Use fresh report paths on an isolated checkout of that checkpoint. This
+point-in-time reader deliberately retains its strict native/source epoch;
+the later container projection qualification below has separate current joins.
+This checkpoint changes no runtime or generator implementation
 and does not establish full G17 acceptance. Capability status stays
 **14 qualified / 3 partial**.
 
@@ -56,3 +58,12 @@ the GP13 cohort. Its retained full compiler output covers 57 positives and
 that complete observation. The controller removes its 1,631,661-byte owned
 log/state directory after embedding terminal evidence. GP16 retains complete
 metadata/capability/phase exits independently of this SQ05 native result.
+
+The subsequent [container source qualification](ap02_container_entity_types_5_0_6.md#installed-production-acceptance)
+admits all 85 reviewed implementation/manifest/validation changes on 11,980
+inputs. Both source joins retain the complete 716-command registry and 707
+native consumers; actual affected callers pass 6/6 and 42 source/result/epoch
+controls reject in each Python mode. The exact post-test G14 ledger update
+is metadata-only and preserves all capability statuses. These joins extend
+the current GP13 provenance verdict without rewriting the original matrix or
+pretending that its earlier status-reader process ran on the later source.

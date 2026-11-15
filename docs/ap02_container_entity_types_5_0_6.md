@@ -1,9 +1,15 @@
-# AP02 standard-container entity projection diagnostics
+# AP02 standard-container entity projection qualification
 
-The complete locked Rust generated libraries accept six entity-type
-projections that the current C++ generated libraries reject. These are
-reproduced C++ generation defects. No production repair or compatibility
-exception is claimed by this diagnostic.
+The six reproduced C++ projection defects are repaired on `cpp_support`
+commit `3187dad4bf3779ea361b250cb77f987296b6919b`. Production qualification passes
+173 Java tests and all 56 actual C++ compiler outcomes. Eighty SDKs reproduce
+3,560 unchanged implementation/guidance files; only the parser fingerprint
+changes in each manifest. Current production SQL consumer artifacts reproduce
+the six-model/thirty-result execution exactly, with those runtime results
+explicitly reused. This accepts the reviewed repair, not complete AP02/G14.
+
+The historical diagnostics and copied-candidate scopes below remain intact.
+Neither pending reference-defect exception is approved by this repair.
 
 The references remain runtime `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`
 and generator `45e1572c4956ca963410d8ea436ead3c8857087a`.
@@ -17,7 +23,7 @@ each complete C++ model facade. Successful Rust binaries print the generated
 Item entity identity. Native C++ observation is syntax compilation, not SQL,
 E evaluation or JSON execution.
 
-| Encoded relation JSON type | Locked Rust | Current C++ |
+| Encoded relation JSON type | Locked Rust | Initial C++ |
 | --- | --- | --- |
 | `Self` | Accept | Accept |
 | `<Vec<Self> as IntoIterator>::Item` | Accept | Reject |
@@ -39,8 +45,9 @@ diagnostic cases completed; parity is explicitly false for the six named cases.
 
 The [reviewable source patch](proposals/container_entity_type_projection.patch)
 contains the exact corrected parser and six permanent regression methods.
-It passes `git apply --check` against the unchanged production workspace.
-Apply it only after the active frozen execution epoch terminates.
+It passed `git apply --check` against the preceding production workspace before
+the implementation was committed and installed. The workflow below describes
+the completed repair packages and their independent acceptance obligations.
 
 1. Extend the generator's existing entity-type projection resolver before its
    nominal module lookup. Preserve the difference between a container and its
@@ -196,21 +203,60 @@ permanent regression methods. Actual offline Maven packaging succeeds, followed
 by fresh compilation and all 173 Java tests. This is committed implementation
 verification, with `installed_to_cpp_support=false` retained in the receipt.
 
-The active `cpp_support` checkout remains at
+During that isolated verification, the active `cpp_support` checkout remained at
 `4a82e0517c6c889c1d9df55fee3e74a7ab685bf9` while the full native source epoch
 runs. All 11,977 execution inputs and both locked references remain unchanged.
 After checking clean tracked/untracked state, the absence of nested
 repositories and retention of the commit on its branch, the owned worktree
 was removed without force. Its measured source/build output size was
 51,852,083 bytes. Package hashes and terminal commands are retained; disposable
-JARs and classes are removed. Merge the retained commit into `cpp_support`
-after the frozen epoch terminates, then qualify current production artifacts
-and their exact source admission.
+JARs and classes are removed. The retained commit was subsequently merged into
+`cpp_support` after the frozen epoch terminated; installed qualification is
+recorded below.
 
 The [production installation recipe](proposals/verify_container_type_installation.patch)
 is prepared as a separate, syntax-checked patch and passes `git apply --check`.
-After installation it must package the current producer, run 173 fresh Java
-tests, regenerate all 56 compiler selections, compare complete SDK bytes and
-execute each production C++ compiler contract. Original Rust outcomes are
-explicitly reused from the sealed matrices. Recipe execution remains pending;
-syntax and patch checks are not production acceptance.
+The installed [production recipe](../scripts/verify_container_type_installation_5_0_6.py)
+packages the current producer, runs 173 fresh Java tests, regenerates all 56
+compiler selections, compares complete SDK bytes and executes each production
+C++ compiler contract. Original Rust outcomes are explicitly reused from the
+sealed matrices. The earlier two startup refusals remain in their separate
+boundary receipt; syntax and patch checks alone are not production acceptance.
+
+## Installed production acceptance
+
+| Gate | Actual scope |
+| --- | --- |
+| [Production generation/compiler recipe](parity/ap02_container_entity_types_installed_5_0_6.json.gz) | Maven packaging, 173 Java tests and 56 actual C++ compiler outcomes pass: forty accepts and sixteen refusals. Whole generated SDKs match the sealed copied matrices. |
+| [SDK regeneration](parity/ap02_container_entity_types_sdks_5_0_6.json.gz) | Six refresh/check commands pass for all eighty SDKs and 3,560 code/guidance files. Each metadata file changes only the single reviewed parser fingerprint. |
+| [Production SQL artifact identity](parity/ap02_container_entity_types_production_sql_reuse_5_0_6.json.gz) | Fresh production Java regenerates all six complete, formatted SDKs byte for byte. Actual compiled Java, runtime sources, libraries and dependencies match the copied execution. Thirty original/C++ SQL/E/JSON outcomes are explicitly reused; this receipt executes no additional SQL. |
+| [Bound ordinary/optimized controls](parity/ap02_container_entity_types_admission_controls_bound_5_0_6.json.gz) | Fourteen new and fifteen plus thirteen preserved corruptions reject per mode. Source/reference hashes are identical before and after execution. |
+| [Actual affected callers](parity/ap02_container_entity_types_native_5_0_6.json.gz) | The exact six registered CTests pass 6/6 per mode with complete JUnit membership and unchanged inputs. |
+| [Current source join](parity/sq02_container_type_source_join_5_0_6.json.gz), [optimized join](parity/sq02_container_type_source_join_optimized_5_0_6.json.gz) | Eighty-five exact source changes are admitted. All 716 Python commands and 707 native consumers are unchanged; seven source/command/epoch corruptions reject per mode. This extends the preceding full 1,101-test native epoch through qualified current changes. |
+
+The [new admission module](../scripts/container_type_source_admission_5_0_6.py)
+checks sealed installed/compiler/SDK/SQL evidence and actual current bytes.
+Exactly six import/current-input predicate changes extend the preceding
+admission module; its historical validation bodies and corruption controls
+remain present. Unknown epochs and relabeled historical inputs reject.
+
+The first source-control receipt lacked an execution-input snapshot. The
+subsequent bound receipt reruns both complete control selections with exact
+source/reference hashes; the source join uses that bound execution. The first
+receipt is preserved without upgrading its provenance claim.
+
+The [installed milestone](parity/ap02_container_entity_types_installation_milestone_5_0_6.json.gz)
+retains the exact post-test ledger update. Only G14 evidence and open questions
+change; all seventeen capability statuses remain unchanged. Its additional
+owned outputs total 41,525,990 measured bytes, plus 16,884 outer-driver bytes;
+eight core production/join receipts retain 5,004,342 bytes. The SQL artifact
+controller, which ran from stdin, is preserved in this milestone without
+rewriting the original artifact receipt.
+
+Complete AP01-AP12, remaining supported type/trait and model configurations,
+G17 and P0-P7 remain open. Capability status stays **14 qualified / 3 partial**.
+The preceding point-in-time GP13 status reader retains its strict native
+checkpoint input epoch; current provenance is qualified by the new source
+joins and explicit metadata-only milestone rather than relabeling its earlier
+execution. No fresh full native, sanitizer or MIPS run is claimed after this
+Java/source-admission change.

@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 import sys
 
+from container_type_source_admission_5_0_6 import current_input_matches as container_input_matches
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
@@ -75,7 +77,7 @@ def validate(candidate, installed, sdk, base_sdk, sql, transition):
     for name, row in candidate["overlays"].items():
         require(sha(row["before_source"].encode()) == row["before_sha256"]
                 and sha(row["after_source"].encode()) == row["after_sha256"]
-                and sha(Path(name).read_bytes()) == row["after_sha256"], "exact installed Java epoch")
+                and container_input_matches(Path(name), row["after_sha256"]), "exact installed Java epoch")
     unit = PRODUCER / "generator/src/test/java/com/skynet/codegenerator/cpp/CppQualifiedEntityTypeProjectionTest.java"
     require(sha(unit.read_bytes()) == candidate["candidate_unit_sha256"], "permanent regression source")
 
@@ -103,7 +105,7 @@ def validate(candidate, installed, sdk, base_sdk, sql, transition):
         directory = (ROOT / after["manifest"]).parent
         require(sha(after["text"].encode()) == after["files"][filename], "complete metadata bytes")
         for name, value in after["files"].items():
-            require(sha((directory / name).read_bytes()) == value, "complete current SDK bytes")
+            require(container_input_matches(directory / name, value), "complete current SDK bytes")
 
     require(sql["complete"] is True and sql["inputs_unchanged"] is True
             and sql["global_inputs_unchanged"] is True and sql["global_references_unchanged"] is True
@@ -130,7 +132,7 @@ def validate(candidate, installed, sdk, base_sdk, sql, transition):
             require(sha(sql["adapted_driver_source"].encode()) == expected == sql["adapted_driver_sha256"],
                     "retained actual SQL driver source")
         else:
-            require(sha(Path(name).read_bytes()) == expected, "current SQL source/library/dependency")
+            require(container_input_matches(Path(name), expected), "current SQL source/library/dependency")
 
     require(transition["complete"] is True and len(transition["edits"]) == 5,
             "bounded historical helper transition")
@@ -143,7 +145,7 @@ def validate(candidate, installed, sdk, base_sdk, sql, transition):
             and sha(source.encode()) == transition["after_sha256"]
             and (ROOT / transition["path"]).read_text() == source, "unchanged remaining helper bodies")
     for name, value in installed["input_hashes_before"].items():
-        require(sha(Path(name).read_bytes()) == value, "current production input")
+        require(container_input_matches(Path(name), value), "current production input")
     for name, value in installed["dependency_jars"].items():
         require(sha(Path(name).read_bytes()) == value, "current Java dependency")
     require(sha(Path(installed["native_compiler"]["path"]).read_bytes())
@@ -182,7 +184,7 @@ def current_input_matches(path, expected):
         if expected != before:
             return False
         evidence()
-        return sha(path.read_bytes()) == after
+        return container_input_matches(path, after)
     return path.is_file() and sha(path.read_bytes()) == expected
 
 

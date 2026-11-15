@@ -16,23 +16,23 @@ This closes the current SQ05 native execution gate before container-projection
 installation. Complete G14/G17 and P0-P7 remain open; capability status stays
 14 qualified / 3 partial. Earlier counts below retain their historical epochs.
 
-The next concrete G14 repair is the
-[standard-container entity projection diagnostic](ap02_container_entity_types_5_0_6.md).
-Eight actual generated-library compiler cases confirm six C++ refusals of valid
-locked Rust `Vec`/`Result`/`Box`/reference projections and two agreeing controls.
-The corrected copied resolver passes 173 Java tests and ten actual generated
-compiler cases. It preserves all 46 preceding/composition SDK trees exactly,
-with their compiler outcomes explicitly reused and eight corruption controls
-per Python mode. Six fresh original/candidate SQLite model pairs also match
-all thirty query/E/JSON outcomes, including a cross-entity Child target.
-The first candidate's two undeclared-lifetime false acceptances and the
-pre-execution missing-Maven failure are preserved separately. The exact source
-repair is committed as `3187dad` on an isolated generator branch; Maven packaging
-and 173 fresh Java tests pass there. The native epoch above has terminated.
-Merge that implementation and qualify production source/artifacts next.
-No installed-production repair is claimed by
-these copied-candidate results, and the two pending reference-defect choices
-remain separate.
+Current G14 repair: [standard-container entity projections](ap02_container_entity_types_5_0_6.md)
+are installed on `cpp_support` commit `3187dad`. Production Java passes 173
+tests and all 56 actual C++ compiler outcomes match. Eighty SDKs retain all
+3,560 code/guidance files; one parser fingerprint refreshes per manifest.
+Six production SQL consumer SDKs reproduce the actual copied-candidate
+six-model/thirty-result execution exactly; those runtime results are explicitly
+reused. Current fourteen and preserved fifteen plus thirteen corruption controls
+reject per Python mode, and actual registered callers pass 6/6 per mode.
+The complete [current source join](parity/sq02_container_type_source_join_5_0_6.json.gz)
+and optimized counterpart admit 85 exact changes on 11,980 inputs, preserve
+716 commands/707 consumers and reject seven transition corruptions per mode.
+The [post-test metadata milestone](parity/ap02_container_entity_types_installation_milestone_5_0_6.json.gz)
+retains exact ledger epochs and all capability statuses. The first candidate's
+two undeclared-lifetime false acceptances and pre-execution missing-Maven
+failure remain preserved. Other Result error types, additional supported
+type/trait/model configurations, complete AP01-AP12 and G17/P0-P7 remain open.
+The Option-model and column-attribute decisions remain pending.
 
 Current governance reconciliation: [GP13 source provenance](governance_gp13_completion_5_0_6.md)
 is closed by the complete registered SQ02 and current source-transition evidence.
