@@ -5,6 +5,19 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+Current copied G14 follow-up: the [scalar constant candidate](ap02_scalar_const_values_5_0_6.md)
+passes 203 Java tests and all 65 original/C++ compiler contracts: 29 fresh
+pairs and 36 completed outcomes reused after fresh complete SDK identity.
+Its immutable 294-case cast corpus covers all seventeen implemented kinds.
+Actual generated-library witnesses retain the difference between standalone
+literal lints, derive-emitted literal representation and checked arithmetic.
+The four-file source/resource patch is reviewable and passes `git apply --check`.
+Eight freshly generated SQLite model pairs also match forty query/E/JSON
+outcomes. The copied checkpoint binds 11,990 unchanged production inputs.
+Production installation, full SDK reproduction and source-guard transitions
+remain the immediate continuation. The qualified production checkpoint below
+remains authoritative.
+
 Current G14 repair: [array constant expressions](ap02_array_const_expressions_5_0_6.md)
 are installed on `cpp_support` commit `d1ad8d40` with eight permanent regression
 methods. Production passes 194 Java tests and reproduces 193 complete SDKs,

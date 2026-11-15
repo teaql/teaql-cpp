@@ -1,0 +1,531 @@
+diff --git a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+index 1735150..4abed62 100644
+--- a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
++++ b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+@@ -240,18 +240,22 @@ final class CppRustLiteralMetadata {
+   private enum ConstKind {
+     I8(8, true), I16(16, true), I32(32, true), I64(64, true), I128(128, true), ISIZE(64, true),
+     U8(8, false), U16(16, false), U32(32, false), U64(64, false), U128(128, false), USIZE(64, false),
+-    BOOL(1, false), UNIT(0, false);
++    BOOL(1, false), UNIT(0, false), CHAR(21, false), F32(32, false), F64(64, false);
+ 
+     final int bits;
+     final boolean signed;
+     ConstKind(int bits, boolean signed) { this.bits = bits; this.signed = signed; }
+     int mask() { return 1 << ordinal(); }
++    boolean floating() { return this == F32 || this == F64; }
+   }
+ 
+   private static final class ConstType {
+     static final int INTEGERS = (1 << 12) - 1;
+     static final int SIGNED = (1 << 6) - 1;
+-    static final int VALUES = INTEGERS | ConstKind.BOOL.mask();
++    static final int FLOATS = ConstKind.F32.mask() | ConstKind.F64.mask();
++    static final int NUMERIC = INTEGERS | FLOATS;
++    static final int BITWISE = INTEGERS | ConstKind.BOOL.mask();
++    static final int VALUES = NUMERIC | ConstKind.BOOL.mask() | ConstKind.CHAR.mask();
+     ConstType parent = this;
+     int allowed;
+     ConstType(int allowed) { this.allowed = allowed; }
+@@ -274,10 +278,12 @@ final class CppRustLiteralMetadata {
+     ConstKind kind() {
+       ConstType root = root();
+       if (Integer.bitCount(root.allowed) != 1) {
+-        if ((root.allowed & ConstKind.I32.mask()) == 0) {
++        int fallback = (root.allowed & ConstKind.I32.mask()) != 0 ? ConstKind.I32.mask()
++            : (root.allowed & ConstKind.F64.mask()) != 0 ? ConstKind.F64.mask() : 0;
++        if (fallback == 0) {
+           throw new IllegalArgumentException("Unresolved Rust const type");
+         }
+-        root.allowed = ConstKind.I32.mask();
++        root.allowed = fallback;
+       }
+       return ConstKind.values()[Integer.numberOfTrailingZeros(root.allowed)];
+     }
+@@ -290,6 +296,7 @@ final class CppRustLiteralMetadata {
+     final ConstType type;
+     final List<ConstNode> arguments;
+     BigInteger literal;
++    String floatingLiteral;
+     ConstSymbol symbol;
+     boolean signedMinimum;
+     ConstNode(String op, ConstType type, ConstNode... arguments) {
+@@ -314,9 +321,21 @@ final class CppRustLiteralMetadata {
+       expression.type.restrict(ConstKind.USIZE.mask());
+       for (ConstNode literal : literals) {
+         ConstKind kind = literal.type.kind();
++        if (literal.floatingLiteral != null) {
++          double value = kind == ConstKind.F32
++              ? Float.parseFloat(literal.floatingLiteral) : Double.parseDouble(literal.floatingLiteral);
++          literal.literal = floatingBits(value, kind);
++        }
++        boolean integer = (kind.mask() & ConstType.INTEGERS) != 0;
++        if (integer && literal.literal.bitLength() > 128) {
++          throw new IllegalArgumentException("Rust integer token exceeds u128");
++        }
+         if (!(literal.signedMinimum && kind.signed
+             && literal.literal.equals(BigInteger.ONE.shiftLeft(kind.bits - 1)))) {
+-          checked(literal.literal, kind);
++          // String-encoded types are re-emitted by the derive macro. Its
++          // literal lints differ from a standalone const; arithmetic errors
++          // still use checked evaluation after the literal is represented.
++          literal.literal = integer ? wrapped(literal.literal, kind) : checked(literal.literal, kind);
+         }
+       }
+       checked(evaluate(expression, new java.util.IdentityHashMap<>()), ConstKind.USIZE);
+@@ -330,10 +349,10 @@ final class CppRustLiteralMetadata {
+         if (cursor.keyword("as") && minimum <= CAST) {
+           cursor.position += 2;
+           ConstKind target = kind();
+-          if (target == ConstKind.BOOL || target == ConstKind.UNIT) {
+-            throw new IllegalArgumentException("Invalid Rust integer cast target");
+-          }
+-          left.type.restrict(ConstType.VALUES);
++          left.type.restrict(target == ConstKind.BOOL ? ConstKind.BOOL.mask()
++              : target == ConstKind.UNIT ? ConstKind.UNIT.mask()
++              : target == ConstKind.CHAR ? ConstKind.U8.mask() | ConstKind.CHAR.mask()
++              : target.floating() ? ConstType.NUMERIC : ConstType.VALUES);
+           left = new ConstNode("as", new ConstType(target.mask()), left);
+           continue;
+         }
+@@ -352,7 +371,7 @@ final class CppRustLiteralMetadata {
+             throw new IllegalArgumentException("Rust const assignment needs a mutable local");
+           }
+           String operation = op.equals("=") ? null : op.substring(0, op.length() - 1);
+-          if (operation == null) { ConstType.join(left.type, right.type, ConstType.VALUES); }
++          if (operation == null) { ConstType.join(left.type, right.type, ConstType.VALUES | ConstKind.UNIT.mask()); }
+           else { binary(operation, left, right); }
+           ConstNode node = new ConstNode(op, new ConstType(ConstKind.UNIT.mask()), left, right);
+           node.symbol = left.symbol;
+@@ -376,7 +395,7 @@ final class CppRustLiteralMetadata {
+         left.type.restrict(ConstType.INTEGERS); right.type.restrict(ConstType.INTEGERS);
+         type = left.type;
+       } else {
+-        int mask = List.of("&", "|", "^").contains(op) ? ConstType.VALUES : ConstType.INTEGERS;
++        int mask = List.of("&", "|", "^").contains(op) ? ConstType.BITWISE : ConstType.NUMERIC;
+         type = ConstType.join(left.type, right.type, mask);
+       }
+       return new ConstNode(op, type, left, right);
+@@ -386,6 +405,8 @@ final class CppRustLiteralMetadata {
+       cursor.trivia();
+       if (cursor.take('(')) {
+         ++depth;
++        cursor.trivia();
++        if (cursor.take(')')) { --depth; return unit(); }
+         ConstNode node = expression(0);
+         cursor.trivia();
+         if (!cursor.take(')')) { throw new IllegalArgumentException("Unclosed Rust const group"); }
+@@ -409,12 +430,12 @@ final class CppRustLiteralMetadata {
+       }
+       if (cursor.take('!')) {
+         ConstNode operand = expression(PREFIX);
+-        operand.type.restrict(ConstType.VALUES);
++        operand.type.restrict(ConstType.BITWISE);
+         return new ConstNode("!", operand.type, operand);
+       }
+       if (cursor.take('-')) {
+         ConstNode operand = expression(PREFIX);
+-        operand.type.restrict(ConstType.SIGNED);
++        operand.type.restrict(ConstType.SIGNED | ConstType.FLOATS);
+         if (operand.op.equals("literal")) { operand.signedMinimum = true; }
+         return new ConstNode("neg", operand.type, operand);
+       }
+@@ -423,10 +444,17 @@ final class CppRustLiteralMetadata {
+         cursor.position += value ? 4 : 5;
+         return literal(value ? BigInteger.ONE : BigInteger.ZERO, ConstKind.BOOL.mask());
+       }
++      if (cursor.currentIfAny('\'') || cursor.text.startsWith("b'", cursor.position)) {
++        return characterLiteral();
++      }
+       if (!cursor.end() && cursor.current() >= '0' && cursor.current() <= '9') {
+         int begin = cursor.position;
+-        if (cursor.lexicalNumber()) { throw new IllegalArgumentException("Non-integer Rust array length"); }
++        boolean floating = cursor.lexicalNumber();
+         String source = cursor.text.substring(begin, cursor.position);
++        boolean decimal = !source.startsWith("0x") && !source.startsWith("0o") && !source.startsWith("0b");
++        if (floating || decimal && (source.endsWith("f32") || source.endsWith("f64"))) {
++          return floatingLiteral(source);
++        }
+         int radix = source.startsWith("0x") ? 16 : source.startsWith("0o") ? 8
+             : source.startsWith("0b") ? 2 : 10;
+         int end = radix == 10 ? 0 : 2;
+@@ -455,6 +483,39 @@ final class CppRustLiteralMetadata {
+       throw new IllegalArgumentException("Unknown Rust const name");
+     }
+ 
++    private ConstNode characterLiteral() {
++      int begin = cursor.position;
++      boolean bytes = cursor.text.startsWith("b'", begin);
++      boolean parsed = bytes ? cursor.prefixedCharacter() : cursor.character();
++      String token = cursor.text.substring(begin + (bytes ? 1 : 0), cursor.position);
++      if (!parsed || !token.endsWith("'")) {
++        throw new IllegalArgumentException("Invalid Rust character suffix");
++      }
++      String payload = token.substring(1, token.length() - 1);
++      int value;
++      if (payload.startsWith("\\x")) {
++        value = Integer.parseInt(payload.substring(2), 16);
++      } else if (payload.startsWith("\\")) {
++        value = CppJsonInputMetadata.decodeLiteral(payload).codePointAt(0);
++      } else {
++        value = payload.codePointAt(0);
++      }
++      return literal(BigInteger.valueOf(value), (bytes ? ConstKind.U8 : ConstKind.CHAR).mask());
++    }
++
++    private ConstNode floatingLiteral(String source) {
++      ConstKind kind = source.endsWith("f32") ? ConstKind.F32
++          : source.endsWith("f64") ? ConstKind.F64 : null;
++      String digits = (kind == null ? source : source.substring(0, source.length() - 3))
++          .replace("_", "");
++      if (!digits.matches("[0-9]+(?:\\.[0-9]*)?(?:[eE][+-]?[0-9]+)?")) {
++        throw new IllegalArgumentException("Invalid Rust floating suffix");
++      }
++      ConstNode result = literal(BigInteger.ZERO, kind == null ? ConstType.FLOATS : kind.mask());
++      result.floatingLiteral = digits;
++      return result;
++    }
++
+     private ConstNode block() {
+       cursor.trivia();
+       if (!cursor.take('{')) { throw new IllegalArgumentException("Expected Rust const block"); }
+@@ -508,6 +569,11 @@ final class CppRustLiteralMetadata {
+ 
+     private ConstKind kind() {
+       cursor.trivia();
++      if (cursor.take('(')) {
++        cursor.trivia();
++        if (!cursor.take(')')) { throw new IllegalArgumentException("Invalid Rust unit type"); }
++        return ConstKind.UNIT;
++      }
+       String name = cursor.nominalEntityTypePath();
+       if (name == null) { throw new IllegalArgumentException("Expected Rust const integer type"); }
+       for (String prefix : List.of("core::primitive::", "::core::primitive::",
+@@ -570,8 +636,16 @@ final class CppRustLiteralMetadata {
+         return evaluate(node.arguments.get(evaluate(node.arguments.get(0), values).signum() != 0 ? 1 : 2), values);
+       }
+       BigInteger left = evaluate(node.arguments.get(0), values);
+-      if (node.op.equals("as")) { return wrapped(left, node.type.kind()); }
+-      if (node.op.equals("neg")) { return checked(left.negate(), node.type.kind()); }
++      if (node.op.equals("as")) {
++        return cast(left, node.arguments.get(0).type.kind(), node.type.kind());
++      }
++      if (node.op.equals("neg")) {
++        return node.type.kind().floating()
++            ? floatingBits(-floatingValue(left, node.type.kind()), node.type.kind())
++            : node.arguments.get(0).op.equals("literal") && node.type.kind().signed
++                ? wrapped(left.negate(), node.type.kind())
++                : checked(left.negate(), node.type.kind());
++      }
+       if (node.op.equals("!")) {
+         return node.type.kind() == ConstKind.BOOL ? BigInteger.ONE.subtract(left)
+             : wrapped(left.not(), node.type.kind());
+@@ -586,10 +660,12 @@ final class CppRustLiteralMetadata {
+         values.put(node.symbol, value);
+         return BigInteger.ZERO;
+       }
+-      return calculate(node.op, left, right, node.type.kind());
++      ConstKind operand = node.arguments.get(0).type.kind();
++      return calculate(node.op, left, right, operand.floating() ? operand : node.type.kind());
+     }
+ 
+     private BigInteger calculate(String op, BigInteger left, BigInteger right, ConstKind kind) {
++      if (kind.floating()) { return floatingCalculate(op, left, right, kind); }
+       int compare = left.compareTo(right);
+       return switch (op) {
+         case "&&" -> left.signum() != 0 && right.signum() != 0 ? BigInteger.ONE : BigInteger.ZERO;
+@@ -624,7 +700,81 @@ final class CppRustLiteralMetadata {
+       };
+     }
+ 
++    private BigInteger floatingBits(double value, ConstKind kind) {
++      return kind == ConstKind.F32 ? BigInteger.valueOf(Float.floatToRawIntBits((float) value))
++          : BigInteger.valueOf(Double.doubleToRawLongBits(value));
++    }
++
++    private double floatingValue(BigInteger value, ConstKind kind) {
++      return kind == ConstKind.F32 ? Float.intBitsToFloat(value.intValue())
++          : Double.longBitsToDouble(value.longValue());
++    }
++
++    private BigInteger cast(BigInteger value, ConstKind source, ConstKind target) {
++      if (target.floating()) {
++        double result = source.floating() ? floatingValue(value, source)
++            : target == ConstKind.F32 ? value.floatValue() : value.doubleValue();
++        return floatingBits(result, target);
++      }
++      if (source.floating()) {
++        double number = floatingValue(value, source);
++        BigInteger limit = BigInteger.ONE.shiftLeft(target.signed ? target.bits - 1 : target.bits);
++        BigInteger minimum = target.signed ? limit.negate() : BigInteger.ZERO;
++        BigInteger maximum = limit.subtract(BigInteger.ONE);
++        if (Double.isNaN(number)) { return BigInteger.ZERO; }
++        if (number == Double.POSITIVE_INFINITY) { return maximum; }
++        if (number == Double.NEGATIVE_INFINITY) { return minimum; }
++        // The constructor retains the exact binary value; valueOf(double)
++        // would instead round through its shortest decimal representation.
++        BigInteger integer = new java.math.BigDecimal(number).toBigInteger();
++        return integer.max(minimum).min(maximum);
++      }
++      return target == ConstKind.CHAR ? checked(value, target) : wrapped(value, target);
++    }
++
++    private BigInteger floatingCalculate(String op, BigInteger left, BigInteger right, ConstKind kind) {
++      double a = floatingValue(left, kind), b = floatingValue(right, kind);
++      switch (op) {
++        case "==" -> { return a == b ? BigInteger.ONE : BigInteger.ZERO; }
++        case "!=" -> { return a != b ? BigInteger.ONE : BigInteger.ZERO; }
++        case "<" -> { return a < b ? BigInteger.ONE : BigInteger.ZERO; }
++        case "<=" -> { return a <= b ? BigInteger.ONE : BigInteger.ZERO; }
++        case ">" -> { return a > b ? BigInteger.ONE : BigInteger.ZERO; }
++        case ">=" -> { return a >= b ? BigInteger.ONE : BigInteger.ZERO; }
++      }
++      if (kind == ConstKind.F32) {
++        float x = (float) a, y = (float) b;
++        float value = switch (op) {
++          case "+" -> x + y;
++          case "-" -> x - y;
++          case "*" -> x * y;
++          case "/" -> x / y;
++          case "%" -> x % y;
++          default -> throw new IllegalArgumentException("Invalid Rust floating operation");
++        };
++        return floatingBits(value, kind);
++      }
++      double value = switch (op) {
++        case "+" -> a + b;
++        case "-" -> a - b;
++        case "*" -> a * b;
++        case "/" -> a / b;
++        case "%" -> a % b;
++        default -> throw new IllegalArgumentException("Invalid Rust floating operation");
++      };
++      return floatingBits(value, kind);
++    }
++
+     private BigInteger checked(BigInteger value, ConstKind kind) {
++      if (kind.floating()) { return value; }
++      if (kind == ConstKind.CHAR) {
++        if (value.signum() < 0 || value.compareTo(BigInteger.valueOf(0x10ffff)) > 0
++            || value.compareTo(BigInteger.valueOf(0xd800)) >= 0
++                && value.compareTo(BigInteger.valueOf(0xdfff)) <= 0) {
++          throw new IllegalArgumentException("Invalid Rust character value");
++        }
++        return value;
++      }
+       if (kind == ConstKind.UNIT && value.signum() == 0) { return value; }
+       BigInteger limit = BigInteger.ONE.shiftLeft(kind.signed ? kind.bits - 1 : kind.bits);
+       BigInteger minimum = kind.signed ? limit.negate() : BigInteger.ZERO;
+diff --git a/generator/src/test/java/com/skynet/codegenerator/cpp/CppScalarConstValueProjectionTest.java b/generator/src/test/java/com/skynet/codegenerator/cpp/CppScalarConstValueProjectionTest.java
+new file mode 100644
+index 0000000..620742f
+--- /dev/null
++++ b/generator/src/test/java/com/skynet/codegenerator/cpp/CppScalarConstValueProjectionTest.java
+@@ -0,0 +1,153 @@
++package com.skynet.codegenerator.cpp;
++
++import static org.junit.Assert.*;
++import com.fasterxml.jackson.databind.JsonNode;
++import com.fasterxml.jackson.databind.ObjectMapper;
++import java.io.ByteArrayInputStream;
++import java.io.InputStream;
++import java.security.MessageDigest;
++import java.util.HexFormat;
++import java.util.List;
++import java.util.zip.GZIPInputStream;
++import org.junit.Test;
++
++public class CppScalarConstValueProjectionTest {
++  private void length(String source) {
++    var type = CppRustLiteralMetadata.projectedEntityTypePath(
++        "<[Self; " + source + "] as IntoIterator>::Item");
++    assertNotNull(source, type);
++    assertEquals(source, "Self", type.path());
++  }
++
++  private void refused(String source) {
++    assertNull(source, CppRustLiteralMetadata.projectedEntityTypePath(
++        "<[Self; " + source + "] as IntoIterator>::Item"));
++  }
++
++  @Test
++  public void characterLiteralsRetainUnicodeAndByteValues() {
++    for (String source : List.of("'A' as usize",
++        "'é' as usize",
++        "'\\u{1f680}' as usize",
++        "b'A' as usize",
++        "b'\\xff' as usize",
++        "'\"' as usize",
++        "'\\'' as usize")) {
++      length(source);
++    }
++  }
++  @Test
++  public void characterCastsRetainTheirTypeRestrictions() {
++    for (String source : List.of("{let mark: char = 'A'; mark as usize}",
++        "(65 as char) as usize",
++        "('A' as char) as usize",
++        "{if ('é' as usize) == 233 {2} else {1 / 0}}")) {
++      length(source);
++    }
++    for (String source : List.of("(65u32 as char) as usize",
++        "('A' + 'B') as usize",
++        "(-'A') as usize",
++        "('A' as f64) as usize",
++        "'A'")) {
++      refused(source);
++    }
++  }
++  @Test
++  public void floatingLiteralsRetainContextualInference() {
++    for (String source : List.of("1.75f64 as usize",
++        "(1.5f32 + 0.5f32) as usize",
++        "(1.25 + 0.75) as usize",
++        "2f32 as usize",
++        "{let value: f32 = 1.0000000596046447753906250000000001; if value > 1.0f32 {2} else {1 / 0}}")) {
++      length(source);
++    }
++  }
++  @Test
++  public void floatingArithmeticRetainsItsOwnPrecision() {
++    for (String source : List.of("{if (16777216.0f32 + 1.0f32) == 16777216.0f32 {2} else {1 / 0}}",
++        "{if (9007199254740992.0f64 + 1.0f64) == 9007199254740992.0f64 {2} else {1 / 0}}",
++        "{if ((16777217u32 as f32) as u32) == 16777216u32 {2} else {1 / 0}}",
++        "{if ((16777217.0f64 as f32) as u32) == 16777216u32 {2} else {1 / 0}}",
++        "{if (18446744073709549568.0f64 as u128) == 18446744073709549568u128 {2} else {1 / 0}}")) {
++      length(source);
++    }
++  }
++  @Test
++  public void floatingCastsSaturateAndTruncate() {
++    for (String source : List.of("{if ((-1.5f64) as u8) == 0u8 {2} else {1 / 0}}",
++        "{if ((1.0f64 / 0.0f64) as u8) == 255u8 {2} else {1 / 0}}",
++        "{if ((-1.0f64 / 0.0f64) as i8) == -128i8 {2} else {1 / 0}}",
++        "{if ((0.0f64 / 0.0f64) as usize) == 0 {2} else {1 / 0}}",
++        "{let value = 0.0f64 / 0.0f64; if value != value {2} else {1 / 0}}",
++        "{if -0.0f64 == 0.0f64 {2} else {1 / 0}}",
++        "{let mut value = 1.0f32; value += 1.0f32; value as usize}")) {
++      length(source);
++    }
++  }
++  @Test
++  public void floatingTypesRejectIllegalOperations() {
++    for (String source : List.of("1.0f64",
++        "(1.0f64 & 1.0f64) as usize",
++        "(true as f64) as usize",
++        "(65.0f64 as char) as usize",
++        "(1.0f32 + 1.0f64) as usize",
++        "1.0F64 as usize")) {
++      refused(source);
++    }
++  }
++  @Test
++  public void identityAndUnitCastsRetainConstSemantics() {
++    for (String source : List.of("(true as bool) as usize",
++        "{let value = () as (); 1usize}",
++        "{let mut value = (); value = (); 1usize}")) {
++      length(source);
++    }
++    for (String source : List.of("{if () == () {1usize} else {2usize}}",
++        "{if () < () {1usize} else {2usize}}")) {
++      refused(source);
++    }
++  }
++  @Test
++  public void completePrimitiveCastMatrixMatchesTheCompiler() throws Exception {
++    byte[] data;
++    try (InputStream input = getClass().getResourceAsStream("/cpp_scalar_const_casts_5_0_6.json.gz")) {
++      assertNotNull(input);
++      data = input.readAllBytes();
++    }
++    assertEquals("0e3cba36376997c27927d8bc2e4b9111ef9ed39e9620d835b9073bfb90007bb3",
++        HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(data)));
++    JsonNode value;
++    try (GZIPInputStream input = new GZIPInputStream(new ByteArrayInputStream(data))) {
++      value = new ObjectMapper().readTree(input);
++    }
++    assertEquals(1, value.get("schema").asInt());
++    assertEquals("fe82a18982415f1746df9a2cf7c42f5e9abdc6d3", value.get("runtime_commit").asText());
++    assertEquals("45e1572c4956ca963410d8ea436ead3c8857087a", value.get("generator_commit").asText());
++    assertEquals("34991adc391729df5ee76ede2eff25167038efb05c515ecef36361d7f75748d3", value.get("source_reference_sha256").asText());
++    assertEquals(294, value.get("cases").size());
++    for (JsonNode row : value.get("cases")) {
++      String expression = row.get("expression").asText();
++      if (row.get("accepted").asBoolean()) {
++        length(expression);
++      } else {
++        refused(expression);
++      }
++    }
++  }
++  @Test
++  public void derivedContextRetainsItsLiteralRepresentation() {
++    for (String source : List.of("(256 as char) as usize",
++        "1e400f64 as usize",
++        "18446744073709551616usize",
++        "{if ((256 as char) as usize) == 0 {1} else {1 / 0}}",
++        "{if (256u8 as usize) == 0 {1} else {1 / 0}}",
++        "{if 128i8 == -128i8 {1} else {1 / 0}}",
++        "{if 18446744073709551616usize == 0usize {1} else {1 / 0}}",
++        "{if true {1usize} else {1e400f64 as usize}}",
++        "{if -384i8 == -128i8 {2} else {1 / 0}}",
++        "{if -129i8 == 127i8 {2} else {1 / 0}}")) {
++      length(source);
++    }
++    refused("340282366920938463463374607431768211456u128 as usize");
++  }
++}
+diff --git a/generator/src/test/java/com/skynet/codegenerator/cpp/CppStandardValueTypeProjectionTest.java b/generator/src/test/java/com/skynet/codegenerator/cpp/CppStandardValueTypeProjectionTest.java
+index 5e6e219..3b2429d 100644
+--- a/generator/src/test/java/com/skynet/codegenerator/cpp/CppStandardValueTypeProjectionTest.java
++++ b/generator/src/test/java/com/skynet/codegenerator/cpp/CppStandardValueTypeProjectionTest.java
+@@ -44,10 +44,10 @@ public class CppStandardValueTypeProjectionTest {
+ 
+   @Test
+   public void arrayLengthLiteralsPreserveUsizeAndScopeRequirements() {
+-    for (String length : List.of("0", "1usize", "0x2", "0b10usize", "0o2", "1_0usize")) {
++    for (String length : List.of("0", "1usize", "0x2", "0b10usize", "0o2", "1_0usize", "18446744073709551616usize")) {
+       entity("<[Self; " + length + "] as IntoIterator>::Item");
+     }
+-    for (String length : List.of("MissingLength", "1u8", "1.0", "-1", "18446744073709551616usize",
++    for (String length : List.of("MissingLength", "1u8", "1.0", "-1",
+         "0b2", "0x")) {
+       assertNull(length, CppRustLiteralMetadata.projectedEntityTypePath(
+           "<[Self; " + length + "] as IntoIterator>::Item"));
+diff --git a/generator/src/test/resources/cpp_scalar_const_casts_5_0_6.json.gz b/generator/src/test/resources/cpp_scalar_const_casts_5_0_6.json.gz
+new file mode 100644
+index 0000000000000000000000000000000000000000..6f589e40ef183f44be27815d6abb7dcaa8fc54d9
+GIT binary patch
+literal 1487
+zcmb8u{XY{390zb_+%{9&k}SpMvX;VJUO3Cc7^Qi<SM%@+ZRMpFV=|=XFs4a|C=U}F
+zH65LKxaKKO<5-7s?eesfNhp>sB+qVs@CV%Yhxc!v*Z1@KzFuF0bdbu<0Jd9-WZ^O&
+zZDImvAf1k)_f<a8jRUPAo#6w2kC=N0LbH#a30)Z{{lqZ4QjuXhx~QXR6L9clhK5r_
+zyJw{cDXw12+SvI0>Zs+Z3@U!pV%hvT$!9`#$sm=F*B1==csAoO7YYNR2HESAk$J3u
+zx3PJB!i4b5TS9(GhNqcX#91CSP8OKm&0n`YB`h8{+J5L)r)SEh8Su8+%<~Y^H(PhG
+z6ei6GR+`9+!+0qrqj#hURuZn|UaK+F!Ov_?VG)Zny_yR9%*J8c=2j{yisI(myvF>x
+zytFosPbEkcV$?Y%mHQ!6&ept#rZ8&MXJNR80YEfJH#nG|{D+Z_3tCMx1<N`*31Jqy
+zABT2w$iALKXJ>?rwo(pG^2iZ(&I6tJK}-GvBwOwwUjV;WTDv1E3ap2TO=-MI-wMj1
+z0UP^6;DCv2tZ9lLJ{JQdXu#PI*&tP7gvtS87BCi|RAW~paTwS5ecxE<;x``DP(rul
+z!a)9MudlvnTGf-(XcM$WIs{miE<xEF)eFZswWBl<0;QxKDd`AnKL8gTV8xjWql#JO
+z$M>b6NzycUd>y2$x*yDDjDa1A3BZvO91@^0!p9v}TDGI?aeD{C!A;(DEZ{PJ|1^HA
+z0tFqZTnKy7IpW_Fr0zW&q)uoEQb(8CvlZlgsA{s(J-dD)%PC+KhB2mHRo4PpESe|7
+zQWfN*E=&E!cf`xaAn{jY5PTCJEEESTZz~itcMTH)z9XraC(Q{MMW4v|pP527E?8J`
+z+i34h^Zaln3L>jSfrctk#HG_&Esz{EMX7Yx>K4eM6RKUnszPzJ$d}qGZGnihT4uYr
+zt^S<<-*-%{&x7>2cjJ0E;Nqbh2Vk99vP9h@#wdjg3hV4htp^ZH5Rhgh=;~ds51$;E
+zk|Vk~D-j2`KbjC2fE8N;v@0A^jQ#7!ey=?(CS0l{o&ZJchs9im-81A@-%Ng}1Llk!
+z20lB3UD`s~1S9UaZdm=Yy`+z}R^7m$HQv4M^Jw#3|1!w3vhdnd5Q0rTds17OH|?h!
+zLqPIEs+DolNx$?IM*-4qHyzCD*w-#VLJXyfC5x!im8~G?R5eZGVuOVm+FKPZh2A&h
+zXVFrXg(VhF%FSWC4kt`UepiBY<&^+wqsrtZp%z>xS&Uy3%U{i{JcVOwJoTusZ_nY~
+zM6FcTG`ANXDVfP=(1+h*EpzAKk;5~YLS1XPgqTCAaHW(uy{mJuPfPKBUo6oqUwnyw
+z&^3R%9Tk2axD)?Jw_}QH{eBQsb-D{}b(&#oxTo26;dau#BsUANfCr382bQSc$OO7X
+z#>K{;3=C~exiFy0T?EI%iN1KXQY(2_ai9wu&!60y1(tRcF)Zs%%Q}h%?j~FU9^Cz`
+zI@hEI_i6n^>paKtmaS-VD{FClBhElxR`c`XM5U*1gdM(Z4Us0a-5Ame44-ZbA2pMv
+znN7gfLQXA9-QRw0j<oZ=hc+4VKOgpI1>KSy^r&8DW8oac2`Q|P4y=lpi>~9n{PqPG
+zv;J?rRA=_7>zsShej4p#(-V=1Ry#OIzw3{*?B5jqCR%0PxMCn~E%12UySJwYcVVJ@
+zlB%1K?`F_hZ%!+uKIoQ{>gKw~=d(lVNllxRrixB#F_%w|ao@JnZ!%wfh7Y?n)zmXw
+zKM`ecVrc@m8G8LnZ7t8N_&}liXqb$ZQ&ra=v*thz<j^H-e;>h{HA`Xg*my3zAeXO|
+c>l=4Jd`M(E<ZK(Sn6X!J5@A;hm?|p&0fecys{jB1
+
+literal 0
+HcmV?d00001
+
