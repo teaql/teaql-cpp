@@ -1,0 +1,261 @@
+diff --git a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+--- a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
++++ b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+@@ -205,7 +205,7 @@
+   record EntityTypePath(String path, List<String> preludeNames, List<String> requiredEntityPaths) {}
+ 
+   private enum ProjectionShape {
+-    ENTITY, PRIMITIVE, TUPLE, OPTION, VECTOR, RESULT, BOX, REFERENCE, MUT_REFERENCE, SLICE, ITERATOR
++    ENTITY, PRIMITIVE, STRING, STR, TUPLE, OPTION, VECTOR, ARRAY, SMART_LIST, RESULT, BOX, REFERENCE, MUT_REFERENCE, SLICE, ITERATOR
+   }
+ 
+   private record ProjectionType(String path, ProjectionShape shape, List<ProjectionType> arguments,
+@@ -213,16 +213,17 @@
+     ProjectionType element() { return arguments.isEmpty() ? null : arguments.get(0); }
+ 
+     boolean sized() {
+-      return shape != ProjectionShape.SLICE
++      return shape != ProjectionShape.SLICE && shape != ProjectionShape.STR
+           && (shape != ProjectionShape.TUPLE || arguments.stream().allMatch(ProjectionType::sized));
+     }
+ 
+     boolean cloneable() {
+       return switch (shape) {
+-        case ENTITY, PRIMITIVE, REFERENCE -> true;
+-        case MUT_REFERENCE, SLICE -> false;
+-        case BOX -> element().shape() == ProjectionShape.SLICE
+-            ? element().element().cloneable() : element().cloneable();
++        case ENTITY, PRIMITIVE, STRING, REFERENCE -> true;
++        case MUT_REFERENCE, SLICE, STR -> false;
++        case BOX -> element().shape() == ProjectionShape.STR
++            || (element().shape() == ProjectionShape.SLICE
++                ? element().element().cloneable() : element().cloneable());
+         default -> arguments.stream().allMatch(ProjectionType::cloneable);
+       };
+     }
+@@ -640,6 +641,16 @@
+ 
+     ProjectionType projectedEntityType() {
+       trivia();
++      if (take('[')) {
++        ProjectionType element = projectedEntityType();
++        trivia();
++        if (element == null || !element.sized()) { return null; }
++        boolean array = take(';');
++        if (array && !arrayProjectionLength()) { return null; }
++        trivia();
++        if (!take(']')) { return null; }
++        return wrapProjection(array ? ProjectionShape.ARRAY : ProjectionShape.SLICE, element, null);
++      }
+       if (take('(')) {
+         trivia();
+         if (take(')')) { return compoundProjection(ProjectionShape.TUPLE, List.of(), null); }
+@@ -726,9 +737,16 @@
+         if (error == null) { return null; }
+         arguments.add(error);
+         trivia();
++      } else if (List.of("teaql_core::SmartList", "::teaql_core::SmartList").contains(path)) {
++        shape = ProjectionShape.SMART_LIST;
+       } else if (path.equals("Box") || List.of("std::boxed::Box", "::std::boxed::Box").contains(path)) {
+         shape = ProjectionShape.BOX;
+         if (path.equals("Box")) { prelude = path; }
++      } else if (List.of("std::array::IntoIter", "::std::array::IntoIter",
++          "core::array::IntoIter", "::core::array::IntoIter").contains(path)) {
++        shape = ProjectionShape.ITERATOR;
++        if (!take(',') || !arrayProjectionLength()) { return null; }
++        trivia();
+       } else if (List.of("std::option::IntoIter", "::std::option::IntoIter",
+           "core::option::IntoIter", "::core::option::IntoIter",
+           "std::vec::IntoIter", "::std::vec::IntoIter",
+@@ -745,11 +763,32 @@
+       return take('>') ? compoundProjection(shape, arguments, prelude) : null;
+     }
+ 
++    private boolean arrayProjectionLength() {
++      trivia();
++      if (end() || current() < '0' || current() > '9') { return false; }
++      int begin = position;
++      try {
++        if (lexicalNumber()) { return false; }
++        String literal = text.substring(begin, position);
++        return literal.matches("(?:0x[0-9a-fA-F_]+|0b[01_]+|0o[0-7_]+|[0-9_]+)(?:usize)?")
++            && integer(literal) != null;
++      } catch (IllegalArgumentException error) {
++        return false;
++      }
++    }
++
+     private ProjectionType nominalProjection(String path) {
++      if (List.of("String", "std::string::String", "::std::string::String").contains(path)) {
++        return new ProjectionType(path, ProjectionShape.STRING, List.of(),
++            path.equals("String") ? List.of("String") : List.of(), List.of());
++      }
+       String primitive = path;
+       for (String prefix : List.of("std::primitive::", "::std::primitive::",
+           "core::primitive::", "::core::primitive::")) {
+         if (path.startsWith(prefix)) { primitive = path.substring(prefix.length()); break; }
++      }
++      if (primitive.equals("str")) {
++        return new ProjectionType(path, ProjectionShape.STR, List.of(), List.of(), List.of());
+       }
+       boolean builtin = List.of("bool", "char", "u8", "u16", "u32", "u64", "u128", "usize",
+           "i8", "i16", "i32", "i64", "i128", "isize", "f32", "f64").contains(primitive);
+@@ -793,6 +832,7 @@
+ 
+     private boolean iterableContainer(ProjectionShape shape) {
+       return shape == ProjectionShape.OPTION || shape == ProjectionShape.VECTOR
++          || shape == ProjectionShape.ARRAY || shape == ProjectionShape.SMART_LIST
+           || shape == ProjectionShape.RESULT;
+     }
+ 
+@@ -802,7 +842,9 @@
+       String prelude = null;
+       if (List.of("ToOwned", "std::borrow::ToOwned", "::std::borrow::ToOwned").contains(trait)
+           && associated.equals("Owned")) {
+-        if (shape == ProjectionShape.SLICE) {
++        if (shape == ProjectionShape.STR) {
++          result = nominalProjection("std::string::String");
++        } else if (shape == ProjectionShape.SLICE) {
+           if (!source.element().cloneable()) { return null; }
+           result = wrapProjection(ProjectionShape.VECTOR, source.element(), null);
+         } else {
+@@ -841,7 +883,7 @@
+         if (shape == ProjectionShape.BOX || shape == ProjectionShape.REFERENCE
+             || shape == ProjectionShape.MUT_REFERENCE) {
+           result = source.element();
+-        } else if (shape == ProjectionShape.VECTOR) {
++        } else if (shape == ProjectionShape.VECTOR || shape == ProjectionShape.SMART_LIST) {
+           result = wrapProjection(ProjectionShape.SLICE, source.element(), null);
+         } else {
+           return null;
+diff --git a/generator/src/test/java/com/skynet/codegenerator/cpp/CppSmartListTypeProjectionTest.java b/generator/src/test/java/com/skynet/codegenerator/cpp/CppSmartListTypeProjectionTest.java
+new file mode 100644
+--- /dev/null
++++ b/generator/src/test/java/com/skynet/codegenerator/cpp/CppSmartListTypeProjectionTest.java
+@@ -0,0 +1,52 @@
++package com.skynet.codegenerator.cpp;
++
++import static org.junit.Assert.*;
++import java.util.List;
++import org.junit.Test;
++
++public class CppSmartListTypeProjectionTest {
++  private void entity(String source) {
++    var type = CppRustLiteralMetadata.projectedEntityTypePath(source);
++    assertNotNull(source, type);
++    assertEquals(source, "Self", type.path());
++  }
++
++  @Test
++  public void smartListPreservesOwnedBorrowedAndSliceProjections() {
++    for (String source : List.of("<teaql_core::SmartList<Self> as IntoIterator>::Item",
++        "<::teaql_core::SmartList<Self> as IntoIterator>::Item",
++        "<<teaql_core::SmartList<Self> as IntoIterator>::IntoIter as Iterator>::Item",
++        "<<&teaql_core::SmartList<Self> as IntoIterator>::Item as std::ops::Deref>::Target",
++        "<<&mut teaql_core::SmartList<Self> as IntoIterator>::Item as std::ops::Deref>::Target",
++        "<<<teaql_core::SmartList<Self> as std::ops::Deref>::Target as ToOwned>::Owned as IntoIterator>::Item")) {
++      entity(source);
++    }
++  }
++
++  @Test
++  public void nestedSmartListValuesRetainCloneAndSizedRequirements() {
++    for (String error : List.of("teaql_core::SmartList<Self>", "teaql_core::SmartList<String>",
++        "teaql_core::SmartList<[Self; 1]>")) {
++      entity("<<Result<Self, " + error + "> as ToOwned>::Owned as IntoIterator>::Item");
++    }
++    entity("<Result<Self, teaql_core::SmartList<&mut Self>> as IntoIterator>::Item");
++    for (String source : List.of(
++        "<<Result<Self, teaql_core::SmartList<&mut Self>> as ToOwned>::Owned as IntoIterator>::Item",
++        "<Result<Self, teaql_core::SmartList<str>> as IntoIterator>::Item")) {
++      assertNull(source, CppRustLiteralMetadata.projectedEntityTypePath(source));
++    }
++  }
++
++  @Test
++  public void smartListUsesThePublicRuntimeExportAndModeledElementScope() {
++    var type = CppRustLiteralMetadata.projectedEntityTypePath(
++        "<Result<Self, teaql_core::SmartList<crate::child::Child>> as IntoIterator>::Item");
++    assertNotNull(type);
++    assertEquals(List.of("Self", "crate::child::Child"), type.requiredEntityPaths());
++    for (String source : List.of("<SmartList<Self> as IntoIterator>::Item",
++        "<teaql_core::list::SmartList<Self> as IntoIterator>::Item",
++        "<teaql_core::UnknownList<Self> as IntoIterator>::Item")) {
++      assertNull(source, CppRustLiteralMetadata.projectedEntityTypePath(source));
++    }
++  }
++}
+diff --git a/generator/src/test/java/com/skynet/codegenerator/cpp/CppStandardValueTypeProjectionTest.java b/generator/src/test/java/com/skynet/codegenerator/cpp/CppStandardValueTypeProjectionTest.java
+new file mode 100644
+--- /dev/null
++++ b/generator/src/test/java/com/skynet/codegenerator/cpp/CppStandardValueTypeProjectionTest.java
+@@ -0,0 +1,69 @@
++package com.skynet.codegenerator.cpp;
++
++import static org.junit.Assert.*;
++import java.util.List;
++import org.junit.Test;
++
++public class CppStandardValueTypeProjectionTest {
++  private void entity(String source) {
++    var type = CppRustLiteralMetadata.projectedEntityTypePath(source);
++    assertNotNull(source, type);
++    assertEquals(source, "Self", type.path());
++  }
++
++  @Test
++  public void ownedAndBorrowedStringErrorsRemainStandardValues() {
++    for (String error : List.of("String", "std::string::String", "::std::string::String",
++        "&str", "&core::primitive::str", "<str as ToOwned>::Owned", "Box<str>")) {
++      entity("<Result<Self, " + error + "> as IntoIterator>::Item");
++    }
++  }
++
++  @Test
++  public void arraysAndBorrowedSlicesExposeTheirEntityItems() {
++    for (String source : List.of("<[Self; 1] as IntoIterator>::Item",
++        "<<[Self; 0] as IntoIterator>::IntoIter as Iterator>::Item",
++        "<std::array::IntoIter<Self, 2> as Iterator>::Item",
++        "<<&[Self] as IntoIterator>::Item as std::ops::Deref>::Target",
++        "<<&[Self; 2] as IntoIterator>::Item as std::ops::Deref>::Target",
++        "<<[Self] as ToOwned>::Owned as IntoIterator>::Item")) {
++      entity(source);
++    }
++  }
++
++  @Test
++  public void valueShapeControlsRecursiveCloningAndSizing() {
++    for (String error : List.of("String", "Box<str>", "[Self; 1]", "&[Self]", "Box<[Self]>")) {
++      entity("<<Result<Self, " + error + "> as ToOwned>::Owned as IntoIterator>::Item");
++    }
++    for (String error : List.of("str", "[Self]", "[str; 1]", "[&mut Self; 1]", "&mut str")) {
++      assertNull(error, CppRustLiteralMetadata.projectedEntityTypePath(
++          "<<Result<Self, " + error + "> as ToOwned>::Owned as IntoIterator>::Item"));
++    }
++  }
++
++  @Test
++  public void arrayLengthLiteralsPreserveUsizeAndScopeRequirements() {
++    for (String length : List.of("0", "1usize", "0x2", "0b10usize", "0o2", "1_0usize")) {
++      entity("<[Self; " + length + "] as IntoIterator>::Item");
++    }
++    for (String length : List.of("MissingLength", "1u8", "1.0", "-1", "18446744073709551616usize",
++        "0b2", "0x")) {
++      assertNull(length, CppRustLiteralMetadata.projectedEntityTypePath(
++          "<[Self; " + length + "] as IntoIterator>::Item"));
++    }
++  }
++
++  @Test
++  public void erasedStandardValuesKeepModeledScopeRequirements() {
++    var type = CppRustLiteralMetadata.projectedEntityTypePath(
++        "<Result<Self, [crate::child::Child; 1]> as IntoIterator>::Item");
++    assertNotNull(type);
++    assertEquals(List.of("Self", "crate::child::Child"), type.requiredEntityPaths());
++    for (String source : List.of("String", "str", "[Self]", "[Self; 1]",
++        "<String as ToOwned>::Owned", "<String as IntoIterator>::Item",
++        "<[Self] as IntoIterator>::Item")) {
++      assertNull(source, CppRustLiteralMetadata.projectedEntityTypePath(source));
++    }
++  }
++}

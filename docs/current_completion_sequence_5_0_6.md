@@ -5,6 +5,19 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+Next G14 installation package: the
+[standard-value and SmartList candidate](ap02_standard_value_smart_list_types_5_0_6.md)
+repairs seven standard-value and eight core SmartList projection differences.
+Its copied implementation passes 186 Java tests and 21 actual SmartList Rust/C++
+compiler pairs. Thirty-four standard-value compiler pairs pass in the preceding
+candidate; the combined candidate regenerates their complete SDKs byte for byte
+and explicitly reuses those outcomes. Eight actual SQLite model pairs match
+40 query/E/JSON results. The exact source patch applies to the production
+workspace; installation, production generation, retained SDK reproduction and
+current source-admission gates remain the next actions. All 11,983 installed
+execution inputs remain unchanged. This candidate preserves the installed
+checkpoint below and does not promote any capability or phase status.
+
 Current G14 repair: [Result error-type projections](ap02_result_error_types_5_0_6.md)
 are installed on `cpp_support` commit `5a6c7c8`. All 28 actual original/C++
 compiler pairs agree. Production passes 178 Java tests and all 84 compiler
