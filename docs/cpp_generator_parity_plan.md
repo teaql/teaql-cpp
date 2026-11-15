@@ -1,6 +1,20 @@
 # C++ generator parity plan
 
-Current G14 associated-type repair:
+Current G14 Result error-type repair:
+[Production installation and source admission](ap02_result_error_types_5_0_6.md)
+pass 178 Java tests, all 28 actual locked-Rust/copied-C++ compiler pairs and
+30 actual SQLite query/E/JSON outcomes. Current production regenerates 84
+complete SDKs, performs 30 C++ compiler checks and explicitly reuses 54 unchanged
+SDK/compiler outcomes. Both changed scalar-refusal diagnostics receive actual
+compilation. All eighty retained SDKs preserve 3,560 implementation/Assist files;
+only two producer fingerprints change. Source/result controls reject 57
+corruptions per Python mode; affected native callers pass 6/6 per mode. Current
+source joins admit all 90 exact changes while retaining 716 commands and 707
+native consumers. Complete G14/G17 and P0-P7 remain open at
+**14 qualified / 3 partial**; the Option-model and column-attribute decisions
+remain pending.
+
+Previous G14 associated-type repair:
 [Production installation and source admission](ap02_qualified_entity_types_5_0_6.md)
 pass 167 Java tests, thirty actual compiler outcomes and fifteen fresh
 SQLite/E/JSON results. All eighty SDKs retain 3,560 implementation/guidance

@@ -61,7 +61,7 @@
     "include/constant_topology_fixture/models.hpp": "c8f71b05d8e3f048d14f6d98153283f3fc818809a9e8b9ee7e902f0c3142726b"
   },
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "a631a6b4b4cb5ea4c15f85650f07e1206f6980fefe61edf0006064fb17d5b4a5",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "77e06521eb119fe45d017717a8c1ee682761d50043435f9806ec3f46db6ccda5",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "8541f4ccb89011cbd5f4ce4f9646577ea535de7cbefc9f1721e802218a6c0ac3",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "8f03fb9b40e6499f3ca412f65b3573b0d753658eabe1cafb4d241ce49b54f418",
@@ -70,7 +70,7 @@
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "f3d346d1ffdf390392803e16934406c225c7c084e77e3e18f5ffe4afcba56009",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java": "0cd2b015509aea951d1081f88f3e3fdb7774c839c1eeb24aea0a5d977ec03040",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustXidMetadata.java": "9d66eea7ed5d83d2cbff9376c462faf4ff056581bdaa53605f00a16f3b0f605c"
   }
 }

@@ -14,6 +14,7 @@ PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
 EVIDENCE = ROOT / "docs/parity"
 sys.path.insert(0, str(ROOT / "tests/parity"))
 from compare_values import same
+from result_type_source_admission_5_0_6 import current_input_matches as result_input_matches
 
 RECORDS = {
     "candidate": ("ap02_container_entity_types_candidate_v2_5_0_6.json.gz",
@@ -97,11 +98,11 @@ def validate(candidate, replay, installed, sdk, base_sdk, copied_sql, sql_reuse,
     for name, row in overlays.items():
         require(sha(row["before_source"].encode()) == row["before_sha256"]
                 and sha(row["after_source"].encode()) == row["after_sha256"]
-                and sha(Path(name).read_bytes()) == row["after_sha256"], "exact installed parser")
+                and result_input_matches(Path(name), row["after_sha256"]), "exact installed parser")
     unit = PRODUCER / "generator/src/test/java/com/skynet/codegenerator/cpp/CppContainerTypeProjectionTest.java"
     require(sha(unit.read_bytes()) == candidate["candidate_unit_sha256"], "permanent regressions")
     for name, value in installed["input_hashes_before"].items():
-        require(sha(Path(name).read_bytes()) == value, "current production compilation input")
+        require(result_input_matches(Path(name), value), "current production compilation input")
     for name, value in installed["dependency_jars"].items():
         require(sha(Path(name).read_bytes()) == value, "current Java dependency")
     compiler = installed["native_compiler"]
@@ -131,7 +132,7 @@ def validate(candidate, replay, installed, sdk, base_sdk, copied_sql, sql_reuse,
         require(after["value"] == value and sha(after["text"].encode()) == after["files"][filename],
                 "one parser fingerprint and complete serialized metadata")
         directory = (ROOT / after["manifest"]).parent
-        require(all(sha((directory / name).read_bytes()) == value for name, value in after["files"].items()),
+        require(all(result_input_matches(directory / name, value) for name, value in after["files"].items()),
                 "actual current complete SDK bytes")
 
     require(copied_sql["complete"] is True and copied_sql["installed"] is False
@@ -160,7 +161,7 @@ def validate(candidate, replay, installed, sdk, base_sdk, copied_sql, sql_reuse,
         path = Path(name)
         if path.name == "CppRustLiteralMetadata.java":
             path = PRODUCER / "generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java"
-        require(sha(path.read_bytes()) == value, "actual copied/production Java identity")
+        require(result_input_matches(path, value), "actual copied/production Java identity")
         normalized[str(path)] = value
     require(sql_reuse["compiled_cpp_java"] == normalized, "complete current SQL generator source set")
     for name, value in copied_sql["input_hashes_before"].items():
@@ -172,7 +173,7 @@ def validate(candidate, replay, installed, sdk, base_sdk, copied_sql, sql_reuse,
             require(value == next(iter(overlays.values()))["before_sha256"],
                     "declared unused prior source; actual compiled overlay checked separately")
         else:
-            require(path.is_file() and sha(path.read_bytes()) == value,
+            require(result_input_matches(path, value),
                     "unchanged actual SQL source/library/dependency")
 
     require(transition["complete"] is True and len(transition["edits"]) == 6,
@@ -214,8 +215,8 @@ def current_input_matches(path, expected):
         if expected != before:
             return False
         evidence()
-        return sha(path.read_bytes()) == after
-    return path.is_file() and sha(path.read_bytes()) == expected
+        return result_input_matches(path, after)
+    return result_input_matches(path, expected)
 
 
 def rejection_controls():

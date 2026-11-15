@@ -5,6 +5,22 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+Current G14 repair: [Result error-type projections](ap02_result_error_types_5_0_6.md)
+are installed on `cpp_support` commit `5a6c7c8`. All 28 actual original/C++
+compiler pairs agree. Production passes 178 Java tests and all 84 compiler
+contracts: 30 actual compiler processes and 54 byte-identical SDK outcomes
+explicitly reused. The two changed scalar-refusal diagnostics are freshly
+compiled. Eighty SDKs retain all 3,560 implementation/Assist files and update
+only two producer fingerprints per manifest. Six actual SQLite model pairs
+match 30 query/E/JSON results; production reproduces their complete SDKs and
+explicitly reuses those runtime outcomes. Fifteen new and 42 preserved controls
+reject in each Python mode; actual affected CTests pass 6/6 per mode. Current
+source joins admit all 90 exact changes on 11,983 inputs and retain the complete
+716-command registry and 707 native consumers. Other supported type/trait/model
+configurations, complete AP01-AP12/G14, G17 and P0-P7 remain open at
+**14 qualified / 3 partial**. The two pending reference-defect decisions remain
+independent. Earlier checkpoints below preserve their original source epochs.
+
 Current full native integration: the
 [GP13/native checkpoint](parity/governance_gp13_native_checkpoint_5_0_6.json.gz)
 passes **1,101/1,101** registered tests with exact JUnit membership, zero
