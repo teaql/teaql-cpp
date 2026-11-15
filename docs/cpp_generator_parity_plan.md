@@ -1,6 +1,18 @@
 # C++ generator parity plan
 
-Current G14 nominal-type repair:
+Current G14 associated-type repair:
+[Production installation and source admission](ap02_qualified_entity_types_5_0_6.md)
+pass 167 Java tests, thirty actual compiler outcomes and fifteen fresh
+SQLite/E/JSON results. All eighty SDKs retain 3,560 implementation/guidance
+files; only two producer fingerprints refresh in each manifest. Fifteen new
+and thirteen preserved controls reject in each Python mode; registered guards
+pass 6/6 per mode. The current SQ02 join admits all 87 source changes with
+seven transition corruptions per mode and 716 unchanged commands/707 unchanged
+native consumers. Option-model and column-attribute decisions remain pending.
+Complete G14/G17 and P0-P7 retain their independent exits at
+**14 qualified / 3 partial**.
+
+Previous G14 nominal-type repair:
 [Production installation](ap02_reverse_relation_module_paths_5_0_6.md#installed-repair-and-historical-source-admission)
 passes 163 Java regressions and 22 actual generated C++ compiler outcomes.
 All eighty SDKs retain their 3,560 implementation/guidance files; eighty
@@ -10,15 +22,6 @@ Thirteen corruption controls reject in both Python modes and the six affected
 native guards pass 6/6 per mode through bounded source admission. Runtime C++
 functions, ownership and module exports remain unchanged. Complete AP02/G14,
 G13/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
-
-Current G14 associated-type continuation:
-[The copied associated entity-type repair](ap02_qualified_entity_types_5_0_6.md)
-corrects six reproduced C++ refusals of valid original generated libraries.
-Java167, all30 compiler outcomes and fifteen fresh SQLite/E/JSON results pass;
-all22 preceding nominal SDKs remain identical. This candidate is not installed.
-The independently reproduced Option-model source defect retains a pending
-compatibility choice. Production sources, retained SDKs and registered SQ02
-commands are unchanged. G13/G14/G17 and P0-P7 retain their full exits.
 
 Current SQ02 completion checkpoint:
 [The complete registered aggregate](sq02_registered_completion_5_0_6.md)

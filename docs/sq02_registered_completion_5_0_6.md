@@ -1,5 +1,12 @@
 # SQ02 registered provenance completion
 
+The [associated-type source join](ap02_qualified_entity_types_5_0_6.md#installed-source-admission-and-remaining-exits)
+extends this qualification through 87 exact source changes, the current six
+receipt guards per Python mode and fifteen new/thirteen preserved corruptions.
+All 716 registered commands and 707 native consumers remain unchanged. Seven
+source-transition corruptions reject in both modes; the original aggregate
+receipts below remain immutable rather than being rerun or relabeled.
+
 The complete registered SQ02 cohort is reconciled against locked Rust 5.0.6
 runtime `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and generator
 `45e1572c4956ca963410d8ea436ead3c8857087a`. The

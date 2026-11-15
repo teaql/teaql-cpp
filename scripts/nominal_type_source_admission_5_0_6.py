@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 from cross_context_corpus_extension_5_0_6 import source_input_matches as corpus_input_matches
+from projected_type_source_admission_5_0_6 import current_input_matches
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -83,7 +84,7 @@ def validate(candidate, installed, sdk, transition):
         require(row["before_sha256"] == sha(row["before_source"].encode()) == before
                 and row["after_sha256"] == sha(row["after_source"].encode()) == after
                 and installed["input_hashes_before"][str(path)] == after
-                and sha(path.read_bytes()) == after, "exact installed Java source epoch")
+                and current_input_matches(path, after), "exact installed Java source epoch")
 
     require(sdk["complete"] is True and sdk["producer_sources_unchanged"] is True
             and sdk["owned_directory_removed"] is True
@@ -107,7 +108,7 @@ def validate(candidate, installed, sdk, transition):
         require(after["value"] == expected, "exact two producer fingerprint updates")
         directory = (ROOT / after["manifest"]).parent
         for key, value in after["files"].items():
-            require(sha((directory / key).read_bytes()) == value, "current complete SDK bytes")
+            require(current_input_matches(directory / key, value), "current complete SDK bytes")
 
     require(transition["complete"] is True and len(transition["guards"]) == 6
             and transition["candidate_sha256"] == CANDIDATE_SHA256
@@ -123,7 +124,7 @@ def validate(candidate, installed, sdk, transition):
                 and sha(row["after_source"].encode()) == row["after_sha256"]
                 and (ROOT / row["path"]).read_text() == expected, "unchanged remaining guard bodies")
     for name, wanted in installed["input_hashes_before"].items():
-        require(sha(Path(name).read_bytes()) == wanted, "current installed execution input")
+        require(current_input_matches(Path(name), wanted), "current installed execution input")
     for name, wanted in installed["dependency_jars"].items():
         require(sha(Path(name).read_bytes()) == wanted, "current Java dependency")
     for name, wanted in installed["runtime_cpp_inputs"].items():
@@ -148,7 +149,7 @@ def historical_input_matches(path, expected):
         if expected != before:
             return False
         evidence()
-        return sha(path.read_bytes()) == after
+        return current_input_matches(path, after)
     return path.is_file() and sha(path.read_bytes()) == expected
 
 
