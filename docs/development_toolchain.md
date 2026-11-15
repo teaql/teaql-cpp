@@ -42,6 +42,21 @@ complete GNU producer/modules qualification. The bundled compiler sysroot has
 an older libc and must not be combined with the host SQLite shared library.
 See [the installed-package checkpoint](module_packaging.md).
 
+Rust reference probes with native C dependencies must use the same host ABI for
+compilation and linking. After activation, `CC` selects the pinned Clang. New
+host probes can also select it explicitly for Rust linking:
+
+```bash
+export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER="$CC"
+```
+
+The [associated-type SQLite probe](ap02_qualified_entity_types_5_0_6.md) records
+an actual `fcntl64` link failure when the bare GCC driver selected its bundled
+older libc for an object compiled against host headers. Its separate Clang
+execution passes all fifteen source/C++ results. Preserve historical oracle
+profiles and receipts; this is guidance for new host probes, not a rewrite of
+their prior compiler evidence.
+
 ## Install and use
 
 The native module frontend is qualified through the `modules_native`

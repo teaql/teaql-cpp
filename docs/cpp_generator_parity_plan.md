@@ -11,6 +11,15 @@ native guards pass 6/6 per mode through bounded source admission. Runtime C++
 functions, ownership and module exports remain unchanged. Complete AP02/G14,
 G13/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
 
+Current G14 associated-type continuation:
+[The copied associated entity-type repair](ap02_qualified_entity_types_5_0_6.md)
+corrects six reproduced C++ refusals of valid original generated libraries.
+Java167, all30 compiler outcomes and fifteen fresh SQLite/E/JSON results pass;
+all22 preceding nominal SDKs remain identical. This candidate is not installed.
+The independently reproduced Option-model source defect retains a pending
+compatibility choice. Production sources, retained SDKs and registered SQ02
+commands are unchanged. G13/G14/G17 and P0-P7 retain their full exits.
+
 Current SQ02 completion checkpoint:
 [The complete registered aggregate](sq02_registered_completion_5_0_6.md)
 reconciles all 513 comparison commands and 203 source/control/invariant commands

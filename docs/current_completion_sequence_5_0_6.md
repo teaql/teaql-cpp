@@ -5,6 +5,18 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+Current G14 follow-up: the [associated entity-type diagnostic and copied repair](ap02_qualified_entity_types_5_0_6.md)
+identify six valid original consumers rejected by installed C++. The copy passes
+167 Java tests, 30 compiler outcomes and fifteen fresh SQLite/E/JSON results;
+all 22 preceding nominal SDKs remain identical. Installation, permanent
+regressions, production reproduction and exact source admission are next.
+The independently reproduced Option-model naming discrepancy has a pending
+user choice; the column-attribute decision remains separate. Production sources
+and the qualified registered SQ02 execution cohort are unchanged. The
+[metadata-only ledger admission](parity/ap02_qualified_entity_types_milestone_5_0_6.json.gz)
+retains the exact before/after JSON and unchanged capability statuses; it does
+not relabel execution of the earlier aggregate as a new run.
+
 Current completion checkpoint: the [registered SQ02 aggregate](sq02_registered_completion_5_0_6.md)
 closes provenance and acceptance-boundary reconciliation for all 513 comparison
 commands and 203 source/control/invariant commands in the exact 1,101-test

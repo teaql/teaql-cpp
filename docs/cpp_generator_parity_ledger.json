@@ -9260,9 +9260,19 @@
         "docs/parity/ap02_reverse_relation_nominal_type_sdk_complete_5_0_6.json.gz",
         "docs/parity/ap02_reverse_relation_nominal_type_source_transition_5_0_6.json.gz",
         "docs/parity/ap02_reverse_relation_nominal_type_admission_controls_5_0_6.json.gz",
-        "docs/parity/ap02_reverse_relation_nominal_type_native_5_0_6.json.gz"
+        "docs/parity/ap02_reverse_relation_nominal_type_native_5_0_6.json.gz",
+        "docs/ap02_qualified_entity_types_5_0_6.md",
+        "docs/parity/ap02_qualified_entity_types_diagnostic_5_0_6.json.gz",
+        "docs/parity/ap02_qualified_entity_types_candidate_5_0_6.json.gz",
+        "docs/parity/ap02_qualified_entity_type_shadow_diagnostic_5_0_6.json.gz",
+        "docs/parity/ap02_plain_option_model_diagnostic_5_0_6.json.gz",
+        "docs/parity/ap02_qualified_entity_type_shadow_candidate_5_0_6.json.gz",
+        "docs/parity/ap02_qualified_entity_types_candidate_sql_5_0_6.json.gz",
+        "docs/parity/ap02_qualified_entity_types_candidate_sql_clang_5_0_6.json.gz",
+        "docs/parity/ap02_qualified_entity_types_milestone_5_0_6.json.gz"
       ],
       "open_questions": [
+        "A copied associated entity-type repair resolves six reproduced C++ refusals of valid original libraries. Fresh candidate Java 167/167, all 30 compiler outcomes (23 accepts, seven refusals), all 22 unchanged nominal SDKs and fifteen fresh SQLite/E/JSON outcomes pass. The candidate is not installed; production generation, permanent regressions, eighty-SDK reproduction and exact current source admission remain required. The separate Option-model diagnostic proves a pre-existing Rust generator name-shadowing failure while installed C++ compiles; its compatibility choice is pending. The first shadow expectation and GCC/sysroot SQL link failure remain retained as incomplete receipts. Full AP02/G14, G17 and P0-P7 remain open.",
         "Installed nominal reverse-relation types now match22 actual original/production compiler outcomes (16accept/6reject), including public/owner module paths, parentheses and empty Self arguments. Java163, strict80-SDK/3560-file reproduction,13 corruptions perPythonmode and native6/6permode pass;15 actual SQLite outputs are explicitly reused through exact SDK/runtime equality. Only2 producer fingerprints refresh in80 metadata files. docs/ap02_reverse_relation_module_paths_5_0_6.md retains full original/candidate/installed epochs and six exact guard transitions. This closes that concrete generated-consumer defect; complete AP02/G14, other configurations, pending column-attribute approval and P0-P7 retain independent exits.",
         "Generated descriptor-to-binding-redaction execution matches 42 original/C++ field policies and safe/debug capture lists across three domains (docs/audit_generated_binding_redactions_5_0_6.md). Three source-derived School audit-length configurations match actual generated SQLite SQL, 36 audited Save pairs and 36 query file-sink cases (docs/audit_generated_sql_sink_expression_5_0_6.md). Four separate mask-policy configurations establish Masked/Plain/Unknown SQLite and publication behavior, including the direct-projection versus governed-Unknown boundary (docs/audit_generated_binding_policy_execution_5_0_6.md). A fifth complete School model carries an independent generated password Credential binding through real SQLite and protected ordinary/debug sinks (docs/audit_generated_credential_execution_5_0_6.md). Other model configurations, graph/approval combinations and audit consumers, arbitrary sinks and complete AP02/G14/G17/P0-P7 remain open.",
         "Three source-derived nested/delegated generated caller pairs now match nine descriptors and 42 field-privacy policies after full original/C++ generation and native execution (docs/audit_delegated_nested_callers_5_0_6.md). This joins a finite parser branch to generated metadata, not actual SQL/protected publication or complete AP02/G14/P0-P7.",
