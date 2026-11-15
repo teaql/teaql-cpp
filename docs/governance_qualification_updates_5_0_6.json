@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "base_matrix": "docs/governance_qualification_requirements_5_0_6.json",
+  "base_matrix_sha256": "1fc6d541eee45f233f786e313090c6fbe23c1f99eebb4f88586852fb044bcb3a",
+  "scope": "Current requirement updates applied to the immutable historical G17 matrix; complete G17 and P0-P7 remain unqualified",
+  "updates": [
+    {
+      "id": "GP13",
+      "status": "reconciled_source_contract",
+      "remaining": null,
+      "qualification": "All 513 comparison registrations and 203 source/control/invariant registrations have complete source responsibilities, qualified execution boundaries and actual ordinary/optimized outcomes in their declared scopes. The current source join admits all 87 subsequent source changes; the post-test ledger update is metadata-only. This closes comparator provenance, independently of G14 semantics and final integration.",
+      "evidence": {
+        "docs/parity/sq02_registered_completion_5_0_6.json.gz": "a58a6e32bf752a7a924eca044f8fc875d765cb738aa5020f8bfdf78b45b9f0bd",
+        "docs/parity/sq02_projected_type_source_join_5_0_6.json.gz": "3daeccad2a3d925f4452e7d41cba222caf3d8a5a7e13dba34d8644b31dafabdf",
+        "docs/parity/sq02_projected_type_source_join_optimized_5_0_6.json.gz": "0f58db4b5e7bda9e380a4a2975564cf8e0117cffcac019ba8df64ff234fe9f8c",
+        "docs/parity/ap02_qualified_entity_types_installation_milestone_5_0_6.json.gz": "28227967fb0d802e53b095ed9bd30f1226ce5ce2d86748c8f0b3280a11513ba6"
+      },
+      "current_scope": {
+        "registered_tests": 1101,
+        "python_commands": 716,
+        "comparison_commands": 513,
+        "source_control_commands": 203,
+        "primary_source_owners": 64,
+        "unchanged_native_consumers": 707,
+        "admitted_source_changes": 87,
+        "historical_compiler_scope": "201 ordinary compiler cases and two selected optimized cases; P0 retains its enforced ordinary boundary"
+      }
+    }
+  ],
+  "open_requirements": ["GP11", "GP16"],
+  "pending_compatibility_decisions": ["option_model", "column_attribute"],
+  "whole_goal_complete": false
+}

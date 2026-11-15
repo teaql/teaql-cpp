@@ -5,6 +5,41 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+Current full native integration: the
+[GP13/native checkpoint](parity/governance_gp13_native_checkpoint_5_0_6.json.gz)
+passes **1,101/1,101** registered tests with exact JUnit membership, zero
+failures/errors/skips, 11,977 unchanged execution inputs and a no-work final
+build. All 707 native consumers retain their qualified hashes. The complete
+ordinary compiler recipe verifies 57 positive and 144 negative cases; its
+untruncated output is retained separately from CTest's shortened JUnit output.
+This closes the current SQ05 native execution gate before container-projection
+installation. Complete G14/G17 and P0-P7 remain open; capability status stays
+14 qualified / 3 partial. Earlier counts below retain their historical epochs.
+
+The next concrete G14 repair is the
+[standard-container entity projection diagnostic](ap02_container_entity_types_5_0_6.md).
+Eight actual generated-library compiler cases confirm six C++ refusals of valid
+locked Rust `Vec`/`Result`/`Box`/reference projections and two agreeing controls.
+The corrected copied resolver passes 173 Java tests and ten actual generated
+compiler cases. It preserves all 46 preceding/composition SDK trees exactly,
+with their compiler outcomes explicitly reused and eight corruption controls
+per Python mode. Six fresh original/candidate SQLite model pairs also match
+all thirty query/E/JSON outcomes, including a cross-entity Child target.
+The first candidate's two undeclared-lifetime false acceptances and the
+pre-execution missing-Maven failure are preserved separately. The exact source
+repair is committed as `3187dad` on an isolated generator branch; Maven packaging
+and 173 fresh Java tests pass there. The native epoch above has terminated.
+Merge that implementation and qualify production source/artifacts next.
+No installed-production repair is claimed by
+these copied-candidate results, and the two pending reference-defect choices
+remain separate.
+
+Current governance reconciliation: [GP13 source provenance](governance_gp13_completion_5_0_6.md)
+is closed by the complete registered SQ02 and current source-transition evidence.
+The current sixteen-requirement matrix resolves fourteen reconciled contracts,
+leaving GP11 (complete generated metadata/configurations) and GP16 (complete
+integration and capability/phase exits) open. Historical matrices remain intact.
+
 Current G14 follow-up: the [associated entity-type repair](ap02_qualified_entity_types_5_0_6.md)
 is installed with permanent regressions. Production Java passes 167 tests;
 all thirty compiler outcomes and fifteen fresh SQLite/E/JSON results match.
@@ -26,13 +61,14 @@ commands and 203 source/control/invariant commands in the exact 1,101-test
 registry. Both Python modes reject twelve aggregate corruptions and pass the
 31 existing binding controls. All 707 retained native consumers match, and the
 six changed guards retain their actual current passes in both modes. G14
-metadata, G17 governance joins and final current integration remain open. The
+metadata, G17 governance joins and final phase integration remain open. The
 earlier checkpoints below retain their own source epochs and bounded verdicts.
 
 At this checkpoint, all 122 in-scope runtime source dispositions are accepted;
 two concrete external integrations remain excluded. Fourteen generator/runtime
-capabilities are qualified. G13, G14 and G17 remain partial. The last broad
-native execution covered 1,075/1,075 tests in a recovered controller epoch.
+capabilities are qualified. G13, G14 and G17 remain partial. Before the current
+epoch above, broad native execution covered 1,075/1,075 tests in a recovered
+controller epoch.
 The current registry has 1,101 tests and 619 Python entries, with no direct
 assertions in the registered entry scripts. The
 [registered-boundary repair](registered_boundary_optimized_checks_5_0_6.md)
@@ -50,7 +86,8 @@ and the unchanged affected executable. The broader static import review
 started from an inventory of 685 Python files,
 including twenty files with 281 assertions in mixed execution roles. These
 counts include historical and uncalled bodies, so each called boundary needs
-its own disposition. No full current 1,101-test native epoch has run.
+its own disposition. These selected receipts predate the complete 1,101-test
+epoch recorded above.
 
 The [actual import-boundary continuation](executed_import_boundary_review_5_0_6.md)
 then resolves 686 static local files from the 615-entry registry. Eighteen

@@ -1,0 +1,291 @@
+diff --git a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+--- a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
++++ b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+@@ -204,9 +204,20 @@
+
+   record EntityTypePath(String path, List<String> preludeNames) {}
+
+-  private enum ProjectionShape { ENTITY, OPTION, OPTION_ITERATOR }
+-
+-  private record ProjectionType(String path, ProjectionShape shape, List<String> preludeNames) {}
++  private enum ProjectionShape {
++    ENTITY, OPTION, VECTOR, RESULT, BOX, REFERENCE, MUT_REFERENCE, SLICE, ITERATOR
++  }
++
++  private record ProjectionType(String path, ProjectionShape shape, ProjectionType element,
++                                List<String> preludeNames) {
++    boolean cloneable() {
++      return switch (shape) {
++        case ENTITY, REFERENCE -> true;
++        case MUT_REFERENCE, SLICE -> false;
++        default -> element != null && element.cloneable();
++      };
++    }
++  }
+
+   static EntityTypePath projectedEntityTypePath(String text) {
+     Cursor cursor = new Cursor(text);
+@@ -625,6 +636,19 @@
+         trivia();
+         return nested != null && take(')') ? nested : null;
+       }
++      if (take('&')) {
++        trivia();
++        int lifetimeBegin = position;
++        boolean explicitLifetime = lifetime();
++        if (explicitLifetime && !List.of("'static", "'_")
++            .contains(text.substring(lifetimeBegin, position))) { return null; }
++        trivia();
++        boolean mutable = keyword("mut");
++        if (mutable) { position += 3; }
++        ProjectionType argument = projectedEntityType();
++        return argument == null ? null : wrapProjection(
++            mutable ? ProjectionShape.MUT_REFERENCE : ProjectionShape.REFERENCE, argument, null);
++      }
+       if (take('<')) {
+         ProjectionType source = projectedEntityType();
+         trivia();
+@@ -641,8 +665,8 @@
+         position += 2;
+         trivia();
+         String associated = nominalEntityTypePath();
+-        if (associated == null) { return null; }
+-        return projectEntityType(source, (rooted ? "::" : "") + trait, associated);
++        return associated == null ? null
++            : projectEntityType(source, (rooted ? "::" : "") + trait, associated);
+       }
+       boolean rooted = text.startsWith("::", position);
+       if (rooted) { position += 2; trivia(); }
+@@ -650,32 +674,47 @@
+       if (path == null) { return null; }
+       if (rooted) { path = "::" + path; }
+       trivia();
+-      if (!take('<')) { return new ProjectionType(path, ProjectionShape.ENTITY, List.of()); }
+-      trivia();
+-      if (take('>')) { return new ProjectionType(path, ProjectionShape.ENTITY, List.of()); }
++      if (!take('<')) { return new ProjectionType(path, ProjectionShape.ENTITY, null, List.of()); }
++      trivia();
++      if (take('>')) { return new ProjectionType(path, ProjectionShape.ENTITY, null, List.of()); }
+       ProjectionType argument = projectedEntityType();
+-      trivia();
+-      if (take(',')) { trivia(); }
+-      if (argument == null || argument.shape() != ProjectionShape.ENTITY || !take('>')) {
+-        return null;
+-      }
++      if (argument == null) { return null; }
++      trivia();
+       ProjectionShape shape;
+       String prelude = null;
+-      if (path.equals("Option")) {
+-        shape = ProjectionShape.OPTION;
+-        prelude = "Option";
+-      } else if (List.of("std::option::Option", "::std::option::Option",
++      if (path.equals("Option") || List.of("std::option::Option", "::std::option::Option",
+           "core::option::Option", "::core::option::Option").contains(path)) {
+         shape = ProjectionShape.OPTION;
++        if (path.equals("Option")) { prelude = path; }
++      } else if (path.equals("Vec") || List.of("std::vec::Vec", "::std::vec::Vec").contains(path)) {
++        shape = ProjectionShape.VECTOR;
++        if (path.equals("Vec")) { prelude = path; }
++      } else if (path.equals("Result") || List.of("std::result::Result", "::std::result::Result",
++          "core::result::Result", "::core::result::Result").contains(path)) {
++        // This reviewed branch has a unit error. Other error types must retain
++        // their own identity/bound qualification instead of being discarded.
++        shape = ProjectionShape.RESULT;
++        if (path.equals("Result")) { prelude = path; }
++        if (!take(',')) { return null; }
++        trivia();
++        if (!take('(')) { return null; }
++        trivia();
++        if (!take(')')) { return null; }
++        trivia();
++      } else if (path.equals("Box") || List.of("std::boxed::Box", "::std::boxed::Box").contains(path)) {
++        shape = ProjectionShape.BOX;
++        if (path.equals("Box")) { prelude = path; }
+       } else if (List.of("std::option::IntoIter", "::std::option::IntoIter",
+-          "core::option::IntoIter", "::core::option::IntoIter").contains(path)) {
+-        shape = ProjectionShape.OPTION_ITERATOR;
++          "core::option::IntoIter", "::core::option::IntoIter",
++          "std::vec::IntoIter", "::std::vec::IntoIter",
++          "std::result::IntoIter", "::std::result::IntoIter",
++          "core::result::IntoIter", "::core::result::IntoIter").contains(path)) {
++        shape = ProjectionShape.ITERATOR;
+       } else {
+         return null;
+       }
+-      List<String> names = new ArrayList<>(argument.preludeNames());
+-      if (prelude != null) { names.add(prelude); }
+-      return new ProjectionType(argument.path(), shape, List.copyOf(names));
++      if (take(',')) { trivia(); }
++      return take('>') ? wrapProjection(shape, argument, prelude) : null;
+     }
+
+     private String projectedPathHead() {
+@@ -694,35 +733,74 @@
+       return path;
+     }
+
++    private ProjectionType wrapProjection(ProjectionShape shape, ProjectionType element,
++                                          String prelude) {
++      List<String> names = new ArrayList<>(element.preludeNames());
++      if (prelude != null) { names.add(prelude); }
++      return new ProjectionType(element.path(), shape, element, List.copyOf(names));
++    }
++
++    private boolean iterableContainer(ProjectionShape shape) {
++      return shape == ProjectionShape.OPTION || shape == ProjectionShape.VECTOR
++          || shape == ProjectionShape.RESULT;
++    }
++
+     private ProjectionType projectEntityType(ProjectionType source, String trait, String associated) {
+       ProjectionShape shape = source.shape();
++      ProjectionType result;
+       String prelude = null;
+       if (List.of("ToOwned", "std::borrow::ToOwned", "::std::borrow::ToOwned").contains(trait)
+           && associated.equals("Owned")) {
+-        // Every modeled entity is Clone. Option and its IntoIter preserve that bound.
+-        if (trait.equals("ToOwned")) { prelude = "ToOwned"; }
++        if (shape == ProjectionShape.SLICE) {
++          if (!source.element().cloneable()) { return null; }
++          result = wrapProjection(ProjectionShape.VECTOR, source.element(), null);
++        } else {
++          if (!source.cloneable()) { return null; }
++          result = source;
++        }
++        if (trait.equals("ToOwned")) { prelude = trait; }
+       } else if (List.of("IntoIterator", "std::iter::IntoIterator", "::std::iter::IntoIterator",
+-          "core::iter::IntoIterator", "::core::iter::IntoIterator").contains(trait)
+-          && shape != ProjectionShape.ENTITY) {
+-        if (trait.equals("IntoIterator")) { prelude = "IntoIterator"; }
+-        if (associated.equals("Item")) {
+-          shape = ProjectionShape.ENTITY;
+-        } else if (associated.equals("IntoIter")) {
+-          shape = ProjectionShape.OPTION_ITERATOR;
++          "core::iter::IntoIterator", "::core::iter::IntoIterator").contains(trait)) {
++        ProjectionType item;
++        if (iterableContainer(shape) || shape == ProjectionShape.ITERATOR) {
++          item = source.element();
++        } else if ((shape == ProjectionShape.REFERENCE || shape == ProjectionShape.MUT_REFERENCE)
++            && (iterableContainer(source.element().shape())
++                || source.element().shape() == ProjectionShape.SLICE)) {
++          item = wrapProjection(shape, source.element().element(), null);
+         } else {
+           return null;
+         }
++        if (associated.equals("Item")) {
++          result = item;
++        } else if (associated.equals("IntoIter")) {
++          result = wrapProjection(ProjectionShape.ITERATOR, item, null);
++        } else {
++          return null;
++        }
++        if (trait.equals("IntoIterator")) { prelude = trait; }
+       } else if (List.of("Iterator", "std::iter::Iterator", "::std::iter::Iterator",
+           "core::iter::Iterator", "::core::iter::Iterator").contains(trait)
+-          && source.shape() == ProjectionShape.OPTION_ITERATOR && associated.equals("Item")) {
+-        shape = ProjectionShape.ENTITY;
+-        if (trait.equals("Iterator")) { prelude = "Iterator"; }
++          && shape == ProjectionShape.ITERATOR && associated.equals("Item")) {
++        result = source.element();
++        if (trait.equals("Iterator")) { prelude = trait; }
++      } else if (List.of("std::ops::Deref", "::std::ops::Deref",
++          "core::ops::Deref", "::core::ops::Deref").contains(trait)
++          && associated.equals("Target")) {
++        if (shape == ProjectionShape.BOX || shape == ProjectionShape.REFERENCE
++            || shape == ProjectionShape.MUT_REFERENCE) {
++          result = source.element();
++        } else if (shape == ProjectionShape.VECTOR) {
++          result = wrapProjection(ProjectionShape.SLICE, source.element(), null);
++        } else {
++          return null;
++        }
+       } else {
+         return null;
+       }
+       List<String> names = new ArrayList<>(source.preludeNames());
+       if (prelude != null) { names.add(prelude); }
+-      return new ProjectionType(source.path(), shape, List.copyOf(names));
++      return new ProjectionType(result.path(), result.shape(), result.element(), List.copyOf(names));
+     }
+
+     private String emptyNominalArguments(String path) {
+diff --git a/generator/src/test/java/com/skynet/codegenerator/cpp/CppContainerTypeProjectionTest.java b/generator/src/test/java/com/skynet/codegenerator/cpp/CppContainerTypeProjectionTest.java
+new file mode 100644
+--- /dev/null
++++ b/generator/src/test/java/com/skynet/codegenerator/cpp/CppContainerTypeProjectionTest.java
+@@ -0,0 +1,75 @@
++package com.skynet.codegenerator.cpp;
++import static org.junit.Assert.*;
++import java.util.List;
++import org.junit.Test;
++
++public class CppContainerTypeProjectionTest {
++  private void entity(String source) {
++    var type = CppRustLiteralMetadata.projectedEntityTypePath(source);
++    assertNotNull(source, type);
++    assertEquals(source, "Self", type.path());
++  }
++
++  @Test
++  public void ownedContainersExposeTheirEntityItems() {
++    for (String source : List.of("<Vec<Self> as IntoIterator>::Item",
++        "<std::vec::Vec<Self> as std::iter::IntoIterator>::Item",
++        "<<Vec<Self> as IntoIterator>::IntoIter as Iterator>::Item",
++        "<Result<Self, ()> as IntoIterator>::Item",
++        "<std::result::IntoIter<Self> as Iterator>::Item")) {
++      entity(source);
++    }
++  }
++
++  @Test
++  public void pointerTargetsRemainSeparateFromPointerWrappers() {
++    for (String source : List.of("<Box<Self> as std::ops::Deref>::Target",
++        "<&Self as core::ops::Deref>::Target", "<&'static Self as std::ops::Deref>::Target",
++        "<&mut Self as std::ops::Deref>::Target")) {
++      entity(source);
++    }
++  }
++
++  @Test
++  public void nestedContainersPreserveEachProjectionStep() {
++    for (String source : List.of(
++        "<<Vec<Option<Self>> as IntoIterator>::Item as IntoIterator>::Item",
++        "<<Box<Option<Self>> as std::ops::Deref>::Target as IntoIterator>::Item",
++        "<<<Vec<Self> as std::ops::Deref>::Target as ToOwned>::Owned as IntoIterator>::Item",
++        "<<<&Vec<Self> as IntoIterator>::IntoIter as Iterator>::Item as std::ops::Deref>::Target")) {
++      entity(source);
++    }
++  }
++
++  @Test
++  public void erasedContainersRetainPreludeIdentityRequirements() {
++    assertEquals(List.of("Vec", "IntoIterator"),
++        CppRustLiteralMetadata.projectedEntityTypePath("<Vec<Self> as IntoIterator>::Item").preludeNames());
++    assertEquals(List.of("Result", "IntoIterator"),
++        CppRustLiteralMetadata.projectedEntityTypePath("<Result<Self, ()> as IntoIterator>::Item").preludeNames());
++    assertEquals(List.of("Box"),
++        CppRustLiteralMetadata.projectedEntityTypePath("<Box<Self> as std::ops::Deref>::Target").preludeNames());
++  }
++
++  @Test
++  public void wrappersAndUnsupportedTraitStepsDoNotBecomeEntities() {
++    for (String source : List.of("Vec<Self>", "Box<Self>", "&Self", "Result<Self, ()>",
++        "<Vec<Self> as Iterator>::Item", "<Box<Self> as IntoIterator>::Item",
++        "<Vec<Self> as std::ops::Deref>::Target",
++        "<<&mut Self as ToOwned>::Owned as std::ops::Deref>::Target")) {
++      assertNull(source, CppRustLiteralMetadata.projectedEntityTypePath(source));
++    }
++  }
++
++  @Test
++  public void unboundReferenceLifetimesDoNotResolve() {
++    entity("<&'static Self as std::ops::Deref>::Target");
++    entity("<&'_ Self as std::ops::Deref>::Target");
++    for (String source : List.of("<&'a Self as std::ops::Deref>::Target",
++        "<&'missing Self as std::ops::Deref>::Target",
++        "<<Box<&'missing Self> as std::ops::Deref>::Target as std::ops::Deref>::Target",
++        "<&'a mut Self as std::ops::Deref>::Target")) {
++      assertNull(source, CppRustLiteralMetadata.projectedEntityTypePath(source));
++    }
++  }
++}

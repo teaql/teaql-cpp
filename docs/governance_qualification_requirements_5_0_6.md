@@ -1,6 +1,23 @@
 # G17 governed execution and provenance reconciliation
 
-Last complete native integration: the
+Current requirement status is resolved through the
+[hash-bound update contract](governance_qualification_updates_5_0_6.json).
+[GP13 provenance](governance_gp13_completion_5_0_6.md) is reconciled through the
+complete registered SQ02/current source joins: thirteen runtime and one source
+contract are reconciled, while GP11 and GP16 remain open. The original matrix
+and earlier narrative below preserve their historical statuses and execution
+epochs. Complete G14/G17 and P0-P7 remain unqualified.
+
+Current complete native integration:
+[1,101/1,101 tests](parity/governance_gp13_native_checkpoint_5_0_6.json.gz)
+pass on 11,977 unchanged inputs, with exact registry/JUnit membership, zero
+failures/errors/skips and a no-work final build. The untruncated ordinary
+compiler output verifies 57 positive and 144 negative cases. GP13 is reconciled
+through the current update contract; GP11 and the complete capability/phase
+exits in GP16 remain open. This native result precedes container-projection
+installation and does not approve either pending reference-defect exception.
+
+Historical complete native integration: the
 [hardened-controller full epoch](parity/current_full_native_hardened_terminal_1066_5_0_6.json.gz)
 passes **1,066/1,066** tests on 11,816 unchanged inputs with exact
 JUnit/registry names, fixed references and a no-work post-build. SQ05 native
