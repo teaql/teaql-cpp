@@ -1,5 +1,16 @@
 # C++ generator parity plan
 
+Current G14 nominal-type repair:
+[Production installation](ap02_reverse_relation_module_paths_5_0_6.md#installed-repair-and-historical-source-admission)
+passes 163 Java regressions and 22 actual generated C++ compiler outcomes.
+All eighty SDKs retain their 3,560 implementation/guidance files; eighty
+metadata files refresh exactly two producer fingerprints. Fifteen actual
+SQLite outcomes are explicitly reused through exact SDK/source equality.
+Thirteen corruption controls reject in both Python modes and the six affected
+native guards pass 6/6 per mode through bounded source admission. Runtime C++
+functions, ownership and module exports remain unchanged. Complete AP02/G14,
+G13/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+
 Current SQ02 source/control continuation:
 [The finite disposition and reuse admission](source_control_dispositions_5_0_6.md)
 covers all 203 exact current ordinary command outcomes across admitted epochs,
@@ -13,10 +24,10 @@ The optional audit observer passes twenty process fixtures, four inventory
 corruptions and root protocol controls in both controller modes. Full SQ02,
 G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**; the last broad
 native epoch remains historical. The finite 203-registration disposition index
-is complete. A separately retained, copied G14 nominal-type candidate matches
+is complete. Its separately retained, copied G14 nominal-type candidate matched
 22 original compiler outcomes and preserves fifteen SQLite query results
-through exact SDK reproduction; installation and permanent regressions remain
-the next implementation step.
+through exact SDK reproduction. The installed continuation above supersedes
+that earlier pending-installation state.
 
 Previous SQ02 paired source/native checkpoint:
 [The complete paired command join](paired_source_binding_join_5_0_6.md)

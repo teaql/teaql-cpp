@@ -6,10 +6,14 @@ import copy
 import gzip
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
+from nominal_type_source_admission_5_0_6 import historical_input_matches, rejection_controls
+
 PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
 SOURCE = ROOT / "docs/parity/ap02_reverse_relation_type_composition_exploratory_5_0_6.json.gz"
 CORPUS = (PRODUCER / "generator/src/test/resources/"
@@ -36,7 +40,7 @@ def unchanged_inputs(record):
     require(record["input_hashes_before"] == record["input_hashes_after"]
             and record["inputs_unchanged"] is True, "Execution inputs changed")
     for path, expected in record["input_hashes_before"].items():
-        require(digest(Path(path).read_bytes()) == expected,
+        require(historical_input_matches(Path(path), expected),
                 "Current execution input changed: " + path)
 
 
@@ -62,7 +66,7 @@ def validate(source, corpus, source_bytes):
     require(source["owned_directory_removed"] is True
             and not Path(source["owned_directory"]).exists(), "Owned source build removed")
     for path, expected in source["source_hashes"].items():
-        require(digest(Path(path).read_bytes()) == expected,
+        require(historical_input_matches(Path(path), expected),
                 "Source input changed: " + path)
     observed = source["cases"]
     require(len(observed) == 4000
@@ -183,6 +187,7 @@ def main():
             controls.append(name)
             continue
         raise RuntimeError("Invalid execution mutation accepted: " + name)
+    nominal_controls = rejection_controls()
     if args.record is not None:
         result = {
             "complete": True, "whole_goal_complete": False,
@@ -196,11 +201,13 @@ def main():
             "source_cases": 4000, "unique_inputs": 2495,
             "replayed_metadata_cases": 82680, "junit_tests": 159,
             "generated_caller_pairs": 2, "controls": controls,
+            "nominal_type_controls": nominal_controls,
         }
         args.record.write_bytes(gzip.compress(json.dumps(result, sort_keys=True).encode(),
                                               mtime=0))
     print("Reverse-relation types: 4,000 source results, 2,495 unique inputs, "
           "159 Java tests, two generated callers and six corruption controls pass")
+    print("Installed nominal-type source admission:", len(nominal_controls), "controls reject")
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@ import copy
 import gzip
 import hashlib
 import json
+import sys
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
@@ -13,6 +14,9 @@ from compare_values import json_lines, same
 
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
+from nominal_type_source_admission_5_0_6 import historical_input_matches
+
 PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
 EXECUTION = ROOT / "docs/parity/ap02_reverse_relation_sql_execution_5_0_6.json.gz"
 CORPUS = (PRODUCER / "generator/src/test/resources/"
@@ -57,7 +61,7 @@ def validate(record):
     require(digest(Path(record["native_compiler"]["path"]))
             == record["native_compiler"]["sha256"], "Actual native compiler identity")
     for name, expected in record["input_hashes_before"].items():
-        require(digest(Path(name)) == expected, "Current execution input changed: " + name)
+        require(historical_input_matches(Path(name), expected), "Current execution input changed: " + name)
     require(record["owned_directory_removed"] is True
             and not Path(record["owned_directory"]).exists(), "Owned build removed")
     corpus = json.loads(gzip.decompress(CORPUS.read_bytes()))

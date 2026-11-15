@@ -6,6 +6,7 @@ import copy
 import gzip
 import hashlib
 import json
+import sys
 from functools import cache
 from pathlib import Path
 import subprocess
@@ -14,6 +15,9 @@ from compare_values import same
 
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
+from nominal_type_source_admission_5_0_6 import historical_input_matches
+
 MAIN = ROOT / "docs/parity/generated_audit_credential_mutation_sinks_current_v2_5_0_6.json.gz"
 QUERY = ROOT / "docs/parity/generated_audit_credential_mutation_query_matrix_v2_5_0_6.json.gz"
 AP02_SOURCE = ROOT / "docs/parity/ap02_index_consumer_installed_source_5_0_6.json.gz"
@@ -119,10 +123,10 @@ def verify_current_sources(main):
         require(path.is_file(), "current source missing: " + name)
         if name in SOURCE_TRANSITIONS:
             old, current = SOURCE_TRANSITIONS[name]
-            require(wanted == old and digest(path) == current,
+            require(wanted == old and historical_input_matches(path, current),
                     "declared source transition changed: " + name)
         else:
-            require(digest(path) == wanted, "unchanged source identity: " + name)
+            require(historical_input_matches(path, wanted), "unchanged source identity: " + name)
     require(set(recorded) - set(current_sql) == {OLD_CORPUS}
             and set(current_sql) - set(recorded) == {NEW_CORPUS}
             and {name for name in set(recorded) & set(current_sql)

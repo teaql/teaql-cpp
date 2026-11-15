@@ -80,7 +80,7 @@ def validate(main, sinks, *, current_sources):
             and main.get("classpath_unchanged") is True,
             "Complete unchanged build-input epoch")
     if current_sources:
-        require(all(Path(path).is_file() and digest(Path(path)) == value
+        require(all(Path(path).is_file() and source.source_input_matches(Path(path), value)
                     for path, value in main["input_hashes_before"].items()),
                 "Current build-input identity")
         require(all(Path(path).is_file() and digest(Path(path)) == value

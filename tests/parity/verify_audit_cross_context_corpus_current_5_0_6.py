@@ -14,7 +14,7 @@ from compare_values import json_lines, same
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
-from cross_context_corpus_extension_5_0_6 import source_input_matches
+from nominal_type_source_admission_5_0_6 import cross_context_input_matches as source_input_matches
 PRODUCER = ROOT.parent / 'teaql_code_gen_cpp'
 FIXTURE = ROOT / 'tests/parity/audit_cross_context_composition_5_0_6_inputs.json'
 EXECUTION = ROOT / 'docs/parity/audit_cross_context_composition_maven_5_0_6.json.gz'

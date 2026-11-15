@@ -1,5 +1,12 @@
 # Reverse-relation module paths against Rust 5.0.6
 
+The nominal-type repair is now installed. The
+[production acceptance](parity/ap02_reverse_relation_nominal_type_installed_5_0_6.json.gz)
+passes 163 Java tests and all 22 actual generated C++ compiler outcomes. The
+six affected registered receipt guards pass 6/6 under ordinary Python and
+6/6 under optimized Python. This closes the defect described below in its
+declared scope; complete AP02/G14 acceptance remains separate.
+
 This bounded AP02 diagnostic uses runtime
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and generator
 `45e1572c4956ca963410d8ea436ead3c8857087a`. It identifies a generated-consumer
@@ -11,7 +18,7 @@ identities checked against the locked runtime, and its small consumer runs.
 Each genuine C++ generated header is checked with the configured native
 compiler. Generated files remain unchanged throughout the probe.
 
-| Reverse-relation `json_type` | Original Rust build/run | C++ header compilation |
+| Reverse-relation `json_type` | Original Rust build/run | Baseline C++ header compilation |
 | --- | --- | --- |
 | `Self` | Pass | Pass |
 | `super::Item` | Pass | Fail: undeclared `super` |
@@ -19,7 +26,7 @@ compiler. Generated files remain unchanged throughout the probe.
 
 The original entity lives in `item::entity`; its parent module re-exports
 `Item`, and the crate exposes the `item` module. These two paths therefore
-refer to the same nominal entity as `Self`. The C++ generator currently writes
+refer to the same nominal entity as `Self`. The preceding C++ generator wrote
 the Rust paths directly into `projection.reverse_one<...>`. Metadata parsing
 success alone does not establish a usable generated adapter.
 
@@ -51,8 +58,8 @@ does not need a Rust compatibility exception.
 A second original/C++ compiler diagnostic adds seventeen cases. Together the
 two diagnostics cover twenty distinct type spellings: fourteen original Rust
 libraries compile and run, and six fail at the original type/visibility
-boundary. Current C++ generation accepts three of the fourteen valid cases;
-eleven valid original consumers fail C++ compilation. The second owned build
+boundary. The preceding C++ generation accepted three of the fourteen valid cases;
+eleven valid original consumers failed C++ compilation. The second owned build
 is removed, reclaiming 458,927,910 bytes.
 
 The valid cases include root re-exports, public model modules, the owner's
@@ -99,3 +106,45 @@ the fifteen actual SQLite query outcomes. All six compact receipts are retained
 unchanged; 1,391,348,632 bytes of owned builds and all temporary receipt copies
 are removed. The copied final source is ready for installation and permanent
 regressions; the producer checkout remains unchanged at this checkpoint.
+
+## Installed repair and historical-source admission
+
+`CppCoreGenerator.containerJsonType` now resolves model names through the
+original generated module layout. The new nominal reader handles parentheses,
+raw identifiers, comments and empty type arguments. The existing metadata
+parser methods and C++ projection implementation remain unchanged. Four
+permanent Java regression methods cover normalization, public/owner visibility,
+invalid boundaries and centralized model naming.
+
+The [complete SDK reproduction](parity/ap02_reverse_relation_nominal_type_sdk_complete_5_0_6.json.gz)
+checks all eighty SDKs: all 3,560 implementation/guidance files remain identical,
+and only the two actual Java producer fingerprints change in eighty metadata
+files. The initial recording stopped after the ordinary 75-SDK commands because
+five independent fixtures require their separate generator. That partial
+[record](parity/ap02_reverse_relation_nominal_type_sdk_refresh_5_0_6.json.gz)
+is preserved; the successful continuation reproduces those five and passes
+the strict contract, example and independent checks. The historical independent
+driver executes through `-E -B`; the current outer checks remain unconditional.
+
+The [source admission](../scripts/nominal_type_source_admission_5_0_6.py) requires
+exact before/after Java bytes, the installed execution, complete SDK equality
+and current source/dependency/library identities. It admits only the declared
+historical Java epoch and rejects attempts to label an old receipt with the
+current hash. The existing corpus-declaration admission remains a separate,
+composed boundary for cross-context receipts.
+
+The [six guard transitions](parity/ap02_reverse_relation_nominal_type_source_transition_5_0_6.json.gz)
+retain their complete preceding/current sources and reconstruct all sixteen
+edit hunks. Previous source/result/corpus/privacy checks remain; the new
+predicates admit this exact source change. The
+[thirteen corruption controls](parity/ap02_reverse_relation_nominal_type_admission_controls_5_0_6.json.gz)
+reject incomplete execution, missing/changed compiler and SQL results, SDK
+changes, altered source/guard epochs and receipt relabeling in both Python modes.
+The [actual native selection](parity/ap02_reverse_relation_nominal_type_native_5_0_6.json.gz)
+then passes all six affected CTests in each mode with unchanged inputs and
+references. Pinned formatting and format checks cover 1,813 C++ files.
+
+Original Rust execution is explicitly reused. C++ runtime functions, module
+exports, ownership domains and generated application implementation files do
+not change. No sanitizer, cross-toolchain or physical-device run is claimed.
+The independent column-attribute compatibility question remains unapproved.

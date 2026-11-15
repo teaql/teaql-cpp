@@ -11,7 +11,8 @@ retains its historical scope. Subsequent checkpoint counts describe their
 recorded epochs. The [finite source/control review](source_control_dispositions_5_0_6.md)
 now covers all 203 ordinary registrations and 201 optimized registrations
 through explicit terminal joins. The [nominal-type candidate](ap02_reverse_relation_module_paths_5_0_6.md)
-is validated in copied Java sources and remains uninstalled.
+is installed with 163 Java regressions, 22 generated compiler outcomes,
+unchanged SDK implementations and six affected native checks per Python mode.
 
 Historical graph-service checkpoint: **118 accepted / 4 pending_review / 2 excluded_external**.
 The latest [complete graph-service acceptance](service_graph_source_acceptance_5_0_6.md)

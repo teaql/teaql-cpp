@@ -97,13 +97,15 @@ The independent [module-path consumer diagnostic](ap02_reverse_relation_module_p
 identifies the next concrete G14 fix: original Rust accepts `super::Item` and
 `crate::item::Item`, while current C++ generation emits those Rust paths
 unchanged and fails compilation. The `Self` control passes in both languages.
-The reviewed copied candidate now matches 22 original compiler outcomes:
-sixteen accepted types and six rejected boundaries. Twenty earlier compiler
-results and fifteen SQLite query results are reused through exact reproduction
-of their 23 generated SDKs; two empty-`Self` cases have fresh original and C++
-compiler evidence. The audit is terminal. Commit this checkpoint, install the
-final candidate, add permanent regressions, and qualify production generation
-and source/artifact admissions before broader metadata signoff.
+The final candidate is now installed. Fresh production generation and C++
+compilation match all 22 original outcomes: sixteen accepted types and six
+rejected boundaries. Java regressions pass 163/163; all eighty SDKs reproduce
+3,560 unchanged implementation/guidance files, with only two producer
+fingerprints refreshed. Fifteen actual SQLite outcomes retain exact SDK/source
+reuse. Thirteen source/result corruptions reject in both Python modes; the six
+affected native guards pass 6/6 per mode through an exact historical-source
+admission. Permanent regressions are installed. Full AP02/G14 metadata and
+G17/capability/phase signoff remain the next responsibilities.
 
 ## Bounded work packages and exit criteria
 

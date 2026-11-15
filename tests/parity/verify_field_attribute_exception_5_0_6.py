@@ -19,6 +19,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 from compare_values import same
+from nominal_type_source_admission_5_0_6 import historical_input_matches
 import verify_property_shape_metadata_5_0_6 as property_observer
 
 DIAGNOSTIC = ROOT / "docs/parity/field_attribute_latest_property_exception_5_0_6.json.gz"
@@ -73,7 +74,7 @@ def validate_common(receipt, corpus, corpus_path, selected_names):
             "current C++ refusal source")
     for path, wanted in hashes.items():
         source = Path(path)
-        require(source.is_file() and digest(source) == wanted, "current input identity: " + path)
+        require(source.is_file() and historical_input_matches(source, wanted), "current input identity: " + path)
 
     wrapper = receipt["observer_wrapper"]
     wrapper_path = ROOT / "scripts/verify_property_shape_metadata_5_0_6.py"
