@@ -1,6 +1,20 @@
 # C++ generator parity plan
 
-Current G14 standard-value and SmartList repair:
+Current G14 array constant expression repair:
+[The installed continuation](ap02_array_const_expressions_5_0_6.md) passes 194
+Java tests and reproduces all 193 complete compiler-contract SDKs. Their 132
+accepted and 61 refused outcomes are explicitly reused through exact artifact
+identity. Actual copied witnesses cover 54 contracts, five additional descriptor
+consumers and eight SQLite model pairs with forty query/E/JSON results. All
+eighty retained SDKs preserve 3,560 code/Assist files and refresh one parser
+fingerprint. Eighteen new and 73 retained corruptions reject per Python mode;
+affected CTests pass 6/6 per mode. Current source joins admit 97 exact changes
+on 11,990 inputs, preserve 716 commands/707 native consumers and reject eight
+transition corruptions per mode. Complete AP01-AP12/G14, G17 and P0-P7 remain
+open at **14 qualified / 3 partial**; both pending compatibility decisions remain
+independent.
+
+Previous G14 standard-value and SmartList repair:
 [Production qualification](ap02_standard_value_smart_list_types_5_0_6.md)
 passes 186 Java tests and regenerates all 139 compiler-contract SDKs exactly;
 their retained 94 accepted / 45 refused compiler outcomes are explicitly reused.

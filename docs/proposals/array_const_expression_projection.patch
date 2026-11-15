@@ -1,0 +1,555 @@
+diff --git a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+--- a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
++++ b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+@@ -235,6 +235,411 @@
+     cursor.trivia();
+     return type != null && type.shape() == ProjectionShape.ENTITY && cursor.end()
+         ? new EntityTypePath(type.path(), type.preludeNames(), type.requiredEntityPaths()) : null;
++  }
++
++  private enum ConstKind {
++    I8(8, true), I16(16, true), I32(32, true), I64(64, true), I128(128, true), ISIZE(64, true),
++    U8(8, false), U16(16, false), U32(32, false), U64(64, false), U128(128, false), USIZE(64, false),
++    BOOL(1, false), UNIT(0, false);
++
++    final int bits;
++    final boolean signed;
++    ConstKind(int bits, boolean signed) { this.bits = bits; this.signed = signed; }
++    int mask() { return 1 << ordinal(); }
++  }
++
++  private static final class ConstType {
++    static final int INTEGERS = (1 << 12) - 1;
++    static final int SIGNED = (1 << 6) - 1;
++    static final int VALUES = INTEGERS | ConstKind.BOOL.mask();
++    ConstType parent = this;
++    int allowed;
++    ConstType(int allowed) { this.allowed = allowed; }
++    ConstType root() {
++      if (parent != this) { parent = parent.root(); }
++      return parent;
++    }
++    void restrict(int mask) {
++      ConstType root = root();
++      root.allowed &= mask;
++      if (root.allowed == 0) { throw new IllegalArgumentException("Incompatible Rust const type"); }
++    }
++    static ConstType join(ConstType left, ConstType right, int mask) {
++      ConstType a = left.root(), b = right.root();
++      int allowed = a.allowed & b.allowed & mask;
++      if (allowed == 0) { throw new IllegalArgumentException("Incompatible Rust const operands"); }
++      b.parent = a; a.allowed = allowed;
++      return a;
++    }
++    ConstKind kind() {
++      ConstType root = root();
++      if (Integer.bitCount(root.allowed) != 1) {
++        if ((root.allowed & ConstKind.I32.mask()) == 0) {
++          throw new IllegalArgumentException("Unresolved Rust const type");
++        }
++        root.allowed = ConstKind.I32.mask();
++      }
++      return ConstKind.values()[Integer.numberOfTrailingZeros(root.allowed)];
++    }
++  }
++
++  private record ConstSymbol(String name, ConstType type, boolean mutable) {}
++
++  private static final class ConstNode {
++    final String op;
++    final ConstType type;
++    final List<ConstNode> arguments;
++    BigInteger literal;
++    ConstSymbol symbol;
++    boolean signedMinimum;
++    ConstNode(String op, ConstType type, ConstNode... arguments) {
++      this.op = op; this.type = type; this.arguments = List.of(arguments);
++    }
++  }
++
++  // Interpret generation-time Rust array lengths using the locked native
++  // reference's 64-bit usize/isize. Keep inference before evaluation so casts,
++  // local bindings and untaken branches retain their original type constraints.
++  private static final class ArrayConstant {
++    private final Cursor cursor;
++    private final char closing;
++    private final List<ConstSymbol> symbols = new ArrayList<>();
++    private final List<ConstNode> literals = new ArrayList<>();
++    private int depth;
++
++    ArrayConstant(Cursor cursor, char closing) { this.cursor = cursor; this.closing = closing; }
++
++    void length() {
++      ConstNode expression = expression(0);
++      expression.type.restrict(ConstKind.USIZE.mask());
++      for (ConstNode literal : literals) {
++        ConstKind kind = literal.type.kind();
++        if (!(literal.signedMinimum && kind.signed
++            && literal.literal.equals(BigInteger.ONE.shiftLeft(kind.bits - 1)))) {
++          checked(literal.literal, kind);
++        }
++      }
++      checked(evaluate(expression, new java.util.IdentityHashMap<>()), ConstKind.USIZE);
++    }
++
++    private ConstNode expression(int minimum) {
++      ConstNode left = primary();
++      boolean comparison = false;
++      while (true) {
++        cursor.trivia();
++        if (cursor.keyword("as") && minimum <= CAST) {
++          cursor.position += 2;
++          ConstKind target = kind();
++          if (target == ConstKind.BOOL || target == ConstKind.UNIT) {
++            throw new IllegalArgumentException("Invalid Rust integer cast target");
++          }
++          left.type.restrict(ConstType.VALUES);
++          left = new ConstNode("as", new ConstType(target.mask()), left);
++          continue;
++        }
++        if (depth == 0 && closing == '>' && cursor.currentIfAny('>')) { return left; }
++        String op = operator();
++        int precedence = precedence(op);
++        if (op == null || precedence < minimum) { return left; }
++        cursor.position += op.length();
++        if (precedence == COMPARISON && comparison) {
++          throw new IllegalArgumentException("Rust comparisons require explicit grouping");
++        }
++        boolean assignment = precedence == ASSIGNMENT;
++        ConstNode right = expression(precedence + (assignment ? 0 : 1));
++        if (assignment) {
++          if (!left.op.equals("local") || !left.symbol.mutable()) {
++            throw new IllegalArgumentException("Rust const assignment needs a mutable local");
++          }
++          String operation = op.equals("=") ? null : op.substring(0, op.length() - 1);
++          if (operation == null) { ConstType.join(left.type, right.type, ConstType.VALUES); }
++          else { binary(operation, left, right); }
++          ConstNode node = new ConstNode(op, new ConstType(ConstKind.UNIT.mask()), left, right);
++          node.symbol = left.symbol;
++          left = node;
++        } else {
++          left = binary(op, left, right);
++        }
++        comparison = precedence == COMPARISON;
++      }
++    }
++
++    private ConstNode binary(String op, ConstNode left, ConstNode right) {
++      ConstType type;
++      if (op.equals("&&") || op.equals("||")) {
++        ConstType.join(left.type, right.type, ConstKind.BOOL.mask());
++        type = new ConstType(ConstKind.BOOL.mask());
++      } else if (List.of("==", "!=", "<", "<=", ">", ">=").contains(op)) {
++        ConstType.join(left.type, right.type, ConstType.VALUES);
++        type = new ConstType(ConstKind.BOOL.mask());
++      } else if (op.equals("<<") || op.equals(">>")) {
++        left.type.restrict(ConstType.INTEGERS); right.type.restrict(ConstType.INTEGERS);
++        type = left.type;
++      } else {
++        int mask = List.of("&", "|", "^").contains(op) ? ConstType.VALUES : ConstType.INTEGERS;
++        type = ConstType.join(left.type, right.type, mask);
++      }
++      return new ConstNode(op, type, left, right);
++    }
++
++    private ConstNode primary() {
++      cursor.trivia();
++      if (cursor.take('(')) {
++        ++depth;
++        ConstNode node = expression(0);
++        cursor.trivia();
++        if (!cursor.take(')')) { throw new IllegalArgumentException("Unclosed Rust const group"); }
++        --depth;
++        return node;
++      }
++      if (cursor.currentIfAny('{')) { return block(); }
++      if (cursor.keyword("if")) {
++        cursor.position += 2;
++        ConstNode condition = expression(0);
++        condition.type.restrict(ConstKind.BOOL.mask());
++        ConstNode then = block();
++        cursor.trivia();
++        ConstNode otherwise = unit();
++        if (cursor.keyword("else")) {
++          cursor.position += 4; cursor.trivia();
++          otherwise = cursor.keyword("if") ? primary() : block();
++        }
++        ConstType type = ConstType.join(then.type, otherwise.type, ConstType.VALUES | ConstKind.UNIT.mask());
++        return new ConstNode("if", type, condition, then, otherwise);
++      }
++      if (cursor.take('!')) {
++        ConstNode operand = expression(PREFIX);
++        operand.type.restrict(ConstType.VALUES);
++        return new ConstNode("!", operand.type, operand);
++      }
++      if (cursor.take('-')) {
++        ConstNode operand = expression(PREFIX);
++        operand.type.restrict(ConstType.SIGNED);
++        if (operand.op.equals("literal")) { operand.signedMinimum = true; }
++        return new ConstNode("neg", operand.type, operand);
++      }
++      if (cursor.keyword("true") || cursor.keyword("false")) {
++        boolean value = cursor.keyword("true");
++        cursor.position += value ? 4 : 5;
++        return literal(value ? BigInteger.ONE : BigInteger.ZERO, ConstKind.BOOL.mask());
++      }
++      if (!cursor.end() && cursor.current() >= '0' && cursor.current() <= '9') {
++        int begin = cursor.position;
++        if (cursor.lexicalNumber()) { throw new IllegalArgumentException("Non-integer Rust array length"); }
++        String source = cursor.text.substring(begin, cursor.position);
++        int radix = source.startsWith("0x") ? 16 : source.startsWith("0o") ? 8
++            : source.startsWith("0b") ? 2 : 10;
++        int end = radix == 10 ? 0 : 2;
++        StringBuilder digits = new StringBuilder();
++        while (end < source.length()) {
++          char c = source.charAt(end);
++          if (c == '_') { ++end; continue; }
++          if (Character.digit(c, radix) < 0) { break; }
++          digits.append(c); ++end;
++        }
++        if (digits.isEmpty()) { throw new IllegalArgumentException("Empty Rust const integer"); }
++        String suffix = source.substring(end);
++        int mask = suffix.isEmpty() ? ConstType.INTEGERS : namedKind(suffix).mask();
++        if ((mask & ConstType.INTEGERS) == 0) { throw new IllegalArgumentException("Invalid Rust const suffix"); }
++        return literal(new BigInteger(digits.toString(), radix), mask);
++      }
++      String name = cursor.identifier();
++      for (int i = symbols.size() - 1; name != null && i >= 0; --i) {
++        ConstSymbol symbol = symbols.get(i);
++        if (symbol.name().equals(name) && !name.equals("_")) {
++          ConstNode node = new ConstNode("local", symbol.type());
++          node.symbol = symbol;
++          return node;
++        }
++      }
++      throw new IllegalArgumentException("Unknown Rust const name");
++    }
++
++    private ConstNode block() {
++      cursor.trivia();
++      if (!cursor.take('{')) { throw new IllegalArgumentException("Expected Rust const block"); }
++      ++depth;
++      int previous = symbols.size();
++      List<ConstNode> expressions = new ArrayList<>();
++      try {
++        while (true) {
++          cursor.trivia();
++          if (cursor.take('}')) { expressions.add(unit()); break; }
++          if (cursor.keyword("let")) {
++            cursor.position += 3; cursor.trivia();
++            boolean mutable = cursor.keyword("mut");
++            if (mutable) { cursor.position += 3; cursor.trivia(); }
++            String name = cursor.identifier();
++            if (name == null) { throw new IllegalArgumentException("Expected Rust const binding"); }
++            cursor.trivia();
++            ConstKind annotation = cursor.take(':') ? kind() : null;
++            cursor.trivia();
++            if (!cursor.take('=')) { throw new IllegalArgumentException("Rust const binding needs an initializer"); }
++            ConstNode value = expression(0);
++            if (annotation != null) { value.type.restrict(annotation.mask()); }
++            cursor.trivia();
++            if (!cursor.take(';')) { throw new IllegalArgumentException("Expected Rust const binding separator"); }
++            ConstSymbol symbol = new ConstSymbol(name, value.type, mutable);
++            symbols.add(symbol);
++            ConstNode binding = new ConstNode("let", new ConstType(ConstKind.UNIT.mask()), value);
++            binding.symbol = symbol; expressions.add(binding);
++          } else {
++            ConstNode expression = expression(0);
++            expressions.add(expression); cursor.trivia();
++            if (cursor.take('}')) { break; }
++            if (!cursor.take(';')) { throw new IllegalArgumentException("Expected Rust const statement separator"); }
++          }
++        }
++        ConstNode last = expressions.get(expressions.size() - 1);
++        return new ConstNode("block", last.type, expressions.toArray(ConstNode[]::new));
++      } finally {
++        symbols.subList(previous, symbols.size()).clear();
++        --depth;
++      }
++    }
++
++    private ConstNode literal(BigInteger value, int mask) {
++      ConstNode node = new ConstNode("literal", new ConstType(mask));
++      node.literal = value; literals.add(node);
++      return node;
++    }
++
++    private ConstNode unit() { return literal(BigInteger.ZERO, ConstKind.UNIT.mask()); }
++
++    private ConstKind kind() {
++      cursor.trivia();
++      String name = cursor.nominalEntityTypePath();
++      if (name == null) { throw new IllegalArgumentException("Expected Rust const integer type"); }
++      for (String prefix : List.of("core::primitive::", "::core::primitive::",
++          "std::primitive::", "::std::primitive::")) {
++        if (name.startsWith(prefix)) { name = name.substring(prefix.length()); break; }
++      }
++      return namedKind(name);
++    }
++
++    private ConstKind namedKind(String name) {
++      if (!name.equals(name.toLowerCase(java.util.Locale.ROOT)) || name.equals("unit")) {
++        throw new IllegalArgumentException("Unknown Rust const integer type");
++      }
++      try { return ConstKind.valueOf(name.toUpperCase(java.util.Locale.ROOT)); }
++      catch (IllegalArgumentException error) { throw new IllegalArgumentException("Unknown Rust const integer type"); }
++    }
++
++    private String operator() {
++      for (String op : List.of("<<=", ">>=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=",
++          "&&", "||", "==", "!=", "<=", ">=", "<<", ">>", "=", "+", "-", "*", "/", "%",
++          "&", "|", "^", "<", ">")) {
++        if (cursor.text.startsWith(op, cursor.position)) { return op; }
++      }
++      return null;
++    }
++
++    private int precedence(String op) {
++      if (op == null) { return -1; }
++      return switch (op) {
++        case "=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=" -> ASSIGNMENT;
++        case "||" -> 3;
++        case "&&" -> 4;
++        case "|" -> 7;
++        case "^" -> 8;
++        case "&" -> 9;
++        case "==", "!=", "<", "<=", ">", ">=" -> COMPARISON;
++        case "<<", ">>" -> 10;
++        case "+", "-" -> 11;
++        default -> 12;
++      };
++    }
++
++    private BigInteger evaluate(ConstNode node, java.util.IdentityHashMap<ConstSymbol, BigInteger> values) {
++      if (node.op.equals("literal")) { return node.literal; }
++      if (node.op.equals("local")) {
++        BigInteger value = values.get(node.symbol);
++        if (value == null) { throw new IllegalArgumentException("Uninitialized Rust const binding"); }
++        return value;
++      }
++      if (node.op.equals("let")) {
++        values.put(node.symbol, evaluate(node.arguments.get(0), values));
++        return BigInteger.ZERO;
++      }
++      if (node.op.equals("block")) {
++        BigInteger value = BigInteger.ZERO;
++        for (ConstNode expression : node.arguments) { value = evaluate(expression, values); }
++        return value;
++      }
++      if (node.op.equals("if")) {
++        return evaluate(node.arguments.get(evaluate(node.arguments.get(0), values).signum() != 0 ? 1 : 2), values);
++      }
++      BigInteger left = evaluate(node.arguments.get(0), values);
++      if (node.op.equals("as")) { return wrapped(left, node.type.kind()); }
++      if (node.op.equals("neg")) { return checked(left.negate(), node.type.kind()); }
++      if (node.op.equals("!")) {
++        return node.type.kind() == ConstKind.BOOL ? BigInteger.ONE.subtract(left)
++            : wrapped(left.not(), node.type.kind());
++      }
++      if (node.op.equals("&&") && left.signum() == 0) { return BigInteger.ZERO; }
++      if (node.op.equals("||") && left.signum() != 0) { return BigInteger.ONE; }
++      BigInteger right = evaluate(node.arguments.get(1), values);
++      if (node.op.equals("=") || node.op.endsWith("=")
++          && !List.of("==", "!=", "<=", ">=").contains(node.op)) {
++        BigInteger value = node.op.equals("=") ? right
++            : calculate(node.op.substring(0, node.op.length() - 1), left, right, node.symbol.type().kind());
++        values.put(node.symbol, value);
++        return BigInteger.ZERO;
++      }
++      return calculate(node.op, left, right, node.type.kind());
++    }
++
++    private BigInteger calculate(String op, BigInteger left, BigInteger right, ConstKind kind) {
++      int compare = left.compareTo(right);
++      return switch (op) {
++        case "&&" -> left.signum() != 0 && right.signum() != 0 ? BigInteger.ONE : BigInteger.ZERO;
++        case "||" -> left.signum() != 0 || right.signum() != 0 ? BigInteger.ONE : BigInteger.ZERO;
++        case "==" -> compare == 0 ? BigInteger.ONE : BigInteger.ZERO;
++        case "!=" -> compare != 0 ? BigInteger.ONE : BigInteger.ZERO;
++        case "<" -> compare < 0 ? BigInteger.ONE : BigInteger.ZERO;
++        case "<=" -> compare <= 0 ? BigInteger.ONE : BigInteger.ZERO;
++        case ">" -> compare > 0 ? BigInteger.ONE : BigInteger.ZERO;
++        case ">=" -> compare >= 0 ? BigInteger.ONE : BigInteger.ZERO;
++        case "+" -> checked(left.add(right), kind);
++        case "-" -> checked(left.subtract(right), kind);
++        case "*" -> checked(left.multiply(right), kind);
++        case "/", "%" -> {
++          if (right.signum() == 0 || kind.signed
++              && left.equals(BigInteger.ONE.shiftLeft(kind.bits - 1).negate())
++              && right.equals(BigInteger.ONE.negate())) {
++            throw new IllegalArgumentException("Invalid Rust const division");
++          }
++          yield checked(op.equals("/") ? left.divide(right) : left.remainder(right), kind);
++        }
++        case "&" -> wrapped(left.and(right), kind);
++        case "|" -> wrapped(left.or(right), kind);
++        case "^" -> wrapped(left.xor(right), kind);
++        case "<<", ">>" -> {
++          if (right.signum() < 0 || right.compareTo(BigInteger.valueOf(kind.bits)) >= 0) {
++            throw new IllegalArgumentException("Invalid Rust const shift");
++          }
++          yield wrapped(op.equals("<<") ? left.shiftLeft(right.intValue()) : left.shiftRight(right.intValue()), kind);
++        }
++        default -> throw new IllegalArgumentException("Unsupported Rust const operation");
++      };
++    }
++
++    private BigInteger checked(BigInteger value, ConstKind kind) {
++      if (kind == ConstKind.UNIT && value.signum() == 0) { return value; }
++      BigInteger limit = BigInteger.ONE.shiftLeft(kind.signed ? kind.bits - 1 : kind.bits);
++      BigInteger minimum = kind.signed ? limit.negate() : BigInteger.ZERO;
++      if (value.compareTo(minimum) < 0 || value.compareTo(limit) >= 0) {
++        throw new IllegalArgumentException("Rust const integer overflow");
++      }
++      return value;
++    }
++
++    private BigInteger wrapped(BigInteger value, ConstKind kind) {
++      if (kind == ConstKind.BOOL) { return checked(value, kind); }
++      BigInteger modulus = BigInteger.ONE.shiftLeft(kind.bits);
++      BigInteger result = value.mod(modulus);
++      return kind.signed && result.testBit(kind.bits - 1) ? result.subtract(modulus) : result;
++    }
+   }
+ 
+   private record Expression(String literal, boolean integer, boolean string, boolean blockBody) {}
+@@ -646,7 +1051,7 @@
+         trivia();
+         if (element == null || !element.sized()) { return null; }
+         boolean array = take(';');
+-        if (array && !arrayProjectionLength()) { return null; }
++        if (array && !arrayProjectionLength(']')) { return null; }
+         trivia();
+         if (!take(']')) { return null; }
+         return wrapProjection(array ? ProjectionShape.ARRAY : ProjectionShape.SLICE, element, null);
+@@ -745,7 +1150,7 @@
+       } else if (List.of("std::array::IntoIter", "::std::array::IntoIter",
+           "core::array::IntoIter", "::core::array::IntoIter").contains(path)) {
+         shape = ProjectionShape.ITERATOR;
+-        if (!take(',') || !arrayProjectionLength()) { return null; }
++        if (!take(',') || !arrayProjectionLength('>')) { return null; }
+         trivia();
+       } else if (List.of("std::option::IntoIter", "::std::option::IntoIter",
+           "core::option::IntoIter", "::core::option::IntoIter",
+@@ -763,16 +1168,11 @@
+       return take('>') ? compoundProjection(shape, arguments, prelude) : null;
+     }
+ 
+-    private boolean arrayProjectionLength() {
+-      trivia();
+-      if (end() || current() < '0' || current() > '9') { return false; }
+-      int begin = position;
++    private boolean arrayProjectionLength(char closing) {
+       try {
+-        if (lexicalNumber()) { return false; }
+-        String literal = text.substring(begin, position);
+-        return literal.matches("(?:0x[0-9a-fA-F_]+|0b[01_]+|0o[0-7_]+|[0-9_]+)(?:usize)?")
+-            && integer(literal) != null;
+-      } catch (IllegalArgumentException error) {
++        new ArrayConstant(this, closing).length();
++        return true;
++      } catch (IllegalArgumentException | ArithmeticException error) {
+         return false;
+       }
+     }
+diff --git a/generator/src/test/java/com/skynet/codegenerator/cpp/CppArrayConstExpressionProjectionTest.java b/generator/src/test/java/com/skynet/codegenerator/cpp/CppArrayConstExpressionProjectionTest.java
+new file mode 100644
+--- /dev/null
++++ b/generator/src/test/java/com/skynet/codegenerator/cpp/CppArrayConstExpressionProjectionTest.java
+@@ -0,0 +1,96 @@
++package com.skynet.codegenerator.cpp;
++
++import static org.junit.Assert.*;
++import java.util.List;
++import org.junit.Test;
++
++public class CppArrayConstExpressionProjectionTest {
++  private void length(String source) {
++    var type = CppRustLiteralMetadata.projectedEntityTypePath(
++        "<[Self; " + source + "] as IntoIterator>::Item");
++    assertNotNull(source, type);
++    assertEquals(source, "Self", type.path());
++  }
++
++  private void refused(String source) {
++    assertNull(source, CppRustLiteralMetadata.projectedEntityTypePath(
++        "<[Self; " + source + "] as IntoIterator>::Item"));
++  }
++
++  @Test
++  public void arithmeticPreservesRustPrecedenceAndGrouping() {
++    for (String source : List.of("1 + 1", "1 + 2 * 3", "(1 + 2) * 2", "{1 + 1}",
++        "8 / 4", "8 % 3", "1 << 2", "(1 | 2) & 3", "/* lhs */1 + /* rhs */1")) {
++      length(source);
++    }
++  }
++
++  @Test
++  public void integerTypesAndCastsKeepTheirOwnBounds() {
++    for (String source : List.of("(1u8 + 1u8) as usize",
++        "(-128i8 + 127i8 + 2i8) as usize", "(257u16 as u8) as usize",
++        "((128u8 << 1) as usize) + 1")) {
++      length(source);
++    }
++    for (String source : List.of("(255u8 + 1u8) as usize", "0usize - 1", "1 / 0",
++        "1u8 + 1u8", "(-1u8) as usize", "1usize << 64", "1USIZE", "1 as USIZE")) {
++      refused(source);
++    }
++  }
++
++  @Test
++  public void localBindingsRetainInferenceShadowingAndMutation() {
++    for (String source : List.of("{let count = 1; count + 1}",
++        "{let count: u8 = 1; count as usize}",
++        "{let count = 1usize; let count = count + 1; count}",
++        "{let mut count = 1usize; count += 1; count}",
++        "{let selected = true; if selected {1} else {2}}")) {
++      length(source);
++    }
++  }
++
++  @Test
++  public void conditionalExecutionStillChecksBothBranchTypes() {
++    length("{if true {1} else {1 / 0}}");
++    length("{if false && (1usize / 0 == 0) {2} else {1}}");
++    length("{if true || (1usize / 0 == 0) {1} else {2}}");
++    refused("{if true {1usize} else {1u8}}");
++    refused("{let unused = 1usize / 0; 1}");
++  }
++
++  @Test
++  public void unknownOrInvalidLocalScopeCannotBeErased() {
++    for (String source : List.of("WIDTH", "{count + 1}",
++        "{let count = 1usize; count = 2; count}",
++        "{let count = 1usize; {let hidden = 1usize; hidden}; hidden}")) {
++      refused(source);
++    }
++  }
++
++  @Test
++  public void genericClosingTokensRemainSeparateFromConstOperators() {
++    for (String source : List.of(
++        "<std::array::IntoIter<Self, {1 + 1}> as Iterator>::Item",
++        "<std::array::IntoIter<Self, {let count = 1usize; count + 1}> as Iterator>::Item")) {
++      var type = CppRustLiteralMetadata.projectedEntityTypePath(source);
++      assertNotNull(source, type);
++      assertEquals("Self", type.path());
++    }
++  }
++
++  @Test
++  public void bitwiseOperatorsBindBeforeComparisons() {
++    for (String source : List.of(
++        "{if 1u8 & 1u8 == 1u8 {2usize} else {1usize}}",
++        "{if 1u8 | 2u8 == 3u8 {2usize} else {1usize}}",
++        "{if 1u8 ^ 3u8 == 2u8 {2usize} else {1usize}}")) {
++      length(source);
++    }
++  }
++
++  @Test
++  public void comparisonChainsRequireExplicitParentheses() {
++    refused("{if 1u8 < 2u8 == true {2usize} else {1usize}}");
++    length("{if (1u8 < 2u8) == true {2usize} else {1usize}}");
++  }
++}

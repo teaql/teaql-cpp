@@ -5,7 +5,25 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
-Current G14 repair: [standard values and SmartList](ap02_standard_value_smart_list_types_5_0_6.md)
+Current G14 repair: [array constant expressions](ap02_array_const_expressions_5_0_6.md)
+are installed on `cpp_support` commit `d1ad8d40` with eight permanent regression
+methods. Production passes 194 Java tests and reproduces 193 complete SDKs,
+explicitly reusing their exact 132 accepted / 61 refused compiler outcomes.
+The copied continuation covers all 54 compiler contracts through 42 fresh
+pairs and twelve completed outcomes reused after fresh SDK identity checks.
+Five additional actual descriptor consumers verify relation and partial
+attribute effects, including ignored malformed comparison metadata. Eight
+actual SQLite model pairs match forty query/E/JSON results; production SDK
+reproduction explicitly reuses those outcomes. All eighty retained SDKs preserve
+3,560 code/Assist files and refresh one parser fingerprint per manifest.
+Eighteen new and 73 preserved controls reject per Python mode; affected CTests
+pass 6/6 per mode. Current joins admit 97 exact source changes on 11,990 inputs,
+preserve 716 commands/707 native consumers and reject eight transition
+corruptions per mode. Broader supported configurations, AP01-AP12/G14, G17 and
+P0-P7 remain open at **14 qualified / 3 partial**. Historical diagnostics and
+controller/environment failures retain their own bounded verdicts.
+
+Previous G14 repair: [standard values and SmartList](ap02_standard_value_smart_list_types_5_0_6.md)
 are installed on `cpp_support` commit `448e0b5c`. Production passes 186 Java
 tests and reproduces 139 complete compiler-contract SDKs, explicitly reusing
 their exact 94 accepted / 45 refused compiler outcomes. Eighty retained SDKs
