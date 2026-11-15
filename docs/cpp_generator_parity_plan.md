@@ -1,6 +1,21 @@
 # C++ generator parity plan
 
-Current G14 primitive-constant and typed-tuple repair:
+Current G14 governed-consumer continuation:
+[Two composed primitive/tuple configurations](ap02_primitive_const_governed_execution_5_0_6.md)
+carry all eight qualified type expressions into actual generated School domains.
+Both preserve eight typed relation descriptors; complete/partial parsing gives
+exact audit lengths 17/13. All 24 original/C++ Save pairs and 24 ordinary/debug
+file cases match. Two original Cargo builds and six native compiler processes
+execute. The complete model's final admission failure is repaired through an
+exact validate-only transition, with completed execution explicitly reused;
+the partial model executes the repaired recipe. Sixteen corruptions per model
+reject under ordinary and optimized Python. Current source joins admit 106
+exact changes on 11,999 inputs while retaining all 716 commands/707 native
+consumers; affected CTests pass 2/2 per mode. This adds governed persistence and
+publication evidence without changing production/runtime/SDK bodies. Complete
+AP01-AP12/G14, G13/G17 and P0-P7 remain open at **14 qualified / 3 partial**.
+
+Previous G14 primitive-constant and typed-tuple repair:
 [Production installation](ap02_primitive_const_paths_5_0_6.md) passes 213 Java
 tests and reproduces all 319 complete SDK contracts. Their 235 accepted and
 84 refused compiler outcomes are explicitly reused through complete artifact
