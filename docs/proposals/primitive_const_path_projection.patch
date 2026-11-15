@@ -1,0 +1,1113 @@
+diff --git a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+index 4abed62..4be40f0 100644
+--- a/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
++++ b/generator/src/main/java/com/skynet/codegenerator/cpp/CppRustLiteralMetadata.java
+@@ -240,7 +240,7 @@ final class CppRustLiteralMetadata {
+   private enum ConstKind {
+     I8(8, true), I16(16, true), I32(32, true), I64(64, true), I128(128, true), ISIZE(64, true),
+     U8(8, false), U16(16, false), U32(32, false), U64(64, false), U128(128, false), USIZE(64, false),
+-    BOOL(1, false), UNIT(0, false), CHAR(21, false), F32(32, false), F64(64, false);
++    BOOL(1, false), UNIT(0, false), CHAR(21, false), F32(32, false), F64(64, false), TUPLE(0, false);
+ 
+     final int bits;
+     final boolean signed;
+@@ -256,9 +256,16 @@ final class CppRustLiteralMetadata {
+     static final int NUMERIC = INTEGERS | FLOATS;
+     static final int BITWISE = INTEGERS | ConstKind.BOOL.mask();
+     static final int VALUES = NUMERIC | ConstKind.BOOL.mask() | ConstKind.CHAR.mask();
++    static final int ASSIGNABLE = VALUES | ConstKind.UNIT.mask() | ConstKind.TUPLE.mask();
+     ConstType parent = this;
++    List<ConstType> fields;
+     int allowed;
+     ConstType(int allowed) { this.allowed = allowed; }
++    static ConstType tuple(List<ConstType> fields) {
++      ConstType result = new ConstType(ConstKind.TUPLE.mask());
++      result.fields = List.copyOf(fields);
++      return result;
++    }
+     ConstType root() {
+       if (parent != this) { parent = parent.root(); }
+       return parent;
+@@ -272,6 +279,17 @@ final class CppRustLiteralMetadata {
+       ConstType a = left.root(), b = right.root();
+       int allowed = a.allowed & b.allowed & mask;
+       if (allowed == 0) { throw new IllegalArgumentException("Incompatible Rust const operands"); }
++      if ((allowed & ConstKind.TUPLE.mask()) != 0 && a != b) {
++        if (a.fields == null) { a.fields = b.fields; }
++        else if (b.fields != null) {
++          if (a.fields.size() != b.fields.size()) {
++            throw new IllegalArgumentException("Incompatible Rust const tuple shape");
++          }
++          for (int i = 0; i < a.fields.size(); ++i) {
++            join(a.fields.get(i), b.fields.get(i), ASSIGNABLE);
++          }
++        }
++      }
+       b.parent = a; a.allowed = allowed;
+       return a;
+     }
+@@ -291,6 +309,11 @@ final class CppRustLiteralMetadata {
+ 
+   private record ConstSymbol(String name, ConstType type, boolean mutable) {}
+ 
++  private record ConstValue(BigInteger scalar, List<ConstValue> fields) {
++    static ConstValue scalar(BigInteger value) { return new ConstValue(value, null); }
++    static ConstValue tuple(List<ConstValue> fields) { return new ConstValue(null, List.copyOf(fields)); }
++  }
++
+   private static final class ConstNode {
+     final String op;
+     final ConstType type;
+@@ -299,6 +322,9 @@ final class CppRustLiteralMetadata {
+     String floatingLiteral;
+     ConstSymbol symbol;
+     boolean signedMinimum;
++    int memberIndex;
++    boolean assigned;
++    ArrayConstant.ConstPattern pattern;
+     ConstNode(String op, ConstType type, ConstNode... arguments) {
+       this.op = op; this.type = type; this.arguments = List.of(arguments);
+     }
+@@ -312,6 +338,7 @@ final class CppRustLiteralMetadata {
+     private final char closing;
+     private final List<ConstSymbol> symbols = new ArrayList<>();
+     private final List<ConstNode> literals = new ArrayList<>();
++    private final List<ConstNode> discards = new ArrayList<>();
+     private int depth;
+ 
+     ArrayConstant(Cursor cursor, char closing) { this.cursor = cursor; this.closing = closing; }
+@@ -319,6 +346,9 @@ final class CppRustLiteralMetadata {
+     void length() {
+       ConstNode expression = expression(0);
+       expression.type.restrict(ConstKind.USIZE.mask());
++      for (ConstNode discard : discards) {
++        if (!discard.assigned) { throw new IllegalArgumentException("Rust placeholder is not a value"); }
++      }
+       for (ConstNode literal : literals) {
+         ConstKind kind = literal.type.kind();
+         if (literal.floatingLiteral != null) {
+@@ -338,7 +368,7 @@ final class CppRustLiteralMetadata {
+           literal.literal = integer ? wrapped(literal.literal, kind) : checked(literal.literal, kind);
+         }
+       }
+-      checked(evaluate(expression, new java.util.IdentityHashMap<>()), ConstKind.USIZE);
++      checked(evaluate(expression, new java.util.IdentityHashMap<>()).scalar(), ConstKind.USIZE);
+     }
+ 
+     private ConstNode expression(int minimum) {
+@@ -346,6 +376,30 @@ final class CppRustLiteralMetadata {
+       boolean comparison = false;
+       while (true) {
+         cursor.trivia();
++        if (cursor.take('.')) {
++          cursor.trivia();
++          left.type.restrict(ConstKind.TUPLE.mask());
++          int begin = cursor.position;
++          while (!cursor.end() && (cursor.current() >= '0' && cursor.current() <= '9'
++              || cursor.current() >= 'a' && cursor.current() <= 'z'
++              || cursor.current() >= 'A' && cursor.current() <= 'Z' || cursor.current() == '_')) {
++            ++cursor.position;
++          }
++          String spelling = cursor.text.substring(begin, cursor.position);
++          if (!Cursor.tupleIndexValue(spelling)) {
++            throw new IllegalArgumentException("Expected unsuffixed Rust tuple index");
++          }
++          int radix = spelling.startsWith("0x") ? 16 : spelling.startsWith("0o") ? 8
++              : spelling.startsWith("0b") ? 2 : 10;
++          String digits = spelling.substring(radix == 10 ? 0 : 2).replace("_", "");
++          int index = new BigInteger(digits, radix).intValueExact();
++          List<ConstType> fields = left.type.root().fields;
++          if (fields == null || index >= fields.size()) { throw new IllegalArgumentException("Rust tuple field out of range"); }
++          ConstNode member = new ConstNode("member", fields.get(index), left);
++          member.memberIndex = index;
++          left = member;
++          continue;
++        }
+         if (cursor.keyword("as") && minimum <= CAST) {
+           cursor.position += 2;
+           ConstKind target = kind();
+@@ -367,14 +421,11 @@ final class CppRustLiteralMetadata {
+         boolean assignment = precedence == ASSIGNMENT;
+         ConstNode right = expression(precedence + (assignment ? 0 : 1));
+         if (assignment) {
+-          if (!left.op.equals("local") || !left.symbol.mutable()) {
+-            throw new IllegalArgumentException("Rust const assignment needs a mutable local");
+-          }
+           String operation = op.equals("=") ? null : op.substring(0, op.length() - 1);
+-          if (operation == null) { ConstType.join(left.type, right.type, ConstType.VALUES | ConstKind.UNIT.mask()); }
++          validateTarget(left, operation == null);
++          if (operation == null) { ConstType.join(left.type, right.type, ConstType.ASSIGNABLE); }
+           else { binary(operation, left, right); }
+           ConstNode node = new ConstNode(op, new ConstType(ConstKind.UNIT.mask()), left, right);
+-          node.symbol = left.symbol;
+           left = node;
+         } else {
+           left = binary(op, left, right);
+@@ -409,6 +460,20 @@ final class CppRustLiteralMetadata {
+         if (cursor.take(')')) { --depth; return unit(); }
+         ConstNode node = expression(0);
+         cursor.trivia();
++        if (cursor.take(',')) {
++          List<ConstNode> fields = new ArrayList<>();
++          fields.add(node);
++          cursor.trivia();
++          while (!cursor.take(')')) {
++            fields.add(expression(0));
++            cursor.trivia();
++            if (cursor.take(')')) { break; }
++            if (!cursor.take(',')) { throw new IllegalArgumentException("Expected Rust tuple separator"); }
++            cursor.trivia();
++          }
++          --depth;
++          return tuple(fields);
++        }
+         if (!cursor.take(')')) { throw new IllegalArgumentException("Unclosed Rust const group"); }
+         --depth;
+         return node;
+@@ -425,7 +490,7 @@ final class CppRustLiteralMetadata {
+           cursor.position += 4; cursor.trivia();
+           otherwise = cursor.keyword("if") ? primary() : block();
+         }
+-        ConstType type = ConstType.join(then.type, otherwise.type, ConstType.VALUES | ConstKind.UNIT.mask());
++        ConstType type = ConstType.join(then.type, otherwise.type, ConstType.ASSIGNABLE);
+         return new ConstNode("if", type, condition, then, otherwise);
+       }
+       if (cursor.take('!')) {
+@@ -471,7 +536,16 @@ final class CppRustLiteralMetadata {
+         if ((mask & ConstType.INTEGERS) == 0) { throw new IllegalArgumentException("Invalid Rust const suffix"); }
+         return literal(new BigInteger(digits.toString(), radix), mask);
+       }
++      int begin = cursor.position;
++      ConstNode associated = associatedConstant();
++      if (associated != null) { return associated; }
++      cursor.position = begin;
+       String name = cursor.identifier();
++      if ("_".equals(name)) {
++        ConstNode discard = new ConstNode("discard", new ConstType(ConstType.ASSIGNABLE));
++        discards.add(discard);
++        return discard;
++      }
+       for (int i = symbols.size() - 1; name != null && i >= 0; --i) {
+         ConstSymbol symbol = symbols.get(i);
+         if (symbol.name().equals(name) && !name.equals("_")) {
+@@ -483,6 +557,135 @@ final class CppRustLiteralMetadata {
+       throw new IllegalArgumentException("Unknown Rust const name");
+     }
+ 
++
++    private ConstNode associatedConstant() {
++      cursor.trivia();
++      if (cursor.take('<')) {
++        ConstKind owner = kind();
++        cursor.trivia();
++        if (!cursor.take('>')) { throw new IllegalArgumentException("Invalid Rust qualified constant"); }
++        cursor.trivia();
++        if (!cursor.text.startsWith("::", cursor.position)) {
++          throw new IllegalArgumentException("Expected Rust associated constant");
++        }
++        cursor.position += 2;
++        cursor.trivia();
++        String member = constantPath();
++        return constant(owner, member, false);
++      }
++      boolean rooted = cursor.text.startsWith("::", cursor.position);
++      if (rooted) { cursor.position += 2; cursor.trivia(); }
++      String path = constantPath();
++      if (path == null) { return null; }
++      if (rooted) { path = "::" + path; }
++      int separator = path.lastIndexOf("::");
++      if (separator < 0) { return null; }
++      String owner = path.substring(0, separator);
++      String member = path.substring(separator + 2);
++      boolean primitive = false;
++      for (String prefix : List.of("std::primitive::", "::std::primitive::",
++          "core::primitive::", "::core::primitive::")) {
++        if (owner.startsWith(prefix)) {
++          owner = owner.substring(prefix.length()); primitive = true; break;
++        }
++      }
++      boolean legacy = false;
++      if (!primitive) {
++        for (String prefix : List.of("std::", "::std::", "core::", "::core::")) {
++          if (owner.startsWith(prefix)) {
++            owner = owner.substring(prefix.length()); legacy = true; break;
++          }
++        }
++      }
++      return constant(namedKind(owner), member, legacy);
++    }
++
++
++    private String constantPath() {
++      String path = cursor.identifier();
++      if (path == null) { return null; }
++      cursor.trivia();
++      while (cursor.text.startsWith("::", cursor.position)) {
++        cursor.position += 2; cursor.trivia();
++        if (cursor.take('<')) {
++          cursor.trivia();
++          if (!cursor.take('>')) { throw new IllegalArgumentException("Rust constant has type arguments"); }
++          cursor.trivia();
++          continue;
++        }
++        String member = cursor.identifier();
++        if (member == null) { throw new IllegalArgumentException("Invalid Rust constant path"); }
++        path += "::" + member;
++        cursor.trivia();
++      }
++      return path;
++    }
++
++    private ConstNode constant(ConstKind owner, String member, boolean legacy) {
++      if (member == null) { throw new IllegalArgumentException("Missing Rust associated constant"); }
++      if ((owner.mask() & ConstType.INTEGERS) != 0) {
++        if (member.equals("BITS") && !legacy) {
++          return constant(BigInteger.valueOf(owner.bits), ConstKind.U32);
++        }
++        BigInteger limit = BigInteger.ONE.shiftLeft(owner.signed ? owner.bits - 1 : owner.bits);
++        if (member.equals("MIN")) {
++          return constant(owner.signed ? limit.negate() : BigInteger.ZERO, owner);
++        }
++        if (member.equals("MAX")) { return constant(limit.subtract(BigInteger.ONE), owner); }
++      } else if (owner == ConstKind.CHAR) {
++        if (!legacy && (member.equals("MAX_LEN_UTF8") || member.equals("MAX_LEN_UTF16"))) {
++          return constant(BigInteger.valueOf(member.equals("MAX_LEN_UTF8") ? 4 : 2), ConstKind.USIZE);
++        }
++        if (member.equals("UNICODE_VERSION")) {
++          return tuple(List.of(constant(BigInteger.valueOf(17), ConstKind.U8),
++              constant(BigInteger.ZERO, ConstKind.U8), constant(BigInteger.ZERO, ConstKind.U8)));
++        }
++        int value = switch (member) {
++          case "MIN" -> legacy ? -1 : 0;
++          case "MAX" -> 0x10ffff;
++          case "REPLACEMENT_CHARACTER" -> 0xfffd;
++          default -> -1;
++        };
++        if (value >= 0) { return constant(BigInteger.valueOf(value), owner); }
++      } else if (owner.floating()) {
++        boolean single = owner == ConstKind.F32;
++        int integer = switch (member) {
++          case "RADIX" -> 2;
++          case "DIGITS" -> single ? 6 : 15;
++          case "MANTISSA_DIGITS" -> single ? 24 : 53;
++          case "MIN_EXP" -> single ? -125 : -1021;
++          case "MAX_EXP" -> single ? 128 : 1024;
++          case "MIN_10_EXP" -> single ? -37 : -307;
++          case "MAX_10_EXP" -> single ? 38 : 308;
++          default -> 0;
++        };
++        if (integer != 0) {
++          return constant(BigInteger.valueOf(integer),
++              member.endsWith("EXP") ? ConstKind.I32 : ConstKind.U32);
++        }
++        double number = switch (member) {
++          case "MIN" -> single ? -Float.MAX_VALUE : -Double.MAX_VALUE;
++          case "MAX" -> single ? Float.MAX_VALUE : Double.MAX_VALUE;
++          case "MIN_POSITIVE" -> single ? Float.MIN_NORMAL : Double.MIN_NORMAL;
++          case "EPSILON" -> Math.scalb(1.0, single ? -23 : -52);
++          case "INFINITY" -> Double.POSITIVE_INFINITY;
++          case "NEG_INFINITY" -> Double.NEGATIVE_INFINITY;
++          case "NAN" -> Double.NaN;
++          default -> throw new IllegalArgumentException("Unknown Rust floating constant");
++        };
++        return constant(floatingBits(number, owner), owner);
++      }
++      throw new IllegalArgumentException("Unknown Rust primitive constant");
++    }
++
++    private ConstNode constant(BigInteger value, ConstKind kind) {
++      // A resolved constant is already typed. It is not a token literal:
++      // negation and arithmetic retain their checked overflow behavior.
++      ConstNode result = new ConstNode("constant", new ConstType(kind.mask()));
++      result.literal = checked(value, kind);
++      return result;
++    }
++
+     private ConstNode characterLiteral() {
+       int begin = cursor.position;
+       boolean bytes = cursor.text.startsWith("b'", begin);
+@@ -528,22 +731,18 @@ final class CppRustLiteralMetadata {
+           if (cursor.take('}')) { expressions.add(unit()); break; }
+           if (cursor.keyword("let")) {
+             cursor.position += 3; cursor.trivia();
+-            boolean mutable = cursor.keyword("mut");
+-            if (mutable) { cursor.position += 3; cursor.trivia(); }
+-            String name = cursor.identifier();
+-            if (name == null) { throw new IllegalArgumentException("Expected Rust const binding"); }
++            ConstPattern pattern = pattern();
+             cursor.trivia();
+-            ConstKind annotation = cursor.take(':') ? kind() : null;
++            ConstType annotation = cursor.take(':') ? bindingType() : null;
+             cursor.trivia();
+             if (!cursor.take('=')) { throw new IllegalArgumentException("Rust const binding needs an initializer"); }
+             ConstNode value = expression(0);
+-            if (annotation != null) { value.type.restrict(annotation.mask()); }
++            if (annotation != null) { ConstType.join(value.type, annotation, ConstType.ASSIGNABLE); }
+             cursor.trivia();
+             if (!cursor.take(';')) { throw new IllegalArgumentException("Expected Rust const binding separator"); }
+-            ConstSymbol symbol = new ConstSymbol(name, value.type, mutable);
+-            symbols.add(symbol);
++            bindPattern(pattern, value.type, new java.util.HashSet<>());
+             ConstNode binding = new ConstNode("let", new ConstType(ConstKind.UNIT.mask()), value);
+-            binding.symbol = symbol; expressions.add(binding);
++            binding.pattern = pattern; expressions.add(binding);
+           } else {
+             ConstNode expression = expression(0);
+             expressions.add(expression); cursor.trivia();
+@@ -567,14 +766,174 @@ final class CppRustLiteralMetadata {
+ 
+     private ConstNode unit() { return literal(BigInteger.ZERO, ConstKind.UNIT.mask()); }
+ 
++    private static final class ConstPattern {
++      String name;
++      boolean mutable;
++      boolean rest;
++      List<ConstPattern> fields;
++      ConstSymbol symbol;
++    }
++
++    private ConstPattern pattern() {
++      cursor.trivia();
++      ConstPattern result = new ConstPattern();
++      if (cursor.keyword("mut")) {
++        cursor.position += 3; cursor.trivia();
++        result.mutable = true;
++      }
++      if (cursor.take('(')) {
++        if (result.mutable) { throw new IllegalArgumentException("Rust mut needs a named binding"); }
++        List<ConstPattern> fields = new ArrayList<>();
++        cursor.trivia();
++        if (cursor.take(')')) { result.fields = List.of(); return result; }
++        ConstPattern first = pattern();
++        cursor.trivia();
++        if (cursor.take(')')) {
++          if (!first.rest) { return first; }
++          result.fields = List.of(first);
++          return result;
++        }
++        if (!cursor.take(',')) { throw new IllegalArgumentException("Expected Rust tuple pattern separator"); }
++        fields.add(first); cursor.trivia();
++        while (!cursor.take(')')) {
++          fields.add(pattern()); cursor.trivia();
++          if (cursor.take(')')) { break; }
++          if (!cursor.take(',')) { throw new IllegalArgumentException("Expected Rust tuple pattern separator"); }
++          cursor.trivia();
++        }
++        result.fields = List.copyOf(fields);
++        return result;
++      }
++      if (cursor.text.startsWith("..", cursor.position)) {
++        if (result.mutable) { throw new IllegalArgumentException("Invalid Rust rest binding"); }
++        cursor.position += 2; result.rest = true; return result;
++      }
++      result.name = cursor.identifier();
++      if (result.name == null || result.mutable && result.name.equals("_")) {
++        throw new IllegalArgumentException("Expected Rust const binding");
++      }
++      return result;
++    }
++
++    private List<Integer> patternIndices(ConstPattern pattern, int size) {
++      int rest = -1;
++      for (int i = 0; i < pattern.fields.size(); ++i) {
++        if (pattern.fields.get(i).rest) {
++          if (rest >= 0) { throw new IllegalArgumentException("Multiple Rust tuple rest patterns"); }
++          rest = i;
++        }
++      }
++      int required = pattern.fields.size() - (rest >= 0 ? 1 : 0);
++      if (required > size || rest < 0 && required != size) {
++        throw new IllegalArgumentException("Rust tuple pattern arity mismatch");
++      }
++      List<Integer> indices = new ArrayList<>();
++      for (int i = 0; i < pattern.fields.size(); ++i) {
++        indices.add(i == rest ? -1 : rest >= 0 && i > rest
++            ? size - (pattern.fields.size() - i) : i);
++      }
++      return indices;
++    }
++
++    private void bindPattern(ConstPattern pattern, ConstType type, java.util.Set<String> names) {
++      if (pattern.rest) { throw new IllegalArgumentException("Rust rest needs a tuple pattern"); }
++      if (pattern.fields == null) {
++        if (!pattern.name.equals("_")) {
++          if (!names.add(pattern.name)) { throw new IllegalArgumentException("Duplicate Rust binding"); }
++          pattern.symbol = new ConstSymbol(pattern.name, type, pattern.mutable);
++          symbols.add(pattern.symbol);
++        }
++        return;
++      }
++      if (pattern.fields.isEmpty()) { type.restrict(ConstKind.UNIT.mask()); return; }
++      List<ConstType> fields;
++      if (type.root().allowed == ConstKind.UNIT.mask()) { fields = List.of(); }
++      else {
++        type.restrict(ConstKind.TUPLE.mask());
++        fields = type.root().fields;
++        if (fields == null) { throw new IllegalArgumentException("Unresolved Rust tuple pattern"); }
++      }
++      List<Integer> indices = patternIndices(pattern, fields.size());
++      for (int i = 0; i < indices.size(); ++i) {
++        if (indices.get(i) >= 0) { bindPattern(pattern.fields.get(i), fields.get(indices.get(i)), names); }
++      }
++    }
++
++    private void bindValue(ConstPattern pattern, ConstValue value,
++                           java.util.IdentityHashMap<ConstSymbol, ConstValue> values) {
++      if (pattern.symbol != null) { values.put(pattern.symbol, value); }
++      if (pattern.fields == null) { return; }
++      List<ConstValue> fields = value.fields() == null ? List.of() : value.fields();
++      List<Integer> indices = patternIndices(pattern, fields.size());
++      for (int i = 0; i < indices.size(); ++i) {
++        if (indices.get(i) >= 0) { bindValue(pattern.fields.get(i), fields.get(indices.get(i)), values); }
++      }
++    }
++
++    private ConstType bindingType() {
++      cursor.trivia();
++      if (!cursor.take('(')) { return new ConstType(kind().mask()); }
++      cursor.trivia();
++      if (cursor.take(')')) { return new ConstType(ConstKind.UNIT.mask()); }
++      ConstType first = bindingType();
++      cursor.trivia();
++      if (cursor.take(')')) { return first; }
++      if (!cursor.take(',')) { throw new IllegalArgumentException("Expected Rust tuple type separator"); }
++      List<ConstType> fields = new ArrayList<>();
++      fields.add(first);
++      cursor.trivia();
++      while (!cursor.take(')')) {
++        fields.add(bindingType());
++        cursor.trivia();
++        if (cursor.take(')')) { break; }
++        if (!cursor.take(',')) { throw new IllegalArgumentException("Expected Rust tuple type separator"); }
++        cursor.trivia();
++      }
++      return ConstType.tuple(fields);
++    }
++
++    private ConstNode tuple(List<ConstNode> fields) {
++      return new ConstNode("tuple", ConstType.tuple(fields.stream().map(field -> field.type).toList()),
++          fields.toArray(ConstNode[]::new));
++    }
++
++    private void validateTarget(ConstNode node, boolean destructuring) {
++      if (destructuring && node.op.equals("discard")) { node.assigned = true; return; }
++      if (destructuring && node.op.equals("tuple")) {
++        for (ConstNode field : node.arguments) { validateTarget(field, true); }
++        return;
++      }
++      if (destructuring && node.op.equals("literal") && node.type.kind() == ConstKind.UNIT) { return; }
++      ConstSymbol symbol = placeSymbol(node);
++      if (symbol != null && !symbol.mutable()) {
++        throw new IllegalArgumentException("Rust const assignment needs a mutable local");
++      }
++    }
++
++    private ConstSymbol placeSymbol(ConstNode place) {
++      if (place.op.equals("local")) { return place.symbol; }
++      if (place.op.equals("member")) {
++        ConstNode parent = place.arguments.get(0);
++        while (parent.op.equals("member")) { parent = parent.arguments.get(0); }
++        return parent.op.equals("local") ? parent.symbol : null;
++      }
++      throw new IllegalArgumentException("Rust const assignment needs a local place");
++    }
++
+     private ConstKind kind() {
+       cursor.trivia();
+       if (cursor.take('(')) {
+         cursor.trivia();
+-        if (!cursor.take(')')) { throw new IllegalArgumentException("Invalid Rust unit type"); }
+-        return ConstKind.UNIT;
++        if (cursor.take(')')) { return ConstKind.UNIT; }
++        ConstKind nested = kind();
++        cursor.trivia();
++        if (!cursor.take(')')) { throw new IllegalArgumentException("Invalid Rust const type group"); }
++        return nested;
+       }
++      boolean rooted = cursor.text.startsWith("::", cursor.position);
++      if (rooted) { cursor.position += 2; cursor.trivia(); }
+       String name = cursor.nominalEntityTypePath();
++      if (rooted && name != null) { name = "::" + name; }
+       if (name == null) { throw new IllegalArgumentException("Expected Rust const integer type"); }
+       for (String prefix : List.of("core::primitive::", "::core::primitive::",
+           "std::primitive::", "::std::primitive::")) {
+@@ -584,7 +943,7 @@ final class CppRustLiteralMetadata {
+     }
+ 
+     private ConstKind namedKind(String name) {
+-      if (!name.equals(name.toLowerCase(java.util.Locale.ROOT)) || name.equals("unit")) {
++      if (!name.equals(name.toLowerCase(java.util.Locale.ROOT)) || name.equals("unit") || name.equals("tuple")) {
+         throw new IllegalArgumentException("Unknown Rust const integer type");
+       }
+       try { return ConstKind.valueOf(name.toUpperCase(java.util.Locale.ROOT)); }
+@@ -616,52 +975,128 @@ final class CppRustLiteralMetadata {
+       };
+     }
+ 
+-    private BigInteger evaluate(ConstNode node, java.util.IdentityHashMap<ConstSymbol, BigInteger> values) {
+-      if (node.op.equals("literal")) { return node.literal; }
++    private ConstValue evaluate(ConstNode node,
++                                java.util.IdentityHashMap<ConstSymbol, ConstValue> values) {
++      if (node.op.equals("literal") || node.op.equals("constant")) {
++        return ConstValue.scalar(node.literal);
++      }
++      if (node.op.equals("tuple")) {
++        List<ConstValue> fields = new ArrayList<>();
++        for (ConstNode field : node.arguments) { fields.add(evaluate(field, values)); }
++        return ConstValue.tuple(fields);
++      }
++      if (node.op.equals("member")) {
++        return evaluate(node.arguments.get(0), values).fields().get(node.memberIndex);
++      }
+       if (node.op.equals("local")) {
+-        BigInteger value = values.get(node.symbol);
++        ConstValue value = values.get(node.symbol);
+         if (value == null) { throw new IllegalArgumentException("Uninitialized Rust const binding"); }
+         return value;
+       }
+       if (node.op.equals("let")) {
+-        values.put(node.symbol, evaluate(node.arguments.get(0), values));
+-        return BigInteger.ZERO;
++        bindValue(node.pattern, evaluate(node.arguments.get(0), values), values);
++        return ConstValue.scalar(BigInteger.ZERO);
+       }
+       if (node.op.equals("block")) {
+-        BigInteger value = BigInteger.ZERO;
++        ConstValue value = ConstValue.scalar(BigInteger.ZERO);
+         for (ConstNode expression : node.arguments) { value = evaluate(expression, values); }
+         return value;
+       }
+       if (node.op.equals("if")) {
+-        return evaluate(node.arguments.get(evaluate(node.arguments.get(0), values).signum() != 0 ? 1 : 2), values);
++        return evaluate(node.arguments.get(
++            evaluate(node.arguments.get(0), values).scalar().signum() != 0 ? 1 : 2), values);
+       }
+-      BigInteger left = evaluate(node.arguments.get(0), values);
++      if (node.op.equals("=") || node.op.endsWith("=")
++          && !List.of("==", "!=", "<=", ">=").contains(node.op)) {
++        ConstNode target = node.arguments.get(0);
++        if (node.op.equals("=")) {
++          // Rust evaluates the right side before the assignment places.
++          ConstValue value = evaluate(node.arguments.get(1), values);
++          writeTarget(target, value, values);
++        } else {
++          // All supported operators are primitive Rust operations: their
++          // compound assignments evaluate the right side before the place.
++          ConstValue right = evaluate(node.arguments.get(1), values);
++          ConstPlace place = resolvePlace(target, values);
++          ConstValue left = readPlace(place, values);
++          ConstValue value = ConstValue.scalar(calculate(node.op.substring(0, node.op.length() - 1),
++              left.scalar(), right.scalar(), target.type.kind()));
++          writePlace(place, value, values);
++        }
++        return ConstValue.scalar(BigInteger.ZERO);
++      }
++      ConstValue leftValue = evaluate(node.arguments.get(0), values);
++      BigInteger left = leftValue.scalar();
+       if (node.op.equals("as")) {
+-        return cast(left, node.arguments.get(0).type.kind(), node.type.kind());
++        return ConstValue.scalar(cast(left, node.arguments.get(0).type.kind(), node.type.kind()));
+       }
+       if (node.op.equals("neg")) {
+-        return node.type.kind().floating()
++        return ConstValue.scalar(node.type.kind().floating()
+             ? floatingBits(-floatingValue(left, node.type.kind()), node.type.kind())
+             : node.arguments.get(0).op.equals("literal") && node.type.kind().signed
+                 ? wrapped(left.negate(), node.type.kind())
+-                : checked(left.negate(), node.type.kind());
++                : checked(left.negate(), node.type.kind()));
+       }
+       if (node.op.equals("!")) {
+-        return node.type.kind() == ConstKind.BOOL ? BigInteger.ONE.subtract(left)
+-            : wrapped(left.not(), node.type.kind());
+-      }
+-      if (node.op.equals("&&") && left.signum() == 0) { return BigInteger.ZERO; }
+-      if (node.op.equals("||") && left.signum() != 0) { return BigInteger.ONE; }
+-      BigInteger right = evaluate(node.arguments.get(1), values);
+-      if (node.op.equals("=") || node.op.endsWith("=")
+-          && !List.of("==", "!=", "<=", ">=").contains(node.op)) {
+-        BigInteger value = node.op.equals("=") ? right
+-            : calculate(node.op.substring(0, node.op.length() - 1), left, right, node.symbol.type().kind());
+-        values.put(node.symbol, value);
+-        return BigInteger.ZERO;
++        return ConstValue.scalar(node.type.kind() == ConstKind.BOOL ? BigInteger.ONE.subtract(left)
++            : wrapped(left.not(), node.type.kind()));
+       }
++      if (node.op.equals("&&") && left.signum() == 0) { return ConstValue.scalar(BigInteger.ZERO); }
++      if (node.op.equals("||") && left.signum() != 0) { return ConstValue.scalar(BigInteger.ONE); }
++      BigInteger right = evaluate(node.arguments.get(1), values).scalar();
+       ConstKind operand = node.arguments.get(0).type.kind();
+-      return calculate(node.op, left, right, operand.floating() ? operand : node.type.kind());
++      return ConstValue.scalar(calculate(node.op, left, right,
++          operand.floating() ? operand : node.type.kind()));
++    }
++
++    private void writeTarget(ConstNode target, ConstValue value,
++                             java.util.IdentityHashMap<ConstSymbol, ConstValue> values) {
++      if (target.op.equals("discard")
++          || target.op.equals("literal") && target.type.kind() == ConstKind.UNIT) { return; }
++      if (target.op.equals("tuple")) {
++        for (int i = 0; i < target.arguments.size(); ++i) {
++          writeTarget(target.arguments.get(i), value.fields().get(i), values);
++        }
++        return;
++      }
++      writePlace(resolvePlace(target, values), value, values);
++    }
++
++    private record ConstPlace(ConstSymbol symbol, List<Integer> indices, ConstValue temporary) {}
++
++    private ConstPlace resolvePlace(ConstNode node,
++                                    java.util.IdentityHashMap<ConstSymbol, ConstValue> values) {
++      if (node.op.equals("local")) { return new ConstPlace(node.symbol, List.of(), null); }
++      if (node.op.equals("member")) {
++        ConstPlace parent = resolvePlace(node.arguments.get(0), values);
++        List<Integer> indices = new ArrayList<>(parent.indices());
++        indices.add(node.memberIndex);
++        return new ConstPlace(parent.symbol(), List.copyOf(indices), parent.temporary());
++      }
++      return new ConstPlace(null, List.of(), evaluate(node, values));
++    }
++
++    private ConstValue readPlace(ConstPlace place,
++                                 java.util.IdentityHashMap<ConstSymbol, ConstValue> values) {
++      ConstValue value = place.symbol() == null ? place.temporary() : values.get(place.symbol());
++      for (int index : place.indices()) { value = value.fields().get(index); }
++      return value;
++    }
++
++    private ConstValue replaceField(ConstValue original, List<Integer> indices, int offset,
++                                    ConstValue value) {
++      if (offset == indices.size()) { return value; }
++      int index = indices.get(offset);
++      List<ConstValue> fields = new ArrayList<>(original.fields());
++      fields.set(index, replaceField(fields.get(index), indices, offset + 1, value));
++      return ConstValue.tuple(fields);
++    }
++
++    private void writePlace(ConstPlace place, ConstValue value,
++                            java.util.IdentityHashMap<ConstSymbol, ConstValue> values) {
++      if (place.symbol() != null) {
++        values.put(place.symbol(), replaceField(values.get(place.symbol()), place.indices(), 0, value));
++      }
+     }
+ 
+     private BigInteger calculate(String op, BigInteger left, BigInteger right, ConstKind kind) {
+diff --git a/generator/src/test/java/com/skynet/codegenerator/cpp/CppPrimitiveConstPathProjectionTest.java b/generator/src/test/java/com/skynet/codegenerator/cpp/CppPrimitiveConstPathProjectionTest.java
+new file mode 100644
+index 0000000..8e3a8c8
+--- /dev/null
++++ b/generator/src/test/java/com/skynet/codegenerator/cpp/CppPrimitiveConstPathProjectionTest.java
+@@ -0,0 +1,164 @@
++package com.skynet.codegenerator.cpp;
++
++import static org.junit.Assert.*;
++import com.fasterxml.jackson.databind.JsonNode;
++import com.fasterxml.jackson.databind.ObjectMapper;
++import java.io.ByteArrayInputStream;
++import java.io.InputStream;
++import java.security.MessageDigest;
++import java.util.HexFormat;
++import java.util.List;
++import java.util.zip.GZIPInputStream;
++import org.junit.Test;
++
++public class CppPrimitiveConstPathProjectionTest {
++  private JsonNode fixture() throws Exception {
++    byte[] data;
++    try (InputStream input = getClass().getResourceAsStream("/cpp_primitive_const_paths_5_0_6.json.gz")) {
++      assertNotNull(input);
++      data = input.readAllBytes();
++    }
++    assertEquals("74453da403525f6abd240389ffd96364bb2ab038a3e310a66e5155d786257ec5",
++        HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(data)));
++    try (GZIPInputStream input = new GZIPInputStream(new ByteArrayInputStream(data))) {
++      return new ObjectMapper().readTree(input);
++    }
++  }
++
++  private void model(String name) throws Exception {
++    for (JsonNode row : fixture().get("model_cases")) {
++      if (row.get("name").asText().equals(name)) {
++        var result = CppRustLiteralMetadata.projectedEntityTypePath(row.get("type").asText());
++        if (row.get("accepted").asBoolean()) {
++          assertNotNull(name, result);
++          assertEquals(name, row.get("projected_path").asText(), result.path());
++        } else {
++          assertNull(name, result);
++        }
++        return;
++      }
++    }
++    fail("Missing original model case: " + name);
++  }
++
++  @Test
++  public void integerConstantsKeepTheirWidthsAndResultTypes() throws Exception {
++    for (String kind : List.of("u8", "u16", "u32", "u64", "u128", "usize",
++        "i8", "i16", "i32", "i64", "i128", "isize")) {
++      model("integer_" + kind);
++    }
++  }
++
++  @Test
++  public void floatingConstantsKeepPrecisionAndClassification() throws Exception {
++    model("float_f32");
++    model("float_f64");
++    model("legacy_root_core_float");
++  }
++
++  @Test
++  public void characterConstantsKeepTheirScalarValues() throws Exception {
++    model("character_constants");
++    model("character_missing_bits");
++  }
++
++  @Test
++  public void qualifiedAndRawPathsResolveThePrimitive() throws Exception {
++    for (String name : List.of("std_primitive", "root_std_primitive", "core_primitive",
++        "root_core_primitive", "qualified", "qualified_group", "qualified_root_core",
++        "raw_identifiers", "turbofish_empty", "qualified_empty", "legacy_std",
++        "legacy_core", "legacy_root_std")) {
++      model(name);
++    }
++  }
++
++  @Test
++  public void valueNamesAndModelNamesDoNotReplaceTypePaths() throws Exception {
++    model("value_namespace");
++    model("owner_u8");
++    model("modeled_child");
++  }
++
++  @Test
++  public void resolvedConstantsRetainCheckedArithmeticAndTypeErrors() throws Exception {
++    for (String name : List.of("negative_min_overflow", "usize_add_overflow",
++        "bits_is_not_u8", "unknown_member", "wrong_final_type", "float_char_cast",
++        "legacy_missing_bits")) {
++      model(name);
++    }
++  }
++
++  @Test
++  public void completeConstExpressionMatrixMatchesActualCompiler() throws Exception {
++    JsonNode value = fixture();
++    assertEquals(1, value.get("schema").asInt());
++    assertEquals("fe82a18982415f1746df9a2cf7c42f5e9abdc6d3", value.get("runtime_commit").asText());
++    assertEquals("45e1572c4956ca963410d8ea436ead3c8857087a", value.get("generator_commit").asText());
++    assertEquals("7d1696a7c54c5073cc90a2e8027af9dd1401589c4b942eefd828b79677641103",
++        value.get("source_reference_sha256").asText());
++    assertEquals(928, value.get("cases").size());
++    for (JsonNode row : value.get("cases")) {
++      String expression = row.get("expression").asText();
++      var result = CppRustLiteralMetadata.projectedEntityTypePath(
++          "<[Self; " + expression + "] as IntoIterator>::Item");
++      if (row.get("accepted").asBoolean()) {
++        assertNotNull(expression, result);
++        assertEquals(expression, "Self", result.path());
++      } else {
++        assertNull(expression, result);
++      }
++    }
++  }
++
++  @Test
++  public void everyActualGeneratedModelKeepsItsTypeOutcome() throws Exception {
++    JsonNode value = fixture();
++    assertEquals(61, value.get("model_cases").size());
++    for (JsonNode row : value.get("model_cases")) {
++      model(row.get("name").asText());
++    }
++  }
++  private void expressionCase(String name) throws Exception {
++    for (JsonNode row : fixture().get("cases")) {
++      if (row.has("name") && row.get("name").asText().equals(name)) {
++        String expression = row.get("expression").asText();
++        var result = CppRustLiteralMetadata.projectedEntityTypePath(
++            "<[Self; " + expression + "] as IntoIterator>::Item");
++        if (row.get("accepted").asBoolean()) {
++          assertNotNull(name, result);
++          assertEquals(name, "Self", result.path());
++        } else {
++          assertNull(name, result);
++        }
++        return;
++      }
++    }
++    fail("Missing actual expression case: " + name);
++  }
++
++  @Test
++  public void tupleShapesPatternsAndCopiesRemainDistinctValues() throws Exception {
++    for (String name : List.of("tuple_literal", "tuple_annotation", "tuple_alias_copy",
++        "tuple_nested_mutation", "unicode_destructure", "unicode_rest_suffix",
++        "tuple_mutable_pattern", "tuple_unit_pattern", "tuple_unit_assignment",
++        "tuple_swap_assignment", "tuple_discard_assignment", "tuple_if_bad_shape",
++        "tuple_wrong_arity", "tuple_immutable_field", "tuple_out_of_range",
++        "tuple_scalar_cast", "tuple_const_comparison", "tuple_duplicate_pattern",
++        "tuple_structural_coercion", "tuple_nested_pattern", "tuple_multiple_rest")) {
++      expressionCase(name);
++    }
++  }
++
++  @Test
++  public void primitiveAssignmentsEvaluateTheRightSideBeforeTheirPlaces() throws Exception {
++    for (String name : List.of("tuple_assignment_order", "tuple_compound_order",
++        "tuple_compound_order_primitive", "scalar_compound_self_write",
++        "scalar_compound_clears_overflow", "primitive_order_add", "primitive_order_sub",
++        "primitive_order_mul", "primitive_order_div", "primitive_order_rem",
++        "primitive_order_and", "primitive_order_or", "primitive_order_xor",
++        "primitive_order_ll", "primitive_order_rr")) {
++      expressionCase(name);
++    }
++  }
++
++}
+diff --git a/generator/src/test/resources/cpp_primitive_const_paths_5_0_6.json.gz b/generator/src/test/resources/cpp_primitive_const_paths_5_0_6.json.gz
+new file mode 100644
+index 0000000000000000000000000000000000000000..7e15b3f69aa10cfc19a77aa1904566676fb7a2a3
+GIT binary patch
+literal 12497
+zcmZ{~bx<9@8}^MADDEx?cP(&mw}ZPCC=_>hcXxO9;_ei8cWrT}xWjY4znSNqdH#5J
+z<}*n)*~uoGxi<H;OBw|a@!tXUxs>zOi3sQ!`iZcorn|4R?^<NXR83za$M?(KB8Ae9
+zXKh_B#?;f;*n@TepVZ-PC#Yv`3!*gcYKWCtyZEs0Rj{o`5*WK9_?;<lzHCN6_wAx}
+zCbdfa#Uia{sMmGF=Vf=l@h(kq<L)FvNHBaw@b!XuE9b4LYom-s@!@(bZMQa!<<rsW
+zwG6X|PG9KxW&%^H>z;5!==u}nCj`36oln}?eEUJ;hjn$p^7)Y={Yv^qrut${YWDfk
+zwE3>}#-PaVWzqTOkx-V|ed+!18kO`FC(rdPjYY`jSzzZnZ$6C$GL;j<7@p;aj{j_A
+zyx}jBR=P~lG7&8tF4jAGV?f&L6L$L*uQG2|+3ORMK@%u-y0T#rVjG#)nAO9j^QGV-
+z>&x%Ap7+zRTu=hD$(4f5cM8$)f)nowktX(F+SAymOz|>N9covlJKkVclM%U#ZiUo&
+z%O%dFEE|l{rmBmWv3J7caDRRc*LS}jkI$M5!Rc)xlWn7|9wFK0BaYlt)upt#*X4>?
+zhjK3yPmFF9;;06OBB{A?rPN3&oFFt}`8nl<EW3HCJDrCGh*p*HU|*Mac8ESo3DNyf
+zZ5Vs8gK~*3p7Aci7INVX`Y}AJ$F;K=K#vQ(Gf`wNzG&e}fzio|B7CGqXoDJKJzns!
+zIrC7QCd93LN3g!)(9E~+?{p@jy{8z#5b4Fo;gK&Z#J__@{(PZS7H0c7hFKN^1OLfO
+zr9+~p7z3EMnq#-%<$+1mi0nvaWXB&guc#y;hMX&wKX1QWA*(4_jPN<@bb=2D#YX>X
+zi%MRa`hXurKH8S5oWEGZE?09)6y9#;4Q9;TCK5JMBHveb^MoMkMzc84+G7KuW26Z1
+zLI}%b%-b!cQ4md7sCq8DZotDA;gO|0ediI*#3vnB0}YFw9z$GLs}}4j-L0VgH(Rp3
+zp`uDn?8zlRBZdItQciTfT~O)&O_wLVZ?4Fu3?1f+dKv%*JYQ03i@le^BW4kK!RWG3
+ziAwo+s~iYTY><+LNzm~po_2Uy`e?#sCs2m=Is(#TYo*_4p`I%7AO<X8&@Ru?{cl-7
+z0Qfr*$S~u17}mq3R-y76JPBHr*u23bS|hZ+PK~g52}~FW4p=Ht5|>{1zB$B%)L2fE
+zBrG!JwIyhX;$*sa4L!d8`fRQeGn<_lf7Zx3r4U~nGSMGAe=zJ~8%STOpOi{v*jvVZ
+z9z1!%?Q#%^!wP#t<BwgAwO%-}0t-_L7_ns;Vaa$iWv}<J`@EBw3szLGZ;^I2WHM%J
+zJ7CBlsOfkM3qM@K_-)T$4fkIa_9YZBU~G?JDMdusrj;$`hQA^@^BU4t*QB-fRi%Yu
+zSam2O_UV||e<h7u%||w=*^T}(D2X7eHbPD)mxz}tLz-`Gkh!S5Ii%P83;hnxr$Fej
+zMkmGA?=(}<RTFt%uS#sR@GB1lK@bL6T!-72KgS``vLgg>pvd@gBoqh;Iun^*^^rJx
+z#xnU6?Tsi3K=e-zHRg#&LUf_U36s@P&f8tYi|77m`=jiBYrk!V(JqZ}G)c}F++d@4
+zau}6KeVFUx6zPc(l6X)Q+6nvXGlD39O5Wm$<MjZ^SX&``zNwT$1WS@r^jCwZE1X>J
+zRb9G=VLB_#^-rO@K~k0*F`63zAcE0hhcBAa5av+0MLzUtxzn%c+4cHdw)Hy4U%%M!
+z8gh9$P~NpXiXNSUJ#RPJNA^cO9~KMlwA#t=>ri)K4vPLx;GCQJljV{!Nk!)}nku*V
+zr_cd|F<55w_r{(1giUxvTgI^ue$<MO6-70`lPBR&C6&HP0q~2>Wyi>ql%o?X5#-_F
+zd2Cc>T=)apY)ceQzwexh2~RqT8@K1NMCFZNyMF{I<E_b7)2fuov%fGCKfZ_n0`#L2
+zrRQ3qGvq9j)!uoLg4x68Qj^u`i-@RJOg<(U&_c6$E6x_)TEC@VX}lCqyHFvDu_3B7
+zsB=2c24i#pg0e&$0he04ixWZZ_t*Ux?PCz>dK>RLqQK(;+4t3RNjQTS>Yv(yDPQKS
+zRn!_KRuaW;GemQk3>x9ibw>&l0H%CgbQDK?{cnWHbxtIP;*w0qT~c_7AO!wLbS=5m
+z@>5o*3`n{Xc|N!X1eA2`c*oOYkNCcGA%K+Va3h?ZE@$)ErU@JA<G<)uk{pLA%9>kH
+zD@(hjAi{8)WC%v_PK=RK6K^tWw@#$t+}Lbt6ct`K8r3wFrb2htMUO(-;yIn>j9a!{
+zD=1^Jt^th=29{2SvL-WfzroxWpcE6JC5{hQZet}5&&JXHjWb*$6is3)OF8LSO?qMw
+zB~m{Ot@OOCqI+dbMW_13+_6!<KiRdJn7!RE2m@J(t>bTe5iHLel7j64n7?37kQ8Et
+zf|53Pz;J`%4NA%_JuZg~6LlQK&n9w(rD=5r;|5D(@%7)EF`$Ou^53SBGTv=M8N~Gi
+zov^N3n?b^h+DLaUvQ&N&Ikn2&GB<TM9-Dga!)|_)&OVh%(s;h)q|4aSh;*U>M}%sp
+z;6dgspM|&Vm@1zpE)&X7vDD;niWH_PNRkp#q8W-tHk&IK@OGAL?%_<#A1GZbF;RR1
+zhc2x{cdF7bYK&G?QrY1NBc8-nf7Fo`)|RS5^H6=YKn9@Zp>MdU!8$G%wf!rnXnO+Y
+z0L%rLJuqirj=)^WDZ(hP6;Yt1?Wcbe;Q0qW^<R@)ImO+?KN7)8Bzo@Cx<WTbEO$nN
+z7{PAjA(w-qpr4hG`ZI8*b0=i0Sns^)3bo;X&Q@$$b2ZSwTK$Za2;VPTBRHCfQm*X(
+zBy^D3DE{>;B{F<a$K-D%YGoKIO_B($GQtEH+M&KG<@^{$R*W1Xe>q$R18Ywah@4W2
+zklz;f04lSr>3sM<RfVufW$40fwG^<^y_5lf*)TYwL{L()!;Uy*UxNE)e@4;fJeYAX
+z>tKe#EQ6T_vz<`{U)WG3MdUliW)|!C2Yl+kCWjeCgH*q7or2nK%!h7+*=C~B_d*>0
+zNGYT7v5|U+quG(754uP(R5q2)-@S-_|DRA6UbPPWCzOvH!Au6#>}|nuQr5Gf>^~gu
+z(Q_gGlS=1t&ZA25bV@eHl#amFevS&U_V%06kse`j3|8y`(GV<~uEE9==Y(G!@gZeP
+z3=|%m-9QpehG?d(qHBWUghBOx{m@)8O1ZrD+JMBSe7P4|6UceW*aGG&-oV(*eVl3I
+zgH$jYV3xsffoTEb3g%(jSOP7@0kWP7XC!-UJix5M(F#nKSp!BI3`;D;?x_*=%+{!b
+z&q|Ddkn<a>VJ@MEEuK{Fo`fyhNY5Dzdermkp0E2+8)=Pzr(=1@*zvpe?8p>CHR-E%
+zQ6{<X<|G?;L!LmSN6W|*ad&~yVvbpw0JZGHx8p=B6!Yd((!?N&KY5N@Je?2h!VmVr
+zjI(N^dxsHo$?tODu6e`8B-L=KE1B{_dGdRhc{C)=FSKUxE;#$@8-@)=Jr9q`H|uXC
+zua4mF58F**#}e+(D{5h5QwS3wU;j;|^v(S<L45euhxQPcN+GHE&`_>}9>+VL{GA6n
+z{W~8RUNHR7=^Nnk2DrQdE^qKd<B6$<P>+%|5xKy!hUG#|GJ(0sg_P4L@8V~RvWjI@
+zR~RMm;l{Zli5<F^O2?S$o6lY~&roGSJ=7Td+PO~+ZSde*RUc(L8<zG`zZQeicbBH?
+z=FJSRfg|3S<9NX{Lfer_nW?DhU=5We;P2#b6|12x|5%9FSEp?Qw_8gr)6JWzL;7}Z
+zpLJKizrMYL(k4Qpw<|>rB<O1Z8qT6r{(_@U63wS-NhMF8#=2tso5>`6L^2TT34X-V
+zhs$76!QjkDAG(6m2QV#QxMrk>m6p(9*eUQ`B-z7q6TkyY01qqyJg}^6>!R(C+0K8&
+zINxUC=2^PjzhRgy46hwO@ZD(>!739C&#Ap`G0(xqDq#ArT;1A0oT@{HcSqU=DKQ|>
+z4HN+gj3MLG2&X<$i{)Yvp#C}+ZFnT(h|Y@`lp}6KrGfAuI+ShW;Nf-0yHC3YK~N*I
+z=Fqswk~ClQ7bMVV^YpQV%TII*{B`7|zmf#a<|7#V>i>#Wfi8l!SPwG+7z5DWB|t}+
+z%zv@hSoskJ-0AN0@Vi|(o3_qE1R}f*J_g=pTTiN6-J`1A?{a6~)XnhUG(fs3Wf5oy
+zkv9bJ3Fi=K@wwLh_R`Ak@s2~_7tbYV$Cq6LsFf!`gZAhdr0E45X&3Ux5e@**i>n?N
+zy}q}XhZ|S6UiM#|Fj9+;6vWXfWK#r12EBm>st=i*Fw)#fpp;x?%#1(Drh1+VE{{kf
+z9OL9Nx6;{g!6%>zdl)#YGYIZVykMFWT1c&?1Xxrz>C9ZN+8to)kDbl!uFprVwF<Al
+z#-td_w?C#$N7`hh_)71I=V{FXCdv{2EQ%8$7Q-b&{yLprg{suXQ>m0P5}-uRXDUkg
+z(iV#mSQ074W!|9!Phtb#0O_toB%HnSuyJOGW7+5Q!b%%;LMlDKjo$nPTm$hdLarqq
+zZWKCysk?>gaNsoFQIPo#%?H92f6!W)ejiOqov|^r1Vh~4!YG|{UIYc=Si-0+5pMMJ
+z&g6OGJl(^kinn6U$YJ+c(59S{W_AoB-1&ESHi!i#fBvp>UrC2p8njl(P7B#q`6LoM
+zM;UFe7Y66KqcRVF^m3U?GE^)v-eN~SzEM?c+aU!#qq{m=yaAMNE=4-fs}&n5JlTZg
+zpr+y_aruPnV}n=zZ>L*?MXbEm3=OfL{1v>@<?VN1uo0bE?;(UV#3?Eox7yPL?%d(_
+zDhG#?|NUSG&f^8x+o2T}&E0Lm|95FZN23@-Ml!AJC`p2LRBXlh96Ee;@mFF^0p39;
+zJ_pg2b!MVK2jQ65D&0|s*N?-k&Z>~ekY}v=B8oXw4?zp8-x$aVl$49i1)}UIm{i4!
+z)oh}oDD#v|V@66SYE=8b(lp8H7s->crl1&T!z4o!2kS}^BDvJkf>T;oob*2bm3rl(
+zAwEe1YP9>PFf_9f2Lmf=nyn(xu&CKo=m!YsVA8Z>ljV9j;2}-bD45wgjp6R3*NP7m
+z;FDc%nx+rb<<YK)A$1;ymt@eg#UhKnmwrA8Mo#=p^j9sGZ(`|nC_{t^0!1Z)dY51V
+z$A3wVm2CMy2AE(KF)>x?!tK+JWlm9{0WKCnKC*-|!r5-~H21daoKR3s((#EkJ(P~b
+z5?y!XmCEu7-a_1-=+AAiVvfSGiIc3WeRafG#l;IhQjGqfoXn+W+jI;>CVS5d!vrm0
+z0$f;7C4@g-F^XY^=iuNi{Hdvod@hRnuSX>X2=++c+u-`aQyM?PN)QlFyhvfZ@S{y^
+z7G*3UHPfVJATZc@Uiu5vf^6P=C%?w;wkrmu7a)ovt1vVr2p(9FCy_s^d69djFAl<@
+z&OLi}8080!K2SREp7RxzdWQKj08)Owi|C!dMnA`rJ}XRauDWa)(<|3XHG|4A!!Q^M
+z!{tr8`I9?#WUNK4mVQ(D=voE|Ccmn@xtpLiCJd<LMCO@swNr{PW^@#;igWV#H{c={
+zcDA#y=hM&pb=>2Q_F?%c$NDArY<^gk&zskVvX(h}jcmD!B7?KLgV?y5yCpep+&W%L
+zMKfRu#kdI8q%tUziXMbIUJ_@JDl88hzrRFPVv1_u`djOdxIWR~E}WCDkU$w>*6HK>
+zJ@g1-BBgNxE{`vU3aV1|E(r(ZzzQmEwP_y&VIAWvO5v}=K119--hccJ2H~h$)Eq@}
+zRg(zXM1>rGnh+~6h7B`evs~NZcmhnsx80M!6PUHdUWJjn1TfX8ZQgAn)BS9*CEPog
+zp#(u44%uQ!1`u{Mp>L3sf=D8&za~8NO~J+=pVk?~ZI;I|-5M2<+WQByh!qJew*auJ
+z5yEl)@+K<r+iW(DdW}M}L*G#UTvgEaE?<RL!5TY{uiCn*_rvs07}iDfm(-)Iqh8e(
+z7R-+h)^NMWNuTOpbrdAHBeS4%#Xn_Ka!t-xQV(woSXv4Uv@ps*o)6lUzUz`8TG!0r
+z$R=o2x)jPZMX``;4)IhXimZunX!!#-Dt5i}-ox}VaQde~i1`D}#~d~peGaEq6eUVi
+zLek2gUWBobi&DpkWFI2)t3(mms=p3)5Vn^*O|*%twyWZ%3kD5*1O*FEqylV2DWc83
+zy(bxEZs{3y*}|#8#57K>$k(r0A>@v^)Q08nytA{=(jYPPJBOg$vEq;b#>daeO7>m3
+z0A9U68Bl;LPvT>6LXd=UBL|5VD+2FT3h~SR7g|cU;J#b{waNUqFOdo)PNn|ITu*Y4
+zS}j>a@H1GWmPM9sO2GVZ^vrjmEq@LfVQ_>4@4@j73?40)7%jfM0Z3ER&HuN_#-S*t
+ze|3cyXRwi(QNN0H*iy)uZ*379@h6I>pk!Eq!{^FG;g3{uG*>+7qllr?DkMt`4qjjK
+zk{&iJ3{LJSv63DY$t<SwKpGFI49>nM5TH!e2~I53PJ%m_9aT!i!`Tv<3q4J&bEGS*
+z0M@#u^SM2KqjMROToU!Se*8uo28v0YsG~#?HC-+;S*X1Y%*Q_{mz`qYfE3Z;wP+@Q
+zDa{eAck@6e81|70SnYLS!-qYNr(`m0J_`J4Wfk^J2`Swg)BNq-nq&)w3=JU(k1oac
+z2owH)GS;~S2QyhNsr%D)4COeXfzvBZSZRH1fj8}e=C}J5{A>r%hBxpxPqFm4<`23G
+zV4W*idg5FgEosO}AN{rdy99rj9MBO2*0~p1SF~+1k=^;mX*aFJWF>+!e}7MerjLUJ
+zgvk6_kqHB$?EHM#@I;m6G_~=I>YQ{-wc?HO^@y<%3A{vT$7JKs-w2@>`2eb%k4h3~
+zH|e;Red`5cjpF?zSa!VZT!;!U4_fG(oiqRyYplMoG&F|=o~96Ut2P{&uXAgxz96>Z
+zWDi!X)UNSZ^Ggu@bFPJ1!-4JNSIOCNbn<&6D7<libof%$`0;w_5(N{(h8DGiXx+s5
+z5d$EMQrP14KQF;jH#NVhhEAI{N;#?F8dtrkxxjJYZ$}Nw2TdePq<oSr<SA{?&|GBV
+zo&_`n&MZJSw)~9aH>XM!0`0&aAk%q_>?}XPB+>X7J@X%AXne>q8&U%Fq={PT75B~f
+z+r!ILt7dKOr=!oS@Ab=%+HL)AU%z(^5I$_c(VRGYi8(4OE@iBBs)JNIV0a}2FoDlH
+z4(otp-eI@F=^KoA^FNKrM%|Sw7tJ*>En?*SNsMMAmKjpPc7Hv`^(alFhOg|N44V^W
+zS8Ip6)BDM5yHju<g&LbVmDgQN<g`riz7<x6X+9z)TsV-K93099h<6C5rz-Ic5B`-I
+zCSf6aLz^6AOvh95n+#31L{x?>4kdv|hFAq-&mAp-OD?^M^kmr@cz(G632$L5-5@kF
+zn;vRF0FW8u2J`@E;l@-PNiIFfu$}$sZ7fK_oYI-8D#%X(eaY;_M3v>xWXgyM4M+&z
+z(AomVv6{dh>k#PrQ=9m>r?=bVeM@sCs#m|)$BiP7$?5MtFuBOb`{w!RK-TtJT+K5?
+zy*7I6%bK(hy(`iEsN&Y~Pz1$C_S7_#i{?jmgK@l=G0w^EmeY7~07=4HaRm8Hr3-RH
+zc(v>&YJ){N$XHVS_bbmq)G#Io;pyn-FLu!*giP$0vtY9nV319sX{!AX*jt~?oN>+o
+zThd2S`wZqG=ju&s{00cu4Z0+J=1A;6ttqUAAN@#fiPVjoSR3kYW~%@|<?qNbLUM;d
+zUOAig9IgV3it}=T)<o(lv-}f<-5_hbR8f;->Im(Aze}4NY*p(}Evl_=#ELD9OMIRS
+zIfGwqfF{yc9XVVU`V=;9s-y;Q_D;?N9Xg!_><!_H(d>Gg>lT`4>=ucmiF`HmB!f;g
+z4!kQS&mwZI3#F45#b>ss&OIgM=aT8xq0+*dwb*Rbnt+N8`2TG@96iV<TNlcvJ(^x?
+z`h`FDY7`rqUjL3DgKCs22Vb2^2i8_-0ef5fbk(v$U+uR+Ib1XK%U&m_Y(l2Bj@MP}
+z0A;lsaL?w8m4DG@at2Ry)2QItwiL41%MxljD;AzpBkKs=y;Gk+c=eR|RhyBs3#0Li
+zj(8GMU;4<>*pP~tpy-epi1aepDEDft*aLivZ}7CMltSs^rg~~1@vo>AE%fMB{cjac
+zn>=Ehw`Kjpp9h#)c*5O(*s84{>+WI}Su>!J)+AC#=-fQ_<Ng2LL14q)$iV1h&S+FN
+zCH&?r@^NLmrFN}oeDUFTz}d0L+J1)tWHl2UGv|c0-fs)%y_zKU3g3N1pTx6b`s<Gz
+z2EPXvj8S)>hs>GE2~@V5O4*dtuY3I$u}Rc6#fi*}FS~B{6koY+p6j0icO_{kvQd;*
+zYwW}Wqumy0n)J6Op?R(-6*G?v&IBMuZyg<6gHn$87)|x@s3$>PtEd9kBT;X&5#BQ~
+z{psyBq%g(RBIv!a>j2AdBjdp}h-YiFl}01uA+Zq@iy>wS$O44M_-r>kq^i^3&{-Dv
+zPmDSusI`43eV4=7cQ66XENT4xK0u${E~$+x1|%rFRut~fF!of;>Sr4m>7O26J}mP-
+zih=Wf+6}_5dSBKzM_#Y2lrWkiU1zHicMttLfkn1tsd!$M2IH>8^)PGLA!+-{w66_Z
+zm#x@8>-cQtZ^FH7S#NzH`+R`uulg_XUUq$xc`)`*x=}ARFq&KPJh-@S-kX0SAMLp8
+zr+kucL20qN9Z~+^HIY5<svM5DQr%>6OJLEN#9MM*iskh;QbK%52RlJaT&b#psda&x
+zg9)3o`AB2F_!)^~3*;Stp}ayv)T$pduw3P^@5vdfQ#%}Rw#04QO%PV2xfgu4<lfj4
+z#(+zi<Hd+zB<Pp|tI2rzw}T24GN^W?jy>3ZMT_>zGJ$2*%OsrpYX7PC^(Rz?wbzW0
+zcn7-PlBU4QD3-LPV854?|8lo(IsEO#U4;|LMNbv$>}T5<-hKxcitfsA{n<LVtsY@m
+zjn&?$iw#j%O-xdaRT4PF9uJW{n!KkFdJxUqH#V;M-b;Bh$&ZRZHJ2a~pG<`eYf)t&
+zGl&Axg!@g7?P+(EPJbO<6H(3;UtuDx10P*j1obCgmN0Y<Cm=Z#JGN#LFVSHIH0t6=
+z)TR(?v@+(f$;*SHM>CRew$JUJLqr44W^qdBwxgZ$8&2MmAG#Y7Jt<=iDojc-|NRpQ
+zu4!eJq2f-dsw{6A<@Ho*Y2aEFwVDV3zx=;zqRG%K#oL;nSBX2z%cBFZJt>)xXO<Gg
+z635h`QI|CaQq%PsYPKm`99C>bUA&0eY~zepE*v&H1W@!^!8h>0?Y>1q1J0J*%jtGw
+zoNdNrpD!M)-inQ&Vji|99ECdU^XTuxI-GYZpw*|x>Gk|pN6c(<ZC+L)P5M^QW8<}H
+zeY{?mhrSfExOXTvGQ@T|a61~Fi~6cfwlccSpCz)6Zt<9(8T)M#R{6^Qm)vnjT`qEU
+zrTZ`4<8*FOJ$Ib7*+!96bc(!B(G@<&V^67A{j1T0Gh!b1Zi<l_xBY+jvDx5k+KRWs
+zR3hg=b;(?md7I-D?h1<`MMvkN{;f$yeHlV2qg907Xbo)_Wt`|*+83u5%jtMR<w1E2
+z*F5<x@(Z*F@%rcsdLy{{stD#GBi09XrcK~bP4E8feHu~sM<T__566Emvax!8V}H+B
+zc&=Y2<W(<#r(?R?67`SKq$NMxuT3e3CFdZxI@WXrqXqzxL)>=s(%Mos`Od`<tP&9$
+z1{Mq=<3l8Jnuz`sDc*KBeC6%5M{XVwNieZ#@f^6cAgQl?<hZ<8B}_1M*j9{sbP)1Y
+zX}Vp{ms?Y>S-tvhmsz@P%718jaEp(c*h+EES#a*a{s+6Ysw4rS0WZk1$@S49NUliw
+zhv~yyQ|6+*{8rolwKkO2wgVVJGdbbELQ+(GQp2BZ`${KA&w(u5aiY<=(v`6G`8_y=
+z!PXcRi^mz6miA7s_fr>BuYPuzIUTqP4<JLH&x7bvZ1tb($7g(47o$)~GAP1SOJ5L`
+z5IDh}K#9sJWLqYJgV+0%D6%VxrB*|sFP^j`vN@tc+1I|L(=aC97|P=FSpPEYFAy?I
+z`!Xn#|5*-*@`#-s>eYO=TG{SBit}}&TW%_FPie9lo4$Mw(wAcIZb>v$t8S+s|8o=&
+zS?Nf2IU*h}X812K4m#8LbDS!KA%{CFR1dkAJ%oICujCDVU2f$+12DCzSX8crtP9Hz
+z;E&$#PP$}EBI>qfbJ<sZZ(~C_UmlpjwO-k6cX#TP<E1NVobmC#o1UpI`Z30cM8ucf
+zLqJ9p;gT~ETk%uVVUX9je>lDmWNm-6Lk?Y1Hw0RuZW$bIQ!7D*z|x5wp+i6wu!!g)
+z;NYo|7h_eM&H4meGgvf~D#4>oZEFZrOFd~yg9Vn9ivr>Wp^3_$M#(~ny~&GrMY+kC
+zg**m6B=qOTd^kO|0qr7vGEvSYN>Bk-0TcM8NPsVs=z3Jv|IeHv81^?s6gnDgGd!6@
+z8C<Y1EvK|>KWvC(NU+hu`AVa*oy7kC6Hp%(^IV(mE6@=Rl?o7U>5H#<$o@a^^mp|H
+zn|T+G0&kP8x`>rjn6z#5r;b7;(TdW$Wy_+hT*s0a!V$xBFLa|o=6||r#RqGKXVT;+
+z`}9BIYO2GTcwU|L<SBntxh+qknczl$QP>|6Vf1AkxnFSFZ7a*8IfaYGr38&OK*POL
+zQX=?jD7&n)uDX`lq^MIMGp<ndTMikv$xEmxh)%H*3vEbJqPG?Pa9nT#Qd(7XRFrEg
+zCR0M*{sbZvohvCNx>}+t7eodpTgC_s_t3Tw#X(ghO8n$n8fJ}9_ijj6!hJF0Kvw2U
+zs`0bvqtz+=!kt2dp;$?SbBtxV+RzwPwkQV0<#I4<t?@E!mOZ{siuNt6@XLDtqJ^kP
+z$+%IJD#cgk847<(iGp$!D)MxdDw~MN=ccbl84js>W}OPVFl6$t6eGvQu`mf%5Ij<R
+z4%QyRA{}6NXrIS71I>EcHHZ5>+a~@>|7PE*MFhMQp%1MG8i<a%>ExE8MS*~-gG}vU
+zTVdrHvh7!>;L8$>ko2n(#mrmtM}#k;pEqK-1J3Jx6jg6whx4!`5)6Iwc;K*7M^QbV
+z+mmd5zJAy!k(_LItEDK{@r*UiSTK>YAl;rp?QmKukeycCoQ`*f1Ayj(3=RiH3RDUX
+z%moHD<@#LG6;~*o7wmFQ&e(Vt&;T$9$SR=^3-0iuKLXpZ7+K53rRmnUay{3pF%u-=
+zFN(j@6h@*0P@0kGKxJ3Z0krDjvV$lQl3~duTbT4Te|gy~2504eyZo$74=7NoQgU?e
+z5JL)832x!|Wp8c_n?SVP=6S#8_`Nyy{P7ZL{Xmti@<m09cr1Zx#frFDa;Ep&mXEg4
+z?~hLUWEctbAV^;FCMtuFe420me+{fOI0BZPmxp`LOv{wplaWPSj@1j;@r(5o>uL3v
+z9Md&CjI?=G{2lAz7cePC5)eKv?z8M_^?!UGyga<`-uLQvcYD5nyi_MLBSFnjSPRJ<
+ze1uYD(93%@M0;vw;c3)xrfQ?gB&D698^VR74iejQM|k(CZILndboc0ae}0^``TRb;
+zlFD0d)Ffe8!aY?4=0GmQ@Cy@FW6>#<^}^m9Cx`#{DOo=X3#5m*S;uz`vE;vL--i|a
+z%mfcvyh1K9uLcd1pb^;?%}9<vNPF0meYuBAGxTY8v3&P_F?Dv;)1m)%|8mhu=)pM{
+zqM9w$6{jfp+2uXPB$+tR@XON#sry`V;f}Y()5HE$l0|{&`pDYVv}t|BX&fbq%{X+F
+z^P1-%>^E+UFaHV>8*f$)Rhccd_9}m;y@^=ods(M*y{EVP`cBz%^Zme$pv`vsUZ-<s
+z7h$=Rj(HcimxJqHU2dablKC>mg9wT2q#WZa1<H9Lb(6<eJc^01u#qjtG!Qb-sdp#G
+z`su-9<uShdJsF|9*`4KcGB1);JBJr^6Zc;6HmFtQ=KV~${dspLU1ie8P|cfj&ih;#
+z8NA?VfA9Wz;_z9gZ|&~cnrl-1)M>6_7BkRawDG__Z=(DcN7TvM@H5%A(a-F?s)vG3
+zaN$H|9QS(;=y|>PQhcV(?@!f;iw@TBg;jQL7}~jrOpFN@V~V%UW9~d{Ht$iPZ<XwM
+z+bo}F4zIiWxkAQ5;%*%;*OOYT&$#=dW4-j)(z&putjmStHjh<XzF7(eU2S+`l4rW^
+z>rCR);RgR$$6lHmAX6n2?wWS2pID0gD`P(-)=Z9+%jy6wFA|JsK5EwmHzCUJs!Qa<
+zN1oW>m4f`hZJ=Jyt}}lcDgHt8U7P!hL%Z*rhnz37PU?DsQ(!{g^Ok4xX6#qqGKo%J
+z>_BU|8TGCt&7zU8&L6miKQD$yr_rX0C6}Yt9Ay)hN5Wq341w1T(ls$_XZM`SYCQ$z
+zg+sM0ksPH<;bnPgd52kUyd=2o-8Yt+XoF^|nNOKQCMhl*-DP*ZikWBm3p)*dpMNJX
+zYds6j)24leCd6DmdYm0_v0TWmyl#st&y)*$TDoMaPjKQknx6*433-ahdhx{ZXH}PR
+zyDcSMc<99poz$t2tb{}ez+Jh@D$8}M)mf))6lnhR==E8C%AFlqOe}&!Uh)?))_5pL
+z+R;%i9#3BoCpdW%w9y>^4xznS$RX<^HKuxG#@qDIhaK=nb>_`~1xhPsc~PWrUZ<tG
+znPG0eb@_NdwQ1QtU#`rVItM+PhO?CnURG7nx>T!VS?(|!8o`i07A9>lwoHV@iA{*D
+z^`99omMgXDY%{e+E!|iEIbK}^<m!W@)S5DOYqyyplRDG8YO$L4L2RdjXo#nk{ei;T
+z+BX|em{zj-QaEux89Unvy|KTyUbr3}Bk_eH#dWc7FnuNn9t#jQG<GD@)l|Ps+4Ubp
+zKV{XXb_N-x^3I0;a6Mt!-EFwif>HiZ?LafSeLW!l%zGn=Y3te%fJeHn-|1j_H_Z8H
+z_}4YLw6N#fDbuKs@Ws$Kxf-*c%Bjc%W6+9bbx@>EPV;QmWX=(DNCcz0i#1k^#o!}s
+zRsLrx>^0ogK$y!PyFwSi&aw@ux`+6yetehK#uh7qu(!Q~*`G2v&kv2X-1<20>{L-u
+zui987EKww7#>(bGQH6UZb76GaSjgSHr(+j;UmdTV+v`^(N_P8Vio618{N4t}d^|tN
+zwsPM@kbVs_pbA{J*YZnDN^FZg?P>wh*9Xpq%9whO_~z(o1obQhc*iR$-RNzp4LN1E
+z=zdpD+((|%b#H`|VeQC=jI*$*%PFwY##K37t%h;vl~r{*xBC!ym1O^LPSwmYtKRUQ
+zGTQUbXFFJL^v(qSMVIh+ZS}e4yH~LH{Iu9yedO@s5H<Ph>({!Ml2#9-!%3nf9effq
+ze%*3R`FL^%zD;YkUM>T*ZgKUoYSY^1Jz5fbIUNidzS|0w^7WS;4B7l?cS7;S@kq<G
+zg+?XD$s!)cys%m5*YOB4dps+1-W88o=qA)y;EbHdu4VgMeQ)o#iTrVsaC)QQO}kYy
+zEHE)cB5d+$_Y@?ZU+yArWQ}dJ&9ao2InS5!_&R2!VI8SmBZl8}+V>rH_aGDY$eUIn
+zyx3#i4^Z$t@TWguH{4w~@OGqtTQJdd%8$I@Ijw+WHndUx3S=(mhr=-emudUQFHfrW
+zp^d8GdFDvu77=~=;6RBaj?ClI+_PD;Hgs3mqGh9A^Yr=J*>C#M&}i>)oykw<rgPUL
+zeFR4vBdMv@&;54Gre*w+Mf2*zrZhrBCuwt$Zy3GJqJ(o!zUAB8(%EBF*2d$?j&T*K
+z8SiN^a7w+$1FxXU)-y@ByYu-lwQ%v&S+aA~6*^-hQPfXIc03NPz!KCy*p<4t?v>Ct
+z1y0YeCDhEEq@2F1G$NB0RIM@5IZ4bX24{^iMRYRa$e+B{N??3C2n<N1&KAm;bw$OG
+zigRy?k>q^kH%9lY4D0$q@h|?~MpXc9DGa}vEUB0+!N;y4PC$KQb;g3wtFWa$Z;tCh
+z+{Q?#$mTp^eb`rWV-@qirUAcf&iQQiu6CVB7s8x7Hw6x7q6f{(xC>cbg2JocDB(3H
+zDDS*iv`0?nAN!r#A2b|@#1)8`zU6ct42-<r6utfNPT{V|axcK;1z~*o?MQ69te?p{
+z2R9R?m2CUd>>^YIFC^fo1{l!z0Icbi5v9@Z@D(iE`*6tFHo4uKKW~5EQKJ}*tkZo=
+zS43PD+&-}4Y>oR&sTnVmd#;>vJK3W4qUj}L{_uHjJx`%$`OFnC?etg`*glV(bicnT
+zc~bY<C`&v<?Yt|(!^4SN3ac_zook4ss-Z1Dkb7p(6xttHJ%2X1*Kr-o?8d8lFc^bv
+z?)?-b%-6aWOaz>jTEYM)-w$iC(bgWA0^U5o?1l;_I)3}@KzYztwcW_%q>F-nn^nSi
+zoy7VR1nAZN>y8wzN+S0SrL60P$zD{*O;^9{=$Z7@7w@?ziC82PX01Lf;H@5k@h*Wg
+zR^Ecc!`t?hh=BlfZ3%hwj1rZB8w&m?&GH~|g&k=-f|@h>xJetG!SIrv|Gw2>%5F?i
+z^_Yh@qI>tr>FmqE;H2MUOS>>FWs}U1r&QTRx8S4<#m|Dbja4yGc*u#^O_n!L=vV>d
+ze@rho?>c^ITck3rmAX0O>JS$!k=<8G`@jG1+;;1IyHYvQ>ct<kTR$dxPM%JX&Drzl
+z*K!5z{(rVZRBXKLyUC|&!W$jKl%<N>*umuu*ch;e8(f`GSjXNfIz|=%MpMjOlLNzz
+z98zd%UViF7MC)Fvhxq_4{Z?dZ$II?3yOyfx8AO-7ZZxE-Dv@#&$r%O@FCE$^Y)fLL
+zwnydHJ85@|NkjFC>bOx<S+=o|-6@(c2lA3o_+}7a`(vPluDkmp@Qoa>ijOYrlEc{2
+zNT>Tbq9g_#3s+5c2NK@a-T)0R?v1BQyL}lyV?`z$&xAAItUh}7?q9-yCi!3830plG
+z5JhrWu)ize;^VsXE_a<Y_h=E<dfZfw&7BH7KTRb~l$xJD*4j2EA)W1zrI^b+wkLEd
+zK9b86vR>=X#EH$(z$l;cT$dgb0&lR7{-U~8D!Wp*m17i65ADKXcE^=VUerq8m%9bJ
+zyZF1`ulWjCqP$z8U|Q)u(yKT)C!V*|NFSWAVL0j~jW=@a*N&-=MRfc~K25}&up3XQ
+z7+*c@wl%4YEcfmGCAW0dltTACr3LHW?0c<@55bS>Q{<Y?PBX+%PcN?L?jO2l6dzVT
+z;_X%DXR^D5Rxg6j7OknJJaMKoK%%PN&l{5~L5S*&i@iNtwgty_*-U|jwcPJcNVs0E
+z+SB{(rB&6#=W8EV?>Dh_ZSGc0YZE?i<FTznBNuxg3ov0|8-6l%qytLsUj?JvuWN6p
+zDe~8qg|Y+7Unl1p&2@{vI4Umf9xhD@4v#0H+hm29HG56p*9TGXHXCI87A(b;i5K1Q
+z09;jgY&`5p?OWkaxo%z05|?)hZvT`_s3q_3%68q+h@P_>y_l<UNJAVv^|zJzs?t#9
+zTU7bK>C~)XcE3??mA(~bF9QXf1pjR%;a#(kh?B+n96Ra=$)fMBeW8%J<bT`ydwmop
+zQGaZoowo})+vx^u-I)ZcFh0`a2<(gQRqMX9YIox)ntJG1Td>vW>M+IBSdXLp%@q=G
+zNC0Xt;hX(JK~yivI4Z-Zk#ALtb}D^7(Jx^3)Bor4Qa4ef*@78rz2P@~WBNMNm*2i&
+zC&X|2v=Db-*$qO~X0g$`k-wv5&Sv>xC=khPIjw4$UH`_`Ti5WCuw%i@r9m!$E~KxS
+zXRbSbC9PPT5T|y-Y}>mrm~>??ZN?d`75Z)EDj7~EQtw)7vM%qmt&#BZ$zjx?^(`lg
+z>57jp_kGptT;b{{r4u!F#=q#Yi91fe(<U%P_i2~MILI(5#6sJ^3@*Z>WP9t@nSjn<
+zZ@HZ~qs!v<E_QO<cJZ56wW-;sM+oqWHE?VI;~>=YmSFP_)92wqS69Mj_+L{$K5h)c
+z4_!h;0@B~Qq`k9G;9ol2i?7kA?yrAmthJolG?@~tjc`aNu1Owlx*c1$a?Z$@4X|J+
+zUg|2s68hDawb(7lcgU0K@J+LgH~=lMC`B4#iLQbMvR#N82aOc|Fs?8NnOI|nOu7Y{
+z>~mYS+-L@1)+ROY6^pQC8Fl)tUcahkPW6I}TAcSNO?wEfH%C!dvW&+xvdj+}<>RR*
+zP|wucm>>3Z-_y5QhFUjGrT9}8%r8PgZP6MchkzT6szL1r4%de6>%{x@dtzXCQpzXU
+iwRWcMGFz08I0#Ro;Ho3`aqa38jw!hJ(Uuq*;{O0R?TESn
+
+literal 0
+HcmV?d00001
+

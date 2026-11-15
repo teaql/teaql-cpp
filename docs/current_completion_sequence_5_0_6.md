@@ -5,6 +5,16 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+Current copied G14 follow-up: [primitive constants and typed tuples](ap02_primitive_const_paths_5_0_6.md)
+pass 213 Java tests and all 61 C++ compiler/projection contracts. All C++
+compiler invocations are fresh; completed original outcomes are explicitly
+reused after fresh full-SDK identity. The seventy-constant catalog, 928 actual
+expression observations and five complete derive-normalized index witnesses
+retain their separate contexts. Eight actual SQLite model pairs match forty
+query/E/JSON outcomes. The exact three-file patch is reviewable; production
+installation, all retained SDKs and source admissions remain next. The installed
+scalar checkpoint below remains authoritative; full G13/G14/G17/P0-P7 stay open.
+
 Current G14 scalar constant repair:
 [Production installation](ap02_scalar_const_values_5_0_6.md) passes 203 Java
 tests and reproduces all 258 complete compiler-contract SDKs. Their 183 accepted
