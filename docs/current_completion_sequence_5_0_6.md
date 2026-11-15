@@ -5,20 +5,25 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
-Current copied G14 follow-up: the [scalar constant candidate](ap02_scalar_const_values_5_0_6.md)
-passes 203 Java tests and all 65 original/C++ compiler contracts: 29 fresh
-pairs and 36 completed outcomes reused after fresh complete SDK identity.
-Its immutable 294-case cast corpus covers all seventeen implemented kinds.
-Actual generated-library witnesses retain the difference between standalone
-literal lints, derive-emitted literal representation and checked arithmetic.
-The four-file source/resource patch is reviewable and passes `git apply --check`.
-Eight freshly generated SQLite model pairs also match forty query/E/JSON
-outcomes. The copied checkpoint binds 11,990 unchanged production inputs.
-Production installation, full SDK reproduction and source-guard transitions
-remain the immediate continuation. The qualified production checkpoint below
-remains authoritative.
+Current G14 scalar constant repair:
+[Production installation](ap02_scalar_const_values_5_0_6.md) passes 203 Java
+tests and reproduces all 258 complete compiler-contract SDKs. Their 183 accepted
+and 75 refused compiler outcomes are explicitly reused through complete artifact
+identity, with zero new production C++ compiler processes. The copied proof has
+65 contracts: 29 fresh pairs and 36 completed outcomes reused after fresh SDK
+identity. The immutable 294-case cast corpus follows actual Rust observations.
+Eight actual SQLite model pairs match forty query/E/JSON results; production
+reproduces their SDKs exactly and explicitly reuses those outcomes.
+All eighty retained SDKs preserve 3,560 code/Assist files with one parser
+fingerprint refresh per manifest. Initial source-guard failures remain recorded;
+the repaired controls reject 37 new and 91 preserved corruptions per Python
+mode, and affected CTests pass 6/6 per mode. Current source joins admit 101 exact
+changes on 11,994 inputs, preserve 716 commands/707 native consumers and reject
+ten transition corruptions per mode. Broader configurations, AP01-AP12/G14,
+G17 and P0-P7 remain open at **14 qualified / 3 partial**. Both pending
+compatibility decisions remain independent.
 
-Current G14 repair: [array constant expressions](ap02_array_const_expressions_5_0_6.md)
+Previous G14 repair: [array constant expressions](ap02_array_const_expressions_5_0_6.md)
 are installed on `cpp_support` commit `d1ad8d40` with eight permanent regression
 methods. Production passes 194 Java tests and reproduces 193 complete SDKs,
 explicitly reusing their exact 132 accepted / 61 refused compiler outcomes.

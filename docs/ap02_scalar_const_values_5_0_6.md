@@ -1,10 +1,11 @@
-# AP02 scalar constant value candidate
+# AP02 scalar constant value projections
 
-The copied candidate passes 203 Java tests and 65 complete generated-library
-compiler contracts against runtime `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`
-and generator `45e1572c4956ca963410d8ea436ead3c8857087a`. Production remains
-the separately qualified array-constant installation. The proposed changes
-are generation-time Java code and tests; they add no C++ runtime dependency.
+The reviewed scalar evaluator is installed on `cpp_support` commit `2816302e1f2579ffd6f1032e4e49441f68ec0c40`.
+Production passes 203 Java tests and reproduces all 258 complete SDK contracts,
+explicitly reusing their 183 accepted and 75 refused compiler outcomes.
+The reference remains runtime `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`
+and generator `45e1572c4956ca963410d8ea436ead3c8857087a`.
+These generation-time Java changes add no C++ runtime dependency.
 
 ## Source observations and semantic boundaries
 
@@ -70,7 +71,7 @@ binds the binary patch, corpus bytes and copied source. `git apply --check`
 passes against the production producer checkpoint. No generated C++ fixture
 has been hand-edited.
 
-## Remaining continuation
+## SQLite proof and production qualification
 
 The [actual SQLite/E/JSON matrix](parity/ap02_scalar_const_value_candidate_sql_5_0_6.json.gz)
 executes eight freshly generated original/C++ model pairs and forty complete
@@ -82,12 +83,47 @@ binds the copied source, original witnesses, complete patch and unchanged
 production inputs. All task-owned probe processes finish before their
 disposable output directories are removed; compact evidence remains.
 
-Install the exact reviewed patch, then requalify production Java, preserved/new
-complete SDKs, all eighty retained SDKs and affected source guards. Keep
-historical inputs and source admissions exact, including the existing-test
-expectation transition. The production installation gate is not accepted by
-this copied checkpoint.
+The [production installation receipt](parity/ap02_scalar_const_value_installed_5_0_6.json.gz)
+records fresh Java compilation, all 203 permanent Java tests and fresh complete
+regeneration of 193 preserved plus 65 scalar SDK contracts. Every complete SDK
+matches its qualified compiler witness. All 258 compiler outcomes are explicitly
+reused; this production step invokes no new C++ compiler.
 
-This candidate does not close AP01-AP12/G14, G17 or P0-P7. Capability status
-remains **14 qualified / 3 partial**. The pending Option-model and quoted-column
+The [eighty-SDK refresh](parity/ap02_scalar_const_value_sdks_5_0_6.json.gz)
+preserves 3,560 implementation and Assist files. Only one parser fingerprint
+changes per manifest. The [production SQL reproduction](parity/ap02_scalar_const_value_production_sql_reuse_5_0_6.json.gz)
+regenerates and formats all eight consumer SDKs identically to the actual copied
+executables. Their forty runtime outcomes are explicitly reused; reproduction
+does not claim forty new SQL executions.
+
+The initial [source-control run](parity/ap02_scalar_const_value_admission_controls_5_0_6.json.gz)
+and [affected CTest run](parity/ap02_scalar_const_value_native_5_0_6.json.gz)
+fail because an older unit-source guard directly checks the corrected existing
+test's previous fingerprint. The repair delegates exactly that one predicate
+through the declared source epochs. Eight exact import/current-input predicates
+in the array admission helper also admit the parser, test, SDK and older-guard
+transitions. All other historical validation and corruption-control bodies
+remain preserved. The [repair record](parity/ap02_scalar_const_value_admission_repair_5_0_6.json.gz)
+and [existing-unit transition](parity/ap02_scalar_const_value_existing_unit_guard_transition_5_0_6.json.gz)
+retain complete before/after source and exact edits.
+
+The [repaired controls](parity/ap02_scalar_const_value_admission_controls_repaired_5_0_6.json.gz)
+reject 37 new and 91 preserved corruptions in each Python mode, including six
+direct checks of the production recipe's imported selection function.
+The [affected registered checks](parity/ap02_scalar_const_value_native_repaired_5_0_6.json.gz)
+pass 6/6 in ordinary Python and 6/6 under optimization, with exact JUnit membership.
+
+The [current source join](parity/sq02_scalar_const_value_source_join_5_0_6.json.gz)
+and its [optimized counterpart](parity/sq02_scalar_const_value_source_join_optimized_5_0_6.json.gz)
+admit 101 exact source changes on 11,994 inputs. They preserve the complete
+1,101-test registry, 716 Python commands and 707 native consumer hashes, and
+reject ten source-transition corruptions per mode. Pinned formatting and module
+path/provenance checks pass. This is affected-test execution and exact source
+admission after the earlier full native epoch; it is not a fresh full native,
+sanitizer, MIPS or physical-router execution.
+
+The [installation milestone](parity/ap02_scalar_const_value_installation_milestone_5_0_6.json.gz)
+binds the exact post-test G14 evidence/open-question update. Broader supported
+configurations, AP01-AP12/G14, G17 and P0-P7 remain open. Capability status stays
+**14 qualified / 3 partial**. The pending Option-model and quoted-column
 attribute decisions remain independent.

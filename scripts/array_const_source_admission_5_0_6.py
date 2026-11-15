@@ -13,6 +13,7 @@ PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
 EVIDENCE = ROOT / "docs/parity"
 sys.path.insert(0, str(ROOT / "tests/parity"))
 from compare_values import same
+from scalar_const_source_admission_5_0_6 import current_input_matches as scalar_input_matches
 
 RECORDS = {
     "candidate": [
@@ -175,11 +176,11 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
     for name, row in overlays.items():
         require(sha(row["before_source"].encode()) == row["before_sha256"]
                 and sha(row["after_source"].encode()) == row["after_sha256"]
-                and sha(Path(name).read_bytes()) == row["after_sha256"], "exact reviewed installed parser")
+                and scalar_input_matches(Path(name), row["after_sha256"]), "exact reviewed installed parser")
     unit = PRODUCER / "generator/src/test/java/com/skynet/codegenerator/cpp/CppArrayConstExpressionProjectionTest.java"
     require(sha(unit.read_bytes()) == candidate["candidate_unit_sha256"], "eight permanent regressions")
     for name, value in installed["input_hashes_before"].items():
-        require(sha(Path(name).read_bytes()) == value, "actual current production input")
+        require(scalar_input_matches(Path(name), value), "actual current production input")
     for name, value in installed["dependency_jars"].items():
         require(sha(Path(name).read_bytes()) == value, "actual Java dependency")
     compiler = installed["native_compiler"]
@@ -210,7 +211,7 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
         require(after["value"] == value and sha(after["text"].encode()) == after["files"][filename],
                 "one exact parser fingerprint change")
         directory = (ROOT / after["manifest"]).parent
-        require(all(sha((directory / name).read_bytes()) == value for name, value in after["files"].items()),
+        require(all(scalar_input_matches(directory / name, value) for name, value in after["files"].items()),
                 "actual current complete SDK bytes")
     require(copied_sql["complete"] is True and copied_sql["installed"] is False
             and copied_sql["candidate_sha256"] == RECORDS["candidate"][1]
@@ -240,7 +241,7 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
             if path.name == Path(original_name).name:
                 path = Path(original_name)
                 break
-        require(sha(path.read_bytes()) == value, "actual copied/production compilation source")
+        require(scalar_input_matches(path, value), "actual copied/production compilation source")
         normalized[str(path)] = value
     require(sql_reuse["compiled_cpp_java"] == normalized
             and sql_reuse["dependency_jars"] == installed["dependency_jars"]
@@ -253,7 +254,7 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
         elif name in overlays:
             require(value == overlays[name]["before_sha256"], "declared unused prior production source")
         else:
-            require(path.is_file() and sha(path.read_bytes()) == value, "unchanged actual SQL source input")
+            require(scalar_input_matches(path, value), "unchanged actual SQL source input")
     require(transition["complete"] is True and len(transition["edits"]) == 7,
             "seven exact historical validation import/predicate edits")
     source = transition["before_source"]
@@ -263,7 +264,7 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
     require(source == transition["after_source"]
             and sha(transition["before_source"].encode()) == transition["before_sha256"]
             and sha(source.encode()) == transition["after_sha256"]
-            and (ROOT / transition["path"]).read_text() == source,
+            and scalar_input_matches(ROOT / transition["path"], sha(source.encode())),
             "all historical validation bodies and controls retained")
 
 
@@ -292,8 +293,8 @@ def current_input_matches(path, expected):
         if expected != before:
             return False
         evidence()
-        return sha(path.read_bytes()) == after
-    return path.is_file() and sha(path.read_bytes()) == expected
+        return scalar_input_matches(path, after)
+    return scalar_input_matches(path, expected)
 
 
 def rejection_controls():

@@ -142,7 +142,7 @@ def validate(candidate, standard, installed, preceding, sdk, base_sdk, copied_sq
                 and array_input_matches(Path(name), row["after_sha256"]), "exact reviewed installed resolver")
     for name, expected_hash in candidate["candidate_unit_sha256"].items():
         unit = PRODUCER / ("generator/src/test/java/com/skynet/codegenerator/cpp/" + name + ".java")
-        require(sha(unit.read_bytes()) == expected_hash, "all eight permanent regression methods")
+        require(array_input_matches(unit, expected_hash), "all eight permanent regression methods")
     for name, expected_hash in installed["input_hashes_before"].items():
         require(array_input_matches(Path(name), expected_hash), "actual current production input")
     for name, expected_hash in installed["dependency_jars"].items():

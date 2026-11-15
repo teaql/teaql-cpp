@@ -1,6 +1,24 @@
 # C++ generator parity plan
 
-Current G14 array constant expression repair:
+Current G14 scalar constant repair:
+[Production installation](ap02_scalar_const_values_5_0_6.md) passes 203 Java
+tests and reproduces all 258 complete compiler-contract SDKs. Their 183 accepted
+and 75 refused compiler outcomes are explicitly reused through complete artifact
+identity, with zero new production C++ compiler processes. The copied proof has
+65 contracts: 29 fresh pairs and 36 completed outcomes reused after fresh SDK
+identity. The immutable 294-case cast corpus follows actual Rust observations.
+Eight actual SQLite model pairs match forty query/E/JSON results; production
+reproduces their SDKs exactly and explicitly reuses those outcomes.
+All eighty retained SDKs preserve 3,560 code/Assist files with one parser
+fingerprint refresh per manifest. Initial source-guard failures remain recorded;
+the repaired controls reject 37 new and 91 preserved corruptions per Python
+mode, and affected CTests pass 6/6 per mode. Current source joins admit 101 exact
+changes on 11,994 inputs, preserve 716 commands/707 native consumers and reject
+ten transition corruptions per mode. Broader configurations, AP01-AP12/G14,
+G17 and P0-P7 remain open at **14 qualified / 3 partial**. Both pending
+compatibility decisions remain independent.
+
+Previous G14 array constant expression repair:
 [The installed continuation](ap02_array_const_expressions_5_0_6.md) passes 194
 Java tests and reproduces all 193 complete compiler-contract SDKs. Their 132
 accepted and 61 refused outcomes are explicitly reused through exact artifact
