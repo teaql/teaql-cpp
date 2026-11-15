@@ -143,6 +143,15 @@ CMake registration changes; all 1,101 native commands/properties and 707 native
 executable hashes remain unchanged. This supplies the named E02/E05 consumer
 join without promoting a capability or accepting complete AP02 configuration.
 
+The subsequent [complete module Python audit](module_source_fixture_gap_audit_5_0_6.md)
+resolves all 403 entries, including ten aliases. Two example entries still used
+the historical 5.0.5 corpus and one clock entry bypassed the core-dump wrapper;
+all three now select their qualified native scripts and pass 3/3 actual tests in
+each Python mode. The audit retains 390 missing source-fixture bindings across
+61 direct groups and the 62-group transitive closure. Its shared frontend-adapter
+plan preserves all source checks and requires complete actual module command
+and dependency validation. These fixture obligations remain open.
+
 ## Phase crosswalk
 
 | Original phase | Required capabilities and remaining joins |

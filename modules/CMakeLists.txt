@@ -346,13 +346,13 @@ if(BUILD_TESTING)
         set_tests_properties(module_example_${example} PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     endforeach()
     add_test(NAME module_examples_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/tests/parity/compare_runtime_examples.py
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_runtime_examples_5_0_6.py
         --schema-crud $<TARGET_FILE:teaql_module_sqlite_schema_crud>
         --relations-graph $<TARGET_FILE:teaql_module_sqlite_relations_graph>)
     set_tests_properties(module_examples_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     if(TEAQL_BUILD_EXAMPLES)
         add_test(NAME module_canonical_examples_rust_parity COMMAND ${Python3_EXECUTABLE}
-            ${PROJECT_SOURCE_DIR}/tests/parity/compare_runtime_examples.py
+            ${PROJECT_SOURCE_DIR}/tests/parity/compare_runtime_examples_5_0_6.py
             --schema-crud $<TARGET_FILE:teaql_sqlite_schema_crud>
             --relations-graph $<TARGET_FILE:teaql_sqlite_relations_graph>)
         set_tests_properties(module_canonical_examples_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
@@ -738,7 +738,7 @@ if(TARGET teaql_module_constant_temporal_probe AND TARGET teaql_sample_fixed_clo
     set_tests_properties(module_constant_temporal_rust_parity PROPERTIES
         ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" TIMEOUT 120)
     add_test(NAME module_clock_epoch_boundary_contracts COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/tests/parity/compare_clock_epoch_boundary_5_0_6.py
+        ${PROJECT_SOURCE_DIR}/tests/parity/run_clock_boundary_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_clock_epoch_boundary_probe>
         --clock $<TARGET_FILE:teaql_sample_fixed_clock>)
 endif()
