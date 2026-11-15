@@ -5,18 +5,19 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
-Next G14 installation package: the
-[standard-value and SmartList candidate](ap02_standard_value_smart_list_types_5_0_6.md)
-repairs seven standard-value and eight core SmartList projection differences.
-Its copied implementation passes 186 Java tests and 21 actual SmartList Rust/C++
-compiler pairs. Thirty-four standard-value compiler pairs pass in the preceding
-candidate; the combined candidate regenerates their complete SDKs byte for byte
-and explicitly reuses those outcomes. Eight actual SQLite model pairs match
-40 query/E/JSON results. The exact source patch applies to the production
-workspace; installation, production generation, retained SDK reproduction and
-current source-admission gates remain the next actions. All 11,983 installed
-execution inputs remain unchanged. This candidate preserves the installed
-checkpoint below and does not promote any capability or phase status.
+Current G14 repair: [standard values and SmartList](ap02_standard_value_smart_list_types_5_0_6.md)
+are installed on `cpp_support` commit `448e0b5c`. Production passes 186 Java
+tests and reproduces 139 complete compiler-contract SDKs, explicitly reusing
+their exact 94 accepted / 45 refused compiler outcomes. Eighty retained SDKs
+preserve 3,560 implementation/Assist files and refresh one parser fingerprint
+per manifest. Eight production SQL consumer SDKs reproduce the actual copied
+eight-model/forty-result execution artifacts, with those runtime results
+explicitly reused. New sixteen and preserved 57 source/result controls reject
+per Python mode; actual affected CTests pass 6/6 per mode. Current source joins
+admit all 94 exact changes on 11,987 inputs and retain 716 commands/707 native
+consumers, rejecting seven source-transition corruptions per mode. Broader
+supported type/trait/model configurations, AP01-AP12/G14, G17 and P0-P7 remain
+open at **14 qualified / 3 partial**. Earlier checkpoints retain their epochs.
 
 Current G14 repair: [Result error-type projections](ap02_result_error_types_5_0_6.md)
 are installed on `cpp_support` commit `5a6c7c8`. All 28 actual original/C++

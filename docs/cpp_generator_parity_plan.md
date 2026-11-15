@@ -1,6 +1,19 @@
 # C++ generator parity plan
 
-Current G14 Result error-type repair:
+Current G14 standard-value and SmartList repair:
+[Production qualification](ap02_standard_value_smart_list_types_5_0_6.md)
+passes 186 Java tests and regenerates all 139 compiler-contract SDKs exactly;
+their retained 94 accepted / 45 refused compiler outcomes are explicitly reused.
+Eighty retained SDKs preserve 3,560 code/Assist files with one parser fingerprint
+refresh per manifest. Eight production SQL consumer SDKs match all actual
+copied eight-model/forty-result execution artifacts. Ordinary and optimized
+controls reject 73 corruptions per mode; affected registered callers pass 6/6
+per mode. Current source joins admit 94 exact changes on 11,987 inputs and
+preserve 716 commands and 707 native consumers. Complete AP01-AP12/G14,
+G17 and P0-P7 stay open at **14 qualified / 3 partial**. Neither pending
+reference-defect decision is approved by this repair.
+
+Previous G14 Result error-type repair:
 [Production installation and source admission](ap02_result_error_types_5_0_6.md)
 pass 178 Java tests, all 28 actual locked-Rust/copied-C++ compiler pairs and
 30 actual SQLite query/E/JSON outcomes. Current production regenerates 84
