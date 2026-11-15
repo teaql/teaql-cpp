@@ -109,7 +109,7 @@ with E01/E03/E04 and the independent phase/artifact exits.
 ## Current C++ and retained artifact identity
 
 The [read-only identity receipt](parity/current_cpp_frontend_source_identity_after_primitive_5_0_6.json.gz)
-compares the previous complete native source snapshot with this running
+compares the previous complete native source snapshot with the completed
 epoch and verifies the files on disk. All **1,817** C++ implementation,
 header, module and fixture inputs are identical. It also verifies every
 file in all **80** retained SDKs against the latest production reproduction;
@@ -125,6 +125,23 @@ The existing [JSON payload](json_payload_compatibility_exception_5_0_6.md),
 [invalid wire-profile](invalid_wire_naming_compatibility_exception_5_0_6.md)
 exceptions retain their exact approved scopes. They neither silently authorize
 E03/E04 nor narrow the unapproved AP02 boundary.
+
+## Current imported protected consumers
+
+The [current imported-consumer join](current_protected_modules_5_0_6.md)
+rebuilds and executes 43 relevant governance/sample/kernel tests after identifying
+the four C++ inputs changed since the earlier governance module receipt.
+The command audit also finds one module comparator still using its historical
+assertion-based helper. Its registration now selects the same unconditional
+validator as native execution and requires the existing corpus-source contract.
+
+The repaired comparison and source fixture pass 2/2 actual tests under ordinary
+and optimized Python, including 5,486 exact mutation-privacy observations per
+mode. The other 42 imported runtime-consumer results are explicitly reused
+through unchanged commands, properties and executable hashes. One module-only
+CMake registration changes; all 1,101 native commands/properties and 707 native
+executable hashes remain unchanged. This supplies the named E02/E05 consumer
+join without promoting a capability or accepting complete AP02 configuration.
 
 ## Phase crosswalk
 

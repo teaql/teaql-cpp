@@ -2154,10 +2154,16 @@ if(TARGET teaql_module_runtime_mutation_probe)
 endif()
 
 if(TARGET teaql_module_runtime_mutation_probe)
+    add_test(NAME module_composite_corpus_source_contracts COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/scripts/verify_corpus_source_contracts_hardened_5_0_6.py --source-only
+        --contracts ${PROJECT_SOURCE_DIR}/tests/parity/composite_corpus_source_contracts_5_0_6.json)
+    set_tests_properties(module_composite_corpus_source_contracts PROPERTIES
+        FIXTURES_SETUP module_composite_corpus_source)
     add_test(NAME module_resolved_mutation_privacy_rust_parity COMMAND ${Python3_EXECUTABLE}
-        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_mutation_privacy_5_0_6.py
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_mutation_privacy_hardened_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_runtime_mutation_probe>)
-    set_tests_properties(module_resolved_mutation_privacy_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    set_tests_properties(module_resolved_mutation_privacy_rust_parity PROPERTIES
+        ENVIRONMENT "TEAQL_LOG_ENDPOINT=off" FIXTURES_REQUIRED module_composite_corpus_source)
 endif()
 
 if(TARGET teaql_module_resolved_dynamic_rows_probe)
