@@ -1,5 +1,21 @@
 # C++ generator parity plan
 
+Current governed compiler-host checkpoint:
+[Ordinary Spring-host execution](compiler_host_governance_5_0_6.md) carries both
+composed configurations into actual SQLite query, governed Save and file
+publication. All 24 original/native Save pairs and 24 sink observations match;
+eight affected native checks pass. Repaired source/receipt admission rejects
+148 corruptions per ordinary/optimized Python mode. The initial interrupted
+receipt check and two reproduced command-binding defects retain their exact
+history. Complete identity jobs preserve three original whole-library refusals;
+the ordinary control matches twelve property identities after an explicitly
+recorded observer correction and exact SDK reproduction. Eighty retained SDKs
+and all 1,822 preceding C++/module inputs remain unchanged. Complete mappings,
+pending identity choices, remaining source/governance joins and final P0-P7
+integration stay open at fourteen qualified and three partial capabilities.
+The [current completion sequence](current_completion_sequence_5_0_6.md) defines
+the next finite configuration-mapping delivery and its exits.
+
 Current trusted compiler-host checkpoint:
 [The Spring host assembly](compiler_host_assembly_5_0_6.md) installs the existing
 compiler service from trusted startup properties and injects it into the normal

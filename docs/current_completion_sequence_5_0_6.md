@@ -5,7 +5,17 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
-The [trusted compiler-host checkpoint](compiler_host_assembly_5_0_6.md) now
+The [governed compiler-host continuation](compiler_host_governance_5_0_6.md)
+executes both composed configurations through ordinary Spring assembly. All
+24 original/native Save pairs and 24 file-publication observations match;
+eight affected native checks pass. Complete-library identity diagnostics retain
+three original compiler refusals and twelve matching ordinary property
+identities. The repaired source/receipt gates reject 148 corruptions per ordinary
+and optimized Python mode, with all fourteen commands passing and stable input
+frames. These are bounded results; G13/G14/G17 and the complete P0-P7 goal
+remain open.
+
+The preceding [trusted compiler-host checkpoint](compiler_host_assembly_5_0_6.md)
 connects normal Spring controller assembly to the existing configured compiler
 service. It passes 272 Java tests, 1,622 actual original/native business
 comparisons, eight affected native tests and 91 source/receipt controls in each
@@ -21,26 +31,60 @@ The current baseline is the exact Rust 5.0.6 runtime and generator in the
 repository locks. Fourteen capabilities are qualified; G13, G14 and G17 remain
 partial. The following steps preserve the existing phase exits:
 
-1. Finish and publish the bounded
-   [narrow-integer kernel repair](narrow_integer_codec_5_0_6.md). Keep its actual
-   376-case derive comparison, affected native regression and source/receipt
-   checks together. Preserve the six complete original generator refusals as
-   separate diagnostics; kernel support does not establish generated SDK support.
-2. Complete G14/GP11 configuration mappings through the full model evaluation,
+1. Complete G14/GP11 configuration mappings through the full model evaluation,
    original compiler and C++ generation route. Inventory the remaining supported
    scalar/storage identities and their query, E, Checker/Fix, sample and Save
    consumers. Repair shared runtime behavior before emitting thin adapters.
    Require a complete compilable original SDK before accepting a mapping; retain
    original failures with their actual outcome rather than changing the reference.
-3. Join those generated callers to G17's governed execution: request intent and
+   Use the compiler-observed scalar and semantic-storage inventories as the
+   concrete work list, with separate required/optional and model-identity rows.
+   The next delivery is that finite mapping matrix and the first demonstrated
+   missing mapping or consumer repair, with explicit exit evidence.
+2. Join those generated callers to G17's governed execution: request intent and
    root/nested/ledger lineage, whole-plan Policy, safe audit/SQL diagnostics,
    rollback and commit/delivery outcomes. Reuse unchanged qualified components
    only through explicit source/artifact identities.
-4. Close G13 and P7 after all in-scope entries have evidence or an approved
-   disposition. Reproduce the retained SDKs, run the current complete native
-   integration gate and the module/compiler gates affected by the final changes.
+3. Reconcile the remaining SQ01-SQ08 and GP13 source/comparator obligations.
+   Preserve the published
+   [narrow-integer kernel repair](narrow_integer_codec_5_0_6.md) and its six
+   complete original generator refusals as separate evidence; kernel support
+   does not establish generated SDK support. Resolve every in-scope row through
+   evidence or an approved disposition before capability promotion.
+4. Close G13 and P7 on the final source state. Reproduce the retained SDKs, run
+   the current complete native integration gate and the module/compiler gates
+   affected by the final changes.
    Use sanitizer or MIPS profiles only when the changed lifetime/toolchain scope
    requires them. Record final artifact identities and publish the checkpoint.
+
+Each delivery must name the source responsibility, actual remaining behavior,
+changed implementation and exit evidence. Repair shared runtime behavior before
+thin generated adapters, and regenerate affected SDKs instead of editing them.
+Reuse successful execution only with its exact source/artifact binding. Do not
+rerun completed business tests for receipt-only changes; verify the changed
+reader with its valid and invalid inputs in both Python modes. Reserve the
+complete integration run for the final source state.
+
+## Next mapping delivery
+
+Inventory the ten canonical scalar mappings in the producer's
+`CppCompilerScalarStorage`, their supported optional forms and the separately
+typed Business ID storage contract. Bind each row to the complete original
+library, observed getter identity, descriptor and existing C++ carrier. The
+mapping table is a work list, not acceptance by enumeration.
+
+Start with Date, Timestamp, JSON and their nullable configurations at the v4
+host entrance. Reconcile String, Boolean, i64/u64, f32/f64, Decimal and Business
+ID evidence with the preceding scalar, business-consumer and governed-host
+receipts before deciding which executions are genuinely missing. Earlier v2/v3
+observations retain their protocol and source scopes.
+
+| Delivery | Exit evidence |
+| --- | --- |
+| Configuration inventory | Each supported scalar/optional or semantic wrapper has an exact compiler identity, C++ mapping and named consumer disposition. Original refusals and pending decisions remain separate. |
+| Missing mapping or caller repair | A complete unchanged original SDK demonstrates the accepted behavior; generated C++ matches the actual typed Query/E/JSON or mutation result. Regeneration and relevant native checks pass. |
+| Governed configuration join | The applicable generated callers preserve metadata, request intent, whole-plan Policy, actual SQLite state, rollback, optimistic versions and committed audit-delivery outcomes. |
+| Final integration | Remaining SQ/GP and phase rows are reconciled, retained SDKs reproduce, and the complete current native plus affected compiler/module gates pass on the final source state. |
 
 The Option-model identity and column-attribute interpretation decisions remain
 pending. The three approved exceptions keep their existing scopes. Independent
