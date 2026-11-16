@@ -224,3 +224,15 @@ inputs retain their hashes. This is a bounded continuation, without a new full
 native/module/sanitizer/MIPS epoch. Complete mappings, E03/E04 decisions,
 E02/E05/E06 joins and every outstanding P0-P7 exit remain required;
 G13/G14/G17 stay partial at 14 qualified / 3 partial.
+
+The [complete JSON consumer continuation](compiler_json_consumers_5_0_6.md)
+uses the v3 compiler capability with two unchanged complete models and four
+unchanged consumer bodies. All 28 original/native outputs match, including
+10,000-row aliases, nullable/omitted graphs, repeated parents, ambiguous lookup
+and sanitized metadata/decoder failures. The approved JSON defect retains
+separate original refusal and successful C++ outcomes. Both Python modes reject
+22 corrupted receipts, and five affected native checks pass. The public alias
+model's reserved-keyword refusal is independently identical in Rust/current
+evaluation; its library consumers use the existing lower-level source service.
+This closes that specific JSON consumer join, with all E01-E06 and remaining
+G13/G14/G17/P0-P7 obligations still required.
