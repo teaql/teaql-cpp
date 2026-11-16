@@ -5,6 +5,14 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [scalar/optional matrix](compiler_scalar_mapping_matrix_5_0_6.md) now binds
+ten canonical carriers and twenty required/optional rows to actual compiler
+witnesses. Seven complete SDK pairs provide 49 scalar facts and sixteen matching
+Query/getter/E/JSON/SQL outputs over 24 typed rows. Its first two failed probes
+retain their exact outcomes; source admission reuses the completed temporal
+prefix only. Both Python modes reject fifteen receipt corruptions. Continue
+with the remaining per-field consumers and governed joins below.
+
 The [governed compiler-host continuation](compiler_host_governance_5_0_6.md)
 executes both composed configurations through ordinary Spring assembly. All
 24 original/native Save pairs and 24 file-publication observations match;
@@ -39,8 +47,9 @@ partial. The following steps preserve the existing phase exits:
    original failures with their actual outcome rather than changing the reference.
    Use the compiler-observed scalar and semantic-storage inventories as the
    concrete work list, with separate required/optional and model-identity rows.
-   The next delivery is that finite mapping matrix and the first demonstrated
-   missing mapping or consumer repair, with explicit exit evidence.
+   The finite carrier matrix is recorded. The next delivery assigns the remaining
+   Checker/Fix, sample, schema and governed Save consumers to their exact fields
+   and closes demonstrated missing behavior with explicit exit evidence.
 2. Join those generated callers to G17's governed execution: request intent and
    root/nested/ledger lineage, whole-plan Policy, safe audit/SQL diagnostics,
    rollback and commit/delivery outcomes. Reuse unchanged qualified components
@@ -73,11 +82,15 @@ typed Business ID storage contract. Bind each row to the complete original
 library, observed getter identity, descriptor and existing C++ carrier. The
 mapping table is a work list, not acceptance by enumeration.
 
-Start with Date, Timestamp, JSON and their nullable configurations at the v4
-host entrance. Reconcile String, Boolean, i64/u64, f32/f64, Decimal and Business
-ID evidence with the preceding scalar, business-consumer and governed-host
-receipts before deciding which executions are genuinely missing. Earlier v2/v3
-observations retain their protocol and source scopes.
+Date, Timestamp, required/optional JSON and optional Decimal now have the
+selected v4 read-consumer evidence in the finite matrix. Reconcile the remaining
+String, Boolean, i64/u64, f32/f64, Decimal and Business ID consumer dispositions
+against the preceding scalar, business-consumer and governed-host receipts.
+Required structural IDs do not establish ordinary configured u64 acceptance.
+Earlier v2/v3 observations retain their protocol and source scopes. Next join
+the applicable configured fields to schema/bootstrap, Checker/Fix and actual
+governed Save; the declared JSON-column read does not establish original schema
+creation from the defective LargeText metadata.
 
 | Delivery | Exit evidence |
 | --- | --- |

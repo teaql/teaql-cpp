@@ -1,5 +1,19 @@
 # C++ generator parity plan
 
+Current scalar/optional consumer checkpoint:
+[The finite compiler matrix](compiler_scalar_mapping_matrix_5_0_6.md) records
+ten canonical carriers and twenty required/optional rows, all with compiler
+witnesses. Seven complete original/C++ SDK pairs provide 49 scalar facts;
+sixteen actual Query/getter/E/JSON/SQL outputs and 24 typed rows match. Four
+ordinary/optimized reader commands pass and each mode rejects fifteen
+corruptions. The initial JSON optionality probe failure and untyped SQLite
+fixture failure remain historical. Completed temporal execution is explicitly
+reused through exact source admission. Structural IDs, configured scalar
+refusals, declared JSON columns and the approved metadata exception retain
+their separate scopes. Complete consumer/governance joins, pending decisions
+and final G13/G14/G17/P0-P7 exits remain open at fourteen qualified and three
+partial capabilities.
+
 Current governed compiler-host checkpoint:
 [Ordinary Spring-host execution](compiler_host_governance_5_0_6.md) carries both
 composed configurations into actual SQLite query, governed Save and file
