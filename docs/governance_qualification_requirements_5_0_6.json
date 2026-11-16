@@ -356,7 +356,21 @@
         "docs/parity/column_model_installed_delta_5_0_6.json.gz",
         "docs/parity/column_model_gates_5_0_6.json.gz",
         "docs/parity/field_attribute_diagnostic_5_0_6.json.gz",
-        "docs/parity/field_attribute_default_control_5_0_6.json.gz"
+        "docs/parity/field_attribute_default_control_5_0_6.json.gz",
+        "docs/ap02_const_function_calls_5_0_6.md",
+        "scripts/const_function_source_admission_5_0_6.py",
+        "docs/parity/ap02_const_function_java_candidate_v5_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_repaired_generated_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_preserved_sdks_repaired_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_sdks_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_sdk_admission_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_sql_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_sql_admission_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_preserved_sql_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_helper_transition_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_source_controls_repaired_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_native_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_source_review_5_0_6.json.gz"
       ]
     },
     {

@@ -1,5 +1,23 @@
 # C++ generator parity plan
 
+Current generator installation checkpoint:
+[Constant-function projection resolution](ap02_const_function_calls_5_0_6.md)
+passes 222 Java tests, 151 projection checks and 87 fresh complete original/C++
+compiler pairs (63 accepted / 24 refused). All 319 preceding complete SDKs
+reproduce identically, explicitly reusing their compiler outcomes. The repair
+fixes the demonstrated memory-intrinsic/local-call differences and the reproduced
+Never-type false acceptance. Exactly one producer parser changes and one test
+is added; all 1,817 C++ inputs remain unchanged. All eighty retained SDKs preserve
+3,560 code/Assist files with one parser fingerprint refreshed per manifest.
+Eight freshly generated SQLite pairs match forty query/E/JSON/SQL observations;
+eight preceding SQL SDKs also reproduce and explicitly reuse forty earlier
+results. Exact source admission preserves historical bodies and passes 171
+source corruptions per Python mode, plus 18 SDK and 17 SQL receipt controls.
+Six affected native CTests pass 6/6 per mode. Next, carry the new configurations
+through graph Save, Policy/Checker and ordinary/debug sinks. Full embedded-Rust grammar, AP02,
+G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**. The full
+integration epochs below retain their exact earlier source scopes.
+
 Current imported-module checkpoint:
 [Shared source prerequisites and preset coverage](module_source_contracts_5_0_6.md)
 qualify all 403 original Python bindings and their 62 source-fixture owners.

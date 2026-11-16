@@ -9447,7 +9447,21 @@
         "docs/parity/current_full_native_after_primitive_lifecycle_1101_5_0_6.json.gz",
         "docs/parity/current_full_native_after_primitive_terminal_1101_5_0_6.json.gz",
         "docs/parity/current_cpp_frontend_source_identity_after_primitive_5_0_6.json.gz",
-        "docs/parity/current_full_native_after_primitive_milestone_1101_5_0_6.json.gz"
+        "docs/parity/current_full_native_after_primitive_milestone_1101_5_0_6.json.gz",
+        "docs/ap02_const_function_calls_5_0_6.md",
+        "scripts/const_function_source_admission_5_0_6.py",
+        "docs/parity/ap02_const_function_java_candidate_v5_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_repaired_generated_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_preserved_sdks_repaired_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_sdks_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_sdk_admission_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_sql_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_sql_admission_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_preserved_sql_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_helper_transition_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_source_controls_repaired_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_native_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_source_review_5_0_6.json.gz"
       ],
       "open_questions": [
         "The installed primitive/tuple type repair now has two composed generated School configurations covering all eight qualified type expressions. Complete and partial metadata retain eight typed Enrollment relations with audit lengths 17/13. Two complete original Cargo builds and six native compiler processes execute; all 24 actual original/C++ Save pairs and 24 ordinary/debug file cases match. Initial controller admission failures remain separate: JSON list/tuple representation and pathlib/string ordering. An exact validate-only source transition explicitly reuses the completed v2 execution, with zero new compiler/SQL executions for that admission repair. The partial configuration executes the repaired recipe directly. Sixteen corruptions per model reject under ordinary and optimized Python; actual affected CTests pass 2/2 per mode. Current source joins admit 106 exact changes on 11,999 inputs, preserving 716 registered commands, the 1,101-test registry and 707 native consumer hashes; eight source-join corruptions reject per mode. Production runtime/generator and all 80 retained SDK implementations remain unchanged. This does not complete all supported grammar/type/trait/model configurations, AP01-AP12/G14, G13/G17 or P0-P7. Both independent compatibility decisions remain pending.",
@@ -9465,7 +9479,8 @@
         "AP12 remains open for complete AP01-AP12/SQ02/G13/G14/G17/P0-P7 integration. Frozen native893/compiler201, metadata 63,918/Java141 and later source/caller/kernel/artifact epochs retain their scopes. Latest adapted inherited-business proof adds 2 corpora/80 exact observations, the reference-locked 20-error original guard, native 5 and prior-key 2. All 305 direct-corpus locators/323,568 primary observations have scoped source records; 197 custom dispatchers and full current integration remain independent. Registry 934 is enumeration. Source 122 accepted/0 pending/2 external and capability 14 qualified/3 partial remain unchanged.",
         "Current query-purpose continuation passes native 28/imported 26 and preserves all 78 SDKs/3,457 generated files and 2,201 protected artifacts. Native discovery is 753. Moving core setter lineage to the runtime boundary is scoped G17/source evidence, not complete audit/privacy or full integration. The historical failed epochs and 50/72/2 source status remain unchanged.",
         "Query schema-builder continuation preserves 78 SDKs/3,457 files and 2,201 protected artifacts. Native discovery is 755, with source status 50/72/2 and all capability statuses unchanged. Native 15/imported 15/selected sanitizer 3 remain scoped kernel/lifetime checks, not a current full native or privacy acceptance epoch.",
-        "Decide the confirmed column-literal/derive-attribute boundary in docs/field_attribute_boundary_5_0_6.md. Current C++ rejection is preserved; no compatibility exception has been approved for it."
+        "Decide the confirmed column-literal/derive-attribute boundary in docs/field_attribute_boundary_5_0_6.md. Current C++ rejection is preserved; no compatibility exception has been approved for it.",
+        "AP02 constant-function projection repair is source-qualified with 222 Java tests, 87 complete compiler pairs, 319 preserved SDK contracts, 80 regenerated retained SDKs and 40 fresh SQLite query/E/JSON/SQL outcomes. Function-pointer coercions, arbitrary item/type syntax, non-primitive target layouts, new-configuration graph Save/Policy/sink combinations and complete G14/G13/G17/P0-P7 exits remain open. Existing unapproved grammar and compatibility decisions retain their independent scope."
       ]
     },
     {
