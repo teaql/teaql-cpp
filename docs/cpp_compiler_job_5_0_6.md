@@ -6,9 +6,11 @@ compiles its unchanged locked Rust output and passes the resulting projection
 document directly to `CppCoreGenerator`. Callers no longer construct a resolved
 projection sidecar or name the fixture's entities themselves.
 
-This implements compiler-job assembly for the projection capability. The ordinary
-Java generation entry still uses the finite metadata interpreter. Automatic
-service/default-entry routing, other configuration responsibilities and removal
+This implements compiler-job assembly for the projection capability. The
+[configured source service](compiler_source_service_5_0_6.md) subsequently adds
+automatic dispatch for ordinary service/controller requests and complete
+multi-file input. The unconfigured Java generation entry still uses the finite
+metadata interpreter. Other configuration responsibilities and removal
 of redundant interpretation remain open under the
 [compiler resolver plan](rust_configuration_compiler_resolver_plan.md).
 G13/G14/G17 and the complete P0-P7 goal remain open.

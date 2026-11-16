@@ -5753,3 +5753,19 @@ negative processes are retained. Direct optimized execution of the real
 68-case comparison and selected native 3/3 tests pass. The current registry is
 1,081 tests; 88 Python entries still contain 1,009 removable assertions, and
 no new full epoch is claimed. Full SQ02/G13/G14/G17/P0-P7 remain open.
+
+The [configured source-service checkpoint](compiler_source_service_5_0_6.md)
+installs a trusted compiler capability in the existing generation service and
+controller. Four actual locked Rust jobs cover multi-file includes, binary file
+preservation, a compiler refusal without fallback, a zero-projection model and
+the controller ZIP route. Three generated C++ observers execute nine matching
+descriptors. The 252 current Java contracts and two separately compiled original
+source-package contracts pass. All eighty retained SDKs and their 3,560 code/Assist
+files reproduce unchanged; 406 default SDKs reproduce with explicit reuse of
+their prior compiler outcomes. Source admission passes 34 new and 108 historical
+controls per Python mode. Both affected CTests pass, 2/2 per mode, as retained
+SQLite receipt verification. The failed source-forwarding attempts remain
+historical diagnostics. No C++ runtime, generated SDK function, new-configuration
+business SQL/Save/Policy/sink or full-suite acceptance is claimed. Complete
+configuration routing is the next resolver stage. G13/G14/G17 remain partial;
+the capability count remains fourteen qualified and three partial.

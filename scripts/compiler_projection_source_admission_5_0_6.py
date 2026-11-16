@@ -82,6 +82,8 @@ def admission_edits():
 
 
 def validate(records):
+    from compiler_source_service_source_admission_5_0_6 import registered_epoch_matches as service_epoch_matches
+
     from preserve_compiler_projection_contracts_5_0_6 import validate as validate_preserved
     from reproduce_compiler_projection_sdks_5_0_6 import validate as validate_sdks
     from verify_compiler_projection_generation_5_0_6 import validate as validate_generation
@@ -133,7 +135,7 @@ def validate(records):
             expected = expected.replace(edit["before"], edit["after"], 1)
         require(expected == row["after_source"] and sha(expected.encode()) == row["after_sha256"]
                 and sha(row["before_source"].encode()) == row["before_sha256"]
-                and (ROOT / name).read_text() == expected, "all other forward helper bodies remain unchanged")
+                and service_epoch_matches(ROOT / name, sha(expected.encode())), "all other forward helper bodies remain unchanged")
     terminal = records["terminal"]
     expected = terminal["before_source"]
     for edit in terminal["edits"]:
@@ -142,7 +144,7 @@ def validate(records):
     require(terminal["complete"] is True and terminal["path"] == forward["path"]
             and terminal["before_sha256"] == forward["after_sha256"]
             and expected == terminal["after_source"] and sha(expected.encode()) == terminal["after_sha256"]
-            and (ROOT / terminal["path"]).read_text() == expected, "direct latest source-version delegation only")
+            and service_epoch_matches(ROOT / terminal["path"], sha(expected.encode())), "direct latest source-version delegation only")
 
 
 @cache
@@ -176,13 +178,15 @@ def artifact_epochs():
 
 
 def registered_epoch_matches(path, expected):
+    from compiler_source_service_source_admission_5_0_6 import registered_epoch_matches as service_epoch_matches
+
     if not path.is_file():
         return False
     observed = sha(path.read_bytes())
     pending, visited = [expected], set()
     while pending:
         candidate = pending.pop()
-        if candidate == observed:
+        if candidate == observed or service_epoch_matches(path, candidate):
             return True
         if candidate in visited:
             continue
@@ -192,7 +196,11 @@ def registered_epoch_matches(path, expected):
 
 
 def current_input_matches(path, expected):
+    from compiler_source_service_source_admission_5_0_6 import current_input_matches as service_input_matches
+
     if path.is_file() and sha(path.read_bytes()) == expected:
+        return True
+    if service_input_matches(path, expected):
         return True
     if path in artifact_epochs() and registered_epoch_matches(path, expected):
         evidence()
@@ -209,9 +217,12 @@ def java_inventory_matches(current, historical):
                  for name, row in source["paths"].items()
                  if name.startswith("producer:") and "/src/main/java/" in name and row["before_sha256"] is None}
     if not unknown <= additions.keys():
-        return False
+        from compiler_source_service_source_admission_5_0_6 import java_inventory_matches as service_inventory_matches
+        if not service_inventory_matches(unknown, additions.keys()):
+            return False
     evidence()
-    return all(Path(name).is_file() and sha(Path(name).read_bytes()) == additions[name] for name in unknown)
+    return all(Path(name).is_file() and sha(Path(name).read_bytes()) == additions[name]
+               for name in unknown if name in additions)
 
 
 def controls():

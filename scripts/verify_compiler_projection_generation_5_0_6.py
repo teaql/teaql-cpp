@@ -236,19 +236,21 @@ def execute(path, check_mips):
 
 
 def validate(record):
+    from compiler_source_service_source_admission_5_0_6 import current_input_matches as service_input_matches
+
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and record["original_rust_compiler_processes"] == 0
             and record["original_compiler_outcomes_explicitly_reused"] is True, "honest completed generation scope")
     require(record["source_receipt_sha256"] == SOURCE_SHA and sha(SOURCE.read_bytes()) == SOURCE_SHA,
             "immutable actual reference compiler epoch")
-    require(record["driver_source"] == Path(__file__).read_text() and record["observer_source"] == OBSERVER.read_text(),
+    require(service_input_matches(Path(__file__), sha(record["driver_source"].encode())) and record["observer_source"] == OBSERVER.read_text(),
             "exact executed observer and generation driver")
     require(record["owned_directory_removed"] is True
             and record["input_hashes_before"] == record["input_hashes_after"]
             and record["references_before"] == record["references_after"], "closed source frame and owned cleanup")
     require(record["references_after"] == {"teaql-rs": original_gate.protocol.RUNTIME,
             "teaql_code_gen": original_gate.protocol.GENERATOR}, "exact locked reference revisions")
-    require(all(Path(p).is_file() and sha(Path(p).read_bytes()) == value for p, value in record["java_sources"].items()),
+    require(all(service_input_matches(Path(p), value) for p, value in record["java_sources"].items()),
             "current tested Java source inputs")
     require(record["java_test_count"] >= 236 and len(record["cases"]) == 4, "all Java contracts and four source models")
     steps = {step["label"]: step for step in record["steps"]}

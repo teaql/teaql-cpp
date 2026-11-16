@@ -26,6 +26,7 @@ ORIGINAL = ROOT / ".reference/teaql_code_gen"
 RUNTIME = ROOT / ".reference/teaql-rs"
 WORKER = PRODUCER / "scripts/cpp_rust_compiler_job.py"
 BRIDGE = PRODUCER / "tools/cpp_reference_model/CppReferenceModel.java"
+MODEL_SOURCE = PRODUCER / "tools/cpp_model_source/CppModelSource.java"
 TOOLCHAIN = ROOT / "tests/parity/rust_configuration_protocol_5_0_6_toolchain.json"
 PROTOCOL = ROOT / "scripts/rust_configuration_protocol.py"
 BUILD_SEED = ROOT / "docs/parity/ap02_generated_rust_mir_resolution_probe_5_0_6.json.gz"
@@ -123,7 +124,7 @@ def execute(path):
                 original_classes, cpp_classes = owned / "original_classes", owned / "cpp_classes"
                 original_classes.mkdir()
                 cpp_classes.mkdir()
-                run("original_javac", ["javac", "--release", "17", "-cp", cp, "-d", original_classes, *sources, BRIDGE])
+                run("original_javac", ["javac", "--release", "17", "-cp", cp, "-d", original_classes, *sources, BRIDGE, MODEL_SOURCE])
                 reference_cp = os.pathsep.join([str(original_classes), str(ORIGINAL / "generator/src/main/resources"),
                                                str(ORIGINAL / "model/src/main/resources"), cp])
                 cpp_compile = next(s["command"] for s in previous["steps"] if s["label"] == "cpp_javac")
@@ -151,7 +152,7 @@ def execute(path):
                 config_path = owned / "capabilities.json"
                 config_path.write_text(json.dumps(config, sort_keys=True))
                 record.update(capabilities=config, java_sources={str(p): sha(p.read_bytes())
-                                                               for p in {*sources, BRIDGE, *cpp_sources}})
+                                                               for p in {*sources, BRIDGE, MODEL_SOURCE, *cpp_sources}})
                 for optimized in (0, 1):
                     run("unit_controls_" + str(optimized), [sys.executable, *(["-O"] if optimized else []),
                         PRODUCER / "scripts/test_cpp_rust_compiler_job.py"])

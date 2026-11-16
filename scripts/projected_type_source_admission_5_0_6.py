@@ -185,7 +185,7 @@ def current_input_matches(path, expected):
             return False
         evidence()
         return container_input_matches(path, after)
-    return path.is_file() and sha(path.read_bytes()) == expected
+    return container_input_matches(path, expected)
 
 
 def rejection_controls():

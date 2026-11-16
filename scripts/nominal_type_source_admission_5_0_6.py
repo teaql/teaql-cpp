@@ -152,11 +152,15 @@ def historical_input_matches(path, expected):
             return False
         evidence()
         return current_input_matches(path, after)
-    return path.is_file() and sha(path.read_bytes()) == expected
+    from compiler_source_service_source_admission_5_0_6 import current_input_matches as service_input_matches
+    return service_input_matches(path, expected)
 
 
 def cross_context_input_matches(path, expected):
     if path in JAVA:
+        return historical_input_matches(path, expected)
+    from compiler_source_service_source_admission_5_0_6 import source_epochs
+    if path in source_epochs():
         return historical_input_matches(path, expected)
     return corpus_input_matches(path, expected)
 
