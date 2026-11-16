@@ -114,11 +114,15 @@ column-attribute and language-specific syntax questions retain their own scope.
    lexical helpers for their documented roles and diagnostics. A valid Rust
    type without a faithful C++ mapping remains an alignment gap; it does not
    become a compatibility exception or an omitted projection.
-4. **Source and runtime qualification.** Re-run the relevant locked metadata and
+4. **Source and runtime qualification (source-service governed SQLite checkpoint qualified; complete exits open).** Re-run the relevant locked metadata and
    compiler corpora, reproduce all retained SDKs and exercise generated SQLite
    query/E/JSON, graph Save, Checker/Policy and ordinary/debug sinks. Keep shared
    source reuse distinct from independent runtime comparison. Qualify protocol
    failures and receipt corruption under ordinary and optimized Python.
+   The [source-service business gate](compiler_governed_execution_5_0_6.md)
+   matches two generated models, 24 original/native Save pairs and 24 actual
+   ordinary/debug publication cases. The controller's retained scalar-type
+   validation gap and dedicated E/JSON and Checker/Fix consumers remain open.
 5. **Replace redundant interpretation.** After the compiler route covers the
    existing contracts, remove redundant evaluator responsibilities through an
    exact reviewed transition. Preserve public C++ APIs and existing abstractions.

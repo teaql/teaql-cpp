@@ -3,9 +3,11 @@
 This is the Stage 3 implementation contract for the
 [compiler resolver plan](rust_configuration_compiler_resolver_plan.md).
 The configured native metadata path is implemented. Its focused compiler/native
-matrix is qualified below; source/SDK continuation and business-operation gates
-remain in progress. G13/G14/G17 and every remaining P0-P7 exit retain their
-complete scope.
+matrix and source/SDK continuation are qualified below. The subsequent
+[governed SQLite gate](compiler_governed_execution_5_0_6.md) adds actual query,
+Save, Policy and sink comparisons through the source service. Dedicated E/JSON,
+Checker/Fix and controller business gates remain open. G13/G14/G17 and every
+remaining P0-P7 exit retain their complete scope.
 
 The existing projection protocol reports compiled JSON relation targets. The
 next protocol also carries complete entity descriptors observed from the same

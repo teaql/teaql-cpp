@@ -1,5 +1,19 @@
 # C++ generator parity plan
 
+Current compiled-configuration business checkpoint:
+[The source-service execution gate](compiler_governed_execution_5_0_6.md)
+generates two unchanged composed models through the full compiler capability
+and joins their SDK manifests to actual SQLite query and governed Save
+observers. All 24 original/native Save pairs and 24 file-publication cases
+match, including Policy approval/denial, rollback, root/child versions and
+post-commit sink failure. The separate controller attempt exposes an existing
+evaluation-layer gap: its fixed scalar list rejects `integer()`, while the
+locked rule uses parsed Domain type registration. Align that responsibility
+next, then qualify controller business execution and dedicated E/JSON and
+Checker/Fix consumers. G13/G14/G17 and complete P0-P7 remain open; the count
+stays fourteen qualified and three partial. Historical checkpoints below
+retain their own source and execution scopes.
+
 Current model-driven compiler-job checkpoint:
 [The producer worker](cpp_compiler_job_5_0_6.md) now generates and freshly compiles
 the locked original output for each actual model, obtains its dynamic entity/
