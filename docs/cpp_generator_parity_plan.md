@@ -1,5 +1,17 @@
 # C++ generator parity plan
 
+Current controller-generated business consumers:
+[The dedicated E/JSON and Checker/Fix checkpoint](compiler_generated_business_5_0_6.md)
+freshly generates four complete original/C++ SDK pairs through the configured
+controller/compiler route. All 15 relation/E/JSON observations, 972 direct
+Checker cases, 648 governed preflight cases and 540 actual SQLite Save cases
+match. Existing relation fixtures receive an explicitly recorded required
+audit-mask declaration after both locked/current evaluators reject the originals.
+Both Python modes reject 23 receipt corruptions, including the imported worker
+descriptor guard; seven affected native tests/required fixtures pass. All 1,819
+existing C++ inputs remain unchanged. Complete mappings, identity/configuration
+decisions and every remaining P0-P7 exit remain open at 14 qualified / 3 partial.
+
 Current shared evaluation and controller business checkpoint:
 [The evaluation alignment](generator_evaluation_alignment_5_0_6.md) restores
 the locked request source/Domain outcomes, isolated rule runner, scalar registry,
@@ -10,17 +22,18 @@ generator contracts pass 259. Fourteen complete evaluation outputs match.
 All eighty SDKs preserve 3,560 code/Assist files and add only four common-model
 source identities to provenance. All 406 default SDKs reproduce unchanged with
 explicit prior compiler-outcome reuse. Two actual controller/compiler/SQLite
-models match 24 Save pairs and 24 publication cases. Dedicated E/JSON and
-Checker/Fix consumers, full mappings and P0-P7 exits remain open. G13/G14/G17
+models match 24 Save pairs and 24 publication cases. The dedicated consumer
+continuation above adds bounded E/JSON and Checker/Fix execution; complete
+mappings, broader combinations and P0-P7 exits remain open. G13/G14/G17
 stay partial; fourteen capabilities remain qualified.
 
-Current compiled-configuration business checkpoint:
+Earlier compiled-configuration business checkpoint:
 [The source-service execution gate](compiler_governed_execution_5_0_6.md)
 generates two unchanged composed models through the full compiler capability
 and joins their SDK manifests to actual SQLite query and governed Save
 observers. All 24 original/native Save pairs and 24 file-publication cases
 match, including Policy approval/denial, rollback, root/child versions and
-post-commit sink failure. The separate controller attempt exposes an existing
+post-commit sink failure. At that checkpoint, the separate controller attempt exposes an existing
 evaluation-layer gap: its fixed scalar list rejects `integer()`, while the
 locked rule uses parsed Domain type registration. Align that responsibility
 next, then qualify controller business execution and dedicated E/JSON and

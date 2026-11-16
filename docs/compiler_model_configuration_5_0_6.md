@@ -5,8 +5,11 @@ This is the Stage 3 implementation contract for the
 The configured native metadata path is implemented. Its focused compiler/native
 matrix and source/SDK continuation are qualified below. The subsequent
 [governed SQLite gate](compiler_governed_execution_5_0_6.md) adds actual query,
-Save, Policy and sink comparisons through the source service. Dedicated E/JSON,
-Checker/Fix and controller business gates remain open. G13/G14/G17 and every
+Save, Policy and sink comparisons through the source service. The later
+[evaluation checkpoint](generator_evaluation_alignment_5_0_6.md) qualifies the
+controller business route; its [dedicated consumer continuation](compiler_generated_business_5_0_6.md)
+adds 15 E/JSON and 2,160 Checker/Fix/preflight/SQLite results through fresh complete
+SDKs. Complete mappings and broader integration remain open. G13/G14/G17 and every
 remaining P0-P7 exit retain their complete scope.
 
 The existing projection protocol reports compiled JSON relation targets. The

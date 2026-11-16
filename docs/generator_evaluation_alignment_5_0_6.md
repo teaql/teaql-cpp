@@ -131,6 +131,8 @@ remove 792,534,522 bytes of owned outputs; their directories are absent. All
 locked sources, the capability ledger, module paths and a no-work native build
 pass. This adds no full-suite, sanitizer, MIPS or physical-device claim.
 
-The dedicated generated E/JSON and Checker/Fix consumers, complete storage/type
-mapping and every remaining P0-P7 exit remain open. Capability status remains
+The subsequent [dedicated business consumer checkpoint](compiler_generated_business_5_0_6.md)
+matches 15 relation/E/JSON and 2,160 Checker/Fix/preflight/SQLite results through
+four complete controller/compiler-generated SDK pairs. Complete storage/type
+mapping, broader combinations and every remaining P0-P7 exit remain open. Capability status remains
 **14 qualified / 3 partial**.
