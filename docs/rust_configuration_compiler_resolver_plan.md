@@ -6,6 +6,12 @@ complete Rust language support. This plan proposes a generation-time compiler
 resolver. It changes neither the C++ runtime dependency scope nor the meaning
 of AP02 or the complete P0-P7 goal.
 
+The [Stage 1 protocol prototype](rust_configuration_protocol_5_0_6.md) is now
+implemented and qualified on native fixtures. Three complete original domains
+yield 53 projection facts and eighteen executed descriptors; a fourth domain
+has an actual compiler refusal. Ordinary/optimized readers reject 23 corruptions
+each. The generation-scoped producer resolver remains to be implemented.
+
 ## Observed feasibility and remaining difference
 
 The [standalone experiment](parity/ap02_rust_mir_type_resolution_probe_5_0_6.json.gz)
@@ -78,7 +84,7 @@ column-attribute and language-specific syntax questions retain their own scope.
 
 ## Implementation stages
 
-1. **Protocol prototype.** Extend the complete-model experiment to to-one and
+1. **Protocol prototype (native fixture checkpoint qualified).** Extend the complete-model experiment to to-one and
    to-many projections, aliases, qualified paths, inheritance and omitted/ignored
    projections. Pin the compiler binary/version/target and reference source
    artifacts. Reject unrecognized MIR formats explicitly. Establish complete
@@ -109,5 +115,7 @@ before cleanup and retain compact source/command/hash/outcome records. Toolchain
 upgrades require protocol requalification. Native 64-bit observations do not
 establish MIPS layout or physical-device acceptance.
 
-The resolver is proposed and experimentally investigated only. Current capability
-status stays **14 qualified / 3 partial** until the existing exit criteria are met.
+The standalone native protocol prototype is implemented. Production generation
+assembly, complete semantic routing and broader qualification remain open.
+Current capability status stays **14 qualified / 3 partial** until the existing
+exit criteria are met.

@@ -1,5 +1,17 @@
 # C++ generator parity plan
 
+Current compiler protocol checkpoint:
+[The native projection protocol](rust_configuration_protocol_5_0_6.md) now
+extracts 53 typed projection facts from three freshly compiled original domains,
+executes eighteen descriptors and retains a fourth original compiler refusal.
+It covers to-one/to-many, aliases, qualified paths, inherited concrete Self,
+omitted projections and ignored metadata. All eight ordinary getter calls per
+domain have a separate exact inventory. Both Python modes reject 23 corruptions.
+The compiler/sysroot lock binds 69 files; unknown formats and target identities
+reject. This completes a bounded Stage 1 prototype checkpoint. Generation-scoped
+producer integration and full Rust semantic routing are the next implementation
+steps; G13/G14/G17 and P0-P7 remain open.
+
 Current governed configuration checkpoint:
 [The constant-function continuation](ap02_const_function_governed_execution_5_0_6.md)
 carries all eight installed configurations into two separately generated School
