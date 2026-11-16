@@ -1,5 +1,26 @@
 # C++ generator parity plan
 
+Current governed configuration checkpoint:
+[The constant-function continuation](ap02_const_function_governed_execution_5_0_6.md)
+carries all eight installed configurations into two separately generated School
+domains. Complete/partial parsing retains lengths 17/13 and all eight relation
+descriptors. Twenty-four actual Save pairs and twenty-four file publication cases
+match, including whole-plan Policy, rollback and root/child version conflicts.
+Both modes reject nineteen corruptions per configuration; two affected native
+CTests pass 2/2 per Python mode. The unchanged engine and its 77 unconditional
+historical checks retain their exact source identities. This adds a bounded
+configuration/runtime join; complete G13/G14/G17 and P0-P7 remain open.
+
+Next full-grammar implementation direction:
+[The locked compiler resolver plan](rust_configuration_compiler_resolver_plan.md)
+records a complete generated-model experiment: original Rust accepts an unused
+function-pointer coercion which current C++ refuses. Following MIR constant
+operands recovers all eight concrete projection targets without editing generated
+sources. The initial collector failure and both repaired ordinary/optimized
+reviews remain separate. MIR is an unstable text interface; the production
+resolver is proposed, not installed. Full Rust grammar remains the required end
+state, with no new compatibility exception or capability promotion.
+
 Current generator installation checkpoint:
 [Constant-function projection resolution](ap02_const_function_calls_5_0_6.md)
 passes 222 Java tests, 151 projection checks and 87 fresh complete original/C++
@@ -13,8 +34,9 @@ Eight freshly generated SQLite pairs match forty query/E/JSON/SQL observations;
 eight preceding SQL SDKs also reproduce and explicitly reuse forty earlier
 results. Exact source admission preserves historical bodies and passes 171
 source corruptions per Python mode, plus 18 SDK and 17 SQL receipt controls.
-Six affected native CTests pass 6/6 per mode. Next, carry the new configurations
-through graph Save, Policy/Checker and ordinary/debug sinks. Full embedded-Rust grammar, AP02,
+Six affected native CTests pass 6/6 per mode. The governed continuation above
+adds graph Save/Policy and ordinary/debug sinks; independent Checker/Fix coverage
+retains its original scope. Full embedded-Rust grammar, AP02,
 G13/G14/G17 and P0-P7 remain open at **14 qualified / 3 partial**. The full
 integration epochs below retain their exact earlier source scopes.
 

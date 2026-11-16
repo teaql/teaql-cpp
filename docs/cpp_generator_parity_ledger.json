@@ -9461,7 +9461,20 @@
         "docs/parity/ap02_const_function_helper_transition_5_0_6.json.gz",
         "docs/parity/ap02_const_function_source_controls_repaired_5_0_6.json.gz",
         "docs/parity/ap02_const_function_native_5_0_6.json.gz",
-        "docs/parity/ap02_const_function_source_review_5_0_6.json.gz"
+        "docs/parity/ap02_const_function_source_review_5_0_6.json.gz",
+        "docs/ap02_const_function_governed_execution_5_0_6.md",
+        "docs/rust_configuration_compiler_resolver_plan.md",
+        "scripts/verify_const_function_governed_execution_5_0_6.py",
+        "docs/parity/ap02_const_function_governed_complete_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_partial_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_complete_controls_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_complete_controls_optimized_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_partial_controls_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_partial_controls_optimized_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_native_5_0_6.json.gz",
+        "docs/parity/ap02_generated_rust_mir_resolution_probe_5_0_6.json.gz",
+        "docs/parity/ap02_generated_rust_mir_resolution_review_5_0_6.json.gz",
+        "docs/parity/ap02_generated_rust_mir_resolution_review_optimized_5_0_6.json.gz"
       ],
       "open_questions": [
         "The installed primitive/tuple type repair now has two composed generated School configurations covering all eight qualified type expressions. Complete and partial metadata retain eight typed Enrollment relations with audit lengths 17/13. Two complete original Cargo builds and six native compiler processes execute; all 24 actual original/C++ Save pairs and 24 ordinary/debug file cases match. Initial controller admission failures remain separate: JSON list/tuple representation and pathlib/string ordering. An exact validate-only source transition explicitly reuses the completed v2 execution, with zero new compiler/SQL executions for that admission repair. The partial configuration executes the repaired recipe directly. Sixteen corruptions per model reject under ordinary and optimized Python; actual affected CTests pass 2/2 per mode. Current source joins admit 106 exact changes on 11,999 inputs, preserving 716 registered commands, the 1,101-test registry and 707 native consumer hashes; eight source-join corruptions reject per mode. Production runtime/generator and all 80 retained SDK implementations remain unchanged. This does not complete all supported grammar/type/trait/model configurations, AP01-AP12/G14, G13/G17 or P0-P7. Both independent compatibility decisions remain pending.",
@@ -9480,7 +9493,8 @@
         "Current query-purpose continuation passes native 28/imported 26 and preserves all 78 SDKs/3,457 generated files and 2,201 protected artifacts. Native discovery is 753. Moving core setter lineage to the runtime boundary is scoped G17/source evidence, not complete audit/privacy or full integration. The historical failed epochs and 50/72/2 source status remain unchanged.",
         "Query schema-builder continuation preserves 78 SDKs/3,457 files and 2,201 protected artifacts. Native discovery is 755, with source status 50/72/2 and all capability statuses unchanged. Native 15/imported 15/selected sanitizer 3 remain scoped kernel/lifetime checks, not a current full native or privacy acceptance epoch.",
         "Decide the confirmed column-literal/derive-attribute boundary in docs/field_attribute_boundary_5_0_6.md. Current C++ rejection is preserved; no compatibility exception has been approved for it.",
-        "AP02 constant-function projection repair is source-qualified with 222 Java tests, 87 complete compiler pairs, 319 preserved SDK contracts, 80 regenerated retained SDKs and 40 fresh SQLite query/E/JSON/SQL outcomes. Function-pointer coercions, arbitrary item/type syntax, non-primitive target layouts, new-configuration graph Save/Policy/sink combinations and complete G14/G13/G17/P0-P7 exits remain open. Existing unapproved grammar and compatibility decisions retain their independent scope."
+        "AP02 constant-function projection repair is source-qualified with 222 Java tests, 87 complete compiler pairs, 319 preserved SDK contracts, 80 regenerated retained SDKs and 40 fresh SQLite query/E/JSON/SQL outcomes. Function-pointer coercions, arbitrary item/type syntax, non-primitive target layouts, new-configuration graph Save/Policy/sink combinations and complete G14/G13/G17/P0-P7 exits remain open. Existing unapproved grammar and compatibility decisions retain their independent scope.",
+        "Constant-function configuration is now joined to two generated School domains: 24 actual Save pairs, 24 publication cases, 19 corruptions per configuration/Python mode and affected native 2/2 per mode. This does not add independent custom Checker/Fix acceptance. A complete original model accepts an unused function-pointer coercion that current C++ still refuses; compiler MIR resolves all eight projection targets. The compiler resolver is proposed only, and full embedded-Rust grammar, other configurations, G13/G14/G17 and P0-P7 remain open."
       ]
     },
     {

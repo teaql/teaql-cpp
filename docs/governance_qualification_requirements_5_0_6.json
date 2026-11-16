@@ -370,7 +370,20 @@
         "docs/parity/ap02_const_function_helper_transition_5_0_6.json.gz",
         "docs/parity/ap02_const_function_source_controls_repaired_5_0_6.json.gz",
         "docs/parity/ap02_const_function_native_5_0_6.json.gz",
-        "docs/parity/ap02_const_function_source_review_5_0_6.json.gz"
+        "docs/parity/ap02_const_function_source_review_5_0_6.json.gz",
+        "docs/ap02_const_function_governed_execution_5_0_6.md",
+        "docs/rust_configuration_compiler_resolver_plan.md",
+        "scripts/verify_const_function_governed_execution_5_0_6.py",
+        "docs/parity/ap02_const_function_governed_complete_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_partial_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_complete_controls_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_complete_controls_optimized_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_partial_controls_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_partial_controls_optimized_5_0_6.json.gz",
+        "docs/parity/ap02_const_function_governed_native_5_0_6.json.gz",
+        "docs/parity/ap02_generated_rust_mir_resolution_probe_5_0_6.json.gz",
+        "docs/parity/ap02_generated_rust_mir_resolution_review_5_0_6.json.gz",
+        "docs/parity/ap02_generated_rust_mir_resolution_review_optimized_5_0_6.json.gz"
       ]
     },
     {

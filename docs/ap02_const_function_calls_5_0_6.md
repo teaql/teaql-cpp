@@ -121,9 +121,9 @@ Continue in this order:
 2. Preserve the completed 80-SDK reproduction and exact production source
    transition described below. Generated provenance changes through generation;
    compiler outcomes are reused only through complete artifact identity.
-3. Extend the completed generated SQLite query/E/JSON continuation to composed
-   Save, Policy/Checker and ordinary/debug audit/SQL consumers. This retains
-   separate persistence, authorization and publication acceptance boundaries.
+3. Preserve the completed [governed continuation](ap02_const_function_governed_execution_5_0_6.md)
+   through composed Save, whole-plan Policy and ordinary/debug sinks. Independent
+   Checker/Fix customization and broader combinations retain their own gates.
 4. Continue the remaining AP01-AP12/G14 configuration and identity work, then
    join it to the G13 semantic matrix and G17 intent/trace/privacy exits. The
    full-grammar requirement and unapproved compatibility decisions remain open.
@@ -181,6 +181,12 @@ four additive files and two reviewed metadata extensions. All 1,817 C++ source
 identities, 707 native ELF hashes and 1,101 registered commands/properties remain
 unchanged. Seven source/metadata substitutions reject per Python mode. This is
 a bounded source review and selected execution join, not a fresh full-suite run.
+
+The later [governed continuation](ap02_const_function_governed_execution_5_0_6.md)
+adds two generated School domains and actual Save/Policy/publication comparisons.
+The [compiler resolver plan](rust_configuration_compiler_resolver_plan.md)
+addresses the remaining full-grammar responsibility; its MIR experiment is
+feasibility evidence, not an installed resolver or complete grammar acceptance.
 
 ## Artifact lifecycle
 
