@@ -236,3 +236,22 @@ model's reserved-keyword refusal is independently identical in Rust/current
 evaluation; its library consumers use the existing lower-level source service.
 This closes that specific JSON consumer join, with all E01-E06 and remaining
 G13/G14/G17/P0-P7 obligations still required.
+
+The [complete expression consumer continuation](compiler_expression_consumers_5_0_6.md)
+uses three unchanged complete model libraries, fifteen entities, 76 scalar facts
+and 32 projections. All 1,504 actual E value/diagnostic/framing outcomes match
+the retained original observations through existing presentation adaptations;
+the complete 936-case text prefix is preserved. Each Python mode rejects 24
+receipt corruptions and seven imported framing substitutions. Seven relevant
+native checks pass with exact registry/JUnit membership. Original/current public
+keyword refusals remain explicit, while the corresponding library fixtures use
+the existing source-service entry. All prior execution inputs, C++ bodies and
+retained SDKs remain unchanged.
+
+The separate [Business ID mapping diagnosis](compiler_business_id_storage_5_0_6.md)
+identifies the next E01 repair: the unchanged complete original model compiles,
+but the v3 observer marks its generated strong ID wrappers as unknown and C++
+generation refuses. Preserve the strong Business ID abstraction while adding
+its explicit semantic-storage mapping. This requires no compatibility exception
+and does not depend on the separate E03/E04 choices. G13/G14/G17 and every
+outstanding P0-P7 exit remain open at 14 qualified / 3 partial.
