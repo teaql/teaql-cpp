@@ -66,9 +66,13 @@ class RestoreInputs(ast.NodeTransformer):
     visit_Tuple = visit_List
 
 
-def load_recipe(name, transition):
+def load_recipe(name, transition, *, historical=False):
     row = transition["paths"]["runtime:scripts/" + name]
     current = (ROOT / "scripts" / name).read_text()
+    if historical:
+        from generator_evaluation_source_admission_5_0_6 import registered_epoch_matches
+        require(registered_epoch_matches(ROOT / "scripts" / name, row["after_sha256"]), "qualified current recipe epoch")
+        current = row["after_source"]
     require(current == row["after_source"] and sha(current.encode()) == row["after_sha256"], "exact current SDK recipe")
     restored = RestoreInputs()
     tree = restored.visit(ast.parse(current))
@@ -97,9 +101,10 @@ def expected_manifest(before, transition):
 
 
 def validate(record):
+    from generator_evaluation_source_admission_5_0_6 import current_input_matches, registered_epoch_matches
     require(sha(BASE.read_bytes()) == BASE_SHA and sha(TRANSITION.read_bytes()) == TRANSITION_SHA, "immutable baseline and exact source transition")
     transition = read(TRANSITION)
-    require(record["complete"] is True and record["whole_goal_complete"] is False and record["driver_source"] == Path(__file__).read_text()
+    require(record["complete"] is True and record["whole_goal_complete"] is False and registered_epoch_matches(Path(__file__), sha(record["driver_source"].encode()))
             and record["baseline_sha256"] == BASE_SHA and record["transition_sha256"] == TRANSITION_SHA, "completed current reproduction")
     require(record["before"] == read(BASE)["after"] and record["observed_before"] == record["before"]
             and len(record["cases"]) == len(record["after"]) == 80, "eighty exact preceding SDKs")
@@ -110,7 +115,7 @@ def validate(record):
                 and all(new["files"][key] == value for key, value in old["files"].items() if key != name), "all retained SDK code and guidance unchanged")
         require(new["value"] == expected_manifest(old, transition) and sha(new["text"].encode()) == new["files"][name], "only four reviewed generator fingerprints change")
         directory = (ROOT / new["manifest"]).parent
-        require(all(sha((directory / key).read_bytes()) == value for key, value in new["files"].items()), "actual retained SDK bytes")
+        require(all(current_input_matches(directory / key, value) for key, value in new["files"].items()), "actual qualified retained SDK bytes")
     require(sum(len(row["files"]) - 1 for row in record["after"]) == 3560, "all retained code/Assist file membership")
     require(len(record["actions"]) == 6 and all(type(action["exit_code"]) is int and action["exit_code"] == 0 for action in record["actions"])
             and record["assertions_hardened"] == RECIPES and record["owned_directory_removed"] is True, "actual complete regeneration/check actions and cleanup")
@@ -119,7 +124,7 @@ def validate(record):
     require(before.keys() == after.keys() and {name for name in before if before[name] != after[name]} <= allowed
             and record["references_before"] == record["references_after"], "only declared manifest changes during reproduction")
     for name in RECIPES:
-        load_recipe(name, transition)
+        load_recipe(name, transition, historical=True)
 
 
 def execute(path):

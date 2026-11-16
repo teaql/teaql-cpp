@@ -152,7 +152,7 @@ def validate(records):
     require(source == row["after_source"] and sha(source.encode()) == row["after_sha256"]
             and sha(row["before_source"].encode()) == row["before_sha256"]
             and forward["paths"][name]["after_sha256"] == row["before_sha256"]
-            and (ROOT / name).read_text() == source, "original corpus-specific before-only admission remains intact")
+            and registered_epoch_matches(ROOT / name, row["after_sha256"]), "original corpus-specific before-only admission remains intact")
 
 
 @cache

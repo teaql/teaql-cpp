@@ -78,7 +78,8 @@ def cases(source):
 
 
 def load_engine(adaptations=None):
-    require(sha(ENGINE.read_bytes()) == ENGINE_SHA, "unchanged complete execution/validation engine")
+    from generator_evaluation_source_admission_5_0_6 import registered_epoch_matches
+    require(registered_epoch_matches(ENGINE, ENGINE_SHA), "qualified complete execution/validation engine")
     require(sha(SOURCE.read_bytes()) == SOURCE_SHA
             and sha(INSTALLED.read_bytes()) == INSTALLED_SHA, "immutable actual source/installation evidence")
     installed_evidence()
@@ -116,9 +117,10 @@ def load_engine(adaptations=None):
 
 
 def validate(record, sinks):
-    require(record["adapter_source"] == Path(__file__).read_text()
-            and record["adapter_sha256"] == sha(Path(__file__).read_bytes())
-            and record["execution_engine_sha256"] == ENGINE_SHA,
+    from generator_evaluation_source_admission_5_0_6 import registered_epoch_matches
+    require(registered_epoch_matches(Path(__file__), sha(record["adapter_source"].encode()))
+            and record["adapter_sha256"] == sha(record["adapter_source"].encode())
+            and registered_epoch_matches(ENGINE, record["execution_engine_sha256"]),
             "exact current adapter and unchanged complete engine")
     engine = load_engine()
     engine.validate(record, sinks)

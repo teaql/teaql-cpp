@@ -1,5 +1,19 @@
 # C++ generator parity plan
 
+Current shared evaluation and controller business checkpoint:
+[The evaluation alignment](generator_evaluation_alignment_5_0_6.md) restores
+the locked request source/Domain outcomes, isolated rule runner, scalar registry,
+Business ID, semantic identity and privacy responsibilities. The controller and
+local generation reuse the evaluated Domain while preserving trusted source
+dispatch. Independent reference/current suites pass 95 tests each; current C++
+generator contracts pass 259. Fourteen complete evaluation outputs match.
+All eighty SDKs preserve 3,560 code/Assist files and add only four common-model
+source identities to provenance. All 406 default SDKs reproduce unchanged with
+explicit prior compiler-outcome reuse. Two actual controller/compiler/SQLite
+models match 24 Save pairs and 24 publication cases. Dedicated E/JSON and
+Checker/Fix consumers, full mappings and P0-P7 exits remain open. G13/G14/G17
+stay partial; fourteen capabilities remain qualified.
+
 Current compiled-configuration business checkpoint:
 [The source-service execution gate](compiler_governed_execution_5_0_6.md)
 generates two unchanged composed models through the full compiler capability

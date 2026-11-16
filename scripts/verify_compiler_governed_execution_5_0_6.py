@@ -52,8 +52,9 @@ def maven_command():
 
 
 def prerequisites():
+    from generator_evaluation_source_admission_5_0_6 import registered_epoch_matches
     require(sha(SEED.read_bytes()) == SEED_SHA, "immutable preparation recipe")
-    require(sha(Path(engine.__file__).read_bytes()) == ENGINE_SHA,
+    require(registered_epoch_matches(Path(engine.__file__), ENGINE_SHA),
             "unchanged complete business execution and validation engine")
     return engine.prerequisites()
 
@@ -67,6 +68,11 @@ def prepare(directory, record):
     for label in ("original_bridge_javac", "cpp_javac"):
         source = next(step["command"] for step in seed["steps"] if step["label"] == label)
         command = [part.replace(old_directory, str(directory)) for part in source]
+        if label == "cpp_javac":
+            for package in ("model", "generator"):
+                for added in sorted((PRODUCER / package / "src/main/java").rglob("*.java")):
+                    if str(added) not in command:
+                        command.append(str(added))
         result = original_run(command, cwd=ROOT, text=True, capture_output=True, timeout=900)
         record["preparation_steps"].append(dict(label=label, command=command,
                                               exit_code=result.returncode,
@@ -91,18 +97,19 @@ def prepare(directory, record):
     path.write_text(json.dumps(capabilities, sort_keys=True))
     record.update(capabilities=capabilities, preparation_seed_sha256=SEED_SHA,
                   prepared_java_sources={name: sha(Path(name).read_bytes())
-                                         for name in seed["java_sources"]})
+                                         for step in record["preparation_steps"] for name in step["command"]
+                                         if name.endswith(".java")})
     return path, classpaths["cpp_generator"]
 
 
-def execute(case_name, path, sinks):
+def execute(case_name, path, sinks, entry="service"):
     prerequisites()
     require(not path.exists() and not sinks.exists(), "preserve actual execution receipts")
     require(shutil.disk_usage(ROOT).free > 2 * 1024 ** 3, "owned output space")
     adapter = dict(adapter_source=Path(__file__).read_text(),
                    adapter_sha256=sha(Path(__file__).read_bytes()),
-                   execution_engine_sha256=ENGINE_SHA, preparation_steps=[],
-                   process_adaptations=[], worker_source=WORKER.read_text())
+                   execution_engine_sha256=sha(Path(engine.__file__).read_bytes()), preparation_steps=[],
+                   process_adaptations=[], worker_source=WORKER.read_text(), entry=entry)
     original_run = engine.run_owned
     error = None
     directory = None
@@ -131,15 +138,18 @@ def execute(case_name, path, sinks):
                     generated = True
                     model, output = map(Path, source[-2:])
                     packaged = directory / "model.json"
+                    entrance = "main.xml" if entry == "controller" else model.name
                     source_package = dict(schema="teaql.model_source_package.v1",
-                                          entrance_file=model.name,
-                                          files={model.name: base64.b64encode(model.read_bytes()).decode()})
+                                          entrance_file=entrance,
+                                          files={entrance: base64.b64encode(model.read_bytes()).decode()})
                     packaged.write_text(json.dumps(source_package, sort_keys=True))
                     report = directory / "compiler_report.json.gz"
                     actual = [source[0], "-cp", classpath, "CppCompilerServiceProbe", str(packaged),
                               str(output), str(Path(sys.executable).resolve()), str(WORKER),
                               str(capabilities), str(directory / "service_jobs"), str(report)]
-                    adapter.update(source_package=source_package, controller=False)
+                    if entry == "controller":
+                        actual.append("--controller")
+                    adapter.update(source_package=source_package, controller=entry == "controller")
                 adaptation = dict(source_command=source, executed_command=actual,
                                   environment_changes=environment_changes)
                 adapter["process_adaptations"].append(adaptation)
@@ -190,11 +200,12 @@ def execute(case_name, path, sinks):
 
 
 def validate(record, sinks):
+    from generator_evaluation_source_admission_5_0_6 import current_input_matches, registered_epoch_matches
     prerequisites()
     engine.validate(record, sinks)
-    require(record["adapter_source"] == Path(__file__).read_text()
-            and record["adapter_sha256"] == sha(Path(__file__).read_bytes())
-            and record["execution_engine_sha256"] == ENGINE_SHA
+    require(registered_epoch_matches(Path(__file__), sha(record["adapter_source"].encode()))
+            and record["adapter_sha256"] == sha(record["adapter_source"].encode())
+            and registered_epoch_matches(Path(engine.__file__), record["execution_engine_sha256"])
             and record["worker_source"] == WORKER.read_text()
             and record["compiler_validation_complete"] is True, "exact adapter, engine, worker and completed admission")
     require(record["preparation_seed_sha256"] == SEED_SHA
@@ -205,8 +216,9 @@ def validate(record, sinks):
     require([step["label"] for step in record["preparation_steps"]] == ["original_bridge_javac", "cpp_javac"]
             and all(type(step["exit_code"]) is int and step["exit_code"] == 0
                     for step in record["preparation_steps"]), "both actual current Java compilations")
-    require(set(record["prepared_java_sources"]) == set(read(SEED)["java_sources"])
-            and all(Path(name).is_file() and sha(Path(name).read_bytes()) == value
+    prepared = {name for step in record["preparation_steps"] for name in step["command"] if name.endswith(".java")}
+    require(set(record["prepared_java_sources"]) == prepared
+            and all(current_input_matches(Path(name), value)
                 for name, value in record["prepared_java_sources"].items()), "prepared Java source identities")
     capabilities, job = record["capabilities"], record["compiler_job"]
     require(capabilities["schema"] == "teaql.rust_configuration.job.v2"
@@ -232,6 +244,8 @@ def validate(record, sinks):
                         str(Path(record["compiler_directory"]) / "capabilities.json"),
                         str(Path(record["compiler_directory"]) / "service_jobs"),
                         str(Path(record["compiler_directory"]) / "compiler_report.json.gz")]
+            if record["controller"]:
+                expected.append("--controller")
         require(actual["executed_command"] == expected, "only the declared source-service launcher replacement")
         require(set(actual["environment_changes"]) <= {"CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER"},
                 "only the locked native Rust linker is normalized")
@@ -239,8 +253,10 @@ def validate(record, sinks):
             require(Path(change["after"]).is_file()
                     and sha(Path(change["after"]).read_bytes()) == record["native_compiler"]["sha256"],
                     "actual locked native linker")
-    require(len(replacements) == 1 and record["controller"] is False,
-            "one actual source-service generation")
+    entry = record.get("entry", "controller" if record["controller"] else "service")
+    require(entry in ("service", "controller")
+            and len(replacements) == 1 and record["controller"] is (entry == "controller"),
+            "one actual selected generation entry")
     service = record["compiler_service_process"]
     generated = next(step for step in record["steps"] if step["label"] == "cpp_generate")
     require(service["command"] == replacements[0]["executed_command"]
@@ -248,8 +264,9 @@ def validate(record, sinks):
             and service["stdout"] == generated["stdout"] and service["stderr"] == generated["stderr"],
             "actual source-service process result")
     package = record["source_package"]
-    require(package == dict(schema="teaql.model_source_package.v1", entrance_file="inheritance_graph.xml",
-                            files={"inheritance_graph.xml": base64.b64encode(record["model_source"].encode()).decode()}),
+    entrance = "main.xml" if record["controller"] else "inheritance_graph.xml"
+    require(package == dict(schema="teaql.model_source_package.v1", entrance_file=entrance,
+                            files={entrance: base64.b64encode(record["model_source"].encode()).decode()}),
             "complete unchanged business model source package")
     require(job["complete"] is True and job["outcome"] == "resolved"
             and job["owned_directory_removed"] is True and job["publication_directory_removed"] is True
@@ -303,6 +320,8 @@ def controls(record, sinks):
         ("changed_compiled_artifact", lambda r: r["artifacts_after"].update(invented="0" * 64)),
         ("wrong_source_package", lambda r: r["source_package"].update(entrance_file="wrong.xml")),
         ("wrong_service_exit", lambda r: r["compiler_service_process"].update(exit_code=False)),
+        ("wrong_entry", lambda r: r.update(entry="unknown")),
+        ("wrong_controller_route", lambda r: r.update(controller=not r["controller"])),
         ("stale_compiler_output", lambda r: r["compiler_job"].update(outcome="compiler_refusal")),
         ("missing_compiled_property", lambda r: r["compiler_job"]["configuration"][0]["properties"].pop()),
         ("wrong_library", lambda r: r["compiler_job"]["configuration_artifacts"].update(invented="0" * 64)),
@@ -333,9 +352,10 @@ def main():
     parser.add_argument("--record", type=Path, required=True)
     parser.add_argument("--sink-record", type=Path, required=True)
     parser.add_argument("--controls", type=Path)
+    parser.add_argument("--entry", choices=("service", "controller"), default="service")
     args = parser.parse_args()
     if args.execute:
-        execute(args.case, args.record.resolve(), args.sink_record.resolve())
+        execute(args.case, args.record.resolve(), args.sink_record.resolve(), args.entry)
     else:
         record, sinks = read(args.record), read(args.sink_record)
         require(record["case"]["name"] == args.case, "selected execution receipt")

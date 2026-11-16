@@ -92,6 +92,11 @@ after that repair and retain a separate completed-admission flag.
 
 ## Controller boundary
 
+The following refusal belongs to this checkpoint's original producer. The
+subsequent [evaluation alignment](generator_evaluation_alignment_5_0_6.md)
+restores the locked shared responsibilities and qualifies actual controller
+business execution with the unchanged inherited XML.
+
 A separate actual controller attempt does not reach the compiler job. After
 using the ZIP loader's required `main.xml` entrance, KSML evaluation rejects the
 retained `school.rank="integer()"` declaration with `KSML-REFERENCE-003`: it

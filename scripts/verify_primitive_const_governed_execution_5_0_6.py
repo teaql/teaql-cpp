@@ -300,7 +300,8 @@ def validate(record, sinks):
     historical_sha = sha(historical_recipe.encode())
     require(record["recipe_sha256"] == historical_sha, "retained actual execution recipe")
     if historical_recipe != current_recipe:
-        require(historical_sha == "a5176fcb89fc0834b9b78e4bf801631bedffb477d1ea4de412bb70c6b0bec769",
+        require(historical_sha in ("a5176fcb89fc0834b9b78e4bf801631bedffb477d1ea4de412bb70c6b0bec769",
+                                   "c889bf94646286acdcc80c54a84e1b3e6438b48afdfc77eb30ffc404b6131715"),
                 "only the exact completed v2 recipe may reuse execution")
         trees = [ast.parse(text) for text in (historical_recipe, current_recipe)]
         for tree in trees:
@@ -316,7 +317,8 @@ def validate(record, sinks):
         path = Path(name)
         if path == Path(__file__).resolve() and expected == historical_sha:
             return True
-        return path.is_file() and sha(path.read_bytes()) == expected
+        from generator_evaluation_source_admission_5_0_6 import current_input_matches
+        return current_input_matches(path, expected)
 
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and record["case"] == selected and record["assertions_hardened"] == 77

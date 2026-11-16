@@ -122,7 +122,11 @@ column-attribute and language-specific syntax questions retain their own scope.
    The [source-service business gate](compiler_governed_execution_5_0_6.md)
    matches two generated models, 24 original/native Save pairs and 24 actual
    ordinary/debug publication cases. The controller's retained scalar-type
-   validation gap and dedicated E/JSON and Checker/Fix consumers remain open.
+   validation gap is resolved by the
+   [shared evaluation/controller checkpoint](generator_evaluation_alignment_5_0_6.md):
+   two actual controller/compiler/SQLite models match 24 Save pairs and 24
+   publication cases. Dedicated E/JSON and Checker/Fix consumers and complete
+   mapping/integration exits remain open.
 5. **Replace redundant interpretation.** After the compiler route covers the
    existing contracts, remove redundant evaluator responsibilities through an
    exact reviewed transition. Preserve public C++ APIs and existing abstractions.

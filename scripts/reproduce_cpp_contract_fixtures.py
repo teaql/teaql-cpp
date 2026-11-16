@@ -27,7 +27,11 @@ METADATA_HELPER_INPUTS = tuple(
     for name in ('CppFieldLayoutMetadata', 'CppRustLiteralMetadata',
                  'CppRustXidMetadata', 'CppJsonInputMetadata',
                  'CppProjectionResolver', 'CppCompilerProjectionResolver',
-                 'CppModelConfiguration', 'CppCompilerModelConfiguration'))
+                 'CppModelConfiguration', 'CppCompilerModelConfiguration')) + (
+    'model/src/main/java/com/skynet/codegenerator/meta/Domain.java',
+    'model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java',
+    'model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java',
+    'model/src/main/java/com/skynet/codegenerator/naming/FieldDescriptorNaming.java')
 
 
 def metadata_manifest_paths(root):

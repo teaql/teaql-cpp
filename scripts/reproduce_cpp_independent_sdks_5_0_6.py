@@ -20,6 +20,11 @@ FAMILIES = ("query_alias_contracts", "relation_identity_contracts", "expression_
 HELPERS = ("CppFieldLayoutMetadata", "CppRustLiteralMetadata", "CppRustXidMetadata",
            "CppProjectionResolver", "CppCompilerProjectionResolver",
            "CppModelConfiguration", "CppCompilerModelConfiguration")
+MODEL_INPUTS = (
+    'model/src/main/java/com/skynet/codegenerator/meta/Domain.java',
+    'model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java',
+    'model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java',
+    'model/src/main/java/com/skynet/codegenerator/naming/FieldDescriptorNaming.java')
 
 
 def digest(path):
@@ -47,6 +52,7 @@ def main():
     runtime = json.loads((ROOT / "upstream.lock.json").read_text())
     generator = json.loads((PRODUCER / "cpp_generator.lock.json").read_text())
     inputs = [Path(__file__).resolve(), ROOT / "tests/generator/TypeConfigurationProbe.java", *sources]
+    inputs.extend(PRODUCER / path for path in MODEL_INPUTS)
     if args.allow_sample_operand_change:
         inputs.append(ROOT / 'scripts/sample_operand_qualification.py')
     before = {str(path): digest(path) for path in inputs}
@@ -122,6 +128,8 @@ def main():
                     updated["generator_implementation_sha256"][path] = digest(PRODUCER / path)
                 for helper in HELPERS:
                     path = "generator/src/main/java/com/skynet/codegenerator/cpp/" + helper + ".java"
+                    updated["generator_implementation_sha256"][path] = digest(PRODUCER / path)
+                for path in MODEL_INPUTS:
                     updated["generator_implementation_sha256"][path] = digest(PRODUCER / path)
                 if args.refresh_provenance:
                     staged.append((manifest, json.dumps(updated, indent=2) + "\n"))

@@ -90,6 +90,10 @@ def main():
                               'generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerProjectionResolver.java',
                               'generator/src/main/java/com/skynet/codegenerator/cpp/CppModelConfiguration.java',
                               'generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerModelConfiguration.java',
+                              'model/src/main/java/com/skynet/codegenerator/meta/Domain.java',
+                              'model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java',
+                              'model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java',
+                              'model/src/main/java/com/skynet/codegenerator/naming/FieldDescriptorNaming.java',
                               'model/src/main/resources/models/infra/system-types.xml',
                               'generator/src/main/resources/generator/cpp_lib_core/support.hpp.template']
             manifest = {

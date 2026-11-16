@@ -69,7 +69,8 @@ def validate(records):
     source = records["source"]
     require(source["complete"] is True and len(source["paths"]) == 14, "fourteen exact implementation/recipe paths")
     for name, row in source["paths"].items():
-        require(sha(source_path(name).read_bytes()) == row["after_sha256"] == sha(row["after_source"].encode()), "actual qualified source bytes")
+        require(registered_epoch_matches(source_path(name), row["after_sha256"])
+                and row["after_sha256"] == sha(row["after_source"].encode()), "actual qualified source bytes")
         if row["before_source"] is not None:
             require(sha(row["before_source"].encode()) == row["before_sha256"], "exact source preimage")
         if name.startswith("producer:"):
@@ -170,6 +171,11 @@ def source_epochs():
 
 
 def registered_epoch_matches(path, expected):
+    from generator_evaluation_source_admission_5_0_6 import registered_epoch_matches as evaluation_epoch_matches
+    return evaluation_epoch_matches(path, expected)
+
+
+def preceding_registered_epoch_matches(path, expected):
     if not path.is_file():
         return False
     observed = sha(path.read_bytes())
@@ -186,6 +192,11 @@ def registered_epoch_matches(path, expected):
 
 
 def current_input_matches(path, expected):
+    from generator_evaluation_source_admission_5_0_6 import current_input_matches as evaluation_input_matches
+    return evaluation_input_matches(path, expected)
+
+
+def preceding_current_input_matches(path, expected):
     if not path.is_file():
         return False
     if sha(path.read_bytes()) == expected:
@@ -197,6 +208,11 @@ def current_input_matches(path, expected):
 
 
 def java_inventory_matches(current, historical):
+    from generator_evaluation_source_admission_5_0_6 import java_inventory_matches as evaluation_inventory_matches
+    return evaluation_inventory_matches(current, historical)
+
+
+def preceding_java_inventory_matches(current, historical):
     unknown = set(current) - set(historical)
     additions = {str(path): row["after_sha256"] for path, rows in source_epochs().items() for row in rows
                  if path.is_relative_to(PRODUCER / "generator/src/main/java") and row.get("before_source", "existing") is None}

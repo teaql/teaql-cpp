@@ -159,7 +159,7 @@ def historical_input_matches(path, expected):
 def cross_context_input_matches(path, expected):
     if path in JAVA:
         return historical_input_matches(path, expected)
-    from compiler_source_service_source_admission_5_0_6 import source_epochs
+    from generator_evaluation_source_admission_5_0_6 import source_epochs
     if path in source_epochs():
         return historical_input_matches(path, expected)
     return corpus_input_matches(path, expected)
