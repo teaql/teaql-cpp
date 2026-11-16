@@ -1,5 +1,19 @@
 # C++ generator parity plan
 
+Current trusted compiler-host checkpoint:
+[The Spring host assembly](compiler_host_assembly_5_0_6.md) installs the existing
+compiler service from trusted startup properties and injects it into the normal
+controller. All 272 selected Java contracts pass, while the exact preceding
+controller fails the new configured-upload regression. Two complete SDK pairs
+execute 1,622 matching original/native business observations and the native
+Business ID allocation/Save contract; a third original compiler refusal returns
+no SDK. Source/receipt checks reject 91 corruptions per Python mode; eight
+affected native tests pass and all eighty retained SDKs remain unchanged.
+The initial final-frame failure from a one-sentence producer guide edit remains
+separate from its qualified document-only admission. Complete configuration
+mappings, pending identity/column decisions, governed joins and full P0-P7 exits
+remain open at fourteen qualified and three partial capabilities.
+
 Current narrow-integer kernel checkpoint:
 [The checked decoding repair](narrow_integer_codec_5_0_6.md) restores required
 and optional i16/i32/u16/u32 conversion from the existing I64/U64 carriers.

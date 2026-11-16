@@ -5,6 +5,16 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [trusted compiler-host checkpoint](compiler_host_assembly_5_0_6.md) now
+connects normal Spring controller assembly to the existing configured compiler
+service. It passes 272 Java tests, 1,622 actual original/native business
+comparisons, eight affected native tests and 91 source/receipt controls in each
+Python mode. The prior controller's reproduced upload failure and the separate
+document-only final-frame failure retain their exact scopes. Eighty SDKs and
+all captured C++/module source inputs remain unchanged. Continue with complete
+configuration mappings and governed caller joins below; this does not promote
+G13/G14/G17 or accept full P0-P7.
+
 ## Active execution order, 2026-11-17
 
 The current baseline is the exact Rust 5.0.6 runtime and generator in the
