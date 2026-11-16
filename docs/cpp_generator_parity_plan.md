@@ -1,5 +1,21 @@
 # C++ generator parity plan
 
+Current strong Business ID compiler mapping:
+[The semantic-storage continuation](compiler_business_id_storage_5_0_6.md)
+preserves ReceiptNumber/TicketNumber identities and their String storage through
+the actual v4 controller/compiler route. A complete 25-file original SDK
+reproduces and a complete 53-file C++ SDK executes 1,620 matching original/native
+Checker, E and Q/SQLite/JSON cases; the native allocation/governed Save test
+passes. Java contracts pass 265 tests and worker contracts pass 18 per Python
+mode. All eighty SDKs retain 3,560 code/Assist files with one fingerprint
+refreshed per manifest. Ordinary and optimized source/receipt admission each
+reject 104 corruptions across the new and retained scalar/JSON/E gates; eight
+affected native tests pass with exact registry/JUnit membership. The inheritance
+model reproduces its existing twenty original compiler errors without a
+candidate SDK; its adapted-source qualification remains separate. Complete
+configuration mappings, pending identity/column choices and every remaining
+G13/G14/G17/P0-P7 exit remain open at fourteen qualified and three partial.
+
 Current controller-generated business consumers:
 [The dedicated E/JSON and Checker/Fix checkpoint](compiler_generated_business_5_0_6.md)
 freshly generates four complete original/C++ SDK pairs through the configured

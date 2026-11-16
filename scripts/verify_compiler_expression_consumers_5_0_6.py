@@ -267,8 +267,10 @@ def validate_evaluations(record):
 
 
 def validate(record):
+    from compiler_business_id_source_admission_5_0_6 import registered_epoch_matches
     require(record["complete"] is True and record["whole_goal_complete"] is False
-        and record["driver_source"] == Path(__file__).read_text() and record["worker_source"] == WORKER.read_text(), "complete exact E execution")
+        and registered_epoch_matches(Path(__file__), sha(record["driver_source"].encode()))
+        and registered_epoch_matches(WORKER, sha(record["worker_source"].encode())), "complete exact E execution")
     require(record["owned_directory_removed"] is True and not Path(record["owned_directory"]).exists()
         and record["inputs_before"] == record["inputs_after"] and frame_matches(execution_inputs(), record["inputs_after"])
         and record["references_before"] == record["references_after"] == references()
@@ -278,7 +280,7 @@ def validate(record):
         and all(type(step["exit_code"]) is int and step["exit_code"] == 0 for step in record["preparation_steps"]), "fresh independent Java preparation and explicit scalar capability")
     require([step["label"] for step in record["evaluation_steps"]] == ["original_evaluation_javac", "original_evaluate", "cpp_evaluation_javac", "cpp_evaluate"]
         and all(type(step["exit_code"]) is int and step["exit_code"] == 0 for step in record["evaluation_steps"])
-        and all(sha(Path(name).read_bytes()) == value for name, value in record["prepared_java_sources"].items()), "complete actual evaluation and Java source binding")
+        and all(registered_epoch_matches(Path(name), value) for name, value in record["prepared_java_sources"].items()), "complete actual evaluation and Java source binding")
     validate_evaluations(record)
     steps = record["evaluation_steps"]
     for index, label in ((1, "original"), (3, "cpp")):

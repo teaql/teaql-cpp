@@ -80,51 +80,23 @@ def source_epochs():
 
 def registered_epoch_matches(path, expected):
     """Pure exact-image traversal; evidence validators never call themselves."""
-    path = Path(path)
-    if not path.is_file():
-        return False
-    observed = sha(path.read_bytes())
-    pending, visited = [expected], set()
-    while pending:
-        candidate = pending.pop()
-        if candidate == observed:
-            return True
-        if candidate in visited:
-            continue
-        visited.add(candidate)
-        pending.extend(row["after_sha256"] for row in source_epochs().get(path, [])
-                       if row["before_sha256"] == candidate)
-    return False
+    from compiler_business_id_source_admission_5_0_6 import registered_epoch_matches as semantic_epoch_matches
+    return semantic_epoch_matches(path, expected)
 
 
 def current_input_matches(path, expected):
-    path = Path(path)
-    if not path.is_file():
-        return False
-    if sha(path.read_bytes()) == expected:
-        return True
-    if not registered_epoch_matches(path, expected):
-        return False
-    evidence()
-    return True
+    from compiler_business_id_source_admission_5_0_6 import current_input_matches as semantic_input_matches
+    return semantic_input_matches(path, expected)
 
 
 def frame_matches(current, historical):
-    return all(name in current and (current[name] == value
-               or registered_epoch_matches(source_path(name), value))
-               for name, value in historical.items())
+    from compiler_business_id_source_admission_5_0_6 import frame_matches as semantic_frame_matches
+    return semantic_frame_matches(current, historical)
 
 
 def java_inventory_matches(current, historical):
-    unknown = set(current) - set(historical)
-    additions = {str(path): row["after_sha256"] for path, rows in source_epochs().items() for row in rows
-                 if path.is_relative_to(PRODUCER / "generator/src/main/java")
-                 and row.get("before_source", "existing") is None}
-    if not unknown <= additions.keys():
-        return False
-    if unknown:
-        evidence()
-    return all(Path(name).is_file() and registered_epoch_matches(Path(name), additions[name]) for name in unknown)
+    from compiler_business_id_source_admission_5_0_6 import java_inventory_matches as semantic_inventory_matches
+    return semantic_inventory_matches(current, historical)
 
 
 def functions(source):

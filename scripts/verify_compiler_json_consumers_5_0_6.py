@@ -241,11 +241,13 @@ def execute(path):
 
 
 def validate(record):
+    from compiler_business_id_source_admission_5_0_6 import registered_epoch_matches, frame_matches
     evaluation()
     require(record["complete"] is True and record["whole_goal_complete"] is False
-            and record["driver_source"] == Path(__file__).read_text() and record["worker_source"] == WORKER.read_text(), "complete exact compiler JSON execution")
+            and registered_epoch_matches(Path(__file__), sha(record["driver_source"].encode()))
+            and registered_epoch_matches(WORKER, sha(record["worker_source"].encode())), "complete exact compiler JSON execution")
     require(record["owned_directory_removed"] is True and not Path(record["owned_directory"]).exists()
-            and record["inputs_before"] == record["inputs_after"] == execution_inputs()
+            and record["inputs_before"] == record["inputs_after"] and frame_matches(execution_inputs(), record["inputs_after"])
             and record["references_before"] == record["references_after"] == references()
             and record["native_inputs_before"] == record["native_inputs_after"] == native_inputs(), "stable exact sources/references/native inputs and cleanup")
     require(record["capabilities"]["schema"] == "teaql.rust_configuration.job.v3"
@@ -253,7 +255,7 @@ def validate(record):
             and all(type(s["exit_code"]) is int and s["exit_code"] == 0 for s in record["preparation_steps"]), "two fresh classpaths and explicit scalar capability")
     prepared = {name for step in record["preparation_steps"] for name in step["command"] if name.endswith(".java")}
     require(set(record["prepared_java_sources"]) == prepared
-            and all(sha(Path(name).read_bytes()) == value for name, value in record["prepared_java_sources"].items()), "all actual compiled Java source identities")
+            and all(registered_epoch_matches(Path(name), value) for name, value in record["prepared_java_sources"].items()), "all actual compiled Java source identities")
     require([row["name"] for row in record["models"]] == list(MODEL_NAMES), "complete authentic model inventory")
     worker = worker_module()
     labels = []

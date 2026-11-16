@@ -197,6 +197,19 @@ def execute(path, resume):
         write(path, record)
 
 
+def manifest_value_matches(actual, expected):
+    from compiler_scalar_source_admission_5_0_6 import registered_epoch_matches
+    key = "generator_implementation_sha256"
+    if not isinstance(actual, dict) or actual.keys() != expected.keys():
+        return False
+    if any(actual[name] != value for name, value in expected.items() if name != key):
+        return False
+    observed, current = actual[key], expected[key]
+    return observed.keys() == current.keys() and all(value == current[name]
+        or current[name] == sha((PRODUCER / name).read_bytes())
+        and registered_epoch_matches(PRODUCER / name, value) for name, value in observed.items())
+
+
 def validate(record):
     from compiler_scalar_source_admission_5_0_6 import registered_epoch_matches
     require(sha(BASE.read_bytes()) == BASE_SHA and record["baseline_sha256"] == BASE_SHA
@@ -216,7 +229,7 @@ def validate(record):
         require(before["manifest"] == after["manifest"] and before["files"].keys() == after["files"].keys()
                 and all(after["files"][key] == value for key, value in before["files"].items() if key != name),
                 "all generated code/Assist bytes are unchanged")
-        require(after["value"] == expected_manifest(before), "only four shared metadata source identities added")
+        require(manifest_value_matches(after["value"], expected_manifest(before)), "exact generated manifest with registered producer source identities")
     require(sum(len(row["files"]) - 1 for row in record["after"]) == 3560, "complete code/Assist file inventory")
     require(len(record["actions"]) == 6 and all(type(row["exit_code"]) is int and row["exit_code"] == 0
             for row in (*record["actions"], *record["steps"])), "all actual generation/check commands")

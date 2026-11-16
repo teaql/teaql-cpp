@@ -66,7 +66,7 @@
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppProjectionResolver.java": "195bf4ce8c7b19be43d3e4b6dda9b1161f2097fcde8f985b6e95698ff4611b46",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerProjectionResolver.java": "250b177331796ae5570d49000377c679d761e15d16a7a70744a492558394974a",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppModelConfiguration.java": "91bae7a393dcffc5e29752e99a0c1c943afb164b628d61d3d15794d7fb7c0743",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerModelConfiguration.java": "ceaa194defb0f7976ccd66c520f6f85c701b4677c6eb512d43dcc6c3b3959de3",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerModelConfiguration.java": "f51cabdc5a7774a394293984fd9d0b70367d49ca486c39712f7568c24314bd22",
     "model/src/main/java/com/skynet/codegenerator/meta/Domain.java": "fd03a321f58410fca8b7e7af73aa467c8efa45cb5568ab0b4f15f7492126581a",
     "model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java": "4328467bc0950f545fac46a11cd1329647b05a8f30fb61055125009ec593cc2e",
     "model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java": "8dbd86e32d360cddb0cb9b3d88ef9ecd7748cea505ebcb0adced54584e24c6c8",
