@@ -49,6 +49,8 @@ def read_bound(path, expected):
 
 
 def validate(candidate, installed, sdk, transition):
+    from compiler_projection_source_admission_5_0_6 import current_input_matches as latest_input_matches
+
     require(candidate["complete"] is True and candidate["installed"] is False,
             "reviewed copied candidate")
     require(installed["complete"] is True and installed["installed"] is True
@@ -122,7 +124,7 @@ def validate(candidate, installed, sdk, transition):
         require(expected == row["after_source"]
                 and sha(row["before_source"].encode()) == row["before_sha256"]
                 and sha(row["after_source"].encode()) == row["after_sha256"]
-                and (ROOT / row["path"]).read_text() == expected, "unchanged remaining guard bodies")
+                and latest_input_matches(ROOT / row["path"], sha(expected.encode())), "unchanged remaining guard bodies")
     for name, wanted in installed["input_hashes_before"].items():
         require(current_input_matches(Path(name), wanted), "current installed execution input")
     for name, wanted in installed["dependency_jars"].items():

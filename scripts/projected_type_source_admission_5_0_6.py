@@ -143,7 +143,7 @@ def validate(candidate, installed, sdk, base_sdk, sql, transition):
     require(source == transition["after_source"]
             and sha(transition["before_source"].encode()) == transition["before_sha256"]
             and sha(source.encode()) == transition["after_sha256"]
-            and (ROOT / transition["path"]).read_text() == source, "unchanged remaining helper bodies")
+            and container_input_matches(ROOT / transition["path"], sha(source.encode())), "unchanged remaining helper bodies")
     for name, value in installed["input_hashes_before"].items():
         require(container_input_matches(Path(name), value), "current production input")
     for name, value in installed["dependency_jars"].items():

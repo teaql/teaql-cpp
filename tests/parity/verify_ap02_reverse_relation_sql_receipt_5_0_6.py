@@ -37,6 +37,8 @@ def digest(path):
 
 
 def validate(record):
+    from compiler_projection_source_admission_5_0_6 import java_inventory_matches
+
     runtime = json.loads((ROOT / "upstream.lock.json").read_text())["commit"]
     generator = json.loads((PRODUCER / "cpp_generator.lock.json").read_text())[
         "generator_baseline_commit"]
@@ -56,7 +58,7 @@ def validate(record):
     java_sources = {str(path) for repository in (ROOT / ".reference/teaql_code_gen", PRODUCER)
                     for package in ("model", "generator")
                     for path in (repository / package / "src/main/java").rglob("*.java")}
-    require(java_sources <= record["input_hashes_before"].keys(),
+    require(java_inventory_matches(java_sources, record["input_hashes_before"].keys()),
             "Complete original/current generator Java source inventory")
     require(digest(Path(record["native_compiler"]["path"]))
             == record["native_compiler"]["sha256"], "Actual native compiler identity")

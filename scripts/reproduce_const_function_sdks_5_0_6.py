@@ -96,6 +96,8 @@ def load_recipe(name):
 
 
 def validate(record):
+    from compiler_projection_source_admission_5_0_6 import current_input_matches
+
     source = record["controller_source"]
     require(hashlib.sha256(source.encode()).hexdigest() == record["controller_sha256"],
             "retained execution controller identity")
@@ -138,7 +140,7 @@ def validate(record):
                 and hashlib.sha256(after["text"].encode()).hexdigest() == after["files"][name],
                 "only the declared parser fingerprint changes")
         directory = (ROOT / after["manifest"]).parent
-        require(all(digest(directory / key) == value for key, value in after["files"].items()),
+        require(all(current_input_matches(directory / key, value) for key, value in after["files"].items()),
                 "actual complete retained SDK bytes")
     require(sum(len(row["files"]) - 1 for row in record["after"]) == 3560,
             "all 3560 retained code and guidance files")

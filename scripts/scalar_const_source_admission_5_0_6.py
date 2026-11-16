@@ -299,7 +299,7 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
     require(source == transition["after_source"]
             and sha(transition["before_source"].encode()) == transition["before_sha256"]
             and sha(source.encode()) == transition["after_sha256"]
-            and (ROOT / transition["path"]).read_text() == source,
+            and primitive_input_matches(ROOT / transition["path"], sha(source.encode())),
             "all historical validation bodies and controls retained")
 
 
@@ -314,7 +314,7 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
     require(expected_source == expectation_transition["after_source"]
             and sha(expectation_transition["before_source"].encode()) == expectation_transition["before_sha256"]
             and sha(expected_source.encode()) == expectation_transition["after_sha256"]
-            and (ROOT / expectation_transition["path"]).read_text() == expected_source,
+            and primitive_input_matches(ROOT / expectation_transition["path"], sha(expected_source.encode())),
             "historical unit guard retains all other validation and controls")
 
 

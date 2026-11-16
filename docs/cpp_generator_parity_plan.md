@@ -1,5 +1,16 @@
 # C++ generator parity plan
 
+Current compiler resolver consumption checkpoint:
+[Explicit constructor/CLI binding](compiler_projection_resolver_5_0_6.md) now
+maps authoritative compiler types into C++ projections. Three fresh native models
+execute eighteen matching descriptors; 236 Java contracts pass. Source refusal,
+stale model, missing projection and an actual MIPS target guard reject before
+unsupported use. The locked Stage 1 Rust model outcomes are explicitly reused.
+All eighty SDKs reproduce with 3,560 code/guidance files unchanged; 406 earlier
+compiler SDKs and 23 query/governance SDKs also reproduce. General compiler-job
+assembly and automatic full Rust routing remain the next implementation work.
+G13/G14/G17 and the complete P0-P7 goal remain open.
+
 Current compiler protocol checkpoint:
 [The native projection protocol](rust_configuration_protocol_5_0_6.md) now
 extracts 53 typed projection facts from three freshly compiled original domains,

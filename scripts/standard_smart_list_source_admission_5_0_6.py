@@ -230,7 +230,7 @@ def validate(candidate, standard, installed, preceding, sdk, base_sdk, copied_sq
     require(source == transition["after_source"]
             and sha(transition["before_source"].encode()) == transition["before_sha256"]
             and sha(source.encode()) == transition["after_sha256"]
-            and (ROOT / transition["path"]).read_text() == source,
+            and array_input_matches(ROOT / transition["path"], sha(source.encode())),
             "historical validation bodies and all controls retained")
 
 

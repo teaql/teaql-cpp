@@ -223,7 +223,7 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
             and metadata["before_source"].replace(metadata["before"], metadata["after"]) == metadata["after_source"]
             and sha(metadata["before_source"].encode()) == metadata["before_sha256"]
             and sha(metadata["after_source"].encode()) == metadata["after_sha256"]
-            and (ROOT / metadata["path"]).read_text() == metadata["after_source"],
+            and standard_input_matches(ROOT / metadata["path"], sha(metadata["after_source"].encode())),
             "one metadata-only recipe wording correction")
     require(transition["complete"] is True and len(transition["edits"]) == 7,
             "seven exact preceding admission boundaries")
@@ -234,7 +234,7 @@ def validate(candidate, installed, preceding, sdk, base_sdk, copied_sql, sql_reu
     require(source == transition["after_source"]
             and sha(transition["before_source"].encode()) == transition["before_sha256"]
             and sha(source.encode()) == transition["after_sha256"]
-            and (ROOT / transition["path"]).read_text() == source,
+            and standard_input_matches(ROOT / transition["path"], sha(source.encode())),
             "historical validation bodies and controls preserved")
 
 

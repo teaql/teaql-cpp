@@ -185,7 +185,7 @@ def validate(candidate, replay, installed, sdk, base_sdk, copied_sql, sql_reuse,
     require(source == transition["after_source"]
             and sha(transition["before_source"].encode()) == transition["before_sha256"]
             and sha(source.encode()) == transition["after_sha256"]
-            and (ROOT / transition["path"]).read_text() == source,
+            and result_input_matches(ROOT / transition["path"], sha(source.encode())),
             "historical validation bodies and controls retained")
 
 

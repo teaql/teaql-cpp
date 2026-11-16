@@ -63,6 +63,8 @@ def selected_cases():
 
 
 def validate(record):
+    from compiler_projection_source_admission_5_0_6 import current_input_matches
+
     cases = selected_cases()
     source = record["recipe_source"]
     require(hashlib.sha256(source.encode()).hexdigest() == record["recipe_sha256"],
@@ -120,7 +122,7 @@ def validate(record):
             and record["references_before"] == record["references_after"]
             and record["owned_directory_removed"] is True,
             "stable source/reference frame and complete owned output cleanup")
-    require(all(Path(name).is_file() and digest(Path(name)) == value
+    require(all(current_input_matches(Path(name), value)
                 for name, value in record["input_hashes_after"].items()),
             "actual unchanged compilation inputs")
 

@@ -62,6 +62,8 @@ def bound(key):
 
 
 def validate(records):
+    from compiler_projection_source_admission_5_0_6 import current_input_matches as compiler_input_matches
+
     java, compiled, proposal = (records[key] for key in ("java", "compiled", "proposal"))
     require(java["complete"] is True and java["qualified"] is True
             and java["differences"] == [] and len(java["cases"]) == 151
@@ -82,7 +84,7 @@ def validate(records):
                 "exact tested current source")
         if row["before_sha256"] is not None:
             require(sha(row["before_source"].encode()) == row["before_sha256"], "exact source preimage")
-    require(all(Path(name).is_file() and sha(Path(name).read_bytes()) == value
+    require(all(compiler_input_matches(Path(name), value)
                 for name, value in java["sources"].items()), "all actual compiled Java inputs")
     require(compiled["complete"] is True and compiled["parity_passed"] is True
             and compiled["differences"] == []
@@ -140,7 +142,7 @@ def validate(records):
     ):
         control = records[key]
         require(control["complete"] is True and control["owned_directory_removed"] is True
-                and sha((ROOT / "scripts" / path).read_bytes()) == control["current_helper_sha256"]
+                and compiler_input_matches(ROOT / "scripts" / path, control["current_helper_sha256"])
                 and len(control["modes"]) == 2
                 and {row["result"]["optimized"] for row in control["modes"]} == {0, 1}
                 and all(row["exit_code"] == 0 and row["result"]["valid_record_accepted"] is True
@@ -169,7 +171,7 @@ def validate(records):
     require(source == transition["after_source"]
             and sha(transition["before_source"].encode()) == transition["before_sha256"]
             and sha(source.encode()) == transition["after_sha256"]
-            and (ROOT / transition["path"]).read_text() == source,
+            and compiler_input_matches(ROOT / transition["path"], sha(source.encode())),
             "all historical validation and corruption controls preserved")
 
 
@@ -193,14 +195,16 @@ def artifact_epochs():
 
 
 def current_input_matches(path, expected):
+    from compiler_projection_source_admission_5_0_6 import current_input_matches as compiler_input_matches
+
     epoch = artifact_epochs().get(path)
     if epoch is not None:
         before, after = epoch
         if expected != before:
             return False
         evidence()
-        return path.is_file() and sha(path.read_bytes()) == after
-    return path.is_file() and sha(path.read_bytes()) == expected
+        return compiler_input_matches(path, after)
+    return compiler_input_matches(path, expected)
 
 
 def rejection_controls():

@@ -25,7 +25,8 @@ FAMILIES = {'scalar_candidate_contracts': 'CandidateMetadataProbe',
 METADATA_HELPER_INPUTS = tuple(
     f'generator/src/main/java/com/skynet/codegenerator/cpp/{name}.java'
     for name in ('CppFieldLayoutMetadata', 'CppRustLiteralMetadata',
-                 'CppRustXidMetadata', 'CppJsonInputMetadata'))
+                 'CppRustXidMetadata', 'CppJsonInputMetadata',
+                 'CppProjectionResolver', 'CppCompilerProjectionResolver'))
 
 
 def metadata_manifest_paths(root):

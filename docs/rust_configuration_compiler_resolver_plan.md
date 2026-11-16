@@ -10,7 +10,9 @@ The [Stage 1 protocol prototype](rust_configuration_protocol_5_0_6.md) is now
 implemented and qualified on native fixtures. Three complete original domains
 yield 53 projection facts and eighteen executed descriptors; a fourth domain
 has an actual compiler refusal. Ordinary/optimized readers reject 23 corruptions
-each. The generation-scoped producer resolver remains to be implemented.
+each. The [generation-scoped consumption path](compiler_projection_resolver_5_0_6.md)
+is now implemented through constructor/CLI capability injection. General compiler
+assembly and automatic semantic routing remain to be implemented.
 
 ## Observed feasibility and remaining difference
 
@@ -89,7 +91,7 @@ column-attribute and language-specific syntax questions retain their own scope.
    projections. Pin the compiler binary/version/target and reference source
    artifacts. Reject unrecognized MIR formats explicitly. Establish complete
    call membership and operand provenance before accepting resolved types.
-2. **Generation-scoped resolver.** Add an explicit resolver interface to the
+2. **Generation-scoped resolver (explicit consumption implemented).** Add an explicit resolver interface to the
    producer. Supply verified reference/toolchain capabilities through generation
    assembly and preserve per-job ownership. Expose structured diagnostics for
    compiler refusals and protocol failures. Account for every compiler input,
@@ -115,7 +117,8 @@ before cleanup and retain compact source/command/hash/outcome records. Toolchain
 upgrades require protocol requalification. Native 64-bit observations do not
 establish MIPS layout or physical-device acceptance.
 
-The standalone native protocol prototype is implemented. Production generation
-assembly, complete semantic routing and broader qualification remain open.
+The standalone native protocol and explicit producer consumption path are
+implemented. General compiler-job assembly, automatic semantic routing and
+broader qualification remain open.
 Current capability status stays **14 qualified / 3 partial** until the existing
 exit criteria are met.

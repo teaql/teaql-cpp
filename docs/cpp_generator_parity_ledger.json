@@ -9483,7 +9483,31 @@
         "docs/parity/rust_configuration_protocol_controls_5_0_6.json.gz",
         "docs/parity/rust_configuration_protocol_controls_optimized_5_0_6.json.gz",
         "docs/parity/rust_configuration_protocol_initial_5_0_6.json.gz",
-        "docs/parity/rust_configuration_protocol_candidate_5_0_6.json.gz"
+        "docs/parity/rust_configuration_protocol_candidate_5_0_6.json.gz",
+        "docs/compiler_projection_resolver_5_0_6.md",
+        "scripts/verify_compiler_projection_generation_5_0_6.py",
+        "scripts/reproduce_compiler_projection_sdks_5_0_6.py",
+        "scripts/preserve_compiler_projection_contracts_5_0_6.py",
+        "scripts/compiler_projection_source_admission_5_0_6.py",
+        "tests/parity/compiler_projection_metadata_probe.cpp",
+        "docs/parity/compiler_projection_generation_5_0_6.json.gz",
+        "docs/parity/compiler_projection_generation_controls_5_0_6.json.gz",
+        "docs/parity/compiler_projection_generation_controls_optimized_5_0_6.json.gz",
+        "docs/parity/compiler_projection_sdks_5_0_6.json.gz",
+        "docs/parity/compiler_projection_sdk_controls_5_0_6.json.gz",
+        "docs/parity/compiler_projection_sdk_controls_optimized_5_0_6.json.gz",
+        "docs/parity/compiler_projection_preserved_contracts_5_0_6.json.gz",
+        "docs/parity/compiler_projection_preserved_controls_5_0_6.json.gz",
+        "docs/parity/compiler_projection_preserved_controls_optimized_5_0_6.json.gz",
+        "docs/parity/compiler_projection_preserved_runtime_sdks_5_0_6.json.gz",
+        "docs/parity/compiler_projection_legacy_predicate_controls_5_0_6.json.gz",
+        "docs/parity/compiler_projection_source_transition_5_0_6.json.gz",
+        "docs/parity/compiler_projection_admission_transition_5_0_6.json.gz",
+        "docs/parity/compiler_projection_forward_guard_transition_5_0_6.json.gz",
+        "docs/parity/compiler_projection_forward_tree_transition_5_0_6.json.gz",
+        "docs/parity/compiler_projection_terminal_guard_transition_5_0_6.json.gz",
+        "docs/parity/compiler_projection_source_controls_current_5_0_6.json.gz",
+        "docs/parity/compiler_projection_source_controls_current_optimized_5_0_6.json.gz"
       ],
       "open_questions": [
         "The installed primitive/tuple type repair now has two composed generated School configurations covering all eight qualified type expressions. Complete and partial metadata retain eight typed Enrollment relations with audit lengths 17/13. Two complete original Cargo builds and six native compiler processes execute; all 24 actual original/C++ Save pairs and 24 ordinary/debug file cases match. Initial controller admission failures remain separate: JSON list/tuple representation and pathlib/string ordering. An exact validate-only source transition explicitly reuses the completed v2 execution, with zero new compiler/SQL executions for that admission repair. The partial configuration executes the repaired recipe directly. Sixteen corruptions per model reject under ordinary and optimized Python; actual affected CTests pass 2/2 per mode. Current source joins admit 106 exact changes on 11,999 inputs, preserving 716 registered commands, the 1,101-test registry and 707 native consumer hashes; eight source-join corruptions reject per mode. Production runtime/generator and all 80 retained SDK implementations remain unchanged. This does not complete all supported grammar/type/trait/model configurations, AP01-AP12/G14, G13/G17 or P0-P7. Both independent compatibility decisions remain pending.",
@@ -9504,7 +9528,8 @@
         "Decide the confirmed column-literal/derive-attribute boundary in docs/field_attribute_boundary_5_0_6.md. Current C++ rejection is preserved; no compatibility exception has been approved for it.",
         "AP02 constant-function projection repair is source-qualified with 222 Java tests, 87 complete compiler pairs, 319 preserved SDK contracts, 80 regenerated retained SDKs and 40 fresh SQLite query/E/JSON/SQL outcomes. Function-pointer coercions, arbitrary item/type syntax, non-primitive target layouts, new-configuration graph Save/Policy/sink combinations and complete G14/G13/G17/P0-P7 exits remain open. Existing unapproved grammar and compatibility decisions retain their independent scope.",
         "Constant-function configuration is now joined to two generated School domains: 24 actual Save pairs, 24 publication cases, 19 corruptions per configuration/Python mode and affected native 2/2 per mode. This does not add independent custom Checker/Fix acceptance. A complete original model accepts an unused function-pointer coercion that current C++ still refuses; compiler MIR resolves all eight projection targets. The compiler resolver is proposed only, and full embedded-Rust grammar, other configurations, G13/G14/G17 and P0-P7 remain open.",
-        "The standalone native compiler protocol prototype now has three freshly compiled complete original domains with 53 projection facts and eighteen executed descriptors, plus an explicit fourth-domain E0425 refusal without stale facts. Both Python modes reject 23 corruptions. The pinned native toolchain/sysroot has 69 file identities; ordinary getters have a separate complete inventory. Initial collector and intermediate candidate receipts remain immutable. This is a Stage 1 prototype checkpoint only: producer resolver assembly, C++ mapping, full Rust semantic routing, target/layout qualification and complete G14/G13/G17/P0-P7 remain open."
+        "The standalone native compiler protocol prototype now has three freshly compiled complete original domains with 53 projection facts and eighteen executed descriptors, plus an explicit fourth-domain E0425 refusal without stale facts. Both Python modes reject 23 corruptions. The pinned native toolchain/sysroot has 69 file identities; ordinary getters have a separate complete inventory. Initial collector and intermediate candidate receipts remain immutable. This is a Stage 1 prototype checkpoint only: producer resolver assembly, C++ mapping, full Rust semantic routing, target/layout qualification and complete G14/G13/G17/P0-P7 remain open.",
+        "Explicit constructor/CLI compiler capability consumption now maps 53 source-qualified projection facts into three freshly compiled/executed C++ domains with eighteen matching descriptors. 236 Java contracts pass; structured model/membership/refusal controls and the actual native-target MIPS guard reject. All eighty retained SDKs reproduce with 3560 code/guidance files unchanged, and 406 compiler-contract plus 23 query/governance SDKs reproduce for explicit outcome reuse. No new Rust model/SQL/Save/publication execution is claimed for that reuse. Both Python modes retain generation16/SDK8/default-contract8, legacy SDK18/SQL17 and current source108 controls. Original failure records and exact source-epoch transitions remain preserved. General compiler-job assembly, automatic full Rust semantic routing, additional targets and complete G14/G13/G17/P0-P7 remain open."
       ]
     },
     {
