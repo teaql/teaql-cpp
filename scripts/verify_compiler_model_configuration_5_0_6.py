@@ -245,7 +245,7 @@ def validate(record):
     require(record["complete"] is True and record["whole_goal_complete"] is False and record["java_test_count"] == 256
             and record["owned_directory_removed"] is True, "complete bounded metadata qualification")
     require(registered_epoch_matches(Path(__file__), sha(record["driver_source"].encode())) and record["observer_template"] == OBSERVER.read_text()
-            and record["worker_source"] == WORKER.read_text(), "actual execution source identities")
+            and registered_epoch_matches(WORKER, sha(record["worker_source"].encode())), "actual execution source identities")
     require(record["input_hashes_before"] == record["input_hashes_after"] and record["references_before"] == record["references_after"], "stable source and reference frame")
     worker = worker_module()
     require(record["references_after"] == {"teaql-rs": worker.RUNTIME, "teaql_code_gen": worker.GENERATOR}

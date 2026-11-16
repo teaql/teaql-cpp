@@ -206,7 +206,7 @@ def validate(record, sinks):
     require(registered_epoch_matches(Path(__file__), sha(record["adapter_source"].encode()))
             and record["adapter_sha256"] == sha(record["adapter_source"].encode())
             and registered_epoch_matches(Path(engine.__file__), record["execution_engine_sha256"])
-            and record["worker_source"] == WORKER.read_text()
+            and registered_epoch_matches(WORKER, sha(record["worker_source"].encode()))
             and record["compiler_validation_complete"] is True, "exact adapter, engine, worker and completed admission")
     require(record["preparation_seed_sha256"] == SEED_SHA
             and record["compiler_directory_removed"] is True
@@ -224,7 +224,7 @@ def validate(record, sinks):
     require(capabilities["schema"] == "teaql.rust_configuration.job.v2"
             and capabilities["artifacts"] == record["artifacts_after"] == job["artifacts"]
             and job["capabilities_sha256"] == sha(json.dumps(capabilities, sort_keys=True).encode())
-            and job["worker_sha256"] == sha(WORKER.read_bytes()), "full metadata and immutable compiled Java artifacts")
+            and job["worker_sha256"] == sha(record["worker_source"].encode()), "full metadata and immutable compiled Java artifacts")
     require(len(record["process_adaptations"]) == len(record["steps"]) == 41,
             "every existing process has its actual launcher")
     replacements = []

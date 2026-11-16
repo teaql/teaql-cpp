@@ -27,7 +27,7 @@ METADATA_HELPER_INPUTS = tuple(
     for name in ('CppFieldLayoutMetadata', 'CppRustLiteralMetadata',
                  'CppRustXidMetadata', 'CppJsonInputMetadata',
                  'CppProjectionResolver', 'CppCompilerProjectionResolver',
-                 'CppModelConfiguration', 'CppCompilerModelConfiguration')) + (
+                 'CppModelConfiguration', 'CppCompilerModelConfiguration', 'CppCompilerScalarStorage')) + (
     'model/src/main/java/com/skynet/codegenerator/meta/Domain.java',
     'model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java',
     'model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java',

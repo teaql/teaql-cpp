@@ -57,8 +57,12 @@ class RestoreInputs(ast.NodeTransformer):
     visit_Tuple = visit_List
 
 
-def load_recipe(name):
+def load_recipe(name, *, source=None):
     current = (ROOT / "scripts" / name).read_text()
+    if source is not None:
+        from compiler_scalar_source_admission_5_0_6 import registered_epoch_matches
+        require(registered_epoch_matches(ROOT / "scripts" / name, sha(source.encode())), "qualified retained recipe source")
+        current = source
     before = subprocess.check_output(["git", "show", BASE_COMMIT + ":scripts/" + name], cwd=ROOT, text=True)
     tree = ast.parse(current)
     if name == "reproduce_cpp_contract_fixtures.py":
@@ -194,13 +198,17 @@ def execute(path, resume):
 
 
 def validate(record):
+    from compiler_scalar_source_admission_5_0_6 import registered_epoch_matches
     require(sha(BASE.read_bytes()) == BASE_SHA and record["baseline_sha256"] == BASE_SHA
             and record["baseline_commit"] == BASE_COMMIT, "exact preceding SDK baseline")
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and record["owned_directory_removed"] is True
-            and record["driver_source"] == Path(__file__).read_text(), "complete actual SDK reproduction")
+            and registered_epoch_matches(Path(__file__), sha(record["driver_source"].encode())), "complete actual SDK reproduction")
     require(record["before"] == read(BASE)["after"] and len(record["after"]) == 80
-            and record["after"] == snapshot(), "complete actual retained SDK membership")
+            and all(row["manifest"] == current["manifest"] and row["files"].keys() == current["files"].keys()
+                    and all(registered_epoch_matches((ROOT / row["manifest"]).parent / name, value)
+                            for name, value in row["files"].items())
+                    for row, current in zip(record["after"], snapshot(), strict=True)), "complete actual retained SDK membership")
     require(type(record["resume_expected_provenance"]) is bool, "explicit provenance resume mode")
     validate_preimage(record["before"], record["observed_before"], record["resume_expected_provenance"])
     for before, after in zip(record["before"], record["after"], strict=True):
@@ -219,8 +227,12 @@ def validate(record):
     require(before.keys() == after.keys() and {key for key in before if before[key] != after[key]} <= allowed
             and record["references_before"] == record["references_after"], "only retained provenance changed during execution")
     for name in RECIPES:
-        require(record["recipes"][name] == (ROOT / "scripts" / name).read_text(), "actual current recipe source")
-        load_recipe(name)
+        source = record["recipes"][name]
+        require(registered_epoch_matches(ROOT / "scripts" / name, sha(source.encode())), "actual qualified recipe source")
+        if source == (ROOT / "scripts" / name).read_text():
+            load_recipe(name)
+        else:
+            load_recipe(name, source=source)
 
 
 def main():

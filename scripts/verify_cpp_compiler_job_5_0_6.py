@@ -225,7 +225,7 @@ def validate(record):
             and record["references_before"] == record["references_after"] == {
                 "teaql-rs": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
                 "teaql_code_gen": "45e1572c4956ca963410d8ea436ead3c8857087a"}, "stable locked source inputs")
-    require(model_input_matches(WORKER, sha(record["worker_source"].encode())) and record["bridge_source"] == BRIDGE.read_text()
+    require(model_input_matches(WORKER, sha(record["worker_source"].encode())) and model_input_matches(BRIDGE, sha(record["bridge_source"].encode()))
             and model_input_matches(Path(__file__), sha(record["driver_source"].encode()))
             and all(model_input_matches(Path(name), value) for name, value in record["java_sources"].items()),
             "exact executed worker, bridge, driver and compiled Java sources")

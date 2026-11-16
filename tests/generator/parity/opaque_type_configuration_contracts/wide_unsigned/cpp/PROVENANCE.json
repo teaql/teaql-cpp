@@ -8,7 +8,7 @@
     "OBSERVATION.json": "afdf0c883e4176a3588f1cc9a583c9e1c5bd34a5bc915873fffd5d880265865d"
   },
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "be2504c65d2475ab96f9f18bd370690aeca462cc0f406837e9e5119089bc61f9",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "5ef179eee07952337693a238fcf4df0da9300fac35e3be26f108d7f544f21fb8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",
@@ -18,11 +18,12 @@
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "8f03fb9b40e6499f3ca412f65b3573b0d753658eabe1cafb4d241ce49b54f418",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppProjectionResolver.java": "195bf4ce8c7b19be43d3e4b6dda9b1161f2097fcde8f985b6e95698ff4611b46",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerProjectionResolver.java": "250b177331796ae5570d49000377c679d761e15d16a7a70744a492558394974a",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppModelConfiguration.java": "ed17e991b2a2bf0527cc2238b1f4554e104f41085ba3bed0804d0ffddfc946cb",
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerModelConfiguration.java": "008159d1ac3a8d2230aed2c2ba01c6b7c227743b7d1685aa6fefae78690631b2",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppModelConfiguration.java": "91bae7a393dcffc5e29752e99a0c1c943afb164b628d61d3d15794d7fb7c0743",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerModelConfiguration.java": "ceaa194defb0f7976ccd66c520f6f85c701b4677c6eb512d43dcc6c3b3959de3",
     "model/src/main/java/com/skynet/codegenerator/meta/Domain.java": "fd03a321f58410fca8b7e7af73aa467c8efa45cb5568ab0b4f15f7492126581a",
     "model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java": "4328467bc0950f545fac46a11cd1329647b05a8f30fb61055125009ec593cc2e",
     "model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java": "8dbd86e32d360cddb0cb9b3d88ef9ecd7748cea505ebcb0adced54584e24c6c8",
-    "model/src/main/java/com/skynet/codegenerator/naming/FieldDescriptorNaming.java": "00cc1b2a36257dfd3fd9ddf5a2f4013dda3c09595275458662a65ba3c36079fb"
+    "model/src/main/java/com/skynet/codegenerator/naming/FieldDescriptorNaming.java": "00cc1b2a36257dfd3fd9ddf5a2f4013dda3c09595275458662a65ba3c36079fb",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerScalarStorage.java": "6f995add81a870b5be0a4428e69ea8149d6bce8385e5f124a811ca30ce4c98dc"
   }
 }

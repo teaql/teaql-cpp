@@ -204,3 +204,23 @@ This establishes only E06's native execution component. The complete
 capability/phase and artifact/frontend joins remain required. The test run
 does not invoke the sanitizer or MIPS profiles, and physical-router testing
 remains deferred. Its exact post-test ledger admission is metadata-only.
+
+## Compiler scalar storage continuation
+
+The [scalar storage checkpoint](compiler_scalar_storage_5_0_6.md) repairs a
+reproduced E01 mapping error: valid qualified Rust scalar types compiled in the
+reference but were refused by the configured C++ spelling check. The new explicit
+compiler capability uses same-library `TypeId` equality for existing carriers,
+with complete getter/descriptor membership and independent observer/artifact
+binding. Five complete SDK pairs match ten actual typed SQLite/E/JSON/SQL
+results; one original compiler refusal remains explicit. Java contracts pass
+262 tests and the worker passes fifteen tests per Python mode.
+
+Eighty retained SDKs preserve all 3,560 code/Assist files while updating only
+three producer identities and adding the scalar helper. All 406 default SDKs
+also freshly regenerate identically, with their earlier C++ compiler outcomes
+explicitly reused. Four affected native checks pass and all 1,819 preceding C++
+inputs retain their hashes. This is a bounded continuation, without a new full
+native/module/sanitizer/MIPS epoch. Complete mappings, E03/E04 decisions,
+E02/E05/E06 joins and every outstanding P0-P7 exit remain required;
+G13/G14/G17 stay partial at 14 qualified / 3 partial.

@@ -237,14 +237,15 @@ def execute(destination):
 
 
 def validate(record):
+    from compiler_scalar_source_admission_5_0_6 import registered_epoch_matches, frame_matches
     require(record["complete"] is True and record["whole_goal_complete"] is False
-            and record["driver_source"] == Path(__file__).read_text()
-            and record["worker_source"] == WORKER.read_text(), "completed exact execution implementation")
+            and registered_epoch_matches(Path(__file__), sha(record["driver_source"].encode()))
+            and registered_epoch_matches(WORKER, sha(record["worker_source"].encode())), "completed exact execution implementation")
     require(record["owned_directory_removed"] is True and not Path(record["owned_directory"]).exists(), "all owned outputs removed")
     require(record["input_hashes_before"] == record["input_hashes_after"]
             and record["references_before"] == record["references_after"] == references(), "unchanged source/reference execution frame")
     frame = execution_inputs()
-    require(all(frame.get(name) == value for name, value in record["input_hashes_after"].items()), "actual current source identities")
+    require(frame_matches(frame, record["input_hashes_after"]), "actual current source identities")
     require(record["native_inputs_before"] == record["native_inputs_after"] == native_inputs(),
             "actual native compiler, libraries and SQLite inputs")
     prepared = record["preparation_steps"]
@@ -252,7 +253,7 @@ def validate(record):
             and all(type(step["exit_code"]) is int and step["exit_code"] == 0 for step in prepared), "independent fresh Java compilation")
     java = {name for step in prepared for name in step["command"] if name.endswith(".java")}
     require(set(record["prepared_java_sources"]) == java
-            and all(sha(Path(name).read_bytes()) == value for name, value in record["prepared_java_sources"].items()), "complete compiled Java input inventory")
+            and all(registered_epoch_matches(Path(name), value) for name, value in record["prepared_java_sources"].items()), "complete compiled Java input inventory")
     config = record["capabilities"]
     worker = worker_module()
     require(config["schema"] == "teaql.rust_configuration.job.v2"
@@ -269,7 +270,7 @@ def validate(record):
         require(job["complete"] is True and job["outcome"] == "resolved"
                 and job["owned_directory_removed"] is True and job["publication_directory_removed"] is True
                 and not Path(job["owned_directory"]).exists() and not Path(job["publication_directory"]).exists(), "actual compiler job completion and cleanup")
-        require(job["worker_sha256"] == sha(WORKER.read_bytes()) and job["artifacts"] == config["artifacts"]
+        require(job["worker_sha256"] == sha(record["worker_source"].encode()) and job["artifacts"] == config["artifacts"]
                 and job["capabilities_sha256"] == sha(json.dumps(config, sort_keys=True).encode()), "compiler capabilities and worker binding")
         raw = base64.b64decode(job["source_package_bytes_base64"], validate=True)
         require(json.loads(raw) == package and sha(raw) == job["model_sha256"]

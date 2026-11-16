@@ -19,7 +19,7 @@ FAMILIES = ("query_alias_contracts", "relation_identity_contracts", "expression_
             "hydration_allocation_contracts", "graph_serialization_contracts")
 HELPERS = ("CppFieldLayoutMetadata", "CppRustLiteralMetadata", "CppRustXidMetadata",
            "CppProjectionResolver", "CppCompilerProjectionResolver",
-           "CppModelConfiguration", "CppCompilerModelConfiguration")
+           "CppModelConfiguration", "CppCompilerModelConfiguration", "CppCompilerScalarStorage")
 MODEL_INPUTS = (
     'model/src/main/java/com/skynet/codegenerator/meta/Domain.java',
     'model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java',

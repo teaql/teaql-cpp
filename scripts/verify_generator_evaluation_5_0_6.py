@@ -208,10 +208,11 @@ def execute(path):
 
 
 def validate(record):
+    from compiler_scalar_source_admission_5_0_6 import registered_epoch_matches
     require(sha(SEED.read_bytes()) == SEED_SHA, "exact retained preparation recipe")
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and record["owned_directory_removed"] is True, "complete scoped evaluation")
-    require(record["driver_source"] == Path(__file__).read_text() and record["probe_source"] == PROBE.read_text(),
+    require(registered_epoch_matches(Path(__file__), sha(record["driver_source"].encode())) and record["probe_source"] == PROBE.read_text(),
             "actual current observation sources")
     require(record["input_hashes_before"] == record["input_hashes_after"]
             and record["references_before"] == record["references_after"], "stable source and reference inputs")
@@ -228,7 +229,7 @@ def validate(record):
     expected_sources = {part for step in record["steps"][:2]
                         for part in step["command"] if part.endswith(".java")}
     require(set(record["compiled_sources"]) == expected_sources
-            and all(Path(name).is_file() and sha(Path(name).read_bytes()) == value
+            and all(registered_epoch_matches(Path(name), value)
                 for name, value in record["compiled_sources"].items()), "current compiled source identities")
     steps = {step["label"]: step for step in record["steps"]}
     for label, field in (("original_shared_junit", "original_shared_test_count"),

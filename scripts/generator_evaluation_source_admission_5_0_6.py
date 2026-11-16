@@ -65,6 +65,11 @@ def source_epochs():
 
 
 def registered_epoch_matches(path, expected):
+    from compiler_scalar_source_admission_5_0_6 import registered_epoch_matches as scalar_epoch_matches
+    return scalar_epoch_matches(path, expected)
+
+
+def preceding_registered_epoch_matches(path, expected):
     if not path.is_file():
         return False
     observed = sha(path.read_bytes())
@@ -82,6 +87,11 @@ def registered_epoch_matches(path, expected):
 
 
 def current_input_matches(path, expected):
+    from compiler_scalar_source_admission_5_0_6 import current_input_matches as scalar_input_matches
+    return scalar_input_matches(path, expected)
+
+
+def preceding_current_input_matches(path, expected):
     if not path.is_file():
         return False
     if sha(path.read_bytes()) == expected:
@@ -93,6 +103,11 @@ def current_input_matches(path, expected):
 
 
 def java_inventory_matches(current, historical):
+    from compiler_scalar_source_admission_5_0_6 import java_inventory_matches as scalar_inventory_matches
+    return scalar_inventory_matches(current, historical)
+
+
+def preceding_java_inventory_matches(current, historical):
     unknown = set(current) - set(historical)
     additions = {str(path): row["after_sha256"] for path, rows in source_epochs().items() for row in rows
                  if path.is_relative_to(PRODUCER / "generator/src/main/java")

@@ -90,6 +90,7 @@ def main():
                               'generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerProjectionResolver.java',
                               'generator/src/main/java/com/skynet/codegenerator/cpp/CppModelConfiguration.java',
                               'generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerModelConfiguration.java',
+                              'generator/src/main/java/com/skynet/codegenerator/cpp/CppCompilerScalarStorage.java',
                               'model/src/main/java/com/skynet/codegenerator/meta/Domain.java',
                               'model/src/main/java/com/skynet/codegenerator/meta/FieldDescriptor.java',
                               'model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java',
