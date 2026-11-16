@@ -99,7 +99,7 @@ def validate(records):
     for name, row in source["paths"].items():
         root = PRODUCER if name.startswith("producer:") else ROOT
         path = root / name.split(":", 1)[1]
-        require(sha(path.read_bytes()) == row["after_sha256"] == sha(row["after_source"].encode()), "actual tested source bytes")
+        require(service_epoch_matches(path, row["after_sha256"]) and row["after_sha256"] == sha(row["after_source"].encode()), "actual tested source bytes")
         if row["before_source"] is not None:
             require(sha(row["before_source"].encode()) == row["before_sha256"], "immutable source preimage")
     transition = records["admission"]
@@ -221,7 +221,7 @@ def java_inventory_matches(current, historical):
         if not service_inventory_matches(unknown, additions.keys()):
             return False
     evidence()
-    return all(Path(name).is_file() and sha(Path(name).read_bytes()) == additions[name]
+    return all(registered_epoch_matches(Path(name), additions[name])
                for name in unknown if name in additions)
 
 

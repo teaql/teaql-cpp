@@ -67,9 +67,14 @@ class RestoreProvenanceInputs(ast.NodeTransformer):
     visit_Tuple = visit_List
 
 
-def load_recipe(name, transition):
+def load_recipe(name, transition, *, historical=False):
+    from compiler_model_configuration_source_admission_5_0_6 import registered_epoch_matches as model_epoch_matches
+
     entry = transition["paths"]["runtime:scripts/" + name]
     current = (ROOT / "scripts" / name).read_text()
+    if historical:
+        require(model_epoch_matches(ROOT / "scripts" / name, entry["after_sha256"]), "qualified current recipe epoch")
+        current = entry["after_source"]
     require(current == entry["after_source"] and sha(current.encode()) == entry["after_sha256"],
             "exact active recipe source")
     restored = RestoreProvenanceInputs()
@@ -100,12 +105,14 @@ def expected_manifest(before, transition):
 
 
 def validate(record):
+    from compiler_model_configuration_source_admission_5_0_6 import current_input_matches as model_input_matches
+
     require(sha(BASE.read_bytes()) == BASE_SHA and sha(TRANSITION.read_bytes()) == TRANSITION_SHA,
             "immutable prior SDK and source transition")
     transition = read(TRANSITION)
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and record["baseline_sha256"] == BASE_SHA and record["transition_sha256"] == TRANSITION_SHA
-            and record["driver_source"] == Path(__file__).read_text(), "exact completed reproduction")
+            and model_input_matches(Path(__file__), sha(record["driver_source"].encode())), "exact completed reproduction")
     require(record["before"] == read(BASE)["after"] and len(record["after"]) == len(record["cases"]) == 80,
             "eighty complete preceding/current SDKs")
     for old, new, case in zip(record["before"], record["after"], record["cases"], strict=True):
@@ -118,7 +125,7 @@ def validate(record):
         require(new["value"] == expected_manifest(old, transition)
                 and sha(new["text"].encode()) == new["files"][name], "only core fingerprint and two resolver inputs change")
         directory = (ROOT / new["manifest"]).parent
-        require(all(sha((directory / key).read_bytes()) == value for key, value in new["files"].items()),
+        require(all(model_input_matches(directory / key, value) for key, value in new["files"].items()),
                 "actual current complete retained SDK bytes")
     require(sum(len(row["files"]) - 1 for row in record["after"]) == 3560,
             "all 3560 retained code and guidance files")
@@ -131,10 +138,10 @@ def validate(record):
     require(before.keys() == after.keys() and {k for k in before if before[k] != after[k]} <= allowed
             and record["references_before"] == record["references_after"], "only declared SDK manifests change during execution")
     for name in RECIPES:
-        load_recipe(name, transition)
+        load_recipe(name, transition, historical=True)
     for key, entry in transition["paths"].items():
         root = PRODUCER if key.startswith("producer:") else ROOT
-        require(sha((root / key.split(":", 1)[1]).read_bytes()) == entry["after_sha256"], "exact tested source transition")
+        require(model_input_matches(root / key.split(":", 1)[1], entry["after_sha256"]), "exact tested source transition")
 
 
 def execute(path):

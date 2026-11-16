@@ -5769,3 +5769,21 @@ historical diagnostics. No C++ runtime, generated SDK function, new-configuratio
 business SQL/Save/Policy/sink or full-suite acceptance is claimed. Complete
 configuration routing is the next resolver stage. G13/G14/G17 remain partial;
 the capability count remains fourteen qualified and three partial.
+
+The [compiled model-configuration checkpoint](compiler_model_configuration_5_0_6.md)
+extends the explicit compiler capability with full descriptors from the same
+original library artifact used for MIR. A separate model-configuration resolver
+feeds entity/table/service, audit, property and relation-policy facts into the
+existing C++ emitter with independent per-generation consumption state. Five
+actual Rust compilations yield three successful native C++ executions and two
+explicit refusals; ten descriptors, 47 properties and fourteen relations agree.
+Current Java 256/256 and worker 12/12 per Python mode pass. Nineteen receipt
+corruptions and 131 source checks reject per mode. All 406 default SDKs reproduce
+with explicit compiler-outcome reuse; all eighty retained SDKs reproduce with
+3,560 code/Assist files unchanged and only reviewed provenance updates. Both
+affected CTests pass, 2/2 per mode, as retained SQLite evidence validation. The
+unchanged optional-type fixture's original E0308/E0599 failures remain explicit;
+its separate successful scalar derivation records its Root/time changes. No new
+compatibility exception, new-path Q/E/JSON/Save/Checker/Policy/sink, complete native
+epoch or full grammar/type-mapping acceptance is claimed. G13/G14/G17 and P0-P7
+retain their complete requirements and partial status.

@@ -18,7 +18,8 @@ PRODUCER = ROOT.parent / "teaql_code_gen_cpp"
 FAMILIES = ("query_alias_contracts", "relation_identity_contracts", "expression_root_contracts",
             "hydration_allocation_contracts", "graph_serialization_contracts")
 HELPERS = ("CppFieldLayoutMetadata", "CppRustLiteralMetadata", "CppRustXidMetadata",
-           "CppProjectionResolver", "CppCompilerProjectionResolver")
+           "CppProjectionResolver", "CppCompilerProjectionResolver",
+           "CppModelConfiguration", "CppCompilerModelConfiguration")
 
 
 def digest(path):

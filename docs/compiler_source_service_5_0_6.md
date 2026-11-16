@@ -12,6 +12,11 @@ removal of redundant interpretation follows the
 [compiler resolver plan](rust_configuration_compiler_resolver_plan.md).
 G13/G14/G17 and the complete P0-P7 goal remain open.
 
+The subsequent [compiled model capability](compiler_model_configuration_5_0_6.md)
+extends this configured service/controller path with full metadata observations.
+Its explicit v2 capability retains projection-only v1 as a separate version;
+new-path business-operation and complete parity gates remain open.
+
 ## Trusted installation and ordinary calls
 
 ```java

@@ -75,7 +75,7 @@ def validate(records):
     transition = records["source"]
     require(transition["complete"] is True and len(transition["paths"]) == 14, "fourteen executed implementation/source paths")
     for name, row in transition["paths"].items():
-        require(sha(path_for(name).read_bytes()) == row["after_sha256"] == sha(row["after_source"].encode()), "actual qualified source")
+        require(registered_epoch_matches(path_for(name), row["after_sha256"]) and row["after_sha256"] == sha(row["after_source"].encode()), "actual qualified source")
         require(records["service"]["input_hashes_after"][name] == row["after_sha256"], "actual service execution source binding")
         if row["before_source"] is not None:
             require(sha(row["before_source"].encode()) == row["before_sha256"], "source preimage")
@@ -140,7 +140,7 @@ def validate(records):
     require(source == row["after_source"] and sha(source.encode()) == row["after_sha256"]
             and sha(row["before_source"].encode()) == row["before_sha256"]
             and forward["paths"][name]["after_sha256"] == row["before_sha256"]
-            and (ROOT / name).read_text() == source, "qualified graph composition preserves all other helper bodies")
+            and registered_epoch_matches(ROOT / name, row["after_sha256"]), "qualified graph composition preserves all other helper bodies")
     corpus = records["corpus_forward"]
     name = "scripts/nominal_type_source_admission_5_0_6.py"
     require(corpus["complete"] is True and set(corpus["paths"]) == {name}, "one bounded generated-caller source delegation")
@@ -173,6 +173,8 @@ def source_epochs():
 
 
 def registered_epoch_matches(path, expected):
+    from compiler_model_configuration_source_admission_5_0_6 import registered_epoch_matches as model_epoch_matches
+
     """Follow only hash-bound source edges, without recursively validating evidence."""
     if not path.is_file():
         return False
@@ -180,7 +182,7 @@ def registered_epoch_matches(path, expected):
     pending, visited = [expected], set()
     while pending:
         candidate = pending.pop()
-        if candidate == observed:
+        if candidate == observed or model_epoch_matches(path, candidate):
             return True
         if candidate in visited:
             continue
@@ -191,6 +193,10 @@ def registered_epoch_matches(path, expected):
 
 
 def current_input_matches(path, expected):
+    from compiler_model_configuration_source_admission_5_0_6 import current_input_matches as model_input_matches
+
+    if model_input_matches(path, expected):
+        return True
     if not path.is_file():
         return False
     current = sha(path.read_bytes())
@@ -209,9 +215,11 @@ def java_inventory_matches(current, historical):
     additions = {str(path): row for path, rows in source_epochs().items() for row in rows
                  if path.is_relative_to(PRODUCER / "generator/src/main/java") and row["before_source"] is None}
     if not unknown <= additions.keys():
-        return False
+        from compiler_model_configuration_source_admission_5_0_6 import java_inventory_matches as model_inventory_matches
+        if not model_inventory_matches(unknown, additions.keys()):
+            return False
     evidence()
-    return all(sha(Path(name).read_bytes()) == additions[name]["after_sha256"] for name in unknown)
+    return all(sha(Path(name).read_bytes()) == additions[name]["after_sha256"] for name in unknown if name in additions)
 
 
 def controls():

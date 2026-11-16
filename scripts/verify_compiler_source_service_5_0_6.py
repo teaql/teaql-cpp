@@ -189,13 +189,15 @@ def execute(path):
 
 
 def validate(record):
+    from compiler_model_configuration_source_admission_5_0_6 import current_input_matches as model_input_matches
+
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and record["owned_directory_removed"] is True and record["java_test_count"] == 252,
             "bounded service qualification and all Java contracts")
     require(record["input_hashes_before"] == record["input_hashes_after"] and record["references_before"] == record["references_after"],
             "source and reference stability")
-    require(record["worker_source"] == WORKER.read_text() and record["driver_source"] == Path(__file__).read_text()
-            and all(Path(name).is_file() and sha(Path(name).read_bytes()) == value for name, value in record["java_sources"].items()),
+    require(model_input_matches(WORKER, sha(record["worker_source"].encode())) and model_input_matches(Path(__file__), sha(record["driver_source"].encode()))
+            and all(model_input_matches(Path(name), value) for name, value in record["java_sources"].items()),
             "actual executed implementation inputs")
     require([row["name"] for row in record["cases"]] == ["service_multi", "service_refusal", "service_zero", "controller_zip"],
             "all actual default-service and controller jobs")

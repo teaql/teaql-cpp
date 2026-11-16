@@ -19,6 +19,14 @@ ordinary source/controller requests automatically through the compiler. Complete
 configuration routing and replacement of the unconfigured interpretation path
 remain open.
 
+The [compiled model-configuration checkpoint](compiler_model_configuration_5_0_6.md)
+now adds complete descriptor observations to that source path. Java maps compiled
+entity/table/service identity, audit policy, property shapes and relation policies
+through a separate generation capability. Five actual original compilations
+produce three matching native metadata executions and two explicit refusals.
+The v2 capability is explicit; remaining storage/type mappings and generated
+business-operation qualification still prevent complete semantic signoff.
+
 ## Observed feasibility and remaining difference
 
 The [standalone experiment](parity/ap02_rust_mir_type_resolution_probe_5_0_6.json.gz)
@@ -101,7 +109,7 @@ column-attribute and language-specific syntax questions retain their own scope.
    assembly and preserve per-job ownership. Expose structured diagnostics for
    compiler refusals and protocol failures. Account for every compiler input,
    dependency lock, relevant environment selection and generated artifact.
-3. **Complete semantic routing.** Route Rust configuration responsibilities
+3. **Complete semantic routing (compiled descriptor path implemented; full mapping and business gates open).** Route Rust configuration responsibilities
    through the authoritative parser/compiler path. Retain the existing pure
    lexical helpers for their documented roles and diagnostics. A valid Rust
    type without a faithful C++ mapping remains an alignment gap; it does not

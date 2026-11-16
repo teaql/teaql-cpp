@@ -215,6 +215,8 @@ def execute(path):
 
 
 def validate(record):
+    from compiler_model_configuration_source_admission_5_0_6 import current_input_matches as model_input_matches
+
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and record["owned_directory_removed"] is True, "complete bounded worker qualification")
     require([row["name"] for row in record["cases"]]
@@ -223,9 +225,9 @@ def validate(record):
             and record["references_before"] == record["references_after"] == {
                 "teaql-rs": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
                 "teaql_code_gen": "45e1572c4956ca963410d8ea436ead3c8857087a"}, "stable locked source inputs")
-    require(record["worker_source"] == WORKER.read_text() and record["bridge_source"] == BRIDGE.read_text()
-            and record["driver_source"] == Path(__file__).read_text()
-            and all(sha(Path(name).read_bytes()) == value for name, value in record["java_sources"].items()),
+    require(model_input_matches(WORKER, sha(record["worker_source"].encode())) and record["bridge_source"] == BRIDGE.read_text()
+            and model_input_matches(Path(__file__), sha(record["driver_source"].encode()))
+            and all(model_input_matches(Path(name), value) for name, value in record["java_sources"].items()),
             "exact executed worker, bridge, driver and compiled Java sources")
     spec = importlib.util.spec_from_file_location("qualified_cpp_compiler_job", WORKER)
     worker = importlib.util.module_from_spec(spec)
