@@ -11,8 +11,10 @@ implemented and qualified on native fixtures. Three complete original domains
 yield 53 projection facts and eighteen executed descriptors; a fourth domain
 has an actual compiler refusal. Ordinary/optimized readers reject 23 corruptions
 each. The [generation-scoped consumption path](compiler_projection_resolver_5_0_6.md)
-is now implemented through constructor/CLI capability injection. General compiler
-assembly and automatic semantic routing remain to be implemented.
+is implemented through constructor/CLI capability injection. The
+[model-driven compiler job](cpp_compiler_job_5_0_6.md) now assembles that capability
+from actual current models, unchanged original generation and fresh compilation.
+Automatic service/default-entry routing and complete semantic routing remain open.
 
 ## Observed feasibility and remaining difference
 
@@ -91,7 +93,7 @@ column-attribute and language-specific syntax questions retain their own scope.
    projections. Pin the compiler binary/version/target and reference source
    artifacts. Reject unrecognized MIR formats explicitly. Establish complete
    call membership and operand provenance before accepting resolved types.
-2. **Generation-scoped resolver (explicit consumption implemented).** Add an explicit resolver interface to the
+2. **Generation-scoped resolver (explicit consumption and projection-job assembly implemented).** Add an explicit resolver interface to the
    producer. Supply verified reference/toolchain capabilities through generation
    assembly and preserve per-job ownership. Expose structured diagnostics for
    compiler refusals and protocol failures. Account for every compiler input,
@@ -117,8 +119,10 @@ before cleanup and retain compact source/command/hash/outcome records. Toolchain
 upgrades require protocol requalification. Native 64-bit observations do not
 establish MIPS layout or physical-device acceptance.
 
-The standalone native protocol and explicit producer consumption path are
-implemented. General compiler-job assembly, automatic semantic routing and
-broader qualification remain open.
+The standalone native protocol, explicit producer consumption and model-driven
+projection-job assembly are implemented. The worker qualifies arbitrary fixture
+inventories, compiled owner overrides, inheritance, include/environment changes
+and a zero-relation model. Automatic service/default-entry routing, other Rust
+configuration responsibilities and broader qualification remain open.
 Current capability status stays **14 qualified / 3 partial** until the existing
 exit criteria are met.

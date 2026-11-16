@@ -6,8 +6,9 @@ resolve to generated C++ model types instead of entering C++ template arguments
 as raw Rust syntax. This implements the consumption path in Stage 2 of the
 [compiler resolver plan](rust_configuration_compiler_resolver_plan.md).
 
-General compiler-job assembly, automatic routing of every Rust configuration
-responsibility and replacement of redundant interpretation remain open. The
+The [model-driven worker](cpp_compiler_job_5_0_6.md) subsequently adds compiler-job
+assembly for this projection capability. Automatic routing of every Rust
+configuration responsibility and replacement of redundant interpretation remain open. The
 ordinary generation entry still uses the existing metadata interpreter unless
 the compiler capability is supplied. The complete P0-P7 goal remains active at
 **14 qualified / 3 partial**.
@@ -52,8 +53,9 @@ CppCoreGenerator MODEL OUTPUT_DIRECTORY \
 
 The sidecar must come from the compiler job; application developers should not
 invent resolved types. The retained qualification driver demonstrates assembly
-from the immutable Stage 1 compiler observations for its known fixtures. A general
-model-to-compiler worker is the next implementation step.
+from the immutable Stage 1 compiler observations for its known fixtures. The
+subsequent worker uses fresh model-to-compiler execution instead of those retained
+facts; the receipts below keep their original explicit-reuse scope.
 
 Bound generation writes `RUST_CONFIGURATION.json` with the exact resolution and
 input identities. The currently qualified compiler target is native x86_64 Linux.

@@ -1,5 +1,18 @@
 # C++ generator parity plan
 
+Current model-driven compiler-job checkpoint:
+[The producer worker](cpp_compiler_job_5_0_6.md) now generates and freshly compiles
+the locked original output for each actual model, obtains its dynamic entity/
+getter inventory and links descriptor observation to the same MIR-producing
+library. Four Rust model jobs execute: the configured/inherited model and an
+entity-only model generate compilable C++ with five matching descriptors; changes
+to an included source file or environment produce actual E0308/E0080 refusals
+without SDKs. Non-BMP model/compiler paths and cleanup-before-publication pass.
+Ten worker contracts and sixteen receipt corruptions pass per Python mode.
+The ordinary Java/service entry still uses finite interpretation. Automatic
+routing, other configuration responsibilities and full G13/G14/G17/P0-P7 remain
+open; this checkpoint adds no new SQLite Save/Policy/sink execution.
+
 Current compiler resolver consumption checkpoint:
 [Explicit constructor/CLI binding](compiler_projection_resolver_5_0_6.md) now
 maps authoritative compiler types into C++ projections. Three fresh native models
@@ -7,8 +20,9 @@ execute eighteen matching descriptors; 236 Java contracts pass. Source refusal,
 stale model, missing projection and an actual MIPS target guard reject before
 unsupported use. The locked Stage 1 Rust model outcomes are explicitly reused.
 All eighty SDKs reproduce with 3,560 code/guidance files unchanged; 406 earlier
-compiler SDKs and 23 query/governance SDKs also reproduce. General compiler-job
-assembly and automatic full Rust routing remain the next implementation work.
+compiler SDKs and 23 query/governance SDKs also reproduce. The compiler-job
+continuation above adds model-driven assembly; automatic full Rust routing
+remains implementation work.
 G13/G14/G17 and the complete P0-P7 goal remain open.
 
 Current compiler protocol checkpoint:
