@@ -1,5 +1,17 @@
 # C++ generator parity plan
 
+Current scalar persistence checkpoint:
+[Generated schema and governed persistence](compiler_scalar_governed_5_0_6.md)
+reproduces seven complete original/C++ SDK pairs and freshly executes 82 paired
+business observations. All 59 Date/Timestamp/Decimal outputs match completely,
+including generated repeatable bootstrap, Context Fix, whole-plan Policy, actual
+graph writes, rollback, optimistic versions and post-commit audit failures.
+The other 23 JSON outputs retain the approved metadata exception and the original
+load/error/committed-state outcomes; they are not counted as matching parity.
+Optional fields include NULL creation and scalar/graph clearing. Complete
+per-field Checker/sample consumers, remaining scalar joins and final
+G13/G14/G17/P0-P7 exits remain open at fourteen qualified and three partial.
+
 Current scalar/optional consumer checkpoint:
 [The finite compiler matrix](compiler_scalar_mapping_matrix_5_0_6.md) records
 ten canonical carriers and twenty required/optional rows, all with compiler

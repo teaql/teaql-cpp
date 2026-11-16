@@ -5,6 +5,15 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [scalar persistence continuation](compiler_scalar_governed_5_0_6.md) now
+joins the seven complete scalar SDK pairs to actual registered schema/bootstrap
+and governed Save. All 59 Date/Timestamp/Decimal outputs match. The 23 JSON
+outputs preserve the approved metadata exception, including the original stored
+row after an error and subsequent authoritative-load refusal; C++ completes the
+same governed scenarios correctly. Optional NULL creation/clearing is explicit.
+Remaining per-field Checker/sample consumers, other scalar joins and final
+integration retain their independent exits; G13/G14/G17 stay partial.
+
 The [scalar/optional matrix](compiler_scalar_mapping_matrix_5_0_6.md) now binds
 ten canonical carriers and twenty required/optional rows to actual compiler
 witnesses. Seven complete SDK pairs provide 49 scalar facts and sixteen matching
@@ -88,9 +97,11 @@ String, Boolean, i64/u64, f32/f64, Decimal and Business ID consumer dispositions
 against the preceding scalar, business-consumer and governed-host receipts.
 Required structural IDs do not establish ordinary configured u64 acceptance.
 Earlier v2/v3 observations retain their protocol and source scopes. Next join
-the applicable configured fields to schema/bootstrap, Checker/Fix and actual
-governed Save; the declared JSON-column read does not establish original schema
-creation from the defective LargeText metadata.
+the remaining configured fields to their named Checker/Fix, sample and governed
+consumers. The seven selected scalar SDKs now have actual schema/bootstrap and
+governed Save observations, with the original JSON LargeText schema/load defect
+retained separately. Reconcile this evidence and the earlier consumer receipts
+field by field before declaring the complete configuration matrix accepted.
 
 | Delivery | Exit evidence |
 | --- | --- |

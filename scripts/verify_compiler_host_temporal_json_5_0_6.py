@@ -206,6 +206,7 @@ def execute(path, selection=None):
 
 
 def validate(record, prefix=False):
+    from compiler_scalar_governed_source_admission_5_0_6 import frame_matches, source_matches
     source = Path(__file__).read_text()
     current = execution_inputs()
     if prefix:
@@ -230,9 +231,8 @@ def validate(record, prefix=False):
                 node.iter = ast.Call(func=ast.Name(id="cases", ctx=ast.Load()), args=[], keywords=[])
         require(ast.dump(restored) == ast.dump(before["execute"]), "exact preceding execution body after removing selection only")
         key = "runtime:scripts/verify_compiler_host_temporal_json_5_0_6.py"
-        require(record["inputs_before"] == record["inputs_after"] and current.keys() == record["inputs_after"].keys()
-                and all(value == current[name] or name == key and value == sha(record["driver_source"].encode())
-                        and current[name] == sha(source.encode()) for name, value in record["inputs_after"].items()), "only the reviewed collector source changes")
+        require(record["inputs_before"] == record["inputs_after"] and frame_matches(current, record["inputs_after"]),
+                "only exact admitted collector/reader additions and source transitions")
         require(record["complete"] is False and len(record["cases"]) == 5
                 and record["steps"][-1]["label"] == "json_required_native_build" and record["steps"][-1]["exit_code"] == 1
                 and "std::optional<teaql::Json>, teaql::Json" in record["steps"][-1]["stderr"], "preserved JSON optionality probe failure")
@@ -241,8 +241,9 @@ def validate(record, prefix=False):
         selected_steps = [step for step in record["steps"] if step["label"] == "host_javac"
             or any(step["label"].startswith(case["name"] + "_") for case in expected)]
     else:
-        require(record["complete"] is True and record["driver_source"] == source
-                and record["inputs_before"] == record["inputs_after"] == current, "exact complete collector and frozen source frame")
+        require(record["complete"] is True and source_matches(Path(__file__), sha(record["driver_source"].encode()))
+                and record["inputs_before"] == record["inputs_after"] and frame_matches(current, record["inputs_after"]),
+                "exact complete execution collector and explicitly admitted source frame")
         expected = selected_cases(record["selected_cases"])
         rows = record["cases"]
         selected_steps = record["steps"]
