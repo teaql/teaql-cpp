@@ -5,6 +5,41 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+## Active execution order, 2026-11-17
+
+The current baseline is the exact Rust 5.0.6 runtime and generator in the
+repository locks. Fourteen capabilities are qualified; G13, G14 and G17 remain
+partial. The following steps preserve the existing phase exits:
+
+1. Finish and publish the bounded
+   [narrow-integer kernel repair](narrow_integer_codec_5_0_6.md). Keep its actual
+   376-case derive comparison, affected native regression and source/receipt
+   checks together. Preserve the six complete original generator refusals as
+   separate diagnostics; kernel support does not establish generated SDK support.
+2. Complete G14/GP11 configuration mappings through the full model evaluation,
+   original compiler and C++ generation route. Inventory the remaining supported
+   scalar/storage identities and their query, E, Checker/Fix, sample and Save
+   consumers. Repair shared runtime behavior before emitting thin adapters.
+   Require a complete compilable original SDK before accepting a mapping; retain
+   original failures with their actual outcome rather than changing the reference.
+3. Join those generated callers to G17's governed execution: request intent and
+   root/nested/ledger lineage, whole-plan Policy, safe audit/SQL diagnostics,
+   rollback and commit/delivery outcomes. Reuse unchanged qualified components
+   only through explicit source/artifact identities.
+4. Close G13 and P7 after all in-scope entries have evidence or an approved
+   disposition. Reproduce the retained SDKs, run the current complete native
+   integration gate and the module/compiler gates affected by the final changes.
+   Use sanitizer or MIPS profiles only when the changed lifetime/toolchain scope
+   requires them. Record final artifact identities and publish the checkpoint.
+
+The Option-model identity and column-attribute interpretation decisions remain
+pending. The three approved exceptions keep their existing scopes. Independent
+implementation and verification can continue while those decisions are pending.
+The complete native epoch below belongs to its recorded source checkpoint;
+later focused results do not relabel it as a current full run.
+
+## Retained checkpoints
+
 Current complete native execution after the parser and governed-consumer changes:
 [The fresh epoch](current_full_native_after_primitive_5_0_6.md) passes
 **1,101/1,101** with exact JUnit/registry membership, zero failures/errors/skips,

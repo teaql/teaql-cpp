@@ -2693,6 +2693,12 @@ if(BUILD_TESTING)
     add_test(NAME field_layout_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_field_layout.py
         --cpp $<TARGET_FILE:teaql_field_layout_probe>)
+    add_executable(teaql_narrow_integer_codec_probe tests/parity/narrow_integer_codec_probe.cpp)
+    target_link_libraries(teaql_narrow_integer_codec_probe PRIVATE teaql::runtime)
+    add_test(NAME narrow_integer_codec_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_narrow_integer_codec_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_narrow_integer_codec_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
     add_executable(teaql_loaded_snapshot_probe tests/parity/loaded_snapshot_probe.cpp)
     target_link_libraries(teaql_loaded_snapshot_probe PRIVATE teaql::provider_sqlite)
     add_test(NAME loaded_snapshot_rust_parity COMMAND ${Python3_EXECUTABLE}

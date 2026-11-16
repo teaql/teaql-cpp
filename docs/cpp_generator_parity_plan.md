@@ -1,5 +1,19 @@
 # C++ generator parity plan
 
+Current narrow-integer kernel checkpoint:
+[The checked decoding repair](narrow_integer_codec_5_0_6.md) restores required
+and optional i16/i32/u16/u32 conversion from the existing I64/U64 carriers.
+All 376 complete original-derive/native values and errors match; seven affected
+native tests pass. All preceding decoder branches retain their exact bytes.
+Ordinary and optimized admission each reject 56 corruptions and the three
+separately reproduced reader regressions. Eighty SDKs, their manifests and all
+3,560 code/Assist files remain unchanged. Six complete original generator
+libraries still fail compilation, so this checkpoint adds kernel support without
+accepting generated narrow-integer mappings. Follow the
+[current execution sequence](current_completion_sequence_5_0_6.md) for complete
+configuration mappings, governed callers and final integration. G13/G14/G17
+remain partial; fourteen capabilities remain qualified and P0-P7 stays open.
+
 Current strong Business ID compiler mapping:
 [The semantic-storage continuation](compiler_business_id_storage_5_0_6.md)
 preserves ReceiptNumber/TicketNumber identities and their String storage through

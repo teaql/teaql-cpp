@@ -6,6 +6,7 @@
 #include <charconv>
 #include <cmath>
 #include <limits>
+#include <utility>
 
 namespace teaql {
 namespace detail {
@@ -47,6 +48,31 @@ public:
         } else if constexpr (std::same_as<T, String>) {
             if (auto text = input->try_text()) {
                 return Outcome::ok(r, String(*text, r));
+            }
+        } else if constexpr (std::same_as<T, std::int16_t> || std::same_as<T, std::int32_t> ||
+                             std::same_as<T, std::uint16_t> || std::same_as<T, std::uint32_t>) {
+            constexpr auto range_errors = [] {
+                if constexpr (std::same_as<T, std::int16_t>) {
+                    return std::pair{"i64 out of i16 range", "u64 out of i16 range"};
+                } else if constexpr (std::same_as<T, std::int32_t>) {
+                    return std::pair{"i64 out of i32 range", "u64 out of i32 range"};
+                } else if constexpr (std::same_as<T, std::uint16_t>) {
+                    return std::pair{"i64 out of u16 range", "u64 out of u16 range"};
+                } else {
+                    return std::pair{"i64 out of u32 range", "u64 out of u32 range"};
+                }
+            }();
+            if (auto value = std::get_if<std::int64_t>(&input->data)) {
+                if (!std::in_range<T>(*value)) {
+                    return error<T>(r, *input, entity, field, range_errors.first);
+                }
+                return Outcome::ok(r, static_cast<T>(*value));
+            }
+            if (auto value = std::get_if<std::uint64_t>(&input->data)) {
+                if (!std::in_range<T>(*value)) {
+                    return error<T>(r, *input, entity, field, range_errors.second);
+                }
+                return Outcome::ok(r, static_cast<T>(*value));
             }
         } else if constexpr (std::same_as<T, std::uint64_t>) {
             if (auto value = std::get_if<std::int64_t>(&input->data); value && *value < 0) {
