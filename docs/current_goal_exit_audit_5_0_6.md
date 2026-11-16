@@ -7,9 +7,11 @@ This audit applies the existing [P0-P7 plan](cpp_generator_parity_plan.md),
 It consolidates their dependencies without removing a capability, abstraction,
 source responsibility, phase gate or approved scope exclusion.
 
-The inspected runtime checkpoint is 35f601fd0fd5a26a6b607e09681dee20f258b0be;
-the independent producer is ec8eac64f0b69808b0017cf72d74e4aef1523e1d on
-cpp_support. The authoritative references are Rust 5.0.6 runtime
+The retained native inspection starts at
+35f601fd0fd5a26a6b607e09681dee20f258b0be; the qualified module continuation
+starts at af9cb40826e7efaea22fe99e943fba0eb0e6b487. The independent producer
+is ec8eac64f0b69808b0017cf72d74e4aef1523e1d on cpp_support.
+The authoritative references are Rust 5.0.6 runtime
 fe82a18982415f1746df9a2cf7c42f5e9abdc6d3 and generator
 45e1572c4956ca963410d8ea436ead3c8857087a. Historical 5.0.5 results retain
 their original scope.
@@ -52,14 +54,22 @@ cases. These scoped results do not prove every model/grammar combination.
 
 ## Execution order and concrete deliveries
 
-1. Finish the existing full native epoch. Preserve its exact source snapshot,
-   complete terminal/JUnit results and compiler-case inventory. Accept the
-   receipt under ordinary and optimized Python, then commit and push the
-   qualified checkpoint. A live progress count is not its acceptance result.
+1. Retain the completed native epoch and the qualified
+   [785-test module checkpoint](module_source_contracts_5_0_6.md), including
+   their distinct source frames, terminal/JUnit results and no-work builds.
+   Ordinary and optimized module admission reject 21 receipt corruptions per
+   mode. Publish the qualified source-prerequisite/preset repair without
+   relabeling the failed first epoch or the historical native result. Native,
+   sanitizer and MIPS profiles retain their change-specific policies.
 2. Reconcile the remaining configuration and compatibility boundaries in
    E01/E03/E04 against the locked source. Keep the existing full Rust grammar
    requirement until an explicit scope answer arrives. Record each approved
    exception separately; an unanswered recommendation changes no contract.
+   The [constant-function diagnostic](ap02_const_function_calls_5_0_6.md)
+   supplies the next concrete E01 repair: three valid original projection
+   configurations compile unsuccessfully in C++, alongside a matching positive
+   control and two matching compiler refusals. Its completed collection is not
+   parity acceptance.
    Continue the independent E02 source/consumer join while those answers are
    pending.
 3. Complete E02 with the generated application's actual protected consumers:
@@ -150,7 +160,23 @@ all three now select their qualified native scripts and pass 3/3 actual tests in
 each Python mode. The audit retains 390 missing source-fixture bindings across
 61 direct groups and the 62-group transitive closure. Its shared frontend-adapter
 plan preserves all source checks and requires complete actual module command
-and dependency validation. These fixture obligations remain open.
+and dependency validation. The [shared adapter implementation](module_source_contracts_5_0_6.md)
+now installs the complete closure for all 403 original Python entries, including
+the mutation-privacy entry's additional partially missing prerequisite. Its
+source selection passes 64/64 actual tests, and the two extended source guards
+pass 2/2 with their native defaults. The first full build succeeds, but its
+test run finds eleven missing programs and one obsolete provenance input. The
+actual CMake target check additionally identifies four cached programs omitted
+from the preset. The repaired preset covers all 633 imported executables;
+sixteen affected tests and ordinary/optimized source/target corruption controls
+pass. The original failed JUnit and source frame are retained. The fresh
+repaired epoch subsequently passes **785/785** with exact membership, zero
+failures/errors/skips, unchanged 12,005 inputs, fixed references, unchanged
+633 imported executables and pre/post no-work builds. Ordinary/optimized
+admission each reject 21 corrupted receipts. The read-only transition review
+retains all 1,817 C++ files and 853 producer inputs. This closes the named
+module source-prerequisite and execution join for its frozen frame; complete
+AP02 and the independent capability/phase exits remain open.
 
 ## Phase crosswalk
 

@@ -20,6 +20,36 @@ def canonical_body(text):
     return re.sub(r"^(?:#include <[^>]+>|import [^\n]+)\n", "", text, flags=re.M)
 
 
+def module_executable_targets(build):
+    reply = build.resolve() / ".cmake/api/v1/reply"
+    indexes = sorted(reply.glob("index-*.json"))
+    if not indexes:
+        raise SystemExit("Module codemodel is missing; configure the modules_native preset")
+    index = json.loads(indexes[-1].read_text())
+    models = [row for row in index["objects"]
+              if row["kind"] == "codemodel" and row["version"]["major"] == 2]
+    if len(models) != 1:
+        raise SystemExit("Expected one current module codemodel")
+    model = json.loads((reply / models[0]["jsonFile"]).read_text())
+    if (Path(model["paths"]["source"]).resolve() != ROOT
+            or Path(model["paths"]["build"]).resolve() != build.resolve()
+            or len(model["configurations"]) != 1):
+        raise SystemExit("Module codemodel source, build or configuration changed")
+    required = set()
+    for reference in model["configurations"][0]["targets"]:
+        target = json.loads((reply / reference["jsonFile"]).read_text())
+        if target["type"] != "EXECUTABLE":
+            continue
+        imported = target["name"].startswith("teaql_module_") or any(
+            item["define"] == "TEAQL_USE_MODULES=1"
+            for group in target.get("compileGroups", []) for item in group.get("defines", []))
+        if imported:
+            required.add(target["name"])
+    if not required:
+        raise SystemExit("Module codemodel contains no imported executable targets")
+    return required
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--build-dir", type=Path, required=True)
@@ -27,7 +57,9 @@ def main():
     contracts = json.loads((ROOT / "modules/contracts.json").read_text())
     presets = json.loads((ROOT / "CMakePresets.json").read_text())
     preset = next(row for row in presets["buildPresets"] if row["name"] == "modules_native")
-    missing = {"teaql_module_" + row["stem"] for row in contracts["contracts"]} - set(preset["targets"])
+    required = {"teaql_module_" + row["stem"] for row in contracts["contracts"]}
+    required.update(module_executable_targets(args.build_dir))
+    missing = required - set(preset["targets"])
     if missing:
         raise SystemExit("Module preset omits registered contracts: " + ", ".join(sorted(missing)))
     directory = args.build_dir / "modules/consumers"

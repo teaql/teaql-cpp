@@ -13,6 +13,7 @@ import sys
 import tempfile
 
 from verify_generated_driver_hardened_sources_5_0_6 import check_row, digest, require
+from frontend_bindings_5_0_6 import fixture_name, test_name
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -69,20 +70,23 @@ def read(path):
     return json.loads(gzip.decompress(path.read_bytes()))
 
 
-def check_bindings(tests):
+def check_bindings(tests, frontend="native"):
     for name, (script, fixture) in BINDINGS.items():
+        name = test_name(name, frontend)
         require(name in tests, "Missing generator-child source prerequisite")
         test = tests[name]
         props = {row["name"]: row["value"] for row in test["properties"]}
         require(Path(test["command"][0]).resolve() == Path(sys.executable).resolve()
                 and test["command"][1:] == [str(ROOT / script)]
-                and props.get("FIXTURES_SETUP") == [fixture]
-                and "generator_child_checks" in props.get("FIXTURES_REQUIRED", [])
+                and props.get("FIXTURES_SETUP") == [fixture_name(fixture, frontend)]
+                and fixture_name("generator_child_checks", frontend)
+                in props.get("FIXTURES_REQUIRED", [])
                 and props.get("RUN_SERIAL") is True and props.get("TIMEOUT") == 180,
                 "Generator child parent command or source/guard fixture changed")
-    require("parity_generator_child_checks" in tests
-            and {row["name"]: row["value"] for row in tests["parity_generator_child_checks"]["properties"]}
-            .get("FIXTURES_SETUP") == ["generator_child_checks"],
+    guard = test_name("parity_generator_child_checks", frontend)
+    require(guard in tests
+            and {row["name"]: row["value"] for row in tests[guard]["properties"]}
+            .get("FIXTURES_SETUP") == [fixture_name("generator_child_checks", frontend)],
             "Generator child source/control guard is not registered")
 
 
@@ -118,6 +122,7 @@ def execute(command, environment):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-dir", type=Path, default=ROOT / "build_native_current")
+    parser.add_argument("--frontend", choices=("native", "module"), default="native")
     parser.add_argument("--record", type=Path)
     args = parser.parse_args()
     require(args.record is None or not args.record.exists(), "Preserve generator child evidence")
@@ -147,7 +152,7 @@ def main():
     entries = json.loads(subprocess.check_output(
         ["ctest", "--test-dir", str(args.build_dir), "--show-only=json-v1"], text=True))["tests"]
     tests = {row["name"]: row for row in entries}
-    check_bindings(tests)
+    check_bindings(tests, args.frontend)
     source_controls = []
     first, parent = manifest["rows"][0], manifest["rows"][1]
     rejected("wrong_historical_source", lambda: check_row(
@@ -157,13 +162,14 @@ def main():
     rejected("missing_child_call_admission", lambda: check_row(
         dict(parent, adaptations=[]), originals[parent["historical_path"]]), source_controls)
     changed = copy.deepcopy(tests)
-    changed["parity_runtime_configuration_source_contracts"]["command"][1] = str(ROOT / parent["historical_path"])
-    rejected("historical_parent_registration", lambda: check_bindings(changed), source_controls)
+    runtime_parent = test_name("parity_runtime_configuration_source_contracts", args.frontend)
+    changed[runtime_parent]["command"][1] = str(ROOT / parent["historical_path"])
+    rejected("historical_parent_registration", lambda: check_bindings(changed, args.frontend), source_controls)
     changed = copy.deepcopy(tests)
-    changed["parity_runtime_configuration_source_contracts"]["properties"] = [
-        row for row in changed["parity_runtime_configuration_source_contracts"]["properties"]
+    changed[runtime_parent]["properties"] = [
+        row for row in changed[runtime_parent]["properties"]
         if row["name"] != "FIXTURES_REQUIRED"]
-    rejected("missing_child_guard", lambda: check_bindings(changed), source_controls)
+    rejected("missing_child_guard", lambda: check_bindings(changed, args.frontend), source_controls)
     results = []
     with tempfile.TemporaryDirectory(prefix="teaql_generator_child_checks_506_") as owned:
         directory = Path(owned)
@@ -210,7 +216,7 @@ def main():
     require(not directory.exists(), "Owned generator child outputs remain")
     if args.record:
         record = {"complete": True, "whole_goal_complete": False, "complete_sq02": False,
-                  "manifest_sha256": MANIFEST_SHA256, "results": results,
+                  "manifest_sha256": MANIFEST_SHA256, "frontend": args.frontend, "results": results,
                   "source_controls": source_controls, "owned_directory_removed": True,
                   "owned_bytes_removed": removed}
         args.record.write_bytes(gzip.compress(json.dumps(record, sort_keys=True).encode(), mtime=0))

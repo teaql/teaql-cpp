@@ -1,0 +1,97 @@
+--- a/CMakePresets.json
++++ b/CMakePresets.json
+@@ -86,6 +86,16 @@
+       "jobs": 8,
+       "targets": [
+         "teaql_module_contracts",
++        "teaql_module_context_root_generated",
++        "teaql_module_document_round_trip_tests",
++        "teaql_module_generated_candidates_tests",
++        "teaql_module_generated_dynamic_field_tests",
++        "teaql_module_generated_graph_serialization_tests",
++        "teaql_module_generated_inheritance_query_tests",
++        "teaql_module_generated_inheritance_tests",
++        "teaql_module_generated_inheritance_variants_tests",
++        "teaql_module_generated_optional_types_tests",
++        "teaql_module_generated_return_type_tests",
+         "teaql_module_decimal_tests",
+         "teaql_module_core_aux_debug_tests",
+         "teaql_module_core_collection_tests",
+@@ -149,6 +159,7 @@
+         "teaql_sqlite_schema_crud",
+         "teaql_sqlite_relations_graph",
+         "teaql_generated_query_expression",
++        "teaql_custom_checker_behavior",
+         "teaql_module_general_query_tests",
+         "teaql_module_entity_graph_plan_tests",
+         "teaql_module_provider_sqlite_id_tests",
+--- a/modules/CMakeLists.txt
++++ b/modules/CMakeLists.txt
+@@ -1,5 +1,6 @@
+ # Facades publish the canonical global declarations and link existing bodies.
+ # Module-only targets keep header consumers and layer metadata independent.
++cmake_file_api(QUERY API_VERSION 1 CODEMODEL 2)
+ function(teaql_add_module package)
+     add_library(${package}_module)
+     string(REGEX REPLACE "^teaql_" "" component ${package})
+--- a/modules/contracts.json
++++ b/modules/contracts.json
+@@ -717,7 +717,7 @@
+         {
+           "name": "runtime_examples_context_contracts",
+           "arguments": [
+-            "tests/parity/runtime_examples_provenance.json"
++            "tests/parity/runtime_examples_provenance_5_0_6.json"
+           ],
+           "environment": [
+             "TEAQL_LOG_ENDPOINT=off"
+--- a/scripts/verify_module_consumers.py
++++ b/scripts/verify_module_consumers.py
+@@ -20,6 +20,36 @@
+     return re.sub(r"^(?:#include <[^>]+>|import [^\n]+)\n", "", text, flags=re.M)
+ 
+ 
++def module_executable_targets(build):
++    reply = build.resolve() / ".cmake/api/v1/reply"
++    indexes = sorted(reply.glob("index-*.json"))
++    if not indexes:
++        raise SystemExit("Module codemodel is missing; configure the modules_native preset")
++    index = json.loads(indexes[-1].read_text())
++    models = [row for row in index["objects"]
++              if row["kind"] == "codemodel" and row["version"]["major"] == 2]
++    if len(models) != 1:
++        raise SystemExit("Expected one current module codemodel")
++    model = json.loads((reply / models[0]["jsonFile"]).read_text())
++    if (Path(model["paths"]["source"]).resolve() != ROOT
++            or Path(model["paths"]["build"]).resolve() != build.resolve()
++            or len(model["configurations"]) != 1):
++        raise SystemExit("Module codemodel source, build or configuration changed")
++    required = set()
++    for reference in model["configurations"][0]["targets"]:
++        target = json.loads((reply / reference["jsonFile"]).read_text())
++        if target["type"] != "EXECUTABLE":
++            continue
++        imported = target["name"].startswith("teaql_module_") or any(
++            item["define"] == "TEAQL_USE_MODULES=1"
++            for group in target.get("compileGroups", []) for item in group.get("defines", []))
++        if imported:
++            required.add(target["name"])
++    if not required:
++        raise SystemExit("Module codemodel contains no imported executable targets")
++    return required
++
++
+ def main():
+     parser = argparse.ArgumentParser()
+     parser.add_argument("--build-dir", type=Path, required=True)
+@@ -27,7 +57,9 @@
+     contracts = json.loads((ROOT / "modules/contracts.json").read_text())
+     presets = json.loads((ROOT / "CMakePresets.json").read_text())
+     preset = next(row for row in presets["buildPresets"] if row["name"] == "modules_native")
+-    missing = {"teaql_module_" + row["stem"] for row in contracts["contracts"]} - set(preset["targets"])
++    required = {"teaql_module_" + row["stem"] for row in contracts["contracts"]}
++    required.update(module_executable_targets(args.build_dir))
++    missing = required - set(preset["targets"])
+     if missing:
+         raise SystemExit("Module preset omits registered contracts: " + ", ".join(sorted(missing)))
+     directory = args.build_dir / "modules/consumers"

@@ -1,5 +1,20 @@
 # C++ generator parity plan
 
+Current imported-module checkpoint:
+[Shared source prerequisites and preset coverage](module_source_contracts_5_0_6.md)
+qualify all 403 original Python bindings and their 62 source-fixture owners.
+The fresh full module epoch passes **785/785**, with exact JUnit membership,
+zero failures/errors/skips, 12,005 unchanged inputs, fixed references, 633
+unchanged imported ELF hashes and pre/post no-work builds. Sixteen affected
+cases and ordinary/optimized source, target and receipt corruption controls
+pass. The first failed epoch and admission-format repair retain their own
+evidence. All 1,817 C++ files and 853 producer inputs remain unchanged.
+This closes the named module source/execution join; full AP02, G13/G14/G17
+and P0-P7 remain open at **14 qualified / 3 partial**. The
+[three constant-function differences](ap02_const_function_calls_5_0_6.md)
+identify the next concrete configuration repair without narrowing the pending
+full-grammar decision or approving either independent compatibility exception.
+
 Current complete native execution after the parser and governed-consumer changes:
 [The fresh epoch](current_full_native_after_primitive_5_0_6.md) passes
 **1,101/1,101** with exact JUnit/registry membership, zero failures/errors/skips,

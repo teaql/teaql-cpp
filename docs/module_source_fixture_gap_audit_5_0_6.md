@@ -2,8 +2,13 @@
 
 The complete imported Python registration audit identifies 390 missing
 source-fixture bindings and three outdated script selections. The script
-selections are repaired in this checkpoint. The fixture bindings remain open
-and require a shared frontend adapter.
+selections are repaired in this checkpoint. The following audit preserves that
+checkpoint's scope. The [subsequent shared adapter](module_source_contracts_5_0_6.md)
+installs these bindings and completes one additional partial binding. Its
+64-test source selection and two native-default guards pass. Its fresh complete
+module integration subsequently passes 785/785 with stable source/reference and
+executable identities. The original failed epoch and its preset/provenance
+repairs remain separately recorded; the audit below retains its original scope.
 
 The baseline remains Rust 5.0.6 runtime
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and generator
@@ -106,8 +111,9 @@ The exit requires every existing Python module entry and every newly introduced
 source/control entry to have an explicit disposition, with no omitted aliases,
 partial argument matches, dropped parent guards or implicit native-cache
 dependency. It does not change the Rust grammar, metadata or compatibility
-requirements. All 390 missing bindings remain open until that implementation
-and its complete evidence exist.
+requirements. The subsequent qualified adapter closes these missing bindings
+and the additional partial binding for its recorded source checkpoint; see the
+linked implementation and complete execution evidence.
 
 ## Artifact lifecycle and goal scope
 

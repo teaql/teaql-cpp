@@ -717,7 +717,7 @@
         {
           "name": "runtime_examples_context_contracts",
           "arguments": [
-            "tests/parity/runtime_examples_provenance.json"
+            "tests/parity/runtime_examples_provenance_5_0_6.json"
           ],
           "environment": [
             "TEAQL_LOG_ENDPOINT=off"

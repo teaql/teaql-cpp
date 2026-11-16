@@ -1,5 +1,6 @@
 # Facades publish the canonical global declarations and link existing bodies.
 # Module-only targets keep header consumers and layer metadata independent.
+cmake_file_api(QUERY API_VERSION 1 CODEMODEL 2)
 function(teaql_add_module package)
     add_library(${package}_module)
     string(REGEX REPLACE "^teaql_" "" component ${package})
@@ -681,7 +682,8 @@ endif()
 if(TARGET teaql_module_query_keys_probe)
     add_test(NAME module_query_keys_5_0_6_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/tests/parity/compare_query_keys.py
-        --cpp $<TARGET_FILE:teaql_module_query_keys_probe>)
+        --cpp $<TARGET_FILE:teaql_module_query_keys_probe>
+        "--pointer-bytes=${CMAKE_SIZEOF_VOID_P}")
     add_test(NAME module_query_metadata_keys_5_0_6_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${PROJECT_SOURCE_DIR}/tests/parity/compare_query_metadata_keys_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_query_keys_probe>)
@@ -878,10 +880,14 @@ foreach(final_entry IN ITEMS runtime_id_models runtime_error_debug unified_buffe
         set(final_probe ${final_entry})
         set(final_test ${final_entry})
     endif()
+    set(final_profile "")
+    if(final_entry STREQUAL "runtime_id_models" OR final_entry STREQUAL "entity_query_boundaries")
+        set(final_profile "--profile=$<IF:$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>,release,debug>")
+    endif()
     if(TARGET teaql_module_${final_probe}_probe)
         add_test(NAME module_${final_test}_rust_parity COMMAND ${Python3_EXECUTABLE}
             ${PROJECT_SOURCE_DIR}/tests/parity/compare_${final_entry}.py
-            --cpp $<TARGET_FILE:teaql_module_${final_probe}_probe>)
+            --cpp $<TARGET_FILE:teaql_module_${final_probe}_probe> ${final_profile})
         set_tests_properties(module_${final_test}_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     endif()
 endforeach()
@@ -2316,4 +2322,8 @@ if(TARGET teaql_module_ledger_execution_probe)
         ${PROJECT_SOURCE_DIR}/tests/parity/compare_ledger_execution_5_0_6.py
         --cpp $<TARGET_FILE:teaql_module_ledger_execution_probe>)
     set_tests_properties(module_ledger_execution_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(BUILD_TESTING)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/source_contracts.cmake)
 endif()

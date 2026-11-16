@@ -13,6 +13,7 @@ import tempfile
 
 from compare_values import same
 from verify_generated_driver_hardened_sources_5_0_6 import check_row, digest, require
+from frontend_bindings_5_0_6 import binding_command, binding_properties, fixture_name, test_name
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -24,18 +25,19 @@ def read(path):
     return json.loads(gzip.decompress(path.read_bytes()))
 
 
-def check_bindings(bindings, tests, build):
+def check_bindings(bindings, tests, build, frontend="native"):
     require(len(bindings) == 3, "Three qualified helper caller registrations")
     for binding in bindings:
-        require(binding["test"] in tests, "Missing helper caller")
-        test = tests[binding["test"]]
+        name = test_name(binding["test"], frontend)
+        require(name in tests, "Missing helper caller")
+        test = tests[name]
         command = test["command"]
         normalized = ["${PYTHON}", *[
             part.replace(str(build.resolve()), "${BINARY_DIR}")
             .replace(str(ROOT), "${SOURCE_DIR}") for part in command[1:]]]
         require(Path(command[0]).resolve() == Path(sys.executable).resolve()
-                and normalized == binding["command"]
-                and test["properties"] == binding["properties"],
+                and normalized == binding_command(binding["command"], frontend)
+                and test["properties"] == binding_properties(binding["properties"], build, frontend),
                 "Qualified helper command or required fixture changed")
 
 
@@ -58,6 +60,7 @@ def environment():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-dir", type=Path, default=ROOT / "build_native_current")
+    parser.add_argument("--frontend", choices=("native", "module"), default="native")
     parser.add_argument("--record", type=Path)
     args = parser.parse_args()
     require(args.record is None or not args.record.exists(), "Preserve executed-helper evidence")
@@ -111,12 +114,14 @@ def main():
     entries = json.loads(subprocess.check_output(
         ["ctest", "--test-dir", str(args.build_dir), "--show-only=json-v1"], text=True))["tests"]
     tests = {row["name"]: row for row in entries}
-    check_bindings(manifest["bindings"], tests, args.build_dir)
-    require(manifest["guard_test"] in tests
-            and tests[manifest["guard_test"]]["command"][1:]
-            == [str(ROOT / manifest["guard_script"]), "--build-dir", str(args.build_dir.resolve())]
-            and {row["name"]: row["value"] for row in tests[manifest["guard_test"]]["properties"]}
-            .get("FIXTURES_SETUP") == [manifest["fixture"]],
+    check_bindings(manifest["bindings"], tests, args.build_dir, args.frontend)
+    guard = test_name(manifest["guard_test"], args.frontend)
+    frontend_args = ["--frontend", "module"] if args.frontend == "module" else []
+    require(guard in tests
+            and tests[guard]["command"][1:]
+            == [str(ROOT / manifest["guard_script"]), "--build-dir", str(args.build_dir.resolve()), *frontend_args]
+            and {row["name"]: row["value"] for row in tests[guard]["properties"]}
+            .get("FIXTURES_SETUP") == [fixture_name(manifest["fixture"], args.frontend)],
             "Executed-helper guard fixture changed")
     source_controls = []
     first = candidate["rows"][0]
@@ -129,14 +134,15 @@ def main():
         dict(parent, adaptations=[]), originals[parent["historical_path"]]), source_controls)
     changed = copy.deepcopy(tests)
     binding = manifest["bindings"][0]
-    changed[binding["test"]]["command"][1] = binding["historical_command"][1].replace("${SOURCE_DIR}", str(ROOT))
+    name = test_name(binding["test"], args.frontend)
+    changed[name]["command"][1] = binding["historical_command"][1].replace("${SOURCE_DIR}", str(ROOT))
     rejected("historical_caller_registration", lambda: check_bindings(
-        manifest["bindings"], changed, args.build_dir), source_controls)
+        manifest["bindings"], changed, args.build_dir, args.frontend), source_controls)
     changed = copy.deepcopy(tests)
-    changed[binding["test"]]["properties"] = [
-        row for row in changed[binding["test"]]["properties"] if row["name"] != "FIXTURES_REQUIRED"]
+    changed[name]["properties"] = [
+        row for row in changed[name]["properties"] if row["name"] != "FIXTURES_REQUIRED"]
     rejected("missing_source_guard_fixture", lambda: check_bindings(
-        manifest["bindings"], changed, args.build_dir), source_controls)
+        manifest["bindings"], changed, args.build_dir, args.frontend), source_controls)
     results, valid_matrix = [], []
     with tempfile.TemporaryDirectory(prefix="teaql_executed_helper_registered_506_") as owned:
         directory = Path(owned)
@@ -177,7 +183,7 @@ def main():
     require(not directory.exists(), "Owned executed-helper observer outputs remain")
     if args.record:
         record = {"complete": True, "whole_goal_complete": False, "manifest_sha256": digest(MANIFEST.read_bytes()),
-                  "results": results, "valid_matrix": valid_matrix, "source_controls": source_controls,
+                  "frontend": args.frontend, "results": results, "valid_matrix": valid_matrix, "source_controls": source_controls,
                   "owned_directory_removed": True, "owned_bytes_removed": removed}
         args.record.write_bytes(gzip.compress(json.dumps(record, sort_keys=True).encode(), mtime=0))
     print("Executed helpers: fourteen unconditional checks; 24 valid/invalid processes; "
