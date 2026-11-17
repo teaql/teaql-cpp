@@ -1,5 +1,14 @@
 # Current exits for the C++ generator/runtime parity goal
 
+Latest input evidence: the [offline XML/ZIP repair](compiler_offline_model_inputs_5_0_6.md)
+retains the existing host loader's complete accepted source package. Five new
+and all 287 Java tests pass; the preceding main fails four regressions. All 80
+retained SDKs and 406 defaults reproduce identical code/guidance. Actual ZIP
+compiler/SQLite consumers match twelve Save pairs, one query pair and twelve
+publication observations, with identical independent original SDK manifests.
+A refused ZIP produces no SDK. This closes that input-loading defect; complete
+E01-E06 and G13/G14/G17 remain open at fourteen qualified / three partial.
+
 Latest offline evidence: the [default-entry repair](compiler_offline_routing_5_0_6.md)
 shares trusted compiler assembly with Spring, preserves explicit mode authority
 and propagates missing settings/refusal without interpreted fallback. Seven new

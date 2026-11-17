@@ -83,7 +83,7 @@
   },
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "486b109bcfc37c58282270bfcce5159067e8e5fb9ecde4f1212ab9cbe1a9f95f",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "db5125ee9d5297c0e4257cd119705e660ce3ef209ee48c9ae91b22f4075ee5c4",
     "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "0c83fc780340b6a228d7d9f94f50e40b015477e399d9446d34de389901bc90c8",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",

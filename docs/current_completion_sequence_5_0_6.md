@@ -5,6 +5,15 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [offline multi-file input repair](compiler_offline_model_inputs_5_0_6.md)
+now reuses the host XML/ZIP loader in the normal offline entry. Five new and all
+287 Java tests pass; the preceding main fails four new regressions. Eighty
+retained SDKs/3,560 files and all 406 defaults reproduce identically. An actual
+multi-file model matches twelve Save pairs, one query pair and twelve publication
+observations against the independently generated original SDK; a refused ZIP
+publishes no SDK. The two affected native tests pass. Continue with the remaining
+configuration, consumer and phase exits below; G13/G14/G17 remain partial.
+
 The [offline source-route repair](compiler_offline_routing_5_0_6.md) now makes
 the default two-argument C++ entry honor the same trusted compiler settings as
 Spring. Seven new and all 282 generator tests pass; the exact previous main
@@ -145,16 +154,33 @@ remaining configuration responsibility by source owner and consumer, including
 complete compiler routing versus the still-preserved unconfigured interpreter.
 Replace redundant interpretation only after the existing contracts are covered.
 
-The dynamic-route delivery closes the previously missed allowlist/target
-dispatch boundary, including the ordinary `/teaql/` prefix. Next review default
-offline `CppCoreGenerator.main`, unconfigured service construction and explicit
-older compiled-model capabilities separately. Establish the supported entry's
-configuration authority and failure behavior before changing a default; do not
-treat a configured route's compiler evidence as acceptance of an interpreted
-route, or silently require a new external capability. Preserve the pending
-identity/attribute decisions and the three explicitly approved exceptions.
+The configured dynamic and offline entries now reach the original compiler,
+including the ordinary `/teaql/` prefix and complete offline archive inputs.
+Their named dispatch/input defects have actual independent SDK and business
+execution evidence. Next inventory unconfigured service construction and
+explicit older compiled-model capabilities separately, by source owner,
+configuration authority, interpreted responsibility and generated consumer.
+Establish failure behavior before changing a default; do not treat a configured
+route's compiler evidence as acceptance of an interpreted route, or silently
+require a new external capability. Replace redundant interpretation only through
+the covered source contracts. Preserve the pending identity/attribute decisions
+and the three explicitly approved exceptions.
 Pending identity decisions and final artifact/phase joins retain their exits.
 Earlier v2/v3 observations retain their protocol and source scopes.
+
+The post-input source review identifies the next owners in the independent
+producer workspace:
+
+| Owner | Remaining responsibility |
+| --- | --- |
+| `CppCompilerServiceConfiguration.create` | With no trusted settings, it returns an ordinary `DomainGenerationService`. Establish the supported unconfigured contract separately from configured compiler dispatch. |
+| `DomainGenerationService.generateDomainFiles(GenerateContext)` and `generateSourceFiles` | An installed source generator receives a source snapshot; an unconfigured call parses the model and uses the ordinary domain generator path. Preserve these distinct authorities and the rejection of source-less calls to a configured scope. |
+| `CppCompilerModelConfiguration.generator` | The explicit projection-only format constructs a projection resolver without the complete model configuration. Later formats separately add complete metadata, scalar types and semantic storage. Inventory each retained format's interpreted responsibilities and existing caller evidence before replacement. |
+
+These are inspected source paths, not new execution acceptance. They prevent
+the completed multipart/default-entry/archive repairs from becoming the next
+work item again. Complete compiler semantics and existing public behavior remain
+required by the original goal.
 
 | Delivery | Exit evidence |
 | --- | --- |

@@ -84,6 +84,7 @@ def reader_continuation():
 
 
 def validate_sources(record):
+    from compiler_offline_input_source_admission_5_0_6 import qualified_transition as input_transition
     initial, units = bound("initial"), bound("units")
     expected = {"producer:" + name for name in units["source_images"]} | {DYNAMIC, LOCAL, SDK}
     require(record["complete"] is True and record["whole_goal_complete"] is False
@@ -91,7 +92,8 @@ def validate_sources(record):
     for name, row in record["paths"].items():
         require(row["after_sha256"] == sha(row["after_source"].encode())
                 and (row["after_sha256"] == sha(source_path(name).read_bytes())
-                     or name == DYNAMIC and row["after_sha256"] == reader_continuation()["before_sha256"]),
+                     or name == DYNAMIC and row["after_sha256"] == reader_continuation()["before_sha256"]
+                     or name == CORE and input_transition(name, row["after_sha256"], sha(source_path(name).read_bytes()))),
                 "exact current offline source image")
         if row["before_source"] is None:
             require(row["before_sha256"] is None and name not in initial["inputs_after"], "actual new input")
@@ -154,6 +156,7 @@ def qualified_transition(name, before, after):
 
 @cache
 def manifest_rows():
+    from compiler_offline_input_source_admission_5_0_6 import qualified_transition as input_transition
     result = {}
     record = bound("sdks")
     require(record["complete"] is True and len(record["before"]) == len(record["after"]) == 80,
@@ -169,7 +172,9 @@ def manifest_rows():
         require(expected["generator_implementation_sha256"][core] == sources()[CORE]["before_sha256"], "exact previous emitter identity")
         expected["generator_implementation_sha256"][core] = sources()[CORE]["after_sha256"]
         require(expected == after["value"] and sha(before["text"].encode()) == before["files"][leaf]
-                and sha(after["text"].encode()) == after["files"][leaf] == sha((ROOT / name).read_bytes()),
+                and sha(after["text"].encode()) == after["files"][leaf]
+                and (after["files"][leaf] == sha((ROOT / name).read_bytes())
+                     or input_transition("runtime:" + name, after["files"][leaf], sha((ROOT / name).read_bytes()))),
                 "only the reviewed main-source fingerprint changes")
         result["runtime:" + name] = dict(before_source=before["text"], before_sha256=before["files"][leaf],
                                         after_source=after["text"], after_sha256=after["files"][leaf])
@@ -183,6 +188,9 @@ def source_epochs():
     for name, row in {**sources(), **manifest_rows()}.items():
         result.setdefault(source_path(name).resolve(), []).append(row)
     result[source_path(DYNAMIC).resolve()].append(reader_continuation())
+    from compiler_offline_input_source_admission_5_0_6 import source_rows
+    for name, row in source_rows().items():
+        result.setdefault(source_path(name).resolve(), []).append(row)
     return result
 
 
@@ -217,6 +225,8 @@ def current_input_matches(path, expected):
 def added_input_hashes():
     result = {name: row["after_sha256"] for name, row in sources().items() if row["before_source"] is None}
     result[SELF] = sha(Path(__file__).read_bytes())
+    from compiler_offline_input_source_admission_5_0_6 import added_input_hashes as inputs_added
+    result.update(inputs_added())
     return result
 
 
