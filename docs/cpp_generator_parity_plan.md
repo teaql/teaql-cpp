@@ -1,5 +1,20 @@
 # C++ generator parity plan
 
+Current ordinary scalar consumer checkpoint:
+[The eighteen-form field matrix](compiler_scalar_family_5_0_6.md) binds eighteen
+complete SDK pairs and 126 same-library scalar facts to 6,816 matching actual
+consumer observations: 6,561 direct Checkers, 108 sample scenarios, twenty-two
+new Query/E outputs and 125 new governed outputs. Matching JSON sample refusals
+remain explicit. Eleven families freshly use the ordinary v4 host; seven exact
+compiler jobs are reused through complete SDK identity before new consumers
+execute. Twenty ordinary/optimized reader commands pass and each mode rejects
+143 source/receipt/imported-state corruptions. Sixteen affected native tests
+pass; eighty retained SDKs preserve 3,560 files. Strong Business ID execution
+reuses its unchanged source/native identities and 1,620 results explicitly.
+Structural u64 roles, original ordinary-u64 refusal, pending decisions and
+complete SQ/GP/G13/G14/G17/P0-P7 exits retain their independent scopes at
+fourteen qualified and three partial capabilities.
+
 Current scalar persistence checkpoint:
 [Generated schema and governed persistence](compiler_scalar_governed_5_0_6.md)
 reproduces seven complete original/C++ SDK pairs and freshly executes 82 paired

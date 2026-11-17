@@ -77,33 +77,13 @@ def evidence():
 
 
 def source_matches(path, expected):
-    path = Path(path).resolve()
-    name = "runtime:" + str(path.relative_to(ROOT))
-    rows = evidence()["paths"]
-    if not path.is_file():
-        return False
-    if expected == sha(path.read_bytes()):
-        return True
-    images = {rows[name][key] for key in ("before_sha256", "after_sha256") if name in rows and rows[name].get(key) is not None}
-    if name == TEMPORAL:
-        images.update(row[key] for row in bound("temporal_source")["paths"][name].values()
-                      for key in ("source_before_sha256", "source_after_sha256"))
-    if name == COLLECTOR:
-        images.update(sha(bound(key)["driver_source"].encode()) for key in ("date", "remaining"))
-    return expected in images
+    from compiler_scalar_consumer_source_admission_5_0_6 import source_matches as matches
+    return matches(path, expected)
 
 
 def frame_matches(current, historical):
-    rows = evidence()["paths"]
-    additions = {name: row["after_sha256"] for name, row in rows.items() if row["before_source"] is None}
-    # The leaf's own image is recorded by fresh validation/milestone receipts;
-    # excluding it from its hash-bound source receipt avoids a hash cycle.
-    additions[LEAF] = sha(Path(__file__).read_bytes())
-    return (historical.keys() <= current.keys()
-            and current.keys() - historical.keys() <= additions.keys()
-            and all(current[name] == additions[name] for name in current.keys() - historical.keys())
-            and all(current[name] == value or name in rows and source_matches(ROOT / name.split(":", 1)[1], value)
-                    for name, value in historical.items()))
+    from compiler_scalar_consumer_source_admission_5_0_6 import frame_matches as matches
+    return matches(current, historical)
 
 
 def controls():

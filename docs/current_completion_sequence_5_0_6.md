@@ -5,6 +5,16 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [eighteen-form scalar consumer matrix](compiler_scalar_family_5_0_6.md)
+now records 6,816 matching observations over complete original/C++ SDK pairs,
+including direct Checker/custom Fix, all sample scales and eleven new typed
+Query/E and governed Save consumer sets. JSON sample refusals remain failures;
+the existing metadata/load exception stays separate. All sixteen affected native
+tests pass and each Python mode rejects 143 corruptions. Strong Business ID
+results are explicitly reused with unchanged producer/runtime/native identities.
+Next reconcile these field dispositions with the remaining SQ/GP and identity
+decisions, then perform P7 on the final source state. G13/G14/G17 stay partial.
+
 The [scalar persistence continuation](compiler_scalar_governed_5_0_6.md) now
 joins the seven complete scalar SDK pairs to actual registered schema/bootstrap
 and governed Save. All 59 Date/Timestamp/Decimal outputs match. The 23 JSON
@@ -56,9 +66,10 @@ partial. The following steps preserve the existing phase exits:
    original failures with their actual outcome rather than changing the reference.
    Use the compiler-observed scalar and semantic-storage inventories as the
    concrete work list, with separate required/optional and model-identity rows.
-   The finite carrier matrix is recorded. The next delivery assigns the remaining
-   Checker/Fix, sample, schema and governed Save consumers to their exact fields
-   and closes demonstrated missing behavior with explicit exit evidence.
+   The finite carrier and eighteen ordinary-field consumer matrices are recorded.
+   Reconcile their exact scopes with the structural u64 and semantic Business ID
+   responsibilities and any remaining configuration branches before claiming
+   the complete GP11/G14 mapping exit.
 2. Join those generated callers to G17's governed execution: request intent and
    root/nested/ledger lineage, whole-plan Policy, safe audit/SQL diagnostics,
    rollback and commit/delivery outcomes. Reuse unchanged qualified components
@@ -91,17 +102,15 @@ typed Business ID storage contract. Bind each row to the complete original
 library, observed getter identity, descriptor and existing C++ carrier. The
 mapping table is a work list, not acceptance by enumeration.
 
-Date, Timestamp, required/optional JSON and optional Decimal now have the
-selected v4 read-consumer evidence in the finite matrix. Reconcile the remaining
-String, Boolean, i64/u64, f32/f64, Decimal and Business ID consumer dispositions
-against the preceding scalar, business-consumer and governed-host receipts.
-Required structural IDs do not establish ordinary configured u64 acceptance.
-Earlier v2/v3 observations retain their protocol and source scopes. Next join
-the remaining configured fields to their named Checker/Fix, sample and governed
-consumers. The seven selected scalar SDKs now have actual schema/bootstrap and
-governed Save observations, with the original JSON LargeText schema/load defect
-retained separately. Reconcile this evidence and the earlier consumer receipts
-field by field before declaring the complete configuration matrix accepted.
+The eighteen ordinary scalar forms now have named actual Checker/sample
+dispositions and paired Query/E and governed observations through new or
+explicitly retained execution. The original JSON LargeText schema/load defect
+and matching sample refusals remain separate. Strong Business ID results retain
+their own exact private SDK/source/native bindings. Required/optional structural
+u64 roles and the configured ordinary-u64 original compiler refusal do not
+substitute for one another. Reconcile these exact field/role dispositions with
+any remaining configuration branches before declaring the complete GP11/G14
+mapping exit. Earlier v2/v3 observations retain their protocol and source scopes.
 
 | Delivery | Exit evidence |
 | --- | --- |
