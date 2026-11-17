@@ -1,5 +1,17 @@
 # C++ generator parity plan
 
+Current default offline source-route continuation:
+[Shared trusted compiler assembly](compiler_offline_routing_5_0_6.md) makes the
+default two-argument entry honor JVM/environment settings through the existing
+source service. Seven new and all 282 Java contracts pass; the exact preceding
+main fails four new regressions. Eighty retained SDKs preserve 3,560 files and
+all 406 default SDKs regenerate identically, with prior compiler outcomes reused
+explicitly. Actual complete offline generation matches twelve Save pairs, one
+typed query pair and twelve safe-publication observations. A real E0277 refusal
+publishes no SDK. Explicit compiled-metadata/qualification modes retain their
+authority. This joins the configured offline route without closing remaining
+unconfigured interpretation, pending choices or full G13/G14/G17/P0-P7 exits.
+
 Current dynamic source-route continuation:
 [Normal C++ target dispatch](compiler_dynamic_routing_5_0_6.md) now recognizes
 the code-emitted target and routes multipart/raw-body input to the installed

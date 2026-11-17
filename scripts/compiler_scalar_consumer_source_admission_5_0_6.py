@@ -112,6 +112,7 @@ def source_matches(path, expected):
 def frame_matches(current, historical):
     import compiler_scalar_governed_source_admission_5_0_6 as previous
     import compiler_dynamic_route_source_admission_5_0_6 as continuation
+    from compiler_offline_source_admission_5_0_6 import added_input_hashes
     rows = source_rows()
     additions = {name: row["after_sha256"] for name,row in rows.items() if row["before_source"] is None}
     additions[previous.LEAF] = rows[previous.LEAF]["after_sha256"]
@@ -119,6 +120,7 @@ def frame_matches(current, historical):
     # cycle between its source image and the receipt hash embedded above.
     additions[LEAF] = sha(Path(__file__).read_bytes())
     additions["runtime:scripts/compiler_dynamic_route_source_admission_5_0_6.py"] = sha(Path(continuation.__file__).read_bytes())
+    additions.update(added_input_hashes())
     return (historical.keys() <= current.keys()
             and current.keys() - historical.keys() <= additions.keys()
             and all(current[name] == additions[name]

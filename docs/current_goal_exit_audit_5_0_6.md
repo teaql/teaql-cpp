@@ -1,5 +1,16 @@
 # Current exits for the C++ generator/runtime parity goal
 
+Latest offline evidence: the [default-entry repair](compiler_offline_routing_5_0_6.md)
+shares trusted compiler assembly with Spring, preserves explicit mode authority
+and propagates missing settings/refusal without interpreted fallback. Seven new
+and all 282 Java tests pass; the exact preceding main fails four new tests.
+Eighty SDKs retain 3,560 files, and all 406 default SDKs regenerate identically.
+Actual offline compiler/SQLite consumers match twelve Save pairs, one query pair
+and twelve publication cases; E0277 produces no SDK. Unconfigured interpretation
+replacement, complete configuration/protected-consumer composition, pending
+E03/E04 and final artifact/integration exits remain independent. G13/G14/G17
+stay partial.
+
 Latest routing evidence: the [dynamic C++ target repair](compiler_dynamic_routing_5_0_6.md)
 recognizes the code-emitted target at normal multipart and raw-body controller
 entries. The exact preceding class fails the new route tests. Actual complete

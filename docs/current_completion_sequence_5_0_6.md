@@ -5,15 +5,26 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [offline source-route repair](compiler_offline_routing_5_0_6.md) now makes
+the default two-argument C++ entry honor the same trusted compiler settings as
+Spring. Seven new and all 282 generator tests pass; the exact previous main
+fails four new regressions. Eighty retained SDKs/3,560 files and all 406 default
+SDKs regenerate identically. Actual configured offline execution matches twelve
+Save pairs, one typed query pair and twelve publication observations, while a
+real original E0277 refusal returns no SDK. Continue with the remaining
+unconfigured interpretation and older-capability responsibilities after the
+current source/artifact compatibility checks. This does not close G13/G14/G17.
+
 The [dynamic source-route repair](compiler_dynamic_routing_5_0_6.md) now makes
 both normal `cpp-lib-core` POST forms reach the configured original compiler.
 The preceding target allowlist rejected them before dispatch. Two complete
 SDK pairs match 24 actual governed Save pairs, two typed query pairs and 24
 file-publication observations; a real original compiler refusal returns no SDK.
-The default offline and unconfigured service paths still use their existing
-interpreter. Review those source owners and supported configuration contracts
-next, before replacing redundant interpretation. This does not close complete
-configuration routing, E03/E04 or the remaining capability/phase exits.
+At that checkpoint, default offline and unconfigured service paths retained
+their existing interpreter. The offline continuation above now honors supplied
+compiler settings; no-settings and explicit qualification paths retain their
+declared scopes. Complete interpretation replacement, E03/E04 and the remaining
+capability/phase exits stay open.
 
 The [identity-role continuation](compiler_identity_roles_5_0_6.md) now joins
 required u64 IDs and optional u64 foreign keys to a fresh complete SDK pair,

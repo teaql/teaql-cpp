@@ -54,13 +54,16 @@ def functions(source):
 
 
 def validate_reader_continuation(record):
+    from compiler_offline_source_admission_5_0_6 import qualified_transition
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and set(record["paths"]) == {LOCAL}
             and record["preceding_sources_sha256"] == RECORDS["sources"][1], "one exact added-reader identity continuation")
     row = record["paths"][LOCAL]
     require(row["before_source"] == bound("sources")["paths"][LOCAL]["after_source"]
             and row["before_sha256"] == sha(row["before_source"].encode())
-            and row["after_sha256"] == sha(row["after_source"].encode()) == sha(source_path(LOCAL).read_bytes()),
+            and row["after_sha256"] == sha(row["after_source"].encode())
+            and (row["after_sha256"] == sha(source_path(LOCAL).read_bytes())
+                 or qualified_transition(LOCAL, row["after_sha256"], sha(source_path(LOCAL).read_bytes()))),
             "exact preceding/current reader source images")
     old = "            and all(current[name] == additions[name] for name in current.keys() - historical.keys())\n"
     new = ("            and all(current[name] == additions[name]\n"
@@ -135,29 +138,13 @@ def source_epochs():
 
 
 def registered_epoch_matches(path, expected):
-    path = Path(path)
-    if type(expected) is not str or re.fullmatch(r"[0-9a-f]{64}", expected) is None or not path.is_file():
-        return False
-    observed = sha(path.read_bytes())
-    pending, visited = [expected], set()
-    while pending:
-        candidate = pending.pop()
-        if candidate == observed:
-            return True
-        if candidate in visited:
-            continue
-        visited.add(candidate)
-        pending.extend(row["after_sha256"] for row in source_epochs().get(path, []) if row["before_sha256"] == candidate)
-    return False
+    from compiler_offline_source_admission_5_0_6 import registered_epoch_matches as current
+    return current(path, expected)
 
 
 def current_input_matches(path, expected):
-    path = Path(path)
-    if not registered_epoch_matches(path, expected):
-        return False
-    if sha(path.read_bytes()) != expected:
-        evidence()
-    return True
+    from compiler_offline_source_admission_5_0_6 import current_input_matches as active
+    return active(path, expected)
 
 
 def frame_matches(current, historical):
@@ -166,15 +153,8 @@ def frame_matches(current, historical):
 
 
 def java_inventory_matches(current, historical):
-    unknown = set(current) - set(historical)
-    additions = {str(path): row["after_sha256"] for path, rows in source_epochs().items() for row in rows
-                 if path.is_relative_to(PRODUCER) and path.suffix == ".java"
-                 and row.get("before_source", "existing") is None}
-    if not unknown <= additions.keys():
-        return False
-    if unknown:
-        evidence()
-    return all(Path(name).is_file() and registered_epoch_matches(Path(name), additions[name]) for name in unknown)
+    from compiler_offline_source_admission_5_0_6 import java_inventory_matches as active
+    return active(current, historical)
 
 
 def validate_units(record):
