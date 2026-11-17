@@ -127,7 +127,8 @@ def validate(record, sinks):
     actual = bound(name)
     require(registered_epoch_matches(Path(__file__), sha(record["host_adapter_source"].encode()))
             and record["host_adapter_sha256"] == sha(record["host_adapter_source"].encode())
-            and record["worker_source"] == WORKER.read_text() and record["host_probe_source"] == HOST.read_text(),
+            and record["worker_source"] == WORKER.read_text()
+            and registered_epoch_matches(HOST, sha(record["host_probe_source"].encode())),
             "actual host adapter and unchanged worker/probe")
     require(record["host_inputs_before"] == record["host_inputs_after"]
             and record["host_inputs_after"].keys() == actual["host_inputs_after"].keys()

@@ -5,6 +5,16 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [dynamic source-route repair](compiler_dynamic_routing_5_0_6.md) now makes
+both normal `cpp-lib-core` POST forms reach the configured original compiler.
+The preceding target allowlist rejected them before dispatch. Two complete
+SDK pairs match 24 actual governed Save pairs, two typed query pairs and 24
+file-publication observations; a real original compiler refusal returns no SDK.
+The default offline and unconfigured service paths still use their existing
+interpreter. Review those source owners and supported configuration contracts
+next, before replacing redundant interpretation. This does not close complete
+configuration routing, E03/E04 or the remaining capability/phase exits.
+
 The [identity-role continuation](compiler_identity_roles_5_0_6.md) now joins
 required u64 IDs and optional u64 foreign keys to a fresh complete SDK pair,
 two actual Q/E/JSON/SQL outputs and forty governed Save outputs. All forty-two
@@ -123,6 +133,15 @@ accept the configured ordinary-u64 original compiler refusal. Next name each
 remaining configuration responsibility by source owner and consumer, including
 complete compiler routing versus the still-preserved unconfigured interpreter.
 Replace redundant interpretation only after the existing contracts are covered.
+
+The dynamic-route delivery closes the previously missed allowlist/target
+dispatch boundary, including the ordinary `/teaql/` prefix. Next review default
+offline `CppCoreGenerator.main`, unconfigured service construction and explicit
+older compiled-model capabilities separately. Establish the supported entry's
+configuration authority and failure behavior before changing a default; do not
+treat a configured route's compiler evidence as acceptance of an interpreted
+route, or silently require a new external capability. Preserve the pending
+identity/attribute decisions and the three explicitly approved exceptions.
 Pending identity decisions and final artifact/phase joins retain their exits.
 Earlier v2/v3 observations retain their protocol and source scopes.
 

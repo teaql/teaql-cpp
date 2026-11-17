@@ -1,5 +1,17 @@
 # C++ generator parity plan
 
+Current dynamic source-route continuation:
+[Normal C++ target dispatch](compiler_dynamic_routing_5_0_6.md) now recognizes
+the code-emitted target and routes multipart/raw-body input to the installed
+original compiler. All 275 selected generator tests and seven target/preview
+tests pass; the exact preceding production class fails the three new host
+regressions and target validation. Two complete SDK pairs match 24 actual Save
+pairs, two query pairs and 24 publication observations. A real original E0277
+refusal produces no C++ SDK. This closes the named configured dispatch defect,
+while default offline/unconfigured interpretation, complete configuration
+authority and all remaining G13/G14/G17/P0-P7 exits stay open. The next delivery
+must review those remaining source owners before changing their defaults.
+
 Current structural identity continuation:
 [Required IDs and optional foreign keys](compiler_identity_roles_5_0_6.md)
 compile through one fresh ordinary v4 host/controller and complete original/C++

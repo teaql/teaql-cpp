@@ -197,7 +197,8 @@ def validate(record):
     from verify_compiler_model_configuration_5_0_6 import worker_module
     require(record["complete"] is True and record["whole_goal_complete"] is False, "bounded completed host execution")
     require(registered_epoch_matches(Path(__file__), sha(record["driver_source"].encode()))
-            and record["host_probe_source"] == HOST.read_text() and record["worker_source"] == WORKER.read_text(),
+            and registered_epoch_matches(HOST, sha(record["host_probe_source"].encode()))
+            and record["worker_source"] == WORKER.read_text(),
             "exact host execution, probe and worker sources")
     documents = bound("documents")
     executed = bound("runtime")

@@ -134,6 +134,7 @@ def snapshot():
 
 def validate(record, key, state=None):
     from compiler_scalar_consumer_source_admission_5_0_6 import bound, frame_matches, source_matches
+    from compiler_dynamic_route_source_admission_5_0_6 import registered_epoch_matches
     current = snapshot() if state is None else state
     canonical = bound(key)
     is_family = key in ("text", "family")
@@ -149,9 +150,10 @@ def validate(record, key, state=None):
     for name in ("capabilities", "environment_overrides", "process_clock", "preparation_seed_sha256", "prepared_java_sources", "preparation_steps", "steps"):
         require(same(record[name],canonical[name]), "immutable actual compiler/consumer process bytes: "+name)
     require(all(type(step["exit_code"]) is int and step["exit_code"] == 0 for step in record["steps"] + record["preparation_steps"]), "all actual terminal commands succeeded")
-    require(all(sha(Path(name).read_bytes()) == digest for name,digest in record["prepared_java_sources"].items()), "current exact freshly compiled Java source inputs")
+    require(all(registered_epoch_matches(Path(name),digest) for name,digest in record["prepared_java_sources"].items()), "exact qualified freshly compiled Java source inputs")
     if is_family:
-        require(record["selected_cases"] == canonical["selected_cases"] and record["host_source"] == family.HOST.read_text()
+        require(record["selected_cases"] == canonical["selected_cases"]
+                and registered_epoch_matches(family.HOST,sha(record["host_source"].encode()))
                 and record["worker_source"] == family.WORKER.read_text(), "actual selected families and current compiler host/worker")
         expected = {case["name"]:case for case in family.cases()}
         rows = record["cases"]

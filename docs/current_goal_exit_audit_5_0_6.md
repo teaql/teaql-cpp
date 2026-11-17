@@ -1,5 +1,14 @@
 # Current exits for the C++ generator/runtime parity goal
 
+Latest routing evidence: the [dynamic C++ target repair](compiler_dynamic_routing_5_0_6.md)
+recognizes the code-emitted target at normal multipart and raw-body controller
+entries. The exact preceding class fails the new route tests. Actual complete
+SDK pairs match 24 Save pairs, two typed query pairs and 24 publication results;
+an actual E0277 compiler refusal publishes no SDK. This is a configured-route
+continuation. Default offline and unconfigured interpretation, complete E01/E02
+composition, E03/E04 decisions and final artifact/integration exits remain open.
+The status stays fourteen qualified and G13/G14/G17 partial.
+
 Latest field/role evidence: the [eighteen ordinary forms](compiler_scalar_family_5_0_6.md)
 have 6,816 exact matching consumer outputs. The independent
 [required-ID/optional-FK continuation](compiler_identity_roles_5_0_6.md) adds one

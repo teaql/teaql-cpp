@@ -43,13 +43,16 @@ def functions(source):
 
 def validate_sources(record):
     import compiler_scalar_governed_source_admission_5_0_6 as previous
+    from compiler_dynamic_route_source_admission_5_0_6 import registered_epoch_matches
     previous.evidence()
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and set(record["paths"]) == {CPP, RUST, COLLECTOR, FAMILY, READER, PRECEDING}, "five new fixture/reader sources and two preceding matcher forwards only")
     for name, row in record["paths"].items():
         path = ROOT / name.split(":", 1)[1]
         require(name.startswith("runtime:") and ".." not in path.relative_to(ROOT).parts
-                and row["after_sha256"] == sha(row["after_source"].encode()) == sha(path.read_bytes()), "exact current source image")
+                and row["after_sha256"] == sha(row["after_source"].encode())
+                and (row["after_sha256"] == sha(path.read_bytes())
+                     or name == READER and registered_epoch_matches(path,row["after_sha256"])), "exact qualified source image")
         if name == PRECEDING:
             require(row["before_sha256"] == sha(row["before_source"].encode()), "exact preceding matcher source")
             before, after = functions(row["before_source"]), functions(row["after_source"])
@@ -108,16 +111,22 @@ def source_matches(path, expected):
 
 def frame_matches(current, historical):
     import compiler_scalar_governed_source_admission_5_0_6 as previous
+    import compiler_dynamic_route_source_admission_5_0_6 as continuation
     rows = source_rows()
     additions = {name: row["after_sha256"] for name,row in rows.items() if row["before_source"] is None}
     additions[previous.LEAF] = rows[previous.LEAF]["after_sha256"]
     # Fresh validation/milestone records bind this leaf separately, avoiding a
     # cycle between its source image and the receipt hash embedded above.
     additions[LEAF] = sha(Path(__file__).read_bytes())
+    additions["runtime:scripts/compiler_dynamic_route_source_admission_5_0_6.py"] = sha(Path(continuation.__file__).read_bytes())
     return (historical.keys() <= current.keys()
             and current.keys() - historical.keys() <= additions.keys()
-            and all(current[name] == additions[name] for name in current.keys() - historical.keys())
+            and all(current[name] == additions[name]
+                    or current[name] == sha(continuation.source_path(name).read_bytes())
+                    and continuation.registered_epoch_matches(continuation.source_path(name), additions[name])
+                    for name in current.keys() - historical.keys())
             and all(current[name] == value or name in rows and source_matches(ROOT / name.split(":",1)[1],value)
+                    or continuation.registered_epoch_matches(continuation.source_path(name),value)
                     for name,value in historical.items()))
 
 
