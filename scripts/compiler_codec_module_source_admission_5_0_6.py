@@ -40,6 +40,7 @@ def initial():
 
 
 def validate_sources(record):
+    from narrow_integer_registration_source_admission_5_0_6 import current_source_matches
     expected = {"CMakePresets.json", "modules/CMakeLists.txt", "modules/contracts.json",
                 "modules/source_contracts.json", PREVIOUS}
     require(record["complete"] is True and record["whole_goal_complete"] is False
@@ -48,7 +49,7 @@ def validate_sources(record):
         require(row["before_sha256"] == sha(row["before_source"].encode())
                 == initial()["inputs_after"]["runtime:" + name]
                 and row["after_sha256"] == sha(row["after_source"].encode())
-                == sha((ROOT / name).read_bytes()), "exact recorded before/current module source images")
+                and current_source_matches(ROOT / name, row["after_sha256"]), "exact recorded before/current module source images")
         if name != PREVIOUS:
             require(row["before_source"] == initial()["source_images"][name]["source"],
                     "actual preceding module metadata bytes")
@@ -69,7 +70,7 @@ def validate_sources(record):
             "one exact existing-comparator module registration")
     bindings = before("modules/source_contracts.json")
     current = after("modules/source_contracts.json")
-    bindings["native_registration_sha256"] = sha((ROOT / "tests/CMakeLists.txt").read_bytes())
+    bindings["native_registration_sha256"] = initial()["inputs_after"]["runtime:tests/CMakeLists.txt"]
     bindings["canonical_contracts_sha256"] = record["paths"]["modules/contracts.json"]["after_sha256"]
     name = "module_narrow_integer_codec_rust_parity"
     addition = dict(module=name, native="narrow_integer_codec_rust_parity",

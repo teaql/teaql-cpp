@@ -130,7 +130,7 @@ def validate(candidate, installed, sdk, transition):
     for name, wanted in installed["dependency_jars"].items():
         require(sha(Path(name).read_bytes()) == wanted, "current Java dependency")
     for name, wanted in installed["runtime_cpp_inputs"].items():
-        require(sha((ROOT / name).read_bytes()) == wanted, "current runtime source for SQL reuse")
+        require(latest_input_matches(ROOT / name, wanted), "qualified runtime source for SQL reuse")
     for name, wanted in installed["sql_libraries"].items():
         require(sha(Path(name).read_bytes()) == wanted, "current linked SQL library")
     require(sha(Path(installed["native_compiler"]["path"]).read_bytes())
@@ -152,14 +152,16 @@ def historical_input_matches(path, expected):
             return False
         evidence()
         return current_input_matches(path, after)
-    from compiler_source_service_source_admission_5_0_6 import current_input_matches as service_input_matches
-    return service_input_matches(path, expected)
+    from compiler_projection_source_admission_5_0_6 import current_input_matches as projection_input_matches
+    return projection_input_matches(path, expected)
 
 
 def cross_context_input_matches(path, expected):
+    if path == ROOT / "scripts/verify_audit_metadata_source_5_0_6.py":
+        return corpus_input_matches(path, expected)
     if path in JAVA:
         return historical_input_matches(path, expected)
-    from compiler_scalar_source_admission_5_0_6 import source_epochs
+    from compiler_offline_source_admission_5_0_6 import source_epochs
     if path in source_epochs():
         return historical_input_matches(path, expected)
     return corpus_input_matches(path, expected)

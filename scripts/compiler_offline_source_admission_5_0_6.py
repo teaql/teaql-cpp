@@ -191,6 +191,9 @@ def source_epochs():
     from compiler_offline_input_source_admission_5_0_6 import source_rows
     for name, row in source_rows().items():
         result.setdefault(source_path(name).resolve(), []).append(row)
+    from narrow_integer_registration_source_admission_5_0_6 import source_rows as registration_rows
+    for name, row in registration_rows().items():
+        result.setdefault(source_path(name).resolve(), []).append(row)
     return result
 
 
@@ -227,6 +230,8 @@ def added_input_hashes():
     result[SELF] = sha(Path(__file__).read_bytes())
     from compiler_offline_input_source_admission_5_0_6 import added_input_hashes as inputs_added
     result.update(inputs_added())
+    from narrow_integer_registration_source_admission_5_0_6 import added_input_hashes as registration_added
+    result.update(registration_added())
     return result
 
 

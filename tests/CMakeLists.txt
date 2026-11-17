@@ -2699,6 +2699,13 @@ if(BUILD_TESTING)
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_narrow_integer_codec_5_0_6.py
         --cpp $<TARGET_FILE:teaql_narrow_integer_codec_probe>
         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+    if(NOT CMAKE_CROSSCOMPILING)
+        add_test(NAME narrow_integer_codec_source_contracts COMMAND ${Python3_EXECUTABLE} -B
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/narrow_integer_source_admission_5_0_6.py --check)
+        set_tests_properties(narrow_integer_codec_source_contracts PROPERTIES
+            TIMEOUT 180 RUN_SERIAL TRUE FIXTURES_SETUP narrow_integer_codec)
+        set_tests_properties(narrow_integer_codec_rust_parity PROPERTIES FIXTURES_REQUIRED narrow_integer_codec)
+    endif()
     add_executable(teaql_loaded_snapshot_probe tests/parity/loaded_snapshot_probe.cpp)
     target_link_libraries(teaql_loaded_snapshot_probe PRIVATE teaql::provider_sqlite)
     add_test(NAME loaded_snapshot_rust_parity COMMAND ${Python3_EXECUTABLE}

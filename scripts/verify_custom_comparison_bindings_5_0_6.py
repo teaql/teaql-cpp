@@ -59,6 +59,8 @@ def fingerprint(value):
 
 
 def validate(manifest, entries, build):
+    from narrow_integer_registration_source_admission_5_0_6 import separate_custom_registration
+    entries, narrow_registration = separate_custom_registration(entries, build)
     require(manifest["complete"] is True and manifest["whole_goal_complete"] is False
             and manifest["complete_sq02"] is False
             and manifest["runtime_commit"] == RUNTIME and manifest["generator_commit"] == GENERATOR,
@@ -134,7 +136,7 @@ def validate(manifest, entries, build):
         for selected_member in selected:
             require(fingerprint(member(source_data[row["cohort"]], selected_member["pointer"]))
                     == selected_member["value_sha256"], "source selection/projection identity changed")
-    return rows
+    return [*rows, narrow_registration]
 
 
 def controls(manifest, tests, build):
@@ -209,8 +211,9 @@ def main():
                   "generator_commit": GENERATOR, "optimized": sys.flags.optimize,
                   "registered_tests": len(entries), "rows": rows, "controls": results}
         args.record.write_bytes(gzip.compress(json.dumps(record, sort_keys=True).encode(), mtime=0))
-    print("160 custom comparisons / 35 required source cohorts / 180 explicit source-member selections; "
-          "thirteen structural controls reject; source/native execution and complete SQ02 remain separate")
+    print("161 custom comparisons: 160 historical comparisons / 35 source cohorts / 180 source-member selections, "
+          "plus the complete 376-case narrow-integer source/receipt/fixture binding; "
+          "thirteen historical controls reject; source/native execution and complete SQ02 remain separate")
 
 
 if __name__ == "__main__":

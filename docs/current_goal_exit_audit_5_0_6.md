@@ -1,5 +1,15 @@
 # Current exits for the C++ generator/runtime parity goal
 
+Latest registered-source repair: [narrow-integer source prerequisites](current_narrow_source_registration_5_0_6.md)
+now run before both native and imported comparison. The custom join includes the
+new 376-case row beside its preserved 160 historical rows. Exact compiler-database,
+runtime-header and generated-caller forwarding fixes restore six historical
+receipt guards. All 38 focused native and three imported tests pass in both Python
+modes; 752 actual observer outputs match and final selected builds have no work.
+The current 718-command partition and host/cross registration boundaries are
+explicit; this does not promote the frozen SQ02 cohort or close E01-E06/P0-P7.
+G13/G14/G17 remain partial and all pending design choices retain their scope.
+
 Latest frontend join: [current imported narrow-codec coverage](current_codec_module_join_5_0_6.md)
 rebuilds four affected module targets and passes eight actual module tests,
 376 complete original/imported outputs and one native regression. Three old

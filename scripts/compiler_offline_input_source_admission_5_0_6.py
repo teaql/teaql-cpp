@@ -47,11 +47,13 @@ def source_path(name):
 
 
 def validate_sources(record):
+    from narrow_integer_registration_source_admission_5_0_6 import current_source_matches
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and set(record["paths"]) == {CORE, TEST, PREVIOUS}, "exact input-loader, CLI contracts and identity guards")
     initial, units = bound("initial"), bound("units")
     for name, row in record["paths"].items():
-        require(row["after_sha256"] == sha(row["after_source"].encode()) == sha(source_path(name).read_bytes()),
+        require(row["after_sha256"] == sha(row["after_source"].encode())
+                and current_source_matches(source_path(name), row["after_sha256"]),
                 "exact current input source image")
         if row["before_source"] is None:
             require(row["before_sha256"] is None and name not in initial["inputs_after"], "genuinely added source")

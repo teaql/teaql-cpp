@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
-  "native_registration_sha256": "05ec08a2f69fc247e76ad4921123647196fdc7eb5d9405267ac6676a1f62a557",
+  "native_registration_sha256": "9a375a7bae47e9b9ec6f754453f32a6b0d790bdb426a62641b6805d98ae40587",
   "canonical_contracts_sha256": "dc6c59b1e3b47b5bf26a69e0e83e6ce7ac1ba7bde568f9703fca3be63735ef94",
   "aliases": {
     "module_examples_rust_parity": "runtime_examples_rust_parity",
@@ -5830,9 +5830,11 @@
       ],
       "properties": {
         "DEPENDS": [
+          "module_narrow_integer_codec_source_contracts",
           "module_source_contract_bindings"
         ],
         "FIXTURES_REQUIRED": [
+          "module_narrow_integer_codec",
           "module_source_contract_bindings"
         ],
         "WORKING_DIRECTORY": "@BUILD@/modules"
@@ -9591,6 +9593,30 @@
   ],
   "fixtures": [
     {
+      "test": "module_narrow_integer_codec_source_contracts",
+      "native": "narrow_integer_codec_source_contracts",
+      "command": [
+        "@PYTHON@",
+        "-B",
+        "@SOURCE@/scripts/narrow_integer_source_admission_5_0_6.py",
+        "--check"
+      ],
+      "properties": {
+        "DEPENDS": [
+          "module_source_contract_bindings"
+        ],
+        "FIXTURES_REQUIRED": [
+          "module_source_contract_bindings"
+        ],
+        "FIXTURES_SETUP": [
+          "module_narrow_integer_codec"
+        ],
+        "RUN_SERIAL": true,
+        "TIMEOUT": 180.0,
+        "WORKING_DIRECTORY": "@BUILD@/modules"
+      }
+    },
+    {
       "test": "module_parity_business_id_lookup_cli_source_contracts",
       "native": "parity_business_id_lookup_cli_source_contracts",
       "command": [
@@ -11128,6 +11154,7 @@
     "legacy_observation_source",
     "lifecycle_cli_source",
     "logging_cli",
+    "narrow_integer_codec",
     "numeric_time_driver_source",
     "pagination_driver_source",
     "private_key_classifier_driver_source",
@@ -11523,6 +11550,7 @@
     "tests/parity/compare_generated_inheritance_graph.py": "8cd6f08efe9f8abd3b49d5937820aa661fb812b57d4388567cd92b26eb834d4e",
     "tests/parity/compare_graph_outcome_models_5_0_6.py": "976ccf6c73bf53c5de4a6ac4bda51c552973379bbc886406949a832d5de87b8a",
     "tests/parity/compare_ledger_execution_5_0_6.py": "956c0689b138ff6601f907566b6774136c4b5ccab746a73f0be711c04d233b6d",
+    "scripts/narrow_integer_source_admission_5_0_6.py": "e7d93466785dec3cacfd9c4f6b51fb4b0e154aa494c2b06088e2c8f370c9ae85",
     "scripts/business_id_lookup_cli_source_binding_5_0_6.py": "880b59f42fff80a4f89b6a4584f42d06a14832b6cad8947137a4d5b6516c9a02",
     "scripts/clock_cli_source_provenance_5_0_6.py": "43ebd2358582c80c639ea72c54038ca8ef22b4739439415a190329eb1c8d8ee2",
     "scripts/composed_graph_cli_source_binding_5_0_6.py": "a2811813e0985029a45654ff3a24ee6e4f73f181ca98ef299bf3ac3cb04730f4",

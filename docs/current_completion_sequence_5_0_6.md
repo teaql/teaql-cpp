@@ -1,5 +1,15 @@
 # Current completion sequence for the locked 5.0.6 goal
 
+The [current narrow-integer registration](current_narrow_source_registration_5_0_6.md)
+adds the missing native/imported source prerequisite and extends the custom join
+to 161 comparisons. Exact compiler-database and nominal caller forwarding repair
+six exposed historical receipt failures. The focused selection passes 38 native
+and three module tests in each Python mode, with 752 matching raw observations and
+final selected no-work builds. The current partition contains 718 Python commands;
+the frozen 716-command SQ02 qualification retains its earlier scope. Production
+C++, the producer, retained SDKs, pending decisions and capability statuses remain
+unchanged. Continue the configuration/consumer and complete phase exits below.
+
 This sequence applies the existing [P0-P7 plan](cpp_generator_parity_plan.md)
 and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.md)
 to the current source state. Acceptance verdicts come from the cited receipts
