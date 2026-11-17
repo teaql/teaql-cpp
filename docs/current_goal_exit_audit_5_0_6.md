@@ -1,5 +1,14 @@
 # Current exits for the C++ generator/runtime parity goal
 
+Latest authority evidence: the [current generation diagnosis](compiler_generation_authority_5_0_6.md)
+confirms original success and two actual interpreted C++ compilation failures
+for the existing complete-model function-item witness. Four explicit metadata
+formats preserve identical complete code/Assist files and reuse one successful
+native descriptor consumer; their underlying responsibilities remain distinct.
+One fresh original semantic compiler job and sixteen ordinary/optimized imported
+controls qualify the diagnosis. The missing-compiler deployment contract is
+pending, with production source preserved and no capability promotion.
+
 Latest input evidence: the [offline XML/ZIP repair](compiler_offline_model_inputs_5_0_6.md)
 retains the existing host loader's complete accepted source package. Five new
 and all 287 Java tests pass; the preceding main fails four regressions. All 80

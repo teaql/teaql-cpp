@@ -5,6 +5,16 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [generation-authority diagnosis](compiler_generation_authority_5_0_6.md)
+now confirms the current unconfigured gap with the existing complete-model
+function-item witness: the locked original compiles, while unconfigured and
+qualification entries emit C++ that fails compilation. Four explicit metadata
+formats freshly generate identical code/Assist files for that witness and
+explicitly reuse one successful actual native descriptor execution. A fresh
+original semantic compiler job and ordinary/optimized sixteen-control admission
+bind the result. The missing-compiler deployment contract is pending; this is
+a diagnosis, not complete configuration acceptance or a new exception.
+
 The [offline multi-file input repair](compiler_offline_model_inputs_5_0_6.md)
 now reuses the host XML/ZIP loader in the normal offline entry. Five new and all
 287 Java tests pass; the preceding main fails four new regressions. Eighty
