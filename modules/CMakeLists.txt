@@ -1257,6 +1257,13 @@ if(TARGET teaql_module_generated_core_query_view_probe)
         --cpp $<TARGET_FILE:teaql_module_generated_core_query_view_probe>)
 endif()
 
+if(TARGET teaql_module_narrow_integer_codec_probe)
+    add_test(NAME module_narrow_integer_codec_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_narrow_integer_codec_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_narrow_integer_codec_probe>
+        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+endif()
+
 if(TARGET teaql_module_generated_scalar_membership_probe)
     target_compile_definitions(teaql_module_generated_scalar_membership_probe PRIVATE TEAQL_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
     add_test(NAME module_generated_scalar_membership_rust_parity COMMAND ${Python3_EXECUTABLE}

@@ -1,5 +1,14 @@
 # Current exits for the C++ generator/runtime parity goal
 
+Latest frontend join: [current imported narrow-codec coverage](current_codec_module_join_5_0_6.md)
+rebuilds four affected module targets and passes eight actual module tests,
+376 complete original/imported outputs and one native regression. Three old
+programs change, 630 ELF hashes remain exact and one imported observer is added.
+Regenerated bindings preserve 403 prior entries and add one comparator; both
+Python modes reject 54 source/result corruptions. This closes the named E05
+import/registration gap while retaining the old full module epoch's scope.
+Complete G13/G14/G17 and the generation/identity/phase exits remain open.
+
 Latest authority evidence: the [current generation diagnosis](compiler_generation_authority_5_0_6.md)
 confirms original success and two actual interpreted C++ compilation failures
 for the existing complete-model function-item witness. Four explicit metadata

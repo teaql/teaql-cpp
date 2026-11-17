@@ -718,7 +718,8 @@
         "teaql_module_ledger_plan_probe",
         "teaql_module_ledger_plan_tests",
         "teaql_module_graph_save_adapter_tests",
-        "teaql_module_recursive_graph_write_tests"
+        "teaql_module_recursive_graph_write_tests",
+        "teaql_module_narrow_integer_codec_probe"
       ]
     },
     {

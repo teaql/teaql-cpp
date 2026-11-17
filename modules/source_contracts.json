@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
-  "native_registration_sha256": "b1fd88704dc32f19ed68e01288b31b9f5d4e7decc51d7cd5798d74e26f810375",
-  "canonical_contracts_sha256": "3e9dba3b3ac9a4a4acc7fc98bc94dc89503d1fed0b89817b8f23ab429e207be0",
+  "native_registration_sha256": "05ec08a2f69fc247e76ad4921123647196fdc7eb5d9405267ac6676a1f62a557",
+  "canonical_contracts_sha256": "dc6c59b1e3b47b5bf26a69e0e83e6ce7ac1ba7bde568f9703fca3be63735ef94",
   "aliases": {
     "module_examples_rust_parity": "runtime_examples_rust_parity",
     "module_canonical_examples_rust_parity": "runtime_examples_rust_parity",
@@ -5819,6 +5819,26 @@
       }
     },
     {
+      "module": "module_narrow_integer_codec_rust_parity",
+      "native": "narrow_integer_codec_rust_parity",
+      "command": [
+        "@PYTHON@",
+        "@SOURCE@/tests/parity/compare_narrow_integer_codec_5_0_6.py",
+        "--cpp",
+        "@BUILD@/modules/teaql_module_narrow_integer_codec_probe",
+        "--cpp-emulator="
+      ],
+      "properties": {
+        "DEPENDS": [
+          "module_source_contract_bindings"
+        ],
+        "FIXTURES_REQUIRED": [
+          "module_source_contract_bindings"
+        ],
+        "WORKING_DIRECTORY": "@BUILD@/modules"
+      }
+    },
+    {
       "module": "module_original_core_dynamic_search_warning_privacy",
       "native": "original_core_dynamic_search_warning_privacy",
       "command": [
@@ -11331,6 +11351,7 @@
     "tests/parity/check_sample_log_callback_close_hardened.py": "a834fed8cf7aef2a4f9d7528c2e3d4b94ca0749d36c95f824c8de0293eca4dc3",
     "tests/parity/compare_generated_request_state_5_0_6.py": "df37257312c89588e947dec5003b62ac8ae91adeaa4f4ae8daefb521d91c3de3",
     "tests/parity/compare_generated_core_query_view_5_0_6.py": "8f9f6ad50dc47cbf28388807ee44d93a35dcea4c85a6c73aa6b0eaf82b125704",
+    "tests/parity/compare_narrow_integer_codec_5_0_6.py": "41e7920f89f7f3685d39d65fdb9bc0c9a709c275ad0b16d8dc3f051a68809b7d",
     "tests/parity/compare_generated_scalar_membership_5_0_6.py": "d7745b5672d976f62fe1e91796d444edae2bf1424878c979ce3fec03b1dbe195",
     "tests/parity/compare_generated_scalar_comparison_5_0_6.py": "3c368d972c6af4207fc89f6a81e9408696531ed481d1fd424125e03af249d2e7",
     "tests/parity/compare_generated_projection_text_5_0_6.py": "2209821be197d5052eed0646e230e0ab3bfa87f579ac27b4d288491482e35857",

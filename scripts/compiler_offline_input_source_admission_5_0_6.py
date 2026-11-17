@@ -124,12 +124,14 @@ def qualified_transition(name, before, after):
 
 
 def source_rows():
-    return {**sources(), **manifest_rows()}
+    from compiler_codec_module_source_admission_5_0_6 import source_rows as module_rows
+    return {**sources(), **manifest_rows(), **module_rows()}
 
 
 def added_input_hashes():
     require(SELF not in bound("initial")["inputs_after"], "new input validator")
-    return {TEST: sources()[TEST]["after_sha256"], SELF: sha(Path(__file__).read_bytes())}
+    from compiler_codec_module_source_admission_5_0_6 import added_input_hashes as module_added
+    return {TEST: sources()[TEST]["after_sha256"], SELF: sha(Path(__file__).read_bytes()), **module_added()}
 
 
 def validate_units(record):

@@ -5,6 +5,16 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [current codec/module join](current_codec_module_join_5_0_6.md) closes an
+independent E05 gap: the narrow-codec header changed after the old complete
+module epoch while its 633 ELF files and source-binding declarations remained
+old. Canonical imported coverage now matches all 376 original outputs; four
+affected targets, eight current module tests and one native regression pass.
+The source manifest retains all prior bindings and adds the new comparator.
+Ordinary/optimized admission rejects 54 corruptions per mode. This is a scoped
+current-code join, not a fresh complete module epoch or generated narrow-SDK
+acceptance. G13/G14/G17 and the pending generation/identity decisions remain open.
+
 The [generation-authority diagnosis](compiler_generation_authority_5_0_6.md)
 now confirms the current unconfigured gap with the existing complete-model
 function-item witness: the locked original compiles, while unconfigured and

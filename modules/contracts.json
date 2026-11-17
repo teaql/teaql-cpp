@@ -5733,6 +5733,13 @@
           ]
         }
       ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "narrow_integer_codec_probe",
+      "source": "tests/parity/narrow_integer_codec_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
     }
   ],
   "fixtures": [
