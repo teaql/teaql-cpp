@@ -1,5 +1,15 @@
 # Current exits for the C++ generator/runtime parity goal
 
+Latest field/role evidence: the [eighteen ordinary forms](compiler_scalar_family_5_0_6.md)
+have 6,816 exact matching consumer outputs. The independent
+[required-ID/optional-FK continuation](compiler_identity_roles_5_0_6.md) adds one
+fresh complete SDK pair and forty-two matching read/governed outputs, including
+actual NULL clearing and wide IDs. Regular Business ID consumers are explicitly
+reused through unchanged identities. The earlier Business ID diagnosis below
+is resolved by its later implementation; it is retained as history. E01's
+complete routing/interpretation scope, E03/E04 decisions and E02/E05/E06 final
+joins remain independent. G13/G14/G17 stay partial.
+
 This audit applies the existing [P0-P7 plan](cpp_generator_parity_plan.md),
 [SQ01-SQ08 requirements](semantic_qualification_requirements_5_0_6.md),
 [AP01-AP12 requirements](audit_privacy_requirements_5_0_6.md) and

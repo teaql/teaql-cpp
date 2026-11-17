@@ -1,5 +1,18 @@
 # C++ generator parity plan
 
+Current structural identity continuation:
+[Required IDs and optional foreign keys](compiler_identity_roles_5_0_6.md)
+compile through one fresh ordinary v4 host/controller and complete original/C++
+SDK pair. All forty-two raw outputs match: two Q/E/JSON/SQL datasets and forty
+governed Save outcomes with explicit nullable FK operands. Actual IDs include
+values above 32 bits and the signed SQLite INTEGER maximum. NULL clearing,
+whole-plan intent, rollback, optimistic conflicts and committed audit failure
+retain their distinct states. This closes the named structural-role consumer
+continuation beside the eighteen ordinary scalar forms; it does not accept the
+ordinary-u64 original refusal or arbitrary custom wrappers. Complete G14
+configuration/routing, pending identity choices and final G13/G17/P0-P7 exits
+remain open at fourteen qualified and three partial capabilities.
+
 Current ordinary scalar consumer checkpoint:
 [The eighteen-form field matrix](compiler_scalar_family_5_0_6.md) binds eighteen
 complete SDK pairs and 126 same-library scalar facts to 6,816 matching actual

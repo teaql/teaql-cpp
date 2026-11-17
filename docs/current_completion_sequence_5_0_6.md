@@ -5,6 +5,16 @@ and its [SQ01-SQ08 exit obligations](semantic_qualification_requirements_5_0_6.m
 to the current source state. Acceptance verdicts come from the cited receipts
 and their declared scopes.
 
+The [identity-role continuation](compiler_identity_roles_5_0_6.md) now joins
+required u64 IDs and optional u64 foreign keys to a fresh complete SDK pair,
+two actual Q/E/JSON/SQL outputs and forty governed Save outputs. All forty-two
+match, including NULL clearing, wide IDs, rollback, conflicts and committed
+audit-delivery failure. These roles retain their own disposition beside the
+eighteen ordinary scalar forms and regular Business IDs. The configured ordinary
+u64 compiler refusal remains separate. Continue with the remaining complete
+configuration-routing/identity and final artifact/phase exits; G13/G14/G17
+remain partial.
+
 The [eighteen-form scalar consumer matrix](compiler_scalar_family_5_0_6.md)
 now records 6,816 matching observations over complete original/C++ SDK pairs,
 including direct Checker/custom Fix, all sample scales and eleven new typed
@@ -67,9 +77,10 @@ partial. The following steps preserve the existing phase exits:
    Use the compiler-observed scalar and semantic-storage inventories as the
    concrete work list, with separate required/optional and model-identity rows.
    The finite carrier and eighteen ordinary-field consumer matrices are recorded.
-   Reconcile their exact scopes with the structural u64 and semantic Business ID
-   responsibilities and any remaining configuration branches before claiming
-   the complete GP11/G14 mapping exit.
+   The required-ID/optional-FK continuation and explicit regular Business ID
+   reuse now have named source and consumer dispositions. Preserve those exact
+   scopes while completing remaining configuration branches and routing before
+   claiming the complete GP11/G14 mapping exit.
 2. Join those generated callers to G17's governed execution: request intent and
    root/nested/ledger lineage, whole-plan Policy, safe audit/SQL diagnostics,
    rollback and commit/delivery outcomes. Reuse unchanged qualified components
@@ -94,23 +105,26 @@ rerun completed business tests for receipt-only changes; verify the changed
 reader with its valid and invalid inputs in both Python modes. Reserve the
 complete integration run for the final source state.
 
-## Next mapping delivery
+## Next configuration delivery
 
-Inventory the ten canonical scalar mappings in the producer's
-`CppCompilerScalarStorage`, their supported optional forms and the separately
-typed Business ID storage contract. Bind each row to the complete original
-library, observed getter identity, descriptor and existing C++ carrier. The
-mapping table is a work list, not acceptance by enumeration.
+The ten canonical scalar mappings in `CppCompilerScalarStorage` now have
+named ordinary-field or structural-role consumers and complete original
+compiler witnesses. The separately typed Business ID contract retains its
+own semantic identity. Preserve those concrete field/role bindings rather than
+reopening completed executions to increase model counts.
 
 The eighteen ordinary scalar forms now have named actual Checker/sample
 dispositions and paired Query/E and governed observations through new or
 explicitly retained execution. The original JSON LargeText schema/load defect
 and matching sample refusals remain separate. Strong Business ID results retain
 their own exact private SDK/source/native bindings. Required/optional structural
-u64 roles and the configured ordinary-u64 original compiler refusal do not
-substitute for one another. Reconcile these exact field/role dispositions with
-any remaining configuration branches before declaring the complete GP11/G14
-mapping exit. Earlier v2/v3 observations retain their protocol and source scopes.
+u64 roles now have independent actual nullable-query/Save evidence; they do not
+accept the configured ordinary-u64 original compiler refusal. Next name each
+remaining configuration responsibility by source owner and consumer, including
+complete compiler routing versus the still-preserved unconfigured interpreter.
+Replace redundant interpretation only after the existing contracts are covered.
+Pending identity decisions and final artifact/phase joins retain their exits.
+Earlier v2/v3 observations retain their protocol and source scopes.
 
 | Delivery | Exit evidence |
 | --- | --- |
