@@ -53,13 +53,16 @@ def functions(source):
 
 
 def validate_reader_continuation(record):
+    from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and set(record["paths"]) == {DYNAMIC} and record["preceding_sources_sha256"] == RECORDS["sources"][1],
             "one bounded recursive identity-guard repair")
     row = record["paths"][DYNAMIC]
     require(row["before_source"] == bound("sources")["paths"][DYNAMIC]["after_source"]
             and row["before_sha256"] == sha(row["before_source"].encode())
-            and row["after_sha256"] == sha(row["after_source"].encode()) == sha(source_path(DYNAMIC).read_bytes()),
+            and row["after_sha256"] == sha(row["after_source"].encode())
+            and (row["after_sha256"] == sha(source_path(DYNAMIC).read_bytes())
+                 or decision_matches(source_path(DYNAMIC), row["after_sha256"])),
             "exact recorded guard source images")
     before, after = functions(row["before_source"]), functions(row["after_source"])
     require(before.keys() == after.keys() and [name for name in before if before[name] != after[name]] == ["current_input_matches"],
@@ -85,6 +88,7 @@ def reader_continuation():
 
 def validate_sources(record):
     from compiler_offline_input_source_admission_5_0_6 import qualified_transition as input_transition
+    from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
     initial, units = bound("initial"), bound("units")
     expected = {"producer:" + name for name in units["source_images"]} | {DYNAMIC, LOCAL, SDK}
     require(record["complete"] is True and record["whole_goal_complete"] is False
@@ -93,7 +97,8 @@ def validate_sources(record):
         require(row["after_sha256"] == sha(row["after_source"].encode())
                 and (row["after_sha256"] == sha(source_path(name).read_bytes())
                      or name == DYNAMIC and row["after_sha256"] == reader_continuation()["before_sha256"]
-                     or name == CORE and input_transition(name, row["after_sha256"], sha(source_path(name).read_bytes()))),
+                     or name == CORE and input_transition(name, row["after_sha256"], sha(source_path(name).read_bytes()))
+                     or decision_matches(source_path(name), row["after_sha256"])),
                 "exact current offline source image")
         if row["before_source"] is None:
             require(row["before_sha256"] is None and name not in initial["inputs_after"], "actual new input")
@@ -194,6 +199,9 @@ def source_epochs():
     from narrow_integer_registration_source_admission_5_0_6 import source_rows as registration_rows
     for name, row in registration_rows().items():
         result.setdefault(source_path(name).resolve(), []).append(row)
+    from generation_decision_source_admission_5_0_6 import source_rows as decision_rows
+    for name, row in decision_rows().items():
+        result.setdefault(source_path(name).resolve(), []).append(row)
     return result
 
 
@@ -232,6 +240,8 @@ def added_input_hashes():
     result.update(inputs_added())
     from narrow_integer_registration_source_admission_5_0_6 import added_input_hashes as registration_added
     result.update(registration_added())
+    from generation_decision_source_admission_5_0_6 import added_input_hashes as decisions_added
+    result.update(decisions_added())
     return result
 
 

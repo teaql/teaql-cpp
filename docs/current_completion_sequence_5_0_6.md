@@ -1,5 +1,13 @@
 # Current completion sequence for the locked 5.0.6 goal
 
+The user [approved all three generation decisions](approved_generation_decisions_5_0_6.md)
+on 2026-11-20: formal C++ generation must reject missing locked compiler
+configuration, preserve correct C++ Option-model behavior and preserve the
+explicit column-attribute refusal. The latter two are independent compatibility
+exceptions. Historical references below to pending choices describe their
+earlier checkpoints; they are no longer unanswered questions. Complete compiler
+route integration, protected-consumer joins and the final phase exits remain.
+
 The [current narrow-integer registration](current_narrow_source_registration_5_0_6.md)
 adds the missing native/imported source prerequisite and extends the custom join
 to 161 comparisons. Exact compiler-database and nominal caller forwarding repair
@@ -509,8 +517,8 @@ and count a capability as qualified only after its complete exit criteria pass.
 
 | Order | Work package | Exit evidence |
 | --- | --- | --- |
-| 1 | SQ02 acceptance integrity: qualified current cohort | The registered aggregate reconciles all 513 comparisons, 203 source/control/invariant registrations, 64 primary source owners and ten helper/dynamic-source reviews. Ordinary and optimized controls reject missing/substituted evidence. Preserve exact source admissions, enforced historical execution boundaries and scoped compiler results when changing this cohort. |
-| 2 | Close G14 generated metadata | Reconcile AP01-AP12 against locked 5.0.6 responsibilities within the supported model scope. Generated descriptors, compiler/caller results, artifact reproduction and approved compatibility exceptions agree. The column-literal exception candidate remains pending user choice. |
+| 1 | SQ02 acceptance integrity: qualified frozen cohort and current extensions | The frozen registered aggregate reconciles 513 comparisons, 203 source/control/invariant registrations, 64 primary source owners and ten helper/dynamic-source reviews. Preserve that scope and the later 718-command registration extensions. Ordinary and optimized controls reject missing/substituted evidence; exact source admissions and enforced historical compiler boundaries remain required. |
+| 2 | Close G14 generated metadata | Reconcile AP01-AP12 against locked 5.0.6 responsibilities within the supported model scope. Generated descriptors, compiler/caller results, artifact reproduction and approved compatibility exceptions agree. Apply the separately approved Option-model and column-attribute decisions; their formal-route and protected-consumer joins remain explicit work. |
 | 3 | Close G17 governed execution | Join accepted metadata to generated Q/E, Checker/Fix, whole-plan Policy, graph Save, SQLite commit/rollback and safe audit/log publication. Retain actual source comparisons for denial, stale versions and post-commit delivery failure. |
 | 4 | Sign off the frozen implementation | Reproduce affected SDKs/examples, run the Java/compiler and required module gates, then one complete current native epoch with exact registry/JUnit membership and unchanged inputs. Update each P0-P7 exit and the capability ledger from those results. |
 
@@ -635,9 +643,9 @@ descriptor or SQLite consumer where the effect changes behavior. Keep compiler
 refusals, valid metadata, privacy classifications and source parse stages
 distinct. Reproduce affected SDKs before marking a producer change accepted.
 
-The separate quoted-column attribute case remains a pending compatibility
-decision. Existing approved JSON, quoted-foreign-key and invalid wire-naming
-exceptions do not cover it. Other G14 work can continue without that decision.
+The separate quoted-column attribute case was approved on 2026-11-20: preserve
+the explicit C++ refusal under its independent compatibility exception. The JSON,
+quoted-foreign-key and invalid wire-naming exceptions retain their own scopes.
 Its two current-source model executions and thirteen strict controls have been
 [refreshed after the reverse-type corpus addition](field_attribute_boundary_5_0_6.md#requalification-after-the-reverse-type-corpus-addition).
 This candidate previously had only a standalone verification command, not a

@@ -55,13 +55,15 @@ def initial():
 
 
 def validate_sources(record):
+    from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
     expected = {"tests/CMakeLists.txt", "modules/source_contracts.json", DRIVER, *GUARDS}
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and set(record["paths"]) == expected, "exact registration, manifest and identity-guard inputs")
     for name, row in record["paths"].items():
         require(row["after_sha256"] == sha(row["after_source"].encode())
                 and (row["after_sha256"] == sha((ROOT / name).read_bytes())
-                     or corrected_source_matches(name, row["after_sha256"])), "exact qualified registration source: " + name)
+                     or corrected_source_matches(name, row["after_sha256"])
+                     or decision_matches(ROOT / name, row["after_sha256"])), "exact qualified registration source: " + name)
         if name == DRIVER:
             require(row["before_source"] is None and row["before_sha256"] is None
                     and "runtime:" + name not in initial()["inputs_after"], "one new bounded registration driver")
@@ -121,6 +123,9 @@ def sources():
 
 
 def current_source_matches(path, expected):
+    from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
+    if decision_matches(path, expected):
+        return True
     path = Path(path).resolve()
     if not path.is_file() or type(expected) is not str:
         return False
@@ -132,7 +137,8 @@ def current_source_matches(path, expected):
     if corrected_source_matches(path.relative_to(ROOT).as_posix(), expected):
         return True
     row = sources().get(path.relative_to(ROOT).as_posix())
-    return row is not None and row["before_sha256"] == expected and row["after_sha256"] == actual
+    return row is not None and row["before_sha256"] == expected and (
+        row["after_sha256"] == actual or decision_matches(path, row["after_sha256"]))
 
 
 def source_rows():
@@ -170,7 +176,8 @@ def validate_reader_correction(record):
     before = record["helper_before_source"]
     require(before == preimage["source_images"][SELF]["source"]
             and sha(before.encode()) == execution["inputs_after"]["runtime:" + SELF], "exact executed source-admission helper")
-    current = Path(__file__).read_text()
+    from generation_decision_source_admission_5_0_6 import previous_source
+    current = previous_source("runtime:" + SELF, Path(__file__).read_text())
     binding = 'READER_SHA = "' + READER_SHA + '"\n'
     require(current.count(binding) == 1
             and current.replace(binding, 'READER_SHA = "__READER_RECORD_SHA256__"\n', 1)
@@ -184,14 +191,18 @@ def reader_sources():
     record = read(READER)
     validate_reader_correction(record)
     before = record["helper_before_source"]
-    after = Path(__file__).read_text()
+    from generation_decision_source_admission_5_0_6 import previous_source
+    after = previous_source("runtime:" + SELF, Path(__file__).read_text())
     return {**record["paths"], SELF: dict(before_source=before, before_sha256=sha(before.encode()),
                                          after_source=after, after_sha256=sha(after.encode()))}
 
 
 def corrected_source_matches(name, expected):
+    from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
     row = reader_sources().get(name)
-    return row is not None and row["before_sha256"] == expected and row["after_sha256"] == sha((ROOT / name).read_bytes())
+    return row is not None and row["before_sha256"] == expected and (
+        row["after_sha256"] == sha((ROOT / name).read_bytes())
+        or decision_matches(ROOT / name, row["after_sha256"]))
 
 
 def validate_nominal_source(record):
@@ -232,11 +243,14 @@ def nominal_sources():
 
 
 def validate_continuation(record):
+    from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
     require(record["complete"] is True and record["whole_goal_complete"] is False
             and set(record["paths"]) == {CUSTOM, DATABASE}, "one current custom reader and one exact compiler-database edge")
     for name, row in record["paths"].items():
         require(row["before_sha256"] == sha(row["before_source"].encode())
-                and row["after_sha256"] == sha(row["after_source"].encode()) == sha((ROOT / name).read_bytes()),
+                and row["after_sha256"] == sha(row["after_source"].encode())
+                and (row["after_sha256"] == sha((ROOT / name).read_bytes())
+                     or decision_matches(ROOT / name, row["after_sha256"])),
                 "exact reader/compiler-database preimage and current bytes")
     row = record["paths"][CUSTOM]
     require(row["before_sha256"] == initial()["inputs_after"]["runtime:" + CUSTOM], "previously installed custom reader")

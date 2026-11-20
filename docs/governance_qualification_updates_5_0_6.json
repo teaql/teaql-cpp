@@ -29,7 +29,20 @@
       }
     }
   ],
-  "open_requirements": ["GP11", "GP16"],
-  "pending_compatibility_decisions": ["option_model", "column_attribute"],
-  "whole_goal_complete": false
+  "open_requirements": [
+    "GP11",
+    "GP16"
+  ],
+  "pending_compatibility_decisions": [],
+  "whole_goal_complete": false,
+  "approved_compatibility_decisions": {
+    "option_model": {
+      "approved_on": "2026-11-20",
+      "contract": "docs/option_model_compatibility_exception_5_0_6.md"
+    },
+    "column_attribute": {
+      "approved_on": "2026-11-20",
+      "contract": "docs/field_attribute_compatibility_exception_5_0_6.md"
+    }
+  }
 }

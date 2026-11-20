@@ -1,5 +1,14 @@
 # C++ generator parity plan
 
+Current approved behavior, 2026-11-20:
+[Three generation decisions](approved_generation_decisions_5_0_6.md) require an
+explicit error for missing trusted locked compiler settings and preserve correct
+C++ Option-model behavior plus explicit column-attribute refusal as two separate
+compatibility exceptions. All 289 current Java contracts pass; the preceding
+factory fails five new regressions. These decisions supersede earlier pending
+choices. Complete formal-route, protected-consumer and P0-P7 exits remain open;
+G13/G14/G17 retain their partial status.
+
 Current default offline source-route continuation:
 [Shared trusted compiler assembly](compiler_offline_routing_5_0_6.md) makes the
 default two-argument entry honor JVM/environment settings through the existing

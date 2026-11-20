@@ -1,5 +1,11 @@
 # Generation authority and remaining interpretation, Rust 5.0.6
 
+The user [resolved the deployment choice](approved_generation_decisions_5_0_6.md)
+on 2026-11-20: formal C++ generation requires trusted locked compiler settings
+and fails explicitly when they are absent. The diagnosis and pending-choice
+statements below retain their historical scope. The Option-model and
+column-attribute choices were independently approved on the same date.
+
 ## Source contract and next qualification
 
 The configured dynamic, offline and archive entries have independent source,

@@ -1,5 +1,12 @@
 # Current exits for the C++ generator/runtime parity goal
 
+Current behavior decisions, approved 2026-11-20: [the three generation choices](approved_generation_decisions_5_0_6.md)
+are settled. Missing trusted compiler configuration must fail explicitly;
+the Option-model collision and column-attribute refusal have separate approved
+exceptions. Earlier pending-decision text is historical. These dispositions do
+not promote G13/G14/G17 or replace remaining source, consumer and integration
+evidence.
+
 Latest registered-source repair: [narrow-integer source prerequisites](current_narrow_source_registration_5_0_6.md)
 now run before both native and imported comparison. The custom join includes the
 new 376-case row beside its preserved 160 historical rows. Exact compiler-database,
@@ -112,10 +119,10 @@ cases. These scoped results do not prove every model/grammar combination.
 
 | Exit | Required work and authoritative acceptance boundary |
 | --- | --- |
-| E01: AP02 configuration interpretation | Reconcile the complete declared literal, expression, type/path/binder, statement/item, lexical and parser-entry responsibilities with source-owned generated consumers. Existing finite corpora, AST witnesses and typed projections retain their scopes. The current plan still requires embedded Rust grammar compatibility; a clarification about language-specific configuration syntax is pending. No boundary is changed merely by asking. |
+| E01: AP02 configuration interpretation | Reconcile the complete declared literal, expression, type/path/binder, statement/item, lexical and parser-entry responsibilities with source-owned generated consumers. Existing finite corpora, AST witnesses and typed projections retain their scopes. Full embedded Rust grammar compatibility remains required. The approved formal-entry contract rejects missing locked compiler configuration; explicit qualification and older compiler-document formats retain their declared authority. |
 | E02: AP01/AP04-AP10 and GP11 composition | Join metadata declaration/ownership and canonical/storage/descriptor identities to complete binding classification, governed query/mutation/graph execution, authoritative rows, transaction/audit delivery, ordinary/sensitive sinks, Context copies and pending cleanup. Accepted source-owned runtime mechanisms and complete G01-G12/G15/G16 responsibility reviews must be reused explicitly, rather than treating each model as a new runtime implementation. Emitting metadata or observing matching values alone cannot establish this join. |
-| E03: Option model collision | Resolve the separately recorded original prelude/model-name collision. The [actual diagnostic](parity/ap02_plain_option_model_diagnostic_5_0_6.json.gz) has original compiler exit 101 and C++ exit 0 for the Self projection. The desired C++ behavior requires its own explicit disposition; the diagnostic is not matching-source acceptance. |
-| E04: Column literal/attribute boundary | Resolve the [confirmed column configuration injection](field_attribute_boundary_5_0_6.md). Original generated descriptors accept inserted column/length attributes while C++ rejects the unescaped quote. This remains a separate pending choice. The approved quoted-FK exception does not authorize it. |
+| E03: Option model collision | Behavior approved 2026-11-20: preserve the correct C++ modeled Option entity and Self projection under its [independent exception](option_model_compatibility_exception_5_0_6.md). Original compiler exit 101 and C++ exit 0 remain a recorded mismatch. Integrating this C++ behavior with the formal original-compiler route remains an explicit obligation; approval does not establish that route's successful execution. |
+| E04: Column literal/attribute boundary | Behavior approved 2026-11-20: preserve the explicit C++ refusal under its [independent exception](field_attribute_compatibility_exception_5_0_6.md). Original accepted column/length attributes and the C++ refusal remain visible. Preserve valid escaped-column behavior and join this boundary to the current generation/consumer epoch. The quoted-FK exception remains separate. |
 | E05: SQ04/SQ06 and AP11 artifact/frontend join | Retain exact producer/model/dependency identities, all generated destinations, accurate Assist, compiler positive/negative cases, handwritten examples and the relevant canonical module/ownership evidence. Distinguish fresh reproduction from unchanged-source reuse. Two Context allocation domains, checked borrows, explicit destination copies, actual destruction and cancel/join requirements remain intact. Full sanitizer and MIPS profiles are not routine requirements; new lifetime or architecture changes require their relevant checks. |
 | E06: SQ05/AP12/GP16 and P7 final integration | Complete the actual current native build and full registry execution with exact JUnit membership, zero failures/errors/skips, unchanged source/reference inputs and a final no-work build. Then join every capability and earlier phase exit. A successful native epoch cannot accept E01-E05 or promote G13/G14/G17 by itself. |
 
@@ -128,17 +135,16 @@ cases. These scoped results do not prove every model/grammar combination.
    mode. Publish the qualified source-prerequisite/preset repair without
    relabeling the failed first epoch or the historical native result. Native,
    sanitizer and MIPS profiles retain their change-specific policies.
-2. Reconcile the remaining configuration and compatibility boundaries in
-   E01/E03/E04 against the locked source. Keep the existing full Rust grammar
-   requirement until an explicit scope answer arrives. Record each approved
-   exception separately; an unanswered recommendation changes no contract.
-   The [constant-function diagnostic](ap02_const_function_calls_5_0_6.md)
-   supplies the next concrete E01 repair: three valid original projection
-   configurations compile unsuccessfully in C++, alongside a matching positive
-   control and two matching compiler refusals. Its completed collection is not
-   parity acceptance.
-   Continue the independent E02 source/consumer join while those answers are
-   pending.
+2. Apply the approved E01/E03/E04 decisions against the locked source. Formal
+   generation must require trusted locked compiler settings; full Rust grammar
+   compatibility remains in scope. Keep each compiler-observation format's
+   actual authority explicit. Join the approved Option-model behavior to the
+   formal original-compiler route without suppressing unrelated compiler errors.
+   Retain the independently approved column-attribute refusal and valid escaped
+   columns. The earlier constant-function diagnosis and its subsequent compiler
+   observations retain their recorded scopes. Continue E02 with the qualified
+   configurations and actual protected consumers; no decision needs to be asked
+   again.
 3. Complete E02 with the generated application's actual protected consumers:
    metadata and identities, Query/Save, authoritative rows, transaction outcome,
    audit delivery, ordinary/sensitive publication and Context cleanup. Reuse

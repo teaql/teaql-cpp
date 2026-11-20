@@ -84,6 +84,7 @@ def reader_continuation():
 
 
 def validate_sources(record):
+    from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
     initial, units = bound("initial"), bound("units")
     expected = {"producer:" + name for name in initial["source_images"]} | READERS | {GLOBAL, LOCAL}
     require(record["complete"] is True and record["whole_goal_complete"] is False
@@ -92,7 +93,8 @@ def validate_sources(record):
         require(row["before_sha256"] == sha(row["before_source"].encode())
                 and row["after_sha256"] == sha(row["after_source"].encode())
                 and (row["after_sha256"] == sha(source_path(name).read_bytes())
-                     or name == LOCAL and row["after_sha256"] == reader_continuation()["paths"][LOCAL]["before_sha256"]),
+                     or name == LOCAL and row["after_sha256"] == reader_continuation()["paths"][LOCAL]["before_sha256"]
+                     or decision_matches(source_path(name), row["after_sha256"])),
                 "exact before/after source images")
         if name.startswith("producer:"):
             path = name.split(":", 1)[1]

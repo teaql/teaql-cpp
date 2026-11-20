@@ -1,5 +1,11 @@
 # Generated C++ entity, query and expression APIs
 
+Formal C++ generation requires trusted locked compiler configuration. Missing
+settings fail explicitly before SDK publication; see the
+[approved generation contract](approved_generation_decisions_5_0_6.md). Explicit
+qualification flags and compiler-observation documents retain their declared
+development scope.
+
 Remaining alignment follows [cpp_generator_parity_plan.md](cpp_generator_parity_plan.md).
 The Context-bound Q/E milestone is complete; full Rust generator parity remains active.
 

@@ -59,6 +59,7 @@ def fingerprint(value):
 
 
 def validate(manifest, entries, build):
+    from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
     from narrow_integer_registration_source_admission_5_0_6 import separate_custom_registration
     entries, narrow_registration = separate_custom_registration(entries, build)
     require(manifest["complete"] is True and manifest["whole_goal_complete"] is False
@@ -106,7 +107,8 @@ def validate(manifest, entries, build):
                 and normalized(owner["command"], ROOT, build) == group["source_command"],
                 "source validator command changed")
         for name, wanted in group["source_inputs"].items():
-            require(digest(ROOT / name) == wanted, "qualified source helper changed: " + name)
+            require(digest(ROOT / name) == wanted or decision_matches(ROOT / name, wanted),
+                    "qualified source helper changed: " + name)
         for evidence in group["evidence"]:
             require(digest(ROOT / evidence["path"]) == evidence["sha256"],
                     "retained source evidence changed")

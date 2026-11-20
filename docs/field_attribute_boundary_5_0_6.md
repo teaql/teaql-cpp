@@ -1,5 +1,10 @@
 # Column literal and derive-attribute boundary
 
+The user approved preserving the explicit C++ refusal on 2026-11-20. The
+[independent compatibility exception](field_attribute_compatibility_exception_5_0_6.md)
+supersedes pending-approval statements in the historical checkpoints below.
+Original execution receipts retain their nonmatching diagnostic status.
+
 This is a diagnostic finding against runtime commit
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3` and generator commit
 `45e1572c4956ca963410d8ea436ead3c8857087a`. It does not qualify a new

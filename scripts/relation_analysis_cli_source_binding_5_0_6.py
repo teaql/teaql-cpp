@@ -39,6 +39,7 @@ class Validator:
         self.registry = registry
 
     def validate_files(self):
+        from generation_decision_source_admission_5_0_6 import current_input_matches as decision_matches
         contract = self.registry
         require(read(ROOT / 'upstream.lock.json')['commit'] == contract['runtime_commit'],
                 'locked Rust runtime')
@@ -49,9 +50,12 @@ class Validator:
                 text=True).strip()
             require(actual == commit, 'locked reference checkout: ' + checkout)
         for path, wanted in contract['support_files'].items():
-            require(digest(ROOT / path) == wanted, 'current source support: ' + path)
+            require(digest(ROOT / path) == wanted or decision_matches(ROOT / path, wanted),
+                    'current source support: ' + path)
         for key in ('corpus', 'exception_manifest', 'source_failure'):
-            require(digest(ROOT / contract[key]) == contract[key + '_sha256'],
+            require(digest(ROOT / contract[key]) == contract[key + '_sha256']
+                    or key == 'exception_manifest' and decision_matches(
+                        ROOT / contract[key], contract[key + '_sha256']),
                     'retained ' + key)
         exception = approved_exception('quoted_fk')
         require(exception['exact_relationship_cases'] == contract['exact_count']

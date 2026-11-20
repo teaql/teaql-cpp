@@ -576,5 +576,34 @@
     "docs/parity/generated_member_alias_quoted_preservation_5_0_6.json.gz": "86596d10bae9d7878cb94388ec7bb8c5e83da6b46295f7b1d2dd8237107de379",
     "docs/parity/generated_wire_mappings_profile_inspection_5_0_6.json.gz": "56f1297f94c3380419dd67a4addc8eb74c19b8fa14a414912d74febd6fcb3f21"
   },
-  "existing_json_payload_exception": "docs/json_payload_compatibility_exception_5_0_6.md"
+  "existing_json_payload_exception": "docs/json_payload_compatibility_exception_5_0_6.md",
+  "option_model": {
+    "id": "option_model_name_collision",
+    "status": "approved",
+    "approved_on": "2026-11-20",
+    "documentation": "docs/option_model_compatibility_exception_5_0_6.md",
+    "cpp_contract": "Preserve the modeled C++ Option entity and Self projection; do not emulate the locked Rust prelude-name collision.",
+    "case_names": [
+      "option_plain_self"
+    ],
+    "evidence_sha256": {
+      "docs/parity/ap02_plain_option_model_diagnostic_5_0_6.json.gz": "58e63896733d147bd89581098f736e80aa676b0f604684f4312f6cc74a80e9f9"
+    }
+  },
+  "column_attribute": {
+    "id": "unescaped_column_attribute_injection",
+    "status": "approved",
+    "approved_on": "2026-11-20",
+    "documentation": "docs/field_attribute_compatibility_exception_5_0_6.md",
+    "cpp_contract": "Reject unescaped quotes in original Rust column literals explicitly before publishing generated files.",
+    "case_names": [
+      "column_attribute_alias",
+      "column_attribute_shape"
+    ],
+    "evidence_sha256": {
+      "tests/parity/field_attribute_models_5_0_6.json.gz": "3083bf99f3b0c94ec6929978781edd382645e633e17346dad38ed473c61ff2e0",
+      "docs/parity/field_attribute_after_reverse_types_property_exception_5_0_6.json.gz": "ecd68ea8e45c7f423d1d4599e832e5ab51e72f18bed9555677d5f64dc54d0853",
+      "docs/parity/field_attribute_after_reverse_types_valid_control_5_0_6.json.gz": "53de5a9673c5513e9b09e3afed6066949856b380601bbc543c7b1fd4edd645ee"
+    }
+  }
 }
