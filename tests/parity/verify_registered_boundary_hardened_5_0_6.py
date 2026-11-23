@@ -111,8 +111,10 @@ def main():
         parent = next(parent for parent in rows if parent["historical_path"] == row["historical_path"])
         require({"before": row["before_literal"], "after": row["after_literal"]}
                 in parent["adaptations"], "Embedded transition is not the installed literal")
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from registered_boundary_source_admission_5_0_6 import dependency_matches
     for path, wanted in manifest["dependencies"].items():
-        require(digest((ROOT / path).read_bytes()) == wanted, "Local imported dependency changed")
+        require(dependency_matches(path, wanted), "Local imported dependency changed")
     support = manifest["support"]
     for item in support.values():
         require(digest((ROOT / item["path"]).read_bytes()) == item["sha256"],

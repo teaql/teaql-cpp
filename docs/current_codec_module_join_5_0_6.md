@@ -1,5 +1,35 @@
 # Current scalar codec and imported-module join, Rust 5.0.6
 
+## Current retained artifacts after the receipt repairs
+
+The [ordinary continuity check](parity/current_module_continuity_after_repairs_5_0_6.json.gz)
+and [optimized continuity check](parity/current_module_continuity_after_repairs_optimized_5_0_6.json.gz)
+verify all 634 retained imported executables, seven BMI files and thirteen
+module/runtime archives against their qualified artifact records. All 1,824
+declared preceding C++ source inputs also match both the actual files and the
+repaired 12,151-input native frame. These are file/source identity checks;
+they do not claim a fresh complete module execution.
+
+The join preserves the actual 785-test full module epoch and its separate
+ordinary/optimized admission. It follows the exact subsequent transition of
+three rebuilt historical executables, 630 unchanged executables and one new
+narrow-integer observer. The affected eight-test execution and later source-
+prerequisite selections retain their complete JUnit membership. All 376 imported
+and native narrow-integer observations agree, including complete error strings.
+No source ownership or cleanup guarantee is replaced by a binary count.
+
+Both Python modes reject eighteen corruptions of the closed result, source,
+artifact, execution and scope identities. The
+[collector execution](parity/current_module_continuity_after_repairs_execution_5_0_6.json.gz)
+retains its complete source and both successful commands. Its owned temporary
+directory is absent, reclaiming 8,504 measured bytes. Stable presets and shared
+caches are retained. The complete current native run and final capability/phase
+decisions remain separate; the records keep `fresh_module_execution`,
+`complete_current_integration` and `whole_goal_complete` false.
+
+The following sections retain the original narrow-codec checkpoint and its
+source/execution scope.
+
 ## Confirmed integration boundary and plan
 
 The last complete imported-module epoch passed 785 tests on its frozen source

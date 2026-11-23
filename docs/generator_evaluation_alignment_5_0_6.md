@@ -1,5 +1,11 @@
 # Generator evaluation alignment with the locked 5.0.6 source
 
+The later [Option naming policy](option_reserved_keyword_policy_5_0_6.md) is an
+explicit user-directed extension of the shared keyword list. The locked
+reference remains unchanged. Current evaluator/generator qualification uses
+the 98 shared and 295 C++ Java tests; the source-equality and test counts below
+retain their historical checkpoint scope.
+
 The preceding [governed compiler entry](compiler_governed_execution_5_0_6.md)
 found an actual controller refusal before compiler dispatch: the C++ workspace
 classifies `school.rank="integer()"` as a missing entity. The locked generator

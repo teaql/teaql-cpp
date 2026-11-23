@@ -98,6 +98,8 @@ def sources():
 
 @cache
 def manifest_rows():
+    from compiled_column_source_admission_5_0_6 import current_input_matches as column_matches
+
     record = bound("sdks")
     require(record["complete"] is True and len(record["before"]) == len(record["after"]) == 80,
             "all eighty regenerated input-compatible SDKs")
@@ -113,7 +115,9 @@ def manifest_rows():
                 "actual preceding input entry identity")
         expected["generator_implementation_sha256"][key] = sources()[CORE]["after_sha256"]
         require(expected == after["value"] and sha(before["text"].encode()) == before["files"][leaf]
-                and sha(after["text"].encode()) == after["files"][leaf] == sha((ROOT / name).read_bytes()),
+                and sha(after["text"].encode()) == after["files"][leaf]
+                and (after["files"][leaf] == sha((ROOT / name).read_bytes())
+                     or column_matches(ROOT / name, after["files"][leaf])),
                 "only the proven input-entry fingerprint changes")
         result["runtime:" + name] = dict(before_source=before["text"], before_sha256=before["files"][leaf],
                                         after_source=after["text"], after_sha256=after["files"][leaf])
@@ -121,8 +125,11 @@ def manifest_rows():
 
 
 def qualified_transition(name, before, after):
+    from compiled_column_source_admission_5_0_6 import qualified_transition as column_transition
+
     row = (sources() if name in (CORE, TEST, PREVIOUS) else manifest_rows()).get(name)
-    return row is not None and row["before_sha256"] == before and row["after_sha256"] == after
+    return row is not None and row["before_sha256"] == before and (row["after_sha256"] == after
+        or column_transition(name, row["after_sha256"], after))
 
 
 def source_rows():

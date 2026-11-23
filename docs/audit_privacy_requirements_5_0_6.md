@@ -1,5 +1,9 @@
 # G14 audit/privacy and identity requirements
 
+AP01-AP12 are qualified for the locked Rust 5.0.6 SQLite/core scope through complete compiler-backed configuration and actual protected consumers. The repaired complete native epoch and final metadata checks pass. See [semantic signoff](final_generator_semantic_signoff_5_0_6.md) and [final acceptance](final_generator_acceptance_5_0_6.md).
+
+## Earlier status checkpoints
+
 Latest AP02 protected-consumer continuation:
 [The cross-context partial-effect School model](audit_cross_context_partial_sql_5_0_6.md)
 retains the locked parser's early audit length `13` after a malformed middle

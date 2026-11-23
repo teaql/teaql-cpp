@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
-  "native_registration_sha256": "9a375a7bae47e9b9ec6f754453f32a6b0d790bdb426a62641b6805d98ae40587",
+  "native_registration_sha256": "c04d3f0850a3f3edc423ea2871a543e8b6590ae3ba84c9931a421182cdb3affd",
   "canonical_contracts_sha256": "dc6c59b1e3b47b5bf26a69e0e83e6ce7ac1ba7bde568f9703fca3be63735ef94",
   "aliases": {
     "module_examples_rust_parity": "runtime_examples_rust_parity",

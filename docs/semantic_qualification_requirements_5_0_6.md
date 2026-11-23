@@ -1,5 +1,9 @@
 # G13 semantic qualification requirements
 
+SQ01-SQ08 and the original P0-P7 exits are complete for the locked Rust 5.0.6 SQLite/core scope. All seventeen capabilities are qualified. The current 718-command source partition joins actual full native execution and exact final metadata. See [final acceptance](final_generator_acceptance_5_0_6.md).
+
+## Earlier status checkpoints
+
 Current SQ02 paired source/native checkpoint:
 [The complete paired command join](paired_source_binding_join_5_0_6.md)
 binds all 35 native execution peers to their source fixtures. Eight structural

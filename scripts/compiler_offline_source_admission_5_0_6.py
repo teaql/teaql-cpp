@@ -202,6 +202,21 @@ def source_epochs():
     from generation_decision_source_admission_5_0_6 import source_rows as decision_rows
     for name, row in decision_rows().items():
         result.setdefault(source_path(name).resolve(), []).append(row)
+    from option_keyword_source_admission_5_0_6 import source_rows as keyword_rows
+    for name, row in keyword_rows().items():
+        result.setdefault(source_path(name).resolve(), []).append(row)
+    from compiled_column_source_admission_5_0_6 import source_rows as column_rows
+    for name, row in column_rows().items():
+        result.setdefault(source_path(name).resolve(), []).append(row)
+    from text_alias_source_admission_5_0_6 import source_rows as text_rows
+    for name, row in text_rows().items():
+        result.setdefault(source_path(name).resolve(), []).append(row)
+    from default_source_guard_source_admission_5_0_6 import source_rows as guard_rows
+    for name, row in guard_rows().items():
+        result.setdefault(source_path(name).resolve(), []).append(row)
+    from projection_trailing_source_admission_5_0_6 import source_rows as projection_rows
+    for name, row in projection_rows().items():
+        result.setdefault(source_path(name).resolve(), []).append(row)
     return result
 
 
@@ -242,6 +257,16 @@ def added_input_hashes():
     result.update(registration_added())
     from generation_decision_source_admission_5_0_6 import added_input_hashes as decisions_added
     result.update(decisions_added())
+    from option_keyword_source_admission_5_0_6 import added_input_hashes as keywords_added
+    result.update(keywords_added())
+    from compiled_column_source_admission_5_0_6 import added_input_hashes as columns_added
+    result.update(columns_added())
+    from text_alias_source_admission_5_0_6 import added_input_hashes as text_added
+    result.update(text_added())
+    from default_source_guard_source_admission_5_0_6 import added_input_hashes as guard_added
+    result.update(guard_added())
+    from projection_trailing_source_admission_5_0_6 import added_input_hashes as projection_added
+    result.update(projection_added())
     return result
 
 

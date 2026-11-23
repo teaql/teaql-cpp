@@ -22,12 +22,17 @@ without adding logging statements to every business method.
 [Customize the runtime](#customize-the-runtime-for-your-application) ·
 [Use with a coding agent](#try-it-with-your-coding-agent)
 
+The first public C++ release is **0.1.0**. Download the source distribution and
+checksums from [GitHub Releases](https://github.com/teaql/teaql-cpp/releases/tag/0.1.0),
+then follow the [release installation guide](docs/releases/0_1_0.md).
+
 The reference design is **Rust 5.0.6**, pinned in
-[upstream.lock.json](upstream.lock.json). C++ runtime and generator alignment is
-in progress. This README describes implemented capabilities and links to their
-examples and scoped verification. Complete cross-language parity remains an
-active migration goal. The Rust reference version is separate from the C++
-release version.
+[upstream.lock.json](upstream.lock.json). Runtime and generator qualification is
+complete for the agreed SQLite/core scope, with
+[documented compatibility exceptions](docs/final_generator_acceptance_5_0_6.md).
+This README describes implemented capabilities and links to their examples and
+scoped verification. The Rust reference version is separate from the C++ release
+version; external integrations are outside the qualified scope.
 
 Start with the retained generated Order example below: it runs against SQLite
 and demonstrates typed Q/E, audited graph Save and list, one and stream execution.

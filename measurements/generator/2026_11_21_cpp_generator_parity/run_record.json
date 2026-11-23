@@ -1,0 +1,627 @@
+{
+  "schema": "teaql.generator_run_report.v1",
+  "report_created_at_utc": "2026-11-23T07:41:32.355150+00:00",
+  "report_created_at_local": "2026-11-23T15:41:32.355150+08:00",
+  "report_timezone": "Asia/Shanghai",
+  "run_id": "2026_11_21_cpp_generator_parity",
+  "purpose": "Consolidate the completed P0-P7 run and accepted audit from retained repository evidence.",
+  "packaging_scope": "Documentation and evidence indexing only; no builds or test suites were rerun to create this report.",
+  "status": "complete",
+  "effective_scope": "Rust 5.0.6 core generator/runtime responsibilities for a compact SQLite edge runtime.",
+  "effective_baseline": {
+    "runtime_version": "5.0.6",
+    "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+    "producer_commit": "df0c496d04a9fe738f49fc387be729804a46c0de",
+    "producer_branch": "cpp_support"
+  },
+  "runtime_source_checkpoint": {
+    "commit": "977166b874f4f29244621394229cc776e5c7c83c",
+    "exact_committed_tree": false,
+    "note": "The run contained uncommitted work. Source-content hashes in the native snapshot and exact final metadata transition identify the tested and qualified inputs."
+  },
+  "goal_service_snapshot": {
+    "threadId": "01a0ff04-0528-7500-8fb8-dcf026ef87f6",
+    "objective": "Complete docs/cpp_generator_parity_plan.md phases P0-P7 in /home/philip/githome/teaql-cpp and the independent /home/philip/githome/teaql_code_gen_cpp cpp_support workspace. Align all in-scope locked Rust generator responsibilities G01-G13: entity changed/eval helpers; model checkers/behaviors and Context/time fixes/evidence; inheritance/polymorphism; constants/candidates; full general typed Q/predicate/projection surfaces; page/exists/count execution and pagination optimization protocols; scalar/relationship aggregates, roll-up/facets; dynamic JSON queries; structured E diagnostics; model runtime assembly/sample data/accurate Assist; and source-based semantic qualification. Use exact generator baseline 77b301e9b29a4928aabebdbe2ccc6d03d618f247 and Rust runtime v5.0.5 commit 62940ae2b88e7acc32763853b8b4685a01c7e90a. Preserve current uncommitted work and completed Context-bound Q/E contracts, independent runtime/service/executor/provider layers, two explicit Context lifetimes, camelCase application APIs, SQLite-only compact dependency scope, original handwritten examples and original generator checkout. Implement shared runtime mechanics before thin generated adapters, regenerate rather than patch artifacts, maintain capability/evidence ledger, complete phase-specific native/compiler/Java/reproduction and relevant module/lifetime gates. Do not claim full parity or goal completion until every in-scope ledger entry and P0-P7 exit criterion is satisfied.",
+    "status": "complete",
+    "tokensUsed": 129198840,
+    "timeUsedSeconds": 1277787,
+    "createdAt": 1791692772,
+    "updatedAt": 1795209108
+  },
+  "goal_baseline_note": "The raw goal objective retains its initial Rust 5.0.5/generator baseline wording. The later user-approved locked Rust 5.0.6 baseline above is effective; earlier qualifications retain their historical scope.",
+  "timing": {
+    "goal_created_at_utc": "2026-10-11T04:26:12+00:00",
+    "goal_marked_complete_at_utc": "2026-11-20T21:11:48+00:00",
+    "goal_created_at_local": "2026-10-11T12:26:12+08:00",
+    "goal_marked_complete_at_local": "2026-11-21T05:11:48+08:00",
+    "goal_calendar_window_seconds": 3516336,
+    "goal_service_cumulative_runtime_seconds": 1277787,
+    "goal_service_cumulative_runtime_display": "14d 18h 56m 27s",
+    "native_controller_started_at_utc": "2026-11-20T18:37:53.426411+00:00",
+    "native_controller_terminal_at_utc": "2026-11-20T20:40:23.088902+00:00",
+    "native_controller_started_at_local": "2026-11-21T02:37:53.426411+08:00",
+    "native_controller_terminal_at_local": "2026-11-21T04:40:23.088902+08:00",
+    "native_controller_elapsed_seconds": 7349.86312102899,
+    "native_ctest_elapsed_seconds": 7275.78,
+    "note": "Cumulative goal-service runtime, calendar window and final native controller/CTest timings are distinct measurements. Operational timings are not a controlled performance benchmark."
+  },
+  "usage": {
+    "goal_service_tokens_used": 129198840,
+    "token_budget": null,
+    "note": "Preserved goal-service counter. No input/output billing breakdown, monetary cost or token-savings claim is inferred."
+  },
+  "environment": {
+    "host": "Linux x86_64",
+    "native_standard_library": "GCC libstdc++ 16.2.0",
+    "language_standard": "C++20",
+    "preset": "native",
+    "pinned_tool_versions": {
+      "llvm": "23.1.3",
+      "cmake": "4.4.4",
+      "ninja": "1.13.2",
+      "gcc": "16.2.0",
+      "sqlite": "3.53.2"
+    },
+    "activation_script": "scripts/toolchains/activate.sh"
+  },
+  "results": {
+    "phases": {
+      "P0": "qualified",
+      "P1": "qualified",
+      "P2": "qualified",
+      "P3": "qualified",
+      "P4": "qualified",
+      "P5": "qualified",
+      "P6": "qualified",
+      "P7": "qualified"
+    },
+    "capabilities": {
+      "G01": "qualified",
+      "G02": "qualified",
+      "G03": "qualified",
+      "G04": "qualified",
+      "G05": "qualified",
+      "G06": "qualified",
+      "G07": "qualified",
+      "G08": "qualified",
+      "G09": "qualified",
+      "G10": "qualified",
+      "G11": "qualified",
+      "G12": "qualified",
+      "G13": "qualified",
+      "G14": "qualified",
+      "G15": "qualified",
+      "G16": "qualified",
+      "G17": "qualified"
+    },
+    "audit_privacy_requirements": 12,
+    "governance_requirements": 16,
+    "semantic_qualification_requirements": 8,
+    "native": {
+      "tests": 1103,
+      "passed": 1103,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "post_build_no_work": true,
+      "source_inputs": 12151,
+      "native_consumers": 708,
+      "library_tool_inputs": 8,
+      "evidence": "native_terminal"
+    },
+    "compiler": {
+      "positive": 57,
+      "negative": 144,
+      "total": 201,
+      "scope": "Actual ordinary compiler gate within the native epoch; not an additional native test total.",
+      "evidence": "compiler_output"
+    },
+    "java": {
+      "shared": 98,
+      "cpp": 305,
+      "total": 403,
+      "compiled_sources": 331,
+      "evidence": "java_suite",
+      "scope": "Executed at the latest producer code change; exact unchanged producer inputs are reused in final qualification."
+    },
+    "registered_source_partition": {
+      "python_commands": 718,
+      "comparisons": 514,
+      "source_controls": 204,
+      "primary_owners": 65
+    },
+    "sdk_reproduction": {
+      "sdks": 80,
+      "code_assist_files": 3560,
+      "evidence": "sdk_reproduction",
+      "scope": "Fresh reproduction at the last producer change; subsequent complete file/fingerprint continuity is verified."
+    },
+    "imported_artifact_continuity": {
+      "executables": 634,
+      "bmis": 7,
+      "archives": 13,
+      "historical_full_tests": 785,
+      "fresh_full_module_execution": false,
+      "evidence": "module_continuity"
+    },
+    "final_audit": {
+      "accepted_evidence": "accepted_final_audit",
+      "modes": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-B",
+            "/tmp/teaql_final_completion_audit_repaired_j5ub3mj_/audit.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-B",
+            "-O",
+            "/tmp/teaql_final_completion_audit_repaired_j5ub3mj_/audit.py"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "initial_failed_audit": "initial_failed_completion_audit"
+    },
+    "final_inventory_checks": [
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/verify_generator_parity.py",
+          "--require-complete"
+        ],
+        "cwd": "/home/philip/githome/teaql-cpp",
+        "elapsed_seconds": 1.0708068860694766,
+        "exit_code": 0,
+        "label": "require_complete",
+        "stderr": "",
+        "stdout": "Verified 42 locked generator sources and 17 capability records; 0 remain unqualified\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/verify_p0_inventory_5_0_6.py"
+        ],
+        "cwd": "/home/philip/githome/teaql-cpp",
+        "elapsed_seconds": 1.9339670350309461,
+        "exit_code": 0,
+        "label": "p0_inventory",
+        "stderr": "",
+        "stdout": "P0 inventory: 42 generator sources, 17 capabilities, 124 runtime sources and 382 current C++ targets mapped\n"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/verify_upstream.py"
+        ],
+        "cwd": "/home/philip/githome/teaql-cpp",
+        "elapsed_seconds": 0.032045447966083884,
+        "exit_code": 0,
+        "label": "upstream",
+        "stderr": "",
+        "stdout": "Verified v5.0.6 @ fe82a18982415f1746df9a2cf7c42f5e9abdc6d3\n"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "/home/philip/githome/teaql-cpp",
+        "elapsed_seconds": 0.050817955983802676,
+        "exit_code": 0,
+        "label": "runtime_whitespace",
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "/home/philip/githome/teaql_code_gen_cpp",
+        "elapsed_seconds": 0.004329778952524066,
+        "exit_code": 0,
+        "label": "producer_whitespace",
+        "stderr": "",
+        "stdout": ""
+      }
+    ],
+    "remaining_required_work": []
+  },
+  "native_commands": [
+    {
+      "stage": "reference",
+      "command": [
+        "python3",
+        "scripts/verify_upstream.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "generator",
+      "command": [
+        "python3",
+        "scripts/verify_generator_parity.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "configure",
+      "command": [
+        "cmake",
+        "--preset",
+        "native"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "native"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "stable_build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "native"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "registry",
+      "command": [
+        "ctest",
+        "--preset",
+        "native",
+        "--show-only=json-v1"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "ctest",
+      "command": [
+        "ctest",
+        "--preset",
+        "native",
+        "--output-on-failure",
+        "--output-junit",
+        "/tmp/teaql_full_native_receipt_repairs_mvestim8/epoch_junit.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "post_build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "native"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "failure_recovery": {
+    "initial_native_epoch": {
+      "evidence": "initial_failed_native",
+      "complete": false,
+      "failures": 7,
+      "errors": 0,
+      "skips": 0,
+      "components": [
+        {
+          "name": "parity_p0_inventory_5_0_6",
+          "result": "Failed",
+          "final_epoch_result": "passed",
+          "final_epoch_line": "160/1103 Test    #1: parity_p0_inventory_5_0_6 ..........................................   Passed    3.29 sec"
+        },
+        {
+          "name": "generated_credential_mutation_receipt_contracts",
+          "result": "Timeout",
+          "final_epoch_result": "passed",
+          "final_epoch_line": "79/1103 Test  #869: generated_credential_mutation_receipt_contracts ....................   Passed   51.63 sec"
+        },
+        {
+          "name": "parity_audit_cross_context_corpus_contracts",
+          "result": "Timeout",
+          "final_epoch_result": "passed",
+          "final_epoch_line": "41/1103 Test  #870: parity_audit_cross_context_corpus_contracts ........................   Passed   74.13 sec"
+        },
+        {
+          "name": "parity_ap02_reverse_relation_type_corpus",
+          "result": "Timeout",
+          "final_epoch_result": "passed",
+          "final_epoch_line": "57/1103 Test  #871: parity_ap02_reverse_relation_type_corpus ...........................   Passed   58.58 sec"
+        },
+        {
+          "name": "parity_ap02_reverse_relation_sql_receipt",
+          "result": "Timeout",
+          "final_epoch_result": "passed",
+          "final_epoch_line": "39/1103 Test  #872: parity_ap02_reverse_relation_sql_receipt ...........................   Passed   71.66 sec"
+        },
+        {
+          "name": "parity_ap02_cross_context_partial_sql_receipt",
+          "result": "Timeout",
+          "final_epoch_result": "passed",
+          "final_epoch_line": "46/1103 Test  #873: parity_ap02_cross_context_partial_sql_receipt ......................   Passed   58.58 sec"
+        },
+        {
+          "name": "parity_registered_boundary_hardened",
+          "result": "Failed",
+          "final_epoch_result": "passed",
+          "final_epoch_line": "1024/1103 Test  #964: parity_registered_boundary_hardened ................................   Passed   24.44 sec"
+        }
+      ],
+      "causes": "Dirty producer inventory, five source-receipt timeouts and one stale registered-boundary dependency pin."
+    },
+    "semantic_reader": {
+      "initial_evidence": "initial_failed_semantic_reader",
+      "accepted_evidence": "semantic_validation",
+      "cause": "A set conversion could not handle dictionary entries in the historical evidence list.",
+      "correction": "Preserve and compare the entire ordered historical evidence prefix."
+    },
+    "completion_auditor": {
+      "initial_evidence": "initial_failed_completion_audit",
+      "accepted_evidence": "accepted_final_audit",
+      "cause": "The auditor expected evidence_sha256 and source_changes_since_native, while the completion record uses evidence and source_changes_from_native.",
+      "correction": "Adapt the auditor field lookups; preserve the original completion data and failed audit."
+    }
+  },
+  "metadata_transition": {
+    "changed_source_inputs": {
+      "runtime:docs/cpp_generator_parity_ledger.json": {
+        "after": "2799f97d8de81cd3fd6b18d46e8b98ec12a852288469620ea154b0843d5e96e7",
+        "before": "a8ff235be74e3591e15d9150e236b93b8b321e7434f3e08f588c87524992e50c"
+      }
+    },
+    "indexed_historical_evidence_objects": 23,
+    "scope": "Only the capability ledger JSON changes after the tested native source frame; original evidence content and earlier narrative bodies remain preserved."
+  },
+  "evidence_reuse_and_limits": {
+    "fresh_full_module_execution": false,
+    "fresh_full_sanitizer_execution": false,
+    "fresh_mips_execution": false,
+    "physical_router_execution": false,
+    "external_service_execution": false,
+    "note": "Relevant earlier frontend/lifetime evidence is reused through exact source/artifact identities. SQLite/core qualification does not imply external provider, GPU adapter or physical-device acceptance."
+  },
+  "cleanup": {
+    "measured_closing_directories": [
+      {
+        "absent": true,
+        "evidence": "current_full_native_after_receipt_repairs_lifecycle_5_0_6.json.gz",
+        "path": "/tmp/teaql_full_native_receipt_repairs_mvestim8",
+        "removed_bytes": 1643923
+      },
+      {
+        "absent": true,
+        "evidence": "current_full_native_after_receipt_repairs_acceptance_execution_5_0_6.json.gz",
+        "path": "/tmp/teaql_final_native_join_0nhi54fu",
+        "removed_bytes": 14897
+      },
+      {
+        "absent": true,
+        "evidence": "final_native_reader_preparation_5_0_6.json.gz",
+        "path": "/tmp/teaql_final_native_reader_3aipmla5",
+        "removed_bytes": 15724
+      },
+      {
+        "absent": true,
+        "evidence": "final_native_reader_imported_preparation_5_0_6.json.gz",
+        "path": "/tmp/teaql_final_reader_imports_rqlmqkkv",
+        "removed_bytes": 17097
+      },
+      {
+        "absent": true,
+        "evidence": "final_generator_semantic_signoff_execution_5_0_6.json.gz",
+        "path": "/tmp/teaql_final_semantic_signoff_56nucqy8",
+        "removed_bytes": 14165
+      },
+      {
+        "absent": true,
+        "evidence": "final_generator_semantic_signoff_execution_repaired_5_0_6.json.gz",
+        "path": "/tmp/teaql_final_semantic_reader_repair_i9_owkt9",
+        "removed_bytes": 16507
+      },
+      {
+        "absent": true,
+        "evidence": "final_generator_metadata_validation_5_0_6.json.gz",
+        "path": "/tmp/teaql_final_metadata_validation_8csq5ew8",
+        "removed_bytes": 14612
+      },
+      {
+        "absent": true,
+        "evidence": "current_module_continuity_after_repairs_execution_5_0_6.json.gz",
+        "path": "/tmp/teaql_current_module_continuity_w7_ltpbw",
+        "removed_bytes": 8504
+      },
+      {
+        "absent": true,
+        "evidence": "native_receipt_budget_targeted_5_0_6.json.gz",
+        "path": "/tmp/teaql_native_budget_targeted_0klt6f84",
+        "removed_bytes": 42517
+      }
+    ],
+    "measured_owned_bytes_removed": 1787946,
+    "scope": "The nine-directory total from the completion record; individual subsequent audit receipts record their own additional cleanup.",
+    "stable_presets_and_shared_caches_retained": true,
+    "shared_or_global_cache_eviction": false
+  },
+  "evidence": {
+    "completion": {
+      "path": "docs/parity/final_generator_completion_5_0_6.json.gz",
+      "sha256": "5386761f7ecc07bd324315dd173067f24e956eeb80fd6fa4fe09739738d65d31",
+      "size_bytes": 483729,
+      "role": "accepted_completion"
+    },
+    "accepted_final_audit": {
+      "path": "docs/parity/final_generator_completion_audit_repaired_5_0_6.json.gz",
+      "sha256": "b9b148ec06a38bc5c7fac262a901cf68ea3956376b91db4f4f18d2e458ad44a0",
+      "size_bytes": 3039,
+      "role": "accepted_final_audit"
+    },
+    "native_terminal": {
+      "path": "docs/parity/current_full_native_after_receipt_repairs_terminal_5_0_6.json.gz",
+      "sha256": "069e8f05dee44c09f3c76b6a1471bc9cfdc4dddb56af166bb7ba7ed162d5c6c0",
+      "size_bytes": 226523,
+      "role": "successful_native_epoch"
+    },
+    "native_owner": {
+      "path": "docs/parity/current_full_native_after_receipt_repairs_lifecycle_5_0_6.json.gz",
+      "sha256": "acb72ba1d7aae4a6e753eb4b01ae1634daf767a07c3b188f633e941069781626",
+      "size_bytes": 6706,
+      "role": "successful_native_controller"
+    },
+    "native_inputs": {
+      "path": "docs/parity/current_full_native_after_receipt_repairs_inputs_5_0_6.json.gz",
+      "sha256": "f6b1c918896d58719991f69a539d304e2c988463a67b69b2057b70c49500fa5d",
+      "size_bytes": 463760,
+      "role": "frozen_source_snapshot"
+    },
+    "native_join": {
+      "path": "docs/parity/current_full_native_after_receipt_repairs_acceptance_5_0_6.json.gz",
+      "sha256": "0763d9274a5a4d885df84e09e8d5ce5f02fa2c0b91708f5a55d12b9c20494934",
+      "size_bytes": 88665,
+      "role": "accepted_native_source_artifact_join"
+    },
+    "native_join_optimized": {
+      "path": "docs/parity/current_full_native_after_receipt_repairs_acceptance_optimized_5_0_6.json.gz",
+      "sha256": "306ed09af04538379ec0a6ca21982114e8c5680e6d44594618bf1f8090b04624",
+      "size_bytes": 88664,
+      "role": "optimized_reader_of_the_same_execution"
+    },
+    "compiler_output": {
+      "path": "docs/parity/current_full_native_compiler_after_receipt_repairs_5_0_6.json.gz",
+      "sha256": "92f554a65862bef84eee871952c6699148c192d01a0919d2bf65de009a92817b",
+      "size_bytes": 3424,
+      "role": "complete_successful_compiler_output"
+    },
+    "semantic_signoff": {
+      "path": "docs/parity/final_generator_semantic_signoff_5_0_6.json.gz",
+      "sha256": "bd2ece8ee4b9aeefa7e7a41b0d9e9c7ac66bccf1b7827abfb17733576ec4388e",
+      "size_bytes": 24127,
+      "role": "semantic_signoff_before_final_metadata"
+    },
+    "semantic_validation": {
+      "path": "docs/parity/final_generator_semantic_signoff_execution_repaired_5_0_6.json.gz",
+      "sha256": "52b0ac72d9757db7b3ddc345e26100ab3037f397e2acddfe956e8d1af21e4d11",
+      "size_bytes": 924651,
+      "role": "accepted_semantic_validation"
+    },
+    "metadata_transition": {
+      "path": "docs/parity/final_generator_metadata_transition_5_0_6.json.gz",
+      "sha256": "85da150795b90cc7173c7b2c19e38dfb86dc1075301f981d2168bc937ffd29c4",
+      "size_bytes": 1517606,
+      "role": "accepted_exact_metadata_transition"
+    },
+    "metadata_validation": {
+      "path": "docs/parity/final_generator_metadata_validation_5_0_6.json.gz",
+      "sha256": "1c4287a7db454740cf41821606dcf808fc8a8680705876b7cd4515e5a608fd92",
+      "size_bytes": 923130,
+      "role": "accepted_metadata_validation"
+    },
+    "completion_checks": {
+      "path": "docs/parity/final_generator_completion_checks_5_0_6.json.gz",
+      "sha256": "54bb8dfa4af30c0c0f364b8dbeaaedfe7b4050b7b78fde940b40f504f40a7013",
+      "size_bytes": 918668,
+      "role": "successful_inventory_reference_whitespace_checks"
+    },
+    "reader_preparation": {
+      "path": "docs/parity/final_native_reader_preparation_5_0_6.json.gz",
+      "sha256": "88947ef88784389308f41fe66d832c96780e588fff327f10fbee3965851f57e5",
+      "size_bytes": 5440,
+      "role": "reader_mechanics_only"
+    },
+    "reader_imported": {
+      "path": "docs/parity/final_native_reader_imported_preparation_5_0_6.json.gz",
+      "sha256": "105302baffd3a69202f4d824abfb73546c84afaead3574323e60d9f8358b8126",
+      "size_bytes": 1435,
+      "role": "imported_reader_mechanics_only"
+    },
+    "java_suite": {
+      "path": "docs/parity/projection_trailing_java_5_0_6.json.gz",
+      "sha256": "e18a8fe48b70e903f94fd233a0db485945435dfb8822c501e59ae811e3124155",
+      "size_bytes": 972522,
+      "role": "java_suite_at_unchanged_producer_inputs"
+    },
+    "sdk_reproduction": {
+      "path": "docs/parity/projection_trailing_sdks_5_0_6.json.gz",
+      "sha256": "88daf36f523edabbaf94a2a68a93bd7c27fa0bec4676a797b7bac0936042e2e8",
+      "size_bytes": 2365086,
+      "role": "fresh_sdk_reproduction_at_last_producer_change"
+    },
+    "artifact_continuity": {
+      "path": "docs/parity/current_artifact_continuity_after_repairs_repaired_5_0_6.json.gz",
+      "sha256": "0301d11811c2aaee7241985e10f4b47b9562e6a18f21817cd68890e28cee147f",
+      "size_bytes": 237240,
+      "role": "source_and_file_identity_only"
+    },
+    "module_continuity": {
+      "path": "docs/parity/current_module_continuity_after_repairs_5_0_6.json.gz",
+      "sha256": "9eb234de04b1981e7e8e94e10121dee2f20af5de7a3bfb80c0fe284b84aeabd7",
+      "size_bytes": 116321,
+      "role": "imported_artifact_identity_and_explicit_reuse"
+    },
+    "initial_failed_native": {
+      "path": "docs/parity/current_full_native_after_keyword_terminal_5_0_6.json.gz",
+      "sha256": "888cc7fbfddadd985f1780bbd6b40a4d9f1dea160313905a0759386c1ca75352",
+      "size_bytes": 166630,
+      "role": "preserved_failed_epoch"
+    },
+    "initial_failed_semantic_reader": {
+      "path": "docs/parity/final_generator_semantic_signoff_execution_5_0_6.json.gz",
+      "sha256": "bf7148bec2bbed9aecfd63075ed7ded13de480a49005ee3be74cf937a86bfabc",
+      "size_bytes": 924663,
+      "role": "preserved_reader_failure"
+    },
+    "initial_failed_completion_audit": {
+      "path": "docs/parity/final_generator_completion_audit_5_0_6.json.gz",
+      "sha256": "4377fc08216cd11a9028f7de28165751255ccd31202e9f2b8c883f763a608f7e",
+      "size_bytes": 2416,
+      "role": "preserved_audit_failure"
+    },
+    "acceptance_report": {
+      "path": "docs/final_generator_acceptance_5_0_6.md",
+      "sha256": "6db1976c2ca98c97b123b8117ce3f378ded98c66215d89fe709ca6d1e38e736c",
+      "size_bytes": 8148,
+      "role": "detailed_acceptance_report"
+    },
+    "semantic_report": {
+      "path": "docs/final_generator_semantic_signoff_5_0_6.md",
+      "sha256": "a11df03147a7bff71c51ac6f0428097486dbc938006a243cf7679507cda311c6",
+      "size_bytes": 10411,
+      "role": "detailed_responsibility_review"
+    },
+    "runtime_lock": {
+      "path": "upstream.lock.json",
+      "sha256": "289895ccb9ebbada5dc05ca2e3b2d286895f40eb91d7b0935f6864a08214d246",
+      "size_bytes": 271,
+      "role": "effective_runtime_reference"
+    },
+    "toolchain_lock": {
+      "path": "toolchains.lock.json",
+      "sha256": "cb872117610ef3606215c9ac92f40382fd21321aedf731249175b8f4ff53c102",
+      "size_bytes": 7868,
+      "role": "pinned_development_environment"
+    }
+  },
+  "evidence_storage": "Existing repository receipts are referenced by path, exact bytes and SHA-256; large logs/builds are not duplicated.",
+  "conversation_transcript_included": false,
+  "record_limit": "This is a consolidation of retained run/goal artifacts, not a verbatim transcript of every conversation or command in the goal."
+}

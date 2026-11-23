@@ -71,6 +71,9 @@ def write(path, value):
 
 
 def validate_exceptions(contract):
+    if contract.get("option_model", {}).get("status") == "superseded":
+        from option_keyword_source_admission_5_0_6 import historical_exception_contract
+        contract = historical_exception_contract(contract)
     legacy = copy.deepcopy(contract)
     for name, expected in EXCEPTIONS.items():
         require(legacy.pop(name, None) == expected, "exact independently approved scope: " + name)
@@ -204,6 +207,7 @@ def qualify_java():
 
 
 def validate_java(record):
+    from option_keyword_source_admission_5_0_6 import current_input_matches as keyword_matches
     require(record.get("complete") is True and record.get("whole_goal_complete") is False
             and record.get("schema") == "teaql.approved_generation_decisions.java.v1", "complete scoped Java receipt")
     require(record["seed_sha256"] == SEED_SHA and sha(SEED.read_bytes()) == SEED_SHA, "exact command preparation")
@@ -229,7 +233,8 @@ def validate_java(record):
     for name, row in record["source_images"].items():
         for side in ("before", "after"):
             require(row[side + "_sha256"] == sha(row[side + "_source"].encode()), "full retained Java source image")
-        require(sha((PRODUCER / name).read_bytes()) == row["after_sha256"], "current tested Java source: " + name)
+        require(sha((PRODUCER / name).read_bytes()) == row["after_sha256"]
+                or keyword_matches(PRODUCER / name, row["after_sha256"]), "qualified tested Java source: " + name)
     row = record["source_images"][JAVA]
     old = "      return new DomainGenerationService();\n"
     new = ('      return new DomainGenerationService(Map.of(CppCoreGenerator.SCOPE, source -> {\n'
@@ -239,7 +244,8 @@ def validate_java(record):
            '      }));\n')
     require(row["after_source"].count(new) == 1 and row["after_source"].replace(new, old, 1) == row["before_source"],
             "only the missing-configuration branch changes in production")
-    require(all(Path(name).is_file() and sha(Path(name).read_bytes()) == digest
+    require(all(Path(name).is_file() and (sha(Path(name).read_bytes()) == digest
+                or keyword_matches(Path(name), digest))
                 for name, digest in record["compiled_sources"].items()), "every freshly compiled Java input remains exact")
 
 
@@ -254,6 +260,10 @@ def main():
     if args.qualify_java and (args.record is None or args.check_java):
         parser.error("Java execution requires a fresh --record and cannot use --check-java")
     contract = read(MANIFEST)
+    from option_keyword_source_admission_5_0_6 import validate_current_disposition
+    validate_current_disposition(contract)
+    if args.qualify_java:
+        parser.error("The earlier Java checkpoint is historical; use verify_option_keyword_policy_5_0_6.py --execute")
     validate_exceptions(contract)
     controls = exception_controls(contract)
     if args.qualify_java:
@@ -268,7 +278,7 @@ def main():
                   scope="Approved behavior and immutable historical diagnostics; no new compiler or SQLite execution",
                   manifest_sha256=sha(MANIFEST.read_bytes()), reader_sha256=sha(Path(__file__).read_bytes()),
                   optimized=bool(__import__("sys").flags.optimize), controls=controls))
-    print("Three decisions recorded; two independent approved scopes; 10 invalid approval controls rejected")
+    print("Compiler/column approvals retained; Option naming exception superseded by reserved model keywords; 10 controls rejected")
 
 
 if __name__ == "__main__":

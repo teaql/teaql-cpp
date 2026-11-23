@@ -7,6 +7,7 @@ latest source revision or every device in the same architecture family.
 
 | Target | Experiment | Recorded date | Evidence |
 | --- | --- | --- | --- |
+| Native SQLite/core and locked Rust 5.0.6 generator | P0-P7 completion: 1103 native tests, 201 compiler cases, 403 Java tests; goal accounting, failure recovery and exact evidence hashes | 2026-11-21 | [Run report and structured record](generator/2026_11_21_cpp_generator_parity/README.md) |
 | Native C++ and Java generator | Typed generated model/query/expression frontend, compiler rejections, real SQLite and selective sanitizer checks | 2026-10-11 | [Generator evidence](generator/2026_10_11_cpp_frontend/README.md) |
 | Native Clang23 and targeted ASan/UBSan | Early SQLite adapter retirement, production regression coverage and active target graphs | 2026-10-10 | [Retirement evidence](maintenance/2026_10_10_sqlite_retirement/README.md) |
 | Native Clang23, sanitizer and MIPS headers | M0-M5 final module release audit, qualified defaults and complete evidence | 2026-10-10 | [Final module release](modules/2026_10_10_module_release/README.md) |

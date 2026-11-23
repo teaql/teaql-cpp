@@ -1,5 +1,11 @@
 # Approved generation decisions
 
+The later [Option keyword decision](option_reserved_keyword_policy_5_0_6.md)
+supersedes the Option-model compatibility choice recorded in this checkpoint.
+Current model generation rejects `option` and `Option` through the shared
+keyword rule. The original decisions and executions below retain their
+historical source scope.
+
 On 2026-11-20 the user resolved the three outstanding behavior choices:
 
 | Decision | Required behavior |

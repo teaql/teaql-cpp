@@ -1,5 +1,9 @@
 # G17 governed execution and provenance reconciliation
 
+GP01-GP16 are qualified for the locked Rust 5.0.6 SQLite/core scope. The hash-bound historical JSON matrix, update file and fixed-frame readers remain unchanged; the current complete statuses and evidence are in the [final structured record](parity/final_generator_completion_5_0_6.json.gz). See [final acceptance](final_generator_acceptance_5_0_6.md).
+
+## Earlier status checkpoints
+
 Current requirement status is resolved through the
 [hash-bound update contract](governance_qualification_updates_5_0_6.json).
 [GP13 provenance](governance_gp13_completion_5_0_6.md) is reconciled through the

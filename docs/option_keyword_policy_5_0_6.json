@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "decision": "reserve_option_model_identifiers",
+  "decided_on": "2026-11-20",
+  "keywords": [
+    "option",
+    "Option"
+  ],
+  "applies_to": [
+    "entity_name",
+    "field_name"
+  ],
+  "entity_rule_id": "KSML-KEYWORD-001",
+  "field_rule_id": "KSML-KEYWORD-002",
+  "rule_source": "generator/src/main/java/com/skynet/codegenerator/evaluation/ReservedKeywordRule.java",
+  "replacement_examples": [
+    "option_record",
+    "payment_option",
+    "option_code"
+  ],
+  "preserves_optional_types": true,
+  "failure_stage": "model_validation",
+  "compiler_error_adapter_required": false,
+  "supersedes": "docs/compatibility_exceptions_5_0_6.json#option_model",
+  "documentation": "docs/option_reserved_keyword_policy_5_0_6.md",
+  "execution_receipt": "docs/parity/option_keyword_java_5_0_6.json.gz",
+  "execution_sha256": "4f90469f4eb1698440bba3732dfe63cbcb4497b76e2b536db8e44e397da055bf",
+  "whole_goal_complete": false
+}

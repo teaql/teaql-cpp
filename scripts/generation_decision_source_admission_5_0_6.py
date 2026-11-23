@@ -67,6 +67,7 @@ def function_changes(before, after, expected):
 
 def validate(record):
     import verify_generation_decisions_5_0_6 as decisions
+    from option_keyword_source_admission_5_0_6 import current_input_matches as keyword_matches, preceding_source
 
     require(sha(JAVA_RECORD.read_bytes()) == JAVA_SHA, "immutable actual Java compiler/JUnit execution")
     java = read(JAVA_RECORD)
@@ -79,7 +80,8 @@ def validate(record):
             "one factory, three Java contracts, two source guards and explicit decision data")
     for name, row in rows.items():
         require(row["after_sha256"] == sha(row["after_source"].encode())
-                == sha(source_path(name).read_bytes()), "exact current source image: " + name)
+                and (row["after_sha256"] == sha(source_path(name).read_bytes())
+                     or keyword_matches(source_path(name), row["after_sha256"])), "qualified source image: " + name)
         if row["before_source"] is None:
             require(name == READER and row["before_sha256"] is None, "only the new decision reader has no preimage")
         else:
@@ -137,7 +139,7 @@ def validate(record):
     require(all(name in rows and rows[name]["before_source"] == row["before_source"]
                 and rows[name]["before_sha256"] == row["before_sha256"]
                 for name, row in preceding["paths"].items()), "all original source preimages remain exact")
-    current = Path(__file__).read_text()
+    current = preceding_source(SELF, Path(__file__).read_text())
     binding = 'RECORD_SHA = "' + RECORD_SHA + '"\n'
     require(current.count(binding) == 1 and current.replace(binding, 'RECORD_SHA = "__RECORD_SHA256__"\n', 1)
             == record["helper_after_source_normalized"], "complete new helper image; only its own receipt hash is normalized")
@@ -161,6 +163,8 @@ def added_input_hashes():
 
 
 def current_input_matches(path, expected):
+    from compiled_column_source_admission_5_0_6 import current_input_matches as column_matches
+
     path = Path(path).resolve()
     if type(expected) is not str or re.fullmatch(r"[0-9a-f]{64}", expected) is None or not path.is_file():
         return False
@@ -169,7 +173,7 @@ def current_input_matches(path, expected):
         return False
     relative = path.relative_to(ROOT if prefix == "runtime:" else PRODUCER).as_posix()
     row = source_rows().get(prefix + relative)
-    return row is not None and expected in (row["before_sha256"], row["after_sha256"])
+    return (row is not None and expected in (row["before_sha256"], row["after_sha256"])) or column_matches(path, expected)
 
 
 def previous_source(name, current):

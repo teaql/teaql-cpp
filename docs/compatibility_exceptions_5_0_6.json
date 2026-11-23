@@ -579,7 +579,7 @@
   "existing_json_payload_exception": "docs/json_payload_compatibility_exception_5_0_6.md",
   "option_model": {
     "id": "option_model_name_collision",
-    "status": "approved",
+    "status": "superseded",
     "approved_on": "2026-11-20",
     "documentation": "docs/option_model_compatibility_exception_5_0_6.md",
     "cpp_contract": "Preserve the modeled C++ Option entity and Self projection; do not emulate the locked Rust prelude-name collision.",
@@ -588,7 +588,10 @@
     ],
     "evidence_sha256": {
       "docs/parity/ap02_plain_option_model_diagnostic_5_0_6.json.gz": "58e63896733d147bd89581098f736e80aa676b0f604684f4312f6cc74a80e9f9"
-    }
+    },
+    "superseded_on": "2026-11-20",
+    "superseded_by": "docs/option_keyword_policy_5_0_6.json",
+    "resolution": "Reserve option and Option as model identifiers through the shared keyword rule; reject before compiler invocation."
   },
   "column_attribute": {
     "id": "unescaped_column_attribute_injection",

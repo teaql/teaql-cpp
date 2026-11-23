@@ -1,5 +1,255 @@
 # Current exits for the C++ generator/runtime parity goal
 
+The current completion audit closes every original P0-P7, AP01-AP12, GP01-GP16 and SQ01-SQ08 obligation in scope. All seventeen capabilities are qualified. The repaired full native epoch passes 1,103/1,103 tests; exact metadata and completion checks pass. See [final acceptance](final_generator_acceptance_5_0_6.md).
+
+## Earlier status checkpoints
+
+The frozen complete native epoch has terminated after executing all 1,103 tests.
+It retains seven failures: five source-receipt timeouts, the initial dirty-producer
+P0 check and one stale imported-dependency hash in the registered-boundary gate.
+There are no errors or skips; all source/reference inputs remained unchanged and
+the final build has no work. The [terminal review](parity/current_full_native_after_keyword_terminal_review_5_0_6.json.gz)
+preserves every failure and the complete successful 57-positive/144-negative
+compiler output. JUnit truncated that successful output, so the review retains
+the actual untruncated section from `LastTest.log`. The failed epoch and rejected
+admissions remain failed evidence.
+
+The independent producer is locally committed as `df0c496` and P0 passes a
+separate direct replay. The five receipt timeouts are now 600 seconds. The
+registered-boundary gate admits exactly the already-qualified relation-helper
+transition while retaining all other dependency checks and all 42+5 command/
+property bindings. Both repairs are installed through complete source images;
+the [installation record](parity/native_receipt_budget_installation_5_0_6.json.gz)
+binds the resulting 12,151-input frame. No C++ implementation, generated SDK or
+ownership contract changes in this repair.
+
+Both direct registered-boundary runs pass, under ordinary and optimized Python,
+preserving 117 direct, ten embedded and 21 imported checks and every existing
+execution/control matrix. The two new admission helpers reject twenty and
+eighteen corruptions per mode. The regenerated module manifest passes both
+modes with 404 bindings, 63 source fixtures, one companion control and sixteen
+corruptions rejected. All 1,166 canonical consumer/fixture bodies retain their
+qualified content; the native build has no work.
+
+The [affected native qualification](parity/native_receipt_budget_targeted_5_0_6.json.gz)
+passes 48 ordinary and 47 optimized selections, with P0's ordinary-only boundary
+retained explicitly. All 708 consumers and eight library/tool inputs remain
+unchanged, as do the complete source/reference frames. Its owned outputs are
+removed, reclaiming 42,517 measured bytes. The
+[repaired current source join](current_registered_source_join_5_0_6.md#current-join-after-the-receipt-repairs)
+qualifies every current registration and source responsibility in both Python
+modes, with seventeen aggregate corruptions rejected per mode.
+
+The fresh complete native epoch now runs on the exact repaired 12,151-input
+frame. Its controller records actual artifact identities after the stable build
+and before CTest, then requires equality after the final build. The records are
+`parity/current_full_native_after_receipt_repairs_inputs_5_0_6.json.gz`,
+`parity/current_full_native_after_receipt_repairs_terminal_5_0_6.json.gz` and
+`parity/current_full_native_after_receipt_repairs_lifecycle_5_0_6.json.gz`.
+Targeted success and source-only joins do not establish complete current native
+or P0-P7 acceptance. G13/G14/G17 remain partial until the full terminal outcome,
+artifact/consumer joins and original AP/GP/SQ/phase exits are reconciled.
+
+The current epoch's ordinary compiler gate has now passed all 201 cases in
+1,887.38 seconds: 57 positive and 144 negative contracts. The
+[untruncated current observation](parity/current_full_native_compiler_after_receipt_repairs_5_0_6.json.gz)
+comes from the actual open CTest log after that compiler test terminated. It
+retains every case name and the complete successful section; the compiler script
+and case selection match the preceding epoch. The lifecycle source-admission
+test also passes in 521.07 seconds. These are completed components of the
+still-running complete epoch, not final native acceptance.
+
+The [complete metadata preimage](parity/final_capability_metadata_before_5_0_6.json.gz)
+archives the exact frozen ledger and all seventeen capability rows, including
+every historical question and evidence entry. It also preserves the hash-bound
+governance and compatibility dispositions. No capability has been promoted.
+Later final status changes must preserve that history and remain separate from
+the implementation/source frame actually tested.
+
+The [final result-reader preparation](final_status_metadata_contract_5_0_6.md#required-final-joins)
+now passes ordinary/optimized CLI and imported validation. All twenty-five
+corrupted or wrongly scoped terminal records reject, as does the actual
+incomplete current record. The historical positive retains its old frame;
+no new native acceptance follows from testing the reader. The running complete
+epoch must still finish before the current native/source/consumer join executes.
+
+The [current artifact continuity](current_artifact_continuity_after_repairs_5_0_6.md)
+now passes ordinary and optimized validation with seventeen rejected corruptions
+each. All eighty actual SDK trees, 331 Java sources, 1,825 selected C/C++ inputs
+and complete protected/original SDK inventories retain their qualified identities.
+The actual pre-test 708-consumer/eight-library snapshot matches the completed
+affected execution and the protected runtime inputs. This closes the current
+source/file-identity component while full post-test, execution and phase
+acceptance remain pending.
+
+The [current imported-artifact join](current_codec_module_join_5_0_6.md#current-retained-artifacts-after-the-receipt-repairs)
+now confirms all 634 retained imported executables, seven BMI files, thirteen
+archives and 1,824 declared preceding C++ inputs. Ordinary and optimized modes
+each reject eighteen corruptions. The original 785-test full module epoch and
+its later eight-test/narrow-source executions are explicitly reused through
+their exact source/artifact identities; this is not a new full module run.
+Its owned collector directory is removed, reclaiming 8,504 measured bytes.
+
+## Earlier checkpoints
+
+The entries below preserve their earlier source/execution states. Their running
+or pending statements are historical; the current state is recorded above.
+
+The independent producer has local commit `df0c496` and a clean working tree.
+All fifteen committed files match the completed 403-test Java epoch, and all
+12,149 frozen source inputs and locked references remain byte-identical across
+the Git metadata change. The unchanged P0 gate passes in a separate direct
+ordinary-Python replay. The [commit and replay](native_receipt_validation_budget_5_0_6.md#local-producer-commit-and-direct-p0-replay)
+resolve the dirty-tree cause without rewriting the original full epoch's P0
+failure. Timeout changes remain prepared but unapplied while CTest continues.
+
+The running complete epoch's `generated_api_type_errors` check now passes;
+the remaining runtime and evidence checks are still executing. A separate
+pinned-format check passes for all 1,820 handwritten C++ files. Neither is
+reported as successful completion of the full epoch.
+
+The five-timeout repair is now prepared in an isolated source mirror. CLI and
+imported validation pass under ordinary and optimized Python, rejecting all
+eighteen corruptions in each process and reclaiming 1,538,140 temporary bytes.
+The [budget repair record](native_receipt_validation_budget_5_0_6.md#prepared-source-transition)
+also includes the exact post-build/pre-test artifact-controller preparation
+and a verified fifteen-file producer commit preflight. These are preparations;
+the live CMake, source adapter, module manifest and producer file contents remain
+unchanged while the original native epoch runs.
+
+All five unchanged timed-out receipt validators now pass in sequential
+standalone processes. Actual timings range from 66.49 to 155.94 seconds;
+Credential alone takes 108.04 seconds against its 60-second registration.
+The [measured budget diagnosis](native_receipt_validation_budget_5_0_6.md)
+preserves commands, complete output and cleanup. This confirms the timeout
+repair's scope without accepting the failed complete epoch. Implementation,
+registration and ledger inputs remain frozen until that epoch terminates.
+
+The active native run has also exposed two concrete qualification issues. Five
+source-receipt checks exceed their existing 60/120-second limits. An unchanged
+reverse-relation receipt validator completes successfully under cProfile in
+197.63 seconds; 109,666 SHA-256 calls account for 93.40 seconds. The
+[profile](parity/current_native_provenance_timeout_profile_5_0_6.json.gz) retains
+its actual zero exit, hotspots and cleanup. This diagnoses one passing but slow
+validator; it does not establish passing results for the other timed-out checks.
+After the frozen run ends, correct and requalify the affected validation budgets
+or repeated work without removing input checks, corpus members or corruptions.
+
+`parity_p0_inventory_5_0_6` originally rejected the independent generator's dirty
+working tree. The branch/base checks and untouched reference requirements remain
+in force. The local metadata-only commit and direct replay above resolve this
+cause; the next full gate must still execute P0 successfully. Neither the old
+failure nor the source timeouts is accepted as a successful P7 exit. Remote push
+remains a separate user-requested action.
+
+The current full native build and stable no-work build have succeeded, and all
+1,103 registered tests are now executing. The first three recorded failures are
+120-second source-receipt timeouts: `parity_ap02_reverse_relation_sql_receipt`,
+`parity_audit_cross_context_corpus_contracts` and
+`parity_ap02_cross_context_partial_sql_receipt`. The full epoch remains active;
+these are failures to diagnose, not accepted or skipped checks. An unchanged
+validator is being profiled separately while implementation/ledger inputs stay
+frozen. Final native acceptance requires their resolution and successful complete
+execution.
+
+The completed-build artifact observation records 708 native consumers, with 179
+cache-to-build changes. Every changed file has an actual linker entry in this
+epoch. The six framework archives and compiler/SQLite inputs remain identical to
+the protected-consumer epoch. The legacy owner compares caches captured before
+building, so its final Boolean will also retain that known cache mismatch; a
+separate admission must validate the actual tested artifact epoch without
+rewriting the raw owner or accepting genuine CTest failures.
+
+The [P0-P7 exit review](final_phase_exit_review_5_0_6.md) reconciles the original
+phase criteria with every accepted capability matrix, later requalifications,
+source-failure boundaries and the current configuration/consumer evidence.
+Its fresh path audit also preserves the original M1a checkpoint hashes.
+Implementation/ledger inputs remain frozen; final native, identity and AP/GP/SQ
+joins are still required before capability or whole-goal promotion.
+
+The [current protected SDK continuity](compiler_protected_configuration_join_5_0_6.md#current-sdk-continuity)
+freshly compiles 331 current Java sources and reproduces all 96 generated files
+against the exact retained original compiler observations. Both Python modes
+reject sixteen evidence corruptions. All 1,825 selected existing C/C++ inputs
+retain their protected-execution hashes; native binaries are not inspected while
+the complete build runs. Earlier SQL/graph/publication execution is explicitly
+reused. Final consumer identities, complete native execution and phase acceptance
+remain independent.
+
+The [current registered source join](current_registered_source_join_5_0_6.md)
+reconciles all 718 Python commands, 514 comparison selections and 204 source/control
+responsibilities. Ordinary and optimized records differ only in their mode field;
+both reject seventeen aggregate and 31 existing binding corruptions. The current
+source partition is closed, while actual full native execution, consumer identity
+and complete SQ02/capability/phase acceptance remain separate requirements.
+
+The [configuration and execution responsibility review](configuration_and_execution_exit_review_5_0_6.md)
+connects E01/E02 to the inspected compiler, descriptor and shared runtime owners,
+with explicit authority limits for older protocols and development entries.
+The current full native epoch is running on 12,149 frozen inputs. Its terminal
+result, current consumer/provenance execution join and complete phase/artifact decisions
+remain required; no capability is promoted by this review or by a running build.
+
+The [complete-stream projection contract](projection_json_stream_contract_5_0_6.md)
+repairs direct projection document parsing, with 403 current Java tests, one
+preceding-reader regression failure and the same actual eight-input probe now
+rejecting all six invalid tails. Eighty retained SDKs keep 3,560 code/Assist files
+through fresh generation/checks. Both Python modes preserve sixteen source,
+74 imported and eight replay corruption controls; affected native checks pass
+40/40 per mode with stable inputs and clean JUnit. This closes one explicit
+older-format input defect without accepting complete E01-E06 or promoting a
+capability.
+
+The [generic source-entry repair](default_source_configuration_guard_5_0_6.md)
+now rejects both unconfigured source overloads before interpreted C++ generation.
+The registered source callback remains authoritative; configured keyword checks,
+domain maintenance and Java generation remain intact. Fresh Java passes 401 tests
+and a two-guard counterfactual fails four regressions. All six old probe requests
+now reject; eighty SDKs retain 3,560 code/Assist bytes through actual reproduction.
+Both Python modes qualify nineteen source/execution controls, 58 imported controls
+and eight replay controls. The affected native selection passes 40/40 per mode
+with stable source frames and clean complete JUnit. This closes the named default dispatch defect while
+complete E01/E02/E05/E06 and capability/phase exits remain open.
+
+The [protected compiler composition](compiler_protected_configuration_join_5_0_6.md)
+now has exact 43-file independent/worker SDK identity, twelve matching Save pairs,
+actual query diagnostics and twelve publication outcomes, with 28 rejected
+corruptions per Python mode. The older filename/provenance mismatch retains its
+scope. A separate current six-route probe exposes an E01 gap: the default generic
+service's two source overloads bypass configured compiler/keyword enforcement.
+Their fresh diagnosis remains `semantic_acceptance: false`; the factory/host and
+ordinary offline routes retain their qualified boundaries. Repair these source
+overloads before complete formal-entry acceptance or capability promotion.
+
+The [String-alias setter continuation](compiled_text_alias_assignment_5_0_6.md)
+matches all 507 repaired observations and 768 separately executed control
+observations. Literal `String` still trims; a qualified String alias preserves
+its input. All 395 Java tests pass, and eighty SDKs regenerate with 3,560
+unchanged code/Assist files. Eighty-five exact source transitions and 27
+corruption controls qualify in both Python modes. Imported helpers separately
+reject 57 corruptions per mode, and affected native tests pass 40/40 in each mode.
+The third extended model's
+original E0308 refusal remains an incomplete-batch boundary. This repairs one
+configuration/consumer defect without closing E01/E02 or promoting G13/G14/G17.
+
+The user subsequently chose the existing
+[model keyword mechanism](option_reserved_keyword_policy_5_0_6.md) for Option.
+This replaces the planned Option-specific compiler adaptation: reserve the model
+name and reject it before compiler invocation. Historical approval and execution
+records remain unchanged. Full configuration, protected-consumer and final
+integration exits remain open.
+
+The [compiled column reader repair](compiled_column_boundary_5_0_6.md) reuses
+the approved source-literal refusal in all three compiled metadata formats.
+All 395 shared/C++ Java tests pass, and the preceding class fails exactly the
+new missing-refusal regression. Eighty SDKs regenerate with all 3,560 code and
+guidance files unchanged; their fingerprints and ninety exact source transitions
+are qualified. The repaired affected CTest selection passes 40/40 in both Python
+modes with stable complete inputs and zero JUnit failures, errors or skips.
+The first 38/40 epoch remains failed evidence. Its synthetic reader evidence and
+the actual complete-SDK reference refusal retain separate scopes. The remaining protected-consumer and
+phase joins stay independent.
+
 Current behavior decisions, approved 2026-11-20: [the three generation choices](approved_generation_decisions_5_0_6.md)
 are settled. Missing trusted compiler configuration must fail explicitly;
 the Option-model collision and column-attribute refusal have separate approved
@@ -121,8 +371,8 @@ cases. These scoped results do not prove every model/grammar combination.
 | --- | --- |
 | E01: AP02 configuration interpretation | Reconcile the complete declared literal, expression, type/path/binder, statement/item, lexical and parser-entry responsibilities with source-owned generated consumers. Existing finite corpora, AST witnesses and typed projections retain their scopes. Full embedded Rust grammar compatibility remains required. The approved formal-entry contract rejects missing locked compiler configuration; explicit qualification and older compiler-document formats retain their declared authority. |
 | E02: AP01/AP04-AP10 and GP11 composition | Join metadata declaration/ownership and canonical/storage/descriptor identities to complete binding classification, governed query/mutation/graph execution, authoritative rows, transaction/audit delivery, ordinary/sensitive sinks, Context copies and pending cleanup. Accepted source-owned runtime mechanisms and complete G01-G12/G15/G16 responsibility reviews must be reused explicitly, rather than treating each model as a new runtime implementation. Emitting metadata or observing matching values alone cannot establish this join. |
-| E03: Option model collision | Behavior approved 2026-11-20: preserve the correct C++ modeled Option entity and Self projection under its [independent exception](option_model_compatibility_exception_5_0_6.md). Original compiler exit 101 and C++ exit 0 remain a recorded mismatch. Integrating this C++ behavior with the formal original-compiler route remains an explicit obligation; approval does not establish that route's successful execution. |
-| E04: Column literal/attribute boundary | Behavior approved 2026-11-20: preserve the explicit C++ refusal under its [independent exception](field_attribute_compatibility_exception_5_0_6.md). Original accepted column/length attributes and the C++ refusal remain visible. Preserve valid escaped-column behavior and join this boundary to the current generation/consumer epoch. The quoted-FK exception remains separate. |
+| E03: Option model collision | Resolved through the user's reserved-name policy: `option` and `Option` use the [shared model keyword rule](option_reserved_keyword_policy_5_0_6.md). All 393 current Java contracts pass, including the exact earlier collision model, entity/field diagnostics, valid compound names/optional fields and zero compiler-worker invocations for rejected names. Old rule/factory overlays fail six/three regressions. The original compiler mismatch remains historical; no Option-specific compiler adaptation remains. |
+| E04: Column literal/attribute boundary | Behavior approved 2026-11-20: preserve the explicit C++ refusal under its [independent exception](field_attribute_compatibility_exception_5_0_6.md). The [reader continuation](compiled_column_boundary_5_0_6.md) now checks source literals in all three compiled formats while preserving valid escaped columns and compiled metadata authority. Join its source/artifact boundary to the current protected-consumer epoch. Historical entity-module success and complete-SDK refusal remain distinct; the quoted-FK exception remains separate. |
 | E05: SQ04/SQ06 and AP11 artifact/frontend join | Retain exact producer/model/dependency identities, all generated destinations, accurate Assist, compiler positive/negative cases, handwritten examples and the relevant canonical module/ownership evidence. Distinguish fresh reproduction from unchanged-source reuse. Two Context allocation domains, checked borrows, explicit destination copies, actual destruction and cancel/join requirements remain intact. Full sanitizer and MIPS profiles are not routine requirements; new lifetime or architecture changes require their relevant checks. |
 | E06: SQ05/AP12/GP16 and P7 final integration | Complete the actual current native build and full registry execution with exact JUnit membership, zero failures/errors/skips, unchanged source/reference inputs and a final no-work build. Then join every capability and earlier phase exit. A successful native epoch cannot accept E01-E05 or promote G13/G14/G17 by itself. |
 
@@ -138,8 +388,8 @@ cases. These scoped results do not prove every model/grammar combination.
 2. Apply the approved E01/E03/E04 decisions against the locked source. Formal
    generation must require trusted locked compiler settings; full Rust grammar
    compatibility remains in scope. Keep each compiler-observation format's
-   actual authority explicit. Join the approved Option-model behavior to the
-   formal original-compiler route without suppressing unrelated compiler errors.
+   actual authority explicit. Apply the shared reserved-name policy to Option
+   at formal model boundaries before invoking the compiler.
    Retain the independently approved column-attribute refusal and valid escaped
    columns. The earlier constant-function diagnosis and its subsequent compiler
    observations retain their recorded scopes. Continue E02 with the qualified

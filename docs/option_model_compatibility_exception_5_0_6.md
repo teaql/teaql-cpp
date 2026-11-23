@@ -1,5 +1,11 @@
 # Option model name compatibility exception
 
+Superseded by the user's later decision on 2026-11-20: `option` and `Option`
+are reserved model identifiers under the existing keyword rule. See the
+[current keyword policy](option_reserved_keyword_policy_5_0_6.md). The original
+diagnostic and approval below are retained as history; an Option-specific
+formal compiler adaptation is no longer planned.
+
 Approved by the user on 2026-11-20. Preserve the correct C++ domain type and
 record the locked Rust failure separately.
 

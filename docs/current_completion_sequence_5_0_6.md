@@ -1,10 +1,74 @@
 # Current completion sequence for the locked 5.0.6 goal
 
+This execution sequence is complete for the locked Rust 5.0.6 SQLite/core goal. All seventeen capabilities are qualified, and the exact status-only transition plus completion inventory checks pass. See [final acceptance](final_generator_acceptance_5_0_6.md).
+
+## Earlier status checkpoints
+
+The [projection JSON stream repair](projection_json_stream_contract_5_0_6.md)
+closes an older document reader's tail-acceptance gap. An actual eight-input
+diagnosis/replay now preserves two valid controls and rejects six tails. All
+403 Java tests pass; the preceding reader fails the new rejection regression.
+Eighty SDKs reproduce 3,560 unchanged code/Assist files, while exact source and
+imported admission reject sixteen/74 corruptions per Python mode. Affected
+native checks pass 40/40 per mode with stable complete inputs and clean JUnit. Explicit
+older-format authority remains distinct from complete model observations.
+Continue the full configuration/consumer and artifact/phase exits; G13/G14/G17
+remain partial.
+
+The [default source-configuration guard](default_source_configuration_guard_5_0_6.md)
+repairs the confirmed generic-service bypass through a language-neutral source
+requirement. All 401 Java tests pass; disabling the two guards causes exactly
+four source-entry regressions. The unchanged six-request probe now rejects every
+unconfigured C++ request. Eighty SDKs reproduce 3,560 unchanged code/Assist files;
+exact source admission and imported controls pass in both Python modes. The
+affected native selection passes 40/40 per mode with clean complete JUnit. Preserve
+the earlier failed diagnostic/collector scopes. Continue the complete E01/E02
+and artifact/phase reconciliation; G13/G14/G17 remain partial.
+
+The [new protected configuration composition](compiler_protected_configuration_join_5_0_6.md)
+joins compiler-evaluated relation types and a String alias to twelve Save pairs,
+SQLite query/diagnostics and twelve publication cases. All 43 independent original
+SDK files now match the worker exactly; a canonical entrance name repairs the
+older source-provenance discrepancy. Both Python modes reject 28 corruptions.
+The next confirmed E01 repair is the default generic service's two public source
+overloads: a fresh six-route diagnosis shows they still return interpreted C++
+without compiler settings and permit `option`. Keep the working factory/host/
+offline paths and explicit maintenance interfaces while fixing this bypass.
+G13/G14/G17 remain partial.
+
+The [String-alias assignment repair](compiled_text_alias_assignment_5_0_6.md)
+preserves compiler-resolved String storage while choosing trimming from the
+locked generator's original type spelling. All 395 Java tests and 507 repaired
+native observations pass; two independently executed controls add 768 matching
+observations. The third extended input is refused by the original compiler, so
+that batch stays incomplete. Eighty retained SDKs regenerate without changing
+their 3,560 code/Assist files. Exact source admission rejects 27 corruptions in
+both Python modes. Imported helpers reject 57 corruptions per mode, and the
+affected native selection passes 40/40 per mode with stable source frames.
+Remaining configuration, protected-consumer and final phase
+exits remain independent; G13/G14/G17 stay partial.
+
+The user's subsequent [Option reserved-name policy](option_reserved_keyword_policy_5_0_6.md)
+replaces the earlier Option-model compatibility exception. Use the existing
+keyword validation and reject this model name before compiler invocation;
+retain legal compound names and optional values. An Option-specific compiler
+adaptation is no longer a remaining implementation requirement.
+
+The [compiled-column continuation](compiled_column_boundary_5_0_6.md) now applies
+the approved refusal to all three metadata readers. All 395 Java tests pass;
+eighty SDKs preserve 3,560 code/guidance files through fresh regeneration and
+checks. Ninety exact source transitions and the repaired 40-test native
+selection qualify in both Python modes. Historical entity-only reference success,
+the new complete-SDK reference refusal and the first failed native epoch retain
+their distinct scopes. Continue with E01's complete configuration authority and
+the E02 protected-consumer join, then the remaining artifact/phase exits.
+G13/G14/G17 remain partial; no further Option behavior decision is needed.
+
 The user [approved all three generation decisions](approved_generation_decisions_5_0_6.md)
 on 2026-11-20: formal C++ generation must reject missing locked compiler
-configuration, preserve correct C++ Option-model behavior and preserve the
-explicit column-attribute refusal. The latter two are independent compatibility
-exceptions. Historical references below to pending choices describe their
+configuration and preserve the explicit column-attribute refusal. The later
+Option keyword decision above supersedes that earlier Option compatibility
+choice. Historical references below to pending choices describe their
 earlier checkpoints; they are no longer unanswered questions. Complete compiler
 route integration, protected-consumer joins and the final phase exits remain.
 
@@ -518,7 +582,7 @@ and count a capability as qualified only after its complete exit criteria pass.
 | Order | Work package | Exit evidence |
 | --- | --- | --- |
 | 1 | SQ02 acceptance integrity: qualified frozen cohort and current extensions | The frozen registered aggregate reconciles 513 comparisons, 203 source/control/invariant registrations, 64 primary source owners and ten helper/dynamic-source reviews. Preserve that scope and the later 718-command registration extensions. Ordinary and optimized controls reject missing/substituted evidence; exact source admissions and enforced historical compiler boundaries remain required. |
-| 2 | Close G14 generated metadata | Reconcile AP01-AP12 against locked 5.0.6 responsibilities within the supported model scope. Generated descriptors, compiler/caller results, artifact reproduction and approved compatibility exceptions agree. Apply the separately approved Option-model and column-attribute decisions; their formal-route and protected-consumer joins remain explicit work. |
+| 2 | Close G14 generated metadata | Reconcile AP01-AP12 against locked 5.0.6 responsibilities within the supported model scope. Generated descriptors, compiler/caller results, artifact reproduction and approved compatibility exceptions agree. Preserve the verified reserved Option-name policy and the separate column-attribute refusal. Remaining configuration and protected-consumer joins stay explicit. |
 | 3 | Close G17 governed execution | Join accepted metadata to generated Q/E, Checker/Fix, whole-plan Policy, graph Save, SQLite commit/rollback and safe audit/log publication. Retain actual source comparisons for denial, stale versions and post-commit delivery failure. |
 | 4 | Sign off the frozen implementation | Reproduce affected SDKs/examples, run the Java/compiler and required module gates, then one complete current native epoch with exact registry/JUnit membership and unchanged inputs. Update each P0-P7 exit and the capability ledger from those results. |
 

@@ -69,7 +69,7 @@ def main():
             output = work / destination
             command = ['java', '-cp', cp,
                             'com.skynet.codegenerator.cpp.CppCoreGenerator',
-                            str(ROOT / model), str(output)]
+                            str(ROOT / model), str(output), '--qualify-inheritance']
             subprocess.run(command, cwd=generator, check=True)
             files = sorted(path for path in output.rglob('*') if path.is_file())
             headers = [str(path) for path in files if path.suffix == '.hpp']

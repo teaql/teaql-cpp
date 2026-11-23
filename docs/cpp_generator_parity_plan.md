@@ -1,5 +1,55 @@
 # C++ generator parity plan
 
+The original P0-P7 plan is complete for the locked Rust 5.0.6 SQLite/core scope. All seventeen capability entries are qualified. See [final acceptance](final_generator_acceptance_5_0_6.md) for the complete requirement, source, artifact and execution joins.
+
+## Earlier status checkpoints
+
+Current projection-document input repair:
+[Strict complete JSON streams](projection_json_stream_contract_5_0_6.md) reject
+all six formerly accepted trailing inputs while preserving complete documents
+and whitespace. Java passes 403 tests; the old reader fails the one new negative
+regression. Affected native checks pass 40/40 per Python mode with stable inputs.
+Fresh eighty-SDK reproduction preserves 3,560 code/Assist files;
+sixteen source and 74 imported corruption controls reject in both Python modes.
+Complete configuration, protected consumers and phase exits remain independent;
+G13/G14/G17 stay partial.
+
+Current default source-entry implementation:
+[The configured-source requirement](default_source_configuration_guard_5_0_6.md)
+repairs both generic source overloads without a C++-specific generic-service
+dependency. All 401 Java tests pass; removing the two guards fails four regression
+methods. The exact six-request replay now rejects every unconfigured request.
+Eighty SDKs preserve 3,560 code/Assist files through fresh generation/checks.
+Historical identity forwarding and imported corruption controls qualify in both
+Python modes, and affected native tests pass 40/40 per mode with stable source
+frames. Full configuration/consumer/phase exits remain independent at
+fourteen qualified and three partial.
+
+Current protected-configuration join and next implementation:
+[Exact source/SDK composition](compiler_protected_configuration_join_5_0_6.md)
+passes twelve Save pairs, real query diagnostics and twelve publication cases;
+all 43 independent original files match the worker and 28 corruptions reject in
+each Python mode. A fresh six-route diagnosis exposes the remaining default
+generic source-service bypass of compiler and keyword enforcement. Repair that
+source dispatch through the existing trusted factory before complete E01/P0-P7
+acceptance. G13/G14/G17 remain partial.
+
+Later Option disposition, 2026-11-20:
+[Reserve the model identifier](option_reserved_keyword_policy_5_0_6.md) through
+the existing shared keyword list. This supersedes the earlier compatibility
+exception and removes the need for an Option-specific compiler adaptation.
+Historical diagnostics and approvals retain their original scope.
+
+Current String-assignment continuation:
+[Original type spelling controls trimming](compiled_text_alias_assignment_5_0_6.md),
+independently of compiler-resolved storage. All 395 Java tests and 507 repaired
+observations pass, with 768 additional matching control observations. The third
+extended model is refused by Rust and does not acquire acceptance. All eighty
+SDKs reproduce 3,560 unchanged code/Assist files; exact source admission rejects
+27 corruptions per Python mode. Imported controls reject 57 corruptions per mode;
+affected native tests pass 40/40 in each mode. Complete configuration, protected-consumer and
+phase exits remain open at fourteen qualified and three partial.
+
 Current approved behavior, 2026-11-20:
 [Three generation decisions](approved_generation_decisions_5_0_6.md) require an
 explicit error for missing trusted locked compiler settings and preserve correct
